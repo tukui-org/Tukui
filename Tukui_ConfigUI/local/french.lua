@@ -99,7 +99,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_unitframes_totdebuffs = "Afficher les debuffs de la cible de la cible (interface Haute Resolution)"
 	TukuiL.option_unitframes_classbar = "Afficher la barre de classe"
 	TukuiL.option_unitframes_weakenedsoulbar = "Afficher la barre de debuff âme affaiblie (pour prêtres)"
-	TukuiL.option_unitframes_onlyselfdebuffs = "N'afficher que mes debuffs sur la cible"
+	TukuiL.option_unitframes_onlyselfdebuffs = "Afficher que vos débuffs sur la cible"
  
 	-- loot
 	TukuiL.option_loot = "Butin"
