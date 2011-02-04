@@ -17,7 +17,8 @@ T.UIScale = function()
 		
 		-- HQ resolution
 		if width >= 9840 then width = 3280 end                   	                -- WQSXGA
-		if width >= 5760 and width < 9840 then width = 1920 end 	                -- WUXGA & HDTV
+		if width >= 7680 and width < 9840 then width = 2560 end                     -- WQXGA
+		if width >= 5760 and width < 7680 then width = 1920 end 	                -- WUXGA & HDTV
 		if width >= 5040 and width < 5760 then width = 1680 end 	                -- WSXGA+
 		
 		-- adding height condition here to be sure it work with bezel compensation because WSXGA+ and UXGA/HD+ got approx same width
