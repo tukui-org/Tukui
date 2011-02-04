@@ -99,7 +99,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_unitframes_totdebuffs = "Habilitar Perjuicios en Objetivo del Objetivo (Resolucion Alta)"
 	TukuiL.option_unitframes_classbar = "Habilitar Barra de Clase"
 	TukuiL.option_unitframes_weakenedsoulbar = "Habilitar Barra de Notificacion de Alma Debilitada (Sacerdote)"
-	TukuiL.option_unitframes_onlyselfdebuffs = "Mostrar solo tus perjuicios en el objetivo"
+	TukuiL.option_unitframes_onlyselfdebuffs = "Mostrar solo tus debuffs en el objetivo"
  
 	-- loot
 	TukuiL.option_loot = "Botín"
