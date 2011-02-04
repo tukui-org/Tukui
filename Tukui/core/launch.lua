@@ -287,7 +287,7 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 			local height = T.getscreenheight
 			
 			-- if autoscale is off, find a new width value of UIParent for screen #1.
-			if not C.general.autoscale then
+			if not C.general.autoscale or height > 1200 then
 				local h = UIParent:GetHeight()
 				local ratio = T.getscreenheight / h
 				local w = T.eyefinity / ratio
