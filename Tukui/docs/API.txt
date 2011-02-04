@@ -1,49 +1,47 @@
 Tukui API
 
 This is how another addon imports the Tukui engine:
-(it must be a top of every lua file if your addon or edited version is built around Tukui)	
+(it must be at the top of every lua file if your addon or edited version is built around Tukui)
 	local T, C, L = unpack(Tukui)
-
 
 Now the functions:
 
 	frame:SetTemplate("Template", texture)
-		Set a backdrop that cover the exact size of the frame according 
-		to which template we choose. If texture is set to true, it will
-		use media.normTex instead of default blank texture. If "" is empty, 
+		Set a backdrop that cover the exact size of the frame according
+		to which template is choosen. If "texture" is set to true, it will
+		use media.normTex instead of the default blank texture. If "" is empty,
 		it will use "Default" template by default.
 
 	frame:CreatePanel("Template", width, height, point, anchor, relativepoint, xposition, yposition)
-		SetTemplate brother, set a backdrop with more options like custom 
-		size, position, point, etc. If "" is empty, it will use "Default" 
+		SetTemplate's brother, sets a backdrop with more options like custom
+		size, position, point, etc. If "" is empty, it will use "Default"
 		template by default.
-		
+
 	frame:Size(width, height)
-		Sets the width and height of object to an absolute (pixel perfect) value 
+		Sets the width and height of object to an absolute (pixel perfect) value
 		in pixels. If height is ommitted then height = width is assumed.
-		
-	frame:Point(...)	
-		Exactly the same as it's little brother SetPoint, but every offset 
+
+	frame:Point(...)
+		Exactly the same as its little brother SetPoint, but every offset
 		is scaled to absolute (pixel perfect) pixel amounts.
-		
+
 	frame:Width(...)
-		Exactly the same as it's little brother SetWidth, but every offset 
+		Exactly the same as its little brother SetWidth, but every offset
 		is scaled to absolute (pixel perfect) pixel amounts.
-	
+
 	frame:Height(...)
-		Exactly the same as it's little brother SetHeight, but every offset 
+		Exactly the same as its little brother SetHeight, but every offset
 		is scaled to absolute (pixel perfect) pixel amounts.
-		
+
 	frame:CreateShadow("Template")
-		Create shadow effect on edge of the frame according to which template 
+		Create shadow effect on the edge of the frame according to which template
 		we choose. If "" is empty, it will use "Default" template by default.
-		
+
 	frame:Kill()
-		Unregister all events from this frame and kill his process for ever.
-		
+		Unregister all events from this frame and kill its process for ever.
+
 	frame:StyleButton(hasChecked)
 		Set a hover / pushed / and... Checked texture (if set on true)
-		
 
 Templates:
 	- "Default"
@@ -58,5 +56,5 @@ Templates:
 	- "Hydra"
 	- "Duffed"
 	- "Eclipse"
-	
-		( ... will probably add more in the future from most popular edits ...)
+
+		( ... will probably add more in the future from most popular edits ... )
