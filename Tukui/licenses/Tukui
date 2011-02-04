@@ -1,5 +1,5 @@
 Tukui License
-	Copyright ©2009-2011 www.tukui.org
+	Copyright ?2009-2011 www.tukui.org
 
 	The contents of this addon, excluding third-party resources, are
 	copyrighted to their authors with all rights reserved.
@@ -12,7 +12,20 @@ Tukui License
 	
 	2. 	Do not modify the name of this addon, including the addon folders.
 	
-	3. 	This copyright notice shall be included in all copies or substantial 
+	3. 	Some users have no restriction at all. Yep for you that's mean you 
+		just DO WHAT THE FUCK YOU WANT TO.
+
+			- Shestak
+			- Elv22
+			- Eclipse
+			- Hydra
+			
+		Even if your name is include in the list, I strongly suggest that you keep
+		the original name of addon, because we are working with others authors
+		to fixes compatibility issues between them if they are found. Renaming it
+		will break these fixes.
+	
+	4. 	This copyright notice shall be included in all copies or substantial 
 		portions of the Software.
 
 	
@@ -22,4 +35,3 @@ Tukui License
 
 	All rights not explicitly addressed in this license are reserved by
 	the copyright holders.
-
