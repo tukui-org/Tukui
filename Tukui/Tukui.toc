@@ -11,4 +11,4 @@
 ## OptionalDeps: Tukui_ConfigUI, !ClassColors, Clique
 ## X-oUF: oUF
 
-Tukui.xml
+Tukui.xml 
