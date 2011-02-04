@@ -2,8 +2,8 @@
 ## Title: |cffC495DDTukui Config UI|r
 ## Notes: Someday there is only pantesaur left.
 ## Author: Tohveli
-## Editor: Tukz
-## Version: 1.11
+## Editor: Tukz, Elv22
+## Version: 13.00
 ## SavedVariables: TukuiConfigAll, TukuiConfigSettings
 ## SavedVariablesPerCharacter: TukuiConfig
 ## RequiredDeps: Tukui
