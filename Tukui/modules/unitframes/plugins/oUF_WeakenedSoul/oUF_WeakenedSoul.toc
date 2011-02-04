@@ -1,0 +1,9 @@
+## Interface: 40000
+## Title: oUF Weakened Soul
+## Notes: Adds a status bar to watch Weakened Soul time left to oUF frames units.
+## Author: Tukz
+## Version: 1
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_WeakenedSoul.lua

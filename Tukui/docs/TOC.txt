@@ -1,0 +1,11 @@
+Example of .toc file for an extra addon for T.
+Just copy/past below lines in a .toc file and edit it.
+
+## Interface: 40000
+## Title: |cffC495DDTukui Example|r
+## Notes: This is the tooltip text show in character screen, addon list, when mouse is over this mod.
+## Author: Your nickname
+## Version: 1.00
+## RequiredDeps: Tukui
+
+example.lua

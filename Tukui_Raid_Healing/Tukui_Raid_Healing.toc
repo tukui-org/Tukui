@@ -1,0 +1,11 @@
+## Interface: 40000
+## Author: Tukz
+## Title: |cffC495DDTukui Raid for healers|r
+## Notes: Raid layout for party and raid, Healer mode.
+## X-Email: tukz@tukui.org
+## X-Category: UnitFrame
+## RequiredDeps: Tukui
+
+oUF_hTukz_AuraWatch.lua
+oUF_hTukz_Raid01_15.lua
+oUF_hTukz_Raid16_40.lua

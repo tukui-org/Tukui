@@ -1,0 +1,61 @@
+Tukui API
+
+This is how another addon imports the Tukui engine:
+(it must be a top of every lua file if your addon or edited version is built around Tukui)	
+	local T, C, L = unpack(Tukui)
+
+
+Now the functions:
+
+	frame:SetTemplate("Template", texture)
+		Set a backdrop that cover the exact size of the frame according 
+		to which template we choose. If texture is set to true, it will
+		use media.normTex instead of default blank texture. If "" is empty, 
+		it will use "Tukui" by default.
+
+	frame:CreatePanel("Template", width, height, point, anchor, relativepoint, xposition, yposition)
+		SetTemplate brother, set a backdrop with more options like custom 
+		size, position, point, etc.
+		
+	frame:CreateTransparentPanel(...)
+		Exactly the same as it's little brother CreatePanel, but with a 
+		transparent backdrop.
+		
+	frame:Size(width, height)
+		Sets the width and height of object to an absolute (pixel perfect) value 
+		in pixels. If height is ommitted then height = width is assumed.
+		
+	frame:Point(...)	
+		Exactly the same as it's little brother SetPoint, but every offset 
+		is scaled to absolute (pixel perfect) pixel amounts.
+		
+	frame:Width(...)
+		Exactly the same as it's little brother SetWidth, but every offset 
+		is scaled to absolute (pixel perfect) pixel amounts.
+	
+	frame:Height(...)
+		Exactly the same as it's little brother SetHeight, but every offset 
+		is scaled to absolute (pixel perfect) pixel amounts.
+		
+	frame:CreateShadow("Template")
+		Create shadow effect on edge of the frame according to which template 
+		we choose.
+		
+	frame:Kill()
+		Unregister all events from this frame and kill his process for ever.
+		
+	frame:StyleButton("Template", hasChecked)
+		Set a hover / pushed / and Checked texture on a button according to 
+		which template we choose.
+		
+
+Templates:
+	- "Tukui"
+	- "ClassColor"
+	- "Elv"
+	- "Eclipse"
+	- "Dajova"
+	- "Hydra"
+	- "Duffed"
+	- "Eclipse"
+	( ... will probably add more in the future from most popular edits ...)
