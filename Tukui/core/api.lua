@@ -196,6 +196,15 @@ local function StyleButton(b, c)
 	end
 end
 
+function T.SetFontString(parent, fontName, fontHeight, fontStyle)
+	local fs = parent:CreateFontString(nil, "OVERLAY")
+	fs:SetFont(fontName, fontHeight, fontStyle)
+	fs:SetJustifyH("LEFT")
+	fs:SetShadowColor(0, 0, 0)
+	fs:SetShadowOffset(mult, -mult)
+	return fs
+end
+
 local function addapi(object)
 	local mt = getmetatable(object).__index
 	mt.Size = Size
