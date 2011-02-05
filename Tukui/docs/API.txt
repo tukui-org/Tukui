@@ -42,6 +42,9 @@ Now the functions:
 
 	frame:StyleButton(hasChecked)
 		Set a hover / pushed / and... Checked texture (if set on true)
+	
+	frame:FontString(fontName, fontHeight, fontStyle)
+		Create a font string with the frame as the parent. Fontstring is automatically called <framename>.text.
 
 Templates:
 	- "Default"

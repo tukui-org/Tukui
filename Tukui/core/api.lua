@@ -196,7 +196,7 @@ local function StyleButton(b, c)
 	end
 end
 
-function T.FontString(parent, fontName, fontHeight, fontStyle)
+local function FontString(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
 	fs:SetFont(fontName, fontHeight, fontStyle)
 	fs:SetJustifyH("LEFT")
@@ -218,6 +218,7 @@ local function addapi(object)
 	mt.StyleButton = StyleButton
 	mt.Width = Width
 	mt.Height = Height
+	mt.FontString = FontString
 end
 
 local handled = {["Frame"] = true}
