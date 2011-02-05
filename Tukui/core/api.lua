@@ -196,12 +196,13 @@ local function StyleButton(b, c)
 	end
 end
 
-function T.SetFontString(parent, fontName, fontHeight, fontStyle)
+function T.FontString(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
 	fs:SetFont(fontName, fontHeight, fontStyle)
 	fs:SetJustifyH("LEFT")
 	fs:SetShadowColor(0, 0, 0)
 	fs:SetShadowOffset(mult, -mult)
+	parent.text = fs
 	return fs
 end
 
