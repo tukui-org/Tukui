@@ -28,6 +28,7 @@ Stat.update = false
 
 local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
+Text:SetText(L.datatext_noguild)
 T.PP(C["datatext"].guild, Text)
 
 local function BuildGuildTable(total)
@@ -121,7 +122,7 @@ local function Update(self, event, ...)
 		self:SetAllPoints(Text)
 		Text:SetFormattedText(displayString, L.datatext_guild, totalOnline)
 	else
-		Text:SetText("|cffFF0000"..L.datatext_noguild)
+		Text:SetText(L.datatext_noguild)
 	end
 	self.update = false
 end
