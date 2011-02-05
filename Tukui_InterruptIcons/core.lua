@@ -4,7 +4,14 @@ tInterruptIcons = CreateFrame("frame")
 tInterruptIcons:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 tInterruptIcons:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 tInterruptIcons:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiInterruptIcons = { ["x"] = 677, ["y"] = 383, ["orientation"] = "VERTICALUP" }
+
+local anchor = CreateFrame("Frame", "TukuiInterruptIconsAnchor", UIParent)
+anchor:SetPoint("CENTER")
+anchor:SetSize(30, 30)
+anchor:SetFrameStrata("HIGH")
+anchor:SetFrameLevel(19)
+anchor:SetMovable(true)
+
 tInterruptIcons.Orientations = { 
 	["HORIZONTALRIGHT"] = { ["point"] = "TOPLEFT", ["rpoint"] = "TOPRIGHT", ["x"] = 3, ["y"] = 0 },
 	["HORIZONTALLEFT"] = { ["point"] = "TOPRIGHT", ["rpoint"] = "TOPLEFT", ["x"] = -3, ["y"] = 0 }, 
@@ -32,7 +39,7 @@ local pvpType
 function tInterruptIcons.CreateIcon()
 	local i = (#tInterruptIcons.Icons)+1
    
-	tInterruptIcons.Icons[i] = CreateFrame("frame","tInterruptIconsIcon"..i,UIParent)
+	tInterruptIcons.Icons[i] = CreateFrame("frame","tInterruptIconsIcon"..i,anchor)
 	tInterruptIcons.Icons[i]:Height(28)
 	tInterruptIcons.Icons[i]:Width(28)
 	tInterruptIcons.Icons[i]:SetFrameStrata("HIGH")
@@ -60,14 +67,8 @@ function tInterruptIcons.CreateIcon()
 end
 
 tInterruptIcons.CreateIcon()
-tInterruptIcons.Icons[1]:RegisterForDrag("LeftButton")
-tInterruptIcons.Icons[1]:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", TukuiInterruptIcons.x, TukuiInterruptIcons.y)
-tInterruptIcons.Icons[1]:SetScript("OnDragStart", function() tInterruptIcons.Icons[1]:StartMoving() end)
-tInterruptIcons.Icons[1]:SetScript("OnDragStop", function() 
-	tInterruptIcons.Icons[1]:StopMovingOrSizing() 
-	TukuiInterruptIcons.x = math.floor(tInterruptIcons.Icons[1]:GetLeft())
-	TukuiInterruptIcons.y = math.floor(tInterruptIcons.Icons[1]:GetTop())
-end)
+tInterruptIcons.Icons[1]:SetPoint("CENTER", anchor, "CENTER", 0, 0)
+tInterruptIcons.Icons[1].moving = false
 
 function tInterruptIcons.SlashHandler(msg)
 	local arg = string.upper(msg)
@@ -86,26 +87,30 @@ function tInterruptIcons.SlashHandler(msg)
 end
 
 function tInterruptIcons.UNLOCK()
-	if (not tInterruptIcons.Icons[1]:IsMouseEnabled()) then
-		tInterruptIcons.StopAllTimers()
-		tInterruptIcons.Icons[1]:EnableMouse(true)
-		tInterruptIcons.Icons[1]:SetMovable(true)
+	if not tInterruptIcons.Icons[1].moving then
+		tInterruptIcons.StopAllTimers()		
+		anchor:EnableMouse(true)
+		anchor:RegisterForDrag("LeftButton", "RightButton")
+		anchor:SetScript("OnDragStart", function(self) self:SetUserPlaced(true) self:StartMoving() end)			
+		anchor:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 		tInterruptIcons.StartTimer(1,60,nil)
+		tInterruptIcons.Icons[1].moving = true
 	end
 end
 
 function tInterruptIcons.LOCK()
-	if (tInterruptIcons.Icons[1]:IsMouseEnabled()) then
-		tInterruptIcons.Icons[1]:EnableMouse(false)
-		tInterruptIcons.Icons[1]:SetMovable(false)
-		tInterruptIcons.StopTimer(1)
+	if tInterruptIcons.Icons[1].moving then
+		tInterruptIcons.StopTimer(1)		
+		anchor:EnableMouse(false)
+		anchor:StopMovingOrSizing()		
+		tInterruptIcons.Icons[1].moving = false
 	end
 end
 
 function tInterruptIcons.RESET()
-	TukuiInterruptIcons.x = 677
-	TukuiInterruptIcons.y = 383
-	tInterruptIcons.Icons[1]:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", TukuiInterruptIcons.x, TukuiInterruptIcons.y)
+	anchor:SetUserPlaced(false)
+	anchor:ClearAllPoints()
+	anchor:SetPoint("CENTER", 0, 0)
 	tInterruptIcons.Print("Position reset successfully.")
 end
 
@@ -160,7 +165,7 @@ function tInterruptIcons.StartTimer(icon, duration, texture, spellID)
 		["Duration"] = duration,
 		["SpellID"] = spellID,
 	}
-	UIFrameFadeIn(tInterruptIcons.Icons[icon],0.2,0.0,1.0)
+	UIFrameFadeIn(tInterruptIcons.Icons[icon],0,0.0,1.0)
 	if (texture) then
 		tInterruptIcons.Icons[(active or icon)].Texture:SetTexture(texture)
 		tInterruptIcons.Icons[(active or icon)].Texture:SetPoint("TOPLEFT", tInterruptIcons.Icons[(active or icon)], T.Scale(2), T.Scale(-2))
@@ -176,7 +181,7 @@ function tInterruptIcons.StopTimer(icon)
 	if (tInterruptIcons.Icons[icon]:IsMouseEnabled()) then
 		tInterruptIcons.LOCK()
 	end
-	UIFrameFadeOut(tInterruptIcons.Icons[icon],0.2,1.0,0.0)
+	UIFrameFadeOut(tInterruptIcons.Icons[icon],0,1.0,0.0)
 	tInterruptIcons.Timers[icon] = nil
 	tInterruptIcons.Reposition()
 	if (#tInterruptIcons.Timers == 0) then
@@ -207,7 +212,7 @@ function tInterruptIcons.Reposition()
 		local i = indexes[v]
 		tInterruptIcons.Icons[i]:ClearAllPoints()
 		if (currentactive == 0) then
-			tInterruptIcons.Icons[i]:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", TukuiInterruptIcons.x, TukuiInterruptIcons.y)
+			tInterruptIcons.Icons[i]:SetPoint("CENTER", anchor, "CENTER", 0, 0)
 		else
 			tInterruptIcons.Icons[i]:SetPoint(tInterruptIcons.Orientations[TukuiInterruptIcons.orientation].point, 
 				tInterruptIcons.Icons[currentactive], 
