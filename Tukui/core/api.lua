@@ -196,7 +196,7 @@ local function StyleButton(b, c)
 	end
 end
 
-local function FontString(parent, fontName, fontHeight, fontStyle, name)
+local function FontString(parent, name, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
 	fs:SetFont(fontName, fontHeight, fontStyle)
 	fs:SetJustifyH("LEFT")
