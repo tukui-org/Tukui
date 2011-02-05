@@ -1,4 +1,4 @@
-Example of .toc file for an extra addon for T.
+Example of .toc file for an extra addon for Tukui.
 Just copy/past below lines in a .toc file and edit it.
 
 ## Interface: 40000

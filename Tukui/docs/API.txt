@@ -44,7 +44,8 @@ Now the functions:
 		Set a hover / pushed / and... Checked texture (if set on true)
 	
 	frame:FontString(name, fontName, fontHeight, fontStyle)
-		Create a FontString with the frame as a parent. If you leave name as nil the font name will become 		"<framename>.text". If a name is provided however it will be called "<framename>.<yourname>".
+		Create a FontString with the frame as a parent. If you leave name as nil the font name will become
+		"<framename>.text". If a name is provided however it will be called "<framename>.<yourname>".
 
 Templates:
 	- "Default"
