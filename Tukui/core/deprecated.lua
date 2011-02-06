@@ -20,6 +20,12 @@ end
 T.Scale = function(x) return scale(x) end
 T.mult = mult
 
+--[[
+		You have 1 month after r13 release to make changes to your addons with Tukui API.
+		All these functions will disapear from Tukui at the start of marsh 2011
+		See Docs/API.txt for more informations.
+--]]
+
 T.CreatePanel = function(f, w, h, a1, p, a2, x, y)
 	local sh = scale(h)
 	local sw = scale(w)
