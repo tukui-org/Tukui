@@ -50,7 +50,7 @@ function tInterruptIcons.CreateIcon()
 
 	tInterruptIcons.Icons[i].Texture = tInterruptIcons.Icons[i]:CreateTexture(nil,"LOW")
 	tInterruptIcons.Icons[i].Texture:SetTexture("Interface\\Icons\\ability_kick.blp")
-	tInterruptIcons.Icons[i].Texture:Point("TOPLEFT", tInterruptIcons.Icons[i], T.Scale(2), T.Scale(-2))
+	tInterruptIcons.Icons[i].Texture:Point("TOPLEFT", tInterruptIcons.Icons[i], 2, -2)
 	tInterruptIcons.Icons[i].Texture:Point("BOTTOMRIGHT", tInterruptIcons.Icons[i], -2, 2)
 	tInterruptIcons.Icons[i].Texture:SetTexCoord(.08, .92, .08, .92)
 	
@@ -169,8 +169,8 @@ function tInterruptIcons.StartTimer(icon, duration, texture, spellID)
 	UIFrameFadeIn(tInterruptIcons.Icons[icon],0,0.0,1.0)
 	if (texture) then
 		tInterruptIcons.Icons[(active or icon)].Texture:SetTexture(texture)
-		tInterruptIcons.Icons[(active or icon)].Texture:SetPoint("TOPLEFT", tInterruptIcons.Icons[(active or icon)], T.Scale(2), T.Scale(-2))
-		tInterruptIcons.Icons[(active or icon)].Texture:SetPoint("BOTTOMRIGHT", tInterruptIcons.Icons[(active or icon)], T.Scale(-2), T.Scale(2))
+		tInterruptIcons.Icons[(active or icon)].Texture:Point("TOPLEFT", tInterruptIcons.Icons[(active or icon)], 2, -2)
+		tInterruptIcons.Icons[(active or icon)].Texture:Point("BOTTOMRIGHT", tInterruptIcons.Icons[(active or icon)], -2, 2)
 		tInterruptIcons.Icons[(active or icon)].Texture:SetTexCoord(.08, .92, .08, .92)
 		tInterruptIcons.Icons[(active or icon)]:SetTemplate("Default")
 	end
