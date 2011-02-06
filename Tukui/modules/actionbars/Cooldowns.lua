@@ -21,11 +21,11 @@ local MIN_SCALE = 0.5 --the minimum scale we want to show cooldown counts at, an
 local MIN_DURATION = 2.5 --the minimum duration to show cooldown text for
 local EXPIRING_DURATION = C["cooldown"].treshold --the minimum number of seconds a cooldown must be to use to display in the expiring format
 
-local EXPIRING_FORMAT = T.RGBPercToHex(1, 0, 0)..'%.1f|r' --format for timers that are soon to expire
-local SECONDS_FORMAT = T.RGBPercToHex(1, 1, 0)..'%d|r' --format for timers that have seconds remaining
-local MINUTES_FORMAT = T.RGBPercToHex(1, 1, 1)..'%dm|r' --format for timers that have minutes remaining
-local HOURS_FORMAT = T.RGBPercToHex(0.4, 1, 1)..'%dh|r' --format for timers that have hours remaining
-local DAYS_FORMAT = T.RGBPercToHex(0.4, 0.4, 1)..'%dh|r' --format for timers that have days remaining
+local EXPIRING_FORMAT = T.RGBToHex(1, 0, 0)..'%.1f|r' --format for timers that are soon to expire
+local SECONDS_FORMAT = T.RGBToHex(1, 1, 0)..'%d|r' --format for timers that have seconds remaining
+local MINUTES_FORMAT = T.RGBToHex(1, 1, 1)..'%dm|r' --format for timers that have minutes remaining
+local HOURS_FORMAT = T.RGBToHex(0.4, 1, 1)..'%dh|r' --format for timers that have hours remaining
+local DAYS_FORMAT = T.RGBToHex(0.4, 0.4, 1)..'%dh|r' --format for timers that have days remaining
 
 --local bindings!
 local floor = math.floor
