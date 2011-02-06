@@ -94,7 +94,7 @@ function tInterruptIcons.UNLOCK()
 		anchor:RegisterForDrag("LeftButton", "RightButton")
 		anchor:SetScript("OnDragStart", function(self) self:SetUserPlaced(true) self:StartMoving() end)			
 		anchor:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
-		tInterruptIcons.StartTimer(1,60,nil)
+		tInterruptIcons.StartTimer(1,999,nil)
 		tInterruptIcons.Icons[1].moving = true
 	end
 end
