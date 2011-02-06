@@ -94,9 +94,11 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 		icon:ClearAllPoints()
 		if pet then
 			local autocast = _G[name.."AutoCastable"]
-			autocast:Size(41, 40)
-			autocast:ClearAllPoints()
-			autocast:SetPoint("CENTER", button, 0, 0)
+			local shine = _G[name.."Shine"]
+			autocast:SetAlpha(0)
+			shine:Size(T.petbuttonsize, T.petbuttonsize)
+			shine:ClearAllPoints()
+			shine:SetPoint("CENTER", button, 0, 0)
 			icon:Point("TOPLEFT", button, T.Scale(2), T.Scale(-2))
 			icon:Point("BOTTOMRIGHT", button, T.Scale(-2), T.Scale(2))
 		else
