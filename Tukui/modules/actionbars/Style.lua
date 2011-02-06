@@ -92,10 +92,12 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
-		if pet then
-			local autocast = _G[name.."AutoCastable"]
+		if pet then			
+			if T.petbuttonsize < 30 then
+				local autocast = _G[name.."AutoCastable"]
+				autocast:SetAlpha(0)
+			end
 			local shine = _G[name.."Shine"]
-			autocast:SetAlpha(0)
 			shine:Size(T.petbuttonsize, T.petbuttonsize)
 			shine:ClearAllPoints()
 			shine:SetPoint("CENTER", button, 0, 0)
