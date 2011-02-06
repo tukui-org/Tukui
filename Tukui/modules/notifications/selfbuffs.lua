@@ -55,11 +55,7 @@ if (buffs and buffs[1]) then
 				local name = GetSpellInfo(buff)
 				local usable, nomana = IsUsableSpell(name)
 				if (usable or nomana) then
-					if T.myclass == "PRIEST" then 
-						self.icon:SetTexture([[Interface\AddOns\Tukui\medias\textures\innerarmor]])
-					else
-						self.icon:SetTexture(select(3, GetSpellInfo(buff)))
-					end
+					self.icon:SetTexture(select(3, GetSpellInfo(buff)))
 					break
 				end
 			end
@@ -100,17 +96,11 @@ if (buffs and buffs[1]) then
 	
 	frame.icon = frame:CreateTexture(nil, "OVERLAY")
 	frame.icon:SetPoint("CENTER")
-	if T.myclass ~= "PRIEST" then
-		frame:CreatePanel("Default", 40, 40, "CENTER", UIParent, "CENTER", 0, 200)
-		frame.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		frame.icon:Size(36)
-	else
-		frame:CreatePanel("Default", 96, 192, "CENTER", UIParent, "CENTER", 0, 200)
-		frame.icon:Width(96)
-		frame.icon:Height(192)
-		frame:SetBackdropColor(0, 0, 0, 0)
-		frame:SetBackdropBorderColor(0, 0, 0, 0)
-	end
+	frame:CreatePanel("Default", 96, 192, "CENTER", UIParent, "CENTER", 0, 200)
+	frame.icon:Width(96)
+	frame.icon:Height(192)
+	frame:SetBackdropColor(0, 0, 0, 0)
+	frame:SetBackdropBorderColor(0, 0, 0, 0)
 	frame:Hide()
 	
 	frame:RegisterEvent("UNIT_AURA")
