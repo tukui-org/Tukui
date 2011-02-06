@@ -31,7 +31,7 @@ tInterruptIcons.Spells = T.interrupt
 
 SlashCmdList["tInterruptIcons"] = function(msg) tInterruptIcons.SlashHandler(msg) end
 SLASH_tInterruptIcons1 = "/ii"
-tInterruptIcons:SetScript("OnEvent", function(this, event, ...) tInterruptIcons[event](...) end)
+tInterruptIcons:SetScript("OnEvent", function(self, event, ...) tInterruptIcons[event](...) end)
 tInterruptIcons.Icons = { }
 
 local pvpType
@@ -174,7 +174,7 @@ function tInterruptIcons.StartTimer(icon, duration, texture, spellID)
 		tInterruptIcons.Icons[(active or icon)]:SetTemplate("Default")
 	end
 	tInterruptIcons.Reposition()
-	tInterruptIcons:SetScript("OnUpdate", function(this, arg1) tInterruptIcons.OnUpdate(arg1) end)
+	tInterruptIcons:SetScript("OnUpdate", function(self, arg1) tInterruptIcons.OnUpdate(arg1) end)
 end
 
 function tInterruptIcons.StopTimer(icon)
@@ -182,11 +182,11 @@ function tInterruptIcons.StopTimer(icon)
 		tInterruptIcons.LOCK()
 	end
 	UIFrameFadeOut(tInterruptIcons.Icons[icon],0,1.0,0.0)
-	tInterruptIcons.Timers[icon] = nil
-	tInterruptIcons.Reposition()
-	if (#tInterruptIcons.Timers == 0) then
+	tInterruptIcons.Timers[icon] = nil	
+	if (#tInterruptIcons.Timers <= 0) then
 		tInterruptIcons:SetScript("OnUpdate", nil)
 	end
+	tInterruptIcons.Reposition()
 end
 
 function tInterruptIcons.StopAllTimers()
