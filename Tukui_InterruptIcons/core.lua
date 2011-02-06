@@ -173,8 +173,8 @@ function tInterruptIcons.StartTimer(icon, duration, texture, spellID)
 		tInterruptIcons.Icons[(active or icon)].Texture:SetTexCoord(.08, .92, .08, .92)
 		tInterruptIcons.Icons[(active or icon)]:SetTemplate("Default")
 	end
-	tInterruptIcons.Reposition()
-	tInterruptIcons:SetScript("OnUpdate", function(self, arg1) tInterruptIcons.OnUpdate(arg1) end)
+	tInterruptIcons:SetScript("OnUpdate", function(self, elapsed) tInterruptIcons.OnUpdate(elapsed) end)
+	tInterruptIcons.Reposition()	
 end
 
 function tInterruptIcons.StopTimer(icon)
