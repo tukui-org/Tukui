@@ -4,6 +4,7 @@ tInterruptIcons = CreateFrame("frame")
 tInterruptIcons:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 tInterruptIcons:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 tInterruptIcons:RegisterEvent("PLAYER_ENTERING_WORLD")
+tInterruptIcons:SetScript("OnUpdate", function(self, elapsed) tInterruptIcons.OnUpdate(elapsed) end)
 
 local anchor = CreateFrame("Frame", "TukuiInterruptIconsAnchor", UIParent)
 anchor:SetPoint("CENTER")
@@ -173,7 +174,6 @@ function tInterruptIcons.StartTimer(icon, duration, texture, spellID)
 		tInterruptIcons.Icons[(active or icon)].Texture:SetTexCoord(.08, .92, .08, .92)
 		tInterruptIcons.Icons[(active or icon)]:SetTemplate("Default")
 	end
-	tInterruptIcons:SetScript("OnUpdate", function(self, elapsed) tInterruptIcons.OnUpdate(elapsed) end)
 	tInterruptIcons.Reposition()	
 end
 
@@ -182,10 +182,7 @@ function tInterruptIcons.StopTimer(icon)
 		tInterruptIcons.LOCK()
 	end
 	UIFrameFadeOut(tInterruptIcons.Icons[icon],0,1.0,0.0)
-	tInterruptIcons.Timers[icon] = nil	
-	if (#tInterruptIcons.Timers <= 0) then
-		tInterruptIcons:SetScript("OnUpdate", nil)
-	end
+	tInterruptIcons.Timers[icon] = nil
 	tInterruptIcons.Reposition()
 end
 
