@@ -92,13 +92,6 @@ if T.client == "ruRU" then
 	L.datatext_gatesdestroyed = "Врат разрушено:"
 	L.datatext_totalmemusage = "Общее использование памяти:"
 	L.datatext_control = "Под контролем:"
-	
-	L.bg_warsong = "Ущелье Песни Войны"
-	L.bg_arathi = "Низина Арати"
-	L.bg_eye = "Око Бури"
-	L.bg_alterac = "Альтеракская долина"
-	L.bg_strand = "Берег Древних"
-	L.bg_isle = "Остров Завоеваний"
  
 	L.Slots = {
 	  [1] = {1, "Голова", 1000},

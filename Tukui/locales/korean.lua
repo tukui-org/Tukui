@@ -93,13 +93,6 @@ if T.client == "koKR" then
 	L.datatext_totalmemusage = "총 메모리 사용량:"
 	L.datatext_control = "현재 진영:"
  
-	L.bg_warsong = "전쟁노래 협곡"
-	L.bg_arathi = "아라시 분지"
-	L.bg_eye = "폭풍의 눈"
-	L.bg_alterac = "알터랙 계곡"
-	L.bg_strand = "고대의 해안"
-	L.bg_isle = "정복의 섬"
- 
 	L.Slots = {
 	  [1] = {1, "머리", 1000},
 	  [2] = {3, "어깨", 1000},

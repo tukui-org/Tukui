@@ -92,13 +92,6 @@ L.datatext_gatesdestroyed = "Gates Destroyed:"
 L.datatext_totalmemusage = "Total Memory Usage:"
 L.datatext_control = "Controlled by:"
 
-L.bg_warsong = "Warsong Gulch"
-L.bg_arathi = "Arathi Basin"
-L.bg_eye = "Eye of the Storm"
-L.bg_alterac = "Alterac Valley"
-L.bg_strand = "Strand of the Ancients"
-L.bg_isle = "Isle of Conquest"
-
 L.Slots = {
 	[1] = {1, "Head", 1000},
 	[2] = {3, "Shoulder", 1000},

@@ -92,13 +92,6 @@ if T.client == "zhTW" then
 	L.datatext_gatesdestroyed = "大門摧毀:"
 	L.datatext_totalmemusage = "總共記憶體使用:"
 	L.datatext_control = "控制方:"
-	
-	L.bg_warsong = "戰歌峽谷"
-	L.bg_arathi = "阿拉希盆地"
-	L.bg_eye = "暴風之眼"
-	L.bg_alterac = "奧特蘭克山谷"
-	L.bg_strand = "遠祖灘頭"
-	L.bg_isle = "征服之島"
  
 	L.Slots = {
 		[1] = {1, "頭部", 1000},

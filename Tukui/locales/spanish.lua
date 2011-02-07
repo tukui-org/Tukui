@@ -92,13 +92,6 @@ if T.client == "esES" then
 	L.datatext_gatesdestroyed = "Puertas Destruidas:"
 	L.datatext_totalmemusage = "Memoria Total Usada:"
 	L.datatext_control = "Controlado por:"
-	
-	L.bg_warsong = "Garganta Grito de Guerra"
-	L.bg_arathi = "Cuenca de Arathi"
-	L.bg_eye = "Ojo de la Tormenta"
-	L.bg_alterac = "Valle de Alterac"
-	L.bg_strand = "Playa de los Ancestros"
-	L.bg_isle = "Isla de la Conquista"
  
 	L.Slots = {
 		[1] = {1, "Cabeza", 1000},

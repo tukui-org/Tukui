@@ -92,13 +92,6 @@ if T.client == "frFR" then
 	L.datatext_gatesdestroyed = "Portes Détruites : "
 	L.datatext_totalmemusage = "Utilisation Totale de la Mémoire : "
 	L.datatext_control = "Controlé par : "
-	
-	L.bg_warsong = "Goulet des Chanteguerres"
-	L.bg_arathi = "Bassin d'Arathi"
-	L.bg_eye = "L'Œil du cyclone"
-	L.bg_alterac = "Vallée d'Alterac"
-	L.bg_strand = "Rivage des Anciens"
-	L.bg_isle = "Île des Conquérants"
 
 	L.Slots = {
 	  [1] = {1, "Tête", 1000},

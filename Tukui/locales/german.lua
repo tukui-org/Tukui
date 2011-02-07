@@ -92,13 +92,6 @@ if T.client == "deDE" then
 	L.datatext_gatesdestroyed = "Tore zerstört:"
 	L.datatext_totalmemusage = "Gesamte Speichernutzung:"
 	L.datatext_control = "Kontrolliert von:"
-	
-	L.bg_warsong = "Kriegshymnenschlucht"
-	L.bg_arathi = "Arathibecken"
-	L.bg_eye = "Auge des Sturms"
-	L.bg_alterac = "Alteractal"
-	L.bg_strand = "Strand der Uralten"
-	L.bg_isle = "Insel der Eroberung"
  
 	L.Slots = {
 		[1] = {1, "Kopf", 1000},
