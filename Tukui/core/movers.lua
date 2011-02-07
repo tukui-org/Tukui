@@ -116,38 +116,40 @@ local function moving()
 	-- don't allow moving while in combat
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	
-	for i = 1, getn(T.MoverFrames) do		
-		if enable then			
-			T.MoverFrames[i]:EnableMouse(true)
-			T.MoverFrames[i]:RegisterForDrag("LeftButton", "RightButton")
-			T.MoverFrames[i]:SetScript("OnDragStart", function(self) 
-				origa1, origf, origa2, origx, origy = T.MoverFrames[i]:GetPoint() 
-				self.moving = true 
-				self:SetUserPlaced(true) 
-				self:StartMoving() 
-			end)			
-			T.MoverFrames[i]:SetScript("OnDragStop", function(self) 
-				self.moving = false 
-				self:StopMovingOrSizing() 
-			end)			
-			exec(T.MoverFrames[i], enable)			
-			if T.MoverFrames[i].text then 
-				T.MoverFrames[i].text:Show() 
+	for i = 1, getn(T.MoverFrames) do
+		if T.MoverFrames[i] then		
+			if enable then			
+				T.MoverFrames[i]:EnableMouse(true)
+				T.MoverFrames[i]:RegisterForDrag("LeftButton", "RightButton")
+				T.MoverFrames[i]:SetScript("OnDragStart", function(self) 
+					origa1, origf, origa2, origx, origy = T.MoverFrames[i]:GetPoint() 
+					self.moving = true 
+					self:SetUserPlaced(true) 
+					self:StartMoving() 
+				end)			
+				T.MoverFrames[i]:SetScript("OnDragStop", function(self) 
+					self.moving = false 
+					self:StopMovingOrSizing() 
+				end)			
+				exec(T.MoverFrames[i], enable)			
+				if T.MoverFrames[i].text then 
+					T.MoverFrames[i].text:Show() 
+				end
+			else			
+				T.MoverFrames[i]:EnableMouse(false)
+				if T.MoverFrames[i].moving == true then
+					T.MoverFrames[i]:StopMovingOrSizing()
+					T.MoverFrames[i]:ClearAllPoints()
+					T.MoverFrames[i]:SetPoint(origa1, origf, origa2, origx, origy)
+				end
+				exec(T.MoverFrames[i], enable)
+				if T.MoverFrames[i].text then T.MoverFrames[i].text:Hide() end
+				T.MoverFrames[i].moving = false
 			end
-		else			
-			T.MoverFrames[i]:EnableMouse(false)
-			if T.MoverFrames[i].moving == true then
-				T.MoverFrames[i]:StopMovingOrSizing()
-				T.MoverFrames[i]:ClearAllPoints()
-				T.MoverFrames[i]:SetPoint(origa1, origf, origa2, origx, origy)
-			end
-			exec(T.MoverFrames[i], enable)
-			if T.MoverFrames[i].text then T.MoverFrames[i].text:Hide() end
-			T.MoverFrames[i].moving = false
 		end
 	end
 	
-	T.MoveUnitFrames()
+	if T.MoveUnitFrames then T.MoveUnitFrames() end
 	
 	if enable then enable = false else enable = true end
 end
