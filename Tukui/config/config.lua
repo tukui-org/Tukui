@@ -18,7 +18,6 @@ C["unitframes"] = {
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
-	["highThreshold"] = 80,                             -- hunter high threshold
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
 	["targetpowerpvponly"] = true,                      -- enable power text on pvp target only
 	["totdebuffs"] = false,                             -- enable tot debuffs (high reso only)
