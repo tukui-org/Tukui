@@ -60,6 +60,7 @@ NamePlates:SetScript("OnEvent", function(self, event, ...) self[event](self, ...
 
 SetCVar("bloatthreat", 0)
 SetCVar("bloattest", 0)
+SetCVar("bloatnameplates", 0)
 
 if C["nameplate"].overlap == true or T.eyefinity then
 	SetCVar("spreadnameplates", "0")
