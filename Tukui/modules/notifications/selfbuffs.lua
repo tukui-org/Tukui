@@ -96,11 +96,9 @@ if (buffs and buffs[1]) then
 	
 	frame.icon = frame:CreateTexture(nil, "OVERLAY")
 	frame.icon:SetPoint("CENTER")
-	frame:CreatePanel("Default", 96, 192, "CENTER", UIParent, "CENTER", 0, 200)
-	frame.icon:Width(96)
-	frame.icon:Height(192)
-	frame:SetBackdropColor(0, 0, 0, 0)
-	frame:SetBackdropBorderColor(0, 0, 0, 0)
+	frame:CreatePanel("Default", 40, 40, "CENTER", UIParent, "CENTER", 0, 200)
+	frame.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	frame.icon:Size(36)
 	frame:Hide()
 	
 	frame:RegisterEvent("UNIT_AURA")
