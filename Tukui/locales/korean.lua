@@ -3,15 +3,15 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if T.client == "koKR" then
  
 	L.chat_BATTLEGROUND_GET = "[B]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[B]"
+	L.chat_BATTLEGROUND_LEADER_GET = "[BL]"--@@
 	L.chat_BN_WHISPER_GET = "[FR]"
 	L.chat_GUILD_GET = "[G]"
 	L.chat_OFFICER_GET = "[O]"
 	L.chat_PARTY_GET = "[P]"
 	L.chat_PARTY_GUIDE_GET = "[P]"
-	L.chat_PARTY_LEADER_GET = "[P]"
+	L.chat_PARTY_LEADER_GET = "[PL]"--@@
 	L.chat_RAID_GET = "[R]"
-	L.chat_RAID_LEADER_GET = "[R]"
+	L.chat_RAID_LEADER_GET = "[RL]"--@@
 	L.chat_RAID_WARNING_GET = "[W]"
 	L.chat_WHISPER_GET = "[FR]"
 	L.chat_FLAG_AFK = "[AFK]"
@@ -28,8 +28,8 @@ if T.client == "koKR" then
  
 	L.disband = "공격대를 해체합니다."
  
-	L.datatext_download = "Download: "
-	L.datatext_bandwidth = "Bandwidth: "
+	L.datatext_download = "다운로드: "
+	L.datatext_bandwidth = "대역폭: "
 	L.datatext_guild = "길드"
 	L.datatext_noguild = "길드 없음"
 	L.datatext_bags = "소지품: "
@@ -93,6 +93,13 @@ if T.client == "koKR" then
 	L.datatext_totalmemusage = "총 메모리 사용량:"
 	L.datatext_control = "현재 진영:"
  
+	L.bg_warsong = "전쟁노래 협곡"
+	L.bg_arathi = "아라시 분지"
+	L.bg_eye = "폭풍의 눈"
+	L.bg_alterac = "알터랙 계곡"
+	L.bg_strand = "고대의 해안"
+	L.bg_isle = "정복의 섬"
+ 
 	L.Slots = {
 	  [1] = {1, "머리", 1000},
 	  [2] = {3, "어깨", 1000},
@@ -110,19 +117,19 @@ if T.client == "koKR" then
 	L.popup_disableui = "Tukui는 현재 해상도에 최적화되어 있지 않습니다. Tukui를 비활성화하시겠습니까? (다른 해상도로 시도해보려면 취소)"
 	L.popup_install = "현재 캐릭터는 Tukui를 처음 사용합니다. 행동 단축바, 대화창, 다양한 설정을 위해 UI를 다시 시작하셔야만 합니다."
 	L.popup_2raidactive = "2개의 공격대 인터페이스가 사용 중입니다. 한 가지만 사용하셔야 합니다."
-	L.popup_reset = "Warning! This will reset everything to Tukui default. Do you want to proceed?"
-	L.popup_install_yes = "Yeah! (recommended!)"
-	L.popup_install_no = "No, it sux so hard"
-	L.popup_reset_yes = "Yeah baby!"
-	L.popup_reset_no = "No, else I'll QQ forums!"
+	L.popup_reset = "경고! Tukui를 모두 초기화 합니다. 실행하시겠습니까?"
+	L.popup_install_yes = "설치를 수락했습니다."
+	L.popup_install_no = "설치를 취소했습니다."
+	L.popup_reset_yes = "초기화를 수락했습니다."
+	L.popup_reset_no = "초기화를 취소했습니다."
  
 	L.merchant_repairnomoney = "수리에 필요한 돈이 충분하지 않습니다!"
 	L.merchant_repaircost = "모든 아이템이 수리되었습니다: "
 	L.merchant_trashsell = "불필요한 아이템이 판매되었습니다: "
  
-	L.goldabbrev = "|cffffd700골|r"
-	L.silverabbrev = "|cffc7c7cf실|r"
-	L.copperabbrev = "|cffeda55f코|r"
+	L.goldabbrev = "|cffffd700●|r"
+	L.silverabbrev = "|cffc7c7cf●|r"
+	L.copperabbrev = "|cffeda55f●|r"
  
 	L.error_noerror = "오류가 발견되지 않았습니다."
  
@@ -138,8 +145,8 @@ if T.client == "koKR" then
 	L.unitframes_ouf_gohawk = "매의 상으로 전환"
 	L.unitframes_ouf_goviper = "독사의 상으로 전환"
 	L.unitframes_disconnected = "연결끊김"
-	L.unitframes_ouf_wrathspell = "Wrath"
-	L.unitframes_ouf_starfirespell = "Starfire"
+	L.unitframes_ouf_wrathspell = "격노"
+	L.unitframes_ouf_starfirespell = "불가사리"
  
 	L.tooltip_count = "개수"
  
@@ -174,18 +181,18 @@ if T.client == "koKR" then
 	L.core_welcome1 = "|cffC495DDTukui|r를 사용해주셔서 감사합니다. 버전 "
 	L.core_welcome2 = "자세한 사항은 |cff00FFFF/uihelp|r를 입력하거나 www.tukui.org 에 방문하시면 확인 가능합니다."
  
-	L.core_uihelp1 = "|cff00ff00General Slash Commands|r"
-	L.core_uihelp2 = "|cffFF0000/moveui|r - Unlock and move elements around the screen."
-	L.core_uihelp3 = "|cffFF0000/rl|r - Reloads your User Interface."
-	L.core_uihelp4 = "|cffFF0000/gm|r - Send GM tickets or show WoW in-game help."
-	L.core_uihelp5 = "|cffFF0000/frame|r - Detect frame name you currently mouseover. (very useful for lua editor)"
-	L.core_uihelp6 = "|cffFF0000/heal|r - Enable healing raid layout."
-	L.core_uihelp7 = "|cffFF0000/dps|r - Enable Dps/Tank raid layout."
-	L.core_uihelp8 = "|cffFF0000/bags|r - For sorting, buying bank slot or stacking items in your bags."
-	L.core_uihelp9 = "|cffFF0000/resetui|r - Reset Tukui to default."
-	L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
-	L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
-	L.core_uihelp100 = "(Scroll up for more commands ...)"
+	L.core_uihelp1 = "|cff00ff00일반적인 명령어|r"
+	L.core_uihelp2 = "|cffFF0000/moveui|r - 화면 주위 요소들을 잠금해제하고 이동합니다."
+	L.core_uihelp3 = "|cffFF0000/rl|r - 당신의 인터페이스를 다시 불러옵니다."
+	L.core_uihelp4 = "|cffFF0000/gm|r - 도움 요청(지식 열람실, GM 요청하기) 창을 엽니다."
+	L.core_uihelp5 = "|cffFF0000/frame|r - 커서가 위치한 창의 이름을 보여줍니다. (lua 편집 시 매우 유용)"
+	L.core_uihelp6 = "|cffFF0000/heal|r - 힐러용 공격대 레이아웃을 사용합니다."
+	L.core_uihelp7 = "|cffFF0000/dps|r - DPS/탱커용 레이아웃을 사용합니다."
+	L.core_uihelp8 = "|cffFF0000/bags|r - 분류, 정리, 가방 보관함을 추가 구입을 할 수 있습니다."
+	L.core_uihelp9 = "|cffFF0000/resetui|r - Tukui 를 초기화 합니다."
+	L.core_uihelp10 = "|cffFF0000/rd|r - 공격대를 해체합니다."
+	L.core_uihelp11 = "|cffFF0000/ainv|r - 자동초대 기능을 사용합니다. '/ainv 단어'를 입력하여 해당 단어가 들어간 귓속말이 올 경우 자동으로 초대를 합니다."
+	L.core_uihelp100 = "(위로 올리십시오 ...)"
  
 	L.symbol_CLEAR = "초기화"
 	L.symbol_SKULL = "해골"
@@ -208,14 +215,14 @@ if T.client == "koKR" then
 	L.hunter_content = "소환수의 만족도: 만족"
 	L.hunter_happy = "소환수의 만족도: 매우 만족"
 	
-	L.move_tooltip = "Move Tooltip"
-	L.move_minimap = "Move Minimap"
-	L.move_watchframe = "Move Quests"
-	L.move_gmframe = "Move Ticket"
-	L.move_buffs = "Move Player Buffs"
-	L.move_debuffs = "Move Player Debuffs"
-	L.move_shapeshift = "Move Shapeshift/Totem"
-	L.move_achievements = "Move Achievements"
-	L.move_roll = "Move Loot Rolling Frames"
-	L.move_vehicle = "Move Vehicle Seat"
+	L.move_tooltip = "툴팁 이동"
+	L.move_minimap = "미니맵 이동"
+	L.move_watchframe = "퀘스트 이동"
+	L.move_gmframe = "대기표 이동"
+	L.move_buffs = "플레이어 버프 이동"
+	L.move_debuffs = "플레이어 디버프 이동"
+	L.move_shapeshift = "태세/토템 바 이동"
+	L.move_achievements = "업적창 이동"
+	L.move_roll = "주사위 창 이동"
+	L.move_vehicle = "탈것 창 이동"
 end
