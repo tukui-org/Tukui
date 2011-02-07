@@ -29,6 +29,10 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		Advanced_UIScaleSlider:Kill()
 		PartyMemberBackground:Kill()
 		TutorialFrameAlertButton:Kill()
+		BuffFrame:Kill()
+		TemporaryEnchantFrame:Kill()
+		ConsolidatedBuffs:Kill()
+		InterfaceOptionsBuffsPanelConsolidateBuffs:Kill()
 		
 		InterfaceOptionsUnitFramePanelPartyBackground:Kill()
 

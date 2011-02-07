@@ -183,9 +183,6 @@ local function CreateAuraHeader(filter, ...)
 	return header
 end
 
-BuffFrame:Kill()
-TemporaryEnchantFrame:Kill()
-
 ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -184, -24))
 ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -184, -160))
 
