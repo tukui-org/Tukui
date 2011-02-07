@@ -39,12 +39,4 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 			ActionButton_ShowGrid(button)
 		end
 	end
-	
-	-- we force a first opening of totem flyout to skin and resize them immediatly
-	-- not waiting for the first click by the player to do this, because if it's done while in combat. It's a total mess! :P
-	if T.myclass == "SHAMAN" and HasMultiCastActionBar() then
-		MultiCastFlyoutFrameOpenButton_Show(MultiCastFlyoutFrameOpenButton, "slot", MultiCastSlotButton1)
-		MultiCastFlyoutFrameOpenButton:Click()
-		MultiCastFlyoutFrame:Hide()
-	end
 end)
