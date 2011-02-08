@@ -54,8 +54,8 @@
 	TukuiL.option_datatext_dur = "장비의 내구도"	
 	TukuiL.option_datatext_currency = "화폐 위치 (0 이면 미사용)"
 	TukuiL.option_datatext_micromenu = "마이크로 메뉴 위치 (0 이면 미사용)"
-	TukuiL.option_datatext_hit = "적중 위치 (0 이면 미사용)"--@@
-	TukuiL.option_datatext_mastery = "숙련 위치 (0 이면 미사용)"--@@
+	TukuiL.option_datatext_hit = "적중도 위치 (0 이면 미사용)"--@@
+	TukuiL.option_datatext_mastery = "특화도 위치 (0 이면 미사용)"--@@
  
 	-- unit frames
 	TukuiL.option_unitframes_unitframes = "개체창"
