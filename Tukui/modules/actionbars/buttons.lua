@@ -47,14 +47,6 @@ local function ShowOrHideBar(bar, button)
 			TukuiBar3:SetHeight(TukuiBar1:GetHeight())
 			TukuiBar2Button:SetHeight(TukuiBar1:GetHeight())
 			TukuiBar3Button:SetHeight(TukuiBar1:GetHeight())
-			if not T.lowversion then
-				for i = 7, 12 do
-					local left = _G["MultiBarBottomLeftButton"..i]
-					local right = _G["MultiBarBottomRightButton"..i]
-					left:Hide()
-					right:Hide()
-				end
-			end
 		end
 	else
 		if bar == TukuiBar5 and T.lowversion then
@@ -78,14 +70,6 @@ local function ShowOrHideBar(bar, button)
 			TukuiBar3:SetHeight(TukuiBar4:GetHeight())
 			TukuiBar2Button:SetHeight(TukuiBar2:GetHeight())
 			TukuiBar3Button:SetHeight(TukuiBar3:GetHeight())
-			if not T.lowversion then
-				for i = 7, 12 do
-					local left = _G["MultiBarBottomLeftButton"..i]
-					local right = _G["MultiBarBottomRightButton"..i]
-					left:Show()
-					right:Show()
-				end	
-			end
 		end
 	end
 end
