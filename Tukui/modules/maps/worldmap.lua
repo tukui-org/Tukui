@@ -184,7 +184,6 @@ addon:SetScript("OnEvent", function(self, event)
 		WorldMapFrameSizeDownButton:Disable() 
 		WorldMapFrameSizeUpButton:Disable()
 		HideUIPanel(WorldMapFrame)
-		WorldMap_ToggleSizeDown()
 		WatchFrame.showObjectives = nil
 		WorldMapQuestShowObjectives:SetChecked(false)
 		WorldMapQuestShowObjectives:Hide()
