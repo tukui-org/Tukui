@@ -38,7 +38,7 @@ local function SetTooltip(self)
 
 	GameTooltip:SetOwner(self, 'ANCHOR_BOTTOM', 0, -5)
 	GameTooltip:AddLine(string.format(XP..": %d / %d (%d%% - %d/%d)", min, max, min/max * 100, bars - (bars * (max - min) / max), bars))
-	GameTooltip:AddLine(string.format(LEVEL_ABBR..": %d (%d%% - %d)", max - min, (max - min) / max * 100, 1 + bars * (max - min) / max))
+	GameTooltip:AddLine(string.format(LEVEL_ABBR..": %d (%d%% - %d/%d)", max - min, (max - min) / max * 100, 1 + bars * (max - min) / max, bars))
 
 	if(self.rested) then
 		GameTooltip:AddLine(string.format("|cff0090ff"..TUTORIAL_TITLE26..": +%d (%d%%)", self.rested, self.rested / max * 100))
