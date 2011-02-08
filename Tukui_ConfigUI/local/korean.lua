@@ -1,7 +1,7 @@
 ﻿if GetLocale() == "koKR" then
 
 	-- update needed msg
-	TukuiL.option_update = "당신의 Tukui ConfigUI를 www.tukui.org 방문하여 업데이트하십시오."--@@
+	TukuiL.option_update = "Tukui 최종 변경으로 인하여 당신의 Tukui ConfigUI를 업데이트 해야합니다.(www.tukui.org 방문해주세요.)"
 	
 	-- general
 	TukuiL.option_general = "일반"
@@ -16,15 +16,15 @@
 	TukuiL.option_nameplates_enhancethreat = "위협수준 기능 사용, 당신의 역할에 따라 자동적으로 변경됨"
 	TukuiL.option_nameplates_showhealth = "생명력을 표시"
 	TukuiL.option_nameplates_combat = "전투 중에만 표시"
-	TukuiL.option_nameplates_goodcolor = "Good 위협 색상, varies depending if your a tank or dps/heal"--@@
-	TukuiL.option_nameplates_badcolor = "Bad 위협 색상, varies depending if your a tank or dps/heal"--@@
-	TukuiL.option_nameplates_transitioncolor = "잃은/얻은 위협 색상"--@@
+	TukuiL.option_nameplates_goodcolor = "Good threat color, varies depending if your a tank or dps/heal"
+	TukuiL.option_nameplates_badcolor = "Bad threat color, varies depending if your a tank or dps/heal"
+	TukuiL.option_nameplates_transitioncolor = "Losing/Gaining threat color"
  
 	-- merchant
 	TukuiL.option_merchant = "상점"
 	TukuiL.option_merchant_autosell = "회색 아이템의 자동판매를 사용"
 	TukuiL.option_merchant_autorepair = "자동수리를 사용"
-	TukuiL.option_merchant_sellmisc = "규정된 (잡템, 회색 템) 아이템 자동 판매"
+	TukuiL.option_merchant_sellmisc = "Sell some defined (craps not gray) items automatically"
  
 	-- bags
 	TukuiL.option_bags = "가방"
@@ -99,7 +99,7 @@
 	TukuiL.option_unitframes_totdebuffs = "대상의 대상의 약화 효과를 보여줌 (고해상도 전용)"
 	TukuiL.option_unitframes_classbar = "직업 바 사용"
 	TukuiL.option_unitframes_weakenedsoulbar = "약화된 영혼 알림바 사용 (사제)"
-	TukuiL.option_unitframes_onlyselfdebuffs = "대상에 대한 해당 디버프만 보기"--@@
+
  
 	-- loot
 	TukuiL.option_loot = "전리품"
@@ -161,7 +161,7 @@
 	
 	-- pvp
 	TukuiL.option_pvp = "PVP"
-	TukuiL.option_pvp_ii = "Enable Interrupt Icons"
+	TukuiL.option_pvp_ii = "방해 아이콘을 사용"
  
 	-- cooldowns
 	TukuiL.option_cooldown = "재사용 대기시간"

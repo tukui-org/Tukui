@@ -3,15 +3,15 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if T.client == "koKR" then
  
 	L.chat_BATTLEGROUND_GET = "[B]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[BL]"--@@
+	L.chat_BATTLEGROUND_LEADER_GET = "[B]"
 	L.chat_BN_WHISPER_GET = "[FR]"
 	L.chat_GUILD_GET = "[G]"
 	L.chat_OFFICER_GET = "[O]"
 	L.chat_PARTY_GET = "[P]"
 	L.chat_PARTY_GUIDE_GET = "[P]"
-	L.chat_PARTY_LEADER_GET = "[PL]"--@@
+	L.chat_PARTY_LEADER_GET = "[P]"
 	L.chat_RAID_GET = "[R]"
-	L.chat_RAID_LEADER_GET = "[RL]"--@@
+	L.chat_RAID_LEADER_GET = "[R]"
 	L.chat_RAID_WARNING_GET = "[W]"
 	L.chat_WHISPER_GET = "[FR]"
 	L.chat_FLAG_AFK = "[AFK]"
@@ -117,11 +117,11 @@ if T.client == "koKR" then
 	L.popup_disableui = "Tukui는 현재 해상도에 최적화되어 있지 않습니다. Tukui를 비활성화하시겠습니까? (다른 해상도로 시도해보려면 취소)"
 	L.popup_install = "현재 캐릭터는 Tukui를 처음 사용합니다. 행동 단축바, 대화창, 다양한 설정을 위해 UI를 다시 시작하셔야만 합니다."
 	L.popup_2raidactive = "2개의 공격대 인터페이스가 사용 중입니다. 한 가지만 사용하셔야 합니다."
-	L.popup_reset = "경고! Tukui를 모두 초기화 합니다. 실행하시겠습니까?"
-	L.popup_install_yes = "설치를 수락했습니다."
-	L.popup_install_no = "설치를 취소했습니다."
-	L.popup_reset_yes = "초기화를 수락했습니다."
-	L.popup_reset_no = "초기화를 취소했습니다."
+	L.popup_reset = "경고! Tukui의 모든것을 기본값으로 변경합니다. 실행하시겠습니까?"
+	L.popup_install_yes = "예"
+	L.popup_install_no = "아니오"
+	L.popup_reset_yes = "예"
+	L.popup_reset_no = "아니오"
  
 	L.merchant_repairnomoney = "수리에 필요한 돈이 충분하지 않습니다!"
 	L.merchant_repaircost = "모든 아이템이 수리되었습니다: "
@@ -146,7 +146,7 @@ if T.client == "koKR" then
 	L.unitframes_ouf_goviper = "독사의 상으로 전환"
 	L.unitframes_disconnected = "연결끊김"
 	L.unitframes_ouf_wrathspell = "격노"
-	L.unitframes_ouf_starfirespell = "불가사리"
+	L.unitframes_ouf_starfirespell = "별빛 섬광"
  
 	L.tooltip_count = "개수"
  
@@ -189,7 +189,7 @@ if T.client == "koKR" then
 	L.core_uihelp6 = "|cffFF0000/heal|r - 힐러용 공격대 레이아웃을 사용합니다."
 	L.core_uihelp7 = "|cffFF0000/dps|r - DPS/탱커용 레이아웃을 사용합니다."
 	L.core_uihelp8 = "|cffFF0000/bags|r - 분류, 정리, 가방 보관함을 추가 구입을 할 수 있습니다."
-	L.core_uihelp9 = "|cffFF0000/resetui|r - Tukui 를 초기화 합니다."
+	L.core_uihelp9 = "|cffFF0000/resetui|r - Tukui를 기본값으로 초기화 합니다."
 	L.core_uihelp10 = "|cffFF0000/rd|r - 공격대를 해체합니다."
 	L.core_uihelp11 = "|cffFF0000/ainv|r - 자동초대 기능을 사용합니다. '/ainv 단어'를 입력하여 해당 단어가 들어간 귓속말이 올 경우 자동으로 초대를 합니다."
 	L.core_uihelp100 = "(위로 올리십시오 ...)"
