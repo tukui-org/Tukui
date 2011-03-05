@@ -62,10 +62,9 @@ SetCVar("bloatthreat", 0)
 SetCVar("bloattest", 0)
 SetCVar("bloatnameplates", 0)
 
-if C["nameplate"].overlap == true or T.eyefinity then
-	SetCVar("spreadnameplates", "0")
-else
-	SetCVar("spreadnameplates", "1")
+if T.eyefinity then
+	SetCVar("nameplateMotion", "0")
+	InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:Kill()
 end
 
 local function QueueObject(parent, object)
