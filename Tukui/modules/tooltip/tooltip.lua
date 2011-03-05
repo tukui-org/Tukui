@@ -361,36 +361,48 @@ local SetStyle = function(self)
 end
 
 TukuiTooltip:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiTooltip:SetScript("OnEvent", function(self)
-	for _, tt in pairs(Tooltips) do
-		tt:HookScript("OnShow", SetStyle)
-	end
-	
-	ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
-	ItemRefTooltip:HookScript("OnShow", SetStyle)	
-	FriendsTooltip:SetTemplate("Default")
-		
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	self:SetScript("OnEvent", nil)
-	
-	-- move health status bar if anchor is found at top
-	local position = TukuiTooltipAnchor:GetPoint()
-	if position:match("TOP") then
-		healthBar:ClearAllPoints()
-		healthBar:Point("TOPLEFT", healthBar:GetParent(), "BOTTOMLEFT", 2, -5)
-		healthBar:Point("TOPRIGHT", healthBar:GetParent(), "BOTTOMRIGHT", -2, -5)
-	end
-	
-	-- Hide tooltips in combat for actions, pet actions and shapeshift
-	if C["tooltip"].hidebuttons == true then
-		local CombatHideActionButtonsTooltip = function(self)
-			if not IsShiftKeyDown() then
-				self:Hide()
-			end
+TukuiTooltip:RegisterEvent("ADDON_LOADED")
+TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
+	if event == "PLAYER_ENTERING_WORLD" then
+		for _, tt in pairs(Tooltips) do
+			tt:HookScript("OnShow", SetStyle)
 		end
-	 
-		hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
-		hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
-		hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
+		
+		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
+		ItemRefTooltip:HookScript("OnShow", SetStyle)	
+		FriendsTooltip:SetTemplate("Default")
+			
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		
+		-- move health status bar if anchor is found at top
+		local position = TukuiTooltipAnchor:GetPoint()
+		if position:match("TOP") then
+			healthBar:ClearAllPoints()
+			healthBar:Point("TOPLEFT", healthBar:GetParent(), "BOTTOMLEFT", 2, -5)
+			healthBar:Point("TOPRIGHT", healthBar:GetParent(), "BOTTOMRIGHT", -2, -5)
+		end
+		
+		-- Hide tooltips in combat for actions, pet actions and shapeshift
+		if C["tooltip"].hidebuttons == true then
+			local CombatHideActionButtonsTooltip = function(self)
+				if not IsShiftKeyDown() then
+					self:Hide()
+				end
+			end
+		 
+			hooksecurefunc(GameTooltip, "SetAction", CombatHideActionButtonsTooltip)
+			hooksecurefunc(GameTooltip, "SetPetAction", CombatHideActionButtonsTooltip)
+			hooksecurefunc(GameTooltip, "SetShapeshift", CombatHideActionButtonsTooltip)
+		end
+	else
+		if addon ~= "Blizzard_DebugTools" then return end
+		
+		if FrameStackTooltip then
+			FrameStackTooltip:SetScale(C.general.uiscale)
+			FrameStackTooltip:SetTemplate("Default")
+			
+			-- fix ~blue background update
+			FrameStackTooltip:SetScript("OnShow", function(self) self:SetBackdropColor(unpack(C.media.backdropcolor)) end)
+		end
 	end
 end)
