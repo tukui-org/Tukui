@@ -4,6 +4,7 @@ if not C["actionbar"].enable == true or not T.lowversion then return end
 TukuiBar5:SetWidth((T.buttonsize * 3) + (T.buttonspacing * 4))
 
 local bar = TukuiBar6
+bar:SetAlpha(1)
 MultiBarBottomLeft:SetParent(bar)
 
 -- setup the bar

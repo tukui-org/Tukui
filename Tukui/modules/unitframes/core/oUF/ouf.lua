@@ -544,5 +544,9 @@ oUF.units = units
 oUF.objects = objects
 
 if(global) then
-	_G[global] = oUF
+	if(parent ~= 'oUF' and global == 'oUF') then
+		error("%s is doing it wrong and setting its global to oUF.", parent)
+	else
+		_G[global] = oUF
+	end
 end

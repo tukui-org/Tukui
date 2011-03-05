@@ -8,11 +8,12 @@ local wideFrame = GetCVar("watchFrameWidth")
 
 -- create our moving area
 local TukuiWatchFrameAnchor = CreateFrame("Button", "TukuiWatchFrameAnchor", UIParent)
-TukuiWatchFrameAnchor:SetFrameStrata("TOOLTIP")
+TukuiWatchFrameAnchor:SetFrameStrata("HIGH")
 TukuiWatchFrameAnchor:SetFrameLevel(20)
 TukuiWatchFrameAnchor:SetHeight(20)
 TukuiWatchFrameAnchor:SetClampedToScreen(true)
 TukuiWatchFrameAnchor:SetMovable(true)
+TukuiWatchFrameAnchor:EnableMouse(false)
 TukuiWatchFrameAnchor:SetTemplate("Default")
 TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
 TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
@@ -71,8 +72,23 @@ local function setup()
 
 	WatchFrameTitle:SetParent(TukuiWatchFrame)
 	WatchFrameCollapseExpandButton:SetParent(TukuiWatchFrame)
+	WatchFrameCollapseExpandButton:SetFrameStrata(WatchFrameHeader:GetFrameStrata())
+	WatchFrameCollapseExpandButton:SetFrameLevel(WatchFrameHeader:GetFrameLevel() + 1)
+	WatchFrameCollapseExpandButton:SetNormalTexture("")
+	WatchFrameCollapseExpandButton:SetPushedTexture("")
+	WatchFrameCollapseExpandButton:SetHighlightTexture("")
+	WatchFrameCollapseExpandButton:SetTemplate("Default")
+	WatchFrameCollapseExpandButton:FontString("text", C.media.font, 12)
+	WatchFrameCollapseExpandButton.text:SetText("X")
+	WatchFrameCollapseExpandButton.text:Point("CENTER", 1, 0)
+	WatchFrameCollapseExpandButton:HookScript("OnClick", function(self) 
+		if WatchFrame.collapsed then 
+			self.text:SetText("V") 
+		else 
+			self.text:SetText("X")
+		end 
+	end)
 	WatchFrameTitle:Kill()
-	WatchFrameCollapseExpandButton:Kill()
 end
 
 ------------------------------------------------------------------------

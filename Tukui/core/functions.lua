@@ -72,7 +72,7 @@ T.DataTextTooltipAnchor = function(self)
 	local panel = self:GetParent()
 	local anchor = "ANCHOR_TOP"
 	local xoff = 0
-	local yoff = T.Scale(6)
+	local yoff = T.Scale(5)
 	
 	if panel == TukuiInfoLeft then
 		anchor = "ANCHOR_TOPLEFT"
@@ -219,17 +219,6 @@ T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
 T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
 
-T.TotemBarOrientation = function(revert)
-	local position = TukuiShiftBar:GetPoint()
-	if position:match("TOP") then
-		revert = true
-	else
-		revert = false
-	end
-	
-	return revert
-end
-
 T.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
     return (("%%.%df"):format(decimals)):format(number)
@@ -294,6 +283,10 @@ end
 ------------------------------------------------------------------------
 --	unitframes Functions
 ------------------------------------------------------------------------
+
+local ADDON_NAME, ns = ...
+local oUF = ns.oUF or oUF
+assert(oUF, "Tukui was unable to locate oUF install.")
 
 T.updateAllElements = function(frame)
 	for _, v in ipairs(frame.__elements) do
@@ -842,4 +835,218 @@ T.UpdateThreat = function(self, event, unit)
 			self.Name:SetTextColor(1,1,1)
 		end
 	end 
+end
+
+--------------------------------------------------------------------------------------------
+-- THE AURAWATCH FUNCTION ITSELF. HERE BE DRAGONS!
+--------------------------------------------------------------------------------------------
+
+T.countOffsets = {
+	TOPLEFT = {6*C["unitframes"].gridscale, 1},
+	TOPRIGHT = {-6*C["unitframes"].gridscale, 1},
+	BOTTOMLEFT = {6*C["unitframes"].gridscale, 1},
+	BOTTOMRIGHT = {-6*C["unitframes"].gridscale, 1},
+	LEFT = {6*C["unitframes"].gridscale, 1},
+	RIGHT = {-6*C["unitframes"].gridscale, 1},
+	TOP = {0, 0},
+	BOTTOM = {0, 0},
+}
+
+T.CreateAuraWatchIcon = function(self, icon)
+	icon:SetTemplate("Default")
+	icon.icon:Point("TOPLEFT", 1, -1)
+	icon.icon:Point("BOTTOMRIGHT", -1, 1)
+	icon.icon:SetTexCoord(.08, .92, .08, .92)
+	icon.icon:SetDrawLayer("ARTWORK")
+	if (icon.cd) then
+		icon.cd:SetReverse()
+	end
+	icon.overlay:SetTexture()
+end
+
+T.createAuraWatch = function(self, unit)
+	local auras = CreateFrame("Frame", nil, self)
+	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
+	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
+	auras.presentAlpha = 1
+	auras.missingAlpha = 0
+	auras.icons = {}
+	auras.PostCreateIcon = T.CreateAuraWatchIcon
+
+	if (not C["unitframes"].auratimer) then
+		auras.hideCooldown = true
+	end
+
+	local buffs = {}
+
+	if (T.buffids["ALL"]) then
+		for key, value in pairs(T.buffids["ALL"]) do
+			tinsert(buffs, value)
+		end
+	end
+
+	if (T.buffids[T.myclass]) then
+		for key, value in pairs(T.buffids[T.myclass]) do
+			tinsert(buffs, value)
+		end
+	end
+
+	-- "Cornerbuffs"
+	if (buffs) then
+		for key, spell in pairs(buffs) do
+			local icon = CreateFrame("Frame", nil, auras)
+			icon.spellID = spell[1]
+			icon.anyUnit = spell[4]
+			icon:SetWidth(T.Scale(6*C["unitframes"].gridscale))
+			icon:SetHeight(T.Scale(6*C["unitframes"].gridscale))
+			icon:SetPoint(spell[2], 0, 0)
+
+			local tex = icon:CreateTexture(nil, "OVERLAY")
+			tex:SetAllPoints(icon)
+			tex:SetTexture(C.media.blank)
+			if (spell[3]) then
+				tex:SetVertexColor(unpack(spell[3]))
+			else
+				tex:SetVertexColor(0.8, 0.8, 0.8)
+			end
+
+			local count = icon:CreateFontString(nil, "OVERLAY")
+			count:SetFont(C["media"].uffont, 8*C["unitframes"].gridscale, "THINOUTLINE")
+			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]]))
+			icon.count = count
+
+			auras.icons[spell[1]] = icon
+		end
+	end
+	
+	self.AuraWatch = auras
+end
+
+if C["unitframes"].raidunitdebuffwatch == true then
+	-- Classbuffs { spell ID, position [, {r,g,b,a}][, anyUnit] }
+	-- For oUF_AuraWatch
+	do
+		T.buffids = {
+			PRIEST = {
+				{6788, "TOPLEFT", {1, 0, 0}, true}, -- Weakened Soul
+				{33076, "TOPRIGHT", {0.2, 0.7, 0.2}}, -- Prayer of Mending
+				{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Renew
+				{17, "BOTTOMRIGHT", {0.81, 0.85, 0.1}, true}, -- Power Word: Shield
+			},
+			DRUID = {
+				{774, "TOPLEFT", {0.8, 0.4, 0.8}}, -- Rejuvenation
+				{8936, "TOPRIGHT", {0.2, 0.8, 0.2}}, -- Regrowth
+				{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Lifebloom
+				{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}}, -- Wild Growth
+			},
+			PALADIN = {
+				{53563, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Light
+			},
+			SHAMAN = {
+				{61295, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Riptide 
+				{51945, "TOPRIGHT", {0.2, 0.7, 0.2}}, -- Earthliving
+				{16177, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Ancestral Fortitude
+				{974, "BOTTOMRIGHT", {0.7, 0.4, 0}, true}, -- Earth Shield
+			},
+			ALL = {
+				{14253, "RIGHT", {0, 1, 0}}, -- Abolish Poison
+				{23333, "LEFT", {1, 0, 0}}, -- Warsong flag xD
+			},
+		}
+	end
+		local _, ns = ...
+	-- Raid debuffs (now using it with oUF_RaidDebuff instead of oUF_Aurawatch)
+	do
+		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+
+		if not ORD then return end
+		
+		ORD.ShowDispelableDebuff = true
+		ORD.FilterDispellableDebuff = true
+		ORD.MatchBySpellName = true
+		
+		local function SpellName(id)
+			local name, _, _, _, _, _, _, _, _ = GetSpellInfo(id) 	
+			return name	
+		end
+
+		T.debuffids = {
+		-- Other debuff
+			SpellName(67479), -- Impale
+
+		--CATA DEBUFFS
+		--Baradin Hold
+			SpellName(95173), -- Consuming Darkness
+
+		--Blackwing Descent
+			--Magmaw
+			SpellName(91911), -- Constricting Chains
+			SpellName(94679), -- Parasitic Infection
+			SpellName(94617), -- Mangle
+
+			--Omintron Defense System
+			SpellName(79835), --Poison Soaked Shell
+			SpellName(91433), --Lightning Conductor
+			SpellName(91521), --Incineration Security Measure
+
+			--Maloriak
+			SpellName(77699), -- Flash Freeze
+			SpellName(77760), -- Biting Chill
+
+			--Atramedes
+			SpellName(92423), -- Searing Flame
+			SpellName(92485), -- Roaring Flame
+			SpellName(92407), -- Sonic Breath
+
+			--Chimaeron
+			SpellName(82881), -- Break
+			SpellName(89084), -- Low Health
+
+			--Nefarian
+
+			--Sinestra
+			SpellName(92956), --Wrack
+
+		--The Bastion of Twilight
+			--Valiona & Theralion
+			SpellName(92878), -- Blackout
+			SpellName(86840), -- Devouring Flames
+			SpellName(95639), -- Engulfing Magic
+
+			--Halfus Wyrmbreaker
+			SpellName(39171), -- Malevolent Strikes
+
+			--Twilight Ascendant Council
+			SpellName(92511), -- Hydro Lance
+			SpellName(82762), -- Waterlogged
+			SpellName(92505), -- Frozen
+			SpellName(92518), -- Flame Torrent
+			SpellName(83099), -- Lightning Rod
+			SpellName(92075), -- Gravity Core
+			SpellName(92488), -- Gravity Crush
+
+			--Cho'gall
+			SpellName(86028), -- Cho's Blast
+			SpellName(86029), -- Gall's Blast
+
+		--Throne of the Four Winds
+			--Conclave of Wind
+				--Nezir <Lord of the North Wind>
+				SpellName(93131), --Ice Patch
+				--Anshal <Lord of the West Wind>
+				SpellName(86206), --Soothing Breeze
+				SpellName(93122), --Toxic Spores
+				--Rohash <Lord of the East Wind>
+				SpellName(93058), --Slicing Gale
+			--Al'Akir
+			SpellName(93260), -- Ice Storm
+			SpellName(93295), -- Lightning Rod
+		}
+
+		T.ReverseTimer = {
+			[92956] = true, -- Sinestra (Wrack)
+		},
+		
+		ORD:RegisterDebuffs(T.debuffids)
+	end
 end

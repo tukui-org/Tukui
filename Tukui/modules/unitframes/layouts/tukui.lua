@@ -1,3 +1,10 @@
+local ADDON_NAME, ns = ...
+local oUF = ns.oUF or oUF
+assert(oUF, "Tukui was unable to locate oUF install.")
+
+ns._Objects = {}
+ns._Headers = {}
+
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
 
@@ -243,7 +250,8 @@ local function Shared(self, unit)
 			-- pvp status text
 			local status = T.SetFontString(panel, font1, 12)
 			status:SetPoint("CENTER", panel, "CENTER", 0, 0)
-			status:SetTextColor(0.69, 0.31, 0.31, 0)
+			status:SetTextColor(0.69, 0.31, 0.31)
+			status:Hide()
 			self.Status = status
 			self:Tag(status, "[pvp]")
 			
@@ -521,16 +529,16 @@ local function Shared(self, unit)
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
 					self.EclipseBar.Text:Hide()
 				end
-				FlashInfo.ManaLevel:SetAlpha(0) 
-				status:SetAlpha(1) 
+				FlashInfo.ManaLevel:Hide()
+				status:Show()
 				UnitFrame_OnEnter(self) 
 			end)
 			self:SetScript("OnLeave", function(self) 
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
 					self.EclipseBar.Text:Show()
 				end
-				FlashInfo.ManaLevel:SetAlpha(1)
-				status:SetAlpha(0) 
+				FlashInfo.ManaLevel:Show()
+				status:Hide()
 				UnitFrame_OnLeave(self) 
 			end)
 		end
@@ -1514,6 +1522,9 @@ end
 --	Default position of Tukui unitframes
 ------------------------------------------------------------------------
 
+local adjust = 0
+if T.lowversion then adjust = 125 end
+
 -- for lower reso
 local adjustXY = 0
 local totdebuffs = 0
@@ -1533,7 +1544,7 @@ end
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0, 246)
+focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0 - adjust, 246)
 focus:Size(200, 29)
 
 -- target
@@ -1565,10 +1576,11 @@ else
 	pet:Size(129, 36)
 end
 
-
-local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
-focustarget:SetPoint("BOTTOM", focus, "TOP", 0, 35)
-focustarget:Size(200, 29)
+if C.unitframes.showfocustarget then
+	local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
+	focustarget:SetPoint("BOTTOM", focus, "TOP", 0 - adjust, 35)
+	focustarget:Size(200, 29)
+end
 
 
 if C.arena.unitframes then
@@ -1576,7 +1588,7 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0, 246)
+			arena[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0 + adjust, 246)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 35)
 		end
@@ -1598,7 +1610,7 @@ if C["unitframes"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0,246)
+			boss[i]:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 0 + adjust,246)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 35)             
 		end

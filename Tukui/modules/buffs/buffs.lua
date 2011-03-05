@@ -1,4 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+if (C.auras.player ~= true) or (C.unitframes.playerauras) then return end
 
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60

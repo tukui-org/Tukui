@@ -48,11 +48,11 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 			func = function() if IsInGuild() then if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end GuildFrame_Toggle() end end},
 			{text = LFG_TITLE,
 			func = function() ToggleFrame(LFDParentFrame) end},
-			{text = L_LFRAID,
+			{text = LOOKING_FOR_RAID,
 			func = function() ToggleFrame(LFRParentFrame) end},
 			{text = HELP_BUTTON,
 			func = function() ToggleHelpFrame() end},
-			{text = L_CALENDAR,
+			{text = CALENDAR_VIEW_EVENT,
 			func = function()
 			if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
 				Calendar_Toggle()

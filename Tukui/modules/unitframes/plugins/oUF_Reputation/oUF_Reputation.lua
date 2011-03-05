@@ -14,6 +14,8 @@ if C.unitframes.enable ~= true then return end
 	 - OverrideText(bar, min, max, value, name, id)
 
 --]]
+local _, ns = ...
+local oUF = ns.oUF or oUF
 
 if not oUF then return end
 

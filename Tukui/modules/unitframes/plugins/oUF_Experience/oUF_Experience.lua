@@ -1,5 +1,9 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C.unitframes.enable ~= true then return end
+
+local _, ns = ...
+local oUF = ns.oUF or oUF
+
 if not oUF then return end
 --[[
 

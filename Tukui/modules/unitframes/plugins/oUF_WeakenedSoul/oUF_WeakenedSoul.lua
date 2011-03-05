@@ -3,7 +3,7 @@ if select(2, UnitClass('player')) ~= "PRIEST" then return end
 
 local _, ns = ...
 local oUF = ns.oUF or oUF
-assert(oUF, 'WeakenedSoul was unable to locate oUF install')
+assert(oUF, 'oUF_WeakenedSoul was unable to locate oUF install')
 
 local function GetDebuffInfo(unit)
 	if not UnitCanAssist('player', unit) then return end

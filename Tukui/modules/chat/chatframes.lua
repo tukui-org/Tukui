@@ -218,15 +218,6 @@ local function SetupChatPosAndFont(self)
 				FCF_SavePositionAndDimensions(chat)
 			end
 		end
-		
-		--Check if chat exists in the bottomright corner
-		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
-			TukuiChatBackgroundRight:Show()
-			TukuiTabsRightBackground:Show()
-			TukuiLineToABRightAlt:ClearAllPoints()
-			TukuiLineToABRightAlt:Point("LEFT", TukuiBar1, "RIGHT", 0, 16)
-			TukuiLineToABRightAlt:Point("BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", 0, 16)			
-		end
 	end
 			
 	-- reposition battle.net popup over chat #1
@@ -258,6 +249,13 @@ end)
 -- Setup temp chat (BN, WHISPER) when needed.
 local function SetupTempChat()
 	local frame = FCF_GetCurrentChatFrame()
+	local id = frame:GetID()
+	local buttonup = _G[format("ChatFrame%sButtonFrameUpButton", id)]
+
+	-- do a check if we already did a skinning earlier for this temp chat frame
+	if not buttonup:IsShown() then return end
+	
+	-- style it
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)

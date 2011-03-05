@@ -1,3 +1,10 @@
+local ADDON_NAME, ns = ...
+local oUF = oUFTukui or oUF
+assert(oUF, "Tukui was unable to locate oUF install.")
+
+ns._Objects = {}
+ns._Headers = {}
+
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
 

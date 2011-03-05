@@ -6,8 +6,8 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", UIParent)
 TukuiMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
 TukuiMinimap:RegisterEvent("ADDON_LOADED")
-TukuiMinimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", T.Scale(-24), T.Scale(-22))
-TukuiMinimap:SetSize(T.Scale(144), T.Scale(144))
+TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -22)
+TukuiMinimap:Size(144)
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
 TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
@@ -64,6 +64,11 @@ MiniMapWorldMapButton:Hide()
 MiniMapInstanceDifficulty:ClearAllPoints()
 MiniMapInstanceDifficulty:SetParent(Minimap)
 MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+
+-- 4.0.6 Guild instance difficulty
+GuildInstanceDifficulty:ClearAllPoints()
+GuildInstanceDifficulty:SetParent(Minimap)
+GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
 
 -- Reposition lfg icon at bottom-left
 local function UpdateLFG()
@@ -143,11 +148,11 @@ local menuList = {
     func = function() if IsInGuild() then if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end GuildFrame_Toggle() end end},
     {text = LFG_TITLE,
     func = function() ToggleFrame(LFDParentFrame) end},
-    {text = L_LFRAID,
+    {text = LOOKING_FOR_RAID,
     func = function() ToggleFrame(LFRParentFrame) end},
     {text = HELP_BUTTON,
     func = function() ToggleHelpFrame() end},
-    {text = L_CALENDAR,
+    {text = CALENDAR_VIEW_EVENT,
     func = function()
     if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
         Calendar_Toggle()

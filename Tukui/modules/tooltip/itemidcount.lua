@@ -1,7 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C.tooltip.enable ~= true then return end
 
-GameTooltip:HookScript("OnTooltipCleared", function(self) self.TukuiItemTooltip=nil end)
+GameTooltip:HookScript("OnTooltipCleared", function(self) self.TukuiItemTooltip = nil end)
 GameTooltip:HookScript("OnTooltipSetItem", function(self)
 	if (IsShiftKeyDown() or IsAltKeyDown()) and (TukuiItemTooltip and not self.TukuiItemTooltip and (TukuiItemTooltip.id or TukuiItemTooltip.count)) then
 		local item, link = self:GetItem()
@@ -29,5 +29,5 @@ f:SetScript("OnEvent", function(_, _, name)
 	if name ~= "Tukui" then return end
 	f:UnregisterEvent("ADDON_LOADED")
 	f:SetScript("OnEvent", nil)
-	TukuiItemTooltip = TukuiItemTooltip or {count=true,id=true}
+	TukuiItemTooltip = TukuiItemTooltip or {count=true, id=true}
 end)

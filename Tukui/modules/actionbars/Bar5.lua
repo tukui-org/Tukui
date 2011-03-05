@@ -6,6 +6,7 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 local bar = TukuiBar5
+bar:SetAlpha(1)
 MultiBarRight:SetParent(bar)
 
 for i= 1, 12 do

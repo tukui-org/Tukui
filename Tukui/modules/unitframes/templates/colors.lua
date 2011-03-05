@@ -1,3 +1,7 @@
+local ADDON_NAME, ns = ...
+local oUF = ns.oUF or oUF
+assert(oUF, "Tukui was unable to locate oUF install.")
+
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 ------------------------------------------------------------------------
 --	Colors

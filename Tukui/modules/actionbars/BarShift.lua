@@ -58,6 +58,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button = _G["ShapeshiftButton"..i]
 			button:ClearAllPoints()
 			button:SetParent(self)
+			button:SetFrameStrata("LOW")
 			if i == 1 then
 				button:Point("BOTTOMLEFT", TukuiShift, 0, 24)
 			else

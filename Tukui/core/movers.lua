@@ -98,10 +98,6 @@ local function exec(self, enable)
 			TukuiShapeShiftHolder:SetAlpha(1)
 		else
 			TukuiShapeShiftHolder:SetAlpha(0)
-			-- used for shaman totembar update
-			if T.myclass == "SHAMAN" and self.moving == false and HasMultiCastActionBar() then
-				T.TotemOrientationDown = T.TotemBarOrientation()
-			end
 		end
 	end
 end

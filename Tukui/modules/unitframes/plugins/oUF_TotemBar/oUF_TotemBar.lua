@@ -21,6 +21,8 @@ if C.unitframes.enable ~= true or T.myclass ~= "SHAMAN" then return end
 			.multiplier : Sets the multiplier for the text or the background (can be two differents multipliers)
 
 --]]
+local _, ns = ...
+local oUF = ns.oUF or oUF
 
 if not oUF then return end
 
