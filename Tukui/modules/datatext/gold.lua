@@ -71,7 +71,7 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	Stat:RegisterEvent("PLAYER_TRADE_MONEY")
 	Stat:RegisterEvent("TRADE_MONEY_CHANGED")
 	Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Stat:SetScript("OnMouseDown", function() OpenAllBags() end)
+	Stat:SetScript("OnMouseDown", function() ToggleAllBags() end)
 	Stat:SetScript("OnEvent", OnEvent)
 	Stat:SetScript("OnEnter", function(self)
 		if not InCombatLockdown() then
