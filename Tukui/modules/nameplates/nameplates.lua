@@ -132,7 +132,7 @@ local function CreateVirtualFrame(parent, point)
 	parent.borderright:SetDrawLayer("BORDER", -7)	
 end
 
-local function SetVirtualBorder(parent, r, g, b)
+local function SetVirtualBorder(parent, r, g, b, a)
 	parent.bordertop:SetTexture(r, g, b)
 	parent.borderbottom:SetTexture(r, g, b)
 	parent.borderleft:SetTexture(r, g, b)
@@ -191,7 +191,6 @@ local function OnHide(frame)
 	frame.hp.gcolor = nil
 	frame.hp.bcolor = nil
 
-	SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
 	frame:SetScript("OnUpdate",nil)
 end
 
@@ -245,6 +244,7 @@ local function UpdateObjects(frame)
 	Colorize(frame)
 	frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor = frame.hp:GetStatusBarColor()
 	frame.hp.hpbg:SetTexture(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor, 0.25)
+	SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
 	
 	if C["nameplate"].enhancethreat == true then
 		frame.hp.name:SetTextColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
