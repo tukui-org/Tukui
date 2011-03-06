@@ -51,7 +51,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 	
 	if addon == "Blizzard_DebugTools" then
-		local noscalemult = E.mult * C["general"].uiscale
+		local noscalemult = T.mult * C["general"].uiscale
 		local bg = {
 		  bgFile = C["media"].blank, 
 		  edgeFile = C["media"].blank, 
