@@ -176,8 +176,6 @@ local function OnHide(frame)
 	frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
 	frame.overlay:Hide()
 	frame.cb:Hide()
-	frame.unit = nil
-	frame.guid = nil
 	frame.hasClass = nil
 	frame.isFriendly = nil
 	frame.hp.rcolor = nil
@@ -492,7 +490,7 @@ local function ShowHealth(frame, ...)
 	end
 end
 
---Run a function for all visible nameplates, we use this for the blacklist, to check unitguid, and to hide drunken text
+--Run a function for all visible nameplates
 local function ForEachPlate(functionToRun, ...)
 	for frame in pairs(frames) do
 		if frame:IsShown() then
