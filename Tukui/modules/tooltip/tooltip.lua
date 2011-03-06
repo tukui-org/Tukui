@@ -399,10 +399,9 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 		
 		if FrameStackTooltip then
 			FrameStackTooltip:SetScale(C.general.uiscale)
-			FrameStackTooltip:SetTemplate("Default")
 			
-			-- fix ~blue background update
-			FrameStackTooltip:SetScript("OnShow", function(self) self:SetBackdropColor(unpack(C.media.backdropcolor)) end)
+			-- Skin it
+			FrameStackTooltip:SetScript("OnShow", function(self) self:SetTemplate("Default") end)
 		end
 	end
 end)
