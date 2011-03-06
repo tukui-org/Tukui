@@ -375,7 +375,7 @@ local function SkinObjects(frame)
 	raidicon:ClearAllPoints()
 	raidicon:SetPoint("BOTTOM", hp, "TOP", 0, 16)
 	raidicon:SetSize(iconSize*1.4, iconSize*1.4)
-	raidicon:SetTexture(C["media"].raidicons)	
+	raidicon:SetTexture([[Interface\AddOns\Tukui\medias\textures\raidicons.blp]])
 	frame.raidicon = raidicon
 	
 	--Hide Old Stuff
