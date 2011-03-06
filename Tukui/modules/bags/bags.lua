@@ -867,6 +867,7 @@ function Stuffing:ADDON_LOADED(addon)
 	ToggleBackpack = Stuffing_Toggle
 	ToggleBag = Stuffing_ToggleBag
 	ToggleAllBags = Stuffing_Toggle
+	OpenAllBags = Stuffing_Open
 	OpenBackpack = Stuffing_Open
 	CloseAllBags = Stuffing_Close
 	CloseBackpack = Stuffing_Close
