@@ -42,7 +42,7 @@ do
 		local pos = settings.position[self.type]
 		local p1, frame, p2, x, y = strsplit("#", pos)
 
-		return self:SetPoint(p1, frame, p2, T.Scale(x), T.Scale(y))
+		return self:Point(p1, frame, p2, x, y)
 	end
 
 	local OnUpdate = function(self, elapsed)

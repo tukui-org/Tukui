@@ -582,7 +582,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 T.PostCreateAura = function(element, button)
-	T.SetTemplate(button)
+	button:SetTemplate("Default")
 	
 	button.remaining = T.SetFontString(button, C["media"].font, C["unitframes"].auratextscale, "THINOUTLINE")
 	button.remaining:Point("CENTER", 1, 0)
@@ -897,8 +897,8 @@ T.createAuraWatch = function(self, unit)
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:SetWidth(T.Scale(6*C["unitframes"].gridscale))
-			icon:SetHeight(T.Scale(6*C["unitframes"].gridscale))
+			icon:Width(6*C["unitframes"].gridscale)
+			icon:Height(6*C["unitframes"].gridscale)
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")

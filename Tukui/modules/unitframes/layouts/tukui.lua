@@ -1391,7 +1391,7 @@ local function Shared(self, unit)
 		local debuffs = CreateFrame("Frame", nil, self)
 		debuffs:SetHeight(26)
 		debuffs:SetWidth(200)
-		debuffs:SetPoint('LEFT', self, 'RIGHT', T.Scale(4), 0)
+		debuffs:Point('LEFT', self, 'RIGHT', 4, 0)
 		debuffs.size = 26
 		debuffs.num = 5
 		debuffs.spacing = 2
@@ -1413,8 +1413,8 @@ local function Shared(self, unit)
 			
 			local Trinket = CreateFrame("Frame", nil, Trinketbg)
 			Trinket:SetAllPoints(Trinketbg)
-			Trinket:SetPoint("TOPLEFT", Trinketbg, T.Scale(2), T.Scale(-2))
-			Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, T.Scale(-2), T.Scale(2))
+			Trinket:Point("TOPLEFT", Trinketbg, 2, -2)
+			Trinket:Point("BOTTOMRIGHT", Trinketbg, -2, 2)
 			Trinket:SetFrameLevel(1)
 			Trinket.trinketUseAnnounce = true
 			self.Trinket = Trinket
@@ -1458,7 +1458,7 @@ local function Shared(self, unit)
 		castbar.button:SetTemplate("Default")
 		castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
-		castbar.icon:Point("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
+		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
 		castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
 		castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
 

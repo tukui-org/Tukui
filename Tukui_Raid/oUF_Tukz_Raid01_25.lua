@@ -151,11 +151,11 @@ oUF:Factory(function(self)
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
 		pets[1]:SetPoint('TOPLEFT', raid, 'TOPLEFT', 0, -120*T.raidscale)
-		pets[1]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
+		pets[1]:Size(120*T.raidscale, 16*T.raidscale)
 	for i =2, 4 do 
 		pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
 		pets[i]:SetPoint('TOP', pets[i-1], 'BOTTOM', 0, -8)
-		pets[i]:SetSize(T.Scale(120*T.raidscale), T.Scale(16*T.raidscale))
+		pets[i]:Size(120*T.raidscale, 16*T.raidscale)
 	end
 	
 	local RaidMove = CreateFrame("Frame")

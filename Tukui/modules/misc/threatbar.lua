@@ -26,7 +26,7 @@ TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
 
 TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.font, 12)
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
-TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
+TukuiThreatBar.Title:Point("LEFT", TukuiThreatBar, "LEFT", 30, 0)
 	  
 TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
 TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)

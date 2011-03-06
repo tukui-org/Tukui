@@ -213,8 +213,8 @@ local function Shared(self, unit)
 		--[[
 		if C["unitframes"].auratimer then
 			RaidDebuffs.cd = CreateFrame('Cooldown', nil, RaidDebuffs)
-			RaidDebuffs.cd:SetPoint("TOPLEFT", T.Scale(2), T.Scale(-2))
-			RaidDebuffs.cd:SetPoint("BOTTOMRIGHT", T.Scale(-2), T.Scale(2))
+			RaidDebuffs.cd:Point("TOPLEFT", 2, -2)
+			RaidDebuffs.cd:Point("BOTTOMRIGHT", -2, 2)
 			RaidDebuffs.cd.noOCC = true -- remove this line if you want cooldown number on it
 		end
 		--]]
