@@ -35,7 +35,16 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 			{text = SPELLBOOK_ABILITIES_BUTTON,
 			func = function() ToggleFrame(SpellBookFrame) end},
 			{text = TALENTS_BUTTON,
-			func = function() if not PlayerTalentFrame then LoadAddOn("Blizzard_TalentUI") end if not GlyphFrame then LoadAddOn("Blizzard_GlyphUI") end PlayerTalentFrame_Toggle() end},
+			func = function() 
+				if not PlayerTalentFrame then 
+					LoadAddOn("Blizzard_TalentUI") 
+				end 
+				
+				if not GlyphFrame then 
+					LoadAddOn("Blizzard_GlyphUI") 
+				end 
+				PlayerTalentFrame_Toggle() 
+			end},
 			{text = ACHIEVEMENT_BUTTON,
 			func = function() ToggleAchievementFrame() end},
 			{text = QUESTLOG_BUTTON,
@@ -45,7 +54,15 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 			{text = PLAYER_V_PLAYER,
 			func = function() ToggleFrame(PVPFrame) end},
 			{text = ACHIEVEMENTS_GUILD_TAB,
-			func = function() if IsInGuild() then if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end GuildFrame_Toggle() end end},
+			func = function() 
+				if IsInGuild() then 
+					if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end 
+					GuildFrame_Toggle() 
+				else 
+					if not LookingForGuildFrame then LoadAddOn("Blizzard_LookingForGuildUI") end 
+					LookingForGuildFrame_Toggle() 
+				end
+			end},
 			{text = LFG_TITLE,
 			func = function() ToggleFrame(LFDParentFrame) end},
 			{text = LOOKING_FOR_RAID,
