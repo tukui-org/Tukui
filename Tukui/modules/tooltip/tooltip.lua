@@ -403,5 +403,9 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 			-- Skin it
 			FrameStackTooltip:SetScript("OnShow", function(self) self:SetTemplate("Default") end)
 		end
+		
+		EventTraceTooltip:HookScript("OnShow", function(self)
+			self:SetTemplate("Default")
+		end)		
 	end
 end)
