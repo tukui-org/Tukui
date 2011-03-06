@@ -110,7 +110,6 @@ local function Enable(self, unit)
 
 		if(experience.Rested) then
 			self:RegisterEvent('UPDATE_EXHAUSTION', Update)
-			experience.Rested:SetFrameLevel(1)
 		end
 
 		if(hunterPlayer) then
