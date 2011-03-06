@@ -220,7 +220,6 @@ local function addapi(object)
 	mt.CreatePanel = CreatePanel
 	mt.CreateShadow = CreateShadow
 	mt.Kill = Kill
-	mt.CreateTransparentPanel = CreateTransparentPanel
 	mt.StyleButton = StyleButton
 	mt.Width = Width
 	mt.Height = Height
