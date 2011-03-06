@@ -5,6 +5,8 @@ C["general"] = {
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
+	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
+	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
 }
 
 C["unitframes"] = {
@@ -32,6 +34,7 @@ C["unitframes"] = {
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
 	["showfocustarget"] = true,                         -- show focus target
+	["bordercolor"] = { .4,.4,.4 },                     -- unit frames panel border color
 
 	-- raid layout (if one of them is enabled)
 	["showrange"] = true,                               -- show range opacity on raidframes
