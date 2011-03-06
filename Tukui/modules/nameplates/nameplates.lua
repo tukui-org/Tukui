@@ -27,6 +27,15 @@ end
 local NamePlates = CreateFrame("Frame", nil, UIParent)
 NamePlates:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 
+SetCVar("bloatthreat", 0)
+SetCVar("bloattest", 0)
+SetCVar("bloatnameplates", 0)
+
+if T.eyefinity then
+	SetCVar("nameplateMotion", "0")
+	InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:Kill()
+end
+
 --Nameplates we do NOT want to see
 local PlateBlacklist = {
 	--Shaman Totems (Ones that don't matter)
