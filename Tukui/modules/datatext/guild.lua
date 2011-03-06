@@ -77,19 +77,12 @@ local function Update(self, event, ...)
 	if IsInGuild() then
 		BuildGuildTable()
 		
-		self:SetAllPoints(Text)
 		Text:SetFormattedText(displayString, L.datatext_guild, totalOnline)
-		
-		if not Stat:GetScript("OnMouseDown") then
-			Stat:SetScript("OnMouseDown", function(self, btn)
-				if btn ~= "LeftButton" then return end
-				ToggleGuildFrame()
-			end)
-		end
 	else
 		Text:SetText(L.datatext_noguild)
-		Stat:SetScript("OnMouseDown", nil)
 	end
+	
+	self:SetAllPoints(Text)
 	self.update = false
 end
 	
@@ -111,9 +104,14 @@ local function whisperClick(self,arg1,arg2,checked)
 end
 
 local function ToggleGuildFrame()
-	if not GuildFrame and IsInGuild() then LoadAddOn("Blizzard_GuildUI") end
-	GuildFrame_Toggle() 
-	GuildFrame_TabClicked(GuildFrameTab2)
+	if IsInGuild() then 
+		if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end 
+		GuildFrame_Toggle()
+		GuildFrame_TabClicked(GuildFrameTab2)
+	else 
+		if not LookingForGuildFrame then LoadAddOn("Blizzard_LookingForGuildUI") end 
+		LookingForGuildFrame_Toggle() 
+	end
 end
 
 Stat:SetScript("OnMouseUp", function(self, btn)
@@ -206,6 +204,10 @@ Stat:SetScript("OnEnter", function(self)
 end)
 
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
+Stat:SetScript("OnMouseDown", function(self, btn)
+	if btn ~= "LeftButton" then return end
+	ToggleGuildFrame()
+end)
 
 Stat:RegisterEvent("GUILD_ROSTER_SHOW")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
