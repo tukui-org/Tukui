@@ -115,7 +115,7 @@ local function ToggleGuildFrame()
 end
 
 Stat:SetScript("OnMouseUp", function(self, btn)
-	if btn ~= "RightButton" then return end
+	if btn ~= "RightButton" or not IsInGuild() then return end
 	
 	GameTooltip:Hide()
 
