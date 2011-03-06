@@ -197,22 +197,21 @@ local function Colorize(frame)
 		if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
 			frame.hasClass = true
 			frame.isFriendly = false
-			frame.hp:SetStatusBarColor(unpack(T.oUF_colors.class[class]))
 			return
 		end
 	end
 	
 	if g+b == 0 then -- hostile
-		r,g,b = unpack(T.oUF_colors.reaction[1])
+		r,g,b = 222/255, 95/255,  95/255
 		frame.isFriendly = false
 	elseif r+b == 0 then -- friendly npc
-		r,g,b = unpack(T.oUF_colors.power["MANA"])
+		r,g,b = 0.31, 0.45, 0.63
 		frame.isFriendly = true
 	elseif r+g > 1.95 then -- neutral
-		r,g,b = unpack(T.oUF_colors.reaction[4])
+		r,g,b = 218/255, 197/255, 92/255
 		frame.isFriendly = false
 	elseif r+g == 0 then -- friendly player
-		r,g,b = unpack(T.oUF_colors.reaction[5])
+		r,g,b = 75/255,  175/255, 76/255
 		frame.isFriendly = true
 	else -- enemy player
 		frame.isFriendly = false
