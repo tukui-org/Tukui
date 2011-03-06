@@ -413,6 +413,7 @@ local function UpdateThreat(frame, elapsed)
 		else
 			SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
 		end
+		frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
 	else
 		if not frame.region:IsShown() then
 			if InCombatLockdown() and frame.isFriendly ~= true then
