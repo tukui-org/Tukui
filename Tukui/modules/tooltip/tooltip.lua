@@ -401,11 +401,11 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 			FrameStackTooltip:SetScale(C.general.uiscale)
 			
 			-- Skin it
-			FrameStackTooltip:SetScript("OnShow", function(self) self:SetTemplate("Default") end)
+			FrameStackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end)
 		end
 		
-		EventTraceTooltip:HookScript("OnShow", function(self)
-			self:SetTemplate("Default")
-		end)		
+		if EventTraceTooltip then
+			EventTraceTooltip:HookScript("OnShow", function(self) self:SetTemplate("Default") end)
+		end
 	end
 end)
