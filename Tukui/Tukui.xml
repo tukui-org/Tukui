@@ -120,4 +120,6 @@
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="core\movers.lua"/>
 	<Script file="developer\test.lua"/>
+	
+	<Script file="modules\chat\blizzfixrealidlink.lua"/>	
 </Ui>

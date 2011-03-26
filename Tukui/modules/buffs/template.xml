@@ -13,7 +13,7 @@
 				if self:GetAttribute("target-slot") == 16 or self:GetAttribute("target-slot") == 17 or self:GetAttribute("target-slot") == 18 then
 					GameTooltip:SetInventoryItem("player", self:GetID())
 				else
-					GameTooltip:SetUnitAura(PlayerFrame.unit, self:GetID(), self:GetAttribute('filter'))
+					GameTooltip:SetUnitAura("player", self:GetID(), self:GetAttribute('filter'))
 				end
 			</OnEnter>
 			<OnLeave function='GameTooltip_Hide'/>

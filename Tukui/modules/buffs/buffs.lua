@@ -55,9 +55,15 @@ local function UpdateWeapons(button, slot, active, expiration)
 		button.id = GetInventorySlotInfo(slot)
 		button.icon = GetInventoryItemTexture("player", button.id)
 		button.texture:SetTexture(button.icon)
-		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)		
+		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 		button.expiration = (expiration/1000)
-		button.bg:SetAlpha(1)
+		
+		if UnitHasVehicleUI("player") then
+			button:SetAlpha(0.3)
+		else
+			button:SetAlpha(1)
+		end
+		
 		button:SetScript("OnUpdate", UpdateTime)		
 	elseif not active then
 		button.texture:SetTexture(nil)
@@ -68,6 +74,8 @@ local function UpdateWeapons(button, slot, active, expiration)
 end
 
 local function UpdateAuras(header, button, weapon)
+	local name, _, texture, count, dtype, duration, expiration, caster = UnitAura(header:GetAttribute("unit"), button:GetID(), header:GetAttribute("filter"))
+	
 	if(not button.texture) then
 		button.texture = button:CreateTexture(nil, "BORDER")
 		button.texture:SetAllPoints()
@@ -87,9 +95,7 @@ local function UpdateAuras(header, button, weapon)
 		button.bg:SetFrameLevel(button:GetFrameLevel() - 1)
 		button.bg:SetFrameStrata(button:GetFrameStrata())
 	end
-	
-	local name, _, texture, count, dtype, duration, expiration = UnitAura(header:GetAttribute("unit"), button:GetID(), header:GetAttribute("filter"))
-	
+		
 	if(name) then
 		button.texture:SetTexture(texture)
 		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
@@ -99,7 +105,19 @@ local function UpdateAuras(header, button, weapon)
 		if(header:GetAttribute("filter") == "HARMFUL") then
 			local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 			button.bg:SetBackdropBorderColor(color.r * 3/5, color.g * 3/5, color.b * 3/5)
+		else
+			if caster == "vehicle" then
+				button.bg:SetBackdropBorderColor(75/255,  175/255, 76/255)
+			else
+				button.bg:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			end
 		end
+	end
+	
+	if UnitHasVehicleUI("player") and caster ~= "vehicle" then
+		button:SetAlpha(0.3)
+	else
+		button:SetAlpha(1)
 	end
 end
 
@@ -143,11 +161,12 @@ local function CreateAuraHeader(filter, ...)
 	if filter == "HELPFUL" then name = "TukuiPlayerBuffs" else name = "TukuiPlayerDebuffs" end
 
 	local header = CreateFrame("Frame", name, UIParent, "SecureAuraHeaderTemplate")
+	header:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	header:RegisterEvent("UNIT_EXITED_VEHICLE")
 	header:SetPoint(...)
 	header:SetClampedToScreen(true)
 	header:SetMovable(true)
-	header:HookScript("OnEvent", ScanAuras)
-	
+	header:HookScript("OnEvent", ScanAuras)	
 	header:SetAttribute("unit", "player")
 	header:SetAttribute("sortMethod", "TIME")
 	header:SetAttribute("template", "TukuiAuraTemplate")

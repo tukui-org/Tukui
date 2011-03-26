@@ -11,7 +11,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)		
 			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
-			CompactPartyFrame:Kill()
 			CompactRaidFrameManager:Kill()
 			CompactRaidFrameContainer:Kill()
 		end	

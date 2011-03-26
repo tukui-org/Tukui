@@ -125,6 +125,9 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"GhostFrameContentsFrame",
 			"ColorPickerFrame",
 			"StackSplitFrame",
+			"ChannelPullout",
+			"ChannelPulloutTab",
+			"RolePollPopup",
 		}
 
 		-- reskin popup buttons
@@ -168,7 +171,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"Logout", 
 			"Quit", 
 			"Continue", 
-			"MacOptions"
+			"MacOptions",
+			"Help",
 		}
 		
 		for i = 1, getn(BlizzardMenuButtons) do
@@ -221,6 +225,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"ColorPickerCancelButton",
 			"StackSplitOkayButton",
 			"StackSplitCancelButton",
+			"RolePollPopupAcceptButton"
 		}
 		
 		for i = 1, getn(BlizzardButtons) do
@@ -251,8 +256,11 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		_G["ColorPickerCancelButton"]:ClearAllPoints()
 		_G["ColorPickerOkayButton"]:ClearAllPoints()
 		_G["ColorPickerCancelButton"]:SetPoint("BOTTOMRIGHT", ColorPickerFrame, "BOTTOMRIGHT", -6, 6)
-		_G["ColorPickerOkayButton"]:SetPoint("RIGHT",_G["ColorPickerCancelButton"],"LEFT", -4,0)		
-		
+		_G["ColorPickerOkayButton"]:SetPoint("RIGHT",_G["ColorPickerCancelButton"],"LEFT", -4,0)
+		_G["ChannelPulloutTab"]:SetHeight(20)
+		_G["ChannelPulloutTabText"]:ClearAllPoints()
+		_G["ChannelPulloutTabText"]:SetPoint("TOP",0,-6)
+				
 		-- others
 		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
 		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
@@ -261,6 +269,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		_G["StaticPopup1EditBoxLeft"]:SetTexture(nil)
 		_G["StaticPopup1EditBoxMid"]:SetTexture(nil)
 		_G["StaticPopup1EditBoxRight"]:SetTexture(nil)
+		_G["ChannelPulloutBackground"]:Kill()
+		_G["ChannelPulloutTabLeft"]:SetTexture(nil)
+		_G["ChannelPulloutTabMiddle"]:SetTexture(nil)
+		_G["ChannelPulloutTabRight"]:SetTexture(nil)
 	end
 	
 	-- mac menu/option panel, made by affli.
