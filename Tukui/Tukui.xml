@@ -114,7 +114,6 @@
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
-	<Script file="modules\notifications\hunterpethappiness.lua"/>	
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
