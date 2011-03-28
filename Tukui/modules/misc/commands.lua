@@ -26,6 +26,10 @@ end
 SLASH_CLFIX1 = "/clfix"
 SlashCmdList.CLFIX = CombatLogClearEntries
 
+-- ready check shortcut
+SlashCmdList.RCSLASH = DoReadyCheck
+SLASH_RCSLASH1 = "/rc"
+
 SLASH_RAIDDISBAND1 = "/rd"
 SlashCmdList["RAIDDISBAND"] = function()
 		SendChatMessage(L.disband, "RAID" or "PARTY")

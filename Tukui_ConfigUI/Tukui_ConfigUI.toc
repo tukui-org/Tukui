@@ -1,0 +1,20 @@
+## Interface: 40100
+## Title: |cffC495DDTukui Config UI|r
+## Notes: Someday there is only pantesaur left.
+## Author: Tohveli
+## Editor: Tukz, Elv22
+## Version: 13.05
+## SavedVariables: TukuiConfigAll, TukuiConfigSettings
+## SavedVariablesPerCharacter: TukuiConfig
+## RequiredDeps: Tukui
+
+local\english.lua
+local\french.lua
+local\russian.lua
+local\german.lua
+local\taiwan.lua
+local\spanish.lua
+local\korean.lua
+local\china.lua
+
+core.lua
