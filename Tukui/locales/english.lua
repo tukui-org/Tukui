@@ -249,8 +249,8 @@ L.tutorial_step_1_line_4 = "A power user is a user of a personal computer who ha
 
 -- tutorial 2
 L.tutorial_step_2_line_1 = "Tukui includes an embedded version of oUF (oUFTukui) created by Haste. This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements."
-L.tutorial_step_2_line_2 = "You can visit wowinterface.com and search for oUF for more informations about this tool."
-L.tutorial_step_2_line_3 = "If you play as a healer or a raid leader, you may want to enable healer unit frames. They display more informations about your raid. (/heal) A dps or tank should use our simple raid display. (/dps) If you don't want to show any of them or use something else, you can disable it in addon manager from character login list."
+L.tutorial_step_2_line_2 = "You can visit wowinterface.com and search for oUF for more information about this tool."
+L.tutorial_step_2_line_3 = "If you play as a healer or a raid leader, you may want to enable healer unit frames. They display more information about your raid. (/heal) A dps or tank should use our simple raid display. (/dps) If you don't want to show any of them or use something else, you can disable it in addon manager from character login list."
 L.tutorial_step_2_line_4 = "To easily change the unitframe position, just type /moveui."
 
 -- tutorial 3
@@ -269,7 +269,7 @@ L.tutorial_step_4_line_4 = "There is some dropdown menu available. Right-clickin
 L.tutorial_step_5_line_1 = "Lastly, Tukui includes useful slash commands. Below is a list."
 L.tutorial_step_5_line_2 = "/moveui allow you to move lots of frames anywhere on the screen. /enable and /disable are used to quickly enable and disable addons. /rl reloads the UI. /heal enable the healer raid unit frames and /dps enable the dps/tank raid unit frames."
 L.tutorial_step_5_line_3 = "/tt lets you whisper your target. /rc initiates a ready check. /rd disbands a party or raid. /bags display some features available thought command line. /ainv enable auto invite by whisper on you. (/ainv off) to turn it off"
-L.tutorial_step_5_line_4 = "/gm toggles the Help frame. /install, /resetui or /tutorial loads this installer. /frame print the name and parent of the frame below the cursor respectively with additionnal informations."
+L.tutorial_step_5_line_4 = "/gm toggles the Help frame. /install, /resetui or /tutorial loads this installer. /frame print the name and parent of the frame below the cursor respectively with additionnal information."
 
 -- tutorial 6
 L.tutorial_step_6_line_1 = "The tutorial is complete. You can choose to reconsult it at any time by typing /tutorial."

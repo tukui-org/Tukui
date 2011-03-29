@@ -9,7 +9,9 @@ if GetLocale() == "esES" then
 	TukuiL.option_general_override = "Usar reso Alta en monitor de reso Baja"
 	TukuiL.option_general_multisample = "Proteccion de Multisample (margen 1xp limpio)"
 	TukuiL.option_general_customuiscale = "Escala UI (solo si escala automatica esta apagado)"
- 
+	TukuiL.option_general_backdropcolor = "Define el color por defecto del fondo de los paneles"
+	TukuiL.option_general_bordercolor = "Define el color por defecto de los paneles"
+
 	-- nameplate
 	TukuiL.option_nameplates = "Placas de nombre"
 	TukuiL.option_nameplates_enable = "Activar placas de nombre"
@@ -101,6 +103,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_unitframes_weakenedsoulbar = "Habilitar Barra de Notificacion de Alma Debilitada (Sacerdote)"
 	TukuiL.option_unitframes_onlyselfdebuffs = "Mostrar solo tus debuffs en el objetivo"
 	TukuiL.option_unitframes_focus = "Habilitar el Blanco de tu Foco"
+	TukuiL.option_unitframes_bordercolor = "Define el color por defecto del borde de los paneles"
  
 	-- loot
 	TukuiL.option_loot = "Botín"

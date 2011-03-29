@@ -9,6 +9,8 @@
 	TukuiL.option_general_override = "Nutze Layout für hohe auf niedriger Auflösung"
 	TukuiL.option_general_multisample = "Multisample Schutz (Saubere 1px Ränder)"
 	TukuiL.option_general_customuiscale = "Interface Skalierung (falls automatische Skalierung deaktiviert ist)"
+	TukuiL.option_general_backdropcolor = "Hintergrundfarbe der Plaketten zurücksetzen"
+	TukuiL.option_general_bordercolor = "Randfarbe der Plaketten zurücksetzen"
  
 	-- nameplate
 	TukuiL.option_nameplates = "Namensplaketten"
@@ -101,6 +103,7 @@
 	TukuiL.option_unitframes_weakenedsoulbar = "Aktiviere 'Geschwächte Seele' Anzeige (Priester)"
 	TukuiL.option_unitframes_onlyselfdebuffs = "Zeigt nur deine debuffs auf dem Ziel an"
 	TukuiL.option_unitframes_focus = "Aktiviere Fokus Ziel"
+	TukuiL.option_unitframes_bordercolor = "Randfarbe der Einheitenfenster zurücksetzen" 
  
 	-- loot
 	TukuiL.option_loot = "Beute"

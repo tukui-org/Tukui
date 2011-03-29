@@ -60,8 +60,10 @@ local function UpdateWeapons(button, slot, active, expiration)
 		
 		if UnitHasVehicleUI("player") then
 			button:SetAlpha(0.3)
+			button.bg:SetAlpha(0.3)
 		else
 			button:SetAlpha(1)
+			button.bg:SetAlpha(1)
 		end
 		
 		button:SetScript("OnUpdate", UpdateTime)		

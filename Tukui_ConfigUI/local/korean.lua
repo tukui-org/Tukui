@@ -9,6 +9,8 @@
 	TukuiL.option_general_override = "저해상도에서 고해상도 버전의 개체창을 사용"
 	TukuiL.option_general_multisample = "멀티샘플링을 항상 1배로 유지 (깨끗한 선)"
 	TukuiL.option_general_customuiscale = "UI크기 (autoscale이 꺼져 있을 때)"
+	TukuiL.option_general_backdropcolor = "판넬 기본 배경 색상 설정"
+	TukuiL.option_general_bordercolor = "판넬 기본 테두리 색상 설정"
  
 	-- nameplate
 	TukuiL.option_nameplates = "이름표"
@@ -100,6 +102,7 @@
 	TukuiL.option_unitframes_classbar = "직업 바 사용"
 	TukuiL.option_unitframes_weakenedsoulbar = "약화된 영혼 알림바 사용 (사제)"
 	TukuiL.option_unitframes_focus = "주시대상의 대상을 보여줌"
+	TukuiL.option_unitframes_bordercolor = "유닛프레임 기본 테두리 색상 설정"
 
  
 	-- loot

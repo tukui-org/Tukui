@@ -9,6 +9,8 @@
 	TukuiL.option_general_override = "Использовать раскладку для высокого разрешения при низком разрешении"
 	TukuiL.option_general_multisample = "Защищать конфигурацию мультисемплинга (ровные края шириной 1 пиксель)"
 	TukuiL.option_general_customuiscale = "Масштаб интерфейса (если автомасштабирование отключено)"
+	TukuiL.option_general_backdropcolor = "Установить изначальный цвет фона панелей"
+	TukuiL.option_general_bordercolor = "Установить изначальный цвет окантовки панелей"		
  
 	-- nameplate
 	TukuiL.option_nameplates = "Индикаторы здоровья"
@@ -101,6 +103,7 @@
 	TukuiL.option_unitframes_weakenedsoulbar = "Включить уведомление Ослабленной души (для Приста)"
 	TukuiL.option_unitframes_onlyselfdebuffs = "Отображать только ваши дебаффы на цели"
 	TukuiL.option_unitframes_focus = "Включить цель фокуса"
+	TukuiL.option_unitframes_bordercolor = "Установить изначальный цвет окантовки рамок"
  
 	-- loot
 	TukuiL.option_loot = "Добыча"

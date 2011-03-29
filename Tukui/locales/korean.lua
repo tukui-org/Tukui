@@ -225,4 +225,81 @@ if T.client == "koKR" then
 	L.move_achievements = "업적창 이동"
 	L.move_roll = "주사위 창 이동"
 	L.move_vehicle = "탈것 창 이동"
+	
+	-- tuto/install
+	L.install_header_1 = "환영합니다"
+	L.install_header_2 = "1. 필수사항"
+	L.install_header_3 = "2. 유닛프레임"
+	L.install_header_4 = "3. 기능"
+	L.install_header_5 = "4. 알아야할 사항!"
+	L.install_header_6 = "5. 명령어"
+	L.install_header_7 = "6. 완료"
+	L.install_header_8 = "1. 필수 설치"
+	L.install_header_9 = "2. 친목"
+	L.install_header_10= "3. 프레임"
+	L.install_header_11= "4. 성공!"
+
+	L.install_init_line_1 = "Tukui를 사용해 주셔서 감사합니다.!"
+	L.install_init_line_2 = "몇차례 간단한 설치 단계를 통해서 안내될것입니다. 각 단계에서 현 설치를 적용시킬지 아닐지를 결정하실수 있습니다."
+	L.install_init_line_3 = "간단한 지침서를 볼수있는 몇가지 Tukui 기능들 또한 주어집니다."
+	L.install_init_line_4 = "이 간단한 지침을 안내받고 싶으시면 '지침서' 버튼을 누르십시요., 이 단계를 넘기시고 싶으시면 '설치'를 누르시면 됩니다."
+
+	L.tutorial_step_1_line_1 = "이 짧은 지침서는 몇가지 Tukui의 기능들을 보여줄것입니다."
+	L.tutorial_step_1_line_2 = "먼저, 이 UI로 플레이 하기 전 알셔야할 필수사항들입니다."
+	L.tutorial_step_1_line_3 = "이 설치기는 부분적으로 특정 캐릭터에 해당됩니다. 반면, 몇몇 설정들은 전캐릭터에 추후 적용됩니다. 각 새로운 캐릭터에 Tukui를 실행시키기 위해 설치 스크립트를 실행시켜야 합니다. 스크립트는 최초 Tukui 사용시 매 새로운 캐릭터 로그인할때 마다 자동으로 보여집니다. 또한, 파워사용자는 /Tukui/config/config.lua에서 옵션 설정을 하시면 됩니다. 친근사용자는 게임내에 /tukui 입력을 통해 옵션설정이 가능합니다."
+	L.tutorial_step_1_line_4 = "파워 사용자는 보통 사용자들의 능력을 넘어서 고급 기능 (예를들면 Lua 수정)을 사용할 능력을 지닌 개인컴퓨터 사용자를 일컸습니다. 친근 사용자는 보통 사용자를 일컫으며 프로그래밍 능력이 꼭 필요한것은 아닙니다. 이들에게는 Tukui 사용자 설정을 위해 (/tukui)를 통해 게임내 설정도구 사용을 추천합니다."
+
+	L.tutorial_step_2_line_1 = "Tukui는 Trond (Haste) A Ekseth에 의해 고안된 oUF의 버전을 포함하고 있습니다. 이는 화면상에 모든 유닛프레임, 버프 및 디버프, 직업 특정 요소들을 다룹니다."
+	L.tutorial_step_2_line_2 = "이 도구에 대해 oUF에 대한 좀더 자세한 정보를 원하시면 wowinterface.com 방문하셔서 찾아보시기 바랍니다."
+	L.tutorial_step_2_line_3 = "만약 힐러나 공대장으로 플레이하시는 분이라면, 힐러 유닛 프레임을 선호하실 겁니다. 이는 공격대에서 좀더 자세한 정보를 보여줍니다. (/heal) 딜러나 탱커는 심플한 레이드 표시기를 사용하시면 됩니다.(/dps) 어떤것도 사용하길 원치 않으시는 분이나 다른 애드온을 사용하시는 분은, 로그인시 캐릭터 선택 화면 애드온 설정에서 사용안함으로 하시면 됩니다."
+	L.tutorial_step_2_line_4 = "간단한 유닛프레임 위치 이동을 원하시면, /moveui를 입력하시기 바랍니다."
+
+	L.tutorial_step_3_line_1 = "Tukui는 블리자드 UI를 새롭게 디자인한 것입니다. 더도덜도 없습니다. 기본 UI에서 볼수있는 거의 모든 기능들은 Tukui를 통해 가능합니다. 기본 UI의 오직 불가능한 기능은 실제적으로 화면상에선 볼수 없는 몇몇 자동 기능들뿐입니다. 상점에서 회색템 자동 판매와 가방 아이템 자동 정리를 예를 들수 있습니다."
+	L.tutorial_step_3_line_2 = "모든 이가 데미지미터기, 보스 경보 모드, 위협수준미터기등 같은것을 선호하는게 아니기 때문에, 최선의 방법이라 판단합니다. Tukui는 모든 직업, 역할, 사양, 게임스타일, 사용자의 취향등에 최대한 맞추기 위해 고안되었습니다. 그래서 Tukui는 현재 가장 선호하는 UI중에 하나입니다. 모든이의 게임스타일에 맞고 최대한 수정가능합니다. 또한 애드온에 의존없이 자신만의 맞춤 UI를 만들기 원하는 모든이를 위한 매우 좋은 개시로 디자인되었습니다. 현재 2009년부터 많은 사용자들이 자신만의 UI를 토대로 Tukui를 사용중입니다. Tukui 웹사이트에 Edited Packages를 한번 살펴보세요.!"
+	L.tutorial_step_3_line_3 = "Tukui 웹사이트에 extra mods 부분을 방문해 보시기 바랍니다. 또는 추가 기능 및 양식 설치를 원하시는 분들은 http://www.wowinterface.com 방문하시기 바랍니다."
+	L.tutorial_step_3_line_4 = ""
+
+	L.tutorial_step_4_line_1 = "액션바 갯수 설정은 하단 액션바 배경의 왼쪽 혹은 오른쪽에 마우스를 대십시요. 오른쪽 액션바도 마찬가지로 배경 위와 아래쪽에 마우스를 대시면 됩니다. 채팅창에서 텍스트 복사는 채팅창 오른쪽 코너에 마우스를 대시면 나타나는 버튼을 클릭하시면 됩니다."
+	L.tutorial_step_4_line_2 = "미니맵 테두리 색상변경. 새 메일을 받으면 녹색으로, 달력 초대를 받으면 빨강색으로, 새 메일과 달력초대가 동시에 있으면 오렌지 색상으로 변경됩니다."
+	L.tutorial_step_4_line_3 = "블리자드의 다양한 판넬을 보려면 데이타텍스트의 80%는 마우스 왼쪽 클릭하시면 됩니다. 친구와 길드 데이타텍스트도 물론 마우스 오른쪽 클릭으로 기능을 살펴보실수 있습니다."
+	L.tutorial_step_4_line_4 = "몇가지 사용가능한 드롭다운 메뉴가 있습니다. 가방 닫기 버튼을 오른쪽 클릭하시면 드롭다운 메뉴가 보여지며 이는 가방보이기, 아이템 정리, 열쇠가방등이 나타납니다. 마우스 중앙 버튼을 미니맵에 누르시면 micro 메뉴가 나타납니다."
+
+	L.tutorial_step_5_line_1 = "마지막으로, Tukui는 유용한 슬래시 명령어를 포함하고 있습니다. 하기 리스트를 참고하세요."
+	L.tutorial_step_5_line_2 = "/moveui는 화면 어디든 많은 프레임 이동을 가능하게 합니다. /enable과 /disable은 빠르게 애드온 적용과 미적용에 사용됩니다. /rl은 UI를 다시 불러올때. /heal은 힐러 레이드 유닛프레임을 사용 /dps는 딜러/탱커 레이드 유닛프레임을 사용."
+	L.tutorial_step_5_line_3 = "/tt는 대상타겟에게 귓속말을 보낼때. /rc는 전투준비 체크. /rd 파티나 레이드 해체. /bags 명령어 라인으로 가능한 몇가지 기능을 보여줍니다. /ainv 귓속말 대상 자동초대를 가능하게 합니다. (/ainv off) 자동초대 기능 끄기"
+	L.tutorial_step_5_line_4 = "/gm 지엠창 끄기 켜기. /install, /resetui 또는 /tutorial은 설치를 불러옵니다. /frame 커서가 위치한 프레임의 이름과 추가정보를 보여줍니다."
+
+	L.tutorial_step_6_line_1 = "지침서가 완료되었습니다. 재조정을 원하시면 언제든지 /tutorial 입력하시면 됩니다."
+	L.tutorial_step_6_line_2 = "config/config.lua 파일을 살펴보시기 바랍니다. 혹은 /Tukui 입력을 통해 원하시는대로 UI 구성을 하시면 됩니다."
+	L.tutorial_step_6_line_3 = "아직 완료전이거나 기본으로 리셋을 원하시면 UI 설치를 계속하실수 있습니다.!"
+	L.tutorial_step_6_line_4 = ""
+
+	L.install_step_1_line_1 = "이번 단계들은 Tukui의 정확한 CVar 설치를 적용시킬것입니다."
+	L.install_step_1_line_2 = "1단계는 필수 설치에 적용됩니다."
+	L.install_step_1_line_3 = "특정 부분설치에만 적용시키길 원하지 않는 한, 모든 사용자는 |cffff0000recommended|r 이 적용됩니다."
+	L.install_step_1_line_4 = "이 설치를 적용시키려면 '계속' 버튼을 눌러주세요., 이 단계를 넘기시려면 '무시' 버튼을 누르시면 됩니다."
+
+	L.install_step_2_line_0 = "다른 채팅 애드온이 발견되면 이 단계는 무시될것입니다. 계속 설치를 위해 '무시' 버튼을 눌러주세요."
+	L.install_step_2_line_1 = "2단계는 옳바른 채팅 구성이 적용됩니다."
+	L.install_step_2_line_2 = "이 단계는 처음이신 사용자분에게 추천합니다. 기존 사용자분들은 이 단계는 넘기셔도 됩니다."
+	L.install_step_2_line_3 = "이 설치를 기반으로 적용시키면 채팅 폰트는 크게 보여집니다. 설치를 마치면 다시 정상적으로 나타납니다."
+	L.install_step_2_line_4 = "이 설치를 적용시키려면 '계속' 버튼을 눌러주세요., 이 단계를 넘기시려면 '무시' 버튼을 누르시면 됩니다."
+
+	L.install_step_3_line_1 = "3단계와 마지막 단계는 기본 프레임 위치 적용입니다."
+	L.install_step_3_line_2 = "이 단계 |cffff0000recommended|r 는 처음이신 사용자를 위한것입니다."
+	L.install_step_3_line_3 = ""
+	L.install_step_3_line_4 = "이 설치를 적용시키려면 '계속' 버튼을 눌러주세요., 이 단계를 넘기시려면 '무시' 버튼을 누르시면 됩니다."
+
+	L.install_step_4_line_1 = "설치가 완료되었습니다."
+	L.install_step_4_line_2 = "UI를 다시 불러오시려면 '마침' 버튼을 눌러주세요."
+	L.install_step_4_line_3 = ""
+	L.install_step_4_line_4 = "Tukui를 즐기세요! http://www.tukui.org를 통해 방문하실수 있습니다.!"
+
+	L.install_button_tutorial = "지침서"
+	L.install_button_install = "설치"
+	L.install_button_next = "다음"
+	L.install_button_skip = "무시"
+	L.install_button_continue = "계속"
+	L.install_button_finish = "마침"
+	L.install_button_close = "종료"
 end

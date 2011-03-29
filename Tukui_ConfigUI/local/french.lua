@@ -1,5 +1,4 @@
 if GetLocale() == "frFR" then
-
 	-- update needed msg
 	TukuiL.option_update = "Vous devez mettre à jour votre interface Tukui pour bénéficier des derniers changements, visitez le site www.tukui.org"
 
@@ -9,7 +8,9 @@ if GetLocale() == "frFR" then
 	TukuiL.option_general_override = "Utiliser l'interface Haute Résolution sur une Basse Résolution"
 	TukuiL.option_general_multisample = "Protection Multisample (bordure de 1px clean)"
 	TukuiL.option_general_customuiscale = "Echelle de l'interface (si échelle auto désactivée)"
- 
+	TukuiL.option_general_backdropcolor = "Définis la couleur de fond par défaut des panneaux"
+	TukuiL.option_general_bordercolor = "Définis la couleur des Bordures par défaut des panneaux"
+
 	-- nameplate
 	TukuiL.option_nameplates = "Barres d'info"
 	TukuiL.option_nameplates_enable = "Activer les barres d'info"
@@ -101,6 +102,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_unitframes_weakenedsoulbar = "Afficher la barre de debuff âme affaiblie (pour prêtres)"
 	TukuiL.option_unitframes_onlyselfdebuffs = "Afficher seulement vos débuffs sur la cible"
 	TukuiL.option_unitframes_focus = "Afficher la cible du Focus"
+	TukuiL.option_unitframes_bordercolor = "Définis la couleur des Bordures par défaut des Images d'Unités"
  
 	-- loot
 	TukuiL.option_loot = "Butin"
