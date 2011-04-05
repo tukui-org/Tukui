@@ -20,7 +20,7 @@ local AddMessage = function(self, text, ...)
 	return origs[self](self, text, ...)
 end
 
--- localize this later k tukz? DON'T FORGET!
+-- Shortcut channel name
 _G.CHAT_BATTLEGROUND_GET = "|Hchannel:Battleground|h"..L.chat_BATTLEGROUND_GET.."|h %s:\32"
 _G.CHAT_BATTLEGROUND_LEADER_GET = "|Hchannel:Battleground|h"..L.chat_BATTLEGROUND_LEADER_GET.."|h %s:\32"
 _G.CHAT_BN_WHISPER_GET = L.chat_BN_WHISPER_GET.." %s:\32"
@@ -35,13 +35,23 @@ _G.CHAT_RAID_WARNING_GET = L.chat_RAID_WARNING_GET.." %s:\32"
 _G.CHAT_SAY_GET = "%s:\32"
 _G.CHAT_WHISPER_GET = L.chat_WHISPER_GET.." %s:\32"
 _G.CHAT_YELL_GET = "%s:\32"
- 
+
+-- color afk, dnd, gm
 _G.CHAT_FLAG_AFK = "|cffFF0000"..L.chat_FLAG_AFK.."|r "
 _G.CHAT_FLAG_DND = "|cffE7E716"..L.chat_FLAG_DND.."|r "
 _G.CHAT_FLAG_GM = "|cff4154F5"..L.chat_FLAG_GM.."|r "
- 
+
+-- customize online/offline msg
 _G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L.chat_ERR_FRIEND_ONLINE_SS.."!"
 _G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
+
+-- Adding brackets to Blizzard timestamps
+_G.TIMESTAMP_FORMAT_HHMM = "[%I:%M]"
+_G.TIMESTAMP_FORMAT_HHMMSS = "[%I:%M:%S]"
+_G.TIMESTAMP_FORMAT_HHMMSS_24HR = "[%H:%M:%S]"
+_G.TIMESTAMP_FORMAT_HHMMSS_AMPM = "[%I:%M:%S %p]"
+_G.TIMESTAMP_FORMAT_HHMM_24HR = "[%H:%M]"
+_G.TIMESTAMP_FORMAT_HHMM_AMPM = "[%I:%M %p]"
 
 -- Hide friends micro button (added in 3.3.5)
 FriendsMicroButton:Kill()
