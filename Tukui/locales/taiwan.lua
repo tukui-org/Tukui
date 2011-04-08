@@ -239,12 +239,12 @@ if T.client == "zhTW" then
 
 	L.tutorial_step_1_line_1 = "這個快速指南將向您展示一些Tukui的特點及功能。"
 	L.tutorial_step_1_line_2 = "首先，基本要素將會告訴您使用這個UI前該知道的事項。"
-	L.tutorial_step_1_line_3 = "這個安裝程序部分是角色特定，一些設定將會全帳號套用，您必須為每一個有使用Tukui的新角色執行安裝程序。程序將會在新角色第一次登入Tukui時自動顯示。同時，進階使用者可以在/Tukui/config/config.lua中找到選項，友善使用者可以在遊戲中鍵入/tukui。"
-	L.tutorial_step_1_line_4 = "進階使用者是指有能力會使用一般使用者所不會的進階功能(如：編輯lua)的個人電腦使用者。友善使用者為一般使用者，並不需要編寫程式的能力，推薦他們使用我們的遊戲內建設定工具(/tukui)來設定Tukui上想呈現的功能。"
+	L.tutorial_step_1_line_3 = "這個安裝程序部分是角色特定，一些設定將會全帳號套用，您必須為每一個有使用Tukui的新角色執行安裝程序。程序將會在新角色第一次登入Tukui時自動顯示。同時，進階使用者可以在/Tukui/config/config.lua中找到選項，友善使用者可以在遊戲中輸入/tukui。"
+	L.tutorial_step_1_line_4 = "進階使用者是指有能力會使用一般使用者所不會的進階功能(如：編輯lua)的個人電腦使用者。友善使用者為一般使用者，並不需要編寫程式的能力，推薦他們使用我們的遊戲內設定工具(/tukui)來設定Tukui上想呈現的功能。"
 
 	L.tutorial_step_2_line_1 = "Tukui包含一個內建版本的oUF，由Trond (Haste) A Ekseth創造，處理畫面中所有的單位框架，增/減益狀態及職業特色元素。"
 	L.tutorial_step_2_line_2 = "您可以拜訪 http://www.wowinterface.com 蒐尋oUF以獲得更多這項工具的資訊。"
-	L.tutorial_step_2_line_3 = "假如您是治療者或是團隊領隊，您可能想啟用治療者團隊框架，它們提供更多團隊資訊(/heal)。傷害輸出玩家或是坦克應該使用簡潔的團隊框架(/dps)。如果不想顯示任一團隊框架或是其他東西，您可以在角色選單的插件管理關閉它。"
+	L.tutorial_step_2_line_3 = "假如您是治療者或是團隊領隊，您可能想啟用治療者團隊框架，它們提供更多團隊資訊(/heal)。傷害輸出玩家或是坦克應該使用簡潔的團隊框架(/dps)。如果不想顯示任一團隊框架或是其他東西，您可以在角色選單的插件管理中關閉它。"
 	L.tutorial_step_2_line_4 = "鍵入/moveui可以簡單地改變單位框架的位置。"
 
 	L.tutorial_step_3_line_1 = "Tukui是一個重新設計過的Blizzard UI，不多也不少。大部分你可以在預設UI上看到的都是Tukui，只有一些自動化功能是畫面中看不到的，如：拜訪商人時自動販賣灰色物品，或是自動分類背包中的物品。"
@@ -262,7 +262,7 @@ if T.client == "zhTW" then
 	L.tutorial_step_5_line_3 = "/tt 密語目標。 /rc 發起團隊確認。 /rd 解散隊伍或團隊。 /bags 顯示可用的背包指令。 /ainv 啟用自動密語邀請。(/ainv off 關閉功能)"
 	L.tutorial_step_5_line_4 = "/gm 開啟尋求幫助選單。 /install, /resetui 或 /tutorial 載入安裝程序。 /frame 列出滑鼠游標下的框架名稱及額外資訊。"
 
-	L.tutorial_step_6_line_1 = "指南到此結束，您可藉由鍵入/tutorial 以再次諮詢。"
+	L.tutorial_step_6_line_1 = "指南到此結束，您可藉由輸入/tutorial 以再次諮詢。"
 	L.tutorial_step_6_line_2 = "建議您開啟config/config.lua或鍵入/Tukui來自訂符合您需求的UI。"
 	L.tutorial_step_6_line_3 = "如果安裝程序未完成，您現在可繼續安裝此UI。或者您想重置至預設值!"
 	L.tutorial_step_6_line_4 = ""
