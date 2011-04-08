@@ -83,7 +83,7 @@ if (buffs and buffs[1]) then
 				self:RegisterEvent("PLAYER_REGEN_DISABLED")
 			end
 		end
-						
+
 		if (UnitAffectingCombat("player") and not UnitInVehicle("player")) then
 			for i, buff in pairs(buffs) do
 				local name = GetSpellInfo(buff)
@@ -103,16 +103,16 @@ if (buffs and buffs[1]) then
 			sound = true
 		end
 	end
-	
+
 	local frame = CreateFrame("Frame", "TukuiBuffsWarningFrame", UIParent)
-	
+
 	frame.icon = frame:CreateTexture(nil, "OVERLAY")
 	frame.icon:SetPoint("CENTER")
 	frame:CreatePanel("Default", 40, 40, "CENTER", UIParent, "CENTER", 0, 200)
 	frame.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	frame.icon:Size(36)
 	frame:Hide()
-	
+
 	frame:RegisterEvent("UNIT_AURA")
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -121,17 +121,17 @@ if (buffs and buffs[1]) then
 	frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
 	frame:RegisterEvent("UNIT_EXITING_VEHICLE")
 	frame:RegisterEvent("UNIT_EXITED_VEHICLE")
-	
+
 	frame:SetScript("OnEvent", BuffsOnEvent)
 end
 
 if (enchants and enchants[1]) then
 	local sound
 	local currentlevel = UnitLevel("player")
-	
+
 	local function EnchantsOnEvent(self, event)
 		if (event == "PLAYER_LOGIN") or (event == "ACTIVE_TALENT_GROUP_CHANGED") or (event == "PLAYER_LEVEL_UP") then
-			if class == "ROGUE" then				
+			if class == "ROGUE" then
 				self:UnregisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 				self:UnregisterEvent("PLAYER_LEVEL_UP")
 				self.icon:SetTexture(select(3, GetSpellInfo(enchants[1])))
@@ -143,14 +143,14 @@ if (enchants and enchants[1]) then
 				elseif ptt and ptt == 2 and currentlevel > 31 then
 					self.icon:SetTexture(select(3, GetSpellInfo(enchants[2])))
 				else
-					self.icon:SetTexture(select(3, GetSpellInfo(enchants[1])))			
+					self.icon:SetTexture(select(3, GetSpellInfo(enchants[1])))
 				end
 				return
 			end
 		end
-		
+
 		if (class == "ROGUE" or class =="SHAMAN") and currentlevel < 10 then return end
-	
+
 		if (UnitAffectingCombat("player") and not UnitInVehicle("player")) then
 			local mainhand, _, _, offhand, _, _, thrown = GetWeaponEnchantInfo()
 			if class == "ROGUE" then
@@ -159,13 +159,13 @@ if (enchants and enchants[1]) then
 					if mainhand and offhand and thrown then
 						self:Hide()
 						sound = true
-						return					
+						return
 					end
 				else
 					if mainhand and offhand then
 						self:Hide()
 						sound = true
-						return					
+						return
 					end
 				end
 			elseif class == "SHAMAN" then
@@ -174,7 +174,7 @@ if (enchants and enchants[1]) then
 					if mainhand and offhand then
 						self:Hide()
 						sound = true
-						return					
+						return
 					end
 				elseif mainhand then
 					self:Hide()
@@ -192,16 +192,16 @@ if (enchants and enchants[1]) then
 			sound = true
 		end
 	end
-	
+
 	local frame = CreateFrame("Frame", "TukuiEnchantsWarningFrame", UIParent)
-	
+
 	frame.icon = frame:CreateTexture(nil, "OVERLAY")
 	frame.icon:SetPoint("CENTER")
 	frame:CreatePanel("Default", 40, 40, "CENTER", UIParent, "CENTER", 0, 200)
 	frame.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	frame.icon:Size(36)
 	frame:Hide()
-	
+
 	frame:RegisterEvent("PLAYER_LOGIN")
 	frame:RegisterEvent("PLAYER_LEVEL_UP")
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -212,6 +212,6 @@ if (enchants and enchants[1]) then
 	frame:RegisterEvent("UNIT_ENTERED_VEHICLE")
 	frame:RegisterEvent("UNIT_EXITING_VEHICLE")
 	frame:RegisterEvent("UNIT_EXITED_VEHICLE")
-	
+
 	frame:SetScript("OnEvent", EnchantsOnEvent)
 end

@@ -87,6 +87,7 @@ local function Local(o)
 	if o == "TukuiConfigUIdatatextmicromenu" then o = TukuiL.option_datatext_micromenu end
 	if o == "TukuiConfigUIdatatexthit" then o = TukuiL.option_datatext_hit end	
 	if o == "TukuiConfigUIdatatextmastery" then o = TukuiL.option_datatext_mastery end	
+	if o == "TukuiConfigUIdatatextregen" then o = MANA_REGEN end
 
 	-- unit frames
 	if o == "TukuiConfigUIunitframes" then o = TukuiL.option_unitframes_unitframes end

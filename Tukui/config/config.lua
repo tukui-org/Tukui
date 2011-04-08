@@ -111,9 +111,10 @@ C["datatext"] = {
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels
-	["hit"] = 0,
-	["mastery"] = 0,
-	["micromenu"] = 0,
+	["hit"] = 0,                                        -- show hit rating
+	["mastery"] = 0,                                    -- show mastery rating
+	["micromenu"] = 0,                                  -- add a micro menu thought datatext
+	["regen"] = 0,                                      -- show mana regeneration
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
