@@ -181,6 +181,12 @@ addon:SetScript("OnEvent", function(self, event)
 		ShowUIPanel(WorldMapFrame)
 		HideUIPanel(WorldMapFrame)
 	elseif event == "PLAYER_REGEN_DISABLED" then
+		local miniWorldMap = GetCVarBool("miniWorldMap")
+		if not miniWorldMap and WatchFrame.showObjectives then
+			-- prevent a taint on fullscreen map when opening fullscreen map in combat
+			WorldMapFrame_SetFullMapView()
+		end
+
 		WorldMapFrameSizeDownButton:Disable() 
 		WorldMapFrameSizeUpButton:Disable()
 		HideUIPanel(WorldMapFrame)

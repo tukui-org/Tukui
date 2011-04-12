@@ -666,6 +666,13 @@ T.HidePortrait = function(self, unit)
 	end
 end
 
+T.PortraitUpdate = function(self, unit)
+	--Fucking Furries
+	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
+		self:SetCamera(1)
+	end
+end
+
 local CheckInterrupt = function(self, unit)
 	if unit == "vehicle" then unit = "player" end
 
