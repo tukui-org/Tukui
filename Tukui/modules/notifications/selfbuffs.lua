@@ -34,6 +34,9 @@ T.remindbuffs = {
 	WARRIOR = {
 		469, -- commanding Shout
 		6673, -- battle Shout
+		93435, -- roar of courage (hunter pet)
+		57330, -- horn of Winter
+		21562, -- fortitude
 	},
 	DEATHKNIGHT = {
 		57330, -- horn of Winter
