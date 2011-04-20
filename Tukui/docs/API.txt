@@ -47,6 +47,9 @@ Now the functions:
 		Create a FontString with the frame as a parent. If you leave name as nil the font name will become
 		"<framename>.text". If a name is provided however it will be called "<framename>.<yourname>".
 
+	frame:HighlightUnit(r, g, b)
+		Highlight your current target with specified (r, g, b) color.
+
 Templates:
 	- "Default"
 		-- use default color according to what we have set via /media/medias.lua
