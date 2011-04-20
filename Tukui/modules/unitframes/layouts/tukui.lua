@@ -496,17 +496,18 @@ local function Shared(self, unit)
 						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 						-- a totem 'slot' in the default ui doesn't necessarily correspond to its place on the screen.
 						-- for example, on the default totem action bar frame, the first totem is earth, but earth's
-						-- slot id is two according to Blizzard default slotID! (see STANDARD_TOTEM_PRIORITIES)
-						-- we fix them by moving status bar around to match totem action bar slot.
+						-- slot id is two according to Blizzard default slotID!
+						-- we want to match action bar so we fix them by moving status bar around.
+						local fixme
 						if (i == 2) then
 							TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 						elseif i == 1 then
-							local fixme = 62
+							fixme = 62
 							if T.lowversion then fixme = 46 end
 							TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", fixme + 1, 1)
 						else
-							local fixme = i
-							if i == 3 then fixme = 2 end
+							fixme = i
+							if i == 3 then fixme = i-1 end
 							TotemBar[i]:Point("TOPLEFT", TotemBar[fixme-1], "TOPRIGHT", 1, 0)
 						end
 						TotemBar[i]:SetStatusBarTexture(normTex)
