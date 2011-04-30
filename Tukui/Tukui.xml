@@ -14,7 +14,6 @@
 	<Script file="config\profiles.lua"/>
 	<Script file="medias\medias.lua"/>	
 	<Script file="core\configui.lua"/>
-	<Script file="medias\medias.lua"/>
 	<Include file="modules\unitframes\core\oUF\oUF.xml"/>
 	<Script file="modules\unitframes\plugins\oUF_AuraWatch\oUF_AuraWatch.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_CombatFeedback\oUF_CombatFeedback.lua"/>
@@ -41,6 +40,7 @@
 	<Script file="modules\blizzard\capturebar.lua"/>
 	<Script file="modules\blizzard\gm.lua"/>
 	<Script file="modules\blizzard\ghostframe.lua"/>
+	<Script file="modules\blizzard\timertracker.lua"/>
 	<Script file="modules\misc\commands.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\misc\invite.lua"/>

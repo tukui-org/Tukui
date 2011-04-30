@@ -60,30 +60,25 @@ local function UpdateGuildMessage()
 	guildMotD = GetGuildRosterMOTD()
 end
 
-local function Update(self, event, ...)	
-	if not GuildFrame then LoadAddOn("Blizzard_GuildUI") UpdateGuildXP() end
-	-- our guild xp changed, recalculate it
-	if event == "GUILD_XP_UPDATE" then UpdateGuildXP() end
-	-- our guild message of the day changed
-	if event == "GUILD_MOTD" or event == "PLAYER_ENTERING_WORLD" then UpdateGuildMessage() end
-	-- an event occured that could change the guild roster, so request update
-	if event ~= "GUILD_ROSTER_UPDATE" then GuildRoster() end
-		
-	-- received an updated event, but we are already updating the table
-	if self.update == true then return end
-
-	-- lock to prevent multiple updates simultaniously
-	self.update = true
+local function Update(self, event, ...)
+	if event == "PLAYER_ENTERING_WORLD" then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		if IsInGuild() and not GuildFrame then LoadAddOn("Blizzard_GuildUI") end
+	end
+	
 	if IsInGuild() then
-		BuildGuildTable()
-		
+		totalOnline = 0
+		local name, rank, level, zone, note, officernote, connected, status, class
+		for i = 1, GetNumGuildMembers() do
+			local connected = select(9, GetGuildRosterInfo(i))
+			if connected then totalOnline = totalOnline + 1 end
+		end	
 		Text:SetFormattedText(displayString, L.datatext_guild, totalOnline)
 	else
 		Text:SetText(L.datatext_noguild)
 	end
 	
 	self:SetAllPoints(Text)
-	self.update = false
 end
 	
 local menuFrame = CreateFrame("Frame", "TukuiGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
@@ -147,6 +142,9 @@ end)
 
 Stat:SetScript("OnEnter", function(self)
 	if InCombatLockdown() or not IsInGuild() then return end
+	
+	UpdateGuildMessage()
+	BuildGuildTable()
 		
 	local name, rank, level, zone, note, officernote, connected, status, class
 	local zonec, classc, levelc
@@ -156,17 +154,21 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	GameTooltip:AddDoubleLine(string.format(guildInfoString, GetGuildInfo('player'), GetGuildLevel()), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
-	GameTooltip:AddLine(' ')
 	
-	if guildMotD ~= "" then GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
+	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
 	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 	if GetGuildLevel() ~= 25 then
+		UpdateGuildXP()
+		
 		local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
 		local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
-		GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
-		GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
+		
+		if currentXP ~= 0 then
+			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
+			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
+		end
 	end
 	
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
@@ -212,8 +214,5 @@ end)
 Stat:RegisterEvent("GUILD_ROSTER_SHOW")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:RegisterEvent("GUILD_ROSTER_UPDATE")
-Stat:RegisterEvent("GUILD_XP_UPDATE")
 Stat:RegisterEvent("PLAYER_GUILD_UPDATE")
-Stat:RegisterEvent("GUILD_MOTD")
 Stat:SetScript("OnEvent", Update)
-UpdateGuildMessage()
