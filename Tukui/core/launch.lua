@@ -146,46 +146,6 @@ local function cvarsetup()
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
-	
-	-- setting this the creator or tukui only, because a lot of people don't like this.		
-	if T.myname == "Tukz" then
-		SetCVar("Maxfps", 120)
-		SetCVar("autoDismountFlying", 1)
-		SetCVar("secureAbilityToggle", 0)
-		SetCVar("colorblindMode", 0)
-		SetCVar("showLootSpam", 1)
-		SetCVar("guildMemberNotify", 1)
-		SetCVar("chatBubblesParty", 0)
-		SetCVar("chatBubbles", 0)	
-		SetCVar("UnitNameOwn", 0)
-		SetCVar("UnitNameNPC", 0)
-		SetCVar("UnitNameNonCombatCreatureName", 0)
-		SetCVar("UnitNamePlayerGuild", 1)
-		SetCVar("UnitNamePlayerPVPTitle", 1)
-		SetCVar("UnitNameFriendlyPlayerName", 0)
-		SetCVar("UnitNameFriendlyPetName", 0)
-		SetCVar("UnitNameFriendlyGuardianName", 0)
-		SetCVar("UnitNameFriendlyTotemName", 0)
-		SetCVar("UnitNameEnemyPlayerName", 1)
-		SetCVar("UnitNameEnemyPetName", 1)
-		SetCVar("UnitNameEnemyGuardianName", 1)
-		SetCVar("UnitNameEnemyTotemName", 1)
-		SetCVar("CombatDamage", 1)
-		SetCVar("CombatHealing", 1)
-		SetCVar("nameplateShowFriends", 0)
-		SetCVar("nameplateShowFriendlyPets", 0)
-		SetCVar("nameplateShowFriendlyGuardians", 0)
-		SetCVar("nameplateShowFriendlyTotems", 0)
-		SetCVar("nameplateShowEnemies", 1)
-		SetCVar("nameplateShowEnemyPets", 1)
-		SetCVar("nameplateShowEnemyGuardians", 1)
-		SetCVar("nameplateShowEnemyTotems", 1)	
-		SetCVar("consolidateBuffs", 0)
-		SetCVar("lootUnderMouse", 1)
-		SetCVar("autoSelfCast", 1)
-		SetCVar("cameraDistanceMax", 50)
-		SetCVar("cameraDistanceMaxFactor", 3.4)
-	end
 end
 
 local function positionsetup()
@@ -510,6 +470,34 @@ StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
 	button2 = "HEAL",
 	OnAccept = function() DisableAddOn("Tukui_Raid_Healing") EnableAddOn("Tukui_Raid") ReloadUI() end,
 	OnCancel = function() EnableAddOn("Tukui_Raid_Healing") DisableAddOn("Tukui_Raid") ReloadUI() end,
+	timeout = 0,
+	whileDead = 1,
+}
+
+StaticPopupDialogs["TUKUIDISBAND_RAID"] = {
+	text = L.disband,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		if InCombatLockdown() then return end -- Prevent user error in combat
+		
+		SendChatMessage(ERR_GROUP_DISBANDED, "RAID" or "PARTY")
+		if UnitInRaid("player") then
+			for i = 1, GetNumRaidMembers() do
+				local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
+				if online and name ~= T.myname then
+					UninviteUnit(name)
+				end
+			end
+		else
+			for i = MAX_PARTY_MEMBERS, 1, -1 do
+				if GetPartyMember(i) then
+					UninviteUnit(UnitName("party"..i))
+				end
+			end
+		end
+		LeaveParty()	
+	end,
 	timeout = 0,
 	whileDead = 1,
 }

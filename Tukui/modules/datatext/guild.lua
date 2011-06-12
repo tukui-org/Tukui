@@ -143,6 +143,7 @@ end)
 Stat:SetScript("OnEnter", function(self)
 	if InCombatLockdown() or not IsInGuild() then return end
 	
+	GuildRoster()
 	UpdateGuildMessage()
 	BuildGuildTable()
 		
@@ -162,10 +163,10 @@ Stat:SetScript("OnEnter", function(self)
 	if GetGuildLevel() ~= 25 then
 		UpdateGuildXP()
 		
-		local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
-		local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
-		
-		if currentXP ~= 0 then
+		if guildXP[0] and guildXP[1] then
+			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
+			local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
+			
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
 		end

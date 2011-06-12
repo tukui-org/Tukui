@@ -45,14 +45,6 @@ _G.CHAT_FLAG_GM = "|cff4154F5"..L.chat_FLAG_GM.."|r "
 _G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L.chat_ERR_FRIEND_ONLINE_SS.."!"
 _G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
 
--- Adding brackets to Blizzard timestamps
-_G.TIMESTAMP_FORMAT_HHMM = "[%I:%M] "
-_G.TIMESTAMP_FORMAT_HHMMSS = "[%I:%M:%S] "
-_G.TIMESTAMP_FORMAT_HHMMSS_24HR = "[%H:%M:%S] "
-_G.TIMESTAMP_FORMAT_HHMMSS_AMPM = "[%I:%M:%S %p] "
-_G.TIMESTAMP_FORMAT_HHMM_24HR = "[%H:%M] "
-_G.TIMESTAMP_FORMAT_HHMM_AMPM = "[%I:%M %p] "
-
 -- Hide friends micro button (added in 3.3.5)
 FriendsMicroButton:Kill()
 
@@ -77,6 +69,9 @@ local function SetChatStyle(frame)
 		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
 		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
 	end
+	
+	-- change tab font
+	_G[chat.."TabText"]:SetFont(C.media.font, 11)
 	
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
@@ -136,7 +131,6 @@ local function SetChatStyle(frame)
 	local a, b, c = select(6, _G[chat.."EditBox"]:GetRegions()) a:Kill() b:Kill() c:Kill()
 	
 	-- bubble tex & glow killing from privates
-	if tab.glow then tab.glow:Kill() end
 	if tab.conversationIcon then tab.conversationIcon:Kill() end
 				
 	-- Disable alt key usage

@@ -1,5 +1,13 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
+T.IsPTRVersion = function()
+	if T.toc > 40200 then
+		return true
+	else
+		return false
+	end
+end
+
 -- just for creating text
 T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
@@ -280,6 +288,39 @@ function T.ShortValue(v)
 		return v
 	end
 end
+
+--Add time before calling a function
+--Usage T.Delay(seconds, functionToCall, ...)
+local waitTable = {}
+local waitFrame
+function T.Delay(delay, func, ...)
+	if(type(delay)~="number" or type(func)~="function") then
+		return false
+	end
+	if(waitFrame == nil) then
+		waitFrame = CreateFrame("Frame","WaitFrame", UIParent)
+		waitFrame:SetScript("onUpdate",function (self,elapse)
+			local count = #waitTable
+			local i = 1
+			while(i<=count) do
+				local waitRecord = tremove(waitTable,i)
+				local d = tremove(waitRecord,1)
+				local f = tremove(waitRecord,1)
+				local p = tremove(waitRecord,1)
+				if(d>elapse) then
+				  tinsert(waitTable,i,{d-elapse,f,p})
+				  i = i + 1
+				else
+				  count = count - 1
+				  f(unpack(p))
+				end
+			end
+		end)
+	end
+	tinsert(waitTable,{delay,func,{...}})
+	return true
+end
+
 ------------------------------------------------------------------------
 --	unitframes Functions
 ------------------------------------------------------------------------

@@ -79,10 +79,6 @@ C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
 }
 
-C["map"] = {
-	["enable"] = true,                                  -- reskin the map to fit tukui
-}
-
 C["loot"] = {
 	["lootframe"] = true,                               -- reskin the loot frame to fit tukui
 	["rolllootframe"] = true,                           -- reskin the roll frame to fit tukui

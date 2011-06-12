@@ -26,7 +26,7 @@ if T.client == "esES" then
 	L.chat_recrutment = "ReclutamientoHermandad"
 	L.chat_lfg = "BuscandoGrupo"
 	
-	L.disband = "Deshacer grupo."
+	L.disband = "Deshacer grupo ?"
  
 	L.datatext_download = "Descarga: "
 	L.datatext_bandwidth = "Ancho de banda: "

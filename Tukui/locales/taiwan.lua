@@ -26,7 +26,7 @@ if T.client == "zhTW" then
 	L.chat_recrutment = "公會招募"
 	L.chat_lfg = "尋求組隊"
 	
-	L.disband = "正在解散隊伍."
+	L.disband = "正在解散隊伍 ?"
 
 	L.datatext_download = "下載: "
 	L.datatext_bandwidth = "寬頻: "

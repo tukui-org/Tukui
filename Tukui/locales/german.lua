@@ -26,7 +26,7 @@ if T.client == "deDE" then
 	L.chat_recrutment = "Gildenrekrutierung"
 	L.chat_lfg = "SucheNachGruppe"
 	
-	L.disband = "Gruppe wird aufgelöst."  
+	L.disband = "Gruppe wird aufgelöst ?"  
  
 	L.datatext_download = "Download: "
 	L.datatext_bandwidth = "Bandbreite: "

@@ -10,7 +10,6 @@ local ALLOWED_GROUPS = {
 	["actionbar"]=1,
 	["nameplate"]=1,
 	["bags"]=1,
-	["map"]=1,
 	["loot"]=1,
 	["cooldown"]=1,
 	["datatext"]=1,

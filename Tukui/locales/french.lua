@@ -26,7 +26,7 @@ if T.client == "frFR" then
 	L.chat_recrutment = "RecrutementDeGuilde"
 	L.chat_lfg = "RechercheDeGroupe"
 
-	L.disband = "Dissoudre le groupe"
+	L.disband = "Dissoudre le groupe ?"
 
 	L.datatext_download = "Téléchargement : "
 	L.datatext_bandwidth = "Bande passante : "
@@ -249,8 +249,8 @@ if T.client == "frFR" then
 	L.tutorial_step_2_line_4 = "Vous avez juste à taper /moveui pour bouger les Unitframes facilement."
 
 	L.tutorial_step_3_line_1 = "Tukui est une interface refaite de Blizzard. Ni plus, ni moins. A peu près toutes les caractéristiques que vous pouvez voir sur l'interface de base sont disponibles par Tukui. Les seules caractéristiques non disponible sur l'interface par défaut sont quelques caractéristiques automatiques non réellement visibles à l'écran, par exemple vente auto des objets gris chez un marchand ou trier les objets dans les sacs."
-	L.tutorial_step_3_line_2 = "Parce que tout le monde n'apprécie pas des addons comme les DPS meters, Boss mods, gestion des menaces, etc, nous jugeons que c'est la meilleure chose à faire. Tukui est réalisé dans l'idée de s'adapter au maximum de classes, rôles, spécialisation, type de jeu, goûts des joueurs, etc. C'est pourquoi Tuikui est l'une des interfaces les plus populaires du moment. Cela convient à tout style de jeu et est éditable à souhait. C'est aussi présenté afin d'être un bon départ pour celui qui veut faire sa propre interface personnalisée sans dépendre d'autres addons. Des tonnes d'utilisateurs depuis 2009 utilisent désormais Tukui comme une base pour leur propre interface. Allez faire un tour dans notre section 'Edited Packages' sur notre site !"
-	L.tutorial_step_3_line_3 = "Les utilisateurs peuvent visiter notre section 'extra mods' sur notre site ou en visitant http://www.wowinterface.com pour installer d'autres caractéristiques ou mods."
+	L.tutorial_step_3_line_2 = "Parce que tout le monde n'apprécie pas des addons comme les DPS meters, Boss mods, gestion des menaces, etc, nous jugeons que c'est la meilleure chose à faire. Tukui est réalisé dans l'idée de s'adapter au maximum de classes, rôles, spécialisation, type de jeu, goûts des joueurs, etc. C'est pourquoi Tukui est l'une des interfaces les plus populaires du moment. Cela convient à tout style de jeu et est éditable à souhait. C'est aussi présenté afin d'être un bon départ pour celui qui veut faire sa propre interface personnalisée sans dépendre d'autres addons. Des tonnes d'utilisateurs depuis 2009 utilisent désormais Tukui comme une base pour leur propre interface. Allez faire un tour dans notre section 'Edited Packages' sur notre site !"
+	L.tutorial_step_3_line_3 = "Les utilisateurs peuvent visiter notre section 'extra mods' sur notre site ou visiter WoWInterface."
 	L.tutorial_step_3_line_4 = ""
 
 	L.tutorial_step_4_line_1 = "Pour définir le nombre de barres que vous voulez, placez votre souris sur la gauche, droite ou le dessous du cadre de fond de la barre d'action. Faites la même chose sur la droite de l'écran, en haut ou en bas du cadre. Pour copier le texte de la fenêtre de dialogue, cliquez sur le bouton vu en passant la souris sur le coin droit de la fenêtre de discussion."

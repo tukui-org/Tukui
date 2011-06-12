@@ -1,5 +1,9 @@
 local function GetLinkColor(data)
 	local type, id, arg1 = string.match(data, '(%w+):(%d+):(%d+)')
+	
+	-- prevent lua error for unknown item type and return yellow for these items
+	if not type then return '|cffffd000' end
+	
 	if(type == 'item') then
 		local _, _, quality = GetItemInfo(id)
 		if(quality) then

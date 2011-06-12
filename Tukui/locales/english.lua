@@ -25,7 +25,7 @@ L.chat_defense = "LocalDefense"
 L.chat_recrutment = "GuildRecruitment"
 L.chat_lfg = "LookingForGroup"
 
-L.disband = "Disbanding group."
+L.disband = "Disbanding group ?"
 
 L.datatext_download = "Download: "
 L.datatext_bandwidth = "Bandwidth: "

@@ -2,24 +2,24 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if C.unitframes.enable ~= true then return end
 
-local _, ns = ...
-local oUF = ns.oUF or oUF
-
-if not oUF then return end
-
-local _, ns = ...
-local oUF = ns.oUF or oUF
+local _NAME, _NS = ...
+local oUF = _NS.oUF or oUF
 
 assert(oUF, "oUF_MovableFrames was unable to locate oUF install.")
 
 local _DB
+local _DBNAME = GetAddOnMetadata(_NAME, 'X-SavedVariables')
 local _LOCK
+local _TITLE = GetAddOnMetadata(_NAME, 'title')
 
+-- I could use the title field in the TOC, but people tend to put color and
+-- other shit there, so we'll just use the folder name:
+local slashGlobal = _NAME:gsub('%s+', '_'):gsub('[^%a%d_]+', ''):upper()
+slashGlobal = slashGlobal .. '_OMF'
+
+local print_fmt = string.format('|cff33ff99%s:|r', _TITLE)
 local print = function(...)
-	return print('|cff33ff99oUF_MovableFrames:|r', ...)
-end
-local round = function(n)
-	return math.floor(n * 1e5 + .5) / 1e5
+	return print(print_fmt, ...)
 end
 
 local backdropPool = {}
@@ -32,8 +32,8 @@ local getPoint = function(obj, anchor)
 		-- Frame doesn't really have a positon yet.
 		if(not Ox) then return end
 
-		local UIS = UIParent:GetEffectiveScale()
-		local OS = obj:GetEffectiveScale()
+		local OS = obj:GetScale()
+		Ox, Oy = Ox * OS, Oy * OS
 
 		local UIWidth, UIHeight = UIParent:GetRight(), UIParent:GetTop()
 
@@ -66,15 +66,15 @@ local getPoint = function(obj, anchor)
 		end
 
 		return string.format(
-			'%s\031%s\031%d\031%d',
-			point, 'UIParent', round(x * UIS / OS),  round(y * UIS / OS)
+			'%s\031%s\031%d\031%d\031\%.3f',
+			point, 'UIParent', x,  y, OS
 		)
 	else
 		local point, parent, _, x, y = anchor:GetPoint()
 
 		return string.format(
-			'%s\031%s\031%d\031%d',
-			point, 'UIParent', round(x), round(y)
+			'%s\031%s\031%d\031%d\031\%.3f',
+			point, 'UIParent', x, y, obj:GetScale()
 		)
 	end
 end
@@ -121,14 +121,14 @@ local restoreDefaultPosition = function(style, identifier)
 	end
 
 	if(obj) then
-		local scale = obj:GetScale()
 		local target = isHeader or obj
-		local SetPoint = getmetatable(target).__index.SetPoint;
 
 		target:ClearAllPoints()
+		local point, parentName, x, y, scale = string.split('\031', _DB.__INITIAL[style][identifier])
+		if(not scale) then scale = 1 end
 
-		local point, parentName, x, y = string.split('\031', _DB.__INITIAL[style][identifier])
-		SetPoint(target, point, parentName, point, x / scale, y / scale)
+		target:_SetScale(scale)
+		target:_SetPoint(point, parentName, point, x, y)
 
 		local backdrop = backdropPool[target]
 		if(backdrop) then
@@ -150,20 +150,37 @@ local function restorePosition(obj)
 	-- We've not saved any custom position for this style.
 	if(not _DB[style] or not _DB[style][identifier]) then return end
 
-	local scale = obj:GetScale()
 	local target = isHeader or obj
-	local SetPoint = getmetatable(target).__index.SetPoint;
-
-	-- Hah, a spot you have to use semi-colon!
-	-- Guess I've never experienced that as these are usually wrapped in do end
-	-- statements.
-	target.SetPoint = restorePosition;
+	if(not target._SetPoint) then
+		target._SetPoint = target.SetPoint
+		target.SetPoint = restorePosition
+		target._SetScale = target.SetScale
+		target.SetScale = restorePosition
+	end
 	target:ClearAllPoints()
 
 	-- damn it Blizzard, _how_ did you manage to get the input of this function
 	-- reversed. Any sane person would implement this as: split(str, dlm, lim);
-	local point, parentName, x, y = string.split('\031', _DB[style][identifier])
-	SetPoint(target, point, parentName, point, x / scale, y / scale)
+	local point, parentName, x, y, scale = string.split('\031', _DB[style][identifier])
+	if(not scale) then
+		scale = 1
+	end
+
+	if(scale) then
+		target:_SetScale(scale)
+	else
+		scale = target:GetScale()
+	end
+	target:_SetPoint(point, parentName, point, x / scale, y / scale)
+end
+
+local restoreCustomPosition = function(style, ident)
+	for _, obj in next, oUF.objects do
+		local objStyle, objIdent = getObjectInformation(obj)
+		if(objStyle == style and objIdent == ident) then
+			return restorePosition(obj)
+		end
+	end
 end
 
 local saveDefaultPosition = function(obj)
@@ -195,6 +212,16 @@ local savePosition = function(obj, anchor)
 	_DB[style][identifier] = getPoint(isHeader or obj, anchor)
 end
 
+local saveCustomPosition = function(style, ident, point, x, y, scale)
+	-- Shouldn't really be the case, but you never know!
+	if(not _DB[style]) then _DB[style] = {} end
+
+	_DB[style][ident] = string.format(
+		'%s\031%s\031%d\031%d\031\%.3f',
+		point, 'UIParent', x,  y, scale
+	)
+end
+
 -- Attempt to figure out a more sane name to dispaly.
 local smartName
 do
@@ -211,6 +238,14 @@ do
 		'arena',
 	}
 
+	local rewrite = {
+		mt = 'maintank',
+		mtt = 'maintanktarget',
+
+		ma = 'mainassist',
+		mat = 'mainassisttarget',
+	}
+
 	local validName = function(smartName)
 		-- Not really a valid name, but we'll accept it for simplicities sake.
 		if(tonumber(smartName)) then
@@ -218,8 +253,11 @@ do
 		end
 
 		if(type(smartName) == 'string') then
-			if(smartName == 'mt') then
-				return 'maintank'
+			-- strip away trailing s from pets, but don't touch boss/focus.
+			smartName = smartName:gsub('([^us])s$', '%1')
+
+			if(rewrite[smartName]) then
+				return rewrite[smartName]
 			end
 
 			for _, v in next, validNames do
@@ -264,7 +302,13 @@ do
 		end
 
 		-- Here comes the substitute train!
-		local n = name:gsub('(%l)(%u)', '%1_%2'):gsub('([%l%u])(%d)', '%1_%2_'):lower()
+		local n = name
+			:gsub('ToT', 'targettarget')
+			:gsub('(%l)(%u)', '%1_%2')
+			:gsub('([%l%u])(%d)', '%1_%2_')
+			:gsub('Main_', 'Main')
+			:lower()
+
 		n = guessName(string.split('_', n))
 		if(n) then
 			nameCache[name] = n
@@ -311,11 +355,33 @@ do
 		self:UnregisterEvent"VARIABLES_LOADED"
 	end
 	frame:RegisterEvent"VARIABLES_LOADED"
+
+	function frame:PLAYER_REGEN_DISABLED()
+		if(_LOCK) then
+			print("Anchors hidden due to combat.")
+			for k, bdrop in next, backdropPool do
+				bdrop:Hide()
+			end
+			_LOCK = nil
+		end
+	end
+	frame:RegisterEvent"PLAYER_REGEN_DISABLED"
 end
 
+local getBackdrop
 do
 	local OnShow = function(self)
 		return self.name:SetText(smartName(self.obj, self.header))
+	end
+
+	local OnHide = function(self)
+		if(self.dirtyMinHeight) then
+			self:SetAttribute('minHeight', nil)
+		end
+
+		if(self.dirtyMinWidth) then
+			self:SetAttribute('minWidth', nil)
+		end
 	end
 
 	local OnDragStart = function(self)
@@ -330,6 +396,47 @@ do
 	local OnDragStop = function(self)
 		self:StopMovingOrSizing()
 		savePosition(self.obj, self)
+
+		-- Restore the initial anchoring, so the anchor follows the frame when we
+		-- edit positions through the UI.
+		restorePosition(self.obj)
+		self:ClearAllPoints()
+		self:SetAllPoints(self.header or self.obj)
+	end
+
+	local OnMouseDown = function(self)
+		local anchor = self:GetParent()
+		saveDefaultPosition(anchor.obj)
+		anchor:StartSizing('BOTTOMRIGHT')
+
+		local frame = anchor.header or anchor.obj
+		frame:ClearAllPoints()
+		frame:SetAllPoints(anchor)
+
+		self:SetButtonState("PUSHED", true)
+	end
+
+	local OnMouseUp = function(self)
+		local anchor = self:GetParent()
+		self:SetButtonState("NORMAL", false)
+
+		anchor:StopMovingOrSizing()
+		savePosition(anchor.obj, anchor)
+	end
+
+	local OnSizeChanged = function(self, width, height)
+		local baseWidth, baseHeight = self.baseWidth, self.baseHeight
+
+		local scale = width / baseWidth
+
+		-- This is damn tiny!
+		if(scale <= .3) then
+			scale = .3
+		end
+
+		self:SetSize(scale * baseWidth, scale * baseHeight)
+		local target = self. target;
+		(target._SetScale or target.SetScale) (target, scale)
 	end
 
 	getBackdrop = function(obj, isHeader)
@@ -340,18 +447,16 @@ do
 		local backdrop = CreateFrame"Frame"
 		backdrop:SetParent(UIParent)
 		backdrop:Hide()
-		
+
 		backdrop:SetTemplate("Default")
-		--backdrop:SetBackdrop(_BACKDROP)
 		backdrop:SetFrameStrata("MEDIUM")
 		backdrop:SetFrameLevel(20)
 		backdrop:SetAllPoints(target)
 
 		backdrop:EnableMouse(true)
 		backdrop:SetMovable(true)
+		backdrop:SetResizable(true)
 		backdrop:RegisterForDrag"LeftButton"
-
-		backdrop:SetScript("OnShow", OnShow)
 
 		local name = backdrop:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		name:SetPoint"CENTER"
@@ -359,21 +464,59 @@ do
 		name:SetFont(C.media.uffont, 12)
 		name:SetTextColor(1, 1, 1)
 
+		local scale = CreateFrame('Button', nil, backdrop)
+		scale:SetPoint'BOTTOMRIGHT'
+		scale:SetSize(16, 16)
+
+		scale:SetNormalTexture[[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up]]
+		scale:SetHighlightTexture[[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Highlight]]
+		scale:SetPushedTexture[[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Down]]
+
+		scale:SetScript('OnMouseDown', OnMouseDown)
+		scale:SetScript('OnMouseUp', OnMouseUp)
+
 		backdrop.name = name
 		backdrop.obj = obj
 		backdrop.header = isHeader
+		backdrop.target = target
 
 		backdrop:SetBackdropBorderColor(1, 0, 0)
-		--backdrop:SetBackdropColor(0, .9, 0)
 
-		-- Work around the fact that headers with no units displayed are 0 in height.
-		if(isHeader and math.floor(isHeader:GetHeight()) == 0) then
-			local height = isHeader:GetChildren():GetHeight()
-			isHeader:SetHeight(height)
+		backdrop.baseWidth, backdrop.baseHeight = obj:GetSize()
+
+		-- We have to define a minHeight on the header if it doesn't have one. The
+		-- reason for this is that the header frame will have an height of 0.1 when
+		-- it doesn't have any frames visible.
+		if(
+			isHeader and
+			(
+				not isHeader:GetAttribute'minHeight' and math.floor(isHeader:GetHeight()) == 0 or
+				not isHeader:GetAttribute'minWidth' and math.floor(isHeader:GetWidth()) == 0
+			)
+		) then
+			isHeader:SetHeight(obj:GetHeight())
+			isHeader:SetWidth(obj:GetWidth())
+
+			if(not isHeader:GetAttribute'minHeight') then
+				isHeader.dirtyMinHeight = true
+				isHeader:SetAttribute('minHeight', obj:GetHeight())
+			end
+
+			if(not isHeader:GetAttribute'minWidth') then
+				isHeader.dirtyMinWidth = true
+				isHeader:SetAttribute('minWidth', obj:GetWidth())
+			end
+		elseif(isHeader) then
+			backdrop.baseWidth, backdrop.baseHeight = isHeader:GetSize()
 		end
+
+		backdrop:SetScript("OnShow", OnShow)
+		backdrop:SetScript('OnHide', OnHide)
 
 		backdrop:SetScript("OnDragStart", OnDragStart)
 		backdrop:SetScript("OnDragStop", OnDragStop)
+
+		backdrop:SetScript('OnSizeChanged', OnSizeChanged)
 
 		backdropPool[target] = backdrop
 
@@ -383,11 +526,7 @@ end
 
 -- reset data
 local function RESETUF()
-	if C["unitframes"].positionbychar == true then
-		TukuiUFpos = {}
-	else
-		TukuiData.ufpos = {}
-	end
+	TukuiDataPerChar.ufpos = {}
 	ReloadUI()
 end
 SLASH_RESETUF1 = "/resetuf"

@@ -60,7 +60,7 @@ local Update = function(self, event, ...)
 			end
 			-- WotF
 			if spellID == 7744 then
-				TrinketUsed(sourceGUID, 45)
+				TrinketUsed(sourceGUID, 30)
 			end
 		end
 	elseif event == "ARENA_OPPONENT_UPDATE" then

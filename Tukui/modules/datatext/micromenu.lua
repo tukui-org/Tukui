@@ -74,6 +74,8 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 			if(not CalendarFrame) then LoadAddOn("Blizzard_Calendar") end
 				Calendar_Toggle()
 			end},
+			{text = ENCOUNTER_JOURNAL,
+			func = function() if T.toc >= 40200 then ToggleFrame(EncounterJournal) end end}, 
 		}
 
 		EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)

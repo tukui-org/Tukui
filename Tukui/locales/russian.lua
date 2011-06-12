@@ -26,7 +26,7 @@ if T.client == "ruRU" then
 	L.chat_recrutment = "Гильдии"
 	L.chat_lfg = "ПоискСпутников"
  
-	L.disband = "Роспуск группы."
+	L.disband = "Роспуск группы ?"
 
 	L.datatext_download = "Загрузка: "
 	L.datatext_bandwidth = "Скорость: "
