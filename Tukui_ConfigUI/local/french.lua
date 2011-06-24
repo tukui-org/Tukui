@@ -10,6 +10,7 @@ if GetLocale() == "frFR" then
 	TukuiL.option_general_customuiscale = "Echelle de l'interface (si échelle auto désactivée)"
 	TukuiL.option_general_backdropcolor = "Définis la couleur de fond par défaut des panneaux"
 	TukuiL.option_general_bordercolor = "Définis la couleur des Bordures par défaut des panneaux"
+	TukuiL.option_general_blizzardreskin = "Appliquer le theme de Tukui à tous les panneaux de Blizzard"
 
 	-- nameplate
 	TukuiL.option_nameplates = "Barres d'info"

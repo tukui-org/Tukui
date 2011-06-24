@@ -11,6 +11,7 @@
 	TukuiL.option_general_customuiscale = "使用者介面比例(需要關閉自動調整)"
 	TukuiL.option_general_backdropcolor = "設定成預設的面板背景顏色"
 	TukuiL.option_general_bordercolor = "設定成預設的面板邊框顏色"
+	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
  
 	-- nameplate
 	TukuiL.option_nameplates = "名條"

@@ -879,7 +879,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 	-- please don't do anything after 1 player_entering_world event.
 	Stuffing:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	
-	if T.toc < 40200 then return end
+	if T.toc >= 40200 then return end
 	
 	-- hooking and setting key ring bag
 	-- this is just a reskin of Blizzard key bag to fit Tukui

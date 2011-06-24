@@ -11,6 +11,7 @@
 	TukuiL.option_general_customuiscale = "Interface Skalierung (falls automatische Skalierung deaktiviert ist)"
 	TukuiL.option_general_backdropcolor = "Hintergrundfarbe der Plaketten zurücksetzen"
 	TukuiL.option_general_bordercolor = "Randfarbe der Plaketten zurücksetzen"
+	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
  
 	-- nameplate
 	TukuiL.option_nameplates = "Namensplaketten"

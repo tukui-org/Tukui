@@ -58,7 +58,6 @@ local function LoadSkin()
 				icon:ClearAllPoints()
 				icon:SetAllPoints()
 				
-				button:SetFrameLevel(button:GetFrameLevel() + 2)
 				if not button.backdrop then
 					button:CreateBackdrop("Default", true)	
 				end
@@ -156,7 +155,6 @@ local function LoadSkin()
 			icon:Point("TOPLEFT", 2, -2)
 			icon:Point("BOTTOMRIGHT", -2, 2)
 			
-			button:SetFrameLevel(button:GetFrameLevel() + 2)
 			if not button.backdrop then
 				button:CreateBackdrop("Default", true)	
 				button.backdrop:SetAllPoints()
@@ -197,7 +195,6 @@ local function LoadSkin()
 			icon:Point("TOPLEFT", 2, -2)
 			icon:Point("BOTTOMRIGHT", -2, 2)
 			
-			button:SetFrameLevel(button:GetFrameLevel() + 2)
 			if not button.backdrop then
 				button:CreateBackdrop("Default", true)	
 				button.backdrop:SetAllPoints()

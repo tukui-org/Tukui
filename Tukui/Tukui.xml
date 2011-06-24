@@ -129,6 +129,7 @@
 	<Script file="modules\skins\calendar.lua"/>
 	<Script file="modules\skins\character.lua"/>
 	<Script file="modules\skins\chat.lua"/>
+	<Script file="modules\skins\colorpicker.lua"/>
 	<Script file="modules\skins\debugtools.lua"/>
 	<Script file="modules\skins\dressup.lua"/>
 	<Script file="modules\skins\friends.lua"/>
@@ -168,6 +169,7 @@
 	<Script file="modules\skins\trade.lua"/>
 	<Script file="modules\skins\tradeskill.lua"/>
 	<Script file="modules\skins\trainer.lua"/>
+	<Script file="modules\skins\tutorial.lua"/>
 	<Script file="modules\skins\watchframe.lua"/>
 	<Script file="modules\skins\worldmap.lua"/>
 	

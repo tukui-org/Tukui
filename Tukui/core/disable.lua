@@ -18,10 +18,6 @@ if (IsAddOnLoaded("Dominos") or IsAddOnLoaded("Bartender4") or IsAddOnLoaded("Ma
 	C["actionbar"].enable = false
 end
 
-if (IsAddOnLoaded("Mapster")) then
-	C["map"].enable = false
-end
-
 if (IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter")) then
 	C["chat"].enable = false
 end

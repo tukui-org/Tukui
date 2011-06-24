@@ -11,6 +11,7 @@ if GetLocale() == "esES" then
 	TukuiL.option_general_customuiscale = "Escala UI (solo si escala automatica esta apagado)"
 	TukuiL.option_general_backdropcolor = "Define el color por defecto del fondo de los paneles"
 	TukuiL.option_general_bordercolor = "Define el color por defecto de los paneles"
+	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
 
 	-- nameplate
 	TukuiL.option_nameplates = "Placas de nombre"

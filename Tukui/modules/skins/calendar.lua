@@ -49,6 +49,10 @@ local function LoadSkin()
 	CalendarContextMenu.SetBackdropColor = T.dummy
 	CalendarContextMenu.SetBackdropBorderColor = T.dummy
 	
+	CalendarInviteStatusContextMenu:SetTemplate("Default")
+	CalendarInviteStatusContextMenu.SetBackdropColor = T.dummy
+	CalendarInviteStatusContextMenu.SetBackdropBorderColor = T.dummy
+	
 	--Boost frame levels
 	for i=1, 42 do
 		_G["CalendarDayButton"..i]:SetFrameLevel(_G["CalendarDayButton"..i]:GetFrameLevel() + 1)
@@ -172,6 +176,16 @@ local function LoadSkin()
 	for _, button in pairs(buttons) do
 		T.SkinButton(_G[button])
 	end		
+	
+	-- too many event same day box
+    CalendarEventPickerFrame:StripTextures()
+	CalendarEventPickerFrame:SetTemplate("Default")
+	CalendarEventPickerTitleFrame:StripTextures()
+
+	T.SkinScrollBar(CalendarEventPickerScrollBar)
+
+	CalendarEventPickerCloseButton:StripTextures()
+	T.SkinButton(CalendarEventPickerCloseButton, true)
 end
 
 T.SkinFuncs["Blizzard_Calendar"] = LoadSkin

@@ -8,6 +8,7 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 	local HPS_FEED = CreateFrame("Frame")
 	local player_id = UnitGUID("player")
 	local actual_heals_total, cmbt_time = 0
+	local amount_healed, amount_over_healed = 0
  
 	local hText = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 	hText:SetFont(C.media.font, C["datatext"].fontsize)
@@ -53,8 +54,13 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 		-- only use events from the player
 		local id = select(4, ...)
 		if id == player_id then
-			amount_healed = select(13, ...)
-			amount_over_healed = select(14, ...)
+			if T.toc < 40200 then
+				amount_healed = select(13, ...)
+				amount_over_healed = select(14, ...)
+			else
+				amount_healed = select(15, ...)
+				amount_over_healed = select(16, ...)
+			end
 			-- add to the total the healed amount subtracting the overhealed amount
 			actual_heals_total = actual_heals_total + math.max(0, amount_healed - amount_over_healed)
 		end

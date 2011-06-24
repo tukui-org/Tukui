@@ -24,6 +24,7 @@ local function LoadSkin()
 		"SecondaryHandSlot",
 		"RangedSlot",
 	}
+	
 	for _, slot in pairs(slots) do
 		local icon = _G["Character"..slot.."IconTexture"]
 		local slot = _G["Character"..slot]
@@ -283,6 +284,33 @@ local function LoadSkin()
 	xtex:SetTexCoord(.12, .63, .15, .55)
 	PetPaperDollPetInfo:CreateBackdrop("Default")
 	PetPaperDollPetInfo:Size(24, 24)
+	
+	-- a request to color item by rarity on character frame.
+	local function ColorItemBorder()
+		for _, slot in pairs(slots) do
+			-- Colour the equipment slots by rarity
+			local target = _G["Character"..slot]
+			local slotId, _, _ = GetInventorySlotInfo(slot)
+			local itemId = GetInventoryItemID("player", slotId)
+			
+			if itemId then
+				local _, _, rarity, _, _, _, _, _, _, _, _ = GetItemInfo(itemId)
+				if rarity then				
+					target.backdrop:SetBackdropBorderColor(GetItemQualityColor(rarity))
+				end
+			else
+				target.backdrop:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			end
+		end
+	end
+	
+	-- execute item coloring everytime we open character frame
+	CharacterFrame:HookScript("OnShow", ColorItemBorder)
+	
+	-- execute item coloring everytime an item is changed
+	local CheckItemBorderColor = CreateFrame("Frame")
+	CheckItemBorderColor:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
+	CheckItemBorderColor:SetScript("OnEvent", ColorItemBorder)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

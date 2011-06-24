@@ -11,6 +11,7 @@ TukuiL.option_general_multisample = "Multisampling protection (clean 1px border)
 TukuiL.option_general_customuiscale = "UI Scale (if auto-scale is disabled)"
 TukuiL.option_general_backdropcolor = "Set default backdrop color of panels"
 TukuiL.option_general_bordercolor = "Set default border color of panels"
+TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
  
 -- nameplate
 TukuiL.option_nameplates = "Nameplates"

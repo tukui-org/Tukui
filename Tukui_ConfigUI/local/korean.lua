@@ -11,6 +11,7 @@
 	TukuiL.option_general_customuiscale = "UI크기 (autoscale이 꺼져 있을 때)"
 	TukuiL.option_general_backdropcolor = "판넬 기본 배경 색상 설정"
 	TukuiL.option_general_bordercolor = "판넬 기본 테두리 색상 설정"
+	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
  
 	-- nameplate
 	TukuiL.option_nameplates = "이름표"

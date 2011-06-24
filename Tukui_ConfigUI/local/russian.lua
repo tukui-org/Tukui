@@ -10,7 +10,8 @@
 	TukuiL.option_general_multisample = "Защищать конфигурацию мультисемплинга (ровные края шириной 1 пиксель)"
 	TukuiL.option_general_customuiscale = "Масштаб интерфейса (если автомасштабирование отключено)"
 	TukuiL.option_general_backdropcolor = "Установить изначальный цвет фона панелей"
-	TukuiL.option_general_bordercolor = "Установить изначальный цвет окантовки панелей"		
+	TukuiL.option_general_bordercolor = "Установить изначальный цвет окантовки панелей"
+	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"	
  
 	-- nameplate
 	TukuiL.option_nameplates = "Индикаторы здоровья"

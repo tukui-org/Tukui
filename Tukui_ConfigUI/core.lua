@@ -38,6 +38,7 @@ local function Local(o)
 	if o == "TukuiConfigUIgeneraluiscale" then o = TukuiL.option_general_customuiscale end
 	if o == "TukuiConfigUIgeneralbackdropcolor" then o = TukuiL.option_general_backdropcolor end
 	if o == "TukuiConfigUIgeneralbordercolor" then o = TukuiL.option_general_bordercolor end
+	if o == "TukuiConfigUIgeneralblizzardreskin" then o = TukuiL.option_general_blizzardreskin end
 	
 	-- nameplate
 	if o == "TukuiConfigUInameplate" then o = TukuiL.option_nameplates end
