@@ -186,6 +186,18 @@ local function Shared(self, unit)
 			maxOverflow = 1,
 		}
 	end
+	
+	if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
+		local ws = CreateFrame("StatusBar", self:GetName().."_WeakenedSoul", power)
+		ws:SetAllPoints(power)
+		ws:SetStatusBarTexture(C.media.normTex)
+		ws:GetStatusBarTexture():SetHorizTile(false)
+		ws:SetBackdrop(backdrop)
+		ws:SetBackdropColor(unpack(C.media.backdropcolor))
+		ws:SetStatusBarColor(191/255, 10/255, 10/255)
+		
+		self.WeakenedSoul = ws
+	end
 
 	return self
 end
