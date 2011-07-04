@@ -130,10 +130,14 @@ end
 local function BuildBNTable(total)
 	BNTotalOnline = 0
 	wipe(BNTable)
-	local presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level
+	local _, presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level
 	for i = 1, total do
 		presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
-		_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		if T.toc < 40200 then
+			_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		else
+			_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		end
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		BNTable[i] = { presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
@@ -150,11 +154,15 @@ end
 local function UpdateBNTable(total)
 	BNTotalOnline = 0
 	local presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText
-	local realmName, faction, race, class, zoneName, level
+	local _, realmName, faction, race, class, zoneName, level
 	for i = 1, #BNTable do
 		-- get guild roster information
 		presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
-		_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		if T.toc < 40200 then
+			_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		else
+			_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		end
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
