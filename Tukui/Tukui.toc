@@ -4,7 +4,7 @@
 ## Credits to: Caith, Caellian, Shestak, Haste, Tekkub, Alza, Roth, P3lim, Tulla, Hungtar, hankthetank, Ishtara, Haleth and others...
 ## Special Thanks to: Admins, Moderator and VIP's from tukui.org
 ## Version: 13.25
-## Build: 1325002
+## Build: 1325003
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
