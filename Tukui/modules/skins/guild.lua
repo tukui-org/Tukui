@@ -220,11 +220,12 @@ local function LoadSkin()
 	GuildTextEditFrame:SetTemplate("Default")
 	T.SkinScrollBar(GuildTextEditScrollFrameScrollBar)
 	GuildTextEditContainer:SetTemplate("Default")
-	for i=1, GuildTextEditFrame:GetNumChildren() do
-		local child = select(i, GuildTextEditFrame:GetChildren())
-		if child:GetName() == "GuildTextEditFrameCloseButton" and child:GetWidth() == 32 then
+	for i = 1, GuildLogFrame:GetNumChildren() do
+		local child = select(i, GuildLogFrame:GetChildren())
+		local point = select(1, child:GetPoint())
+		if point == "TOPRIGHT" then
 			T.SkinCloseButton(child)
-		elseif child:GetName() == "GuildTextEditFrameCloseButton" then
+		else
 			T.SkinButton(child, true)
 		end
 	end
