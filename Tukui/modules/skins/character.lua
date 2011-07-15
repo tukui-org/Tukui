@@ -131,7 +131,7 @@ local function LoadSkin()
 
 			object.Check:SetTexture(nil)
 			object.icon:SetTexCoord(.08, .92, .08, .92)
-			object.icon:SetTemplate("Default")
+			object:SetTemplate("Default")
 		end
 		GearManagerDialogPopup:StripTextures()
 		GearManagerDialogPopup:SetTemplate("Default")
