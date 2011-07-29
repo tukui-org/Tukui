@@ -9,8 +9,8 @@
 	TukuiL.option_general_override = "使用高解析度設定於低解析度"
 	TukuiL.option_general_multisample = "多重採樣保護"
 	TukuiL.option_general_customuiscale = "使用者介面比例(需要關閉自動調整)"
-	TukuiL.option_general_backdropcolor = "設定成預設的面板背景顏色"
-	TukuiL.option_general_bordercolor = "設定成預設的面板邊框顏色"
+	TukuiL.option_general_backdropcolor = "設定面板背景顏色"
+	TukuiL.option_general_bordercolor = "設定面板邊框顏色"
 	TukuiL.option_general_blizzardreskin = "Reskin Blizzard frames to match Tukui"
  
 	-- nameplate
@@ -104,7 +104,7 @@
 	TukuiL.option_unitframes_weakenedsoulbar = "啟用虛弱靈魂指示 (牧師)"
 	TukuiL.option_unitframes_onlyselfdebuffs = "只在目標頭像上顯示自己釋放的減益效果"
 	TukuiL.option_unitframes_focus = "開啟專注目標的目標"
-	TukuiL.option_unitframes_bordercolor = "設定成預設的單位框架邊框顏色"
+	TukuiL.option_unitframes_bordercolor = "設定單位框架的邊框顏色"
  
 	-- loot
 	TukuiL.option_loot = "戰利品"
