@@ -7,7 +7,7 @@ if T.client == "ruRU" then
 	C["media"].uffont = C["media"].ru_uffont
 	C["media"].font = C["media"].ru_font
 	C["media"].dmgfont = C["media"].ru_dmgfont
-elseif T.client == "zhTW" then
+elseif T.client == "zhTW" or T.client == "zhCN" then
 	C["media"].uffont = C["media"].tw_uffont
 	C["media"].font = C["media"].tw_font
 	C["media"].dmgfont = C["media"].tw_dmgfont
