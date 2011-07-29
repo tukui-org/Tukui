@@ -241,7 +241,11 @@ local function LoadSkin()
 
 	-- dropdown on full map is scaled incorrectly
 	WorldMapContinentDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
-	WorldMapZoneDropDownButton:HookScript("OnClick", function() DropDownList1:SetScale(C.general.uiscale) end)
+	WorldMapZoneDropDownButton:HookScript("OnClick", function() 
+		DropDownList1:SetScale(C.general.uiscale)
+		DropDownList1:ClearAllPoints()
+		DropDownList1:Point("TOPRIGHT", self, "BOTTOMRIGHT", -17, -4)
+	end)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
