@@ -1095,8 +1095,7 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			--Al'Akir
 			SpellName(93260), -- Ice Storm
 			SpellName(93295), -- Lightning Rod
-		}
-		
+
 		-- Firelands, thanks Kaelhan :)
 			-- Beth'tilac
 				SpellName(99506),	-- Widows Kiss
@@ -1124,7 +1123,6 @@ if C["unitframes"].raidunitdebuffwatch == true then
 				SpellName(100293),	-- Lava Wave
 				SpellName(98313),	-- Magma Blast
 				SpellName(100675),	-- Dreadflame
-
 		}
 
 		T.ReverseTimer = {
