@@ -7,8 +7,12 @@ Tukui License
 	Authors of this addon hereby grant you the following rights:
 
 	1. 	You may make modifications to this addon for private use only except
-		if you publish your edited version via tukui.org, wowinterface.com or
-		if you ask authors permission before uploading it somewhere else.
+		if you publish your edited version via tukui.org, wowinterface.com,
+		curse.com, github.com or if you ask authors permission before uploading it
+		somewhere else. If you upload it on curse.com or wowinterface.com, it must
+		be uploaded thought an "addon pack" category only. Do not enable any kind
+		of donation from other site unless you rewrote or edited more than 60%
+		of our codes.
 
 	2. 	Do not modify the name of this addon, including the addon folders.
 
@@ -41,3 +45,5 @@ Tukui License
 
 	All rights not explicitly addressed in this license are reserved by
 	the copyright holders.
+
+	You can write us at contact@tukui.org for reporting abuse.
