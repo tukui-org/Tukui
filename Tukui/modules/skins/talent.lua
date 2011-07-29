@@ -224,7 +224,7 @@ local function LoadSkin()
 	for i=1, 3 do
 		TalentSummaryClean(i)
 		TalentHeaderIcon(nil, true, i)
-		for j=1, 2 do
+		for j=1, NUM_TALENT_COLUMNS do
 			TalentSummaryButtons(nil, true, true, i, j)
 			TalentSummaryButtons(nil, true, false, i, j)
 		end

@@ -48,6 +48,11 @@ local function LoadSkin()
 	GlyphFrameClearInfoFrame:StyleButton()
 	GlyphFrameClearInfoFrame:Size(25, 25)
 	
+	GlyphFrame.levelOverlay1:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlayText1:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlay2:SetParent(GlyphFrameSparkleFrame)
+	GlyphFrame.levelOverlayText2:SetParent(GlyphFrameSparkleFrame)
+	
 	T.SkinScrollBar(GlyphFrameScrollFrameScrollBar)
 
 	local StripAllTextures = {
