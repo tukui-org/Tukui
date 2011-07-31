@@ -28,7 +28,7 @@ if GetLocale() == "zhCN" then
 	TukuiL.option_merchant = "商人"
 	TukuiL.option_merchant_autosell = "自动售卖灰色物品"
 	TukuiL.option_merchant_autorepair = "自动修理物品"
-	TukuiL.option_merchant_sellmisc = "自动售卖灰色物品（当然不是灰色的咯）"
+	TukuiL.option_merchant_sellmisc = "自动贩卖特定物品(非灰色等级的指定物品)"
 	 
 	-- bags
 	TukuiL.option_bags = "背包"
