@@ -32,9 +32,9 @@
 	<Script file="core\deprecated.lua"/>
 	<Script file="core\api.lua"/>
 	<Script file="core\functions.lua"/>
-	<Script file="core\launch.lua"/>
-	<Script file="core\disable.lua"/>
 	<Script file="core\clientfonts.lua"/>
+	<Script file="core\disable.lua"/>
+	<Script file="core\launch.lua"/>
 	<Script file="modules\blizzard\watchframe.lua"/>
 	<Script file="modules\blizzard\durability.lua"/>
 	<Script file="modules\blizzard\vehicle.lua"/>
