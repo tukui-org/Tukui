@@ -120,7 +120,7 @@ if GetLocale() == "zhCN" then
 	 
 	-- invite
 	TukuiL.option_invite = "邀请"
-	TukuiL.option_invite_autoinvite = "开启自动邀请 (好友和公会成员)"
+	TukuiL.option_invite_autoinvite = "开启自动接受邀请 (好友和公会成员)"
 	 
 	-- tooltip
 	TukuiL.option_tooltip = "鼠标提示"
@@ -153,8 +153,8 @@ if GetLocale() == "zhCN" then
 	TukuiL.option_actionbar_ssmo = "鼠标划过显示姿态栏和图腾栏"
 	TukuiL.option_actionbar_rbn = "底部动作条数目 (1 or 2)"
 	TukuiL.option_actionbar_rn = "右侧动作条数目 (0, 1, 2 or 3)"
-	TukuiL.option_actionbar_buttonsize = "主动作条大小"
-	TukuiL.option_actionbar_buttonspacing = "动作条按钮大小"
+	TukuiL.option_actionbar_buttonsize = "主动作条按钮大小"
+	TukuiL.option_actionbar_buttonspacing = "动作条按钮间距"
 	TukuiL.option_actionbar_petbuttonsize = "宠物或姿态栏按钮大小"
 
 	-- quest watch frame
