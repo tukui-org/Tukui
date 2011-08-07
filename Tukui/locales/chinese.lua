@@ -4,12 +4,12 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if T.client == "zhCN" then
 
 	L.chat_BATTLEGROUND_GET = "[战场]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[将领]"
+	L.chat_BATTLEGROUND_LEADER_GET = "[战场领袖]"
 	L.chat_BN_WHISPER_GET = "密语"
 	L.chat_GUILD_GET = "[公]"
 	L.chat_OFFICER_GET = "[官]"
 	L.chat_PARTY_GET = "[队]"
-	L.chat_PARTY_GUIDE_GET = "[向导]"
+	L.chat_PARTY_GUIDE_GET = "[地下城向导]"
 	L.chat_PARTY_LEADER_GET = "[队长]"
 	L.chat_RAID_GET = "[团]"
 	L.chat_RAID_LEADER_GET = "[团长]"
@@ -22,7 +22,7 @@ if T.client == "zhCN" then
 	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000下线了|r"
 
 	L.chat_general = "综"
-	L.chat_trade = "易"
+	L.chat_trade = "交"
 	L.chat_defense = "防"
 	L.chat_recrutment = "公会招募"
 	L.chat_lfg = "寻求组队"
@@ -240,8 +240,8 @@ if T.client == "zhCN" then
 	-- install
 	L.install_init_line_1 = "感谢您选择Tukui。"
 	L.install_init_line_2 = "几个小步骤将引导你安装Tukui. 在每一步中， 你可以选择应用或者跳过当前的设定。"
-	L.install_init_line_3 = "你也可以选择我们提供给您的关于Tukui一些特性的小提示。"
-	L.install_init_line_4 = "按下教程按键开始安装教程，或者点击安装跳过这一步。"
+	L.install_init_line_3 = "你也可以选择查看我们提供给您的关于Tukui一些特性的小提示。"
+	L.install_init_line_4 = "按下教程按键开始查看教程，或者点击安装跳过这一步。"
 
 	-- tutorial 1
 	L.tutorial_step_1_line_1 = "这个快速的小教程将给您展示一些Tukui的特性。"
@@ -256,8 +256,8 @@ if T.client == "zhCN" then
 	L.tutorial_step_2_line_4 = "你只需要输入/moveui,，既可以简单的移动单位框架。"
 
 	-- tutorial 3
-	L.tutorial_step_3_line_1 = "Tukui是一个重新设计过的暴雪用户界面。不多不少，大概所有的原始特性你都可以在Tukui中实现。 有些仅有的原始界面不能实现的功能在屏幕中是看不到的， 比如说当你访问商人的时候自动售卖灰色的物品，又或者自动整理背包内的物品。"
-	L.tutorial_step_3_line_2 = "因为并不是所有人都喜欢 伤害统计, 首领模块, 仇恨统计, 等等, 但我们认为这是非常好的事. Tukui是为不同职业，不同口味，不同爱好，不同天赋等等最大化的玩家群体所编写的。 这就是为什么Tukui是当前最火的UI。 它满足了每一个人的游戏体验并且完全可供编辑。 它也被设计成可为那些想要打造自己特性的UI的初学者们提供了一个很好的开端而无需专注于插件本身的构造。 从2009年开始，许多用户使用Tukui作为基本架构来制作他们自己的插件。 你可以到我们的网站上看看那些Tukui改版！"
+	L.tutorial_step_3_line_1 = "Tukui是一个重新设计过的暴雪用户界面。不多不少，大概所有的原始特性你都可以在Tukui中体验到。 有些仅有的原始界面不能实现的功能在屏幕中是看不到的， 比如说当你访问商人的时候自动售卖灰色的物品，又或者自动整理背包内的物品。"
+	L.tutorial_step_3_line_2 = "因为并不是所有人都喜欢诸如：伤害统计, 首领模块, 仇恨统计, 等等这些模块, 但我们认为这是非常好的事. Tukui是为不同职业，不同口味，不同爱好，不同天赋等等最大化的玩家群体所编写的。 这就是为什么Tukui是当前最火的UI。 它满足了每一个人的游戏体验并且完全可供编辑。 它也被设计于为那些想要打造自己特性的UI的初学者们提供了一个很好的开端而无需专注于插件本身的构造。 从2009年开始，许多用户使用Tukui作为基本架构来制作他们自己的插件。 你可以到我们的网站上看看那些Tukui改版！"
 	L.tutorial_step_3_line_3 = "用户们可以到我们官方网站的Tukui配套插件区或者访问 www.wowinterface.com 来获取安装更多有额外特性的插件。"
 	L.tutorial_step_3_line_4 = ""
 
@@ -283,10 +283,10 @@ if T.client == "zhCN" then
 	L.install_step_1_line_1 = "这些步骤将会为Tukui设置正确的环境变量。"
 	L.install_step_1_line_2 = "第一步将会应用一些比较重要的设置。"
 	L.install_step_1_line_3 = "这一步 |cffff0000推荐|r 所有的用户应用, 除非你只想应用一些特殊的设定。"
-	L.install_step_1_line_4 = "点击继续来应用这些设定或者点击跳过，如果你想要跳过这些步骤。"
+	L.install_step_1_line_4 = "点击继续来应用这些设定，或者如果你想要跳过这些步骤点击跳过。"
 
 	-- install step 2
-	L.install_step_2_line_0 = "发现另外的聊天插件。我们将忽略这一步。请按跳过继续安装。"
+	L.install_step_2_line_0 = "发现另外的聊天插件。我们将略过这一步。请按跳过继续安装。"
 	L.install_step_2_line_1 = "第二步应用了正确的聊天设定。"
 	L.install_step_2_line_2 = "如果你是一个新用户，那么非常建议你应用这一步。 如果您已经在使用，那么可以跳过这一步。"
 	L.install_step_2_line_3 = "由于应用这些设定，聊天字体过大是正常的。 当安装完成之后它会恢复正常。"
