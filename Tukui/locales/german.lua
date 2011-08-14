@@ -162,8 +162,8 @@ if T.client == "deDE" then
 	L.bags_stackend = "Neu stapeln abgeschlossen."  
 	L.bags_rightclick_search = "Rechtsklick, um zu suchen." 
 	
-	L.loot_fish = "Fishy loot",
-	L.loot_empty = "Empty slot",
+	L.loot_fish = "Fishy loot"
+	L.loot_empty = "Empty slot"
  
 	L.chat_invalidtarget = "Falsches Ziel"
  

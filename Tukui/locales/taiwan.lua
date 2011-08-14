@@ -162,8 +162,8 @@ if T.client == "zhTW" then
 	L.bags_stackend = "重新堆疊完成"
 	L.bags_rightclick_search = "點擊右鍵以搜尋物品."
 	
-	L.loot_fish = "Fishy loot",
-	L.loot_empty = "Empty slot",
+	L.loot_fish = "Fishy loot"
+	L.loot_empty = "Empty slot"
  
 	L.chat_invalidtarget = "無效的目標"
  

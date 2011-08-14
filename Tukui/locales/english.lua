@@ -161,8 +161,8 @@ L.bags_bids = "Using bags: "
 L.bags_stackend = "Restacking finished."
 L.bags_rightclick_search = "Right-click to search."
 
-L.loot_fish = "Fishy loot",
-L.loot_empty = "Empty slot",
+L.loot_fish = "Fishy loot"
+L.loot_empty = "Empty slot"
 
 L.chat_invalidtarget = "Invalid Target"
 

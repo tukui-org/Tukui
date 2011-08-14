@@ -169,8 +169,8 @@ if T.client == "koKR" then
 	L.bags_stackend = "재정리 완료."
 	L.bags_rightclick_search = "검색하려면 오른쪽 클릭"
 	
-	L.loot_fish = "Fishy loot",
-	L.loot_empty = "Empty slot",
+	L.loot_fish = "Fishy loot"
+	L.loot_empty = "Empty slot"
  
 	L.chat_invalidtarget = "잘못된 대상"
  

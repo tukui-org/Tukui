@@ -162,6 +162,9 @@ if T.client == "zhCN" then
 	L.bags_bids = "使用背包： "
 	L.bags_stackend = "重新堆叠完成。"
 	L.bags_rightclick_search = "右击开始查找。"
+	
+	L.loot_fish = "Fishy loot"
+	L.loot_empty = "Empty slot"
 
 	L.chat_invalidtarget = "无效的目标"
 
