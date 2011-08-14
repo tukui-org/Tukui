@@ -207,6 +207,10 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 			local slot = addon.slots[i] or createSlot(i)
 			local texture, item, quantity, quality, locked = GetLootSlotInfo(i)
 			local color = ITEM_QUALITY_COLORS[quality]
+			
+			-- very rare bug to avoid a lua error, sometime quantity or quality value is not returned
+			if not quantity then quantity = 1 end
+			if not quality then quality = 0 end
 
 			if(LootSlotIsCoin(i)) then
 				item = item:gsub("\n", ", ")
