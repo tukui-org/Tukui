@@ -332,7 +332,7 @@ local function Shared(self, unit)
 				CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateDruidMana(self) end)
 				local DruidMana = T.SetFontString(health, font1, 12)
 				DruidMana:SetTextColor(1, 0.49, 0.04)
-				self.DruidMana = DruidMana
+				self.DruidManaText = DruidMana
 			end
 			
 			if C["unitframes"].classbar then
