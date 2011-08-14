@@ -8,7 +8,7 @@ local Fishy = {
 	empty = "Empty slot",
 }
 
-local addon = CreateFrame("Button", "Butsu")
+local addon = CreateFrame("Button", "TukuiLootFrame")
 local title = addon:CreateFontString(nil, "OVERLAY")
 
 local iconSize = 30
@@ -63,7 +63,7 @@ end
 
 local createSlot = function(id)
 	local iconsize = iconSize-2
-	local frame = CreateFrame("Button", 'ButsuSlot'..id, addon)
+	local frame = CreateFrame("Button", 'TukuiLootFrameSlot'..id, addon)
 	frame:Point("LEFT", 8, 0)
 	frame:Point("RIGHT", -8, 0)
 	frame:Height(iconsize)
@@ -206,36 +206,39 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 		for i=1, items do
 			local slot = addon.slots[i] or createSlot(i)
 			local texture, item, quantity, quality, locked = GetLootSlotInfo(i)
-			local color = ITEM_QUALITY_COLORS[quality]
+			
+			if texture then
+				local color = ITEM_QUALITY_COLORS[quality]
 
-			if(LootSlotIsCoin(i)) then
-				item = item:gsub("\n", ", ")
+				if(LootSlotIsCoin(i)) then
+					item = item:gsub("\n", ", ")
+				end
+
+				if(quantity > 1) then
+					slot.count:SetText(quantity)
+					slot.count:Show()
+				else
+					slot.count:Hide()
+				end
+
+				if(quality > 1) then
+					slot.drop:SetVertexColor(color.r, color.g, color.b)
+					slot.drop:Show()
+				else
+					slot.drop:Hide()
+				end
+
+				slot.quality = quality
+				slot.name:SetText(item)
+				slot.name:SetTextColor(color.r, color.g, color.b)
+				slot.icon:SetTexture(texture)
+
+				m = math.max(m, quality)
+				w = math.max(w, slot.name:GetStringWidth())
+
+				slot:Enable()
+				slot:Show()
 			end
-
-			if(quantity > 1) then
-				slot.count:SetText(quantity)
-				slot.count:Show()
-			else
-				slot.count:Hide()
-			end
-
-			if(quality > 1) then
-				slot.drop:SetVertexColor(color.r, color.g, color.b)
-				slot.drop:Show()
-			else
-				slot.drop:Hide()
-			end
-
-			slot.quality = quality
-			slot.name:SetText(item)
-			slot.name:SetTextColor(color.r, color.g, color.b)
-			slot.icon:SetTexture(texture)
-
-			m = math.max(m, quality)
-			w = math.max(w, slot.name:GetStringWidth())
-
-			slot:Enable()
-			slot:Show()
 		end
 	else
 		local slot = addon.slots[1] or createSlot(1)
@@ -288,9 +291,7 @@ addon.UPDATE_MASTER_LOOT_LIST = function(self)
 end
 
 addon.ADDON_LOADED = function(self, event, addon)
-	if(addon == "Butsu") then
-		db = setmetatable({}, {__index = defaults})
-
+	if(addon == "Tukui") then
 		self:SetScale(frameScale)
 
 		-- clean up.
@@ -313,7 +314,7 @@ addon:Hide()
 
 -- Fuzz
 LootFrame:UnregisterAllEvents()
-table.insert(UISpecialFrames, "Butsu")
+table.insert(UISpecialFrames, "TukuiLootFrame")
 
 function _G.GroupLootDropDown_GiveLoot(self)
 	if ( sq >= MASTER_LOOT_THREHOLD ) then
