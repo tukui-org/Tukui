@@ -775,18 +775,22 @@ T.EclipseDirection = function(self)
 	end
 end
 
-T.EclipseDisplay = function(self, login)
+T.DruidBarDisplay = function(self, login)
 	local eb = self.EclipseBar
+	local dm = self.DruidMana
 	local txt = self.EclipseBar.Text
 
 	if login then
-		eb:SetScript("OnUpdate", nil)
+		dm:SetScript("OnUpdate", nil)
 	end
 	
-	if eb:IsShown() then
-		txt:Show()
-		self.FlashInfo:Hide()
+	if eb:IsShown() or dm:IsShown() then
+		if eb:IsShown() then
+			txt:Show()
+			self.FlashInfo:Hide()
+		end
 		self.shadow:Point("TOPLEFT", -4, 12)
+		self.DruidManaBackground:Show()
 		if T.lowversion then
 			if self.Buffs then self.Buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 34) end
 		else
@@ -796,6 +800,7 @@ T.EclipseDisplay = function(self, login)
 		txt:Hide()
 		self.FlashInfo:Show()
 		self.shadow:Point("TOPLEFT", -4, 4)
+		self.DruidManaBackground:Hide()
 		if T.lowversion then
 			if self.Buffs then self.Buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 26) end
 		else

@@ -333,6 +333,31 @@ local function Shared(self, unit)
 				local DruidMana = T.SetFontString(health, font1, 12)
 				DruidMana:SetTextColor(1, 0.49, 0.04)
 				self.DruidManaText = DruidMana
+				
+				local DruidManaBackground = CreateFrame("Frame", nil, self)
+				DruidManaBackground:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+				if T.lowversion then
+					DruidManaBackground:Size(186, 8)
+				else
+					DruidManaBackground:Size(250, 8)
+				end
+				DruidManaBackground:SetFrameLevel(8)
+				DruidManaBackground:SetFrameStrata("MEDIUM")
+				DruidManaBackground:SetTemplate("Default")
+				DruidManaBackground:SetBackdropBorderColor(0,0,0,0)
+				
+				local DruidManaBarStatus = CreateFrame('StatusBar', nil, DruidManaBackground)
+				DruidManaBarStatus:SetPoint('LEFT', DruidManaBackground, 'LEFT', 0, 0)
+				DruidManaBarStatus:SetSize(DruidManaBackground:GetWidth(), DruidManaBackground:GetHeight())
+				DruidManaBarStatus:SetStatusBarTexture(normTex)
+				DruidManaBarStatus:SetStatusBarColor(.30, .52, .90)
+				
+				DruidManaBarStatus:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
+				DruidManaBackground:SetScript("OnUpdate", function() T.DruidBarDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
+				DruidManaBarStatus:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
+				
+				self.DruidManaBackground = DruidManaBackground
+				self.DruidMana = DruidManaBarStatus
 			end
 			
 			if C["unitframes"].classbar then
@@ -348,9 +373,8 @@ local function Shared(self, unit)
 					eclipseBar:SetFrameLevel(8)
 					eclipseBar:SetTemplate("Default")
 					eclipseBar:SetBackdropBorderColor(0,0,0,0)
-					eclipseBar:SetScript("OnShow", function() T.EclipseDisplay(self, false) end)
-					eclipseBar:SetScript("OnUpdate", function() T.EclipseDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
-					eclipseBar:SetScript("OnHide", function() T.EclipseDisplay(self, false) end)
+					eclipseBar:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
+					eclipseBar:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
 					
 					local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
