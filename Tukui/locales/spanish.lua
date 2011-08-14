@@ -161,6 +161,9 @@ if T.client == "esES" then
 	L.bags_bids = "Usando las bolsas: "
 	L.bags_stackend = "Se ha acabado de amontonar."
 	L.bags_rightclick_search = "Click derecho para buscar."
+	
+	L.loot_fish = "Fishy loot",
+	L.loot_empty = "Empty slot",
  
 	L.chat_invalidtarget = "Objetivo Invalido"
  

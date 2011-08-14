@@ -3,11 +3,6 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if not C["loot"].lootframe == true then return end
 
-local Fishy = {
-	fish = "Fishy loot",
-	empty = "Empty slot",
-}
-
 local addon = CreateFrame("Button", "TukuiLootFrame")
 local title = addon:CreateFontString(nil, "OVERLAY")
 
@@ -178,7 +173,7 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 	local items = GetNumLootItems()
 
 	if(IsFishingLoot()) then
-		title:SetText(Fishy.fish)
+		title:SetText(L.loot_fish)
 	elseif(not UnitIsFriend("player", "target") and UnitIsDead"target") then
 		title:SetText(UnitName"target")
 	else
@@ -244,7 +239,7 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 		local slot = addon.slots[1] or createSlot(1)
 		local color = ITEM_QUALITY_COLORS[0]
 
-		slot.name:SetText(Fishy.empty)
+		slot.name:SetText(L.loot_empty)
 		slot.name:SetTextColor(color.r, color.g, color.b)
 		slot.icon:SetTexture[[Interface\\LootFrame\\FishingLoot-Icon]]
 

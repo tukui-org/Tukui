@@ -162,6 +162,9 @@ if T.client == "frFR" then
 	L.bags_bids = "Emplacements utilisés : "
 	L.bags_stackend = "Empilage terminé."
 	L.bags_rightclick_search = "Clic-droit pour rechercher."
+	
+	L.loot_fish = "Poisson!",
+	L.loot_empty = "Emplacement vide",
 
 	L.chat_invalidtarget = "Cible non valide"
 
