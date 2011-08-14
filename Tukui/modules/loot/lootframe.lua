@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if not C["loot"].lootframe == true then return end
 
-local L = {
+local Fishy = {
 	fish = "Fishy loot",
 	empty = "Empty slot",
 }
@@ -178,7 +178,7 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 	local items = GetNumLootItems()
 
 	if(IsFishingLoot()) then
-		title:SetText(L.fish)
+		title:SetText(Fishy.fish)
 	elseif(not UnitIsFriend("player", "target") and UnitIsDead"target") then
 		title:SetText(UnitName"target")
 	else
@@ -241,9 +241,9 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 		local slot = addon.slots[1] or createSlot(1)
 		local color = ITEM_QUALITY_COLORS[0]
 
-		slot.name:SetText(L.empty)
+		slot.name:SetText(Fishy.empty)
 		slot.name:SetTextColor(color.r, color.g, color.b)
-		slot.icon:SetTexture[[Interface\Icons\INV_Misc_Herb_AncientLichen]]
+		slot.icon:SetTexture[[Interface\\LootFrame\\FishingLoot-Icon]]
 
 		items = 1
 		w = math.max(w, slot.name:GetStringWidth())
