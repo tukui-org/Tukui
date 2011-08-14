@@ -1,5 +1,3 @@
-local WoW41 = select(4, GetBuildInfo()) == 40100
-
 local parent, ns = ...
 local oUF = ns.oUF
 local Private = oUF.Private
@@ -26,11 +24,8 @@ if(IsAddOnLoaded'!ClassColors' and CUSTOM_CLASS_COLORS) then
 			colors.class[eclass] = {color.r, color.g, color.b}
 		end
 
-		local oUF = ns.oUF or _G[parent]
-		if(oUF) then
-			for _, obj in next, oUF.objects do
-				obj:UpdateAllElements("CUSTOM_CLASS_COLORS")
-			end
+		for _, obj in next, oUF.objects do
+			obj:UpdateAllElements("CUSTOM_CLASS_COLORS")
 		end
 	end
 
