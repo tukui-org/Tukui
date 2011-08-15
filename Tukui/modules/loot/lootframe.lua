@@ -241,7 +241,7 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 
 		slot.name:SetText(L.loot_empty)
 		slot.name:SetTextColor(color.r, color.g, color.b)
-		slot.icon:SetTexture[[Interface\LootFrame\FishingLoot-Icon]]
+		slot.icon:SetTexture[[Interface\Icons\INV_Misc_Herb_AncientLichen]]
 
 		items = 1
 		w = math.max(w, slot.name:GetStringWidth())
