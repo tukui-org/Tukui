@@ -357,7 +357,7 @@ local function Shared(self, unit)
 					DruidManaBarStatus:SetStatusBarColor(.30, .52, .90)
 					
 					DruidManaBarStatus:SetScript("OnShow", function() T.DruidBarDisplay(self, false) end)
-					DruidManaBackground:SetScript("OnUpdate", function() T.DruidBarDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
+					DruidManaBarStatus:SetScript("OnUpdate", function() T.DruidBarDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
 					DruidManaBarStatus:SetScript("OnHide", function() T.DruidBarDisplay(self, false) end)
 					
 					self.DruidManaBackground = DruidManaBackground
