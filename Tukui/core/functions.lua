@@ -782,6 +782,7 @@ T.DruidBarDisplay = function(self, login)
 	local shadow = self.shadow
 	local bg = self.DruidManaBackground
 	local buffs = self.Buffs
+	local flash = self.FlashInfo
 
 	if login then
 		dm:SetScript("OnUpdate", nil)
@@ -790,7 +791,7 @@ T.DruidBarDisplay = function(self, login)
 	if eb:IsShown() or dm:IsShown() then
 		if eb:IsShown() then
 			txt:Show()
-			self.FlashInfo:Hide()
+			flash:Hide()
 		end
 		shadow:Point("TOPLEFT", -4, 12)
 		bg:SetAlpha(1)
@@ -801,7 +802,7 @@ T.DruidBarDisplay = function(self, login)
 		end				
 	else
 		txt:Hide()
-		self.FlashInfo:Show()
+		flash:Show()
 		shadow:Point("TOPLEFT", -4, 4)
 		bg:SetAlpha(0)
 		if T.lowversion then
