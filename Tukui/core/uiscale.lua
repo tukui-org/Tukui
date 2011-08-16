@@ -39,7 +39,7 @@ T.UIScale = function()
 	end
 	
 	if C["general"].autoscale == true then
-		C["general"].uiscale = min(2, max(.64, 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], "%d+x(%d+)")))
+		C["general"].uiscale = min(2, max(.64, 768/string.match(T.resolution, "%d+x(%d+)")))
 	end
 
 	if T.lowversion then
