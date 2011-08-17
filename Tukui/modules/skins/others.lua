@@ -6,6 +6,7 @@ local function LoadSkin()
 		"StaticPopup1",
 		"StaticPopup2",
 		"StaticPopup3",
+		"StaticPopup4",
 		"GameMenuFrame",
 		"InterfaceOptionsFrame",
 		"VideoOptionsFrame",
@@ -61,7 +62,7 @@ local function LoadSkin()
 	LFDRoleCheckPopupRoleButtonHealer:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer:GetChildren():GetFrameLevel() + 1)
 
 	-- reskin popup buttons
-	for i = 1, 2 do
+	for i = 1, 4 do
 		for j = 1, 3 do
 			T.SkinButton(_G["StaticPopup"..i.."Button"..j])
 			T.SkinEditBox(_G["StaticPopup"..i.."EditBox"])

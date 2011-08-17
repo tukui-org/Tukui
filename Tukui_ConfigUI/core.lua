@@ -254,6 +254,7 @@ StaticPopupDialogs["PERCHAR"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 StaticPopupDialogs["RESET_PERCHAR"] = {
@@ -267,6 +268,7 @@ StaticPopupDialogs["RESET_PERCHAR"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 StaticPopupDialogs["RESET_ALL"] = {
@@ -281,6 +283,7 @@ StaticPopupDialogs["RESET_ALL"] = {
 	button2 = CANCEL,
 	timeout = 0,
 	whileDead = 1,
+	preferredIndex = 3,
 }
 
 -- We wanna make sure we have all needed tables when we try add values
