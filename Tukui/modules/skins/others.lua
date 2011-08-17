@@ -14,10 +14,6 @@ local function LoadSkin()
 		"LFDDungeonReadyStatus",
 		"BNToastFrame",
 		"TicketStatusFrameButton",
-		"DropDownList1MenuBackdrop",
-		"DropDownList2MenuBackdrop",
-		"DropDownList1Backdrop",
-		"DropDownList2Backdrop",
 		"LFDSearchStatus",
 		"AutoCompleteBox",
 		"ConsolidatedBuffsTooltip",
@@ -33,6 +29,17 @@ local function LoadSkin()
 		end
 	end
 
+	-- Skin all DropDownList[i]
+	local function SkinDropDownList(level, index)
+		for i = 1, UIDROPDOWNMENU_MAXLEVELS do
+			local dropdown = _G["DropDownList"..i.."MenuBackdrop"]
+			if not dropdown.isSkinned then
+				dropdown:SetTemplate("Default")
+				dropdown.isSkinned = true
+			end
+		end
+	end
+	hooksecurefunc("UIDropDownMenu_CreateFrames", SkinDropDownList)
 
 	local ChatMenus = {
 		"ChatMenu",
