@@ -32,10 +32,12 @@ local function LoadSkin()
 	-- Skin all DropDownList[i]
 	local function SkinDropDownList(level, index)
 		for i = 1, UIDROPDOWNMENU_MAXLEVELS do
-			local dropdown = _G["DropDownList"..i.."MenuBackdrop"]
-			if not dropdown.isSkinned then
-				dropdown:SetTemplate("Default")
-				dropdown.isSkinned = true
+			local menubackdrop = _G["DropDownList"..i.."MenuBackdrop"]
+			local backdrop = _G["DropDownList"..i.."Backdrop"]
+			if not backdrop.isSkinned then
+				menubackdrop:SetTemplate("Default")
+				backdrop:SetTemplate("Default")
+				backdrop.isSkinned = true
 			end
 		end
 	end
