@@ -140,7 +140,6 @@ local function LoadSkin()
 					WorldMapFrame_SetFullMapView()
 				end
 
-				HideUIPanel(WorldMapFrame)
 				WatchFrame.showObjectives = nil
 				WorldMapTitleButton:Hide()
 				WorldMapBlobFrame:Hide()
