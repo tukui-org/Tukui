@@ -43,6 +43,7 @@
 	<Script file="modules\blizzard\ghostframe.lua"/>
 	<Script file="modules\blizzard\timertracker.lua"/>
 	<Script file="modules\misc\commands.lua"/>
+	<Script file="modules\misc\micromenu.lua"/>
 	<Script file="modules\blizzard\quests.lua"/>
 	<Script file="modules\misc\invite.lua"/>
 	<Script file="modules\misc\damage.lua"/>
