@@ -254,7 +254,6 @@ local function Shared(self, unit)
 			status:SetTextColor(0.69, 0.31, 0.31)
 			status:Hide()
 			self.Status = status
-			self:Tag(status, "[pvp]")
 			
 			-- leader icon
 			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
@@ -572,6 +571,11 @@ local function Shared(self, unit)
 				FlashInfo.ManaLevel:Hide()
 				status:Show()
 				UnitFrame_OnEnter(self) 
+				if UnitIsPVP("Player") then
+					status:SetText("PvP")
+				else
+					status:SetText("")
+				end
 			end)
 			self:SetScript("OnLeave", function(self) 
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
