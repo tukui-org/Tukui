@@ -182,7 +182,7 @@ local function LoadSkin()
 
 				WatchFrame_Update()
 				
-				if quest and Taint and not miniWorldMap and WorldMapFrame:IsShown() and WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
+				if Taint and not miniWorldMap and WorldMapFrame:IsShown() and WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
 					HideUIPanel(WorldMapFrame)
 					ShowUIPanel(WorldMapFrame)
 				end
