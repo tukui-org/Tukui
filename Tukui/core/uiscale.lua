@@ -49,17 +49,21 @@ else
 end
 
 --------------------------------------------------------
+-- Auto Scale UI (Overwrite Settings and Blizzard)
+--------------------------------------------------------
+
+-- autoscale
+if C["general"].autoscale == true then
+	C["general"].uiscale = min(2, max(.64, 768/string.match(T.resolution, "%d+x(%d+)")))
+end
+	
+--------------------------------------------------------
 -- Graphics Settings
 --------------------------------------------------------
 
 local Graphic = CreateFrame("Frame")
-Graphic:RegisterEvent("PLAYER_LOGIN")
+Graphic:RegisterEvent("PLAYER_ENTERING_WORLD")
 Graphic:SetScript("OnEvent", function(self, event)
-	-- autoscale
-	if C["general"].autoscale == true then
-		C["general"].uiscale = min(2, max(.64, 768/string.match(T.resolution, "%d+x(%d+)")))
-	end
-
 	-- always enable uiscale for Tukui (needed)
 	local useUiScale = GetCVar("useUiScale")
 	if useUiScale ~= "1" then
