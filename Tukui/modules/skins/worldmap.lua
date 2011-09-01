@@ -1,5 +1,7 @@
 local T, C, L = unpack(select(2, ...))
 
+local Taint = T.FullMapQuestTaintFix
+
 local function LoadSkin()
 	WorldMapFrame:CreateBackdrop("Default")
 	-- WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
@@ -131,7 +133,7 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Disable()
 			WorldMapFrameSizeUpButton:Disable()
 			
-			if (quest) and (miniWorldMap or T.FullMapQuestTaintFix) then
+			if (quest) and (miniWorldMap or Taint) then
 				if WorldMapFrame:IsShown() then
 					HideUIPanel(WorldMapFrame)
 				end
@@ -157,7 +159,7 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Enable()
 			WorldMapFrameSizeUpButton:Enable()
 			
-			if (quest) and (miniWorldMap or T.FullMapQuestTaintFix) then
+			if (quest) and (miniWorldMap or Taint) then
 				WorldMapQuestShowObjectives.Show = WorldMapQuestShowObjectives:Show()
 				WorldMapTitleButton.Show = WorldMapTitleButton:Show()
 				WorldMapBlobFrame.Show = WorldMapBlobFrame:Show()
