@@ -121,7 +121,7 @@ local function LoadSkin()
 	WorldMapFrame:HookScript("OnEvent", function(self, event)
 		local miniWorldMap = GetCVarBool("miniWorldMap")
 		local quest = WorldMapQuestShowObjectives:GetChecked()
-		
+
 		if event == "PLAYER_LOGIN" then
 			if not miniWorldMap then
 				ToggleFrame(WorldMapFrame)
@@ -131,9 +131,13 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Disable()
 			WorldMapFrameSizeUpButton:Disable()
 			
-			if quest and miniWorldMap then
+			if (quest) and (miniWorldMap or T.FullMapQuestTaintFix) then
 				if WorldMapFrame:IsShown() then
 					HideUIPanel(WorldMapFrame)
+				end
+				
+				if not miniWorldMap and T.FullMapQuestTaintFix then
+					WorldMapFrame_SetFullMapView()
 				end
 
 				WatchFrame.showObjectives = nil
@@ -153,7 +157,7 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Enable()
 			WorldMapFrameSizeUpButton:Enable()
 			
-			if quest and miniWorldMap then
+			if (quest) and (miniWorldMap or T.FullMapQuestTaintFix) then
 				WorldMapQuestShowObjectives.Show = WorldMapQuestShowObjectives:Show()
 				WorldMapTitleButton.Show = WorldMapTitleButton:Show()
 				WorldMapBlobFrame.Show = WorldMapBlobFrame:Show()
@@ -162,6 +166,10 @@ local function LoadSkin()
 				WorldMapTitleButton:Show()
 
 				WatchFrame.showObjectives = true
+				
+				if not miniWorldMap and T.FullMapQuestTaintFix then
+					WorldMapFrame_SetFullMapView()
+				end
 
 				WorldMapBlobFrame:Show()
 				WorldMapPOIFrame:Show()
