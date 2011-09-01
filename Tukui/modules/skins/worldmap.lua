@@ -131,13 +131,9 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Disable()
 			WorldMapFrameSizeUpButton:Disable()
 			
-			if quest then
+			if quest and miniWorldMap then
 				if WorldMapFrame:IsShown() then
 					HideUIPanel(WorldMapFrame)
-				end
-
-				if not miniWorldMap then
-					WorldMapFrame_SetFullMapView()
 				end
 
 				WatchFrame.showObjectives = nil
@@ -157,7 +153,7 @@ local function LoadSkin()
 			WorldMapFrameSizeDownButton:Enable()
 			WorldMapFrameSizeUpButton:Enable()
 			
-			if quest then
+			if quest and miniWorldMap then
 				WorldMapQuestShowObjectives.Show = WorldMapQuestShowObjectives:Show()
 				WorldMapTitleButton.Show = WorldMapTitleButton:Show()
 				WorldMapBlobFrame.Show = WorldMapBlobFrame:Show()
@@ -166,10 +162,6 @@ local function LoadSkin()
 				WorldMapTitleButton:Show()
 
 				WatchFrame.showObjectives = true
-
-				if not miniWorldMap then
-					WorldMapFrame_SetQuestMapView()
-				end
 
 				WorldMapBlobFrame:Show()
 				WorldMapPOIFrame:Show()

@@ -521,37 +521,7 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 	if T.getscreenwidth < 1200 then
 			SetCVar("useUiScale", 0)
 			StaticPopup_Show("TUKUIDISABLE_UI")
-	else
-		SetCVar("useUiScale", 1)
-		if C["general"].multisampleprotect == true then
-			SetMultisampleFormat(1)
-		end
-		if C["general"].uiscale > 1 then C["general"].uiscale = 1 end
-		if C["general"].uiscale < 0.64 then C["general"].uiscale = 0.64 end
-
-		-- set our uiscale
-		SetCVar("uiScale", C["general"].uiscale)
-		
-		-- we adjust UIParent to screen #1 if Eyefinity is found
-		if T.eyefinity then
-			local width = T.eyefinity
-			local height = T.getscreenheight
-			
-			-- if autoscale is off, find a new width value of UIParent for screen #1.
-			if not C.general.autoscale or height > 1200 then
-				local h = UIParent:GetHeight()
-				local ratio = T.getscreenheight / h
-				local w = T.eyefinity / ratio
-				
-				width = w
-				height = h			
-			end
-			
-			UIParent:SetSize(width, height)
-			UIParent:ClearAllPoints()
-			UIParent:SetPoint("CENTER")		
-		end
-		
+	else		
 		-- install default if we never ran Tukui on this character.
 		if not TukuiDataPerChar.install then			
 			install()

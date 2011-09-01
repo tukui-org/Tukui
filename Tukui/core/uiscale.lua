@@ -1,51 +1,101 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-T.UIScale = function()
-	if T.getscreenwidth < 1600 then
-			if C.general.overridelowtohigh == true then
-				C["general"].autoscale = false
-				T.lowversion = false
-			else
-				T.lowversion = true
-			end
-	elseif (T.getscreenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.getscreenwidth) then
-		local width = T.getscreenwidth
-		local height = T.getscreenheight
-		
-		-- because some user enable bezel compensation, we need to find the real width of a single monitor.
-		-- I don't know how it really work, but i'm assuming they add pixel to width to compensate the bezel. :P
-		
-		-- HQ resolution
-		if width >= 9840 then width = 3280 end                   	                -- WQSXGA
-		if width >= 7680 and width < 9840 then width = 2560 end                     -- WQXGA
-		if width >= 5760 and width < 7680 then width = 1920 end 	                -- WUXGA & HDTV
-		if width >= 5040 and width < 5760 then width = 1680 end 	                -- WSXGA+
-		
-		-- adding height condition here to be sure it work with bezel compensation because WSXGA+ and UXGA/HD+ got approx same width
-		if width >= 4800 and width < 5760 and height == 900 then width = 1600 end   -- UXGA & HD+
-		
-		-- low resolution screen
-		if width >= 4320 and width < 4800 then width = 1440 end 	                -- WSXGA
-		if width >= 4080 and width < 4320 then width = 1360 end 	                -- WXGA
-		if width >= 3840 and width < 4080 then width = 1224 end 	                -- SXGA & SXGA (UVGA) & WXGA & HDTV
-		
-		-- yep, now set Tukui to lower reso if screen #1 width < 1600
-		if width < 1600 and not C.general.overridelowtohigh then
+--------------------------------------------------------
+-- detect if high, low or eyefinity version
+--------------------------------------------------------
+
+if T.getscreenwidth < 1600 then
+		if C.general.overridelowtohigh == true then
+			C["general"].autoscale = false
+			T.lowversion = false
+		else
 			T.lowversion = true
 		end
-		
-		-- register a constant, we will need it later for launch.lua
-		T.eyefinity = width
+elseif (T.getscreenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.getscreenwidth) then
+	local width = T.getscreenwidth
+	local height = T.getscreenheight
+	
+	-- because some user enable bezel compensation, we need to find the real width of a single monitor.
+	-- I don't know how it really work, but i'm assuming they add pixel to width to compensate the bezel. :P
+	
+	-- HQ resolution
+	if width >= 9840 then width = 3280 end                   	                -- WQSXGA
+	if width >= 7680 and width < 9840 then width = 2560 end                     -- WQXGA
+	if width >= 5760 and width < 7680 then width = 1920 end 	                -- WUXGA & HDTV
+	if width >= 5040 and width < 5760 then width = 1680 end 	                -- WSXGA+
+	
+	-- adding height condition here to be sure it work with bezel compensation because WSXGA+ and UXGA/HD+ got approx same width
+	if width >= 4800 and width < 5760 and height == 900 then width = 1600 end   -- UXGA & HD+
+	
+	-- low resolution screen
+	if width >= 4320 and width < 4800 then width = 1440 end 	                -- WSXGA
+	if width >= 4080 and width < 4320 then width = 1360 end 	                -- WXGA
+	if width >= 3840 and width < 4080 then width = 1224 end 	                -- SXGA & SXGA (UVGA) & WXGA & HDTV
+	
+	-- yep, now set Tukui to lower reso if screen #1 width < 1600
+	if width < 1600 and not C.general.overridelowtohigh then
+		T.lowversion = true
 	end
 	
-	if C["general"].autoscale == true then
-		C["general"].uiscale = min(2, max(.64, 768/string.match(T.resolution, "%d+x(%d+)")))
-	end
-
-	if T.lowversion then
-		T.raidscale = 0.8
-	else
-		T.raidscale = 1
-	end
+	-- register a constant, we will need it later for launch.lua
+	T.eyefinity = width
 end
-T.UIScale()
+
+--------------------------------------------------------
+-- Graphics Settings
+--------------------------------------------------------
+
+-- autoscale
+if C["general"].autoscale == true then
+	C["general"].uiscale = min(2, max(.64, 768/string.match(T.resolution, "%d+x(%d+)")))
+end
+
+-- raid scale according to which version we use
+if T.lowversion then
+	T.raidscale = 0.8
+else
+	T.raidscale = 1
+end
+
+-- always enable uiscale for Tukui (needed)
+local useUiScale = GetCVar("useUiScale")
+if useUiScale ~= 1 then
+	SetCVar("useUiScale", 1)
+end
+
+-- Multisample need to be at 1 for pixel perfectness
+local gxMultisample = GetCVar("gxMultisample")
+if C["general"].multisampleprotect == true and gxMultisample ~= 1 then
+	SetMultisampleFormat(1)
+end
+
+-- uiscale security
+if C["general"].uiscale > 1 then C["general"].uiscale = 1 end
+if C["general"].uiscale < 0.64 then C["general"].uiscale = 0.64 end
+
+-- set our uiscale now
+SetCVar("uiScale", C["general"].uiscale)
+
+-- we adjust UIParent to screen #1 if Eyefinity is found
+if T.eyefinity then
+	local width = T.eyefinity
+	local height = T.getscreenheight
+	
+	-- if autoscale is off, find a new width value of UIParent for screen #1.
+	if not C.general.autoscale or height > 1200 then
+		local h = UIParent:GetHeight()
+		local ratio = T.getscreenheight / h
+		local w = T.eyefinity / ratio
+		
+		width = w
+		height = h			
+	end
+	
+	UIParent:SetSize(width, height)
+	UIParent:ClearAllPoints()
+	UIParent:SetPoint("CENTER")		
+end
+
+-- require a reload when graphics option changes, even if Standard Blizzard UI doesn't really need it.
+VideoOptionsFrameOkay:HookScript("OnClick", function(self) ReloadUI() end)
+VideoOptionsFrameApply:HookScript("OnClick", function(self) ReloadUI() end)
