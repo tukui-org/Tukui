@@ -61,6 +61,19 @@ end
 -- Graphics Settings
 --------------------------------------------------------
 
+local function ResolutionChanged(value)
+	local resolution = Graphics_ResolutionDropDown
+	local x, y = resolution:getValues()
+	local newreso = x.."x"..y
+	local oldreso = T.resolution
+
+	if newreso ~= oldreso then
+		return true
+	else
+		return false
+	end
+end
+
 local Graphic = CreateFrame("Frame")
 Graphic:RegisterEvent("PLAYER_ENTERING_WORLD")
 Graphic:SetScript("OnEvent", function(self, event)
@@ -110,6 +123,6 @@ Graphic:SetScript("OnEvent", function(self, event)
 	end
 
 	-- require a reload when graphics option changes, even if Standard Blizzard UI doesn't really need it.
-	VideoOptionsFrameOkay:HookScript("OnClick", function(self) ReloadUI() end)
-	VideoOptionsFrameApply:HookScript("OnClick", function(self) ReloadUI() end)
+	VideoOptionsFrameOkay:HookScript("OnClick", function(self) if ResolutionChanged() then ReloadUI() end end)
+	VideoOptionsFrameApply:HookScript("OnClick", function(self) if ResolutionChanged() then ReloadUI() end end)
 end)
