@@ -67,8 +67,10 @@ function ScreenRatioChanged()
 	local x, y = resolution:getValues()
 	local oldratio = T.getscreenwidth / T.getscreenheight
 	local newratio = x / y
-
-	if oldratio == newratio then
+	local oldreso = T.resolution
+	local newreso = x.."x"..y
+	
+	if (oldratio == newratio) and (oldreso ~= newreso) then
 		ReloadUI()
 	end
 end
