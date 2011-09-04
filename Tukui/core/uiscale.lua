@@ -62,7 +62,7 @@ end
 --------------------------------------------------------
 
 -- the ui doesn't reload if ratio stay the same, we need to force reload if it happen.
-function ScreenRatioChanged()
+local function NeedReloadUI()
 	local resolution = Graphics_ResolutionDropDown
 	local x, y = resolution:getValues()
 	local oldratio = T.getscreenwidth / T.getscreenheight
@@ -124,8 +124,8 @@ Graphic:SetScript("OnEvent", function(self, event)
 	end
 
 	-- require a reload when graphics option changes, even if Standard Blizzard UI doesn't really need it.
-	VideoOptionsFrameOkay:HookScript("OnClick", ScreenRatioChanged)
-	VideoOptionsFrameApply:HookScript("OnClick", ScreenRatioChanged)
+	VideoOptionsFrameOkay:HookScript("OnClick", NeedReloadUI)
+	VideoOptionsFrameApply:HookScript("OnClick", NeedReloadUI)
 	
 	-- unload
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
