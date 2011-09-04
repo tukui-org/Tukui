@@ -122,7 +122,7 @@ Graphic:SetScript("OnEvent", function(self, event)
 		UIParent:SetPoint("CENTER")		
 	end
 
-	-- require a reload when graphics option changes, even if Standard Blizzard UI doesn't really need it.
+	-- require a reload when graphics resolution option change, even if Standard Blizzard UI doesn't really need it.
 	VideoOptionsFrameOkay:HookScript("OnClick", function(self) if ResolutionChanged() then ReloadUI() end end)
 	VideoOptionsFrameApply:HookScript("OnClick", function(self) if ResolutionChanged() then ReloadUI() end end)
 end)
