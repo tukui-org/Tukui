@@ -260,7 +260,7 @@ StaticPopupDialogs["PERCHAR"] = {
 StaticPopupDialogs["RESET_PERCHAR"] = {
 	text = TukuiL.option_resetchar,
 	OnAccept = function() 
-		TukuiConfig = TukuiConfigSettings
+		TukuiConfig = TukuiConfigPublic
 		ReloadUI() 
 	end,
 	OnCancel = function() if TukuiConfigUI and TukuiConfigUI:IsShown() then TukuiConfigCover:Hide() end end,
@@ -274,8 +274,8 @@ StaticPopupDialogs["RESET_PERCHAR"] = {
 StaticPopupDialogs["RESET_ALL"] = {
 	text = TukuiL.option_resetall,
 	OnAccept = function() 
-		TukuiConfigSettings = nil
-		TukuiConfig = nil
+		TukuiConfigPublic = nil
+		TukuiConfigPrivate = nil
 		ReloadUI() 
 	end,
 	OnCancel = function() TukuiConfigCover:Hide() end,
@@ -290,27 +290,27 @@ StaticPopupDialogs["RESET_ALL"] = {
 local function SetValue(group,option,value)		
 	--Determine if we should be copying our default settings to our player settings, this only happens if we're not using player settings by default
 	local mergesettings
-	if TukuiConfig == TukuiConfigSettings then
+	if TukuiConfigPrivate == TukuiConfigPublic then
 		mergesettings = true
 	else
 		mergesettings = false
 	end
 
 	if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-		if not TukuiConfig then TukuiConfig = {} end	
-		if not TukuiConfig[group] then TukuiConfig[group] = {} end
-		TukuiConfig[group][option] = value
+		if not TukuiConfigPrivate then TukuiConfig = {} end	
+		if not TukuiConfigPrivate[group] then TukuiConfigPrivate[group] = {} end
+		TukuiConfigPrivate[group][option] = value
 	else
 		--Set PerChar settings to the same as our settings if theres no per char settings
 		if mergesettings == true then
-			if not TukuiConfig then TukuiConfig = {} end	
-			if not TukuiConfig[group] then TukuiConfig[group] = {} end
-			TukuiConfig[group][option] = value
+			if not TukuiConfigPrivate then TukuiConfigPrivate = {} end	
+			if not TukuiConfigPrivate[group] then TukuiConfigPrivate[group] = {} end
+			TukuiConfigPrivate[group][option] = value
 		end
 		
-		if not TukuiConfigSettings then TukuiConfigSettings = {} end
-		if not TukuiConfigSettings[group] then TukuiConfigSettings[group] = {} end
-		TukuiConfigSettings[group][option] = value
+		if not TukuiConfigPublic then TukuiConfigPublic = {} end
+		if not TukuiConfigPublic[group] then TukuiConfigPublic[group] = {} end
+		TukuiConfigPublic[group][option] = value
 	end
 end
 

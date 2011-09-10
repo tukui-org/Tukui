@@ -35,7 +35,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			BuffFrame:Kill()
 			TemporaryEnchantFrame:Kill()
 			ConsolidatedBuffs:Kill()
-			InterfaceOptionsBuffsPanelConsolidateBuffs:Kill()
+			-- kill the module in default interface option
+			InterfaceOptionsFrameCategoriesButton12:Kill()
 		end
 		
 		InterfaceOptionsUnitFramePanelPartyBackground:Kill()
@@ -58,10 +59,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		
 		if C.unitframes.enable then
 			PlayerFrame:Kill() -- Just to be sure we are safe
-			InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)	
-			InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
-			InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)
+			InterfaceOptionsFrameCategoriesButton9:Kill()
+			InterfaceOptionsFrameCategoriesButton10:Kill()
 		end
 		
 		if C.actionbar.enable then

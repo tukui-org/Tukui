@@ -120,7 +120,7 @@ oUF.Tags['Tukui:getnamecolor'] = function(unit)
 	if (UnitIsPlayer(unit)) then
 		return _TAGS['raidcolor'](unit)
 	elseif (reaction) then
-		local c = T.oUF_colors.reaction[reaction]
+		local c = T.UnitColor.reaction[reaction]
 		return string.format('|cff%02x%02x%02x', c[1] * 255, c[2] * 255, c[3] * 255)
 	else
 		r, g, b = .84,.75,.65

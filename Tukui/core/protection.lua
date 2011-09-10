@@ -1,10 +1,9 @@
 ------------------------------------------------------------------------
--- auto-overwrite script config is X mod is found
+-- We don't want 2 addons enabled doing the same thing. 
+-- Disable a feature on Tukui if X addon is found.
 ------------------------------------------------------------------------
 
--- because users are too lazy to disable feature in config file
--- adding an auto disable if some mods are loaded
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...))
 
 if (IsAddOnLoaded("Stuf") or IsAddOnLoaded("PitBull4") or IsAddOnLoaded("ShadowedUnitFrames") or IsAddOnLoaded("ag_UnitFrames")) then
 	C["unitframes"].enable = false

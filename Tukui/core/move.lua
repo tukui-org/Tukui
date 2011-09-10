@@ -2,11 +2,10 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 -- all the frame we want to move
 -- all our frames that we want being movable.
-T.MoverFrames = {
+T.AllowFrameMoving = {
 	TukuiMinimap,
 	TukuiTooltipAnchor,
-	TukuiPlayerBuffs,
-	TukuiPlayerDebuffs,
+	TukuiAurasPlayerBuffs,
 	TukuiShiftBar,
 	TukuiRollAnchor,
 	TukuiAchievementHolder,
@@ -17,7 +16,6 @@ T.MoverFrames = {
 
 -- used to exec various code if we enable or disable moving
 local function exec(self, enable)
-
 	if self == TukuiGMFrameAnchor then
 		if enable then
 			self:Show()
@@ -36,27 +34,37 @@ local function exec(self, enable)
 		end
 	end
 	
-	if self == TukuiPlayerBuffs or self == TukuiPlayerDebuffs then
+	if self == TukuiAurasPlayerBuffs then
+		if not self:GetBackdrop() then self:SetTemplate("Default") end
+		
+		local buffs = TukuiAurasPlayerBuffs
+		local debuffs = TukuiAurasPlayerDebuffs
+		
 		if enable then
-			self:SetBackdropColor(unpack(C.media.backdropcolor))
-			self:SetBackdropBorderColor(1,0,0,1)	
+			buffs:SetBackdropColor(unpack(C.media.backdropcolor))
+			buffs:SetBackdropBorderColor(1,0,0,1)	
 		else
-			local position = self:GetPoint()			
+			local position = self:GetPoint()
 			if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") or position:match("TOPRIGHT") then
-				self:SetAttribute("point", position)
+				buffs:SetAttribute("point", position)
+				debuffs:SetAttribute("point", position)
 			end
 			if position:match("LEFT") then
-				self:SetAttribute("xOffset", 36)
+				buffs:SetAttribute("xOffset", 35)
+				debuffs:SetAttribute("xOffset", 35)
 			else
-				self:SetAttribute("xOffset", -36)
+				buffs:SetAttribute("xOffset", -35)
+				debuffs:SetAttribute("xOffset", -35)
 			end
 			if position:match("BOTTOM") then
-				self:SetAttribute("wrapYOffset", 68)
+				buffs:SetAttribute("wrapYOffset", 67.5)
+				debuffs:SetAttribute("wrapYOffset", 67.5)
 			else
-				self:SetAttribute("wrapYOffset", -68)
+				buffs:SetAttribute("wrapYOffset", -67.5)
+				debuffs:SetAttribute("wrapYOffset", -67.5)
 			end
-			self:SetBackdropColor(0,0,0,0)
-			self:SetBackdropBorderColor(0,0,0,0)
+			buffs:SetBackdropColor(0,0,0,0)
+			buffs:SetBackdropBorderColor(0,0,0,0)
 		end
 	end
 	
@@ -109,35 +117,35 @@ local function moving()
 	-- don't allow moving while in combat
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	
-	for i = 1, getn(T.MoverFrames) do
-		if T.MoverFrames[i] then		
+	for i = 1, getn(T.AllowFrameMoving) do
+		if T.AllowFrameMoving[i] then		
 			if enable then			
-				T.MoverFrames[i]:EnableMouse(true)
-				T.MoverFrames[i]:RegisterForDrag("LeftButton", "RightButton")
-				T.MoverFrames[i]:SetScript("OnDragStart", function(self) 
-					origa1, origf, origa2, origx, origy = T.MoverFrames[i]:GetPoint() 
+				T.AllowFrameMoving[i]:EnableMouse(true)
+				T.AllowFrameMoving[i]:RegisterForDrag("LeftButton", "RightButton")
+				T.AllowFrameMoving[i]:SetScript("OnDragStart", function(self) 
+					origa1, origf, origa2, origx, origy = T.AllowFrameMoving[i]:GetPoint() 
 					self.moving = true 
 					self:SetUserPlaced(true) 
 					self:StartMoving() 
 				end)			
-				T.MoverFrames[i]:SetScript("OnDragStop", function(self) 
+				T.AllowFrameMoving[i]:SetScript("OnDragStop", function(self) 
 					self.moving = false 
 					self:StopMovingOrSizing() 
 				end)			
-				exec(T.MoverFrames[i], enable)			
-				if T.MoverFrames[i].text then 
-					T.MoverFrames[i].text:Show() 
+				exec(T.AllowFrameMoving[i], enable)			
+				if T.AllowFrameMoving[i].text then 
+					T.AllowFrameMoving[i].text:Show() 
 				end
 			else			
-				T.MoverFrames[i]:EnableMouse(false)
-				if T.MoverFrames[i].moving == true then
-					T.MoverFrames[i]:StopMovingOrSizing()
-					T.MoverFrames[i]:ClearAllPoints()
-					T.MoverFrames[i]:SetPoint(origa1, origf, origa2, origx, origy)
+				T.AllowFrameMoving[i]:EnableMouse(false)
+				if T.AllowFrameMoving[i].moving == true then
+					T.AllowFrameMoving[i]:StopMovingOrSizing()
+					T.AllowFrameMoving[i]:ClearAllPoints()
+					T.AllowFrameMoving[i]:SetPoint(origa1, origf, origa2, origx, origy)
 				end
-				exec(T.MoverFrames[i], enable)
-				if T.MoverFrames[i].text then T.MoverFrames[i].text:Hide() end
-				T.MoverFrames[i].moving = false
+				exec(T.AllowFrameMoving[i], enable)
+				if T.AllowFrameMoving[i].text then T.AllowFrameMoving[i].text:Hide() end
+				T.AllowFrameMoving[i].moving = false
 			end
 		end
 	end

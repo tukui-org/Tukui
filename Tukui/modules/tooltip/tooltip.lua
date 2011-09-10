@@ -330,13 +330,13 @@ local BorderColor = function(self)
 
 	if player then
 		local class = select(2, UnitClass(unit))
-		local c = T.oUF_colors.class[class]
+		local c = T.UnitColor.class[class]
 		r, g, b = c[1], c[2], c[3]
 		self:SetBackdropBorderColor(r, g, b)
 		healthBarBG:SetBackdropBorderColor(r, g, b)
 		healthBar:SetStatusBarColor(r, g, b)
 	elseif reaction then
-		local c = T.oUF_colors.reaction[reaction]
+		local c = T.UnitColor.reaction[reaction]
 		r, g, b = c[1], c[2], c[3]
 		self:SetBackdropBorderColor(r, g, b)
 		healthBarBG:SetBackdropBorderColor(r, g, b)

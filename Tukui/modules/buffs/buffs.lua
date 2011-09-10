@@ -1,232 +1,251 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if (C.auras.player ~= true) or (C.unitframes.playerauras) then return end
+local T, C, L = unpack(select(2, ...))
 
-local FormatTime = function(s)
-	local day, hour, minute = 86400, 3600, 60
-	if s >= day then
-		return format("|cffeeeeee%d d|r", ceil(s / day))
-	elseif s >= hour then
-		return format("|cffeeeeee%d h|r", ceil(s / hour))
-	elseif s >= minute then
-		return format("|cffeeeeee%d m|r", ceil(s / minute))
-	elseif s >= minute / 12 then
-		return floor(s)
-	end
-	return format("%.1f", s)
+--[[ This is a forked file by Haste, rewrite by Tukz for Tukui. ]]--
+
+local frame = CreateFrame("Frame", "TukuiAuras")
+frame.content = {}
+
+local icon
+local faction = T.myfaction
+local alliance = [[Interface\Icons\Pvpcurrency-honor-alliance]]
+local horde = [[Interface\Icons\Pvpcurrency-honor-horde]]
+local flash = C.auras.flash
+local filter = C.auras.consolidate
+
+-- Set our proxy icon
+if faction == "Horde" then
+	icon = horde
+else
+	icon = alliance
 end
 
-local function UpdateTime(self, elapsed)
-	if(self.expiration) then	
-		self.expiration = math.max(self.expiration - elapsed, 0)
-		if(self.expiration <= 0) then
-			self.time:SetText("")
+local StartStopFlash = function(self, timeLeft)
+	if(timeLeft < 31) then
+		if(not self:IsPlaying()) then
+			self:Play()
+		end
+	elseif(animation:IsPlaying()) then
+		self:Stop()
+	end
+end
+
+local OnUpdate = function(self, elapsed)
+	local timeLeft
+	
+	-- Handle refreshing of temporary enchants.
+	if(self.offset) then
+		local expiration = select(self.offset, GetWeaponEnchantInfo())
+		if(expiration) then
+			timeLeft = expiration / 1e3
 		else
-			local time = FormatTime(self.expiration)
-			if self.expiration <= 86400.5 and self.expiration > 3600.5 then
-				self.time:SetText("|cffcccccc"..time.."|r")
-			elseif self.expiration <= 3600.5 and self.expiration > 60.5 then
-				self.time:SetText("|cffcccccc"..time.."|r")
-			elseif self.expiration <= 60.5 and self.expiration > 10.5 then
-				self.time:SetText("|cffE8D911"..time.."|r")
-			elseif self.expiration <= 10.5 then
-				self.time:SetText("|cffff0000"..time.."|r")
+			timeLeft = 0
+		end
+	else
+		timeLeft = self.timeLeft - elapsed		
+	end
+	
+	self.timeLeft = timeLeft
+
+	if(timeLeft <= 0) then
+		-- Kill the tracker so we don't end up with stuck timers.
+		self.timeLeft = nil
+
+		self.Duration:SetText("")
+		return self:SetScript("OnUpdate", nil)
+	else
+		local text = T.FormatTime(timeLeft)
+		
+		if(timeLeft < 60.5) then
+			if flash then
+				StartStopFlash(self.Animation, timeLeft)
 			end
-		end
-	end
-end
-
-local function UpdateWeapons(button, slot, active, expiration)
-	if not button.texture then
-		button.texture = button:CreateTexture(nil, "BORDER")
-		button.texture:SetAllPoints()
-		
-		button.time = button:CreateFontString(nil, "ARTWORK")
-		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(C.media.font, 12, "OUTLINE")
-				
-		button.bg = CreateFrame("Frame", nil, button)
-		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
-		button.bg:SetFrameLevel(button:GetFrameLevel() - 1)
-		button.bg:SetFrameStrata(button:GetFrameStrata())
-		button.bg:SetAlpha(0)
-	end
-	
-	if active then
-		button.id = GetInventorySlotInfo(slot)
-		button.icon = GetInventoryItemTexture("player", button.id)
-		button.texture:SetTexture(button.icon)
-		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		button.expiration = (expiration/1000)
-		
-		if UnitHasVehicleUI("player") then
-			button:SetAlpha(0.3)
-			button.bg:SetAlpha(0.3)
+			
+			self.Duration:SetTextColor(255/255, 165/255, 0/255)			
 		else
-			button:SetAlpha(1)
-			button.bg:SetAlpha(1)
+			self.Duration:SetTextColor(.9, .9, .9)
 		end
 		
-		button:SetScript("OnUpdate", UpdateTime)		
-	elseif not active then
-		button.texture:SetTexture(nil)
-		button.time:SetText("")
-		button.bg:SetAlpha(0)
-		button:SetScript("OnUpdate", nil)
+		self.Duration:SetText(text)
 	end
 end
 
-local function UpdateAuras(header, button, weapon)
-	local name, _, texture, count, dtype, duration, expiration, caster = UnitAura(header:GetAttribute("unit"), button:GetID(), header:GetAttribute("filter"))
-	
-	if(not button.texture) then
-		button.texture = button:CreateTexture(nil, "BORDER")
-		button.texture:SetAllPoints()
-
-		button.count = button:CreateFontString(nil, "ARTWORK")
-		button.count:SetPoint("BOTTOMRIGHT", -1, 1)
-		button.count:SetFont(C.media.font, 12, "OUTLINE")
-
-		button.time = button:CreateFontString(nil, "ARTWORK")
-		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(C.media.font, 12, "OUTLINE")
-
-		button:SetScript("OnUpdate", UpdateTime)
-		
-		button.bg = CreateFrame("Frame", nil, button)
-		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
-		button.bg:SetFrameLevel(button:GetFrameLevel() - 1)
-		button.bg:SetFrameStrata(button:GetFrameStrata())
-	end
-		
+local UpdateAura = function(self, index)
+	local name, rank, texture, count, dtype, duration, expirationTime, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(self:GetParent():GetAttribute"unit", index, self.filter)
+	local consolidate = self.consolidate
 	if(name) then
-		button.texture:SetTexture(texture)
-		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		button.count:SetText(count > 1 and count or "")
-		button.expiration = expiration - GetTime()
-		
-		if(header:GetAttribute("filter") == "HARMFUL") then
-			local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
-			button.bg:SetBackdropBorderColor(color.r * 3/5, color.g * 3/5, color.b * 3/5)
-		else
-			if caster == "vehicle" then
-				button.bg:SetBackdropBorderColor(75/255,  175/255, 76/255)
+		if(duration > 0 and expirationTime and not consolidate) then
+			local timeLeft = expirationTime - GetTime()
+			if(not self.timeLeft) then
+				self.timeLeft = timeLeft
+				self:SetScript("OnUpdate", OnUpdate)
 			else
-				button.bg:SetBackdropBorderColor(unpack(C.media.bordercolor))
+				self.timeLeft = timeLeft
+			end
+
+			-- We do the check here as well, that way we don't have to check on
+			-- every single OnUpdate call.
+			if flash then
+				StartStopFlash(self.Animation, timeLeft)
+			end
+		else
+			if flash then
+				self.Animation:Stop()
+			end
+			self.timeLeft = nil
+			self.Duration:SetText("")
+			self:SetScript("OnUpdate", nil)
+		end
+
+		if(count > 1) then
+			self.Count:SetText(count)
+		else
+			self.Count:SetText("")
+		end
+
+		if(self.filter == "HARMFUL") then
+			local color = DebuffTypeColor[dtype or "none"]
+			self:SetBackdropBorderColor(color.r, color.g, color.b)
+		end
+
+		self.Icon:SetTexture(texture)
+	end
+end
+
+local UpdateTempEnchant = function(self, slot)
+	self.Icon:SetTexture(GetInventoryItemTexture("player", slot))
+	
+	local offset
+	local weapon = self:GetName():sub(-1)
+	if weapon:match("1") then
+		-- GetWeaponEnchantInfo() use #2 returned value for timeleft on this weapon
+		offset = 2
+	elseif weapon:match("2") then
+		-- GetWeaponEnchantInfo() use #5 returned value for timeleft on this weapon
+		offset = 5
+	elseif weapon:match("3") then
+		-- GetWeaponEnchantInfo() use #8 returned value for timeleft on this weapon
+		-- UNFORTUNATLY IT WILL NEVER MATCH VALUE "3" FOR NOW BECAUSE IT'S BROKEN SINCE
+		-- THE IMPLEMENTATION IN CATACLYSM BETA OF THE SECURE AURA HEADER. BLIZZARD IS 
+		--  TOO LAZY TO FINNISH THEIR SYSTEM, QQ
+		offset = 8
+	end
+	
+	local expiration = select(offset, GetWeaponEnchantInfo())
+	if(expiration) then
+		self.offset = offset
+		self:SetScript("OnUpdate", OnUpdate)
+	else
+		self.offset = nil
+		self.timeLeft = nil
+		self:SetScript("OnUpdate", nil)
+	end
+end
+
+local OnAttributeChanged = function(self, attribute, value)
+	if(attribute == "index") then
+		-- look if the current buff is consolidated
+		if filter then
+			local consolidate = self:GetName():match("Consolidate")
+			if consolidate then 
+				self.consolidate = true
+			end
+		end
+		
+		return UpdateAura(self, value)
+	elseif(attribute == "target-slot") then		
+		return UpdateTempEnchant(self, value)
+	end
+end
+
+local Skin = function(self)
+	self:SetTemplate("Default")
+	
+	local proxy = self:GetName():sub(-11) == "ProxyButton"
+	local Icon = self:CreateTexture(nil, "BORDER")
+	Icon:SetTexCoord(.07, .93, .07, .93)
+	Icon:Point("TOPLEFT", 2, -2)
+	Icon:Point("BOTTOMRIGHT", -2, 2)
+	self.Icon = Icon
+
+	local Count = self:CreateFontString(nil, "OVERLAY")
+	Count:SetFontObject(NumberFontNormal)
+	Count:SetPoint("TOP", self, 1, -4)
+	self.Count = Count
+
+	if(not proxy) then
+		local Duration = self:CreateFontString(nil, "OVERLAY")
+		local font, size, flags = C.media.font, 12, "OUTLINE"
+		Duration:SetFont(font, size, flags)
+		Duration:SetPoint("BOTTOM", 0, -17)
+		self.Duration = Duration
+		
+		if flash then
+			local Animation = self:CreateAnimationGroup()
+			Animation:SetLooping"BOUNCE"
+
+			local FadeOut = Animation:CreateAnimation"Alpha"
+			FadeOut:SetChange(-.5)
+			FadeOut:SetDuration(.4)
+			FadeOut:SetSmoothing("IN_OUT")
+
+			self.Animation = Animation
+		end
+
+		-- Kinda meh way to piggyback on the secure aura headers update loop.
+		self:SetScript("OnAttributeChanged", OnAttributeChanged)
+
+		self.filter = self:GetParent():GetAttribute"filter"
+	else
+		local Overlay = self:CreateTexture(nil, "OVERLAY")
+		local x = self:GetWidth()
+		local y = self:GetHeight()
+		Overlay:SetTexture(icon)
+		Overlay:SetPoint("CENTER")
+		Overlay:Size(x - 2, y - 2)
+		Overlay:SetTexCoord(.07, .93, .07, .93)
+		self.Overlay = Overlay
+	end
+end
+
+frame:SetScript("OnEvent", function(self, event, ...)
+	self[event](self, event, ...)
+end)
+
+function frame:PLAYER_ENTERING_WORLD()
+	for _, header in next, frame.content do
+		local child = header:GetAttribute"child1"
+		local i = 1
+		while(child) do
+			UpdateAura(child, child:GetID())
+
+			i = i + 1
+			child = header:GetAttribute("child" .. i)
+		end
+	end
+end
+frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+function frame:VARIABLES_LOADED()
+	for _, header in next, frame.content do
+		if header == TukuiAurasPlayerBuffs then
+			local buffs = TukuiAurasPlayerBuffs
+			local debuffs = TukuiAurasPlayerDebuffs
+			local position = buffs:GetPoint()
+			if position:match("LEFT") then
+				buffs:SetAttribute("xOffset", 35)
+				buffs:SetAttribute("point", position)
+				debuffs:SetAttribute("xOffset", 35)
+				debuffs:SetAttribute("point", position)
 			end
 		end
 	end
-	
-	if UnitHasVehicleUI("player") and caster ~= "vehicle" then
-		button:SetAlpha(0.3)
-	else
-		button:SetAlpha(1)
-	end
 end
+frame:RegisterEvent("VARIABLES_LOADED")
 
-local function ScanAuras(self, event, unit)
-	if(unit) then
-		if(unit ~= PlayerFrame.unit) then return end
-		if(unit ~= self:GetAttribute("unit")) then
-			self:SetAttribute("unit", unit)
-		end
-	end
-	
-	for index = 1, 32 do		
-		local child = self:GetAttribute("child" .. index)
-		if(child) then
-			UpdateAuras(self, child)
-		end
-	end
+-- Expose ourselves:
+for frame, func in next, {
+	Skin = Skin,
+	Update = Update,
+} do
+	TukuiAuras[frame] = func
 end
-
-local TimeSinceLastUpdate = 1
-local function CheckWeapons(self, elapsed)
-	TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
-	
-	if (TimeSinceLastUpdate >= 1) then
-		local e1, e1time, _, e2, e2time, _, e3, e3time, _  = GetWeaponEnchantInfo()
-		
-		local w1 = self:GetAttribute("tempEnchant1")
-		local w2 = self:GetAttribute("tempEnchant2")
-		local w3 = self:GetAttribute("tempEnchant3")
-
-		if w1 then UpdateWeapons(w1, "MainHandSlot", e1, e1time) end
-		if w2 then UpdateWeapons(w2, "SecondaryHandSlot", e2, e2time) end
-		if w3 then UpdateWeapons(w3, "RangedSlot", e3, e3time) end
-
-		TimeSinceLastUpdate = 0
-	end
-end
-
-local function CreateAuraHeader(filter, ...)
-	local name	
-	if filter == "HELPFUL" then name = "TukuiPlayerBuffs" else name = "TukuiPlayerDebuffs" end
-
-	local header = CreateFrame("Frame", name, UIParent, "SecureAuraHeaderTemplate")
-	header:RegisterEvent("UNIT_ENTERED_VEHICLE")
-	header:RegisterEvent("UNIT_EXITED_VEHICLE")
-	header:SetPoint(...)
-	header:SetClampedToScreen(true)
-	header:SetMovable(true)
-	header:HookScript("OnEvent", ScanAuras)	
-	header:SetAttribute("unit", "player")
-	header:SetAttribute("sortMethod", "TIME")
-	header:SetAttribute("template", "TukuiAuraTemplate")
-	header:SetAttribute("filter", filter)
-	header:SetAttribute("point", "TOPRIGHT")
-	header:SetAttribute("minWidth", 300)
-	header:SetAttribute("minHeight", 94)
-	header:SetAttribute("xOffset", -36)
-	header:SetAttribute("wrapYOffset", -68)
-	header:SetAttribute("wrapAfter", 16)
-	header:SetAttribute("maxWraps", 2)
-	
-	-- look for weapons buffs
-	if filter == "HELPFUL" then
-		header:SetAttribute("includeWeapons", 1)
-		header:SetAttribute("weaponTemplate", "TukuiAuraTemplate")
-		header:HookScript("OnUpdate", CheckWeapons)
-	end
-	
-	header:SetTemplate("Default")
-	header:SetBackdropColor(0,0,0,0)
-	header:SetBackdropBorderColor(0,0,0,0)
-	header:Show()
-	
-	header.text = T.SetFontString(header, C.media.uffont, 12)
-	header.text:SetPoint("CENTER")
-	if filter == "HELPFUL" then
-		header.text:SetText(L.move_buffs)
-	else
-		header.text:SetText(L.move_debuffs)
-	end	
-	header.text:Hide()
-
-	return header
-end
-
-ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -184, -24))
-ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -184, -160))
-
--- create our aura
-local start = CreateFrame("Frame")
-start:RegisterEvent("VARIABLES_LOADED")
-start:SetScript("OnEvent", function(self)
-	local frames = {TukuiPlayerBuffs,TukuiPlayerDebuffs}
-	for i = 1, getn(frames) do
-		local frame = frames[i]
-		local position = frame:GetPoint()
-		if position:match("TOPLEFT") or position:match("BOTTOMLEFT") or position:match("BOTTOMRIGHT") then
-			frame:SetAttribute("point", position)
-		end
-		if position:match("LEFT") then
-			frame:SetAttribute("xOffset", 36)
-		end
-		if position:match("BOTTOM") then
-			frame:SetAttribute("wrapYOffset", 68)
-		end
-		if T.lowversion then
-			frame:SetAttribute("wrapAfter", 8)
-		end
-	end
-end)

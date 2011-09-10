@@ -1,4 +1,8 @@
-﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+﻿local T, C, L = unpack(select(2, ...))
+
+-----------------------------------------
+-- This is the default configuration file
+-----------------------------------------
 
 C["general"] = {
 	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
@@ -64,11 +68,13 @@ C["arena"] = {
 
 C["auras"] = {
 	["player"] = true,                                  -- enable tukui buffs/debuffs
+	["consolidate"] = true,                             -- enable downpdown menu with consolidate buff
+	["flash"] = false,                                   -- flash warning for buff with time < 30 sec
 }
 
 C["actionbar"] = {
 	["enable"] = true,                                  -- enable tukui action bars
-	["hotkey"] = true,                                 -- enable hotkey display because it was a lot requested
+	["hotkey"] = true,                                  -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
 	["showgrid"] = true,                                -- show grid on empty button
 	["buttonsize"] = 27,                                -- normal buttons size

@@ -1,8 +1,8 @@
--- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...))
 
 if T.client == "zhCN" then
-
+	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)
+	
 	L.chat_BATTLEGROUND_GET = "[战场]"
 	L.chat_BATTLEGROUND_LEADER_GET = "[战场领袖]"
 	L.chat_BN_WHISPER_GET = "密语"

@@ -1,7 +1,8 @@
---------------------------------------------------------------------------
--- overwrite font for some language, because default font are incompatible
---------------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...))
+
+-------------------------------------------------------------------------
+-- adjust defualt fonts according to which client we are currently using.
+-------------------------------------------------------------------------
 
 if T.client == "ruRU" then
 	C["media"].uffont = C["media"].ru_uffont

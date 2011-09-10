@@ -34,7 +34,7 @@ else
 	TukuiWatchFrameAnchor:SetWidth(250)
 end
 
-local screenheight = T.getscreenheight
+local screenheight = T.screenheight
 TukuiWatchFrame:SetParent(TukuiWatchFrameAnchor)
 TukuiWatchFrame:SetHeight(screenheight / 1.6)
 TukuiWatchFrame:ClearAllPoints()

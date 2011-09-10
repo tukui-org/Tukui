@@ -1,19 +1,19 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...))
 
 --------------------------------------------------------
 -- detect if high, low or eyefinity version
 --------------------------------------------------------
 
-if T.getscreenwidth < 1600 then
+if T.screenwidth < 1600 then
 		if C.general.overridelowtohigh == true then
 			C["general"].autoscale = false
 			T.lowversion = false
 		else
 			T.lowversion = true
 		end
-elseif (T.getscreenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.getscreenwidth) then
-	local width = T.getscreenwidth
-	local height = T.getscreenheight
+elseif (T.screenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.screenwidth) then
+	local width = T.screenwidth
+	local height = T.screenheight
 	
 	-- because some user enable bezel compensation, we need to find the real width of a single monitor.
 	-- I don't know how it really work, but i'm assuming they add pixel to width to compensate the bezel. :P
@@ -65,7 +65,7 @@ end
 local function NeedReloadUI()
 	local resolution = Graphics_ResolutionDropDown
 	local x, y = resolution:getValues()
-	local oldratio = T.getscreenwidth / T.getscreenheight
+	local oldratio = T.screenwidth / T.screenheight
 	local newratio = x / y
 	local oldreso = T.resolution
 	local newreso = x.."x"..y
@@ -106,12 +106,12 @@ Graphic:SetScript("OnEvent", function(self, event)
 	-- we adjust UIParent to screen #1 if Eyefinity is found
 	if T.eyefinity then
 		local width = T.eyefinity
-		local height = T.getscreenheight
+		local height = T.screenheight
 		
 		-- if autoscale is off, find a new width value of UIParent for screen #1.
 		if not C.general.autoscale or height > 1200 then
 			local h = UIParent:GetHeight()
-			local ratio = T.getscreenheight / h
+			local ratio = T.screenheight / h
 			local w = T.eyefinity / ratio
 			
 			width = w

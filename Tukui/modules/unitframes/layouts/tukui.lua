@@ -29,7 +29,7 @@ local backdrop = {
 
 local function Shared(self, unit)
 	-- set our own colors
-	self.colors = T.oUF_colors
+	self.colors = T.UnitColor
 	
 	-- register click
 	self:RegisterForClicks("AnyUp")
@@ -328,10 +328,11 @@ local function Shared(self, unit)
 			
 			-- show druid mana when shapeshifted in bear, cat or whatever
 			if T.myclass == "DRUID" then
-				CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateDruidMana(self) end)
-				local DruidMana = T.SetFontString(health, font1, 12)
-				DruidMana:SetTextColor(1, 0.49, 0.04)
-				self.DruidManaText = DruidMana
+				local DruidManaUpdate = CreateFrame("Frame")
+				DruidManaUpdate:SetScript("OnUpdate", function() T.UpdateDruidManaText(self) end)
+				local DruidManaText = T.SetFontString(health, font1, 12)
+				DruidManaText:SetTextColor(1, 0.49, 0.04)
+				self.DruidManaText = DruidManaText
 			end
 			
 			if C["unitframes"].classbar then

@@ -1,6 +1,7 @@
 ﻿------------------------------------------------------------------------
--- Launch Tukui Script
+-- Install Script
 ------------------------------------------------------------------------
+
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 local function chatsetup()
@@ -153,8 +154,8 @@ local function positionsetup()
 	TukuiDataPerChar = {}
 	
 	-- reset movable stuff into original position
-	for i = 1, getn(T.MoverFrames) do
-		if T.MoverFrames[i] then T.MoverFrames[i]:SetUserPlaced(false) end
+	for i = 1, getn(T.AllowFrameMoving) do
+		if T.AllowFrameMoving[i] then T.AllowFrameMoving[i]:SetUserPlaced(false) end
 	end
 end
 
@@ -518,7 +519,7 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 	if (TukuiData == nil) then TukuiData = {} end
 	if (TukuiDataPerChar == nil) then TukuiDataPerChar = {} end
 
-	if T.getscreenwidth < 1200 then
+	if T.screenwidth < 1200 then
 			SetCVar("useUiScale", 0)
 			StaticPopup_Show("TUKUIDISABLE_UI")
 	else		

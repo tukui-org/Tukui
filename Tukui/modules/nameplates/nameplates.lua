@@ -17,6 +17,7 @@ local OVERLAY = [=[Interface\TargetingFrame\UI-TargetingFrame-Flash]=]
 local numChildren = -1
 local frames = {}
 local noscalemult = T.mult * C["general"].uiscale
+local Role
 
 --Change defaults if we are showing health text or not
 if C["nameplate"].showhealth ~= true then
@@ -66,6 +67,16 @@ local PlateBlacklist = {
 	--Test
 	--["Unbound Seer"] = true,
 }
+
+-- Check Player's Role
+local RoleUpdater = CreateFrame("Frame")
+RoleUpdater:RegisterEvent("PLAYER_ENTERING_WORLD")
+RoleUpdater:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
+RoleUpdater:RegisterEvent("PLAYER_TALENT_UPDATE")
+RoleUpdater:RegisterEvent("CHARACTER_POINTS_CHANGED")
+RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
+RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+RoleUpdater:SetScript("OnEvent", function() Role = T.CheckRole() end)
 
 local function QueueObject(parent, object)
 	parent.queue = parent.queue or {}
@@ -418,7 +429,7 @@ local function UpdateThreat(frame, elapsed)
 		if not frame.region:IsShown() then
 			if InCombatLockdown() and frame.isFriendly ~= true then
 				--No Threat
-				if T.Role == "Tank" then
+				if Role == "Tank" then
 					frame.hp:SetStatusBarColor(badR, badG, badB)
 					frame.hp.hpbg:SetTexture(badR, badG, badB, 0.25)
 				else
@@ -435,7 +446,7 @@ local function UpdateThreat(frame, elapsed)
 			local r, g, b = frame.region:GetVertexColor()
 			if g + b == 0 then
 				--Have Threat
-				if T.Role == "Tank" then
+				if Role == "Tank" then
 					frame.hp:SetStatusBarColor(goodR, goodG, goodB)
 					frame.hp.hpbg:SetTexture(goodR, goodG, goodB, 0.25)
 				else
