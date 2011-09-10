@@ -110,7 +110,6 @@
 	<Script file="modules\loot\rollframe.lua"/>
 	<Script file="modules\maps\zonemap.lua"/>
 	<Script file="modules\blizzard\mirror.lua"/>
-	<Script file="modules\notifications\selfbuffs.lua"/>
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>

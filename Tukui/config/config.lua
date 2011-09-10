@@ -165,8 +165,3 @@ C["error"] = {
 C["invite"] = { 
 	["autoaccept"] = true,                              -- auto-accept invite from guildmate and friends.
 }
-
-C["buffreminder"] = {
-	["enable"] = true,                                  -- this is now the new innerfire warning script for all armor/aspect class.
-	["sound"] = true,                                   -- enable warning sound notification for reminder.
-}
