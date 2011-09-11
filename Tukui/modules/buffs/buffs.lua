@@ -24,7 +24,7 @@ local StartStopFlash = function(self, timeLeft)
 		if(not self:IsPlaying()) then
 			self:Play()
 		end
-	elseif(animation:IsPlaying()) then
+	elseif(self:IsPlaying()) then
 		self:Stop()
 	end
 end
