@@ -1,5 +1,6 @@
 -- This will filter everythin NON user config data out of TukuiDB
 
+local T, C, L
 local myPlayerRealm = GetCVar("realmName")
 local myPlayerName  = UnitName("player")
 
@@ -26,9 +27,7 @@ local TableFilter = {
 	["filter"]=1,
 }
 
-local function Local(o)
-	local T, C, L = unpack(Tukui)
-	
+local function Local(o)	
 	-- general
 	if o == "TukuiConfigUIgeneral" then o = TukuiL.option_general end
 	if o == "TukuiConfigUIgeneralautoscale" then o = TukuiL.option_general_uiscale end
@@ -356,8 +355,6 @@ local function ShowGroup(group)
 end
 
 function CreateTukuiConfigUI()
-	local T, C, L = unpack(Tukui)
-	
 	if TukuiConfigUI then
 		ShowGroup("general")
 		TukuiConfigUI:Show()
@@ -698,4 +695,45 @@ do
 			StaticPopup_Show("RESET_ALL")
 		end	
 	end
+	
+	-- create esc button
+	local loaded = CreateFrame("Frame")
+	loaded:RegisterEvent("PLAYER_LOGIN")
+	loaded:SetScript("OnEvent", function(self, event, addon)
+		T, C, L = unpack(Tukui)
+		
+		local menu = GameMenuFrame
+		local menuy = menu:GetHeight()
+		local quit = GameMenuButtonQuit
+		local continue = GameMenuButtonContinue
+		local continuex = continue:GetWidth()
+		local continuey = continue:GetHeight()
+		local config = TukuiConfigUI
+
+		menu:SetHeight(menuy + continuey)
+		
+		local button = CreateFrame("BUTTON", "GameMenuTukuiButtonOptions", menu)
+		button:SetSize(continuex, continuey)
+		button:SetPoint("TOP", quit, "BOTTOM", 0, -13)
+		
+		button.text = T.SetFontString(button, C.media.font, 12)
+		button.text:SetPoint("CENTER", 0, 0)
+		button.text:SetText("Tukui")
+		
+		T.SkinButton(button)
+		
+		button:SetScript("OnClick", function(self)
+			local config = TukuiConfigUI
+			if config and config:IsShown() then
+				TukuiConfigUI:Hide()
+			else
+				CreateTukuiConfigUI()
+				HideUIPanel(menu)
+			end
+		end)
+		
+		continue:ClearAllPoints()
+		continue:SetPoint("TOP", button, "BOTTOM", 0, -12)
+	end)
+
 end

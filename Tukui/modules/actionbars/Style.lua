@@ -72,13 +72,13 @@ local function style(self)
 end
 
 local function stylesmallbutton(normal, button, icon, name, pet)
-	local Flash	 = _G[name.."Flash"]
 	button:SetNormalTexture("")
 	
-	-- another bug fix reported by Affli in t12 beta
+	-- bug fix when moving spell from bar
 	button.SetNormalTexture = T.dummy
 	
-	Flash:SetTexture(media.buttonhover)
+	local Flash	 = _G[name.."Flash"]
+	Flash:SetTexture("")
 	
 	if not _G[name.."Panel"] then
 		button:SetWidth(T.petbuttonsize)

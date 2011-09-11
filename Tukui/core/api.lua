@@ -183,7 +183,7 @@ local function StyleButton(b, c)
 	pushed:Point("TOPLEFT",button,2,-2)
 	pushed:Point("BOTTOMRIGHT",button,-2,2)
 	button:SetPushedTexture(pushed)
- 
+
 	if c then
 		local checked = b:CreateTexture("frame", nil, self) -- checked
 		checked:SetTexture(0,1,0,0.3)

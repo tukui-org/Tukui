@@ -6,6 +6,7 @@ ns._Objects = {}
 ns._Headers = {}
 
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+
 if not C["unitframes"].enable == true then return end
 
 ------------------------------------------------------------------------
@@ -17,6 +18,7 @@ local font2 = C["media"].font
 local normTex = C["media"].normTex
 local glowTex = C["media"].glowTex
 local bubbleTex = C["media"].bubbleTex
+local bdcr, bdcg, bdcb = unpack(C["media"].bordercolor)
 
 local backdrop = {
 	bgFile = C["media"].blank,
@@ -78,7 +80,7 @@ local function Shared(self, unit)
 		end
 		panel:SetFrameLevel(2)
 		panel:SetFrameStrata("MEDIUM")
-		panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+		panel:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 		self.panel = panel
 	
 		-- health bar
@@ -829,7 +831,7 @@ local function Shared(self, unit)
 			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
-			panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			panel:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			self.panel = panel
 		end
 		
@@ -905,7 +907,7 @@ local function Shared(self, unit)
 			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, 0)
 			panel:SetFrameLevel(2)
 			panel:SetFrameStrata("MEDIUM")
-			panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			panel:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			self.panel = panel
 		end
 		
@@ -1125,7 +1127,7 @@ local function Shared(self, unit)
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			castbar.bg:SetTemplate("Default")
-			castbar.bg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.bg:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.bg:Point("TOPLEFT", -2, 2)
 			castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 			castbar.bg:SetFrameLevel(5)
@@ -1149,7 +1151,7 @@ local function Shared(self, unit)
 			castbar.button:Width(castbar:GetHeight()+4)
 			castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
 			castbar.button:SetTemplate("Default")
-			castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.button:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 			castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
 			castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
@@ -1270,7 +1272,7 @@ local function Shared(self, unit)
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			castbar.bg:SetTemplate("Default")
-			castbar.bg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.bg:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.bg:Point("TOPLEFT", -2, 2)
 			castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 			castbar.bg:SetFrameLevel(5)
@@ -1294,7 +1296,7 @@ local function Shared(self, unit)
 			castbar.button:Width(castbar:GetHeight()+4)
 			castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
 			castbar.button:SetTemplate("Default")
-			castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.button:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 			castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
 			castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
@@ -1480,7 +1482,7 @@ local function Shared(self, unit)
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			castbar.bg:SetTemplate("Default")
-			castbar.bg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.bg:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.bg:Point("TOPLEFT", -2, 2)
 			castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 			castbar.bg:SetFrameLevel(5)
@@ -1504,7 +1506,7 @@ local function Shared(self, unit)
 			castbar.button:Width(castbar:GetHeight()+4)
 			castbar.button:Point("RIGHT", castbar, "LEFT",-4, 0)
 			castbar.button:SetTemplate("Default")
-			castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			castbar.button:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 			castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 			castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
 			castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)

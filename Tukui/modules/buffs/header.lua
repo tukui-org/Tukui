@@ -66,7 +66,7 @@ local proxy = buffs:GetAttribute("consolidateProxy")
 proxy:HookScript("OnShow", function(self) if consolidate:IsShown() then consolidate:Hide() end end) -- kind of bug fix for secure aura header
 
 -- create the dropdown and register click
-local dropdown = CreateFrame("BUTTON", "MyClickButton", proxy, "SecureHandlerClickTemplate")
+local dropdown = CreateFrame("BUTTON", "TukuiAurasPlayerConsolidateDropdownButton", proxy, "SecureHandlerClickTemplate")
 dropdown:SetAllPoints()
 dropdown:RegisterForClicks("AnyUp")
 dropdown:SetAttribute("_onclick", [=[

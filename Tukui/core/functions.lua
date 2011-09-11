@@ -903,7 +903,8 @@ T.UpdateThreat = function(self, event, unit)
 		end
 	else
 		if self.panel then
-			self.panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			local r, g, b = unpack(C["media"].bordercolor)
+			self.panel:SetBackdropBorderColor(r * 0.7, g * 0.7, b * 0.7)
 		else
 			self.Name:SetTextColor(1,1,1)
 		end

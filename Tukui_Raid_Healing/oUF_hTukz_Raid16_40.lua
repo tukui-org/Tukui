@@ -11,6 +11,7 @@ if not C["unitframes"].enable == true then return end
 local font2 = C["media"].uffont
 local font1 = C["media"].font
 local normTex = C["media"].normTex
+local bdcr, bdcg, bdcb = unpack(C["media"].bordercolor)
 local backdrop = {
 	bgFile = C["media"].blank,
 	insets = {top = -T.mult, left = -T.mult, bottom = -T.mult, right = -T.mult},
@@ -101,7 +102,7 @@ local function Shared(self, unit)
         insets = { left = 0, right = 0, top = 0, bottom = 0 }
     })
     panel:SetBackdropColor(unpack(C["media"].backdropcolor))
-    panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+    panel:SetBackdropBorderColor(bdcr * 0.7, bdcg * 0.7, bdcb * 0.7)
 	self.panel = panel
 	
 	local name = panel:CreateFontString(nil, "OVERLAY")
