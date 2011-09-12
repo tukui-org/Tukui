@@ -80,6 +80,7 @@ C["actionbar"] = {
 	["buttonsize"] = 27,                                -- normal buttons size
 	["petbuttonsize"] = 29,                             -- pet & stance buttons size
 	["buttonspacing"] = 4,                              -- buttons spacing
+	["ownshdbar"] = false,                              -- use a complete new stance bar for shadow dance (rogue only)
 }
 
 C["bags"] = {
