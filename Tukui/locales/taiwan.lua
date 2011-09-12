@@ -27,6 +27,7 @@ if T.client == "zhTW" then
 	
 	L.disband = "正在解散隊伍"
 
+	L.datatext_notalents ="No Talents"
 	L.datatext_download = "下載: "
 	L.datatext_bandwidth = "寬頻: "
 	L.datatext_guild = "公會"

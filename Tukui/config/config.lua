@@ -118,6 +118,8 @@ C["datatext"] = {
 	["mastery"] = 0,                                    -- show mastery rating
 	["micromenu"] = 0,                                  -- add a micro menu thought datatext
 	["regen"] = 0,                                      -- show mana regeneration
+	["talent"] = 0,                                     -- show talent
+	["calltoarms"] = 0,                                 -- show dungeon and call to arms
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.

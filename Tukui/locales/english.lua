@@ -27,6 +27,7 @@ L.chat_lfg = "LookingForGroup"
 
 L.disband = "Disbanding group ?"
 
+L.datatext_notalents ="No Talents"
 L.datatext_download = "Download: "
 L.datatext_bandwidth = "Bandwidth: "
 L.datatext_guild = "Guild"

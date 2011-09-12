@@ -27,6 +27,7 @@ if T.client == "frFR" then
 
 	L.disband = "Dissoudre le groupe ?"
 
+	L.datatext_notalents ="No Talents"
 	L.datatext_download = "Téléchargement : "
 	L.datatext_bandwidth = "Bande passante : "
 	L.datatext_guild = "Guilde"

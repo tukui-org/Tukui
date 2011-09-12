@@ -81,6 +81,8 @@
 	<Script file="modules\datatext\micromenu.lua"/>
 	<Script file="modules\datatext\mastery.lua"/>
 	<Script file="modules\datatext\regen.lua"/>
+	<Script file="modules\datatext\talent.lua"/>
+	<Script file="modules\datatext\calltoarms.lua"/>
 	<Script file="modules\actionbars\Bind.lua"/>
 	<Script file="modules\actionbars\Hide.lua"/>
 	<Script file="modules\actionbars\Bar1.lua"/>
