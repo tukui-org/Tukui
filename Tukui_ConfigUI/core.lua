@@ -709,18 +709,19 @@ do
 		local continuex = continue:GetWidth()
 		local continuey = continue:GetHeight()
 		local config = TukuiConfigUI
+		local interface = GameMenuButtonUIOptions
+		local keybinds = GameMenuButtonKeybindings
 
 		menu:SetHeight(menuy + continuey)
 		
-		local button = CreateFrame("BUTTON", "GameMenuTukuiButtonOptions", menu)
+		local button = CreateFrame("BUTTON", "GameMenuTukuiButtonOptions", menu, "GameMenuButtonTemplate")
 		button:SetSize(continuex, continuey)
-		button:SetPoint("TOP", quit, "BOTTOM", 0, -13)
+		button:Point("TOP", interface, "BOTTOM", 0, -1)
+		button:SetText("Tukui")
 		
-		button.text = T.SetFontString(button, C.media.font, 12)
-		button.text:SetPoint("CENTER", 0, 0)
-		button.text:SetText("Tukui")
-		
-		T.SkinButton(button)
+		if C.general.blizzardreskin then
+			T.SkinButton(button)
+		end
 		
 		button:SetScript("OnClick", function(self)
 			local config = TukuiConfigUI
@@ -732,8 +733,8 @@ do
 			end
 		end)
 		
-		continue:ClearAllPoints()
-		continue:SetPoint("TOP", button, "BOTTOM", 0, -12)
+		keybinds:ClearAllPoints()
+		keybinds:Point("TOP", button, "BOTTOM", 0, -1)
 	end)
 
 end
