@@ -769,20 +769,6 @@ function Stuffing:SetBagsForSorting(c)
 					end
 				end
 			end
-		elseif s == "p" then
-			if not self.bankFrame or not self.bankFrame:IsShown() then
-				for _, i in ipairs(bags_BACKPACK) do
-					if self.bags[i] and self.bags[i].bagType == ST_SPECIAL then
-						table.insert(self.sortBags, i)
-					end
-				end
-			else
-				for _, i in ipairs(bags_BANK) do
-					if self.bags[i] and self.bags[i].bagType == ST_SPECIAL then
-						table.insert(self.sortBags, i)
-					end
-				end
-			end
 		else
 			if tonumber(s) == nil then
 				Print(string.format(Loc["Error: don't know what \"%s\" means."], s))
@@ -809,8 +795,6 @@ local function StuffingSlashCmd(Cmd)
 		Stuffing_OpenConfig()
 	elseif cmd == "sort" then
 		Stuffing_Sort(args)
-	elseif cmd == "psort" then
-		Stuffing_Sort("c/p")
 	elseif cmd == "stack" then
 		Stuffing:SetBagsForSorting(args)
 		Stuffing:Restack()
@@ -1347,29 +1331,12 @@ function Stuffing.Menu(self, level)
 		Stuffing_Sort("d")
 	end
 	UIDropDownMenu_AddButton(info, level)
-	
-	wipe(info)
-	info.text = L.bags_sortspecial
-	info.notCheckable = 1
-	info.func = function()
-		Stuffing_Sort("c/p")
-	end
-	UIDropDownMenu_AddButton(info, level)
 
 	wipe(info)
 	info.text = L.bags_stackmenu
 	info.notCheckable = 1
 	info.func = function()
 		Stuffing:SetBagsForSorting("d")
-		Stuffing:Restack()
-	end
-	UIDropDownMenu_AddButton(info, level)
-	
-	wipe(info)
-	info.text = L.bags_stackspecial
-	info.notCheckable = 1
-	info.func = function()
-		Stuffing:SetBagsForSorting("c/p")
 		Stuffing:Restack()
 	end
 	UIDropDownMenu_AddButton(info, level)
