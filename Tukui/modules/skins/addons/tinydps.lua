@@ -3,9 +3,7 @@ if not IsAddOnLoaded("TinyDPS") then return end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")
-frame:SetScript("OnEvent", function(self, event, addon)
-	if not addon == "TinyDPS" then return end
-	
+frame:SetScript("OnEvent", function(self, event)	
 	-- define our locals
 	local frame = tdpsFrame
 	local anchor = tdpsAnchor
@@ -26,7 +24,7 @@ frame:SetScript("OnEvent", function(self, event, addon)
 	end
 	
 	-- set default position, under minimap
-    anchor:Point('BOTTOMLEFT', TukuiMinimap, 'BOTTOMLEFT', 0, -26)
+	anchor:Point('BOTTOMLEFT', TukuiMinimap, 'BOTTOMLEFT', 0, -26)
 	
 	-- needed, idk why
 	position = {x = 0, y = 0}
