@@ -180,6 +180,8 @@
 	<Script file="modules\skins\addons\recount.lua"/>
 	<Script file="modules\skins\addons\skada.lua"/>
 	<Script file="modules\skins\addons\tinydps.lua"/>
+	<Script file="modules\skins\addons\dbm.lua"/>
+	<Script file="modules\skins\addons\dxe.lua"/>
 	
 	<Script file="developer\test.lua"/>	
 </Ui>
