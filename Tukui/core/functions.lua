@@ -502,21 +502,18 @@ function T.SkinCheckBox(frame)
 	frame.SetHighlightTexture = T.dummy
 end
 
-function T.SkinCloseButton(f, point)
-	for i=1, f:GetNumRegions() do
-		local region = select(i, f:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			region:SetDesaturated(1)
-			
-			if region:GetTexture() == "Interface\\DialogFrame\\UI-DialogBox-Corner" then
-				region:Kill()
-			end
-		end
-	end	
-	
+function T.SkinCloseButton(f, point)	
 	if point then
 		f:Point("TOPRIGHT", point, "TOPRIGHT", 2, 2)
 	end
+	
+	f:SetNormalTexture("")
+	f:SetPushedTexture("")
+	f:SetHighlightTexture("")
+	f.t = f:CreateFontString(nil, "OVERLAY")
+	f.t:SetFont(C.media.pixelfont, 12, "MONOCHROME")
+	f.t:SetPoint("CENTER", 0, 1)
+	f.t:SetText("X")
 end
 
 local LoadBlizzardSkin = CreateFrame("Frame")

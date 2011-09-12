@@ -422,7 +422,7 @@ function Stuffing:CreateBagFrame(w)
 	f.b_close = CreateFrame("Button", "Stuffing_CloseButton" .. w, f, "UIPanelCloseButton")
 	f.b_close:Width(32)
 	f.b_close:Height(32)
-	f.b_close:Point("TOPRIGHT", -3, -3)
+	f.b_close:Point("TOPRIGHT", -1, -3)
 	f.b_close:SetScript("OnClick", function(self, btn)
 		if self:GetParent():GetName() == "TukuiBags" and btn == "RightButton" then
 			if Stuffing_DDMenu.initialize ~= Stuffing.Menu then
@@ -435,7 +435,13 @@ function Stuffing:CreateBagFrame(w)
 		self:GetParent():Hide()
 	end)
 	f.b_close:RegisterForClicks("AnyUp")
-	f.b_close:GetNormalTexture():SetDesaturated(1)
+	f.b_close:SetNormalTexture("")
+	f.b_close:SetPushedTexture("")
+	f.b_close:SetHighlightTexture("")
+	f.b_close.t = f.b_close:CreateFontString(nil, "OVERLAY")
+	f.b_close.t:SetFont(C.media.pixelfont, 12, "MONOCHROME")
+	f.b_close.t:SetPoint("CENTER", 0, 1)
+	f.b_close.t:SetText("X")
 
 	-- create the bags frame
 	local fb = CreateFrame ("Frame", n .. "BagsFrame", f)
