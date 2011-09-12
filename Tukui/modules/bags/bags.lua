@@ -218,6 +218,15 @@ function Stuffing:BagFrameSlotNew (slot, p)
 		slot = slot - 4
 		tpl = "BankItemButtonBagTemplate"
 		ret.frame = CreateFrame("CheckButton", "StuffingBBag" .. slot, p, tpl)
+		ret.frame:StyleButton()
+		ret.frame:SetTemplate("Default")
+		local icon = _G["StuffingBBag" .. slot .. "IconTexture"]
+		local border = _G["StuffingBBag" .. slot .. "NormalTexture"]
+		icon:SetTexCoord(.08, .92, .08, .92)
+		icon:ClearAllPoints()
+		icon:Point("TOPLEFT", 2, -2)
+		icon:Point("BOTTOMRIGHT", -2, 2)
+		border:SetTexture("")
 		ret.frame:SetID(slot + 4)
 		table.insert(self.bagframe_buttons, ret)
 
@@ -230,6 +239,15 @@ function Stuffing:BagFrameSlotNew (slot, p)
 	else
 		tpl = "BagSlotButtonTemplate"
 		ret.frame = CreateFrame("CheckButton", "StuffingFBag" .. slot .. "Slot", p, tpl)
+		ret.frame:StyleButton()
+		ret.frame:SetTemplate("Default")
+		local icon = _G["StuffingFBag" .. slot .. "SlotIconTexture"]
+		local border = _G["StuffingFBag" .. slot .. "SlotNormalTexture"]
+		icon:SetTexCoord(.08, .92, .08, .92)
+		icon:ClearAllPoints()
+		icon:Point("TOPLEFT", 2, -2)
+		icon:Point("BOTTOMRIGHT", -2, 2)
+		border:SetTexture("")
 		ret.slot = slot
 		table.insert(self.bagframe_buttons, ret)
 	end
@@ -602,38 +620,19 @@ function Stuffing:Layout(lb)
 	end
 
 	f:SetClampedToScreen(1)
-	f:SetBackdrop({
-		bgFile = C["media"].blank,
-		edgeFile = C["media"].blank,
-		edgeSize = T.mult,
-		insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
-	})
-	f:SetBackdropColor(unpack(C["media"].backdropcolor))
-	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	f:SetTemplate("Default")
 
 
 	-- bag frame stuff
 	local fb = f.bags_frame
 	if bag_bars == 1 then
-		fb:SetClampedToScreen(1)
-		fb:SetBackdrop({
-			bgFile = C["media"].blank,
-			edgeFile = C["media"].blank,
-			edgeSize = T.mult,
-			insets = {left = -T.mult, right = -T.mult, top = -T.mult, bottom = -T.mult}
-		})
-		fb:SetBackdropColor(unpack(C["media"].backdropcolor))
-		fb:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		fb:SetTemplate("Default")
 
 		local bsize = 30
 		if lb then bsize = 37 end
 
-		local w = 2 * 12
-		w = w + ((#bs - 1) * bsize)
-		w = w + (12 * (#bs - 2))
-
-		fb:Height(2 * 12 + bsize)
-		fb:Width(w)
+		fb:Height(bsize + 16)
+		fb:Width(f:GetWidth())
 		fb:Show()
 	else
 		fb:Hide()
