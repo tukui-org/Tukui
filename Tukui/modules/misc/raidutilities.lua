@@ -16,6 +16,8 @@ local function CreateUtilities(self, event, addon)
 		local TukuiRaidUtility = CreateFrame("Frame", "TukuiRaidUtility", UIParent)
 		TukuiRaidUtility:CreatePanel("Default", TukuiMinimap:GetWidth(), panel_height, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2)
 		TukuiRaidUtility:Hide()
+		TukuiRaidUtility:SetFrameLevel(10)
+		TukuiRaidUtility:SetFrameStrata("Medium")
 
 		--Check if We are Raid Leader or Raid Officer
 		local function CheckRaidStatus()

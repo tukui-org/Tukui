@@ -60,7 +60,11 @@ local OnUpdate = function(self, elapsed)
 				StartStopFlash(self.Animation, timeLeft)
 			end
 			
-			self.Duration:SetTextColor(255/255, 165/255, 0/255)			
+			if(timeLeft < 5) then
+				self.Duration:SetTextColor(255/255, 20/255, 20/255)	
+			else
+				self.Duration:SetTextColor(255/255, 165/255, 0/255)
+			end
 		else
 			self.Duration:SetTextColor(.9, .9, .9)
 		end
@@ -104,7 +108,7 @@ local UpdateAura = function(self, index)
 
 		if(self.filter == "HARMFUL") then
 			local color = DebuffTypeColor[dtype or "none"]
-			self:SetBackdropBorderColor(color.r, color.g, color.b)
+			self:SetBackdropBorderColor(color.r * 3/5, color.g * 3/5, color.b * 3/5)
 		end
 
 		self.Icon:SetTexture(texture)
