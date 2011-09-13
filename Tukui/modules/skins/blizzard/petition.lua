@@ -8,6 +8,7 @@ local function LoadSkin()
 	T.SkinButton(PetitionFrameRequestButton)
 	T.SkinButton(PetitionFrameRenameButton)
 	T.SkinButton(PetitionFrameCancelButton)
+	T.SkinButton(PetitionFrameSignButton)
 	T.SkinCloseButton(PetitionFrameCloseButton)
 
 	PetitionFrameCharterTitle:SetTextColor(1, 1, 0)
