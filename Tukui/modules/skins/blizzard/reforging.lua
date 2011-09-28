@@ -4,15 +4,21 @@ local function LoadSkin()
 	ReforgingFrame:StripTextures()
 	ReforgingFrame:SetTemplate("Default")
 	
-	ReforgingFrameTopInset:StripTextures()
-	ReforgingFrameInset:StripTextures()
-	ReforgingFrameBottomInset:StripTextures()
+	if T.build < 14600 then
+		ReforgingFrameTopInset:StripTextures()
+		ReforgingFrameInset:StripTextures()
+		ReforgingFrameBottomInset:StripTextures()
+		T.SkinDropDownBox(ReforgingFrameFilterOldStat, 180)
+		T.SkinDropDownBox(ReforgingFrameFilterNewStat, 180)
+	else
+		ReforgingFrameButtonFrame:StripTextures()
+		ReforgingFrameReforgeButton:ClearAllPoints()
+		ReforgingFrameReforgeButton:Point("LEFT", ReforgingFrameRestoreButton, "RIGHT", 2, 0)
+		ReforgingFrameReforgeButton:Point("BOTTOMRIGHT", -3, 3)
+	end
 	
 	T.SkinButton(ReforgingFrameRestoreButton, true)
 	T.SkinButton(ReforgingFrameReforgeButton, true)
-	
-	T.SkinDropDownBox(ReforgingFrameFilterOldStat, 180)
-	T.SkinDropDownBox(ReforgingFrameFilterNewStat, 180)
 	
 	ReforgingFrameItemButton:StripTextures()
 	ReforgingFrameItemButton:SetTemplate("Default", true)
