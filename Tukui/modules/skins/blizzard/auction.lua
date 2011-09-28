@@ -18,20 +18,21 @@ local function LoadSkin()
 	T.SkinCheckBox(IsUsableCheckButton)
 	T.SkinCheckBox(ShowOnPlayerCheckButton)
 	
-	--Dress Up Frame
-	AuctionDressUpFrame:StripTextures()
-	AuctionDressUpFrame:SetTemplate("Default")
-	AuctionDressUpFrame:Point("TOPLEFT", AuctionFrame, "TOPRIGHT", 2, 0)
-	T.SkinButton(AuctionDressUpFrameResetButton)
-	AuctionDressUpFrameCloseButton:StripTextures()
-	AuctionDressUpFrameCloseButton:SetNormalTexture(AuctionFrameCloseButton:GetNormalTexture():GetTexture())
-	AuctionDressUpFrameCloseButton:SetPushedTexture(AuctionFrameCloseButton:GetPushedTexture():GetTexture())
-	AuctionDressUpFrameCloseButton:SetHighlightTexture(AuctionFrameCloseButton:GetHighlightTexture():GetTexture())
-	AuctionDressUpFrameCloseButton:SetDisabledTexture(AuctionFrameCloseButton:GetDisabledTexture():GetTexture())
-	
-	T.SkinRotateButton(AuctionDressUpModelRotateLeftButton)
-	T.SkinRotateButton(AuctionDressUpModelRotateRightButton)
-	AuctionDressUpModelRotateRightButton:Point("TOPLEFT", AuctionDressUpModelRotateLeftButton, "TOPRIGHT", 4, 0)
+	if T.build < 14600 then
+		--Dress Up Frame
+		AuctionDressUpFrame:StripTextures()
+		AuctionDressUpFrame:SetTemplate("Default")
+		AuctionDressUpFrame:Point("TOPLEFT", AuctionFrame, "TOPRIGHT", 2, 0)
+		T.SkinButton(AuctionDressUpFrameResetButton)
+		AuctionDressUpFrameCloseButton:StripTextures()
+		AuctionDressUpFrameCloseButton:SetNormalTexture(AuctionFrameCloseButton:GetNormalTexture():GetTexture())
+		AuctionDressUpFrameCloseButton:SetPushedTexture(AuctionFrameCloseButton:GetPushedTexture():GetTexture())
+		AuctionDressUpFrameCloseButton:SetHighlightTexture(AuctionFrameCloseButton:GetHighlightTexture():GetTexture())
+		AuctionDressUpFrameCloseButton:SetDisabledTexture(AuctionFrameCloseButton:GetDisabledTexture():GetTexture())
+		T.SkinRotateButton(AuctionDressUpModelRotateLeftButton)
+		T.SkinRotateButton(AuctionDressUpModelRotateRightButton)
+		AuctionDressUpModelRotateRightButton:Point("TOPLEFT", AuctionDressUpModelRotateLeftButton, "TOPRIGHT", 4, 0)
+	end
 	
 	--Progress Frame
 	AuctionProgressFrame:StripTextures()
