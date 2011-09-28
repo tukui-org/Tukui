@@ -6,9 +6,6 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", UIParent)
 TukuiMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
 TukuiMinimap:RegisterEvent("ADDON_LOADED")
-TukuiMinimap:RegisterEvent("CALENDAR_UPDATE_PENDING_INVITES")
-TukuiMinimap:RegisterEvent("UPDATE_PENDING_MAIL")
-TukuiMinimap:RegisterEvent("PLAYER_ENTERING_WORLD")
 TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -22)
 TukuiMinimap:Size(144)
 TukuiMinimap:SetClampedToScreen(true)
@@ -147,42 +144,6 @@ TukuiMinimap:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_TimeManager" then
 		-- Hide Game Time
 		TimeManagerClockButton:Kill()
-	else
-		local inv = CalendarGetNumPendingInvites()
-		local mail = HasNewMail()
-		if inv > 0 and mail then -- New invites and mail
-			TukuiMinimap:SetBackdropBorderColor(1, .5, 0)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, .5, 0)
-			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, .5, 0)
-			end
-		elseif inv > 0 and not mail then -- New invites and no mail
-			TukuiMinimap:SetBackdropBorderColor(1, 30/255, 60/255)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(1, 30/255, 60/255)
-			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(1, 30/255, 60/255)
-			end
-		elseif inv==0 and mail then -- No invites and new mail
-			TukuiMinimap:SetBackdropBorderColor(0, 1, 0)
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(0, 1, 0)
-			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(0, 1, 0)
-			end
-		else -- None of the above
-			TukuiMinimap:SetBackdropBorderColor(unpack(C.media.bordercolor))
-			if TukuiMinimapStatsLeft then
-				TukuiMinimapStatsLeft:SetBackdropBorderColor(unpack(C.media.bordercolor))
-			end
-			if TukuiMinimapStatsRight then
-				TukuiMinimapStatsRight:SetBackdropBorderColor(unpack(C.media.bordercolor))
-			end
-		end
 	end
 end)
 
