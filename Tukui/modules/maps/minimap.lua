@@ -105,25 +105,6 @@ local function UpdateLFG()
 end
 hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
 
--- reskin LFG dropdown
-LFDSearchStatus:SetTemplate("Default")
-
--- for t13+, if we move map we need to point LFDSearchStatus according to our Minimap position.
-local function UpdateLFGTooltip()
-	local position = TukuiMinimap:GetPoint()
-	LFDSearchStatus:ClearAllPoints()
-	if position:match("BOTTOMRIGHT") then
-		LFDSearchStatus:SetPoint("BOTTOMRIGHT", MiniMapLFGFrame, "BOTTOMLEFT", 0, 0)
-	elseif position:match("BOTTOM") then
-		LFDSearchStatus:SetPoint("BOTTOMLEFT", MiniMapLFGFrame, "BOTTOMRIGHT", 4, 0)
-	elseif position:match("LEFT") then		
-		LFDSearchStatus:SetPoint("TOPLEFT", MiniMapLFGFrame, "TOPRIGHT", 4, 0)
-	else
-		LFDSearchStatus:SetPoint("TOPRIGHT", MiniMapLFGFrame, "TOPLEFT", 0, 0)	
-	end
-end
-LFDSearchStatus:HookScript("OnShow", UpdateLFGTooltip)
-
 -- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, d)

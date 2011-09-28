@@ -23,9 +23,11 @@ local function LoadSkin()
 	}
 
 	for i = 1, getn(skins) do
-		_G[skins[i]]:SetTemplate("Default")
-		if _G[skins[i]] ~= _G["AutoCompleteBox"] then -- frame to blacklist from create shadow function
-			_G[skins[i]]:CreateShadow("Default")
+		if _G[skins[i]] then
+			_G[skins[i]]:SetTemplate("Default")
+			if _G[skins[i]] ~= _G["AutoCompleteBox"] then -- frame to blacklist from create shadow function
+				_G[skins[i]]:CreateShadow("Default")
+			end
 		end
 	end
 
@@ -191,10 +193,6 @@ local function LoadSkin()
 
 	RolePollPopup:SetTemplate("Default")
 	RolePollPopup:CreateShadow("Default")
-	LFDDungeonReadyDialog:SetTemplate("Default")
-	LFDDungeonReadyDialog:CreateShadow("Default")
-	T.SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
-	T.SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

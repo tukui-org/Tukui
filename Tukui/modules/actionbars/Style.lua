@@ -25,15 +25,19 @@ local function style(self)
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
  
-	Border:Hide()
-	Border = T.dummy
+	if Border then
+		Border:Hide()
+		Border = T.dummy
+	end
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
 	Count:SetFont(C["media"].font, 12, "OUTLINE")
- 
-	Btname:SetText("")
-	Btname:Kill()
+
+	if Btname then
+		Btname:SetText("")
+		Btname:Kill()
+	end
  
 	if not _G[name.."Panel"] then
 		-- resize all button not matching T.buttonsize
@@ -198,6 +202,8 @@ SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
  
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
 local function styleflyout(self)
+	if not self.FlyoutArrow then return end
+	
 	self.FlyoutBorder:SetAlpha(0)
 	self.FlyoutBorderShadow:SetAlpha(0)
 	

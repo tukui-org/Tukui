@@ -1,5 +1,7 @@
 local T, C, L = unpack(select(2, ...))
 
+if T.build > 14600 then return end -- TEMP, NEED TO FIGURE OUT WHAT'S WRONG
+
 --[[ This is a forked file by Haste, rewrite by Tukz for Tukui. ]]--
 
 local frame = CreateFrame("Frame", "TukuiAuras")

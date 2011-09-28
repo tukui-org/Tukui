@@ -55,35 +55,37 @@ local function LoadSkin()
 	CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 7, CharacterFrameExpandButton:GetHeight() - 7)
 	T.SkinNextPrevButton(CharacterFrameExpandButton)
 
-	T.SkinRotateButton(CharacterModelFrameRotateLeftButton)
-	T.SkinRotateButton(CharacterModelFrameRotateRightButton)
-	CharacterModelFrameRotateLeftButton:Point("TOPLEFT", CharacterModelFrame, "TOPLEFT", 4, -4)
-	CharacterModelFrameRotateRightButton:Point("TOPLEFT", CharacterModelFrameRotateLeftButton, "TOPRIGHT", 4, 0)
+	if T.build < 14600 then
+		T.SkinRotateButton(CharacterModelFrameRotateLeftButton)
+		T.SkinRotateButton(CharacterModelFrameRotateRightButton)
+		CharacterModelFrameRotateLeftButton:Point("TOPLEFT", CharacterModelFrame, "TOPLEFT", 4, -4)
+		CharacterModelFrameRotateRightButton:Point("TOPLEFT", CharacterModelFrameRotateLeftButton, "TOPRIGHT", 4, 0)
 
-	--Swap item flyout frame (shown when holding alt over a slot)
-	PaperDollFrameItemFlyout:HookScript("OnShow", function()
-		PaperDollFrameItemFlyoutButtons:StripTextures()
-		
-		for i=1, PDFITEMFLYOUT_MAXITEMS do
-			local button = _G["PaperDollFrameItemFlyoutButtons"..i]
-			local icon = _G["PaperDollFrameItemFlyoutButtons"..i.."IconTexture"]
-			if button then
-				button:StyleButton(false)
-				
-				icon:SetTexCoord(.08, .92, .08, .92)
-				button:GetNormalTexture():SetTexture(nil)
-				
-				icon:ClearAllPoints()
-				icon:Point("TOPLEFT", 2, -2)
-				icon:Point("BOTTOMRIGHT", -2, 2)	
-				button:SetFrameLevel(button:GetFrameLevel() + 2)
-				if not button.backdrop then
-					button:CreateBackdrop("Default")
-					button.backdrop:SetAllPoints()			
+		--Swap item flyout frame (shown when holding alt over a slot)
+		PaperDollFrameItemFlyout:HookScript("OnShow", function()
+			PaperDollFrameItemFlyoutButtons:StripTextures()
+			
+			for i=1, PDFITEMFLYOUT_MAXITEMS do
+				local button = _G["PaperDollFrameItemFlyoutButtons"..i]
+				local icon = _G["PaperDollFrameItemFlyoutButtons"..i.."IconTexture"]
+				if button then
+					button:StyleButton(false)
+					
+					icon:SetTexCoord(.08, .92, .08, .92)
+					button:GetNormalTexture():SetTexture(nil)
+					
+					icon:ClearAllPoints()
+					icon:Point("TOPLEFT", 2, -2)
+					icon:Point("BOTTOMRIGHT", -2, 2)	
+					button:SetFrameLevel(button:GetFrameLevel() + 2)
+					if not button.backdrop then
+						button:CreateBackdrop("Default")
+						button.backdrop:SetAllPoints()			
+					end
 				end
 			end
-		end
-	end)
+		end)
+	end
 
 	--Icon in upper right corner of character frame
 	CharacterFramePortrait:Kill()
@@ -99,7 +101,9 @@ local function LoadSkin()
 	end
 
 	for _, object in pairs(charframe) do
-		_G[object]:StripTextures()
+		if _G[object] then
+			_G[object]:StripTextures()
+		end
 	end
 
 	--Titles

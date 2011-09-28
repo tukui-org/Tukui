@@ -106,7 +106,9 @@ local function LoadSkin()
 	WhoFrameEditBox:Width(WhoFrameEditBox:GetWidth() + 17)
 
 	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
+		if _G[texture] then
+			_G[texture]:Kill()
+		end
 	end
 
 	for _, object in pairs(StripAllTextures) do

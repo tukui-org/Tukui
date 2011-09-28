@@ -105,4 +105,4 @@ local function LoadSkin()
 	end
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+T.SkinFuncs["Blizzard_EncounterJournal"] = LoadSkin

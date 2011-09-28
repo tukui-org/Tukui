@@ -40,11 +40,11 @@ local function LoadSkin()
 	end
 
 	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+		if _G[object] then _G[object]:StripTextures() end
 	end
 
 	for _, texture in pairs(KillTextures) do
-		_G[texture]:Kill()
+		if _G[texture] then _G[texture]:Kill() end
 	end
 
 	for i = 1, #buttons do
@@ -96,15 +96,20 @@ local function LoadSkin()
 		end
 	end)
 	
-	LFDDungeonReadyDialog:SetTemplate("Transparent")
-	LFDDungeonReadyDialog:CreateShadow("Default")
+	if T.build < 14600 then
+		LFDDungeonReadyDialog:SetTemplate("Default")
+		LFDDungeonReadyDialog:CreateShadow("Default")
+		T.SkinCloseButton(LFDDungeonReadyDialogCloseButton,LFDDungeonReadyDialog)
+		T.SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
+		T.SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
+	end
+
 	LFDQueueFrameSpecificListScrollFrame:StripTextures()
 	LFDQueueFrameSpecificListScrollFrame:Height(LFDQueueFrameSpecificListScrollFrame:GetHeight() - 8)
 	LFDParentFrame:CreateBackdrop("Default")
 	LFDParentFrame.backdrop:Point( "TOPLEFT", LFDParentFrame, "TOPLEFT")
 	LFDParentFrame.backdrop:Point( "BOTTOMRIGHT", LFDParentFrame, "BOTTOMRIGHT")
-	T.SkinCloseButton(LFDParentFrameCloseButton,LFDParentFrame)
-	T.SkinCloseButton(LFDDungeonReadyDialogCloseButton,LFDDungeonReadyDialog)
+	T.SkinCloseButton(LFDParentFrameCloseButton,LFDParentFrame)	
 	T.SkinDropDownBox(LFDQueueFrameTypeDropDown, 300)
 	LFDQueueFrameTypeDropDown:Point("RIGHT",-10,0)
 	LFDQueueFrameCapBar:CreateBackdrop("Default")
