@@ -27,7 +27,7 @@
 		</Scripts>
 	</Button>
 
-	<Frame name="TukuiAurasProxyTemplate" inherits="SecureUnitButtonTemplate ,SecureHandlerEnterLeaveTemplate" virtual="true">
+	<Frame name="TukuiAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
 		<Size x="30" y="30"/>
 		<Scripts>
 			<OnLoad>

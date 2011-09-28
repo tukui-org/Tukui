@@ -105,6 +105,27 @@ local function UpdateLFG()
 end
 hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
 
+-- reskin LFG dropdown
+local status
+if T.build > 14600 then status = LFGSearchStatus else status = LFDSearchStatus end
+status:SetTemplate("Default")
+
+-- for t13+, if we move map we need to point status according to our Minimap position.
+local function UpdateLFGTooltip()
+	local position = TukuiMinimap:GetPoint()
+	status:ClearAllPoints()
+	if position:match("BOTTOMRIGHT") then
+		status:SetPoint("BOTTOMRIGHT", MiniMapLFGFrame, "BOTTOMLEFT", 0, 0)
+	elseif position:match("BOTTOM") then
+		status:SetPoint("BOTTOMLEFT", MiniMapLFGFrame, "BOTTOMRIGHT", 4, 0)
+	elseif position:match("LEFT") then		
+		status:SetPoint("TOPLEFT", MiniMapLFGFrame, "TOPRIGHT", 4, 0)
+	else
+		status:SetPoint("TOPRIGHT", MiniMapLFGFrame, "TOPLEFT", 0, 0)	
+	end
+end
+status:HookScript("OnShow", UpdateLFGTooltip)
+
 -- Enable mouse scrolling
 Minimap:EnableMouseWheel(true)
 Minimap:SetScript("OnMouseWheel", function(self, d)
@@ -276,4 +297,4 @@ m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
 m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 m_zone:RegisterEvent("ZONE_CHANGED")
 m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
-m_zone:SetScript("OnEvent",zone_Update) 
+m_zone:SetScript("OnEvent",zone_Update)

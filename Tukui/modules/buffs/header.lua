@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...))
 
-if T.build > 14600 then return end -- TEMP, NEED TO FIGURE OUT WHAT'S WRONG
+C.auras.player = false -- force disable buffs for now, secure group aura header seem to be buggy (as always ...)
 
 if not C.auras.player then return end
 
@@ -61,7 +61,7 @@ buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "
 buffs:SetAttribute("consolidateHeader", consolidate)
 buffs:SetAttribute("consolidateTo", filter)
 buffs:SetAttribute("consolidateDuration", -1)
---buffs:Show()
+buffs:Show()
 
 -- create the consolidated button
 local proxy = buffs:GetAttribute("consolidateProxy")
@@ -107,4 +107,4 @@ SecureHandlerSetFrameRef(proxy, "header", consolidate)
 -- set our debuff header
 debuffs:SetPoint("TOP", buffs, "BOTTOM", 0, -38)
 debuffs:SetAttribute("filter", "HARMFUL")
---debuffs:Show()
+debuffs:Show()
