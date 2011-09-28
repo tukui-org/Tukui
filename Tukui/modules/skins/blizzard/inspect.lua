@@ -60,9 +60,11 @@ local function LoadSkin()
 			slot.backdrop:SetAllPoints()
 		end		
 	
-	T.SkinRotateButton(InspectModelFrameRotateLeftButton)
-	T.SkinRotateButton(InspectModelFrameRotateRightButton)
-	InspectModelFrameRotateRightButton:Point("TOPLEFT", InspectModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
+	if T.build < 14600 then
+		T.SkinRotateButton(InspectModelFrameRotateLeftButton)
+		T.SkinRotateButton(InspectModelFrameRotateRightButton)
+		InspectModelFrameRotateRightButton:Point("TOPLEFT", InspectModelFrameRotateLeftButton, "TOPRIGHT", 3, 0)
+	end
 	
 	InspectPVPFrameBottom:Kill()
 	InspectGuildFrameBG:Kill()
