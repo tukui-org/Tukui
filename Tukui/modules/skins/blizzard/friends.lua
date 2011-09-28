@@ -44,9 +44,17 @@ local function LoadSkin()
 		"FriendsFriendsFrame",
 		"FriendsFriendsList",
 		"FriendsFriendsNoteFrame",
+		"ChannelFrameLeftInset",
+		"ChannelFrameRightInset",
+		"LFRQueueFrameRoleInset",
+		"LFRQueueFrameListInset",
+		"LFRQueueFrameCommentInset",
+		"WhoFrameListInset",
+		"WhoFrameEditBoxInset",
 	}			
 
 	local KillTextures = {
+		"FriendsFrameInset",
 		"FriendsFrameTopLeft",
 		"FriendsFrameTopRight",
 		"FriendsFrameBottomLeft",
@@ -112,7 +120,9 @@ local function LoadSkin()
 	end
 
 	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+		if _G[object] then
+			_G[object]:StripTextures()
+		end
 	end
 	FriendsFrame:StripTextures(true)
 
@@ -144,6 +154,8 @@ local function LoadSkin()
 	FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
 	T.SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton,ChannelFrameDaughterFrame)
 	T.SkinCloseButton(FriendsFrameCloseButton,FriendsFrame.backdrop)
+	FriendsFrameCloseButton:ClearAllPoints()
+	FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)
 	T.SkinDropDownBox(WhoFrameDropDown,150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown,70)
 
@@ -175,6 +187,50 @@ local function LoadSkin()
 	T.SkinEditBox(FriendsFriendsList)
 	T.SkinEditBox(FriendsFriendsNoteFrame)
 	T.SkinDropDownBox(FriendsFriendsFrameDropDown,150)
+	
+	--Raid Browser Tab
+	for i=1, 2 do
+		local tab = _G["LFRParentFrameSideTab"..i]
+		if tab then
+			local icon = tab:GetNormalTexture():GetTexture()
+
+			tab:StripTextures()
+			tab:SetNormalTexture(icon)
+			tab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
+			tab:GetNormalTexture():ClearAllPoints()
+
+			tab:GetNormalTexture():Point("TOPLEFT", 2, -2)
+			tab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
+			
+			tab:CreateBackdrop("Default")
+			tab.backdrop:SetAllPoints()
+			tab:StyleButton(true)			
+			
+			local point, relatedTo, point2, x, y = tab:GetPoint()
+			tab:Point(point, relatedTo, point2, 1, y)
+		end
+	end
+	
+	-- 4.3+ only stuff
+	if T.build > 14600 then
+		-- bug on PTR with WhoFrame, fixing them
+		WhoFrameEditBox:ClearAllPoints()
+		WhoFrameWhoButton:ClearAllPoints()
+		WhoFrameAddFriendButton:ClearAllPoints()
+		WhoFrameGroupInviteButton:ClearAllPoints()
+		WhoFrameWhoButton:Point("BOTTOMLEFT", 4, 4)
+		WhoFrameGroupInviteButton:Point("BOTTOMRIGHT", -4, 4)
+		WhoFrameAddFriendButton:Point("LEFT", WhoFrameWhoButton, "RIGHT", 4, 0)
+		WhoFrameAddFriendButton:Width(125)
+		WhoListScrollFrame:ClearAllPoints()
+		WhoListScrollFrame:SetPoint("TOPRIGHT", WhoFrameListInset, -25, 0)
+		WhoFrameEditBox:Point("BOTTOM", 0, 32)
+		WhoFrameEditBox:Point("LEFT", 6, 0)
+		WhoFrameEditBox:Point("RIGHT", -6, 0)
+		
+		-- go
+		FriendsFrame:SetTemplate("Default")
+	end
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
