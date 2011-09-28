@@ -59,21 +59,22 @@ Recount.CreateFrame = function(self, Name, Title, Height, Width, ShowFunc, HideF
 	return frame
 end
 
--- Skin existing frames
-if Recount.MainWindow then SkinFrame(Recount.MainWindow) end
-if Recount.ConfigWindow then SkinFrame(Recount.ConfigWindow) end
-if Recount.GraphWindow then SkinFrame(Recount.GraphWindow) end
-if Recount.DetailWindow then SkinFrame(Recount.DetailWindow) end
-if Recount.ResetFrame then SkinFrame(Recount.ResetFrame) end
-if _G["Recount_Realtime_!RAID_DAMAGE"] then SkinFrame(_G["Recount_Realtime_!RAID_DAMAGE"].Window) end
-if _G["Recount_Realtime_!RAID_HEALING"] then SkinFrame(_G["Recount_Realtime_!RAID_HEALING"].Window) end
-if _G["Recount_Realtime_!RAID_HEALINGTAKEN"] then SkinFrame(_G["Recount_Realtime_!RAID_HEALINGTAKEN"].Window) end
-if _G["Recount_Realtime_!RAID_DAMAGETAKEN"] then SkinFrame(_G["Recount_Realtime_!RAID_DAMAGETAKEN"].Window) end
-if _G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"] then SkinFrame(_G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"].Window) end
-if _G["Recount_Realtime_FPS_FPS"] then SkinFrame(_G["Recount_Realtime_FPS_FPS"].Window) end
-if _G["Recount_Realtime_Latency_LAG"] then SkinFrame(_G["Recount_Realtime_Latency_LAG"].Window) end
-if _G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"] then SkinFrame(_G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"].Window) end
-if _G["Recount_Realtime_Upstream Traffic_UP_TRAFFIC"] then SkinFrame(_G["Recount_Realtime_Upstream Traffic_UP_TRAFFIC"].Window) end
+-- frame we want to skins
+local elements = {
+	Recount.MainWindow,
+	Recount.ConfigWindow,
+	Recount.GraphWindow,
+	Recount.DetailWindow,
+	Recount.ResetFrame,
+}
+
+-- skin them
+for i = 1, getn(elements) do
+	local frame = elements[i]
+	if frame then
+		SkinFrame(frame)
+	end
+end
 
 --Update Textures
 Recount:UpdateBarTextures()
