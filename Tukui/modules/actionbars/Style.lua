@@ -21,6 +21,7 @@ local function style(self)
 	local Border  = _G[name.."Border"]
 	local Btname = _G[name.."Name"]
 	local normal  = _G[name.."NormalTexture"]
+	local BtnBG = _G[name..'FloatingBG']
  
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
@@ -73,6 +74,10 @@ local function style(self)
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
+	
+	if BtnBG then
+		BtnBG:Kill()
+	end 
 end
 
 local function stylesmallbutton(normal, button, icon, name, pet)
