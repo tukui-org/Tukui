@@ -28,7 +28,14 @@ local function Update(self, event, unit, powertype)
 	if(druidmana.colorClass) then
 		t = self.colors.class['DRUID']
 	elseif(druidmana.colorSmooth) then
-		r, g, b = self.ColorGradient(min / max, unpack(druidmana.smoothGradient or self.colors.smooth))
+		local perc
+		if(max == 0) then
+			perc = 0
+		else
+			perc = min / max
+		end
+
+		r, g, b = self.ColorGradient(perc, unpack(druidmana.smoothGradient or self.colors.smooth))
 	elseif(druidmana.colorPower) then
 		t = self.colors.power['MANA']
 	end
@@ -89,7 +96,7 @@ local Enable = function(self, unit)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)
 
-		if(not druidmana:GetStatusBarTexture()) then
+		if(druidmana:IsObjectType'StatusBar' and not druidmana:GetStatusBarTexture()) then
 			druidmana:SetStatusBarTexture[[Interface\TargetingFrame\UI-StatusBar]]
 		end
 
