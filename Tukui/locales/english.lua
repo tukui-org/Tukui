@@ -115,6 +115,7 @@ L.popup_install_yes = "Yeah! (recommended!)"
 L.popup_install_no = "No, it sux so hard"
 L.popup_reset_yes = "Yeah baby!"
 L.popup_reset_no = "No, or else I'll QQ in the forums!"
+L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
 
 L.merchant_repairnomoney = "You don't have enough money to repair!"
 L.merchant_repaircost = "Your items have been repaired for"

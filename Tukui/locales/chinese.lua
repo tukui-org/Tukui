@@ -116,6 +116,7 @@ if T.client == "zhCN" then
 	L.popup_install_no = "不，这个UI太难用了！"
 	L.popup_reset_yes = "当然勒~还是预设的好~"
 	L.popup_reset_no = "不了，否则我会在论坛发帖抱怨的！"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
 
 	L.merchant_repairnomoney = "您没有足够的金币以完成修理！"
 	L.merchant_repaircost = "您修理装备花费了："

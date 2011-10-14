@@ -115,6 +115,7 @@ if T.client == "esES" then
 	L.popup_install_no = "No, ¡realmente apesta!"
 	L.popup_reset_yes = "¡Oh, si nena!"
 	L.popup_reset_no = "No, ¡preguntare en los foros!"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
  
 	L.merchant_repairnomoney = "¡No tienes suficiente dinero para reparar!"
 	L.merchant_repaircost = "Tus objetos han sido reparados por"

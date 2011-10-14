@@ -115,6 +115,7 @@ if T.client == "deDE" then
 	L.popup_install_no = "Nein, das is echt großer Mist"
 	L.popup_reset_yes = "Yeah baby!"
 	L.popup_reset_no = "Nein!"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
  
 	L.merchant_repairnomoney = "Du hast nicht genügend Gold zum Reparieren!" 
 	L.merchant_repaircost = "Deine Rüstung wurde repariert für"

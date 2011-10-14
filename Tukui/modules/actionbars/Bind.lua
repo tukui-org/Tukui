@@ -226,10 +226,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 			self.enabled = false
 			self:HideFrame()
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-			StaticPopup_Hide("KEYBIND_MODE")
+			StaticPopup_Hide("TUKUI_KEYBIND_MODE")
 		end
 
-		StaticPopupDialogs["KEYBIND_MODE"] = {
+		StaticPopupDialogs["TUKUI_KEYBIND_MODE"] = {
 			text = L.bind_instruct,
 			button1 = L.bind_save,
 			button2 = L.bind_discardbind,
@@ -290,7 +290,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 	end
 	if not bind.enabled then
 		bind:Activate()
-		StaticPopup_Show("KEYBIND_MODE")
+		StaticPopup_Show("TUKUI_KEYBIND_MODE")
 	end
 end
 SLASH_MOUSEOVERBIND1 = "/bindkey"

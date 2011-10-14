@@ -115,6 +115,7 @@ if T.client == "ruRU" then
 	L.popup_install_no = "Нет, это слишком сложно"
 	L.popup_reset_yes = "О да, детка!"
 	L.popup_reset_no = "Нет, я посмотрю на QQ форуме!"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
  
 	L.merchant_repairnomoney = "Не достаточно денег на починку"
 	L.merchant_repaircost = "Предметы починены за"

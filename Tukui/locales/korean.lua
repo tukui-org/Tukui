@@ -122,6 +122,7 @@ if T.client == "koKR" then
 	L.popup_install_no = "아니오"
 	L.popup_reset_yes = "예"
 	L.popup_reset_no = "아니오"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
  
 	L.merchant_repairnomoney = "수리에 필요한 돈이 충분하지 않습니다!"
 	L.merchant_repaircost = "모든 아이템이 수리되었습니다: "

@@ -115,6 +115,7 @@ if T.client == "zhTW" then
 	L.popup_install_no = "不用了, 救命這UI真差"
 	L.popup_reset_yes = "當然啦, 預設就是美!"
 	L.popup_reset_no = "不囉, 不然我會發文抱怨!"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
  
 	L.merchant_repairnomoney = "您沒有足夠的金錢來修理!"
 	L.merchant_repaircost = "您的裝備已修理, 花費了"

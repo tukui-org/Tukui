@@ -115,6 +115,7 @@ if T.client == "frFR" then
 	L.popup_install_no = "No, it sux so hard"
 	L.popup_reset_yes = "Yeah baby!"
 	L.popup_reset_no = "No, else I'll QQ forums!"
+	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
 
 	L.merchant_repairnomoney = "Vous n'avez pas assez d'argent pour réparer !"
 	L.merchant_repaircost = "Tous les objets ont été réparés pour"

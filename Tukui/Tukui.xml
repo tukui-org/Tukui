@@ -33,6 +33,7 @@
 	<Script file="core\functions.lua"/>
 	<Script file="core\fonts.lua"/>
 	<Script file="core\protection.lua"/>
+	<Script file="core\popups.lua"/>
 	<Script file="core\install.lua"/>
 	<Script file="modules\blizzard\watchframe.lua"/>
 	<Script file="modules\blizzard\durability.lua"/>
@@ -144,6 +145,7 @@
 	<Script file="modules\skins\blizzard\guildregister.lua"/>
 	<Script file="modules\skins\blizzard\help.lua"/>
 	<Script file="modules\skins\blizzard\inspect.lua"/>
+	<Script file="modules\skins\blizzard\itemtransmogrify.lua"/>
 	<Script file="modules\skins\blizzard\itemtext.lua"/>
 	<Script file="modules\skins\blizzard\journal.lua"/>
 	<Script file="modules\skins\blizzard\lfd.lua"/>
@@ -172,6 +174,7 @@
 	<Script file="modules\skins\blizzard\tradeskill.lua"/>
 	<Script file="modules\skins\blizzard\trainer.lua"/>
 	<Script file="modules\skins\blizzard\tutorial.lua"/>
+	<Script file="modules\skins\blizzard\voidstorage.lua"/>
 	<Script file="modules\skins\blizzard\watchframe.lua"/>
 	<Script file="modules\skins\blizzard\worldmap.lua"/>
 	

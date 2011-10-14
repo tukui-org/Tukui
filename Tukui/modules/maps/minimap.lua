@@ -104,7 +104,7 @@ hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
 
 -- reskin LFG dropdown
 local status
-if T.build > 14600 then status = LFGSearchStatus else status = LFDSearchStatus end
+if T.toc >= 40300 then status = LFGSearchStatus else status = LFDSearchStatus end
 status:SetTemplate("Default")
 
 -- for t13+, if we move map we need to point status according to our Minimap position.

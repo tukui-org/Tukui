@@ -4,7 +4,7 @@ local function LoadSkin()
 	ReforgingFrame:StripTextures()
 	ReforgingFrame:SetTemplate("Default")
 	
-	if T.build < 14600 then
+	if T.toc < 40300 then
 		ReforgingFrameTopInset:StripTextures()
 		ReforgingFrameInset:StripTextures()
 		ReforgingFrameBottomInset:StripTextures()
