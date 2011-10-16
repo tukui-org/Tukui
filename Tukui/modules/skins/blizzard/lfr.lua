@@ -31,18 +31,36 @@ local function LoadSkin()
 	T.SkinTab(LFRParentFrameTab2)
 
 	T.SkinDropDownBox(LFRBrowseFrameRaidDropDown)
-
+	
+	-- initial skinning for LFR expand
 	for i=1, 20 do
-	  local button = _G["LFRQueueFrameSpecificListButton"..i.."ExpandOrCollapseButton"]
+		local button = _G["LFRQueueFrameSpecificListButton"..i.."ExpandOrCollapseButton"]
 
-	  if button then
-		button:HookScript("OnClick", function()
-		  T.SkinCloseButton(button)
-		end)
-		T.SkinCloseButton(button)
-	  end
+		if button then		
+			button:HookScript("OnClick", function(self)			
+				local text = self.t:GetText()
+				if text == "X" then
+					self.t:SetText("V")
+				else
+					self.t:SetText("X")
+				end
+			end)
+			T.SkinCloseButton(button)
+			button.SetNormalTexture = T.dummy		
+		end
 	end
-
+	
+	-- refresh expand button when opening LFR
+	LFRQueueFrame:HookScript("OnShow", function(self)
+		for i=1, 20 do
+			local list = _G["LFRQueueFrameSpecificListButton"..i]
+			local button = _G["LFRQueueFrameSpecificListButton"..i.."ExpandOrCollapseButton"]
+			if list then
+				if list.isCollapsed then button.t:SetText("V") else button.t:SetText("X") end
+			end
+		end
+	end)
+	
 	LFRQueueFrameCommentTextButton:CreateBackdrop("Default")
 	LFRQueueFrameCommentTextButton:Height(35)
 
