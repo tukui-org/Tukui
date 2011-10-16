@@ -81,6 +81,7 @@ local function LoadSkin()
 	CalendarCreateEventDescriptionContainer:SetTemplate("Default")
 	
 	T.SkinCloseButton(CalendarCreateEventCloseButton)
+	CalendarCreateEventCloseButton:StripTextures()
 	
 	T.SkinCheckBox(CalendarCreateEventLockEventCheck)
 	
@@ -144,6 +145,7 @@ local function LoadSkin()
 	CalendarViewRaidFrame:Point("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)
 	CalendarViewRaidTitleFrame:StripTextures()
 	T.SkinCloseButton(CalendarViewRaidCloseButton)
+	CalendarViewRaidCloseButton:StripTextures()
 	
 	--Holiday View
 	CalendarViewHolidayFrame:StripTextures(true)
@@ -151,6 +153,7 @@ local function LoadSkin()
 	CalendarViewHolidayFrame:Point("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)
 	CalendarViewHolidayTitleFrame:StripTextures()
 	T.SkinCloseButton(CalendarViewHolidayCloseButton)
+	CalendarViewHolidayCloseButton:StripTextures()
 	
 	-- Event View
 	CalendarViewEventFrame:StripTextures()
@@ -163,6 +166,7 @@ local function LoadSkin()
 	CalendarViewEventInviteList:SetTemplate("Default")
 	CalendarViewEventInviteListSection:StripTextures()
 	T.SkinCloseButton(CalendarViewEventCloseButton)
+	CalendarViewEventCloseButton:StripTextures()
 	
 	T.SkinScrollBar(CalendarViewEventInviteListScrollFrameScrollBar)
 
