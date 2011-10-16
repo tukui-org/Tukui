@@ -125,6 +125,7 @@
 	<Script file="modules\skins\blizzard\achievementpopup.lua"/>
 	<Script file="modules\skins\blizzard\archeology.lua"/>
 	<Script file="modules\skins\blizzard\auction.lua"/>
+	<Script file="modules\skins\blizzard\bags.lua"/>
 	<Script file="modules\skins\blizzard\barbershop.lua"/>
 	<Script file="modules\skins\blizzard\bgscore.lua"/>
 	<Script file="modules\skins\blizzard\binding.lua"/>
