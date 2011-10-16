@@ -17,6 +17,39 @@ local function LoadSkin()
 	
 	T.SkinCheckBox(IsUsableCheckButton)
 	T.SkinCheckBox(ShowOnPlayerCheckButton)
+
+	-- Dress Frame
+	do
+		local f
+		if T.toc < 40300 then
+			f1 = "Auction"
+			f2 = "Frame"
+		else
+			f1 = "Side"
+			f2 = "Model"
+		end
+		
+		local frame = _G[f1.."DressUpFrame"]
+		local reset = _G[f1.."DressUp"..f2.."ResetButton"]
+		local close = _G[f1.."DressUp"..f2.."CloseButton"]
+		local left = _G[f1.."DressUpFrameModelRotateLeftButton"]
+		local right = _G[f1.."DressUpFrameModelRotateRightButton"]
+		
+		frame:StripTextures()
+		frame:SetTemplate("Default")
+		frame:Point("TOPLEFT", AuctionFrame, "TOPRIGHT", 2, 0)
+		T.SkinButton(reset)
+		close:StripTextures()
+		close:SetNormalTexture(close:GetNormalTexture():GetTexture())
+		close:SetPushedTexture(close:GetPushedTexture():GetTexture())
+		close:SetHighlightTexture(close:GetHighlightTexture():GetTexture())
+		close:SetDisabledTexture(close:GetDisabledTexture():GetTexture())
+		if left and right then
+			T.SkinRotateButton(left)
+			T.SkinRotateButton(right)
+			right:Point("TOPLEFT", left, "TOPRIGHT", 4, 0)
+		end
+	end
 	
 	if T.toc < 40300 then
 		--Dress Up Frame

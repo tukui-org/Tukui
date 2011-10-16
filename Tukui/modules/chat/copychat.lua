@@ -46,6 +46,7 @@ local function CreatCopyFrame()
 
 	local close = CreateFrame("Button", "CopyCloseButton", frame, "UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT")
+	T.SkinCloseButton(close)
 
 	isf = true
 end
