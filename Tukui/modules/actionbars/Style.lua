@@ -10,7 +10,11 @@ local function style(self)
 	local name = self:GetName()
 	
 	--> fixing a taint issue while changing totem flyout button in combat.
-	if name:match("MultiCast") then return end 
+	if name:match("MultiCast") then return end
+	
+	--> don't skin the boss encounter extra button to match texture (4.3 patch)
+	--> http://www.tukui.org/storage/viewer.php?id=913811extrabar.jpg
+	if name:match("ExtraActionButton") then return end
 	
 	local action = self.action
 	local Button = self

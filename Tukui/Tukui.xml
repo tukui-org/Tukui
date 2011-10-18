@@ -100,7 +100,8 @@
 	<Script file="modules\actionbars\Style.lua"/>
 	<Script file="modules\actionbars\Range.lua"/>
 	<Script file="modules\actionbars\Others.lua"/>
-	<Script file="modules\actionbars\Cooldowns.lua"/>	
+	<Script file="modules\actionbars\Cooldowns.lua"/>
+	<Script file="modules\actionbars\Extra.lua"/>	
 	<Script file="modules\chat\chatframes.lua"/>
 	<Script file="modules\chat\telltarget.lua"/>
 	<Script file="modules\chat\copychat.lua"/>
