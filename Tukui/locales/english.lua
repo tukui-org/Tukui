@@ -222,6 +222,7 @@ L.move_shapeshift = "Move Shapeshift/Totem"
 L.move_achievements = "Move Achievements"
 L.move_roll = "Move Loot Roll Frame"
 L.move_vehicle = "Move Vehicle Seat"
+L.move_extrabutton = "Extra Button"
 
 -------------------------------------------------
 -- INSTALLATION

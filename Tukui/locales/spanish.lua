@@ -222,6 +222,7 @@ if T.client == "esES" then
 	L.move_achievements = "Mover Logros"
 	L.move_roll = "Mover Marco de Lanzamiento de Dados por Objetos"
 	L.move_vehicle = "Mover Asiento del vehiculo"
+	L.move_extrabutton = "Extra Button"
 	
 	-- tuto and install
 	L.install_header_1 = "Bienvenido/a"

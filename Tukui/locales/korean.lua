@@ -229,6 +229,7 @@ if T.client == "koKR" then
 	L.move_achievements = "업적창 이동"
 	L.move_roll = "주사위 창 이동"
 	L.move_vehicle = "탈것 창 이동"
+	L.move_extrabutton = "Extra Button"
 	
 	-- tuto/install
 	L.install_header_1 = "환영합니다"
