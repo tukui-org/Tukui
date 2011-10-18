@@ -85,6 +85,36 @@ local function LoadSkin()
 				end
 			end
 		end)
+	else
+		EquipmentFlyoutFrameHighlight:Kill()
+		local function SkinItemFlyouts()
+			EquipmentFlyoutFrameButtons:StripTextures()
+
+			for i = 1, EQUIPMENTFLYOUT_MAXITEMS do
+				local button = _G["EquipmentFlyoutFrameButton"..i]
+				local icon = _G["EquipmentFlyoutFrameButton"..i.."IconTexture"]
+				if button then
+					button:StyleButton(false)
+
+					icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					button:GetNormalTexture():SetTexture(nil)
+
+					icon:ClearAllPoints()
+					icon:Point("TOPLEFT", 2, -2)
+					icon:Point("BOTTOMRIGHT", -2, 2)
+					button:SetFrameLevel(button:GetFrameLevel() + 2)
+					button:SetFrameStrata("DIALOG")
+					if not button.backdrop then
+						button:CreateBackdrop("Default")
+						button.backdrop:SetAllPoints()
+					end
+				end
+			end
+		end
+
+		-- Swap item flyout frame (shown when holding alt over a slot)
+		EquipmentFlyoutFrame:HookScript("OnShow", SkinItemFlyouts)
+		hooksecurefunc("EquipmentFlyout_Show", SkinItemFlyouts)
 	end
 
 	--Icon in upper right corner of character frame
