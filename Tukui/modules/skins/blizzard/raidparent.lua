@@ -36,6 +36,18 @@ local function LoadSkin()
 			T.SkinTab(tab)	
 		end
 	end
+	
+	local checkButtons = {
+		"RaidFinderQueueFrameRoleButtonTank",
+		"RaidFinderQueueFrameRoleButtonHealer",
+		"RaidFinderQueueFrameRoleButtonDPS",
+		"RaidFinderQueueFrameRoleButtonLeader",
+	}
+
+	for _, object in pairs(checkButtons) do
+		_G[object].checkButton:SetFrameLevel(_G[object].checkButton:GetFrameLevel() + 2)
+		T.SkinCheckBox(_G[object].checkButton)
+	end
 end
 
 local function LoadRaidSkin()
