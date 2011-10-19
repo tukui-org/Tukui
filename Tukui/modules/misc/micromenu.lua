@@ -40,7 +40,7 @@ local function CreateMicroMenuDropDown()
 		func = function() ToggleFrame(LFDParentFrame) end},
 		{text = LOOKING_FOR_RAID,
 		func = function() if T.toc >= 40300 then ToggleFriendsFrame(4) else ToggleFrame(LFRParentFrame) end end},
-		{text = RAID_FINDER,
+		{text = RAID_FINDER.." - "..RAID_GROUPS,
 		func = function() if T.toc >= 40300 then ToggleFrame(RaidParentFrame) end end},
 		{text = HELP_BUTTON,
 		func = function() ToggleHelpFrame() end},
