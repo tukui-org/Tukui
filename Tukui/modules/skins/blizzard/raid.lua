@@ -1,4 +1,5 @@
 local T, C, L = unpack(select(2, ...))
+if T.toc >= 40300 then return end
 
 local function LoadSkin()
 	local buttons = {
