@@ -166,6 +166,7 @@ local function LoadSkin()
 		"StackSplitCancelButton",
 		"RolePollPopupAcceptButton",
 		"InterfaceOptionsHelpPanelResetTutorials",
+		"CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButton",
 	}
 
 	for i = 1, getn(BlizzardButtons) do

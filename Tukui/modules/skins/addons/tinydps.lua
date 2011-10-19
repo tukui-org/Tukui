@@ -8,16 +8,16 @@ frame:SetScript("OnEvent", function(self, event)
 	local frame = tdpsFrame
 	local anchor = tdpsAnchor
 	local status = tdpsStatusBar
-	local tdps = tinydps
+	local tdps = tdps
 	local font = tdpsFont
 	local position = tdpsPosition
 	local button = TukuiRaidUtilityShowButton
 	
 	-- set our default configuration
-	if tinydps then
-		tinydps.width = TukuiMinimap:GetWidth()
-		tinydps.spacing = 2
-		tinydps.barHeight = 15
+	if tdps then
+		tdps.width = TukuiMinimap:GetWidth()
+		tdps.spacing = 2
+		tdps.barHeight = 15
 		font.name = C["media"].font
 		font.size = 11
 		font.outline = "OUTLINE"
@@ -25,6 +25,9 @@ frame:SetScript("OnEvent", function(self, event)
 	
 	-- set default position, under minimap
 	anchor:Point('BOTTOMLEFT', TukuiMinimap, 'BOTTOMLEFT', 0, -26)
+	
+	-- make sure width is applied, even if it was a first install
+	frame:SetWidth(TukuiMinimap:GetWidth())
 	
 	-- needed, idk why
 	position = {x = 0, y = 0}
