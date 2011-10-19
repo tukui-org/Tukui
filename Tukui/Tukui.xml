@@ -120,6 +120,7 @@
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
+	<Script file="modules\misc\dropdownlist.lua"/>
 	<Script file="core\move.lua"/>
 	<Script file="modules\misc\raidutilities.lua"/>
 	<Script file="modules\skins\blizzard\achievement.lua"/>

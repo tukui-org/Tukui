@@ -7,6 +7,9 @@ local function LoadSkin()
 		"PlayerTalentFrameActivateButton",
 	}
 	PlayerTalentFrameToggleSummariesButton:Point("BOTTOM", PlayerTalentFrame, "BOTTOM",0,5)
+	
+	-- fix button frame level
+	PlayerTalentFrameActivateButton:SetFrameLevel(6)
 
 	for i = 1, #buttons do
 		_G[buttons[i]]:StripTextures()
