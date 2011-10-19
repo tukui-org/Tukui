@@ -25,6 +25,7 @@ local function LoadSkin()
 		"LFDQueueFrameCancelButton",
 		"LFDQueueFramePartyBackfillBackfillButton",
 		"LFDQueueFramePartyBackfillNoBackfillButton",
+		"LFDQueueFrameNoLFDWhileLFRLeaveQueueButton",
 	}
 
 	local checkButtons = {
@@ -119,6 +120,7 @@ local function LoadSkin()
 	LFDQueueFrameCapBarCap1:SetTexture(C["media"].normTex)
 	LFDQueueFrameCapBarCap2:SetTexture(C["media"].normTex)
 	T.SkinScrollBar(LFDQueueFrameSpecificListScrollFrameScrollBar)
+	LFDQueueFrameNoLFDWhileLFR:SetTemplate("Default")
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
