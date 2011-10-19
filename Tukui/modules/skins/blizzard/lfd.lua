@@ -9,6 +9,7 @@ local function LoadSkin()
 		"LFDQueueFrameRandomScrollFrame",
 		"LFDQueueFrameCapBar",
 		"LFDDungeonReadyDialog",
+		"LFGDungeonReadyDialog",
 	}
 
 	local KillTextures = {
@@ -19,6 +20,7 @@ local function LoadSkin()
 		"LFDQueueFrameRoleButtonHealerBackground",
 		"LFDQueueFrameRoleButtonDPSBackground",
 		"LFDDungeonReadyDialogBackground",
+		"LFGDungeonReadyDialogBackground",
 	}
 	local buttons = {
 		"LFDQueueFrameFindGroupButton",
@@ -121,6 +123,18 @@ local function LoadSkin()
 	LFDQueueFrameCapBarCap2:SetTexture(C["media"].normTex)
 	T.SkinScrollBar(LFDQueueFrameSpecificListScrollFrameScrollBar)
 	LFDQueueFrameNoLFDWhileLFR:SetTemplate("Default")
+	
+	if T.toc >= 40300 then
+		LFGDungeonReadyDialog:SetTemplate("Default")
+		LFGDungeonReadyDialog:CreateShadow("Default")
+		T.SkinButton(LFGDungeonReadyDialogLeaveQueueButton)
+		T.SkinButton(LFGDungeonReadyDialogEnterDungeonButton)
+		T.SkinCloseButton(LFGDungeonReadyDialogCloseButton)
+		LFGDungeonReadyDialogCloseButton.t:SetText("_")
+		LFGDungeonReadyStatus:SetTemplate("Default")
+		T.SkinCloseButton(LFGDungeonReadyStatusCloseButton)
+		LFGDungeonReadyStatusCloseButton.t:SetText("_")
+	end
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
