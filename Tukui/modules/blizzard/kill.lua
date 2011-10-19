@@ -36,7 +36,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			TemporaryEnchantFrame:Kill()
 			ConsolidatedBuffs:Kill()
 			-- kill the module in default interface option
-			InterfaceOptionsFrameCategoriesButton12:Kill()
+			InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
+			InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)	
 		end
 		
 		InterfaceOptionsUnitFramePanelPartyBackground:Kill()
@@ -59,8 +60,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		
 		if C.unitframes.enable then
 			PlayerFrame:Kill() -- Just to be sure we are safe
-			InterfaceOptionsFrameCategoriesButton9:Kill()
-			InterfaceOptionsFrameCategoriesButton10:Kill()
+			InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
+			InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)	
 		end
 		
 		if C.actionbar.enable then
@@ -73,6 +74,20 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		
 		if C["nameplate"].enable == true and C["nameplate"].enhancethreat == true then
 			InterfaceOptionsDisplayPanelAggroWarningDisplay:Kill()
-		end		
+		end
+
+		-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
+		-- This taint is blaming every addon even if we are not calling SearchLFGLeave() function in our addon ...
+		--[[ TAINT LOG
+				10/18 21:46:01.774  An action was blocked because of taint from Tukui - SearchLFGLeave()
+				10/18 21:46:01.774      Interface\FrameXML\LFRFrame.lua:395 LFRBrowseFrame_OnUpdateAlways()
+				10/18 21:46:01.774      UIParent:OnUpdate()
+		--]]
+		local TaintFix = CreateFrame("Frame")
+		TaintFix:SetScript("OnUpdate", function(self, elapsed)
+			if LFRBrowseFrame.timeToClear then
+				LFRBrowseFrame.timeToClear = nil 
+			end 
+		end)		
 	end
 end)

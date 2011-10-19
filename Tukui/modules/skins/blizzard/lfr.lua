@@ -84,20 +84,6 @@ local function LoadSkin()
 	LFRQueueFrameRoleButtonTank:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonTank:GetChildren():GetFrameLevel() + 2)
 	LFRQueueFrameRoleButtonHealer:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonHealer:GetChildren():GetFrameLevel() + 2)
 	LFRQueueFrameRoleButtonDPS:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonDPS:GetChildren():GetFrameLevel() + 2)
-	
-	-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
-	-- This taint is blaming every addon even if we are not calling SearchLFGLeave() function in our addon ...
-	--[[ TAINT LOG
-			10/18 21:46:01.774  An action was blocked because of taint from Tukui - SearchLFGLeave()
-			10/18 21:46:01.774      Interface\FrameXML\LFRFrame.lua:395 LFRBrowseFrame_OnUpdateAlways()
-			10/18 21:46:01.774      UIParent:OnUpdate()
-	--]]
-	local TaintFix = CreateFrame("Frame")
-	TaintFix:SetScript("OnUpdate", function(self, elapsed)
-		if LFRBrowseFrame.timeToClear then
-			LFRBrowseFrame.timeToClear = nil 
-		end 
-	end)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
