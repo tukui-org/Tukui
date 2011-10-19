@@ -166,6 +166,7 @@
 	<Script file="modules\skins\blizzard\questlog.lua"/>
 	<Script file="modules\skins\blizzard\raid.lua"/>
 	<Script file="modules\skins\blizzard\raidinfo.lua"/>
+	<Script file="modules\skins\blizzard\raidparent.lua"/>
 	<Script file="modules\skins\blizzard\reforging.lua"/>
 	<Script file="modules\skins\blizzard\socket.lua"/>
 	<Script file="modules\skins\blizzard\spellbook.lua"/>

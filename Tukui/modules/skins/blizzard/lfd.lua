@@ -22,6 +22,7 @@ local function LoadSkin()
 		"LFDDungeonReadyDialogBackground",
 		"LFGDungeonReadyDialogBackground",
 	}
+	
 	local buttons = {
 		"LFDQueueFrameFindGroupButton",
 		"LFDQueueFrameCancelButton",
