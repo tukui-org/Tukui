@@ -344,5 +344,5 @@ anchor:SetScript("OnEvent", function(frame, event, addon)
 
 	anchor:SetScript("OnEvent", function(frame, event, ...) if event == "CHAT_MSG_LOOT" then return CHAT_MSG_LOOT(...) else return START_LOOT_ROLL(...) end end)
 
-	anchor:Point("CENTER", UIParent, "CENTER", 0, -200)
+	anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 350)
 end)

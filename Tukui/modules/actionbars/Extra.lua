@@ -4,7 +4,7 @@ if T.toc < 40300 then return end
 -- create the holder to allow moving extra button
 local holder = CreateFrame("Frame", "TukuiExtraActionBarFrameHolder", UIParent)
 holder:Size(160, 80)
-holder:SetPoint("BOTTOM", 0, T.screenheight / 3)
+holder:SetPoint("BOTTOM", 0, 250)
 holder:SetMovable(true)
 holder:SetTemplate("Default")
 holder:SetBackdropBorderColor(0,0,0,0)
