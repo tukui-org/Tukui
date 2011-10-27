@@ -127,10 +127,7 @@ local UpdateTempEnchant = function(self, slot)
 		-- GetWeaponEnchantInfo() use #5 returned value for timeleft on this weapon
 		offset = 5
 	elseif weapon:match("3") then
-		-- GetWeaponEnchantInfo() use #8 returned value for timeleft on this weapon
-		-- UNFORTUNATLY IT WILL NEVER MATCH VALUE "3" FOR NOW BECAUSE IT'S BROKEN SINCE
-		-- THE IMPLEMENTATION IN CATACLYSM BETA OF THE SECURE AURA HEADER. BLIZZARD IS 
-		--  TOO LAZY TO FINNISH THEIR SYSTEM, QQ
+		-- GetWeaponEnchantInfo() use #5 returned value for timeleft on this weapon
 		offset = 8
 	end
 	

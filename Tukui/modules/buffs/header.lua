@@ -58,6 +58,7 @@ buffs:SetAttribute("filter", "HELPFUL")
 buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "ProxyButton", buffs, "TukuiAurasProxyTemplate"))
 buffs:SetAttribute("consolidateHeader", consolidate)
 buffs:SetAttribute("consolidateTo", filter)
+buffs:SetAttribute("includeWeapons", 1)
 buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
 
