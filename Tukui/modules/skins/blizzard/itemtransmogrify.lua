@@ -6,9 +6,9 @@ if T.toc < 40300 then return end
 ----------------------------------------------------------------------------------------
 
 local function LoadSkin()
-	TransmogrifyFrame:StripTextures()
-	TransmogrifyFrame:SetTemplate("Default")
-	TransmogrifyModelFrame:SetFrameLevel(TransmogrifyFrame:GetFrameLevel() + 2)
+	TransmogrifyArtFrame:StripTextures()
+	TransmogrifyArtFrame:SetTemplate("Default")
+	TransmogrifyModelFrame:SetFrameLevel(TransmogrifyArtFrame:GetFrameLevel() + 2)
 
 	local KillTextures = {
 		"TransmogrifyModelFrameLines",
@@ -29,7 +29,7 @@ local function LoadSkin()
 
 	T.SkinButton(TransmogrifyApplyButton, true)
 	TransmogrifyApplyButton:Point("BOTTOMRIGHT", TransmogrifyFrame, "BOTTOMRIGHT", -4, 4)
-	T.SkinCloseButton(TransmogrifyFrameCloseButton)
+	T.SkinCloseButton(TransmogrifyArtFrameCloseButton)
 
 	local slots = {"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet",
 	"Wrist", "Hands", "Back", "MainHand", "SecondaryHand", "Ranged"}
