@@ -40,10 +40,8 @@ local function CreateMicroMenuDropDown()
 			end
 		end},
 		{text = LFG_TITLE,
-		func = function() ToggleFrame(LFDParentFrame) end},
-		{text = LOOKING_FOR_RAID,
-		func = function() if T.toc >= 40300 then ToggleFriendsFrame(4) else ToggleFrame(LFRParentFrame) end end},
-		{text = finder,
+		func = function() ToggleFrame(LFDParentFrame) end},		
+		{text = RAID,
 		func = function() if T.toc >= 40300 then ToggleFrame(RaidParentFrame) else ToggleFriendsFrame(4) end end},
 		{text = HELP_BUTTON,
 		func = function() ToggleHelpFrame() end},
@@ -56,7 +54,7 @@ local function CreateMicroMenuDropDown()
 		func = function() if T.toc >= 40200 then if T.toc >= 40300 then ToggleEncounterJournal() else ToggleFrame(EncounterJournal) end end end},
 	}
 	
-	for i=1, 14 do
+	for i=1, 13 do
 		UIDropDownMenu_AddButton(microList[i])
 	end
 	

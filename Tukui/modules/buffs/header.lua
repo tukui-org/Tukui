@@ -1,7 +1,5 @@
 local T, C, L = unpack(select(2, ...))
 
-C.auras.player = false -- force disable buffs for now, secure group aura header seem to be buggy (as always ...)
-
 if not C.auras.player then return end
 
 local frame = TukuiAuras

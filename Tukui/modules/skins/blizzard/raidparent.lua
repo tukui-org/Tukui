@@ -30,7 +30,7 @@ local function LoadSkin()
 	RaidFinderQueueFrameSelectionDropDown:ClearAllPoints()
 	RaidFinderQueueFrameSelectionDropDown:SetPoint("TOPRIGHT", -4, -112)
 	
-	for i=1, 2 do
+	for i=1, 3 do
 		local tab = _G["RaidParentFrameTab"..i]
 		if tab then
 			T.SkinTab(tab)	
