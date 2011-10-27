@@ -1,4 +1,6 @@
 if GetLocale() == "ruRU" then
+	-- translated by ?
+
 	-- general
 	TukuiConfigUILocalization.general = "General"
 	TukuiConfigUILocalization.generalautoscale = "Auto UI Scale"

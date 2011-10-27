@@ -1,4 +1,6 @@
 if GetLocale() == "zhTW" then
+	-- translated by ?
+
 	-- general
 	TukuiConfigUILocalization.general = "General"
 	TukuiConfigUILocalization.generalautoscale = "Auto UI Scale"
