@@ -1,8 +1,7 @@
 local T, C, L = unpack(select(2, ...))
 
 if T.client == "zhCN" then
-	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)
-	
+	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)	
 	L.chat_BATTLEGROUND_GET = "[战场]"
 	L.chat_BATTLEGROUND_LEADER_GET = "[战场领袖]"
 	L.chat_BN_WHISPER_GET = "密语"
@@ -20,10 +19,11 @@ if T.client == "zhCN" then
 	L.chat_FLAG_GM = "[GM]"
 	L.chat_ERR_FRIEND_ONLINE_SS = "|cff05e9FF上线了|r"  
 	L.chat_ERR_FRIEND_OFFLINE_S = "|cffff0000下线了|r"
-
-	L.chat_general = "综"
-	L.chat_trade = "交"
-	L.chat_defense = "防"
+	
+	-- 请不要缩写下列频道名称 这是用来帮助设置归类频道的
+	L.chat_general = "综合"
+	L.chat_trade = "交易"
+	L.chat_defense = "本地防务"
 	L.chat_recrutment = "公会招募"
 	L.chat_lfg = "寻求组队"
 
@@ -116,7 +116,7 @@ if T.client == "zhCN" then
 	L.popup_install_no = "不，这个UI太难用了！"
 	L.popup_reset_yes = "当然勒~还是预设的好~"
 	L.popup_reset_no = "不了，否则我会在论坛发帖抱怨的！"
-	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
+	L.popup_fix_ab = "你的动作条存在一些问题。你想重载插件修复它么?"
 
 	L.merchant_repairnomoney = "您没有足够的金币以完成修理！"
 	L.merchant_repaircost = "您修理装备花费了："
@@ -164,8 +164,8 @@ if T.client == "zhCN" then
 	L.bags_stackend = "重新堆叠完成。"
 	L.bags_rightclick_search = "右击开始查找。"
 	
-	L.loot_fish = "Fishy loot"
-	L.loot_empty = "Empty slot"
+	L.loot_fish = "Fishy loot" -- not sure for this now
+	L.loot_empty = "Empty slot" -- not sure for this now
 
 	L.chat_invalidtarget = "无效的目标"
 
@@ -316,5 +316,4 @@ if T.client == "zhCN" then
 	L.install_button_continue = "继续"
 	L.install_button_finish = "完成"
 	L.install_button_close = "关闭"
-
 end
