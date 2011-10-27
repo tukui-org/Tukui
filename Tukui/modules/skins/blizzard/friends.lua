@@ -158,6 +158,12 @@ local function LoadSkin()
 	FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)
 	T.SkinDropDownBox(WhoFrameDropDown,150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown,70)
+	T.SkinButton(FriendsTabHeaderSoRButton)
+	FriendsTabHeaderSoRButton:StyleButton()
+	FriendsTabHeaderSoRButton.icon:SetTexCoord(.08, .92, .08, .92)
+	FriendsTabHeaderSoRButton.icon:ClearAllPoints()
+	FriendsTabHeaderSoRButton.icon:Point("TOPLEFT", 2, -2)
+	FriendsTabHeaderSoRButton.icon:Point("BOTTOMRIGHT", -2, 2)
 
 	--Bottom Tabs
 	for i=1, 4 do
