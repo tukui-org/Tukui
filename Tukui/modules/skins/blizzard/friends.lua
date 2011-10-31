@@ -164,6 +164,15 @@ local function LoadSkin()
 	FriendsTabHeaderSoRButton.icon:ClearAllPoints()
 	FriendsTabHeaderSoRButton.icon:Point("TOPLEFT", 2, -2)
 	FriendsTabHeaderSoRButton.icon:Point("BOTTOMRIGHT", -2, 2)
+	
+	ScrollOfResurrectionFrame:StripTextures()
+	ScrollOfResurrectionFrameNoteFrame:StripTextures()
+	ScrollOfResurrectionFrame:SetTemplate("Transparent")
+	ScrollOfResurrectionFrameNoteFrame:SetTemplate("Overlay")
+	T.SkinButton(ScrollOfResurrectionFrameAcceptButton)
+	T.SkinButton(ScrollOfResurrectionFrameCancelButton)
+	T.SkinEditBox(ScrollOfResurrectionFrameTargetEditBox)
+	ScrollOfResurrectionFrameTargetEditBox:Height(ScrollOfResurrectionFrameTargetEditBox:GetHeight() - 5)
 
 	--Bottom Tabs
 	for i=1, 4 do

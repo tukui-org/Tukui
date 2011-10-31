@@ -600,33 +600,35 @@ local function Shared(self, unit)
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
 			
-			-- combo points on target
-			local CPoints = {}
-			CPoints.unit = PlayerFrame.unit
-			for i = 1, 5 do
-				CPoints[i] = self:CreateTexture(nil, "OVERLAY")
-				CPoints[i]:Height(12)
-				CPoints[i]:Width(12)
-				CPoints[i]:SetTexture(bubbleTex)
-				if i == 1 then
-					if T.lowversion then
-						CPoints[i]:Point("TOPRIGHT", 15, 1.5)
+			-- standard combo points on target if classbar is disabled
+			if not C["unitframes"].classbar then
+				local CPoints = {}
+				CPoints.unit = PlayerFrame.unit
+				for i = 1, 5 do
+					CPoints[i] = self:CreateTexture(nil, "OVERLAY")
+					CPoints[i]:Height(12)
+					CPoints[i]:Width(12)
+					CPoints[i]:SetTexture(bubbleTex)
+					if i == 1 then
+						if T.lowversion then
+							CPoints[i]:Point("TOPRIGHT", 15, 1.5)
+						else
+							CPoints[i]:Point("TOPLEFT", -15, 1.5)
+						end
+						CPoints[i]:SetVertexColor(0.69, 0.31, 0.31)
 					else
-						CPoints[i]:Point("TOPLEFT", -15, 1.5)
+						CPoints[i]:Point("TOP", CPoints[i-1], "BOTTOM", 1)
 					end
-					CPoints[i]:SetVertexColor(0.69, 0.31, 0.31)
-				else
-					CPoints[i]:Point("TOP", CPoints[i-1], "BOTTOM", 1)
 				end
+				CPoints[2]:SetVertexColor(0.69, 0.31, 0.31)
+				CPoints[3]:SetVertexColor(0.65, 0.63, 0.35)
+				CPoints[4]:SetVertexColor(0.65, 0.63, 0.35)
+				CPoints[5]:SetVertexColor(0.33, 0.59, 0.33)
+				self.CPoints = CPoints
 			end
-			CPoints[2]:SetVertexColor(0.69, 0.31, 0.31)
-			CPoints[3]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[4]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[5]:SetVertexColor(0.33, 0.59, 0.33)
-			self.CPoints = CPoints
 		end
 
-		if (unit == "target" and C["unitframes"].targetauras) or (unit == "player" and C["unitframes"].playerauras) then
+		if (unit == "target" and C["unitframes"].targetauras) then
 			local buffs = CreateFrame("Frame", nil, self)
 			local debuffs = CreateFrame("Frame", nil, self)
 			

@@ -119,6 +119,7 @@
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
+	<Script file="modules\misc\combo.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="modules\misc\dropdownlist.lua"/>
 	<Script file="core\move.lua"/>
