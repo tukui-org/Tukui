@@ -13,21 +13,21 @@ local Colors = {
 	[5] = {.33, .63, .33, 1},
 }
 
-local function Update()
+local function Update(self)
 	local points = GetComboPoints("player", "target")
 	local shadow = parent.shadow
 	if points and points > 0 then
-		TukuiCombo:Show()
+		self:Show()
 		shadow:Point("TOPLEFT", -4, 12)
 		for i = 1, MAX_COMBO_POINTS do
 			if i <= points then
-				TukuiCombo[i]:SetAlpha(1)
+				self[i]:SetAlpha(1)
 			else
-				TukuiCombo[i]:SetAlpha(.2)
+				self[i]:SetAlpha(.2)
 			end
 		end
 	else
-		TukuiCombo:Hide()
+		self:Hide()
 		shadow:Point("TOPLEFT", -4, 4)
 	end
 end
@@ -46,7 +46,7 @@ TukuiCombo:SetScript("OnEvent", Update)
 
 -- create combos
 for i = 1, 5 do
-	TukuiCombo[i]=CreateFrame("StatusBar", "TukuiComboBar"..i, TukuiCombo)
+	TukuiCombo[i] = CreateFrame("StatusBar", "TukuiComboBar"..i, TukuiCombo)
 	TukuiCombo[i]:Height(8)
 	TukuiCombo[i]:SetStatusBarTexture(C.media.normTex)
 	TukuiCombo[i]:GetStatusBarTexture():SetHorizTile(false)
