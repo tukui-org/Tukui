@@ -17,39 +17,16 @@ local Colors = {
 	[5] = {.33, .63, .33, 1},
 }
 
-local function ClassUpdate(self, display)
-	-- if not a rogue, we show/hide the bar according if we found combo points or not on the target
-	if T.myclass == "ROGUE" then return end
-
-	if display then
-		self:Show()
-		
-		-- update player frame shadow
-		if shadow then shadow:Point("TOPLEFT", -4, 12) end
-		
-		-- update Y position of buffs
-		if buffs then buffs:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, 1) end
-	else
-		self:Hide()
-		
-		-- update player frame shadow
-		if shadow then shadow:Point("TOPLEFT", -4, 4) end
-		
-		-- update Y position of buffs
-		if buffs then buffs:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, 1) end
-	end
-end
-
-local function Update(self)
+local function OnUpdate(self)
 	local points
 	
-	if(UnitHasVehicleUI("player") then
+	if UnitHasVehicleUI("player") then
 		points = GetComboPoints("vehicle", "target")
 	else
 		points = GetComboPoints("player", "target")
 	end
-	
-	if points and points > 0 then
+
+	if points then
 		-- update combos display
 		for i = 1, MAX_COMBO_POINTS do
 			if i <= points then
@@ -60,8 +37,33 @@ local function Update(self)
 		end
 	end
 	
-	-- update display status
-	ClassUpdate(self, points)
+	if points > 0 then
+		self:Show()
+		
+		-- update player frame shadow
+		if shadow then
+			shadow:Point("TOPLEFT", -4, 12)
+		end
+		
+		-- update Y position of buffs
+		if buffs then 
+			buffs:ClearAllPoints() 
+			buffs:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 14)
+		end
+	else
+		self:Hide()
+		
+		-- update player frame shadow
+		if shadow then
+			shadow:Point("TOPLEFT", -4, 4)
+		end
+		
+		-- update Y position of buffs
+		if buffs then 
+			buffs:ClearAllPoints() 
+			buffs:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 4)
+		end
+	end
 end
 
 -- create the bar
@@ -74,8 +76,7 @@ TukuiCombo:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 TukuiCombo:RegisterEvent("PLAYER_ENTERING_WORLD")
 TukuiCombo:RegisterEvent("UNIT_COMBO_POINTS")
 TukuiCombo:RegisterEvent("PLAYER_TARGET_CHANGED")
-TukuiCombo:SetScript("OnEvent", Update)
-TukuiCombo:Show()
+TukuiCombo:SetScript("OnEvent", OnUpdate)
 
 -- create combos
 for i = 1, 5 do
@@ -92,9 +93,5 @@ for i = 1, 5 do
 	else
 		TukuiCombo[i]:Point("LEFT", TukuiCombo[i-1], "RIGHT", 1, 0)
 		TukuiCombo[i]:Width(parent:GetWidth() / 5 - 1)
-	end
-	
-	if T.class == "ROGUE" and shadow then
-		shadow:Point("TOPLEFT", -4, 12)
 	end
 end
