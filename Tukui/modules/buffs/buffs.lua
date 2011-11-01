@@ -147,7 +147,7 @@ local OnAttributeChanged = function(self, attribute, value)
 		-- look if the current buff is consolidated
 		if filter then
 			local consolidate = self:GetName():match("Consolidate")
-			if consolidate then 
+			if consolidate then
 				self.consolidate = true
 			end
 		end
@@ -159,7 +159,10 @@ local OnAttributeChanged = function(self, attribute, value)
 end
 
 local Skin = function(self)
-	self:SetTemplate("Default")
+	if not self.isSkinned then
+		self:SetTemplate("Default")
+		self.isSkinned = true
+	end
 	
 	local proxy = self:GetName():sub(-11) == "ProxyButton"
 	local Icon = self:CreateTexture(nil, "BORDER")

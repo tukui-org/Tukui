@@ -34,9 +34,6 @@
 				-- Avoiding XML 101:
 				TukuiAuras.Skin(self)
 			</OnLoad>
-			<OnClick>
-				print(self)
-			</OnClick>
 		</Scripts>
 	</Frame>
 </Ui>

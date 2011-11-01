@@ -49,6 +49,10 @@ end
 local function UpdateGuildXP()
 	local currentXP, remainingXP, dailyXP, maxDailyXP = UnitGetGuildXP("player")
 	local nextLevelXP = currentXP + remainingXP
+	
+	-- prevent 4.3 division / 0
+	if nextLevelXP == 0 or maxDailyXP == 0 then return end
+	
 	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
 	local percentDaily = tostring(math.ceil((dailyXP / maxDailyXP) * 100))
 	
