@@ -159,11 +159,6 @@ local OnAttributeChanged = function(self, attribute, value)
 end
 
 local Skin = function(self)
-	if not self.isSkinned then
-		self:SetTemplate("Default")
-		self.isSkinned = true
-	end
-	
 	local proxy = self:GetName():sub(-11) == "ProxyButton"
 	local Icon = self:CreateTexture(nil, "BORDER")
 	Icon:SetTexCoord(.07, .93, .07, .93)
@@ -209,6 +204,9 @@ local Skin = function(self)
 		Overlay:SetTexCoord(.07, .93, .07, .93)
 		self.Overlay = Overlay
 	end
+	
+	-- Set a template
+	self:SetTemplate("Default")
 end
 
 frame:SetScript("OnEvent", function(self, event, ...)

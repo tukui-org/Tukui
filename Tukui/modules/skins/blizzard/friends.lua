@@ -112,6 +112,7 @@ local function LoadSkin()
 	WhoFrameEditBox:Height(WhoFrameEditBox:GetHeight() - 15)
 	WhoFrameEditBox:Point("BOTTOM", WhoFrame, "BOTTOM", -10, 108)
 	WhoFrameEditBox:Width(WhoFrameEditBox:GetWidth() + 17)
+	T.SkinScrollBar(FriendsFrameFriendsScrollFrameScrollBar)
 
 	for _, texture in pairs(KillTextures) do
 		if _G[texture] then

@@ -16,6 +16,7 @@ local function LoadSkin()
 	
 	QuestLogFrameCompleteButton:StripTextures()
 	T.SkinButton(QuestLogFrameCompleteButton)
+	T.SkinScrollBar(QuestLogDetailScrollFrameScrollBar)
 
 	local buttons = {
 		"QuestLogFrameAbandonButton",

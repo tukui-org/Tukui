@@ -134,6 +134,7 @@ local function LoadSkin()
 	PVPColorPickerButton1:Height(PVPColorPickerButton1:GetHeight()-5)
 	PVPColorPickerButton2:Height(PVPColorPickerButton1:GetHeight())
 	PVPColorPickerButton3:Height(PVPColorPickerButton1:GetHeight())
+	T.SkinScrollBar(PVPHonorFrameTypeScrollFrameScrollBar)
 
 	--War Games
 	if T.toc >= 40200 then
