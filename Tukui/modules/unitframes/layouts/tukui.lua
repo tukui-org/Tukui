@@ -601,7 +601,7 @@ local function Shared(self, unit)
 			self.Name = Name
 			
 			-- standard combo points on target if classbar is disabled
-			if not C["unitframes"].classbar then
+			if C["unitframes"].classiccombo then
 				local CPoints = {}
 				CPoints.unit = PlayerFrame.unit
 				for i = 1, 5 do

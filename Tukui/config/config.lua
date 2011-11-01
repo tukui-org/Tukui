@@ -21,6 +21,7 @@ C["unitframes"] = {
 	["unitcastbar"] = true,                             -- enable tukui castbar
 	["cblatency"] = false,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
+	["classiccombo"] = false                            -- display classic combo points (from Tukui 13 or less)
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
 	["targetauras"] = true,                             -- enable auras on target unit frame

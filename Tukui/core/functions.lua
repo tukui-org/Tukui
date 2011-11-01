@@ -1030,7 +1030,7 @@ T.DruidBarDisplay = function(self, login)
 			flash:Hide()
 		end
 		shadow:Point("TOPLEFT", -4, 12)
-		bg:SetAlpha(1)			
+		bg:SetAlpha(1)
 	else
 		txt:Hide()
 		flash:Show()
