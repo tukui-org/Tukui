@@ -100,7 +100,11 @@ local function UpdateLFG()
 	MiniMapLFGFrame:Point("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, 1)
 	MiniMapLFGFrameBorder:Hide()
 end
-hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
+if T.toc < 40300 then
+	hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
+else
+	hooksecurefunc("MiniMapLFG_Update", UpdateLFG)
+end
 
 -- reskin LFG dropdown
 local status
