@@ -164,7 +164,7 @@ Minimap:SetScript("OnMouseUp", function(self, btn)
 		ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, TukuiMinimap, xoff, T.Scale(-2))
 	elseif btn == "MiddleButton" then
 		if not TukuiMicroMenu then return end
-		if position:match("RIGHT") then xoff = T.Scale(-33) end
+		if position:match("RIGHT") then xoff = T.Scale(-14) end
 		ToggleDropDownMenu(1, nil, TukuiMicroMenu, TukuiMinimap, xoff, T.Scale(-2))
 	else
 		Minimap_OnClick(self)

@@ -8,6 +8,7 @@ local function LoadSkin()
 		"RaidFinderFrameRoleInset",
 		"RaidFinderQueueFrameScrollFrame",
 		"RaidFinderQueueFrame",
+		"RaidFinderQueueFrameIneligibleFrame",
 	}
 
 	local buttons = {

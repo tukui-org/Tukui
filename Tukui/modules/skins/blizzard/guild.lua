@@ -33,6 +33,7 @@ local function LoadSkin()
 		"GuildInfoFrameApplicants",
 		"GuildNewsBossModel",
 		"GuildNewsBossModelTextFrame",
+		"GuildInfoFrameApplicantsContainerScrollBar",
 	}
 	GuildRewardsFrameVisitText:ClearAllPoints()
 	GuildRewardsFrameVisitText:SetPoint("TOP", GuildRewardsFrame, "TOP", 0, 30)
@@ -185,6 +186,7 @@ local function LoadSkin()
 	
 	--Info Frame
 	T.SkinScrollBar(GuildInfoDetailsFrameScrollBar)
+	T.SkinScrollBar(GuildInfoFrameApplicantsContainerScrollBar)
 	
 	for i=1, 3 do
 		_G["GuildInfoFrameTab"..i]:StripTextures()
