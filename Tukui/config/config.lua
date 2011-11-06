@@ -22,6 +22,7 @@ C["unitframes"] = {
 	["cblatency"] = false,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["classiccombo"] = false,                           -- display classic combo points (from Tukui 13 or less)
+	["movecombobar"] = true,                            -- display the new combo bar (t14+) from target to player (ROGUE ONLY)
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
 	["targetauras"] = true,                             -- enable auras on target unit frame

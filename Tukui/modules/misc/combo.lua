@@ -1,7 +1,13 @@
 -- Combo Points for Tukui 14+
 
 local T, C, L = unpack(select(2, ...))
-local parent = TukuiTarget
+local parent = TukuiPlayer
+local stick
+
+if T.myclass == "ROGUE" and C.unitframes.movecombobar then
+	parent = TukuiPlayer
+	stick = true
+end
 
 if not parent or C.unitframes.classiccombo then return end
 
@@ -17,27 +23,10 @@ local Colors = {
 	[5] = {.33, .63, .33, 1},
 }
 
-local function OnUpdate(self)
-	local points
+local function UpdateBuffs(self, points)
+	if stick then return end
 	
-	if UnitHasVehicleUI("player") then
-		points = GetComboPoints("vehicle", "target")
-	else
-		points = GetComboPoints("player", "target")
-	end
-
-	if points then
-		-- update combos display
-		for i = 1, MAX_COMBO_POINTS do
-			if i <= points then
-				self[i]:SetAlpha(1)
-			else
-				self[i]:SetAlpha(.2)
-			end
-		end
-	end
-	
-	if points > 0 then
+	if points and points > 0 then
 		self:Show()
 		
 		-- update player frame shadow
@@ -66,6 +55,29 @@ local function OnUpdate(self)
 	end
 end
 
+local function OnUpdate(self)
+	local points
+	
+	if UnitHasVehicleUI("player") then
+		points = GetComboPoints("vehicle", "target")
+	else
+		points = GetComboPoints("player", "target")
+	end
+
+	if points then
+		-- update combos display
+		for i = 1, MAX_COMBO_POINTS do
+			if i <= points then
+				self[i]:SetAlpha(1)
+			else
+				self[i]:SetAlpha(.2)
+			end
+		end
+	end
+
+	UpdateBuffs(self, points)
+end
+
 -- create the bar
 local TukuiCombo = CreateFrame("Frame", "TukuiCombo", parent)
 TukuiCombo:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, 1)
@@ -77,6 +89,7 @@ TukuiCombo:RegisterEvent("PLAYER_ENTERING_WORLD")
 TukuiCombo:RegisterEvent("UNIT_COMBO_POINTS")
 TukuiCombo:RegisterEvent("PLAYER_TARGET_CHANGED")
 TukuiCombo:SetScript("OnEvent", OnUpdate)
+TukuiCombo:Show()
 
 -- create combos
 for i = 1, 5 do
@@ -93,5 +106,9 @@ for i = 1, 5 do
 	else
 		TukuiCombo[i]:Point("LEFT", TukuiCombo[i-1], "RIGHT", 1, 0)
 		TukuiCombo[i]:Width(parent:GetWidth() / 5 - 1)
+	end
+	
+	if stick then
+		shadow:Point("TOPLEFT", -4, 12)
 	end
 end

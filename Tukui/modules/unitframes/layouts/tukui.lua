@@ -632,7 +632,7 @@ local function Shared(self, unit)
 			local buffs = CreateFrame("Frame", nil, self)
 			local debuffs = CreateFrame("Frame", nil, self)
 			
-			buffs:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 4)
+			buffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 			
 			if T.lowversion then
 				buffs:SetHeight(21.5)
