@@ -11,7 +11,7 @@
 		http://www.tukui.org/downloads/Tukui_CustomConfig.zip
 		
 		Don't forget to add in the .toc, in your edited Tukui version: Tukui_CustomConfig
-		Add it to: ## RequiredDeps
+		Add it to: ## OptionalDeps
 
 		That's it! That's all!
 --]]
