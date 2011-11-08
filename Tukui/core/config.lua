@@ -6,7 +6,7 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 local myPlayerRealm = GetCVar("realmName")
 local myPlayerName  = UnitName("player")
 
-if not IsAddOnLoaded("TukUI_ConfigUI") then return end
+if not IsAddOnLoaded("Tukui_ConfigUI") then return end
 
 if not TukuiConfigAll then TukuiConfigAll = {} end		
 if (TukuiConfigAll[myPlayerRealm] == nil) then TukuiConfigAll[myPlayerRealm] = {} end
