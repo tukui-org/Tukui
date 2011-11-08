@@ -255,7 +255,7 @@ oUF:RegisterStyle('TukuiHealR25R40', Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("TukuiHealR25R40")	
 	if C["unitframes"].gridonly ~= true then
-		local raid = self:SpawnHeader("TukuiGrid", nil, "custom [@raid16,exists] show;hide",
+		local raid = self:SpawnHeader("TukuiRaidHealerGrid", nil, "custom [@raid16,exists] show;hide",
 			'oUF-initialConfigFunction', [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute('initial-width'))
