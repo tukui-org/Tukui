@@ -5,12 +5,12 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 	local events = {SPELL_HEAL = true, SPELL_PERIODIC_HEAL = true}
-	local HPS_FEED = CreateFrame("Frame")
+	local HPS_FEED = CreateFrame("Frame", "TukuiStatHeal")
 	local player_id = UnitGUID("player")
 	local actual_heals_total, cmbt_time = 0
 	local amount_healed, amount_over_healed = 0
  
-	local hText = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local hText = TukuiInfoLeft:CreateFontString("TukuiStatHealText", "OVERLAY")
 	hText:SetFont(C.media.font, C["datatext"].fontsize)
 	hText:SetText("0.0 ",L.datatext_hps)
  

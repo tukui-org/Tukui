@@ -13,12 +13,12 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -----------------------------------------
 
 if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
-	local Stat = CreateFrame("Frame")
+	local Stat = CreateFrame("Frame", "TukuiStatMicroMenu")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatMicroMenuText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].micromenu, Text)
 

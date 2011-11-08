@@ -15,12 +15,12 @@ local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,
 local difficultyInfo = { "N", "N", "H", "H" }
 local curHr, curMin, curAmPm
 
-local Stat = CreateFrame("Frame")
+local Stat = CreateFrame("Frame", "TukuiStatTime")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("MEDIUM")
 Stat:SetFrameLevel(3)
 
-local Text = Stat:CreateFontString(nil, "OVERLAY")
+local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].wowtime, Text)
 

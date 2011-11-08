@@ -3,11 +3,11 @@ if not C["datatext"].regen and not C["datatext"].regen > 0 then return end
 
 local regen
 
-local Stat = CreateFrame("Frame")
+local Stat = CreateFrame("Frame", "TukuiStatRegen")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 
-local Text = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
+local Text = TukuiInfoLeft:CreateFontString("TukuiStatRegenText", "OVERLAY")
 Text:SetFont(C["media"].font, C["datatext"].fontsize)
 Text:SetShadowColor(0, 0, 0)
 Text:SetShadowOffset(1.25, -1.25)
