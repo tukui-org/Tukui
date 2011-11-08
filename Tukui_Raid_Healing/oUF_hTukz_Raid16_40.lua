@@ -277,7 +277,7 @@ oUF:Factory(function(self)
 		)
 		raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
 	else
-		local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party",
+		local raid = self:SpawnHeader("TukuiRaidHealerGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute('initial-width'))

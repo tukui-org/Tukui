@@ -210,7 +210,7 @@ oUF:RegisterStyle('TukuiHealR01R15', Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("TukuiHealR01R15")
 
-	local raid = self:SpawnHeader("oUF_TukuiHealRaid0115", nil, "custom [@raid16,exists] hide;show", 
+	local raid = self:SpawnHeader("TukuiRaidHealer15", nil, "custom [@raid16,exists] hide;show", 
 	'oUF-initialConfigFunction', [[
 		local header = self:GetParent()
 		self:SetWidth(header:GetAttribute('initial-width'))

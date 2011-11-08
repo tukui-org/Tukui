@@ -157,25 +157,29 @@ local function LoadSkin()
 	FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
 	T.SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton,ChannelFrameDaughterFrame)
 	T.SkinCloseButton(FriendsFrameCloseButton,FriendsFrame.backdrop)
-	FriendsFrameCloseButton:ClearAllPoints()
-	FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)
+	if T.toc >= 40300 then
+		FriendsFrameCloseButton:ClearAllPoints()
+		FriendsFrameCloseButton:SetPoint("TOPRIGHT", 0, 0)	
+	end
 	T.SkinDropDownBox(WhoFrameDropDown,150)
 	T.SkinDropDownBox(FriendsFrameStatusDropDown,70)
-	T.SkinButton(FriendsTabHeaderSoRButton)
-	FriendsTabHeaderSoRButton:StyleButton()
-	FriendsTabHeaderSoRButton.icon:SetTexCoord(.08, .92, .08, .92)
-	FriendsTabHeaderSoRButton.icon:ClearAllPoints()
-	FriendsTabHeaderSoRButton.icon:Point("TOPLEFT", 2, -2)
-	FriendsTabHeaderSoRButton.icon:Point("BOTTOMRIGHT", -2, 2)
-	
-	ScrollOfResurrectionFrame:StripTextures()
-	ScrollOfResurrectionFrameNoteFrame:StripTextures()
-	ScrollOfResurrectionFrame:SetTemplate("Transparent")
-	ScrollOfResurrectionFrameNoteFrame:SetTemplate("Overlay")
-	T.SkinButton(ScrollOfResurrectionFrameAcceptButton)
-	T.SkinButton(ScrollOfResurrectionFrameCancelButton)
-	T.SkinEditBox(ScrollOfResurrectionFrameTargetEditBox)
-	ScrollOfResurrectionFrameTargetEditBox:Height(ScrollOfResurrectionFrameTargetEditBox:GetHeight() - 5)
+	if T.toc >= 40300 then
+		T.SkinButton(FriendsTabHeaderSoRButton)
+		FriendsTabHeaderSoRButton:StyleButton()
+		FriendsTabHeaderSoRButton.icon:SetTexCoord(.08, .92, .08, .92)
+		FriendsTabHeaderSoRButton.icon:ClearAllPoints()
+		FriendsTabHeaderSoRButton.icon:Point("TOPLEFT", 2, -2)
+		FriendsTabHeaderSoRButton.icon:Point("BOTTOMRIGHT", -2, 2)
+
+		ScrollOfResurrectionFrame:StripTextures()
+		ScrollOfResurrectionFrameNoteFrame:StripTextures()
+		ScrollOfResurrectionFrame:SetTemplate("Transparent")
+		ScrollOfResurrectionFrameNoteFrame:SetTemplate("Overlay")
+		T.SkinButton(ScrollOfResurrectionFrameAcceptButton)
+		T.SkinButton(ScrollOfResurrectionFrameCancelButton)
+		T.SkinEditBox(ScrollOfResurrectionFrameTargetEditBox)
+		ScrollOfResurrectionFrameTargetEditBox:Height(ScrollOfResurrectionFrameTargetEditBox:GetHeight() - 5)
+	end
 
 	--Bottom Tabs
 	for i=1, 4 do
