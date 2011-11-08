@@ -248,6 +248,7 @@ option2.Text:SetPoint("CENTER")
 
 local close = CreateFrame("Button", "TukuiInstallCloseButton", f, "UIPanelCloseButton")
 close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
+T.SkinCloseButton(close)
 close:SetScript("OnClick", function()
 	f:Hide()
 end)

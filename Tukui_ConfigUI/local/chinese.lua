@@ -105,6 +105,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesonlyselfdebuffs = "只在目标框体上显示你释放的DEBUFF"
 	TukuiConfigUILocalization.unitframesshowfocustarget = "启用焦点目标"
 	TukuiConfigUILocalization.unitframesbordercolor = "设置为默认的边框颜色"
+	TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"

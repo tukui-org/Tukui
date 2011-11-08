@@ -1,7 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
--- This is the file for our action bars settings in game via mouseover buttons around action bars.
--- I really hope you'll understand the code, because I was totally drunk when I wrote this file.
--- At least, it work fine. :P (lol)
+local T, C, L = unpack(select(2, ...))
 
 local function ShowOrHideBar(bar, button)
 	local db = TukuiDataPerChar
@@ -166,8 +163,7 @@ local function MoveButtonBar(button, bar)
 	end
 end
 
-local function DrPepper(self, bar) -- guess what! :P
-	-- yep, you cannot drink DrPepper while in combat. :(
+local function UpdateBar(self, bar) -- guess what! :P
 	if InCombatLockdown() then print(ERR_NOT_IN_COMBAT) return end
 	
 	local button = self
@@ -187,7 +183,7 @@ end
 TukuiBar2Button:SetTemplate("Default")
 TukuiBar2Button:RegisterForClicks("AnyUp")
 TukuiBar2Button:SetAlpha(0)
-TukuiBar2Button:SetScript("OnClick", function(self) DrPepper(self, TukuiBar2) end)
+TukuiBar2Button:SetScript("OnClick", function(self) UpdateBar(self, TukuiBar2) end)
 TukuiBar2Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar2Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar2Button.text = T.SetFontString(TukuiBar2Button, C.media.uffont, 20)
@@ -205,7 +201,7 @@ end
 TukuiBar3Button:SetTemplate("Default")
 TukuiBar3Button:RegisterForClicks("AnyUp")
 TukuiBar3Button:SetAlpha(0)
-TukuiBar3Button:SetScript("OnClick", function(self) DrPepper(self, TukuiBar3) end)
+TukuiBar3Button:SetScript("OnClick", function(self) UpdateBar(self, TukuiBar3) end)
 TukuiBar3Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar3Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar3Button.text = T.SetFontString(TukuiBar3Button, C.media.uffont, 20)
@@ -219,7 +215,7 @@ TukuiBar4Button:Point("TOP", TukuiBar1, "BOTTOM", 0, -2)
 TukuiBar4Button:SetTemplate("Default")
 TukuiBar4Button:RegisterForClicks("AnyUp")
 TukuiBar4Button:SetAlpha(0)
-TukuiBar4Button:SetScript("OnClick", function(self) DrPepper(self, TukuiBar4) end)
+TukuiBar4Button:SetScript("OnClick", function(self) UpdateBar(self, TukuiBar4) end)
 TukuiBar4Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar4Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.uffont, 30)
@@ -233,7 +229,7 @@ TukuiBar5ButtonTop:Point("BOTTOM", TukuiBar5, "TOP", 0, 2)
 TukuiBar5ButtonTop:SetTemplate("Default")
 TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
 TukuiBar5ButtonTop:SetAlpha(0)
-TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
+TukuiBar5ButtonTop:SetScript("OnClick", function(self) UpdateBar(self, TukuiBar5) end)
 TukuiBar5ButtonTop:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar5ButtonTop:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.uffont, 20)
@@ -248,7 +244,7 @@ TukuiBar5ButtonBottom:Point("TOP", TukuiBar5, "BOTTOM", 0, -2)
 TukuiBar5ButtonBottom:SetTemplate("Default")
 TukuiBar5ButtonBottom:RegisterForClicks("AnyUp")
 TukuiBar5ButtonBottom:SetAlpha(0)
-TukuiBar5ButtonBottom:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
+TukuiBar5ButtonBottom:SetScript("OnClick", function(self) UpdateBar(self, TukuiBar5) end)
 TukuiBar5ButtonBottom:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar5ButtonBottom:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonBottom.text = T.SetFontString(TukuiBar5ButtonBottom, C.media.uffont, 20)
@@ -283,10 +279,6 @@ vehicleright.text:Point("CENTER", 1, 1)
 vehicleright.text:SetText("|cff4BAF4CV|r")
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
---------------------------------------------------------------
--- DrPepper taste is really good with Vodka. 
---------------------------------------------------------------
-
 local init = CreateFrame("Frame")
 init:RegisterEvent("VARIABLES_LOADED")
 init:SetScript("OnEvent", function(self, event)
@@ -294,15 +286,15 @@ init:SetScript("OnEvent", function(self, event)
 	local db = TukuiDataPerChar
 	
 	if not T.lowversion and db.hidebar2 then 
-		DrPepper(TukuiBar2Button, TukuiBar2)
+		UpdateBar(TukuiBar2Button, TukuiBar2)
 	end
 	
 	if not T.lowversion and db.hidebar3 then
-		DrPepper(TukuiBar3Button, TukuiBar3)
+		UpdateBar(TukuiBar3Button, TukuiBar3)
 	end
 	
 	if db.hidebar4 then
-		DrPepper(TukuiBar4Button, TukuiBar4)
+		UpdateBar(TukuiBar4Button, TukuiBar4)
 	end
 		
 	if T.lowversion then
@@ -324,6 +316,6 @@ init:SetScript("OnEvent", function(self, event)
 	end
 	
 	if db.hidebar5 then
-		DrPepper(TukuiBar5ButtonTop, TukuiBar5)
+		UpdateBar(TukuiBar5ButtonTop, TukuiBar5)
 	end
 end)

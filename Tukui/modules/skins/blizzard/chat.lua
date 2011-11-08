@@ -239,6 +239,8 @@ local function LoadSkin()
 	ChatConfigFrame:Size(680,596)
 	ChatConfigFrameHeader:ClearAllPoints()
 	ChatConfigFrameHeader:SetPoint("TOP", ChatConfigFrame, 0, -5)
+	
+	T.SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

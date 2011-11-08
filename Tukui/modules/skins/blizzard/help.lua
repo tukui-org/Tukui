@@ -91,6 +91,7 @@ local function LoadSkin()
 	HelpFrame:CreateBackdrop("Default")
 	T.SkinEditBox(HelpFrameKnowledgebaseSearchBox)
 	T.SkinScrollBar(HelpFrameKnowledgebaseScrollFrameScrollBar)
+	T.SkinScrollBar(HelpFrameTicketScrollFrameScrollBar)
 	T.SkinCloseButton(HelpFrameCloseButton, HelpFrame.backdrop)	
 	T.SkinCloseButton(HelpFrameKnowledgebaseErrorFrameCloseButton, HelpFrameKnowledgebaseErrorFrame.backdrop)
 
