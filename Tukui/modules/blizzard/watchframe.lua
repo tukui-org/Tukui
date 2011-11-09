@@ -79,6 +79,7 @@ local function setup()
 	WatchFrameCollapseExpandButton:SetPushedTexture("")
 	WatchFrameCollapseExpandButton:SetHighlightTexture("")
 	WatchFrameCollapseExpandButton:SetTemplate("Default")
+	T.SkinCloseButton(WatchFrameCollapseExpandButton)
 	WatchFrameCollapseExpandButton:HookScript("OnClick", function(self) 
 		if WatchFrame.collapsed then 
 			self.t:SetText("V") 

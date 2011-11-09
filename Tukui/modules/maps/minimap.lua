@@ -175,7 +175,7 @@ end)
 -- Mouseover map, displaying zone and coords
 ----------------------------------------------------------------------------------------
 
-local m_zone = CreateFrame("Frame","TukuiMinimapZone,TukuiMinimap)
+local m_zone = CreateFrame("Frame","TukuiMinimapZone",TukuiMinimap)
 m_zone:CreatePanel("Default", 0, 20, "TOPLEFT", TukuiMinimap, "TOPLEFT", 2,-2)
 m_zone:SetFrameLevel(5)
 m_zone:SetFrameStrata("LOW")
@@ -195,7 +195,7 @@ m_coord:CreatePanel("Default", 40, 20, "BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT",
 m_coord:SetFrameStrata("LOW")
 m_coord:SetAlpha(0)
 
-local m_coord_text = m_coord:CreateFontString("TukuiMinimapCoordText,"Overlay")
+local m_coord_text = m_coord:CreateFontString("TukuiMinimapCoordText","Overlay")
 m_coord_text:SetFont(C["media"].font,12)
 m_coord_text:Point("Center",-1,0)
 m_coord_text:SetAlpha(0)
