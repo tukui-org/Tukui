@@ -65,14 +65,12 @@ TukuiBar7:SetAlpha(0)
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
 petbg:CreatePanel("Default", T.petbuttonsize + (T.petbuttonspacing * 2), (T.petbuttonsize * 10) + (T.petbuttonspacing * 11), "RIGHT", TukuiBar5, "LEFT", -6, 0)
-petbg:SetAlpha(0)
 
 local ltpetbg1 = CreateFrame("Frame", "TukuiLineToPetActionBarBackground", petbg)
 ltpetbg1:CreatePanel("Default", 24, 265, "LEFT", petbg, "RIGHT", 0, 0)
 ltpetbg1:SetParent(petbg)
 ltpetbg1:SetFrameStrata("BACKGROUND")
 ltpetbg1:SetFrameLevel(0)
-ltpetbg1:SetAlpha(0)
 
 -- INVISIBLE FRAME COVERING BOTTOM ACTIONBARS JUST TO PARENT UF CORRECTLY
 local invbarbg = CreateFrame("Frame", "InvTukuiActionBarBackground", UIParent)

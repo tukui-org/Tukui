@@ -341,8 +341,8 @@ MaxGroup:SetScript("OnEvent", function(self)
 	local inInstance, instanceType = IsInInstance()
 	local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
 	if inInstance and instanceType == "raid" and maxPlayers ~= 40 then
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5")
+		TukuiRaidHealerGrid:SetAttribute("groupFilter", "1,2,3,4,5")
 	else
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		TukuiRaidHealerGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 	end
 end)
