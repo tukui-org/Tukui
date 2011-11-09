@@ -106,6 +106,8 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesshowfocustarget = "启用焦点目标"
 	TukuiConfigUILocalization.unitframesbordercolor = "设置为默认的边框颜色"
 	TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
+	TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
+	TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"

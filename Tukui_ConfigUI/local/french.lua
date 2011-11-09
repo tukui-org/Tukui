@@ -60,6 +60,8 @@ if GetLocale() == "frFR" then
 	TukuiConfigUILocalization.datatexttalent = "Display talents (0 for disabled)"
 	TukuiConfigUILocalization.datatextcalltoarms = "Call to Arms & Dungeons (0 for disabled)"
 	TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
+	TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
+	TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
 
 	 
 	-- unit frames

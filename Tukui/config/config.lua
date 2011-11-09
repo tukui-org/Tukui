@@ -52,6 +52,7 @@ C["unitframes"] = {
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = false,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
+	["gridvertical"] = false,                           -- grid group displayed vertically
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
