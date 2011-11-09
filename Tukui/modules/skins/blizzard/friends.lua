@@ -152,9 +152,7 @@ local function LoadSkin()
 	hooksecurefunc("FriendsFrame_OnEvent", UpdateWhoSkins)
 
 	ChannelFrameDaughterFrame:CreateBackdrop("Default")
-	FriendsFrame:CreateBackdrop("Default")
-	FriendsFrame.backdrop:Point( "TOPLEFT", FriendsFrame, "TOPLEFT", 11,-12)
-	FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
+	
 	T.SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton,ChannelFrameDaughterFrame)
 	T.SkinCloseButton(FriendsFrameCloseButton,FriendsFrame.backdrop)
 	if T.toc >= 40300 then
@@ -249,9 +247,11 @@ local function LoadSkin()
 		WhoFrameEditBox:Point("BOTTOM", 0, 32)
 		WhoFrameEditBox:Point("LEFT", 6, 0)
 		WhoFrameEditBox:Point("RIGHT", -6, 0)
-		
-		-- go
 		FriendsFrame:SetTemplate("Default")
+	else
+		FriendsFrame:CreateBackdrop("Default")
+		FriendsFrame.backdrop:Point( "TOPLEFT", FriendsFrame, "TOPLEFT", 11,-12)
+		FriendsFrame.backdrop:Point( "BOTTOMRIGHT", FriendsFrame, "BOTTOMRIGHT", -35, 76)
 	end
 end
 
