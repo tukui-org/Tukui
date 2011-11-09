@@ -15,5 +15,6 @@ local\taiwan.lua
 local\spanish.lua
 local\korean.lua
 local\chinese.lua
+local\portuguese.lua
 
 core.lua
