@@ -11,7 +11,7 @@ local editBox = nil
 local isf = nil
 
 local function CreatCopyFrame()
-	frame = CreateFrame("Frame", "CopyFrame", UIParent)
+	frame = CreateFrame("Frame", "TukuiChatCopyFrame", UIParent)
 	frame:SetTemplate("Default")
 	if T.lowversion then
 		frame:Width(TukuiBar1:GetWidth() + 10)
