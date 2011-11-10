@@ -1,4 +1,4 @@
-if GetLocale() == "frFR" then
+﻿if GetLocale() == "frFR" then
 	-- translated by ?
 
 	-- general

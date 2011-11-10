@@ -1,4 +1,4 @@
-if GetLocale() == "zhTW" then
+﻿if GetLocale() == "zhTW" then
 	-- translated by ?
 
 	-- general

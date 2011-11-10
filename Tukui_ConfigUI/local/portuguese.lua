@@ -1,4 +1,4 @@
-if GetLocale() == "ptBR" then
+﻿if GetLocale() == "ptBR" then
 	-- translated by ?
 
 	-- general

@@ -1,4 +1,4 @@
-if GetLocale() == "deDE" then
+﻿if GetLocale() == "deDE" then
 	-- translated by ?
 
 	-- general

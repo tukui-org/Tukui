@@ -1,4 +1,4 @@
-if GetLocale() == "esES" then
+﻿if GetLocale() == "esES" then
 	-- translated by ?
 
 	-- general

@@ -1,4 +1,4 @@
-if GetLocale() == "ruRU" then
+﻿if GetLocale() == "ruRU" then
 	-- translated by ?
 
 	-- general
