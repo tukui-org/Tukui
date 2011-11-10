@@ -5,7 +5,7 @@ if C["chat"].enable ~= true then return end
 -- SETUP TUKUI CHATS
 -----------------------------------------------------------------------
 
-local TukuiChat = CreateFrame("Frame")
+local TukuiChat = CreateFrame("Frame", "TukuiChat")
 local tabalpha = 1
 local tabnoalpha = 0
 local _G = _G
