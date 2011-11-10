@@ -25,11 +25,13 @@ local OnEnter = function(self)
 end
 
 local OnLeave = function(self)
-	if(self.quality > 1) then
-		local color = ITEM_QUALITY_COLORS[self.quality]
-		self.drop:SetVertexColor(color.r, color.g, color.b)
-	else
-		self.drop:Hide()
+	if self.quality then
+		if(self.quality > 1) then
+			local color = ITEM_QUALITY_COLORS[self.quality]
+			self.drop:SetVertexColor(color.r, color.g, color.b)
+		else
+			self.drop:Hide()
+		end
 	end
 
 	GameTooltip:Hide()
