@@ -57,8 +57,13 @@ buffs:SetPoint("TOPRIGHT", UIParent, -184, -22)
 buffs:SetAttribute("filter", "HELPFUL")
 buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "ProxyButton", buffs, "TukuiAurasProxyTemplate"))
 buffs:SetAttribute("consolidateHeader", consolidate)
-buffs:SetAttribute("consolidateTo", filter)
-buffs:SetAttribute("includeWeapons", 1)
+
+-- blizzard introduced bugs with secure aura headers in 4.3, disabling it until fixed
+if T.toc < 40300 then
+	buffs:SetAttribute("consolidateTo", filter)
+	buffs:SetAttribute("includeWeapons", 1)
+end
+
 buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
 
