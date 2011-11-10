@@ -8,6 +8,7 @@ if C["datatext"].power and C["datatext"].power > 0 then
 	local Stat = CreateFrame("Frame", "TukuiStatPower")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.power
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatPowerText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

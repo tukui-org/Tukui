@@ -7,6 +7,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 	local Stat = CreateFrame("Frame", "TukuiStatCrit")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.crit
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatCritText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

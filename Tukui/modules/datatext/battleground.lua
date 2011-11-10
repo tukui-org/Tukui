@@ -62,6 +62,7 @@ bgframe:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 
 local Stat = CreateFrame("Frame", "TukuiStatBattleGround")
 Stat:EnableMouse(true)
+Stat.Option = C.datatext.battleground
 
 local Text1  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText1", "OVERLAY")
 Text1:SetFont(C.media.font, C["datatext"].fontsize)

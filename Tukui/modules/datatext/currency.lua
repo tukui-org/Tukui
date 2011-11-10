@@ -8,6 +8,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.currency
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatCurrencyText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

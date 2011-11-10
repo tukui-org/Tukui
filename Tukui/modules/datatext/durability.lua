@@ -8,6 +8,7 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.dur
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatDurabilityText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

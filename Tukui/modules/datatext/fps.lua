@@ -9,6 +9,7 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	Stat:SetFrameStrata("BACKGROUND")	
 	Stat:SetFrameLevel(3)
 	Stat:EnableMouse(true)
+	Stat.Option = C.datatext.fps
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatFPSText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

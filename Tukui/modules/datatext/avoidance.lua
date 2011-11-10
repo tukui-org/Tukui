@@ -8,6 +8,7 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.avd
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatAvoidanceText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

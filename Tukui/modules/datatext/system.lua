@@ -10,6 +10,7 @@ Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 Stat:EnableMouse(true)
+Stat.Option = C.datatext.system
 Stat.tooltip = false
 
 local Text  = TukuiInfoLeft:CreateFontString("TukuiStatSystemText", "OVERLAY")

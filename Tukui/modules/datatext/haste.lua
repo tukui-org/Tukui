@@ -7,6 +7,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 	local Stat = CreateFrame("Frame", "TukuiStatHaste")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.haste
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatHasteText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

@@ -17,6 +17,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.micromenu
 
 	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatMicroMenuText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)

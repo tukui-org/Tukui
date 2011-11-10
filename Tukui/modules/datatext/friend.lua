@@ -30,6 +30,7 @@ local Stat = CreateFrame("Frame", "TukuiStatFriends")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
+Stat.Option = C.datatext.friends
 
 local Text  = TukuiInfoLeft:CreateFontString("TukuiStatFriendsText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)

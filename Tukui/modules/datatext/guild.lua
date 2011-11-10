@@ -24,6 +24,7 @@ local Stat = CreateFrame("Frame", "TukuiStatGuild")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
+Stat.Option = C.datatext.guild
 Stat.update = false
 
 local Text = TukuiInfoLeft:CreateFontString("TukuiStatGuildText", "OVERLAY")
