@@ -105,9 +105,9 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesonlyselfdebuffs = "只在目标框体上显示你释放的DEBUFF"
 	TukuiConfigUILocalization.unitframesshowfocustarget = "启用焦点目标"
 	TukuiConfigUILocalization.unitframesbordercolor = "设置为默认的边框颜色"
-	TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
-	TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
-	TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
+	TukuiConfigUILocalization.unitframesmovecombobar = "在目标框体上移动战斗条 (仅潜行者)"
+	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典战斗条样式"
+	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"

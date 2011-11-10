@@ -122,7 +122,7 @@ if T.client == "koKR" then
 	L.popup_install_no = "아니오"
 	L.popup_reset_yes = "예"
 	L.popup_reset_no = "아니오"
-	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
+	L.popup_fix_ab = "귀하의 작업 표시줄에 뭔가 문제가 있어요. 당신은 reloadui 그것을 해결시겠습니까?"
  
 	L.merchant_repairnomoney = "수리에 필요한 돈이 충분하지 않습니다!"
 	L.merchant_repaircost = "모든 아이템이 수리되었습니다: "
@@ -170,8 +170,8 @@ if T.client == "koKR" then
 	L.bags_stackend = "재정리 완료."
 	L.bags_rightclick_search = "검색하려면 오른쪽 클릭"
 	
-	L.loot_fish = "Fishy loot"
-	L.loot_empty = "Empty slot"
+	L.loot_fish = "전리품"
+	L.loot_empty = "빈 슬롯"
  
 	L.chat_invalidtarget = "잘못된 대상"
  
@@ -229,7 +229,7 @@ if T.client == "koKR" then
 	L.move_achievements = "업적창 이동"
 	L.move_roll = "주사위 창 이동"
 	L.move_vehicle = "탈것 창 이동"
-	L.move_extrabutton = "Extra Button"
+	L.move_extrabutton = "추가 버튼"
 	
 	-- tuto/install
 	L.install_header_1 = "환영합니다"
