@@ -1,7 +1,7 @@
 -- Combo Points for Tukui 14+
 
 local T, C, L = unpack(select(2, ...))
-local parent = TukuiPlayer
+local parent = TukuiTarget
 local stick
 
 if T.myclass == "ROGUE" and C.unitframes.movecombobar then
