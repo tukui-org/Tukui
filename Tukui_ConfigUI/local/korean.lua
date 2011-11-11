@@ -61,7 +61,7 @@
 	 
 	-- unit frames
 	TukuiConfigUILocalization.unitframes = "개체창"
-	TukuiConfigUILocalization.unitframescombatfeedback = "C플레이어창과 대상창에 받는 피해량 및 치유량을 보여줌"
+	TukuiConfigUILocalization.unitframescombatfeedback = "플레이어창과 대상창에 받는 피해량 및 치유량을 보여줌"
 	TukuiConfigUILocalization.unitframesrunebar = "죽음의 기사 룬바를 사용"
 	TukuiConfigUILocalization.unitframesauratimer = "강화 및 약화 효과의 지속시간 타이머를 사용"
 	TukuiConfigUILocalization.unitframestotembar = "주술사 토템 타이머를 사용"
