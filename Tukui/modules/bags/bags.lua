@@ -297,7 +297,7 @@ function Stuffing:SlotNew (bag, slot)
 	end
 
 	if not ret.frame then
-		ret.frame = CreateFrame("Button", "StuffingBag" .. bag .. "_" .. slot, self.bags[bag], tpl)
+		ret.frame = CreateFrame("Button", "TukuiBag_" .. bag .. "_" .. slot, self.bags[bag], tpl)
 		ret.frame:SetTemplate()
 		ret.frame:Height(31)
 		ret.frame:Width(31)
