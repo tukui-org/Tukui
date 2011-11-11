@@ -27,7 +27,7 @@ Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.guild
 Stat.update = false
 
-local Text = TukuiInfoLeft:CreateFontString("TukuiStatGuildText", "OVERLAY")
+local Text = Stat:CreateFontString("TukuiStatGuildText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].guild, Text)
 

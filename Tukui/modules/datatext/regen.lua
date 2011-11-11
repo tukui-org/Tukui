@@ -8,7 +8,7 @@ Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.regen
 
-local Text = TukuiInfoLeft:CreateFontString("TukuiStatRegenText", "OVERLAY")
+local Text = Stat:CreateFontString("TukuiStatRegenText", "OVERLAY")
 Text:SetFont(C["media"].font, C["datatext"].fontsize)
 Text:SetShadowColor(0, 0, 0)
 Text:SetShadowOffset(1.25, -1.25)

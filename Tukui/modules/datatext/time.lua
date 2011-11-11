@@ -19,6 +19,7 @@ local Stat = CreateFrame("Frame", "TukuiStatTime")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("MEDIUM")
 Stat:SetFrameLevel(3)
+Stat.Option = C.datatext.wowtime
 
 local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)

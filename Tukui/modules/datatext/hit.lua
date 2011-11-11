@@ -9,7 +9,7 @@ if not C["datatext"].hit == nil or C["datatext"].hit > 0 then
 	local Stat = CreateFrame("Frame", "TukuiStatHit")
 	Stat.Option = C.datatext.hit
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatHitText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatHitText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].hit, Text)
 

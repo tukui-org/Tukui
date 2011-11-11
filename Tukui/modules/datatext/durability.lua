@@ -10,7 +10,7 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.dur
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatDurabilityText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatDurabilityText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].dur, Text)
 

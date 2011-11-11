@@ -11,7 +11,7 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.calltoarms
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatCallToArmsText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatCallToArmsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	Text:SetShadowOffset(T.mult, -T.mult)
 	Text:SetShadowColor(0, 0, 0, 0.4)

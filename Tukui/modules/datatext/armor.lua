@@ -9,7 +9,7 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatArmorText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatArmorText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].armor, Text)
 

@@ -10,7 +10,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.bags
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatBagsText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatBagsText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].bags, Text)
 

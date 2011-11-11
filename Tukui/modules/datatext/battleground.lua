@@ -60,21 +60,21 @@ bgframe:SetScript("OnEnter", function(self)
 end) 
 bgframe:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 
-local Stat = CreateFrame("Frame", "TukuiStatBattleGround")
+local Stat = CreateFrame("Frame", "TukuiStatBattleGround", UIParent)
 Stat:EnableMouse(true)
 Stat.Option = C.datatext.battleground
 
-local Text1  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText1", "OVERLAY")
+local Text1  = Stat:CreateFontString("TukuiStatBattleGroundText1", "OVERLAY")
 Text1:SetFont(C.media.font, C["datatext"].fontsize)
 Text1:SetPoint("LEFT", TukuiInfoLeftBattleGround, 30, 0.5)
 Text1:SetHeight(TukuiInfoLeft:GetHeight())
 
-local Text2  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText2", "OVERLAY")
+local Text2  = Stat:CreateFontString("TukuiStatBattleGroundText2", "OVERLAY")
 Text2:SetFont(C.media.font, C["datatext"].fontsize)
 Text2:SetPoint("CENTER", TukuiInfoLeftBattleGround, 0, 0.5)
 Text2:SetHeight(TukuiInfoLeft:GetHeight())
 
-local Text3  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText3", "OVERLAY")
+local Text3  = Stat:CreateFontString("TukuiStatBattleGroundText3", "OVERLAY")
 Text3:SetFont(C.media.font, C["datatext"].fontsize)
 Text3:SetPoint("RIGHT", TukuiInfoLeftBattleGround, -30, 0.5)
 Text3:SetHeight(TukuiInfoLeft:GetHeight())

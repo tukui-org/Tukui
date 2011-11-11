@@ -7,7 +7,7 @@ if C.datatext.talent then
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.talent
  
-	local Text = TukuiInfoLeft:CreateFontString("TukuiStatTalentText", "OVERLAY")
+	local Text = Stat:CreateFontString("TukuiStatTalentText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C.datatext.talent, Text)
  

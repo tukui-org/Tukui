@@ -32,7 +32,7 @@ Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.friends
 
-local Text  = TukuiInfoLeft:CreateFontString("TukuiStatFriendsText", "OVERLAY")
+local Text  = Stat:CreateFontString("TukuiStatFriendsText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 Text:SetShadowOffset(T.mult, -T.mult)
 T.PP(C["datatext"].friends, Text)

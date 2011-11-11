@@ -13,7 +13,7 @@ Stat:EnableMouse(true)
 Stat.Option = C.datatext.system
 Stat.tooltip = false
 
-local Text  = TukuiInfoLeft:CreateFontString("TukuiStatSystemText", "OVERLAY")
+local Text  = Stat:CreateFontString("TukuiStatSystemText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].system, Text)
 

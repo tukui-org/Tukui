@@ -9,7 +9,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.crit
 
-	local Text  = TukuiInfoLeft:CreateFontString("TukuiStatCritText", "OVERLAY")
+	local Text  = Stat:CreateFontString("TukuiStatCritText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].crit, Text)
 
