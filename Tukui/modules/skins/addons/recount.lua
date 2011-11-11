@@ -59,6 +59,24 @@ Recount.CreateFrame = function(self, Name, Title, Height, Width, ShowFunc, HideF
 	return frame
 end
 
+-- Skin some others frame, not available outside Recount
+Recount.AddWindow_ = Recount.AddWindow
+Recount.AddWindow = function(self, frame)
+	Recount:AddWindow_(frame)
+
+	-- try to find the reset window and skin it
+	if frame.YesButton then
+		frame:SetTemplate("Default")
+		T.SkinButton(frame.YesButton)
+		T.SkinButton(frame.NoButton)
+	end
+	
+	-- try to find the report button
+	if frame.ReportButton then
+		T.SkinButton(frame.ReportButton)
+	end
+end
+
 -- frame we want to skins
 local elements = {
 	Recount.MainWindow,
@@ -80,62 +98,43 @@ end
 Recount:UpdateBarTextures()
 
 -- skin dropdown
-Recount.MainWindow.FileButton:HookScript("OnClick", function(self) if LibDropdownFrame0 then LibDropdownFrame0:SetTemplate() end end)
+Recount.MainWindow.FileButton:HookScript("OnClick", function(self)
+	if LibDropdownFrame0 then 
+		LibDropdownFrame0:SetTemplate()
+	end
+end)
 
--- reskin button
-Recount.MainWindow.RightButton:SetTemplate("Default")
-Recount.MainWindow.RightButton:SetNormalTexture("")
-Recount.MainWindow.RightButton:SetPushedTexture("")	
-Recount.MainWindow.RightButton:SetHighlightTexture("")
-Recount.MainWindow.RightButton:SetSize(16, 16)
-Recount.MainWindow.RightButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
+-- skin the buttons o main window
+local PB = Recount.MainWindow.CloseButton
+local MWbuttons = {
+	Recount.MainWindow.RightButton,
+	Recount.MainWindow.LeftButton,
+	Recount.MainWindow.ResetButton,
+	Recount.MainWindow.FileButton,
+	Recount.MainWindow.ConfigButton,
+	Recount.MainWindow.ReportButton,
+}
+
+for i = 1, getn(MWbuttons) do
+	local button = MWbuttons[i]
+	if button then
+		button:SetTemplate("Default")
+		button:SetNormalTexture("")
+		button:SetPushedTexture("")	
+		button:SetHighlightTexture("")
+		button:SetSize(16, 16)
+		button:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
+		button.text:SetPoint("CENTER", 1, 1)
+		button:ClearAllPoints()
+		button:SetPoint("RIGHT", PB, "LEFT", -2, 0)
+		PB = button
+	end
+end
+
+-- set our custom text inside main window buttons
 Recount.MainWindow.RightButton.text:SetText(">")
-Recount.MainWindow.RightButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.RightButton:ClearAllPoints()
-Recount.MainWindow.RightButton:SetPoint("RIGHT", Recount.MainWindow.CloseButton, "LEFT", -2, 0)
-
-Recount.MainWindow.LeftButton:SetTemplate("Default")
-Recount.MainWindow.LeftButton:SetNormalTexture("")
-Recount.MainWindow.LeftButton:SetPushedTexture("")	
-Recount.MainWindow.LeftButton:SetHighlightTexture("")
-Recount.MainWindow.LeftButton:SetSize(16, 16)
-Recount.MainWindow.LeftButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
 Recount.MainWindow.LeftButton.text:SetText("<")
-Recount.MainWindow.LeftButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.LeftButton:SetPoint("RIGHT", Recount.MainWindow.RightButton, "LEFT", -2, 0)
-
-Recount.MainWindow.ResetButton:SetTemplate("Default")
-Recount.MainWindow.ResetButton:SetNormalTexture("")
-Recount.MainWindow.ResetButton:SetPushedTexture("")	
-Recount.MainWindow.ResetButton:SetHighlightTexture("")
-Recount.MainWindow.ResetButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
 Recount.MainWindow.ResetButton.text:SetText("R")
-Recount.MainWindow.ResetButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.ResetButton:SetPoint("RIGHT", Recount.MainWindow.LeftButton, "LEFT", -2, 0)
-
-Recount.MainWindow.FileButton:SetTemplate("Default")
-Recount.MainWindow.FileButton:SetNormalTexture("")
-Recount.MainWindow.FileButton:SetPushedTexture("")	
-Recount.MainWindow.FileButton:SetHighlightTexture("")
-Recount.MainWindow.FileButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
 Recount.MainWindow.FileButton.text:SetText("F")
-Recount.MainWindow.FileButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.FileButton:SetPoint("RIGHT", Recount.MainWindow.ResetButton, "LEFT", -2, 0)
-
-Recount.MainWindow.ConfigButton:SetTemplate("Default")
-Recount.MainWindow.ConfigButton:SetNormalTexture("")
-Recount.MainWindow.ConfigButton:SetPushedTexture("")	
-Recount.MainWindow.ConfigButton:SetHighlightTexture("")
-Recount.MainWindow.ConfigButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
 Recount.MainWindow.ConfigButton.text:SetText("C")
-Recount.MainWindow.ConfigButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.ConfigButton:SetPoint("RIGHT", Recount.MainWindow.FileButton, "LEFT", -2, 0)
-
-Recount.MainWindow.ReportButton:SetTemplate("Default")
-Recount.MainWindow.ReportButton:SetNormalTexture("")
-Recount.MainWindow.ReportButton:SetPushedTexture("")	
-Recount.MainWindow.ReportButton:SetHighlightTexture("")
-Recount.MainWindow.ReportButton:FontString("text", C.media.pixelfont, 12, "MONOCHROME")
 Recount.MainWindow.ReportButton.text:SetText("S")
-Recount.MainWindow.ReportButton.text:SetPoint("CENTER", 1, 1)
-Recount.MainWindow.ReportButton:SetPoint("RIGHT", Recount.MainWindow.ConfigButton, "LEFT", -2, 0)
