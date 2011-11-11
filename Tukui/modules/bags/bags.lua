@@ -1,4 +1,7 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...))
+
+-- NOTE for myself, this will need a total rewrite for MoP.
+-- This bag script has become out of control
 
 --[[
 	A featureless, 'pure' version of Stuffing. 
@@ -217,11 +220,11 @@ function Stuffing:BagFrameSlotNew (slot, p)
 		ret.slot = slot
 		slot = slot - 4
 		tpl = "BankItemButtonBagTemplate"
-		ret.frame = CreateFrame("CheckButton", "StuffingBBag" .. slot, p, tpl)
+		ret.frame = CreateFrame("CheckButton", "TukuiBankBag" .. slot, p, tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
-		local icon = _G["StuffingBBag" .. slot .. "IconTexture"]
-		local border = _G["StuffingBBag" .. slot .. "NormalTexture"]
+		local icon = _G["TukuiBankBag" .. slot .. "IconTexture"]
+		local border = _G["TukuiBankBag" .. slot .. "NormalTexture"]
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
 		icon:Point("TOPLEFT", 2, -2)
@@ -238,11 +241,11 @@ function Stuffing:BagFrameSlotNew (slot, p)
 		end
 	else
 		tpl = "BagSlotButtonTemplate"
-		ret.frame = CreateFrame("CheckButton", "StuffingFBag" .. slot .. "Slot", p, tpl)
+		ret.frame = CreateFrame("CheckButton", "TukuiBackBag" .. slot .. "Slot", p, tpl)
 		ret.frame:StyleButton()
 		ret.frame:SetTemplate("Default")
-		local icon = _G["StuffingFBag" .. slot .. "SlotIconTexture"]
-		local border = _G["StuffingFBag" .. slot .. "SlotNormalTexture"]
+		local icon = _G["TukuiBackBag" .. slot .. "SlotIconTexture"]
+		local border = _G["TukuiBackBag" .. slot .. "SlotNormalTexture"]
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
 		icon:Point("TOPLEFT", 2, -2)
@@ -295,6 +298,12 @@ function Stuffing:SlotNew (bag, slot)
 
 	if not ret.frame then
 		ret.frame = CreateFrame("Button", "StuffingBag" .. bag .. "_" .. slot, self.bags[bag], tpl)
+		ret.frame:SetTemplate()
+		ret.frame:Height(31)
+		ret.frame:Width(31)
+		ret.frame:SetPushedTexture("")
+		ret.frame:SetNormalTexture("")
+		ret.frame:StyleButton()
 	end
 
 	ret.bag = bag
@@ -719,21 +728,13 @@ function Stuffing:Layout(lb)
 
 				b.frame:ClearAllPoints()
 				b.frame:Point("TOPLEFT", f, "TOPLEFT", xoff, yoff)
-				b.frame:Height(31)
-				b.frame:Width(31)
-				b.frame:SetPushedTexture("")
-				b.frame:SetNormalTexture("")
+
 				b.frame:Show()
-				b.frame:SetTemplate("Default")
-				b.frame:SetBackdropColor(0, 0, 0, 0) -- we just need border with SetTemplate, not the backdrop. Hopefully this will fix invisible item that some users have.
-				b.frame:StyleButton()
 				
 				-- color fish bag border slot to red
 				if bagType == ST_FISHBAG then b.frame:SetBackdropBorderColor(1, 0, 0) b.frame.lock = true end
 				-- color profession bag slot border ~yellow
 				if bagType == ST_SPECIAL then b.frame:SetBackdropBorderColor(255/255, 243/255,  82/255) b.frame.lock = true end
-				
-				self:SlotUpdate(b)
 				
 				local iconTex = _G[b.frame:GetName() .. "IconTexture"]
 				iconTex:SetTexCoord(.08, .92, .08, .92)
