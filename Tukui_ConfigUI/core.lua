@@ -117,7 +117,7 @@ local function SetValue(group,option,value)
 	end
 
 	if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-		if not TukuiConfigPrivate then TukuiConfig = {} end	
+		if not TukuiConfigPrivate then TukuiConfigPrivate = {} end	
 		if not TukuiConfigPrivate[group] then TukuiConfigPrivate[group] = {} end
 		TukuiConfigPrivate[group][option] = value
 	else
