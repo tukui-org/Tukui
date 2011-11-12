@@ -57,7 +57,7 @@ C["media"] = {
 -- Used to overwrite default medias outside Tukui
 -------------------------------------------------------------------
 
-local settings = TukuiCustomConfig
+local settings = TukuiEditedDefaultConfig
 if settings then
 	local media = settings.media
 	if media then
