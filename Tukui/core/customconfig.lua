@@ -19,7 +19,7 @@
 
 local T, C, L = unpack(select(2, ...))
 
-if not TukuiCustomConfig then return end
+if not TukuiEditedDefaultConfig then return end
 
 local settings = TukuiEditedDefaultConfig
 
