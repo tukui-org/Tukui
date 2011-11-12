@@ -52,3 +52,17 @@ C["media"] = {
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],
 	["warning"] = [[Interface\AddOns\Tukui\medias\sounds\warning.mp3]],
 }
+
+-------------------------------------------------------------------
+-- Used to overwrite default medias outside Tukui
+-------------------------------------------------------------------
+
+local settings = TukuiCustomConfig
+if settings then
+	local media = settings.media
+	if media then
+		for option, value in pairs(media) do
+			C.media[option] = value
+		end
+	end
+end
