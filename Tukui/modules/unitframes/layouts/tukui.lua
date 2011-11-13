@@ -911,7 +911,6 @@ local function Shared(self, unit)
 		health.PostUpdate = T.PostUpdatePetColor
 				
 		self.Health = health
-		self.Health.bg = healthBG
 		
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
@@ -935,6 +934,8 @@ local function Shared(self, unit)
 				health.colorHappiness = true
 			end
 		end
+		
+		self.Health.bg = healthBG
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
