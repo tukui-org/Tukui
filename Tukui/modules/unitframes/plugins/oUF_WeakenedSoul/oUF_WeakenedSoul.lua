@@ -23,8 +23,14 @@ end
 local function UpdateBar(self, event, unit)
 	local duration = self.dur
 	local timeLeft = self.exp-GetTime()
+	local value
+	if timeLeft == 0 then
+		value = 0
+	else
+		value = (timeLeft * 100) / duration
+	end
 
-	self:SetValue((timeLeft * 100) / duration)
+	self:SetValue(value)
 end
 
 local function Update(self, event, unit)
