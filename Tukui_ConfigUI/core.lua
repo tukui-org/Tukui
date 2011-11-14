@@ -22,6 +22,15 @@ local ALLOWED_GROUPS = {
 	["auras"]=1,
 }
 
+if TukuiEditedDefaultConfig then
+	for group, value in pairs(TukuiEditedDefaultConfig) do
+		if group ~= "media" and not ALLOWED_GROUPS[group] then
+			-- add a new group from edited default
+			ALLOWED_GROUPS[group]=1
+		end
+	end
+end
+
 --List of "Table Names" that we do not want to show in the config
 local TableFilter = {
 	["filter"]=1,

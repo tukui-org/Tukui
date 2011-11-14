@@ -6,6 +6,7 @@
 ## SavedVariables: TukuiConfigAll, TukuiConfigPublic
 ## SavedVariablesPerCharacter: TukuiConfigPrivate
 ## RequiredDeps: Tukui
+## OptionalDeps: Tukui_EditedDefaultConfig
 
 local\english.lua
 local\french.lua
