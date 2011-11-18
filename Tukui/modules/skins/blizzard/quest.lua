@@ -19,6 +19,9 @@ local function LoadSkin()
 	T.SkinButton(QuestFrameGoodbyeButton, true)
 	T.SkinButton(QuestFrameCompleteQuestButton, true)
 	T.SkinCloseButton(QuestFrameCloseButton, QuestFrame.backdrop)
+	T.SkinScrollBar(QuestLogScrollFrameScrollBar)
+	T.SkinScrollBar(QuestDetailScrollFrameScrollBar)
+	T.SkinScrollBar(QuestRewardScrollFrameScrollBar)
 
 	for i=1, 6 do
 		local button = _G["QuestProgressItem"..i]

@@ -109,6 +109,11 @@ local function LoadSkin()
 			pt:Point("BOTTOMRIGHT", -2, 2)
 		end
 	end
+	
+	-- scroll bars
+	T.SkinScrollBar(MacroButtonScrollFrameScrollBar)
+	T.SkinScrollBar(MacroFrameScrollFrameScrollBar)
+	T.SkinScrollBar(MacroPopupScrollFrameScrollBar)
 end
 
 T.SkinFuncs["Blizzard_MacroUI"] = LoadSkin

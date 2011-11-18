@@ -37,6 +37,7 @@ local function LoadSkin()
 	GossipFrame.backdrop:Point("TOPLEFT", GossipFrame, "TOPLEFT", 15, -20)
 	GossipFrame.backdrop:Point("BOTTOMRIGHT", GossipFrame, "BOTTOMRIGHT", -30, 65)
 	T.SkinCloseButton(GossipFrameCloseButton,GossipFrame.backdrop)
+	T.SkinScrollBar(GossipGreetingScrollFrameScrollBar)
 
 
 	--Extreme hackage, blizzard makes button text on quest frame use hex color codes for some reason
