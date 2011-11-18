@@ -261,10 +261,10 @@ local function SetupTempChat()
 	local frame = FCF_GetCurrentChatFrame()
 
 	-- do a check if we already did a skinning earlier for this temp chat frame
-	if frame.skinned then return end
+	if frame.isSkinned then return end
 	
 	-- style it
-	frame.temp = true
+	frame.isSkinned = true
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
