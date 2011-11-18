@@ -177,7 +177,7 @@ local function SetChatStyle(frame)
 		_G[chat].AddMessage = AddMessage
 	end
 	
-	frame.skinned = true
+	frame.isSkinned = true
 end
 
 -- Setup chatframes 1 to 10 on login.
@@ -264,7 +264,7 @@ local function SetupTempChat()
 	if frame.isSkinned then return end
 	
 	-- style it
-	frame.isSkinned = true
+	frame.temp = true
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)

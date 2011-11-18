@@ -202,7 +202,7 @@ local function LoadSkin()
 
 	RolePollPopup:SetTemplate("Default")
 	RolePollPopup:CreateShadow("Default")
-	T.SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
+	--T.SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

@@ -18,6 +18,7 @@ local function LoadSkin()
 		"RaidFrameRaidInfoButton",
 		"RaidInfoExtendButton",
 		"RaidInfoCancelButton",
+		"RaidFrameNotInRaidRaidBrowserButton",
 	}
 
 	for _, object in pairs(StripAllTextures) do
