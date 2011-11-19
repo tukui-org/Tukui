@@ -175,6 +175,17 @@ local function SetChatStyle(frame)
 	if _G[chat] ~= _G["ChatFrame2"] then
 		origs[_G[chat]] = _G[chat].AddMessage
 		_G[chat].AddMessage = AddMessage
+	else
+		CombatLogQuickButtonFrame_Custom:StripTextures()
+		CombatLogQuickButtonFrame_Custom:SetTemplate("Default")
+		T.SkinCloseButton(CombatLogQuickButtonFrame_CustomAdditionalFilterButton)
+		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:SetText("V")
+		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:ClearAllPoints()
+		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:Point("RIGHT", -8, 4)
+		CombatLogQuickButtonFrame_CustomProgressBar:ClearAllPoints()
+		CombatLogQuickButtonFrame_CustomProgressBar:SetPoint("TOPLEFT", CombatLogQuickButtonFrame_Custom, 2, -2)
+		CombatLogQuickButtonFrame_CustomProgressBar:SetPoint("BOTTOMRIGHT", CombatLogQuickButtonFrame_Custom, -2, 2)
+		CombatLogQuickButtonFrame_CustomProgressBar:SetStatusBarTexture(C.media.normTex)
 	end
 	
 	frame.isSkinned = true
@@ -196,7 +207,7 @@ local function SetupChat(self)
 	ChatTypeInfo.CHANNEL.sticky = 1
 end
 
-local function SetupChatPosAndFont(self)	
+local function SetupChatPosAndFont(self)
 	for i = 1, NUM_CHAT_WINDOWS do
 		local chat = _G[format("ChatFrame%s", i)]
 		local tab = _G[format("ChatFrame%sTab", i)]
@@ -229,18 +240,8 @@ local function SetupChatPosAndFont(self)
 			end
 		end
 	end
-			
-	-- reposition battle.net popup over chat #1
-	BNToastFrame:HookScript("OnShow", function(self)
-		self:ClearAllPoints()
-		if C.chat.background and TukuiChatBackgroundLeft then
-			self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
-		else
-			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
-		end
-	end)
 end
-
+	
 TukuiChat:RegisterEvent("ADDON_LOADED")
 TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
 TukuiChat:SetScript("OnEvent", function(self, event, ...)
@@ -268,3 +269,16 @@ local function SetupTempChat()
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
+
+-- reposition battle.net popup over chat #1
+BNToastFrame:HookScript("OnShow", function(self)
+	self:ClearAllPoints()
+	if C.chat.background and TukuiChatBackgroundLeft then
+		self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
+	else
+		self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
+	end
+end)
+
+-- reskin Toast Frame Close Button
+T.SkinCloseButton(BNToastFrameCloseButton)
