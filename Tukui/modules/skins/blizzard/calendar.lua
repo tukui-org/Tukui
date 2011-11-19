@@ -190,6 +190,7 @@ local function LoadSkin()
 
 	CalendarEventPickerCloseButton:StripTextures()
 	T.SkinButton(CalendarEventPickerCloseButton, true)
+	T.SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
 end
 
 T.SkinFuncs["Blizzard_Calendar"] = LoadSkin

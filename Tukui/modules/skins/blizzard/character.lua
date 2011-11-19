@@ -271,6 +271,10 @@ local function LoadSkin()
 	end	
 	ReputationFrame:HookScript("OnShow", UpdateFactionSkins)
 	hooksecurefunc("ReputationFrame_OnEvent", UpdateFactionSkins)
+	T.SkinCloseButton(ReputationDetailCloseButton)
+	T.SkinCheckBox(ReputationDetailAtWarCheckBox)
+	T.SkinCheckBox(ReputationDetailInactiveCheckBox)
+	T.SkinCheckBox(ReputationDetailMainScreenCheckBox)
 
 	--Currency
 	TokenFrame:HookScript("OnShow", function()
