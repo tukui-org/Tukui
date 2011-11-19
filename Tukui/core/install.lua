@@ -48,6 +48,9 @@ local function chatsetup()
 		-- rename windows general and combat log
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
+		
+		-- lock them if unlocked
+		if not frame.isLocked then FCF_SetLocked(frame, 1) end
 	end
 	
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
