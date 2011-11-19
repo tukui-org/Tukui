@@ -1,6 +1,9 @@
 local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
+	-- always scale it at the same value as UIParent
+	ScriptErrorsFrame:SetParent(UIParent)
+	
 	local noscalemult = T.mult * C["general"].uiscale
 	local bg = {
 	  bgFile = C["media"].blank, 
@@ -49,7 +52,13 @@ local function LoadSkin()
 			child:SetBackdropColor(unpack(C.media.backdropcolor))
 			child:SetBackdropBorderColor(unpack(C.media.bordercolor))	
 		end
-	end	
+	end
+	
+	T.SkinCloseButton(ScriptErrorsFrameClose)
+	T.SkinScrollBar(ScriptErrorsFrameScrollFrameScrollBar)
+	ScriptErrorsFrameScrollFrameScrollBar:ClearAllPoints()
+	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("TOPRIGHT", 50, 14)
+	ScriptErrorsFrameScrollFrameScrollBar:SetPoint("BOTTOMRIGHT", 50, -20)
 end
 
 T.SkinFuncs["Blizzard_DebugTools"] = LoadSkin
