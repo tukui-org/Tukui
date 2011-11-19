@@ -30,7 +30,7 @@ local function LoadSkin()
 	end
 
 	for i = 1, #buttons do
-		T.SkinButton(_G[buttons[i]])
+		if _G[buttons[i]] then T.SkinButton(_G[buttons[i]]) end
 	end
 	RaidInfoScrollFrame:StripTextures()
 	RaidInfoFrame:CreateBackdrop("Default")
