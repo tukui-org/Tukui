@@ -30,6 +30,9 @@ local function LoadSkin()
 		end
 		
 		BackpackTokenFrame:StripTextures()
+	end
+	
+	if T.toc >= 40300 then
 		BagItemSearchBox:Size(159, 15)
 		BagItemSearchBox:ClearAllPoints()
 		BagItemSearchBox:Point("TOPLEFT", 19, -29)
@@ -51,12 +54,14 @@ local function LoadSkin()
 		T.SkinButton(BankFramePurchaseButton)
 		BankFramePurchaseButton:Height(22)
 		
-		BankItemSearchBox:Size(159, 15)
-		BankItemSearchBox:ClearAllPoints()
-		BankItemSearchBox:Point("TOPRIGHT", -56, -48)
-		BankItemSearchBox.ClearAllPoints = T.dummy
-		BankItemSearchBox.SetPoint = T.dummy
-		T.SkinEditBox(BankItemSearchBox)
+		if T.toc >= 40300 then
+			BankItemSearchBox:Size(159, 15)
+			BankItemSearchBox:ClearAllPoints()
+			BankItemSearchBox:Point("TOPRIGHT", -56, -48)
+			BankItemSearchBox.ClearAllPoints = T.dummy
+			BankItemSearchBox.SetPoint = T.dummy
+			T.SkinEditBox(BankItemSearchBox)
+		end
 
 		-- Bank Bags
 		for i = 1, 7 do
