@@ -121,7 +121,6 @@ local StuffingTT = nil
 local QUEST_ITEM_STRING = nil
 
 function Stuffing:SlotUpdate(b)
-	if not TukuiBags:IsShown() then return end -- don't do any slot update if bags are not show
 	local texture, count, locked = GetContainerItemInfo (b.bag, b.slot)
 	local clink = GetContainerItemLink(b.bag, b.slot)
 	
