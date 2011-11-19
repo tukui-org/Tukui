@@ -34,6 +34,8 @@ local function LoadSkin()
 	TradeSkillIncrementButton:Point("RIGHT", TradeSkillCreateButton, "LEFT", -13, 0)
 	
 	T.SkinCloseButton(TradeSkillFrameCloseButton)
+	T.SkinScrollBar(TradeSkillDetailScrollFrameScrollBar)
+	T.SkinScrollBar(TradeSkillListScrollFrameScrollBar)
 	
 	local once = false
 	hooksecurefunc("TradeSkillFrame_SetSelection", function(id)

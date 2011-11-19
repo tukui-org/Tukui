@@ -32,6 +32,8 @@ local function LoadSkin()
 	
 	KeyBindingFrameUnbindButton:Point("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
 	KeyBindingFrameOkayButton:Point("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
+	
+	T.SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 end
 
 T.SkinFuncs["Blizzard_BindingUI"] = LoadSkin

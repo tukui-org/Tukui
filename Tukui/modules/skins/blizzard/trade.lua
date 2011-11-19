@@ -9,8 +9,6 @@ local function LoadSkin()
 	T.SkinButton(TradeFrameTradeButton, true)
 	T.SkinButton(TradeFrameCancelButton, true)
 	T.SkinCloseButton(TradeFrameCloseButton, TradeFrame.backdrop)
-	--T.SkinScrollBar(TradeSkillDetailScrollFrameScrollBar)
-	--T.SkinScrollBar(TradeSkillListScrollFrameScrollBar)
 
 	T.SkinEditBox(TradePlayerInputMoneyFrameGold)
 	T.SkinEditBox(TradePlayerInputMoneyFrameSilver)
