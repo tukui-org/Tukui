@@ -2,6 +2,7 @@ local T, C, L = unpack(select(2, ...))
 
 local function LoadSkin()
 	WorldStateScoreScrollFrame:StripTextures()
+	T.SkinScrollBar(WorldStateScoreScrollFrameScrollBar)
 	WorldStateScoreFrame:StripTextures()
 	WorldStateScoreFrame:SetTemplate("Default")
 	T.SkinCloseButton(WorldStateScoreFrameCloseButton)

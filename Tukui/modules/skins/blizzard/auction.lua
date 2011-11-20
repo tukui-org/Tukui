@@ -309,7 +309,11 @@ local function LoadSkin()
 	AuctionFrameAuctions.bg2:SetTemplate("Default")
 	AuctionFrameAuctions.bg2:Point("TOPLEFT", AuctionFrameAuctions.bg1, "TOPRIGHT", 3, 0)
 	AuctionFrameAuctions.bg2:Point("BOTTOMRIGHT", AuctionFrame, -8, 35)  
-	AuctionFrameAuctions.bg2:SetFrameLevel(AuctionFrameAuctions.bg2:GetFrameLevel() - 2)		
+	AuctionFrameAuctions.bg2:SetFrameLevel(AuctionFrameAuctions.bg2:GetFrameLevel() - 2)
+
+	T.SkinScrollBar(BrowseFilterScrollFrameScrollBar)
+	T.SkinScrollBar(BrowseScrollFrameScrollBar)
+	T.SkinScrollBar(AuctionsScrollFrameScrollBar)
 end
 
 T.SkinFuncs["Blizzard_AuctionUI"] = LoadSkin
