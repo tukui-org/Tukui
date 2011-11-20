@@ -365,7 +365,13 @@ function T.SkinScrollBar(frame)
 	
 	if _G[frame:GetName().."Top"] then
 		_G[frame:GetName().."Top"]:SetTexture(nil)
+	end
+	
+	if _G[frame:GetName().."Bottom"] then
 		_G[frame:GetName().."Bottom"]:SetTexture(nil)
+	end
+	
+	if _G[frame:GetName().."Middle"] then
 		_G[frame:GetName().."Middle"]:SetTexture(nil)
 	end
 
