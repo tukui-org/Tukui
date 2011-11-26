@@ -44,7 +44,10 @@ local function LoadSkin()
 		QuestProgressRequiredItemsText:SetTextColor(1, 1, 0)
 		QuestProgressRequiredMoneyText:SetTextColor(1, 1, 0)
 	end)
-
+	
+	T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
+	T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
+	T.SkinScrollBar(QuestProgressScrollFrame)
 	QuestNPCModel:StripTextures()
 	QuestNPCModel:CreateBackdrop("Default")
 	QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)

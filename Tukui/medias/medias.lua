@@ -44,9 +44,13 @@ C["media"] = {
 	["bubbleTex"] = [[Interface\AddOns\Tukui\medias\textures\bubbleTex]], -- unitframes combo points
 	["copyicon"] = [[Interface\AddOns\Tukui\medias\textures\copy]], -- copy icon
 	["blank"] = [[Interface\AddOns\Tukui\medias\textures\blank]], -- the main texture for all borders/panels
+	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
+	
+	-- colors
 	["bordercolor"] = C.general.bordercolor or { .6,.6,.6 }, -- border color of tukui panels
 	["backdropcolor"] = C.general.backdropcolor or { .1,.1,.1 }, -- background color of tukui panels
-	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
+	["datatextcolor1"] = { 1, 1, 1 }, -- color of datatext title
+	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result
 	
 	-- sound
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],

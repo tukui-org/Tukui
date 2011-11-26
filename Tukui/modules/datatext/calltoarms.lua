@@ -10,6 +10,8 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat:SetFrameStrata("MEDIUM")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.calltoarms
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatCallToArmsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
@@ -66,12 +68,12 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 		end	
 		
 		if unavailable then
-			Text:SetText(QUEUE_TIME_UNAVAILABLE)
+			Text:SetText(Stat.Color1..QUEUE_TIME_UNAVAILABLE.."|r")
 		else
 			if tankReward or healerReward or dpsReward then
-				Text:SetText(BATTLEGROUND_HOLIDAY..":"..MakeString(tankReward, healerReward, dpsReward, true))
+				Text:SetText(Stat.Color1..BATTLEGROUND_HOLIDAY..":|r"..Stat.Color2..MakeString(tankReward, healerReward, dpsReward, true).."|r")
 			else
-				Text:SetText(LOOKING_FOR_DUNGEON)
+				Text:SetText(Stat.Color1..LOOKING_FOR_DUNGEON.."|r")
 			end
 		end
 		

@@ -7,6 +7,8 @@ local Stat = CreateFrame("Frame", "TukuiStatRegen")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.regen
+Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 local Text = Stat:CreateFontString("TukuiStatRegenText", "OVERLAY")
 Text:SetFont(C["media"].font, C["datatext"].fontsize)
@@ -28,5 +30,5 @@ Stat:SetScript("OnEvent", function(self)
 		regen = floor(base*5)		
 	end
 	
-	Text:SetText(regen.." "..MANA_REGEN_ABBR)
+	Text:SetText(Stat.Color2..regen.." "..MANA_REGEN_ABBR.."|r")
 end)

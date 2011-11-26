@@ -5,8 +5,20 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 
 if not C["datatext"].wowtime or C["datatext"].wowtime == 0 then return end
 
-local europeDisplayFormat = string.join("", "%02d", ":|r%02d")
-local ukDisplayFormat = string.join("", "", "%d", ":|r%02d", " %s|r")
+local Stat = CreateFrame("Frame", "TukuiStatTime")
+Stat:EnableMouse(true)
+Stat:SetFrameStrata("MEDIUM")
+Stat:SetFrameLevel(3)
+Stat.Option = C.datatext.wowtime
+Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+
+local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
+Text:SetFont(C.media.font, C["datatext"].fontsize)
+T.PP(C["datatext"].wowtime, Text)
+
+local europeDisplayFormat = string.join("", Stat.Color2.."%02d", ":%02d|r")
+local ukDisplayFormat = string.join("", "", Stat.Color2.."%d", ":%02d", " %s|r")
 local timerLongFormat = "%d:%02d:%02d"
 local timerShortFormat = "%d:%02d"
 local lockoutInfoFormat = "%s |cffaaaaaa(%s%s, %s/%s)"
@@ -14,17 +26,6 @@ local formatBattleGroundInfo = "%s: "
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
 local difficultyInfo = { "N", "N", "H", "H" }
 local curHr, curMin, curAmPm
-
-local Stat = CreateFrame("Frame", "TukuiStatTime")
-Stat:EnableMouse(true)
-Stat:SetFrameStrata("MEDIUM")
-Stat:SetFrameLevel(3)
-Stat.Option = C.datatext.wowtime
-
-local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
-Text:SetFont(C.media.font, C["datatext"].fontsize)
-T.PP(C["datatext"].wowtime, Text)
-
 local APM = { TIMEMANAGER_PM, TIMEMANAGER_AM }
 
 local function CalculateTimeValues(tt)

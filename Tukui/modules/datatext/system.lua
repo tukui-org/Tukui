@@ -12,6 +12,8 @@ Stat:SetFrameLevel(3)
 Stat:EnableMouse(true)
 Stat.Option = C.datatext.system
 Stat.tooltip = false
+Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 local Text  = Stat:CreateFontString("TukuiStatSystemText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -77,7 +79,7 @@ local function Update(self, t)
 	if int < 0 then
 		RebuildAddonList(self)
 		local total = UpdateMemory()
-		Text:SetText(formatMem(total))
+		Text:SetText(Stat.Color2..formatMem(total).."|r")
 		int = 10
 	end
 end

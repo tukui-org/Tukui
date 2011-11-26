@@ -9,6 +9,8 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.currency
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatCurrencyText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -22,9 +24,9 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 				if(i ~= 1) then _text = _text .. " " else _text = "" end
 				words = { strsplit(" ", name) }
 				for _, word in ipairs(words) do
-					_text = _text .. string.sub(word,1,1)
+					_text = _text .. Stat.Color1..string.sub(word,1,1).."|r"
 				end
-				_text = _text .. ": " .. count
+				_text = _text .. Stat.Color1..": |r" .. Stat.Color2..count.."|r"
 			end
 		end
 		

@@ -31,6 +31,8 @@ Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.friends
+Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 local Text  = Stat:CreateFontString("TukuiStatFriendsText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -78,7 +80,7 @@ local wowString = "WoW"
 local totalOnlineString = L.datatext_online .. "%s/%s"
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
-local displayString = string.join("", "%s: ", "|cffffffff", "%d|r")
+local displayString = string.join("", Stat.Color1.."%s:|r ", Stat.Color2, "%d|r")
 local statusTable = { "[AFK]", "[DND]", "" }
 local groupedTable = { "|cffaaaaaa*|r", "" } 
 local friendTable, BNTable = {}, {}

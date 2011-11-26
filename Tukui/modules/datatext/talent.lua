@@ -6,6 +6,8 @@ if C.datatext.talent then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.talent
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
  
 	local Text = Stat:CreateFontString("TukuiStatTalentText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -22,7 +24,7 @@ if C.datatext.talent then
 			local tree2num = select(5,GetTalentTabInfo(2))
 			local tree3num = select(5,GetTalentTabInfo(3))
 			local majorTree = GetPrimaryTalentTree()
-			Text:SetText(select(2,GetTalentTabInfo(majorTree))..": "..tree1num.."/"..tree2num.."/"..tree3num)
+			Text:SetText(Stat.Color1..select(2,GetTalentTabInfo(majorTree))..":|r "..Stat.Color2..tree1num.."/"..tree2num.."/"..tree3num)
 		end
 	end
  

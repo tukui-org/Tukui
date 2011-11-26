@@ -9,6 +9,8 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.avd
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatAvoidanceText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -41,14 +43,14 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 			block = (GetBlockChance()-leveldifference*.2)
 			MissChance = (basemisschance + 1/(0.0625 + 0.956/(GetCombatRating(CR_DEFENSE_SKILL)/4.91850*0.04)))
 			avoidance = (dodge+parry+block+MissChance)
-			Text:SetText(L.datatext_playeravd.."|r"..format("%.2f", avoidance))
+			Text:SetText(Stat.Color1..L.datatext_playeravd.."|r"..Stat.Color2..format("%.2f", avoidance).."|r")
 		else
 			dodge = (GetDodgeChance()+abs(leveldifference*.2))
 			parry = (GetParryChance()+abs(leveldifference*.2))
 			block = (GetBlockChance()+abs(leveldifference*.2))
 			MissChance = (basemisschance + 1/(0.0625 + 0.956/(GetCombatRating(CR_DEFENSE_SKILL)/4.91850*0.04)))
 			avoidance = (dodge+parry+block+MissChance)
-			Text:SetText(L.datatext_playeravd.."|r"..format("%.2f", avoidance))
+			Text:SetText(Stat.Color1..L.datatext_playeravd.."|r"..Stat.Color2..format("%.2f", avoidance).."|r")
 		end
 
 		--Setup Avoidance Tooltip

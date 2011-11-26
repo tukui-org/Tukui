@@ -58,6 +58,7 @@ TukuiConfigUILocalization.datatexthit = "Hit position (0 for disabled)"
 TukuiConfigUILocalization.datatextmastery = "Mastery position (0 for disabled)"
 TukuiConfigUILocalization.datatexttalent = "Display talents (0 for disabled)"
 TukuiConfigUILocalization.datatextcalltoarms = "Call to Arms & Dungeons (0 for disabled)"
+TukuiConfigUILocalization.datatextregen = MANA_REGEN_ABBR
 TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
 TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
 TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"

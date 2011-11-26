@@ -9,6 +9,8 @@ if C["datatext"].power and C["datatext"].power > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.power
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatPowerText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -47,7 +49,7 @@ if C["datatext"].power and C["datatext"].power > 0 then
 			tp_pwr = L.datatext_playersp
 		end
 		if int < 0 then
-			Text:SetText(pwr.." ".. tp_pwr)      
+			Text:SetText(Stat.Color2..pwr.." ".. tp_pwr.."|r")      
 			int = 1
 		end
 	end

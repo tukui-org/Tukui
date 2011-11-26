@@ -10,6 +10,8 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	Stat:SetFrameLevel(3)
 	Stat:EnableMouse(true)
 	Stat.Option = C.datatext.fps_ms
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatFPSText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -19,7 +21,7 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	local function Update(self, t)
 		int = int - t
 		if int < 0 then
-			Text:SetText(floor(GetFramerate())..L.datatext_fps..select(3, GetNetStats())..L.datatext_ms)
+			Text:SetText(Stat.Color2..floor(GetFramerate()).."|r"..Stat.Color1..L.datatext_fps.."|r"..Stat.Color2..select(3, GetNetStats()).."|r"..Stat.Color1..L.datatext_ms.."|r")
 			self:SetAllPoints(Text)
 			int = 1			
 		end	

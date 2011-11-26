@@ -10,6 +10,8 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 	local player_id = UnitGUID("player")
 	local dmg_total, last_dmg_amount = 0, 0
 	local cmbt_time = 0
+	DPS_FEED.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	DPS_FEED.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local pet_id = UnitGUID("pet")
      
@@ -80,9 +82,9 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
      
 	function getDPS()
 		if (dmg_total == 0) then
-			return ("0.0 " .. L.datatext_dps)
+			return (DPS_FEED.Color2.."0.0 |r" .. DPS_FEED.Color1..L.datatext_dps.."|r")
 		else
-			return string.format("%.1f " .. L.datatext_dps, (dmg_total or 0) / (cmbt_time or 1))
+			return string.format(DPS_FEED.Color2.."%.1f |r" .. DPS_FEED.Color1 .. L.datatext_dps .. "|r", (dmg_total or 0) / (cmbt_time or 1))
 		end
 	end
 

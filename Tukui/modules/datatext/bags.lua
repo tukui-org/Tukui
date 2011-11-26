@@ -9,6 +9,8 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.bags
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatBagsText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -20,7 +22,7 @@ if C["datatext"].bags and C["datatext"].bags > 0 then
 			free, total = free + GetContainerNumFreeSlots(i), total + GetContainerNumSlots(i)
 		end
 		used = total - free
-		Text:SetText(L.datatext_bags..used.."/"..total)
+		Text:SetText(Stat.Color1..L.datatext_bags.."|r"..Stat.Color2..used.."/"..total.."|r")
 		self:SetAllPoints(Text)
 	end
           

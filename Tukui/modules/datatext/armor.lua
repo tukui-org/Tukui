@@ -8,6 +8,9 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
+	Stat.Option = C.datatext.armor
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatArmorText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -15,7 +18,7 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 
 	local function Update(self)
 		baseArmor , effectiveArmor, armor, posBuff, negBuff = UnitArmor("player");
-		Text:SetText((effectiveArmor).." "..L.datatext_armor)
+		Text:SetText(Stat.Color2..(effectiveArmor).."|r "..Stat.Color1..L.datatext_armor.."|r")
 		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
 	end

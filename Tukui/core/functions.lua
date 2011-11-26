@@ -1424,6 +1424,38 @@ if C["unitframes"].raidunitdebuffwatch == true then
 				SpellName(100293),	-- Lava Wave
 				SpellName(98313),	-- Magma Blast
 				SpellName(100675),	-- Dreadflame
+				
+		-- Dragon Soul
+			-- Morchok
+				SpellName(103541),	-- Safe
+				SpellName(103536),	-- Warning
+				SpellName(103534),	-- Danger
+				SpellName(108570),	-- Black Blood of the Earth
+
+			-- Warlord Zon'ozz
+				SpellName(103434),	-- Disrupting Shadows
+
+			-- Yor'sahj the Unsleeping
+				SpellName(105171),	-- Deep Corruption
+
+			-- Hagara the Stormbinder
+				SpellName(105465),	-- Lighting Storm
+				SpellName(104451),	-- Ice Tomb
+				SpellName(109325),	-- Frostflake
+				SpellName(105289),	-- Shattered Ice
+				SpellName(105285),	-- Target
+
+			-- Ultraxion
+				SpellName(110079),	-- Fading Light
+				SpellName(109075),	-- Fading Light
+
+			-- Warmaster Blackhorn
+
+			-- Spine of Deathwing
+				SpellName(105479),	-- Searing Plasma
+				SpellName(105490),	-- Fiery Grip
+
+			-- Madness of Deathwing	
 		}
 
 		T.ReverseTimer = {

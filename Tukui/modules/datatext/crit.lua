@@ -8,6 +8,8 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.crit
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatCritText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -28,7 +30,7 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 			CritChance = meleecrit
 		end
 		if int < 0 then
-			Text:SetText(format("%.2f", CritChance) .. "%"..L.datatext_playercrit)
+			Text:SetText(Stat.Color2..format("%.2f", CritChance) .. "%|r"..Stat.Color1..L.datatext_playercrit.."|r")
 			int = 1
 		end     
 	end

@@ -9,6 +9,8 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.dur
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatDurabilityText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -30,9 +32,9 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 		table.sort(L.Slots, function(a, b) return a[3] < b[3] end)
 		
 		if Total > 0 then
-			Text:SetText(floor(L.Slots[1][3]*100).."% "..L.datatext_armor)
+			Text:SetText(Stat.Color2..floor(L.Slots[1][3]*100).."% |r"..Stat.Color1..L.datatext_armor.."|r")
 		else
-			Text:SetText("100% "..L.datatext_armor)
+			Text:SetText(Stat.Color2.."100% |r"..Stat.Color1..L.datatext_armor.."|r")
 		end
 		-- Setup Durability Tooltip
 		self:SetAllPoints(Text)

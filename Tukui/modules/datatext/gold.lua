@@ -9,6 +9,8 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.gold
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatGoldText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -24,11 +26,11 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		local silver = mod(floor(math.abs(money) / 100), 100)
 		local copper = mod(floor(math.abs(money)), 100)
 		if gold ~= 0 then
-			return format("%s"..L.goldabbrev.." %s"..L.silverabbrev.." %s"..L.copperabbrev, gold, silver, copper)
+			return format(Stat.Color2.."%s|r"..L.goldabbrev..Stat.Color2.." %s|r"..L.silverabbrev..Stat.Color2.." %s|r"..L.copperabbrev, gold, silver, copper)
 		elseif silver ~= 0 then
-			return format("%s"..L.silverabbrev.." %s"..L.copperabbrev, silver, copper)
+			return format(Stat.Color2.."%s|r"..L.silverabbrev..Stat.Color2.." %s|r"..L.copperabbrev, silver, copper)
 		else
-			return format("%s"..L.copperabbrev, copper)
+			return format(Stat.Color2.."%s|r"..L.copperabbrev, copper)
 		end
 	end
 

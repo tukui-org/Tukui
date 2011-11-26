@@ -8,6 +8,8 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.haste
+	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
 	local Text  = Stat:CreateFontString("TukuiStatHasteText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
@@ -30,7 +32,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 		
 		int = int - t
 		if int < 0 then
-			Text:SetText(haste.." "..L.datatext_playerhaste)
+			Text:SetText(Stat.Color2..haste.."|r "..Stat.Color1..L.datatext_playerhaste.."|r")
 			int = 1
 		end     
 	end

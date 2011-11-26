@@ -7,6 +7,8 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 	local events = {SPELL_HEAL = true, SPELL_PERIODIC_HEAL = true}
 	local HPS_FEED = CreateFrame("Frame", "TukuiStatHeal")
 	HPS_FEED.Option = C.datatext.hps_text
+	HPS_FEED.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
+	HPS_FEED.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 	
 	local player_id = UnitGUID("player")
 	local actual_heals_total, cmbt_time = 0
@@ -84,9 +86,9 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
  
 	function get_hps()
 		if (actual_heals_total == 0) then
-			return ("0.0 " .. L.datatext_hps)
+			return (HPS_FEED.Color2.."0.0 |r" .. HPS_FEED.Color1 .. L.datatext_hps .. "|r")
 		else
-			return string.format("%.1f " .. L.datatext_hps, (actual_heals_total or 0) / (cmbt_time or 1))
+			return string.format(HPS_FEED.Color2.."%.1f |r" .. HPS_FEED.Color1..L.datatext_hps.."|r", (actual_heals_total or 0) / (cmbt_time or 1))
 		end
 	end
 
