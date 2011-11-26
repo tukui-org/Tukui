@@ -2,16 +2,16 @@ local T, C, L = unpack(select(2, ...))
 
 if T.client == "ruRU" then
 	L.chat_BATTLEGROUND_GET = "[ПБ]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[ПБ]"
+	L.chat_BATTLEGROUND_LEADER_GET = "[ЛПБ]"
 	L.chat_BN_WHISPER_GET = "От"
 	L.chat_GUILD_GET = "[Г]"
 	L.chat_OFFICER_GET = "[О]"
 	L.chat_PARTY_GET = "[Гр]"
 	L.chat_PARTY_GUIDE_GET = "[Гр]"
-	L.chat_PARTY_LEADER_GET = "[Гр]"
+	L.chat_PARTY_LEADER_GET = "[Лгр]"
 	L.chat_RAID_GET = "[Р]"
-	L.chat_RAID_LEADER_GET = "[Р]"
-	L.chat_RAID_WARNING_GET = "[Ш]"
+	L.chat_RAID_LEADER_GET = "[ЛР]"
+	L.chat_RAID_WARNING_GET = "[ОР]"
 	L.chat_WHISPER_GET = "От"
 	L.chat_FLAG_AFK = "[АФК]"
 	L.chat_FLAG_DND = "[ДНД]"
@@ -27,7 +27,7 @@ if T.client == "ruRU" then
  
 	L.disband = "Роспуск группы ?"
 
-	L.datatext_notalents ="No Talents"
+	L.datatext_notalents ="Нет талантов"
 	L.datatext_download = "Загрузка: "
 	L.datatext_bandwidth = "Скорость: "
 	L.datatext_guild = "Гильдия"
@@ -44,10 +44,10 @@ if T.client == "ruRU" then
 	L.datatext_friendlist = "Список друзей:"
 	L.datatext_playersp = "sp"
 	L.datatext_playerap = "ap"
-	L.datatext_playerhaste = "haste"
-	L.datatext_dps = "dps"
-	L.datatext_hps = "hps"
-	L.datatext_playerarp = "arp"
+	L.datatext_playerhaste = "скорость"
+	L.datatext_dps = "дпс"
+	L.datatext_hps = "хпс"
+	L.datatext_playerarp = "арп"
 	L.datatext_session = "Сеанс: "
 	L.datatext_character = "Персонаж: "
 	L.datatext_server = "Сервер: "
@@ -60,7 +60,7 @@ if T.client == "ruRU" then
 	L.datatext_playerheal = " heal"
 	L.datatext_avoidancebreakdown = "Распределение"
 	L.datatext_lvl = "ур"
-	L.datatext_boss = "босс"
+	L.datatext_boss = "Босс"
 	L.datatext_miss = "Промах"
 	L.datatext_dodge = "Уклонение"
 	L.datatext_block = "Блок"
@@ -115,9 +115,9 @@ if T.client == "ruRU" then
 	L.popup_install_no = "Нет, это слишком сложно"
 	L.popup_reset_yes = "О да, детка!"
 	L.popup_reset_no = "Нет, я посмотрю на QQ форуме!"
-	L.popup_fix_ab = "There is something wrong with your action bar. Do you want to reloadui to fix it?"
+	L.popup_fix_ab = "Что-то не то с вашей панелью действий. Хотите перезагрузить интерфейс, чтобы исправить это?"
  
-	L.merchant_repairnomoney = "Не достаточно денег на починку"
+	L.merchant_repairnomoney = "Недостаточно денег на починку"
 	L.merchant_repaircost = "Предметы починены за"
 	L.merchant_trashsell = "Серые предметы проданы и Вы получили"
  
@@ -125,7 +125,7 @@ if T.client == "ruRU" then
 	L.silverabbrev = "|cffc7c7cfс|r"
 	L.copperabbrev = "|cffeda55fм|r"
  
-	L.error_noerror = "Ошибок пока нет."
+	L.error_noerror = "Ошибок не обнаружено."
  
 	L.unitframes_ouf_offline = "Оффлайн"
 	L.unitframes_ouf_dead = "Труп"
@@ -138,7 +138,7 @@ if T.client == "ruRU" then
 	L.unitframes_ouf_deadheal = "ТРУП"
 	L.unitframes_ouf_gohawk = "Дух Ястреба"
 	L.unitframes_ouf_goviper = "Дух Гадюки"
-	L.unitframes_disconnected = "дисконнект"
+	L.unitframes_disconnected = "D/C"
 	L.unitframes_ouf_wrathspell = "Гнев"
 	L.unitframes_ouf_starfirespell = "Звездный огонь"
  
@@ -163,8 +163,8 @@ if T.client == "ruRU" then
 	L.bags_stackend = "Заполнение завершено."
 	L.bags_rightclick_search = "ПКМ для поиска."
 	
-	L.loot_fish = "Fishy loot"
-	L.loot_empty = "Empty slot"
+	L.loot_fish = "Рыбалка"
+	L.loot_empty = "Пусто"
  
 	L.chat_invalidtarget = "Неверная цель"
  
@@ -222,7 +222,7 @@ if T.client == "ruRU" then
 	L.move_achievements = "Передвинуть всплывающее окно достижений"
 	L.move_roll = "Передвинуть окно розыгрыша добычи"
 	L.move_vehicle = "Передвинуть фрейм транспорта"
-	L.move_extrabutton = "Extra Button"
+	L.move_extrabutton = "Передвинуть доп. кнопку"
 	
 	-- tuto/install
 	L.install_header_1 = "Добро пожаловать!"
