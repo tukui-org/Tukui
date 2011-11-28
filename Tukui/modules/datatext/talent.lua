@@ -28,7 +28,7 @@ if C.datatext.talent and C.datatext.talent > 0 then
 	end
  
 	Stat:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
-	Stat:RegisterEvent("CHARACTER_POINTS_CHANGED")
+	Stat:RegisterEvent("CONFIRM_TALENT_WIPE")
 	Stat:RegisterEvent("PLAYER_TALENT_UPDATE")
 	Stat:SetScript("OnEvent", Update)
 	Stat:SetScript("OnEnter", function(self)
