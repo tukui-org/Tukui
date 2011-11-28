@@ -232,9 +232,11 @@ T.SetDefaultChatPositions = function()
 		if i == 1 then
 			frame:ClearAllPoints()
 			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-		elseif i == 4 and chatName == LOOT and not frame.isDocked then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+		elseif i == 4 and chatName == LOOT then
+			if not frame.isDocked then
+				frame:ClearAllPoints()
+				frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+			end
 		end
 				
 		-- save new default position and dimension
