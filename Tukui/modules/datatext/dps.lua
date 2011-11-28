@@ -31,12 +31,17 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 	DPS_FEED:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 	DPS_FEED:RegisterEvent("PLAYER_LOGIN")
 
+	local elapsed = 2
 	DPS_FEED:SetScript("OnUpdate", function(self, elap)
 		if UnitAffectingCombat("player") then
 			cmbt_time = cmbt_time + elap
 		end
-       
-		dText:SetText(getDPS())
+
+		elapsed = elapsed + elap
+		if elapsed >= 2 then
+			elapsed = 0
+			dText:SetText(getDPS())
+		end
 	end)
      
 	function DPS_FEED:PLAYER_LOGIN()
@@ -84,7 +89,7 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 		if (dmg_total == 0) then
 			return (DPS_FEED.Color2.."0.0 |r" .. DPS_FEED.Color1..L.datatext_dps.."|r")
 		else
-			return string.format(DPS_FEED.Color2.."%.1f |r" .. DPS_FEED.Color1 .. L.datatext_dps .. "|r", (dmg_total or 0) / (cmbt_time or 1))
+			return string.format(DPS_FEED.Color2.."%.1fk |r" .. DPS_FEED.Color1 .. L.datatext_dps .. "|r", ((dmg_total or 0) / (cmbt_time or 1)) / 1000)
 		end
 	end
 

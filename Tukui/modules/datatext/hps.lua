@@ -29,7 +29,8 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
  
 	HPS_FEED:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 	HPS_FEED:RegisterEvent("PLAYER_LOGIN")
- 
+	
+	local elapsed = 2
 	HPS_FEED:SetScript("OnUpdate", function(self, elap)
 		if UnitAffectingCombat("player") then
 			HPS_FEED:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
@@ -37,7 +38,12 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 		else
 			HPS_FEED:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 		end
-		hText:SetText(get_hps())
+		
+		elapsed = elapsed + elap
+		if elapsed >= 2 then
+			elapsed = 0
+			hText:SetText(get_hps())
+		end
 	end)
  
 	function HPS_FEED:PLAYER_LOGIN()
@@ -88,7 +94,7 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 		if (actual_heals_total == 0) then
 			return (HPS_FEED.Color2.."0.0 |r" .. HPS_FEED.Color1 .. L.datatext_hps .. "|r")
 		else
-			return string.format(HPS_FEED.Color2.."%.1f |r" .. HPS_FEED.Color1..L.datatext_hps.."|r", (actual_heals_total or 0) / (cmbt_time or 1))
+			return string.format(HPS_FEED.Color2.."%.1fk |r" .. HPS_FEED.Color1..L.datatext_hps.."|r", ((actual_heals_total or 0) / (cmbt_time or 1)) / 1000)
 		end
 	end
 
