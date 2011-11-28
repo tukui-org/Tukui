@@ -31,14 +31,14 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 	DPS_FEED:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 	DPS_FEED:RegisterEvent("PLAYER_LOGIN")
 
-	local elapsed = 2
+	local elapsed = 1
 	DPS_FEED:SetScript("OnUpdate", function(self, elap)
 		if UnitAffectingCombat("player") then
 			cmbt_time = cmbt_time + elap
 		end
 
 		elapsed = elapsed + elap
-		if elapsed >= 2 then
+		if elapsed >= 1 then
 			elapsed = 0
 			dText:SetText(getDPS())
 		end
