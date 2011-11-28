@@ -42,37 +42,3 @@ SlashCmdList["LEAVEPARTY"] = function()
 	LeaveParty()
 end
 SLASH_LEAVEPARTY1 = '/leaveparty'
-
--- chat position reset to Tukui default
--- since t14, we do not force position after loading UI.
--- you can execute this command if you made change and want to reset back to default
--- an alternative method is to launch the install and only apply step 2 (chat)
-SLASH_TUKUICHATRESET1 = "/chatdefault"
-SlashCmdList.TUKUICHATRESET = function()
-	for i = 1, NUM_CHAT_WINDOWS do
-		local frame = _G[format("ChatFrame%s", i)]
-		local chatFrameId = frame:GetID()
-		local chatName = FCF_GetChatWindowInfo(chatFrameId)
-		
-		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth + 1, 111)
-		
-		-- tell wow that we are using new size
-		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
-		
-		-- move general bottom left or Loot (if found) on right
-		if i == 1 then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-		elseif i == 4 and chatName == LOOT then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
-		end
-				
-		-- save new default position and dimension
-		FCF_SavePositionAndDimensions(frame)
-		
-		-- lock them if unlocked
-		if not frame.isLocked then FCF_SetLocked(frame, 1) end
-	end
-end

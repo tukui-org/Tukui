@@ -214,6 +214,36 @@ local function SetupChat(self)
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
 end
+
+-- default chat position of left and right (1 & 4) windows
+T.SetDefaultChatPositions = function()
+	for i = 1, NUM_CHAT_WINDOWS do
+		local frame = _G[format("ChatFrame%s", i)]
+		local chatFrameId = frame:GetID()
+		local chatName = FCF_GetChatWindowInfo(chatFrameId)
+		
+		-- set the size of chat frames
+		frame:Size(T.InfoLeftRightWidth + 1, 111)
+		
+		-- tell wow that we are using new size
+		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
+		
+		-- move general bottom left or Loot (if found) on right
+		if i == 1 then
+			frame:ClearAllPoints()
+			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
+		elseif i == 4 and chatName == LOOT and not frame.isDocked then
+			frame:ClearAllPoints()
+			frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+		end
+				
+		-- save new default position and dimension
+		FCF_SavePositionAndDimensions(frame)
+		
+		-- lock them if unlocked
+		if not frame.isLocked then FCF_SetLocked(frame, 1) end
+	end
+end
 	
 TukuiChat:RegisterEvent("ADDON_LOADED")
 TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -226,6 +256,7 @@ TukuiChat:SetScript("OnEvent", function(self, event, ...)
 		end
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		T.SetDefaultChatPositions()
 	end
 end)
 
