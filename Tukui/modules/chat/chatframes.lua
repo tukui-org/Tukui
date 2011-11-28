@@ -172,15 +172,7 @@ local function SetChatStyle(frame)
 		end
 	end)
 	
-	if _G[chat] ~= _G["ChatFrame2"] then
-		-- justify text on loot frame to the right
-		if _G[chat] == _G["ChatFrame4"] and not _G[chat].isDocked then
-			local name = _G[chat.."TabText"]:GetText()
-			if name == LOOT then
-				frame:SetJustifyH("RIGHT")
-			end
-		end
-		
+	if _G[chat] ~= _G["ChatFrame2"] then	
 		origs[_G[chat]] = _G[chat].AddMessage
 		_G[chat].AddMessage = AddMessage
 	else
@@ -215,50 +207,11 @@ local function SetupChat(self)
 	ChatTypeInfo.CHANNEL.sticky = 1
 end
 
--- default chat position of left and right (1 & 4) windows
-T.SetDefaultChatPositions = function()
-	for i = 1, NUM_CHAT_WINDOWS do
-		local frame = _G[format("ChatFrame%s", i)]
-		local chatFrameId = frame:GetID()
-		local chatName = FCF_GetChatWindowInfo(chatFrameId)
-		
-		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth + 1, 111)
-		
-		-- tell wow that we are using new size
-		SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
-		
-		-- move general bottom left or Loot (if found) on right
-		if i == 1 then
-			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-		elseif i == 4 and chatName == LOOT then
-			if not frame.isDocked then
-				frame:ClearAllPoints()
-				frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
-			end
-		end
-				
-		-- save new default position and dimension
-		FCF_SavePositionAndDimensions(frame)
-		
-		-- lock them if unlocked
-		if not frame.isLocked then FCF_SetLocked(frame, 1) end
-	end
-end
-	
 TukuiChat:RegisterEvent("ADDON_LOADED")
-TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiChat:SetScript("OnEvent", function(self, event, ...)
-	local addon = ...
-	if event == "ADDON_LOADED" then
-		if addon == "Blizzard_CombatLog" then
-			self:UnregisterEvent("ADDON_LOADED")
-			SetupChat(self)
-		end
-	elseif event == "PLAYER_ENTERING_WORLD" then
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-		T.SetDefaultChatPositions()
+TukuiChat:SetScript("OnEvent", function(self, event, addon)
+	if addon == "Blizzard_CombatLog" then
+		self:UnregisterEvent("ADDON_LOADED")
+		SetupChat(self)
 	end
 end)
 
@@ -290,3 +243,35 @@ T.SkinCloseButton(BNToastFrameCloseButton)
 
 -- kill the default reset button
 ChatConfigFrameDefaultButton:Kill()
+
+-- default position of chat #1 (left) and chat #4 (right)
+T.SetDefaultChatPosition = function(frame)
+	if frame then
+		local id = frame:GetID()
+		local name = FCF_GetChatWindowInfo(id)
+		
+		-- set the size of chat frames
+		frame:Size(T.InfoLeftRightWidth + 1, 111)
+		
+		-- tell wow that we are using new size
+		SetChatWindowSavedDimensions(id, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
+		
+		if id == 1 then
+			frame:ClearAllPoints()
+			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
+		elseif id == 4 and name == LOOT then
+			if not frame.isDocked then
+				frame:ClearAllPoints()
+				frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+				frame:SetJustifyH("RIGHT")
+			end
+		end
+		
+		-- save new default position and dimension
+		FCF_SavePositionAndDimensions(frame)
+		
+		-- lock them if unlocked
+		if not frame.isLocked then FCF_SetLocked(frame, 1) end
+	end
+end
+hooksecurefunc("FCF_RestorePositionAndDimensions", T.SetDefaultChatPosition)

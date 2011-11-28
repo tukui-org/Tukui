@@ -28,6 +28,8 @@ T.ChatSetup = function()
 		-- rename windows general and combat log
 		if i == 1 then FCF_SetWindowName(frame, "G, S & W") end
 		if i == 2 then FCF_SetWindowName(frame, "Log") end
+		
+		T.SetDefaultChatPosition(frame)
 	end
 	
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
@@ -105,8 +107,6 @@ T.ChatSetup = function()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
-	
-	T.SetDefaultChatPositions()
 end
 
 local function cvarsetup()
