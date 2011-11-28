@@ -105,6 +105,8 @@ T.ChatSetup = function()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+	
+	T.SetDefaultChatPositions()
 end
 
 local function cvarsetup()
@@ -127,6 +129,7 @@ local function cvarsetup()
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
+	SetCVar("gxMultisample", 1)
 end
 
 local function positionsetup()
@@ -310,6 +313,7 @@ local step1 = function()
 	option1:SetScript("OnClick", step2)
 	option2:SetScript("OnClick", function()
 		cvarsetup()
+		RestartGx()
 		step2()
 	end)
 	

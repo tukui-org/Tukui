@@ -8,7 +8,6 @@ C["general"] = {
 	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
-	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
 	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
 	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
 	["blizzardreskin"] = true                           -- reskin all Blizzard frames
