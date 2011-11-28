@@ -9,7 +9,7 @@ skin:SetScript("OnEvent", function(self, event, addon)
 	
 	local DXE = DXE
 	local _G = getfenv(0)
-	local barSpacing = T.Scale(1, 1)
+	local barSpacing = T.Scale(2, 2)
 	local borderWidth = T.Scale(2, 2)
 	local buttonZoom = {.09,.91,.09,.91}
 
@@ -26,6 +26,8 @@ skin:SetScript("OnEvent", function(self, event, addon)
 		-- Right Icon
 		bar.righticon:SetTemplate("Default")
 		bar.righticon.border:Kill()
+		bar.righticon:ClearAllPoints()
+		bar.righticon:SetPoint("LEFT", bar, "RIGHT", 2, 0)
 		bar.righticon.t:SetTexCoord(unpack(buttonZoom))
 		bar.righticon.t:ClearAllPoints()
 		bar.righticon.t:SetPoint("TOPLEFT", borderWidth, -borderWidth)
@@ -35,6 +37,8 @@ skin:SetScript("OnEvent", function(self, event, addon)
 		-- Left Icon
 		bar.lefticon:SetTemplate("Default")
 		bar.lefticon.border:Kill()
+		bar.lefticon:ClearAllPoints()
+		bar.lefticon:SetPoint("RIGHT", bar, "LEFT", -2, 0)
 		bar.lefticon.t:SetTexCoord(unpack(buttonZoom))
 		bar.lefticon.t:ClearAllPoints()
 		bar.lefticon.t:SetPoint("TOPLEFT",borderWidth, -borderWidth)
@@ -43,8 +47,8 @@ skin:SetScript("OnEvent", function(self, event, addon)
 	end
 
 	-- Hook Health frames (Skin & spacing)
-	DXT.LayoutHealthWatchers_ = DXT.LayoutHealthWatchers
-	DXT.LayoutHealthWatchers = function(self)
+	DXE.LayoutHealthWatchers_ = DXE.LayoutHealthWatchers
+	DXE.LayoutHealthWatchers = function(self)
 		for i,hw in ipairs(self.HW) do
 			if hw:IsShown() then
 				hw:SetTemplate("Transparent")
@@ -54,8 +58,8 @@ skin:SetScript("OnEvent", function(self, event, addon)
 		end
 	end
 
-	DXT.Alerts.RefreshBars_ = DXT.Alerts.RefreshBars
-	DXT.Alerts.RefreshBars = function(self)
+	DXE.Alerts.RefreshBars_ = DXE.Alerts.RefreshBars
+	DXE.Alerts.RefreshBars = function(self)
 		if self.refreshing then return end
 		self.refreshing = true
 		self:RefreshBars_()
@@ -70,16 +74,15 @@ skin:SetScript("OnEvent", function(self, event, addon)
 		self.refreshing = false
 	end
 
-	DXT.Alerts.Simple_ = DXT.Alerts.Simple
-	DXT.Alerts.Simple = function(self,...)
+	DXE.Alerts.Simple_ = DXE.Alerts.Simple
+	DXE.Alerts.Simple = function(self,...)
 		self:Simple_(...)
 		self:RefreshBars()
 	end
 
 	-- Force some updates
 	DXE:LayoutHealthWatchers()
-	DXT.Alerts:RefreshBars()
-	--DXT.Pane.border:Kill()
+	DXE.Alerts:RefreshBars()
 
 	--Force some default profile options
 	if not DXEDB then DXEDB = {} end
