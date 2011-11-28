@@ -3,12 +3,13 @@
 ## Project Collaborators: Elv22, Nightcracker
 ## Credits to: Caith, Caellian, Shestak, Haste, Tekkub, Alza, Roth, P3lim, Tulla, Hungtar, hankthetank, Ishtara, Haleth and others...
 ## Special Thanks to: Admins, Moderator and VIP's from tukui.org
-## Version: 14.0095
+## Version: 14.00
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
 ## SavedVariablesPerCharacter: TukuiDataPerChar
 ## OptionalDeps: Tukui_ConfigUI, Tukui_EditedDefaultConfig, !ClassColors, Clique
 ## X-oUF: oUFTukui
+## Website: www.tukui.org
 
 Tukui.xml 
