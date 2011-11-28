@@ -14,19 +14,19 @@ if C.datatext.talent and C.datatext.talent > 0 then
 	T.PP(C.datatext.talent, Text)
  
 	local function Update(self)
-		local majorTree = GetPrimaryTalentTree()
-		if not majorTree then
+		if not GetPrimaryTalentTree() then
 			Text:SetText(L.datatext_notalents) 
 		else
+			local majorTree = GetPrimaryTalentTree()
 			local tree1num = select(5,GetTalentTabInfo(1))
 			local tree2num = select(5,GetTalentTabInfo(2))
 			local tree3num = select(5,GetTalentTabInfo(3))
-			Text:SetText(Stat.Color1..select(2,GetTalentTabInfo(majorTree))..":|r "..Stat.Color2..tree1num.."/"..tree2num.."/"..tree3num)
+			local tree = select(2,GetTalentTabInfo(majorTree)) or ""
+			Text:SetText(Stat.Color1..tree..":|r "..Stat.Color2..tree1num.."/"..tree2num.."/"..tree3num.."|r")
 		end
 		self:SetAllPoints(Text)
 	end
  
-	Stat:RegisterEvent("PLAYER_LOGIN")
 	Stat:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	Stat:RegisterEvent("CHARACTER_POINTS_CHANGED")
 	Stat:RegisterEvent("PLAYER_TALENT_UPDATE")
