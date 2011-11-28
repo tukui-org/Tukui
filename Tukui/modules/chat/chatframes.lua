@@ -285,3 +285,6 @@ end)
 
 -- reskin Toast Frame Close Button
 T.SkinCloseButton(BNToastFrameCloseButton)
+
+-- kill the default reset button
+ChatConfigFrameDefaultButton:Kill()

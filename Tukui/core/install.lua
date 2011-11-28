@@ -4,7 +4,7 @@
 
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-local function chatsetup()
+T.ChatSetup = function()
 	-- setting chat frames if using Tukui chats.					
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
@@ -282,7 +282,7 @@ local step2 = function()
 		text3:SetText(L.install_step_2_line_3)
 		text4:SetText(L.install_step_2_line_4)
 		option2:SetScript("OnClick", function()
-			chatsetup()
+			T.ChatSetup()
 			step3()
 		end)
 	end	
