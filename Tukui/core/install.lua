@@ -129,7 +129,6 @@ local function cvarsetup()
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
-	SetCVar("gxMultisample", 1)
 end
 
 local function positionsetup()
@@ -313,7 +312,11 @@ local step1 = function()
 	option1:SetScript("OnClick", step2)
 	option2:SetScript("OnClick", function()
 		cvarsetup()
-		RestartGx()
+		local ms = GetCVar("gxMultisample")
+		if ms ~= "1" then
+			SetCVar("gxMultisample", 1)
+			RestartGx()
+		end
 		step2()
 	end)
 	
