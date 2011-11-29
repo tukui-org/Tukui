@@ -17,6 +17,14 @@ local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].wowtime, Text)
 
+local Animation = Text:CreateAnimationGroup()
+Animation:SetLooping("BOUNCE")
+
+local FadeOut = Animation:CreateAnimation("Alpha")
+FadeOut:SetChange(-.5)
+FadeOut:SetDuration(.4)
+FadeOut:SetSmoothing("IN_OUT")
+
 local europeDisplayFormat = string.join("", Stat.Color2.."%02d", ":%02d|r")
 local ukDisplayFormat = string.join("", "", Stat.Color2.."%d", ":%02d", " %s|r")
 local timerLongFormat = "%d:%02d:%02d"
@@ -109,6 +117,13 @@ local function Update(self, t)
 	
 	local Hr, Min, AmPm = CalculateTimeValues()
 	
+	local invitation = GameTimeFrame.flashInvite
+	if invitation then
+		if not Animation:IsPlaying() then Animation:Play() end
+	else
+		if Animation:IsPlaying() then Animation:Stop() end
+	end
+	
 	-- no update quick exit
 	if (Hr == curHr and Min == curMin and AmPm == curAmPm) then
 		int = 2
@@ -188,8 +203,6 @@ Stat:SetScript("OnEnter", function(self)
 end)
 
 Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)
-Stat:RegisterEvent("CALENDAR_UPDATE_PENDING_INVITES")
-Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:SetScript("OnUpdate", Update)
 Stat:RegisterEvent("UPDATE_INSTANCE_INFO")
 Stat:SetScript("OnMouseDown", function(self, btn)
