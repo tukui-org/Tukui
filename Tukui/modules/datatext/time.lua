@@ -109,12 +109,6 @@ local function Update(self, t)
 	
 	local Hr, Min, AmPm = CalculateTimeValues()
 	
-	if CalendarGetNumPendingInvites() > 0 then
-		Text:SetTextColor(1, 0, 0)
-	else
-		Text:SetTextColor(1, 1, 1)
-	end
-	
 	-- no update quick exit
 	if (Hr == curHr and Min == curMin and AmPm == curAmPm) then
 		int = 2
