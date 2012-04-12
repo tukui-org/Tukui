@@ -22,7 +22,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 			local name, count, _, _, _ = GetBackpackCurrencyInfo(i)
 			if name and count then
 				if(i ~= 1) then _text = _text .. " " else _text = "" end
-				words = { strsplit(" ", name) }
+				local words = { strsplit(" ", name) }
 				for _, word in ipairs(words) do
 					_text = _text .. Stat.Color1..string.sub(word,1,1).."|r"
 				end

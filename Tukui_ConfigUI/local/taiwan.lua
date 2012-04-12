@@ -13,7 +13,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "名條"
-	TukuiConfigUILocalization.nameplates_enable = "啟用名條模組"
+	TukuiConfigUILocalization.nameplateenable = "啟用名條模組"
 	TukuiConfigUILocalization.nameplateenhancethreat = "啟用仇恨上色模式, 依照你的角色定位決定"
 	TukuiConfigUILocalization.nameplateshowhealth = "在名條上顯示生命值"
 	TukuiConfigUILocalization.nameplatecombat = "只在戰鬥中顯示敵人名條"
@@ -95,8 +95,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "光環上的文字大小"
 	TukuiConfigUILocalization.unitframesgridscale = "Grid大小調整"
 	TukuiConfigUILocalization.unitframesmanahigh = "法力過高警告(獵人專用)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "法力過低警告(所有有法力的職業)"
-	TukuiConfigUILocalization.unitframesalphaoor = "隊伍/團隊單位超出距離透明值"
+	TukuiConfigUILocalization.unitframeslowThreshold = "法力過低警告(所有有法力的職業)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "隊伍/團隊單位超出距離透明值"
 	TukuiConfigUILocalization.unitframesmaintank = "啟用主坦克框架"
 	TukuiConfigUILocalization.unitframesmainassist = "啟用主助攻框架"
 	TukuiConfigUILocalization.unitframesunicolor = "啟用特殊顏色樣式(灰色生命值)"

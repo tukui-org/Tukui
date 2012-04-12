@@ -11,7 +11,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "이름표"
-	TukuiConfigUILocalization.nameplates_enable = "이름표를 사용"
+	TukuiConfigUILocalization.nameplateenable = "이름표를 사용"
 	TukuiConfigUILocalization.nameplateenhancethreat = "위협수준 기능 사용, 당신의 역할에 따라 자동적으로 변경됨"
 	TukuiConfigUILocalization.nameplateshowhealth = "생명력을 표시"
 	TukuiConfigUILocalization.nameplatecombat = "전투 중에만 표시"
@@ -93,8 +93,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "강화 및 약화 효과 지속시간의 글꼴크기"
 	TukuiConfigUILocalization.unitframesgridscale = "공격대 인터페이스의 크기"
 	TukuiConfigUILocalization.unitframesmanahigh = "마나가 높으면 경고를 보여줌 (사냥꾼 전용)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "마나가 낮으면 경고를 보여줌"
-	TukuiConfigUILocalization.unitframesalphaoor = "거리에 따른 투명도 수치"
+	TukuiConfigUILocalization.unitframeslowThreshold = "마나가 낮으면 경고를 보여줌"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "거리에 따른 투명도 수치"
 	TukuiConfigUILocalization.unitframesmaintank = "방어 전담창을 사용"
 	TukuiConfigUILocalization.unitframesmainassist = "지원공격 전담창을 사용"
 	TukuiConfigUILocalization.unitframesunicolor = "직업색상을 사용(회색 바)"

@@ -1,17 +1,17 @@
 local T, C, L = unpack(select(2, ...))
 
 if T.client == "frFR" then
-	L.chat_BATTLEGROUND_GET = "[BG]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[BG]"
+	L.chat_BATTLEGROUND_GET = "BG"
+	L.chat_BATTLEGROUND_LEADER_GET = "BG"
 	L.chat_BN_WHISPER_GET = "De"
-	L.chat_GUILD_GET = "[G]"
-	L.chat_OFFICER_GET = "[O]"
-	L.chat_PARTY_GET = "[G]"
-	L.chat_PARTY_GUIDE_GET = "[G]"
-	L.chat_PARTY_LEADER_GET = "[G]"
-	L.chat_RAID_GET = "[R]"
-	L.chat_RAID_LEADER_GET = "[R]"
-	L.chat_RAID_WARNING_GET = "[W]"
+	L.chat_GUILD_GET = "G"
+	L.chat_OFFICER_GET = "O"
+	L.chat_PARTY_GET = "G"
+	L.chat_PARTY_GUIDE_GET = "G"
+	L.chat_PARTY_LEADER_GET = "G"
+	L.chat_RAID_GET = "R"
+	L.chat_RAID_LEADER_GET = "R"
+	L.chat_RAID_WARNING_GET = "W"
 	L.chat_WHISPER_GET = "De"
 	L.chat_FLAG_AFK = "[ABS]"
 	L.chat_FLAG_DND = "[NPD]"
@@ -92,6 +92,8 @@ if T.client == "frFR" then
 	L.datatext_gatesdestroyed = "Portes Détruites : "
 	L.datatext_totalmemusage = "Utilisation Totale de la Mémoire : "
 	L.datatext_control = "Controlé par : "
+	L.datatext_cta_allunavailable = "Impossible de récupérer les informations d'appel aux armes."
+	L.datatext_cta_nodungeons = "Aucun donjon offre actuellement d'appel aux armes."
 
 	L.Slots = {
 	  [1] = {1, "Tête", 1000},

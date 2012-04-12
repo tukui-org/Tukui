@@ -6,7 +6,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------------
 
 if C["loot"].autogreed == true then
-	local autogreed = CreateFrame("frame")
+	local autogreed = CreateFrame("frame", "TukuiAutoGreed")
 	autogreed:RegisterEvent("START_LOOT_ROLL")
 	autogreed:SetScript("OnEvent", function(self, event, id)
 		local name = select(2, GetLootRollItemInfo(id))

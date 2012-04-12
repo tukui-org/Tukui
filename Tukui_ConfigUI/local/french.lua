@@ -13,7 +13,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Barres d'info"
-	TukuiConfigUILocalization.nameplates_enable = "Activer les barres d'info"
+	TukuiConfigUILocalization.nameplateenable = "Activer les barres d'info"
 	TukuiConfigUILocalization.nameplateenhancethreat = "Activer le système de menace, change automatiquement selon votre rôle"
 	TukuiConfigUILocalization.nameplateshowhealth = "Montrer la santé sur les barres d'info"
 	TukuiConfigUILocalization.nameplatecombat = "Afficher les barres d'infos des ennemis seulement en combat"
@@ -98,8 +98,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "Échelle du texte des améliorations/affaiblissements"
 	TukuiConfigUILocalization.unitframesgridscale = "Échelle Grid"
 	TukuiConfigUILocalization.unitframesmanahigh = "Indication de mana élevé (pour Chasseurs)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "Indication de mana faible (toutes classes à mana)"
-	TukuiConfigUILocalization.unitframesalphaoor = "Transparence des joueurs en groupe/raid hors de portée"
+	TukuiConfigUILocalization.unitframeslowThreshold = "Indication de mana faible (toutes classes à mana)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "Transparence des joueurs en groupe/raid hors de portée"
 	TukuiConfigUILocalization.unitframesmaintank = "Afficher Tank principal"
 	TukuiConfigUILocalization.unitframesmainassist = "Afficher Assist principal"
 	TukuiConfigUILocalization.unitframesunicolor = "Utiliser un thème de couleur unique (barre de vie grise)"

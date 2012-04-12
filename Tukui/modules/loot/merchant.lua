@@ -14,7 +14,7 @@ local filter = {
 	[43572] = true, -- Magic Eater		
 }
 
-local f = CreateFrame("Frame")
+local f = CreateFrame("Frame", "TukuiMerchant")
 f:SetScript("OnEvent", function()
 	if C["merchant"].sellgrays or C["merchant"].sellmisc then
 		local c = 0

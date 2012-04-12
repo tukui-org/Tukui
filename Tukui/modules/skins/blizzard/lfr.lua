@@ -8,6 +8,8 @@ local function LoadSkin()
 	  "LFRBrowseFrameInviteButton",
 	  "LFRBrowseFrameRefreshButton",
 	  "LFRQueueFrameNoLFRWhileLFDLeaveQueueButton",
+	  "RaidFinderQueueFrameIneligibleFrameLeaveQueueButton",	  
+	  "LFRQueueFrameNoLFRWhileLFD",
 	}
 
 	LFRParentFrame:StripTextures()
@@ -84,6 +86,8 @@ local function LoadSkin()
 	LFRQueueFrameRoleButtonTank:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonTank:GetChildren():GetFrameLevel() + 2)
 	LFRQueueFrameRoleButtonHealer:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonHealer:GetChildren():GetFrameLevel() + 2)
 	LFRQueueFrameRoleButtonDPS:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonDPS:GetChildren():GetFrameLevel() + 2)
+	T.SkinScrollBar(LFRQueueFrameCommentScrollFrame)
+	T.SkinScrollBar(RaidFinderQueueFrameScrollFrame)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

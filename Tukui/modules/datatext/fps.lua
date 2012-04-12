@@ -21,7 +21,9 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	local function Update(self, t)
 		int = int - t
 		if int < 0 then
-			Text:SetText(Stat.Color2..floor(GetFramerate()).."|r"..Stat.Color1..L.datatext_fps.."|r"..Stat.Color2..select(3, GetNetStats()).."|r"..Stat.Color1..L.datatext_ms.."|r")
+			local ms = select(3, GetNetStats())
+			if ms == 0 then ms = "???" end
+			Text:SetText(Stat.Color2..floor(GetFramerate()).."|r"..Stat.Color1..L.datatext_fps.."|r"..Stat.Color2..ms.."|r"..Stat.Color1..L.datatext_ms.."|r")
 			self:SetAllPoints(Text)
 			int = 1			
 		end	

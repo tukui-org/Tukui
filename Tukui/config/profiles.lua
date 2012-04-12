@@ -19,7 +19,9 @@ end
 -- Name need to be case sensitive
 ---------------------------------------------------------------------------
 
-if T.myname == "PutYourNameHere" then
-	C.general.autoscale = false
+if T.myname == "Tukz" and T.myrealm == "Ysondre" then
+	C.actionbar.hideshapeshift = true
+	C.actionbar.hotkey = false
+	C.unitframes.enemyhcolor = true
 	C.general.uiscale = 0.64
 end

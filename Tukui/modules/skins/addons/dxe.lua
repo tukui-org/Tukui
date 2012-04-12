@@ -1,6 +1,5 @@
 local T, C, L = unpack(select(2, ...))
-
--- NOTE TO ME, MORE WORK TO DO ON THIS FILE
+if not C.general.dxereskin then return end
 
 local skin = CreateFrame("Frame")
 skin:RegisterEvent("ADDON_LOADED")

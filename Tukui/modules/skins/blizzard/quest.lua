@@ -47,7 +47,7 @@ local function LoadSkin()
 	
 	T.SkinScrollBar(QuestNPCModelTextScrollFrameScrollBar)
 	T.SkinScrollBar(QuestGreetingScrollFrameScrollBar)
-	T.SkinScrollBar(QuestProgressScrollFrame)
+	T.SkinScrollBar(QuestProgressScrollFrameScrollBar)
 	QuestNPCModel:StripTextures()
 	QuestNPCModel:CreateBackdrop("Default")
 	QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)

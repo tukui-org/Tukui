@@ -17,7 +17,7 @@ local backdrop = {
 }
 
 local function Shared(self, unit)
-	self.colors = T.oUF_colors
+	self.colors = T.UnitColor
 	self:RegisterForClicks("AnyUp")
 	self:SetScript('OnEnter', UnitFrame_OnEnter)
 	self:SetScript('OnLeave', UnitFrame_OnLeave)
@@ -202,6 +202,11 @@ local function Shared(self, unit)
 		
 		self.WeakenedSoul = ws
 	end
+	
+	-- for editors, easy way to edit raid unit frames
+	local header = self:GetParent():GetName()
+	self.PostUpdateRaidUnit = T.PostUpdateRaidUnit or T.dummy
+	self:PostUpdateRaidUnit(unit, header)
 
 	return self
 end

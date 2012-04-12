@@ -1,5 +1,14 @@
 local T, C, L = unpack(select(2, ...))
-if not C["actionbar"].enable == true then return end
+
+if not C["actionbar"].enable == true then
+	TukuiPetBar:Hide()
+	TukuiBar5:Hide()
+	TukuiBar6:Hide()
+	TukuiBar7:Hide()
+	TukuiBar5ButtonTop:Hide()
+	TukuiBar5ButtonBottom:Hide()
+	return
+end
 
 ---------------------------------------------------------------------------
 -- Manage all others stuff for actionbars

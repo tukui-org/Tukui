@@ -61,7 +61,7 @@ end
 
 local function setup()	
 	WatchFrame:SetParent(TukuiWatchFrame)
-	WatchFrame:SetFrameStrata("MEDIUM")
+	WatchFrame:SetFrameStrata("LOW")
 	WatchFrame:SetFrameLevel(3)
 	WatchFrame:SetClampedToScreen(false)
 	WatchFrame:ClearAllPoints()

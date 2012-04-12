@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-local TukuiFonts = CreateFrame("Frame", nil, UIParent)
+local TukuiFonts = CreateFrame("Frame", "TukuiFonts", UIParent)
 
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	obj:SetFont(font, size, style)
@@ -71,6 +71,10 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
 	SetFont(PVPInfoTextString,                  NORMAL, 22, "THINOUTLINE")
 	SetFont(PVPArenaTextString,                 NORMAL, 22, "THINOUTLINE")
+	SetFont(FriendsFont_Normal,                 NORMAL, 12)
+	SetFont(FriendsFont_Small,                  NORMAL, 11)
+	SetFont(FriendsFont_Large,                  NORMAL, 14)
+	SetFont(FriendsFont_UserText,               NORMAL, 11)
 
 	SetFont = nil
 	self:SetScript("OnEvent", nil)

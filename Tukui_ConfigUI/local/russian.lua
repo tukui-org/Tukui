@@ -13,7 +13,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Индикаторы здоровья"
-	TukuiConfigUILocalization.nameplates_enable = "Включить индикаторы здоровья"
+	TukuiConfigUILocalization.nameplateenable = "Включить индикаторы здоровья"
 	TukuiConfigUILocalization.nameplateenhancethreat = "Автоматическая смена цвета угрозы (зависит от вашей роли)"
 	TukuiConfigUILocalization.nameplateshowhealth = "Цифровое значение здоровья"
 	TukuiConfigUILocalization.nameplatecombat = "Показывать индикаторы только во время боя"
@@ -95,8 +95,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "Размер текста на аурах"
 	TukuiConfigUILocalization.unitframesgridscale = "Размер Grid"
 	TukuiConfigUILocalization.unitframesmanahigh = "Индикатор избытка маны (Для охотников)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "Индикатор нехватки маны (Все классы с маной)"
-	TukuiConfigUILocalization.unitframesalphaoor = "Значение для прозрачности рамок группы/рейда вне зоны досягаемости"
+	TukuiConfigUILocalization.unitframeslowThreshold = "Индикатор нехватки маны (Все классы с маной)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "Значение для прозрачности рамок группы/рейда вне зоны досягаемости"
 	TukuiConfigUILocalization.unitframesmaintank = "Отображать рамки танков рейда"
 	TukuiConfigUILocalization.unitframesmainassist = "Отображать рамки помощников"
 	TukuiConfigUILocalization.unitframesunicolor = "Включить особую цветовую схему (серая панель здоровья)"

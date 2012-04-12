@@ -51,6 +51,8 @@ local function LoadSkin()
 		"LFRQueueFrameCommentInset",
 		"WhoFrameListInset",
 		"WhoFrameEditBoxInset",
+		"IgnoreListFrame",
+		"PendingListFrame",
 	}			
 
 	local KillTextures = {

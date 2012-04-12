@@ -33,6 +33,7 @@ local function LoadSkin()
 	ItemSocketingSocketButton:Point("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
 	T.SkinButton(ItemSocketingSocketButton)
 	T.SkinCloseButton(ItemSocketingCloseButton)
+	T.SkinScrollBar(ItemSocketingScrollFrameScrollBar)
 end
 
 T.SkinFuncs["Blizzard_ItemSocketingUI"] = LoadSkin

@@ -39,6 +39,14 @@ local function BuildGuildTable()
 	local name, rank, level, zone, note, officernote, connected, status, class
 	for i = 1, GetNumGuildMembers() do
 		name, rank, _, level, _, zone, note, officernote, connected, status, class = GetGuildRosterInfo(i)
+		if status == 1 then
+			status = "|cffff0000[AFK]|r" -- Needs Localization
+		elseif status == 2 then
+			status = "|cffff0000[DND]|r" -- Needs Localization
+		else
+			status = ""
+		end
+		
 		guildTable[i] = { name, rank, level, zone, note, officernote, connected, status, class }
 		if connected then totalOnline = totalOnline + 1 end
 	end

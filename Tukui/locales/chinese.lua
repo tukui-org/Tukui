@@ -2,17 +2,17 @@ local T, C, L = unpack(select(2, ...))
 
 if T.client == "zhCN" then
 	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)	
-	L.chat_BATTLEGROUND_GET = "[战场]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[战场领袖]"
+	L.chat_BATTLEGROUND_GET = "战场"
+	L.chat_BATTLEGROUND_LEADER_GET = "战场领袖"
 	L.chat_BN_WHISPER_GET = "密语"
-	L.chat_GUILD_GET = "[公]"
-	L.chat_OFFICER_GET = "[官]"
-	L.chat_PARTY_GET = "[队]"
-	L.chat_PARTY_GUIDE_GET = "[地下城向导]"
-	L.chat_PARTY_LEADER_GET = "[队长]"
-	L.chat_RAID_GET = "[团]"
-	L.chat_RAID_LEADER_GET = "[团长]"
-	L.chat_RAID_WARNING_GET = "[团队警告]"
+	L.chat_GUILD_GET = "公"
+	L.chat_OFFICER_GET = "官"
+	L.chat_PARTY_GET = "队"
+	L.chat_PARTY_GUIDE_GET = "地下城向导"
+	L.chat_PARTY_LEADER_GET = "队长"
+	L.chat_RAID_GET = "团"
+	L.chat_RAID_LEADER_GET = "团长"
+	L.chat_RAID_WARNING_GET = "团队警告"
 	L.chat_WHISPER_GET = "密语"
 	L.chat_FLAG_AFK = "[AFK]"
 	L.chat_FLAG_DND = "[DND]"
@@ -93,6 +93,8 @@ if T.client == "zhCN" then
 	L.datatext_gatesdestroyed = "摧毁大门："
 	L.datatext_totalmemusage = "总内存占用："
 	L.datatext_control = "控制方："
+	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
+	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
 
 	L.Slots = {
 		[1] = {1, "头部", 1000},

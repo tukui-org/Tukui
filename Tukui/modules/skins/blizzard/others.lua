@@ -202,6 +202,15 @@ local function LoadSkin()
 
 	RolePollPopup:SetTemplate("Default")
 	RolePollPopup:CreateShadow("Default")
+	
+	for i = 1, 4 do
+		local button = _G["StaticPopup"..i.."CloseButton"]
+		button:SetNormalTexture("")
+		button.SetNormalTexture = T.dummy
+		button:SetPushedTexture("")
+		button.SetPushedTexture = T.dummy
+		T.SkinCloseButton(button)
+	end
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

@@ -5,6 +5,7 @@
 
 local T, C, L = unpack(select(2, ...))
 
+if not C.general.bigwigsreskin then return end
 if not IsAddOnLoaded("BigWigs") then return end
 
 local buttonsize = 19
@@ -30,7 +31,7 @@ local function freestyle(bar)
 	end
 
 	-- reparent and hide icon background
-	local ibg = bar:Get("bigwigs:Tukui:bg")
+	local ibg = bar:Get("bigwigs:Tukui:ibg")
 	if ibg then
 		ibg:ClearAllPoints()
 		ibg:SetParent(UIParent)
@@ -42,6 +43,30 @@ local function freestyle(bar)
 	bar.candyBarBar.SetPoint=bar.candyBarBar.OldSetPoint
 	bar.candyBarIconFrame.SetWidth=bar.candyBarIconFrame.OldSetWidth
 	bar.SetScale=bar.OldSetScale
+	
+	--Reset Positions
+	--Icon
+	bar.candyBarIconFrame:ClearAllPoints()
+	bar.candyBarIconFrame:SetPoint("TOPLEFT")
+	bar.candyBarIconFrame:SetPoint("BOTTOMLEFT")
+	bar.candyBarIconFrame:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+
+	--Status Bar
+	bar.candyBarBar:ClearAllPoints()
+	bar.candyBarBar:SetPoint("TOPRIGHT")
+	bar.candyBarBar:SetPoint("BOTTOMRIGHT")
+
+	--BG
+	bar.candyBarBackground:SetAllPoints()
+
+	--Duration
+	bar.candyBarDuration:ClearAllPoints()
+	bar.candyBarDuration:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
+
+	--Name
+	bar.candyBarLabel:ClearAllPoints()
+	bar.candyBarLabel:SetPoint("LEFT", bar.candyBarBar, "LEFT", 2, 0)
+	bar.candyBarLabel:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
 end
 
 local applystyle = function(bar)
@@ -81,7 +106,7 @@ local applystyle = function(bar)
 		ibg:Point("BOTTOMRIGHT", bar.candyBarIconFrame, "BOTTOMRIGHT", 2, -2)
 		ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
-		bar:Set("bigwigs:Tukui:bg", ibg)
+		bar:Set("bigwigs:Tukui:ibg", ibg)
 	end
 
 	-- setup timer and bar name fonts and positions
@@ -138,65 +163,20 @@ local function RegisterStyle()
 	end
 end
 
-local function PositionBWAnchor()
-	if not BigWigsAnchor then return end
-	BigWigsAnchor:ClearAllPoints()
-	if E.CheckAddOnShown() == true then
-		if C["chat"].background == true and T.ChatRightShown == true then
-			BigWigsAnchor:Point("TOP", ChatRBGDummy, "TOP", 12, 0)	
-		else
-			BigWigsAnchor:Point("TOP", ChatRBGDummy, "TOP", 12, -32)
-		end	
-	else
-		BigWigsAnchor:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 8)		
-	end
-end
-
-local function PositionBWAnchor()
-	if not BigWigsAnchor then return end
-	BigWigsAnchor:ClearAllPoints()
-	BigWigsAnchor:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -5, 3)		
-end
-
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
-	if event == "ADDON_LOADED" and addon == "BigWigs_Plugins" then
+	if IsAddOnLoaded("Tukui_BigWigs") then return end
+	if addon == "BigWigs_Plugins" then
 		RegisterStyle()
 		local profile = BigWigs3DB["profileKeys"][T.myname.." - "..T.myrealm]
 		local path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Bars"]["profiles"][profile]
-		path.texture = "Tukui Norm"
+		path.texture = C.media.normTex
 		path.barStyle = "Tukui"
-		path.font = "Tukui Font"
+		path.font = C.media.font
 		
-		local path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Messages"]["profiles"][profile]
-		path.font = "Tukui Font"
+		path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Proximity"]["profiles"][profile]
+		path.font = C.media.font
 		
-		local path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Proximity"]["profiles"][profile]
-		path.font = "Tukui Font"
-		
-		f:UnregisterEvent("ADDON_LOADED")
-	elseif event == "PLAYER_ENTERING_WORLD" then
-		LoadAddOn("BigWigs_Core")
-		LoadAddOn("BigWigs_Plugins")
-		LoadAddOn("BigWigs_Options")
-		BigWigs:Enable()
-		BigWigsOptions:SendMessage("BigWigs_StartConfigureMode", true)
-		BigWigsOptions:SendMessage("BigWigs_StopConfigureMode")
-		PositionBWAnchor()
-
-		if Skada and Skada:GetWindows() and Skada:GetWindows()[1] and C["skin"].embed == "Skada" then
-			Skada:GetWindows()[1].bargroup:HookScript("OnShow", function() PositionBWAnchor() end)
-			Skada:GetWindows()[1].bargroup:HookScript("OnHide", function() PositionBWAnchor() end)
-		elseif Recount_MainWindow and C["skin"].embed == "Recount" then
-			Recount_MainWindow:HookScript("OnShow", function() PositionBWAnchor() end)
-			Recount_MainWindow:HookScript("OnHide", function() PositionBWAnchor() end)
-		elseif OmenAnchor and C["skin"].embed == "Omen" then
-			OmenAnchor:HookScript("OnShow", function() PositionBWAnchor() end)
-			OmenAnchor:HookScript("OnHide", function() PositionBWAnchor() end)		
-		end
-	elseif event == "PLAYER_REGEN_DISABLED" then
-		PositionBWAnchor()
-	elseif event == "PLAYER_REGEN_ENABLED" then
-		PositionBWAnchor()
+		self:UnregisterEvent("ADDON_LOADED")
 	end
 end)

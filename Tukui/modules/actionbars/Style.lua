@@ -6,7 +6,7 @@ local media = C["media"]
 local securehandler = CreateFrame("Frame", nil, nil, "SecureHandlerBaseTemplate")
 local replace = string.gsub
 
-local function style(self)
+function T.StyleActionBarButton(self)
 	local name = self:GetName()
 	
 	--> fixing a taint issue while changing totem flyout button in combat.
@@ -84,7 +84,7 @@ local function style(self)
 	end 
 end
 
-local function stylesmallbutton(normal, button, icon, name, pet)
+function T.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
 	button:SetNormalTexture("")
 	
 	-- bug fix when moving spell from bar
@@ -135,7 +135,7 @@ function T.StyleShift()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture"]
-		stylesmallbutton(normal, button, icon, name)
+		T.StyleActionBarPetAndShiftButton(normal, button, icon, name)
 	end
 end
 
@@ -145,11 +145,11 @@ function T.StylePet()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture2"]
-		stylesmallbutton(normal, button, icon, name, true)
+		T.StyleActionBarPetAndShiftButton(normal, button, icon, name, true)
 	end
 end
 
-local function updatehotkey(self, actionButtonType)
+function T.UpdateActionBarHotKey(self, actionButtonType)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
 	
@@ -198,7 +198,7 @@ local function SetupFlyoutButton()
 	for i=1, buttons do
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
-			style(_G["SpellFlyoutButton"..i])
+			T.StyleActionBarButton(_G["SpellFlyoutButton"..i])
 					
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
@@ -210,7 +210,7 @@ SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
  
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
-local function styleflyout(self)
+function T.StyleActionBarFlyout(self)
 	if not self.FlyoutArrow then return end
 	
 	self.FlyoutBorder:SetAlpha(0)
@@ -272,9 +272,9 @@ do
 	end
 end
 
-hooksecurefunc("ActionButton_Update", style)
-hooksecurefunc("ActionButton_UpdateHotkeys", updatehotkey)
-hooksecurefunc("ActionButton_UpdateFlyout", styleflyout)
+hooksecurefunc("ActionButton_Update", T.StyleActionBarButton)
+hooksecurefunc("ActionButton_UpdateHotkeys", T.UpdateActionBarHotKey)
+hooksecurefunc("ActionButton_UpdateFlyout", T.StyleActionBarFlyout)
 
 ---------------------------------------------------------------
 -- Totem Style, they need a lot more work than "normal" buttons

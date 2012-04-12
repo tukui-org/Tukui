@@ -19,9 +19,10 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 
 	local function Update(self, t)
 		int = int - t
-		meleecrit = GetCritChance()
-		spellcrit = GetSpellCritChance(1)
-		rangedcrit = GetRangedCritChance()
+		local meleecrit = GetCritChance()
+		local spellcrit = GetSpellCritChance(1)
+		local rangedcrit = GetRangedCritChance()
+		local CritChance
 		if spellcrit > meleecrit then
 			CritChance = spellcrit
 		elseif select(2, UnitClass("Player")) == "HUNTER" then    

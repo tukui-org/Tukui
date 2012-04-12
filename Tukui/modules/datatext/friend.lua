@@ -81,7 +81,7 @@ local totalOnlineString = L.datatext_online .. "%s/%s"
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
 local displayString = string.join("", Stat.Color1.."%s:|r ", Stat.Color2, "%d|r")
-local statusTable = { "[AFK]", "[DND]", "" }
+local statusTable = { "|cffff0000[AFK]|r", "|cffff0000[DND]|r", "" }
 local groupedTable = { "|cffaaaaaa*|r", "" } 
 local friendTable, BNTable = {}, {}
 local totalOnline, BNTotalOnline = 0, 0
@@ -93,6 +93,12 @@ local function BuildFriendTable(total)
 	for i = 1, total do
 		name, level, class, area, connected, status, note = GetFriendInfo(i)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
+		
+		if status == "<"..AFK..">" then
+			status = "|cffff0000[AFK]|r"
+		elseif status == "<"..DND..">" then
+			status = "|cffff0000[DND]|r"
+		end
 		
 		friendTable[i] = { name, level, class, area, connected, status, note }
 		if connected then totalOnline = totalOnline + 1 end
@@ -112,7 +118,7 @@ local function UpdateFriendTable(total)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
-		index = GetTableIndex(friendTable, 1, name)
+		local index = GetTableIndex(friendTable, 1, name)
 		-- we cannot find a friend in our table, so rebuild it
 		if index == -1 then
 			BuildFriendTable(total)
@@ -171,7 +177,7 @@ local function UpdateBNTable(total)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
-		index = GetTableIndex(BNTable, 1, presenceID)
+		local index = GetTableIndex(BNTable, 1, presenceID)
 		-- we cannot find a BN member in our table, so rebuild it
 		if index == -1 then
 			BuildBNTable(total)

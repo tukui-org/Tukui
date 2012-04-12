@@ -13,7 +13,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Namensplaketten"
-	TukuiConfigUILocalization.nameplates_enable = "Aktiviere Namensplaketten"
+	TukuiConfigUILocalization.nameplateenable = "Aktiviere Namensplaketten"
 	TukuiConfigUILocalization.nameplateenhancethreat = "Aktiviere Bedrohungsanzeige, ändert sich automatisch nach Rolle"
 	TukuiConfigUILocalization.nameplateshowhealth = "Zeige Leben an Namensplaketten"
 	TukuiConfigUILocalization.nameplatecombat = "Zeige nur feindliche Namensplaketten im Kampf"
@@ -95,8 +95,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "Textskalierung auf  Stärkungs-/Schwächungszaubern"
 	TukuiConfigUILocalization.unitframesgridscale = "Grid Skalierung"
 	TukuiConfigUILocalization.unitframesmanahigh = "Hohes Mana Indikator (für Jäger)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "Wenig Mana Indikator (Für alle Mana Klassen)"
-	TukuiConfigUILocalization.unitframesalphaoor = "Transparenz der Schlachtzug- und Gruppenfenster wenn außer Reichweite"
+	TukuiConfigUILocalization.unitframeslowThreshold = "Wenig Mana Indikator (Für alle Mana Klassen)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "Transparenz der Schlachtzug- und Gruppenfenster wenn außer Reichweite"
 	TukuiConfigUILocalization.unitframesmaintank = "Main Tank Anzeige aktivieren"
 	TukuiConfigUILocalization.unitframesmainassist = "Main Assist Anzeige aktivieren"
 	TukuiConfigUILocalization.unitframesunicolor = "Einheitliches Farbschema (graue Lebensbalken) aktivieren"

@@ -13,7 +13,7 @@
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Nameplates"
-	TukuiConfigUILocalization.nameplates_enable = "Enable Nameplates"
+	TukuiConfigUILocalization.nameplateenable = "Enable Nameplates"
 	TukuiConfigUILocalization.nameplateenhancethreat = "Enable threat feature, automatically changes by your role"
 	TukuiConfigUILocalization.nameplateshowhealth = "Show health on nameplate"
 	TukuiConfigUILocalization.nameplatecombat = "Only show enemy nameplates in-combat"
@@ -98,8 +98,8 @@
 	TukuiConfigUILocalization.unitframesauratextscale = "Aura text scale on auras"
 	TukuiConfigUILocalization.unitframesgridscale = "Grid Scale"
 	TukuiConfigUILocalization.unitframesmanahigh = "High mana indicator (For Hunters)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "Low mana indicator (All mana class)"
-	TukuiConfigUILocalization.unitframesalphaoor = "Alpha on Party/Raid unit out of range"
+	TukuiConfigUILocalization.unitframeslowThreshold = "Low mana indicator (All mana class)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "Alpha on Party/Raid unit out of range"
 	TukuiConfigUILocalization.unitframesmaintank = "Enable Main Tank"
 	TukuiConfigUILocalization.unitframesmainassist = "Enable Main Assist"
 	TukuiConfigUILocalization.unitframesunicolor = "Enable Unique color theme (grey health bar)"

@@ -10,7 +10,14 @@ C["general"] = {
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
 	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
-	["blizzardreskin"] = true                           -- reskin all Blizzard frames
+	["blizzardreskin"] = true,                          -- reskin all Blizzard frames
+	["bigwigsreskin"] = true,                           -- reskin bigwigs
+	["dbmreskin"] = true,                               -- reskin dbm
+	["dxereskin"] = true,                               -- reskin dxe
+	["omenreskin"] = true,                              -- reskin omen
+	["recountreskin"] = true,                           -- reskin recount
+	["skadareskin"] = true,                             -- reskin skada
+	["tinydpsreskin"] = true,                           -- reskin tinydps
 }
 
 C["unitframes"] = {

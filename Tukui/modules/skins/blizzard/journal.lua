@@ -78,17 +78,14 @@ local function LoadSkin()
 				EncounterJournalEncounterFrameInfo.backdrop3:SetTexture(0, 0, 0)
 				EncounterJournalEncounterFrameInfo.backdrop3:Point("TOPLEFT", EncounterJournalEncounterFrameInfoBG, "TOPLEFT", -T.mult, T.mult)
 				EncounterJournalEncounterFrameInfo.backdrop3:Point("BOTTOMRIGHT", EncounterJournalEncounterFrameInfoBG, "BOTTOMRIGHT", T.mult, -T.mult)								
-			end	
+			end
+			EncounterJournalEncounterFrameInfoBossTab:SetTemplate("Default")
 			EncounterJournalEncounterFrameInfoBossTab:ClearAllPoints()
-			EncounterJournalEncounterFrameInfoBossTab:Point("LEFT", EncounterJournalEncounterFrameInfoEncounterTile, "RIGHT", -10, 4)
+			EncounterJournalEncounterFrameInfoBossTab:Point("TOPRIGHT", EncounterJournalEncounterFrame, "TOPRIGHT", 75, 20)
+			
+			EncounterJournalEncounterFrameInfoLootTab:SetTemplate("Default")
 			EncounterJournalEncounterFrameInfoLootTab:ClearAllPoints()
-			EncounterJournalEncounterFrameInfoLootTab:Point("LEFT", EncounterJournalEncounterFrameInfoBossTab, "RIGHT", -24, 0)
-			
-			EncounterJournalEncounterFrameInfoBossTab:SetFrameStrata("HIGH")
-			EncounterJournalEncounterFrameInfoLootTab:SetFrameStrata("HIGH")
-			
-			EncounterJournalEncounterFrameInfoBossTab:SetScale(0.75)
-			EncounterJournalEncounterFrameInfoLootTab:SetScale(0.75)
+			EncounterJournalEncounterFrameInfoLootTab:Point("TOP", EncounterJournalEncounterFrameInfoBossTab, "BOTTOM", 0, -4)
 		end)
 		
 		T.SkinScrollBar(EncounterJournalInstanceSelectScrollFrameScrollBar)

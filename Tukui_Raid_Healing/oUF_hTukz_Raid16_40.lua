@@ -20,7 +20,7 @@ local point = "LEFT"
 local columnAnchorPoint = "TOP"
 
 local function Shared(self, unit)
-	self.colors = T.oUF_colors
+	self.colors = T.UnitColor
 	self:RegisterForClicks("AnyUp")
 	self:SetScript('OnEnter', UnitFrame_OnEnter)
 	self:SetScript('OnLeave', UnitFrame_OnLeave)
@@ -249,6 +249,11 @@ local function Shared(self, unit)
 		
 		self.WeakenedSoul = ws
 	end
+	
+	-- for editors, easy way to edit raid unit frames
+	local header = self:GetParent():GetName()
+	self.PostUpdateRaidUnit = T.PostUpdateRaidUnit or T.dummy
+	self:PostUpdateRaidUnit(unit, header)
 
 	return self
 end
@@ -342,7 +347,7 @@ oUF:Factory(function(self)
 end)
 
 -- only show 5 groups in raid (25 mans raid)
-local MaxGroup = CreateFrame("Frame")
+local MaxGroup = CreateFrame("Frame", "TukuiRaidHealerGridMaxGroup")
 MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
 MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 MaxGroup:SetScript("OnEvent", function(self)

@@ -543,8 +543,8 @@ function T.SkinCheckBox(frame)
 		frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	end
 	
-	if frame.SetDisabledTexture then
-		frame:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+	if frame.SetDisabledCheckedTexture then
+		frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 	end
 	
 	frame.SetNormalTexture = T.dummy
@@ -898,7 +898,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 -- create a skin for all unitframes buffs/debuffs
-T.PostCreateAura = function(element, button)
+T.PostCreateAura = function(self, button)
 	button:SetTemplate("Default")
 	
 	button.remaining = T.SetFontString(button, C["media"].font, C["unitframes"].auratextscale, "THINOUTLINE")
@@ -935,12 +935,21 @@ T.PostCreateAura = function(element, button)
 	button.Glow:SetBackdrop{edgeFile = C["media"].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
+	
+	local Animation = button:CreateAnimationGroup()
+	Animation:SetLooping("BOUNCE")
+
+	local FadeOut = Animation:CreateAnimation("Alpha")
+	FadeOut:SetChange(-.9)
+	FadeOut:SetDuration(.6)
+	FadeOut:SetSmoothing("IN_OUT")
+
+	button.Animation = Animation
 end
 
 -- update cd, border color, etc on buffs / debuffs
-T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
-	local _, _, _, _, dtype, duration, expirationTime, unitCaster, _ = UnitAura(unit, index, icon.filter)
-
+T.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
+	local _, _, _, _, dtype, duration, expirationTime, unitCaster, isStealable = UnitAura(unit, index, icon.filter)
 	if(icon.debuff) then
 		if(not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle") then
 			icon:SetBackdropBorderColor(unpack(C["media"].bordercolor))
@@ -952,9 +961,13 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 		end
 	else
 		if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
-			icon:SetBackdropBorderColor(1, 0.85, 0, 1)
+			if not icon.Animation:IsPlaying() then
+				icon.Animation:Play()
+			end
 		else
-			icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			if icon.Animation:IsPlaying() then
+				icon.Animation:Stop()
+			end
 		end
 	end
 	
@@ -1319,6 +1332,7 @@ if C["unitframes"].raidunitdebuffwatch == true then
 		ORD.ShowDispelableDebuff = true
 		ORD.FilterDispellableDebuff = true
 		ORD.MatchBySpellName = true
+		ORD.DeepCorruption = true
 		
 		local function SpellName(id)
 			local name = select(1, GetSpellInfo(id))
@@ -1427,35 +1441,44 @@ if C["unitframes"].raidunitdebuffwatch == true then
 				
 		-- Dragon Soul
 			-- Morchok
-				SpellName(103541),	-- Safe
+				SpellName(103687),	-- Crush Armor
 				SpellName(103536),	-- Warning
 				SpellName(103534),	-- Danger
 				SpellName(108570),	-- Black Blood of the Earth
-
+			
 			-- Warlord Zon'ozz
 				SpellName(103434),	-- Disrupting Shadows
-
+			
 			-- Yor'sahj the Unsleeping
-				SpellName(105171),	-- Deep Corruption
-
+				SpellName(103628),	-- Deep Corruption
+			
 			-- Hagara the Stormbinder
-				SpellName(105465),	-- Lighting Storm
 				SpellName(104451),	-- Ice Tomb
+				SpellName(105259),	-- Watery Entrenchment
 				SpellName(109325),	-- Frostflake
 				SpellName(105289),	-- Shattered Ice
 				SpellName(105285),	-- Target
-
+				SpellName(107061),	-- Ice Lance
+			
 			-- Ultraxion
-				SpellName(110079),	-- Fading Light
-				SpellName(109075),	-- Fading Light
-
+				SpellName(105925),	-- Fading Light
+			
 			-- Warmaster Blackhorn
-
+				SpellName(108043),	-- Devastate
+				SpellName(108046),	-- Shockwave
+				SpellName(107567),	-- Brutal Strike
+				SpellName(107558),	-- Degeneration
+			
 			-- Spine of Deathwing
+				SpellName(105563),	-- Grasping Tendrils
 				SpellName(105479),	-- Searing Plasma
 				SpellName(105490),	-- Fiery Grip
-
-			-- Madness of Deathwing	
+			
+			-- Madness of Deathwing
+				SpellName(105841),	-- Degenerative bite
+				SpellName(105445),	-- Blistering heat
+				SpellName(109603),	-- Tetanus
+				SpellName(110141),	-- Shrapnel
 		}
 
 		T.ReverseTimer = {

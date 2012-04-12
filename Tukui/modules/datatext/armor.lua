@@ -4,6 +4,8 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].armor and C["datatext"].armor > 0 then
+	local effectiveArmor
+	
 	local Stat = CreateFrame("Frame", "TukuiStatArmor")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
@@ -17,7 +19,7 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 	T.PP(C["datatext"].armor, Text)
 
 	local function Update(self)
-		baseArmor , effectiveArmor, armor, posBuff, negBuff = UnitArmor("player");
+		effectiveArmor = select(2, UnitArmor("player"))
 		Text:SetText(Stat.Color2..(effectiveArmor).."|r "..Stat.Color1..L.datatext_armor.."|r")
 		--Setup Armor Tooltip
 		self:SetAllPoints(Text)
@@ -35,9 +37,9 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 			GameTooltip:ClearLines()
 			GameTooltip:AddLine(L.datatext_mitigation)
 			local lv = 83
+			local mitigation = (effectiveArmor/(effectiveArmor+(467.5*lv-22167.5)))
 			for i = 1, 4 do
 				local format = string.format
-				local mitigation = (effectiveArmor/(effectiveArmor+(467.5*lv-22167.5)));
 				if mitigation > .75 then
 					mitigation = .75
 				end
@@ -45,7 +47,6 @@ if C["datatext"].armor and C["datatext"].armor > 0 then
 				lv = lv - 1
 			end
 			if UnitLevel("target") > 0 and UnitLevel("target") < UnitLevel("player") then
-				mitigation = (effectiveArmor/(effectiveArmor+(467.5*(UnitLevel("target"))-22167.5)));
 				if mitigation > .75 then
 					mitigation = .75
 				end

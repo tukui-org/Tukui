@@ -31,13 +31,8 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	end
 
 	local function OpenMenu()
-		if not TukuiMicroMenu or not TukuiMinimap then return end
-		
-		local xoff = 0
-		local position = TukuiMinimap:GetPoint()
-		if position:match("RIGHT") then xoff = T.Scale(-14) end
-		
-		ToggleDropDownMenu(1, nil, TukuiMicroMenu, TukuiMinimap, xoff, T.Scale(-2))
+		if not TukuiMicroButtonsDropDown then return end
+		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 
 	Stat:RegisterEvent("PLAYER_LOGIN")

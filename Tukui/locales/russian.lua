@@ -1,17 +1,17 @@
 local T, C, L = unpack(select(2, ...))
 
 if T.client == "ruRU" then
-	L.chat_BATTLEGROUND_GET = "[ПБ]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[ЛПБ]"
+	L.chat_BATTLEGROUND_GET = "ПБ"
+	L.chat_BATTLEGROUND_LEADER_GET = "ЛПБ"
 	L.chat_BN_WHISPER_GET = "От"
-	L.chat_GUILD_GET = "[Г]"
-	L.chat_OFFICER_GET = "[О]"
-	L.chat_PARTY_GET = "[Гр]"
-	L.chat_PARTY_GUIDE_GET = "[Гр]"
-	L.chat_PARTY_LEADER_GET = "[Лгр]"
-	L.chat_RAID_GET = "[Р]"
-	L.chat_RAID_LEADER_GET = "[ЛР]"
-	L.chat_RAID_WARNING_GET = "[ОР]"
+	L.chat_GUILD_GET = "Г"
+	L.chat_OFFICER_GET = "О"
+	L.chat_PARTY_GET = "Гр"
+	L.chat_PARTY_GUIDE_GET = "Гр"
+	L.chat_PARTY_LEADER_GET = "Лгр"
+	L.chat_RAID_GET = "Р"
+	L.chat_RAID_LEADER_GET = "ЛР"
+	L.chat_RAID_WARNING_GET = "ОР"
 	L.chat_WHISPER_GET = "От"
 	L.chat_FLAG_AFK = "[АФК]"
 	L.chat_FLAG_DND = "[ДНД]"
@@ -92,6 +92,8 @@ if T.client == "ruRU" then
 	L.datatext_gatesdestroyed = "Врат разрушено:"
 	L.datatext_totalmemusage = "Общее использование памяти:"
 	L.datatext_control = "Под контролем:"
+	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
+	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
  
 	L.Slots = {
 	  [1] = {1, "Голова", 1000},

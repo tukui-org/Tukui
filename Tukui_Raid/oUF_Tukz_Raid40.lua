@@ -16,7 +16,7 @@ local backdrop = {
 }
 
 local function Shared(self, unit)
-	self.colors = T.oUF_colors
+	self.colors = T.UnitColor
 	self:RegisterForClicks("AnyUp")
 	self:SetScript('OnEnter', UnitFrame_OnEnter)
 	self:SetScript('OnLeave', UnitFrame_OnLeave)
@@ -50,7 +50,7 @@ local function Shared(self, unit)
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
-		health.colorReaction = true			
+		health.colorReaction = true
 	end
 		
 	local name = health:CreateFontString(nil, 'OVERLAY')
@@ -100,6 +100,11 @@ local function Shared(self, unit)
 		local range = {insideAlpha = 1, outsideAlpha = C["unitframes"].raidalphaoor}
 		self.Range = range
 	end
+	
+	-- for editors, easy way to edit raid unit frames
+	local header = self:GetParent():GetName()
+	self.PostUpdateRaidUnit = T.PostUpdateRaidUnit or T.dummy
+	self:PostUpdateRaidUnit(unit, header)
 	
 	return self
 end

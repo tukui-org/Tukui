@@ -44,7 +44,7 @@ local function LoadSkin()
 	end
 	hooksecurefunc("AchievementAlertFrame_FixAnchors", SkinAchievePopUp)
 
-	function SkinDungeonPopUP()
+	local function SkinDungeonPopUP()
 		for i = 1, DUNGEON_COMPLETION_MAX_REWARDS do
 			local frame = _G["DungeonCompletionAlertFrame"..i]
 			if frame then
@@ -60,7 +60,7 @@ local function LoadSkin()
 				for i=1, frame:GetNumRegions() do
 					local region = select(i, frame:GetRegions())
 					if region:GetObjectType() == "Texture" then
-						if region:GetTexture() == "Interface\\LFGFrame\\UI-LFG-DUNGEONTOAST" then
+						if region:GetTexture() == "Interface\\LFGFrame\\UI-LFG-DUNGEONTOAST" or region:GetTexture() == "Interface\\LFGFrame\\LFR-Texture" then
 							region:Kill()
 						end
 					end

@@ -1,6 +1,8 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 if not IsAddOnLoaded("Skada") then return end
+if not C.general.skadareskin then return end
+
 local Skada = Skada
 
 local Skada = Skada

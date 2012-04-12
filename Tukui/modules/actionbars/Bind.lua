@@ -86,7 +86,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				
 				bind.button.bindings = {GetBindingKey(spellmacro.." "..bind.button.name)}
 					if #bind.button.bindings == 0 then
-						GameTooltip:AddLine("No bindings set.", .6, .6, .6)
+						GameTooltip:AddLine(EMPTY, .6, .6, .6)
 					else
 						GameTooltip:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
@@ -114,9 +114,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 					self:AddLine(bind.button.name, 1, 1, 1)
 					bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
 					if #bind.button.bindings == 0 then
-						self:AddLine("No bindings set.", .6, .6, .6)
+						self:AddLine(EMPTY, .6, .6, .6)
 					else
-						self:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
+						self:AddDoubleLine(KEY_BINDING, "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
 							self:AddDoubleLine(i, bind.button.bindings[i])
 						end
@@ -157,7 +157,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 					if #bind.button.bindings == 0 then
 						self:AddLine("No bindings set.", .6, .6, .6)
 					else
-						self:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
+						self:AddDoubleLine(KEY_BINDING, "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
 							self:AddDoubleLine(i, bind.button.bindings[i])
 						end

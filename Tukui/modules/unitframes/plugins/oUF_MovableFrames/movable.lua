@@ -358,7 +358,6 @@ do
 
 	function frame:PLAYER_REGEN_DISABLED()
 		if(_LOCK) then
-			print("Anchors hidden due to combat.")
 			for k, bdrop in next, backdropPool do
 				bdrop:Hide()
 			end
@@ -534,7 +533,7 @@ SlashCmdList["RESETUF"] = RESETUF
 
 T.MoveUnitFrames = function(inp)
 	if(InCombatLockdown()) then
-		return print"Frames cannot be moved while in combat. Bailing out."
+		return
 	end
 
 	if(not _LOCK) then

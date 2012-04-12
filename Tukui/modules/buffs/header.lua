@@ -57,12 +57,9 @@ buffs:SetPoint("TOPRIGHT", UIParent, -184, -22)
 buffs:SetAttribute("filter", "HELPFUL")
 buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "ProxyButton", buffs, "TukuiAurasProxyTemplate"))
 buffs:SetAttribute("consolidateHeader", consolidate)
+buffs:SetAttribute("consolidateTo", filter)
+buffs:SetAttribute("includeWeapons", 1)
 
--- blizzard introduced bugs with secure aura headers in 4.3, disabling it until fixed
-if T.toc < 40300 then
-	buffs:SetAttribute("consolidateTo", filter)
-	buffs:SetAttribute("includeWeapons", 1)
-end
 
 buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
@@ -109,6 +106,49 @@ consolidate:Hide()
 SecureHandlerSetFrameRef(proxy, "header", consolidate)
 
 -- set our debuff header
-debuffs:SetPoint("TOP", buffs, "BOTTOM", 0, -38)
+debuffs:SetPoint("TOP", buffs, "BOTTOM", 0, -84)
 debuffs:SetAttribute("filter", "HARMFUL")
 debuffs:Show()
+
+---------------------------------------------------------
+-- WORKAROUND FIX FOR BUGGED SECURE AURA HEADER ON 4.3
+---------------------------------------------------------
+
+if T.toc < 40300 then return end
+
+-- TODO
+	-- Do a check for weapons enchants with and without consolidate buff enabled if bug happen. (I don't have a rogue available)
+	-- Tooltip sometime can be show on a invisible buffs. This buffs can be seen sometime at the end of the row on mouseover, an invisible buff. (Little minor bug)
+	
+
+local function WorkAround(self, event, unit)
+	local num, i, count = 0, 0, 0
+
+	-- MATH!
+	while true do
+		local name, _, _, _, _, _, _, _, _, consolidate = UnitAura("player", i + 1)
+		if not name then break end
+		if not consolidate or not C.auras.consolidate then
+			num = num + 1
+		else
+			count = count + 1
+		end
+		i = i + 1
+	end
+	
+	-- This fix the last buff(s) icon not cleared
+	for i, button in self:ActiveButtons() do
+		button:SetAlpha(i > num and 0 or 1)
+	end
+end
+buffs:HookScript("OnEvent", WorkAround)
+
+local function Child(self, i)
+	i = i + 1
+	local child = self:GetAttribute("child" .. i)
+	if child and child:IsShown() then
+		return i, child, child:GetAttribute("index")
+	end
+end
+
+function buffs:ActiveButtons() return Child, self, 0 end

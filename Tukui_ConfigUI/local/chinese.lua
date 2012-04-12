@@ -12,7 +12,7 @@ if GetLocale() == "zhCN" then
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "姓名板"
-	TukuiConfigUILocalization.nameplates_enable = "开启姓名版"
+	TukuiConfigUILocalization.nameplateenable = "开启姓名版"
 	TukuiConfigUILocalization.nameplateenhancethreat = "启用仇恨着色模式，将会根据你的角色自动改变颜色"
 	TukuiConfigUILocalization.nameplateshowhealth = "在姓名板上显示生命值"
 	TukuiConfigUILocalization.nameplatecombat = "仅在战斗中显示姓名板"
@@ -94,8 +94,8 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesauratextscale = "光环文字大小设置"
 	TukuiConfigUILocalization.unitframesgridscale = "Grid框体大小"
 	TukuiConfigUILocalization.unitframesmanahigh = "法力值过高警报 (LR专用)"
-	TukuiConfigUILocalization.unitframeslowthreshold = "低法力值警报 (所有的法系职业)"
-	TukuiConfigUILocalization.unitframesalphaoor = "小队/团队超出距离透明值"
+	TukuiConfigUILocalization.unitframeslowThreshold = "低法力值警报 (所有的法系职业)"
+	TukuiConfigUILocalization.unitframesraidalphaoor = "小队/团队超出距离透明值"
 	TukuiConfigUILocalization.unitframesmaintank = "启用主坦克框架"
 	TukuiConfigUILocalization.unitframesmainassist = "启用主助理框架"
 	TukuiConfigUILocalization.unitframesunicolor = "启用单一的颜色主题(灰色的生命条)"

@@ -1,8 +1,6 @@
 local T, C, L = unpack(select(2, ...))
 if not C["datatext"].regen and not C["datatext"].regen > 0 then return end
 
-local regen
-
 local Stat = CreateFrame("Frame", "TukuiStatRegen")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
@@ -22,6 +20,7 @@ Stat:RegisterEvent("PLAYER_REGEN_ENABLED")
 Stat:RegisterEvent("UNIT_STATS")
 Stat:RegisterEvent("UNIT_AURA")
 Stat:SetScript("OnEvent", function(self)
+	local regen
 	local base, casting = GetManaRegen()
 
 	if InCombatLockdown() then

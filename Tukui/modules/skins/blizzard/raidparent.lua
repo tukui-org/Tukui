@@ -30,6 +30,8 @@ local function LoadSkin()
 	T.SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown)
 	RaidFinderQueueFrameSelectionDropDown:ClearAllPoints()
 	RaidFinderQueueFrameSelectionDropDown:SetPoint("TOPRIGHT", -4, -112)
+	RaidFinderQueueFrameIneligibleFrame:SetTemplate("Default")
+	RaidFinderQueueFrameIneligibleFrame:SetBackdropBorderColor(unpack(C.media.backdropcolor))
 	
 	for i=1, 3 do
 		local tab = _G["RaidParentFrameTab"..i]

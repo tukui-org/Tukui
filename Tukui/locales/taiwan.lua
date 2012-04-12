@@ -1,17 +1,17 @@
 local T, C, L = unpack(select(2, ...))
 
 if T.client == "zhTW" then
-	L.chat_BATTLEGROUND_GET = "[B]"
-	L.chat_BATTLEGROUND_LEADER_GET = "[B]"
+	L.chat_BATTLEGROUND_GET = "B"
+	L.chat_BATTLEGROUND_LEADER_GET = "B"
 	L.chat_BN_WHISPER_GET = "From"
-	L.chat_GUILD_GET = "[G]"
-	L.chat_OFFICER_GET = "[O]"
-	L.chat_PARTY_GET = "[P]"
-	L.chat_PARTY_GUIDE_GET = "[P]"
-	L.chat_PARTY_LEADER_GET = "[P]"
-	L.chat_RAID_GET = "[R]"
-	L.chat_RAID_LEADER_GET = "[R]"
-	L.chat_RAID_WARNING_GET = "[W]"
+	L.chat_GUILD_GET = "G"
+	L.chat_OFFICER_GET = "O"
+	L.chat_PARTY_GET = "P"
+	L.chat_PARTY_GUIDE_GET = "P"
+	L.chat_PARTY_LEADER_GET = "P"
+	L.chat_RAID_GET = "R"
+	L.chat_RAID_LEADER_GET = "R"
+	L.chat_RAID_WARNING_GET = "W"
 	L.chat_WHISPER_GET = "From"
 	L.chat_FLAG_AFK = "[AFK]"
 	L.chat_FLAG_DND = "[DND]"
@@ -92,6 +92,8 @@ if T.client == "zhTW" then
 	L.datatext_gatesdestroyed = "大門摧毀:"
 	L.datatext_totalmemusage = "總共記憶體使用:"
 	L.datatext_control = "控制方:"
+	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
+	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
  
 	L.Slots = {
 		[1] = {1, "頭部", 1000},

@@ -18,9 +18,9 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 	local int = 1
 
 	local function Update(self, t)
-		spellhaste = GetCombatRating(20)
-		rangedhaste = GetCombatRating(19)
-		attackhaste = GetCombatRating(18)
+		local spellhaste = GetCombatRating(20)
+		local rangedhaste = GetCombatRating(19)
+		local attackhaste = GetCombatRating(18)
 		
 		if attackhaste > spellhaste and select(2, UnitClass("Player")) ~= "HUNTER" then
 			haste = attackhaste

@@ -20,7 +20,7 @@ local function LoadSkin()
 
 	-- Dress Frame
 	do
-		local f
+		local f1, f2
 		if T.toc < 40300 then
 			f1 = "Auction"
 			f2 = "Frame"
@@ -166,7 +166,7 @@ local function LoadSkin()
 		_G[sorttab.."Right"]:Kill()
 	end
 	
-	for i=1, 3 do
+	for i=1, AuctionFrame.numTabs do
 		T.SkinTab(_G["AuctionFrameTab"..i])
 	end
 	

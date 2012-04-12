@@ -1,5 +1,6 @@
 ﻿local T, C, L = unpack(select(2, ...))
 if not IsAddOnLoaded("TinyDPS") then return end
+if not C.general.tinydpsreskin then return end
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_LOGIN")

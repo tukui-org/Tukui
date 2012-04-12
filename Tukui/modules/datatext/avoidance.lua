@@ -4,6 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].avd and C["datatext"].avd > 0 then
+	local dodge, parry, block, MissChance, avoidance, targetlv, playerlv, basemisschance, leveldifference
 	local Stat = CreateFrame("Frame", "TukuiStatAvoidance")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
@@ -16,12 +17,12 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].avd, Text)
 	
-	local targetlv
-	local playerlv
+	local targetlv, playerlv, dodge, parry, block, MissChance
 
 	local function Update(self)
 		local format = string.format
 		targetlv, playerlv = UnitLevel("target"), UnitLevel("player")
+		local basemisschance, leveldifference, avoidance
 		
 		if targetlv == -1 then
 			basemisschance = (5 - (3*.2))  --Boss Value
@@ -35,6 +36,10 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 		else
 			basemisschance = 5 --Sets miss chance of attacker level if no target exists, lv80=5, 81=4.2, 82=3.4, 83=2.6
 			leveldifference = 0
+		end
+		
+		if T.myrace == "NightElf" then
+			basemisschance = basemisschance + 2
 		end
 
 		if leveldifference >= 0 then

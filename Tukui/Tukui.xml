@@ -55,7 +55,7 @@
 	<Script file="modules\chat\copyurl.lua"/>
 	<Script file="modules\tooltip\itemidcount.lua"/>
 	<Script file="modules\blizzard\kill.lua"/>
-	<Script file="modules\chat\spam.lua"/>	
+	<Script file="modules\chat\spam.lua"/>
 	<Script file="modules\blizzard\font.lua"/>
 	<Include file="modules\buffs\template.xml"/>
 	<Script file="modules\buffs\buffs.lua"/>
@@ -156,6 +156,7 @@
 	<Script file="modules\skins\blizzard\lfd.lua"/>
 	<Script file="modules\skins\blizzard\lfg.lua"/>
 	<Script file="modules\skins\blizzard\lfr.lua"/>
+	<Script file="modules\skins\blizzard\loot.lua"/>
 	<Script file="modules\skins\blizzard\macosx.lua"/>
 	<Script file="modules\skins\blizzard\macro.lua"/>
 	<Script file="modules\skins\blizzard\mail.lua"/>
@@ -181,7 +182,6 @@
 	<Script file="modules\skins\blizzard\trainer.lua"/>
 	<Script file="modules\skins\blizzard\tutorial.lua"/>
 	<Script file="modules\skins\blizzard\voidstorage.lua"/>
-	<Script file="modules\skins\blizzard\watchframe.lua"/>
 	<Script file="modules\skins\blizzard\worldmap.lua"/>
 	
 	<Script file="modules\skins\addons\bigwigs.lua"/>

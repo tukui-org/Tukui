@@ -374,6 +374,7 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 		ItemRefTooltip:HookScript("OnShow", SetStyle)	
 		FriendsTooltip:SetTemplate("Default")
+		T.SkinCloseButton(ItemRefCloseButton)
 			
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		
