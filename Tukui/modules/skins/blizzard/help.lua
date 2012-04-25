@@ -76,6 +76,10 @@ local function LoadSkin()
 		local b2 = _G["HelpFrameSubmitSuggestionSubmit"]
 		b2:StripTextures(true)
 		T.SkinButton(b2, true)
+		
+		local b3 = _G["HelpFrameButton6"]
+		b3:ClearAllPoints()
+		b3:Point("TOP", b, "BOTTOM", 0, -4)
 	end
 
 	-- skin table options
