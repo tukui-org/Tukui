@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 ---------------------------------------------------------------------------
@@ -22,4 +22,8 @@ for i= 1, 12 do
 	else
 		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
 	end
+	
+	G.ActionBars.Bar4["Button"..i] = b
 end
+
+RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")

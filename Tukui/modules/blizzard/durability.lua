@@ -1,5 +1,8 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...))
+
+-------------------------
 -- move durability frame.
+-------------------------
 
 hooksecurefunc(DurabilityFrame,"SetPoint",function(self,_,parent)
     if (parent == "MinimapCluster") or (parent == _G["MinimapCluster"]) then

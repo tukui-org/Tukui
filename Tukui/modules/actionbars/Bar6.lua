@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true or not T.lowversion then return end
 
 TukuiBar5:SetWidth((T.buttonsize * 3) + (T.buttonspacing * 4))
@@ -21,4 +21,8 @@ for i=1, 12 do
 	else
 		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
 	end
+	
+	G.ActionBars.Bar6["Button"..i] = b
 end
+
+RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")

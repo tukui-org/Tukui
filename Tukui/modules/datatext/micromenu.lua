@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 -----------------------------------------
 -- Tukui Micro Menu
 --
@@ -20,10 +20,12 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	Stat.Option = C.datatext.micromenu
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.MicroMenu = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatMicroMenuText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].micromenu, Text)
+	T.DataTextPosition(C["datatext"].micromenu, Text)
+	G.DataText.MicroMenu.Text = Text
 
 	local function OnEvent(self, event, ...)
 		Text:SetText(Stat.Color2..MAINMENU_BUTTON.."|r")

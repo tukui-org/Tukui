@@ -1,42 +1,17 @@
 Tukui License
-	Copyright 2009-2011 http://www.tukui.org
+	Copyright 2009-2012 http://www.tukui.org
 
 	The contents of this addon, excluding third-party resources, are
 	copyrighted to their authors with all rights reserved.
 
 	Authors of this addon hereby grant you the following rights:
 
-	1. 	You may make modifications to this addon for private use only except
-		if you publish your edited version via tukui.org, wowinterface.com,
-		curse.com, github.com or if you ask authors permission before uploading it
-		somewhere else. If you upload it on curse.com or wowinterface.com, it must
-		be uploaded thought an "addon pack" category only. Do not enable any kind
-		of donation from other site unless you rewrote or edited more than 60%
-		of our codes.
+	1. 	You may NOT make any modification inside this addon. If you want
+		to create your own edited version, please create it from outside.
 
 	2. 	Do not modify the name of this addon, including the addon folders.
 
-	3. 	Some users have no restrictions at all. Yep for you that means you
-		just DO WHAT THE FUCK YOU WANT TO.
-
-			- Nightcracker
-			- Shestak
-			- Elv22
-			- Eclipse
-			- Hydra
-			- Syne
-			- Foof
-			- Safturento
-			- Darth Android
-			- Smelly
-			- Haleth
-
-		Even if your name is included in the list, I strongly suggest that you keep
-		the original name of addon, because we are working with other authors
-		to fix compatibility issues between them if they are found. Renaming it
-		will break these fixes.
-
-	4. 	This copyright notice shall be included in all copies or substantial
+	3. 	This copyright notice shall be included in all copies or substantial
 		portions of the Software.
 
 	Earlier versions were released under terms that did not require permission,

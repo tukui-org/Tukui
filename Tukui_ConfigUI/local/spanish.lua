@@ -110,6 +110,12 @@
 	TukuiConfigUILocalization.unitframesmovecombobar = "Mover la barra de combo del objetivo (PÍCARO SOLAMENTE)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "Usar barra de combo clásica"
 	TukuiConfigUILocalization.unitframesgridvertical = "Mostrar grupos de banda en Cuadrícula verticálmente"
+	TukuiConfigUILocalization.unitframesraid = "Activa el Marco de Banda de Tukui"
+	TukuiConfigUILocalization.unitframesshowraidpets = "Muestra las Mascotas en el Cuadro de Banda de Tukui"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "Muestra la Barra de Maná del Druida en forma de Gato/Oso"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "Muestra la Barra de Setas del Druida en la especialización de Equilibrio o Restauración"
+	TukuiConfigUILocalization.unitframesmageclassbar = "Muestra la Barra del Mago Arcano"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Número de unidades de banda por columna/fila"
 
 	-- Botín
 	TukuiConfigUILocalization.loot = "Botín"
@@ -147,10 +153,13 @@
 	TukuiConfigUILocalization.actionbarbuttonspacing = "Espacio entre los botones de acción principales"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "Tamaño de los botones de la barra de mascota/cambio de forma/tótems"
 	TukuiConfigUILocalization.actionbarownshdbar = "Usar una barra bacía para 'Danza de las Sombras' (Pícaro) en lugar de la barra de sigilo"
+	TukuiConfigUILocalization.actionbarownmetabar = "Usar una barra vacía para Metamorfosis (Brujo)en vez de la barra principal"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Usar una barra vacía para cada estancia (Guerrero) en vez de la barra principal"
+	TukuiConfigUILocalization.actionbarmacro = "Ver el texto de la macro en la barra principal"
 
 	-- arena
 	TukuiConfigUILocalization.arena = "Arena"
-	TukuiConfigUILocalization.arenaunitframes = "Activar marcos de unidad de arena"
+	TukuiConfigUILocalization.unitframesarena = "Activar marcos de unidad de arena"
 
 	-- Tiempos de Reutilización
 	TukuiConfigUILocalization.cooldown = "Tiempos de Reutilización"
@@ -168,6 +177,7 @@
 	TukuiConfigUILocalization.aurasplayer = "Activa los marcos de Beneficios/Prejuicios de Tukui"
 	TukuiConfigUILocalization.aurasconsolidate = "Activa la consolidación de Beneficios"
 	TukuiConfigUILocalization.aurasflash = "Activa la animación intermitente en auras con duración menor a 30 segundos"
+	TukuiConfigUILocalization.aurasclassictimer = "Mostrar temporizador clásico en las auras del jugador"
 
 	-- botones
 	TukuiConfigUILocalization.option_button_reset = "Reiniciar"

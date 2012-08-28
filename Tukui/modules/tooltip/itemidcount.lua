@@ -1,8 +1,12 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if C.tooltip.enable ~= true then return end
 
-GameTooltip:HookScript("OnTooltipCleared", function(self) self.TukuiItemTooltip = nil end)
-GameTooltip:HookScript("OnTooltipSetItem", function(self)
+local function ClearItemID(self)
+	self.TukuiItemTooltip = nil
+end
+T.ClearTooltipItemID = ClearItemID
+
+local function ShowItemID(self)
 	if (IsShiftKeyDown() or IsAltKeyDown()) and (TukuiItemTooltip and not self.TukuiItemTooltip and (TukuiItemTooltip.id or TukuiItemTooltip.count)) then
 		local item, link = self:GetItem()
 		local num = GetItemCount(link)
@@ -21,7 +25,11 @@ GameTooltip:HookScript("OnTooltipSetItem", function(self)
 		self:AddDoubleLine(left, right)
 		self.TukuiItemTooltip = 1
 	end
-end)
+end
+T.ShowTooltipItemID = ShowItemID
+
+GameTooltip:HookScript("OnTooltipCleared", ClearItemID)
+GameTooltip:HookScript("OnTooltipSetItem", ShowItemID)
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")

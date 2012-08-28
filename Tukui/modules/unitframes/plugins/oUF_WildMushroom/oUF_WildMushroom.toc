@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Wild Mushroon
+## Notes: Display Druid Mushroom
+## Author: Tukz
+## Version: 1.00
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_WildMushroom.lua

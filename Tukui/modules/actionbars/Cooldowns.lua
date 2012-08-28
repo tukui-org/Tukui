@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 --[[
         An edited lightweight OmniCC for Tukui
                 A featureless, 'pure' version of OmniCC.
@@ -15,10 +15,10 @@ local DAYISH, HOURISH, MINUTEISH = 3600 * 23.5, 60 * 59.5, 59.5 --used for forma
 local HALFDAYISH, HALFHOURISH, HALFMINUTEISH = DAY/2 + 0.5, HOUR/2 + 0.5, MINUTE/2 + 0.5 --used for calculating next update times
 
 --configuration settings
-local FONT_FACE = C["media"].font --what font to use
-local FONT_SIZE = 20 --the base font size to use at a scale of 1
-local MIN_SCALE = 0.5 --the minimum scale we want to show cooldown counts at, anything below this will be hidden
-local MIN_DURATION = 2.5 --the minimum duration to show cooldown text for
+T.SetDefaultActionButtonCooldownFont = C["media"].font --what font to use
+T.SetDefaultActionButtonCooldownFontSize = 20 --the base font size to use at a scale of 1
+T.SetDefaultActionButtonCooldownMinScale = 0.5 --the minimum scale we want to show cooldown counts at, anything below this will be hidden
+T.SetDefaultActionButtonCooldownMinDuration = 2.5 --the minimum duration to show cooldown text for
 local EXPIRING_DURATION = C["cooldown"].treshold --the minimum number of seconds a cooldown must be to use to display in the expiring format
 
 local EXPIRING_FORMAT = T.RGBToHex(1, 0, 0)..'%.1f|r' --format for timers that are soon to expire
@@ -78,10 +78,10 @@ local function Timer_OnSizeChanged(self, width, height)
 	end
 
 	self.fontScale = fontScale
-	if fontScale < MIN_SCALE then
+	if fontScale < T.SetDefaultActionButtonCooldownMinScale then
 		self:Hide()
 	else
-		self.text:SetFont(FONT_FACE, fontScale * FONT_SIZE, 'OUTLINE')
+		self.text:SetFont(T.SetDefaultActionButtonCooldownFont, fontScale * T.SetDefaultActionButtonCooldownFontSize, 'OUTLINE')
 		self.text:SetShadowColor(0, 0, 0, 0.5)
 		self.text:SetShadowOffset(2, -2)
 		if self.enabled then
@@ -98,7 +98,7 @@ local function Timer_OnUpdate(self, elapsed)
 	else
 		local remain = self.duration - (GetTime() - self.start)
 		if tonumber(T.Round(remain)) > 0 then
-			if (self.fontScale * self:GetEffectiveScale() / UIParent:GetScale()) < MIN_SCALE then
+			if (self.fontScale * self:GetEffectiveScale() / UIParent:GetScale()) < T.SetDefaultActionButtonCooldownMinScale then
 				self.text:SetText('')
 				self.nextUpdate  = 1
 			else
@@ -141,13 +141,13 @@ end
 local function Timer_Start(self, start, duration)
 	if self.noOCC then return end
 	--start timer
-	if start > 0 and duration > MIN_DURATION then
+	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration then
 		local timer = self.timer or Timer_Create(self)
 		timer.start = start
 		timer.duration = duration
 		timer.enabled = true
 		timer.nextUpdate = 0
-		if timer.fontScale >= MIN_SCALE then timer:Show() end
+		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale then timer:Show() end
 	--stop timer
 	else
 		local timer = self.timer
@@ -158,8 +158,6 @@ local function Timer_Start(self, start, duration)
 end
 
 hooksecurefunc(getmetatable(ActionButton1Cooldown).__index, "SetCooldown", Timer_Start)
-
-if T.toc < 40300 then return end
 
 local active = {}
 local hooked = {}
@@ -180,10 +178,13 @@ local function cooldown_ShouldUpdateTimer(self, start, duration)
 	return timer.start ~= start
 end
 
-local function cooldown_Update(self)
+T.UpdateActionButtonCooldown = function(self)
 	local button = self:GetParent()
 	local start, duration, enable = GetActionCooldown(button.action)
-
+	local charges, maxCharges, chargeStart, chargeDuration = GetActionCharges(button.action)
+	
+	if charges and charges > 0 then return end
+	
 	if cooldown_ShouldUpdateTimer(self, start, duration) then
 		Timer_Start(self, start, duration)
 	end
@@ -193,7 +194,7 @@ local EventWatcher = CreateFrame("Frame")
 EventWatcher:Hide()
 EventWatcher:SetScript("OnEvent", function(self, event)
 	for cooldown in pairs(active) do
-		cooldown_Update(cooldown)
+		T.UpdateActionButtonCooldown(cooldown)
 	end
 end)
 EventWatcher:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")

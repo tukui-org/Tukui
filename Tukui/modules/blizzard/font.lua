@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 local TukuiFonts = CreateFrame("Frame", "TukuiFonts", UIParent)
 
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
@@ -81,3 +81,5 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	self:UnregisterAllEvents()
 	self = nil
 end)
+
+G.Misc.Fonts = TukuiFonts

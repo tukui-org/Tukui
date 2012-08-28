@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 --------------------------------------------------------------------
 -- FPS
@@ -12,10 +12,12 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	Stat.Option = C.datatext.fps_ms
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.FPS = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatFPSText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].fps_ms, Text)
+	T.DataTextPosition(C["datatext"].fps_ms, Text)
+	G.DataText.FPS.Text = Text
 
 	local int = 1
 	local function Update(self, t)

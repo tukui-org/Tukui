@@ -7,7 +7,6 @@ local myPlayerName  = UnitName("player")
 local ALLOWED_GROUPS = {
 	["general"]=1,
 	["unitframes"]=1,
-	["arena"]=1,
 	["actionbar"]=1,
 	["nameplate"]=1,
 	["bags"]=1,
@@ -60,60 +59,6 @@ local NewButton = function(text,parent)
 
 	return result
 end
-
-StaticPopupDialogs["PERCHAR"] = {
-	text = TukuiConfigUILocalization.option_perchar,
-	OnAccept = function() 
-		if TukuiConfigAllCharacters:GetChecked() then 
-			TukuiConfigAll[myPlayerRealm][myPlayerName] = true
-		else 
-			TukuiConfigAll[myPlayerRealm][myPlayerName] = false
-		end 	
-		ReloadUI() 
-	end,
-	OnCancel = function() 
-		TukuiConfigCover:Hide()
-		if TukuiConfigAllCharacters:GetChecked() then 
-			TukuiConfigAllCharacters:SetChecked(false)
-		else 
-			TukuiConfigAllCharacters:SetChecked(true)
-		end 		
-	end,
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	timeout = 0,
-	whileDead = 1,
-	preferredIndex = 3,
-}
-
-StaticPopupDialogs["RESET_PERCHAR"] = {
-	text = TukuiConfigUILocalization.option_resetchar,
-	OnAccept = function() 
-		TukuiConfig = TukuiConfigPublic
-		ReloadUI() 
-	end,
-	OnCancel = function() if TukuiConfigUI and TukuiConfigUI:IsShown() then TukuiConfigCover:Hide() end end,
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	timeout = 0,
-	whileDead = 1,
-	preferredIndex = 3,
-}
-
-StaticPopupDialogs["RESET_ALL"] = {
-	text = TukuiConfigUILocalization.option_resetall,
-	OnAccept = function() 
-		TukuiConfigPublic = nil
-		TukuiConfigPrivate = nil
-		ReloadUI() 
-	end,
-	OnCancel = function() TukuiConfigCover:Hide() end,
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	timeout = 0,
-	whileDead = 1,
-	preferredIndex = 3,
-}
 
 -- We wanna make sure we have all needed tables when we try add values
 local function SetValue(group,option,value)		
@@ -197,43 +142,73 @@ function CreateTukuiConfigUI()
 		return
 	end
 	
+	T.CreatePopup["PERCHAR"] = {
+		question = TukuiConfigUILocalization.option_perchar,
+		function1 = function() 
+			if TukuiConfigAllCharacters:GetChecked() then 
+				TukuiConfigAll[myPlayerRealm][myPlayerName] = true
+			else 
+				TukuiConfigAll[myPlayerRealm][myPlayerName] = false
+			end 	
+			ReloadUI() 
+		end,
+		function2 = function() 
+			TukuiConfigCover:Hide()
+			if TukuiConfigAllCharacters:GetChecked() then 
+				TukuiConfigAllCharacters:SetChecked(false)
+			else 
+				TukuiConfigAllCharacters:SetChecked(true)
+			end 		
+		end,
+		answer1 = ACCEPT,
+		answer2 = CANCEL,
+	}
+
+	T.CreatePopup["RESET_PERCHAR"] = {
+		question = TukuiConfigUILocalization.option_resetchar,
+		function1 = function() 
+			TukuiConfig = TukuiConfigPublic
+			ReloadUI() 
+		end,
+		function2 = function() if TukuiConfigUI and TukuiConfigUI:IsShown() then TukuiConfigCover:Hide() end end,
+		answer1 = ACCEPT,
+		answer2 = CANCEL,
+	}
+
+	T.CreatePopup["RESET_ALL"] = {
+		question = TukuiConfigUILocalization.option_resetall,
+		function1 = function() 
+			TukuiConfigPublic = nil
+			TukuiConfigPrivate = nil
+			ReloadUI() 
+		end,
+		function2 = function() TukuiConfigCover:Hide() end,
+		answer1 = ACCEPT,
+		answer2 = CANCEL,
+	}
+	
 	-- MAIN FRAME
-	local TukuiConfigUI = CreateFrame("Frame","TukuiConfigUI",UIParent)
-	TukuiConfigUI:SetPoint("CENTER", UIParent, "CENTER", 90, 0)
+	local TukuiConfigUI = CreateFrame("Frame","TukuiConfigUI",nil)
+	TukuiConfigUI:SetPoint("TOPLEFT", UIParent,10,-20)
 	TukuiConfigUI:SetWidth(550)
-	TukuiConfigUI:SetHeight(300)
+	TukuiConfigUI:SetHeight(UIParent:GetHeight() - 40)
 	TukuiConfigUI:SetFrameStrata("DIALOG")
 	TukuiConfigUI:SetFrameLevel(20)
-	
-	-- TITLE 2
-	local TukuiConfigUITitleBox = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
-	TukuiConfigUITitleBox:SetWidth(570)
-	TukuiConfigUITitleBox:SetHeight(24)
-	TukuiConfigUITitleBox:SetPoint("TOPLEFT", -10, 42)
-	TukuiConfigUITitleBox:SetTemplate("Default")
-	TukuiConfigUITitleBox:CreateShadow("Default")
-	
-	local title = TukuiConfigUITitleBox:CreateFontString("TukuiConfigUITitle", "OVERLAY")
-	title:SetFont(C.media.font, 12)
-	title:SetPoint("LEFT", TukuiConfigUITitleBox, "LEFT", 4, 0)
-		
-	local TukuiConfigUIBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
-	TukuiConfigUIBG:SetPoint("TOPLEFT", -10, 10)
-	TukuiConfigUIBG:SetPoint("BOTTOMRIGHT", 10, -10)
-	TukuiConfigUIBG:SetTemplate("Default")
-	TukuiConfigUIBG:CreateShadow("Default")
+	TukuiConfigUI:SetScale(C.general.uiscale)
 	
 	-- GROUP SELECTION ( LEFT SIDE )
 	local groups = CreateFrame("ScrollFrame", "TukuiCatagoryGroup", TukuiConfigUI)
-	groups:SetPoint("TOPLEFT",-180,0)
-	groups:SetWidth(150)
-	groups:SetHeight(300)
+	groups:SetPoint("TOPRIGHT",UIParent, 2,2)
+	groups:SetWidth(136)
+	groups:SetHeight(UIParent:GetHeight() + 4)
+	groups:SetTemplate()
+	groups:CreateShadow()
 
-	local groupsBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
-	groupsBG:SetPoint("TOPLEFT", groups, -10, 10)
-	groupsBG:SetPoint("BOTTOMRIGHT", groups, 10, -10)
-	groupsBG:SetTemplate("Default")
-	groupsBG:CreateShadow("Default")
+	--local groupsBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
+	--groupsBG:SetPoint("TOPLEFT", groups, -10, 10)
+	--groupsBG:SetPoint("BOTTOMRIGHT", groups, 10, -10)
+	--groupsBG:SetTemplate("Default")
+	--groupsBG:CreateShadow("Default")
 	
 	--This is our frame we will use to prevent clicking on the config, before you choose a popup window
 	local TukuiConfigCover = CreateFrame("Frame", "TukuiConfigCover", TukuiConfigUI)
@@ -257,23 +232,27 @@ function CreateTukuiConfigUI()
 	slider:SetBackdropColor(r,g,b,0.2)
 	local child = CreateFrame("Frame",nil,groups)
 	child:SetPoint("TOPLEFT")
-	local offset=5
+	local offset = 9
 	for group in pairs(ALLOWED_GROUPS) do
 		local o = "TukuiConfigUI"..group
 		local translate = Local(group)
 		local button = NewButton(translate, child)
-		button:SetHeight(16)
-		button:SetWidth(125)
-		button:SetPoint("TOPLEFT", 5,-(offset))
-		button:SetScript("OnClick", function(self) ShowGroup(group) end)		
-		offset=offset+20
+		button:SetHeight(19)
+		button:SetWidth(120)
+		button:SetPoint("TOP", 5,-(offset))
+		button:SetScript("OnClick", function(self) ShowGroup(group) end)	
+		button:SkinButton()
+		button:StyleButton()
+		button:SetFrameLevel(button:GetFrameLevel() + 10)
+		offset=offset+25
 	end
 	child:SetWidth(125)
 	child:SetHeight(offset)
-	slider:SetMinMaxValues(0, (offset == 0 and 1 or offset-12*25))
+
+	--slider:SetMinMaxValues(0, (offset == 0 and 1 or offset-12*25))
 	slider:SetValue(1)
 	groups:SetScrollChild(child)
-	
+	slider:Hide()
 	local x
 	_G["TukuiCatagoryGroup"]:EnableMouseWheel(true)
 	_G["TukuiCatagoryGroup"]:SetScript("OnMouseWheel", function(self, delta)
@@ -291,17 +270,17 @@ function CreateTukuiConfigUI()
 	local group = CreateFrame("ScrollFrame", "TukuiConfigUIGroup", TukuiConfigUI)
 	group:SetPoint("TOPLEFT",0,5)
 	group:SetWidth(550)
-	group:SetHeight(300)
+	group:SetHeight(UIParent:GetHeight())
 	local slider = CreateFrame("Slider", "TukuiConfigUIGroupSlider", group)
-	slider:SetPoint("TOPRIGHT",0,0)
+	slider:SetPoint("TOPRIGHT",-28,0)
 	slider:SetWidth(20)
-	slider:SetHeight(300)
+	slider:SetHeight(UIParent:GetHeight() - 30)
 	slider:SetThumbTexture("Interface\\Buttons\\UI-ScrollBar-Knob")
 	slider:SetOrientation("VERTICAL")
 	slider:SetValueStep(20)
-	slider:SetTemplate("Default")
+	slider:SetTemplate("Transparent")
 	local r,g,b,a = unpack(C["media"].bordercolor)
-	slider:SetBackdropColor(r,g,b,0.2)
+	--slider:SetBackdropColor(r,g,b,0.2)
 	slider:SetScript("OnValueChanged", function(self,value) group:SetVerticalScroll(value) end)
 	
 	for group in pairs(ALLOWED_GROUPS) do
@@ -321,6 +300,9 @@ function CreateTukuiConfigUI()
 				_G["TukuiConfigUI"..group..option.."Text"]:SetText(translate)
 				_G["TukuiConfigUI"..group..option.."Text"]:SetFont(C.media.font, 12)
 				button:SetChecked(value)
+				button:SkinCheckBox()
+				button.backdrop:SetBackdropColor(0,0,0,0)
+				button:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 				button:SetScript("OnClick", function(self) SetValue(group,option,(self:GetChecked() and true or false)) end)
 				button:SetPoint("TOPLEFT", 5, -(offset))
 				offset = offset+25
@@ -363,7 +345,7 @@ function CreateTukuiConfigUI()
 				local oktext = okbutton:CreateFontString(nil,"OVERLAY",nil)
 				oktext:SetFont(C.media.font,12)
 				oktext:SetText("OK")
-				oktext:SetPoint("CENTER", T.Scale(1), 0)
+				oktext:Point("CENTER", 1, 0)
 				oktext:SetJustifyH("CENTER")
 				okbutton:Hide()
  
@@ -453,39 +435,63 @@ function CreateTukuiConfigUI()
 
 	local reset = NewButton(TukuiConfigUILocalization.option_button_reset, TukuiConfigUI)
 	reset:SetWidth(100)
-	reset:SetHeight(20)
-	reset:SetPoint("BOTTOMLEFT",-10, -38)
+	reset:SetHeight(23)
+	reset:SetPoint("BOTTOMLEFT",TukuiConfigUI,"BOTTOMRIGHT", 0, 20)
 	reset:SetScript("OnClick", function(self) 
 		TukuiConfigCover:Show()
 		if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-			StaticPopup_Show("RESET_PERCHAR")
+			T.ShowPopup("RESET_PERCHAR")
 		else
-			StaticPopup_Show("RESET_ALL")
+			T.ShowPopup("RESET_ALL")
 		end
+		TukuiConfigUI:Hide()
 	end)
-	reset:SetTemplate("Default")
+	--reset:SetTemplate("Default")
 	reset:CreateShadow("Default")
+	reset:SkinButton()
 	
 	local close = NewButton(TukuiConfigUILocalization.option_button_close, TukuiConfigUI)
 	close:SetWidth(100)
-	close:SetHeight(20)
-	close:SetPoint("BOTTOMRIGHT", 10, -38)
+	close:SetHeight(23)
+	close:SetPoint("LEFT", reset, "RIGHT", 10, 0)
 	close:SetScript("OnClick", function(self) TukuiConfigUI:Hide() end)
-	close:SetTemplate("Default")
+	--close:SetTemplate("Default")
 	close:CreateShadow("Default")
+	close:SkinButton()
 	
 	local load = NewButton(TukuiConfigUILocalization.option_button_load, TukuiConfigUI)
-	load:SetHeight(20)
-	load:SetPoint("LEFT", reset, "RIGHT", 15, 0)
-	load:SetPoint("RIGHT", close, "LEFT", -15, 0)
+	load:SetWidth(100)
+	load:SetHeight(23)
+	load:SetPoint("LEFT", close, "RIGHT", 10, 0)
 	load:SetScript("OnClick", function(self) ReloadUI() end)
-	load:SetTemplate("Default")
+	--load:SetTemplate("Default")
 	load:CreateShadow("Default")
+	load:SkinButton()
+	
+	-- TITLE 2
+	local TukuiConfigUITitleBox = CreateFrame("Frame","TukuiConfigUITitleBox",TukuiConfigUI)
+	TukuiConfigUITitleBox:SetWidth(320)
+	TukuiConfigUITitleBox:SetHeight(26)
+	TukuiConfigUITitleBox:SetPoint("TOPLEFT",reset, 0, 32)
+	--TukuiConfigUITitleBox:SetPoint("TOPRIGHT",TukuiCatagoryGroup,"TOPLEFT", -58, -20)
+	TukuiConfigUITitleBox:SetTemplate("Default")
+	TukuiConfigUITitleBox:CreateShadow("Default")
+	
+	
+	local title = TukuiConfigUITitleBox:CreateFontString("TukuiConfigUITitle", "OVERLAY")
+	title:SetFont(C.media.font, 12)
+	title:SetPoint("LEFT", TukuiConfigUITitleBox, "LEFT", 4, 0)
+		
+	local TukuiConfigUIBG = CreateFrame("Frame","TukuiConfigUI",TukuiConfigUI)
+	TukuiConfigUIBG:SetPoint("TOPLEFT", -40, 40)
+	TukuiConfigUIBG:SetPoint("BOTTOMRIGHT", -58, -40)
+	TukuiConfigUIBG:SetTemplate("Default")
+	TukuiConfigUIBG:CreateShadow("Default")
 	
 	if TukuiConfigAll then
 		local button = CreateFrame("CheckButton", "TukuiConfigAllCharacters", TukuiConfigUITitleBox, "InterfaceOptionsCheckButtonTemplate")
 		
-		button:SetScript("OnClick", function(self) StaticPopup_Show("PERCHAR") TukuiConfigCover:Show() end)
+		button:SetScript("OnClick", function(self) T.ShowPopup("PERCHAR") TukuiConfigUI:Hide() end)
 		
 		button:SetPoint("RIGHT", TukuiConfigUITitleBox, "RIGHT",-3, 0)	
 		
@@ -500,9 +506,48 @@ function CreateTukuiConfigUI()
 		else
 			button:SetChecked(false)
 		end
+		button:SkinCheckBox()
 	end	
 	
+	UIParent:SetAlpha(0)
 	ShowGroup("general")
+	
+	-- CREDITS
+	local credits = T.Credits
+	local interval = #credits
+	local f = CreateFrame("ScrollingMessageFrame", "TukuiConfigUICredits", TukuiConfigUI)
+	f:SetSize(TukuiConfigUITitleBox:GetWidth(), UIParent:GetHeight())
+	f:SetPoint("BOTTOMLEFT", reset, 0, 62)
+	f:SetFont(C.media.font,26,"OUTLINE")
+	f:SetShadowColor(0,0,0,0)
+	f:SetFading(false)
+	f:SetFadeDuration(20)
+	f:SetTimeVisible(1)
+	f:SetMaxLines(64)
+	f:SetSpacing(2)
+	f:AddMessage("Tukui "..T.version, 222/255, 95/255,  95/255)
+	f:AddMessage(" ")
+	f:AddMessage("SPECIAL THANKS TO:", 75/255,  175/255, 76/255)
+	f:AddMessage(" ")
+	f:SetFrameLevel(0)
+	f:SetFrameStrata("BACKGROUND")
+	f:SetScript("OnUpdate", function(self, time)
+		interval = interval - time
+		for index, name in pairs(T.Credits) do
+			if interval < index then 
+				f:AddMessage(T.Credits[index], 1, 1, 1)
+				tremove(credits, index)
+			end
+		end
+		
+		-- stop!
+		if interval < 0 then self:SetScript("OnUpdate", nil) end
+	end)
+	
+	TukuiConfigUI:SetScript("OnShow", function(self) UIParent:SetAlpha(0) end)
+	TukuiConfigUI:SetScript("OnHide", function(self) UIParent:SetAlpha(1) end)
+	
+	tinsert(UISpecialFrames, "TukuiConfigUI")
 end
 
 do
@@ -514,17 +559,6 @@ do
 		else
 			TukuiConfigUI:Hide()
 		end
-	end
-	
-	SLASH_RESETCONFIG1 = '/resetconfig'
-	function SlashCmdList.RESETCONFIG()
-		if TukuiConfigUI and TukuiConfigUI:IsShown() then TukuiConfigCover:Show() end
-		
-		if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-			StaticPopup_Show("RESET_PERCHAR")
-		else
-			StaticPopup_Show("RESET_ALL")
-		end	
 	end
 	
 	-- create esc button
@@ -551,7 +585,7 @@ do
 		button:SetText("Tukui")
 		
 		if C.general.blizzardreskin then
-			T.SkinButton(button)
+			button:SkinButton()
 		end
 		
 		button:SetScript("OnClick", function(self)
@@ -567,5 +601,4 @@ do
 		keybinds:ClearAllPoints()
 		keybinds:Point("TOP", button, "BOTTOM", 0, -1)
 	end)
-
 end

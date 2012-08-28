@@ -116,6 +116,12 @@ TukuiConfigUILocalization.unitframesweakenedsoulbar = "Enable Weakened Soul bar 
 TukuiConfigUILocalization.unitframesonlyselfdebuffs = "Display only our debuffs on target"
 TukuiConfigUILocalization.unitframesshowfocustarget = "Enable Focus target"
 TukuiConfigUILocalization.unitframesbordercolor = "Set default border color of panels"
+TukuiConfigUILocalization.unitframesraid = "Enable Tukui Raid Frames"
+TukuiConfigUILocalization.unitframesshowraidpets = "Show Pets in Tukui Raid Frames"
+TukuiConfigUILocalization.unitframesdruidmanabar = "Show Druid Mana Bar in Bear/Cat form"
+TukuiConfigUILocalization.unitframesdruidmushroombar = "Show Druid Mushroom bar in Balance or Restoration specialization"
+TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
+TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
  
 -- loot
 TukuiConfigUILocalization.loot = "Loot"
@@ -153,10 +159,13 @@ TukuiConfigUILocalization.actionbarbuttonsize = "Size of the main action buttons
 TukuiConfigUILocalization.actionbarbuttonspacing = "Spacing of the main action buttons"
 TukuiConfigUILocalization.actionbarpetbuttonsize = "Size of pet/shapeshift buttons"
 TukuiConfigUILocalization.actionbarownshdbar = "Use an empty bar for shadow dance (rogue) instead of stealth bar"
+TukuiConfigUILocalization.actionbarownmetabar = "Use an empty bar for Metamorphosis (warlock) instead of main bar"
+TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
+TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
  
 -- arena
 TukuiConfigUILocalization.arena = "Arena"
-TukuiConfigUILocalization.arenaunitframes = "Enable arena unit frames"
+TukuiConfigUILocalization.unitframesarena = "Enable arena unit frames"
  
 -- cooldowns
 TukuiConfigUILocalization.cooldown = "Cooldowns"
@@ -174,6 +183,8 @@ TukuiConfigUILocalization.auras = "Auras"
 TukuiConfigUILocalization.aurasplayer = "Enable Tukui Buff/Debuff Frames"
 TukuiConfigUILocalization.aurasconsolidate = "Enable Consolidate Buffs"
 TukuiConfigUILocalization.aurasflash = "Enable flashing animation on aura less than 30 seconds"
+TukuiConfigUILocalization.aurasclassictimer = "Display classic timer on player auras"
+
 
 -- buttons
 TukuiConfigUILocalization.option_button_reset = "Reset"

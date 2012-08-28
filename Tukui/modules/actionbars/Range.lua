@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 --[[
 	Thx to Tulla
 		Adds out of range coloring to action buttons
@@ -85,9 +85,6 @@ do
 	local HOLY_POWER_SPELLS = {
 		[85256] = GetSpellInfo(85256), --Templar's Verdict
 		[53600] = GetSpellInfo(53600), --Shield of the Righteous
-		-- [84963] = GetSpellInfo(84963), --Inquisition
-		-- [85673] = GetSpellInfo(85673), --Word of Glory
-		-- [85222] = GetSpellInfo(85222), --Light of Dawn
 	}
 
 	isHolyPowerAbility = function(actionId)
@@ -109,7 +106,8 @@ do
 end
 
 --[[ The main thing ]]--
-local TukuiRange = timer_Create(CreateFrame('Frame', 'TukuiRange'), UPDATE_DELAY)
+local TukuiRange = timer_Create(CreateFrame('Frame', 'TukuiActionButtonsRange'), UPDATE_DELAY)
+G.ActionBars.RangeCheck = TukuiRange
 
 function TukuiRange:Load()
 	self:SetScript('OnEvent', self.OnEvent)

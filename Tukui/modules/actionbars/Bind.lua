@@ -226,23 +226,18 @@ SlashCmdList.MOUSEOVERBIND = function()
 			self.enabled = false
 			self:HideFrame()
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-			StaticPopup_Hide("TUKUI_KEYBIND_MODE")
 		end
 
-		StaticPopupDialogs["TUKUI_KEYBIND_MODE"] = {
-			text = L.bind_instruct,
-			button1 = L.bind_save,
-			button2 = L.bind_discardbind,
-			OnAccept = function() bind:Deactivate(true) end,
-			OnCancel = function() bind:Deactivate(false) end,
-			timeout = 0,
-			whileDead = 1,
-			hideOnEscape = false,
-			preferredIndex = 3,
+		T.CreatePopup["TUKUI_KEYBIND_MODE"] = {
+			question = L.bind_instruct,
+			answer1 = L.bind_save,
+			answer2 = L.bind_discardbind,
+			function1 = function() bind:Deactivate(true) end,
+			function2 = function() bind:Deactivate(false) end,
 		}
 
 		-- REGISTERING
-		local stance = ShapeshiftButton1:GetScript("OnClick")
+		local stance = StanceButton1:GetScript("OnClick")
 		local pet = PetActionButton1:GetScript("OnClick")
 		local button = SecureActionButton_OnClick
 
@@ -290,11 +285,8 @@ SlashCmdList.MOUSEOVERBIND = function()
 	end
 	if not bind.enabled then
 		bind:Activate()
-		StaticPopup_Show("TUKUI_KEYBIND_MODE")
+		T.ShowPopup("TUKUI_KEYBIND_MODE")
 	end
 end
 SLASH_MOUSEOVERBIND1 = "/bindkey"
-SLASH_MOUSEOVERBIND2 = "/hoverbind"
-if not IsAddOnLoaded("HealBot") then
-	SLASH_MOUSEOVERBIND3 = "/hb"
-end
+SLASH_MOUSEOVERBIND2 = "/kb"

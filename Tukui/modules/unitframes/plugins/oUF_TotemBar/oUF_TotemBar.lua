@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if C.unitframes.enable ~= true or T.myclass ~= "SHAMAN" then return end
 --[[
 	Documentation:
@@ -46,14 +46,13 @@ end
 local function TotemOnClick(self,...)
 	local id = self.ID
 	local mouse = ...
---~ 	print(id, mouse)
-		if IsShiftKeyDown() then
-			for j = 1,4 do 
-				DestroyTotem(j)
-			end 
-		else 
-			DestroyTotem(id) 
-		end
+	if IsShiftKeyDown() then
+		for j = 1,4 do 
+			DestroyTotem(j)
+		end 
+	else 
+		DestroyTotem(id) 
+	end
 end
 	
 local function InitDestroy(self)
@@ -65,10 +64,11 @@ local function InitDestroy(self)
 		Destroy.ID = i
 		Destroy:SetScript("OnClick", TotemOnClick)
 	end
-end			
+end
+	
 local function UpdateSlot(self, slot)
 	local totem = self.TotemBar
-
+	if not totem[slot] then return end
 
 	local haveTotem, name, startTime, duration, totemIcon = GetTotemInfo(slot)
 
@@ -99,7 +99,7 @@ local function UpdateSlot(self, slot)
 					if total >= delay then
 						total = 0
 						haveTotem, name, startTime, duration, totemIcon = GetTotemInfo(self.ID)
-							if ((GetTime() - startTime) == 0) then
+							if ((GetTime() - startTime) == 0) or (duration == 0) then
 								self:SetValue(0)
 							else
 								self:SetValue(1 - ((GetTime() - startTime) / duration))

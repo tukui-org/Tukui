@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- SUPPORT FOR DPS Feed... 
 --------------------------------------------------------------------
@@ -12,14 +12,16 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 	local cmbt_time = 0
 	DPS_FEED.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	DPS_FEED.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.DPS = DPS_FEED
 
 	local pet_id = UnitGUID("pet")
      
 	local dText = DPS_FEED:CreateFontString("TukuiStatDamageText", "OVERLAY")
 	dText:SetFont(C.media.font, C["datatext"].fontsize)
 	dText:SetText("0.0 ",L.datatext_dps)
+	G.DataText.DPS.Text = dText
 
-	T.PP(C["datatext"].dps_text, dText)
+	T.DataTextPosition(C["datatext"].dps_text, dText)
 
 	DPS_FEED:EnableMouse(true)
 	DPS_FEED:SetFrameStrata("BACKGROUND")
@@ -69,17 +71,9 @@ if C["datatext"].dps_text and C["datatext"].dps_text > 0 then
 		   
 		if id == player_id or id == pet_id then
 			if select(2, ...) == "SWING_DAMAGE" then
-				if T.toc < 40200 then
-					last_dmg_amount = select(10, ...)
-				else
-					last_dmg_amount = select(12, ...)
-				end
+				last_dmg_amount = select(12, ...)
 			else
-				if T.toc < 40200 then
-					last_dmg_amount = select(13, ...)
-				else
-					last_dmg_amount = select(15, ...)
-				end
+				last_dmg_amount = select(15, ...)
 			end
 			dmg_total = dmg_total + last_dmg_amount
 		end       

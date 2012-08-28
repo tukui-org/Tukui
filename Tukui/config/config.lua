@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(select(2, ...))
+﻿local T, C, L, G = unpack(select(2, ...))
 
 -----------------------------------------
 -- This is the default configuration file
@@ -11,13 +11,6 @@ C["general"] = {
 	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
 	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
 	["blizzardreskin"] = true,                          -- reskin all Blizzard frames
-	["bigwigsreskin"] = true,                           -- reskin bigwigs
-	["dbmreskin"] = true,                               -- reskin dbm
-	["dxereskin"] = true,                               -- reskin dxe
-	["omenreskin"] = true,                              -- reskin omen
-	["recountreskin"] = true,                           -- reskin recount
-	["skadareskin"] = true,                             -- reskin skada
-	["tinydpsreskin"] = true,                           -- reskin tinydps
 }
 
 C["unitframes"] = {
@@ -49,46 +42,54 @@ C["unitframes"] = {
 	["bordercolor"] = { .4,.4,.4 },                     -- unit frames panel border color
 
 	-- raid layout (if one of them is enabled)
+	["raid"] = true,                                    -- enable raid frames
 	["showrange"] = true,                               -- show range opacity on raidframes
 	["raidalphaoor"] = 0.3,                             -- alpha of unitframes when unit is out of range
-	["gridonly"] = false,                               -- enable grid only mode for all healer mode raid layout.
 	["showsymbols"] = true,	                            -- show symbol.
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
-	["showplayerinparty"] = false,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
-	["gridvertical"] = false,                           -- grid group displayed vertically
+	["gridvertical"] = true,                            -- grid group displayed vertically
+	["raidunitspercolumn"] = 10,                        -- number or raid member show per column
+	["showraidpets"] = true,                            -- show pets in raid unit frames
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
+	
+	-- arena frames
+	["arena"] = true,                                   -- enable arena frames
 
 	-- priest only plugin
 	["weakenedsoulbar"] = true,                         -- show weakened soul bar
 	
 	-- class bar
 	["classbar"] = true,                                -- enable tukui classbar over player unit
-}
-
-C["arena"] = {
-	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
+	
+	-- these class bar are considered optional
+	["druidmanabar"] = true,                            -- enable druid class mana bar
+	["druidmushroombar"] = true,                        -- enable druid class mushroom bar
+	["mageclassbar"] = true,                            -- enable mage class arcane bar
 }
 
 C["auras"] = {
 	["player"] = true,                                  -- enable tukui buffs/debuffs
-	["consolidate"] = true,                             -- enable downpdown menu with consolidate buff
-	["flash"] = false,                                   -- flash warning for buff with time < 30 sec
+	["consolidate"] = false,                            -- enable downpdown menu with consolidate buff
+	["flash"] = false,                                  -- flash warning for buff with time < 30 sec
+	["classictimer"] = false,                           -- Display classic timer on player auras.
 }
 
 C["actionbar"] = {
 	["enable"] = true,                                  -- enable tukui action bars
 	["hotkey"] = true,                                  -- enable hotkey display because it was a lot requested
+	["macro"] = false,                                  -- enable macro display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
-	["showgrid"] = true,                                -- show grid on empty button
 	["buttonsize"] = 27,                                -- normal buttons size
 	["petbuttonsize"] = 29,                             -- pet & stance buttons size
 	["buttonspacing"] = 4,                              -- buttons spacing
 	["ownshdbar"] = false,                              -- use a complete new stance bar for shadow dance (rogue only)
+	["ownmetabar"] = true,                              -- use a complete new stance bar for metamorphosis (warlock only)
+	["ownwarstancebar"] = false,                        -- use a different bar for every warrior stance like it was in previous xpac (warrior only)
 }
 
 C["bags"] = {
@@ -98,7 +99,6 @@ C["bags"] = {
 C["loot"] = {
 	["lootframe"] = true,                               -- reskin the loot frame to fit tukui
 	["rolllootframe"] = true,                           -- reskin the roll frame to fit tukui
-	["autogreed"] = true,                               -- auto-dez or auto-greed item at max level, auto-greed Frozen orb
 }
 
 C["cooldown"] = {

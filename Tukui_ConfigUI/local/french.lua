@@ -109,6 +109,12 @@
 	TukuiConfigUILocalization.unitframesonlyselfdebuffs = "Afficher seulement vos affaiblissements sur la cible"
 	TukuiConfigUILocalization.unitframesshowfocustarget = "Afficher la focalisation de la cible"
 	TukuiConfigUILocalization.unitframesbordercolor = "Définir la couleur par défaut des bords des panneaux"
+	TukuiConfigUILocalization.unitframesraid = "Activer l'interface de raid de Tukui"
+	TukuiConfigUILocalization.unitframesshowraidpets = "Afficher les familiers dans l'interface de raid"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "Afficher la barre de mana des druides en forme de félin / ours"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "Afficher la barre de champignons en spécialisation équilibre et restauration"
+	TukuiConfigUILocalization.unitframesmageclassbar = "Afficher la barre d'arcane du mage."
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Nombre d'unités de raid par colonne / ligne"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Butin"
@@ -146,10 +152,13 @@
 	TukuiConfigUILocalization.actionbarbuttonspacing = "Espacement entre les boutons de la barre principale"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "Taille des boutons de la barre de formes/du familier"
 	TukuiConfigUILocalization.actionbarownshdbar = "Utiliser une barre vide pour 'Danse de l'ombre' (voleur) au lieu de la barre de camouflage"
+	TukuiConfigUILocalization.actionbarownmetabar = "Utiliser une barre d'action vide pour Métamorphose (démoniste) au lieu de la barre principale"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Utiliser une barre d'action vide pour chaque posture (guerrier) au lieu de la barre principale"
+	TukuiConfigUILocalization.actionbarmacro = "Affiche le nom des macros sur la barre d'action"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "Arène"
-	TukuiConfigUILocalization.arenaunitframes = "Activer les barres d'unités en arène"
+	TukuiConfigUILocalization.unitframesarena = "Activer les barres d'unités en arène"
 	 
 	-- cooldowns
 	TukuiConfigUILocalization.cooldown = "Comptes à rebours"
@@ -167,6 +176,7 @@
 	TukuiConfigUILocalization.aurasplayer = "Activer les fenêtres d'amélioration/affaiblissement Tukui"
 	TukuiConfigUILocalization.aurasconsolidate = "Regrouper des améliorations"
 	TukuiConfigUILocalization.aurasflash = "Activer l'animation de flash lorsqu'il reste moins de 30 secondes"
+	TukuiConfigUILocalization.aurasclassictimer = "Utiliser l'affichage classique pour la durée des auras du joueur"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "Réinitialiser"

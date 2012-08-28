@@ -1,7 +1,7 @@
 --------------------------------------------------------------------
 -- GUILD ROSTER
 --------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 if not C["datatext"].guild or C["datatext"].guild == 0 then return end
 
@@ -13,6 +13,7 @@ Stat.Option = C.datatext.guild
 Stat.update = false
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+G.DataText.Guild = Stat
 
 local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
 local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
@@ -31,23 +32,25 @@ local totalOnline = 0
 
 local Text = Stat:CreateFontString("TukuiStatGuildText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
-T.PP(C["datatext"].guild, Text)
+T.DataTextPosition(C["datatext"].guild, Text)
+G.DataText.Guild.Text = Text
 
 local function BuildGuildTable()
 	totalOnline = 0
 	wipe(guildTable)
-	local name, rank, level, zone, note, officernote, connected, status, class
+	local _, name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	for i = 1, GetNumGuildMembers() do
-		name, rank, _, level, _, zone, note, officernote, connected, status, class = GetGuildRosterInfo(i)
+		name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = GetGuildRosterInfo(i)
+		
 		if status == 1 then
-			status = "|cffff0000[AFK]|r" -- Needs Localization
+			status = "|cffff0000["..AFK.."]|r"
 		elseif status == 2 then
-			status = "|cffff0000[DND]|r" -- Needs Localization
+			status = "|cffff0000["..DND.."]|r" 
 		else
 			status = ""
 		end
 		
-		guildTable[i] = { name, rank, level, zone, note, officernote, connected, status, class }
+		guildTable[i] = { name, rank, level, zone, note, officernote, connected, status, class, isMobile }
 		if connected then totalOnline = totalOnline + 1 end
 	end
 	table.sort(guildTable, function(a, b)
@@ -58,17 +61,15 @@ local function BuildGuildTable()
 end
 
 local function UpdateGuildXP()
-	local currentXP, remainingXP, dailyXP, maxDailyXP = UnitGetGuildXP("player")
+	local currentXP, remainingXP = UnitGetGuildXP("player")
 	local nextLevelXP = currentXP + remainingXP
 	
 	-- prevent 4.3 division / 0
 	if nextLevelXP == 0 or maxDailyXP == 0 then return end
 	
 	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
-	local percentDaily = tostring(math.ceil((dailyXP / maxDailyXP) * 100))
 	
 	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
-	guildXP[1] = { dailyXP, maxDailyXP, percentDaily }
 end
 
 local function UpdateGuildMessage()
@@ -137,15 +138,17 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 	menuList[3].menuList = {}
 
 	for i = 1, #guildTable do
-		if guildTable[i][7] and guildTable[i][1] ~= T.myname then
+		if (guildTable[i][7] and guildTable[i][1] ~= T.myname) then
 			local classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[guildTable[i][9]], GetQuestDifficultyColor(guildTable[i][3])
 
 			if UnitInParty(guildTable[i][1]) or UnitInRaid(guildTable[i][1]) then
 				grouped = "|cffaaaaaa*|r"
 			else
-				menuCountInvites = menuCountInvites +1
 				grouped = ""
-				menuList[2].menuList[menuCountInvites] = {text = string.format(levelNameString, levelc.r*255,levelc.g*255,levelc.b*255, guildTable[i][3], classc.r*255,classc.g*255,classc.b*255, guildTable[i][1], ""), arg1 = guildTable[i][1],notCheckable=true, func = inviteClick}
+				if not guildTable[i][10] then
+					menuCountInvites = menuCountInvites + 1
+					menuList[2].menuList[menuCountInvites] = {text = string.format(levelNameString, levelc.r*255,levelc.g*255,levelc.b*255, guildTable[i][3], classc.r*255,classc.g*255,classc.b*255, guildTable[i][1], ""), arg1 = guildTable[i][1],notCheckable=true, func = inviteClick}
+				end
 			end
 			menuCountWhispers = menuCountWhispers + 1
 			menuList[3].menuList[menuCountWhispers] = {text = string.format(levelNameString, levelc.r*255,levelc.g*255,levelc.b*255, guildTable[i][3], classc.r*255,classc.g*255,classc.b*255, guildTable[i][1], grouped), arg1 = guildTable[i][1],notCheckable=true, func = whisperClick}
@@ -162,28 +165,30 @@ Stat:SetScript("OnEnter", function(self)
 	UpdateGuildMessage()
 	BuildGuildTable()
 		
-	local name, rank, level, zone, note, officernote, connected, status, class
+	local name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	local zonec, classc, levelc
 	local online = totalOnline
+	local GuildInfo = GetGuildInfo('player')
+	local GuildLevel = GetGuildLevel()
 		
 	local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
-	GameTooltip:AddDoubleLine(string.format(guildInfoString, GetGuildInfo('player'), GetGuildLevel()), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+	if GuildInfo and GuildLevel then
+		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+	end
 	
 	if guildMotD ~= "" then GameTooltip:AddLine(' ') GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
 	
 	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
-	if GetGuildLevel() ~= 25 then
-		UpdateGuildXP()
+	if GuildLevel and GuildLevel ~= 25 then
+		--UpdateGuildXP()
 		
-		if guildXP[0] and guildXP[1] then
+		if guildXP[0] then
 			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
-			local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
 			
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
-			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
 		end
 	end
 	
@@ -203,10 +208,12 @@ Stat:SetScript("OnEnter", function(self)
 				break
 			end
 
-			name, rank, level, zone, note, officernote, connected, status, class = unpack(guildTable[i])
+			name, rank, level, zone, note, officernote, connected, status, class, isMobile = unpack(guildTable[i])
 			if connected and name ~= T.myname then
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
+				
+				if isMobile then zone = "" end
 				
 				if IsShiftKeyDown() then
 					GameTooltip:AddDoubleLine(string.format(nameRankString, name, rank), zone, classc.r, classc.g, classc.b, zonec.r, zonec.g, zonec.b)

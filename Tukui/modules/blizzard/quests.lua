@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...))
 
 -- add quest level into Quest list frame.
 if (IsAddOnLoaded("QuestGuru")) then return end
@@ -21,5 +21,6 @@ local function questlevel()
 		end
 	end
 end
+
 hooksecurefunc("QuestLog_Update", questlevel)
 QuestLogScrollFrameScrollBar:HookScript("OnValueChanged", questlevel)

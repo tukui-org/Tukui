@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: |cffC495DDTukui Config UI|r
 ## Notes: Someday there is only pantesaur left.
 ## Author: Tohveli

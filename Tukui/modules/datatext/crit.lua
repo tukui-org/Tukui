@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- Crit (Spell or Melee.. or ranged)
 --------------------------------------------------------------------
@@ -10,10 +10,12 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 	Stat.Option = C.datatext.crit
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.Crit = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatCritText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].crit, Text)
+	T.DataTextPosition(C["datatext"].crit, Text)
+	G.DataText.Crit.Text = Text
 
 	local int = 1
 

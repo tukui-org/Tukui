@@ -107,6 +107,12 @@
 	TukuiConfigUILocalization.unitframesmovecombobar = "대상 콤보 막대를 이동 (ROGUE ONLY)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "고전 콤보 포인트를 사용"
 	TukuiConfigUILocalization.unitframesgridvertical = "그리드 수직에서 RAID 그룹을 표시합니다"
+	TukuiConfigUILocalization.unitframesraid = "Enable Tukui Raid Frames"
+	TukuiConfigUILocalization.unitframesshowraidpets = "Show Pets in Tukui Raid Frames"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "Show Druid Mana Bar in Bear/Cat form"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "Show Druid Mushroom bar in Balance or Restoration specialization"
+	TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "전리품"
@@ -144,10 +150,13 @@
 	TukuiConfigUILocalization.actionbarbuttonspacing = "행동 단축버튼의 간격"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "펫/태세 버튼의 크기"
 	TukuiConfigUILocalization.actionbarownshdbar = "도적이 어둠의 춤을 사용시 은신 단축바를 띄우지 않고 다른 바를 띄움"
+	TukuiConfigUILocalization.actionbarownmetabar = "Use an empty bar for Metamorphosis (warlock) instead of main bar"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
+	TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "투기장"
-	TukuiConfigUILocalization.arenaunitframes = "투기장 상대 플레이어창을 사용 (Tukui 개체창을 사용 중이어야 함)"
+	TukuiConfigUILocalization.unitframesarena = "투기장 상대 플레이어창을 사용 (Tukui 개체창을 사용 중이어야 함)"
 	 
 	-- cooldowns
 	TukuiConfigUILocalization.cooldown = "재사용 대기시간"
@@ -165,6 +174,7 @@
 	TukuiConfigUILocalization.aurasplayer = "Tukui 버프/디버프 창 사용"
 	TukuiConfigUILocalization.aurasconsolidate = "일정 버프 통합 숨기기 사용"
 	TukuiConfigUILocalization.aurasflash = "효과 지속시간이 30초이하로 남을 시 화면 번뜩임"
+	TukuiConfigUILocalization.aurasclassictimer = "Display classic timer on player auras"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "초기화"

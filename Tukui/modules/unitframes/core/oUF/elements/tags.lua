@@ -39,13 +39,13 @@ local tagStrings = {
 	end]],
 
 	["leader"] = [[function(u)
-		if(UnitIsPartyLeader(u)) then
+		if(UnitIsGroupLeader(u)) then
 			return 'L'
 		end
 	end]],
 
 	["leaderlong"]  = [[function(u)
-		if(UnitIsPartyLeader(u)) then
+		if(UnitIsGroupLeader(u)) then
 			return 'Leader'
 		end
 	end]],
@@ -238,7 +238,7 @@ local tagStrings = {
 			name = string.format("%s-%s", name, server)
 		end
 
-		for i=1, GetNumRaidMembers() do
+		for i=1, GetNumGroupMembers() do
 			local raidName, _, group = GetRaidRosterInfo(i)
 			if( raidName == name ) then
 				return group
@@ -270,6 +270,34 @@ local tagStrings = {
 
 	['maxmana'] = [[function(unit)
 		return UnitPowerMax(unit, SPELL_POWER_MANA)
+	end]],
+
+	['soulshards'] = [[function()
+		local num = UnitPower('player', SPELL_POWER_SOUL_SHARDS)
+		if(num > 0) then
+			return num
+		end
+	end]],
+
+	['holypower'] = [[function()
+		local num = UnitPower('player', SPELL_POWER_HOLY_POWER)
+		if(num > 0) then
+			return num
+		end
+	end]],
+
+	['chi'] = [[function()
+		local num = UnitPower('player', SPELL_POWER_LIGHT_FORCE)
+		if(num > 0) then
+			return num
+		end
+	end]],
+
+	['shadoworbs'] = [[function()
+		local num = UnitPower('player', SPELL_POWER_SHADOW_ORBS)
+		if(num > 0) then
+			return num
+		end
 	end]],
 }
 
@@ -348,6 +376,10 @@ local tagEvents = {
 	["pereclipse"]          = 'UNIT_POWER',
 	['curmana']             = 'UNIT_POWER UNIT_MAXPOWER',
 	['maxmana']             = 'UNIT_POWER UNIT_MAXPOWER',
+	['soulshards']          = 'UNIT_POWER',
+	['holypower']           = 'UNIT_POWER',
+	['chi']                 = 'UNIT_POWER',
+	['shadoworbs']          = 'UNIT_POWER',
 }
 
 local unitlessEvents = {
@@ -642,9 +674,11 @@ local Untag = function(self, fs)
 	fs.UpdateTag = nil
 end
 
-oUF.Tags = tags
-oUF.TagEvents = tagEvents
-oUF.UnitlessTagEvents = unitlessEvents
+oUF.Tags = {
+	Methods = tags,
+	Events = tagEvents,
+	SharedEvents = unitlessEvents,
 
+}
 oUF:RegisterMetaFunction('Tag', Tag)
 oUF:RegisterMetaFunction('Untag', Untag)

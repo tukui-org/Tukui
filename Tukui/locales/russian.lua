@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "ruRU" then
+	L.UI_Outdated = "Ваша версия Tukui устарела. Вы можете скачать последнюю версию на www.tukui.org"
+	
 	L.chat_BATTLEGROUND_GET = "ПБ"
 	L.chat_BATTLEGROUND_LEADER_GET = "ЛПБ"
 	L.chat_BN_WHISPER_GET = "От"
@@ -92,8 +94,11 @@ if T.client == "ruRU" then
 	L.datatext_gatesdestroyed = "Врат разрушено:"
 	L.datatext_totalmemusage = "Общее использование памяти:"
 	L.datatext_control = "Под контролем:"
-	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
-	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+	L.datatext_cta_allunavailable = "Не могу получить информацию Призыва к Оружию."
+	L.datatext_cta_nodungeons = "Призыва к Оружию на данный момент нет."
+	L.datatext_carts_controlled = "Захваты вагонеток:"
+	L.datatext_victory_points = "Очки победы:"
+	L.datatext_orb_possessions = "Захваты сферы:"
  
 	L.Slots = {
 	  [1] = {1, "Голова", 1000},

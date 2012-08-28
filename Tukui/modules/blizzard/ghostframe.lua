@@ -1,4 +1,6 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+-- MOVE ME TO /SKINS
+
+local T, C, L, G = unpack(select(2, ...)) 
 -- GhostFrame at top
 GhostFrame:SetTemplate("Default")
 GhostFrame:SetBackdropColor(0,0,0,0)
@@ -18,3 +20,7 @@ GhostFrame:ClearAllPoints()
 GhostFrame:Point("TOP", UIParent, 0, 26)
 GhostFrameContentsFrameText:ClearAllPoints()
 GhostFrameContentsFrameText:Point("BOTTOM", 0, 5)
+
+G.Skins.GhostFrame = GhostFrame
+G.Skins.GhostFrame.Content = GhostFrameContentsFrame
+G.Skins.GhostFrame.Text = GhostFrameContentsFrameText

@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Statue
+## Notes: Display a totem indicator for some specific spells.
+## Author: Tukz
+## Version: 1.00
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_Statue.lua

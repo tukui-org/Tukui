@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 -- NOTE for myself, this will need a total rewrite for MoP.
 -- This bag script has become out of control
@@ -55,10 +55,20 @@ local function Stuffing_Sort(args)
 	Stuffing:SortBags()
 end
 
+local function ForceUpdate()
+	-- XXX: hack to force bag frame update on show
+	
+	-- bank
+	Stuffing:PLAYERBANKSLOTS_CHANGED(29)
+	
+	-- bags
+	for i = 0, #bags_BACKPACK - 1 do
+		Stuffing:BAG_UPDATE(i)
+	end
+end
 
 local function Stuffing_OnShow()
-	Stuffing:PLAYERBANKSLOTS_CHANGED(29)	-- XXX: hack to force bag frame update
-
+	ForceUpdate()
 	Stuffing:Layout()
 	Stuffing:SearchReset()
 end
@@ -99,10 +109,6 @@ end
 
 
 local function Stuffing_ToggleBag(id)
-	if id == -2 then
-		ToggleKeyRing()
-		return
-	end
 	Stuffing_Toggle()
 end
 
@@ -121,23 +127,33 @@ local StuffingTT = nil
 local QUEST_ITEM_STRING = nil
 
 function Stuffing:SlotUpdate(b)
+	-- only update cooldown on a slot update if bag are show, else it's useless
+	if (b.Cooldown and (TukuiBags and TukuiBags:IsShown()) or (TukuiBank and TukuiBank:IsShown())) then
+		local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b.bag, b.slot)
+		CooldownFrame_SetTimer(b.Cooldown, cd_start, cd_finish, cd_enable)
+	end
+	
 	local texture, count, locked = GetContainerItemInfo (b.bag, b.slot)
 	local clink = GetContainerItemLink(b.bag, b.slot)
+	local name, _, rarity, iType
+	if clink then name, _, rarity, _, _, iType = GetItemInfo(clink) end
 	
-	-- set all slot color to default tukui on update
+	-- do a check if item changed and don't update if match
+	if texture == b.texture and b.count == count and b.rarity == rarity then return end
+	
+	b.texture = texture
+	b.count = count
+	b.name = name
+	b.rarity = rarity
+	
+	-- reset
 	if not b.frame.lock then
 		b.frame:SetBackdropBorderColor(unpack(C.media.bordercolor))
 	end
 	
-	if b.Cooldown then
-		local cd_start, cd_finish, cd_enable = GetContainerItemCooldown(b.bag, b.slot)
-		CooldownFrame_SetTimer(b.Cooldown, cd_start, cd_finish, cd_enable)
-	end
+	b.frame.questIcon:Hide()
 
 	if(clink) then
-		local iType
-		b.name, _, b.rarity, _, _, iType = GetItemInfo(clink)
-		
 		-- color slot according to item quality
 		if not b.frame.lock and b.rarity and b.rarity > 1 then
 			b.frame:SetBackdropBorderColor(GetItemQualityColor(b.rarity))
@@ -173,8 +189,7 @@ function Stuffing:SlotUpdate(b)
 
 			if iType and iType == QUEST_ITEM_STRING then
 				b.qitem = true
-				-- color quest item red
-				if not b.frame.lock then b.frame:SetBackdropBorderColor(1.0, 0.3, 0.3) end
+				b.frame.questIcon:Show()
 			else
 				b.qitem = nil
 			end
@@ -184,7 +199,6 @@ function Stuffing:SlotUpdate(b)
 	
 	SetItemButtonTexture(b.frame, texture)
 	SetItemButtonCount(b.frame, count)
-	SetItemButtonDesaturated(b.frame, locked, 0.5, 0.5, 0.5)
 		
 	b.frame:Show()
 end
@@ -303,6 +317,12 @@ function Stuffing:SlotNew (bag, slot)
 		ret.frame:SetPushedTexture("")
 		ret.frame:SetNormalTexture("")
 		ret.frame:StyleButton()
+		
+		_G[ret.frame:GetName().."IconQuestTexture"]:SetTexture("Interface\\GossipFrame\\AvailableQuestIcon")
+		_G[ret.frame:GetName().."IconQuestTexture"]:SetInside(ret.frame)
+		_G[ret.frame:GetName().."IconQuestTexture"]:SetTexCoord(-.1, 1.2, 0, 1)
+		_G[ret.frame:GetName().."IconQuestTexture"]:Hide()
+		ret.frame.questIcon = _G[ret.frame:GetName().."IconQuestTexture"]
 	end
 
 	ret.bag = bag
@@ -414,6 +434,7 @@ end
 function Stuffing:CreateBagFrame(w)
 	local n = "Tukui"  .. w
 	local f = CreateFrame ("Frame", n, UIParent)
+	G.Bags[w] = f
 	f:EnableMouse(1)
 	f:SetMovable(1)
 	f:SetToplevel(1)
@@ -437,7 +458,8 @@ function Stuffing:CreateBagFrame(w)
 				CloseDropDownMenus()
 				Stuffing_DDMenu.initialize = Stuffing.Menu
 			end
-			ToggleDropDownMenu(1, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
+
+			ToggleDropDownMenu(nil, nil, Stuffing_DDMenu, self:GetName(), 0, 0)
 			return
 		end
 		self:GetParent():Hide()
@@ -446,10 +468,7 @@ function Stuffing:CreateBagFrame(w)
 	f.b_close:SetNormalTexture("")
 	f.b_close:SetPushedTexture("")
 	f.b_close:SetHighlightTexture("")
-	f.b_close.t = f.b_close:CreateFontString(nil, "OVERLAY")
-	f.b_close.t:SetFont(C.media.pixelfont, 12, "MONOCHROME")
-	f.b_close.t:SetPoint("CENTER", 0, 1)
-	f.b_close.t:SetText("X")
+	f.b_close:SkinCloseButton()
 
 	-- create the bags frame
 	local fb = CreateFrame ("Frame", n .. "BagsFrame", f)
@@ -845,6 +864,7 @@ function Stuffing:ADDON_LOADED(addon)
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 
 	self:RegisterEvent("BAG_CLOSED")
+	self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 
 	SlashCmdList["STUFFING"] = StuffingSlashCmd
 	SLASH_STUFFING1 = "/bags"
@@ -871,43 +891,10 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 	-- bug fix when entering world in combat and when we try to use an item in bag (example: hearthstone)
 	ToggleBackpack()
 	ToggleBackpack()
-	
-	if T.toc >= 40200 then return end
-	
-	-- hooking and setting key ring bag
-	-- this is just a reskin of Blizzard key bag to fit Tukui
-	-- hooking OnShow because sometime key max slot changes.
-	ContainerFrame1:HookScript("OnShow", function(self)
-		local keybackdrop = CreateFrame("Frame", nil, self)
-		keybackdrop:Point("TOPLEFT", 9, -40)
-		keybackdrop:Point("BOTTOMLEFT", 0, 0)
-		keybackdrop:Size(179,215)
-		keybackdrop:SetTemplate("Default")
-		ContainerFrame1CloseButton:Hide()
-		ContainerFrame1Portrait:Hide()
-		ContainerFrame1Name:Hide()
-		ContainerFrame1BackgroundTop:SetAlpha(0)
-		ContainerFrame1BackgroundMiddle1:SetAlpha(0)
-		ContainerFrame1BackgroundMiddle2:SetAlpha(0)
-		ContainerFrame1BackgroundBottom:SetAlpha(0)
-		for i=1, GetKeyRingSize() do
-			local slot = _G["ContainerFrame1Item"..i]
-			local t = _G["ContainerFrame1Item"..i.."IconTexture"]
-			slot:SetPushedTexture("")
-			slot:SetNormalTexture("")
-			t:SetTexCoord(.08, .92, .08, .92)
-			t:Point("TOPLEFT", slot, 2, -2)
-			t:Point("BOTTOMRIGHT", slot, -2, 2)
-			slot:SetTemplate("Default")
-			slot:SetBackdropColor(0, 0, 0, 0)
-			slot:StyleButton()
-		end		
-	end)
-	
-	ContainerFrame1:ClearAllPoints()
-	ContainerFrame1:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 4, 5)
-	ContainerFrame1.ClearAllPoints = T.dummy
-	ContainerFrame1.SetPoint = T.dummy
+end
+
+function Stuffing:BAG_UPDATE_COOLDOWN(self)
+	ForceUpdate()
 end
 
 function Stuffing:PLAYERBANKSLOTS_CHANGED(id)
@@ -1369,26 +1356,6 @@ function Stuffing.Menu(self, level)
 
 	end
 	UIDropDownMenu_AddButton(info, level)
-
-	if T.toc < 40200 then
-		wipe(info)
-		info.text = KEYRING
-		info.checked = function()
-			return key_ring == 1
-		end
-
-		info.func = function()
-			if key_ring == 1 then
-				key_ring = 0
-			else
-				key_ring = 1
-			end
-			Stuffing_Toggle()
-			ToggleKeyRing()
-			Stuffing:Layout()
-		end
-		UIDropDownMenu_AddButton(info, level)
-	end
 
 	wipe(info)
 	info.disabled = nil

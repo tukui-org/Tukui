@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 -------------------------------------------------------------------------
 -- adjust defualt fonts according to which client we are currently using.

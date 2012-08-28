@@ -1,4 +1,4 @@
-﻿local T, C, L = unpack(select(2, ...))
+﻿local T, C, L, G = unpack(select(2, ...))
 
 ---------------------------------------------------------------------------
 -- Per Class Config (overwrite general)
@@ -19,7 +19,7 @@ end
 -- Name need to be case sensitive
 ---------------------------------------------------------------------------
 
-if T.myname == "Tukz" and T.myrealm == "Ysondre" then
+if T.myname == "PuTYourNameHere" and T.myrealm == "PuTYourRealmHere" then
 	C.actionbar.hideshapeshift = true
 	C.actionbar.hotkey = false
 	C.unitframes.enemyhcolor = true

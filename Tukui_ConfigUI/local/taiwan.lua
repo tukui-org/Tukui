@@ -109,6 +109,12 @@
 	TukuiConfigUILocalization.unitframesmovecombobar = "移動目標的連擊點條 (盜賊限定)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用經典連擊點樣式"
 	TukuiConfigUILocalization.unitframesgridvertical = "Grid上的隊伍以垂直方向顯示"
+	TukuiConfigUILocalization.unitframesraid = "Enable Tukui Raid Frames"
+	TukuiConfigUILocalization.unitframesshowraidpets = "Show Pets in Tukui Raid Frames"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "Show Druid Mana Bar in Bear/Cat form"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "Show Druid Mushroom bar in Balance or Restoration specialization"
+	TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "戰利品"
@@ -146,10 +152,13 @@
 	TukuiConfigUILocalization.actionbarbuttonspacing = "動作列按鍵的間隔距離"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "寵物或變形列按鍵大小"
 	TukuiConfigUILocalization.actionbarownshdbar = "暗影之舞使用空白列而不是潛行列 (盜賊)"
+	TukuiConfigUILocalization.actionbarownmetabar = "Use an empty bar for Metamorphosis (warlock) instead of main bar"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
+	TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "競技場"
-	TukuiConfigUILocalization.arenaunitframes = "啟用競技場單位框架"
+	TukuiConfigUILocalization.unitframesarena = "啟用競技場單位框架"
 	 
 	-- cooldowns
 	TukuiConfigUILocalization.cooldown = "冷卻"
@@ -167,6 +176,7 @@
 	TukuiConfigUILocalization.aurasplayer = "啟用Tukui增/減益狀態框架"
 	TukuiConfigUILocalization.aurasconsolidate = "合併增益狀態"
 	TukuiConfigUILocalization.aurasflash = "光環少於30秒時以閃動動畫顯示"
+	TukuiConfigUILocalization.aurasclassictimer = "Display classic timer on player auras"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "重置"

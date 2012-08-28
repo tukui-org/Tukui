@@ -108,6 +108,12 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesmovecombobar = "在目标框体上移动战斗条 (仅潜行者)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典战斗条样式"
 	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
+	TukuiConfigUILocalization.unitframesraid = "启用Tukui团队框架"
+	TukuiConfigUILocalization.unitframesshowraidpets = "在Tukui团队框架中显示宠物"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "在熊或猫形态下显示德鲁伊的法力条"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "在平衡或者恢复专精下显示德鲁伊的生长条"
+	TukuiConfigUILocalization.unitframesmageclassbar = "显示法师的奥法条"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "每列或者每行团队单位的数量"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"
@@ -145,10 +151,13 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.actionbarbuttonspacing = "动作条按钮间距"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "宠物或姿态栏按钮大小"
 	TukuiConfigUILocalization.actionbarownshdbar = "当暗影之舞时使用一个空的动作条来替代盗贼的潜行动作条（仅盗贼）"
+	TukuiConfigUILocalization.actionbarownmetabar = "在术士变形状态下用一个空动作条代替主动作条"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
+	TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "竞技场"
-	TukuiConfigUILocalization.arenaunitframes = "开启竞技场单位框体"
+	TukuiConfigUILocalization.unitframesarena = "开启竞技场单位框体"
 	 
 	-- cooldowns
 	TukuiConfigUILocalization.cooldown = "冷却"
@@ -166,6 +175,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.aurasplayer = "启用Tukui Buff/Debuff 框架"
 	TukuiConfigUILocalization.aurasconsolidate = "启用增强BUFF显示"
 	TukuiConfigUILocalization.aurasflash = "当光环剩余时间少于30秒时启用闪烁动画"
+	TukuiConfigUILocalization.aurasclassictimer = "在玩家光环上显示经典计时器"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "重置"

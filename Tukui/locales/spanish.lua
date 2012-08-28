@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "esES" or T.client == "esMX" then
+	L.UI_Outdated = "Tu versión de Tukui no está actualizada. Puedes descargar la última versión de www.tukui.org"
+	
 	L.chat_BATTLEGROUND_GET = "B"
 	L.chat_BATTLEGROUND_LEADER_GET = "B"
 	L.chat_BN_WHISPER_GET = "De"
@@ -92,8 +94,11 @@ if T.client == "esES" or T.client == "esMX" then
 	L.datatext_gatesdestroyed = "Puertas Destruidas:"
 	L.datatext_totalmemusage = "Total de Memoria Usada:"
 	L.datatext_control = "Controlado por:"
-	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
-	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+	L.datatext_cta_allunavailable = "No se puede obtener información del Llamamiento a las Armas."
+	L.datatext_cta_nodungeons = "Actualmente no hay mazmorras ofreciendo el Llamamiento a las Armas."
+	L.datatext_carts_controlled = "Vagonetas Controladas:"
+	L.datatext_victory_points = "Puntos de Victoria:"
+	L.datatext_orb_possessions = "Orbes en Posesión:"
  
 	L.Slots = {
 		[1] = {1, "Cabeza", 1000},

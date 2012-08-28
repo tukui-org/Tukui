@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 --------------------------------------------------------------------
 -- Player Hit
@@ -10,10 +10,12 @@ if not C["datatext"].hit == nil or C["datatext"].hit > 0 then
 	Stat.Option = C.datatext.hit
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.Hit = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatHitText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].hit, Text)
+	T.DataTextPosition(C["datatext"].hit, Text)
+	G.DataText.Hit.Text = Text
 
 	local int = 1
 

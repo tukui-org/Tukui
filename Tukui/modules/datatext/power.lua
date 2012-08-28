@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 --------------------------------------------------------------------
 -- player power (attackpower or power depending on what you have more of)
@@ -11,10 +11,12 @@ if C["datatext"].power and C["datatext"].power > 0 then
 	Stat.Option = C.datatext.power
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.Power = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatPowerText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].power, Text)
+	T.DataTextPosition(C["datatext"].power, Text)
+	G.DataText.Power.Text = Text
 
 	local int = 1
 

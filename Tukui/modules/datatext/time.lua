@@ -1,7 +1,7 @@
 --------------------------------------------------------------------
 -- TIME
 --------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L, G = unpack(select(2, ...))
 
 if not C["datatext"].wowtime or C["datatext"].wowtime == 0 then return end
 
@@ -12,10 +12,12 @@ Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.wowtime
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+G.DataText.Time = Stat
 
 local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
-T.PP(C["datatext"].wowtime, Text)
+T.DataTextPosition(C["datatext"].wowtime, Text)
+G.DataText.Time.Text = Text
 
 local europeDisplayFormat = string.join("", Stat.Color2.."%02d", ":%02d|r")
 local ukDisplayFormat = string.join("", "", Stat.Color2.."%d", ":%02d", " %s|r")
@@ -27,6 +29,8 @@ local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,
 local difficultyInfo = { "N", "N", "H", "H" }
 local curHr, curMin, curAmPm
 local APM = { TIMEMANAGER_PM, TIMEMANAGER_AM }
+local startTimer = GetTime()
+local played = 0
 
 local function CalculateTimeValues(tt)
 	if tt == nil then tt = false end
@@ -135,7 +139,7 @@ Stat:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 
-	local localizedName, isActive, canQueue, startTime, canEnter
+	local _, localizedName, isActive, canQueue, startTime, canEnter
 	for i = 1, GetNumWorldPVPAreas() do
 		_, localizedName, isActive, canQueue, startTime, canEnter = GetWorldPVPAreaInfo(i)
 		if canEnter then
@@ -168,6 +172,12 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:AddDoubleLine(timeText, string.format(europeDisplayFormat, Hr, Min))
 	else
 		GameTooltip:AddDoubleLine(timeText, string.format(ukDisplayFormat, Hr, Min, APM[AmPm]))
+	end
+	
+	local actualtime = GetTime()
+	played = actualtime - startTimer
+	if played > 60 then
+		GameTooltip:AddDoubleLine(TIME_PLAYED_MSG..": ", T.FormatTime(played))
 	end
 	
 	local oneraid, lockoutColor

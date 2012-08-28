@@ -2,7 +2,7 @@ local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "Tukui was unable to locate oUF install.")
 
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 ------------------------------------------------------------------------
 --	Colors
@@ -50,6 +50,7 @@ T.UnitColor = setmetatable({
 		["SHAMAN"]      = {  41/255,  79/255, 155/255 },
 		["WARLOCK"]     = { 148/255, 130/255, 201/255 },
 		["WARRIOR"]     = { 199/255, 156/255, 110/255 },
+		["MONK"]        = { 0/255, 255/255, 150/255   },
 	}, {__index = oUF.colors.class}),
 }, {__index = oUF.colors})
 

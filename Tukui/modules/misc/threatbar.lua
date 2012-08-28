@@ -1,15 +1,18 @@
-local T, C, L = unpack(select(2, ...))
-if not TukuiInfoRight then return end
+local T, C, L, G = unpack(select(2, ...))
+if not TukuiInfoRight or not oUFTukui then return end
 
---[[local aggroColors = {
+local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},
 	[2] = {166/255, 171/255,  26/255},
 	[3] = {163/255,  24/255,  24/255},
-}]]
+}
 
 local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
 TukuiThreatBar:Point("TOPLEFT", 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
+TukuiThreatBar:SetFrameStrata("MEDIUM")
+TukuiThreatBar:SetFrameLevel(0)
+G.Misc.ThreatBar = TukuiThreatBar
 
 TukuiThreatBar:SetStatusBarTexture(C.media.normTex)
 TukuiThreatBar:GetStatusBarTexture():SetHorizTile(false)
@@ -29,8 +32,8 @@ TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
 TukuiThreatBar.bg:SetTexture(0.1,0.1,0.1)
 
 local function OnEvent(self, event, ...)
-	local party = GetNumPartyMembers()
-	local raid = GetNumRaidMembers()
+	local party = GetNumGroupMembers()
+	local raid = GetNumGroupMembers()
 	local pet = select(1, HasPetUI())
 	if event == "PLAYER_ENTERING_WORLD" then
 		self:Hide()
@@ -60,7 +63,7 @@ local function OnUpdate(self, event, unit)
 		self:SetValue(threatval)
 		self.text:SetFormattedText("%3.1f", threatval)
 		
-		local r, g, b = oUFTukui.ColorGradient(threatval/100, 0,.8,0,.8,.8,0,.8,0,0)
+		local r, g, b = oUFTukui.ColorGradient(threatval,100, 0,.8,0,.8,.8,0,.8,0,0)
 		self:SetStatusBarColor(r, g, b)
 
 		if threatval > 0 then

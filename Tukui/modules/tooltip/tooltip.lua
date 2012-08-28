@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 -- credits : Aezay (TipTac) and Caellian for some parts of code.
 
 if not C["tooltip"].enable then return end
@@ -10,9 +10,18 @@ local _G = getfenv(0)
 local GameTooltip, GameTooltipStatusBar = _G["GameTooltip"], _G["GameTooltipStatusBar"]
 
 local gsub, find, format = string.gsub, string.find, string.format
-
 local Tooltips = {GameTooltip,ShoppingTooltip1,ShoppingTooltip2,ShoppingTooltip3,WorldMapTooltip,WorldMapCompareTooltip1,WorldMapCompareTooltip2,WorldMapCompareTooltip3}
 local ItemRefTooltip = ItemRefTooltip
+
+G.Tooltips.GameTooltip = GameTooltip
+G.Tooltips.ShoppingTooltip1 = ShoppingTooltip1
+G.Tooltips.ShoppingTooltip2 = ShoppingTooltip2
+G.Tooltips.ShoppingTooltip3 = ShoppingTooltip3
+G.Tooltips.WorldMapTooltip = WorldMapTooltip
+G.Tooltips.WorldMapCompareTooltip1 = WorldMapCompareTooltip1
+G.Tooltips.WorldMapCompareTooltip2 = WorldMapCompareTooltip2
+G.Tooltips.GameTooltip = GameTooltip
+G.Tooltips.WorldMapCompareTooltip3 = ItemRefTooltip
 
 local linkTypes = {item = true, enchant = true, spell = true, quest = true, unit = true, talent = true, achievement = true, glyph = true}
 
@@ -42,6 +51,7 @@ anchor:SetMovable(true)
 anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
+G.Tooltips.GameTooltip.Anchor = anchor
 
 -- Update Tukui Tooltip Position on some specifics Tooltip
 -- Also used because on Eyefinity, SetClampedToScreen doesn't work on left and right side of screen #1
@@ -110,7 +120,7 @@ local function UpdateTooltip(self)
 	end
 end
 
-hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
+local function SetTooltipDefaultAnchor(self, parent)
 	if C["tooltip"].cursor == true then
 		if IsAddOnLoaded("Tukui_Raid_Healing") and parent ~= UIParent then
 			self:SetOwner(parent, "ANCHOR_NONE")
@@ -122,7 +132,8 @@ hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 	end
 	
 	self:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -111111, -111111) -- hack to update GameStatusBar instantly.
-end)
+end
+hooksecurefunc("GameTooltip_SetDefaultAnchor", SetTooltipDefaultAnchor)
 
 GameTooltip:HookScript("OnUpdate", function(self, ...) UpdateTooltip(self) end)
 
@@ -161,7 +172,7 @@ local function ShortValue(value)
 end
 
 -- update HP value on status bar
-GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
+local function StatusBarOnValueChanged(self, value)
 	if not value then
 		return
 	end
@@ -216,7 +227,8 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			self.text:Hide()
 		end
 	end
-end)
+end
+GameTooltipStatusBar:SetScript("OnValueChanged", StatusBarOnValueChanged)
 
 local healthBar = GameTooltipStatusBar
 healthBar:ClearAllPoints()
@@ -224,14 +236,16 @@ healthBar:Height(6)
 healthBar:Point("BOTTOMLEFT", healthBar:GetParent(), "TOPLEFT", 2, 5)
 healthBar:Point("BOTTOMRIGHT", healthBar:GetParent(), "TOPRIGHT", -2, 5)
 healthBar:SetStatusBarTexture(C.media.normTex)
+G.Tooltips.GameTooltip.Health = healthBar
 
 local healthBarBG = CreateFrame("Frame", "StatusBarBG", healthBar)
 healthBarBG:SetFrameLevel(healthBar:GetFrameLevel() - 1)
 healthBarBG:Point("TOPLEFT", -2, 2)
 healthBarBG:Point("BOTTOMRIGHT", 2, -2)
 healthBarBG:SetTemplate("Default")
+G.Tooltips.GameTooltip.Health.Background = healthBarBG
 
-GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+local function OnTooltipSetUnit(self)
 	local lines = self:NumLines()
 	local GMF = GetMouseFocus()
 	local unit = (select(2, self:GetUnit())) or (GMF and GMF:GetAttribute("unit"))
@@ -315,7 +329,8 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	
 	-- Sometimes this wasn't getting reset, the fact a cleanup isn't performed at this point, now that it was moved to "OnTooltipCleared" is very bad, so this is a fix
 	self.fadeOut = nil
-end)
+end
+GameTooltip:HookScript("OnTooltipSetUnit", OnTooltipSetUnit)
 
 local BorderColor = function(self)
 	local GMF = GetMouseFocus()
@@ -374,7 +389,7 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 		ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 		ItemRefTooltip:HookScript("OnShow", SetStyle)	
 		FriendsTooltip:SetTemplate("Default")
-		T.SkinCloseButton(ItemRefCloseButton)
+		ItemRefCloseButton:SkinCloseButton()
 			
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		
@@ -413,3 +428,4 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 		end
 	end
 end)
+G.Tooltips.Init = TukuiTooltip

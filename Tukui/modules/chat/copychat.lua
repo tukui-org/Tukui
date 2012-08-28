@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 -----------------------------------------------------------------------------
 -- Copy on chatframes feature
 -----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ local frame = nil
 local editBox = nil
 local isf = nil
 
-local function CreatCopyFrame()
+local function CreateCopyFrame()
 	frame = CreateFrame("Frame", "TukuiChatCopyFrame", UIParent)
 	frame:SetTemplate("Default")
 	if T.lowversion then
@@ -28,7 +28,7 @@ local function CreatCopyFrame()
 	scrollArea:Point("TOPLEFT", frame, "TOPLEFT", 8, -30)
 	scrollArea:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -30, 8)
 
-	editBox = CreateFrame("EditBox", "CopyBox", frame)
+	editBox = CreateFrame("EditBox", "TukuiChatCopyEditBox", frame)
 	editBox:SetMultiLine(true)
 	editBox:SetMaxLetters(99999)
 	editBox:EnableMouse(true)
@@ -46,8 +46,8 @@ local function CreatCopyFrame()
 
 	local close = CreateFrame("Button", "CopyCloseButton", frame, "UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT")
-	T.SkinCloseButton(close)
-	T.SkinScrollBar(TukuiChatCopyScrollScrollBar)
+	close:SkinCloseButton()
+	TukuiChatCopyScrollScrollBar:SkinScrollBar()
 
 	isf = true
 end
@@ -71,33 +71,32 @@ local function Copy(cf)
 	local lineCt = GetLines(cf:GetRegions())
 	local text = table.concat(lines, "\n", 1, lineCt)
 	FCF_SetChatWindowFontSize(cf, cf, size)
-	if not isf then CreatCopyFrame() end
+	if not isf then CreateCopyFrame() end
 	if frame:IsShown() then frame:Hide() return end
 	frame:Show()
 	editBox:SetText(text)
 end
 
-local function ChatCopyButtons()
-	for i = 1, NUM_CHAT_WINDOWS do
-		local cf = _G[format("ChatFrame%d",  i)]
-		local button = CreateFrame("Button", format("TukuiButtonCF%d", i), cf)
-		button:SetPoint("TOPRIGHT", 0, 0)
-		button:Height(20)
-		button:Width(20)
-		button:SetNormalTexture(C.media.copyicon)
-		button:SetAlpha(0)
-		button:SetTemplate("Default")
+for i = 1, NUM_CHAT_WINDOWS do
+	local cf = _G[format("ChatFrame%d",  i)]
+	local button = CreateFrame("Button", format("TukuiButtonCF%d", i), cf)
+	button:SetPoint("TOPRIGHT", 0, 0)
+	button:Height(20)
+	button:Width(20)
+	button:SetNormalTexture(C.media.copyicon)
+	button:SetAlpha(0)
+	button:SetTemplate("Default")
 
-		button:SetScript("OnMouseUp", function(self)
-			Copy(cf)
-		end)
-		button:SetScript("OnEnter", function() 
-			button:SetAlpha(1) 
-		end)
-		button:SetScript("OnLeave", function() button:SetAlpha(0) end)
-	end
+	button:SetScript("OnMouseUp", function(self)
+		Copy(cf)
+	end)
+	button:SetScript("OnEnter", function() 
+		button:SetAlpha(1) 
+	end)
+	button:SetScript("OnLeave", function() button:SetAlpha(0) end)
+	
+	G.Chat["ChatFrame"..i].Copy = button
 end
-ChatCopyButtons()
 
 -- little fix for RealID text copy/paste (real name bug)
 for i=1, NUM_CHAT_WINDOWS do

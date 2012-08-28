@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if select(2, UnitClass('player')) ~= "PRIEST" then return end
 
 local _, ns = ...
@@ -24,7 +24,7 @@ local function UpdateBar(self, event, unit)
 	local duration = self.dur
 	local timeLeft = self.exp-GetTime()
 	local value
-	if timeLeft == 0 then
+	if timeLeft == 0 or duration == 0 then
 		value = 0
 	else
 		value = (timeLeft * 100) / duration

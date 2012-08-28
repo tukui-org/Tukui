@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 ------------------------------------------------------------------------
 -- Auto accept invite
@@ -7,15 +7,16 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C["invite"].autoaccept then
 	local holder = CreateFrame("Frame")
 	holder:RegisterEvent("PARTY_INVITE_REQUEST")
-	holder:RegisterEvent("PARTY_MEMBERS_CHANGED")
+	holder:RegisterEvent("GROUP_ROSTER_UPDATE")
+	G.Misc.AutoAcceptInvite = holder
 	
 	local hidestatic -- used to hide static popup when auto-accepting
 	holder:SetScript("OnEvent", function(self, event, leader)
 		local ingroup = false
 		
 		if event == "PARTY_INVITE_REQUEST" then
-			if MiniMapLFGFrame:IsShown() then return end -- Prevent losing que inside LFD if someone invites you to group
-			if GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0 then return end
+			if QueueStatusMinimapButton:IsShown() then return end
+			if GetNumGroupMembers() > 0 or GetNumGroupMembers() > 0 then return end
 			hidestatic = true
 		
 			-- Update Guild and Friendlist
@@ -69,7 +70,7 @@ if C["invite"].autoaccept then
 				end
 			end
 			
-		elseif event == "PARTY_MEMBERS_CHANGED" and hidestatic == true then
+		elseif event == "GROUP_ROSTER_UPDATE" and hidestatic == true then
 			StaticPopup_Hide("PARTY_INVITE")
 			hidestatic = false
 		end
@@ -86,10 +87,11 @@ local ainvkeyword = "invite"
 local autoinvite = CreateFrame("frame")
 autoinvite:RegisterEvent("CHAT_MSG_WHISPER")
 autoinvite:SetScript("OnEvent", function(self,event,arg1,arg2)
-	if ((not UnitExists("party1") or IsPartyLeader("player") or IsRaidOfficer("player") or IsRaidLeader("player")) and arg1:lower():match(ainvkeyword)) and ainvenabled == true then
+	if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and arg1:lower():match(ainvkeyword)) and ainvenabled == true then
 		InviteUnit(arg2)
 	end
 end)
+G.Misc.AutoInvite = autoinvite
 
 function SlashCmdList.AUTOINVITE(msg, editbox)
 	if msg == "off" then

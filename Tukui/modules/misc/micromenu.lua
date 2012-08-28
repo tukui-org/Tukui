@@ -1,6 +1,7 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 local menuFrame = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
+G.Misc.MicroButtonsDropDown = menuFrame
 T.MicroMenu = {
 	{text = CHARACTER_BUTTON,
 	func = function() ToggleCharacter("PaperDollFrame") end},
@@ -9,36 +10,35 @@ T.MicroMenu = {
 	{text = TALENTS_BUTTON,
 	func = function() 
 		if not PlayerTalentFrame then 
-			LoadAddOn("Blizzard_TalentUI") 
+			TalentFrame_LoadUI()
 		end 
 
-		if not GlyphFrame then 
-			LoadAddOn("Blizzard_GlyphUI") 
-		end 
-		PlayerTalentFrame_Toggle() 
+		ShowUIPanel(PlayerTalentFrame)
 	end},
 	{text = ACHIEVEMENT_BUTTON,
 	func = function() ToggleAchievementFrame() end},
 	{text = QUESTLOG_BUTTON,
 	func = function() ToggleFrame(QuestLogFrame) end},
+	{text = MOUNTS_AND_PETS,
+	func = function() TogglePetJournal() end},
 	{text = SOCIAL_BUTTON,
 	func = function() ToggleFriendsFrame(1) end},
-	{text = PLAYER_V_PLAYER,
+	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE,
+	func = function() PVEFrame_ToggleFrame(); end},
+	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
 	func = function() ToggleFrame(PVPFrame) end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function() 
 		if IsInGuild() then 
-			if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end 
+			if not GuildFrame then GuildFrame_LoadUI() end 
 			GuildFrame_Toggle() 
 		else 
-			if not LookingForGuildFrame then LoadAddOn("Blizzard_LookingForGuildUI") end 
+			if not LookingForGuildFrame then LookingForGuildFrame_LoadUI() end 
 			LookingForGuildFrame_Toggle() 
 		end
 	end},
-	{text = LFG_TITLE,
-	func = function() ToggleFrame(LFDParentFrame) end},		
 	{text = RAID,
-	func = function() if T.toc >= 40300 then ToggleFrame(RaidParentFrame) else ToggleFriendsFrame(4) end end},
+	func = function() ToggleFriendsFrame(4) end},
 	{text = HELP_BUTTON,
 	func = function() ToggleHelpFrame() end},
 	{text = CALENDAR_VIEW_EVENT,
@@ -47,13 +47,14 @@ T.MicroMenu = {
 		Calendar_Toggle()
 	end},
 	{text = ENCOUNTER_JOURNAL,
-	func = function() if T.toc >= 40200 then if T.toc >= 40300 then ToggleEncounterJournal() else ToggleFrame(EncounterJournal) end end end},
+	func = function() ToggleEncounterJournal() end},
 }
 	
--- spellbook need at least 1 opening else it taint in combat
+-- need to be opened at least one time before logging in, or big chance of taint later ...
 local taint = CreateFrame("Frame")
-taint:RegisterEvent("PLAYER_ENTERING_WORLD")
-taint:SetScript("OnEvent", function(self)
+taint:RegisterEvent("ADDON_LOADED")
+taint:SetScript("OnEvent", function(self, event, addon)
+	if addon ~= "Tukui" then return end
 	ToggleFrame(SpellBookFrame)
-	ToggleFrame(SpellBookFrame)
+	TogglePetJournal()
 end)

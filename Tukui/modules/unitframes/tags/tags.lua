@@ -2,7 +2,7 @@ local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "Tukui was unable to locate oUF install.")
 
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if not C["unitframes"].enable == true then return end
 
 ------------------------------------------------------------------------
@@ -19,15 +19,15 @@ local function ShortenValue(value)
 	end
 end
 
-oUF.TagEvents['Tukui:threat'] = 'UNIT_THREAT_LIST_UPDATE'
-oUF.Tags['Tukui:threat'] = function(unit)
+oUF.Tags.Events['Tukui:threat'] = 'UNIT_THREAT_LIST_UPDATE'
+oUF.Tags.Methods['Tukui:threat'] = function(unit)
 	local tanking, status, percent = UnitDetailedThreatSituation('player', 'target')
 	if(percent and percent > 0) then
 		return ('%s%d%%|r'):format(Hex(GetThreatStatusColor(status)), percent)
 	end
 end
 
-oUF.Tags['Tukui:health'] = function(unit)
+oUF.Tags.Methods['Tukui:health'] = function(unit)
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
 	local status = not UnitIsConnected(unit) and 'Offline' or UnitIsGhost(unit) and 'Ghost' or UnitIsDead(unit) and 'Dead'
 
@@ -44,7 +44,7 @@ oUF.Tags['Tukui:health'] = function(unit)
 	end
 end
 
-oUF.Tags['Tukui:power'] = function(unit)
+oUF.Tags.Methods['Tukui:power'] = function(unit)
 	local power = UnitPower(unit)
 	if(power > 0 and not UnitIsDeadOrGhost(unit)) then
 		local _, type = UnitPowerType(unit)
@@ -53,15 +53,15 @@ oUF.Tags['Tukui:power'] = function(unit)
 	end
 end
 
-oUF.Tags['Tukui:druid'] = function(unit)
+oUF.Tags.Methods['Tukui:druid'] = function(unit)
 	local min, max = UnitPower(unit, 0), UnitPowerMax(unit, 0)
 	if(UnitPowerType(unit) ~= 0 and min ~= max) then
 		return ('|cff0090ff%d%%|r'):format(min / max * 100)
 	end
 end
 
-oUF.TagEvents['Tukui:diffcolor'] = 'UNIT_LEVEL'
-oUF.Tags['Tukui:diffcolor'] = function(unit)
+oUF.Tags.Events['Tukui:diffcolor'] = 'UNIT_LEVEL'
+oUF.Tags.Methods['Tukui:diffcolor'] = function(unit)
 	local r, g, b
 	local level = UnitLevel(unit)
 	if (level < 1) then
@@ -114,8 +114,8 @@ local utf8sub = function(string, i, dots)
 end
 
 
-oUF.TagEvents['Tukui:getnamecolor'] = 'UNIT_POWER'
-oUF.Tags['Tukui:getnamecolor'] = function(unit)
+oUF.Tags.Events['Tukui:getnamecolor'] = 'UNIT_POWER'
+oUF.Tags.Methods['Tukui:getnamecolor'] = function(unit)
 	local reaction = UnitReaction(unit, 'player')
 	if (UnitIsPlayer(unit)) then
 		return _TAGS['raidcolor'](unit)
@@ -128,33 +128,37 @@ oUF.Tags['Tukui:getnamecolor'] = function(unit)
 	end
 end
 
-oUF.TagEvents['Tukui:nameshort'] = 'UNIT_NAME_UPDATE'
-oUF.Tags['Tukui:nameshort'] = function(unit)
+oUF.Tags.Events['Tukui:nameshort'] = 'UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE'
+oUF.Tags.Methods['Tukui:nameshort'] = function(unit)
 	local name = UnitName(unit)
-	return utf8sub(name, 10, false)
+	local isLeader = UnitIsGroupLeader(unit)
+	local isAssistant = UnitIsGroupAssistant(unit) or UnitIsRaidOfficer(unit)
+	local assist, lead = "", ""
+	if isAssistant then assist = "|A| " elseif isLeader then lead = "|L| " end
+	return utf8sub(lead..assist..name, 10, false)
 end
 
-oUF.TagEvents['Tukui:namemedium'] = 'UNIT_NAME_UPDATE'
-oUF.Tags['Tukui:namemedium'] = function(unit)
+oUF.Tags.Events['Tukui:namemedium'] = 'UNIT_NAME_UPDATE'
+oUF.Tags.Methods['Tukui:namemedium'] = function(unit)
 	local name = UnitName(unit)
 	return utf8sub(name, 15, true)
 end
 
-oUF.TagEvents['Tukui:namelong'] = 'UNIT_NAME_UPDATE'
-oUF.Tags['Tukui:namelong'] = function(unit)
+oUF.Tags.Events['Tukui:namelong'] = 'UNIT_NAME_UPDATE'
+oUF.Tags.Methods['Tukui:namelong'] = function(unit)
 	local name = UnitName(unit)
 	return utf8sub(name, 20, true)
 end
 
-oUF.TagEvents['Tukui:dead'] = 'UNIT_HEALTH'
-oUF.Tags['Tukui:dead'] = function(unit)
+oUF.Tags.Events['Tukui:dead'] = 'UNIT_HEALTH'
+oUF.Tags.Methods['Tukui:dead'] = function(unit)
 	if UnitIsDeadOrGhost(unit) then
 		return L.unitframes_ouf_deaddps
 	end
 end
 
-oUF.TagEvents['Tukui:afk'] = 'PLAYER_FLAGS_CHANGED'
-oUF.Tags['Tukui:afk'] = function(unit)
+oUF.Tags.Events['Tukui:afk'] = 'PLAYER_FLAGS_CHANGED'
+oUF.Tags.Methods['Tukui:afk'] = function(unit)
 	if UnitIsAFK(unit) then
 		return CHAT_FLAG_AFK
 	end

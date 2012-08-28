@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if not C["actionbar"].enable == true then return end
 
 local _G = _G
@@ -8,14 +8,6 @@ local replace = string.gsub
 
 function T.StyleActionBarButton(self)
 	local name = self:GetName()
-	
-	--> fixing a taint issue while changing totem flyout button in combat.
-	if name:match("MultiCast") then return end
-	
-	--> don't skin the boss encounter extra button to match texture (4.3 patch)
-	--> http://www.tukui.org/storage/viewer.php?id=913811extrabar.jpg
-	if name:match("ExtraActionButton") then return end
-	
 	local action = self.action
 	local Button = self
 	local Icon = _G[name.."Icon"]
@@ -30,108 +22,127 @@ function T.StyleActionBarButton(self)
 	Flash:SetTexture("")
 	Button:SetNormalTexture("")
  
-	if Border then
+	Count:ClearAllPoints()
+	Count:Point("BOTTOMRIGHT", 0, 2)
+	
+	HotKey:ClearAllPoints()
+	HotKey:Point("TOPRIGHT", 0, -3)
+	
+	if Border and Border:IsShown() then
 		Border:Hide()
 		Border = T.dummy
 	end
- 
-	Count:ClearAllPoints()
-	Count:Point("BOTTOMRIGHT", 0, 2)
-	Count:SetFont(C["media"].font, 12, "OUTLINE")
-
-	if Btname then
-		Btname:SetText("")
-		Btname:Kill()
-	end
- 
-	if not _G[name.."Panel"] then
-		-- resize all button not matching T.buttonsize
-		if self:GetHeight() ~= T.buttonsize and not InCombatLockdown() then --Taint fix for Flyout Buttons
-			self:SetSize(T.buttonsize, T.buttonsize)
+	
+	if Btname and normal and C.actionbar.macro then
+		local query = GetActionText(action)
+		if query then
+			local text = string.sub(query,1,5)
+			Btname:SetText(text)
 		end
-
-		-- create the bg/border panel
-		local panel = CreateFrame("Frame", name.."Panel", self)
-		panel:CreatePanel("Default", T.buttonsize, T.buttonsize, "CENTER", self, "CENTER", 0, 0)
- 
-		panel:SetFrameStrata(self:GetFrameStrata())
-		panel:SetFrameLevel(self:GetFrameLevel() - 1)
- 
-		Icon:SetTexCoord(.08, .92, .08, .92)
-		Icon:Point("TOPLEFT", Button, 2, -2)
-		Icon:Point("BOTTOMRIGHT", Button, -2, 2)
 	end
-
-	HotKey:ClearAllPoints()
-	HotKey:Point("TOPRIGHT", 0, -3)
-	HotKey:SetFont(C["media"].font, 12, "OUTLINE")
-	HotKey.ClearAllPoints = T.dummy
-	HotKey.SetPoint = T.dummy
+	
+	-- the remaining stuff need to be applied only 1 time.
+	if Button.isSkinned then return end
+	
+	Count:SetFont(C["media"].font, 12, "OUTLINE")
+	
+	if Btname then
+		if C.actionbar.macro then
+			Btname:SetFont(C.media.font, 10)
+			Btname:ClearAllPoints()
+			Btname:SetPoint("BOTTOM", 1, 1)
+		else
+			Btname:SetText("")
+			Btname:Kill()
+		end
+	end
+	
+	if BtnBG then
+		BtnBG:Kill()
+	end
  
 	if not C["actionbar"].hotkey == true then
 		HotKey:SetText("")
 		HotKey:Kill()
+	else
+		HotKey:SetFont(C["media"].font, 10, "OUTLINE")
+		HotKey.ClearAllPoints = T.dummy
+		HotKey.SetPoint = T.dummy
 	end
- 
+	
+	if name:match("Extra") then
+		Button:SetTemplate()
+		Button.pushed = true
+		Icon:SetDrawLayer('ARTWORK')
+	else
+		Button:CreateBackdrop()
+		Button.backdrop:SetOutside(Button, 0, 0)	
+		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+		Button:SetAttribute("showgrid", 999999)	
+		ActionButton_ShowGrid(Button)			
+	end
+	
+	Icon:SetTexCoord(.08, .92, .08, .92)
+	Icon:SetInside()
+	
+	-- bug, some buttons are checked in a /rl or login, even if they shouldn`t be, double check
+	if normal and Button:GetChecked() then
+		ActionButton_UpdateState(Button)
+	end
+	
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
 	
-	if BtnBG then
-		BtnBG:Kill()
-	end 
+	Button:StyleButton()
+	Button.isSkinned = true
 end
 
 function T.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
-	button:SetNormalTexture("")
+	if button.isSkinned then return end
 	
-	-- bug fix when moving spell from bar
+	button:SetWidth(T.petbuttonsize)
+	button:SetHeight(T.petbuttonsize)
+	button:CreateBackdrop()
+	button.backdrop:SetOutside(button, 0, 0)
+	icon:SetTexCoord(.08, .92, .08, .92)
+	icon:ClearAllPoints()
+	icon:SetInside()
+	if pet then			
+		if T.petbuttonsize < 30 then
+			local autocast = _G[name.."AutoCastable"]
+			autocast:SetAlpha(0)
+		end
+		local shine = _G[name.."Shine"]
+		shine:Size(T.petbuttonsize, T.petbuttonsize)
+		shine:ClearAllPoints()
+		shine:SetPoint("CENTER", button, 0, 0)
+		icon:Point("TOPLEFT", button, 2, -2)
+		icon:Point("BOTTOMRIGHT", button, -2, 2)
+	end
+	
+	button:SetNormalTexture("")
 	button.SetNormalTexture = T.dummy
 	
 	local Flash	 = _G[name.."Flash"]
 	Flash:SetTexture("")
 	
-	if not _G[name.."Panel"] then
-		button:SetWidth(T.petbuttonsize)
-		button:SetHeight(T.petbuttonsize)
-		
-		local panel = CreateFrame("Frame", name.."Panel", button)
-		panel:CreatePanel("Default", T.petbuttonsize, T.petbuttonsize, "CENTER", button, "CENTER", 0, 0)
-		panel:SetBackdropColor(unpack(media.backdropcolor))
-		panel:SetFrameStrata(button:GetFrameStrata())
-		panel:SetFrameLevel(button:GetFrameLevel() - 1)
-
-		icon:SetTexCoord(.08, .92, .08, .92)
-		icon:ClearAllPoints()
-		if pet then			
-			if T.petbuttonsize < 30 then
-				local autocast = _G[name.."AutoCastable"]
-				autocast:SetAlpha(0)
-			end
-			local shine = _G[name.."Shine"]
-			shine:Size(T.petbuttonsize, T.petbuttonsize)
-			shine:ClearAllPoints()
-			shine:SetPoint("CENTER", button, 0, 0)
-			icon:Point("TOPLEFT", button, 2, -2)
-			icon:Point("BOTTOMRIGHT", button, -2, 2)
-		else
-			icon:Point("TOPLEFT", button, 2, -2)
-			icon:Point("BOTTOMRIGHT", button, -2, 2)
-		end
-	end
-	
 	if normal then
 		normal:ClearAllPoints()
 		normal:SetPoint("TOPLEFT")
 		normal:SetPoint("BOTTOMRIGHT")
 	end
+	
+	button:StyleButton()
+	button.isSkinned = true
 end
 
 function T.StyleShift()
-	for i=1, NUM_SHAPESHIFT_SLOTS do
-		local name = "ShapeshiftButton"..i
+	for i=1, NUM_STANCE_SLOTS do
+		local name = "StanceButton"..i
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture"]
@@ -172,24 +183,6 @@ function T.UpdateActionBarHotKey(self, actionButtonType)
 		hotkey:SetText('')
 	else
 		hotkey:SetText(text)
-	end
-end
-
--- rescale cooldown spiral to fix texture.
-local buttonNames = { "ActionButton",  "MultiBarBottomLeftButton", "MultiBarBottomRightButton", "MultiBarLeftButton", "MultiBarRightButton", "ShapeshiftButton", "PetActionButton", "MultiCastActionButton"}
-for _, name in ipairs( buttonNames ) do
-	for index = 1, 12 do
-		local buttonName = name .. tostring(index)
-		local button = _G[buttonName]
-		local cooldown = _G[buttonName .. "Cooldown"]
- 
-		if ( button == nil or cooldown == nil ) then
-			break
-		end
-		
-		cooldown:ClearAllPoints()
-		cooldown:Point("TOPLEFT", button, "TOPLEFT", 2, -2)
-		cooldown:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 2)
 	end
 end
 
@@ -256,192 +249,34 @@ function T.StyleActionBarFlyout(self)
 	end
 end
 
--- rework the mouseover, pushed, checked texture to match Tukui theme.
-do
-	for i = 1, 12 do
-		_G["ActionButton"..i]:StyleButton(true)
-		_G["MultiBarBottomLeftButton"..i]:StyleButton(true)
-		_G["MultiBarBottomRightButton"..i]:StyleButton(true)
-		_G["MultiBarLeftButton"..i]:StyleButton(true)
-		_G["MultiBarRightButton"..i]:StyleButton(true)
+T.ShowHighlightActionButton = function(self)
+	-- hide ugly blizzard proc highlight
+	if self.overlay then
+		self.overlay:Hide()
+		ActionButton_HideOverlayGlow(self)
 	end
-		 
-	for i=1, 10 do
-		_G["ShapeshiftButton"..i]:StyleButton(true)
-		_G["PetActionButton"..i]:StyleButton(true)
+	
+	if not self.Animation then
+		local Animation = self:CreateAnimationGroup()
+		Animation:SetLooping("BOUNCE")
+
+		local FadeOut = Animation:CreateAnimation("Alpha")
+		FadeOut:SetChange(-1)
+		FadeOut:SetDuration(.20)
+		FadeOut:SetSmoothing("IN_OUT")
+
+		self.Animation = Animation
 	end
+	
+	if not self.Animation:IsPlaying() then self.Animation:Play() end
 end
 
+T.HideHighlightActionButton = function(self)
+	if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
+end
+
+hooksecurefunc("ActionButton_ShowOverlayGlow", T.ShowHighlightActionButton)
+hooksecurefunc("ActionButton_HideOverlayGlow", T.HideHighlightActionButton)
 hooksecurefunc("ActionButton_Update", T.StyleActionBarButton)
 hooksecurefunc("ActionButton_UpdateHotkeys", T.UpdateActionBarHotKey)
 hooksecurefunc("ActionButton_UpdateFlyout", T.StyleActionBarFlyout)
-
----------------------------------------------------------------
--- Totem Style, they need a lot more work than "normal" buttons
--- Because of this, we skin it via separate styling codes
--- Special thank's to DarthAndroid
----------------------------------------------------------------
-
--- don't continue executing code in this file is not playing a shaman.
-if not T.myclass == "SHAMAN" then return end
-
--- Tex Coords for empty buttons
-SLOT_EMPTY_TCOORDS = {
-	[EARTH_TOTEM_SLOT] = {
-		left	= 66 / 128,
-		right	= 96 / 128,
-		top		= 3 / 256,
-		bottom	= 33 / 256,
-	},
-	[FIRE_TOTEM_SLOT] = {
-		left	= 67 / 128,
-		right	= 97 / 128,
-		top		= 100 / 256,
-		bottom	= 130 / 256,
-	},
-	[WATER_TOTEM_SLOT] = {
-		left	= 39 / 128,
-		right	= 69 / 128,
-		top		= 209 / 256,
-		bottom	= 239 / 256,
-	},
-	[AIR_TOTEM_SLOT] = {
-		left	= 66 / 128,
-		right	= 96 / 128,
-		top		= 36 / 256,
-		bottom	= 66 / 256,
-	},
-}
-
-local function StyleTotemFlyout(flyout)
-	-- remove blizzard flyout texture
-	flyout.top:SetTexture(nil)
-	flyout.middle:SetTexture(nil)
-	
-	-- Skin buttons
-	local last = nil
-	
-	for _,button in ipairs(flyout.buttons) do
-		button:SetTemplate("Default")
-		local icon = select(1,button:GetRegions())
-		icon:SetTexCoord(.09,.91,.09,.91)
-		icon:SetDrawLayer("ARTWORK")
-		icon:Point("TOPLEFT",button,"TOPLEFT",2,-2)
-		icon:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)			
-		if not InCombatLockdown() then
-			button:Size(30,30)
-			button:ClearAllPoints()
-			button:Point("BOTTOM",last,"TOP",0,4)
-		end			
-		if button:IsVisible() then last = button end
-		button:SetBackdropBorderColor(flyout.parent:GetBackdropBorderColor())
-		button:StyleButton()
-	end
-	
-	flyout.buttons[1]:SetPoint("BOTTOM",flyout,"BOTTOM")
-	
-	if flyout.type == "slot" then
-		local tcoords = SLOT_EMPTY_TCOORDS[flyout.parent:GetID()]
-		flyout.buttons[1].icon:SetTexCoord(tcoords.left,tcoords.right,tcoords.top,tcoords.bottom)
-	end
-	
-	-- Skin Close button
-	local close = MultiCastFlyoutFrameCloseButton
-	close:SetTemplate("Default")	
-	close:GetHighlightTexture():SetTexture([[Interface\Buttons\ButtonHilight-Square]])
-	close:GetHighlightTexture():Point("TOPLEFT",close,"TOPLEFT",1,-1)
-	close:GetHighlightTexture():Point("BOTTOMRIGHT",close,"BOTTOMRIGHT",-1,1)
-	close:GetNormalTexture():SetTexture(nil)
-	close:ClearAllPoints()
-	close:Point("BOTTOMLEFT",last,"TOPLEFT",0,4)
-	close:Point("BOTTOMRIGHT",last,"TOPRIGHT",0,4)	
-	close:Height(8)
-	
-	close:SetBackdropBorderColor(last:GetBackdropBorderColor())
-	flyout:ClearAllPoints()
-	flyout:Point("BOTTOM",flyout.parent,"TOP",0,4)
-end
-hooksecurefunc("MultiCastFlyoutFrame_ToggleFlyout",function(self) StyleTotemFlyout(self) end)
-	
-local function StyleTotemOpenButton(button, parent)
-	button:GetHighlightTexture():SetTexture(nil)
-	button:GetNormalTexture():SetTexture(nil)
-	button:Height(20)
-	button:ClearAllPoints()
-	button:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, -3)
-	button:Point("BOTTOMRIGHT", parent, "TOPRIGHT", 0, -3)
-	if not button.visibleBut then
-		button.visibleBut = CreateFrame("Frame",nil,button)
-		button.visibleBut:Height(8)
-		button.visibleBut:Width(button:GetWidth() + 2)
-		button.visibleBut:SetPoint("CENTER")
-		button.visibleBut.highlight = button.visibleBut:CreateTexture(nil,"HIGHLIGHT")
-		button.visibleBut.highlight:SetTexture([[Interface\Buttons\ButtonHilight-Square]])
-		button.visibleBut.highlight:Point("TOPLEFT",button.visibleBut,"TOPLEFT",1,-1)
-		button.visibleBut.highlight:Point("BOTTOMRIGHT",button.visibleBut,"BOTTOMRIGHT",-1,1)
-		button.visibleBut:SetTemplate("Default")
-	end
-	
-	button.visibleBut:SetBackdropBorderColor(parent:GetBackdropBorderColor())
-end
-hooksecurefunc("MultiCastFlyoutFrameOpenButton_Show",function(button,_, parent) StyleTotemOpenButton(button, parent) end)
-
--- the color we use for border
-local bordercolors = {
-	{.23,.45,.13},   -- Earth
-	{.58,.23,.10},   -- Fire
-	{.19,.48,.60},   -- Water
-	{.42,.18,.74},   -- Air
-}
-
-local function StyleTotemSlotButton(button, index)
-	button:SetTemplate("Default")
-	button.overlayTex:SetTexture(nil)
-	button.background:SetDrawLayer("ARTWORK")
-	button.background:ClearAllPoints()
-	button.background:Point("TOPLEFT",button,"TOPLEFT",2,-2)
-	button.background:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
-	if not InCombatLockdown() then button:Size(30) end
-	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
-	button:StyleButton()
-end
-hooksecurefunc("MultiCastSlotButton_Update",function(self, slot) StyleTotemSlotButton(self,tonumber( string.match(self:GetName(),"MultiCastSlotButton(%d)"))) end)
-
--- Skin the actual totem buttons
-local function StyleTotemActionButton(button, index)
-	local icon = select(1,button:GetRegions())
-	icon:SetTexCoord(.09,.91,.09,.91)
-	icon:SetDrawLayer("ARTWORK")
-	icon:Point("TOPLEFT",button,"TOPLEFT",2,-2)
-	icon:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
-	button.overlayTex:SetTexture(nil)
-	button.overlayTex:Hide()
-	button:GetNormalTexture():SetTexCoord(0,0,0,0)
-	if not InCombatLockdown() and button.slotButton then
-		button:ClearAllPoints()
-		button:SetAllPoints(button.slotButton)
-		button:SetFrameLevel(button.slotButton:GetFrameLevel()+1)
-	end
-	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
-	button:SetBackdropColor(0,0,0,0)
-	button:StyleButton(true)
-end
-hooksecurefunc("MultiCastActionButton_Update",function(actionButton, actionId, actionIndex, slot) StyleTotemActionButton(actionButton,actionIndex) end)
-
--- Skin the summon and recall buttons
-local function StyleTotemSpellButton(button, index)
-	if not button then return end
-	local icon = select(1,button:GetRegions())
-	icon:SetTexCoord(.09,.91,.09,.91)
-	icon:SetDrawLayer("ARTWORK")
-	icon:Point("TOPLEFT",button,"TOPLEFT",2,-2)
-	icon:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
-	button:SetTemplate("Default")
-	button:GetNormalTexture():SetTexture(nil)
-	if not InCombatLockdown() then button:Size(30, 30) end
-	_G[button:GetName().."Highlight"]:SetTexture(nil)
-	_G[button:GetName().."NormalTexture"]:SetTexture(nil)
-	button:StyleButton()
-end
-hooksecurefunc("MultiCastSummonSpellButton_Update", function(self) StyleTotemSpellButton(self,0) end)
-hooksecurefunc("MultiCastRecallSpellButton_Update", function(self) StyleTotemSpellButton(self,5) end)

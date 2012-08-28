@@ -1,10 +1,11 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 -- yleaf (yaroot@gmail.com)
 
 if C.unitframes.enable ~= true or C.unitframes.raidunitdebuffwatch ~= true then return end
 
 local _, ns = ...
 local oUF = ns.oUF or oUF
+local Plugin = CreateFrame("Frame")
 
 local addon = {}
 ns.oUF_RaidDebuffs = addon
@@ -48,7 +49,7 @@ local DispellColor = {
 	['Curse']	= {.6, 0, 1},
 	['Disease']	= {.6, .4, 0},
 	['Poison']	= {0, .6, 0},
-	['none'] = {unpack(C.media.bordercolor)},
+	['none'] = {.6, .6, .6},
 }
 
 local DispellPriority = {
@@ -82,62 +83,32 @@ do
 			['Curse'] = true,
 			['Poison'] = true,
 		},
+		['MONK'] = {
+			['Poison'] = true,
+			['Magic'] = false,
+			['Disease'] = true,
+		},
 	}
 	
 	DispellFilter = dispellClasses[select(2, UnitClass('player'))] or {}
 end
 
--- Return true if the talent matching the name of the spell given by (Credit Pitbull4)
--- spellid has at least one point spent in it or false otherwise
-local function CheckForKnownTalent(spellid)
-	local wanted_name = GetSpellInfo(spellid)
-	if not wanted_name then return nil end
-	local num_tabs = GetNumTalentTabs()
-	for t=1, num_tabs do
-		local num_talents = GetNumTalents(t)
-		for i=1, num_talents do
-			local name_talent, _, _, _, current_rank = GetTalentInfo(t,i)
-			if name_talent and (name_talent == wanted_name) then
-				if current_rank and (current_rank > 0) then
-					return true
-				else
-					return false
-				end
-			end
-		end
-	end
-	return false
-end
-
-local function CheckSpec(self, event, levels)
-	-- Not interested in gained points from leveling	
-	if event == "CHARACTER_POINTS_CHANGED" and levels > 0 then return end
+local function CheckSpec()
+	local role = ""
+	local tree = GetSpecialization()
 	
-	--Check for certain talents to see if we can dispel magic or not
-	if select(2, UnitClass('player')) == "PALADIN" then
-		--Check to see if we have the 'Sacred Cleansing' talent.
-		if CheckForKnownTalent(53551) then
-			DispellFilter.Magic = true
-		else
-			DispellFilter.Magic = false	
-		end
-	elseif select(2, UnitClass('player')) == "SHAMAN" then
-		--Check to see if we have the 'Improved Cleanse Spirit' talent.
-		if CheckForKnownTalent(77130) then
-			DispellFilter.Magic = true
-		else
-			DispellFilter.Magic = false	
-		end
-	elseif select(2, UnitClass('player')) == "DRUID" then
-		--Check to see if we have the 'Nature's Cure' talent.
-		if CheckForKnownTalent(88423) then
-			DispellFilter.Magic = true
-		else
-			DispellFilter.Magic = false	
-		end
+	if tree then
+		role = select(6, GetSpecializationInfo(tree))
+	end
+	
+	if role == "HEALER" then
+		DispellFilter.Magic = true
+	else
+		DispellFilter.Magic = false	
 	end
 end
-
+Plugin:RegisterEvent("PLAYER_TALENT_UPDATE")
+Plugin:SetScript("OnEvent", CheckSpec)
 
 local function formatTime(s)
 	if s > 60 then
@@ -271,22 +242,18 @@ local function Update(self, event, unit)
 end
 
 local function Enable(self)
-	if self.RaidDebuffs then
+	local rd = self.RaidDebuffs
+	if rd then
 		self:RegisterEvent('UNIT_AURA', Update)
 		return true
 	end
-	--Need to run these always
-	self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
-	self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
 end
 
 local function Disable(self)
-	if self.RaidDebuffs then
+	local rd = self.RaidDebuffs
+	if rd then
 		self:UnregisterEvent('UNIT_AURA', Update)
-		self.RaidDebuffs:Hide()
 	end
-	self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
-	self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
 end
 
 oUF:AddElement('RaidDebuffs', Update, Enable, Disable)

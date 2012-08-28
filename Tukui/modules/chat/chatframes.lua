@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if C["chat"].enable ~= true then return end
 
 -----------------------------------------------------------------------
@@ -6,6 +6,11 @@ if C["chat"].enable ~= true then return end
 -----------------------------------------------------------------------
 
 local TukuiChat = CreateFrame("Frame", "TukuiChat")
+G.Chat.Chat = TukuiChat
+for i = 1, NUM_CHAT_WINDOWS do
+	G.Chat["ChatFrame"..i] = _G["ChatFrame"..i]
+end
+
 local tabalpha = 1
 local tabnoalpha = 0
 local _G = _G
@@ -55,17 +60,43 @@ FriendsMicroButton:Kill()
 -- hide chat bubble menu button
 ChatFrameMenuButton:Kill()
 
+local function UpdateEditBoxColor(self)
+	local type = self:GetAttribute("chatType")
+	local bd = self.backdrop
+	
+	if bd then
+		if ( type == "CHANNEL" ) then
+			local id = GetChannelName(self:GetAttribute("channelTarget"))
+			if id == 0 then
+				bd:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			else
+				bd:SetBackdropBorderColor(ChatTypeInfo[type..id].r,ChatTypeInfo[type..id].g,ChatTypeInfo[type..id].b)
+			end
+		else
+			bd:SetBackdropBorderColor(ChatTypeInfo[type].r,ChatTypeInfo[type].g,ChatTypeInfo[type].b)
+		end	
+	end
+end
+
+-- update border color according where we talk
+hooksecurefunc("ChatEdit_UpdateHeader", function()
+	local EditBox = ChatEdit_ChooseBoxForSend()	
+	UpdateEditBoxColor(EditBox)
+end)
+	
 -- set the chat style
 local function SetChatStyle(frame)
 	local id = frame:GetID()
 	local chat = frame:GetName()
 	local tab = _G[chat.."Tab"]
+	G.Chat[chat] = _G[chat]
+	G.Chat[tab] = tab
 	
 	-- always set alpha to 1, don"t fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
 
-	if not C.chat.background and not frame.temp then
+	if not C.chat.background then
 		-- hide text when setting chat
 		_G[chat.."TabText"]:Hide()
 		
@@ -91,6 +122,7 @@ local function SetChatStyle(frame)
 	_G[chat]:SetMinResize(T.InfoLeftRightWidth + 1,111)
 	
 	-- move the chat edit box
+	G.Chat.EditBox = _G[chat.."EditBox"]
 	_G[chat.."EditBox"]:ClearAllPoints()
 	_G[chat.."EditBox"]:Point("TOPLEFT", TukuiTabsLeftBackground or TukuiInfoLeft, 2, -2)
 	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", TukuiTabsLeftBackground or TukuiInfoLeft, -2, 2)	
@@ -150,31 +182,11 @@ local function SetChatStyle(frame)
 	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
 			
 	-- create our own texture for edit box
-	local EditBoxBackground = CreateFrame("frame", "TukuiChatchatEditBoxBackground", _G[chat.."EditBox"])
-	EditBoxBackground:CreatePanel("Default", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
-	EditBoxBackground:ClearAllPoints()
-	EditBoxBackground:SetAllPoints(TukuiTabsLeftBackground or TukuiInfoLeft)
-	EditBoxBackground:SetFrameStrata("LOW")
-	EditBoxBackground:SetFrameLevel(1)
-	
-	local function colorize(r,g,b)
-		EditBoxBackground:SetBackdropBorderColor(r, g, b)
-	end
-	
-	-- update border color according where we talk
-	hooksecurefunc("ChatEdit_UpdateHeader", function()
-		local type = _G[chat.."EditBox"]:GetAttribute("chatType")
-		if ( type == "CHANNEL" ) then
-		local id = GetChannelName(_G[chat.."EditBox"]:GetAttribute("channelTarget"))
-			if id == 0 then
-				colorize(unpack(C.media.bordercolor))
-			else
-				colorize(ChatTypeInfo[type..id].r,ChatTypeInfo[type..id].g,ChatTypeInfo[type..id].b)
-			end
-		else
-			colorize(ChatTypeInfo[type].r,ChatTypeInfo[type].g,ChatTypeInfo[type].b)
-		end
-	end)
+	_G[chat.."EditBox"]:CreateBackdrop()
+	_G[chat.."EditBox"].backdrop:ClearAllPoints()
+	_G[chat.."EditBox"].backdrop:SetAllPoints(TukuiTabsLeftBackground or TukuiInfoLeft)
+	_G[chat.."EditBox"].backdrop:SetFrameStrata("LOW")
+	_G[chat.."EditBox"].backdrop:SetFrameLevel(1)
 	
 	if _G[chat] ~= _G["ChatFrame2"] then	
 		origs[_G[chat]] = _G[chat].AddMessage
@@ -182,7 +194,7 @@ local function SetChatStyle(frame)
 	else
 		CombatLogQuickButtonFrame_Custom:StripTextures()
 		CombatLogQuickButtonFrame_Custom:SetTemplate("Default")
-		T.SkinCloseButton(CombatLogQuickButtonFrame_CustomAdditionalFilterButton)
+		CombatLogQuickButtonFrame_CustomAdditionalFilterButton:SkinCloseButton()
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:SetText("V")
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:ClearAllPoints()
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:Point("RIGHT", -8, 4)
@@ -222,6 +234,12 @@ end)
 -- Setup temp chat (BN, WHISPER) when needed.
 local function SetupTempChat()
 	local frame = FCF_GetCurrentChatFrame()
+		
+	-- fuck this pet battle window, really... do people really need this shit?
+	if _G[frame:GetName().."Tab"]:GetText():match(PET_BATTLE_COMBAT_LOG) then
+		FCF_Close(frame)
+		return
+	end
 
 	-- do a check if we already did a skinning earlier for this temp chat frame
 	if frame.isSkinned then return end
@@ -231,6 +249,17 @@ local function SetupTempChat()
 	SetChatStyle(frame)
 end
 hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
+
+for i=1, BNToastFrame:GetNumRegions() do
+	if i ~= 10 then
+		local region = select(i, BNToastFrame:GetRegions())
+		if region:GetObjectType() == "Texture" then
+			region:SetTexture(nil)
+		end
+	end
+end	
+BNToastFrame:SetTemplate()
+BNToastFrame:CreateShadow()
 
 -- reposition battle.net popup over chat #1
 BNToastFrame:HookScript("OnShow", function(self)
@@ -243,7 +272,7 @@ BNToastFrame:HookScript("OnShow", function(self)
 end)
 
 -- reskin Toast Frame Close Button
-T.SkinCloseButton(BNToastFrameCloseButton)
+BNToastFrameCloseButton:SkinCloseButton()
 
 -- kill the default reset button
 ChatConfigFrameDefaultButton:Kill()

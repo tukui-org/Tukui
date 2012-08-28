@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 -- here we kill all shit stuff on default UI that we don't need!
 
 local Kill = CreateFrame("Frame")
@@ -9,57 +9,35 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			hooksecurefunc("AchievementFrameCategories_DisplayButton", function(button) button.showTooltipFunc = nil end)
 		end
 	end
+
+	if addon ~= "Tukui" then return end
 	
 	-- disable Blizzard party & raid frame if our Raid Frames are loaded
-	if addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then   
+	if C.unitframes.raid then
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
-
-		local function KillRaidFrame()
-			CompactRaidFrameManager:UnregisterAllEvents()
-			if not InCombatLockdown() then CompactRaidFrameManager:Hide() end
-
-			local shown = CompactRaidFrameManager_GetSetting("IsShown")
-			if shown and shown ~= "0" then
-				CompactRaidFrameManager_SetSetting("IsShown", "0")
-			end
-		end
-
-		hooksecurefunc("CompactRaidFrameManager_UpdateShown", function()
-			KillRaidFrame()
-		end)
-
-		KillRaidFrame()
-
-		-- kill party 1 to 5
-		local function KillPartyFrame()
-			CompactPartyFrame:Kill()
-
-			for i=1, MEMBERS_PER_RAID_GROUP do
-				local name = "CompactPartyFrameMember" .. i
-				local frame = _G[name]
-				frame:UnregisterAllEvents()
-			end			
-		end
+		
+		-- raid
+		CompactRaidFrameManager:SetParent(TukuiUIHider)
+		CompactUnitFrameProfiles:UnregisterAllEvents()
 			
 		for i=1, MAX_PARTY_MEMBERS do
 			local name = "PartyMemberFrame" .. i
 			local frame = _G[name]
 
-			frame:Kill()
+			frame:SetParent(TukuiUIHider)
 
 			_G[name .. "HealthBar"]:UnregisterAllEvents()
 			_G[name .. "ManaBar"]:UnregisterAllEvents()
+			
+			local pet = name.."PetFrame"
+			local petframe = _G[pet]
+			
+			petframe:SetParent(TukuiUIHider)
+			
+			_G[pet .. "HealthBar"]:UnregisterAllEvents()
 		end
-		
-		if CompactPartyFrame then
-			KillPartyFrame()
-		elseif CompactPartyFrame_Generate then -- 4.1
-			hooksecurefunc("CompactPartyFrame_Generate", KillPartyFrame)
-		end		
 	end
-	
-	if addon ~= "Tukui" then return end
 		
 	StreamingIcon:Kill()
 	Advanced_UseUIScale:Kill()
@@ -68,21 +46,18 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	TutorialFrameAlertButton:Kill()
 	GuildChallengeAlertFrame:Kill()
 	
-	if C.auras.player or C.unitframes.playerauras then
+	if C.auras.player then
 		BuffFrame:Kill()
 		TemporaryEnchantFrame:Kill()
 		ConsolidatedBuffs:Kill()
-		-- kill the module in default interface option
 		InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)	
 	end
-	
-	InterfaceOptionsUnitFramePanelPartyBackground:Kill()
 
 	-- make sure boss or arena frame is always disabled when running tukui
 	SetCVar("showArenaEnemyFrames", 0)
 	
-	if C.arena.unitframes then
+	if C.unitframes.arena then
 		InterfaceOptionsFrameCategoriesButton10:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0) 
 		InterfaceOptionsUnitFramePanelArenaEnemyFrames:Kill()
@@ -92,13 +67,11 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	
 	if C.chat.enable then
 		SetCVar("WholeChatWindowClickable", 0)
-		SetCVar("ConversationMode", "inline")
 		InterfaceOptionsSocialPanelWholeChatWindowClickable:Kill()
-		InterfaceOptionsSocialPanelConversationMode:Kill()
 	end
 	
 	if C.unitframes.enable then
-		PlayerFrame:Kill() -- Just to be sure we are safe
+		PlayerFrame:SetParent(TukuiUIHider) -- Just to be sure we are safe
 		InterfaceOptionsFrameCategoriesButton9:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)	
 	end
@@ -109,10 +82,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelRight:Kill()
 		InterfaceOptionsActionBarsPanelRightTwo:Kill()
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
-	end
-	
-	if C["nameplate"].enable == true and C["nameplate"].enhancethreat == true then
-		InterfaceOptionsDisplayPanelAggroWarningDisplay:Kill()
 	end
 
 	-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
@@ -129,3 +98,4 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		end 
 	end)
 end)
+G.Misc.Kill = Kill

@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 if not C["datatext"].battleground then return end
 
@@ -11,6 +11,8 @@ local IOC = 540
 local EOTS = 482
 local TBFG = 736
 local AB = 461
+local TOK = 856
+local SSM = 860
 
 local bgframe = TukuiInfoLeftBattleGround
 bgframe:SetScript("OnEnter", function(self)
@@ -52,6 +54,11 @@ bgframe:SetScript("OnEnter", function(self)
 				elseif curmapid == IOC or curmapid == TBFG or curmapid == AB then
 					GameTooltip:AddDoubleLine(L.datatext_basesassaulted,GetBattlefieldStatData(i, 1),1,1,1)
 					GameTooltip:AddDoubleLine(L.datatext_basesdefended,GetBattlefieldStatData(i, 2),1,1,1)
+				elseif CurrentMapID == TOK then
+					GameTooltip:AddDoubleLine(L.datatext_orb_possessions, GetBattlefieldStatData(i, 1),1,1,1)
+					GameTooltip:AddDoubleLine(L.datatext_victory_points, GetBattlefieldStatData(i, 2),1,1,1)
+				elseif CurrentMapID == SSM then
+					GameTooltip:AddDoubleLine(L.datatext_carts_controlled, GetBattlefieldStatData(i, 1),1,1,1)
 				end			
 				GameTooltip:Show()
 			end
@@ -65,21 +72,25 @@ Stat:EnableMouse(true)
 Stat.Option = C.datatext.battleground
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+G.DataText.Battleground = Stat
 
 local Text1  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText1", "OVERLAY")
 Text1:SetFont(C.media.font, C["datatext"].fontsize)
 Text1:SetPoint("LEFT", 30, 0.5)
 Text1:SetHeight(TukuiInfoLeft:GetHeight())
+G.DataText.Battleground.Text1 = Text1
 
 local Text2  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText2", "OVERLAY")
 Text2:SetFont(C.media.font, C["datatext"].fontsize)
 Text2:SetPoint("CENTER", 0, 0.5)
 Text2:SetHeight(TukuiInfoLeft:GetHeight())
+G.DataText.Battleground.Text2 = Text2
 
 local Text3  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText3", "OVERLAY")
 Text3:SetFont(C.media.font, C["datatext"].fontsize)
 Text3:SetPoint("RIGHT", -30, 0.5)
 Text3:SetHeight(TukuiInfoLeft:GetHeight())
+G.DataText.Battleground.Text3 = Text3
 
 local int = 2
 local function Update(self, t)

@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Shadow Orbs Bar
+## Notes: Display Priest Shadow Orbs.
+## Author: Tukz
+## Version: 1.03
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_ShadowOrbsBar.lua

@@ -1,10 +1,8 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-
---[[ 	
-		original code by alza, edited by tukz for tukui
---]]
+local T, C, L, G = unpack(select(2, ...))
 
 local menuFrame = CreateFrame("Frame", "TukuiMarkingFrame", UIParent, "UIDropDownMenuTemplate")
+G.Misc.SymbolDropDown = menuFrame
+
 local menuList = {
     {text = L.symbol_CLEAR,
     func = function() SetRaidTarget("target", 0) end},
@@ -27,11 +25,11 @@ local menuList = {
 }
 
 WorldFrame:HookScript("OnMouseDown", function(self, button)
-    if(button=="LeftButton" and IsShiftKeyDown() and IsControlKeyDown() and UnitExists("mouseover")) then 
-        local inParty = (GetNumPartyMembers() > 0)
-        local inRaid = (GetNumRaidMembers() > 0)
-        if(inRaid and (IsRaidLeader() or IsRaidOfficer()) or (inParty and not inRaid)) then
-            EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 1)
+    if(button=="RightButton" and IsShiftKeyDown() and IsControlKeyDown() and UnitExists("mouseover")) then 
+        local inParty = (GetNumGroupMembers() > 0)
+        local inRaid = (GetNumGroupMembers() > 0)
+        if (inRaid and (IsRaidLeader() or IsRaidOfficer()) or (inParty and not inRaid)) or (not inParty and not inRaid) then
+			EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", nil)
         end
     end
 end)

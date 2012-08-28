@@ -1,7 +1,7 @@
 --------------------------------------------------------------------
 -- System Stats
 --------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 if not C["datatext"].system or C["datatext"].system == 0 then return end
 
@@ -14,10 +14,12 @@ Stat.Option = C.datatext.system
 Stat.tooltip = false
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+G.DataText.System = Stat
 
 local Text  = Stat:CreateFontString("TukuiStatSystemText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
-T.PP(C["datatext"].system, Text)
+T.DataTextPosition(C["datatext"].system, Text)
+G.DataText.System.Text = Text
 
 local bandwidthString = "%.2f Mbps"
 local percentageString = "%.2f%%"

@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Warlock Spec Bars
+## Notes: Display Class Bar for Warlock.
+## Author: Tukz
+## Version: 1.03
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_WarlockSpecBars.lua

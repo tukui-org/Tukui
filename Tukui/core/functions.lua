@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 -- Define action bar default buttons size
 T.buttonsize = T.Scale(C.actionbar.buttonsize)
@@ -8,7 +8,7 @@ T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
 
 -- return if we are currently playing on PTR.
 T.IsPTRVersion = function()
-	if T.toc > 40200 then
+	if T.toc > 50000 then
 		return true
 	else
 		return false
@@ -26,7 +26,7 @@ T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 end
 
 -- datatext panel position
-T.PP = function(p, obj)
+T.DataTextPosition = function(p, obj)
 	local left = TukuiInfoLeft
 	local right = TukuiInfoRight
 	local mapleft = TukuiMinimapStatsLeft
@@ -114,19 +114,23 @@ T.DataTextTooltipAnchor = function(self)
 end
 
 -- used to update shift action bar buttons
-T.TukuiShiftBarUpdate = function()
+T.ShiftBarUpdate = function(self)
 	local numForms = GetNumShapeshiftForms()
 	local texture, name, isActive, isCastable
 	local button, icon, cooldown
 	local start, duration, enable
-	for i = 1, NUM_SHAPESHIFT_SLOTS do
-		button = _G["ShapeshiftButton"..i]
-		icon = _G["ShapeshiftButton"..i.."Icon"]
+	for i = 1, NUM_STANCE_SLOTS do
+		buttonName = "StanceButton"..i
+		button = _G[buttonName]
+		icon = _G[buttonName.."Icon"]
 		if i <= numForms then
 			texture, name, isActive, isCastable = GetShapeshiftFormInfo(i)
+			
+			if not icon then return end
+			
 			icon:SetTexture(texture)
 			
-			cooldown = _G["ShapeshiftButton"..i.."Cooldown"]
+			cooldown = _G[buttonName.."Cooldown"]
 			if texture then
 				cooldown:SetAlpha(1)
 			else
@@ -137,7 +141,7 @@ T.TukuiShiftBarUpdate = function()
 			CooldownFrame_SetTimer(cooldown, start, duration, enable)
 			
 			if isActive then
-				ShapeshiftBarFrame.lastSelected = button:GetID()
+				StanceBarFrame.lastSelected = button:GetID()
 				button:SetChecked(1)
 			else
 				button:SetChecked(0)
@@ -153,7 +157,7 @@ T.TukuiShiftBarUpdate = function()
 end
 
 -- used to update pet bar buttons
-T.TukuiPetBarUpdate = function(self, event)
+T.PetBarUpdate = function(self, event)
 	local petActionButton, petActionIcon, petAutoCastableTexture, petAutoCastShine
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local buttonName = "PetActionButton" .. i
@@ -196,17 +200,6 @@ T.TukuiPetBarUpdate = function(self, event)
 			AutoCastShine_AutoCastStart(petAutoCastShine)
 		else
 			AutoCastShine_AutoCastStop(petAutoCastShine)
-		end
-		
-		-- grid display
-		if name then
-			if not C["actionbar"].showgrid then
-				petActionButton:SetAlpha(1)
-			end			
-		else
-			if not C["actionbar"].showgrid then
-				petActionButton:SetAlpha(0)
-			end
 		end
 		
 		if texture then
@@ -258,21 +251,11 @@ end
 
 -- used to return role
 T.CheckRole = function()
-	local role
-	local tree = GetPrimaryTalentTree()
-	if ((T.myclass == "PALADIN" and tree == 2) or (T.myclass == "WARRIOR" and tree == 3) or (T.myclass == "DEATHKNIGHT" and tree == 1)) or (T.myclass == "DRUID" and tree == 2 and GetBonusBarOffset() == 3) then
-		role = "Tank"
-	else
-		local playerint = select(2, UnitStat("player", 4))
-		local playeragi	= select(2, UnitStat("player", 2))
-		local base, posBuff, negBuff = UnitAttackPower("player");
-		local playerap = base + posBuff + negBuff;
-
-		if (((playerap > playerint) or (playeragi > playerint)) and not (T.myclass == "SHAMAN" and tree ~= 1 and tree ~= 3) and not (UnitBuff("player", GetSpellInfo(24858)) or UnitBuff("player", GetSpellInfo(65139)))) or T.myclass == "ROGUE" or T.myclass == "HUNTER" or (T.myclass == "SHAMAN" and tree == 2) then
-			role = "Melee"
-		else
-			role = "Caster"
-		end
+	local role = ""
+	local tree = GetSpecialization()
+	
+	if tree then
+		role = select(6, GetSpecializationInfo(tree))
 	end
 
 	return role
@@ -317,255 +300,6 @@ end
 T.SkinFuncs = {}
 T.SkinFuncs["Tukui"] = {}
 
-function T.SetModifiedBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-end
-
-function T.SetOriginalBackdrop(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	if C["general"].classcolortheme == true then
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		self:SetTemplate("Default")
-	end
-end
-
-function T.SkinButton(f, strip)
-	if f:GetName() then
-		local l = _G[f:GetName().."Left"]
-		local m = _G[f:GetName().."Middle"]
-		local r = _G[f:GetName().."Right"]
-		
-		
-		if l then l:SetAlpha(0) end
-		if m then m:SetAlpha(0) end
-		if r then r:SetAlpha(0) end
-	end
-
-	if f.SetNormalTexture then f:SetNormalTexture("") end
-	
-	if f.SetHighlightTexture then f:SetHighlightTexture("") end
-	
-	if f.SetPushedTexture then f:SetPushedTexture("") end
-	
-	if f.SetDisabledTexture then f:SetDisabledTexture("") end
-	
-	if strip then f:StripTextures() end
-	
-	f:SetTemplate("Default")
-	f:HookScript("OnEnter", T.SetModifiedBackdrop)
-	f:HookScript("OnLeave", T.SetOriginalBackdrop)
-end
-
-function T.SkinScrollBar(frame)
-	if _G[frame:GetName().."BG"] then _G[frame:GetName().."BG"]:SetTexture(nil) end
-	if _G[frame:GetName().."Track"] then _G[frame:GetName().."Track"]:SetTexture(nil) end
-	
-	if _G[frame:GetName().."Top"] then
-		_G[frame:GetName().."Top"]:SetTexture(nil)
-	end
-	
-	if _G[frame:GetName().."Bottom"] then
-		_G[frame:GetName().."Bottom"]:SetTexture(nil)
-	end
-	
-	if _G[frame:GetName().."Middle"] then
-		_G[frame:GetName().."Middle"]:SetTexture(nil)
-	end
-
-	if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
-		_G[frame:GetName().."ScrollUpButton"]:StripTextures()
-		_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Default", true)
-		if not _G[frame:GetName().."ScrollUpButton"].texture then
-			_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, 'OVERLAY')
-			_G[frame:GetName().."ScrollUpButton"].texture:Point("TOPLEFT", 2, -2)
-			_G[frame:GetName().."ScrollUpButton"].texture:Point("BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
-			_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
-		end	
-		
-		_G[frame:GetName().."ScrollDownButton"]:StripTextures()
-		_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Default", true)
-	
-		if not _G[frame:GetName().."ScrollDownButton"].texture then
-			_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, 'OVERLAY')
-			_G[frame:GetName().."ScrollDownButton"].texture:Point("TOPLEFT", 2, -2)
-			_G[frame:GetName().."ScrollDownButton"].texture:Point("BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
-			_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
-		end				
-		
-		if not frame.trackbg then
-			frame.trackbg = CreateFrame("Frame", nil, frame)
-			frame.trackbg:Point("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
-			frame.trackbg:Point("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
-			frame.trackbg:SetTemplate("Transparent")
-		end
-		
-		if frame:GetThumbTexture() then
-			if not thumbTrim then thumbTrim = 3 end
-			frame:GetThumbTexture():SetTexture(nil)
-			if not frame.thumbbg then
-				frame.thumbbg = CreateFrame("Frame", nil, frame)
-				frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
-				frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
-				frame.thumbbg:SetTemplate("Default", true)
-				if frame.trackbg then
-					frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
-				end
-			end
-		end	
-	end	
-end
-
---Tab Regions
-local tabs = {
-	"LeftDisabled",
-	"MiddleDisabled",
-	"RightDisabled",
-	"Left",
-	"Middle",
-	"Right",
-}
-
-function T.SkinTab(tab)
-	if not tab then return end
-	for _, object in pairs(tabs) do
-		local tex = _G[tab:GetName()..object]
-		if tex then
-			tex:SetTexture(nil)
-		end
-	end
-	
-	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
-		tab:GetHighlightTexture():SetTexture(nil)
-	else
-		tab:StripTextures()
-	end
-	
-	tab.backdrop = CreateFrame("Frame", nil, tab)
-	tab.backdrop:SetTemplate("Default")
-	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
-	tab.backdrop:Point("TOPLEFT", 10, -3)
-	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)				
-end
-
-function T.SkinNextPrevButton(btn, horizonal)
-	btn:SetTemplate("Default")
-	btn:Size(btn:GetWidth() - 7, btn:GetHeight() - 7)	
-	
-	if horizonal then
-		btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.72, 0.65, 0.29, 0.65, 0.72)
-		btn:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.8, 0.65, 0.35, 0.65, 0.8)
-		btn:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)	
-	else
-		btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
-		if btn:GetPushedTexture() then
-			btn:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.81, 0.65, 0.35, 0.65, 0.81)
-		end
-		if btn:GetDisabledTexture() then
-			btn:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)
-		end
-	end
-	
-	btn:GetNormalTexture():ClearAllPoints()
-	btn:GetNormalTexture():Point("TOPLEFT", 2, -2)
-	btn:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
-	if btn:GetDisabledTexture() then
-		btn:GetDisabledTexture():SetAllPoints(btn:GetNormalTexture())
-	end
-	if btn:GetPushedTexture() then
-		btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())
-	end
-	btn:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
-	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
-end
-
-function T.SkinRotateButton(btn)
-	btn:SetTemplate("Default")
-	btn:Size(btn:GetWidth() - 14, btn:GetHeight() - 14)	
-	
-	btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
-	btn:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)	
-	
-	btn:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
-	
-	btn:GetNormalTexture():ClearAllPoints()
-	btn:GetNormalTexture():Point("TOPLEFT", 2, -2)
-	btn:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
-	btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())	
-	btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
-end
-
-function T.SkinEditBox(frame)
-	if _G[frame:GetName().."Left"] then _G[frame:GetName().."Left"]:Kill() end
-	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
-	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
-	if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
-	frame:CreateBackdrop("Default")
-	
-	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
-		frame.backdrop:Point("BOTTOMRIGHT", -12, -2)
-	end
-end
-
-function T.SkinDropDownBox(frame, width)
-	local button = _G[frame:GetName().."Button"]
-	if not width then width = 155 end
-	
-	frame:StripTextures()
-	frame:Width(width)
-	
-	_G[frame:GetName().."Text"]:ClearAllPoints()
-	_G[frame:GetName().."Text"]:Point("RIGHT", button, "LEFT", -2, 0)
-
-	
-	button:ClearAllPoints()
-	button:Point("RIGHT", frame, "RIGHT", -10, 3)
-	button.SetPoint = T.dummy
-	
-	T.SkinNextPrevButton(button, true)
-	
-	frame:CreateBackdrop("Default")
-	frame.backdrop:Point("TOPLEFT", 20, -2)
-	frame.backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
-end
-
-function T.SkinCheckBox(frame)
-	frame:StripTextures()
-	frame:CreateBackdrop("Default")
-	frame.backdrop:Point("TOPLEFT", 4, -4)
-	frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
-	
-	if frame.SetCheckedTexture then
-		frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
-	end
-	
-	if frame.SetDisabledCheckedTexture then
-		frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
-	end
-	
-	frame.SetNormalTexture = T.dummy
-	frame.SetPushedTexture = T.dummy
-	frame.SetHighlightTexture = T.dummy
-end
-
-function T.SkinCloseButton(f, point)	
-	if point then
-		f:Point("TOPRIGHT", point, "TOPRIGHT", 2, 2)
-	end
-	
-	f:SetNormalTexture("")
-	f:SetPushedTexture("")
-	f:SetHighlightTexture("")
-	f.t = f:CreateFontString(nil, "OVERLAY")
-	f.t:SetFont(C.media.pixelfont, 12, "MONOCHROME")
-	f.t:SetPoint("CENTER", 0, 1)
-	f.t:SetText("X")
-end
-
 local LoadBlizzardSkin = CreateFrame("Frame")
 LoadBlizzardSkin:RegisterEvent("ADDON_LOADED")
 LoadBlizzardSkin:SetScript("OnEvent", function(self, event, addon)
@@ -600,6 +334,7 @@ end)
 -- tell oUF Framework that we use our own oUF version (ns.oUF, also know as X-oUF in /Tukui/Tukui.toc)
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF
+oUFTukui = ns.oUF -- MOP BETA
 assert(oUF, "Tukui was unable to locate oUF install.")
 
 -- a function to update all unit frames
@@ -640,21 +375,48 @@ local StopFlash = function(self)
 end
 
 -- Spawn the right-click dropdown on unitframe
-T.SpawnMenu = function(self)
-	local unit = self.unit:gsub("(.)", string.upper, 1)
-	if unit == "Targettarget" or unit == "focustarget" or unit == "pettarget" then return end
+local dropdown = CreateFrame("Frame", "oUF_TukuiDropDown", UIParent, "UIDropDownMenuTemplate")
 
-	if _G[unit.."FrameDropDown"] then
-		ToggleDropDownMenu(1, nil, _G[unit.."FrameDropDown"], "cursor")
-	elseif (self.unit:match("party")) then
-		ToggleDropDownMenu(1, nil, _G["PartyMemberFrame"..self.id.."DropDown"], "cursor")
+T.SpawnMenu = function(self)
+	dropdown:SetParent(self)
+	return ToggleDropDownMenu(nil, nil, dropdown, "cursor", 0, 0)
+end
+
+local initdropdown = function(self)
+	local unit = self:GetParent().unit
+	local menu, name, id
+
+	if(not unit) then
+		return
+	end
+
+	if(UnitIsUnit(unit, "player")) then
+		menu = "SELF"
+	elseif(UnitIsUnit(unit, "vehicle")) then
+		menu = "VEHICLE"
+	elseif(UnitIsUnit(unit, "pet")) then
+		menu = "PET"
+	elseif(UnitIsPlayer(unit)) then
+		id = UnitInRaid(unit)
+		if(id) then
+			menu = "RAID_PLAYER"
+			name = GetRaidRosterInfo(id)
+		elseif(UnitInParty(unit)) then
+			menu = "PARTY"
+		else
+			menu = "PLAYER"
+		end
 	else
-		FriendsDropDown.unit = self.unit
-		FriendsDropDown.id = self.id
-		FriendsDropDown.initialize = RaidFrameDropDown_Initialize
-		ToggleDropDownMenu(1, nil, FriendsDropDown, "cursor")
+		menu = "TARGET"
+		name = RAID_TARGET_ICON
+	end
+
+	if(menu) then
+		UnitPopup_ShowMenu(self, menu, unit, name, id)
 	end
 end
+
+UIDropDownMenu_Initialize(dropdown, initdropdown, "MENU")
 
 -- called in some function to return a short value. (example: 120 000 return 120k)
 local ShortValue = function(v)
@@ -698,7 +460,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 
 		if min ~= max then
 			local r, g, b
-			r, g, b = oUF.ColorGradient(min/max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
+			r, g, b = oUF.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if unit == "player" and health:GetAttribute("normalUnit") ~= "pet" then
 				if C["unitframes"].showtotalhpmp == true then
 					health.value:SetFormattedText("|cff559655%s|r |cffD7BEA5|||r |cff559655%s|r", ShortValue(min), ShortValue(max))
@@ -950,41 +712,57 @@ end
 -- update cd, border color, etc on buffs / debuffs
 T.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
 	local _, _, _, _, dtype, duration, expirationTime, unitCaster, isStealable = UnitAura(unit, index, icon.filter)
-	if(icon.debuff) then
-		if(not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle") then
-			icon:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-			icon.icon:SetDesaturated(true)
-		else
-			local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
-			icon:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
-			icon.icon:SetDesaturated(false)
-		end
-	else
-		if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
-			if not icon.Animation:IsPlaying() then
-				icon.Animation:Play()
+	if icon then
+		if(icon.filter == "HARMFUL") then
+			if(not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle") then
+				icon.icon:SetDesaturated(true)
+				icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			else
+				local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
+				icon.icon:SetDesaturated(false)
+				icon:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
-			if icon.Animation:IsPlaying() then
-				icon.Animation:Stop()
+			if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
+				if not icon.Animation:IsPlaying() then
+					icon.Animation:Play()
+				end
+			else
+				if icon.Animation:IsPlaying() then
+					icon.Animation:Stop()
+				end
 			end
 		end
-	end
-	
-	if duration and duration > 0 then
-		if C["unitframes"].auratimer == true then
-			icon.remaining:Show()
+		
+		if duration and duration > 0 then
+			if C["unitframes"].auratimer == true then
+				icon.remaining:Show()
+			else
+				icon.remaining:Hide()
+			end
 		else
 			icon.remaining:Hide()
 		end
-	else
-		icon.remaining:Hide()
+	 
+		icon.duration = duration
+		icon.timeLeft = expirationTime
+		icon.first = true
+		icon:SetScript("OnUpdate", CreateAuraTimer)
 	end
- 
-	icon.duration = duration
-	icon.timeLeft = expirationTime
-	icon.first = true
-	icon:SetScript("OnUpdate", CreateAuraTimer)
+end
+
+T.UpdateTargetDebuffsHeader = function(self)
+	local numBuffs = self.visibleBuffs
+	local perRow = self.numRow
+	local s = self.size
+	local row = math.ceil((numBuffs / perRow))
+	local p = self:GetParent()
+	local h = p.Debuffs
+	local y = s * row
+	local addition = s
+	
+	if numBuffs == 0 then addition = 0 end
+	h:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", (T.lowversion and 0) or -2, y + addition)
 end
 
 -- hide the portrait if out of range, not connected, etc
@@ -1054,7 +832,9 @@ end
 T.UpdateHoly = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'HOLY_POWER')) then return end
 	local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
-	for i = 1, MAX_HOLY_POWER do
+	local numMax = UnitPowerMax('player', SPELL_POWER_HOLY_POWER)
+
+	for i = 1, numMax do
 		if(i <= num) then
 			self.HolyPower[i]:SetAlpha(1)
 		else
@@ -1074,11 +854,41 @@ T.EclipseDirection = function(self)
 	end
 end
 
+-- update some elements
+T.ComboPointsBarUpdate = function(self, parent, points)
+	local s = parent.shadow
+	local b = parent.Buffs
+		
+	if T.myclass == "ROGUE" and C.unitframes.movecombobar then
+		-- always show we this option enabled
+		s:Point("TOPLEFT", -4, 12)
+		self:Show()
+	else
+		if points > 0 then
+			if s then
+				s:Point("TOPLEFT", -4, 12)
+			end
+			if b then 
+				b:ClearAllPoints() 
+				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 14)
+			end
+		else
+			if s then
+				s:Point("TOPLEFT", -4, 4)
+			end
+			if b then 
+				b:ClearAllPoints() 
+				b:SetPoint("BOTTOMLEFT", parent, "TOPLEFT", 0, 4)
+			end
+		end
+	end
+end
+
 -- show the druid bar mana or eclipse if form is moonkin/cat/bear.
 T.DruidBarDisplay = function(self, login)
 	local eb = self.EclipseBar
+	local m = self.WildMushroom
 	local dm = self.DruidMana
-	local txt = self.EclipseBar.Text
 	local shadow = self.shadow
 	local bg = self.DruidManaBackground
 	local flash = self.FlashInfo
@@ -1087,18 +897,65 @@ T.DruidBarDisplay = function(self, login)
 		dm:SetScript("OnUpdate", nil)
 	end
 	
-	if eb:IsShown() or dm:IsShown() then
-		if eb:IsShown() then
+	if dm and dm:IsShown() then
+		shadow:Point("TOPLEFT", -4, 12)
+		bg:SetAlpha(1)
+	else
+		flash:Show()
+		shadow:Point("TOPLEFT", -4, 4)
+		if bg then bg:SetAlpha(0) end
+	end
+		
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
+		if eb and eb:IsShown() then
+			local txt = self.EclipseBar.Text
 			txt:Show()
 			flash:Hide()
 		end
 		shadow:Point("TOPLEFT", -4, 12)
-		bg:SetAlpha(1)
+		if bg then bg:SetAlpha(1) end
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 21)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+		end
 	else
-		txt:Hide()
+		if eb then
+			local txt = self.EclipseBar.Text
+			txt:Hide()
+		end
 		flash:Show()
 		shadow:Point("TOPLEFT", -4, 4)
-		bg:SetAlpha(0)
+		if bg then bg:SetAlpha(0) end
+		
+		-- mushroom
+		if m and m:IsShown() then
+			shadow:Point("TOPLEFT", -4, 12)
+			m:ClearAllPoints()
+			m:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+		end
+	end
+end
+
+T.UpdateMushroomVisibility = function(self)
+	local p = self:GetParent()
+	local eb = p.EclipseBar
+	local dm = p.DruidMana
+	local m = p.WildMushroom
+	local shadow = p.shadow
+	
+	if (eb and eb:IsShown()) or (dm and dm:IsShown()) then
+		shadow:Point("TOPLEFT", -4, 21)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 10)
+	elseif m:IsShown() then
+		shadow:Point("TOPLEFT", -4, 12)
+		m:ClearAllPoints()
+		m:Point("BOTTOMLEFT", p, "TOPLEFT", 0, 1)
+	else
+		shadow:Point("TOPLEFT", -4, 4)
 	end
 end
 
@@ -1294,10 +1151,10 @@ if C["unitframes"].raidunitdebuffwatch == true then
 	do
 		T.buffids = {
 			PRIEST = {
-				{6788, "TOPLEFT", {1, 0, 0}, true}, -- Weakened Soul
-				{33076, "TOPRIGHT", {0.2, 0.7, 0.2}}, -- Prayer of Mending
+				{6788, "TOPRIGHT", {1, 0, 0}, true},	 -- Weakened Soul
+				{33076, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},	 -- Prayer of Mending
 				{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Renew
-				{17, "BOTTOMRIGHT", {0.81, 0.85, 0.1}, true}, -- Power Word: Shield
+				{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},	 -- Power Word: Shield
 			},
 			DRUID = {
 				{774, "TOPLEFT", {0.8, 0.4, 0.8}}, -- Rejuvenation
@@ -1306,17 +1163,25 @@ if C["unitframes"].raidunitdebuffwatch == true then
 				{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}}, -- Wild Growth
 			},
 			PALADIN = {
-				{53563, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Beacon of Light
+				{53563, "TOPRIGHT", {0.7, 0.3, 0.7}},	 -- Beacon of Light
+				{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true},	-- Hand of Protection
+				{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},	-- Hand of Freedom
+				{1038, "BOTTOMRIGHT", {0.93, 0.75, 0}, true},	-- Hand of Salvation
+				{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},	-- Hand of Sacrifice
 			},
 			SHAMAN = {
 				{61295, "TOPLEFT", {0.7, 0.3, 0.7}}, -- Riptide 
 				{51945, "TOPRIGHT", {0.2, 0.7, 0.2}}, -- Earthliving
-				{16177, "BOTTOMLEFT", {0.4, 0.7, 0.2}}, -- Ancestral Fortitude
 				{974, "BOTTOMRIGHT", {0.7, 0.4, 0}, true}, -- Earth Shield
+			},
+			MONK = {
+				{119611, "TOPLEFT", {0.8, 0.4, 0.8}},	 --Renewing Mist
+				{116849, "TOPRIGHT", {0.2, 0.8, 0.2}},	 -- Life Cocoon
+				{124682, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Enveloping Mist
+				{124081, "BOTTOMRIGHT", {0.7, 0.4, 0}}, -- Zen Sphere
 			},
 			ALL = {
 				{14253, "RIGHT", {0, 1, 0}}, -- Abolish Poison
-				{23333, "LEFT", {1, 0, 0}}, -- Warsong flag xD
 			},
 		}
 	end
@@ -1324,8 +1189,7 @@ if C["unitframes"].raidunitdebuffwatch == true then
 	-- Dispellable & Important Raid Debuffs we want to show on Grid!
 	-- It use oUF_RaidDebuffs lib for tracking dispellable / important
 	do
-		local _, ns = ...
-		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+		local ORD = oUF_RaidDebuffs
 
 		if not ORD then return end
 		
@@ -1338,151 +1202,90 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			local name = select(1, GetSpellInfo(id))
 			return name	
 		end
-
-		T.debuffids = {
-		-- Other debuff
-			SpellName(67479), -- Impale
-
-		--CATA DEBUFFS
-		--Baradin Hold
-			SpellName(95173), -- Consuming Darkness
-
-		--Blackwing Descent
-			--Magmaw
-			SpellName(91911), -- Constricting Chains
-			SpellName(94679), -- Parasitic Infection
-			SpellName(94617), -- Mangle
-
-			--Omintron Defense System
-			SpellName(79835), --Poison Soaked Shell
-			SpellName(91433), --Lightning Conductor
-			SpellName(91521), --Incineration Security Measure
-
-			--Maloriak
-			SpellName(77699), -- Flash Freeze
-			SpellName(77760), -- Biting Chill
-
-			--Atramedes
-			SpellName(92423), -- Searing Flame
-			SpellName(92485), -- Roaring Flame
-			SpellName(92407), -- Sonic Breath
-
-			--Chimaeron
-			SpellName(82881), -- Break
-			SpellName(89084), -- Low Health
-
-			--Nefarian
-
-			--Sinestra
-			SpellName(92956), --Wrack
-
-		--The Bastion of Twilight
-			--Valiona & Theralion
-			SpellName(92878), -- Blackout
-			SpellName(86840), -- Devouring Flames
-			SpellName(95639), -- Engulfing Magic
-
-			--Halfus Wyrmbreaker
-			SpellName(39171), -- Malevolent Strikes
-
-			--Twilight Ascendant Council
-			SpellName(92511), -- Hydro Lance
-			SpellName(82762), -- Waterlogged
-			SpellName(92505), -- Frozen
-			SpellName(92518), -- Flame Torrent
-			SpellName(83099), -- Lightning Rod
-			SpellName(92075), -- Gravity Core
-			SpellName(92488), -- Gravity Crush
-
-			--Cho'gall
-			SpellName(86028), -- Cho's Blast
-			SpellName(86029), -- Gall's Blast
-
-		--Throne of the Four Winds
-			--Conclave of Wind
-				--Nezir <Lord of the North Wind>
-				SpellName(93131), --Ice Patch
-				--Anshal <Lord of the West Wind>
-				SpellName(86206), --Soothing Breeze
-				SpellName(93122), --Toxic Spores
-				--Rohash <Lord of the East Wind>
-				SpellName(93058), --Slicing Gale
-			--Al'Akir
-			SpellName(93260), -- Ice Storm
-			SpellName(93295), -- Lightning Rod
-
-		-- Firelands, thanks Kaelhan :)
-			-- Beth'tilac
-				SpellName(99506),	-- Widows Kiss
-				SpellName(97202),	-- Fiery Web Spin
-				SpellName(49026),	-- Fixate
-				SpellName(97079),	-- Seeping Venom
-			-- Lord Rhyolith
-				-- none, hehe, fake boss
-			-- Alysrazor
-				SpellName(101296),	-- Fieroblast
-				SpellName(100723),	-- Gushing Wound
-				SpellName(99389),	-- Imprinted
-				SpellName(101729),	-- Blazing Claw
-			-- Shannox
-				SpellName(99837),	-- Crystal Prison
-				SpellName(99937),	-- Jagged Tear
-			-- Baleroc
-				SpellName(99256),	-- Torment
-				SpellName(99252),	-- Blaze of Glory
-				SpellName(99516),	-- Countdown
-			-- Majordomo Staghelm
-				SpellName(98450),	-- Searing Seeds
-			-- Ragnaros
-				SpellName(99399),	-- Burning Wound
-				SpellName(100293),	-- Lava Wave
-				SpellName(98313),	-- Magma Blast
-				SpellName(100675),	-- Dreadflame
-				
-		-- Dragon Soul
-			-- Morchok
-				SpellName(103687),	-- Crush Armor
-				SpellName(103536),	-- Warning
-				SpellName(103534),	-- Danger
-				SpellName(108570),	-- Black Blood of the Earth
 			
-			-- Warlord Zon'ozz
-				SpellName(103434),	-- Disrupting Shadows
+		-- Important Raid Debuffs we want to show on Grid!
+		-- Mists of Pandaria debuff list created by prophet
+		-- http://www.tukui.org/code/view.php?id=PROPHET170812083424
+		T.debuffids = {			
+			-----------------------------------------------------------------
+			-- Mogu'shan Vaults
+			-----------------------------------------------------------------
+			-- The Stone Guard
+			SpellName(116281),	-- Cobalt Mine Blast
 			
-			-- Yor'sahj the Unsleeping
-				SpellName(103628),	-- Deep Corruption
+			-- Feng the Accursed
+			SpellName(116784),	-- Wildfire Spark
+			SpellName(116417),	-- Arcane Resonance
+			SpellName(116942),	-- Flaming Spear
 			
-			-- Hagara the Stormbinder
-				SpellName(104451),	-- Ice Tomb
-				SpellName(105259),	-- Watery Entrenchment
-				SpellName(109325),	-- Frostflake
-				SpellName(105289),	-- Shattered Ice
-				SpellName(105285),	-- Target
-				SpellName(107061),	-- Ice Lance
+			-- Gara'jal the Spiritbinder
+			SpellName(116161),	-- Crossed Over
+			SpellName(122151),	-- Voodoo Dolls
 			
-			-- Ultraxion
-				SpellName(105925),	-- Fading Light
+			-- The Spirit Kings
+			SpellName(117708),	-- Maddening Shout
+			SpellName(118303),	-- Fixate
+			SpellName(118048),	-- Pillaged
+			SpellName(118135),	-- Pinned Down
 			
-			-- Warmaster Blackhorn
-				SpellName(108043),	-- Devastate
-				SpellName(108046),	-- Shockwave
-				SpellName(107567),	-- Brutal Strike
-				SpellName(107558),	-- Degeneration
+			-- Elegon
+			SpellName(117878),	-- Overcharged
+			SpellName(117949),	-- Closed Circuit
 			
-			-- Spine of Deathwing
-				SpellName(105563),	-- Grasping Tendrils
-				SpellName(105479),	-- Searing Plasma
-				SpellName(105490),	-- Fiery Grip
+			-- Will of the Emperor
+			SpellName(116835),	-- Devastating Arc
+			SpellName(116778),	-- Focused Defense
+			SpellName(116525),	-- Focused Assault
 			
-			-- Madness of Deathwing
-				SpellName(105841),	-- Degenerative bite
-				SpellName(105445),	-- Blistering heat
-				SpellName(109603),	-- Tetanus
-				SpellName(110141),	-- Shrapnel
+			-----------------------------------------------------------------
+			-- Heart of Fear
+			-----------------------------------------------------------------
+			-- Imperial Vizier Zor'lok
+			SpellName(122761),	-- Exhale
+			SpellName(122760), -- Exhale
+			SpellName(122740),	-- Convert
+			SpellName(123812),	-- Pheromones of Zeal
+			
+			-- Blade Lord Ta'yak
+			SpellName(123180),	-- Wind Step
+			SpellName(123474),	-- Overwhelming Assault
+			
+			-- Garalon
+			SpellName(122835),	-- Pheromones
+			SpellName(123081),	-- Pungency
+			
+			-- Wind Lord Mel'jarak
+			SpellName(122125),	-- Corrosive Resin Pool
+			SpellName(121885), 	-- Amber Prison
+			
+			-- Amber-Shaper Un'sok
+			SpellName(121949),	-- Parasitic Growth
+			-- Grand Empress Shek'zeer
+			
+			-----------------------------------------------------------------
+			-- Terrace of Endless Spring
+			-----------------------------------------------------------------
+			-- Protectors of the Endless
+			SpellName(117436),	-- Lightning Prison
+			SpellName(118091),	-- Defiled Ground
+			SpellName(117519),	-- Touch of Sha
+
+			-- Tsulong
+			SpellName(122752),	-- Shadow Breath
+			SpellName(123011),	-- Terrorize
+			SpellName(116161),	-- Crossed Over
+			
+			-- Lei Shi
+			SpellName(123121),	-- Spray
+			
+			-- Sha of Fear
+			SpellName(119985),	-- Dread Spray
+			SpellName(119086),	-- Penetrating Bolt
+			SpellName(119775),	-- Reaching Attack
 		}
 
 		T.ReverseTimer = {
-			[92956] = true, -- Sinestra (Wrack)
+
 		},
 		
 		ORD:RegisterDebuffs(T.debuffids)

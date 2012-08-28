@@ -1,11 +1,11 @@
 Example of .toc file for an extra addon for Tukui.
 Just copy/past below lines in a .toc file and edit it.
 
-## Interface: 40000
-## Title: |cffC495DDTukui Example|r
+## Interface: 50000
+## Title: |cffC495DDDrPepper|r
 ## Notes: This is the tooltip text show in character screen, addon list, when mouse is over this mod.
 ## Author: Your nickname
 ## Version: 1.00
 ## RequiredDeps: Tukui
 
-example.lua
+your_file.lua

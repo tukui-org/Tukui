@@ -1,9 +1,9 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 
 local AchievementHolder = CreateFrame("Frame", "TukuiAchievementHolder", UIParent)
 AchievementHolder:Width(180)
 AchievementHolder:Height(20)
-AchievementHolder:SetPoint("CENTER", UIParent, "CENTER", 0, 170)
+AchievementHolder:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 176)
 AchievementHolder:SetTemplate("Default")
 AchievementHolder:SetBackdropBorderColor(1, 0, 0)
 AchievementHolder:SetClampedToScreen(true)
@@ -13,69 +13,26 @@ AchievementHolder.text = T.SetFontString(AchievementHolder, C.media.uffont, 12)
 AchievementHolder.text:SetPoint("CENTER")
 AchievementHolder.text:SetText(L.move_achievements)
 
-local pos = "TOP"
+AlertFrame:SetParent(AchievementHolder)
+AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)
 
-function T.AchievementMove(self, event, ...)
-	local previousFrame
-	for i=1, MAX_ACHIEVEMENT_ALERTS do
-		local aFrame = _G["AchievementAlertFrame"..i]
-		if ( aFrame ) then
-			aFrame:ClearAllPoints()
-			if pos == "TOP" then
-				if ( previousFrame and previousFrame:IsShown() ) then
-					aFrame:SetPoint("TOP", previousFrame, "BOTTOM", 0, -10)
-				else
-					aFrame:SetPoint("TOP", AchievementHolder, "BOTTOM")
-				end
-			else
-				if ( previousFrame and previousFrame:IsShown() ) then
-					aFrame:SetPoint("BOTTOM", previousFrame, "TOP", 0, 10)
-				else
-					aFrame:SetPoint("BOTTOM", AchievementHolder, "TOP")	
-				end			
-			end
-			
-			previousFrame = aFrame
-		end		
-	end
-	
-end
-hooksecurefunc("AchievementAlertFrame_FixAnchors", T.AchievementMove)
-
-hooksecurefunc("DungeonCompletionAlertFrame_FixAnchors", function()
-	for i=MAX_ACHIEVEMENT_ALERTS, 1, -1 do
-		local aFrame = _G["AchievementAlertFrame"..i]
-		if ( aFrame and aFrame:IsShown() ) then
-			DungeonCompletionAlertFrame1:ClearAllPoints()
-			if pos == "TOP" then
-				DungeonCompletionAlertFrame1:SetPoint("TOP", aFrame, "BOTTOM", 0, -10)
-			else
-				DungeonCompletionAlertFrame1:SetPoint("BOTTOM", aFrame, "TOP", 0, 10)
-			end
-			
-			return
-		end
+--[[
+	SlashCmdList.TEST_ACHIEVEMENT = function()
+		PlaySound("LFG_Rewards")
+		AchievementFrame_LoadUI()
+		AchievementAlertFrame_ShowAlert(5780)
+		AchievementAlertFrame_ShowAlert(5000)
+		GuildChallengeAlertFrame_ShowAlert(3, 2, 5)
+		ChallengeModeAlertFrame_ShowAlert()
+		CriteriaAlertFrame_GetAlertFrame()
+		AlertFrame_AnimateIn(CriteriaAlertFrame1)
+		AlertFrame_AnimateIn(DungeonCompletionAlertFrame1)
+		AlertFrame_AnimateIn(ScenarioAlertFrame1)
+		MoneyWonAlertFrame_ShowAlert(1)
 		
-		DungeonCompletionAlertFrame1:ClearAllPoints()	
-		if pos == "TOP" then
-			DungeonCompletionAlertFrame1:SetPoint("TOP", AchievementHolder, "BOTTOM")
-		else
-			DungeonCompletionAlertFrame1:SetPoint("BOTTOM", AchievementHolder, "TOP")
-		end
+		local _, itemLink = GetItemInfo(6948)
+		LootWonAlertFrame_ShowAlert(itemLink, -1, 1, 1)
+		AlertFrame_FixAnchors()
 	end
-end)
-
-function T.PostAchievementMove(frame)
-	local point = select(1, frame:GetPoint())
-
-	if string.find(point, "TOP") or point == "CENTER" or point == "LEFT" or point == "RIGHT" then
-		pos = "TOP"
-	else
-		pos = "BOTTOM"
-	end
-	T.AchievementMove()
-end
-
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("ACHIEVEMENT_EARNED")
-frame:SetScript("OnEvent", function(self, event, ...) T.AchievementMove(self, event, ...) end)
+	SLASH_TEST_ACHIEVEMENT1 = "/testalerts"
+--]]

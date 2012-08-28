@@ -12,11 +12,6 @@ Now the functions:
 		use media.normTex instead of the default blank texture. If "" is empty,
 		it will use "Default" template by default.
 
-	frame:CreatePanel("Template", width, height, point, anchor, relativepoint, xposition, yposition)
-		SetTemplate's brother, sets a backdrop with more options like custom
-		size, position, point, etc. If "" is empty, it will use "Default"
-		template by default.
-
 	frame:Size(width, height)
 		Sets the width and height of object to an absolute (pixel perfect) value
 		in pixels. If height is ommitted then height = width is assumed.
@@ -49,6 +44,14 @@ Now the functions:
 
 	frame:HighlightUnit(r, g, b)
 		Highlight your current target with specified (r, g, b) color.
+		
+	element:SetInside(frame, x, y)
+		Resize the element inside a frame with x (horizontal) and y (vertical) pixel spacing.
+		if frame, x and y is not specified, it will try to anchor to parent frame with default x, y values. (2)
+		
+	element:SetOutside(frame, x, y)
+		Resize the element outside a frame with x (horizontal) and y (vertical) pixel spacing.
+		if frame, x and y is not specified, it will try to anchor to parent frame with default x, y values. (2)
 
 Templates:
 	- "Default"
@@ -56,3 +59,4 @@ Templates:
 	- "Transparent"
 		-- Same as "Default" but with Transparent background
 	- "ClassColor"
+		-- Same as "Default" but with class colored border.

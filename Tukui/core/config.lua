@@ -1,25 +1,30 @@
-----------------------------------------------------------------------------
--- This Module loads new user settings if TukUI_ConfigUI is loaded
-----------------------------------------------------------------------------
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+------------------------------------------------------------------
+-- This Module loads new user settings if in-game config is loaded
+------------------------------------------------------------------
+
+local T, C, L, G = unpack(select(2, ...))
 
 local myPlayerRealm = GetCVar("realmName")
 local myPlayerName  = UnitName("player")
 
 if not IsAddOnLoaded("Tukui_ConfigUI") then return end
+if not TukuiConfigAll then TukuiConfigAll = {} end
 
-if not TukuiConfigAll then TukuiConfigAll = {} end		
-if (TukuiConfigAll[myPlayerRealm] == nil) then TukuiConfigAll[myPlayerRealm] = {} end
-if (TukuiConfigAll[myPlayerRealm][myPlayerName] == nil) then TukuiConfigAll[myPlayerRealm][myPlayerName] = false end
+local tca = TukuiConfigAll
+local private = TukuiConfigPrivate
+local public = TukuiConfigPublic
+		
+if not tca[myPlayerRealm] then tca[myPlayerRealm] = {} end
+if not tca[myPlayerRealm][myPlayerName] then tca[myPlayerRealm][myPlayerName] = false end
 
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == true and not TukuiConfigPrivate then return end
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == false and not TukuiConfigPublic then return end
+if tca[myPlayerRealm][myPlayerName] == true and not private then return end
+if tca[myPlayerRealm][myPlayerName] == false and not public then return end
 
 local setting
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-	setting = TukuiConfigPrivate
+if tca[myPlayerRealm][myPlayerName] == true then
+	setting = private
 else
-	setting = TukuiConfigPublic
+	setting = public
 end
 
 for group,options in pairs(setting) do

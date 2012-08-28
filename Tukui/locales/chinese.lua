@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "zhCN" then
+	L.UI_Outdated = "Tukui 版本已过期，请至 www.tukui.org 下载最新版"
+	
 	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)	
 	L.chat_BATTLEGROUND_GET = "战场"
 	L.chat_BATTLEGROUND_LEADER_GET = "战场领袖"
@@ -93,8 +95,11 @@ if T.client == "zhCN" then
 	L.datatext_gatesdestroyed = "摧毁大门："
 	L.datatext_totalmemusage = "总内存占用："
 	L.datatext_control = "控制方："
-	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
-	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+	L.datatext_cta_allunavailable = "无法获取战斗的召唤信息."
+	L.datatext_cta_nodungeons = "目前没有可用的战斗的召唤地下城."
+	L.datatext_carts_controlled = "Carts Controlled:"
+	L.datatext_victory_points = "Victory Points:"
+	L.datatext_orb_possessions = "Orb Possessions:"
 
 	L.Slots = {
 		[1] = {1, "头部", 1000},

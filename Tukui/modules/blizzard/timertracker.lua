@@ -1,4 +1,6 @@
-local T, C, L = unpack(select(2, ...))
+-- MOVE ME TO /SKINS
+
+local T, C, L, G = unpack(select(2, ...))
 
 local function SkinIt(bar)	
 	local _, originalPoint, _, _, _ = bar:GetPoint()
@@ -25,7 +27,6 @@ local function SkinIt(bar)
 	bar.backdrop:SetTemplate("Default")
 	bar.backdrop:SetAllPoints(originalPoint)
 end
-
 
 local function SkinBlizzTimer(self, event)
 	for _, b in pairs(TimerTracker.timerList) do

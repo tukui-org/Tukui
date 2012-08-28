@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 C["media"] = {
 	-- fonts (ENGLISH, SPANISH)
@@ -48,7 +48,7 @@ C["media"] = {
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
 	
 	-- colors
-	["bordercolor"] = C.general.bordercolor or { .6,.6,.6 }, -- border color of tukui panels
+	["bordercolor"] = C.general.bordercolor or { .5,.5,.5 }, -- border color of tukui panels
 	["backdropcolor"] = C.general.backdropcolor or { .1,.1,.1 }, -- background color of tukui panels
 	["datatextcolor1"] = { 1, 1, 1 }, -- color of datatext title
 	["datatextcolor2"] = { 1, 1, 1 }, -- color of datatext result

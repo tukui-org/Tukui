@@ -3,18 +3,20 @@
 		All others raid frames mods or default Blizzard should have already this feature
 --]]
 
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 local panel_height = ((T.Scale(5)*4) + (T.Scale(22)*4))
 local r,g,b = C["media"].backdropcolor
 
 local function CreateUtilities(self, event, addon)
-	if addon == "Tukui_Raid_Healing" or addon == "Tukui_Raid" then
+	if addon == "Tukui" and C.unitframes.raid then
 		-- it need the Tukui minimap
 		if not TukuiMinimap then return end
 
 		--Create main frame
-		local TukuiRaidUtility = CreateFrame("Frame", "TukuiRaidUtility", UIParent)
-		TukuiRaidUtility:CreatePanel("Default", TukuiMinimap:GetWidth(), panel_height, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2)
+		local TukuiRaidUtility = CreateFrame("Frame", "TukuiRaidUtility", TukuiMinimap)
+		TukuiRaidUtility:SetTemplate()
+		TukuiRaidUtility:Size(TukuiMinimap:GetWidth(), panel_height)
+		TukuiRaidUtility:Point("TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2)
 		TukuiRaidUtility:Hide()
 		TukuiRaidUtility:SetFrameLevel(10)
 		TukuiRaidUtility:SetFrameStrata("Medium")
@@ -22,7 +24,7 @@ local function CreateUtilities(self, event, addon)
 		--Check if We are Raid Leader or Raid Officer
 		local function CheckRaidStatus()
 			local inInstance, instanceType = IsInInstance()
-			if (UnitIsRaidOfficer("player") or IsPartyLeader()) and not (inInstance and (instanceType == "pvp" or instanceType == "arena")) then
+			if (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")) and not (inInstance and (instanceType == "pvp" or instanceType == "arena")) then
 				return true
 			else
 				return false
@@ -66,7 +68,7 @@ local function CreateUtilities(self, event, addon)
 		end
 
 		--Show Button
-		CreateButton("TukuiRaidUtilityShowButton", UIParent, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", TukuiMinimap:GetWidth(), 21, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2, RAID_ASSISTANT, nil)
+		CreateButton("TukuiRaidUtilityShowButton", TukuiMinimap, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", TukuiMinimap:GetWidth(), 21, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2, RAID_ASSISTANT, nil)
 		TukuiRaidUtilityShowButton:SetFrameRef("TukuiRaidUtility", TukuiRaidUtility)
 		TukuiRaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef("TukuiRaidUtility"):Show();]=])
 		TukuiRaidUtilityShowButton:SetScript("OnMouseUp", function(self) TukuiRaidUtility.toggled = true end)
@@ -82,7 +84,7 @@ local function CreateUtilities(self, event, addon)
 		CreateButton("TukuiRaidUtilityDisbandRaidButton", TukuiRaidUtility, "UIMenuButtonStretchTemplate", TukuiRaidUtility:GetWidth() * 0.95, T.Scale(21), "TOP", TukuiRaidUtility, "TOP", 0, T.Scale(-5), "Disband Group", nil)
 		TukuiRaidUtilityDisbandRaidButton:SetScript("OnMouseUp", function(self)
 			if CheckRaidStatus() then
-				StaticPopup_Show("TUKUIDISBAND_RAID")
+				T.ShowPopup("TUKUIDISBAND_RAID")
 			end
 		end)
 
@@ -172,11 +174,19 @@ local function CreateUtilities(self, event, addon)
 			if event == "PLAYER_REGEN_ENABLED" then
 				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 			end
+			
+			if UnitInRaid("player") then
+				TukuiRaidUtilityMainTankButton:Enable()
+				TukuiRaidUtilityMainAssistButton:Enable()
+			else
+				TukuiRaidUtilityMainTankButton:Disable()
+				TukuiRaidUtilityMainAssistButton:Disable()			
+			end
 		end
 
 		--Automatically show/hide the frame if we have RaidLeader or RaidOfficer
 		local LeadershipCheck = CreateFrame("Frame")
-		LeadershipCheck:RegisterEvent("RAID_ROSTER_UPDATE")
+		LeadershipCheck:RegisterEvent("GROUP_ROSTER_UPDATE")
 		LeadershipCheck:SetScript("OnEvent", ToggleRaidUtil)
 	end
 end

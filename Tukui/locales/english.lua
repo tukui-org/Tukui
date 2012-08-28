@@ -1,5 +1,7 @@
 -- localization for enUS and enGB
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...))
+
+L.UI_Outdated = "Your version of Tukui is out of date. You can download the latest version from www.tukui.org"
 
 L.chat_BATTLEGROUND_GET = "BG"
 L.chat_BATTLEGROUND_LEADER_GET = "BG"
@@ -94,6 +96,9 @@ L.datatext_totalmemusage = "Total Memory Usage:"
 L.datatext_control = "Controlled by:"
 L.datatext_cta_allunavailable = "Could not get Call To Arms information."
 L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+L.datatext_carts_controlled = "Carts Controlled:"
+L.datatext_victory_points = "Victory Points:"
+L.datatext_orb_possessions = "Orb Possessions:"
 
 L.Slots = {
 	[1] = {1, "Head", 1000},
@@ -110,8 +115,8 @@ L.Slots = {
 }
 
 L.popup_disableui = "Tukui doesn't work for this resolution, do you want to disable Tukui? (Cancel if you want to try another resolution)"
-L.popup_install = "First time running Tukui V13 with this Character. You must reload your UI to set Action Bars, Variables and Chat Frames."
-L.popup_reset = "Warning! This will reset everything to Tukui default. Do you want to proceed?"
+L.popup_install = "First time running Tukui v15 with this Character. You must reload your UI to set Action Bars, Variables and Chat Frames."
+L.popup_reset = "Warning! This will reset everything in Tukui to default. Do you want to proceed?"
 L.popup_2raidactive = "2 raid layouts are active, please select a layout."
 L.popup_install_yes = "Yeah! (recommended!)"
 L.popup_install_no = "No, it sux so hard"
@@ -146,13 +151,13 @@ L.unitframes_ouf_starfirespell = "Starfire"
 
 L.tooltip_count = "Count"
 
-L.bags_noslots = "can't buy anymore slots!"
+L.bags_noslots = "Can't buy anymore slots!"
 L.bags_costs = "Cost: %.2f gold"
 L.bags_buyslots = "Buy new slot with /bags purchase yes"
 L.bags_openbank = "You need to open your bank first."
-L.bags_sort = "sort your bags or your bank, if open."
-L.bags_stack = "fill up partial stacks in your bags or bank, if open."
-L.bags_buybankslot = "buy bank slot. (need to have bank open)"
+L.bags_sort = "Sort your bags or your bank, if open."
+L.bags_stack = "Fill up partial stacks in your bags or bank, if open."
+L.bags_buybankslot = "Buy bank slot. (need to have bank open)"
 L.bags_search = "Search"
 L.bags_sortmenu = "Sort"
 L.bags_sortspecial = "Sort Special"
@@ -185,9 +190,9 @@ L.core_uihelp2 = "|cffFF0000/moveui|r - Unlock and move elements around the scre
 L.core_uihelp3 = "|cffFF0000/rl|r - Reloads your User Interface."
 L.core_uihelp4 = "|cffFF0000/gm|r - Send GM tickets or shows WoW in-game help."
 L.core_uihelp5 = "|cffFF0000/frame|r - Detect the frame name your mouse is currently on. (very useful for lua editors)"
-L.core_uihelp6 = "|cffFF0000/heal|r - Enable healing raid layout."
-L.core_uihelp7 = "|cffFF0000/dps|r - Enable Dps/Tank raid layout."
-L.core_uihelp8 = "|cffFF0000/bags|r - For sorting, buying bank slot, or stacking items in your bags."
+L.core_uihelp6 = "|cffFF0000/heal|r - Enable Healing raid layout."
+L.core_uihelp7 = "|cffFF0000/dps|r - Enable DDPS/Tank raid layout."
+L.core_uihelp8 = "|cffFF0000/bags|r - For sorting, buying bank slots, or stacking items in your bags."
 L.core_uihelp9 = "|cffFF0000/resetui|r - Reset Tukui to default."
 L.core_uihelp10 = "|cffFF0000/rd|r - Disband raid."
 L.core_uihelp11 = "|cffFF0000/ainv|r - Enable autoinvite via keyword on whisper. You can set your own keyword by typing `/ainv myword`"
@@ -209,10 +214,6 @@ L.bind_discard = "All newly set keybindings have been discarded."
 L.bind_instruct = "Hover your mouse over any actionbutton to bind it. Press the escape key or right click to clear the current actionbuttons keybinding."
 L.bind_save = "Save bindings"
 L.bind_discardbind = "Discard bindings"
-
-L.hunter_unhappy = "Your pet is unhappy!"
-L.hunter_content = "Your pet is content!"
-L.hunter_happy = "Your pet is happy!"
 
 L.move_tooltip = "Move Tooltip"
 L.move_minimap = "Move Minimap"
@@ -245,43 +246,43 @@ L.install_header_11= "4. Success!"
 
 -- install
 L.install_init_line_1 = "Thank you for choosing Tukui!"
-L.install_init_line_2 = "You will be guided through the installation process in a few simple steps. At each step, you can decide whether or not you want to apply or skip the presented settings."
+L.install_init_line_2 = "You will be guided through the installation process in a few simple steps.  At each step, you can decide whether or not you want to apply or skip the presented settings."
 L.install_init_line_3 = "You are also given the possibility to be shown a brief tutorial on some of the features of Tukui."
 L.install_init_line_4 = "Press the 'Tutorial' button to be guided through this small introduction, or press 'Install' to skip this step."
 
 -- tutorial 1
 L.tutorial_step_1_line_1 = "This quick tutorial will show you some of the features in Tukui."
 L.tutorial_step_1_line_2 = "First, the essentials that you should know before you can play with this UI."
-L.tutorial_step_1_line_3 = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run install script for each new character running Tukui. Script is auto show on every new character logging into Tukui for the first time. Also, the options can be found in /Tukui/config/config.lua for `Power` users or by typing /tukui in game for `Friendly` users."
-L.tutorial_step_1_line_4 = "A power user is a user of a personal computer who has the ability to use advanced features (ex: Lua editing) which are beyond the abilities of normal users. A friendly user is a normal user and is not necessarily capable of programming. It's recommended for them to use our in game configuration tool (/tukui) for settings what they want displayed on Tukui."
+L.tutorial_step_1_line_3 = "This installer is partially character-specific. While some of the settings that will be applied later on are account-wide, you need to run the install script for each new character running Tukui.  The script is auto shown on every new character you log in with Tukui installed for the first time.  Also, the options can be found in /Tukui/config/config.lua for `Power` users or by typing /tukui in game for `Friendly` users."
+L.tutorial_step_1_line_4 = "A power user is a user of a personal computer who has the ability to use advanced features (ex: Lua editing) which are beyond the abilities of normal users.  A friendly user is a normal user and is not necessarily capable of programming.  It's recommended for them to use our in game configuration tool (/tukui) for settings they want changed in Tukui."
 
 -- tutorial 2
-L.tutorial_step_2_line_1 = "Tukui includes an embedded version of oUF (oUFTukui) created by Haste. This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements."
+L.tutorial_step_2_line_1 = "Tukui includes an embedded version of oUF (oUFTukui) created by Haste.  This handles all of the unitframes on the screen, the buffs and debuffs, and the class-specific elements."
 L.tutorial_step_2_line_2 = "You can visit wowinterface.com and search for oUF for more information about this tool."
-L.tutorial_step_2_line_3 = "If you play as a healer or a raid leader, you may want to enable healer unit frames. They display more information about your raid. (/heal) A dps or tank should use our simple raid display. (/dps) If you don't want to show any of them or use something else, you can disable it in addon manager from character login list."
-L.tutorial_step_2_line_4 = "To easily change the unitframe position, just type /moveui."
+L.tutorial_step_2_line_3 = "To easily change the unitframes positions, just type /moveui."
+L.tutorial_step_2_line_4 = ""
 
 -- tutorial 3
-L.tutorial_step_3_line_1 = "Tukui is a redesigned Blizzard UI. Nothing less, nothing more. Approx all features you can see on Default UI is available thought Tukui. The only features not available thought default UI are some automated features not really visible on screen, like example auto selling gray when visiting a vendor or, another example, auto sort items in bags."
-L.tutorial_step_3_line_2 = "Because not everyone is enjoying things like DPS meters, Boss mods, Threat meter, etc, we judge that it's the best thing to do. Tukui is made around this idea to fit at maximum all class, roles, specs, type of gameplay, taste of users, etc. That's why Tukui is one of the most popular UI at the moment. It fit everyone gameplay and is extremly editable. It's also designed to be a very good start for everyone that want to make their own custom UI without depending on addons. Tons of users since 2009 are now using Tukui as a base for their own UI. Take a look into our Edited Packages from our website!"
-L.tutorial_step_3_line_3 = "Users may want to visit our extra mods section into our website or by visiting www.wowinterface.com to install additionnal features or mods."
+L.tutorial_step_3_line_1 = "Tukui is a redesigned Blizzard UI.  Nothing less, nothing more.  Approxmently all features you see with Default UI is available thought Tukui.  The only features not available thought default UI are some automated features not really visible on screen, for example auto selling grays when visiting a vendor or, auto sorting bags."
+L.tutorial_step_3_line_2 =  "Not everyone enjoys things like DPS meters, Boss mods, Threat meters, etc, we judge that it's the best thing to do. Tukui is made around the idea to work  for all classes, roles, specs, type of gameplay, taste of the users, etc. This why Tukui is one of the most popular UI at the moment. It fits everyones play style and is extremly editable. It's also designed to be a good start for everyone that want to make their own custom UI without depending on addons. Since 2009 a lot of users have started using Tukui as a base for their own UI. Take a look at the Edited Packages on our website!"
+L.tutorial_step_3_line_3 = "Users may want to visit our extra mods section on our website or by visiting www.wowinterface.com to install additional features or mods."
 L.tutorial_step_3_line_4 = ""
 
 -- tutorial 4
-L.tutorial_step_4_line_1 = "To set how many bars you want, mouseover on left or right of bottom action bar background. Do the same on the right, via top and bottom. To copy text from the chat frame, click the button show on mouseover on the right corner of chat frames."
-L.tutorial_step_4_line_2 = "The minimap border changes colour. It is green when you have new mail, red when you have a new calendar invite, and orange when you have both."
-L.tutorial_step_4_line_3 = "You can left-click thought 80% of datatext to show various panels from Blizzard. Friend and Guild Datatext have right-click features aswell."
-L.tutorial_step_4_line_4 = "There is some dropdown menu available. Right-clicking on [X] (Close) bag button will show a dropdown menu to show bags, sort items, show keyring, etc. Middle-clicking thought Minimap will show the micro menu."
+L.tutorial_step_4_line_1 = "To set how many bars you want, mouseover on left or right of bottom action bar background.  Do the same on the right, via top and bottom.  To copy text from the chat frame, click the button shown on mouseover in the right corner of chat frames."
+L.tutorial_step_4_line_2 = "You can left-click through 80% of datatext to show various panels from Blizzard.  Friend and Guild Datatext have right-click features aswell."
+L.tutorial_step_4_line_3 = "There are some dropdown menus available. Right-clicking on the [X] (Close) bag button will show a dropdown menu to show bags, sort items, show keyring, etc.  Middle-clicking thought Minimap will show the micro menu."
+L.tutorial_step_4_line_4 = ""
 
 -- tutorial 5
-L.tutorial_step_5_line_1 = "Lastly, Tukui includes useful slash commands. Below is a list."
-L.tutorial_step_5_line_2 = "/moveui allow you to move lots of frames anywhere on the screen. /enable and /disable are used to quickly enable and disable addons. /rl reloads the UI. /heal enable the healer raid unit frames and /dps enable the dps/tank raid unit frames."
-L.tutorial_step_5_line_3 = "/tt lets you whisper your target. /rc initiates a ready check. /rd disbands a party or raid. /bags display some features available thought command line. /ainv enable auto invite by whisper on you. (/ainv off) to turn it off"
-L.tutorial_step_5_line_4 = "/gm toggles the Help frame. /install, /resetui or /tutorial loads this installer. /frame print the name and parent of the frame below the cursor respectively with additionnal information."
+L.tutorial_step_5_line_1 = "Lastly, Tukui includes useful slash commands.  Below is a list."
+L.tutorial_step_5_line_2 = "/moveui allow you to move lots of the frames anywhere on the screen.  /enable and /disable are used to quickly enable and disable addons.  /rl reloads the UI."
+L.tutorial_step_5_line_3 = "/tt lets you whisper your target.  /rc initiates a ready check.  /rd disbands a party or raid.  /bags display some features available thought command line.  /ainv enable auto invite by whisper to you.  (/ainv off) to turn it off"
+L.tutorial_step_5_line_4 = "/gm toggles the Help frame.  /install or /tutorial loads this installer. "
 
 -- tutorial 6
-L.tutorial_step_6_line_1 = "The tutorial is complete. You can choose to reconsult it at any time by typing /tutorial."
-L.tutorial_step_6_line_2 = "I suggest you have a look through config/config.lua or by typing /Tukui to customize the UI to your needs."
+L.tutorial_step_6_line_1 = "The tutorial is complete.  You can choose to reconsult it at any time by typing /tutorial."
+L.tutorial_step_6_line_2 = "I suggest you have a look through config/config.lua or type /Tukui to customize the UI to your needs."
 L.tutorial_step_6_line_3 = "You can now continue install the UI if it's not done yet or if you want to reset to default!"
 L.tutorial_step_6_line_4 = ""
 
@@ -292,15 +293,15 @@ L.install_step_1_line_3 = "This is |cffff0000recommended|r for any user, unless 
 L.install_step_1_line_4 = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step."
 
 -- install step 2
-L.install_step_2_line_0 = "Another chat addon is found. We will ignore this step. Please press skip to continue installation."
+L.install_step_2_line_0 = "Another chat addon is found.  We will ignore this step.  Please press skip to continue installation."
 L.install_step_2_line_1 = "The second step applies the correct chat setup."
-L.install_step_2_line_2 = "If you are a new user, this step is recommended. If you are an existing user, you may want to skip this step."
-L.install_step_2_line_3 = "It is normal that your chat font will appear too big upon applying these settings. It will revert back to normal when finishing the installation."
+L.install_step_2_line_2 = "If you are a new user, this step is recommended.  If you are an existing user, you may want to skip this step."
+L.install_step_2_line_3 = "It is normal that your chat font will appear too big upon applying these settings.  It will revert back to normal when you finish with the installation."
 L.install_step_2_line_4 = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step."
 
 -- install step 3
-L.install_step_3_line_1 = "The third and final step applies default frames position."
-L.install_step_3_line_2 = "This step is |cffff0000recommended|r for any new user."
+L.install_step_3_line_1 = "The third and final step applies the default frame positions."
+L.install_step_3_line_2 = "This step is |cffff0000recommended|r for new users."
 L.install_step_3_line_3 = ""
 L.install_step_3_line_4 = "Click 'Continue' to apply the settings, or click 'Skip' if you wish to skip this step."
 

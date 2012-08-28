@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "deDE" then
+	L.UI_Outdated = "Deine Version von Tukui ist veraltet. Du kannst die aktuelle Version von www.tukui.org laden"
+	
 	L.chat_BATTLEGROUND_GET = "B"
 	L.chat_BATTLEGROUND_LEADER_GET = "B"
 	L.chat_BN_WHISPER_GET = "Von"
@@ -94,6 +96,9 @@ if T.client == "deDE" then
 	L.datatext_control = "Kontrolliert von:"
 	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
 	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+	L.datatext_carts_controlled = "Kontrollierte Loren:"
+	L.datatext_victory_points = "Siegespunkte:"
+	L.datatext_orb_possessions = "Gehaltene Kugeln:"
  
 	L.Slots = {
 		[1] = {1, "Kopf", 1000},

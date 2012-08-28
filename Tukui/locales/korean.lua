@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "koKR" then
+	L.UI_Outdated = "당신의 Tukui 버전이 구버전입니다. 당신은 www.tukui.org에서 최신 버전을 다운로드하실 수 있습니다."
+	
 	L.chat_BATTLEGROUND_GET = "B"
 	L.chat_BATTLEGROUND_LEADER_GET = "B"
 	L.chat_BN_WHISPER_GET = "FR"
@@ -94,6 +96,9 @@ if T.client == "koKR" then
 	L.datatext_control = "현재 진영:"
 	L.datatext_cta_allunavailable = "Could not get Call To Arms information."
 	L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
+	L.datatext_carts_controlled = "Carts Controlled:"
+	L.datatext_victory_points = "Victory Points:"
+	L.datatext_orb_possessions = "Orb Possessions:"
  
 	L.bg_warsong = "전쟁노래 협곡"
 	L.bg_arathi = "아라시 분지"

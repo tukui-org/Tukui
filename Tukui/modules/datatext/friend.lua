@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 --------------------------------------------------------------------
 -- FRIEND
@@ -7,23 +7,12 @@ local T, C, L = unpack(select(2, ...))
 if not C["datatext"].friends or C["datatext"].friends == 0 then return end
 
 -- create a popup
-StaticPopupDialogs.TUKUI_SET_BN_BROADCAST = {
-	text = BN_BROADCAST_TOOLTIP,
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	hasEditBox = 1,
-	editBoxWidth = 350,
-	maxLetters = 127,
-	OnAccept = function(self) BNSetCustomMessage(self.editBox:GetText()) end,
-	OnShow = function(self) self.editBox:SetText(select(3, BNGetInfo()) ) self.editBox:SetFocus() end,
-	OnHide = ChatEdit_FocusActiveWindow,
-	EditBoxOnEnterPressed = function(self) BNSetCustomMessage(self:GetText()) self:GetParent():Hide() end,
-	EditBoxOnEscapePressed = function(self) self:GetParent():Hide() end,
-	timeout = 0,
-	exclusive = 1,
-	whileDead = 1,
-	hideOnEscape = 1,
-	preferredIndex = 3,
+T.CreatePopup["TUKUI_SET_BN_BROADCAST"] = {
+	question = BN_BROADCAST_TOOLTIP,
+	answer1 = ACCEPT,
+	answer2 = CANCEL,
+	function1 = function(self) local p = self:GetParent() BNSetCustomMessage(p.EditBox:GetText()) end,
+	editbox = true,
 }
 
 local Stat = CreateFrame("Frame", "TukuiStatFriends")
@@ -33,11 +22,13 @@ Stat:SetFrameLevel(3)
 Stat.Option = C.datatext.friends
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+G.DataText.Friends = Stat
 
 local Text  = Stat:CreateFontString("TukuiStatFriendsText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 Text:SetShadowOffset(T.mult, -T.mult)
-T.PP(C["datatext"].friends, Text)
+T.DataTextPosition(C["datatext"].friends, Text)
+G.DataText.Friends.Text = Text
 
 local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
@@ -51,7 +42,7 @@ local menuList = {
 			{ text = "|cffFF0000"..AFK.."|r", notCheckable=true, func = function() if not IsChatAFK() then SendChatMessage("", "AFK") end end },
 		},
 	},
-	{ text = BN_BROADCAST_TOOLTIP, notCheckable=true, func = function() StaticPopup_Show("TUKUI_SET_BN_BROADCAST") end },
+	{ text = BN_BROADCAST_TOOLTIP, notCheckable=true, func = function() T.ShowPopup("TUKUI_SET_BN_BROADCAST") end },
 }
 
 local function GetTableIndex(table, fieldIndex, value)
@@ -63,12 +54,20 @@ end
 
 local function inviteClick(self, arg1, arg2, checked)
 	menuFrame:Hide()
-	InviteUnit(arg1)
+	if type(arg1) ~= 'number' then
+		InviteUnit(arg1)
+	else
+		BNInviteFriend(arg1);
+	end
 end
 
-local function whisperClick(self,arg1,arg2,checked)
-	menuFrame:Hide() 
-	SetItemRef( "player:"..arg1, ("|Hplayer:%1$s|h[%1$s]|h"):format(arg1), "LeftButton" )		 
+local function whisperClick(self,name,bnet)
+	menuFrame:Hide()
+	if bnet then
+		ChatFrame_SendSmartTell(name)
+	else
+		SetItemRef( "player:"..name, ("|Hplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )
+	end
 end
 
 local levelNameString = "|cff%02x%02x%02x%d|r |cff%02x%02x%02x%s|r"
@@ -103,11 +102,6 @@ local function BuildFriendTable(total)
 		friendTable[i] = { name, level, class, area, connected, status, note }
 		if connected then totalOnline = totalOnline + 1 end
 	end
-	table.sort(friendTable, function(a, b)
-		if a[1] and b[1] then
-			return a[1] < b[1]
-		end
-	end)
 end
 
 local function UpdateFriendTable(total)
@@ -141,39 +135,25 @@ end
 local function BuildBNTable(total)
 	BNTotalOnline = 0
 	wipe(BNTable)
-	local _, presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level
+	
 	for i = 1, total do
-		presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
-		if T.toc < 40200 then
-			_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
-		else
-			_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
-		end
+		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(presenceID)
+
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
-		BNTable[i] = { presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
+		BNTable[i] = { presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
 		if isOnline then BNTotalOnline = BNTotalOnline + 1 end
 	end
-	table.sort(BNTable, function(a, b)
-		if a[2] and b[2] then
-			if a[2] == b[2] then return a[3] < b[3] end
-			return a[2] < b[2]
-		end
-	end)
 end
 
 local function UpdateBNTable(total)
 	BNTotalOnline = 0
-	local presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText
-	local _, realmName, faction, race, class, zoneName, level
 	for i = 1, #BNTable do
 		-- get guild roster information
-		presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
-		if T.toc < 40200 then
-			_, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
-		else
-			_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
-		end
+		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(presenceID)
+		
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
@@ -187,8 +167,8 @@ local function UpdateBNTable(total)
 		BNTable[index][7] = isOnline
 		-- update information only for on-line members
 		if isOnline then
-			BNTable[index][2] = givenName
-			BNTable[index][3] = surname
+			BNTable[index][2] = presenceName
+			BNTable[index][3] = battleTag
 			BNTable[index][4] = toonName
 			BNTable[index][5] = toonID
 			BNTable[index][6] = client
@@ -235,21 +215,20 @@ Stat:SetScript("OnMouseUp", function(self, btn)
 	end
 	
 	if BNTotalOnline > 0 then
-		local realID, playerFaction, grouped
+		local realID, grouped
 		for i = 1, #BNTable do
 			if (BNTable[i][7]) then
-				realID = (BATTLENET_NAME_FORMAT):format(BNTable[i][2], BNTable[i][3])
+				realID = BNTable[i][2]
 				menuCountWhispers = menuCountWhispers + 1
-				menuList[3].menuList[menuCountWhispers] = {text = realID, arg1 = realID,notCheckable=true, func = whisperClick}
+				menuList[3].menuList[menuCountWhispers] = {text = realID, arg1 = realID, arg2 = true, notCheckable=true, func = whisperClick}
 
-				if select(1, UnitFactionGroup("player")) == "Horde" then playerFaction = 0 else playerFaction = 1 end
-				if BNTable[i][6] == wowString and BNTable[i][11] == T.myrealm and playerFaction == BNTable[i][12] then
+				if BNTable[i][6] == wowString and UnitFactionGroup("player") == BNTable[i][12] then
 					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]], GetQuestDifficultyColor(BNTable[i][16])
 					if classc == nil then classc = GetQuestDifficultyColor(BNTable[i][16]) end
 
 					if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end
 					menuCountInvites = menuCountInvites + 1
-					menuList[2].menuList[menuCountInvites] = {text = format(levelNameString,levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4]), arg1 = BNTable[i][4],notCheckable=true, func = inviteClick}
+					menuList[2].menuList[menuCountInvites] = {text = format(levelNameString,levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4]), arg1 = BNTable[i][5],notCheckable=true, func = inviteClick}
 				end
 			end
 		end
@@ -322,14 +301,14 @@ Stat:SetScript("OnEnter", function(self)
 						if classc == nil then classc = GetQuestDifficultyColor(BNTable[i][16]) end
 						
 						if UnitInParty(BNTable[i][4]) or UnitInRaid(BNTable[i][4]) then grouped = 1 else grouped = 2 end
-						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNTable[i][6],levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4],groupedTable[grouped], 255, 0, 0, statusTable[status]),BNTable[i][2].." "..BNTable[i][3],238,238,238,238,238,238)
+						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNTable[i][6],levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4],groupedTable[grouped], 255, 0, 0, statusTable[status]),BNTable[i][2],238,238,238,238,238,238)
 						if IsShiftKeyDown() then
 							if GetRealZoneText() == BNTable[i][15] then zonec = activezone else zonec = inactivezone end
 							if GetRealmName() == BNTable[i][11] then realmc = activezone else realmc = inactivezone end
 							GameTooltip:AddDoubleLine("  "..BNTable[i][15], BNTable[i][11], zonec.r, zonec.g, zonec.b, realmc.r, realmc.g, realmc.b)
 						end
 					else
-						GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][6].." ("..BNTable[i][4]..")|r", "|cffeeeeee"..BNTable[i][2].." "..BNTable[i][3].."|r")
+						GameTooltip:AddDoubleLine("|cffeeeeee"..BNTable[i][6].." ("..BNTable[i][4]..")|r", "|cffeeeeee"..BNTable[i][2].."|r")
 					end
 				end
 			end

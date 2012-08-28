@@ -4,20 +4,20 @@
 
 --[[
 		To add your own custom config into your edited version,
-		You need to create the addon Tukui_EditedDefaultConfig and add
-		your custom configuration into it.
+		You need to create the addons (example: GoogleUI and 
+		GoogleUI_Config) and add your custom configuration into 
+		GoogleUI_Config.
 		
-		A guide (example) can be downloaded at:
-		http://www.tukui.org/downloads/Tukui_EditedDefaultConfig.zip
+		A configuration guide (example) can be downloaded at:
+		(link to be updated with a new edit example)
 		
-		Don't forget to add in the .toc, in your edited Tukui version: Tukui_CustomConfig
-		If no new option group, Add it to: ## OptionalDeps
-		If new option group, Add it to: ## RequiredDeps
+		Don't forget to add in the .toc, in your edited Tukui 
+		(ex: GoogleUI) version: ## RequiredDeps: Tukui
 
 		That's it! That's all!
 --]]
 
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if not TukuiEditedDefaultConfig then return end
 

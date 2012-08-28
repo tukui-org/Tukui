@@ -109,6 +109,12 @@
 	TukuiConfigUILocalization.unitframesmovecombobar = "Bewege die Kombopunkte vom Ziel (nur Schurke)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "Benutze klassische Kombopunktanzeige"
 	TukuiConfigUILocalization.unitframesgridvertical = "Gridausrichtung vertikal anstatt horizontal"
+	TukuiConfigUILocalization.unitframesraid = "Aktiviere das Tukui Schlachtzugsfenster"
+	TukuiConfigUILocalization.unitframesshowraidpets = "Zeige die Begleiter im Tukui Schlachtzugsfenster"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "Zeige die Manaleiste in Bär-/Katzenform (Druide)"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "Zeige die Wildpilz-Leiste in der Gleichgewichts- oder Wiederherstellungsspezialisierung (Druide)"
+	TukuiConfigUILocalization.unitframesmageclassbar = "Zeige die Leiste für Arkane Ladungen (Magier)"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Anzahl der Schlachtzugseinheiten per Spalte/Reihe"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Beute"
@@ -145,11 +151,14 @@
 	TukuiConfigUILocalization.actionbarbuttonsize = "Größe der Aktionsleisten Buttons"
 	TukuiConfigUILocalization.actionbarbuttonspacing = "Abstand der Aktionsleisten Buttons"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "Größe der Begleiter/Gestaltenwandler Buttons"
-	TukuiConfigUILocalization.actionbarownshdbar = "Benutze eine leer Leiste für Schattentanz (Schurke) Anstatt der Verstohlenheitsleiste"
+	TukuiConfigUILocalization.actionbarownshdbar = "Benutze eine leere Leiste für Schattentanz (Schurke) anstatt der Verstohlenheitsleiste"
+	TukuiConfigUILocalization.actionbarownmetabar = "Benutze eine leere Leiste für Metamorphose (Hexenmeister) anstatt der Hauptleiste"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "Nutze eine leere Leiste für jede Haltung (Krieger) anstelle der Haupt-Leiste"
+	TukuiConfigUILocalization.actionbarmacro = "Zeige Makro-Text auf der Aktionsleiste"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "Arena"
-	TukuiConfigUILocalization.arenaunitframes = "Aktiviere Arenaeinheitenfenster"
+	TukuiConfigUILocalization.unitframesarena = "Aktiviere Arenaeinheitenfenster"
 	 
 	-- cooldowns
 	TukuiConfigUILocalization.cooldown = "Abklingzeiten"
@@ -166,7 +175,8 @@
 	TukuiConfigUILocalization.auras = "Auren"
 	TukuiConfigUILocalization.aurasplayer = "Aktiviere Tukui Stärkungs/Schwächungszauberanzeige"
 	TukuiConfigUILocalization.aurasconsolidate = "Aktiviere zusammengelegte Stärkungszauber"
-	TukuiConfigUILocalization.aurasflash = "Aktivieren blinkende Animation für Auren mit weniger als 30 Sekunden"
+	TukuiConfigUILocalization.aurasflash = "Aktiviere blinkende Animation für Auren mit weniger als 30 Sekunden"
+	TukuiConfigUILocalization.aurasclassictimer = "Zeige den klassischen Timer für Spielerauren"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "Zurücksetzen"

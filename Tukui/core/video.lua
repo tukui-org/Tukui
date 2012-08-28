@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 --------------------------------------------------------
 -- detect if high, low or eyefinity version
@@ -91,7 +91,7 @@ Graphic:SetScript("OnEvent", function(self, event)
 	end
 
 	-- uiscale security
-	if C["general"].uiscale > 1 then C["general"].uiscale = 1 end
+	if C["general"].uiscale > 1.1 then C["general"].uiscale = 1.1 end
 	if C["general"].uiscale < 0.64 then C["general"].uiscale = 0.64 end
 
 	-- set our new uiscale now if it doesn't match Blizzard saved uiScale.

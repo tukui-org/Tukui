@@ -1,6 +1,8 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "frFR" then
+	L.UI_Outdated = "Une version plus récente de Tukui est disponible. Vous pouvez télécharger la dernière version sur www.tukui.org"
+	
 	L.chat_BATTLEGROUND_GET = "BG"
 	L.chat_BATTLEGROUND_LEADER_GET = "BG"
 	L.chat_BN_WHISPER_GET = "De"
@@ -94,6 +96,9 @@ if T.client == "frFR" then
 	L.datatext_control = "Controlé par : "
 	L.datatext_cta_allunavailable = "Impossible de récupérer les informations d'appel aux armes."
 	L.datatext_cta_nodungeons = "Aucun donjon offre actuellement d'appel aux armes."
+	L.datatext_carts_controlled = "Chariots contrôlée:"
+	L.datatext_victory_points = "Points de Victoire:"
+	L.datatext_orb_possessions = "Orbes en possession:"
 
 	L.Slots = {
 	  [1] = {1, "Tête", 1000},
@@ -115,8 +120,8 @@ if T.client == "frFR" then
 	L.popup_reset = "Attention ! Vous allez charger les paramètres par défaut de Tukui. Voulez-vous poursuivre ?"
 	L.popup_install_yes = "Ouais! (recommandé!)"
 	L.popup_install_no = "Non, ça craint trop!"
-	L.popup_reset_yes = "Ouais bébé!"
-	L.popup_reset_no = "Non, ou j'irai pleurer sur les forums!"
+	L.popup_reset_yes = "Ouais!"
+	L.popup_reset_no = "Non!"
 	L.popup_fix_ab = "Quelque chose ne va pas avec vos barres d'action. Voulez-vous recharger l'interface pour les réparer?"
 
 	L.merchant_repairnomoney = "Vous n'avez pas assez d'argent pour réparer !"

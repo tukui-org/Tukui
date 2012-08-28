@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 if C["chat"].enable ~= true then return end
 
 ------------------------------------------------------------------------
@@ -14,4 +14,5 @@ if C.chat.whispersound then
 			PlaySoundFile(C["media"].whisper)
 		end
 	end)
+	G.Chat.Sound = SoundSys
 end

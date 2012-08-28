@@ -1,7 +1,8 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...))
 
 local TukuiWatchFrame = CreateFrame("Frame", "TukuiWatchFrame", UIParent)
 TukuiWatchFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+G.Misc.WatchFrame = TukuiWatchFrame
 
 -- to be compatible with blizzard option
 local wideFrame = GetCVar("watchFrameWidth")
@@ -15,12 +16,14 @@ TukuiWatchFrameAnchor:SetClampedToScreen(true)
 TukuiWatchFrameAnchor:SetMovable(true)
 TukuiWatchFrameAnchor:EnableMouse(false)
 TukuiWatchFrameAnchor:SetTemplate("Default")
-TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
-TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
+TukuiWatchFrameAnchor:SetBackdropBorderColor(1, 0, 0)
+TukuiWatchFrameAnchor:SetAlpha(0)
 TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, 12)
 TukuiWatchFrameAnchor.text:SetPoint("CENTER")
 TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
 TukuiWatchFrameAnchor.text:Hide()
+
+G.Misc.WatchFrameAnchor = TukuiWatchFrameAnchor
 
 -- set default position according to how many right bars we have
 TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -220)
@@ -35,10 +38,9 @@ else
 end
 
 local screenheight = T.screenheight
-TukuiWatchFrame:SetParent(TukuiWatchFrameAnchor)
 TukuiWatchFrame:SetHeight(screenheight / 1.6)
 TukuiWatchFrame:ClearAllPoints()
-TukuiWatchFrame:SetPoint("TOP")
+TukuiWatchFrame:SetPoint("TOP", TukuiWatchFrameAnchor)
 
 local function init()
 	TukuiWatchFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -78,7 +80,7 @@ local function setup()
 	WatchFrameCollapseExpandButton:SetNormalTexture("")
 	WatchFrameCollapseExpandButton:SetPushedTexture("")
 	WatchFrameCollapseExpandButton:SetHighlightTexture("")
-	T.SkinCloseButton(WatchFrameCollapseExpandButton)
+	WatchFrameCollapseExpandButton:SkinCloseButton()
 	WatchFrameCollapseExpandButton.t:SetFont(C.media.font, 12, "OUTLINE")
 	WatchFrameCollapseExpandButton:HookScript("OnClick", function(self) 
 		if WatchFrame.collapsed then 

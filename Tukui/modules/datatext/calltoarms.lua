@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...))
+local T, C, L, G = unpack(select(2, ...))
 
 --------------------------------------------------------------------
  -- Call To Arms -- Elv22
@@ -12,13 +12,15 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat.Option = C.datatext.calltoarms
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.CallToArm = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatCallToArmsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	Text:SetShadowOffset(T.mult, -T.mult)
 	Text:SetShadowColor(0, 0, 0, 0.4)
-	T.PP(C["datatext"].calltoarms, Text)
+	T.DataTextPosition(C["datatext"].calltoarms, Text)
 	Stat:SetParent(Text:GetParent())
+	G.DataText.CallToArm.Text = Text
 	
 	local TANK_STRING = TANK
 	local HEALER_STRING = HEALER

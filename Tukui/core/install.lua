@@ -2,7 +2,7 @@
 -- Install Script
 ------------------------------------------------------------------------
 
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...))
 
 T.ChatSetup = function()
 	-- setting chat frames if using Tukui chats.					
@@ -121,6 +121,7 @@ end
 
 local function cvarsetup()
 	SetCVar("buffDurations", 1)
+	SetCVar("consolidateBuffs", 0)
 	SetCVar("mapQuestDifficulty", 1)
 	SetCVar("scriptErrors", 1)
 	SetCVar("ShowClassColorInNameplate", 1)
@@ -129,8 +130,9 @@ local function cvarsetup()
 	SetCVar("chatStyle", "im")
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("ConversationMode", "inline")
+	SetCVar("WhisperMode", "inline")
+	SetCVar("BnWhisperMode", "inline")
 	SetCVar("showTutorials", 0)
-	SetCVar("showNewbieTips", 0)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
 	SetCVar("UberTooltips", 1)
@@ -139,6 +141,10 @@ local function cvarsetup()
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
+	SetCVar("alwaysShowActionBars", 1)
+	SetCVar("autoOpenLootHistory", 0)
+	SetCVar("spamFilter", 0)
+	SetCVar("violenceLevel", 5)
 end
 
 local function positionsetup()
@@ -163,6 +169,7 @@ v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
+G.Install.Version = v
 
 local f = CreateFrame("Frame", "TukuiInstallFrame", UIParent)
 f:SetSize(400, 400)
@@ -170,6 +177,7 @@ f:SetPoint("CENTER")
 f:SetTemplate("Default")
 f:CreateShadow("Default")
 f:Hide()
+G.Install.Frame = f
 
 local sb = CreateFrame("StatusBar", nil, f)
 sb:SetStatusBarTexture(C.media.normTex)
@@ -179,6 +187,7 @@ sb:SetWidth(f:GetWidth()-44)
 sb:SetFrameStrata("HIGH")
 sb:SetFrameLevel(6)
 sb:Hide()
+G.Install.StatusBar = sb
 
 local sbd = CreateFrame("Frame", nil, sb)
 sbd:SetTemplate("Default")
@@ -186,43 +195,51 @@ sbd:SetPoint("TOPLEFT", sb, -2, 2)
 sbd:SetPoint("BOTTOMRIGHT", sb, 2, -2)
 sbd:SetFrameStrata("HIGH")
 sbd:SetFrameLevel(5)
+G.Install.StatusBar.Backdrop = sdb
 
 local header = f:CreateFontString(nil, "OVERLAY")
 header:SetFont(C.media.font, 16, "THINOUTLINE")
 header:SetPoint("TOP", f, "TOP", 0, -20)
+G.Install.Frame.Header = header
 
 local text1 = f:CreateFontString(nil, "OVERLAY")
 text1:SetJustifyH("LEFT")
 text1:SetFont(C.media.font, 12)
 text1:SetWidth(f:GetWidth()-40)
 text1:SetPoint("TOPLEFT", f, "TOPLEFT", 20, -60)
+G.Install.Frame.Text1 = G.Install.Frame
 
 local text2 = f:CreateFontString(nil, "OVERLAY")
 text2:SetJustifyH("LEFT")
 text2:SetFont(C.media.font, 12)
 text2:SetWidth(f:GetWidth()-40)
 text2:SetPoint("TOPLEFT", text1, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text2 = text2
 
 local text3 = f:CreateFontString(nil, "OVERLAY")
 text3:SetJustifyH("LEFT")
 text3:SetFont(C.media.font, 12)
 text3:SetWidth(f:GetWidth()-40)
 text3:SetPoint("TOPLEFT", text2, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text3 = text3
 
 local text4 = f:CreateFontString(nil, "OVERLAY")
 text4:SetJustifyH("LEFT")
 text4:SetFont(C.media.font, 12)
 text4:SetWidth(f:GetWidth()-40)
 text4:SetPoint("TOPLEFT", text3, "BOTTOMLEFT", 0, -20)
+G.Install.Frame.Text4 = text4
 
 local credits = f:CreateFontString(nil, "OVERLAY")
 credits:SetFont(C.media.font, 12, "THINOUTLINE")
 credits:SetText("")
 credits:SetPoint("BOTTOM", f, "BOTTOM", 0, 4)
+G.Install.Frame.Credits = credits
 
 local sbt = sb:CreateFontString(nil, "OVERLAY")
 sbt:SetFont(C.media.font, 13, "THINOUTLINE")
 sbt:SetPoint("CENTER", sb)
+G.Install.StatusBar.Text = sbt
 
 local option1 = CreateFrame("Button", "TukuiInstallOption1", f)
 option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
@@ -230,6 +247,7 @@ option1:SetSize(128, 25)
 option1:SetTemplate("Default")
 option1:FontString("Text", C.media.font, 12)
 option1.Text:SetPoint("CENTER")
+G.Install.Option1 = option1
 
 local option2 = CreateFrame("Button", "TukuiInstallOption2", f)
 option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
@@ -237,13 +255,15 @@ option2:SetSize(128, 25)
 option2:SetTemplate("Default")
 option2:FontString("Text", C.media.font, 12)
 option2.Text:SetPoint("CENTER")
+G.Install.Option2 = option2
 
 local close = CreateFrame("Button", "TukuiInstallCloseButton", f, "UIPanelCloseButton")
 close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
-T.SkinCloseButton(close)
+close:SkinCloseButton()
 close:SetScript("OnClick", function()
 	f:Hide()
 end)
+G.Install.Close = close
 
 local step4 = function()
 	TukuiDataPerChar.install = true
@@ -460,16 +480,25 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 
 	if T.screenwidth < 1200 then
 			SetCVar("useUiScale", 0)
-			StaticPopup_Show("TUKUIDISABLE_UI")
+			T.ShowPopup("TUKUIDISABLE_UI")
 	else		
 		-- install default if we never ran Tukui on this character.
 		if not TukuiDataPerChar.install then			
 			install()
 		end
 	end
-	
-	if (IsAddOnLoaded("Tukui_Raid") and IsAddOnLoaded("Tukui_Raid_Healing")) then
-		StaticPopup_Show("TUKUIDISABLE_RAID")
+		
+	if IsAddOnLoaded("Tukui_Raid") or IsAddOnLoaded("Tukui_Raid_Healing") then
+		-- stupid protection because I know lots of peoples will not read our blog or the changelog
+		if IsAddOnLoaded("Tukui_Raid") then
+			DisableAddOn("Tukui_Raid")
+		end
+		
+		if IsAddOnLoaded("Tukui_Raid_Healing") then
+			DisableAddOn("Tukui_Raid_Healing")
+		end
+		
+		T.ShowPopup("TUKUI_DISABLE_OLD_ADDONS")
 	end
 end)
 
@@ -485,3 +514,18 @@ SlashCmdList.CONFIGURE = install
 
 SLASH_RESETUI1 = "/resetui"
 SlashCmdList.RESETUI = function() f:Show() step1() end
+
+T.CreatePopup["TUKUIDISABLE_UI"] = {
+	question = L.popup_disableui,
+	answer1 = ACCEPT,
+	answer2 = CANCEL,
+	function1 = function() DisableAddOn("Tukui") ReloadUI() end,
+}
+
+T.CreatePopup["TUKUI_DISABLE_OLD_ADDONS"] = {
+	question = "Ah, just like I thought, you didn't read our latest blog about the release of Tukui for Mists of Pandaria. You must disable our old raid frames addons to use Tukui now. Let's me do this for you... Ok... It's done! Reload your UI now!",
+	answer1 = "RELOAD MY UI!",
+	answer2 = "RELOAD MY UI!",
+	function1 = ReloadUI,
+	function2 = ReloadUI,
+}

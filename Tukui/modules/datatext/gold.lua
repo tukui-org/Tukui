@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L, G = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- GOLD
 --------------------------------------------------------------------
@@ -11,10 +11,12 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	Stat.Option = C.datatext.gold
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
+	G.DataText.Gold = Stat
 
 	local Text  = Stat:CreateFontString("TukuiStatGoldText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
-	T.PP(C["datatext"].gold, Text)
+	T.DataTextPosition(C["datatext"].gold, Text)
+	G.DataText.Gold.Text = Text
 
 	local Profit	= 0
 	local Spent		= 0
