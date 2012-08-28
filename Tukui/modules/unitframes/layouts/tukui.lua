@@ -165,7 +165,8 @@ local function Shared(self, unit)
 		-- portraits
 		if (C["unitframes"].charportrait == true) then
 			local graphic = GetCVar("gxapi")
-			if graphic == "D3D11" then
+			local isMac = IsMacClient()
+			if isMac or graphic == "D3D11" then
 				local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
 				portrait:SetFrameLevel(8)
 				if T.lowversion then
