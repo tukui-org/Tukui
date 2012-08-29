@@ -189,27 +189,13 @@ local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTi
 	end
 end
 
--- used to blacklist some debuffs which can cause problems
-local blacklist = {
-	[101108] = true, -- Rage of Ragnaros
-	[101109] = true, -- Rage of Ragnaros
-	[101110] = true, -- Rage of Ragnaros
-	[101228] = true, -- Rage of Ragnaros
-}
-
--- kind of fix for deep corruption, which need to show stacking first
-local DeepCorruption = {
-	[103628] = true, -- Deep Corruption (stacking)
-	[109389] = true, -- Deep Corruption (stacking)
-}
-
 local function Update(self, event, unit)
 	if unit ~= self.unit then return end
 	local _name, _icon, _count, _dtype, _duration, _endTime, _spellId
 	local _priority, priority = 0
 	for i = 1, 40 do
 		local name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, isStealable, shouldConsolidate, spellId = UnitAura(unit, i, 'HARMFUL')
-		if (not name) or (blacklist[spellId]) then break end
+		if (not name) then break end
 		
 		if addon.ShowDispelableDebuff and debuffType then
 			if addon.FilterDispellableDebuff then
@@ -225,7 +211,7 @@ local function Update(self, event, unit)
 		end
 		
 		priority = debuff_data[addon.MatchBySpellName and name or spellId]
-		if (priority and (priority > _priority)) or (addon.DeepCorruption and DeepCorruption[spellId]) then
+		if (priority and (priority > _priority)) then
 			_priority, _name, _icon, _count, _dtype, _duration, _endTime, _spellId = priority, name, icon, count, debuffType, duration, expirationTime, spellId
 		end
 	end
