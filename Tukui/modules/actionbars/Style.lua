@@ -262,7 +262,7 @@ T.ShowHighlightActionButton = function(self)
 	end
 
 	if not self.Animation then
-		local NewProc = CreateFrame("Frame", nil, UIParent)
+		local NewProc = CreateFrame("Frame", nil, self)
 		NewProc:SetBackdrop(ProcBackdrop)
 		NewProc:SetBackdropBorderColor(1, 1, 0)
 		NewProc:SetAllPoints(self)
