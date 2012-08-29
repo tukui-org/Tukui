@@ -834,9 +834,8 @@ end
 T.UpdateHoly = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'HOLY_POWER')) then return end
 	local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
-	local numMax = UnitPowerMax('player', SPELL_POWER_HOLY_POWER)
 
-	for i = 1, numMax do
+	for i = 1, 5 do
 		if(i <= num) then
 			self.HolyPower[i]:SetAlpha(1)
 		else
