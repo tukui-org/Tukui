@@ -7,6 +7,6 @@
 ## SavedVariablesPerCharacter: TukuiDataPerChar
 ## OptionalDeps: Tukui_ConfigUI, Clique
 ## X-oUF: oUFTukui
-## Website: www.tukui.org
+## Website: http://www.tukui.org
 
 Tukui.xml 
