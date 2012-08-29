@@ -220,6 +220,26 @@ local function LoadSkin()
 	ChatConfigFrameHeader:SetPoint("TOP", ChatConfigFrame, 0, -5)
 	
 	ChannelRosterScrollFrameScrollBar:SkinScrollBar()
+	
+	-- BNConversationInviteDialog
+	BNConversationInviteDialog:StripTextures()
+	BNConversationInviteDialog:SetTemplate()
+	BNConversationInviteDialogInviteButton:SkinButton()
+	BNConversationInviteDialogCancelButton:SkinButton()
+	BNConversationInviteDialogList:StripTextures()
+	BNConversationInviteDialogListScrollFrameScrollBar:SkinScrollBar()
+	BNConversationInviteDialogInviteButton:SkinButton()
+	hooksecurefunc("BNConversationInvite_Update", function()
+		print"test"
+		for i = 1, BN_CONVERSATION_INVITE_NUM_DISPLAYED do
+			local b = _G["BNConversationInviteDialogListFriend"..i]
+			local c = b.checkButton()
+			if c and not c.isSkinned then
+				c:SkinCheckBox()
+				c.isSkinned = true
+			end
+		end
+	end)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
