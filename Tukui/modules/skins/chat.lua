@@ -230,7 +230,6 @@ local function LoadSkin()
 	BNConversationInviteDialogListScrollFrameScrollBar:SkinScrollBar()
 	BNConversationInviteDialogInviteButton:SkinButton()
 	hooksecurefunc("BNConversationInvite_Update", function()
-		print"test"
 		for i = 1, BN_CONVERSATION_INVITE_NUM_DISPLAYED do
 			local b = _G["BNConversationInviteDialogListFriend"..i]
 			local c = b.checkButton()
