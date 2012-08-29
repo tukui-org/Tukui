@@ -249,30 +249,42 @@ function T.StyleActionBarFlyout(self)
 	end
 end
 
+local ProcBackdrop = {
+	edgeFile = C["media"].blank, edgeSize = T.mult,
+	insets = {left = T.mult, right = T.mult, top = T.mult, bottom = T.mult},
+}
+
 T.ShowHighlightActionButton = function(self)
 	-- hide ugly blizzard proc highlight
 	if self.overlay then
 		self.overlay:Hide()
 		ActionButton_HideOverlayGlow(self)
 	end
-	
+
 	if not self.Animation then
-		local Animation = self:CreateAnimationGroup()
+		local NewProc = CreateFrame("Frame", nil, UIParent)
+		NewProc:SetBackdrop(ProcBackdrop)
+		NewProc:SetBackdropBorderColor(1, 1, 0)
+		NewProc:SetAllPoints(self)
+
+		self.NewProc = NewProc
+
+		local Animation = self.NewProc:CreateAnimationGroup()
 		Animation:SetLooping("BOUNCE")
 
 		local FadeOut = Animation:CreateAnimation("Alpha")
 		FadeOut:SetChange(-1)
-		FadeOut:SetDuration(.20)
+		FadeOut:SetDuration(0.40)
 		FadeOut:SetSmoothing("IN_OUT")
 
 		self.Animation = Animation
 	end
-	
-	if not self.Animation:IsPlaying() then self.Animation:Play() end
+
+	if not self.Animation:IsPlaying() then self.Animation:Play() self.NewProc:Show() end
 end
 
 T.HideHighlightActionButton = function(self)
-	if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
+	if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() self.NewProc:Hide() end
 end
 
 hooksecurefunc("ActionButton_ShowOverlayGlow", T.ShowHighlightActionButton)
