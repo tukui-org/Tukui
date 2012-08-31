@@ -2,6 +2,7 @@ local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "zhCN" then
 	L.UI_Outdated = "Tukui 版本已过期，请至 www.tukui.org 下载最新版"
+	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	
 	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)	
 	L.chat_BATTLEGROUND_GET = "战场"

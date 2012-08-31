@@ -2,6 +2,7 @@ local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "zhTW" then
 	L.UI_Outdated = "Tukui 版本已過期，請至 www.tukui.org 下載最新版"
+	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	
 	L.chat_BATTLEGROUND_GET = "B"
 	L.chat_BATTLEGROUND_LEADER_GET = "B"

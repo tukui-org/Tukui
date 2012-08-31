@@ -2,6 +2,7 @@ local T, C, L, G = unpack(select(2, ...))
 
 if T.client == "esES" or T.client == "esMX" then
 	L.UI_Outdated = "Tu versión de Tukui no está actualizada. Puedes descargar la última versión de www.tukui.org"
+	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	
 	L.chat_BATTLEGROUND_GET = "B"
 	L.chat_BATTLEGROUND_LEADER_GET = "B"
