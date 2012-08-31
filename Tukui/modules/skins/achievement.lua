@@ -143,6 +143,12 @@ local function LoadSkin()
 				_G["AchievementFrameSummaryAchievement"..i.."IconTexture"]:Point("TOPLEFT", 2, -2)
 				_G["AchievementFrameSummaryAchievement"..i.."IconTexture"]:Point("BOTTOMRIGHT", -2, 2)
 			end
+			
+			if frame.accountWide then
+				frame.backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			else
+				frame.backdrop:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			end	
 		end				
 	end)
 	
@@ -379,6 +385,14 @@ local function LoadSkin()
 				end		
 			end
 		end
+	end)
+	
+	hooksecurefunc('AchievementButton_DisplayAchievement', function(frame)
+		if frame.accountWide and frame.bg3 then
+			frame.bg3:SetTexture(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+		elseif frame.bg3 then
+			frame.bg3:SetTexture(unpack(C.media.bordercolor))
+		end			
 	end)
 end
 
