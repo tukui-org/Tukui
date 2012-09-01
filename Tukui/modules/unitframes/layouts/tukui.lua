@@ -164,36 +164,58 @@ local function Shared(self, unit)
 
 		-- portraits
 		if (C["unitframes"].charportrait == true) then
-			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
-			portrait:SetFrameLevel(4)
-			if T.lowversion then
-				portrait:SetHeight(51)
+			local graphic = GetCVar("gxapi")
+			local isMac = IsMacClient()
+			if isMac or graphic == "D3D11" then
+				local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
+				portrait:SetFrameLevel(8)
+				if T.lowversion then
+					portrait:SetHeight(51)
+				else
+					portrait:SetHeight(57)
+				end
+				portrait:SetWidth(33)
+				portrait:SetAlpha(1)
+				if unit == "player" then
+					portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -34,0)
+					panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
+					panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
+				elseif unit == "target" then
+					portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 34,0)
+					panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
+					panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
+				end
+				panel:SetWidth(panel:GetWidth() - 34) -- panel need to be resized if charportrait is enabled
+				table.insert(self.__elements, T.HidePortrait)
+				portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
+				self.Portrait = portrait
 			else
-				portrait:SetHeight(57)
+				portrait = self:CreateTexture(nil, "ARTWORK")
+				portrait:SetPoint("CENTER")
+				portrait:SetPoint("CENTER")
+				portrait:SetHeight(35)
+				portrait:SetWidth(33)
+				portrait:SetTexCoord(0.1,0.9,0.1,0.9)
+				if unit == "player" then
+					portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -34,0)
+				elseif unit == "target" then
+					portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 34,0)
+				end	
+
+				self.Portrait = portrait
 			end
-			portrait:SetWidth(33)
-			portrait:SetAlpha(1)
+			
 			if unit == "player" then
 				health:SetPoint("TOPLEFT", 34,0)
 				health:SetPoint("TOPRIGHT")
 				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-				portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -34,0)
 			elseif unit == "target" then
 				health:SetPoint("TOPRIGHT", -34,0)
 				health:SetPoint("TOPLEFT")
 				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-				portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 34,0)
 			end
-			panel:SetWidth(panel:GetWidth() - 34) -- panel need to be resized if charportrait is enabled
-			table.insert(self.__elements, T.HidePortrait)
-			portrait.PostUpdate = T.PortraitUpdate --Worgen Fix (Hydra)
-			self.Portrait = portrait
 		end
 		
 		if T.myclass == "PRIEST" and C["unitframes"].weakenedsoulbar then
