@@ -113,6 +113,7 @@
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "Show Druid Mushroom bar in Balance or Restoration specialization"
 	TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "전리품"

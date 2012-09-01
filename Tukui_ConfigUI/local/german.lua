@@ -115,6 +115,7 @@
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "Zeige die Wildpilz-Leiste in der Gleichgewichts- oder Wiederherstellungsspezialisierung (Druide)"
 	TukuiConfigUILocalization.unitframesmageclassbar = "Zeige die Leiste für Arkane Ladungen (Magier)"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Anzahl der Schlachtzugseinheiten per Spalte/Reihe"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Beute"

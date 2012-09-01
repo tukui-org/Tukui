@@ -115,6 +115,7 @@
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "Afficher la barre de champignons en spécialisation équilibre et restauration"
 	TukuiConfigUILocalization.unitframesmageclassbar = "Afficher la barre d'arcane du mage."
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Nombre d'unités de raid par colonne / ligne"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Butin"

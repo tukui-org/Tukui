@@ -116,6 +116,7 @@
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "Muestra la Barra de Setas del Druida en la especialización de Equilibrio o Restauración"
 	TukuiConfigUILocalization.unitframesmageclassbar = "Muestra la Barra del Mago Arcano"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Número de unidades de banda por columna/fila"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 
 	-- Botín
 	TukuiConfigUILocalization.loot = "Botín"

@@ -115,6 +115,7 @@
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "Показывать индикатор грибов для друидов баланса и исцеления"
 	TukuiConfigUILocalization.unitframesmageclassbar = "Отображать полосу чародейских зарядов мага"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Количество рейдовых юнитов на ряд/столбец"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Добыча"

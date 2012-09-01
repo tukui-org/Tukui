@@ -114,6 +114,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "在平衡或者恢复专精下显示德鲁伊的生长条"
 	TukuiConfigUILocalization.unitframesmageclassbar = "显示法师的奥法条"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "每列或者每行团队单位的数量"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"
