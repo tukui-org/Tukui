@@ -143,6 +143,27 @@ local function LoadSkin()
 			child:SetTemplate("Default")
 		end
 	end
+	
+	for i=1, HelpFrameReportBug:GetNumChildren() do
+		local child = select(i, HelpFrameReportBug:GetChildren())
+		if child and not child:GetName() then
+			child:StripTextures()
+			child:SetTemplate()
+		end
+	end
+	
+	for i=1, HelpFrameSubmitSuggestion:GetNumChildren() do
+		local child = select(i, HelpFrameSubmitSuggestion:GetChildren())
+		if child and not child:GetName() then
+			child:StripTextures()
+			child:SetTemplate()
+		end
+	end
+	
+	HelpFrameOpenTicketHelpItemRestoration:SkinButton()
+	HelpFrameReportBugSubmit:SkinButton()
+	HelpFrameSubmitSuggestionScrollFrameScrollBar:SkinScrollBar()
+	HelpFrameReportBugScrollFrameScrollBar:SkinScrollBar()
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
