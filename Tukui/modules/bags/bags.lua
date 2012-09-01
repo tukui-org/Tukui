@@ -139,12 +139,13 @@ function Stuffing:SlotUpdate(b)
 	if clink then name, _, rarity, _, _, iType = GetItemInfo(clink) end
 	
 	-- do a check if item changed and don't update if match
-	if texture == b.texture and b.count == count and b.rarity == rarity then return end
-	
+	if texture == b.texture and b.count == count and b.rarity == rarity and b.lock == locked then return end
+
 	b.texture = texture
 	b.count = count
 	b.name = name
 	b.rarity = rarity
+	b.lock = locked
 	
 	-- reset
 	if not b.frame.lock then
@@ -199,6 +200,7 @@ function Stuffing:SlotUpdate(b)
 	
 	SetItemButtonTexture(b.frame, texture)
 	SetItemButtonCount(b.frame, count)
+	SetItemButtonDesaturated(b.frame, locked, 0.5, 0.5, 0.5)
 		
 	b.frame:Show()
 end
