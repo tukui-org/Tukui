@@ -11,7 +11,7 @@ G.Loot.Frame.title = title
 local iconSize = 30
 local frameScale = 1
 
-local sq, ss, sn
+local sq, ss, sn, st
 
 local OnEnter = function(self)
 	local slot = self:GetID()
@@ -48,6 +48,14 @@ local OnClick = function(self)
 		ss = self:GetID()
 		sq = self.quality
 		sn = self.name:GetText()
+		st = self.icon:GetTexture()
+
+		LootFrame.selectedLootButton = self:GetName()
+		LootFrame.selectedSlot = ss
+		LootFrame.selectedQuality = sq
+		LootFrame.selectedItemName = sn
+		LootFrame.selectedTexture = st
+
 		LootSlot(ss)
 	end
 end
@@ -286,7 +294,7 @@ addon.OPEN_MASTER_LOOT_LIST = function(self)
 end
 
 addon.UPDATE_MASTER_LOOT_LIST = function(self)
-	UIDropDownMenu_Refresh(GroupLootDropDown)
+	MasterLooterFrame_UpdatePlayers()
 end
 
 addon.ADDON_LOADED = function(self, event, addon)

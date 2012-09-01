@@ -74,6 +74,41 @@ local function LoadSkin()
 		end
 	end
 	hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
+	
+	-- master loot frame
+	MasterLooterFrame:StripTextures()
+	MasterLooterFrame:SetTemplate()
+	
+	hooksecurefunc("MasterLooterFrame_Show", function()
+		local b = MasterLooterFrame.Item
+		if b then
+			local i = b.Icon
+			local icon = i:GetTexture()
+			local c = ITEM_QUALITY_COLORS[LootFrame.selectedQuality]
+			
+			b:StripTextures()
+			i:SetTexture(icon)
+			i:SetTexCoord(.1,.9,.1,.9)
+			b:CreateBackdrop()
+			b.backdrop:SetOutside(i)
+			b.backdrop:SetBackdropBorderColor(c.r, c.g, c.b)
+		end
+		
+		for i=1, MasterLooterFrame:GetNumChildren() do
+			local child = select(i, MasterLooterFrame:GetChildren())
+			if child and not child.isSkinned and not child:GetName() then
+				if child:GetObjectType() == "Button" then
+					if child:GetPushedTexture() then
+						child:SkinCloseButton()
+					else
+						child:SetTemplate()
+						child:StyleButton()		
+					end
+					child.isSkinned = true
+				end
+			end
+		end
+	end)
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
