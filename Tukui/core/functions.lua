@@ -773,9 +773,9 @@ T.HidePortrait = function(self, unit)
 		else
 			self.Portrait:SetAlpha(1)
 		end
-		-- weird bug, need to set level everytime to fix a portrait issue on dx9. :X
-		self.Portrait:SetFrameLevel(4)
 	end
+	-- weird bug, need to set level everytime to fix a portrait issue on dx9. :X
+	self.Portrait:SetFrameLevel(4)
 end
 
 -- This is mostly just a fix for worgen male portrait because of a bug found in default Blizzard UI.
