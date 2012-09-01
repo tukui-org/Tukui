@@ -2443,5 +2443,41 @@ if C.unitframes.raid == true then
 			pet:Point(pa1, raid, pa2, px, py)
 			G.UnitFrames.RaidPets = pet
 		end
+		
+		if C.unitframes.maxraidplayers then
+			-- Max number of group according to Instance max players
+			local ten = "1,2"
+			local twentyfive = "1,2,3,4,5"
+			local forty = "1,2,3,4,5,6,7,8"
+
+			local MaxGroup = CreateFrame("Frame", "TukuiRaidMaxGroup")
+			MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
+			MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+			MaxGroup:SetScript("OnEvent", function(self)
+				local filter
+				local inInstance, instanceType = IsInInstance()
+				local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
+				
+				if maxPlayers == 25 then
+					filter = twentyfive
+				elseif maxPlayers == 10 then
+					filter = ten
+				else
+					filter = forty
+				end
+
+				if inInstance and instanceType == "raid" then
+					TukuiRaid:SetAttribute("groupFilter", filter)
+					if C.unitframes.showraidpets then
+						TukuiRaidPet:SetAttribute("groupFilter", filter)
+					end
+				else
+					TukuiRaid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+					if C.unitframes.showraidpets then
+						TukuiRaidPet:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+					end
+				end
+			end)
+		end
 	end)
 end

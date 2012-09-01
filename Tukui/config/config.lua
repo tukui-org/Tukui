@@ -53,6 +53,7 @@ C["unitframes"] = {
 	["gridvertical"] = true,                            -- grid group displayed vertically
 	["raidunitspercolumn"] = 10,                        -- number or raid member show per column
 	["showraidpets"] = true,                            -- show pets in raid unit frames
+	["maxraidplayers"] = false,                         -- max raid frames displayed according to instance max players
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
