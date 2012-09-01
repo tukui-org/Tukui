@@ -50,18 +50,16 @@ local function LoadSkin()
 		end
 	end
 	
-	ChatConfigChannelSettingsLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ChatConfigChannelSettingsLeft:SetScript("OnEvent", function(self, event)
-		ChatConfigChannelSettingsLeft:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	ChatConfigCategoryFrameButton3:HookScript("OnClick", function()
 		for i = 1,#ChatConfigChannelSettingsLeft.checkBoxTable do
 			_G["ChatConfigChannelSettingsLeftCheckBox"..i]:StripTextures()
 			_G["ChatConfigChannelSettingsLeftCheckBox"..i]:SetHeight(ChatConfigOtherSettingsCombatCheckBox1:GetHeight())
 			_G["ChatConfigChannelSettingsLeftCheckBox"..i.."Check"]:SkinCheckBox()
 			_G["ChatConfigChannelSettingsLeftCheckBox"..i.."ColorClasses"]:SkinCheckBox()
 			_G["ChatConfigChannelSettingsLeftCheckBox"..i.."ColorClasses"]:SetHeight(ChatConfigChatSettingsLeftCheckBox1Check:GetHeight())
-		end
+		end	
 	end)
-	
+
 	--Makes the skin work, but only after /reload ui :o   (found in chatconfingframe.xml)
 	CreateChatChannelList(self, GetChannelList())
 	ChatConfig_CreateCheckboxes(ChatConfigChannelSettingsLeft, CHAT_CONFIG_CHANNEL_LIST, "ChatConfigCheckBoxWithSwatchAndClassColorTemplate", CHANNELS)
