@@ -110,10 +110,11 @@ local function LoadSkin()
 	AchievementFrame:HookScript("OnShow", function()
 		for i=1, 20 do
 			local frame = _G["AchievementFrameCategoriesContainerButton"..i]
-			local lastframe = _G["AchievementFrameCategoriesContainerButton"..i-1]
-			
-			frame:StripTextures()
-			frame:StyleButton()				
+			if frame and not frame.isSkinned then
+				frame:StripTextures()
+				frame:StyleButton()
+				frame.isSkinned = true
+			end
 		end	
 	end)
 	
