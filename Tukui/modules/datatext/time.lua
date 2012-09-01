@@ -27,7 +27,6 @@ local lockoutInfoFormat = "%s%s |cffaaaaaa(%s, %s/%s)"
 local lockoutInfoFormatNoEnc = "%s%s |cffaaaaaa(%s)"
 local formatBattleGroundInfo = "%s: "
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
-local difficultyInfo = { "", "N5", "H5", "N10", "H10", "N25", "H25", "LFR", "N40", "H40"}
 local curHr, curMin, curAmPm
 local APM = { TIMEMANAGER_PM, TIMEMANAGER_AM }
 local startTimer = GetTime()
@@ -193,7 +192,7 @@ Stat:SetScript("OnEnter", function(self)
 				oneraid = true
 			end
 			if extended then lockoutColor = lockoutColorExtended else lockoutColor = lockoutColorNormal end
-			if difficulty:match("Player") or difficulty:match("Normal") then
+			if difficulty:match("Normal") then
 				idiff = "N"
 			elseif difficulty:match("Heroic") then
 				idiff = "H"
