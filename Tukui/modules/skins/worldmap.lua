@@ -54,8 +54,8 @@ local function LoadSkin()
 		end
 		
 		WorldMapFrame.backdrop:ClearAllPoints()
-		WorldMapFrame.backdrop:Point("TOPLEFT", UIParent, "TOPLEFT", -2, 2)
-		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 2, -2)	    
+		WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
+		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 25, -30)	    
 	end
 
 	local function QuestSkin()
@@ -68,8 +68,8 @@ local function LoadSkin()
 		end
 		
 		WorldMapFrame.backdrop:ClearAllPoints()
-		WorldMapFrame.backdrop:Point("TOPLEFT", UIParent, "TOPLEFT", -2, 2)
-		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 2, -2)	 
+		WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
+		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235) 	 
 		
 		if not WorldMapQuestDetailScrollFrame.backdrop then
 			WorldMapQuestDetailScrollFrame:CreateBackdrop("Default")
