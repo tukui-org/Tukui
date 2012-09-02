@@ -78,9 +78,7 @@ function T.StyleActionBarButton(self)
 		Button:CreateBackdrop()
 		Button.backdrop:SetOutside(Button, 0, 0)	
 		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
-		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
-		Button:SetAttribute("showgrid", 999999)	
-		ActionButton_ShowGrid(Button)			
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")			
 	end
 	
 	Icon:SetTexCoord(.08, .92, .08, .92)
