@@ -342,6 +342,7 @@ local BorderColor = function(self)
 	local tappedbyme = unit and UnitIsTappedByPlayer(unit)
 	local connected = unit and UnitIsConnected(unit)
 	local dead = unit and UnitIsDead(unit)
+	local r, g, b
 
 	if player then
 		local class = select(2, UnitClass(unit))
