@@ -26,6 +26,7 @@ local timerShortFormat = "%d:%02d"
 local lockoutInfoFormat = "%s%s |cffaaaaaa(%s, %s/%s)"
 local lockoutInfoFormatNoEnc = "%s%s |cffaaaaaa(%s)"
 local formatBattleGroundInfo = "%s: "
+local heroicDifficulty = {DUNGEON_DIFFICULTY2, DUNGEON_DIFFICULTY_5PLAYER_HEROIC, RAID_DIFFICULTY3, RAID_DIFFICULTY4, RAID_DIFFICULTY_10PLAYER_HEROIC, RAID_DIFFICULTY_25PLAYER_HEROIC}
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
 local curHr, curMin, curAmPm
 local APM = { TIMEMANAGER_PM, TIMEMANAGER_AM }
@@ -183,7 +184,7 @@ Stat:SetScript("OnEnter", function(self)
 	local oneraid, lockoutColor
 	for i = 1, GetNumSavedInstances() do
 		local name, _, reset, _, locked, extended, _, isRaid, maxPlayers, difficulty, numEncounters, encounterProgress  = GetSavedInstanceInfo(i)
-		local idiff = ""
+		local idiff = "N"
 		if isRaid and (locked or extended) and name then
 			local tr,tg,tb,diff
 			if not oneraid then
@@ -192,10 +193,11 @@ Stat:SetScript("OnEnter", function(self)
 				oneraid = true
 			end
 			if extended then lockoutColor = lockoutColorExtended else lockoutColor = lockoutColorNormal end
-			if difficulty:match("Normal") then
-				idiff = "N"
-			elseif difficulty:match("Heroic") then
-				idiff = "H"
+			for i, value in pairs(heroicDifficulty) do
+				if value == difficulty then
+					idiff = "H"
+					break
+				end
 			end
 			local formatTime = formatResetTime(reset)
 			if (numEncounters and numEncounters > 0) and (encounterProgress and encounterProgress > 0) then
