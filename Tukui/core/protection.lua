@@ -40,3 +40,7 @@ end
 if IsAddOnLoaded("AdiBags") or IsAddOnLoaded("ArkInventory") or IsAddOnLoaded("cargBags_Nivaya") or IsAddOnLoaded("cargBags") or IsAddOnLoaded("Bagnon") or IsAddOnLoaded("Combuctor") then
 	C.bags.enable = false
 end
+
+if IsAddOnLoaded("InlineAura") then
+	C.cooldown.enable = false
+end

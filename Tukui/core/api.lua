@@ -258,10 +258,9 @@ local function StyleButton(button)
 
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture("frame", nil, self)
-		checked:SetTexture(0,1,0,1)
+		checked:SetTexture(0,1,0,.3)
 		checked:Point("TOPLEFT", 2, -2)
 		checked:Point("BOTTOMRIGHT", -2, 2)
-		checked:SetAlpha(0.4)
 		button.checked = checked
 		button:SetCheckedTexture(checked)
 	end
