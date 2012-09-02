@@ -1,6 +1,16 @@
 -- this file is used when we find bug in default UI. We fix in this file.
 local T, C, L, G = unpack(select(2, ...))
 
+-- blizzard glyph bug -> http://us.battle.net/wow/en/forum/topic/6470967787
+local Load = CreateFrame("Frame")
+Load:RegisterEvent("PLAYER_ENTERING_WORLD")
+Load:SetScript("OnEvent", function(self, event)
+	LoadAddOn("Blizzard_TalentUI")
+	LoadAddOn("Blizzard_GlyphUI")
+	
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+end)
+
 if C.unitframes.raid then
 	local function LoadTalentFix()
 		T.CreatePopup["TUKUI_TALENT_FIX"] = {
