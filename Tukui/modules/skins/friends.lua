@@ -168,6 +168,7 @@ local function LoadSkin()
 	FriendsTabHeaderSoRButton.icon:ClearAllPoints()
 	FriendsTabHeaderSoRButton.icon:Point("TOPLEFT", 2, -2)
 	FriendsTabHeaderSoRButton.icon:Point("BOTTOMRIGHT", -2, 2)
+	FriendsTabHeaderSoRButton.icon:SetDrawLayer('ARTWORK')
 
 	ScrollOfResurrectionSelectionFrame:StripTextures()
 	ScrollOfResurrectionSelectionFrameList:StripTextures()
