@@ -13,14 +13,9 @@ local function LoadSkin()
 	
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
 	
-	TimeManagerAlarmEnabledButton:SkinButton(true)
-	TimeManagerAlarmEnabledButton:HookScript("OnClick", function(self)
-		self:SkinButton()
-	end)
-
-	TimeManagerFrame:HookScript("OnShow", function(self)
-		TimeManagerAlarmEnabledButton:SkinButton()
-	end)		
+	TimeManagerAlarmEnabledButton:SkinButton()
+	TimeManagerAlarmEnabledButton:Size(16)
+	TimeManagerAlarmEnabledButtonText:SetPoint("RIGHT", 76, 0)
 	
 	TimeManagerMilitaryTimeCheck:SkinCheckBox()
 	TimeManagerLocalTimeCheck:SkinCheckBox()
