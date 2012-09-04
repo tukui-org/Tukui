@@ -10,7 +10,6 @@ T.AllowFrameMoving = {
 	TukuiRollAnchor,
 	TukuiAchievementHolder,
 	TukuiWatchFrameAnchor,
-	TukuiGMFrameAnchor,
 	TukuiVehicleAnchor,
 	TukuiExtraActionBarFrameHolder,
 }
