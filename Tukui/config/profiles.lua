@@ -19,9 +19,9 @@ end
 -- Name need to be case sensitive
 ---------------------------------------------------------------------------
 
-if T.myname == "PuTYourNameHere" and T.myrealm == "PuTYourRealmHere" then
+if T.myname == "Tukz" and T.myrealm == "Illidan" then
 	C.actionbar.hideshapeshift = true
 	C.actionbar.hotkey = false
 	C.unitframes.enemyhcolor = true
-	C.general.uiscale = 0.64
+	C.auras.classictimer = true
 end
