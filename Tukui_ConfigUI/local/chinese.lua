@@ -1,5 +1,6 @@
 if GetLocale() == "zhCN" then
 	--Translated by 风吹那啥凉 （Popptise @Tukui forums)
+    --Translated by guo2easy (guo2easy@bbs.ngacn.cc)
 	-- general
 	TukuiConfigUILocalization.general = "综合"
 	TukuiConfigUILocalization.generalautoscale = "UI自动缩放"
@@ -11,7 +12,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.generalblizzardreskin = "改变暴雪样式的框体为Tukui风格"
 	 
 	-- nameplate
-	TukuiConfigUILocalization.nameplate = "姓名板"
+	TukuiConfigUILocalization.nameplate = "姓名版"
 	TukuiConfigUILocalization.nameplateenable = "开启姓名版"
 	TukuiConfigUILocalization.nameplateenhancethreat = "启用仇恨着色模式，将会根据你的角色自动改变颜色"
 	TukuiConfigUILocalization.nameplateshowhealth = "在姓名板上显示生命值"
@@ -31,7 +32,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.bagsenable = "开启背包整合"
 	 
 	-- datatext
-	TukuiConfigUILocalization.datatext = "信息文本"
+	TukuiConfigUILocalization.datatext = "文本信息"
 	TukuiConfigUILocalization.datatexttime24 = "使用24小时制"
 	TukuiConfigUILocalization.datatextlocaltime = "使用本地时间取代服务器时间"
 	TukuiConfigUILocalization.datatextbattleground = "启用战场状态"
@@ -43,7 +44,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.datatextfontsize = "文本字体大小"
 	TukuiConfigUILocalization.datatextfps_ms = "延时和帧数(输入0关闭)"
 	TukuiConfigUILocalization.datatextarmor = "护甲值 (输入0关闭)"
-	TukuiConfigUILocalization.datatextavd = "躲闪 (输入0关闭)"
+	TukuiConfigUILocalization.datatextavd = "免伤 (输入0关闭)"
 	TukuiConfigUILocalization.datatextpower = "攻强/法伤(输入0关闭)"
 	TukuiConfigUILocalization.datatexthaste = "急速(输入0关闭)"
 	TukuiConfigUILocalization.datatextfriends = "好友(输入0关闭)"
@@ -57,15 +58,16 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.datatexthit = "命中(输入0关闭)"
 	TukuiConfigUILocalization.datatextmastery = "精通 (输入0关闭)"
 	TukuiConfigUILocalization.datatexttalent = "显示天赋 (输入0关闭)"
-	TukuiConfigUILocalization.datatextcalltoarms = "战斗和地下城的召唤 (输入0关闭)" -- I am unsure about this , when 4.3 is out, This will be changed soon!
-
+	TukuiConfigUILocalization.datatextcalltoarms = "地下城战斗的召唤 (输入0关闭)"
+	TukuiConfigUILocalization.datatextregen = MANA_REGEN_ABBR
 	 
 	-- unit frames
 	TukuiConfigUILocalization.unitframes = "单位框体"
+	TukuiConfigUILocalization.unitframesenable = "启用Tukui头像框架"
 	TukuiConfigUILocalization.unitframescombatfeedback = "在玩家和目标框体上显示战斗信息"
-	TukuiConfigUILocalization.unitframesrunebar = "为死亡骑士启用符文条"
+	TukuiConfigUILocalization.unitframesrunebar = "启用死亡骑士符文条"
 	TukuiConfigUILocalization.unitframesauratimer = "在光环上显示时间"
-	TukuiConfigUILocalization.unitframestotembar = "为萨满启用图腾条"
+	TukuiConfigUILocalization.unitframestotembar = "启用萨满图腾条"
 	TukuiConfigUILocalization.unitframesshowtotalhpmp = "显示总的生命/能量值"
 	TukuiConfigUILocalization.unitframesshowplayerinparty = "在团队中显示你自己"
 	TukuiConfigUILocalization.unitframesraidunitdebuffwatch = "启用PVE光环检测 (只能在GRIG模式下)"
@@ -75,7 +77,6 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesplayeraggro = "在自身头像上启用仇恨显示"
 	TukuiConfigUILocalization.unitframesshowsmooth = "启用平滑状态条"
 	TukuiConfigUILocalization.unitframescharportrait = "为自身和目标启用头像显示"
-	TukuiConfigUILocalization.unitframesenable = "启用Tukui头像框架"
 	TukuiConfigUILocalization.unitframestargetpowerpvponly = "只显示敌对目标的能量值"
 	TukuiConfigUILocalization.unitframesgridonly = "治疗模式下仅使用GRID样式"
 	TukuiConfigUILocalization.unitframeshealcomm = "启用预估治疗"
@@ -87,7 +88,8 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesshowsymbols = "显示小队/团队标记"
 	TukuiConfigUILocalization.unitframesthreatbar = "启用仇恨条"
 	TukuiConfigUILocalization.unitframesshowrange = "启用小队/团队距离检测"
-	TukuiConfigUILocalization.unitframesfocus = "启用焦点目标"
+	TukuiConfigUILocalization.unitframesfocus = "启用焦点框体"
+	TukuiConfigUILocalization.unitframesshowfocustarget = "启用焦点的目标框体"
 	TukuiConfigUILocalization.unitframescblatency = "显示施法延时"
 	TukuiConfigUILocalization.unitframescbicons = "显示施法条图标"
 	TukuiConfigUILocalization.unitframesplayerauras = "为玩家启用额外的光环模式"
@@ -96,31 +98,29 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesmanahigh = "法力值过高警报 (LR专用)"
 	TukuiConfigUILocalization.unitframeslowThreshold = "低法力值警报 (所有的法系职业)"
 	TukuiConfigUILocalization.unitframesraidalphaoor = "小队/团队超出距离透明值"
-	TukuiConfigUILocalization.unitframesmaintank = "启用主坦克框架"
+	TukuiConfigUILocalization.unitframesmaintank = "启用主坦克框体"
 	TukuiConfigUILocalization.unitframesmainassist = "启用主助理框架"
 	TukuiConfigUILocalization.unitframesunicolor = "启用单一的颜色主题(灰色的生命条)"
 	TukuiConfigUILocalization.unitframestotdebuffs = "启用目标的目标的DEBUFF显示 (仅限高分辨率)"
 	TukuiConfigUILocalization.unitframesclassbar = "启用职业条"
 	TukuiConfigUILocalization.unitframesweakenedsoulbar = "启用灵魂虚弱指示 (牧师)"
 	TukuiConfigUILocalization.unitframesonlyselfdebuffs = "只在目标框体上显示你释放的DEBUFF"
-	TukuiConfigUILocalization.unitframesshowfocustarget = "启用焦点目标"
 	TukuiConfigUILocalization.unitframesbordercolor = "设置为默认的边框颜色"
-	TukuiConfigUILocalization.unitframesmovecombobar = "在目标框体上移动战斗条 (仅潜行者)"
-	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典战斗条样式"
-	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	TukuiConfigUILocalization.unitframesraid = "启用Tukui团队框架"
-	TukuiConfigUILocalization.unitframesshowraidpets = "在Tukui团队框架中显示宠物"
-	TukuiConfigUILocalization.unitframesdruidmanabar = "在熊或猫形态下显示德鲁伊的法力条"
-	TukuiConfigUILocalization.unitframesdruidmushroombar = "在平衡或者恢复专精下显示德鲁伊的生长条"
-	TukuiConfigUILocalization.unitframesmageclassbar = "显示法师的奥法条"
-	TukuiConfigUILocalization.unitframesraidunitspercolumn = "每列或者每行团队单位的数量"
-	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesshowraidpets = "团队框架中启用宠物框体"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "熊、猫姿态下显示魔法条（德鲁伊）"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "平衡或恢复天赋下启用蘑菇条（德鲁伊）"
+	TukuiConfigUILocalization.unitframesmageclassbar = "启用奥法助手"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "团队框架中每行/列的单位数量"
+	TukuiConfigUILocalization.unitframesmovecombobar = "将能量条移动至目标框体 (仅潜行者)"
+	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典连击点样式"
+	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"
 	TukuiConfigUILocalization.lootlootframe = "启用拾取框"
 	TukuiConfigUILocalization.lootautogreed = "满级时启用自动贪婪绿色物品"
-	TukuiConfigUILocalization.lootrolllootframe = "启用R点框体"
+	TukuiConfigUILocalization.lootrolllootframe = "启用Roll点框体"
 	 
 	-- invite
 	TukuiConfigUILocalization.invite = "邀请"
@@ -129,22 +129,22 @@ if GetLocale() == "zhCN" then
 	-- tooltip
 	TukuiConfigUILocalization.tooltip = "鼠标提示"
 	TukuiConfigUILocalization.tooltipenable = "开启鼠标提示"
-	TukuiConfigUILocalization.tooltiphidecombat = "战斗中关闭鼠标提示"
+	TukuiConfigUILocalization.tooltiphidecombat = "战斗中隐藏鼠标提示"
 	TukuiConfigUILocalization.tooltiphidebuttons = "隐藏动作条鼠标提示"
-	TukuiConfigUILocalization.tooltiphideuf = "隐藏头像信息提示"
+	TukuiConfigUILocalization.tooltiphideuf = "隐藏头像框体鼠标提示"
 	TukuiConfigUILocalization.tooltipcursor = "开启提示跟随鼠标指针"
 	 
 	-- error
 	TukuiConfigUILocalization.error = "错误信息"
-	TukuiConfigUILocalization.errorenable = "隐藏屏幕中恼人的错误提示信息"
+	TukuiConfigUILocalization.errorenable = "隐藏屏幕中间的红色错误提示信息"
 	 
 	-- action bar
 	TukuiConfigUILocalization.actionbar = "动作条"
 	TukuiConfigUILocalization.actionbarhideshapeshift = "隐藏姿态或者图腾栏"
-	TukuiConfigUILocalization.actionbarshowgrid = "始终在动作条上显示方格"
+	TukuiConfigUILocalization.actionbarshowgrid = "始终在动作条上显示空按钮"
 	TukuiConfigUILocalization.actionbarenable = "启用Tukui动作条"
 	TukuiConfigUILocalization.actionbarrb = "启用右侧动作条鼠标划过显示"
-	TukuiConfigUILocalization.actionbarhotkey = "显示热键名称"
+	TukuiConfigUILocalization.actionbarhotkey = "显示快捷键名称"
 	TukuiConfigUILocalization.actionbarssmo = "鼠标划过显示姿态栏和图腾栏"
 	TukuiConfigUILocalization.actionbarrbn = "底部动作条数目 (1 或 2)"
 	TukuiConfigUILocalization.actionbarrn = "右侧动作条数目 (0, 1, 2 或 3)"
@@ -152,9 +152,9 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.actionbarbuttonspacing = "动作条按钮间距"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "宠物或姿态栏按钮大小"
 	TukuiConfigUILocalization.actionbarownshdbar = "当暗影之舞时使用一个空的动作条来替代盗贼的潜行动作条（仅盗贼）"
-	TukuiConfigUILocalization.actionbarownmetabar = "在术士变形状态下用一个空动作条代替主动作条"
-	TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
-	TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
+	TukuiConfigUILocalization.actionbarownmetabar = "当恶魔形态时使用一个空的动作条来替代主动作条（仅术士）"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "切换姿态时使用一个空的动作条来替代主动作条（仅战士）"
+	TukuiConfigUILocalization.actionbarmacro = "在动作条上显示宏名称"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "竞技场"
@@ -166,17 +166,18 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.cooldowntreshold = "在X秒以后以红色显示冷却时间"
 	 
 	-- chat
-	TukuiConfigUILocalization.chat = "聊天框"
+	TukuiConfigUILocalization.chat = "聊天"
 	TukuiConfigUILocalization.chatenable = "启用Tukui的聊天框架"
-	TukuiConfigUILocalization.chatwhispersound = "在收到M语时播放提示音"
+	TukuiConfigUILocalization.chatwhispersound = "在收到密语时播放提示音"
 	TukuiConfigUILocalization.chatbackground = "启用聊天面板背景"
 
 	-- buff
 	TukuiConfigUILocalization.auras = "光环"
-	TukuiConfigUILocalization.aurasplayer = "启用Tukui Buff/Debuff 框架"
-	TukuiConfigUILocalization.aurasconsolidate = "启用增强BUFF显示"
+	TukuiConfigUILocalization.aurasplayer = "启用Tukui"
+	TukuiConfigUILocalization.aurasconsolidate = "启用Tukui Buff/Debuff 框架"
 	TukuiConfigUILocalization.aurasflash = "当光环剩余时间少于30秒时启用闪烁动画"
-	TukuiConfigUILocalization.aurasclassictimer = "在玩家光环上显示经典计时器"
+	TukuiConfigUILocalization.aurasclassictimer = "启用经典光环计时"
+
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "重置"
