@@ -46,8 +46,8 @@ local OnUpdate = function(self, elapsed)
 	local timeLeft
 	
 	-- Handle refreshing of temporary enchants.
-	if(self.isWeapon) then
-		local expiration = select(2, GetWeaponEnchantInfo())
+	if(self.offset) then
+		local expiration = select(self.offset, GetWeaponEnchantInfo())
 		if(expiration) then
 			timeLeft = expiration / 1e3
 		else
@@ -148,14 +148,23 @@ local UpdateTempEnchant = function(self, slot)
 	self.Icon:SetTexture(GetInventoryItemTexture("player", slot))
 	
 	-- time left
-	local expiration = select(2, GetWeaponEnchantInfo())
+	local offset
+	local weapon = self:GetName():sub(-1)
+	
+	if weapon:match("1") then
+		offset = 2
+	elseif weapon:match("2") then
+		offset = 5
+	end
+	
+	local expiration = select(offset, GetWeaponEnchantInfo())
 	
 	if(expiration) then
 		self.Dur = 3600
-		self.isWeapon = true
+		self.offset = offset
 		self:SetScript("OnUpdate", OnUpdate)
 	else
-		self.isWeapon = nil
+		self.offset = nil
 		self.timeLeft = nil
 		self:SetScript("OnUpdate", nil)
 	end
