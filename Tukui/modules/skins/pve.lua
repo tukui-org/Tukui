@@ -71,6 +71,8 @@ local function LoadSkin()
 					na:SetSize(118, 39)
 					cta:SetAlpha(0)
 					
+					button:StripTextures()
+					
 					button.border = CreateFrame("Frame", nil, button)
 					button.border:CreateBackdrop("Default")
 					button.border.backdrop:Point("TOPLEFT", icon, -2, 2)
@@ -111,8 +113,7 @@ local function LoadSkin()
 	RaidFinderFrameFindRaidButton:StripTextures()
 	RaidFinderFrameFindRaidButton:SkinButton()
 	RaidFinderQueueFrame:StripTextures()
-
-	GroupFinderFrameGroupButton2:HookScript("OnClick", function(self) RaidFinderQueueFrame:StripTextures() end)
+	RaidFinderQueueFrameBackground:SetAlpha(0)
 
 	for i = 1, LFD_MAX_REWARDS do
 		local button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i]
@@ -130,6 +131,8 @@ local function LoadSkin()
 				na:SetTexture(0, 0, 0, .25)
 				na:SetSize(118, 39)
 				cta:SetAlpha(0)
+				
+				button:StripTextures()
 				
 				button.border = CreateFrame("Frame", nil, button)
 				button.border:CreateBackdrop("Default")
