@@ -216,10 +216,10 @@ local function START_LOOT_ROLL(rollid, time)
 	f.rollid = rollid
 	f.time = time
 	for i in pairs(f.rolls) do f.rolls[i] = nil end
-	f.need:SetText(0)
-	f.greed:SetText(0)
-	f.pass:SetText(0)
-	f.disenchant:SetText(0)
+	f.need:SetText("")
+	f.greed:SetText("")
+	f.pass:SetText("")
+	f.disenchant:SetText("")
 
 	local texture, name, count, quality, bop, canNeed, canGreed, canDisenchant = GetLootRollItemInfo(rollid)
 	f.button:SetNormalTexture(texture)
@@ -309,30 +309,16 @@ local function ParseRollChoice(msg)
 	end
 end
 
-local function CHAT_MSG_LOOT(msg)
-	local playername, itemname, rolltype = ParseRollChoice(msg)
-	if playername and itemname and rolltype then
-		for _,f in ipairs(frames) do
-			if f.rollid and f.button.link == itemname and not f.rolls[playername] then
-				f.rolls[playername] = rolltype
-				f[rolltype]:SetText(tonumber(f[rolltype]:GetText()) + 1)
-				return
-			end
-		end
-	end
-end
-
 anchor:RegisterEvent("ADDON_LOADED")
 anchor:SetScript("OnEvent", function(frame, event, addon)
 	if addon ~= "Tukui" then return end
 
 	anchor:UnregisterEvent("ADDON_LOADED")
 	anchor:RegisterEvent("START_LOOT_ROLL")
-	anchor:RegisterEvent("CHAT_MSG_LOOT")
 	UIParent:UnregisterEvent("START_LOOT_ROLL")
 	UIParent:UnregisterEvent("CANCEL_LOOT_ROLL")
 
-	anchor:SetScript("OnEvent", function(frame, event, ...) if event == "CHAT_MSG_LOOT" then return CHAT_MSG_LOOT(...) else return START_LOOT_ROLL(...) end end)
+	anchor:SetScript("OnEvent", function(frame, event, ...) return START_LOOT_ROLL(...) end)
 
 	anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 350)
 end)
