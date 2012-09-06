@@ -1887,11 +1887,11 @@ local function Shared(self, unit)
 		
 		self:Tag(Name, "[Tukui:getnamecolor][Tukui:nameshort]")
 		self.Name = Name
+		
+		-- post update for main assist and maintank, for editors.
+		self.PostUpdateUnit = T.PostUpdateUnit or T.dummy
+		self:PostUpdateUnit(unit)
 	end
-	
-	-- post update for editors
-	self.PostUpdateUnit = T.PostUpdateUnit or T.dummy
-	self:PostUpdateUnit(unit)
 	
 	return self
 end
@@ -2071,54 +2071,6 @@ if C["unitframes"].showboss then
 		end
 		boss[i]:Size(200, 29)
 		G.UnitFrames["Boss"..i] = boss[i]
-	end
-end
-
-local assisttank_width = 100
-local assisttank_height  = 20
-if C["unitframes"].maintank == true then
-	local function GetAttributes()
-		return
-		"TukuiMainTank", nil, "raid",
-		"oUF-initialConfigFunction", ([[
-			self:SetWidth(%d)
-			self:SetHeight(%d)
-		]]):format(assisttank_width, assisttank_height),
-		"showRaid", true,
-		"groupFilter", "MAINTANK",
-		"yOffset", 7,
-		"point" , "BOTTOM",
-		"template", "oUF_TukuiMtt"		
-	end
-	T.MainTankAttributes = GetAttributes
-	
-	local tank = oUF:SpawnHeader(T.MainTankAttributes())
-	tank:SetParent(TukuiPetBattleHider)
-	tank:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-end
- 
-if C["unitframes"].mainassist == true then
-	local function GetAttributes()
-		return
-		"TukuiMainAssist", nil, "raid",
-		"oUF-initialConfigFunction", ([[
-			self:SetWidth(%d)
-			self:SetHeight(%d)
-		]]):format(assisttank_width, assisttank_height),
-		"showRaid", true,
-		"groupFilter", "MAINASSIST",
-		"yOffset", 7,
-		"point" , "BOTTOM",
-		"template", "oUF_TukuiMtt"
-	end
-	T.MainAssistAttributes = GetAttributes
-	
-	local assist = oUF:SpawnHeader(T.MainAssistAttributes())
-	assist:SetParent(TukuiPetBattleHider)
-	if C["unitframes"].maintank == true then
-		assist:SetPoint("TOPLEFT", TukuiMainTank, "BOTTOMLEFT", 2, -50)
-	else
-		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	end
 end
 
@@ -2450,6 +2402,54 @@ if C.unitframes.raid == true then
 	end
 		
 	oUF:Factory(function(self)
+		local assisttank_width = 100
+		local assisttank_height  = 20
+		if C["unitframes"].maintank == true then
+			local function GetAttributes()
+				return
+				"TukuiMainTank", nil, "raid",
+				"oUF-initialConfigFunction", ([[
+					self:SetWidth(%d)
+					self:SetHeight(%d)
+				]]):format(assisttank_width, assisttank_height),
+				"showRaid", true,
+				"groupFilter", "MAINTANK",
+				"yOffset", 7,
+				"point" , "BOTTOM",
+				"template", "oUF_TukuiMtt"		
+			end
+			T.MainTankAttributes = GetAttributes
+			
+			local tank = oUF:SpawnHeader(T.MainTankAttributes())
+			tank:SetParent(TukuiPetBattleHider)
+			tank:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+		end
+		 
+		if C["unitframes"].mainassist == true then
+			local function GetAttributes()
+				return
+				"TukuiMainAssist", nil, "raid",
+				"oUF-initialConfigFunction", ([[
+					self:SetWidth(%d)
+					self:SetHeight(%d)
+				]]):format(assisttank_width, assisttank_height),
+				"showRaid", true,
+				"groupFilter", "MAINASSIST",
+				"yOffset", 7,
+				"point" , "BOTTOM",
+				"template", "oUF_TukuiMtt"
+			end
+			T.MainAssistAttributes = GetAttributes
+			
+			local assist = oUF:SpawnHeader(T.MainAssistAttributes())
+			assist:SetParent(TukuiPetBattleHider)
+			if C["unitframes"].maintank == true then
+				assist:SetPoint("TOPLEFT", TukuiMainTank, "BOTTOMLEFT", 2, -50)
+			else
+				assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+			end
+		end
+		
 		if T.isAltRaidFrame then return end
 		
 		oUF:SetActiveStyle("TukuiRaid")
