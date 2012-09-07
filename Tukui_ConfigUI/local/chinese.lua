@@ -115,6 +115,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesmovecombobar = "将能量条移动至目标框体 (仅潜行者)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典连击点样式"
 	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "根据最大玩家人数调整团队框架"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"
