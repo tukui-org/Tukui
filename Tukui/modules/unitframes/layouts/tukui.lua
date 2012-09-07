@@ -2214,6 +2214,12 @@ if C.unitframes.raid == true then
 		ReadyCheck:SetPoint("CENTER") 	
 		self.ReadyCheck = ReadyCheck
 		
+		local LFDRole = health:CreateTexture(nil, "OVERLAY")
+		LFDRole:SetInside(panel)
+		LFDRole:SetTexture(0,0,0,0)
+		LFDRole.Override = T.SetGridGroupRole
+		self.LFDRole = LFDRole
+		
 		--local picon = self.Health:CreateTexture(nil, "OVERLAY")
 		--picon:SetPoint("CENTER", self.Health)
 		--picon:SetSize(16, 16)

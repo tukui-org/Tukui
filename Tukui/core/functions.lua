@@ -1080,6 +1080,25 @@ T.UpdateThreat = function(self, event, unit)
 	end 
 end
 
+T.SetGridGroupRole = function(self, role)
+	local lfdrole = self.LFDRole
+	
+	local role = UnitGroupRolesAssigned(self.unit)
+	
+	if role == "TANK" then
+		lfdrole:SetTexture(0,0,1,.3)
+		lfdrole:Show()
+	elseif role == "HEALER" then
+		lfdrole:SetTexture(.3,  1, .3, .3)
+		lfdrole:Show()
+	elseif role == "DAMAGER" then
+		lfdrole:SetTexture(1, .3, .3, .3)
+		lfdrole:Show()
+	else
+		lfdrole:Hide()
+	end
+end
+
 --------------------------------------------------------------------------------------------
 -- Grid theme indicator section
 --------------------------------------------------------------------------------------------
