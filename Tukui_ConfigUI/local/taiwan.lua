@@ -109,13 +109,13 @@
 	TukuiConfigUILocalization.unitframesmovecombobar = "移動目標的連擊點條 (盜賊限定)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用經典連擊點樣式"
 	TukuiConfigUILocalization.unitframesgridvertical = "Grid上的隊伍以垂直方向顯示"
-	TukuiConfigUILocalization.unitframesraid = "Enable Tukui Raid Frames"
-	TukuiConfigUILocalization.unitframesshowraidpets = "Show Pets in Tukui Raid Frames"
-	TukuiConfigUILocalization.unitframesdruidmanabar = "Show Druid Mana Bar in Bear/Cat form"
-	TukuiConfigUILocalization.unitframesdruidmushroombar = "Show Druid Mushroom bar in Balance or Restoration specialization"
-	TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
-	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
-	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesraid = "啟用Tukui團隊框架"
+	TukuiConfigUILocalization.unitframesshowraidpets = "在團隊框架中顯示寵物"
+	TukuiConfigUILocalization.unitframesdruidmanabar = "在熊或貓形態下顯示德魯伊的法力條"
+	TukuiConfigUILocalization.unitframesdruidmushroombar = "在德魯伊平衡專精下顯示狂野蘑菇的個數"
+	TukuiConfigUILocalization.unitframesmageclassbar = "在法師奧法專精下顯示奧沖層數"
+	TukuiConfigUILocalization.unitframesraidunitspercolumn = "团队團隊框架中每行/列的單位數量"
+	TukuiConfigUILocalization.unitframesmaxraidplayers = "根據最大玩家人數顯示最大團隊框架"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "戰利品"
@@ -152,10 +152,10 @@
 	TukuiConfigUILocalization.actionbarbuttonsize = "動作列按鍵大小"
 	TukuiConfigUILocalization.actionbarbuttonspacing = "動作列按鍵的間隔距離"
 	TukuiConfigUILocalization.actionbarpetbuttonsize = "寵物或變形列按鍵大小"
-	TukuiConfigUILocalization.actionbarownshdbar = "暗影之舞使用空白列而不是潛行列 (盜賊)"
-	TukuiConfigUILocalization.actionbarownmetabar = "Use an empty bar for Metamorphosis (warlock) instead of main bar"
-	TukuiConfigUILocalization.actionbarownwarstancebar = "Use an empty bar for each stance (warrior) instead of main bar"
-	TukuiConfigUILocalization.actionbarmacro = "Show macro text on action bar"
+	TukuiConfigUILocalization.actionbarownshdbar = "當惡影之舞時使用一個空的動作條替代主動作條（仅盜賊）"
+	TukuiConfigUILocalization.actionbarownmetabar = "當惡魔形態時使用一個空的動作條來替代主動作條（仅术士）"
+	TukuiConfigUILocalization.actionbarownwarstancebar = "切換姿態時用一個空的動作條來替代主動作（仅戰士）"
+	TukuiConfigUILocalization.actionbarmacro = "在動作條上顯示宏名稱"
 	 
 	-- arena
 	TukuiConfigUILocalization.arena = "競技場"
@@ -177,7 +177,7 @@
 	TukuiConfigUILocalization.aurasplayer = "啟用Tukui增/減益狀態框架"
 	TukuiConfigUILocalization.aurasconsolidate = "合併增益狀態"
 	TukuiConfigUILocalization.aurasflash = "光環少於30秒時以閃動動畫顯示"
-	TukuiConfigUILocalization.aurasclassictimer = "Display classic timer on player auras"
+	TukuiConfigUILocalization.aurasclassictimer = "啟用經典光環計時"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "重置"
