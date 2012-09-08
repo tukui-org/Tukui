@@ -1,7 +1,11 @@
-local T, C, L, G = unpack(select(2, ...)) 
+local T, C, L, G = unpack(select(2, ...))
+
 --------------------------------------------------------------------
 -- Tukui Minimap Script
 --------------------------------------------------------------------
+
+-- shitty map addon that a lot of peoples use.
+if (IsAddOnLoaded("SexyMap")) then return end
 
 local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", TukuiPetBattleHider)
 TukuiMinimap:SetTemplate()
