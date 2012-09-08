@@ -44,7 +44,6 @@ local OnClick = function(self)
 	if(IsModifiedClick()) then
 		HandleModifiedItemClick(GetLootSlotLink(self:GetID()))
 	else
-		StaticPopup_Hide"CONFIRM_LOOT_DISTRIBUTION"
 		ss = self:GetID()
 		sq = self.quality
 		sn = self.name:GetText()
