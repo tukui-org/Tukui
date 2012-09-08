@@ -1,6 +1,6 @@
 local T, C, L, G = unpack(select(2, ...)) 
 local class = select(2, UnitClass('player'))
-if class ~= "MONK" and class ~= "PRIEST" and class ~= "WARRIOR" then return end
+if class ~= "MONK" and class ~= "PRIEST" and class ~= "WARRIOR" and class ~= "DEATHKNIGHT" then return end
 
 local _, ns = ...
 local oUF = ns.oUF or oUF
@@ -13,6 +13,8 @@ elseif class == "PRIEST" then
 	Colors = { 238/255, 221/255,  130/255 }
 elseif class == "WARRIOR" then
 	Colors = { 205/255, 92/255,  92/255 }
+elseif class == "DEATHKNIGHT" then
+	Colors = { .6, .4, 0 }
 end
 
 local function UpdateStatueTimer(self, elapsed)
