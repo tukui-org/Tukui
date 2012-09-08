@@ -1,0 +1,9 @@
+## Interface: 50001
+## Title: oUF Holy Power Bar
+## Notes: Display Paladin Holy Power.
+## Author: Haste, Tukz
+## Version: 1
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_HolyPowerBar.lua

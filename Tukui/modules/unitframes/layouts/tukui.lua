@@ -562,14 +562,13 @@ local function Shared(self, unit)
 					bars:SetBackdropBorderColor(0,0,0,0)
 					
 					for i = 1, 5 do					
-						bars[i]=CreateFrame("StatusBar", self:GetName().."_Shard"..i, bars)
+						bars[i]=CreateFrame("StatusBar", self:GetName().."_HolyPower"..i, bars)
 						bars[i]:Height(8)					
 						bars[i]:SetStatusBarTexture(normTex)
 						bars[i]:GetStatusBarTexture():SetHorizTile(false)
+						bars[i]:SetStatusBarColor(228/255,225/255,16/255)
 
 						bars[i].bg = bars[i]:CreateTexture(nil, "BORDER")
-
-						bars[i]:SetStatusBarColor(228/255,225/255,16/255)
 						bars[i].bg:SetTexture(228/255,225/255,16/255)
 						
 						if i == 1 then
@@ -592,10 +591,8 @@ local function Shared(self, unit)
 						
 						bars[i].bg:SetTexture(normTex)					
 						bars[i].bg:SetAlpha(.15)
-						bars[i].width = bars[i]:GetWidth()
 					end
 					
-					bars.Override = T.UpdateHoly
 					self.HolyPower = bars
 				end
 
