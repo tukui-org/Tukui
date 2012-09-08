@@ -92,6 +92,20 @@ local function setup()
 	WatchFrameTitle:Kill()
 end
 
+-- skin buttons
+local function SkinQuestButton(self)
+	if not self.isSkinned then
+		local t = _G[self:GetName().."IconTexture"]
+		self:SkinButton()
+		self:StyleButton()
+		t:SetTexCoord(.1,.9,.1,.9)
+		t:SetInside()
+		self.isSkinned = true
+	end
+end
+
+hooksecurefunc("WatchFrameItem_UpdateCooldown", SkinQuestButton)
+
 ------------------------------------------------------------------------
 -- Execute setup after we enter world
 ------------------------------------------------------------------------
