@@ -31,21 +31,6 @@ local function LoadSkin()
 		end
 	end
 
-	local ChatMenus = {
-		"ChatMenu",
-		"EmoteMenu",
-		"LanguageMenu",
-		"VoiceMacroMenu",		
-	}
-	--
-	for i = 1, getn(ChatMenus) do
-		if _G[ChatMenus[i]] == _G["ChatMenu"] then
-			_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) self:ClearAllPoints() self:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, T.Scale(30)) end)
-		else
-			_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) end)
-		end
-	end
-
 	--LFD Role Picker frame
 	LFDRoleCheckPopup:StripTextures()
 	LFDRoleCheckPopup:SetTemplate("Default")

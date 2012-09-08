@@ -1,6 +1,4 @@
 local T, C, L, G = unpack(select(2, ...))
--- MOVE ME TO SKIN
-
 
 -- Skin all DropDownList[i]
 local function SkinDropDownList(level, index)
@@ -19,3 +17,19 @@ local function SkinDropDownList(level, index)
 	end
 end
 hooksecurefunc("UIDropDownMenu_CreateFrames", SkinDropDownList)
+
+-- chat menu dropdown
+local ChatMenus = {
+	"ChatMenu",
+	"EmoteMenu",
+	"LanguageMenu",
+	"VoiceMacroMenu",		
+}
+
+for i = 1, getn(ChatMenus) do
+	if _G[ChatMenus[i]] == _G["ChatMenu"] then
+		_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) self:ClearAllPoints() self:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, T.Scale(30)) end)
+	else
+		_G[ChatMenus[i]]:HookScript("OnShow", function(self) self:SetTemplate("Default", true) self:SetBackdropColor(unpack(C["media"].backdropcolor)) end)
+	end
+end
