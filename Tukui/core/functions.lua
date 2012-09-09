@@ -1046,13 +1046,13 @@ T.SetGridGroupRole = function(self, role)
 	local role = UnitGroupRolesAssigned(self.unit)
 	
 	if role == "TANK" then
-		lfdrole:SetTexture(0,0,1,.3)
+		lfdrole:SetTexture(67/255, 110/255, 238/255,.3)
 		lfdrole:Show()
 	elseif role == "HEALER" then
-		lfdrole:SetTexture(.3,  1, .3, .3)
+		lfdrole:SetTexture(154/255,  255/255, 154/255, .2)
 		lfdrole:Show()
 	elseif role == "DAMAGER" then
-		lfdrole:SetTexture(1, .3, .3, .3)
+		lfdrole:SetTexture(176/255, 23/255, 31/255, .27)
 		lfdrole:Show()
 	else
 		lfdrole:Hide()
