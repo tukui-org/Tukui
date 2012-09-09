@@ -1049,7 +1049,7 @@ T.SetGridGroupRole = function(self, role)
 		lfdrole:SetTexture(67/255, 110/255, 238/255,.3)
 		lfdrole:Show()
 	elseif role == "HEALER" then
-		lfdrole:SetTexture(154/255,  255/255, 154/255, .2)
+		lfdrole:SetTexture(130/255,  255/255, 130/255, .15)
 		lfdrole:Show()
 	elseif role == "DAMAGER" then
 		lfdrole:SetTexture(176/255, 23/255, 31/255, .27)
