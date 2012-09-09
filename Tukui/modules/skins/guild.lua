@@ -190,6 +190,7 @@ local function LoadSkin()
 	--Info Frame
 	GuildInfoDetailsFrameScrollBar:SkinScrollBar()
 	GuildInfoFrameApplicantsContainerScrollBar:SkinScrollBar()
+	GuildInfoFrameInfoMOTDScrollFrameScrollBar:SkinScrollBar()
 	
 	for i=1, 3 do
 		_G["GuildInfoFrameTab"..i]:StripTextures()
