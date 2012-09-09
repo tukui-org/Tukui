@@ -274,7 +274,7 @@ if T.client == "itIT" then
 	L.tutorial_step_4_line_1 = "Per impostare quante barre vuoi, posizionati sopra con il mouse a sinistra o destra della action bar. Fate lo stasso sulla destra. Per copiare il testo dalla chat, premete il bottone nella parte destra della chat."
 	L.tutorial_step_4_line_2 = "Puoi fare left-click sull'80% dei datatext per visualizzare i pannelli BLizzard. Amici e Gilda datatext hanno la caratteristica right-click."
 	L.tutorial_step_4_line_3 = "Ci sono alcuni menu a tendina disponibili. Right-Click su [X] (Chiudi) per gli zaini visualizzerà gli zaini, ordinamento item, visualizzerà il keyring, etc. Middle-Clicking sulla minimappa visualizzerà un micro menu."
-	L.tutorial_step_4_line_4 = "
+	L.tutorial_step_4_line_4 = ""
 
 	-- tutorial 5
 	L.tutorial_step_5_line_1 = "Ultimo, Tukui include una lista di comandi utili. "
