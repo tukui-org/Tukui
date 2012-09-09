@@ -11,6 +11,7 @@
 	<Script file="locales\korean.lua"/>	
 	<Script file="locales\chinese.lua"/>
 	<Script file="locales\portuguese.lua"/>
+	<Script file="locales\italian.lua"/>
 	<Script file="config\config.lua"/>
 	<Script file="config\profiles.lua"/>
 	<Script file="core\customconfig.lua"/>
