@@ -23,5 +23,5 @@ if (T.myname == "Tukz" or T.myname == "Tükz") and T.myrealm == "Illidan" then
 	C.actionbar.hideshapeshift = true
 	C.actionbar.hotkey = false
 	C.unitframes.enemyhcolor = true
-	C.auras.classictimer = true
+	--C.auras.classictimer = true
 end
