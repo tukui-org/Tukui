@@ -117,6 +117,7 @@
 	TukuiConfigUILocalization.unitframesmageclassbar = "Muestra la Barra del Mago Arcano"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Número de unidades de banda por columna/fila"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 
 	-- Botín
 	TukuiConfigUILocalization.loot = "Botín"

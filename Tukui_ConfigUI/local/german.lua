@@ -116,6 +116,7 @@
 	TukuiConfigUILocalization.unitframesmageclassbar = "Zeige die Leiste für Arkane Ladungen (Magier)"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Anzahl der Schlachtzugseinheiten per Spalte/Reihe"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Beute"

@@ -116,6 +116,7 @@
 	TukuiConfigUILocalization.unitframesmageclassbar = "Отображать полосу чародейских зарядов мага"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Количество рейдовых юнитов на ряд/столбец"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Добыча"

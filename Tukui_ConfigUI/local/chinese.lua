@@ -116,6 +116,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典连击点样式"
 	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "根据最大玩家人数调整团队框架"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"

@@ -639,35 +639,37 @@ local function Shared(self, unit)
 
 					self.Runes = Runes
 					
-					-- statue bar
-					local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
-					bar:SetWidth((T.lowversion and 186) or 250)
-					bar:SetHeight(8)
-					bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-					bar:SetStatusBarTexture(C.media.normTex)
-					bar.bg = bar:CreateTexture(nil, 'ARTWORK')
-					
-					bar.background = CreateFrame("Frame", "TukuiStatue", bar)
-					bar.background:SetAllPoints()
-					bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
-					bar.background:SetBackdrop(backdrop)
-					bar.background:SetBackdropColor(0, 0, 0)
-					bar.background:SetBackdropBorderColor(0,0,0)
-					
-					bar:SetScript("OnShow", function(self) 
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 22)
-					end)
-					
-					bar:SetScript("OnHide", function(self)
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 12)
-					end)
+					if C.unitframes.showstatuebar then
+						-- statue bar
+						local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
+						bar:SetWidth((T.lowversion and 186) or 250)
+						bar:SetHeight(8)
+						bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+						bar:SetStatusBarTexture(C.media.normTex)
+						bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+						
+						bar.background = CreateFrame("Frame", "TukuiStatue", bar)
+						bar.background:SetAllPoints()
+						bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+						bar.background:SetBackdrop(backdrop)
+						bar.background:SetBackdropColor(0, 0, 0)
+						bar.background:SetBackdropBorderColor(0,0,0)
+						
+						bar:SetScript("OnShow", function(self) 
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 22)
+						end)
+						
+						bar:SetScript("OnHide", function(self)
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 12)
+						end)
 
-					self.Statue = bar
+						self.Statue = bar
+					end
 				end
 				
-				if T.myclass == "WARRIOR" then
+				if T.myclass == "WARRIOR" and C.unitframes.showstatuebar then
 					-- statue bar
 					local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
 					bar:SetWidth((T.lowversion and 186) or 250)
@@ -732,32 +734,34 @@ local function Shared(self, unit)
 					
 					self.HarmonyBar = hb
 					
-					-- statue bar
-					local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
-					bar:SetWidth((T.lowversion and 186) or 250)
-					bar:SetHeight(8)
-					bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-					bar:SetStatusBarTexture(C.media.normTex)
-					bar.bg = bar:CreateTexture(nil, 'ARTWORK')
-					
-					bar.background = CreateFrame("Frame", "TukuiStatue", bar)
-					bar.background:SetAllPoints()
-					bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
-					bar.background:SetBackdrop(backdrop)
-					bar.background:SetBackdropColor(0, 0, 0)
-					bar.background:SetBackdropBorderColor(0,0,0)
-					
-					bar:SetScript("OnShow", function(self) 
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 22)
-					end)
-					
-					bar:SetScript("OnHide", function(self)
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 12)
-					end)
+					if C.unitframes.showstatuebar then
+						-- statue bar
+						local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
+						bar:SetWidth((T.lowversion and 186) or 250)
+						bar:SetHeight(8)
+						bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+						bar:SetStatusBarTexture(C.media.normTex)
+						bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+						
+						bar.background = CreateFrame("Frame", "TukuiStatue", bar)
+						bar.background:SetAllPoints()
+						bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+						bar.background:SetBackdrop(backdrop)
+						bar.background:SetBackdropColor(0, 0, 0)
+						bar.background:SetBackdropBorderColor(0,0,0)
+						
+						bar:SetScript("OnShow", function(self) 
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 22)
+						end)
+						
+						bar:SetScript("OnHide", function(self)
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 12)
+						end)
 
-					self.Statue = bar
+						self.Statue = bar
+					end
 				end
 				
 				-- priest
@@ -807,31 +811,33 @@ local function Shared(self, unit)
 					self.ShadowOrbsBar = pb
 					
 					-- statue bar
-					local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
-					bar:SetWidth((T.lowversion and 186) or 250)
-					bar:SetHeight(8)
-					bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-					bar:SetStatusBarTexture(C.media.normTex)
-					bar.bg = bar:CreateTexture(nil, 'ARTWORK')
-					
-					bar.background = CreateFrame("Frame", "TukuiStatue", bar)
-					bar.background:SetAllPoints()
-					bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
-					bar.background:SetBackdrop(backdrop)
-					bar.background:SetBackdropColor(0, 0, 0)
-					bar.background:SetBackdropBorderColor(0,0,0)
-					
-					bar:SetScript("OnShow", function(self) 
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 12)
-					end)
-					
-					bar:SetScript("OnHide", function(self)
-						local f = self:GetParent()
-						f.shadow:Point("TOPLEFT", -4, 4)
-					end)
+					if C.unitframes.showstatuebar then
+						local bar = CreateFrame("StatusBar", "TukuiStatueBar", self)
+						bar:SetWidth((T.lowversion and 186) or 250)
+						bar:SetHeight(8)
+						bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+						bar:SetStatusBarTexture(C.media.normTex)
+						bar.bg = bar:CreateTexture(nil, 'ARTWORK')
+						
+						bar.background = CreateFrame("Frame", "TukuiStatue", bar)
+						bar.background:SetAllPoints()
+						bar.background:SetFrameLevel(bar:GetFrameLevel() - 1)
+						bar.background:SetBackdrop(backdrop)
+						bar.background:SetBackdropColor(0, 0, 0)
+						bar.background:SetBackdropBorderColor(0,0,0)
+						
+						bar:SetScript("OnShow", function(self) 
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 12)
+						end)
+						
+						bar:SetScript("OnHide", function(self)
+							local f = self:GetParent()
+							f.shadow:Point("TOPLEFT", -4, 4)
+						end)
 
-					self.Statue = bar
+						self.Statue = bar
+					end
 				end
 				
 				-- shaman totem bar

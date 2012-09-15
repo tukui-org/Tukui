@@ -116,6 +116,7 @@
 	TukuiConfigUILocalization.unitframesmageclassbar = "在法師奧法專精下顯示奧沖層數"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "团队團隊框架中每行/列的單位數量"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "根據最大玩家人數顯示最大團隊框架"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "戰利品"

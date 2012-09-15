@@ -65,11 +65,6 @@ local function UpdateTooltip(self)
 	
 	-- mouseover
 	if self:GetAnchorType() == "ANCHOR_CURSOR" then
-		if InCombatLockdown() and C["tooltip"].hidecombat == true then
-			self:Hide()
-			return
-		end
-		
 		-- h4x for world object tooltip border showing last border color 
 		-- or showing background sometime ~blue :x		
 		if NeedBackdropBorderRefresh then
@@ -128,7 +123,7 @@ end
 
 local function SetTooltipDefaultAnchor(self, parent)
 	if C["tooltip"].cursor == true then
-		if IsAddOnLoaded("Tukui_Raid_Healing") and parent ~= UIParent then
+		if parent ~= UIParent then
 			self:SetOwner(parent, "ANCHOR_NONE")
 		else
 			self:SetOwner(parent, "ANCHOR_CURSOR")

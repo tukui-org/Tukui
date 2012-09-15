@@ -116,6 +116,7 @@
 	TukuiConfigUILocalization.unitframesmageclassbar = "Afficher la barre d'arcane du mage."
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Nombre d'unités de raid par colonne / ligne"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Butin"

@@ -184,6 +184,7 @@
 	<Script file="modules\skins\reforging.lua"/>
 	<Script file="modules\skins\socket.lua"/>
 	<Script file="modules\skins\spellbook.lua"/>
+	<Script file="modules\skins\survey.lua"/>
 	<Script file="modules\skins\tabard.lua"/>
 	<Script file="modules\skins\talent.lua"/>
 	<Script file="modules\skins\taxi.lua"/>

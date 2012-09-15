@@ -39,6 +39,7 @@ C["unitframes"] = {
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
 	["showfocustarget"] = true,                         -- show focus target
+	["showstatuebar"] = true,                           -- show statue bar (Dependencies: class bar option)
 	["bordercolor"] = { .4,.4,.4 },                     -- unit frames panel border color
 
 	-- raid layout (if one of them is enabled)
