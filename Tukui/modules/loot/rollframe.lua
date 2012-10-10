@@ -191,6 +191,7 @@ anchor:SetTemplate("Default")
 anchor:SetAlpha(0)
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
 G.Loot.RollAnchor = anchor
+tinsert(T.AllowFrameMoving, TukuiRollAnchor)
 
 local frames = {}
 

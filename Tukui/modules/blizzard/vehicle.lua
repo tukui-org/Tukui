@@ -15,6 +15,7 @@ anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_vehicle)
 G.Misc.VehicleAnchor = anchor
+tinsert(T.AllowFrameMoving, TukuiVehicleAnchor)
 
 hooksecurefunc(VehicleSeatIndicator,"SetPoint",function(_,_,parent) -- vehicle seat indicator
     if (parent == "MinimapCluster") or (parent == _G["MinimapCluster"]) then

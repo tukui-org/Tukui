@@ -12,6 +12,7 @@ AchievementHolder:SetAlpha(0)
 AchievementHolder.text = T.SetFontString(AchievementHolder, C.media.uffont, 12)
 AchievementHolder.text:SetPoint("CENTER")
 AchievementHolder.text:SetText(L.move_achievements)
+tinsert(T.AllowFrameMoving, TukuiAchievementHolder)
 
 AlertFrame:SetParent(AchievementHolder)
 AlertFrame:SetPoint("TOP", AchievementHolder, 0, -30)

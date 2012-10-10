@@ -63,6 +63,7 @@ local function LoadSkin()
 	--Popup
 	GuildBankPopupFrame:StripTextures()
 	GuildBankPopupScrollFrame:StripTextures()
+	GuildBankPopupScrollFrameScrollBar:SkinScrollBar()
 	GuildBankPopupFrame:SetTemplate("Default")
 	GuildBankPopupFrame:Point("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, -30)
 	GuildBankPopupOkayButton:SkinButton()

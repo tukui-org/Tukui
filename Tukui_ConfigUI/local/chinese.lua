@@ -116,7 +116,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典连击点样式"
 	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "根据最大玩家人数调整团队框架"
-	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
+	TukuiConfigUILocalization.unitframesshowstatuebar = "显示状态条（职业条必须开启的情况下）"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "拾取"
@@ -175,8 +175,8 @@ if GetLocale() == "zhCN" then
 
 	-- buff
 	TukuiConfigUILocalization.auras = "光环"
-	TukuiConfigUILocalization.aurasplayer = "启用Tukui"
-	TukuiConfigUILocalization.aurasconsolidate = "启用Tukui Buff/Debuff 框架"
+	TukuiConfigUILocalization.aurasplayer = "启用Tukui Buff/Debuff 框架"
+	TukuiConfigUILocalization.aurasconsolidate = "启用BUFF整合"
 	TukuiConfigUILocalization.aurasflash = "当光环剩余时间少于30秒时启用闪烁动画"
 	TukuiConfigUILocalization.aurasclassictimer = "启用经典光环计时"
 

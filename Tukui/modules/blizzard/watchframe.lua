@@ -22,8 +22,8 @@ TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffo
 TukuiWatchFrameAnchor.text:SetPoint("CENTER")
 TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
 TukuiWatchFrameAnchor.text:Hide()
-
 G.Misc.WatchFrameAnchor = TukuiWatchFrameAnchor
+tinsert(T.AllowFrameMoving, TukuiWatchFrameAnchor)
 
 -- set default position according to how many right bars we have
 TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -220)

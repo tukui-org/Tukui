@@ -52,6 +52,7 @@ anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 G.Tooltips.GameTooltip.Anchor = anchor
+tinsert(T.AllowFrameMoving, TukuiTooltipAnchor)
 
 -- Update Tukui Tooltip Position on some specifics Tooltip
 -- Also used because on Eyefinity, SetClampedToScreen doesn't work on left and right side of screen #1

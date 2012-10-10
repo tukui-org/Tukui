@@ -42,6 +42,7 @@
 	<Script file="core\video.lua"/>
 	<Script file="core\deprecated.lua"/>
 	<Script file="core\api.lua"/>
+	<Script file="core\move.lua"/>
 	<Script file="core\functions.lua"/>
 	<Script file="core\fonts.lua"/>
 	<Script file="core\protection.lua"/>
@@ -134,7 +135,6 @@
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="modules\misc\dropdownlist.lua"/>
-	<Script file="core\move.lua"/>
 	<Script file="modules\misc\raidutilities.lua"/>
 	<Script file="modules\ui\petbattles.lua"/>
 	

@@ -68,10 +68,9 @@ buffs:SetAttribute("consolidateProxy", CreateFrame("Frame", buffs:GetName() .. "
 buffs:SetAttribute("consolidateHeader", consolidate)
 buffs:SetAttribute("consolidateTo", filter)
 buffs:SetAttribute("includeWeapons", 1)
-
-
 buffs:SetAttribute("consolidateDuration", -1)
 buffs:Show()
+tinsert(T.AllowFrameMoving, TukuiAurasPlayerBuffs)
 
 -- create the consolidated button
 local proxy = buffs:GetAttribute("consolidateProxy")

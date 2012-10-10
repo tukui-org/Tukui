@@ -89,9 +89,7 @@ local function LoadSkin()
 
 	for i = 1, NUM_LFD_CHOICE_BUTTONS do
 		_G["LFDQueueFrameSpecificListButton"..i].enableButton:SkinCheckBox()
-	end
-
-	ScenarioQueueFrameSpecificButton1.enableButton:SkinCheckBox()		
+	end	
 
 	for i = 1, NUM_LFR_CHOICE_BUTTONS do
 		local bu = _G["LFRQueueFrameSpecificListButton"..i].enableButton
@@ -156,6 +154,40 @@ local function LoadSkin()
 	ScenarioQueueFrameFindGroupButton:StripTextures()
 	ScenarioQueueFrameFindGroupButton:SkinButton()
 	ScenarioQueueFrameTypeDropDown:SkinDropDownBox()
+	
+	local function SkinScenarioCheckBox()
+		if NUM_SCENARIO_CHOICE_BUTTONS then
+			for i = 1, NUM_SCENARIO_CHOICE_BUTTONS do
+				local button = _G["ScenarioQueueFrameSpecificButton"..i]
+				if button and not button.isSkinned then
+					button.enableButton:SkinCheckBox()
+					button.isSkinned = true
+				end
+			end
+		end
+	end
+	hooksecurefunc("ScenarioQueueFrameSpecific_Update", SkinScenarioCheckBox)
+	
+	local function SkinScenarioRewards()
+		for i = 1, 4 do
+			local b = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem"..i]
+			if b and not b.isSkinned then
+				local icon = b.icon
+				local icontexture = icon:GetTexture()
+				icon:SetTexCoord(.1,.9,.1,.9)
+				icon:SetDrawLayer("OVERLAY")
+				b:StripTextures()
+				icon:SetTexture(icontexture)
+				b.isSkinned = true
+				
+				b.border = CreateFrame("Frame", nil, b)
+				b.border:SetOutside(icon)
+				b.border:SetTemplate()
+				b.border:SetBackdropColor(0,0,0,0)
+			end
+		end
+	end
+	hooksecurefunc("ScenarioQueueFrameRandom_UpdateFrame", SkinScenarioRewards)
 
 	-- Raid frame (social frame)
 	RaidFrameRaidBrowserButton:SetTemplate("Default")

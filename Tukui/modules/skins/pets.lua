@@ -114,16 +114,42 @@ local function LoadSkin()
 		end
 	end
 
+	local function UpdatePetCardQuality()
+		if PetJournalPetCard.petID  then
+			local speciesID, customName, level, xp, maxXp, displayID, name, icon, petType, creatureID, sourceText, description, isWild, canBattle, tradable = C_PetJournal.GetPetInfoByPetID(PetJournalPetCard.petID)
+			if canBattle then
+				local health, maxHealth, power, speed, rarity = C_PetJournal.GetPetStats(PetJournalPetCard.petID)
+				PetJournalPetCard.QualityFrame.quality:SetText(_G["BATTLE_PET_BREED_QUALITY"..rarity])
+				local color = ITEM_QUALITY_COLORS[rarity-1]
+				PetJournalPetCard.QualityFrame.quality:SetVertexColor(color.r, color.g, color.b)
+				PetJournalPetCard.QualityFrame:Show()
+			else
+				PetJournalPetCard.QualityFrame:Hide()
+			end
+		end
+	end
+	hooksecurefunc("PetJournal_UpdatePetCard", UpdatePetCardQuality)
+
 	local function ColorSelectedPet()
-		for i = 1, #PetJournal.listScroll.buttons do
+		local petButtons = PetJournal.listScroll.buttons;
+		for i = 1, #petButtons do
+			local index = petButtons[i].index;
 			local b = _G["PetJournalListScrollFrameButton"..i]
 			local t = _G["PetJournalListScrollFrameButton"..i.."Name"]
+			local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, isWild);
+			local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID);
 			if b.dragButton.ActiveTexture:IsShown() then
 				t:SetTextColor(1,1,0)
-				b.backdrop:SetBackdropBorderColor(1, 1, 0)
+				--b.backdrop:SetBackdropBorderColor(1, 1, 0)
 			else
 				t:SetTextColor(1, 1, 1)
-				b.backdrop:SetBackdropBorderColor(unpack(C.media.bordercolor))
+				--b.backdrop:SetBackdropBorderColor(unpack(C.media.bordercolor))
+			end
+			if rarity then
+				local color = ITEM_QUALITY_COLORS[rarity-1]
+				b.backdrop:SetBackdropBorderColor(color.r, color.g, color.b);
+			else
+				b.backdrop:SetBackdropBorderColor(1, 1, 0)
 			end
 		end
 	end
@@ -193,8 +219,21 @@ local function LoadSkin()
 	PetJournalPetCardPetInfo.backdrop:SetFrameLevel(PetJournalPetCardPetInfo.backdrop:GetFrameLevel() + 2)
 	PetJournalPetCardPetInfo.level:SetParent(PetJournalPetCardPetInfo.backdrop)
 
-	PetJournalPrimaryAbilityTooltip:StripTextures()
-	PetJournalPrimaryAbilityTooltip:SetTemplate()
+	local tt = PetJournalPrimaryAbilityTooltip
+	tt.Background:SetTexture(nil)
+	if tt.Delimiter1 then
+		tt.Delimiter1:SetTexture(nil)
+		tt.Delimiter2:SetTexture(nil)
+	end
+	tt.BorderTop:SetTexture(nil)
+	tt.BorderTopLeft:SetTexture(nil)
+	tt.BorderTopRight:SetTexture(nil)
+	tt.BorderLeft:SetTexture(nil)
+	tt.BorderRight:SetTexture(nil)
+	tt.BorderBottom:SetTexture(nil)
+	tt.BorderBottomRight:SetTexture(nil)
+	tt.BorderBottomLeft:SetTexture(nil)
+		tt:SetTemplate("Transparent")
 
 	for i=1, 6 do
 		local frame = _G["PetJournalPetCardSpell"..i]

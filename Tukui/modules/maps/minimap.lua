@@ -18,6 +18,7 @@ TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
 TukuiMinimap.text:SetPoint("CENTER")
 TukuiMinimap.text:SetText(L.move_minimap)
 G.Maps.Minimap = TukuiMinimap
+tinsert(T.AllowFrameMoving, TukuiMinimap)
 
 -- kill the minimap cluster
 MinimapCluster:Kill()

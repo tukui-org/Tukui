@@ -43,6 +43,27 @@ local function LoadSkin()
 	LFDRoleCheckPopupRoleButtonDPS:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonDPS:GetChildren():GetFrameLevel() + 1)
 	LFDRoleCheckPopupRoleButtonHealer:GetChildren():SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer:GetChildren():GetFrameLevel() + 1)
 
+	-- Cinematic popup
+	CinematicFrameCloseDialog:SetTemplate()
+	CinematicFrameCloseDialogConfirmButton:SkinButton()
+	CinematicFrameCloseDialogResumeButton:SkinButton()
+	
+	-- Report Cheats
+	ReportCheatingDialog:StripTextures()
+	ReportCheatingDialog:SetTemplate()
+	ReportCheatingDialogReportButton:SkinButton()
+	ReportCheatingDialogCancelButton:SkinButton()
+	ReportCheatingDialogCommentFrame:StripTextures()
+	ReportCheatingDialogCommentFrameEditBox:SkinEditBox()
+	
+	-- Report Name
+	ReportPlayerNameDialog:StripTextures()
+	ReportPlayerNameDialog:SetTemplate()
+	ReportPlayerNameDialogReportButton:SkinButton()
+	ReportPlayerNameDialogCancelButton:SkinButton()
+	ReportPlayerNameDialogCommentFrame:StripTextures()
+	ReportPlayerNameDialogCommentFrameEditBox:SkinEditBox()
+	
 	-- reskin popup buttons
 	for i = 1, 4 do
 		for j = 1, 3 do
@@ -438,6 +459,7 @@ local function LoadSkin()
 	"AudioOptionsSoundPanelPetSounds",
 	"AudioOptionsSoundPanelMusic",
 	"AudioOptionsSoundPanelLoopMusic",
+	"AudioOptionsSoundPanelPetBattleMusic",
 	"AudioOptionsSoundPanelAmbientSounds",
 	"AudioOptionsSoundPanelSoundInBG",
 	"AudioOptionsSoundPanelReverb",

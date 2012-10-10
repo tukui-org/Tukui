@@ -2,17 +2,7 @@ local T, C, L, G = unpack(select(2, ...))
 
 -- all the frame we want to move
 -- all our frames that we want being movable.
-T.AllowFrameMoving = {
-	TukuiMinimap,
-	TukuiTooltipAnchor,
-	TukuiAurasPlayerBuffs,
-	TukuiStance,
-	TukuiRollAnchor,
-	TukuiAchievementHolder,
-	TukuiWatchFrameAnchor,
-	TukuiVehicleAnchor,
-	TukuiExtraActionBarFrameHolder,
-}
+T.AllowFrameMoving = {}
 
 -- used to exec various code if we enable or disable moving
 local function exec(self, enable)

@@ -27,6 +27,8 @@ ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 G.ActionBars.Stance.Holder = ssmover
 
+tinsert(T.AllowFrameMoving, TukuiStance)
+
 -- hide it if not needed and stop executing code
 if C.actionbar.hideshapeshift then TukuiStance:Hide() return end
 

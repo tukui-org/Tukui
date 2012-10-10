@@ -109,6 +109,15 @@ local function LoadSkin()
 			end
 		end
 	end)
+	
+	-- bonus
+	BonusRollFrame:StripTextures()
+	BonusRollFrame:SetTemplate()
+	BonusRollFrame.PromptFrame.Icon:SetTexCoord(.1,.9,.1,.9)
+	BonusRollFrame.PromptFrame.IconBackdrop = CreateFrame("Frame", nil, BonusRollFrame.PromptFrame)
+	BonusRollFrame.PromptFrame.IconBackdrop:SetFrameLevel(BonusRollFrame.PromptFrame.IconBackdrop:GetFrameLevel() - 1)
+	BonusRollFrame.PromptFrame.IconBackdrop:SetOutside(BonusRollFrame.PromptFrame.Icon)
+	BonusRollFrame.PromptFrame.IconBackdrop:SetTemplate()
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

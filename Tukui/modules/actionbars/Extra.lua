@@ -9,11 +9,11 @@ holder:SetMovable(true)
 holder:SetTemplate("Default")
 holder:SetBackdropBorderColor(1,0,0)
 holder:SetAlpha(0)
-	
 holder.text = T.SetFontString(holder, C.media.uffont, 12)
 holder.text:SetPoint("CENTER")
 holder.text:SetText(L.move_extrabutton)
 holder.text:Hide()
+tinsert(T.AllowFrameMoving, TukuiExtraActionBarFrameHolder)
 
 ExtraActionBarFrame:SetParent(UIParent)
 ExtraActionBarFrame:ClearAllPoints()
