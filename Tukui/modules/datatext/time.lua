@@ -146,7 +146,7 @@ Stat:SetScript("OnEnter", function(self)
 		if canEnter then
 			if isActive then
 				startTime = WINTERGRASP_IN_PROGRESS
-			elseif startTime == nil then
+			elseif startTime == nil or startTime == 0 then
 				startTime = QUEUE_TIME_UNAVAILABLE
 			else
 				local hour, min, sec = CalculateTimeLeft(startTime)
