@@ -55,6 +55,7 @@ C["unitframes"] = {
 	["raidunitspercolumn"] = 10,                        -- number or raid member show per column
 	["showraidpets"] = true,                            -- show pets in raid unit frames
 	["maxraidplayers"] = false,                         -- max raid frames displayed according to instance max players
+	["showgroupresurrect"] = false,                     -- show ressurect icon on raid frames
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.

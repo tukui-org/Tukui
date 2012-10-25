@@ -118,6 +118,7 @@ if GetLocale() == "itIT" then
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Numero di unità in raid per colonna/riga"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max frame del raid in base al massimo dei players"
 	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
+	TukuiConfigUILocalization.unitframesshowgroupresurrect = "Show ressurect icon on raid frames"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "Loot"

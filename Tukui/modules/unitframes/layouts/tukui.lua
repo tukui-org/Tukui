@@ -2250,6 +2250,19 @@ if C.unitframes.raid == true then
 		LFDRole.Override = T.SetGridGroupRole
 		self.LFDRole = LFDRole
 		
+		if C.unitframes.showgroupresurrect then
+			local Resurrect = CreateFrame("Frame", nil, self.Health)
+			Resurrect:SetFrameLevel(self.Health:GetFrameLevel() + 1)
+			Resurrect:Size(20)
+			Resurrect:SetPoint("CENTER")
+			self.Resurrect = Resurrect
+
+			local ResurrectIcon = Resurrect:CreateTexture(nil, "OVERLAY")
+			ResurrectIcon:SetAllPoints()
+			ResurrectIcon:SetDrawLayer("OVERLAY", 7)
+			self.ResurrectIcon = ResurrectIcon
+		end
+		
 		--local picon = self.Health:CreateTexture(nil, "OVERLAY")
 		--picon:SetPoint("CENTER", self.Health)
 		--picon:SetSize(16, 16)

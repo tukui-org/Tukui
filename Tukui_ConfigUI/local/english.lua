@@ -124,6 +124,7 @@ TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependenci
 TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
 TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
 TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
+TukuiConfigUILocalization.unitframesshowgroupresurrect = "Show ressurect icon on raid frames"
 
 -- loot
 TukuiConfigUILocalization.loot = "Loot"

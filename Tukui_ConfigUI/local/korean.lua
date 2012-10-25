@@ -115,6 +115,7 @@
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 	TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
+	TukuiConfigUILocalization.unitframesshowgroupresurrect = "Show ressurect icon on raid frames"
 	 
 	-- loot
 	TukuiConfigUILocalization.loot = "전리품"
