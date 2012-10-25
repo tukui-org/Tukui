@@ -54,7 +54,10 @@ local function OnUpdate(self, elapsed)
 		local mpower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 		self:SetValue(power)
 		AltPowerText:SetText(power.." / "..mpower)
-		local r, g, b = oUFTukui.ColorGradient(power,mpower, 0,.8,0,.8,.8,0,.8,0,0)
+		local texture, r, g, b = UnitAlternatePowerTextureInfo("player", 2, 0) -- 2 = status bar index, 0 = displayed bar
+		if not r then
+			r, g, b = oUFTukui.ColorGradient(power,mpower, 0,.8,0,.8,.8,0,.8,0,0)
+		end
 		AltPowerBarStatus:SetStatusBarColor(r, g, b)
 		self.TimeSinceLastUpdate = 0
 	end

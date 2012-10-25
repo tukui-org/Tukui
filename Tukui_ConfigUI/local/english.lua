@@ -66,9 +66,6 @@ TukuiConfigUILocalization.datatextmastery = "Mastery position (0 for disabled)"
 TukuiConfigUILocalization.datatexttalent = "Display talents (0 for disabled)"
 TukuiConfigUILocalization.datatextcalltoarms = "Call to Arms & Dungeons (0 for disabled)"
 TukuiConfigUILocalization.datatextregen = MANA_REGEN_ABBR
-TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
-TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
-TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
 
  
 -- unit frames
@@ -124,7 +121,10 @@ TukuiConfigUILocalization.unitframesmageclassbar = "Show Mage Arcane Bar"
 TukuiConfigUILocalization.unitframesraidunitspercolumn = "Number of raid units per column/row"
 TukuiConfigUILocalization.unitframesmaxraidplayers = "Max raid frames displayed according to instance max players"
 TukuiConfigUILocalization.unitframesshowstatuebar = "Show Statue Bar (Dependencies: Class Bar Option need to be enabled)"
- 
+TukuiConfigUILocalization.unitframesmovecombobar = "Move the combo bar from target (ROGUE ONLY)"
+TukuiConfigUILocalization.unitframesclassiccombo = "Use classic combo point"
+TukuiConfigUILocalization.unitframesgridvertical = "Display raid groups on Grid vertically"
+
 -- loot
 TukuiConfigUILocalization.loot = "Loot"
 TukuiConfigUILocalization.lootlootframe = "Enable loot window"
