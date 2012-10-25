@@ -15,7 +15,7 @@ local meta = ""
 local warstance = ""
 
 if C.actionbar.ownshdbar then shd = 10 end
-if C.actionbar.ownmetabar then meta = "[stance:1] 10;" end
+if C.actionbar.ownmetabar then meta = "[stance:1] 10; [stance:2] 10;" end
 if C.actionbar.ownwarstancebar then warstance = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
 
 local Page = {
