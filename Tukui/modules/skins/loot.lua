@@ -112,12 +112,17 @@ local function LoadSkin()
 	
 	-- bonus
 	BonusRollFrame:StripTextures()
-	BonusRollFrame:SetTemplate()
+	BonusRollFrame:CreateBackdrop()
+	BonusRollFrame.backdrop:SetFrameLevel(0)
 	BonusRollFrame.PromptFrame.Icon:SetTexCoord(.1,.9,.1,.9)
 	BonusRollFrame.PromptFrame.IconBackdrop = CreateFrame("Frame", nil, BonusRollFrame.PromptFrame)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetFrameLevel(BonusRollFrame.PromptFrame.IconBackdrop:GetFrameLevel() - 1)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetOutside(BonusRollFrame.PromptFrame.Icon)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetTemplate()
+	BonusRollFrame.PromptFrame.Timer.Bar:SetTexture(75/255,  175/255, 76/255)
+	BonusRollFrame.PromptFrame.Timer.Bar:SetVertexColor(75/255,  175/255, 76/255)
+	BonusRollFrame.BlackBackgroundHoist:StripTextures()
+	BonusRollFrame.PromptFrame.Timer:CreateBackdrop()
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)
