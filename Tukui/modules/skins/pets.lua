@@ -131,27 +131,31 @@ local function LoadSkin()
 	hooksecurefunc("PetJournal_UpdatePetCard", UpdatePetCardQuality)
 
 	local function ColorSelectedPet()
-		local petButtons = PetJournal.listScroll.buttons;
-		for i = 1, #petButtons do
-			local index = petButtons[i].index;
-			local b = _G["PetJournalListScrollFrameButton"..i]
-			local t = _G["PetJournalListScrollFrameButton"..i.."Name"]
-			local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index, isWild)
-			
-			if petID then
-				local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
-				
-				if b.dragButton.ActiveTexture:IsShown() then
-					t:SetTextColor(1,1,0)
-				else
-					t:SetTextColor(1, 1, 1)
-				end
-				
-				if rarity then
-					local color = ITEM_QUALITY_COLORS[rarity-1]
-					b.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
-				else
-					b.backdrop:SetBackdropBorderColor(1, 1, 0)
+		local petButtons = PetJournal.listScroll.buttons
+		if petButtons then
+			for i = 1, #petButtons do
+				local index = petButtons[i].index
+				if index then
+					local b = _G["PetJournalListScrollFrameButton"..i]
+					local t = _G["PetJournalListScrollFrameButton"..i.."Name"]
+					local petID, speciesID, isOwned, customName, level, favorite, isRevoked, name, icon, petType, creatureID, sourceText, description, isWildPet, canBattle = C_PetJournal.GetPetInfoByIndex(index)
+					
+					if petID then
+						local health, maxHealth, attack, speed, rarity = C_PetJournal.GetPetStats(petID)
+						
+						if b.dragButton.ActiveTexture:IsShown() then
+							t:SetTextColor(1,1,0)
+						else
+							t:SetTextColor(1, 1, 1)
+						end
+						
+						if rarity then
+							local color = ITEM_QUALITY_COLORS[rarity-1]
+							b.backdrop:SetBackdropBorderColor(color.r, color.g, color.b)
+						else
+							b.backdrop:SetBackdropBorderColor(1, 1, 0)
+						end
+					end
 				end
 			end
 		end

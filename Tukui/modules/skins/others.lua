@@ -45,6 +45,7 @@ local function LoadSkin()
 
 	-- Cinematic popup
 	CinematicFrameCloseDialog:SetTemplate()
+	CinematicFrameCloseDialog:SetScale(C.general.uiscale)
 	CinematicFrameCloseDialogConfirmButton:SkinButton()
 	CinematicFrameCloseDialogResumeButton:SkinButton()
 	
