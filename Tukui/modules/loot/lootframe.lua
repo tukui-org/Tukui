@@ -382,7 +382,7 @@ local function init()
 			for _, cand in ipairs(players) do
 				-- Add candidate button
 				info.text = cand
-				info.colorCode = hexColors[this_class] or hexColors["UNKOWN"]
+				info.colorCode = hexColors[this_class] or hexColors["UNKNOWN"]
 				info.textHeight = 12
 				info.value = player_indices[cand]
 				info.notCheckable = 1
