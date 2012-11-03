@@ -20,6 +20,7 @@ local function LoadSkin()
 	end
 
 	VoidStorageFrame:SetTemplate("Default")
+	VoidStorageFrame:CreateShadow()
 	VoidStoragePurchaseFrame:SetTemplate("Default")
 	VoidStorageFrameMarbleBg:Kill()
 	VoidStorageFrameLines:Kill()
@@ -74,6 +75,15 @@ local function LoadSkin()
 		icon:Point("TOPLEFT", 2, -2)
 		icon:Point("BOTTOMRIGHT", -2, 2)
 	end
+	
+	-- dress
+	SideDressUpFrame:StripTextures(true)
+	SideDressUpFrame:CreateBackdrop()
+	SideDressUpFrame.backdrop:CreateShadow()
+
+	SideDressUpModelResetButton:SkinButton()
+	SideDressUpModelCloseButton:StripTextures()
+	SideDressUpModelCloseButton:SkinCloseButton()
 end
 
 T.SkinFuncs["Blizzard_VoidStorageUI"] = LoadSkin
