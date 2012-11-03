@@ -112,7 +112,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.unitframesdruidmushroombar = "平衡或恢复天赋下启用蘑菇条（德鲁伊）"
 	TukuiConfigUILocalization.unitframesmageclassbar = "启用奥法助手"
 	TukuiConfigUILocalization.unitframesraidunitspercolumn = "团队框架中每行/列的单位数量"
-	TukuiConfigUILocalization.unitframesmovecombobar = "将能量条移动至目标框体 (仅潜行者)"
+	TukuiConfigUILocalization.unitframesmovecombobar = "将能量条移动至玩家框体 (仅潜行者)"
 	TukuiConfigUILocalization.unitframesclassiccombo = "使用经典连击点样式"
 	TukuiConfigUILocalization.unitframesgridvertical = "在Grid中垂直显示小队"
 	TukuiConfigUILocalization.unitframesmaxraidplayers = "根据最大玩家人数调整团队框架"
