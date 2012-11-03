@@ -351,7 +351,7 @@ local function MasterLoot_GiveLoot(frame)
 end
 
 local function init()
-	local candidate, color, lclass, className
+	local candidate, lclass, className
 	local slot = sq or 0
 	local info = UIDropDownMenu_CreateInfo()
 
@@ -369,12 +369,12 @@ local function init()
 		end
 		if #players > 0 then
 			table.sort(players)
-			for _, cand in ipairs(players) do
+			for i, p in ipairs(players) do
 				-- Add candidate button
-				info.text = cand
+				info.text = p
 				info.colorCode = hexColors[this_class] or hexColors["UNKNOWN"]
 				info.textHeight = 12
-				info.value = player_indices[cand]
+				info.value = player_indices[p]
 				info.notCheckable = 1
 				info.disabled = nil
 				info.func = MasterLoot_GiveLoot
@@ -423,7 +423,7 @@ local function init()
 			candidate, lclass, className = GetMasterLootCandidate(slot, i)
 			if candidate then
 				-- Add candidate button
-				info.text = candidate -- coloredNames[candidate]
+				info.text = candidate
 				info.colorCode = hexColors[className] or hexColors["UNKNOWN"]
 				info.textHeight = 12
 				info.value = i
@@ -450,7 +450,7 @@ local function init()
 
 	wipe(randoms)
 	for i = 1, MAX_RAID_MEMBERS do
-		candidate,lclass,className = GetMasterLootCandidate(slot,i)
+		candidate, lclass, className = GetMasterLootCandidate(slot, i)
 		if candidate then
 			table.insert(randoms, i)
 		end
