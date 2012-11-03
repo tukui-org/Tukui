@@ -55,6 +55,10 @@ local PlateBlacklist = {
 	["Windfury Totem"] = true,
 	["Totem of Wrath"] = true,
 	["Wrath of Air Totem"] = true,
+	["Air Totem"] = true,
+	["Water Totem"] = true,
+	["Fire Totem"] = true,
+	["Earth Totem"] = true,
 
 	--Army of the Dead
 	["Army of the Dead Ghoul"] = true,
