@@ -1,6 +1,14 @@
 local T, C, L, G = unpack(select(2, ...))
 if IsAddOnLoaded("SmellyPowerBar") then return end
 
+local PowerTextures = {
+	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDJASPER_HORIZONTAL_FILL.BLP"] = {r = 1, g = 0.4, b = 0},
+	["INTERFACE\\UNITPOWERBARALT\\MAP_HORIZONTAL_FILL.BLP"] = {r = 0.97, g = 0.81, b = 0}
+	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDCOBALT_HORIZONTAL_FILL.BLP"] = {r = 0.1, g = 0.4, b = 0.95},
+	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDJADE_HORIZONTAL_FILL.BLP"] = {r = 0.13, g = 0.55, b = 0.13},
+	["INTERFACE\\UNITPOWERBARALT\\STONEGUARDAMETHYST_HORIZONTAL_FILL.BLP"] = {r = 0.67, g = 0, b = 1},
+}
+
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -55,7 +63,9 @@ local function OnUpdate(self, elapsed)
 		self:SetValue(power)
 		AltPowerText:SetText(power.." / "..mpower)
 		local texture, r, g, b = UnitAlternatePowerTextureInfo("player", 2, 0) -- 2 = status bar index, 0 = displayed bar
-		if not r then
+		if texture and PowerTextures[texture] then
+			r, g, b = PowerTextures[texture].r, PowerTextures[texture].g, PowerTextures[texture].b
+		else
 			r, g, b = oUFTukui.ColorGradient(power,mpower, 0,.8,0,.8,.8,0,.8,0,0)
 		end
 		AltPowerBarStatus:SetStatusBarColor(r, g, b)
