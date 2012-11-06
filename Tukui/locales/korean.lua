@@ -180,6 +180,8 @@ if T.client == "koKR" then
 	
 	L.loot_fish = "전리품"
 	L.loot_empty = "빈 슬롯"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
  
 	L.chat_invalidtarget = "잘못된 대상"
  

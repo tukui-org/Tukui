@@ -173,6 +173,8 @@ if T.client == "esES" or T.client == "esMX" then
 	
 	L.loot_fish = "Botín de Pesca"
 	L.loot_empty = "Espacio Vacío"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
  
 	L.chat_invalidtarget = "Objetivo Invalido"
  

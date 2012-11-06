@@ -173,6 +173,8 @@ if T.client == "zhTW" then
 	
 	L.loot_fish = "漁獲"
 	L.loot_empty = "無戰利品"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
  
 	L.chat_invalidtarget = "無效的目標"
  

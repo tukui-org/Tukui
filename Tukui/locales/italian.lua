@@ -174,6 +174,8 @@ if T.client == "itIT" then
 
 	L.loot_fish = "Fishy loot"
 	L.loot_empty = "slot vuoto"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
 
 	L.chat_invalidtarget = "Target non valido"
 

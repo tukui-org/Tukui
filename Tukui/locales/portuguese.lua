@@ -174,6 +174,8 @@ if T.client == "ptBR" then
 
 	L.loot_fish = "Saque de Peixe"
 	L.loot_empty = "Espaço vazio"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
 
 	L.chat_invalidtarget = "Alvo inválido"
 

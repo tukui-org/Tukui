@@ -174,6 +174,8 @@ if T.client == "zhCN" then
 	
 	L.loot_fish = "Fishy loot" -- not sure for this now
 	L.loot_empty = "Empty slot" -- not sure for this now
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
 
 	L.chat_invalidtarget = "无效的目标"
 

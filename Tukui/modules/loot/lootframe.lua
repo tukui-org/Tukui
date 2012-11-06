@@ -38,6 +38,8 @@ local OnLeave = function(self)
 end
 
 local OnClick = function(self)
+	if not self:GetID() then return end
+	
 	if(IsModifiedClick()) then
 		HandleModifiedItemClick(GetLootSlotLink(self:GetID()))
 	else
@@ -45,6 +47,13 @@ local OnClick = function(self)
 		sq = self.quality
 		sn = self.name:GetText()
 		st = self.icon:GetTexture()
+		
+		-- master looter
+		LootFrame.selectedLootButton = self:GetName()
+		LootFrame.selectedSlot = ss
+		LootFrame.selectedQuality = sq
+		LootFrame.selectedItemName = sn
+		LootFrame.selectedTexture = st
 
 		LootSlot(ss)
 	end
@@ -279,7 +288,7 @@ addon.LOOT_CLOSED = function(self)
 end
 
 addon.OPEN_MASTER_LOOT_LIST = function(self)
-	ToggleDropDownMenu(nil, nil, GroupLootDropDown, addon.slots[ss], 0, 0)
+	ToggleDropDownMenu(nil, nil, TukuiMasterLootDropDown, addon.slots[ss], 0, 0)
 end
 
 addon.UPDATE_MASTER_LOOT_LIST = function(self)
@@ -311,175 +320,3 @@ addon:Hide()
 -- Fuzz
 LootFrame:UnregisterAllEvents()
 table.insert(UISpecialFrames, "TukuiLootFrame")
-
--- Master Loot (special thanks to Ammo)
-local mlItemName, mlAssignNickname, mlValue, mlPopupQuestion
-
-T.CreatePopup["TUKUI_GIVEMASTERLOOT"] = {
-	answer1 = ACCEPT,
-	answer2 = CANCEL,
-	function1 = function() GiveMasterLoot(ss, mlValue) end,
-}
-
-local hexColors = {}
-for k, v in pairs(RAID_CLASS_COLORS) do
-	hexColors[k] = string.format("|cff%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
-end
-hexColors["UNKNOWN"] = string.format("|cff%02x%02x%02x", 0.6 * 255, 0.6 * 255, 0.6 * 255)
-
-local playerName = UnitName("player")
-local classesInRaid = {}
-local players, player_indices = {}, {}
-local randoms = {}
-local wipe = table.wipe
-
-local function MasterLoot_RequestRoll(frame)
-	DoMasterLootRoll(frame.value)
-end
-
-local function MasterLoot_GiveLoot(frame)
-	if sq >= MASTER_LOOT_THREHOLD then
-		mlValue = frame.value
-		mlItemName = ITEM_QUALITY_COLORS[sq].hex..sn..FONT_COLOR_CODE_CLOSE
-		mlAssignNickname = frame:GetText()
-		T.CreatePopup.TUKUI_GIVEMASTERLOOT.question = string.format(CONFIRM_LOOT_DISTRIBUTION, mlItemName, mlAssignNickname)
-		T.ShowPopup("TUKUI_GIVEMASTERLOOT")
-	else
-		GiveMasterLoot(ss, frame.value)
-	end
-	CloseDropDownMenus()
-end
-
-local function init()
-	local candidate, lclass, className
-	local slot = sq or 0
-	local info = UIDropDownMenu_CreateInfo()
-
-	if UIDROPDOWNMENU_MENU_LEVEL == 2 then
-		-- Raid class menu
-		wipe(players)
-		wipe(player_indices)
-		local this_class = UIDROPDOWNMENU_MENU_VALUE
-		for i = 1, MAX_RAID_MEMBERS do
-			candidate, lclass, className = GetMasterLootCandidate(slot, i)
-			if candidate and this_class == className then
-				table.insert(players,candidate)
-				player_indices[candidate] = i
-			end
-		end
-		if #players > 0 then
-			table.sort(players)
-			for i, p in ipairs(players) do
-				-- Add candidate button
-				info.text = p
-				info.colorCode = hexColors[this_class] or hexColors["UNKNOWN"]
-				info.textHeight = 12
-				info.value = player_indices[p]
-				info.notCheckable = 1
-				info.disabled = nil
-				info.func = MasterLoot_GiveLoot
-				UIDropDownMenu_AddButton(info, UIDROPDOWNMENU_MENU_LEVEL)
-			end
-		end
-		return
-	end
-
-	info.isTitle = 1
-	info.text = GIVE_LOOT
-	info.textHeight = 12
-	info.notCheckable = 1
-	info.disabled = nil
-	info.notClickable = nil
-	UIDropDownMenu_AddButton(info)
-
-	if IsInRaid() then
-		-- In a raid
-		wipe(classesInRaid)
-		for i = 1, MAX_RAID_MEMBERS do
-			candidate, lclass, className = GetMasterLootCandidate(slot, i)
-			if candidate then
-				classesInRaid[className] = lclass
-			end
-		end
-
-		for i, class in ipairs(CLASS_SORT_ORDER) do
-			local cname = classesInRaid[class]
-			if cname then
-				info.isTitle = nil
-				info.text = cname
-				info.colorCode = hexColors[class] or hexColors["UNKNOWN"]
-				info.textHeight = 12
-				info.hasArrow = 1
-				info.notCheckable = 1
-				info.value = class
-				info.func = nil
-				info.disabled = nil
-				UIDropDownMenu_AddButton(info)
-			end
-		end
-	else
-		-- In a party
-		for i = 1, MAX_PARTY_MEMBERS + 1, 1 do
-			candidate, lclass, className = GetMasterLootCandidate(slot, i)
-			if candidate then
-				-- Add candidate button
-				info.text = candidate
-				info.colorCode = hexColors[className] or hexColors["UNKNOWN"]
-				info.textHeight = 12
-				info.value = i
-				info.notCheckable = 1
-				info.hasArrow = nil
-				info.isTitle = nil
-				info.disabled = nil
-				info.func = MasterLoot_GiveLoot
-				UIDropDownMenu_AddButton(info)
-			end
-		end
-	end
-
-	info.colorCode = "|cffffffff"
-	info.isTitle = nil
-	info.textHeight = 12
-	info.value = slot
-	info.notCheckable = 1
-	info.hasArrow = nil
-	info.text = REQUEST_ROLL
-	info.func = MasterLoot_RequestRoll
-	info.icon = "Interface\\Buttons\\UI-GroupLoot-Dice-Up"
-	UIDropDownMenu_AddButton(info)
-
-	wipe(randoms)
-	for i = 1, MAX_RAID_MEMBERS do
-		candidate, lclass, className = GetMasterLootCandidate(slot, i)
-		if candidate then
-			table.insert(randoms, i)
-		end
-	end
-	if #randoms > 0 then
-		info.colorCode = "|cffffffff"
-		info.isTitle = nil
-		info.textHeight = 12
-		info.value = randoms[math.random(1, #randoms)]
-		info.notCheckable = 1
-		info.text = L_LOOT_RANDOM
-		info.func = MasterLoot_GiveLoot
-		info.icon = "Interface\\Buttons\\UI-GroupLoot-Coin-Up"
-		UIDropDownMenu_AddButton(info)
-	end
-	for i = 1, MAX_RAID_MEMBERS do
-		candidate, lclass, className = GetMasterLootCandidate(slot, i)
-		if candidate and candidate == playerName then
-			info.colorCode = hexColors[className] or hexColors["UNKNOWN"]
-			info.isTitle = nil
-			info.textHeight = 12
-			info.value = i
-			info.notCheckable = 1
-			info.text = L_LOOT_SELF
-			info.func = MasterLoot_GiveLoot
-			info.icon = "Interface\\GossipFrame\\VendorGossipIcon"
-			UIDropDownMenu_AddButton(info)
-		end
-	end
-end
-
-UIDropDownMenu_Initialize(GroupLootDropDown, init, "MENU")

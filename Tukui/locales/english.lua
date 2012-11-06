@@ -173,6 +173,8 @@ L.bags_rightclick_search = "Right-click to search."
 
 L.loot_fish = "Fishy loot"
 L.loot_empty = "Empty slot"
+L.loot_randomplayer = "Give to a Random Player"
+L.loot_self = "Self Loot"
 
 L.chat_invalidtarget = "Invalid Target"
 

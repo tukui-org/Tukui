@@ -173,6 +173,8 @@ if T.client == "ruRU" then
 	
 	L.loot_fish = "Рыбалка"
 	L.loot_empty = "Пусто"
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
  
 	L.chat_invalidtarget = "Неверная цель"
  

@@ -124,6 +124,7 @@
 	<Script file="modules\tooltip\tooltip.lua"/>
 	<Script file="modules\nameplates\nameplates.lua"/>
 	<Script file="modules\bags\bags.lua"/>
+	<Script file="modules\loot\masterloot.lua"/>
 	<Script file="modules\loot\lootframe.lua"/>
 	<Script file="modules\loot\rollframe.lua"/>
 	<Script file="modules\maps\zonemap.lua"/>

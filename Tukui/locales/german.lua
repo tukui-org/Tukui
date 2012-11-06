@@ -173,6 +173,8 @@ if T.client == "deDE" then
 	
 	L.loot_fish = "Faule Beute" --changed
 	L.loot_empty = "Leerer slot" --changed
+	L.loot_randomplayer = "Random Player"
+	L.loot_self = "Self Loot"
  
 	L.chat_invalidtarget = "Falsches Ziel"
  
