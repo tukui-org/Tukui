@@ -37,6 +37,7 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		end
 	end
 	
+	-- always show grid
 	for i = 1, 12 do
 		local button = _G[format("ActionButton%d", i)]
 		button:SetAttribute("showgrid", 1)
@@ -58,7 +59,5 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		button:SetAttribute("showgrid", 1)
 		ActionButton_ShowGrid(button)
 	end
-	ActionButton_HideGrid = T.dummy
-	ActionButton_ShowGrid = T.dummy
 end)
 G.ActionBars.EnterWorld = TukuiOnLogon

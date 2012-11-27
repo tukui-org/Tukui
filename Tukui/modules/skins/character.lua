@@ -297,9 +297,9 @@ local function LoadSkin()
 
 	--Pet
 	PetModelFrame:CreateBackdrop("Default")
-	PetPaperDollFrameExpBar:StripTextures()
-	PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
-	PetPaperDollFrameExpBar:CreateBackdrop("Default")
+	--PetPaperDollFrameExpBar:StripTextures()
+	--PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
+	--PetPaperDollFrameExpBar:CreateBackdrop("Default")
 	PetModelFrameRotateRightButton:SkinRotateButton()
 	PetModelFrameRotateLeftButton:SkinRotateButton()
 	PetModelFrameRotateRightButton:ClearAllPoints()

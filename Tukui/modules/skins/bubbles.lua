@@ -34,6 +34,8 @@ local function skinbubble(frame)
 	frame:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 	frame:SetBackdropColor(.1, .1, .1, .8)
 	
+	frame.text:SetFont(C.media.font, 14)
+	
 	tinsert(bubbles, frame)
 end
 

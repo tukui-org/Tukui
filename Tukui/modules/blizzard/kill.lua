@@ -83,6 +83,10 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		InterfaceOptionsActionBarsPanelRightTwo:Kill()
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 	end
+	
+	if C.nameplate.enable then
+		InterfaceOptionsNamesPanelUnitNameplatesNameplateClassColors:Kill()
+	end
 
 	-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
 	-- This taint is blaming every addon even if we are not calling SearchLFGLeave() function in our addon ...

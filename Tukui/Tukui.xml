@@ -169,6 +169,7 @@
 	<Script file="modules\skins\guildregister.lua"/>
 	<Script file="modules\skins\journal.lua"/>
 	<Script file="modules\skins\lfg.lua"/>
+	<Script file="modules\skins\losscontrol.lua"/>
 	<Script file="modules\skins\loot.lua"/>
 	<Script file="modules\skins\macro.lua"/>
 	<Script file="modules\skins\mail.lua"/>

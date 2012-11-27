@@ -94,15 +94,14 @@ local function Enable(self, unit)
 			ms.bg:SetTexture(unpack(Colors))
 		end
 		
-		local Destroy = CreateFrame("Button", nil, ms)
-		Destroy:SetAllPoints()
-		Destroy:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-		Destroy.ID = 1
-		Destroy:SetScript("OnClick", function(self)
-			if IsShiftKeyDown() then
-				DestroyTotem(Destroy.ID)
-			end
-		end)
+		-- since 5.1, DestroyTotem is restricted/protected with Blizzard UI only, so, use some kind of hack ...
+		local t = TotemFrameTotem1
+		t:ClearAllPoints()
+		t:SetParent(ms)
+		t:SetAllPoints(ms)
+		t:SetFrameLevel(ms:GetFrameLevel() + 1)
+		t:SetFrameStrata(ms:GetFrameStrata())
+		t:SetAlpha(0)
 		
 		ms:Hide()
 

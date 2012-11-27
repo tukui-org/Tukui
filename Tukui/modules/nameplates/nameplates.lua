@@ -190,6 +190,8 @@ end
 --We need to reset everything when a nameplate it hidden, this is so theres no left over data when a nameplate gets reshown for a differant mob.
 local function OnHide(frame)
 	frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
+	frame.hp.name:SetTextColor(1, 1, 1)
+	frame.hp:SetScale(1)
 	frame.overlay:Hide()
 	frame.cb:Hide()
 	frame.hasClass = nil
@@ -203,8 +205,8 @@ end
 
 --Color Nameplate
 local function Colorize(frame)
-	local r,g,b = frame.hp:GetStatusBarColor()
-	
+	local r,g,b = frame.healthOriginal:GetStatusBarColor()
+
 	for class, color in pairs(RAID_CLASS_COLORS) do
 		local r, g, b = floor(r*100+.5)/100, floor(g*100+.5)/100, floor(b*100+.5)/100
 		if RAID_CLASS_COLORS[class].r == r and RAID_CLASS_COLORS[class].g == g and RAID_CLASS_COLORS[class].b == b then
@@ -213,12 +215,14 @@ local function Colorize(frame)
 			return
 		end
 	end
-	
-	if g+b == 0 then -- hostile
+
+	if (r + b + b) > 2 then
+		r,g,b = 0.55, 0.57, 0.61
+	elseif g+b == 0 then -- hostile
 		r,g,b = 222/255, 95/255,  95/255
 		frame.isFriendly = false
 	elseif r+b == 0 then -- friendly npc
-		r,g,b = 0.31, 0.45, 0.63
+		r,g,b = 0.29, 0.69, 0.29
 		frame.isFriendly = true
 	elseif r+g > 1.95 then -- neutral
 		r,g,b = 218/255, 197/255, 92/255
@@ -230,7 +234,7 @@ local function Colorize(frame)
 		frame.isFriendly = false
 	end
 	frame.hasClass = false
-	
+
 	frame.hp:SetStatusBarColor(r,g,b)
 end
 
@@ -248,17 +252,18 @@ local function UpdateObjects(frame)
 	frame.hp:GetStatusBarTexture():SetHorizTile(true)
 			
 	--Colorize Plate
-	Colorize(frame)
-	frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor = frame.hp:GetStatusBarColor()
-	frame.hp.hpbg:SetTexture(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor, 0.25)
+	--Colorize(frame)
+	--frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor = frame.hp:GetStatusBarColor()
+	--frame.hp.hpbg:SetTexture(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor, 0.25)
 	SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
-	
-	if C["nameplate"].enhancethreat == true then
-		frame.hp.name:SetTextColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
-	end
 	
 	--Set the name text
 	frame.hp.name:SetText(frame.hp.oldname:GetText())
+	
+	-- why the fuck does blizzard rescale "useless" npc nameplate to 0.4, its really hard to read ...
+	while frame.hp:GetEffectiveScale() < 1 do
+		frame.hp:SetScale(frame.hp:GetScale() + 0.01)
+	end
 	
 	--Setup level text
 	local level, elite, mylevel = tonumber(frame.hp.oldlevel:GetText()), frame.hp.elite:IsShown(), UnitLevel("player")
@@ -288,9 +293,10 @@ local function UpdateObjects(frame)
 end
 
 --This is where we create most 'Static' objects for the nameplate, it gets fired when a nameplate is first seen.
-local function SkinObjects(frame)
+local function SkinObjects(frame, nameFrame)
 	local hp, cb = frame:GetChildren()
-	local threat, hpborder, overlay, oldname, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
+	local threat, hpborder, overlay, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
+	local oldname = nameFrame:GetRegions()
 	local _, cbborder, cbshield, cbicon = cb:GetRegions()
 
 	--Health Bar
@@ -330,10 +336,14 @@ local function SkinObjects(frame)
 	
 	hp.hpbg = hp:CreateTexture(nil, 'BORDER')
 	hp.hpbg:SetAllPoints(hp)
-	hp.hpbg:SetTexture(1,1,1,0.25) 		
+	hp.hpbg:SetTexture(unpack(C.media.backdropcolor))		
 	
 	hp:HookScript('OnShow', UpdateObjects)
 	frame.hp = hp
+	
+	if not frame.threat then
+		frame.threat = threat
+	end
 	
 	--Cast Bar
 	cb:SetFrameLevel(1)
@@ -402,59 +412,15 @@ local function SkinObjects(frame)
 	frames[frame] = true
 end
 
-local goodR, goodG, goodB = unpack(C["nameplate"].goodcolor)
-local badR, badG, badB = unpack(C["nameplate"].badcolor)
-local transitionR, transitionG, transitionB = unpack(C["nameplate"].transitioncolor)
 local function UpdateThreat(frame, elapsed)
-	frame.hp:Show()
-	if frame.hasClass == true then return end
-	
-	if C["nameplate"].enhancethreat ~= true then
-		if(frame.region:IsShown()) then
-			local _, val = frame.region:GetVertexColor()
-			if(val > 0.7) then
-				SetVirtualBorder(frame.hp, transitionR, transitionG, transitionB)
-			else
-				SetVirtualBorder(frame.hp, badR, badG, badB)
-			end
+	if frame.threat:IsShown() then
+		if Role == "TANK" then
+			frame.hp.name:SetTextColor(0, 1, 0)
 		else
-			SetVirtualBorder(frame.hp, unpack(C["media"].bordercolor))
+			frame.hp.name:SetTextColor(1, 0, 0)
 		end
-		frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
 	else
-		if not frame.region:IsShown() then
-			if InCombatLockdown() and frame.isFriendly ~= true then
-				--No Threat
-				if Role == "TANK" then
-					frame.hp:SetStatusBarColor(badR, badG, badB)
-					frame.hp.hpbg:SetTexture(badR, badG, badB, 0.25)
-				else
-					frame.hp:SetStatusBarColor(goodR, goodG, goodB)
-					frame.hp.hpbg:SetTexture(goodR, goodG, goodB, 0.25)
-				end		
-			else
-				--Set colors to their original, not in combat
-				frame.hp:SetStatusBarColor(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor)
-				frame.hp.hpbg:SetTexture(frame.hp.rcolor, frame.hp.gcolor, frame.hp.bcolor, 0.25)
-			end
-		else
-			--Ok we either have threat or we're losing/gaining it
-			local r, g, b = frame.region:GetVertexColor()
-			if g + b == 0 then
-				--Have Threat
-				if Role == "TANK" then
-					frame.hp:SetStatusBarColor(goodR, goodG, goodB)
-					frame.hp.hpbg:SetTexture(goodR, goodG, goodB, 0.25)
-				else
-					frame.hp:SetStatusBarColor(badR, badG, badB)
-					frame.hp.hpbg:SetTexture(badR, badG, badB, 0.25)
-				end
-			else
-				--Losing/Gaining Threat
-				frame.hp:SetStatusBarColor(transitionR, transitionG, transitionB)	
-				frame.hp.hpbg:SetTexture(transitionR, transitionG, transitionB, 0.25)
-			end
-		end
+		frame.hp.name:SetTextColor(1, 1, 1)
 	end
 end
 
@@ -517,7 +483,7 @@ end
 --Run a function for all visible nameplates
 local function ForEachPlate(functionToRun, ...)
 	for frame in pairs(frames) do
-		if frame:IsShown() then
+		if frame and frame:IsShown() then
 			functionToRun(frame, ...)
 		end
 	end
@@ -530,9 +496,8 @@ local function HookFrames(...)
 		local frame = select(index, ...)
 		local region = frame:GetRegions()
 		
-		if(not frames[frame] and (frame:GetName() and not frame.isSkinned and frame:GetName():find("NamePlate%d")) and region and region:GetObjectType() == 'Texture') then
-			SkinObjects(frame)
-			frame.region = region
+		if(not frames[frame] and (frame:GetName() and not frame.isSkinned and frame:GetName():find("NamePlate%d"))) then
+			SkinObjects(frame:GetChildren())
 			frame.isSkinned = true
 		end
 	end
@@ -546,7 +511,9 @@ NamePlates:SetScript('OnUpdate', function(self, elapsed)
 	end
 
 	if(self.elapsed and self.elapsed > 0.2) then
-		ForEachPlate(UpdateThreat, self.elapsed)
+		if C.nameplate.enhancethreat then
+			ForEachPlate(UpdateThreat, self.elapsed)
+		end
 		ForEachPlate(AdjustNameLevel)
 		self.elapsed = 0
 	else
@@ -556,6 +523,7 @@ NamePlates:SetScript('OnUpdate', function(self, elapsed)
 	ForEachPlate(ShowHealth)
 	ForEachPlate(CheckBlacklist)
 	ForEachPlate(HideDrunkenText)
+	ForEachPlate(Colorize)
 end)
 
 --Only show nameplates when in combat

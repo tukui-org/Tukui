@@ -90,6 +90,16 @@ local function setup()
 		end 
 	end)
 	WatchFrameTitle:Kill()
+	WatchFrameLines:StripTextures()
+	
+	-- popup auto-quest
+	hooksecurefunc("WatchFrameAutoQuest_GetOrCreateFrame", function(p, i)
+		local frame = _G["WatchFrameAutoQuestPopUp"..i.."ScrollChild"]
+		if frame and not frame.isSkinned then
+			frame:StripTextures()
+			frame.isSkinned = true
+		end
+	end)
 end
 
 -- skin buttons

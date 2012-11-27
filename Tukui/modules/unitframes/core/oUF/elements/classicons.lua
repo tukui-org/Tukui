@@ -148,9 +148,9 @@ end
 
 do
 	if(PlayerClass == 'MONK') then
-		ClassPowerType = SPELL_POWER_LIGHT_FORCE
+		ClassPowerType = SPELL_POWER_CHI
 		ClassPowerTypes = {
-			LIGHT_FORCE = true,
+			CHI = true,
 			DARK_FORCE = true,
 		}
 
