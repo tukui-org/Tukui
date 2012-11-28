@@ -44,7 +44,8 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 			
 			G.ActionBars.Pet["Button"..i] = button
 		end
-		RegisterStateDriver(self, "visibility", "[pet,novehicleui,nobonusbar:5] show; hide")
+		RegisterStateDriver(self, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nobonusbar:5] show; hide")
+		
 		hooksecurefunc("PetActionBar_Update", T.PetBarUpdate)
 	elseif event == "PET_BAR_UPDATE" or event == "UNIT_PET" and arg1 == "player" 
 	or event == "PLAYER_CONTROL_LOST" or event == "PLAYER_CONTROL_GAINED" or event == "PLAYER_FARSIGHT_FOCUS_CHANGED" or event == "UNIT_FLAGS"
@@ -56,5 +57,3 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 		T.StylePet()
 	end
 end)
-
-RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
