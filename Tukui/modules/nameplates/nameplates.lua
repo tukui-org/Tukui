@@ -444,7 +444,7 @@ end
 
 --Force the name text of a nameplate to be behind other nameplates unless it is our target
 local function AdjustNameLevel(frame, ...)
-	if UnitName("target") == frame.hp.name:GetText() and frame:GetAlpha() == 1 then
+	if UnitName("target") == frame.hp.name:GetText() and frame:GetParent():GetAlpha() == 1 then
 		frame.hp.name:SetDrawLayer("OVERLAY")
 	else
 		frame.hp.name:SetDrawLayer("BORDER")
@@ -483,7 +483,7 @@ end
 --Run a function for all visible nameplates
 local function ForEachPlate(functionToRun, ...)
 	for frame in pairs(frames) do
-		if frame and frame:IsShown() then
+		if frame and frame:GetParent():IsShown() then
 			functionToRun(frame, ...)
 		end
 	end
@@ -494,10 +494,10 @@ local select = select
 local function HookFrames(...)
 	for index = 1, select('#', ...) do
 		local frame = select(index, ...)
-		local region = frame:GetRegions()
-		
-		if(not frames[frame] and (frame:GetName() and not frame.isSkinned and frame:GetName():find("NamePlate%d"))) then
-			SkinObjects(frame:GetChildren())
+
+		if frame:GetName() and not frame.isSkinned and frame:GetName():find("NamePlate%d") then
+			local child1, child2 = frame:GetChildren()
+			SkinObjects(child1, child2)
 			frame.isSkinned = true
 		end
 	end
