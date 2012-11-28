@@ -21,8 +21,9 @@ local CheckVersion = function(self, event, prefix, message, channel, sender)
 	else
 		-- Tell everyone what version we use.
 		local bg = UnitInBattleground("player")
-
-		if not bg and UnitInRaid("player") then
+		if bg and bg > 0 then
+			SendAddonMessage("TukuiVersion", Version, "INSTANCE_CHAT")
+		elseif UnitInRaid("player") then
 			SendAddonMessage("TukuiVersion", Version, "RAID") 
 		elseif UnitInParty("player") then
 			SendAddonMessage("TukuiVersion", Version, "PARTY")
