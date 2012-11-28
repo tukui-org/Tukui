@@ -5,8 +5,8 @@ if T.client == "zhCN" then
 	L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 	
 	-- localization for zhCN  by 风吹那啥凉（Popptise @Tukui forums)	
-	L.chat_BATTLEGROUND_GET = "战场"
-	L.chat_BATTLEGROUND_LEADER_GET = "战场领袖"
+	L.chat_INSTANCE_CHAT = "I"
+	L.chat_INSTANCE_CHAT_LEADER = "IL"
 	L.chat_BN_WHISPER_GET = "密语"
 	L.chat_GUILD_GET = "公"
 	L.chat_OFFICER_GET = "官"

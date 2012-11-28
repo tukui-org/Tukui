@@ -5,8 +5,8 @@ if T.client == "itIT" then
 	L.UI_Outdated = "La tua versione di Tukui non è aggiornata. Puoi scaricare l'ultima versione da www.tukui.org"
 	L.UI_Talent_Change_Bug = "Un bug della Blizzard sta impedendo il cambio dei talenti, questo succede quando si ispeziona qualcuno. Sfortunatamente non si può fare nulla per sistemare il problema, ricaricate la propria ui e riprovate."
 
-	L.chat_BATTLEGROUND_GET = "BG"
-	L.chat_BATTLEGROUND_LEADER_GET = "BG"
+	L.chat_INSTANCE_CHAT = "I"
+	L.chat_INSTANCE_CHAT_LEADER = "IL"
 	L.chat_BN_WHISPER_GET = "Da"
 	L.chat_GUILD_GET = "G"
 	L.chat_OFFICER_GET = "O"

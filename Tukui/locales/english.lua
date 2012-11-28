@@ -4,8 +4,8 @@ local T, C, L, G = unpack(select(2, ...))
 L.UI_Outdated = "Your version of Tukui is out of date. You can download the latest version from www.tukui.org"
 L.UI_Talent_Change_Bug = "A blizzard bug has occured which is preventing you from changing your talents, this happen when you've inspected someone. Unfortunatly there is nothing we can do in this WoW Patch to fix it, please reload your ui and try again."
 
-L.chat_BATTLEGROUND_GET = "BG"
-L.chat_BATTLEGROUND_LEADER_GET = "BG"
+L.chat_INSTANCE_CHAT = "I"
+L.chat_INSTANCE_CHAT_LEADER = "IL"
 L.chat_BN_WHISPER_GET = "From"
 L.chat_GUILD_GET = "G"
 L.chat_OFFICER_GET = "O"
