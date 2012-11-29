@@ -121,19 +121,9 @@ local function Enable(self, unit)
 		delay = totem.delay or delay
 		if totem.Destroy then
 			-- since 5.1, DestroyTotem is restricted/protected with Blizzard UI only, so, use some kind of hack ...
-
 			for i = 1, 4 do
 				if totem[i] then
-					local t
-
-					if i == 1 then
-						t = _G['TotemFrameTotem'..i+1]
-					elseif i == 2 then
-						t = _G['TotemFrameTotem'..i-1]
-					else
-						t = _G['TotemFrameTotem'..i]
-					end
-					
+					local t = _G['TotemFrameTotem'..i]
 					t:ClearAllPoints()
 					t:SetParent(totem[i])
 					t:SetAllPoints(totem[i])
@@ -142,7 +132,19 @@ local function Enable(self, unit)
 					t:SetAlpha(0)
 				end
 			end
-		end		
+			
+			hooksecurefunc("TotemFrame_Update", function()
+				for i=1, MAX_TOTEMS do
+					local t = _G['TotemFrameTotem'..i]
+					local slot = t.slot
+					
+					if slot and slot > 0 then
+						t:ClearAllPoints()
+						t:SetAllPoints(totem[slot])
+					end
+				end
+			end)
+		end
 	
 		return true
 	end	
