@@ -56,5 +56,5 @@ taint:RegisterEvent("ADDON_LOADED")
 taint:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Tukui" then return end
 	ToggleFrame(SpellBookFrame)
-	TogglePetJournal()
+	PetJournal_LoadUI()
 end)
