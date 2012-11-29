@@ -521,7 +521,7 @@ NamePlates:SetScript('OnUpdate', function(self, elapsed)
 	end
 	
 	ForEachPlate(ShowHealth)
-	ForEachPlate(CheckBlacklist)
+	--ForEachPlate(CheckBlacklist)
 	ForEachPlate(HideDrunkenText)
 	ForEachPlate(Colorize)
 end)
