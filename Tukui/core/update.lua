@@ -3,6 +3,7 @@ local T, C, L, G = unpack(select(2, ...))
 -- Communicate to other players through our AddOn
 local Version = tonumber(GetAddOnMetadata("Tukui", "Version"))
 local SendAddonMessage = SendAddonMessage
+local LE_PARTY_CATEGORY_HOME = LE_PARTY_CATEGORY_HOME
 local tonumber = tonumber
 
 -- Need this localized
@@ -20,11 +21,11 @@ local CheckVersion = function(self, event, prefix, message, channel, sender)
 		end
 	else
 		-- Tell everyone what version we use.
-		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) and (IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) then
+		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) or (not IsInRaid(LE_PARTY_CATEGORY_HOME)) then
 			SendAddonMessage("TukuiVersion", Version, "INSTANCE_CHAT")
-		elseif UnitInRaid("player") then
+		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
 			SendAddonMessage("TukuiVersion", Version, "RAID") 
-		elseif UnitInParty("player") then
+		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
 			SendAddonMessage("TukuiVersion", Version, "PARTY")
 		elseif IsInGuild() then
 			SendAddonMessage("TukuiVersion", Version, "GUILD")
