@@ -438,18 +438,48 @@ local function Shared(self, unit)
 					
 					mb[i].bg = mb[i]:CreateTexture(nil, 'ARTWORK')
 				end
-				
-				mb:SetScript("OnShow", function(self) 
-					local f = self:GetParent()
-					f.shadow:Point("TOPLEFT", -4, 12)
-				end)
-				
-				mb:SetScript("OnHide", function(self)
-					local f = self:GetParent()
-					f.shadow:Point("TOPLEFT", -4, 4)
-				end)
+
+				mb:SetScript("OnShow", T.UpdateMageClassBarVisibility)
+				mb:SetScript("OnHide", T.UpdateMageClassBarVisibility)
 				
 				self.ArcaneChargeBar = mb
+				
+				local rp = CreateFrame("Frame", "TukuiRunePower", self)
+				rp:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+				rp:SetWidth((T.lowversion and 186) or 250)
+				rp:SetHeight(8)
+				rp:SetBackdrop(backdrop)
+				rp:SetBackdropColor(0, 0, 0)
+				rp:SetBackdropBorderColor(0, 0, 0)	
+				
+				for i = 1, 2 do
+					rp[i] = CreateFrame("StatusBar", "TukuiRunePower"..i, rp)
+					rp[i]:Height(8)
+					rp[i]:SetStatusBarTexture(C.media.normTex)
+					
+					if i == 1 then
+						if T.lowversion then
+							rp[i]:Width(186 / 2)
+						else
+							rp[i]:Width(250 / 2 - 1)
+						end
+						rp[i]:SetPoint("LEFT", rp, "LEFT", 0, 0)
+					else
+						if T.lowversion then
+							rp[i]:Width((186 / 2) - 1)
+						else
+							rp[i]:Width((250 / 2))
+						end
+						rp[i]:SetPoint("LEFT", rp[i-1], "RIGHT", 1, 0)
+					end
+					
+					rp[i].bg = rp[i]:CreateTexture(nil, 'ARTWORK')
+				end
+				
+				rp:SetScript("OnShow", T.UpdateMageClassBarVisibility)
+				rp:SetScript("OnHide", T.UpdateMageClassBarVisibility)
+				
+				self.RunePower = rp
 			end
 			
 			if C.unitframes.classbar then

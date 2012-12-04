@@ -38,6 +38,7 @@
 	<Script file="modules\unitframes\plugins\oUF_PVPSpecIcons\oUF_PVPSpecIcons.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_Statue\oUF_Statue.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
+	<Script file="modules\unitframes\plugins\oUF_RuneOfPower\oUF_RuneOfPower.lua"/>
 	<Script file="modules\unitframes\templates\colors.lua"/>
 	<Script file="core\video.lua"/>
 	<Script file="core\deprecated.lua"/>

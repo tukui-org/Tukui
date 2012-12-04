@@ -1,0 +1,9 @@
+## Interface: 50100
+## Title: oUF Rune of Power
+## Notes: Display a totem indicator for mage rune of power.
+## Author: Tukz
+## Version: 1.00
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_RuneOfPower.lua
