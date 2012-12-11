@@ -10,6 +10,7 @@
 	TukuiConfigUILocalization.generalbackdropcolor = "Установить цвет фона панелей"
 	TukuiConfigUILocalization.generalbordercolor = "Установить цвет границы панелей"
 	TukuiConfigUILocalization.generalblizzardreskin = "Включить стилизацию элементов интерфейса Blizzard"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Индикаторы здоровья"
@@ -180,6 +181,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "Объединить ауры"
 	TukuiConfigUILocalization.aurasflash = "Включить анимацию мигания ауры на 30 секундах"
 	TukuiConfigUILocalization.aurasclassictimer = "Использовать классические таймеры на аурах игрока"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "Сброс"

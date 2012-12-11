@@ -10,6 +10,7 @@
 	TukuiConfigUILocalization.generalbackdropcolor = "Hintergrundfarbe der Panels"
 	TukuiConfigUILocalization.generalbordercolor = "Randfarbe der Panels"
 	TukuiConfigUILocalization.generalblizzardreskin = "Änder Blizzardframes so das sie Aussehen wie Tukui"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Namensplaketten"
@@ -180,6 +181,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "Aktiviere zusammengelegte Stärkungszauber"
 	TukuiConfigUILocalization.aurasflash = "Aktiviere blinkende Animation für Auren mit weniger als 30 Sekunden"
 	TukuiConfigUILocalization.aurasclassictimer = "Zeige den klassischen Timer für Spielerauren"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "Zurücksetzen"

@@ -10,6 +10,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.generalbackdropcolor = "设置默认的面板背景色"
 	TukuiConfigUILocalization.generalbordercolor = "设置默认的面板边框颜色"
 	TukuiConfigUILocalization.generalblizzardreskin = "改变暴雪样式的框体为Tukui风格"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "姓名版"
@@ -179,6 +180,7 @@ if GetLocale() == "zhCN" then
 	TukuiConfigUILocalization.aurasconsolidate = "启用BUFF整合"
 	TukuiConfigUILocalization.aurasflash = "当光环剩余时间少于30秒时启用闪烁动画"
 	TukuiConfigUILocalization.aurasclassictimer = "启用经典光环计时"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 
 	-- buttons

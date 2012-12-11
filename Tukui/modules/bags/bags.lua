@@ -182,7 +182,7 @@ function Stuffing:SlotUpdate(b)
 				local txt = getglobal("StuffingTTTextLeft" .. i)
 				if txt then
 					local text = txt:GetText()
-					if string.find (txt:GetText(), ITEM_BIND_QUEST) then
+					if string.find(txt:GetText(), ITEM_BIND_QUEST) or string.find(txt:GetText(), ITEM_STARTS_QUEST) then
 						iType = QUEST_ITEM_STRING
 					end
 				end

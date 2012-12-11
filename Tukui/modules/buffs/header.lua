@@ -116,7 +116,11 @@ SecureHandlerSetFrameRef(proxy, "header", consolidate)
 -- set our debuff header
 debuffs:SetPoint("TOP", buffs, "BOTTOM", 0, -84)
 debuffs:SetAttribute("filter", "HARMFUL")
-debuffs:Show()
+if C.auras.hidedebuffs then
+	debuffs:Hide()
+else
+	debuffs:Show()
+end
 
 ---------------------------------------------------------
 -- WORKAROUND FIX FOR BUGGED SECURE AURA HEADER ON 4.3

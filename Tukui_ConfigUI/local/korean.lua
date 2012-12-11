@@ -8,6 +8,7 @@
 	TukuiConfigUILocalization.generalbackdropcolor = "판넬 기본 배경 색상 설정"
 	TukuiConfigUILocalization.generalbordercolor = "판넬 기본 테두리 색상 설정"
 	TukuiConfigUILocalization.generalblizzardreskin = "블리자드 기본 프레임을 Tukui에 맞게 조절합니다."
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "이름표"
@@ -178,6 +179,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "일정 버프 통합 숨기기 사용"
 	TukuiConfigUILocalization.aurasflash = "효과 지속시간이 30초이하로 남을 시 화면 번뜩임"
 	TukuiConfigUILocalization.aurasclassictimer = "Display classic timer on player auras"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "초기화"

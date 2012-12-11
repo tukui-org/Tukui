@@ -11,6 +11,7 @@
 	TukuiConfigUILocalization.generalbackdropcolor = "Establece el color predeterminado de fondo de los paneles"
 	TukuiConfigUILocalization.generalbordercolor = "Establece el color predeterminado de bordes de los paneles"
 	TukuiConfigUILocalization.generalblizzardreskin = "Ajusta los marcos de Blizzard para que coincidan visualmente con Tukui"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 
 	-- Placas de Nombre
 	TukuiConfigUILocalization.nameplate = "Placas de Nombre"
@@ -181,6 +182,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "Activa la consolidación de Beneficios"
 	TukuiConfigUILocalization.aurasflash = "Activa la animación intermitente en auras con duración menor a 30 segundos"
 	TukuiConfigUILocalization.aurasclassictimer = "Mostrar temporizador clásico en las auras del jugador"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- botones
 	TukuiConfigUILocalization.option_button_reset = "Reiniciar"

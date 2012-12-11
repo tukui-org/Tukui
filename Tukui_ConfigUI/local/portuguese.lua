@@ -9,7 +9,8 @@
 	TukuiConfigUILocalization.generaluiscale = "Escala da UI (se a escala da UI automática estiver desactiva)"
 	TukuiConfigUILocalization.generalbackdropcolor = "Define a cor padrão do fundo para os painéis" 
 	TukuiConfigUILocalization.generalbordercolor = "Define a cor padrão do rebordo dos painéis"
-	TukuiConfigUILocalization.generalblizzardreskin = "Redesenha dos quadros da Blizzard para condizer com a Tukui" 
+	TukuiConfigUILocalization.generalblizzardreskin = "Redesenha dos quadros da Blizzard para condizer com a Tukui"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Placas de Identificação"
@@ -180,6 +181,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "Activar consolidação de Buffs"
 	TukuiConfigUILocalization.aurasflash = "Activar Piscar nas auras com menos de 30 segundos"
 	TukuiConfigUILocalization.aurasclassictimer = "Mostrar no modo clássico o temporizador das auras do jogador"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "Restaurar"

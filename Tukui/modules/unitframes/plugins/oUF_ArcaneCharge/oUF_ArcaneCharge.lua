@@ -108,6 +108,8 @@ local function Enable(self, unit)
 			end	
 		end
 		
+		bar:Hide()
+		
 		return true
 	end	
 end

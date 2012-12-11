@@ -11,6 +11,7 @@ C["general"] = {
 	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
 	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
 	["blizzardreskin"] = true,                          -- reskin all Blizzard frames
+	["multiplescreendamage"] = true,                    -- enable triple monitors text damage (eyefinity/surround)
 }
 
 C["unitframes"] = {
@@ -80,6 +81,7 @@ C["auras"] = {
 	["consolidate"] = false,                            -- enable downpdown menu with consolidate buff
 	["flash"] = false,                                  -- flash warning for buff with time < 30 sec
 	["classictimer"] = false,                           -- Display classic timer on player auras.
+	["hidedebuffs"] = false,                            -- Hide debuffs.
 }
 
 C["actionbar"] = {

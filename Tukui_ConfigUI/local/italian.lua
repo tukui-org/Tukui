@@ -9,7 +9,7 @@ if GetLocale() == "itIT" then
 	TukuiConfigUILocalization.generalbackdropcolor = "Imposta il colore dello sfondo di default per i pannelli"
 	TukuiConfigUILocalization.generalbordercolor = "Imposta il colore del bordo per i pannelli"
 	TukuiConfigUILocalization.generalblizzardreskin = "Reskin Blizzard frames in modo che corrisponda a Tukui"
-	TukuiConfigUILocalization.generalbigwigsreskin = "Reskin Big Wigs frames in modo che corrisponda a Tukui"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Nameplates"
@@ -181,6 +181,7 @@ if GetLocale() == "itIT" then
 	TukuiConfigUILocalization.aurasconsolidate = "Abilita Buff consolidati"
 	TukuiConfigUILocalization.aurasflash = "Abilita flashing automatico sulle auree che hanno meno di 30 secondi"
 	TukuiConfigUILocalization.aurasclassictimer = "Visualizza i timer classici sull'aura del player"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 
 	-- buttons

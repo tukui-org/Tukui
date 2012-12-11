@@ -10,6 +10,7 @@
 	TukuiConfigUILocalization.generalbackdropcolor = "設定面板背景顏色"
 	TukuiConfigUILocalization.generalbordercolor = "設定面板邊框顏色"
 	TukuiConfigUILocalization.generalblizzardreskin = "使用Tukui樣式來美化暴雪框架"
+	TukuiConfigUILocalization.generalmultiplescreendamage = "Enable multiple monitors text damage (Surround/Eyefinity)"
 	 
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "名條"
@@ -180,6 +181,7 @@
 	TukuiConfigUILocalization.aurasconsolidate = "合併增益狀態"
 	TukuiConfigUILocalization.aurasflash = "光環少於30秒時以閃動動畫顯示"
 	TukuiConfigUILocalization.aurasclassictimer = "啟用經典光環計時"
+	TukuiConfigUILocalization.aurashidedebuffs = "Hide Debuffs"
 
 	-- buttons
 	TukuiConfigUILocalization.option_button_reset = "重置"

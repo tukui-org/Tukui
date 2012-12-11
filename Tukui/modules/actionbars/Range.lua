@@ -232,7 +232,7 @@ function TukuiRange.UpdateButtonUsable(button)
 		if IsActionInRange(action) == 0 then
 			TukuiRange.SetButtonColor(button, 'oor')
 		--a holy power abilty, and we're less than 3 Holy Power
-		elseif PLAYER_IS_PALADIN and isHolyPowerAbility(action) and not(UnitPower('player', SPELL_POWER_HOLY_POWER) == 3 or UnitBuff('player', HAND_OF_LIGHT)) then
+		elseif PLAYER_IS_PALADIN and isHolyPowerAbility(action) and not(UnitPower('player', SPELL_POWER_HOLY_POWER) >= 3 or UnitBuff('player', HAND_OF_LIGHT)) then
 			TukuiRange.SetButtonColor(button, 'ooh')
 		--in range
 		else
