@@ -96,7 +96,13 @@ local function setup()
 	hooksecurefunc("WatchFrameAutoQuest_GetOrCreateFrame", function(p, i)
 		local frame = _G["WatchFrameAutoQuestPopUp"..i.."ScrollChild"]
 		if frame and not frame.isSkinned then
+			local parent = frame:GetParent()
 			frame:StripTextures()
+			parent:CreateBackdrop("Transparent")
+			parent.backdrop:ClearAllPoints()
+			parent.backdrop:SetPoint("TOPLEFT", frame, 0, 5)
+			parent.backdrop:SetPoint("BOTTOMRIGHT", frame, 13, -5)
+			parent.backdrop:CreateShadow()
 			frame.isSkinned = true
 		end
 	end)
