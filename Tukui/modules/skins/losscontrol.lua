@@ -9,6 +9,7 @@ local function LoadSkin()
 	LossOfControlFrame.Icon:SetTexCoord(.1, .9, .1, .9)
 	LossOfControlFrame:StripTextures()
 	LossOfControlFrame.AbilityName:ClearAllPoints()
+	LossOfControlFrame.Cooldown:SetAlpha(0)
 
 	hooksecurefunc("LossOfControlFrame_SetUpDisplay", function(self)
 		self.Icon:ClearAllPoints()
