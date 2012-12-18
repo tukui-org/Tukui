@@ -263,7 +263,11 @@ local function LoadSkin()
 	PetJournalLoadoutBorder:Height(350)
 end
 
-T.SkinFuncs["Blizzard_PetJournal"] = LoadSkin
+if PetJournalParent then
+	tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+else
+	T.SkinFuncs["Blizzard_PetJournal"] = LoadSkin
+end
 
 local function LoadPetStableSkin()
 	PetStableFrame:StripTextures()
