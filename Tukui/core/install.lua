@@ -119,6 +119,8 @@ T.ChatSetup = function()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
+	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT")
+	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT_LEADER")
 end
 
 local function cvarsetup()
