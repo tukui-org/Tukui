@@ -83,6 +83,7 @@ local OnUpdate = function(self, elapsed)
 				self.Duration:SetTextColor(255/255, 165/255, 0/255)
 			end
 		else
+			if self.Animation and self.Animation:IsPlaying() then self.Animation:Stop() end
 			self.Duration:SetTextColor(.9, .9, .9)
 		end
 		
