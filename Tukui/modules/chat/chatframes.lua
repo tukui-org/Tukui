@@ -193,7 +193,6 @@ local function SetChatStyle(frame)
 		_G[chat].AddMessage = AddMessage
 	else
 		CombatLogQuickButtonFrame_Custom:StripTextures()
-		CombatLogQuickButtonFrame_Custom:SetTemplate("Default")
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton:SkinCloseButton()
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:SetText("V")
 		CombatLogQuickButtonFrame_CustomAdditionalFilterButton.t:ClearAllPoints()
