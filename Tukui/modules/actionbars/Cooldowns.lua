@@ -149,11 +149,14 @@ local function Timer_Start(self, start, duration)
 		timer.nextUpdate = 0
 		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale then timer:Show() end
 	--stop timer
+	--Note 5.1, look like we always need the cooldown update script to be enabled. (Example: Shaman & Ascendance)
+	--[[
 	else
 		local timer = self.timer
 		if timer then
 			Timer_Stop(timer)
 		end
+	--]]
 	end
 end
 
