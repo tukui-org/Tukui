@@ -1196,6 +1196,11 @@ local function Shared(self, unit)
 			self:RegisterEvent("UNIT_THREAT_LIST_UPDATE", T.UpdateThreat)
 			self:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE", T.UpdateThreat)
 		end
+		
+		-- http://www.tukui.org/tickets/tukui/index.php?page=bug_show&bug_id=218
+		if unit == "player" then
+			self:RegisterEvent("PLAYER_ENTERING_WORLD", T.updateAllElements)
+		end
 	end
 	
 	------------------------------------------------------------------------
