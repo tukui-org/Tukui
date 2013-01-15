@@ -10,15 +10,24 @@ if not C["actionbar"].enable == true then return end
 
 local bar = TukuiBar1
 
-local warstance = ""
+-- warrior custom paging
+local warrior = ""
+if C.actionbar.ownwarstancebar then warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
 
-if C.actionbar.ownwarstancebar then warstance = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
+-- rogue custom paging
+local rogue = ""
+if C.actionbar.ownshdbar then rogue = "[stance:3] 10; " end
+
+-- warlock custom paging
+local warlock = ""
+if C.actionbar.ownmetabar then warlock = "[stance:1] 10; " end
 
 local Page = {
 	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
-	["WARRIOR"] = warstance,
+	["WARRIOR"] = warrior,
 	["PRIEST"] = "[bonusbar:1] 7;",
-	["ROGUE"] = "[bonusbar:1,stealth] 7;",
+	["ROGUE"] = rogue.."[bonusbar:1] 7;",
+	["WARLOCK"] = warlock,
 	["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
 	["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
 }
@@ -33,33 +42,7 @@ local function GetBar()
 		condition = condition.." "..page
 	end
 	
-	-- detect which stance macro is temp (HasTempShapeshiftActionBar()) 
-	-- Example : The Prophet Tharon'ja
-	-- Ugly way of doing it I know, but Blizzard didn't add a proper macro conditional for this. :/
-	local num = 1
-	for i = 1, NUM_STANCE_SLOTS do
-		local b = GetShapeshiftFormInfo(i)
-		if not b then
-			break
-		end
-		num = num + 1
-	end
-	
-	-- add rogue shadow dance if spec detected
-	if T.myclass == "ROGUE" and GetShapeshiftFormInfo(2) then
-		if C.actionbar.ownshdbar then
-			more = "[stance:2] 10;"
-		else
-			more = "[bonusbar:1,nostealth] 7;"
-		end
-	end
-	
-	-- add warlock metamorphosis if spec detected
-	if C.actionbar.ownmetabar and T.myclass == "WARLOCK" and GetShapeshiftFormInfo(1) then
-		more = "[stance:1] 10;"
-	end
-	
-	condition = condition..more.."[stance:"..num.."] 13; 1"
+	condition = condition.." [form] 1; 1"
 
 	return condition
 end
@@ -71,7 +54,6 @@ bar:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 bar:RegisterEvent("BAG_UPDATE")
 bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-bar:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 bar:SetScript("OnEvent", function(self, event, unit, ...)
 	if event == "PLAYER_LOGIN" or event == "ACTIVE_TALENT_GROUP_CHANGED" then
 		local button
@@ -89,6 +71,11 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 		]])
 
 		self:SetAttribute("_onstate-page", [[ 
+			print(newstate)
+			if HasTempShapeshiftActionBar() then
+				newstate = GetTempShapeshiftBarIndex() or newstate
+			end
+			
 			for i, button in ipairs(buttons) do
 				button:SetAttribute("actionpage", tonumber(newstate))
 			end
