@@ -71,7 +71,6 @@ bar:SetScript("OnEvent", function(self, event, unit, ...)
 		]])
 
 		self:SetAttribute("_onstate-page", [[ 
-			print(newstate)
 			if HasTempShapeshiftActionBar() then
 				newstate = GetTempShapeshiftBarIndex() or newstate
 			end
