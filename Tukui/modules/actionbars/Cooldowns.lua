@@ -149,18 +149,15 @@ local function Timer_Start(self, start, duration)
 		timer.nextUpdate = 0
 		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale then timer:Show() end
 	--stop timer
-	--Note 5.1, look like we always need the cooldown update script to be enabled. (Example: Shaman & Ascendance)
-	--[[
 	else
 		local timer = self.timer
 		if timer then
 			Timer_Stop(timer)
 		end
-	--]]
 	end
 end
 
-hooksecurefunc(getmetatable(ActionButton1Cooldown).__index, "SetCooldown", Timer_Start)
+hooksecurefunc(getmetatable(_G["ActionButton1Cooldown"]).__index, "SetCooldown", Timer_Start)
 
 local active = {}
 local hooked = {}
@@ -178,7 +175,7 @@ local function cooldown_ShouldUpdateTimer(self, start, duration)
 	if not timer then
 		return true
 	end
-	return timer.start ~= start
+	return not(timer.start == start or timer.charges == charges or timer.maxCharges == maxCharges)
 end
 
 T.UpdateActionButtonCooldown = function(self)
@@ -186,10 +183,8 @@ T.UpdateActionButtonCooldown = function(self)
 	local start, duration, enable = GetActionCooldown(button.action)
 	local charges, maxCharges, chargeStart, chargeDuration = GetActionCharges(button.action)
 	
-	if charges and charges > 0 then return end
-	
-	if cooldown_ShouldUpdateTimer(self, start, duration) then
-		Timer_Start(self, start, duration)
+	if cooldown_ShouldUpdateTimer(self, start, duration, charges, maxCharges) then
+		Timer_Start(self, start, duration, charges, maxCharges)
 	end
 end
 
