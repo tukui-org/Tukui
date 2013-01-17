@@ -138,10 +138,11 @@ end
 --hook the SetCooldown method of all cooldown frames
 --ActionButton1Cooldown is used here since its likely to always exist
 --and I'd rather not create my own cooldown frame to preserve a tiny bit of memory
-local function Timer_Start(self, start, duration)
-	if self.noOCC then return end
+local function Timer_Start(self, start, duration, charges, maxCharges)
+	local num = charges or 0
+	
 	--start timer
-	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration then
+	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration and num == 0 and not self.noOCC then
 		local timer = self.timer or Timer_Create(self)
 		timer.start = start
 		timer.duration = duration
@@ -170,7 +171,7 @@ local function cooldown_OnHide(self)
 	active[self] = nil
 end
 
-local function cooldown_ShouldUpdateTimer(self, start, duration)
+local function cooldown_ShouldUpdateTimer(self, start, duration, charges, maxCharges)
 	local timer = self.timer
 	if not timer then
 		return true
