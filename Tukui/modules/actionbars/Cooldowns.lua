@@ -141,18 +141,19 @@ end
 local function Timer_Start(self, start, duration, charges, maxCharges)
 	if self.noOCC then return end
 	
-	local num = charges or 0
-	
 	--start timer
-	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration and num == 0 then
+	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration then
 		local timer = self.timer or Timer_Create(self)
+		local num = charges or 0
 		timer.start = start
 		timer.duration = duration
-		timer.charges = charges
+		timer.charges = num
 		timer.maxCharges = maxCharges
 		timer.enabled = true
 		timer.nextUpdate = 0
-		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale then timer:Show() end
+		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale and timer.charges < 1 then
+			timer:Show()
+		end
 	--stop timer
 	else
 		local timer = self.timer
@@ -175,22 +176,12 @@ local function cooldown_OnHide(self)
 	active[self] = nil
 end
 
-local function cooldown_ShouldUpdateTimer(self, start, duration, charges, maxCharges)
-	local timer = self.timer
-	if not timer then
-		return true
-	end
-	return not(timer.start == start or timer.charges == charges or timer.maxCharges == maxCharges)
-end
-
 T.UpdateActionButtonCooldown = function(self)
 	local button = self:GetParent()
 	local start, duration, enable = GetActionCooldown(button.action)
 	local charges, maxCharges, chargeStart, chargeDuration = GetActionCharges(button.action)
-	
-	if cooldown_ShouldUpdateTimer(self, start, duration, charges, maxCharges) then
-		Timer_Start(self, start, duration, charges, maxCharges)
-	end
+
+	Timer_Start(self, start, duration, charges, maxCharges)
 end
 
 local EventWatcher = CreateFrame("Frame")
