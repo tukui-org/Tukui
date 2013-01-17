@@ -139,13 +139,17 @@ end
 --ActionButton1Cooldown is used here since its likely to always exist
 --and I'd rather not create my own cooldown frame to preserve a tiny bit of memory
 local function Timer_Start(self, start, duration, charges, maxCharges)
+	if self.noOCC then return end
+	
 	local num = charges or 0
 	
 	--start timer
-	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration and num == 0 and not self.noOCC then
+	if start > 0 and duration > T.SetDefaultActionButtonCooldownMinDuration and num == 0 then
 		local timer = self.timer or Timer_Create(self)
 		timer.start = start
 		timer.duration = duration
+		timer.charges = charges
+		timer.maxCharges = maxCharges
 		timer.enabled = true
 		timer.nextUpdate = 0
 		if timer.fontScale >= T.SetDefaultActionButtonCooldownMinScale then timer:Show() end
