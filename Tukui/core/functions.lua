@@ -1082,6 +1082,13 @@ T.SetGridGroupRole = function(self, role)
 	end
 end
 
+T.UpdateBossAltPower = function(self, minimum, current, maximum)
+	if (not current) or (not maximum) then return end
+	
+	local r, g, b = oUFTukui.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
+	self:SetStatusBarColor(r, g, b)
+end
+
 --------------------------------------------------------------------------------------------
 -- Grid theme indicator section
 --------------------------------------------------------------------------------------------
@@ -1311,6 +1318,55 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			SpellName(119985),	-- Dread Spray
 			SpellName(119086),	-- Penetrating Bolt
 			SpellName(119775),	-- Reaching Attack
+			
+			
+			-----------------------------------------------------------------
+			-- Throne of Thunder
+			-----------------------------------------------------------------
+			--Trash
+			SpellName(138349), -- Static Wound
+			SpellName(137371), -- Thundering Throw
+
+			--Horridon
+			SpellName(136767), --Triple Puncture
+
+			--Council of Elders
+			SpellName(137641), --Soul Fragment
+			SpellName(137359), --Shadowed Loa Spirit Fixate
+			SpellName(137972), --Twisted Fate
+
+			--Tortos
+			SpellName(136753), --Slashing Talons
+			SpellName(137633), --Crystal Shell
+
+			--Megaera
+			SpellName(137731), --Ignite Flesh
+
+			--Ji-Kun
+			SpellName(138309), --Slimed
+
+			--Durumu the Forgotten
+			SpellName(133767), --Serious Wound
+			SpellName(133768), --Arterial Cut
+
+			--Primordius
+			SpellName(136050), --Malformed Blood
+
+			--Dark Animus
+			SpellName(138569), --Explosive Slam
+
+			--Iron Qon
+			SpellName(134691), --Impale
+
+			--Twin Consorts
+			SpellName(137440), --Icy Shadows
+			SpellName(137408), --Fan of Flames
+			SpellName(137360), --Corrupted Healing
+
+			--Lei Shen
+			SpellName(135000), --Decapitate
+
+			--Ra-den
 		}
 
 		T.ReverseTimer = {

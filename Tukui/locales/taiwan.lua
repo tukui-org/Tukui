@@ -100,6 +100,12 @@ if T.client == "zhTW" then
 	L.datatext_carts_controlled = "購物車:"
 	L.datatext_victory_points = "勝利點數:"
 	L.datatext_orb_possessions = "珠寶財務:"
+	L.datatext_galleon = "帆船"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_sha = "憤怒之煞"
+	L.datatext_defeated = "已擊殺"
+	L.datatext_undefeated = "未擊殺"
  
 	L.Slots = {
 		[1] = {1, "頭部", 1000},

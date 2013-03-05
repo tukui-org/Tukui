@@ -195,6 +195,7 @@ local function LoadSkin()
 	BasicScriptErrors:SetTemplate()
 	BasicScriptErrors:CreateShadow()
 	BasicScriptErrorsButton:SkinButton()
+	BasicScriptErrors:SetScale(C.general.uiscale)
 	
 	for i = 1, 4 do
 		local button = _G["StaticPopup"..i.."CloseButton"]

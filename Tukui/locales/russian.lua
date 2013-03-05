@@ -100,6 +100,12 @@ if T.client == "ruRU" then
 	L.datatext_carts_controlled = "Захваты вагонеток:"
 	L.datatext_victory_points = "Очки победы:"
 	L.datatext_orb_possessions = "Захваты сферы:"
+	L.datatext_galleon = "Галеон"
+	L.datatext_sha = "Ша Злости"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Убит"
+	L.datatext_undefeated = "Не убит"
  
 	L.Slots = {
 	  [1] = {1, "Голова", 1000},

@@ -181,6 +181,20 @@ Stat:SetScript("OnEnter", function(self)
 		GameTooltip:AddDoubleLine(TIME_PLAYED_MSG..": ", T.FormatTime(played))
 	end
 	
+	GameTooltip:AddDoubleLine(" ", " ")
+	
+	if UnitLevel("player") == 90 then
+		local Sha = IsQuestFlaggedCompleted(32099)
+		local Galleon = IsQuestFlaggedCompleted(32098)
+		local Oondasta = IsQuestFlaggedCompleted(32519)
+		local Nalak = IsQuestFlaggedCompleted(32518)
+		
+		GameTooltip:AddDoubleLine(L.datatext_sha..": ", Sha and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+		GameTooltip:AddDoubleLine(L.datatext_galleon..": ", Galleon and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+		GameTooltip:AddDoubleLine(L.datatext_oondasta..": ", Oondasta and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+		GameTooltip:AddDoubleLine(L.datatext_nalak..": ", Nalak and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+	end
+	
 	local oneraid, lockoutColor
 	for i = 1, GetNumSavedInstances() do
 		local name, _, reset, _, locked, extended, _, isRaid, maxPlayers, difficulty, numEncounters, encounterProgress  = GetSavedInstanceInfo(i)

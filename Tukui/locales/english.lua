@@ -100,6 +100,12 @@ L.datatext_cta_nodungeons = "No dungeons are currently offering a Call To Arms."
 L.datatext_carts_controlled = "Carts Controlled:"
 L.datatext_victory_points = "Victory Points:"
 L.datatext_orb_possessions = "Orb Possessions:"
+L.datatext_galleon = "Galleon"
+L.datatext_sha = "Sha of Anger"
+L.datatext_oondasta = "Oondasta"
+L.datatext_nalak = "Nalak"
+L.datatext_defeated = "Defeated"
+L.datatext_undefeated = "Undefeated"
 
 L.Slots = {
 	[1] = {1, "Head", 1000},

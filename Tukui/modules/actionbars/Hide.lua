@@ -30,10 +30,11 @@ MainMenuBar.slideOut.IsPlaying = function() return true end
 SetCVar("alwaysShowActionBars", 1)
 
 -- we don't use these buttons in Tukui, disable them.
+OverrideActionBar:UnregisterAllEvents()
 for i = 1, 6 do
 	local b = _G["OverrideActionBarButton"..i]
 	b:UnregisterAllEvents()
-	b:SetAttribute("statehidden", 1)
+	b:SetAttribute("statehidden", true)
 end
 
 -- fix main bar keybind not working after a talent switch. :X

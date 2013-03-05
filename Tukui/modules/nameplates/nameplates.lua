@@ -301,7 +301,7 @@ local function SkinObjects(frame, nameFrame)
 
 	--Health Bar
 	frame.healthOriginal = hp
-	hp:SetFrameLevel(1)
+	hp:SetFrameLevel(0)
 	hp:SetStatusBarTexture(TEXTURE)
 	CreateVirtualFrame(hp)
 	

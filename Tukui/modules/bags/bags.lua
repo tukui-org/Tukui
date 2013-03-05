@@ -1259,18 +1259,20 @@ function Stuffing:Restack()
 	for i, v in pairs(self.buttons) do
 		if InBags(v.bag) then
 			local tex, cnt, _, _, _, _, clink = GetContainerItemInfo(v.bag, v.slot)
+			
 			if clink then
 				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
-
-				if cnt ~= s then
-					if not st[n] then
-						st[n] = {{
+				local id = tonumber(clink:match(":(%w+)"))
+					
+				if id and cnt ~= s then
+					if not st[id] then
+						st[id] = {{
 							item = v,
 							size = cnt,
 							max = s
 						}}
 					else
-						table.insert(st[n], {
+						table.insert(st[id], {
 							item = v,
 							size = cnt,
 							max = s

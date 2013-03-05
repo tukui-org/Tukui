@@ -100,6 +100,12 @@ if T.client == "deDE" then
 	L.datatext_carts_controlled = "Kontrollierte Loren:"
 	L.datatext_victory_points = "Siegespunkte:"
 	L.datatext_orb_possessions = "Gehaltene Kugeln:"
+	L.datatext_galleon = "Galleon"
+	L.datatext_sha = "Sha of Anger"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Defeated"
+	L.datatext_undefeated = "Undefeated"
  
 	L.Slots = {
 		[1] = {1, "Kopf", 1000},

@@ -100,6 +100,12 @@ if T.client == "koKR" then
 	L.datatext_carts_controlled = "Carts Controlled:"
 	L.datatext_victory_points = "Victory Points:"
 	L.datatext_orb_possessions = "Orb Possessions:"
+	L.datatext_galleon = "Galleon"
+	L.datatext_sha = "Sha of Anger"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Defeated"
+	L.datatext_undefeated = "Undefeated"
  
 	L.bg_warsong = "전쟁노래 협곡"
 	L.bg_arathi = "아라시 분지"

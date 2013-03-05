@@ -26,7 +26,12 @@ T.MicroMenu = {
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE,
 	func = function() PVEFrame_ToggleFrame(); end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
-	func = function() ToggleFrame(PVPFrame) end},
+	func = function()
+		if not PVPUIFrame then
+			PVP_LoadUI()
+		end
+		PVPUIFrame_ShowFrame() 
+	end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function() 
 		if IsInGuild() then 

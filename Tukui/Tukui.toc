@@ -1,6 +1,6 @@
-﻿## Interface: 50100
+﻿## Interface: 50200
 ## Author: Tukz
-## Version: 15.42
+## Version: 15.50
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
@@ -10,3 +10,7 @@
 ## Website: http://www.tukui.org
 
 Tukui.xml
+
+
+## X-Tukui-ProjectID: -1
+## X-Tukui-ProjectFolders: Tukui_ConfigUI, Tukui

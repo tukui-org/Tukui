@@ -99,6 +99,7 @@ local function LoadSkin()
 	end
 	
 	LFDQueueFrameTypeDropDown:SkinDropDownBox()
+	LFDQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 
 	-- Raid Finder
 	RaidFinderFrame:StripTextures()
@@ -324,6 +325,9 @@ local function LoadSkin()
 	LFDQueueFrameTypeDropDown:Point("TOPRIGHT", LFDQueueFrame, "TOPRIGHT", -10, -111)
 	RaidFinderQueueFrameSelectionDropDown:ClearAllPoints()
 	RaidFinderQueueFrameSelectionDropDown:Point("TOPRIGHT", RaidFinderQueueFrame, "TOPRIGHT", -10, -109)
+	ScenarioQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
+	LFDQueueFrameRandomScrollFrameScrollBar:StripTextures()
+	LFDQueueFrameRandomScrollFrameScrollBar:SkinScrollBar()
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

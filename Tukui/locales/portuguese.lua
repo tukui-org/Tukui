@@ -101,6 +101,12 @@ if T.client == "ptBR" then
 	L.datatext_carts_controlled = "Carrinhos Controlados:"
 	L.datatext_victory_points = "Pontos de Vitória:"
 	L.datatext_orb_possessions = "Posse de Orbes:"
+	L.datatext_galleon = "Galleon"
+	L.datatext_sha = "Sha of Anger"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Defeated"
+	L.datatext_undefeated = "Undefeated"
 
 	L.Slots = {
 		[1] = {1, "Cabeça", 1000},

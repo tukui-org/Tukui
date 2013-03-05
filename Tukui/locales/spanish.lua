@@ -100,6 +100,12 @@ if T.client == "esES" or T.client == "esMX" then
 	L.datatext_carts_controlled = "Vagonetas Controladas:"
 	L.datatext_victory_points = "Puntos de Victoria:"
 	L.datatext_orb_possessions = "Orbes en Posesión:"
+	L.datatext_galleon = "Galeón"
+	L.datatext_sha = "Sha de la Ira"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Derrotado"
+	L.datatext_undefeated = "No derrotado"
  
 	L.Slots = {
 		[1] = {1, "Cabeza", 1000},

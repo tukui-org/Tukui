@@ -1790,7 +1790,7 @@ local function Shared(self, unit)
 			AltPowerBar:Height(4)
 			AltPowerBar:SetStatusBarTexture(C.media.normTex)
 			AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
-			AltPowerBar:SetStatusBarColor(1, 0, 0)
+			AltPowerBar:SetStatusBarColor(0, 0, 0)
 
 			AltPowerBar:SetPoint("LEFT")
 			AltPowerBar:SetPoint("RIGHT")
@@ -1803,6 +1803,8 @@ local function Shared(self, unit)
 			  insets = { left = 0, right = 0, top = 0, bottom = T.Scale(-1)}
 			})
 			AltPowerBar:SetBackdropColor(0, 0, 0)
+			AltPowerBar:SetBackdropBorderColor(0, 0, 0)
+			AltPowerBar.PostUpdate = T.UpdateBossAltPower
 
 			self.AltPowerBar = AltPowerBar
 			

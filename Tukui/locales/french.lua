@@ -100,6 +100,12 @@ if T.client == "frFR" then
 	L.datatext_carts_controlled = "Chariots contrôlée:"
 	L.datatext_victory_points = "Points de Victoire:"
 	L.datatext_orb_possessions = "Orbes en possession:"
+	L.datatext_galleon = "Galleon"
+	L.datatext_sha = "Sha of Anger"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "Defeated"
+	L.datatext_undefeated = "Undefeated"
 
 	L.Slots = {
 	  [1] = {1, "Tête", 1000},

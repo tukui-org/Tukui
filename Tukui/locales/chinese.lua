@@ -101,6 +101,12 @@ if T.client == "zhCN" then
 	L.datatext_carts_controlled = "Carts Controlled:"
 	L.datatext_victory_points = "Victory Points:"
 	L.datatext_orb_possessions = "Orb Possessions:"
+	L.datatext_galleon = "炮舰"
+	L.datatext_sha = "怒之煞"
+	L.datatext_oondasta = "Oondasta"
+	L.datatext_nalak = "Nalak"
+	L.datatext_defeated = "已击杀"
+	L.datatext_undefeated = "未击杀"
 
 	L.Slots = {
 		[1] = {1, "头部", 1000},
