@@ -1,6 +1,6 @@
 ﻿## Interface: 50200
 ## Author: Tukz
-## Version: 15.51
+## Version: 15.52
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
