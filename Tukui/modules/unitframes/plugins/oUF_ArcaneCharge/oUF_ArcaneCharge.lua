@@ -24,7 +24,7 @@ local Update = function(self, event)
 	local bar = self.ArcaneChargeBar
 	if(bar.PreUpdate) then bar:PreUpdate(event) end
 	
-	local arcaneCharges, maxCharges, duration, expirationTime = 0, 6
+	local arcaneCharges, maxCharges, duration, expirationTime = 0, 4
 	if bar:IsShown() then
 		for i = 1, 40 do
 			local count, _, start, timeLeft, _, _, _, spellID = select(4, UnitDebuff(unit, i))
@@ -90,7 +90,7 @@ local function Enable(self, unit)
 		bar.Visibility:RegisterEvent("PLAYER_TALENT_UPDATE")
 		bar.Visibility:SetScript("OnEvent", function(frame, event, unit) Visibility(self, event, unit) end)
 
-		for i = 1, 6 do
+		for i = 1, 4 do
 			if not bar[i]:GetStatusBarTexture() then
 				bar[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
