@@ -3,12 +3,13 @@
 
  Widget
 
- HealPrediction - A table containing `myBar` and `otherBar`.
+ HealPrediction - A table containing `myBar`, `otherBar` and `absBar`.
 
  Sub-Widgets
 
  myBar    - A StatusBar used to represent your incoming heals.
  otherBar - A StatusBar used to represent other peoples incoming heals.
+ absBar   - A StatusBar used to represent absorption effects.
 
  Notes
 
@@ -60,10 +61,15 @@ local function Update(self, event, unit)
 
 	local myIncomingHeal = UnitGetIncomingHeals(unit, 'player') or 0
 	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
+	local absorbHP = UnitGetTotalAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 
 	if(health + allIncomingHeal > maxHealth * hp.maxOverflow) then
 		allIncomingHeal = maxHealth * hp.maxOverflow - health
+	end
+	
+	if(health + allIncomingHeal + absorbHP > maxHealth * hp.maxOverflow) then
+		absorbHP = maxHealth * hp.maxOverflow - (health + allIncomingHeal)
 	end
 
 	if(allIncomingHeal < myIncomingHeal) then
@@ -83,6 +89,12 @@ local function Update(self, event, unit)
 		hp.otherBar:SetMinMaxValues(0, maxHealth)
 		hp.otherBar:SetValue(allIncomingHeal)
 		hp.otherBar:Show()
+	end
+	
+	if(hp.absBar) then
+		hp.absBar:SetMinMaxValues(0, maxHealth)
+		hp.absBar:SetValue(absorbHP)
+		hp.absBar:Show()
 	end
 
 	if(hp.PostUpdate) then
@@ -107,6 +119,7 @@ local function Enable(self)
 		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 		self:RegisterEvent('UNIT_HEALTH', Path)
+		self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
 
 		if(not hp.maxOverflow) then
 			hp.maxOverflow = 1.05
@@ -118,7 +131,10 @@ local function Enable(self)
 		if(hp.otherBar and hp.otherBar:IsObjectType'StatusBar' and not hp.otherBar:GetStatusBarTexture()) then
 			hp.otherBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 		end
-
+		if(hp.absBar and hp.absBar:IsObjectType'StatusBar' and not hp.absBar:GetStatusBarTexture()) then
+			hp.absBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
+		end
+		
 		return true
 	end
 end
@@ -129,6 +145,7 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_HEAL_PREDICTION', Path)
 		self:UnregisterEvent('UNIT_MAXHEALTH', Path)
 		self:UnregisterEvent('UNIT_HEALTH', Path)
+		self:UnregisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
 	end
 end
 

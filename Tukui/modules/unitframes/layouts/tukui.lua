@@ -1181,10 +1181,18 @@ local function Shared(self, unit)
 			ohpb:SetWidth(250)
 			ohpb:SetStatusBarTexture(normTex)
 			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+			
+			local absb = CreateFrame("StatusBar", nil, self.Health)
+			absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			absb:SetWidth(250)
+			absb:SetStatusBarTexture(normTex)
+			absb:SetStatusBarColor(1, 1, 0, 0.25)
 
 			self.HealPrediction = {
 				myBar = mhpb,
 				otherBar = ohpb,
+				absBar = absb,
 				maxOverflow = 1,
 			}
 		end
@@ -2318,12 +2326,14 @@ if C.unitframes.raid == true then
 		end
 		
 		if C["unitframes"].healcomm then
+			local gw = self.Health:GetWidth()
+			local gh = self.Health:GetHeight()
 			local mhpb = CreateFrame("StatusBar", nil, self.Health)
 			if C["unitframes"].gridhealthvertical then
 				mhpb:SetOrientation("VERTICAL")
 				mhpb:SetPoint("BOTTOM", self.Health:GetStatusBarTexture(), "TOP", 0, 0)
 				mhpb:Width(66*C["unitframes"].gridscale*T.raidscale)
-				mhpb:Height(50*C["unitframes"].gridscale*T.raidscale)		
+				mhpb:Height(28*C["unitframes"].gridscale*T.raidscale)		
 			else
 				mhpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 				mhpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
@@ -2337,18 +2347,33 @@ if C.unitframes.raid == true then
 				ohpb:SetOrientation("VERTICAL")
 				ohpb:SetPoint("BOTTOM", mhpb:GetStatusBarTexture(), "TOP", 0, 0)
 				ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
-				ohpb:Height(50*C["unitframes"].gridscale*T.raidscale)
+				ohpb:Height(28*C["unitframes"].gridscale*T.raidscale)
 			else
 				ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 				ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
-				ohpb:Width(6*C["unitframes"].gridscale*T.raidscale)
+				ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
 			end
 			ohpb:SetStatusBarTexture(normTex)
 			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+			
+			local absb = CreateFrame("StatusBar", nil, self.Health)
+			if C["unitframes"].gridhealthvertical then
+				absb:SetOrientation("VERTICAL")
+				absb:SetPoint("BOTTOM", ohpb:GetStatusBarTexture(), "TOP", 0, 0)
+				absb:Width(66*C["unitframes"].gridscale*T.raidscale)
+				absb:Height(28*C["unitframes"].gridscale*T.raidscale)			
+			else
+				absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+				absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+				absb:SetWidth(66*C["unitframes"].gridscale*T.raidscale)			
+			end
+			absb:SetStatusBarTexture(normTex)
+			absb:SetStatusBarColor(1, 1, 0, 0.25)
 
 			self.HealPrediction = {
 				myBar = mhpb,
 				otherBar = ohpb,
+				absBar = absb,
 				maxOverflow = 1,
 			}
 		end
