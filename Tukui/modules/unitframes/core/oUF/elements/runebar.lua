@@ -76,7 +76,7 @@ local UpdateType = function(self, event, rid, alt)
 	end
 
 	if(runes.PostUpdateType) then
-		return runes:PostUpdateType(rune, rid)
+		return runes:PostUpdateType(rune, rid, alt)
 	end
 end
 
@@ -96,9 +96,11 @@ local UpdateRune = function(self, event, rid)
 		rune:SetMinMaxValues(1, duration)
 		rune:SetScript("OnUpdate", OnUpdate)
 	end
+	
+	UpdateType(self, event, rid)
 
 	if(runes.PostUpdateRune) then
-		return runes:PostUpdateRune(rune, rid)
+		return runes:PostUpdateRune(rune, rid, start, duration, runeReady)
 	end
 end
 

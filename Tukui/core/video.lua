@@ -11,7 +11,7 @@ if T.screenwidth < 1600 then
 		else
 			T.lowversion = true
 		end
-elseif (T.screenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.screenwidth) then
+elseif (T.screenwidth > 3840) or (UIParent:GetWidth() + 1 > T.screenwidth) then
 	local width = T.screenwidth
 	local height = T.screenheight
 	

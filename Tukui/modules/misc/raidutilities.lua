@@ -92,7 +92,11 @@ local function CreateUtilities(self, event, addon)
 		CreateButton("TukuiRaidUtilityRoleCheckButton", TukuiRaidUtility, "UIMenuButtonStretchTemplate", TukuiRaidUtility:GetWidth() * 0.95, T.Scale(21), "TOP", TukuiRaidUtilityDisbandRaidButton, "BOTTOM", 0, T.Scale(-5), ROLE_POLL, nil)
 		TukuiRaidUtilityRoleCheckButton:SetScript("OnMouseUp", function(self)
 			if CheckRaidStatus() then
-				InitiateRolePoll()
+				if InCombatLockdown() then
+					print(ERR_NOT_IN_COMBAT)
+				else
+					InitiateRolePoll()
+				end
 			end
 		end)
 

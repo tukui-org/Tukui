@@ -113,6 +113,8 @@ local function LoadSkin()
 	RaidFinderFrameFindRaidButton:SkinButton()
 	RaidFinderQueueFrame:StripTextures()
 	RaidFinderQueueFrameBackground:SetAlpha(0)
+	RaidFinderQueueFramePartyBackfillBackfillButton:SkinButton()
+	RaidFinderQueueFramePartyBackfillNoBackfillButton:SkinButton()
 
 	for i = 1, LFD_MAX_REWARDS do
 		local button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i]

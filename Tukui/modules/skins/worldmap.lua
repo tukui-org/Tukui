@@ -45,13 +45,13 @@ local function LoadSkin()
 
 	--Large
 	local function LargeSkin()
-		if not InCombatLockdown() then
+		--if not InCombatLockdown() then
 			WorldMapFrame:SetParent(UIParent)
 			WorldMapFrame:EnableMouse(false)
 			WorldMapFrame:EnableKeyboard(false)
 			SetUIPanelAttribute(WorldMapFrame, "area", "center");
 			SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
-		end
+		--end
 		
 		WorldMapFrame.backdrop:ClearAllPoints()
 		WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
@@ -59,13 +59,13 @@ local function LoadSkin()
 	end
 
 	local function QuestSkin()
-		if not InCombatLockdown() then
+		--if not InCombatLockdown() then
 			WorldMapFrame:SetParent(UIParent)
 			WorldMapFrame:EnableMouse(false)
 			WorldMapFrame:EnableKeyboard(false)
 			SetUIPanelAttribute(WorldMapFrame, "area", "center");
 			SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
-		end
+		--end
 		
 		WorldMapFrame.backdrop:ClearAllPoints()
 		WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
@@ -99,12 +99,12 @@ local function LoadSkin()
 			QuestSkin()
 		end
 
-		if not InCombatLockdown() then
+		--if not InCombatLockdown() then
 			WorldMapFrame:SetScale(1)
 			WorldMapFrameSizeDownButton:Show()
 			WorldMapFrame:SetFrameLevel(40)
 			WorldMapFrame:SetFrameStrata("HIGH")
-		end
+		--end
 		
 		WorldMapFrameAreaLabel:SetFont(C["media"].font, 50, "OUTLINE")
 		WorldMapFrameAreaLabel:SetShadowOffset(2, -2)
@@ -128,8 +128,8 @@ local function LoadSkin()
 	end)
 
 	WorldMapFrame:RegisterEvent("PLAYER_LOGIN")
-	WorldMapFrame:RegisterEvent("PLAYER_REGEN_ENABLED") -- fix taint with small map & big map
-	WorldMapFrame:RegisterEvent("PLAYER_REGEN_DISABLED") -- fix taint with small map & big map
+	--WorldMapFrame:RegisterEvent("PLAYER_REGEN_ENABLED") -- fix taint with small map & big map
+	--WorldMapFrame:RegisterEvent("PLAYER_REGEN_DISABLED") -- fix taint with small map & big map
 	WorldMapFrame:HookScript("OnEvent", function(self, event)
 		local miniWorldMap = GetCVarBool("miniWorldMap")
 		local quest = WorldMapQuestShowObjectives:GetChecked()

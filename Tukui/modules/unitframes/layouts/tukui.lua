@@ -37,9 +37,6 @@ local function Shared(self, unit)
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	
-	-- menu? lol
-	self.menu = T.SpawnMenu
 
 	-- backdrop for every units
 	self:SetBackdrop(backdrop)
@@ -1172,22 +1169,25 @@ local function Shared(self, unit)
 				mhpb:SetWidth(250)
 			end
 			mhpb:SetStatusBarTexture(normTex)
-			mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+			mhpb:SetStatusBarColor(0, 0.3, 0.15, 1)
 			mhpb:SetMinMaxValues(0,1)
 
 			local ohpb = CreateFrame("StatusBar", nil, self.Health)
-			ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-			ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			ohpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			ohpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 			ohpb:SetWidth(250)
 			ohpb:SetStatusBarTexture(normTex)
-			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+			ohpb:SetStatusBarColor(0, 0.3, 0, 1)
 			
 			local absb = CreateFrame("StatusBar", nil, self.Health)
-			absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-			absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+			absb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+			absb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 			absb:SetWidth(250)
 			absb:SetStatusBarTexture(normTex)
-			absb:SetStatusBarColor(1, 1, 0, 0.25)
+			absb:SetStatusBarColor(0.3, 0.3, 0, 1)
+			
+			ohpb:SetFrameLevel(absb:GetFrameLevel() + 1)
+			mhpb:SetFrameLevel(absb:GetFrameLevel() + 2)
 
 			self.HealPrediction = {
 				myBar = mhpb,
@@ -2150,19 +2150,6 @@ if C["unitframes"].showboss then
 end
 
 ------------------------------------------------------------------------
--- Right-Click on unit frames menu. 
--- Removing some useless stuff and tainting stuff
-------------------------------------------------------------------------
-
-for _, menu in pairs(UnitPopupMenus) do
-	for index = #menu, 1, -1 do
-		if menu[index] == "SET_FOCUS" or menu[index] == "CLEAR_FOCUS" or menu[index] == "MOVE_PLAYER_FRAME" or menu[index] == "MOVE_TARGET_FRAME" or (T.myclass == "HUNTER" and menu[index] == "PET_DISMISS") then
-			table.remove(menu, index)
-		end
-	end
-end
-
-------------------------------------------------------------------------
 -- Raid Frames
 ------------------------------------------------------------------------
 
@@ -2181,8 +2168,6 @@ if C.unitframes.raid == true then
 		self:RegisterForClicks("AnyUp")
 		self:SetScript("OnEnter", UnitFrame_OnEnter)
 		self:SetScript("OnLeave", UnitFrame_OnLeave)
-		
-		self.menu = T.SpawnMenu
 		
 		self:SetBackdrop({bgFile = C["media"].blank, insets = {top = -T.mult, left = -T.mult, bottom = -T.mult, right = -T.mult}})
 		self:SetBackdropColor(0, 0, 0)
@@ -2340,35 +2325,35 @@ if C.unitframes.raid == true then
 				mhpb:Width(66*C["unitframes"].gridscale*T.raidscale)
 			end				
 			mhpb:SetStatusBarTexture(normTex)
-			mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+			mhpb:SetStatusBarColor(0, 0.3, 0.15, 1)
 
 			local ohpb = CreateFrame("StatusBar", nil, self.Health)
 			if C["unitframes"].gridhealthvertical then
 				ohpb:SetOrientation("VERTICAL")
-				ohpb:SetPoint("BOTTOM", mhpb:GetStatusBarTexture(), "TOP", 0, 0)
+				ohpb:SetPoint("BOTTOM", self.Health:GetStatusBarTexture(), "TOP", 0, 0)
 				ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
 				ohpb:Height(28*C["unitframes"].gridscale*T.raidscale)
 			else
-				ohpb:SetPoint("TOPLEFT", mhpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-				ohpb:SetPoint("BOTTOMLEFT", mhpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+				ohpb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+				ohpb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 				ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
 			end
 			ohpb:SetStatusBarTexture(normTex)
-			ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+			ohpb:SetStatusBarColor(0, 0.3, 0, 1)
 			
 			local absb = CreateFrame("StatusBar", nil, self.Health)
 			if C["unitframes"].gridhealthvertical then
 				absb:SetOrientation("VERTICAL")
-				absb:SetPoint("BOTTOM", ohpb:GetStatusBarTexture(), "TOP", 0, 0)
+				absb:SetPoint("BOTTOM", self.Health:GetStatusBarTexture(), "TOP", 0, 0)
 				absb:Width(66*C["unitframes"].gridscale*T.raidscale)
 				absb:Height(28*C["unitframes"].gridscale*T.raidscale)			
 			else
-				absb:SetPoint("TOPLEFT", ohpb:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
-				absb:SetPoint("BOTTOMLEFT", ohpb:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
+				absb:SetPoint("TOPLEFT", self.Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
+				absb:SetPoint("BOTTOMLEFT", self.Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 				absb:SetWidth(66*C["unitframes"].gridscale*T.raidscale)			
 			end
 			absb:SetStatusBarTexture(normTex)
-			absb:SetStatusBarColor(1, 1, 0, 0.25)
+			absb:SetStatusBarColor(0.3, 0.3, 0, 1)
 
 			self.HealPrediction = {
 				myBar = mhpb,

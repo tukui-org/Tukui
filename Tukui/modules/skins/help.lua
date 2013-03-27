@@ -135,6 +135,8 @@ local function LoadSkin()
 		navButtonFrameLevel(self)
 	end)
 	
+	HelpFrameGM_ResponseScrollFrame2ScrollBar:SkinScrollBar()
+	HelpFrameGM_ResponseScrollFrame1ScrollBar:SkinScrollBar()
 	HelpFrameGM_ResponseNeedMoreHelp:SkinButton()
 	HelpFrameGM_ResponseCancel:SkinButton()
 	for i=1, HelpFrameGM_Response:GetNumChildren() do

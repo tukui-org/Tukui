@@ -87,13 +87,13 @@ local function Update(self, event, unit)
 
 	if(hp.otherBar) then
 		hp.otherBar:SetMinMaxValues(0, maxHealth)
-		hp.otherBar:SetValue(allIncomingHeal)
+		hp.otherBar:SetValue(myIncomingHeal + allIncomingHeal)
 		hp.otherBar:Show()
 	end
 	
 	if(hp.absBar) then
 		hp.absBar:SetMinMaxValues(0, maxHealth)
-		hp.absBar:SetValue(absorbHP)
+		hp.absBar:SetValue(myIncomingHeal + allIncomingHeal + absorbHP)
 		hp.absBar:Show()
 	end
 

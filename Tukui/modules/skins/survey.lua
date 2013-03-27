@@ -16,6 +16,7 @@ local function LoadSkin()
 	
 	GMSurveyCloseButton:SkinCloseButton()
 	GMSurveyScrollFrame:SkinScrollBar()
+	GMSurveyScrollFrameScrollBar:SkinScrollBar()
 
 	for i = 1, 11 do
 		_G["GMSurveyQuestion"..i]:StripTextures()

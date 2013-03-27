@@ -310,7 +310,6 @@ local function LoadSecondarySkin()
 		BlackMarketFrame.HotDeal.Item.IconTexture:SetTexCoord(.08, .92, .08, .92)
 		BlackMarketFrame.BidButton:SkinButton()
 		BlackMarketFrame.BidButton:Height(20)
-		BlackMarketFrame.HotDeal.BidButton:SkinButton()
 		BlackMarketFrame.CloseButton:SkinCloseButton()
 		
 		local tabs = {"ColumnName", "ColumnLevel", "ColumnType", "ColumnDuration", "ColumnHighBidder", "ColumnCurrentBid"}
@@ -360,8 +359,7 @@ local function LoadSecondarySkin()
 	BlackMarketFrame.HotDeal.Item:StyleButton()
 	BlackMarketFrame.HotDeal.Item.hover:SetAllPoints()
 	BlackMarketFrame.HotDeal.Item.pushed:SetAllPoints()
-	
-	BlackMarketFrame.HotDeal.BidButton:SkinButton()
+
 	BlackMarketHotItemBidPriceGold:SkinEditBox()
 	
 	for i=1, BlackMarketFrame:GetNumRegions() do
