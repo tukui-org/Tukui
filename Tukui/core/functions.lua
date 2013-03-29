@@ -238,6 +238,43 @@ T.RGBToHex = function(r, g, b)
 	return string.format("|cff%02x%02x%02x", r*255, g*255, b*255)
 end
 
+-- Spawn the right-click dropdown on unitframe
+local dropdown = CreateFrame("Frame", "oUF_TukuiDropDown", UIParent, "UIDropDownMenuTemplate")
+
+T.SpawnMenu = function(self)
+	dropdown:SetParent(self)
+	return ToggleDropDownMenu(nil, nil, dropdown, "cursor", 0, 0)
+end
+
+local initdropdown = function(self)
+	local unit = self:GetParent().unit
+	local menu, name, id
+
+	if(not unit) then
+		return
+	end
+
+	if(UnitIsPlayer(unit)) then
+		id = UnitInRaid(unit)
+		if(id) then
+			menu = "RAID_PLAYER"
+			name = GetRaidRosterInfo(id)
+		elseif(UnitInParty(unit)) then
+			menu = "PARTY"
+		end
+	end
+
+	if(menu) then
+		UnitPopup_ShowMenu(self, menu, unit, name, id)
+	end
+end
+
+UIDropDownMenu_Initialize(dropdown, initdropdown, "MENU")
+
+UnitPopupMenus["PARTY"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "PARTY_SILENCE", "PARTY_UNSILENCE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "PROMOTE", "PROMOTE_GUIDE", "LOOT_PROMOTE", "VOTE_TO_KICK", "UNINVITE", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" };
+UnitPopupMenus["RAID_PLAYER"] = { "ADD_FRIEND", "ADD_FRIEND_MENU", "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "WHISPER", "INSPECT", "ACHIEVEMENTS", "TRADE", "FOLLOW", "DUEL", "PET_BATTLE_PVP_DUEL", "RAID_TARGET_ICON", "SELECT_ROLE", "RAID_LEADER", "RAID_PROMOTE", "RAID_DEMOTE", "LOOT_PROMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "PVP_REPORT_AFK", "RAF_SUMMON", "RAF_GRANT_LEVEL", "REPORT_PLAYER", "CANCEL" };
+UnitPopupMenus["RAID"] = { "MUTE", "UNMUTE", "RAID_SILENCE", "RAID_UNSILENCE", "BATTLEGROUND_SILENCE", "BATTLEGROUND_UNSILENCE", "RAID_LEADER", "RAID_PROMOTE", "RAID_MAINTANK", "RAID_MAINASSIST", "LOOT_PROMOTE", "RAID_DEMOTE", "VOTE_TO_KICK", "RAID_REMOVE", "PVP_REPORT_AFK", "MOVE_PLAYER_FRAME", "MOVE_TARGET_FRAME", "REPORT_PLAYER", "CANCEL" };
+
 --Return short value of a number
 T.ShortValue = function(v)
 	if v >= 1e6 then
