@@ -20,7 +20,6 @@
 	<Include file="modules\unitframes\core\oUF\oUF.xml"/>
 	<Script file="modules\unitframes\plugins\oUF_AuraWatch\oUF_AuraWatch.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_CombatFeedback\oUF_CombatFeedback.lua"/>
-	<Script file="modules\unitframes\plugins\oUF_DebuffHighlight\oUF_DebuffHighlight.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_Experience\oUF_Experience.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_MovableFrames\movable.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_Reputation\oUF_Reputation.lua"/>

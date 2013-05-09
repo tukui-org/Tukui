@@ -360,7 +360,7 @@ local function LoadSecondarySkin()
 	BlackMarketFrame.HotDeal.Item.hover:SetAllPoints()
 	BlackMarketFrame.HotDeal.Item.pushed:SetAllPoints()
 
-	BlackMarketHotItemBidPriceGold:SkinEditBox()
+	--BlackMarketHotItemBidPriceGold:SkinEditBox()
 	
 	for i=1, BlackMarketFrame:GetNumRegions() do
 		local region = select(i, BlackMarketFrame:GetRegions())
