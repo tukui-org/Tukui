@@ -30,8 +30,8 @@ local function LoadSkin()
 	WorldMapLevelDownButton:Point("BOTTOMLEFT", WorldMapLevelDropDown, "BOTTOMRIGHT", -2, 2)
 
 	WorldMapTrackQuest:SkinCheckBox()
-	WorldMapQuestShowObjectives:SkinCheckBox()
-	WorldMapShowDigSites:SkinCheckBox()
+	--WorldMapQuestShowObjectives:SkinCheckBox()
+	--WorldMapShowDigSites:SkinCheckBox()
 
 	--Mini
 	local function SmallSkin()
@@ -132,78 +132,23 @@ local function LoadSkin()
 	--WorldMapFrame:RegisterEvent("PLAYER_REGEN_DISABLED") -- fix taint with small map & big map
 	WorldMapFrame:HookScript("OnEvent", function(self, event)
 		local miniWorldMap = GetCVarBool("miniWorldMap")
-		local quest = WorldMapQuestShowObjectives:GetChecked()
+		--local quest = WorldMapQuestShowObjectives:GetChecked()
 
 		if event == "PLAYER_LOGIN" then
 			if not miniWorldMap then
 				WorldMapFrame:Show()
 				WorldMapFrame:Hide()
 			end
-		elseif event == "PLAYER_REGEN_DISABLED" then
-			WorldMapFrameSizeDownButton:Disable()
-			WorldMapFrameSizeUpButton:Disable()
-			
-			if (quest) and (miniWorldMap or Taint) then
-				if WorldMapFrame:IsShown() then
-					HideUIPanel(WorldMapFrame)
-				end
-
-				if not miniWorldMap and Taint and WORLDMAP_SETTINGS.size == WORLDMAP_QUESTLIST_SIZE then
-					WorldMapFrame_SetFullMapView()
-				end
-
-				WatchFrame.showObjectives = nil
-				WorldMapTitleButton:Hide()
-				WorldMapBlobFrame:Hide()
-				WorldMapPOIFrame:Hide()
-
-				WorldMapQuestShowObjectives.Show = T.dummy
-				WorldMapTitleButton.Show = T.dummy
-				WorldMapBlobFrame.Show = T.dummy
-				WorldMapPOIFrame.Show = T.dummy
-
-				WatchFrame_Update()
-			end
-			WorldMapQuestShowObjectives:Hide()
-		elseif event == "PLAYER_REGEN_ENABLED" then
-			WorldMapFrameSizeDownButton:Enable()
-			WorldMapFrameSizeUpButton:Enable()
-			
-			if (quest) and (miniWorldMap or Taint) then
-				WorldMapQuestShowObjectives.Show = WorldMapQuestShowObjectives:Show()
-				WorldMapTitleButton.Show = WorldMapTitleButton:Show()
-				WorldMapBlobFrame.Show = WorldMapBlobFrame:Show()
-				WorldMapPOIFrame.Show = WorldMapPOIFrame:Show()
-
-				WorldMapTitleButton:Show()
-
-				WatchFrame.showObjectives = true
-
-				if not miniWorldMap and Taint and WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
-					WorldMapFrame_SetFullMapView()
-				end
-
-				WorldMapBlobFrame:Show()
-				WorldMapPOIFrame:Show()
-
-				WatchFrame_Update()
-				
-				if Taint and not miniWorldMap and WorldMapFrame:IsShown() and WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
-					HideUIPanel(WorldMapFrame)
-					ShowUIPanel(WorldMapFrame)
-				end
-			end
-			WorldMapQuestShowObjectives:Show()
 		end
 	end)
 
 	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
-	local fontheight = select(2, WorldMapQuestShowObjectivesText:GetFont())*1.1
+	local fontheight = 12*1.1
 	coords:SetFrameLevel(90)
 	coords:FontString("PlayerText", C["media"].font, fontheight, "THINOUTLINE")
 	coords:FontString("MouseText", C["media"].font, fontheight, "THINOUTLINE")
-	coords.PlayerText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
-	coords.MouseText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
+	coords.PlayerText:SetTextColor(1, 1, 1)
+	coords.MouseText:SetTextColor(1, 1, 1)
 	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapDetailFrame, "BOTTOMLEFT", 5, 5)
 	coords.PlayerText:SetText("Player:   0, 0")
 	coords.MouseText:SetPoint("BOTTOMLEFT", coords.PlayerText, "TOPLEFT", 0, 5)
