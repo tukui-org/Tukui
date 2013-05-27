@@ -164,12 +164,12 @@ local function UpdateCastText(frame, curValue)
 	
 	if UnitChannelInfo("target") then
 		frame.time:SetFormattedText("%.1f ", curValue)
-		frame.name:SetText(select(1, (UnitChannelInfo("target"))))
+		--frame.name:SetText(select(1, (UnitChannelInfo("target"))))
 	end
 	
 	if UnitCastingInfo("target") then
 		frame.time:SetFormattedText("%.1f ", maxValue - curValue)
-		frame.name:SetText(select(1, (UnitCastingInfo("target"))))
+		--frame.name:SetText(select(1, (UnitCastingInfo("target"))))
 	end
 end
 
@@ -297,7 +297,7 @@ local function SkinObjects(frame, nameFrame)
 	local hp, cb = frame:GetChildren()
 	local threat, hpborder, overlay, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
 	local oldname = nameFrame:GetRegions()
-	local _, cbborder, cbshield, cbicon = cb:GetRegions()
+	local _, cbborder, cbshield, cbicon, cbname, cbshadow = cb:GetRegions()
 
 	--Health Bar
 	frame.healthOriginal = hp
@@ -350,6 +350,9 @@ local function SkinObjects(frame, nameFrame)
 	cb:SetStatusBarTexture(TEXTURE)
 	CreateVirtualFrame(cb)
 	
+	-- shadow
+	cbshadow:SetTexture("")
+	
 	--Create Cast Time Text
 	cb.time = cb:CreateFontString(nil, "ARTWORK")
 	cb.time:SetPoint("RIGHT", cb, "LEFT", -1, 0)
@@ -358,13 +361,14 @@ local function SkinObjects(frame, nameFrame)
 	cb.time:SetTextColor(1, 1, 1)
 	cb.time:SetShadowOffset(T.mult, -T.mult)
 
-	--Create Cast Name Text
-	cb.name = cb:CreateFontString(nil, "ARTWORK")
-	cb.name:SetPoint("TOP", cb, "BOTTOM", 0, -3)
-	cb.name:SetFont(FONT, FONTSIZE, FONTFLAG)
-	cb.name:SetTextColor(1, 1, 1)
-	cb.name:SetShadowColor(0, 0, 0, 0.4)
-	cb.name:SetShadowOffset(T.mult, -T.mult)		
+	--Cast Name Text
+	cbname:SetFont(FONT, FONTSIZE, FONTFLAG)
+	--cb.name = cb:CreateFontString(nil, "ARTWORK")
+	--cb.name:SetPoint("TOP", cb, "BOTTOM", 0, -3)
+	--cb.name:SetFont(FONT, FONTSIZE, FONTFLAG)
+	--cb.name:SetTextColor(1, 1, 1)
+	--cb.name:SetShadowColor(0, 0, 0, 0.4)
+	--cb.name:SetShadowOffset(T.mult, -T.mult)		
 	
 	--Setup CastBar Icon
 	cbicon:ClearAllPoints()

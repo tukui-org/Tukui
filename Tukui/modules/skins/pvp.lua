@@ -8,6 +8,12 @@ local function LoadSkin()
 	PVPUIFrame.Shadows:StripTextures()
 
 	PVPUIFrameCloseButton:SkinCloseButton()
+	
+	HonorFrame.RoleInset:StripTextures()
+	
+	HonorFrame.RoleInset.DPSIcon.checkButton:SkinCheckBox(true)
+	HonorFrame.RoleInset.TankIcon.checkButton:SkinCheckBox(true)
+	HonorFrame.RoleInset.HealerIcon.checkButton:SkinCheckBox(true)
 
 	for i=1, 2 do
 		_G["PVPUIFrameTab"..i]:SkinTab()
@@ -27,7 +33,7 @@ local function LoadSkin()
 		button:StyleButton()
 
 		button:CreateShadow("Default")
-		--button.shadow:SetBackdropBorderColor(unpack(E['media'].rgbvaluecolor))
+		--button.shadow:SetBackdropBorderColor(unpack(E["media"].rgbvaluecolor))
 
 		if i == 1 then
 			button.shadow:SetAlpha(1)
@@ -49,11 +55,11 @@ local function LoadSkin()
 
 	for i=1, 3 do
 		local button = _G["PVPArenaTeamsFrameTeam"..i]
-		button:SetTemplate('Default')
+		button:SetTemplate("Default")
 		button.Background:Kill()
 		button:StyleButton()
 		button:CreateShadow("Default")
-		--button.shadow:SetBackdropBorderColor(unpack(E['media'].rgbvaluecolor))
+		--button.shadow:SetBackdropBorderColor(unpack(E["media"].rgbvaluecolor))
 
 		if i == 1 then
 			button.shadow:SetAlpha(1)
@@ -115,7 +121,7 @@ local function LoadSkin()
 	ConquestPointsBarBG:Kill()
 	ConquestPointsBarShadow:Kill()
 	ConquestPointsBar.progress:SetTexture(C["media"].normTex)
-	ConquestPointsBar:CreateBackdrop('Default')
+	ConquestPointsBar:CreateBackdrop("Default")
 	ConquestPointsBar.backdrop:SetOutside(ConquestPointsBar, nil, -T.mult)
 	ConquestFrame:StripTextures()
 	ConquestFrame.ShadowOverlay:StripTextures()
