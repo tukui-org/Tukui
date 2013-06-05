@@ -71,7 +71,7 @@ local function LoadSkin()
 			local icon = _G["EquipmentFlyoutFrameButton"..i.."IconTexture"]
 			button:StyleButton(false)
 
-			icon:SetTexCoord(.9, .1, .9, .1)
+			icon:SetTexCoord(.1, .9, .1, .9)
 			button:GetNormalTexture():SetTexture(nil)
 
 			icon:SetInside()
