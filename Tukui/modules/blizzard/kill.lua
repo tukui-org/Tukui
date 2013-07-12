@@ -22,20 +22,23 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		CompactUnitFrameProfiles:UnregisterAllEvents()
 			
 		for i=1, MAX_PARTY_MEMBERS do
-			local name = "PartyMemberFrame" .. i
-			local frame = _G[name]
+			local member = "PartyMemberFrame" .. i
 
-			frame:SetParent(TukuiUIHider)
-
-			_G[name .. "HealthBar"]:UnregisterAllEvents()
-			_G[name .. "ManaBar"]:UnregisterAllEvents()
+			_G[member]:UnregisterAllEvents()
+			_G[member]:SetParent(TukuiUIHider)
+			_G[member]:Hide()
+			_G[member .. "HealthBar"]:UnregisterAllEvents()
+			_G[member .. "ManaBar"]:UnregisterAllEvents()
 			
-			local pet = name.."PetFrame"
-			local petframe = _G[pet]
+			local pet = member.."PetFrame"
 			
-			petframe:SetParent(TukuiUIHider)
-			
+			_G[pet]:UnregisterAllEvents()
+			_G[pet]:SetParent(TukuiUIHider)
 			_G[pet .. "HealthBar"]:UnregisterAllEvents()
+			
+			HidePartyFrame()
+			ShowPartyFrame = function() return end
+			HidePartyFrame = function() return end
 		end
 	end
 		
