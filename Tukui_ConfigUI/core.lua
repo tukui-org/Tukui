@@ -40,6 +40,7 @@ local function Local(o)
 	for option, value in pairs(TukuiConfigUILocalization) do
 		if option == o then
 			string = value
+			break
 		end
 	end
 	

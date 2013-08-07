@@ -22,35 +22,52 @@ if C["datatext"].power and C["datatext"].power > 0 then
 
 	local function Update(self, t)
 		int = int - t
-		local base, posBuff, negBuff = UnitAttackPower("player")
-		local effective = base + posBuff + negBuff
-		local Rbase, RposBuff, RnegBuff = UnitRangedAttackPower("player")
-		local Reffective = Rbase + RposBuff + RnegBuff
-
-
-		healpwr = GetSpellBonusHealing()
-
-		Rattackpwr = Reffective
-		spellpwr2 = GetSpellBonusDamage(7)
-		attackpwr = effective
-
-		if healpwr > spellpwr2 then
-			spellpwr = healpwr
-		else
-			spellpwr = spellpwr2
-		end
-
-		if attackpwr > spellpwr and select(2, UnitClass("Player")) ~= "HUNTER" then
-			pwr = attackpwr
-			tp_pwr = L.datatext_playerap
-		elseif select(2, UnitClass("Player")) == "HUNTER" then
-			pwr = Reffective
-			tp_pwr = L.datatext_playerap
-		else
-			pwr = spellpwr
-			tp_pwr = L.datatext_playersp
-		end
 		if int < 0 then
+			local base, posBuff, negBuff = UnitAttackPower("player")
+			local effective = base + posBuff + negBuff
+			local Rbase, RposBuff, RnegBuff = UnitRangedAttackPower("player")
+			local Reffective = Rbase + RposBuff + RnegBuff
+			local currentSpec = GetSpecialization()
+			local role = "None"
+			local specname = "Unknown"
+			local pwr = "---"
+			local tp_pwr = ""
+			
+			if currentSpec then
+				role = select(6, GetSpecializationInfo(currentSpec))
+				specname = select(2, GetSpecializationInfo(currentSpec))
+			end
+
+			local healpwr = GetSpellBonusHealing()
+			local Rattackpwr = Reffective
+			local spellpwr2 = GetSpellBonusDamage(7)
+			local attackpwr = effective
+
+			if healpwr > spellpwr2 then
+				spellpwr = healpwr
+			else
+				spellpwr = spellpwr2
+			end
+			
+			if role ~= "None" then
+				if (select(2, UnitClass("Player")) == "DRUID" and specname == "Balance") or (select(2, UnitClass("Player")) == "SHAMAN" and specname == "Elemental") then
+					pwr = spellpwr
+					tp_pwr = L.datatext_playersp
+				elseif select(2, UnitClass("Player")) == "HUNTER" then
+					pwr = Reffective
+					tp_pwr = L.datatext_playerap
+				elseif role == "HEALER" then
+					pwr = spellpwr
+					tp_pwr = L.datatext_playersp				
+				elseif spellpwr >= attackpwr then
+					pwr = spellpwr
+					tp_pwr = L.datatext_playersp
+				else
+					pwr = attackpwr
+					tp_pwr = L.datatext_playerap
+				end
+			end
+		
 			Text:SetText(Stat.Color2..pwr.." |r".. Stat.Color1..tp_pwr.."|r")      
 			int = 1
 		end

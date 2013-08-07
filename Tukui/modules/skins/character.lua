@@ -242,6 +242,8 @@ local function LoadSkin()
 	hooksecurefunc("ReputationFrame_OnEvent", UpdateFactionSkins)
 	ReputationDetailCloseButton:SkinCloseButton()
 	ReputationDetailAtWarCheckBox:SkinCheckBox()
+	ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
+	ReputationDetailLFGBonusReputationCheckBox:SkinCheckBox()
 	ReputationDetailInactiveCheckBox:SkinCheckBox()
 	ReputationDetailMainScreenCheckBox:SkinCheckBox()
 	

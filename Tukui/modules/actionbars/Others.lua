@@ -41,27 +41,32 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 	for i = 1, 12 do
 		local button = _G[format("ActionButton%d", i)]
 		button:SetAttribute("showgrid", 1)
-		button:SetAttribute("statehidden", nil)
+		button:SetAttribute("statehidden", true)
+		button:Show()
 		ActionButton_ShowGrid(button)
 		
 		button = _G[format("MultiBarRightButton%d", i)]
 		button:SetAttribute("showgrid", 1)
-		button:SetAttribute("statehidden", nil)
+		button:SetAttribute("statehidden", true)
+		button:Show()
 		ActionButton_ShowGrid(button)
 
 		button = _G[format("MultiBarBottomRightButton%d", i)]
 		button:SetAttribute("showgrid", 1)
-		button:SetAttribute("statehidden", nil)
+		button:SetAttribute("statehidden", true)
+		button:Show()
 		ActionButton_ShowGrid(button)
 		
 		button = _G[format("MultiBarLeftButton%d", i)]
 		button:SetAttribute("showgrid", 1)
-		button:SetAttribute("statehidden", nil)
+		button:SetAttribute("statehidden", true)
+		button:Show()
 		ActionButton_ShowGrid(button)
 		
 		button = _G[format("MultiBarBottomLeftButton%d", i)]
 		button:SetAttribute("showgrid", 1)
-		button:SetAttribute("statehidden", nil)
+		button:SetAttribute("statehidden", true)
+		button:Show()
 		ActionButton_ShowGrid(button)
 	end
 end)

@@ -46,7 +46,7 @@ if C["invite"].autoaccept then
 					local presenceID, givenName, surname, toonName, toonID, client, isOnline = BNGetFriendInfo(i)
 					local _, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
 
-					if client == "WoW" and realmName == T.myrealm and faction == playerFaction then
+					if client == "WoW" and faction == playerFaction then
 						if toonName == leader then
 							AcceptGroup()
 							ingroup = true
