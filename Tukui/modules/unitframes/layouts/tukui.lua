@@ -2165,7 +2165,6 @@ if C.unitframes.raid == true then
 
 	local function Shared(self, unit)
 		self.colors = T.UnitColor
-		self.menu = T.SpawnMenu
 		self:RegisterForClicks("AnyUp")
 		self:SetScript("OnEnter", UnitFrame_OnEnter)
 		self:SetScript("OnLeave", UnitFrame_OnLeave)
