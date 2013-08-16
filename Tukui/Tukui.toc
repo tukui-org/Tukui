@@ -1,6 +1,6 @@
-﻿## Interface: 50300
+﻿## Interface: 50400
 ## Author: Tukz
-## Version: 15.64
+## Version: 15.70
 ## Title: |cffC495DDTukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData

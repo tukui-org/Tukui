@@ -92,9 +92,9 @@ local function setup()
 	WatchFrameTitle:Kill()
 	WatchFrameLines:StripTextures()
 	
-	-- popup auto-quest
-	hooksecurefunc("WatchFrameAutoQuest_GetOrCreateFrame", function(p, i)
+	local function SkinWatchFramePopup(f, i)
 		local frame = _G["WatchFrameAutoQuestPopUp"..i.."ScrollChild"]
+		
 		if frame and not frame.isSkinned then
 			local parent = frame:GetParent()
 			frame:StripTextures()
@@ -104,8 +104,15 @@ local function setup()
 			parent.backdrop:SetPoint("BOTTOMRIGHT", frame, 13, -5)
 			parent.backdrop:CreateShadow()
 			frame.isSkinned = true
-		end
-	end)
+		end	
+	end
+	
+	if _G["WatchFrameAutoQuestPopUp1ScrollChild"] and _G["WatchFrameAutoQuestPopUp1ScrollChild"]:IsShown() then
+		SkinWatchFramePopup(nil, 1)
+	end
+	
+	-- popup auto-quest
+	hooksecurefunc("WatchFrameAutoQuest_GetOrCreateFrame", SkinWatchFramePopup)
 end
 
 -- skin buttons
@@ -126,14 +133,4 @@ hooksecurefunc("WatchFrameItem_UpdateCooldown", SkinQuestButton)
 -- Execute setup after we enter world
 ------------------------------------------------------------------------
 
-local f = CreateFrame("Frame")
-f:Hide()
-f.elapsed = 0
-f:SetScript("OnUpdate", function(self, elapsed)
-	f.elapsed = f.elapsed + elapsed
-	if f.elapsed > .5 then
-		setup()
-		f:Hide()
-	end
-end)
-TukuiWatchFrame:SetScript("OnEvent", function() if not IsAddOnLoaded("Who Framed Watcher Wabbit") or not IsAddOnLoaded("Fux") then init() f:Show() end end)
+TukuiWatchFrame:SetScript("OnEvent", function() if not IsAddOnLoaded("Who Framed Watcher Wabbit") or not IsAddOnLoaded("Fux") then init() setup() end end)

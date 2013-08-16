@@ -30,7 +30,12 @@ T.MicroMenu = {
 		if not PVPUIFrame then
 			PVP_LoadUI()
 		end
-		PVPUIFrame_ShowFrame() 
+		
+		if T.toc < 50400 then
+			PVPUIFrame_ShowFrame()
+		else
+			PVPUIFrame_ToggleFrame()
+		end
 	end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function() 

@@ -142,9 +142,11 @@ local function LoadSkin()
 	
 	CalendarMassInviteCloseButton:SkinCloseButton()
 	CalendarMassInviteGuildAcceptButton:SkinButton()
-	CalendarMassInviteArenaButton2:SkinButton()
-	CalendarMassInviteArenaButton3:SkinButton()
-	CalendarMassInviteArenaButton5:SkinButton()
+	if T.toc < 50400 then
+		CalendarMassInviteArenaButton2:SkinButton()
+		CalendarMassInviteArenaButton3:SkinButton()
+		CalendarMassInviteArenaButton5:SkinButton()
+	end
 	CalendarMassInviteGuildRankMenu:SkinDropDownBox(130)
 	
 	CalendarMassInviteGuildMinLevelEdit:SkinEditBox()

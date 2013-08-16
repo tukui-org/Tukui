@@ -325,6 +325,10 @@ function Stuffing:SlotNew (bag, slot)
 		_G[ret.frame:GetName().."IconQuestTexture"]:SetTexCoord(-.1, 1.2, 0, 1)
 		_G[ret.frame:GetName().."IconQuestTexture"]:Hide()
 		ret.frame.questIcon = _G[ret.frame:GetName().."IconQuestTexture"]
+		
+		if T.toc > 50300 and _G[ret.frame:GetName().."NewItemTexture"] then
+			_G[ret.frame:GetName().."NewItemTexture"]:SetAlpha(0)
+		end
 	end
 
 	ret.bag = bag

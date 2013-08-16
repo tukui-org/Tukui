@@ -1,6 +1,8 @@
 local T, C, L, G = unpack(select(2, ...))
 
 local function LoadSkin()
+	local NumTabs = 3
+	
 	PVEFrame:StripTextures()
 	PVEFrame:StripTextures()
 	PVEFrameLeftInset:StripTextures()
@@ -17,8 +19,12 @@ local function LoadSkin()
 	GroupFinderFrameGroupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
 	GroupFinderFrameGroupButton2.icon:SetTexture("Interface\\Icons\\inv_helmet_06")
 	GroupFinderFrameGroupButton3.icon:SetTexture("Interface\\Icons\\Icon_Scenarios")
+	if T.toc > 50300 then
+		NumTabs = 4
+		GroupFinderFrameGroupButton4.icon:SetTexture("Interface\\Icons\\Icon_Scenarios")
+	end
 
-	for i = 1, 3 do
+	for i = 1, NumTabs do
 		local bu = GroupFinderFrame["groupButton"..i]
 
 		bu.ring:Hide()
@@ -330,6 +336,18 @@ local function LoadSkin()
 	ScenarioQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton:SkinButton()
 	LFDQueueFrameRandomScrollFrameScrollBar:StripTextures()
 	LFDQueueFrameRandomScrollFrameScrollBar:SkinScrollBar()
+	
+	-- Flex
+	if T.toc > 50300 then
+		FlexRaidFrame:StripTextures()
+		FlexRaidFrameStartRaidButton:StripTextures()
+		FlexRaidFrameStartRaidButton:SkinButton()
+		FlexRaidFrameBottomInset:StripTextures()
+		FlexRaidFrameScrollFrame:StripTextures()
+		FlexRaidFrameScrollFrameScrollBar:StripTextures()
+		FlexRaidFrameScrollFrameScrollBar:SkinScrollBar()
+		FlexRaidFrameSelectionDropDown:SkinDropDownBox()
+	end
 end
 
 tinsert(T.SkinFuncs["Tukui"], LoadSkin)

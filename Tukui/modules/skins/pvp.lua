@@ -14,9 +14,11 @@ local function LoadSkin()
 	HonorFrame.RoleInset.DPSIcon.checkButton:SkinCheckBox(true)
 	HonorFrame.RoleInset.TankIcon.checkButton:SkinCheckBox(true)
 	HonorFrame.RoleInset.HealerIcon.checkButton:SkinCheckBox(true)
-
-	for i=1, 2 do
-		_G["PVPUIFrameTab"..i]:SkinTab()
+	
+	if T.toc < 50400 then
+		for i=1, 2 do
+			_G["PVPUIFrameTab"..i]:SkinTab()
+		end
 	end
 
 	for i=1, 3 do
@@ -52,31 +54,33 @@ local function LoadSkin()
 			end
 		end)
 	end
+	
+	if T.toc < 50400 then
+		for i=1, 3 do
+			local button = _G["PVPArenaTeamsFrameTeam"..i]
+			button:SetTemplate("Default")
+			button.Background:Kill()
+			button:StyleButton()
+			button:CreateShadow("Default")
+			--button.shadow:SetBackdropBorderColor(unpack(E["media"].rgbvaluecolor))
 
-	for i=1, 3 do
-		local button = _G["PVPArenaTeamsFrameTeam"..i]
-		button:SetTemplate("Default")
-		button.Background:Kill()
-		button:StyleButton()
-		button:CreateShadow("Default")
-		--button.shadow:SetBackdropBorderColor(unpack(E["media"].rgbvaluecolor))
-
-		if i == 1 then
-			button.shadow:SetAlpha(1)
-		else
-			button.shadow:SetAlpha(0)
-		end
-
-		button:HookScript("OnClick", function(self)
-			for j=1, 3 do
-				local b = _G["PVPArenaTeamsFrameTeam"..j]
-				if self:GetID() == b:GetID() then
-					b.shadow:SetAlpha(1)
-				else
-					b.shadow:SetAlpha(0)
-				end
+			if i == 1 then
+				button.shadow:SetAlpha(1)
+			else
+				button.shadow:SetAlpha(0)
 			end
-		end)
+
+			button:HookScript("OnClick", function(self)
+				for j=1, 3 do
+					local b = _G["PVPArenaTeamsFrameTeam"..j]
+					if self:GetID() == b:GetID() then
+						b.shadow:SetAlpha(1)
+					else
+						b.shadow:SetAlpha(0)
+					end
+				end
+			end)
+		end
 	end
 
 	-->>>HONOR FRAME
@@ -112,9 +116,7 @@ local function LoadSkin()
 	
 	-->>>CONQUEST FRAME
 	ConquestFrame.Inset:StripTextures()
-	--ConquestFrame.Inset:SetTemplate("Transparent")
 
-	--CapProgressBar_Update(ConquestFrame.ConquestBar, 0, 0, nil, nil, 1000, 2200);
 	ConquestPointsBarLeft:Kill()
 	ConquestPointsBarRight:Kill()
 	ConquestPointsBarMiddle:Kill()
@@ -129,7 +131,7 @@ local function LoadSkin()
 	ConquestFrame.RatedBG:SkinButton()
 	ConquestFrame.RatedBG.SelectedTexture:ClearAllPoints()
 	ConquestFrame.RatedBG.SelectedTexture:SetAllPoints()
-	ConquestFrame.RatedBG.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+	ConquestFrame.RatedBG.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
 	ConquestJoinButton:SkinButton(true)
 
 	-->>>WARGRAMES FRAME
@@ -140,64 +142,96 @@ local function LoadSkin()
 	WarGamesFrame.HorizontalBar:StripTextures()
 
 	-->>>ARENATEAMS
-	PVPArenaTeamsFrame:StripTextures()
-	ArenaTeamFrame.TopInset:StripTextures()
-	ArenaTeamFrame.BottomInset:StripTextures()
-	ArenaTeamFrame.WeeklyDisplay:StripTextures()
-	ArenaTeamFrame.weeklyToggleRight:SkinNextPrevButton()
-	ArenaTeamFrame.weeklyToggleLeft:SkinNextPrevButton()
-	ArenaTeamFrame:StripTextures()
-	ArenaTeamFrame.TopShadowOverlay:StripTextures()
+	if T.toc < 50400 then
+		PVPArenaTeamsFrame:StripTextures()
+		ArenaTeamFrame.TopInset:StripTextures()
+		ArenaTeamFrame.BottomInset:StripTextures()
+		ArenaTeamFrame.WeeklyDisplay:StripTextures()
+		ArenaTeamFrame.weeklyToggleRight:SkinNextPrevButton()
+		ArenaTeamFrame.weeklyToggleLeft:SkinNextPrevButton()
+		ArenaTeamFrame:StripTextures()
+		ArenaTeamFrame.TopShadowOverlay:StripTextures()
 
-	for i=1, 4 do
-		_G["ArenaTeamFrameHeader"..i.."Left"]:Kill()
-		_G["ArenaTeamFrameHeader"..i.."Middle"]:Kill()
-		_G["ArenaTeamFrameHeader"..i.."Right"]:Kill()
-		_G["ArenaTeamFrameHeader"..i]:SetHighlightTexture(nil)
-	end
-	
-	for i=1, 3 do
-		local b = ARENA_BUTTONS[i]
-		b:StripTextures()
-		b:SkinButton()
-		b.SelectedTexture:ClearAllPoints()
-		b.SelectedTexture:SetAllPoints()
-		b.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	end
-
-	ArenaTeamFrame.AddMemberButton:SkinButton(true)
-
-	-->>>PVP BANNERS
-	PVPBannerFrame:StripTextures()
-	PVPBannerFramePortrait:SetAlpha(0)
-	PVPBannerFrame:SetTemplate()
-	PVPBannerFrameCloseButton:SkinCloseButton()
-	PVPBannerFrameEditBox:SkinEditBox()
-	PVPBannerFrameEditBox.backdrop:SetOutside(PVPBannerFrameEditBox, 2, -5)
-	PVPBannerFrame.Inset:StripTextures()
-
-	PVPBannerFrameAcceptButton:SkinButton(true)
-	PVPBannerFrameCancelButton:SkinButton(true)
-
-	--Duplicate button name workaround
-	for i=1, PVPBannerFrame:GetNumChildren() do
-		local child = select(i, PVPBannerFrame:GetChildren())
-		if child and child:GetObjectType() == "Button" and child:GetWidth() == 80 then
-			child:SkinButton(true)
+		for i=1, 4 do
+			_G["ArenaTeamFrameHeader"..i.."Left"]:Kill()
+			_G["ArenaTeamFrameHeader"..i.."Middle"]:Kill()
+			_G["ArenaTeamFrameHeader"..i.."Right"]:Kill()
+			_G["ArenaTeamFrameHeader"..i]:SetHighlightTexture(nil)
 		end
-	end
+		
+		for i=1, 3 do
+			local b = ARENA_BUTTONS[i]
+			b:StripTextures()
+			b:SkinButton()
+			b.SelectedTexture:ClearAllPoints()
+			b.SelectedTexture:SetAllPoints()
+			b.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		end
 
-	for i=1, 3 do
-		_G["PVPColorPickerButton"..i]:SkinButton(true)
-		_G["PVPColorPickerButton"..i]:SetHeight(_G["PVPColorPickerButton"..i]:GetHeight() - 2)
-	end
+		ArenaTeamFrame.AddMemberButton:SkinButton(true)
 
-	PVPBannerFrameCustomizationFrame:StripTextures()
+		-->>>PVP BANNERS
+		PVPBannerFrame:StripTextures()
+		PVPBannerFramePortrait:SetAlpha(0)
+		PVPBannerFrame:SetTemplate()
+		PVPBannerFrameCloseButton:SkinCloseButton()
+		PVPBannerFrameEditBox:SkinEditBox()
+		PVPBannerFrameEditBox.backdrop:SetOutside(PVPBannerFrameEditBox, 2, -5)
+		PVPBannerFrame.Inset:StripTextures()
 
-	for i=1, 2 do
-		_G["PVPBannerFrameCustomization"..i]:StripTextures()
-		_G["PVPBannerFrameCustomization"..i.."RightButton"]:SkinNextPrevButton()
-		_G["PVPBannerFrameCustomization"..i.."LeftButton"]:SkinNextPrevButton()
+		PVPBannerFrameAcceptButton:SkinButton(true)
+		PVPBannerFrameCancelButton:SkinButton(true)
+
+		--Duplicate button name workaround
+		for i=1, PVPBannerFrame:GetNumChildren() do
+			local child = select(i, PVPBannerFrame:GetChildren())
+			if child and child:GetObjectType() == "Button" and child:GetWidth() == 80 then
+				child:SkinButton(true)
+			end
+		end
+
+		for i=1, 3 do
+			_G["PVPColorPickerButton"..i]:SkinButton(true)
+			_G["PVPColorPickerButton"..i]:SetHeight(_G["PVPColorPickerButton"..i]:GetHeight() - 2)
+		end
+
+		PVPBannerFrameCustomizationFrame:StripTextures()
+
+		for i=1, 2 do
+			_G["PVPBannerFrameCustomization"..i]:StripTextures()
+			_G["PVPBannerFrameCustomization"..i.."RightButton"]:SkinNextPrevButton()
+			_G["PVPBannerFrameCustomization"..i.."LeftButton"]:SkinNextPrevButton()
+		end
+	else
+		ConquestFrame.Arena2v2:StripTextures()
+		ConquestFrame.Arena2v2:SkinButton()
+		ConquestFrame.Arena2v2.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena2v2.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena2v2.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		ConquestFrame.Arena2v2.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena2v2.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena2v2.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
+		
+		ConquestFrame.Arena3v3:StripTextures()
+		ConquestFrame.Arena3v3:SkinButton()
+		ConquestFrame.Arena3v3.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena3v3.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena3v3.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		ConquestFrame.Arena3v3.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena3v3.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena3v3.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
+
+		ConquestFrame.Arena5v5:StripTextures()
+		ConquestFrame.Arena5v5:SkinButton()
+		ConquestFrame.Arena5v5.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena5v5.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena5v5.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		ConquestFrame.Arena5v5.SelectedTexture:ClearAllPoints()
+		ConquestFrame.Arena5v5.SelectedTexture:SetAllPoints()
+		ConquestFrame.Arena5v5.SelectedTexture:SetTexture(0, 1, 0, 0.1)
+		
+		ConquestTooltip:SetTemplate()
+		ConquestTooltip:SetScale(C.general.uiscale)
 	end
 end
 
