@@ -69,6 +69,12 @@ local function LoadSkin()
 		EncounterJournalEncounterFrameInfoLootTab:SetTemplate("Default")
 		EncounterJournalEncounterFrameInfoLootTab:ClearAllPoints()
 		EncounterJournalEncounterFrameInfoLootTab:Point("TOP", EncounterJournalEncounterFrameInfoBossTab, "BOTTOM", 0, -4)
+		
+		if T.toc > 50300 then
+			EncounterJournalEncounterFrameInfoModelTab:SetTemplate()
+			EncounterJournalEncounterFrameInfoModelTab:ClearAllPoints()
+			EncounterJournalEncounterFrameInfoModelTab:Point("TOP", EncounterJournalEncounterFrameInfoLootTab, "BOTTOM", 0, -4)		
+		end
 	end)
 	
 	EncounterJournalInstanceSelectScrollFrameScrollBar:SkinScrollBar()
