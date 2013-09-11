@@ -1360,6 +1360,75 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			SpellName(135000), --Decapitate
 
 			--Ra-den
+
+		-- Siege of Orgrimmar
+			-- Immerseus
+			SpellName(143436),	-- Corrosive Blast
+			SpellName(143459),	-- Sha Residue
+			
+			-- The Fallen Protectors
+			SpellName(143198),	-- Garrote
+			SpellName(143434),	-- Shadow Word: Bane
+			SpellName(147383),	-- Debilitation
+			
+			-- Norushen
+			SpellName(146124),	-- Self Doubt
+			SpellName(144514),	-- Lingering Corruption
+			
+			-- Sha of Pride
+			SpellName(144358),	-- Wounded Pride
+			SpellName(144351),	-- Mark of Arrogance
+			SpellName(146594),	-- Gift of the Titans
+			SpellName(147207),	-- Weakened Resolve
+			
+			-- Galakras
+			SpellName(146765),	-- Flame Arrows
+			SpellName(146902),	-- Poison-Tipped Blades
+			
+			-- Iron Juggernaut
+			SpellName(144467),	-- Ignite Armor
+			SpellName(144459),	-- Laser Burn
+			
+			-- Kor'kron Dark Shaman
+			SpellName(144215),	-- Froststorm Strike
+			SpellName(144089),	-- Toxic Mist
+			SpellName(144330),	-- Iron Prison
+			
+			-- General Nazgrim
+			SpellName(143494),	-- Sundering Blow
+			SpellName(143638),	-- Bonecracker
+			SpellName(143431),	-- Magistrike
+			
+			-- Malkorok
+			SpellName(142990),	-- Fatal Strike
+			SpellName(142913),	-- Displaced Energy
+			
+			-- Spoils of Pandaria
+			SpellName(145218),	-- Harden Flesh
+			SpellName(146235),	-- Breath of Fire
+			
+			-- Thok the Bloodthirsty
+			SpellName(143766),	-- Panic
+			SpellName(143780),	-- Acid Breath
+			SpellName(143773),	-- Freezing Breath
+			SpellName(143800),	-- Icy Blood
+			SpellName(143767),	-- Scorching Breath
+			SpellName(143791),	-- Corrosive Blood
+			
+			-- Siegecrafter Blackfuse
+			SpellName(143385),	-- Electrostatic Charge
+			SpellName(144236),	-- Pattern Recognition
+			
+			-- Paragons of the Klaxxi
+			SpellName(142929),	-- Tenderizing Strikes
+			SpellName(143275),	-- Hewn
+			SpellName(143279),	-- Genetic Alteration
+			SpellName(143974),	-- Shield Bash
+			SpellName(142948),	-- Aim
+			
+			-- Garrosh Hellscream
+			SpellName(145183),	-- Gripping Despair
+			SpellName(145195),	-- Empowered Gripping Despair
 		}
 
 		T.ReverseTimer = {
