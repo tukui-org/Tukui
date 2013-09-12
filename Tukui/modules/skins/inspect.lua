@@ -58,13 +58,7 @@ local function LoadSkin()
 			slot.backdrop:SetAllPoints()
 		end		
 	
-	InspectPVPFrameBottom:Kill()
 	InspectGuildFrameBG:Kill()
-	InspectPVPFrame:HookScript("OnShow", function() InspectPVPFrameBG:Kill() end)
-	
-	for i=1, 3 do
-		_G["InspectPVPTeam"..i]:StripTextures()
-	end
 	
 	InspectTalentFrame:StripTextures()
 end
