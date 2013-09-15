@@ -1,6 +1,3 @@
-local T, C, L, G = unpack(select(2, ...)) 
-if C.unitframes.enable ~= true or C.unitframes.combatfeedback ~= true then return end
-
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
@@ -68,7 +65,10 @@ local function combat(self, event, unit, eventType, flags, amount, dtype)
 	local FeedbackText = self.CombatFeedbackText
 	local fColors = FeedbackText.colors
 	local font, fontHeight, fontFlags = FeedbackText:GetFont()
-	fontHeight = FeedbackText.origHeight -- always start at original height
+	if not font then font = STANDARD_TEXT_FONT end
+	if (not fontHeight) or (fontHeight <= 0) then fontHeight = 12 end
+	if not fontFlags then fontFlags = nil end
+	--fontHeight = FeedbackText.origHeight -- always start at original height
 	local text, arg
 	color = fColors and fColors.STANDARD or colors.STANDARD
 	if eventType == "IMMUNE" and not FeedbackText.ignoreImmune then
