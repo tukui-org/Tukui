@@ -279,8 +279,15 @@ Stat:SetScript("OnEnter", function(self)
 			for i = 1, #friendTable do
 				if friendTable[i][5] then
 					if GetRealZoneText() == friendTable[i][4] then zonec = activezone else zonec = inactivezone end
-					classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]], GetQuestDifficultyColor(friendTable[i][2])
+					classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[friendTable[i][3]]
 					if classc == nil then classc = GetQuestDifficultyColor(friendTable[i][2]) end
+					
+					if friendTable[i][2] ~= '' then
+						levelc = GetQuestDifficultyColor(friendTable[i][2])
+					else
+						levelc = RAID_CLASS_COLORS["PRIEST"]
+						classc = RAID_CLASS_COLORS["PRIEST"]
+					end
 					
 					if UnitInParty(friendTable[i][1]) or UnitInRaid(friendTable[i][1]) then grouped = 1 else grouped = 2 end
 					GameTooltip:AddDoubleLine(format(levelNameClassString,levelc.r*255,levelc.g*255,levelc.b*255,friendTable[i][2],friendTable[i][1],groupedTable[grouped]," "..friendTable[i][6]),friendTable[i][4],classc.r,classc.g,classc.b,zonec.r,zonec.g,zonec.b)

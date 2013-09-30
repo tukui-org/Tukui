@@ -104,6 +104,8 @@ if T.client == "ruRU" then
 	L.datatext_sha = "Ша Злости"
 	L.datatext_oondasta = "Oondasta"
 	L.datatext_nalak = "Nalak"
+	L.datatext_celestrials = "Celestrials"
+	L.datatext_ordos = "Ordos"
 	L.datatext_defeated = "Убит"
 	L.datatext_undefeated = "Не убит"
  

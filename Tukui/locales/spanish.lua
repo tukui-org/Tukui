@@ -104,6 +104,8 @@ if T.client == "esES" or T.client == "esMX" then
 	L.datatext_sha = "Sha de la Ira"
 	L.datatext_oondasta = "Oondasta"
 	L.datatext_nalak = "Nalak"
+	L.datatext_celestrials = "Celestrials"
+	L.datatext_ordos = "Ordos"
 	L.datatext_defeated = "Derrotado"
 	L.datatext_undefeated = "No derrotado"
  

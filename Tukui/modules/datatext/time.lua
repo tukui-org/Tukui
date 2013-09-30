@@ -188,11 +188,15 @@ Stat:SetScript("OnEnter", function(self)
 		local Galleon = IsQuestFlaggedCompleted(32098)
 		local Oondasta = IsQuestFlaggedCompleted(32519)
 		local Nalak = IsQuestFlaggedCompleted(32518)
+		local Celestrials = IsQuestFlaggedCompleted(33117)
+		local Ordos = IsQuestFlaggedCompleted(33118)
 		
 		GameTooltip:AddDoubleLine(L.datatext_sha..": ", Sha and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
 		GameTooltip:AddDoubleLine(L.datatext_galleon..": ", Galleon and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
 		GameTooltip:AddDoubleLine(L.datatext_oondasta..": ", Oondasta and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
 		GameTooltip:AddDoubleLine(L.datatext_nalak..": ", Nalak and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+		GameTooltip:AddDoubleLine(L.datatext_celestrials..": ", Celestrials and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
+		GameTooltip:AddDoubleLine(L.datatext_ordos..": ", Ordos and "|cff00ff00"..L.datatext_defeated.."|r" or "|cffff0000"..L.datatext_undefeated.."|r")
 	end
 	
 	local oneraid, lockoutColor

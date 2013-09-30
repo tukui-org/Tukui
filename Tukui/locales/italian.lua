@@ -104,6 +104,8 @@ if T.client == "itIT" then
 	L.datatext_sha = "Sha della Rabbia"
 	L.datatext_oondasta = "Oondasta"
 	L.datatext_nalak = "Nalak"
+	L.datatext_celestrials = "Celestrials"
+	L.datatext_ordos = "Ordos"
 	L.datatext_defeated = "Sconfitto"
 	L.datatext_undefeated = "Non sconfitto"
 

@@ -104,6 +104,8 @@ if T.client == "zhTW" then
 	L.datatext_oondasta = "Oondasta"
 	L.datatext_nalak = "Nalak"
 	L.datatext_sha = "憤怒之煞"
+	L.datatext_celestrials = "Celestrials"
+	L.datatext_ordos = "Ordos"
 	L.datatext_defeated = "已擊殺"
 	L.datatext_undefeated = "未擊殺"
  

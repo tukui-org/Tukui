@@ -105,6 +105,8 @@ if T.client == "ptBR" then
 	L.datatext_sha = "Sha of Anger"
 	L.datatext_oondasta = "Oondasta"
 	L.datatext_nalak = "Nalak"
+	L.datatext_celestrials = "Celestrials"
+	L.datatext_ordos = "Ordos"
 	L.datatext_defeated = "Defeated"
 	L.datatext_undefeated = "Undefeated"
 
