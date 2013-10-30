@@ -3,6 +3,8 @@ local T, C, L, G = unpack(select(2, ...))
 local Taint = T.FullMapQuestTaintFix
 
 local function LoadSkin()
+	setfenv(WorldMapFrame_OnShow, setmetatable({ UpdateMicroButtons = function() end }, { __index = _G })) -- blizzard taint fix for 5.4.1
+	
 	WorldMapFrame:CreateBackdrop("Default")
 	WorldMapFrame.backdrop:EnableMouse(true)
 	
