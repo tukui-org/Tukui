@@ -1,7 +1,7 @@
 -- This will filter everythin NON user config data out of TukuiDB
 
 local T, C, L
-local myPlayerRealm = GetCVar("realmName")
+local myPlayerRealm = GetRealmName()
 local myPlayerName  = UnitName("player")
 
 local ALLOWED_GROUPS = {
