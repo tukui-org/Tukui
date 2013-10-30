@@ -22,7 +22,7 @@ T.MicroMenu = {
 	{text = MOUNTS_AND_PETS,
 	func = function() TogglePetJournal() end},
 	{text = SOCIAL_BUTTON,
-	func = function() ToggleFriendsFrame(1) end},
+	func = function() ToggleFriendsFrame() end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE,
 	func = function() PVEFrame_ToggleFrame(); end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
@@ -57,7 +57,11 @@ T.MicroMenu = {
 		Calendar_Toggle()
 	end},
 	{text = ENCOUNTER_JOURNAL,
-	func = function() ToggleEncounterJournal() end},
+	func = function() if not IsAddOnLoaded("Blizzard_EncounterJournal")
+		then EncounterJournal_LoadUI()
+	end
+	ToggleFrame(EncounterJournal) 
+	end}
 }
 	
 -- need to be opened at least one time before logging in, or big chance of taint later ...

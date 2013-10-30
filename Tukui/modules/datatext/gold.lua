@@ -21,7 +21,7 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	local Profit	= 0
 	local Spent		= 0
 	local OldMoney	= 0
-	local myPlayerRealm = GetCVar("realmName");
+	local myPlayerRealm = GetRealmName()
 
 	local function formatMoney(money)
 		local gold = floor(math.abs(money) / 10000)
