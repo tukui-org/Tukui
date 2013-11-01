@@ -61,11 +61,11 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		-- Setup Money Tooltip
 		self:SetAllPoints(Text)
 
-		local myPlayerName  = UnitName("player");				
-		if (TukuiData == nil) then TukuiData = {}; end
-		if (TukuiData.gold == nil) then TukuiData.gold = {}; end
-		if (TukuiData.gold[myPlayerRealm]==nil) then TukuiData.gold[myPlayerRealm]={}; end
-		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney();
+		local myPlayerName  = UnitName("player")				
+		if not TukuiData then TukuiData = {} end
+		if not TukuiData.gold then TukuiData.gold = {} end
+		if not TukuiData.gold[myPlayerRealm] then TukuiData.gold[myPlayerRealm]={} end
+		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney()
 				
 		OldMoney = NewMoney
 	end
@@ -120,12 +120,12 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	Stat:SetScript("OnLeave", function() GameTooltip:Hide() end)	
 	-- reset gold data
 	local function RESETGOLD()
-		local myPlayerRealm = GetCVar("realmName");
-		local myPlayerName  = UnitName("player");
+		local myPlayerRealm = GetRealmName()
+		local myPlayerName  = UnitName("player")
 		
 		TukuiData.gold = {}
 		TukuiData.gold[myPlayerRealm]={}
-		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney();
+		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney()
 	end
 	SLASH_RESETGOLD1 = "/resetgold"
 	SlashCmdList["RESETGOLD"] = RESETGOLD
