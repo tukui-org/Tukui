@@ -61,7 +61,11 @@ T.MicroMenu = {
 		then EncounterJournal_LoadUI()
 	end
 	ToggleFrame(EncounterJournal) 
-	end}
+	end},
+	{text = BLIZZARD_STORE,
+	func = function()
+		StoreMicroButton:Click()
+	end},
 }
 	
 -- need to be opened at least one time before logging in, or big chance of taint later ...
