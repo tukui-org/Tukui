@@ -308,7 +308,7 @@ end
 hooksecurefunc("FCF_RestorePositionAndDimensions", T.SetDefaultChatPosition)
 
 local function RemoveCurrentRealmName(self, event, msg, author, ...)
-	local realmName = GetRealmName()
+	local realmName = string.gsub(GetRealmName(), " ", "")
 
 	if msg:find("-" .. realmName) then
 		return false, gsub(msg, "%-"..realmName, ""), author, ...
