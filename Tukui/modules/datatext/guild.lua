@@ -42,6 +42,8 @@ local function BuildGuildTable()
 	for i = 1, GetNumGuildMembers() do
 		name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = GetGuildRosterInfo(i)
 		
+		name = string.gsub(name, "-.*", "")
+		
 		if status == 1 then
 			status = "|cffff0000["..AFK.."]|r"
 		elseif status == 2 then

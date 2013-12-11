@@ -306,3 +306,12 @@ T.SetDefaultChatPosition = function(frame)
 	end
 end
 hooksecurefunc("FCF_RestorePositionAndDimensions", T.SetDefaultChatPosition)
+
+local function RemoveCurrentRealmName(self, event, msg, author, ...)
+	local realmName = GetRealmName()
+
+	if msg:find("-" .. realmName) then
+		return false, gsub(msg, "%-"..realmName, ""), author, ...
+	end
+end
+ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", RemoveCurrentRealmName)
