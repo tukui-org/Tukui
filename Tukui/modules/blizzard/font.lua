@@ -37,7 +37,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
 
 	UNIT_NAME_FONT     = NORMAL
-	NAMEPLATE_FONT     = NORMAL
+	--NAMEPLATE_FONT     = NORMAL
 	DAMAGE_TEXT_FONT   = COMBAT
 	STANDARD_TEXT_FONT = NORMAL
 
