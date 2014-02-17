@@ -14,7 +14,7 @@ if GetLocale() == "itIT" then
 	-- nameplate
 	TukuiConfigUILocalization.nameplate = "Barre delle unità"
 	TukuiConfigUILocalization.nameplateenable = "Attiva le barre delle unità Tukui."
-	TukuiConfigUILocalization.nameplateenhancethreat = "Attiva la funzionalità di rilevamento della minaccia, che si adatterà automaticamente al tuo ruolo."
+	TukuiConfigUILocalization.nameplateenhancethreat = "Attiva la funzionalità di rilevamento della minaccia, che si adatterà in automatico al tuo ruolo."
 	TukuiConfigUILocalization.nameplateshowhealth = "Mostra la salute sulla barra delle unità."
 	TukuiConfigUILocalization.nameplatecombat = "Mostra soltanto le barre delle unità nemiche in combattimento."
 	TukuiConfigUILocalization.nameplategoodcolor = "Colore per un livello positivo di minaccia, a seconda se sei difensore o assaltatore/guaritore."
@@ -70,7 +70,7 @@ if GetLocale() == "itIT" then
 	TukuiConfigUILocalization.unitframestotembar = "Mostra la barra dei totems dello sciamano."
 	TukuiConfigUILocalization.unitframesshowtotalhpmp = "Visualizza il totale di salute/potere."
 	TukuiConfigUILocalization.unitframesshowplayerinparty = "Mostra te stesso in gruppo."
-	TukuiConfigUILocalization.unitframesraidunitdebuffwatch = "Attiva il monitoraggio delle auree nelle incursioni PvA (solo con la disposione a griglia)."
+	TukuiConfigUILocalization.unitframesraidunitdebuffwatch = "Attiva il monitoraggio delle auree nelle incursioni PvA (solo con la disposizione a griglia)."
 	TukuiConfigUILocalization.unitframesunitcastbar = "Mostra la barra incantesimi."
 	TukuiConfigUILocalization.unitframestargetauras = "Mostra le auree del bersaglio."
 	TukuiConfigUILocalization.unitframessaveperchar = "Salva la posizione dei riquadri delle unità per-personaggio."
