@@ -382,6 +382,8 @@ local function LoadSecondarySkin()
 			bu.Icon:SetTexCoord(.08, .92, .08, .92)	
 		end
 	end
+	
+	LFRBrowseFrameListScrollFrameScrollBar:SkinScrollBar()
 end
 
 T.SkinFuncs["Blizzard_ChallengesUI"] = LoadSecondarySkin

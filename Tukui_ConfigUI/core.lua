@@ -578,7 +578,10 @@ do
 		local interface = GameMenuButtonUIOptions
 		local keybinds = GameMenuButtonKeybindings
 
-		menu:SetHeight(menuy + continuey)
+		menu:HookScript("OnShow", function(self)
+			local h = menu:GetHeight()
+			self:SetHeight(h + 21)
+		end)
 		
 		local button = CreateFrame("BUTTON", "GameMenuTukuiButtonOptions", menu, "GameMenuButtonTemplate")
 		button:SetSize(continuex, continuey)

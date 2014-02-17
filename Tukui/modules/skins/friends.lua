@@ -263,6 +263,21 @@ local function LoadSkin()
 	BNetReportFrameReportButton:SkinButton()
 	BNetReportFrameCancelButton:SkinButton()
 	
+	FriendsTabHeaderRecruitAFriendButton:SkinButton()
+	FriendsTabHeaderRecruitAFriendButton:StyleButton()
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetDrawLayer("OVERLAY")
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetTexCoord(.08, .92, .08, .92)
+	FriendsTabHeaderRecruitAFriendButtonIcon:SetInside()
+	
+	RecruitAFriendFrame:StripTextures()
+	RecruitAFriendFrame:SetTemplate("Default")
+	RecruitAFriendNameEditBox:SkinEditBox()
+	RecruitAFriendFrameSendButton:SkinButton()
+	RecruitAFriendFrameCloseButton:SkinCloseButton()
+	RecruitAFriendNoteFrame:StripTextures()
+	RecruitAFriendNoteFrame:SetTemplate("Default")
+	RecruitAFriendNoteFrameScrollFrameScrollBar:SkinScrollBar()
+	
 	FriendsFrame:SetTemplate("Default")
 end
 

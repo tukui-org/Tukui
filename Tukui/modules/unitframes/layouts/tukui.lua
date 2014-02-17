@@ -1710,7 +1710,7 @@ local function Shared(self, unit)
 	
 	if (unit and unit:find("arena%d") and C["unitframes"].arena == true) or (unit and unit:find("boss%d") and C["unitframes"].showboss == true) then
 		-- Right-click focus on arena or boss units
-		self:SetAttribute("type2", "focus")
+		self:SetAttribute("*type2", "togglemenu")
 		
 		-- health 
 		local health = CreateFrame("StatusBar", nil, self)

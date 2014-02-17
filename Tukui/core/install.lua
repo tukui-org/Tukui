@@ -211,7 +211,7 @@ text1:SetJustifyH("LEFT")
 text1:SetFont(C.media.font, 12)
 text1:SetWidth(f:GetWidth()-40)
 text1:SetPoint("TOPLEFT", f, "TOPLEFT", 20, -60)
-G.Install.Frame.Text1 = G.Install.Frame
+G.Install.Frame.Text1 = text1
 
 local text2 = f:CreateFontString(nil, "OVERLAY")
 text2:SetJustifyH("LEFT")

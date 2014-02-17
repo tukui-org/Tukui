@@ -1267,8 +1267,8 @@ function Stuffing:Restack()
 			if clink then
 				local n, _, _, _, _, _, _, s = GetItemInfo(clink)
 				local id = tonumber(clink:match(":(%w+)"))
-					
-				if id and cnt ~= s then
+
+				if id and id ~= 82800 and cnt ~= s then -- 82800 = pet cage
 					if not st[id] then
 						st[id] = {{
 							item = v,

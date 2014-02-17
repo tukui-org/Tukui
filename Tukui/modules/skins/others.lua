@@ -99,7 +99,8 @@ local function LoadSkin()
 		"Quit", 
 		"Continue", 
 		"MacOptions",
-		"Help"
+		"Help",
+		"Store",
 	}
 
 	for i = 1, getn(BlizzardMenuButtons) do
@@ -267,6 +268,7 @@ local function LoadSkin()
 	"ControlsPanelAutoLootCorpse",
 	"ControlsPanelAutoOpenLootHistory",
 	"ControlsPanelInteractOnLeftClick",
+	"ControlsPanelBlockChatChannelInvites",
 	-- Combat
 	"CombatPanelAttackOnAssist",
 	"CombatPanelStopAutoAttack",
@@ -410,7 +412,7 @@ local function LoadSkin()
 			icheckbox:SkinCheckBox()
 		end
 	end
-	
+
 	local interfacedropdown ={
 	-- Controls
 	"ControlsPanelAutoLootKeyDropDown",

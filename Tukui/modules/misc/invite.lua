@@ -5,74 +5,52 @@ local T, C, L, G = unpack(select(2, ...))
 ------------------------------------------------------------------------
 
 if C["invite"].autoaccept then
-	local holder = CreateFrame("Frame")
-	holder:RegisterEvent("PARTY_INVITE_REQUEST")
-	holder:RegisterEvent("GROUP_ROSTER_UPDATE")
-	G.Misc.AutoAcceptInvite = holder
-	
-	local hidestatic -- used to hide static popup when auto-accepting
-	holder:SetScript("OnEvent", function(self, event, leader)
-		local ingroup = false
-		
-		if event == "PARTY_INVITE_REQUEST" then
-			if QueueStatusMinimapButton:IsShown() then return end
-			if GetNumGroupMembers() > 0 or GetNumGroupMembers() > 0 then return end
-			hidestatic = true
-		
-			-- Update Guild and Friendlist
-			if GetNumFriends() > 0 then ShowFriends() end
-			if IsInGuild() then GuildRoster() end
-			
-			for friendindex = 1, GetNumFriends() do
-				local friendname = GetFriendInfo(friendindex)
-				if friendname == leader then
-					AcceptGroup()
-					ingroup = true
-					break
+	local CheckFriend = function(name)
+		for i = 1, GetNumFriends() do
+			if GetFriendInfo(i) == name then
+				return true
+			end
+		end
+		for i = 1, select(2, BNGetNumFriends()) do
+			local presenceID, _, _, _, _, _, client, isOnline = BNGetFriendInfo(i)
+			if client == "WoW" and isOnline then
+				local _, toonName, _, realmName = BNGetToonInfo(presenceID)
+				if name == toonName or name == toonName.."-"..realmName then
+					return true
 				end
 			end
-			
-			-------------------------------------------------------------------
-			-- friend not found in friend index, so we look now into battle.net
-			-------------------------------------------------------------------
-			
-			local playerFaction
-			
-			-- find which faction we play
-			if select(1, UnitFactionGroup("player")) == "Horde" then playerFaction = 0 else playerFaction = 1 end
-			
-			if not ingroup then
-				for i = 1, select(2, BNGetNumFriends()) do
-					local presenceID, givenName, surname, toonName, toonID, client, isOnline = BNGetFriendInfo(i)
-					local _, _, _, realmName, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+		end
+		if IsInGuild() then
+			for i = 1, GetNumGuildMembers() do
+				if Ambiguate(GetGuildRosterInfo(i), "guild") == name then
+					return true
+				end
+			end
+		end
+	end
 
-					if client == "WoW" and faction == playerFaction then
-						if toonName == leader then
-							AcceptGroup()
-							ingroup = true
-							break
-						end
-					end
+	local ai = CreateFrame("Frame")
+	ai:RegisterEvent("PARTY_INVITE_REQUEST")
+	ai:SetScript("OnEvent", function(self, event, name)
+		if QueueStatusMinimapButton:IsShown() or GetNumGroupMembers() > 0 then return end
+		if CheckFriend(name) then
+			RaidNotice_AddMessage(RaidWarningFrame, L_INFO_INVITE..name, {r = 0.41, g = 0.8, b = 0.94}, 3)
+			print(format("|cffffff00"..L_INFO_INVITE..name.."."))
+			AcceptGroup()
+			for i = 1, STATICPOPUP_NUMDIALOGS do
+				local frame = _G["StaticPopup"..i]
+				if frame:IsVisible() and frame.which == "PARTY_INVITE" then
+					frame.inviteAccepted = 1
+					StaticPopup_Hide("PARTY_INVITE")
+					return
+				elseif frame:IsVisible() and frame.which == "PARTY_INVITE_XREALM" then
+					frame.inviteAccepted = 1
+					StaticPopup_Hide("PARTY_INVITE_XREALM")
+					return
 				end
 			end
-			
-			-----------------------------------------------------------------------------
-			-- friend not found in battle.net friend index, so we look now into our guild
-			-----------------------------------------------------------------------------
-			
-			if not ingroup then
-				for guildindex = 1, GetNumGuildMembers(true) do
-					local guildmembername = GetGuildRosterInfo(guildindex)
-					if guildmembername == leader then
-						AcceptGroup()
-						break
-					end
-				end
-			end
-			
-		elseif event == "GROUP_ROSTER_UPDATE" and hidestatic == true then
-			StaticPopup_Hide("PARTY_INVITE")
-			hidestatic = false
+		else
+			SendWho(name)
 		end
 	end)
 end
@@ -86,9 +64,14 @@ local ainvkeyword = "invite"
 
 local autoinvite = CreateFrame("frame")
 autoinvite:RegisterEvent("CHAT_MSG_WHISPER")
-autoinvite:SetScript("OnEvent", function(self,event,arg1,arg2)
+autoinvite:SetScript("OnEvent", function(self, event, arg1, arg2, ...)
 	if ((not UnitExists("party1") or UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) and arg1:lower():match(ainvkeyword)) and ainvenabled == true then
-		InviteUnit(arg2)
+		if event == "CHAT_MSG_WHISPER" then
+			InviteUnit(arg2)
+		elseif event == "CHAT_MSG_BN_WHISPER" then
+			local _, toonName, _, realmName = BNGetToonInfo(select(11, ...))
+			InviteUnit(toonName.."-"..realmName)
+		end
 	end
 end)
 G.Misc.AutoInvite = autoinvite
