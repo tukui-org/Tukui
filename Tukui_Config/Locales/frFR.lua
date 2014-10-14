@@ -536,7 +536,7 @@ TukuiConfig["frFR"] = {
 		
 		["CastBarIcon"] = {
 			["Name"] = "Icone de barre d'incantation",
-			["Desc"] = "Créer une icÙne ‡ cÙté de la barre",
+			["Desc"] = "Affiche une icone barre d'incantation",
 		},
 		
 		["CastBarLatency"] = {
