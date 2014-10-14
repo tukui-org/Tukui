@@ -6,602 +6,602 @@ if (Locale ~= "frFR") then
 end
 
 -- Some postfix's for certain controls.
-local Performance = "\n|cffFF0000Disabling this may increase performance|r" -- For high CPU options
-local PerformanceSlight = "\n|cffFF0000Disabling this may slightly increase performance|r" -- For semi-high CPU options
-local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For color pickers
+local Performance = "\n|cffFF0000La désactivation peut augmenter les performances|r" -- For high CPU options
+local PerformanceSlight = "\n|cffFF0000La désactivation peut augmenter légèrement les performances|r" -- For semi-high CPU options
+local RestoreDefault = "\n|cffFFFF00Clic droit pour restaurer par défaut|r" -- For color pickers
 
 TukuiConfig["frFR"] = {
 	["General"] = {
 		["AutoScale"] = {
-			["Name"] = "Auto Scale",
-			["Desc"] = "Automatically detect the best scale for your resolution",
+			["Name"] = "Ajustement Automatique",
+			["Desc"] = "Détecter automatiquement la meilleure échelle pour la résolution",
 		},
 		
 		["UIScale"] = {
-			["Name"] = "UI Scale",
-			["Desc"] = "Set a custom UI scale",
+			["Name"] = "Echelle de l'interface utilisateur",
+			["Desc"] = "Réglez l'échelle de l'interface utilisateur personnalisée",
 		},
 		
 		["BackdropColor"] = {
-			["Name"] = "Backdrop Color",
-			["Desc"] = "Set the backdrop color for all Tukui frames"..RestoreDefault,
+			["Name"] = "Couleur de fond",
+			["Desc"] = "Réglez la couleur de fond pour tous les cadres Tukui"..RestoreDefault,
 		},
 		
 		["BorderColor"] = {
-			["Name"] = "Border Color",
-			["Desc"] = "Set the border color for all Tukui frames"..RestoreDefault,
+			["Name"] = "Couleur de la bordure",
+			["Desc"] = "Réglez la couleur de la bordure pour tous les cadres Tukui"..RestoreDefault,
 		},
 		
 		["HideShadows"] = {
-			["Name"] = "Hide Shadows",
-			["Desc"] = "Display or hide shadows on certain Tukui frames",
+			["Name"] = "Masquer les Ombres",
+			["Desc"] = "Afficher ou masquer les ombres sur certains cadres de Tukui",
 		},
 	},
 	
 	["ActionBars"] = {
 		["Enable"] = {
-			["Name"] = "Enable action bars",
+			["Name"] = "Activer les barres d'action",
 			["Desc"] = "Derp",
 		},
 		
 		["HotKey"] = {
-			["Name"] = "Hotkeys",
-			["Desc"] = "Display Hotkey text on buttons",
+			["Name"] = "Raccourcis clavier",
+			["Desc"] = "Afficher le texte de raccourcis sur les boutons",
 		},
 		
 		["Macro"] = {
-			["Name"] = "Macro keys",
-			["Desc"] = "DIsplay macro text on buttons",
+			["Name"] = "Touches de macro",
+			["Desc"] = "Afficher le texte de macro sur les boutons",
 		},
 		
 		["ShapeShift"] = {
-			["Name"] = "ShapeShift",
-			["Desc"] = "Enable Tukui style ShapeShift bar",
+			["Name"] = "Postures",
+			["Desc"] = "Activer les barre des postures Tukui",
 		},
 		
 		["Pet"] = {
-			["Name"] = "Pet",
-			["Desc"] = "Enable Tukui style Pet bar",
+			["Name"] = "Familier",
+			["Desc"] = "Activer la barre de Familier Tukui",
 		},
 		
 		["NormalButtonSize"] = {
-			["Name"] = "Button Size",
-			["Desc"] = "Set a size for action bar buttons",
+			["Name"] = "Taille des boutons",
+			["Desc"] = "Définition de la taille des boutons de la barre d'action",
 		},
 		
 		["PetButtonSize"] = {
-			["Name"] = "Pet Button Size",
-			["Desc"] = "Set a size for pet action bar buttons",
+			["Name"] = "Taille des boutons familiers",
+			["Desc"] = "Définition de la taille des boutons de la barre des familiers",
 		},
 		
 		["ButtonSpacing"] = {
-			["Name"] = "Button Spacing",
-			["Desc"] = "Set the spacing between action bar buttons",
+			["Name"] = "Espacement des boutons",
+			["Desc"] = "Réglez l'espacement entre les boutons de la barre d'action",
 		},
 		
 		["OwnShadowDanceBar"] = {
-			["Name"] = "Shadow Dance bar",
-			["Desc"] = "Use a special bar while in Shadow Dance",
+			["Name"] = "Barre Danse de l'ombre",
+			["Desc"] = "Utilisez une barre spéciale sous Danse de l'ombre",
 		},
 		
 		["OwnMetamorphosisBar"] = {
-			["Name"] = "Metamorphosis Bar",
-			["Desc"] = "Use a special bar while in Metamorphosis",
+			["Name"] = "Barre des metamorphoses",
+			["Desc"] = "Utilisez une barre spéciale sous Métamorphose",
 		},
 		
 		["OwnWarriorStanceBar"] = {
-			["Name"] = "Warrior Stance Bar",
-			["Desc"] = "Use a special bar while in Warrior stances",
+			["Name"] = "Barre des Postures du Guerrier",
+			["Desc"] = "Utilisez une barre spéciale suivant la posture Guerrier",
 		},
 		
 		["HideBackdrop"] = {
-			["Name"] = "Hide Backdrop",
-			["Desc"] = "Disable the backdrop on action bars",
+			["Name"] = "Masquer le Fond",
+			["Desc"] = "Désactiver le fond sur les barres d'action",
 		},
 		
 		["Font"] = {
-			["Name"] = "Action bar font",
-			["Desc"] = "Set a font for the action bars",
+			["Name"] = "Police de caractères",
+			["Desc"] = "Définir une police pour les barres d'action",
 		},
 	},
 	
 	["Auras"] = {
 		["Enable"] = {
-			["Name"] = "Enable Auras",
+			["Name"] = "Activer auras",
 			["Desc"] = "Derp",
 		},
 		
 		["Consolidate"] = {
-			["Name"] = "Consolidate Auras",
-			["Desc"] = "Enable consolidated auras",
+			["Name"] = "Consolider les Auras",
+			["Desc"] = "Activer les Auras consolidés",
 		},
 		
 		["Flash"] = {
-			["Name"] = "Flash Auras",
-			["Desc"] = "Flash auras when their duration is low"..PerformanceSlight,
+			["Name"] = "Surbrillance des Auras",
+			["Desc"] = "Surbrillance des auras lorsque leur durée est faible"..PerformanceSlight,
 		},
 		
 		["ClassicTimer"] = {
-			["Name"] = "Classic Timer",
-			["Desc"] = "Use the text timer beneath auras",
+			["Name"] = "Decompte classique",
+			["Desc"] = "Utiliser le texte de decompte sous auras",
 		},
 		
 		["HideBuffs"] = {
-			["Name"] = "Hide Buffs",
-			["Desc"] = "Disable buff display",
+			["Name"] = "Cacher les Améliorations",
+			["Desc"] = "Affichage des Améliorations Désactiver",
 		},
 		
 		["HideDebuffs"] = {
-			["Name"] = "Hide Debuffs",
-			["Desc"] = "Disable debuff display",
+			["Name"] = "Cacher les Affaiblissements",
+			["Desc"] = "Affichage des Affaiblissements Désactiver",
 		},
 		
 		["Animation"] = {
 			["Name"] = "Animation",
-			["Desc"] = "Show a 'pop in' animation on auras"..PerformanceSlight,
+			["Desc"] = "Voir une 'pop in' animation sur auras"..PerformanceSlight,
 		},
 		
 		["BuffsPerRow"] = {
-			["Name"] = "Buffs Per Row",
-			["Desc"] = "Set the number of buffs to show before creating a new row",
+			["Name"] = "Améliorations Par rangée",
+			["Desc"] = "Définissez le nombre d'améliorations a afficher avant de créer une nouvelle ligne",
 		},
 		
 		["Font"] = {
-			["Name"] = "Aura font",
-			["Desc"] = "Set a font for auras",
+			["Name"] = "Police de caractère des Auras",
+			["Desc"] = "Définir une police pour les auras",
 		},
 	},
 	
 	["Bags"] = {
 		["Enable"] = {
-			["Name"] = "Enable Bags",
+			["Name"] = "Activer les Sacs",
 			["Desc"] = "Derp",
 		},
 		
 		["ButtonSize"] = {
-			["Name"] = "Slot Size",
-			["Desc"] = "Set a size for bag slots",
+			["Name"] = "Taille des emplacements",
+			["Desc"] = "Taille des emplacements dans le sac",
 		},
 		
 		["Spacing"] = {
-			["Name"] = "Spacing",
-			["Desc"] = "Set the spacing between bag slots",
+			["Name"] = "Espacement",
+			["Desc"] = "Réglez l'espacement entre les emplacements de sacs",
 		},
 		
 		["ItemsPerRow"] = {
-			["Name"] = "Items Per Row",
-			["Desc"] = "Set how many slots are on each row of the bags",
+			["Name"] = "Objets par ligne",
+			["Desc"] = "Définir le nombre d'emplacements sur chaque ligne de sacs",
 		},
 		
 		["PulseNewItem"] = {
-			["Name"] = "Flash New Item(s)",
-			["Desc"] = "New items in your bags will have a flash animation",
+			["Name"] = "Surbrillance des nouveaux objets",
+			["Desc"] = "Les nouveaux objets dans vos sacs auront une animation avec surbrillance",
 		},
 		
 		["Font"] = {
-			["Name"] = "Bag font",
-			["Desc"] = "Set a font for bags",
+			["Name"] = "Police de caractère des sacs",
+			["Desc"] = "Définir une police pour les sacs",
 		},
 		
 		["BagFilter"] = {
-			["Name"] = "Enable Bag filter",
-			["Desc"] = "Automatically deletes useless items from your bags when looted",
-			["Default"] = "Automatically deletes useless items from your bags when looted",
+			["Name"] = "Activez le filtre sac",
+			["Desc"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
+			["Default"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
 		},
 	},
 	
 	["Chat"] = {
 		["Enable"] = {
-			["Name"] = "Enable Chat",
+			["Name"] = "Activer la fenetre de discussion",
 			["Desc"] = "Derp",
 		},
 		
 		["WhisperSound"] = {
-			["Name"] = "Whisper Sound",
-			["Desc"] = "Play a sound when receiving a whisper",
+			["Name"] = "Chuchotement sonore",
+			["Desc"] = "Jouer un son lors de la réception d'un chuchotement",
 		},
 		
 		["LinkColor"] = {
-			["Name"] = "URL Link Color",
-			["Desc"] = "Set a color to display URL links in"..RestoreDefault,
+			["Name"] = "Lien URL en couleur",
+			["Desc"] = "Définir une couleur pour afficher les liens URL dans"..RestoreDefault,
 		},
 		
 		["LinkBrackets"] = {
-			["Name"] = "URL Link Brackets",
-			["Desc"] = "Display URL links wrapped in brackets",
+			["Name"] = "Lien URL entre crochets",
+			["Desc"] = "Affichage des liens URL entre crochets",
 		},
 		
 		["LootFrame"] = {
-			["Name"] = "Loot Frame",
-			["Desc"] = "Create a seperate 'Loot' chat frame to the right",
+			["Name"] = "Fenetre de butin",
+			["Desc"] = "Créer une fenetre de butin séparé sur la droite",
 		},
 		
 		["Background"] = {
-			["Name"] = "Chat Background",
-			["Desc"] = "Create a background for the left and right chat frames",
+			["Name"] = "Fond de fenetre de discussion",
+			["Desc"] = "Créer un fond pour les cadres de discussion gauche et droit",
 		},
 		
 		["ChatFont"] = {
-			["Name"] = "Chat Font",
-			["Desc"] = "Set a font to be used by chat",
+			["Name"] = "Police",
+			["Desc"] = "Définir une police pour la fenetre de discussion",
 		},
 		
 		["TabFont"] = {
-			["Name"] = "Chat Tab Font",
-			["Desc"] = "Set a font to be used by chat tabs",
+			["Name"] = "Police de l'onglet",
+			["Desc"] = "Définir une police pour l'onglet de la fenetre de discussion",
 		},
 		
 		["ScrollByX"] = {
-			["Name"] = "Mouse Scrolling",
-			["Desc"] = "Set the number of lines that the chat will jump when scrolling",
+			["Name"] = "Défilement de la souris",
+			["Desc"] = "Définissez le nombre de lignes que la fenetre de discussion va sauter lors du défilement",
 		},
 	},
 	
 	["Cooldowns"] = {
 		["Font"] = {
-			["Name"] = "Cooldown Font",
-			["Desc"] = "Set a font to be used by cooldown timers",
+			["Name"] = "Police de caractère",
+			["Desc"] = "Définir une police pour les temps de recharge",
 		},
 	},
 	
 	["DataTexts"] = {
 		["Battleground"] = {
-			["Name"] = "Enable Battleground",
-			["Desc"] = "Enable data texts displaying battleground information",
+			["Name"] = "Activer champ de bataille",
+			["Desc"] = "Activer textes de données affichant des informations de champ de bataille",
 		},
 		
 		["LocalTime"] = {
-			["Name"] = "Local Time",
-			["Desc"] = "Use local time in the Time data text, rather than realm time",
+			["Name"] = "Heure locale",
+			["Desc"] = "Utilisez heure locale dans le texte de données de temps , plutot que le temps du serveur",
 		},
 		
 		["Time24HrFormat"] = {
-			["Name"] = "24-Hour Time Format",
-			["Desc"] = "Enable to set the Time data text to 24 hour format.",
+			["Name"] = "Format de l'heure sur 24 heures",
+			["Desc"] = "Permettre de définir le texte de données de temps au format 24 heures.",
 		},
 		
 		["NameColor"] = {
-			["Name"] = "Label Color",
-			["Desc"] = "Set a color for the label of a data text, usually the name"..RestoreDefault,
+			["Name"] = "Libellé de couleur",
+			["Desc"] = "Définir une couleur de l'étiquette d'un texte de données , généralement le nom"..RestoreDefault,
 		},
 		
 		["ValueColor"] = {
-			["Name"] = "Value Color",
-			["Desc"] = "Set a color for the value of a data text, usually a number"..RestoreDefault,
+			["Name"] = "valeur de la couleur",
+			["Desc"] = "Définir une couleur pour la valeur d'un texte de données , généralement un nombre"..RestoreDefault,
 		},
 		
 		["Font"] = {
-			["Name"] = "Data Text Font",
-			["Desc"] = "Set a font to be used by the data texts",
+			["Name"] = "Police de caractère	",
+			["Desc"] = "Définir une police pour les Données Texte",
 		},
 	},
 	
 	["Merchant"] = {
 		["AutoSellGrays"] = {
-			["Name"] = "Auto Sell Grays",
-			["Desc"] = "When visiting a vendor, automatically sell gray quality items",
+			["Name"] = "Vendre automatiquement les objets gris",
+			["Desc"] = "Lors de la visite d'un vendeur , vendre automatiquement les objets de qualitée grise",
 		},
 		
 		["SellMisc"] = {
-			["Name"] = "Sell Misc. Items",
-			["Desc"] = "Automatically sells useless items that are not gray quality",
+			["Name"] = "Vendre les objets divers.",
+			["Desc"] = "Vend automatiquement les objets inutiles qui ne sont pas de qualité grise",
 		},
 		
 		["AutoRepair"] = {
-			["Name"] = "Auto Repair",
-			["Desc"] = "When visiting a repair merchant, automatically repair our gear",
+			["Name"] = "Réparation Automatique",
+			["Desc"] = "Lors de la visite d'un marchand , réparer automatiquement votre équipement",
 		},
 		
 		["UseGuildRepair"] = {
-			["Name"] = "Use Guild Repair",
-			["Desc"] = "When using 'Auto Repair', use funds from the Guild bank",
+			["Name"] = "Utilisation des Réparations de Guilde",
+			["Desc"] = "En utilisant ' Réparation Automatique ' , utiliser les fonds de la banque de guilde",
 		},
 	},
 	
 	["Misc"] = {
 		["ThreatBarEnable"] = {
-			["Name"] = "Enable Threat Bar",
+			["Name"] = "Activer la barre de menace",
 			["Desc"] = "Derp",
 		},
 		
 		["AltPowerBarEnable"] = {
-			["Name"] = "Enable Alt-Power Bar",
+			["Name"] = "Activer la barre Alt-Power",
 			["Desc"] = "Derp",
 		},
 		
 		["ExperienceEnable"] = {
-			["Name"] = "Enable Experience Bars",
-			["Desc"] = "Enable two experience bars on the left and right of the screen.",
+			["Name"] = "Activer la barre d'experience",
+			["Desc"] = "Activez deux barres d'expérience sur la gauche et la droite de l'écran.",
 		},
 		
 		["ReputationEnable"] = {
-			["Name"] = "Enable Reputation Bars",
-			["Desc"] = "Enable two reputation bars on the left and right of the screen.",
+			["Name"] = "Activer la barre de réputation",
+			["Desc"] = "Activez deux barres de réputation sur la gauche et la droite de l'écran.",
 		},
 		
 		["ErrorFilterEnable"] = {
-			["Name"] = "Enable Error Filtering",
-			["Desc"] = "Filters out messages from the UIErrorsFrame.",
+			["Name"] = "Activer le filtrage des Erreurs",
+			["Desc"] = "Filtres des messages UIErrorsFrame.",
 		},
 	},
 	
 	["NamePlates"] = {
 		["Enable"] = {
-			["Name"] = "Enable NamePlates",
+			["Name"] = "Activer les barres d'unités",
 			["Desc"] = "Derp"..PerformanceSlight,
 		},
 		
 		["Width"] = {
-			["Name"] = "Set Width",
-			["Desc"] = "Set the width of NamePlates",
+			["Name"] = "Définir la largeur",
+			["Desc"] = "Définir la largeur des barres d'unités",
 		},
 		
 		["Height"] = {
-			["Name"] = "Set Height",
-			["Desc"] = "Set the height of NamePlates",
+			["Name"] = "Définir la hauteur",
+			["Desc"] = "Définir la hauteur des barres d'unités",
 		},
 		
 		["CastHeight"] = {
-			["Name"] = "Cast Bar Height",
-			["Desc"] = "Set the height of the cast bar on NamePlates",
+			["Name"] = "Hauteur de la barre de incantation",
+			["Desc"] = "Définir la hauteur de la barre de incantation des barres d'unités",
 		},
 		
 		["Spacing"] = {
-			["Name"] = "Spacing",
-			["Desc"] = "Set the spacing between NamePlates and cast bar",
+			["Name"] = "Espacement",
+			["Desc"] = "Définir l'espacement entre la barre d'unité et la barre de incantation",
 		},
 		
 		["NonTargetAlpha"] = {
-			["Name"] = "Non-Target Alpha",
-			["Desc"] = "The alpha of NamePlates that we're not targetting",
+			["Name"] = "Opacité non-ciblé",
+			["Desc"] = "Opcaité des barres d'unités qui ne sont pas ciblées",
 		},
 		
 		["Texture"] = {
-			["Name"] = "NamePlates Texture",
-			["Desc"] = "Set a texture for nameplates",
+			["Name"] = "Texture des barres d'unités",
+			["Desc"] = "Définir une texture pour les barres d'unités",
 		},
 		
 		["Font"] = {
-			["Name"] = "NamePlates Font",
-			["Desc"] = "Set a font for nameplates",
+			["Name"] = "Police de caractère",
+			["Desc"] = "Définir la police de caractère des barres d'unités",
 		},
 	},
 	
 	["Party"] = {
 		["Enable"] = {
-			["Name"] = "Enable Party Frames",
+			["Name"] = "Activer les cadres de groupe",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
 			["Name"] = "Portrait",
-			["Desc"] = "Display portrait on party frames",
+			["Desc"] = "Afficher les portraits sur les cadres de groupe",
 		},
 		
 		["HealBar"] = {
 			["Name"] = "HealComm",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Desc"] = "Afficher une barre indiquant les soins et absorbe entrants",
 		},
 		
 		["ShowPlayer"] = {
-			["Name"] = "Show Player",
-			["Desc"] = "Show yourself in the party",
+			["Name"] = "Afficher Joueur",
+			["Desc"] = "Afficher soi-mÍme en groupe",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Health Text",
-			["Desc"] = "Show the amount of health the unit lost.",
+			["Name"] = "Texte de santé",
+			["Desc"] = "Indiquez le montant de la santé perdue de l'unité.",
 		},
 		
 		["Font"] = {
-			["Name"] = "Party Frame Name Font",
-			["Desc"] = "Set a font for name text on party frames",
+			["Name"] = "Police",
+			["Desc"] = "Définir la police de caractère des noms des cadres de groupe",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Party Frame Health Font",
-			["Desc"] = "Set a font for health text on party frames",
+			["Name"] = "Police du texte santé",
+			["Desc"] = "Définir la police de caractère de la santé des cadres de groupe",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "Texture de la barre de puissance",
+			["Desc"] = "Définir une texture pour les barres de puissance",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "Texture de la barre de santé",
+			["Desc"] = "Définir une texture pour les barres de santé",
 		},
 	},
 	
 	["Raid"] = {
 		["Enable"] = {
-			["Name"] = "Enable Raid Frames",
+			["Name"] = "Activer les cadres de raid",
 			["Desc"] = "Derp",
 		},
 		
 		["HealBar"] = {
 			["Name"] = "HealComm",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Desc"] = "Afficher une barre indiquant les soins et absorbe entrants",
 		},
 		
 		["AuraWatch"] = {
-			["Name"] = "Aura Watch",
-			["Desc"] = "Display timers for class specific buffs in the corners of the raid frames",
+			["Name"] = "Affichage des Aura",
+			["Desc"] = "Affiche un decompte pour les améliorations spécifiques aux classes dans les coins des cadres de raid",
 		},
 		
 		["AuraWatchTimers"] = {
-			["Name"] = "Aura Watch Timers",
-			["Desc"] = "Display a timer on debuff icons created by Debuff Watch",
+			["Name"] = "Affichage de decompte pour les Aura",
+			["Desc"] = "Affiche un decompte pour les icones d'affaiblissements créés par l'affichage des affaiblissement",
 		},
 		
 		["DebuffWatch"] = {
-			["Name"] = "Debuff Watch",
-			["Desc"] = "Display a big icon on the raid frames when a player has an important debuff",
+			["Name"] = "Dffichage des affaiblissement",
+			["Desc"] = "Afficher une grosse icÙne sur les cadres de raid quand un joueur a un affaiblissement important",
 		},
 		
 		["RangeAlpha"] = {
-			["Name"] = "Out Of Range Alpha",
-			["Desc"] = "Set the transparency of units that are out of range",
+			["Name"] = "Opacité Hors-d'atteinte",
+			["Desc"] = "Défini l'opacité des unitées qui sont hors d'atteinte",
 		},
 		
 		["ShowRessurection"] = {
-			["Name"] = "Show Ressurection Icon",
-			["Desc"] = "Display incoming ressurections on players",
+			["Name"] = "Afficher l'icone de ressurection",
+			["Desc"] = "Afficher les ressurections entrantes sur les joueurs",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Health Text",
-			["Desc"] = "Show the amount of health the unit lost.",
+			["Name"] = "Texte de Santé",
+			["Desc"] = "Indiquez le montant de la santé perdue de l'unité.",
 		},
 		
 		["Font"] = {
-			["Name"] = "Raid Frame Name Font",
-			["Desc"] = "Set a font for name text on raid frames",
+			["Name"] = "Police de caractère des noms",
+			["Desc"] = "Définir la police de caractère des noms des cadre de raid",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Raid Frame Health Font",
-			["Desc"] = "Set a font for health text on raid frames",
+			["Name"] = "Police de caractère du texte santé",
+			["Desc"] = "Définir la police de caractère de la santé des cadres de raid",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "Texture de la barre de puissance",
+			["Desc"] = "Définir une texture pour les barres de puissance",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "Texture de la barre de santé",
+			["Desc"] = "Définir une texture pour les barres de santé",
 		},
 		
 		["GroupBy"] = {
-			["Name"] = "Group By",
-			["Desc"] = "Define how raids groups are sorted",
+			["Name"] = "Groupé par",
+			["Desc"] = "Définir le mode de tri des groupes de raid",
 		},
 	},
 	
 	["Tooltips"] = {
 		["Enable"] = {
-			["Name"] = "Enable Tooltips",
+			["Name"] = "Activer infobulles",
 			["Desc"] = "Derp",
 		},
 		
 		["HideOnUnitFrames"] = {
-			["Name"] = "Hide on Unit Frames",
-			["Desc"] = "Don't display Tooltips on unit frames",
+			["Name"] = "cacher sur cadre d'unités",
+			["Desc"] = "Ne pas afficher les info-bulles sur les cadres unités",
 		},
 		
 		["UnitHealthText"] = {
-			["Name"] = "Display Health Text",
-			["Desc"] = "Display health text on the tooltip health bar",
+			["Name"] = "Affichage texte Santé ",
+			["Desc"] = "Afficher le texte de la santé sur la barre de santé de l'info-bulle",
 		},
 		
 		["ShowSpec"] = {
-			["Name"] = "Specialization and iLevel",
-			["Desc"] = "Display player specialization and ilevel in tooltip",
+			["Name"] = "Spécialisation et iLevel",
+			["Desc"] = "Affichage de la spécialisation et du iLevel dans l'info-bulle",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Health Bar Font",
-			["Desc"] = "Set a font to be used by the health bar below unit tooltips",
+			["Name"] = "Police de la barre de santée",
+			["Desc"] = "Définir une police pour Ítre utilisé sur la barre de santé des unités en-dessous des infobulles ",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture to be used by the health bar below unit tooltips",
+			["Name"] = "Texture de la barre de santé",
+			["Desc"] = "Définir une texture pour les barres de santé en-dessous des infobulles",
 		},
 	},
 	
 	["UnitFrames"] = {
 		["Enable"] = {
-			["Name"] = "Enable Unit Frames",
+			["Name"] = "Activé cadre des unités",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "Enable Player & Target Portrait",
-			["Desc"] = "Enable Player & Target Portrait",
+			["Name"] = "Activer Joueur et portrait de la cible",
+			["Desc"] = "Activer Joueur et portrait de la cible",
 		},
 		
 		["CastBar"] = {
-			["Name"] = "Cast Bar",
-			["Desc"] = "Enable cast bar for unit frames",
+			["Name"] = "Barre d'incantation",
+			["Desc"] = "Activer les barres d'incantation pour les unitées",
 		},
 		
 		["UnlinkCastBar"] = {
-			["Name"] = "Unlink Cast Bar",
-			["Desc"] = "Move player and target cast bar outside unit frame and allow moving of cast bar around the screen",
+			["Name"] = "Délier Barre d'incantation",
+			["Desc"] = "Deplacer librement les barres d'incantation joueur et cible en dehors du cadre unité",
 		},
 		
 		["CastBarIcon"] = {
-			["Name"] = "Cast Bar Icon",
-			["Desc"] = "Create an icon beside the cast bar",
+			["Name"] = "Icone de barre d'incantation",
+			["Desc"] = "Créer une icÙne ‡ cÙté de la barre",
 		},
 		
 		["CastBarLatency"] = {
-			["Name"] = "Cast Bar Latency",
-			["Desc"] = "Display your latency on the cast bar",
+			["Name"] = "Latence de la barre d'incantation",
+			["Desc"] = "Affichez votre temps de latence sur la barre",
 		},
 		
 		["Smooth"] = {
-			["Name"] = "Smooth Bars",
-			["Desc"] = "Smooth out the updating of the health bars"..PerformanceSlight,
+			["Name"] = "Barres lisses",
+			["Desc"] = "Lisser la mise a jour des barres de santé"..PerformanceSlight,
 		},
 		
 		["CombatLog"] = {
-			["Name"] = "Combat Feedback",
-			["Desc"] = "Display incoming heals and damage on the player unit frame",
+			["Name"] = "Commentaires de combat",
+			["Desc"] = "Afficher les soins entrants et les dommages sur le cadre de l'unité du joueur",
 		},
 		
 		["WeakBar"] = {
-			["Name"] = "Weakened Soul Bar",
-			["Desc"] = "Display a bar to show the Weakened Soul debuff",
+			["Name"] = "Barre d'‚me affaiblie",
+			["Desc"] = "Afficher une barre de montrer l'affaiblisement Ame affaiblie",
 		},
 		
 		["HealBar"] = {
 			["Name"] = "HealComm",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Desc"] = "Afficher une barre indiquant les soins et absorbe entrants",
 		},
 		
 		["TotemBar"] = {
-			["Name"] = "Totem Bar",
-			["Desc"] = "Create a tukui style totem bar",
+			["Name"] = "Berre de Totem",
+			["Desc"] = "Créer une barre de totem de style tukui",
 		},
 		
 		["AnticipationBar"] = {
-			["Name"] = "Rogue Anticipation Bar",
-			["Desc"] = "Display a bar showing rogue anticipation points",
+			["Name"] = "Barre d'anticipation Voleur",
+			["Desc"] = "Afficher une barre indiquant les points d'anticipation voleur",
 		},
 		
 		["SerendipityBar"] = {
-			["Name"] = "Priest Serendipity Bar",
-			["Desc"] = "Display a bar showing priest serendipity stacks",
+			["Name"] = "Barre Heureux hasard Pretre",
+			["Desc"] = "Afficher une barre indiquant le nombre de cumul Heureux hasard pour les pretre",
 		},
 		
 		["OnlySelfDebuffs"] = {
-			["Name"] = "Display My Debuffs Only",
-			["Desc"] = "Only display our debuffs on the target frame",
+			["Name"] = "Afficher seulement mes affaiblissements",
+			["Desc"] = "Afficher seulement mes affaiblissements sur le cadre cible",
 		},
 		
 		["DarkTheme"] = {
-			["Name"] = "Dark Theme",
-			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
+			["Name"] = "Theme sombre",
+			["Desc"] = "Si activé, les cadres d'unités seront d'une couleur sombre avec les barres de puissance aux couleurs des classes",
 		},
 		
 		["Font"] = {
-			["Name"] = "Unit Frame Font",
-			["Desc"] = "Set a font for unit frames",
+			["Name"] = "Police de caractere",
+			["Desc"] = "Défini une police de caractere pour les cadres unités",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "Texture de la barre de puissance",
+			["Desc"] = "Définir une texture pour les barres de puissance",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "Texture de la barre de santé",
+			["Desc"] = "Définir une texture pour les barres de santé",
 		},
 	},
 }
