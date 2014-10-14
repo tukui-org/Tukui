@@ -5,18 +5,7 @@ local format = format
 local Class = select(2, UnitClass("player"))
 
 local Update = function(self)
-	local Melee = GetCombatRating(18)
-	local Ranged = GetCombatRating(19)
-	local Spell = GetCombatRating(20)
-	local Value
-	
-	if (Melee > Spell and Class ~= "HUNTER") then
-		Value = Melee
-	elseif (Class == "HUNTER") then
-		Value = Ranged
-	else
-		Value = Spell
-	end
+	local Value = GetCombatRating(18)
 
 	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Haste .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
 end
