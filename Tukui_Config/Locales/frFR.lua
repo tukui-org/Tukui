@@ -90,7 +90,7 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["OwnWarriorStanceBar"] = {
-			["Name"] = "Barre des Postures du Guerrier",
+			["Name"] = "Barre des postures du Guerrier",
 			["Desc"] = "Utilisez une barre spéciale suivant la posture Guerrier",
 		},
 		
@@ -138,16 +138,16 @@ TukuiConfig["frFR"] = {
 		
 		["Animation"] = {
 			["Name"] = "Animation",
-			["Desc"] = "Voir une 'pop in' animation sur auras"..PerformanceSlight,
+			["Desc"] = "Activer les animations des auras"..PerformanceSlight,
 		},
 		
 		["BuffsPerRow"] = {
-			["Name"] = "Améliorations Par rangée",
+			["Name"] = "Améliorations par rangée",
 			["Desc"] = "Définissez le nombre d'améliorations a afficher avant de créer une nouvelle ligne",
 		},
 		
 		["Font"] = {
-			["Name"] = "Police de caractère des Auras",
+			["Name"] = "Police de caractère des auras",
 			["Desc"] = "Définir une police pour les auras",
 		},
 	},
@@ -202,7 +202,7 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["LinkColor"] = {
-			["Name"] = "Lien URL en couleur",
+			["Name"] = "Couleur lien URL",
 			["Desc"] = "Définir une couleur pour afficher les liens URL dans"..RestoreDefault,
 		},
 		
@@ -262,17 +262,17 @@ TukuiConfig["frFR"] = {
 		
 		["NameColor"] = {
 			["Name"] = "Libellé de couleur",
-			["Desc"] = "Définir une couleur de l'étiquette d'un texte de données , généralement le nom"..RestoreDefault,
+			["Desc"] = "Définir une couleur de l'étiquette d'un texte de données, généralement le nom"..RestoreDefault,
 		},
 		
 		["ValueColor"] = {
-			["Name"] = "valeur de la couleur",
-			["Desc"] = "Définir une couleur pour la valeur d'un texte de données , généralement un nombre"..RestoreDefault,
+			["Name"] = "Valeur de la couleur",
+			["Desc"] = "Définir une couleur pour la valeur d'un texte de données, généralement un nombre"..RestoreDefault,
 		},
 		
 		["Font"] = {
 			["Name"] = "Police de caractère	",
-			["Desc"] = "Définir une police pour les Données Texte",
+			["Desc"] = "Définir une police pour les données texte",
 		},
 	},
 	
@@ -289,12 +289,12 @@ TukuiConfig["frFR"] = {
 		
 		["AutoRepair"] = {
 			["Name"] = "Réparation Automatique",
-			["Desc"] = "Lors de la visite d'un marchand , réparer automatiquement votre équipement",
+			["Desc"] = "Lors de la visite d'un marchand, réparer automatiquement votre équipement",
 		},
 		
 		["UseGuildRepair"] = {
-			["Name"] = "Utilisation des Réparations de Guilde",
-			["Desc"] = "En utilisant ' Réparation Automatique ' , utiliser les fonds de la banque de guilde",
+			["Name"] = "Utilisation des réparations de guilde",
+			["Desc"] = "En utilisant 'Réparation Automatique', utiliser les fonds de la banque de guilde",
 		},
 	},
 	
@@ -320,7 +320,7 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["ErrorFilterEnable"] = {
-			["Name"] = "Activer le filtrage des Erreurs",
+			["Name"] = "Activer le filtrage des erreurs",
 			["Desc"] = "Filtres des messages UIErrorsFrame.",
 		},
 	},
@@ -384,8 +384,8 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["ShowPlayer"] = {
-			["Name"] = "Afficher Joueur",
-			["Desc"] = "Afficher soi-mÍme en groupe",
+			["Name"] = "Afficher jouer",
+			["Desc"] = "Afficher soi-meme en groupe",
 		},
 		
 		["ShowHealthText"] = {
@@ -426,22 +426,22 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["AuraWatch"] = {
-			["Name"] = "Affichage des Aura",
+			["Name"] = "Affichage des auras",
 			["Desc"] = "Affiche un decompte pour les améliorations spécifiques aux classes dans les coins des cadres de raid",
 		},
 		
 		["AuraWatchTimers"] = {
-			["Name"] = "Affichage de decompte pour les Aura",
-			["Desc"] = "Affiche un decompte pour les icones d'affaiblissements créés par l'affichage des affaiblissement",
+			["Name"] = "Affichage de decompte pour les auras",
+			["Desc"] = "Affiche un decompte (spiral) pour les auras",
 		},
 		
 		["DebuffWatch"] = {
-			["Name"] = "Dffichage des affaiblissement",
-			["Desc"] = "Afficher une grosse icÙne sur les cadres de raid quand un joueur a un affaiblissement important",
+			["Name"] = "Affichage des affaiblissement",
+			["Desc"] = "Afficher une grosse icone sur les cadres de raid quand un joueur a un affaiblissement important",
 		},
 		
 		["RangeAlpha"] = {
-			["Name"] = "Opacité Hors-d'atteinte",
+			["Name"] = "Opacité hors-d'atteinte",
 			["Desc"] = "Défini l'opacité des unitées qui sont hors d'atteinte",
 		},
 		
@@ -451,7 +451,7 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Texte de Santé",
+			["Name"] = "Texte de santé",
 			["Desc"] = "Indiquez le montant de la santé perdue de l'unité.",
 		},
 		
@@ -493,7 +493,7 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["UnitHealthText"] = {
-			["Name"] = "Affichage texte Santé ",
+			["Name"] = "Affichage texte santé",
 			["Desc"] = "Afficher le texte de la santé sur la barre de santé de l'info-bulle",
 		},
 		
@@ -503,8 +503,8 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Police de la barre de santée",
-			["Desc"] = "Définir une police pour Ítre utilisé sur la barre de santé des unités en-dessous des infobulles ",
+			["Name"] = "Police de la barre de santé",
+			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles ",
 		},
 		
 		["HealthTexture"] = {
@@ -555,8 +555,8 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["WeakBar"] = {
-			["Name"] = "Barre d'‚me affaiblie",
-			["Desc"] = "Afficher une barre de montrer l'affaiblisement Ame affaiblie",
+			["Name"] = "Barre d'ame affaiblie Pretre",
+			["Desc"] = "Afficher une barre pour montrer l'affaiblisement ame affaiblie",
 		},
 		
 		["HealBar"] = {
@@ -566,7 +566,7 @@ TukuiConfig["frFR"] = {
 		
 		["TotemBar"] = {
 			["Name"] = "Berre de Totem",
-			["Desc"] = "Créer une barre de totem de style tukui",
+			["Desc"] = "Créer une barre de totem de style Tukui",
 		},
 		
 		["AnticipationBar"] = {
@@ -575,8 +575,8 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["SerendipityBar"] = {
-			["Name"] = "Barre Heureux hasard Pretre",
-			["Desc"] = "Afficher une barre indiquant le nombre de cumul Heureux hasard pour les pretre",
+			["Name"] = "Barre 'heureux hasard' de Pretre",
+			["Desc"] = "Afficher une barre indiquant le nombre de cumul 'heureux hasard' pour les Pretres",
 		},
 		
 		["OnlySelfDebuffs"] = {
@@ -590,8 +590,8 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["Font"] = {
-			["Name"] = "Police de caractere",
-			["Desc"] = "Défini une police de caractere pour les cadres unités",
+			["Name"] = "Police de caractère",
+			["Desc"] = "Défini une police de caractère pour les cadres unités",
 		},
 		
 		["PowerTexture"] = {
