@@ -16,7 +16,7 @@ L.ChatFrames.LookingForGroup = "RechercheDeGroupe"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
-L.DataText.AvoidanceBreakdown = "Avoidance Breakdown"
+L.DataText.AvoidanceBreakdown = "Evitement détaillé"
 L.DataText.Level = "Niveau"
 L.DataText.Boss = "Boss"
 L.DataText.Miss = "Raté"
@@ -25,7 +25,7 @@ L.DataText.Block = "Blocage"
 L.DataText.Parry = "Parade"
 L.DataText.Avoidance = "Evitement"
 L.DataText.AvoidanceShort = "Evi: "
-L.DataText.Memory = "Memoire"
+L.DataText.Memory = "Mémoire"
 L.DataText.Hit = "Toucher"
 L.DataText.Power = "Puissance"
 L.DataText.Mastery = "Maîtrise"
@@ -82,10 +82,10 @@ L.DataText.LocalTime = "Heure Locale: "
 L.DataText.Mitigation = "Mitigation Par Niveau: "
 L.DataText.Healing = "Soins: "
 L.DataText.Damage = "Dégats: "
-L.DataText.Honor = "Honeur: "
+L.DataText.Honor = "Honneur: "
 L.DataText.KillingBlow = "Coups fatals: "
 L.DataText.StatsFor = "Stats pour "
-L.DataText.HonorableKill = "Victoire Honorable:"
+L.DataText.HonorableKill = "Victoires Honorables:"
 L.DataText.Death = "Morts:"
 L.DataText.HonorGained = "Honneur gagné:"
 L.DataText.DamageDone = "Dégats Effectués:"
@@ -97,36 +97,36 @@ L.DataText.TowerDefend = "Tours Défendues:"
 L.DataText.FlagCapture = "Drapeaux Capturés:"
 L.DataText.FlagReturn = "Drapeaux Retournés:"
 L.DataText.GraveyardAssault = "Cimetières Assiégés:"
-L.DataText.GraveyardDefend = "Cimetières Défendues:"
-L.DataText.DemolisherDestroy = "Démolisseurs Detruits:"
-L.DataText.GateDestroy = "Portes Detruites:"
+L.DataText.GraveyardDefend = "Cimetières Défendus:"
+L.DataText.DemolisherDestroy = "Démolisseurs Détruits:"
+L.DataText.GateDestroy = "Portes Détruites:"
 L.DataText.TotalMemory = "Utilisation totale de la mémoire:"
 L.DataText.ControlBy = "Contrôlé par:"
 L.DataText.CallToArms = "Appel aux Armes" 
 L.DataText.ArmError = "Impossible d'obtenir des informations sur l'appel aux armes."
 L.DataText.NoDungeonArm = "Aucun donjons n'offre actuellement un appel aux armes."
-L.DataText.CartControl = "Chariots contrôlée:"
+L.DataText.CartControl = "Chariots contrôlés:"
 L.DataText.VictoryPts = "Points de Victoire:"
-L.DataText.OrbPossession = "Orb Possessions:"
+L.DataText.OrbPossession = "Orbes Possédés:"
 L.DataText.Slots = {
-	[1] = {1, "Head", 1000},
-	[2] = {3, "Shoulder", 1000},
-	[3] = {5, "Chest", 1000},
-	[4] = {6, "Waist", 1000},
-	[5] = {9, "Wrist", 1000},
-	[6] = {10, "Hands", 1000},
-	[7] = {7, "Legs", 1000},
-	[8] = {8, "Feet", 1000},
-	[9] = {16, "Main Hand", 1000},
-	[10] = {17, "Off Hand", 1000},
-	[11] = {18, "Ranged", 1000}
+	[1] = {1, "Tête", 1000},
+	[2] = {3, "Epaules", 1000},
+	[3] = {5, "Torse", 1000},
+	[4] = {6, "Taille", 1000},
+	[5] = {9, "Poignets", 1000},
+	[6] = {10, "Mains", 1000},
+	[7] = {7, "Jambes", 1000},
+	[8] = {8, "Pieds", 1000},
+	[9] = {16, "À une main", 1000},
+	[10] = {17, "Tenu en main gauche", 1000},
+	[11] = {18, "À distance", 1000}
 }
 
 ------------------------------------------------
 L.Tooltips = {} -- Tooltips Locales
 ------------------------------------------------
 
-L.Tooltips.MoveAnchor = "Déplacez le Tooltip du jeu"
+L.Tooltips.MoveAnchor = "Déplacer les Infobulles"
 
 ------------------------------------------------
 L.UnitFrames = {} -- Unit Frames Locales
@@ -146,18 +146,18 @@ L.ActionBars.ArrowUp = "▲ ▲ ▲ ▲ ▲"
 L.ActionBars.ArrowDown = "▼ ▼ ▼ ▼ ▼"
 L.ActionBars.ExtraButton = "Bouton supplémentaire"
 L.ActionBars.CenterBar = " Barre en bas au centre"
-L.ActionBars.ActionButton1 = "Barre principale: Barre du Bas au Centre Bouton d'action 1"
-L.ActionBars.ActionButton2 = "Barre principale: Barre du Bas au Centre Bouton d'action 2"
-L.ActionBars.ActionButton3 = "Barre principale: Barre du Bas au Centre Bouton d'action 3"
-L.ActionBars.ActionButton4 = "Barre principale: Barre du Bas au Centre Bouton d'action 4"
-L.ActionBars.ActionButton5 = "Barre principale: Barre du Bas au Centre Bouton d'action 5"
-L.ActionBars.ActionButton6 = "Barre principale: Barre du Bas au Centre Bouton d'action 6"
-L.ActionBars.ActionButton7 = "Barre principale: Barre du Bas au Centre Bouton d'action 7"
-L.ActionBars.ActionButton8 = "Barre principale: Barre du Bas au Centre Bouton d'action 8"
-L.ActionBars.ActionButton9 = "Barre principale: Barre du Bas au Centre Bouton d'action 9"
-L.ActionBars.ActionButton10 = "Barre principale: Barre du Bas au Centre Bouton d'action 10"
-L.ActionBars.ActionButton11 = "Barre principale: Barre du Bas au Centre Bouton d'action 11"
-L.ActionBars.ActionButton12 = "Barre principale: Barre du Bas au Centre Bouton d'action 12"
+L.ActionBars.ActionButton1 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 1"
+L.ActionBars.ActionButton2 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 2"
+L.ActionBars.ActionButton3 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 3"
+L.ActionBars.ActionButton4 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 4"
+L.ActionBars.ActionButton5 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 5"
+L.ActionBars.ActionButton6 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 6"
+L.ActionBars.ActionButton7 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 7"
+L.ActionBars.ActionButton8 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 8"
+L.ActionBars.ActionButton9 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 9"
+L.ActionBars.ActionButton10 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 10"
+L.ActionBars.ActionButton11 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 11"
+L.ActionBars.ActionButton12 = "Barre d'action principale: Barre du Bas au Centre Bouton d'action 12"
 L.ActionBars.MultiActionBar1Button1 = "Bas Gauche: Barre du Bas Bouton d'action 6"
 L.ActionBars.MultiActionBar1Button2 = "Bas Gauche: Barre du Bas Bouton d'action 5"
 L.ActionBars.MultiActionBar1Button3 = "Bas Gauche: Barre du Bas Bouton d'action 4"
@@ -194,7 +194,7 @@ L.ActionBars.MultiActionBar4Button9 = "Bas Centre: Barre du Haut Bouton d'action
 L.ActionBars.MultiActionBar4Button10 = "Bas Centre: Barre du Haut Bouton d'action 10"
 L.ActionBars.MultiActionBar4Button11 = "Bas Centre: Barre du Haut Bouton d'action 11"
 L.ActionBars.MultiActionBar4Button12 = "Bas Centre: Barre du Haut Bouton d'action 12"
-L.ActionBars.MoveStanceBar = "Move Stance Bar"
+L.ActionBars.MoveStanceBar = "Déplacer la barre de postures"
 
 ------------------------------------------------
 L.Minimap = {} -- Minimap Locales
@@ -206,7 +206,7 @@ L.Minimap.MoveMinimap = "Déplacer la Minicarte"
 L.Miscellaneous = {} -- Miscellaneous
 ------------------------------------------------
 
-L.Miscellaneous.Repair = "Attention ! Vous devez réparer votre équipement dès que possible!"
+L.Miscellaneous.Repair = "Attention ! Vous devez réparer vôtre équipement dès que possible!"
 
 ------------------------------------------------
 L.Auras = {} -- Aura Locales
@@ -222,18 +222,18 @@ L.Install = {} -- Installation of Tukui
 L.Install.Tutorial = "Tutoriel"
 L.Install.Install = "Installation"
 L.Install.InstallStep0 = "Merci d'avoir choisi Tukui !|n|nVous serez guidé à travers le processus d'installation en quelques étapes simples . A chaque étape , vous pouvez décider si vous souhaitez ou non appliquer ou ignorer les paramètres présentés."
-L.Install.InstallStep1 = "La première étape applique les paramètres essentiels . Ceci est |cffff0000recommendé|r pour tout utilisateur , à moins que vous souhaitez appliquer seulement une partie spécifique des paramètres.|n|nCliquer 'Appliquer' pour appliquer les paramètres et 'Suivant' pour continuer le processus d'installation . Si vous souhaitez sauter cette étape , appuyez simplement sur 'Suivant'."
-L.Install.InstallStep2 = "La deuxième étape concerne la configuration de la fenêtre de discution . Si vous êtes un nouvel utilisateur , cette étape est recommandé . Si vous êtes un utilisateur existant , vous pouvez sauter cette étape .|n|nCliquer 'Appliquer' pour appliquer les paramètres et 'Suivant' pour continuer le processus d'installation . Si vous souhaitez sauter cette étape , appuyez simplement sur 'Suivant'."
-L.Install.InstallStep3 = "L'installation est terminée . Veuillez cliquer sur le bouton 'Terminé' pour recharger l'interface utilisateur. Profitez de Tukui ! Rendez-nous visite sur www.tukui.org !"
+L.Install.InstallStep1 = "La première étape applique les paramètres essentiels . Ceci est |cffff0000recommendé|r pour tout utilisateur , à moins que vous souhaitiez appliquer seulement une partie spécifique des paramètres.|n|nCliquer 'Appliquer' pour appliquer les paramètres et 'Suivant' pour continuer le processus d'installation . Si vous souhaitez sauter cette étape , appuyez simplement sur 'Suivant'."
+L.Install.InstallStep2 = "La deuxième étape concerne la configuration de la fenêtre de discussion . Si vous êtes un nouvel utilisateur , cette étape est recommandé . Si vous êtes un utilisateur existant , vous pouvez sauter cette étape .|n|nCliquer 'Appliquer' pour appliquer les paramètres et 'Suivant' pour continuer le processus d'installation . Si vous souhaitez sauter cette étape , appuyez simplement sur 'Suivant'."
+L.Install.InstallStep3 = "L'installation est terminée . Veuillez cliquer sur le bouton 'Terminer' pour recharger l'interface utilisateur. Profitez de Tukui ! Rendez-nous visite sur www.tukui.org !"
 
 ------------------------------------------------
 L.Help = {} -- /tukui help
 ------------------------------------------------
 
-L.Help.Title = "Tukui Commandes:"
+L.Help.Title = "Commandes Tukui:"
 L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : Activer ou désactiver la configuration DataText."
 L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Installer ou réinitialiser les paramètres par défaut Tukui."
-L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : Affichage dans le jeu de la fenêtre de configuration."
+L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : Afficher la fenêtre de configuration en jeu."
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Déplacer les cadres."
 L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : Tester les cadres d'unitées."
 
@@ -249,4 +249,4 @@ L.Merchant.SoldTrash = "Vos objets inutiles ont été vendu et vous avez gagné"
 L.Version = {} -- Version Check
 ------------------------------------------------
 
-L.Version.Outdated = "Votre version de Tukui n'est pas à jour . Vous pouvez télécharger la dernière version depuis www.tukui.org"
+L.Version.Outdated = "Vôtre version de Tukui n'est pas à jour . Vous pouvez télécharger la dernière version depuis www.tukui.org"
