@@ -1,0 +1,40 @@
++ DeathKnight - Risen Ally (Raise Dead)
+T["Colors"].totems = {
+	[1] = {0.60, 0.40, 0},
+}
+
++ Monk - Black Ox / Jade Serpent Statue
+T["Colors"].totems = {
+	[1] = { 95/255, 222/255, 95/255 },
+}
+
++ Priest - Lightwell
+T["Colors"].totems = {
+	[1] = { 238/255, 221/255, 130/255 },
+}
+
++ Warrior - Demoralizing / Mocking / Skull Banner
+T["Colors"].totems = {
+	[1] = { 205/255, 92/255, 92/255 },
+}
+
++ Mage - Rune of Power
+T["Colors"].totems = {
+	[1] = { 132/255, 112/255, 255/255 },
+	[2] = { 132/255, 112/255, 255/255 },
+}
+
++ Druid - Wild Mushrooms
+T["Colors"].totems = {
+	[1] = { 95/255, 222/255, 95/255 },
+	[2] = { 95/255, 222/255, 95/255 },
+	[3] = { 95/255, 222/255, 95/255 },
+}
+
++ Shaman - Totems
+T["Colors"].totems = {
+	[1] = {0.58, 0.23, 0.10}, -- fire
+	[2] = {0.23, 0.45, 0.13}, -- earth
+	[3] = {0.19, 0.48, 0.60}, -- water
+	[4] = {0.42, 0.18, 0.74}, -- air
+}

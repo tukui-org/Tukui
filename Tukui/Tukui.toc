@@ -1,16 +1,21 @@
-﻿## Interface: 50400
-## Author: Tukz
-## Version: 15.85
-## Title: |cffC495DDTukui|r
+## Interface: 60000
+## Author: Tukz & Hydra
+## Version: 16.01
+## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
 ## SavedVariablesPerCharacter: TukuiDataPerChar
-## OptionalDeps: Tukui_ConfigUI, Clique
-## X-oUF: oUFTukui
+## OptionalDeps: Tukui_Config, Tukui_EditedConfig, Clique
+## X-oUF: TukuiUnitFrameFramework
 ## Website: http://www.tukui.org
-
-Tukui.xml
-
-
 ## X-Tukui-ProjectID: -1
-## X-Tukui-ProjectFolders: Tukui_ConfigUI, Tukui
+## X-Tukui-ProjectFolders: Tukui
+
+Core\Init.lua
+Config\Init.xml
+Libs\Init.xml
+Medias\Medias.lua
+Locales\Init.xml
+Core\Init.xml
+Modules\Init.xml
+Core\Temp.lua

@@ -1,0 +1,8 @@
+To edit Tukui externally, you must add the following line into your AddOn's .toc file:
+
+------------------------------------------------------------------------------------------
+## Dependencies: Tukui
+------------------------------------------------------------------------------------------
+
+This metatag will ensure that your AddOn loads after Tukui, so that you have access to everything
+within Tukui. If Tukui is not enabled, your AddOn will not load, and therefore not create errors.

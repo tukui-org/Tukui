@@ -1,29 +1,36 @@
-local T, C, L, G = unpack(select(2, ...)) 
-if not C["actionbar"].enable == true then return end
+local T, C, L = select(2, ...):unpack()
 
----------------------------------------------------------------------------
--- setup MultiBarRight as bar #4
----------------------------------------------------------------------------
+local TukuiActionBars = T["ActionBars"]
+local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 
-local bar = TukuiBar4
-bar:SetAlpha(1)
-MultiBarLeft:SetParent(bar)
-
-for i= 1, 12 do
-	local b = _G["MultiBarLeftButton"..i]
-	local b2 = _G["MultiBarLeftButton"..i-1]
-	b:SetSize(T.buttonsize, T.buttonsize)
-	b:ClearAllPoints()
-	b:SetFrameStrata("BACKGROUND")
-	b:SetFrameLevel(15)
+function TukuiActionBars:CreateBar4()
+	local Size = C.ActionBars.NormalButtonSize
+	local Spacing = C.ActionBars.ButtonSpacing
+	local MultiBarRight = MultiBarRight
+	local ActionBar4 = T.Panels.ActionBar4
 	
-	if i == 1 then
-		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
-	else
-		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
+	MultiBarRight:SetParent(ActionBar4)
+	MultiBarRight:SetScript("OnHide", function() ActionBar4.Backdrop:Hide() end)
+	MultiBarRight:SetScript("OnShow", function() ActionBar4.Backdrop:Show() end)
+	
+	for i = 1, NUM_ACTIONBAR_BUTTONS do
+		local Button = _G["MultiBarRightButton"..i]
+		local PreviousButton = _G["MultiBarRightButton"..i-1]
+		
+		Button:Size(Size)
+		Button:ClearAllPoints()
+		Button:SetFrameStrata("BACKGROUND")
+		Button:SetFrameLevel(15)
+		Button:SetAttribute("flyoutDirection", "UP")
+		
+		if (i == 1) then
+			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
+		else
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+		end
+		
+		ActionBar4["Button"..i] = Button
 	end
 	
-	G.ActionBars.Bar4["Button"..i] = b
+	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end
-
-RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")

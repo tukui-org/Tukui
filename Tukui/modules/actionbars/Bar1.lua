@@ -1,123 +1,114 @@
-local T, C, L, G = unpack(select(2, ...)) 
+local T, C, L = select(2, ...):unpack()
 
-if not C["actionbar"].enable == true then return end
+local _G = _G
+local TukuiActionBars = T["ActionBars"]
+local Num = NUM_ACTIONBAR_BUTTONS
+local MainMenuBar_OnEvent = MainMenuBar_OnEvent
 
----------------------------------------------------------------------------
--- Setup Main Action Bar.
--- Now used for stances, Bonus, Vehicle at the same time.
--- Since t12, it's also working for druid cat stealth. (a lot requested)
----------------------------------------------------------------------------
+function TukuiActionBars:UpdateBar1()
+	local ActionBar1 = T["Panels"].ActionBar1
+	local Button
 
-local bar = TukuiBar1
+	for i = 1, Num do
+		Button = _G["ActionButton"..i]
+		ActionBar1:SetFrameRef("ActionButton"..i, Button)
+	end	
 
--- warrior custom paging
-local warrior = ""
-if C.actionbar.ownwarstancebar then warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;" end
+	ActionBar1:Execute([[
+		Button = table.new()
+		for i = 1, 12 do
+			table.insert(Button, self:GetFrameRef("ActionButton"..i))
+		end
+	]])
 
--- rogue custom paging
-local rogue = ""
-if C.actionbar.ownshdbar then rogue = "[stance:3] 10; " end
+	ActionBar1:SetAttribute("_onstate-page", [[ 
+		if HasTempShapeshiftActionBar() then
+			newstate = GetTempShapeshiftBarIndex() or newstate
+		end
 
--- warlock custom paging
-local warlock = ""
-if C.actionbar.ownmetabar then warlock = "[stance:1] 10; " end
+		for i, Button in ipairs(Button) do
+			Button:SetAttribute("actionpage", tonumber(newstate))
+		end
+	]])
 
-local Page = {
-	["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
-	["WARRIOR"] = warrior,
-	["PRIEST"] = "[bonusbar:1] 7;",
-	["ROGUE"] = rogue.."[bonusbar:1] 7;",
-	["WARLOCK"] = warlock,
-	["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
-	["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
-}
-
-local function GetBar()
-	local condition = Page["DEFAULT"]
-	local class = T.myclass
-	local page = Page[class]
-	local more = ""
-	
-	if page then
-		condition = condition.." "..page
-	end
-	
-	condition = condition.." [form] 1; 1"
-
-	return condition
+	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
 end
 
-bar:RegisterEvent("PLAYER_LOGIN")
-bar:RegisterEvent("PLAYER_ENTERING_WORLD")
-bar:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
-bar:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-bar:RegisterEvent("BAG_UPDATE")
-bar:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-bar:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
-bar:SetScript("OnEvent", function(self, event, unit, ...)
-	if event == "PLAYER_LOGIN" or event == "ACTIVE_TALENT_GROUP_CHANGED" then
-		local button
-		for i = 1, NUM_ACTIONBAR_BUTTONS do
-			button = _G["ActionButton"..i]
-			self:SetFrameRef("ActionButton"..i, button)
-			G.ActionBars.Bar1["Button"..i] = button
-		end	
+function TukuiActionBars:CreateBar1()
+	local Panels = T["Panels"]
+	local Size = C.ActionBars.NormalButtonSize
+	local PetSize = C.ActionBars.PetButtonSize
+	local Spacing = C.ActionBars.ButtonSpacing
+	local ActionBar1 = Panels.ActionBar1
+	local Warrior, Rogue, Warlock = "", "", ""
 
-		self:Execute([[
-			buttons = table.new()
-			for i = 1, 12 do
-				table.insert(buttons, self:GetFrameRef("ActionButton"..i))
-			end
-		]])
+	if C.ActionBars.OwnWarriorStanceBar then
+		Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
+	end
 
-		self:SetAttribute("_onstate-page", [[ 
-			if HasTempShapeshiftActionBar() then
-				newstate = GetTempShapeshiftBarIndex() or newstate
-			end
-			
-			for i, button in ipairs(buttons) do
-				button:SetAttribute("actionpage", tonumber(newstate))
-			end
-		]])
+	if C.ActionBars.OwnShadowDanceBar then
+		Rogue = "[stance:3] 10; "
+	end
+
+	if C.ActionBars.OwnMetamorphosisBar then
+		Warlock = "[stance:1] 10; "
+	end
+
+	ActionBar1.Page = {
+		["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
+		["WARRIOR"] = Warrior,
+		["PRIEST"] = "[bonusbar:1] 7;",
+		["ROGUE"] = Rogue .. "[bonusbar:1] 7;",
+		["WARLOCK"] = Warlock,
+		["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
+		["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
+	}
+
+	function ActionBar1:GetBar()
+		local Condition = ActionBar1.Page["DEFAULT"]
+		local Class = select(2, UnitClass("player"))
+		local Page = ActionBar1.Page[Class]
 		
-		RegisterStateDriver(self, "page", GetBar())	
-	elseif event == "PLAYER_ENTERING_WORLD" then
-		local button
-		for i = 1, 12 do
-			button = _G["ActionButton"..i]
-			button:SetSize(T.buttonsize, T.buttonsize)
-			button:ClearAllPoints()
-			button:SetParent(bar)
-			button:SetFrameStrata("BACKGROUND")
-			button:SetFrameLevel(15)
-			if i == 1 then
-				button:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
-			else
-				local previous = _G["ActionButton"..i-1]
-				button:SetPoint("LEFT", previous, "RIGHT", T.buttonspacing, 0)
-			end
+		if Page then
+			Condition = Condition .. " " .. Page
 		end
-	elseif event == "UPDATE_VEHICLE_ACTIONBAR" or event == "UPDATE_OVERRIDE_ACTIONBAR" then
-		if HasVehicleActionBar() or HasOverrideActionBar() then
-			if not self.inVehicle then
-				TukuiBar2Button:Hide()
-				TukuiBar3Button:Hide()
-				TukuiBar4Button:Hide()
-				TukuiBar5ButtonTop:Hide()
-				TukuiBar5ButtonBottom:Hide()
-				self.inVehicle = true
+		
+		Condition = Condition .. " [form] 1; 1"
+
+		return Condition
+	end
+
+	TukuiActionBars:UpdateBar1()
+
+	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
+	ActionBar1:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
+	ActionBar1:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
+	ActionBar1:RegisterEvent("BAG_UPDATE")
+	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
+		if (event == "ACTIVE_TALENT_GROUP_CHANGED") then
+			TukuiActionBars:UpdateBar1()
+		elseif (event == "PLAYER_ENTERING_WORLD") then
+			for i = 1, Num do
+				local Button = _G["ActionButton"..i]
+				Button:Size(Size)
+				Button:ClearAllPoints()
+				Button:SetParent(self)
+				Button:SetFrameStrata("BACKGROUND")
+				Button:SetFrameLevel(15)
+				if (i == 1) then
+					Button:SetPoint("BOTTOMLEFT", Spacing, Spacing)
+				else
+					local Previous = _G["ActionButton"..i-1]
+					Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
+				end
 			end
 		else
-			if self.inVehicle then
-				TukuiBar2Button:Show()
-				TukuiBar3Button:Show()
-				TukuiBar4Button:Show()
-				TukuiBar5ButtonTop:Show()
-				TukuiBar5ButtonBottom:Show()
-				self.inVehicle = false
-			end
+			MainMenuBar_OnEvent(self, event, ...)
 		end
-	else
-		MainMenuBar_OnEvent(self, event, ...)
+	end)
+	
+	for i = 1, Num do
+		local Button = _G["ActionButton"..i]
+		ActionBar1["Button"..i] = Button
 	end
-end)
+end

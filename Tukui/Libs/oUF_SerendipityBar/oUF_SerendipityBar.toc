@@ -1,0 +1,8 @@
+## Interface: 60000
+## Title: oUF Serendipity Bar
+## Notes: Adds support for priest serendipity talent to oUF.
+## Author: Tukz
+## Version: 1.0.0
+## Dependencies: oUF
+
+oUF_SerendipityBar.lua

@@ -1,153 +1,157 @@
-local T, C, L, G = unpack(select(2, ...))
+local T, C, L = select(2, ...):unpack()
 
-T.CreatePopup = {}
-local frame = {}
-local total = 4
+local TukuiPopups = CreateFrame("Frame")
+local ACCEPT, CANCEL = ACCEPT, CANCEL
+local ChatFontNormal = ChatFontNormal
 
-local function Hide(self)
-	local popup = self:GetParent()
-	popup:Hide()
+TukuiPopups.Popup = {}
+TukuiPopups.Frames = {}
+TukuiPopups.Total = 4
+
+function TukuiPopups:HidePopup()
+	local Popup = self:GetParent()
+	Popup:Hide()
 end
 
--- Create the popups
-for i = 1, total do
-	frame[i] = CreateFrame("Frame", "TukuiPopupDialog"..i, UIParent)
-	frame[i]:SetSize(400, 60)
-	frame[i]:SetFrameLevel(3)
-	frame[i]:CreateShadow("Default")
-	frame[i]:SetTemplate("Default")
-	frame[i]:Hide()
-
-	frame[i].Text = CreateFrame("MessageFrame", nil, frame[i])
-	frame[i].Text:SetPoint("CENTER")
-	frame[i].Text:SetSize(380, 40)
-	frame[i].Text:SetFont(C.media.font, 12)
-	frame[i].Text:SetInsertMode("TOP")
-	frame[i].Text:SetFading(0)
-	frame[i].Text:AddMessage("")
-
-	frame[i].button1 = CreateFrame("Button", "TukuiPopupDialogButtonAccept"..i, frame[i])
-	frame[i].button1:SetPoint("TOPLEFT", frame[i], "BOTTOMLEFT", 0, -2)
-	frame[i].button1:SetSize(199, 23)
-	frame[i].button1:SetTemplate("Default")
-	frame[i].button1:CreateShadow("Default")
-	frame[i].button1:FontString("Text", C.media.font, 12)
-	frame[i].button1.Text:SetPoint("CENTER")
-	frame[i].button1.Text:SetText(ACCEPT)
-	frame[i].button1:SetScript("OnClick", Hide)
-	frame[i].button1:HookScript("OnClick", Hide)
-	frame[i].button1:SkinButton()
-
-	frame[i].button2 = CreateFrame("Button", "TukuiPopupDialogButtonCancel"..i, frame[i])
-	frame[i].button2:SetPoint("TOPRIGHT", frame[i], "BOTTOMRIGHT", 0, -2)
-	frame[i].button2:SetSize(199, 23)
-	frame[i].button2:SetTemplate("Default")
-	frame[i].button2:CreateShadow("Default")
-	frame[i].button2:FontString("Text", C.media.font, 12)
-	frame[i].button2.Text:SetPoint("CENTER")
-	frame[i].button2.Text:SetText(CANCEL)
-	frame[i].button2:SetScript("OnClick", Hide)
-	frame[i].button2:HookScript("OnClick", Hide)
-	frame[i].button2:SkinButton()
-	
-	frame[i].EditBox = CreateFrame("EditBox", "TukuiPopupDialogEditBox"..i, frame[i])
-	frame[i].EditBox:SetMultiLine(false)
-	frame[i].EditBox:EnableMouse(true)
-	frame[i].EditBox:SetAutoFocus(true)
-	frame[i].EditBox:SetFontObject(ChatFontNormal)
-	frame[i].EditBox:Width(380)
-	frame[i].EditBox:Height(16)
-	frame[i].EditBox:SetPoint("BOTTOM", frame[i], 0, 12)
-	frame[i].EditBox:SetScript("OnEscapePressed", function() frame[i]:Hide() end)
-	frame[i].EditBox:CreateBackdrop()
-	frame[i].EditBox.backdrop:SetPoint("TOPLEFT", -4, 4)
-	frame[i].EditBox.backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
-	frame[i].EditBox:Hide()
-	
-	-- default position
-	if i == 1 then
-		-- create a panel which anchor popup #1 to top screen
-		frame[i].Anchor = CreateFrame("Frame", nil, frame[i])
-		frame[i].Anchor:SetSize(360, 30)
-		frame[i].Anchor:SetPoint("BOTTOM", frame[i], "TOP", 0, -2)
-		frame[i].Anchor:SetTemplate("Transparent")
-		frame[i].Anchor:SetFrameLevel(frame[i]:GetFrameLevel() - 2)
+function TukuiPopups:CreatePopups()
+	for i = 1, TukuiPopups.Total do
+		local Frames = TukuiPopups.Frames
 		
-		-- position popup #1
-		frame[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
-	else
-		local previous = frame[i-1]
-		frame[i]:SetPoint("TOP", previous, "BOTTOM", 0, -frame[i].button1:GetHeight() - 4)
-	end	
+		Frames[i] = CreateFrame("Frame", nil, UIParent)
+		Frames[i]:SetSize(400, 60)
+		Frames[i]:SetFrameLevel(3)
+		Frames[i]:CreateShadow()
+		Frames[i]:SetTemplate()
+		Frames[i]:Hide()
+
+		Frames[i].Text = CreateFrame("MessageFrame", nil, Frames[i])
+		Frames[i].Text:SetPoint("CENTER")
+		Frames[i].Text:SetSize(380, 40)
+		Frames[i].Text:SetFont(C.Medias.Font, 12)
+		Frames[i].Text:SetInsertMode("TOP")
+		Frames[i].Text:SetFading(0)
+		Frames[i].Text:AddMessage("")
+
+		Frames[i].Button1 = CreateFrame("Button", nil, Frames[i])
+		Frames[i].Button1:SetPoint("TOPLEFT", Frames[i], "BOTTOMLEFT", 0, -2)
+		Frames[i].Button1:SetSize(199, 23)
+		Frames[i].Button1:SetTemplate()
+		Frames[i].Button1:CreateShadow()
+		Frames[i].Button1:FontString("Text", C.Medias.Font, 12)
+		Frames[i].Button1.Text:SetPoint("CENTER")
+		Frames[i].Button1.Text:SetText(ACCEPT)
+		Frames[i].Button1:SetScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button1:HookScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button1:SkinButton()
+
+		Frames[i].Button2 = CreateFrame("Button", nil, Frames[i])
+		Frames[i].Button2:SetPoint("TOPRIGHT", Frames[i], "BOTTOMRIGHT", 0, -2)
+		Frames[i].Button2:SetSize(199, 23)
+		Frames[i].Button2:SetTemplate("Default")
+		Frames[i].Button2:CreateShadow("Default")
+		Frames[i].Button2:FontString("Text", C.Medias.Font, 12)
+		Frames[i].Button2.Text:SetPoint("CENTER")
+		Frames[i].Button2.Text:SetText(CANCEL)
+		Frames[i].Button2:SetScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button2:HookScript("OnClick", TukuiPopups.HidePopup)
+		Frames[i].Button2:SkinButton()
+		
+		Frames[i].EditBox = CreateFrame("EditBox", nil, Frames[i])
+		Frames[i].EditBox:SetMultiLine(false)
+		Frames[i].EditBox:EnableMouse(true)
+		Frames[i].EditBox:SetAutoFocus(true)
+		Frames[i].EditBox:SetFontObject(ChatFontNormal)
+		Frames[i].EditBox:Width(380)
+		Frames[i].EditBox:Height(16)
+		Frames[i].EditBox:SetPoint("BOTTOM", Frames[i], 0, 12)
+		Frames[i].EditBox:SetScript("OnEscapePressed", function() Frames[i]:Hide() end)
+		Frames[i].EditBox:CreateBackdrop()
+		Frames[i].EditBox.Backdrop:SetPoint("TOPLEFT", -4, 4)
+		Frames[i].EditBox.Backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
+		Frames[i].EditBox:Hide()
+		
+		if (i == 1) then
+			Frames[i].Anchor = CreateFrame("Frame", nil, Frames[i])
+			Frames[i].Anchor:SetSize(360, 30)
+			Frames[i].Anchor:SetPoint("BOTTOM", Frames[i], "TOP", 0, -2)
+			Frames[i].Anchor:SetTemplate("Transparent")
+			Frames[i].Anchor:SetFrameLevel(Frames[i]:GetFrameLevel() - 2)
+			Frames[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
+		else
+			local Previous = Frames[i-1]
+			Frames[i]:SetPoint("TOP", Previous, "BOTTOM", 0, -Frames[i].Button1:GetHeight() - 4)
+		end
+	end
 end
 
-T.ShowPopup = function(self)
-	local info = T.CreatePopup[self]
-	if not info then return end
+function TukuiPopups:ShowPopup()
+	local Info = TukuiPopups.Popup[self]
 	
-	-- choose popup to show
-	local selection = _G["TukuiPopupDialog1"]
-	for i = 1, total - 1 do
-		if frame[i]:IsShown() then
-			selection = _G["TukuiPopupDialog"..i+1]
+	if not Info then
+		return
+	end
+
+	local Popups = TukuiPopups.Frames
+	local Selection = Popups[1]
+	for i = 1, TukuiPopups.Total - 1 do
+		if Popups[i]:IsShown() then
+			Selection = Popups[i + 1]
 		end
 	end
 
-	local popup = selection
-	local question = popup.Text
-	local btn1 = popup.button1
-	local btn2 = popup.button2
-	local eb = popup.EditBox
+	local Popup = Selection
+	local Question = Popup.Text
+	local Button1 = Popup.Button1
+	local Button2 = Popup.Button2
+	local EditBox = Popup.EditBox
 	
-	-- clear the question
-	question:Clear()
+	Question:Clear()
+	EditBox:SetText("")
 	
-	-- clear the editbox
-	eb:SetText("")
-	
-	-- add the question asked if found
-	if info.question then
-		question:AddMessage(info.question)
+	if Info.Question then
+		Question:AddMessage(Info.Question)
 	end
 	
-	-- insert wanted text into left button
-	if info.answer1 then
-		btn1.Text:SetText(info.answer1)
+	if Info.Answer1 then
+		Button1.Text:SetText(Info.Answer1)
 	else
-		btn1.Text:SetText(ACCEPT)
+		Button1.Text:SetText(ACCEPT)
 	end
 	
-	-- insert wanted text into right button
-	if info.answer2 then
-		btn2.Text:SetText(info.answer2)
+	if Info.Answer2 then
+		Button2.Text:SetText(Info.Answer2)
 	else
-		btn2.Text:SetText(CANCEL)
+		Button2.Text:SetText(CANCEL)
 	end
 	
-	-- execute a function on button 1 if defined by the coder
-	if info.function1 then
-		btn1:SetScript("OnClick", info.function1)
+	if Info.Function1 then
+		Button1:SetScript("OnClick", Info.Function1)
 	else
-		btn1:SetScript("OnClick", Hide)
+		Button1:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
 	
-	-- execute a function on button 2 if defined by the coder
-	if info.function2 then
-		btn2:SetScript("OnClick", info.function2)
+	if Info.Function2 then
+		Button2:SetScript("OnClick", Info.Function2)
 	else
-		btn2:SetScript("OnClick", Hide)
+		Button2:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
 	
-	if info.editbox then
-		eb:Show()
+	if Info.EditBox then
+		EditBox:Show()
 	else
-		eb:Hide()
+		EditBox:Hide()
 	end
 	
-	-- always hide the popup after a click
-	btn1:HookScript("OnClick", Hide)
-	btn2:HookScript("OnClick", Hide)
+	Button1:HookScript("OnClick", TukuiPopups.HidePopup)
+	Button2:HookScript("OnClick", TukuiPopups.HidePopup)
 	
-	-- show it when we ask for it
-	popup:Show()
+	Popup:Show()
 end
+
+TukuiPopups:RegisterEvent("PLAYER_LOGIN")
+TukuiPopups:SetScript("OnEvent", function(self, event)
+	self:CreatePopups()
+	self:UnregisterAllEvents()
+end)
+
+T["Popups"] = TukuiPopups

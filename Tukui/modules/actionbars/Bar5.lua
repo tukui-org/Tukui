@@ -1,29 +1,38 @@
-local T, C, L, G = unpack(select(2, ...)) 
-if not C["actionbar"].enable == true then return end
+local T, C, L = select(2, ...):unpack()
 
----------------------------------------------------------------------------
--- setup MultiBarBottomRight as bar #5
----------------------------------------------------------------------------
+local TukuiActionBars = T["ActionBars"]
+local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 
-local bar = TukuiBar5
-bar:SetAlpha(1)
-MultiBarRight:SetParent(bar)
-
-for i= 1, 12 do
-	local b = _G["MultiBarRightButton"..i]
-	local b2 = _G["MultiBarRightButton"..i-1]
-	b:SetSize(T.buttonsize, T.buttonsize)
-	b:ClearAllPoints()
-	b:SetFrameStrata("BACKGROUND")
-	b:SetFrameLevel(15)
+function TukuiActionBars:CreateBar5()
+	local Movers = T["Movers"]
+	local Size = C.ActionBars.NormalButtonSize
+	local Spacing = C.ActionBars.ButtonSpacing
+	local MultiBarLeft = MultiBarLeft
+	local ActionBar5 = T.Panels.ActionBar5
 	
-	if i == 1 then
-		b:SetPoint("TOPRIGHT", bar, -T.buttonspacing, -T.buttonspacing)
-	else
-		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
+	MultiBarLeft:SetParent(ActionBar5)
+	MultiBarLeft:SetScript("OnHide", function() ActionBar5.Backdrop:Hide() end)
+	MultiBarLeft:SetScript("OnShow", function() ActionBar5.Backdrop:Show() end)
+	
+	for i = 1, NUM_ACTIONBAR_BUTTONS do
+		local Button = _G["MultiBarLeftButton"..i]
+		local PreviousButton = _G["MultiBarLeftButton"..i-1]
+		
+		Button:Size(Size)
+		Button:ClearAllPoints()
+		Button:SetFrameStrata("BACKGROUND")
+		Button:SetFrameLevel(15)
+
+		if (i == 1) then
+			Button:SetPoint("TOPRIGHT", ActionBar5, -Spacing, -Spacing)
+		else
+			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+		end
+
+		ActionBar5["Button"..i] = Button
 	end
 	
-	G.ActionBars.Bar5["Button"..i] = b
-end
+	Movers:RegisterFrame(ActionBar5)
 
-RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+	RegisterStateDriver(ActionBar5, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+end

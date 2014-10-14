@@ -1,276 +1,271 @@
-local T, C, L, G = unpack(select(2, ...))
+local T, C, L = select(2, ...):unpack()
 
---------------------------------------------------------------------
--- Tukui Minimap Script
---------------------------------------------------------------------
+local _G = _G
+local Miscellaneous = T["Miscellaneous"]
+local Maps = T["Maps"]
+local Elapsed = 0
 
--- shitty map addon that a lot of peoples use.
-if (IsAddOnLoaded("SexyMap")) then return end
+Minimap.ZoneColors = {
+	["friendly"] = {0.1, 1.0, 0.1},
+	["sanctuary"] = {0.41, 0.8, 0.94},
+	["arena"] = {1.0, 0.1, 0.1},
+	["hostile"] = {1.0, 0.1, 0.1},
+	["contested"] = {1.0, 0.7, 0.0},
+}
 
-local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", TukuiPetBattleHider)
-TukuiMinimap:SetTemplate()
-TukuiMinimap:RegisterEvent("ADDON_LOADED")
-TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -22)
-TukuiMinimap:Size(144)
-TukuiMinimap:SetClampedToScreen(true)
-TukuiMinimap:SetMovable(true)
-TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
-TukuiMinimap.text:SetPoint("CENTER")
-TukuiMinimap.text:SetText(L.move_minimap)
-G.Maps.Minimap = TukuiMinimap
-tinsert(T.AllowFrameMoving, TukuiMinimap)
+function Minimap:DisableMinimapElements()
+	local North = _G["MinimapNorthTag"]
+	local HiddenFrames = {
+		"MinimapCluster",
+		"MinimapBorder",
+		"MinimapBorderTop",
+		"MinimapZoomIn",
+		"MinimapZoomOut",
+		"MiniMapVoiceChatFrame",
+		"MinimapNorthTag",
+		"MinimapZoneTextButton",
+		"MiniMapTracking",
+		"GameTimeFrame",
+		"MiniMapWorldMapButton",
+		"GarrisonLandingPageMinimapButton",
+	}
+	
+	for i, FrameName in pairs(HiddenFrames) do
+		local Frame = _G[FrameName]
+		Frame:Hide()
+		
+		if Frame.UnregisterAllEvents then
+			Frame:UnregisterAllEvents()
+		end
+	end
+	
+	North:SetTexture(nil)
+end
 
--- kill the minimap cluster
-MinimapCluster:Kill()
-
--- Parent Minimap into our Map frame.
-Minimap:SetParent(TukuiMinimap)
-Minimap:ClearAllPoints()
-Minimap:Point("TOPLEFT", 2, -2)
-Minimap:Point("BOTTOMRIGHT", -2, 2)
-
--- Hide Border
-MinimapBorder:Hide()
-MinimapBorderTop:Hide()
-
--- Hide Zoom Buttons
-MinimapZoomIn:Hide()
-MinimapZoomOut:Hide()
-
--- Hide Voice Chat Frame
-MiniMapVoiceChatFrame:Hide()
-
--- Hide North texture at top
-MinimapNorthTag:SetTexture(nil)
-
--- Hide Zone Frame
-MinimapZoneTextButton:Hide()
-
--- Hide Tracking Button
-MiniMapTracking:Hide()
-
--- Hide Calendar Button
-GameTimeFrame:Hide()
-
--- Hide Mail Button
-MiniMapMailFrame:ClearAllPoints()
-MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
-MiniMapMailFrame:SetFrameLevel(Minimap:GetFrameLevel() + 1)
-MiniMapMailFrame:SetFrameStrata(Minimap:GetFrameStrata())
-MiniMapMailBorder:Hide()
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\mail")
-G.Maps.Minimap.Mail = MiniMapMailFrame
-G.Maps.Minimap.Mail.Icon = MiniMapMailIcon
-
--- Ticket Frame
-local TukuiTicket = CreateFrame("Frame", "TukuiTicket", TukuiMinimap)
-TukuiTicket:SetTemplate()
-TukuiTicket:Size(TukuiMinimap:GetWidth() - 4, 24)
-TukuiTicket:SetFrameLevel(Minimap:GetFrameLevel() + 4)
-TukuiTicket:SetFrameStrata(Minimap:GetFrameStrata())
-TukuiTicket:Point("TOP", 0, -2)
-TukuiTicket:FontString("Text", C.media.font, 12)
-TukuiTicket.Text:SetPoint("CENTER")
-TukuiTicket.Text:SetText(HELP_TICKET_EDIT)
-TukuiTicket:SetBackdropBorderColor(255/255, 243/255,  82/255)
-TukuiTicket.Text:SetTextColor(255/255, 243/255,  82/255)
-TukuiTicket:SetAlpha(0)
-G.Maps.Minimap.Ticket = TukuiTicket
-
-HelpOpenTicketButton:SetParent(TukuiTicket)
-HelpOpenTicketButton:SetFrameLevel(TukuiTicket:GetFrameLevel() + 1)
-HelpOpenTicketButton:SetFrameStrata(TukuiTicket:GetFrameStrata())
-HelpOpenTicketButton:ClearAllPoints()
-HelpOpenTicketButton:SetAllPoints()
-HelpOpenTicketButton:SetHighlightTexture(nil)
-HelpOpenTicketButton:SetAlpha(0)
-HelpOpenTicketButton:HookScript("OnShow", function(self) TukuiTicket:SetAlpha(1) end)
-HelpOpenTicketButton:HookScript("OnHide", function(self) TukuiTicket:SetAlpha(0) end)
-G.Maps.Minimap.TicketButton = HelpOpenTicketButton
-
--- Hide world map button
-MiniMapWorldMapButton:Hide()
-
--- shitty 3.3 flag to move
-MiniMapInstanceDifficulty:ClearAllPoints()
-MiniMapInstanceDifficulty:SetParent(Minimap)
-MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-G.Maps.Minimap.Difficulty = MiniMapInstanceDifficulty
-
--- 4.0.6 Guild instance difficulty
-GuildInstanceDifficulty:ClearAllPoints()
-GuildInstanceDifficulty:SetParent(Minimap)
-GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-G.Maps.Minimap.GuildDifficulty = GuildInstanceDifficulty
-
--- Queue Button and Tooltip
-QueueStatusMinimapButton:SetParent(Minimap)
-QueueStatusMinimapButton:ClearAllPoints()
-QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
-QueueStatusMinimapButtonBorder:Kill()
-QueueStatusFrame:StripTextures()
-QueueStatusFrame:SetTemplate("Default")
-
-local function UpdateLFGTooltip()
-	local position = TukuiMinimap:GetPoint()
-	QueueStatusFrame:ClearAllPoints()
-	if position:match("BOTTOMRIGHT") then
-		QueueStatusFrame:SetPoint("BOTTOMRIGHT", QueueStatusMinimapButton, "BOTTOMLEFT", 0, 0)
-	elseif position:match("BOTTOM") then
-		QueueStatusFrame:SetPoint("BOTTOMLEFT", QueueStatusMinimapButton, "BOTTOMRIGHT", 4, 0)
-	elseif position:match("LEFT") then		
-		QueueStatusFrame:SetPoint("TOPLEFT", QueueStatusMinimapButton, "TOPRIGHT", 4, 0)
+function Minimap:OnMove(enabled)
+	if enabled then
+		self:SetBackdropBorderColor(1, 0, 0)
+		Map:Hide()
 	else
-		QueueStatusFrame:SetPoint("TOPRIGHT", QueueStatusMinimapButton, "TOPLEFT", 0, 0)	
+		self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+		Map:Show()
 	end
 end
-QueueStatusFrame:HookScript("OnShow", UpdateLFGTooltip)
 
-G.Maps.Minimap.QueueStatus = QueueStatusFrame
-G.Maps.Minimap.QueueButton = QueueStatusMinimapButton
-
--- Enable mouse scrolling
-Minimap:EnableMouseWheel(true)
-Minimap:SetScript("OnMouseWheel", function(self, d)
-	if d > 0 then
-		_G.MinimapZoomIn:Click()
-	elseif d < 0 then
-		_G.MinimapZoomOut:Click()
-	end
-end)
-
--- Set Square Map Mask
-Minimap:SetMaskTexture(C.media.blank)
-
--- For others mods with a minimap button, set minimap buttons position in square mode.
-function GetMinimapShape() return "SQUARE" end
-
--- do some stuff on addon loaded or player login event
-TukuiMinimap:SetScript("OnEvent", function(self, event, addon)
-	if addon == "Blizzard_TimeManager" then
-		-- Hide Game Time
-		TimeManagerClockButton:Kill()
-	end
-end)
-
-----------------------------------------------------------------------------------------
--- Map menus, right/middle click
-----------------------------------------------------------------------------------------
-
-Minimap:SetScript("OnMouseUp", function(self, btn)
-	local xoff = 0
-	local position = TukuiMinimap:GetPoint()
-	
-	if btn == "RightButton" then	
-		if position:match("RIGHT") then xoff = T.Scale(-8) end
-		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, TukuiMinimap, xoff, T.Scale(-2))
-	elseif btn == "MiddleButton" then
-		if not TukuiMicroButtonsDropDown then return end
-		if position:match("RIGHT") then xoff = T.Scale(-160) end
-		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
+function Minimap:OnMouseClick(button)
+	if (button == "RightButton") then
+		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, self, 0, T.Scale(-3))
+	elseif (button == "MiddleButton") then
+		EasyMenu(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", T.Scale(-160), 0, "MENU", 2)
 	else
 		Minimap_OnClick(self)
 	end
-end)
-
-----------------------------------------------------------------------------------------
--- Mouseover map, displaying zone and coords
-----------------------------------------------------------------------------------------
-
-local m_zone = CreateFrame("Frame","TukuiMinimapZone",TukuiMinimap)
-m_zone:SetTemplate()
-m_zone:Size(0,20)
-m_zone:Point("TOPLEFT", TukuiMinimap, "TOPLEFT", 2,-2)
-m_zone:SetFrameLevel(Minimap:GetFrameLevel() + 3)
-m_zone:SetFrameStrata(Minimap:GetFrameStrata())
-m_zone:Point("TOPRIGHT",TukuiMinimap,-2,-2)
-m_zone:SetAlpha(0)
-G.Maps.Minimap.Zone = m_zone
-
-local m_zone_text = m_zone:CreateFontString("TukuiMinimapZoneText","Overlay")
-m_zone_text:SetFont(C["media"].font,12)
-m_zone_text:Point("TOP", 0, -1)
-m_zone_text:SetPoint("BOTTOM")
-m_zone_text:Height(12)
-m_zone_text:Width(m_zone:GetWidth()-6)
-m_zone_text:SetAlpha(0)
-G.Maps.Minimap.Zone.Text = m_zone_text
-
-local m_coord = CreateFrame("Frame","TukuiMinimapCoord",TukuiMinimap)
-m_coord:SetTemplate()
-m_coord:Size(40,20)
-m_coord:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 2,2)
-m_coord:SetFrameLevel(Minimap:GetFrameLevel() + 3)
-m_coord:SetFrameStrata(Minimap:GetFrameStrata())
-m_coord:SetAlpha(0)
-G.Maps.Minimap.Coord = m_coord
-
-local m_coord_text = m_coord:CreateFontString("TukuiMinimapCoordText","Overlay")
-m_coord_text:SetFont(C["media"].font,12)
-m_coord_text:Point("Center",-1,0)
-m_coord_text:SetAlpha(0)
-m_coord_text:SetText("00,00")
-G.Maps.Minimap.Coord.Text = m_coord_text
-
-Minimap:SetScript("OnEnter",function()
-	m_zone:SetAlpha(1)
-	m_zone_text:SetAlpha(1)
-	m_coord:SetAlpha(1)
-	m_coord_text:SetAlpha(1)
-end)
-
-Minimap:SetScript("OnLeave",function()
-	m_zone:SetAlpha(0)
-	m_zone_text:SetAlpha(0)
-	m_coord:SetAlpha(0)
-	m_coord_text:SetAlpha(0)
-end)
- 
-local ela = 0
-local coord_Update = function(self,t)
-	ela = ela - t
-	if ela > 0 then return end
-	local x,y = GetPlayerMapPosition("player")
-	local xt,yt
-	x = math.floor(100 * x)
-	y = math.floor(100 * y)
-	if x == 0 and y == 0 then
-		m_coord_text:SetText("X _ X")
-	else
-		if x < 10 then
-			xt = "0"..x
-		else
-			xt = x
-		end
-		if y < 10 then
-			yt = "0"..y
-		else
-			yt = y
-		end
-		m_coord_text:SetText(xt..","..yt)
-	end
-	ela = .2
 end
-m_coord:SetScript("OnUpdate",coord_Update)
- 
-local zone_Update = function()
-	local pvp = GetZonePVPInfo()
-	m_zone_text:SetText(GetMinimapZoneText())
-	if pvp == "friendly" then
-		m_zone_text:SetTextColor(0.1, 1.0, 0.1)
-	elseif pvp == "sanctuary" then
-		m_zone_text:SetTextColor(0.41, 0.8, 0.94)
-	elseif pvp == "arena" or pvp == "hostile" then
-		m_zone_text:SetTextColor(1.0, 0.1, 0.1)
-	elseif pvp == "contested" then
-		m_zone_text:SetTextColor(1.0, 0.7, 0.0)
+
+function Minimap:StyleMinimap()
+	local Mail = MiniMapMailFrame
+	local MailBorder = MiniMapMailBorder
+	local MailIcon = MiniMapMailIcon
+	local QueueStatusMinimapButton = QueueStatusMinimapButton
+	local QueueStatusFrame = QueueStatusFrame
+	local MiniMapInstanceDifficulty = MiniMapInstanceDifficulty
+	local GuildInstanceDifficulty = GuildInstanceDifficulty
+	local HelpOpenTicketButton = HelpOpenTicketButton
+	
+	self:SetMaskTexture(C.Medias.Blank)
+	self:CreateBackdrop()
+	self:SetScript("OnMouseUp", Minimap.OnMouseClick)
+	
+	self.Ticket = CreateFrame("Frame", nil, Minimap)
+	self.Ticket:SetTemplate()
+	self.Ticket:Size(Minimap:GetWidth() + 4, 24)
+	self.Ticket:SetFrameLevel(Minimap:GetFrameLevel() + 4)
+	self.Ticket:SetFrameStrata(Minimap:GetFrameStrata())
+	self.Ticket:Point("BOTTOM", 0, -47)
+	self.Ticket:FontString("Text", C.Medias.Font, 12)
+	self.Ticket.Text:SetPoint("CENTER")
+	self.Ticket.Text:SetText(HELP_TICKET_EDIT)
+	self.Ticket:SetAlpha(0)
+	
+	Mail:ClearAllPoints()
+	Mail:Point("TOPRIGHT", 3, 3)
+	Mail:SetFrameLevel(self:GetFrameLevel() + 2)
+	MailBorder:Hide()
+	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\mail")
+	
+	QueueStatusMinimapButton:SetParent(Minimap)
+	QueueStatusMinimapButton:ClearAllPoints()
+	QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
+	QueueStatusMinimapButtonBorder:Kill()
+	QueueStatusFrame:StripTextures()
+	QueueStatusFrame:SetTemplate()
+
+	MiniMapInstanceDifficulty:ClearAllPoints()
+	MiniMapInstanceDifficulty:SetParent(Minimap)
+	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+	
+	GuildInstanceDifficulty:ClearAllPoints()
+	GuildInstanceDifficulty:SetParent(Minimap)
+	GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+	
+	HelpOpenTicketButton:SetParent(Minimap.Ticket)
+	HelpOpenTicketButton:SetFrameLevel(Minimap.Ticket:GetFrameLevel() + 1)
+	HelpOpenTicketButton:SetFrameStrata(Minimap.Ticket:GetFrameStrata())
+	HelpOpenTicketButton:ClearAllPoints()
+	HelpOpenTicketButton:SetAllPoints()
+	HelpOpenTicketButton:SetHighlightTexture(nil)
+	HelpOpenTicketButton:SetAlpha(0)
+	HelpOpenTicketButton:HookScript("OnShow", function(self) Minimap.Ticket:SetAlpha(1) end)
+	HelpOpenTicketButton:HookScript("OnHide", function(self) Minimap.Ticket:SetAlpha(0) end)
+end
+
+function Minimap:PositionMinimap()
+	local Movers = T["Movers"]
+	
+	self:SetParent(T["Panels"].PetBattleHider)
+	self:Point("TOPRIGHT", UIParent, "TOPRIGHT", -30, -30)
+	self:SetMovable(true)
+	
+	Movers:RegisterFrame(self)
+end
+
+function Minimap:AddMinimapDataTexts()
+	local Panels = T["Panels"]
+
+	local MinimapDataTextOne = CreateFrame("Frame", nil, self)
+	MinimapDataTextOne:Size(self:GetWidth() / 2 + 2, 19)
+	MinimapDataTextOne:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -3)
+	MinimapDataTextOne:SetTemplate()
+	MinimapDataTextOne:SetFrameStrata("LOW")
+	
+	local MinimapDataTextTwo = CreateFrame("Frame", nil, self)
+	MinimapDataTextTwo:Size(self:GetWidth() / 2 + 1, 19)
+	MinimapDataTextTwo:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -3)
+	MinimapDataTextTwo:SetTemplate()
+	MinimapDataTextTwo:SetFrameStrata("LOW")
+	
+	Panels.MinimapDataTextOne = MinimapDataTextOne
+	Panels.MinimapDataTextTwo = MinimapDataTextTwo
+end
+
+function GetMinimapShape() 
+	return "SQUARE"
+end
+
+function Minimap:AddZoneAndCoords()
+	local MinimapZone = CreateFrame("Frame", "TukuiMinimapZone", self)
+	MinimapZone:SetTemplate()
+	MinimapZone:Size(self:GetWidth() + 4, 22)
+	MinimapZone:Point("TOP", self, 0, 2)
+	MinimapZone:SetFrameStrata(self:GetFrameStrata())
+	MinimapZone:SetAlpha(0)
+	
+	MinimapZone.Text = MinimapZone:CreateFontString("TukuiMinimapZoneText", "OVERLAY")
+	MinimapZone.Text:SetFont(C["Medias"].Font, 12)
+	MinimapZone.Text:Point("TOP", 0, -1)
+	MinimapZone.Text:SetPoint("BOTTOM")
+	MinimapZone.Text:Height(12)
+	MinimapZone.Text:Width(MinimapZone:GetWidth() - 6)
+	
+	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
+	MinimapCoords:SetTemplate()
+	MinimapCoords:Size(40, 22)
+	MinimapCoords:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 2, 2)
+	MinimapCoords:SetFrameStrata(self:GetFrameStrata())
+	MinimapCoords:SetAlpha(0)
+	
+	MinimapCoords.Text = MinimapCoords:CreateFontString("TukuiMinimapCoordText", "OVERLAY")
+	MinimapCoords.Text:SetFont(C["Medias"].Font, 12)
+	MinimapCoords.Text:Point("Center", 0, -1)
+	MinimapCoords.Text:SetText("0, 0")
+	
+	-- Update zone text
+	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
+	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+	MinimapZone:RegisterEvent("ZONE_CHANGED")
+	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
+	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
+	
+	-- Update coordinates
+	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
+	
+	Minimap.MinimapZone = MinimapZone
+	Minimap.MinimapCoords = MinimapCoords
+end
+
+function Minimap:UpdateCoords(t)
+	Elapsed = Elapsed - t
+	
+	if (Elapsed > 0) then
+		return
+	end
+	
+	local X, Y = GetPlayerMapPosition("player")
+	local XText, YText
+	
+	X = math.floor(100 * X)
+	Y = math.floor(100 * Y)
+	
+	if (X == 0 and Y == 0) then
+		Minimap.MinimapCoords.Text:SetText("x, x")
 	else
-		m_zone_text:SetTextColor(1.0, 1.0, 1.0)
+		if (X < 10) then
+			XText = "0"..X
+		else
+			XText = X
+		end
+		
+		if (Y < 10) then
+			YText = "0"..Y
+		else
+			YText = Y
+		end
+		
+		Minimap.MinimapCoords.Text:SetText(XText .. ", " .. YText)
+	end
+	
+	Elapsed = 0.5
+end
+
+function Minimap:UpdateZone()
+	local Info = GetZonePVPInfo()
+	
+	if Minimap.ZoneColors[Info] then
+		local Color = Minimap.ZoneColors[Info]
+		
+		Minimap.MinimapZone.Text:SetTextColor(Color[1], Color[2], Color[3])
+	else
+		Minimap.MinimapZone.Text:SetTextColor(1.0, 1.0, 1.0)
+	end
+	
+	Minimap.MinimapZone.Text:SetText(GetMinimapZoneText())
+end
+
+function Minimap:EnableMouseOver()
+	self:SetScript("OnEnter", function()
+		Minimap.MinimapZone:SetAnimation("FadeIn", 0.3)
+		Minimap.MinimapCoords:SetAnimation("FadeIn", 0.3)
+	end)
+
+	self:SetScript("OnLeave", function()
+		Minimap.MinimapZone:SetAnimation("FadeOut", 0.3)
+		Minimap.MinimapCoords:SetAnimation("FadeOut", 0.3)
+	end)
+end
+
+function Minimap:Enable()
+	local Time = _G["TimeManagerClockButton"]
+	
+	self:DisableMinimapElements()
+	self:StyleMinimap()
+	self:PositionMinimap()
+	self:AddMinimapDataTexts()
+	self:AddZoneAndCoords()
+	self:EnableMouseOver()
+	
+	if Time then
+		Time:Kill()
 	end
 end
- 
-m_zone:RegisterEvent("PLAYER_ENTERING_WORLD")
-m_zone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
-m_zone:RegisterEvent("ZONE_CHANGED")
-m_zone:RegisterEvent("ZONE_CHANGED_INDOORS")
-m_zone:SetScript("OnEvent",zone_Update)
+
+T["Maps"].Minimap = Minimap

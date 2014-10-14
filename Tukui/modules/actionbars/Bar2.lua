@@ -1,38 +1,47 @@
-local T, C, L, G = unpack(select(2, ...)) 
+local T, C, L = select(2, ...):unpack()
 
-if not C["actionbar"].enable == true then return end
+local TukuiActionBars = T["ActionBars"]
+local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 
----------------------------------------------------------------------------
--- setup MultiBarBottomLeft as bar #2
----------------------------------------------------------------------------
-
-local bar = TukuiBar2
-MultiBarBottomLeft:SetParent(bar)
-
--- setup the bar
-for i=1, 12 do
-	local b = _G["MultiBarBottomLeftButton"..i]
-	local b2 = _G["MultiBarBottomLeftButton"..i-1]
-	b:SetSize(T.buttonsize, T.buttonsize)
-	b:ClearAllPoints()
-	b:SetFrameStrata("BACKGROUND")
-	b:SetFrameLevel(15)
+function TukuiActionBars:CreateBar2()
+	local Movers = T["Movers"]
+	local Size = C.ActionBars.NormalButtonSize
+	local Spacing = C.ActionBars.ButtonSpacing
+	local MultiBarBottomLeft = MultiBarBottomLeft
+	local ActionBar2 = T.Panels.ActionBar2
 	
-	if i == 1 then
-		b:SetPoint("BOTTOMLEFT", bar, T.buttonspacing, T.buttonspacing)
-	elseif i == 7 then
-		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
-	else
-		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
+	MultiBarBottomLeft:SetParent(ActionBar2)
+	MultiBarBottomLeft:SetScript("OnHide", function() ActionBar2.Backdrop:Hide() end)
+	MultiBarBottomLeft:SetScript("OnShow", function() ActionBar2.Backdrop:Show() end)
+	
+	for i = 1, NUM_ACTIONBAR_BUTTONS do
+		local Button = _G["MultiBarBottomLeftButton"..i]
+		local PreviousButton = _G["MultiBarBottomLeftButton"..i-1]
+		
+		Button:Size(Size)
+		Button:ClearAllPoints()
+		Button:SetFrameStrata("BACKGROUND")
+		Button:SetFrameLevel(15)
+		
+		if (i == 1) then
+			Button:SetPoint("BOTTOMRIGHT", ActionBar2, -Spacing, Spacing)
+		elseif (i == 7) then
+			Button:SetPoint("TOPRIGHT", ActionBar2, -Spacing, -Spacing)
+		else
+			Button:SetPoint("RIGHT", PreviousButton, "LEFT", -Spacing, 0)
+		end
+		
+		ActionBar2["Button"..i] = Button
+	end
+
+	for i = 7, 12 do
+		local Button = _G["MultiBarBottomLeftButton"..i]
+		local Button1 = _G["MultiBarBottomLeftButton1"]
+		
+		Button:SetFrameLevel(Button1:GetFrameLevel() - 2)
 	end
 	
-	G.ActionBars.Bar2["Button"..i] = b
+	Movers:RegisterFrame(ActionBar2)
+	
+	RegisterStateDriver(ActionBar2, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end
-
-for i=7, 12 do
-	local b = _G["MultiBarBottomLeftButton"..i]
-	local b2 = _G["MultiBarBottomLeftButton1"]
-	b:SetFrameLevel(b2:GetFrameLevel() - 2)
-end
-
-RegisterStateDriver(bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
