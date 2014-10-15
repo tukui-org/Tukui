@@ -263,6 +263,16 @@ function Minimap:Enable()
 	self:AddZoneAndCoords()
 	self:EnableMouseOver()
 	
+	-- Fix a Blizzard Bug, which mouse wheel zoom was not working.
+	self:EnableMouseWheel(true)
+	self:SetScript("OnMouseWheel", function(self, delta)
+		if (delta > 0) then
+			MinimapZoomIn:Click()
+		elseif (delta < 0) then
+			MinimapZoomOut:Click()
+		end
+	end)
+	
 	if Time then
 		Time:Kill()
 	end
