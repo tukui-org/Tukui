@@ -247,6 +247,10 @@ function TukuiChat:SaveChatFramePositionAndDimensions()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
 	
+	if not (TukuiDataPerChar.Chat) then
+		TukuiDataPerChar.Chat = {}
+	end
+	
 	TukuiDataPerChar.Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
 end
 
