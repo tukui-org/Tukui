@@ -1,8 +1,30 @@
 ﻿local T, C, L = select(2, ...):unpack()
 local Inventory = T["Inventory"]
+local Movers = T["Movers"]
 local Loot = CreateFrame("Frame")
 local LootFrame = LootFrame
 local TopFrame = CreateFrame("Frame", nil, LootFrame)
+
+function Loot:Move()
+	local IsUnderMouse = GetCVar("lootUnderMouse")
+	
+	if (IsUnderMouse ~= "1") then
+		if not LootFrame.DragInfo then
+			Movers:RegisterFrame(LootFrame)
+		end
+		
+		if (not TukuiDataPerChar.Move) then
+			TukuiDataPerChar.Move = {}
+		end
+		
+		if not (TukuiDataPerChar.Move.LootFrame) then
+			TukuiDataPerChar.Move.LootFrame = {"TOPLEFT", UIParent, "TOPLEFT", 16, -116}
+		end
+		
+		LootFrame:ClearAllPoints()
+		LootFrame:SetPoint(unpack(TukuiDataPerChar.Move.LootFrame))
+	end
+end
 
 function Loot:SkinLootFrame()
 	LootFrame:StripTextures()
@@ -87,6 +109,7 @@ end
 
 function Loot:AddHooks()
 	hooksecurefunc("LootFrame_UpdateButton", self.SkinLootFrameButtons)
+	hooksecurefunc("LootFrame_Show", self.Move)
 end
 
 function Loot:Enable()
