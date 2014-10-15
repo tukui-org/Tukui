@@ -200,9 +200,6 @@ function Bags:CreateReagentContainer()
 			Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
 			NumButtons = NumButtons + 1
 		end
-			
-		Count.Show = Noop
-		Count:Hide()
 
 		Icon:SetTexCoord(unpack(T.IconCoord))
 		Icon:SetInside()
