@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Harmony Bar
+## Notes: Display Monk Harmony Points.
+## Author: Tukz
+## Version: 1.03
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_HarmonyBar.lua

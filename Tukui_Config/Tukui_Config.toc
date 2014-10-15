@@ -1,0 +1,20 @@
+## Interface: 60000
+## Title: |cffff8000Tukui Config|r
+## Notes: Tukui Config GUI
+## Author: Hydra & Tukz
+## SavedVariables: TukuiConfigShared
+## SavedVariablesPerCharacter: TukuiConfigNotShared
+## RequiredDeps: Tukui
+
+Tukui_Config.lua
+Locales\enUS.lua
+Locales\deDE.lua
+Locales\esES.lua
+Locales\esMX.lua
+Locales\frFR.lua
+Locales\itIT.lua
+Locales\koKR.lua
+Locales\ptBR.lua
+Locales\ruRU.lua
+Locales\zhCN.lua
+Locales\zhTW.lua

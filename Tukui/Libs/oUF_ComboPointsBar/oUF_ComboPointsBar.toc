@@ -1,0 +1,9 @@
+## Interface: 50000
+## Title: oUF Combo Points Bar
+## Notes: Display Combo Points as bars instead of original oUF dot.
+## Author: Tukz
+## Version: 1
+## X-Category: oUF
+## Dependencies: oUF
+
+oUF_ComboPointsBar.lua
