@@ -1,7 +1,0 @@
-Modules in T16 are loaded differently from T15 or less. Most of them are now enabled during the PLAYER_LOGIN event.
-So in order to edit a Tukui Frames in T16, you will need to execute most of your codes after PLAYER_LOGIN event,
-or by hooking/overwriting a function.
-
-The file which loads all of the modules is located at "Tukui/Core/Loading.lua".
-
-If you want to add your own module, simply hooking the T["Loading"].OnEvent function should be perfect.

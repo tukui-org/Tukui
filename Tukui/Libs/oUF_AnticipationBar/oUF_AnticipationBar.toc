@@ -1,8 +1,0 @@
-## Interface: 60000
-## Title: oUF Anticipation Bar
-## Notes: Adds support for rogue anticipation talent to oUF.
-## Author: Azilroka
-## Version: 1.0.0
-## Dependencies: oUF
-
-oUF_AnticipationBar.lua
