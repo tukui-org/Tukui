@@ -28,7 +28,7 @@ function TukuiUnitFrames:Raid()
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
-	if C.Party.ShowHealthText then
+	if C.Raid.ShowHealthText then
 		Health.Value = Health:CreateFontString(nil, "OVERLAY")
 		Health.Value:SetFontObject(HealthFont)
 		Health.Value:Point("CENTER", Health, 0, 0)
