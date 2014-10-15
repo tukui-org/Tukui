@@ -1001,6 +1001,10 @@ function TukuiUnitFrames:OnEvent(event)
 end
 
 function TukuiUnitFrames:Enable()
+	if (not C.UnitFrames.Enable) then
+		return
+	end
+	
 	self.Backdrop = {
 		bgFile = C.Medias.Blank,
 		insets = {top = -T.Mult, left = -T.Mult, bottom = -T.Mult, right = -T.Mult},
