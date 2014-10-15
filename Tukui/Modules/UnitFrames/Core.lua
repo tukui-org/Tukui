@@ -923,7 +923,6 @@ function TukuiUnitFrames:CreateUnits()
 		TukuiUnitFrames.Headers.Party = Party
 		
 		Movers:RegisterFrame(Party)
-		Movers:RegisterFrame(Pet)
 	end
 	
 	if C.Raid.Enable then
