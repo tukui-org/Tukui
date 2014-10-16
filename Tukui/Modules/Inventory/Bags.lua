@@ -703,6 +703,8 @@ function Bags:UpdateAllBankBags()
 			end
 			
 			Bags.SkinBagButton(Button)
+			Bags.SlotUpdate(self, Bag - 1, Button)
+			
 			LastButton = Button
 		end
 	end
