@@ -189,7 +189,8 @@ function TukuiChat:SkinToastFrame()
 	Toast:CreateShadow()
 	ToastCloseButton:SkinCloseButton()
 	Toast:ClearAllPoints()
-	Toast:SetFrameStrata("HIGH")
+	Toast:SetFrameStrata("Medium")
+	Toast:SetFrameLevel(20)
 	
 	if C.Chat.Background then
 		local Backdrop = T["Panels"].LeftChatBG
