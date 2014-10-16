@@ -425,6 +425,16 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Использовать рамки рейда Tukui",
 		},
 		
+		["ShowPets"] = {
+			["Name"] = "Show Pets",
+			["Desc"] = "Derp",
+		},
+		
+		["MaxUnitPerColumn"] = {
+			["Name"] = "Raid members per column",
+			["Desc"] = "Change the max number of raid members per column",
+		},
+		
 		["HealBar"] = {
 			["Name"] = "Входящее исцеление",
 			["Desc"] = "Отображать входящее исцеления и поглощения в виде полосы",

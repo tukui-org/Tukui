@@ -425,6 +425,16 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["ShowPets"] = {
+			["Name"] = "Show Pets",
+			["Desc"] = "Derp",
+		},
+		
+		["MaxUnitPerColumn"] = {
+			["Name"] = "Raid members per column",
+			["Desc"] = "Change the max number of raid members per column",
+		},
+		
 		["HealBar"] = {
 			["Name"] = "HealComm",
 			["Desc"] = "Zeige eine Leiste für ankommende Heilungen und Absorbationen an",
