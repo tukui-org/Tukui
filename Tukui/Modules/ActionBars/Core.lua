@@ -306,9 +306,9 @@ function TukuiActionBars:UpdateStanceBar(...)
 				
 				if IsActive then
 					StanceBarFrame.lastSelected = Button:GetID()
-					Button:SetChecked(1)
+					Button:SetChecked(true)
 				else
-					Button:SetChecked(0)
+					Button:SetChecked(false)
 				end
 
 				if IsCastable then
