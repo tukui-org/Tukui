@@ -576,7 +576,7 @@ function TukuiUnitFrames:CreateAuraWatchIcon(icon)
 	
 	if (icon.cd) then
 		icon.cd:SetHideCountdownNumbers(true)
-		icon.cd:SetReverse()
+		icon.cd:SetReverse(true)
 	end
 	
 	icon.overlay:SetTexture()
