@@ -594,6 +594,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Если включено, рамки юнитов окрасятся в тёмный цвет, а полоса ресурса в цвет класса",
 		},
 		
+		["Arena"] = {
+			["Name"] = "Arena Frames",
+			["Desc"] = "Display arena opponents when inside a battleground or arena",
+		},
+		
 		["Font"] = {
 			["Name"] = "Шрифт рамок юнитов",
 			["Desc"] = "Установить шрифт рамок юнитов",

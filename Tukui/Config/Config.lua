@@ -163,6 +163,7 @@ C["UnitFrames"] = {
 	["SerendipityBar"] = true,
 	["OnlySelfDebuffs"] = false,
 	["DarkTheme"] = false,
+	["Arena"] = true,
 	["Font"] = "Tukui UF Outline",
 	["PowerTexture"] = "Tukui",
 	["HealthTexture"] = "Tukui",

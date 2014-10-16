@@ -877,24 +877,26 @@ function TukuiUnitFrames:CreateUnits()
 	self.Units.Focus = Focus
 	self.Units.FocusTarget = FocusTarget
 	
-	local Arena = {}
+	if (C.UnitFrames.Arena) then
+		local Arena = {}
 	
-	for i = 1, 5 do
-		Arena[i] = oUF:Spawn("arena"..i, nil)
-		Arena[i]:SetParent(Panels.PetBattleHider)
-		if (i == 1) then
-			Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
-		else
-			Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
-		end
-		Arena[i]:Size(200, 29)
+		for i = 1, 5 do
+			Arena[i] = oUF:Spawn("arena"..i, nil)
+			Arena[i]:SetParent(Panels.PetBattleHider)
+			if (i == 1) then
+				Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			else
+				Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
+			end
+			Arena[i]:Size(200, 29)
 		
-		Movers:RegisterFrame(Arena[i])
+			Movers:RegisterFrame(Arena[i])
+		end
+	
+		self.Units.Arena = Arena
+	
+		self:CreateArenaPreparationFrames()
 	end
-	
-	self.Units.Arena = Arena
-	
-	self:CreateArenaPreparationFrames()
 	
 	local Boss = {}
 	
@@ -1016,10 +1018,12 @@ function TukuiUnitFrames:Enable()
 	self:CreateUnits()
 	
 	-- Arena Preparation
-	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
-	self:RegisterEvent("ARENA_OPPONENT_UPDATE")	
-	self:SetScript("OnEvent", self.OnEvent)
+	if (C.UnitFrames.Arena) then
+		self:RegisterEvent("PLAYER_ENTERING_WORLD")
+		self:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
+		self:RegisterEvent("ARENA_OPPONENT_UPDATE")	
+		self:SetScript("OnEvent", self.OnEvent)
+	end
 end
 
 T["UnitFrames"] = TukuiUnitFrames

@@ -589,6 +589,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Wenn eingeschalten, Werden die Einheitenfenster mit dunkel und die Powerbar in Klassen Farbe angezeit",
 		},
 		
+		["Arena"] = {
+			["Name"] = "Arena Frames",
+			["Desc"] = "Display arena opponents when inside a battleground or arena",
+		},
+		
 		["Font"] = {
 			["Name"] = "Einheitenfenster Schriftart",
 			["Desc"] = "Legt die Schriftart für Einheitenfenster fest",

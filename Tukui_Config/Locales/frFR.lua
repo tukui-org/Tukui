@@ -594,6 +594,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Si activé, les cadres d'unités seront d'une couleur sombre avec les barres de puissance aux couleurs des classes",
 		},
 		
+		["Arena"] = {
+			["Name"] = "Arena Frames",
+			["Desc"] = "Display arena opponents when inside a battleground or arena",
+		},
+		
 		["Font"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Défini une police de caractère pour les cadres unités",

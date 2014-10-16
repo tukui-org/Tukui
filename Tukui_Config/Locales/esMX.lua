@@ -589,6 +589,11 @@ TukuiConfig["esMX"] = {
 			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
 		},
 		
+		["Arena"] = {
+			["Name"] = "Arena Frames",
+			["Desc"] = "Display arena opponents when inside a battleground or arena",
+		},
+		
 		["Font"] = {
 			["Name"] = "Unit Frame Font",
 			["Desc"] = "Set a font for unit frames",
