@@ -125,7 +125,7 @@ function BGFrame:Enable()
 	local DataTextLeft = T["Panels"].DataTextLeft
 	BGFrame:SetAllPoints(DataTextLeft)
 	BGFrame:SetTemplate()
-	BGFrame:SetFrameLevel(2)
+	BGFrame:SetFrameLevel(4)
 
 	local Text1 = BGFrame:CreateFontString(nil, "OVERLAY")
 	Text1:SetFontObject(DataText.Font)
