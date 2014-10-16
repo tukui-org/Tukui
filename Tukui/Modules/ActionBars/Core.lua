@@ -307,8 +307,16 @@ function TukuiActionBars:UpdateStanceBar(...)
 				if IsActive then
 					StanceBarFrame.lastSelected = Button:GetID()
 					Button:SetChecked(true)
+					
+					if Button.Backdrop then
+						Button.Backdrop:SetBackdropBorderColor(0, 1, 0)
+					end
 				else
 					Button:SetChecked(false)
+					
+					if Button.Backdrop then
+						Button.Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+					end
 				end
 
 				if IsCastable then
