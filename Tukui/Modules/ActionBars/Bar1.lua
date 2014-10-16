@@ -40,27 +40,35 @@ function TukuiActionBars:CreateBar1()
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local ActionBar1 = Panels.ActionBar1
-	local Warrior, Rogue, Warlock = "", "", ""
+	local Druid, Warrior, Priest, Rogue, Warlock, Monk = "", "", "", "", "", ""
+	
+	if (C.ActionBars.SwitchBarOnStance) then
+		if C.ActionBars.OwnWarriorStanceBar then
+			Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
+		end
 
-	if C.ActionBars.OwnWarriorStanceBar then
-		Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
-	end
+		if C.ActionBars.OwnShadowDanceBar then
+			Rogue = "[stance:3] 10; [bonusbar:1] 7;"
+		else
+			Rogue = "[bonusbar:1] 7;"
+		end
 
-	if C.ActionBars.OwnShadowDanceBar then
-		Rogue = "[stance:3] 10; "
-	end
-
-	if C.ActionBars.OwnMetamorphosisBar then
-		Warlock = "[stance:1] 10; "
+		if C.ActionBars.OwnMetamorphosisBar then
+			Warlock = "[stance:1] 10; "
+		end
+		
+		Druid = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
+		Priest = "[bonusbar:1] 7;"
+		Monk = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 	end
 
 	ActionBar1.Page = {
-		["DRUID"] = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;",
+		["DRUID"] = Druid,
 		["WARRIOR"] = Warrior,
-		["PRIEST"] = "[bonusbar:1] 7;",
-		["ROGUE"] = Rogue .. "[bonusbar:1] 7;",
+		["PRIEST"] = Priest,
+		["ROGUE"] = Rogue,
 		["WARLOCK"] = Warlock,
-		["MONK"] = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
+		["MONK"] = Monk,
 		["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
 	}
 

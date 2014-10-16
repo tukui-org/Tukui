@@ -48,13 +48,18 @@ TukuiConfig["enUS"] = {
 		},
 		
 		["ShapeShift"] = {
-			["Name"] = "ShapeShift",
-			["Desc"] = "Enable Tukui style ShapeShift bar",
+			["Name"] = "Stance Bar",
+			["Desc"] = "Enable Tukui style stance bar",
 		},
 		
 		["Pet"] = {
-			["Name"] = "Pet",
-			["Desc"] = "Enable Tukui style Pet bar",
+			["Name"] = "Pet Bar",
+			["Desc"] = "Enable Tukui style pet bar",
+		},
+		
+		["SwitchBarOnStance"] = {
+			["Name"] = "Swap main bar on new stance",
+			["Desc"] = "Enable main action bar swap when you change stance.",
 		},
 		
 		["NormalButtonSize"] = {

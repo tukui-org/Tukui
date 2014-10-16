@@ -58,6 +58,11 @@ TukuiConfig["ruRU"] = {
 			["Name"] = "Панель стоек/тотемы",
 			["Desc"] = "Использовать панель стоек/тотемов в стиле Tukui",
 		},
+
+		["SwitchBarOnStance"] = {
+			["Name"] = "Swap main bar on new stance",
+			["Desc"] = "Enable main action bar swap when you change stance.",
+		},
 		
 		["Pet"] = {
 			["Name"] = "Панель питомца",

@@ -55,13 +55,18 @@ TukuiConfig["frFR"] = {
 		},
 		
 		["ShapeShift"] = {
-			["Name"] = "Postures",
-			["Desc"] = "Activer les barre des postures Tukui",
+			["Name"] = "Barre de Postures",
+			["Desc"] = "Activer les barre des postures",
 		},
 		
 		["Pet"] = {
-			["Name"] = "Familier",
-			["Desc"] = "Activer la barre de Familier Tukui",
+			["Name"] = "Barre du Familier",
+			["Desc"] = "Activer la barre de Familier",
+		},
+		
+		["SwitchBarOnStance"] = {
+			["Name"] = "Changement de barre sur posture",
+			["Desc"] = "Change la barre d'action principale lorsque l'on change de posture",
 		},
 		
 		["NormalButtonSize"] = {

@@ -64,6 +64,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Schalte Tukui Style Begleiterleiste ein",
 		},
 		
+		["SwitchBarOnStance"] = {
+			["Name"] = "Swap main bar on new stance",
+			["Desc"] = "Enable main action bar swap when you change stance.",
+		},
+		
 		["NormalButtonSize"] = {
 			["Name"] = "Tastengröße",
 			["Desc"] = "Lege die Größe für die Aktionsleistentasten fest",

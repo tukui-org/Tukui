@@ -18,6 +18,7 @@ C["ActionBars"] = {
 	["Macro"] = false,
 	["ShapeShift"] = false,
 	["Pet"] = true,
+	["SwitchBarOnStance"] = true,
 	["NormalButtonSize"] = 27,
 	["PetButtonSize"] = 25,
 	["ButtonSpacing"] = 4,
