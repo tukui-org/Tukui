@@ -18,11 +18,13 @@ function Loot:Move()
 		end
 		
 		if not (TukuiDataPerChar.Move.LootFrame) then
-			TukuiDataPerChar.Move.LootFrame = {"TOPLEFT", UIParent, "TOPLEFT", 16, -116}
+			TukuiDataPerChar.Move.LootFrame = {"TOPLEFT", "UIParent", "TOPLEFT", 16, -116}
 		end
 		
+		local A1, _, A2, X, Y = unpack(TukuiDataPerChar.Move.LootFrame)
+		
 		LootFrame:ClearAllPoints()
-		LootFrame:SetPoint(unpack(TukuiDataPerChar.Move.LootFrame))
+		LootFrame:SetPoint(A1, UIParent, A2, X, Y)
 	end
 end
 
