@@ -146,6 +146,17 @@ function Install:Launch()
 	self.Description:Point("CENTER", self, "CENTER")
 	self.Description:SetTemplate()
 	self.Description:CreateShadow()
+	self.Description:RegisterEvent("PLAYER_REGEN_DISABLED")
+	self.Description:RegisterEvent("PLAYER_REGEN_ENABLED")
+	self.Description:SetScript("OnEvent", function(self, event)
+		if (event == "PLAYER_REGEN_DISABLED") then
+			Install:Hide()
+		else
+			if (not TukuiDataPerChar.InstallDone) then
+				Install:Show()
+			end
+		end
+	end)
 
 	self.StatusBar = CreateFrame("StatusBar", nil, self)
 	self.StatusBar:SetStatusBarTexture(C.Medias.Normal)
