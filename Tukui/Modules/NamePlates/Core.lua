@@ -212,6 +212,7 @@ function Plates:Skin(obj)
 	-- OnShow Execution
 	Plate:HookScript("OnShow", self.OnShow)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
+	Plate.Cast:HookScript("OnSizeChanged", self.CastOnShow)
 	self.OnShow(Plate)
 	
 	-- Tell Tukui that X nameplate is Skinned
