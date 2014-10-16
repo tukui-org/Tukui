@@ -144,7 +144,7 @@ function Tooltip:OnTooltipSetUnit()
 		end
 	end
 
-	if (UnitIsPlayer(Unit)) then
+	if (UnitIsPlayer(Unit) and UnitIsFriend("Player", Unit)) then
 		if (C.Tooltips.ShowSpec) then
 			local Talent = T.Tooltips.Talent
 			
@@ -228,7 +228,7 @@ function Tooltip:OnTooltipSetUnit()
 		HealthBar.Text:SetText(Short(Health) .. " / " .. Short(MaxHealth))
 	end
 	
-	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit)) then
+	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit) and UnitIsFriend("Player", Unit)) then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..ILevel.."|r")
 		GameTooltip:AddLine(SPECIALIZATION..": |cff3eea23"..TalentSpec.."|r")
