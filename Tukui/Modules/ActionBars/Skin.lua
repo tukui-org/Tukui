@@ -226,6 +226,11 @@ function TukuiActionBars:StyleFlyout()
 	TukuiActionBars.SkinFlyoutButtons()
 end
 
+local ProcBackdrop = {
+	edgeFile = C.Medias.Blank, edgeSize = T.Mult,
+	insets = {left = T.Mult, right = T.Mult, top = T.Mult, bottom = T.Mult},
+}
+
 -- NOTE: Try to find a better animation for this.
 function TukuiActionBars:StartButtonHighlight()
 	if self.overlay then
@@ -233,11 +238,6 @@ function TukuiActionBars:StartButtonHighlight()
 		ActionButton_HideOverlayGlow(self)
 	end
 	
-	local ProcBackdrop = {
-		edgeFile = C.Medias.Blank, edgeSize = T.Mult,
-		insets = {left = T.Mult, right = T.Mult, top = T.Mult, bottom = T.Mult},
-	}
-
 	if not self.Animation then
 		local NewProc = CreateFrame("Frame", nil, self)
 		NewProc:SetBackdrop(ProcBackdrop)
