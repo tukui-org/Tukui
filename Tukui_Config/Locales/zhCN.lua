@@ -13,415 +13,410 @@ local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For 
 TukuiConfig["zhCN"] = {
 	["General"] = {
 		["AutoScale"] = {
-			["Name"] = "Auto Scale",
-			["Desc"] = "Automatically detect the best scale for your resolution",
+			["Name"] = "自动缩放",
+			["Desc"] = "自动检测最佳分辨率",
 		},
 		
 		["UIScale"] = {
-			["Name"] = "UI Scale",
-			["Desc"] = "Set a custom UI scale",
+			["Name"] = "UI比例",
+			["Desc"] = "设置自定义UI比例",
 		},
 		
 		["BackdropColor"] = {
-			["Name"] = "Backdrop Color",
-			["Desc"] = "Set the backdrop color for all Tukui frames"..RestoreDefault,
+			["Name"] = "背景颜色",
+			["Desc"] = "决定框架的背景颜色”"..RestoreDefault,
 		},
 		
 		["BorderColor"] = {
-			["Name"] = "Border Color",
-			["Desc"] = "Set the border color for all Tukui frames"..RestoreDefault,
+			["Name"] = "边框颜色",
+			["Desc"] = "决定框架的边框颜色"..RestoreDefault,
 		},
 		
 		["HideShadows"] = {
-			["Name"] = "Hide Shadows",
-			["Desc"] = "Display or hide shadows on certain Tukui frames",
+			["Name"] = "显示或隐藏",
+			["Desc"] = "显示或者隐藏tukui框架",
 		},
 	},
 	
 	["ActionBars"] = {
 		["Enable"] = {
-			["Name"] = "Enable action bars",
+			["Name"] = "启用动作条",
 			["Desc"] = "Derp",
 		},
 		
 		["HotKey"] = {
-			["Name"] = "Hotkeys",
-			["Desc"] = "Display Hotkey text on buttons",
+			["Name"] = "快捷键",
+			["Desc"] = "在按钮上显示快捷键文字",
 		},
 		
 		["Macro"] = {
-			["Name"] = "Macro keys",
-			["Desc"] = "DIsplay macro text on buttons",
+			["Name"] = "宏键",
+			["Desc"] = "在按钮显示宏",
 		},
 		
 		["ShapeShift"] = {
-			["Name"] = "Stance Bar",
-			["Desc"] = "Enable Tukui style stance bar",
+			["Name"] = "转变",
+			["Desc"] = "使用tukui风格皮肤",
 		},
 		
 		["Pet"] = {
-			["Name"] = "Pet Bar",
-			["Desc"] = "Enable Tukui style Pet bar",
-		},
-		
-		["SwitchBarOnStance"] = {
-			["Name"] = "Swap main bar on new stance",
-			["Desc"] = "Enable main action bar swap when you change stance.",
+			["Name"] = "宠物",
+			["Desc"] = "使用tukui风格宠物皮肤",
 		},
 		
 		["NormalButtonSize"] = {
-			["Name"] = "Button Size",
-			["Desc"] = "Set a size for action bar buttons",
+			["Name"] = "按钮大小",
+			["Desc"] = "设置一个动作栏按钮的大小",
 		},
 		
 		["PetButtonSize"] = {
-			["Name"] = "Pet Button Size",
-			["Desc"] = "Set a size for pet action bar buttons",
+			["Name"] = "宠物按钮的大小",
+			["Desc"] = "设置一个宠物的动作栏按钮的大小",
 		},
 		
 		["ButtonSpacing"] = {
-			["Name"] = "Button Spacing",
-			["Desc"] = "Set the spacing between action bar buttons",
+			["Name"] = "按钮的间隔",
+			["Desc"] = "设置操作栏按钮之间的间距",
 		},
 		
 		["OwnShadowDanceBar"] = {
-			["Name"] = "Shadow Dance bar",
-			["Desc"] = "Use a special bar while in Shadow Dance",
+			["Name"] = "暗影之舞条",
+			["Desc"] = "使用自己的暗影之舞动作条",
 		},
 		
 		["OwnMetamorphosisBar"] = {
-			["Name"] = "Metamorphosis Bar",
-			["Desc"] = "Use a special bar while in Metamorphosis",
+			["Name"] = "幻化条",
+			["Desc"] = "使用幻化条",
 		},
 		
 		["OwnWarriorStanceBar"] = {
-			["Name"] = "Warrior Stance Bar",
-			["Desc"] = "Use a special bar while in Warrior stances",
+			["Name"] = "战士姿态",
+			["Desc"] = "启用战士姿态动作条",
 		},
 		
 		["HideBackdrop"] = {
-			["Name"] = "Hide Backdrop",
-			["Desc"] = "Disable the backdrop on action bars",
+			["Name"] = "隐藏背景",
+			["Desc"] = "禁止在动作条的背景下",
 		},
 		
 		["Font"] = {
-			["Name"] = "Action bar font",
-			["Desc"] = "Set a font for the action bars",
+			["Name"] = "动作条字体",
+			["Desc"] = "设置动作条字体",
 		},
 	},
 	
 	["Auras"] = {
 		["Enable"] = {
-			["Name"] = "Enable Auras",
+			["Name"] = "启用光环",
 			["Desc"] = "Derp",
 		},
 		
 		["Consolidate"] = {
-			["Name"] = "Consolidate Auras",
-			["Desc"] = "Enable consolidated auras",
+			["Name"] = "光环增强 ",
+			["Desc"] = "启用统一光环",
 		},
 		
 		["Flash"] = {
-			["Name"] = "Flash Auras",
-			["Desc"] = "Flash auras when their duration is low"..PerformanceSlight,
+			["Name"] = "闪光光环",
+			["Desc"] = "闪光的光环时，持续时间较低"..PerformanceSlight,
 		},
 		
 		["ClassicTimer"] = {
-			["Name"] = "Classic Timer",
-			["Desc"] = "Use the text timer beneath auras",
+			["Name"] = "经典的计时器",
+			["Desc"] = "使用下面的光环文本定时器",
 		},
 		
 		["HideBuffs"] = {
-			["Name"] = "Hide Buffs",
-			["Desc"] = "Disable buff display",
+			["Name"] = "隐藏增益效果",
+			["Desc"] = "隐藏角色增益效果",
 		},
 		
 		["HideDebuffs"] = {
-			["Name"] = "Hide Debuffs",
-			["Desc"] = "Disable debuff display",
+			["Name"] = "隐藏负面效果",
+			["Desc"] = "隐藏角色负面效果",
 		},
 		
 		["Animation"] = {
-			["Name"] = "Animation",
-			["Desc"] = "Show a 'pop in' animation on auras"..PerformanceSlight,
+			["Name"] = "动画",
+			["Desc"] = "显示光环动画"..PerformanceSlight,
 		},
 		
 		["BuffsPerRow"] = {
-			["Name"] = "Buffs Per Row",
-			["Desc"] = "Set the number of buffs to show before creating a new row",
+			["Name"] = "每行增益效果",
+			["Desc"] = "创建一个新行数的设置显示每行增益效果",
 		},
 		
 		["Font"] = {
-			["Name"] = "Aura font",
-			["Desc"] = "Set a font for auras",
+			["Name"] = "光环字体",
+			["Desc"] = "设置光环字体",
 		},
 	},
 	
 	["Bags"] = {
 		["Enable"] = {
-			["Name"] = "Enable Bags",
+			["Name"] = "启用背包",
 			["Desc"] = "Derp",
 		},
 		
 		["ButtonSize"] = {
-			["Name"] = "Slot Size",
-			["Desc"] = "Set a size for bag slots",
+			["Name"] = "插槽尺寸",
+			["Desc"] = "设置背包插槽大小",
 		},
 		
 		["Spacing"] = {
-			["Name"] = "Spacing",
-			["Desc"] = "Set the spacing between bag slots",
+			["Name"] = "间距",
+			["Desc"] = "设置背包的间距",
 		},
 		
 		["ItemsPerRow"] = {
-			["Name"] = "Items Per Row",
-			["Desc"] = "Set how many slots are on each row of the bags",
+			["Name"] = "每行物品",
+			["Desc"] = "设置多少插槽的每一行上的背包",
 		},
 		
 		["PulseNewItem"] = {
-			["Name"] = "Flash New Item(s)",
-			["Desc"] = "New items in your bags will have a flash animation",
+			["Name"] = "闪光的新物品(s)",
+			["Desc"] = "在你的包新物品将有一个动画",
 		},
 		
 		["Font"] = {
-			["Name"] = "Bag font",
-			["Desc"] = "Set a font for bags",
+			["Name"] = "背包字体",
+			["Desc"] = "设置背包字体大小",
 		},
 		
 		["BagFilter"] = {
-			["Name"] = "Enable Bag filter",
-			["Desc"] = "Automatically deletes useless items from your bags when looted",
-			["Default"] = "Automatically deletes useless items from your bags when looted",
+			["Name"] = "使用背包过滤",
+			["Desc"] = "清理的时候自动删除您的包没用物品",
+			["Default"] = "清理的时候自动删除您的包没用物品",
 		},
 	},
 	
 	["Chat"] = {
 		["Enable"] = {
-			["Name"] = "Enable Chat",
+			["Name"] = "启用聊天",
 			["Desc"] = "Derp",
 		},
 		
 		["WhisperSound"] = {
-			["Name"] = "Whisper Sound",
-			["Desc"] = "Play a sound when receiving a whisper",
+			["Name"] = "私语声音",
+			["Desc"] = "收到私语的时候播放声音",
 		},
 		
 		["LinkColor"] = {
-			["Name"] = "URL Link Color",
-			["Desc"] = "Set a color to display URL links in"..RestoreDefault,
+			["Name"] = "URL链接颜色",
+			["Desc"] = "设置URL链接显示颜色"..RestoreDefault,
 		},
 		
 		["LinkBrackets"] = {
-			["Name"] = "URL Link Brackets",
-			["Desc"] = "Display URL links wrapped in brackets",
+			["Name"] = "URL链接括号",
+			["Desc"] = "包在括号中显示的URL链接",
 		},
 		
 		["LootFrame"] = {
-			["Name"] = "Loot Frame",
-			["Desc"] = "Create a seperate 'Loot' chat frame to the right",
+			["Name"] = "战利品框架",
+			["Desc"] = "建立一个独立的'掉落'聊天框",
 		},
 		
 		["Background"] = {
-			["Name"] = "Chat Background",
-			["Desc"] = "Create a background for the left and right chat frames",
+			["Name"] = "聊天背景",
+			["Desc"] = "创建一个背景聊天框架",
 		},
 		
 		["ChatFont"] = {
-			["Name"] = "Chat Font",
-			["Desc"] = "Set a font to be used by chat",
+			["Name"] = "聊天字体",
+			["Desc"] = "设置聊天字体",
 		},
 		
 		["TabFont"] = {
-			["Name"] = "Chat Tab Font",
-			["Desc"] = "Set a font to be used by chat tabs",
+			["Name"] = "聊天标签字体",
+			["Desc"] = "设置字体被聊天标签使用",
 		},
 		
 		["ScrollByX"] = {
-			["Name"] = "Mouse Scrolling",
-			["Desc"] = "Set the number of lines that the chat will jump when scrolling",
+			["Name"] = "鼠标拖动",
+			["Desc"] = "设置行滚动时聊天会跳的数量",
 		},
 	},
 	
 	["Cooldowns"] = {
 		["Font"] = {
-			["Name"] = "Cooldown Font",
-			["Desc"] = "Set a font to be used by cooldown timers",
+			["Name"] = "冷却时间字体",
+			["Desc"] = "设置冷却时间字体",
 		},
 	},
 	
 	["DataTexts"] = {
 		["Battleground"] = {
-			["Name"] = "Enable Battleground",
-			["Desc"] = "Enable data texts displaying battleground information",
+			["Name"] = "开启战场",
+			["Desc"] = "启动显示战场信息",
 		},
 		
 		["LocalTime"] = {
-			["Name"] = "Local Time",
-			["Desc"] = "Use local time in the Time data text, rather than realm time",
+			["Name"] = "本地时间",
+			["Desc"] = "启用本地时间，而不是服务器时间",
 		},
 		
 		["Time24HrFormat"] = {
-			["Name"] = "24-Hour Time Format",
-			["Desc"] = "Enable to set the Time data text to 24 hour format.",
+			["Name"] = "24小时时间格式",
+			["Desc"] = "允许设置的时间数据文字24小时格式.",
 		},
 		
 		["NameColor"] = {
-			["Name"] = "Label Color",
-			["Desc"] = "Set a color for the label of a data text, usually the name"..RestoreDefault,
+			["Name"] = "标签颜色",
+			["Desc"] = "设置的数据文本标签的颜色"..RestoreDefault,
 		},
 		
 		["ValueColor"] = {
-			["Name"] = "Value Color",
-			["Desc"] = "Set a color for the value of a data text, usually a number"..RestoreDefault,
+			["Name"] = "彩色值",
+			["Desc"] = "设置颜色为文字数据值"..RestoreDefault,
 		},
 		
 		["Font"] = {
-			["Name"] = "Data Text Font",
-			["Desc"] = "Set a font to be used by the data texts",
+			["Name"] = "数据文本字体",
+			["Desc"] = "设置字体要使用的数据文本",
 		},
 	},
 	
 	["Merchant"] = {
 		["AutoSellGrays"] = {
-			["Name"] = "Auto Sell Grays",
-			["Desc"] = "When visiting a vendor, automatically sell gray quality items",
+			["Name"] = "自动出售灰色的",
+			["Desc"] = "当访问商人，自动出售灰色物品",
 		},
 		
 		["SellMisc"] = {
-			["Name"] = "Sell Misc. Items",
-			["Desc"] = "Automatically sells useless items that are not gray quality",
+			["Name"] = "卖杂项 物品",
+			["Desc"] = "自动售没用的东西不属于品质灰色",
 		},
 		
 		["AutoRepair"] = {
-			["Name"] = "Auto Repair",
-			["Desc"] = "When visiting a repair merchant, automatically repair our gear",
+			["Name"] = "自动修理",
+			["Desc"] = "访问商人的时候自动修理装备",
 		},
 		
 		["UseGuildRepair"] = {
-			["Name"] = "Use Guild Repair",
-			["Desc"] = "When using 'Auto Repair', use funds from the Guild bank",
+			["Name"] = "使用工会修理",
+			["Desc"] = "使用“自动修复”时，使用从公会银行资金",
 		},
 	},
 	
 	["Misc"] = {
 		["ThreatBarEnable"] = {
-			["Name"] = "Enable Threat Bar",
+			["Name"] = "启动仇恨条",
 			["Desc"] = "Derp",
 		},
 		
 		["AltPowerBarEnable"] = {
-			["Name"] = "Enable Alt-Power Bar",
+			["Name"] = "启用按住Alt能量条",
 			["Desc"] = "Derp",
 		},
 		
 		["ExperienceEnable"] = {
-			["Name"] = "Enable Experience Bars",
-			["Desc"] = "Enable two experience bars on the left and right of the screen.",
+			["Name"] = "使用经验条",
+			["Desc"] = "使在屏幕的左边和右边的两个经验条.",
 		},
 		
 		["ReputationEnable"] = {
-			["Name"] = "Enable Reputation Bars",
-			["Desc"] = "Enable two reputation bars on the left and right of the screen.",
+			["Name"] = "启用声望条",
+			["Desc"] = "使在屏幕的左边和右边的两个名声条.",
 		},
 		
 		["ErrorFilterEnable"] = {
-			["Name"] = "Enable Error Filtering",
-			["Desc"] = "Filters out messages from the UIErrorsFrame.",
+			["Name"] = "启用过滤错误",
+			["Desc"] = "过滤掉从UI错误框架消息.",
 		},
 	},
 	
 	["NamePlates"] = {
 		["Enable"] = {
-			["Name"] = "Enable NamePlates",
+			["Name"] = "启动姓名条",
 			["Desc"] = "Derp"..PerformanceSlight,
 		},
 		
 		["Width"] = {
-			["Name"] = "Set Width",
-			["Desc"] = "Set the width of NamePlates",
+			["Name"] = "设置宽度",
+			["Desc"] = "设置姓名板宽度",
 		},
 		
 		["Height"] = {
-			["Name"] = "Set Height",
-			["Desc"] = "Set the height of NamePlates",
+			["Name"] = "设置高度",
+			["Desc"] = "设置姓名板高度",
 		},
 		
 		["CastHeight"] = {
-			["Name"] = "Cast Bar Height",
-			["Desc"] = "Set the height of the cast bar on NamePlates",
+			["Name"] = "施放条高度",
+			["Desc"] = "设置姓名板施放条高度",
 		},
 		
 		["Spacing"] = {
-			["Name"] = "Spacing",
-			["Desc"] = "Set the spacing between NamePlates and cast bar",
+			["Name"] = "间距",
+			["Desc"] = "设置姓名板间距",
 		},
 		
 		["NonTargetAlpha"] = {
-			["Name"] = "Non-Target Alpha",
-			["Desc"] = "The alpha of NamePlates that we're not targetting",
+			["Name"] = "非目标测试",
+			["Desc"] = "姓名板非目标测试",
 		},
 		
 		["Texture"] = {
-			["Name"] = "NamePlates Texture",
-			["Desc"] = "Set a texture for nameplates",
+			["Name"] = "姓名板材质",
+			["Desc"] = "设置姓名板材质",
 		},
 		
 		["Font"] = {
-			["Name"] = "NamePlates Font",
-			["Desc"] = "Set a font for nameplates",
+			["Name"] = "姓名板字体",
+			["Desc"] = "设置姓名板字体",
 		},
 	},
 	
 	["Party"] = {
 		["Enable"] = {
-			["Name"] = "Enable Party Frames",
+			["Name"] = "队友框架",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "Portrait",
-			["Desc"] = "Display portrait on party frames",
+			["Name"] = "模型",
+			["Desc"] = "队友框架显示的模型",
 		},
 		
 		["HealBar"] = {
-			["Name"] = "HealComm",
+			["Name"] = "治疗提示",
 			["Desc"] = "Display a bar showing incoming heals & absorbs",
 		},
 		
 		["ShowPlayer"] = {
-			["Name"] = "Show Player",
-			["Desc"] = "Show yourself in the party",
+			["Name"] = "显示玩家",
+			["Desc"] = "显示自己在框架",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Health Text",
-			["Desc"] = "Show the amount of health the unit lost.",
+			["Name"] = "治疗数字",
+			["Desc"] = "显示治疗的损失量.",
 		},
 		
 		["Font"] = {
-			["Name"] = "Party Frame Name Font",
-			["Desc"] = "Set a font for name text on party frames",
+			["Name"] = "团队框名字字体",
+			["Desc"] = "设置团队名字的字体",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Party Frame Health Font",
-			["Desc"] = "Set a font for health text on party frames",
+			["Name"] = "治疗团队框体",
+			["Desc"] = "设置治疗字体",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "能量纹理",
+			["Desc"] = "设置能量纹理",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "治疗纹理",
+			["Desc"] = "设置治疗纹理",
 		},
 	},
 	
 	["Raid"] = {
 		["Enable"] = {
-			["Name"] = "Enable Raid Frames",
+			["Name"] = "启用RAID框架",
 			["Desc"] = "Derp",
 		},
 		
@@ -436,172 +431,172 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealBar"] = {
-			["Name"] = "HealComm",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Name"] = "治疗",
+			["Desc"] = "显示治疗的损失量",
 		},
 		
 		["AuraWatch"] = {
-			["Name"] = "Aura Watch",
-			["Desc"] = "Display timers for class specific buffs in the corners of the raid frames",
+			["Name"] = "光环时间",
+			["Desc"] = "计时器显示在RAID框架的的角落",
 		},
 		
 		["AuraWatchTimers"] = {
-			["Name"] = "Aura Watch Timers",
-			["Desc"] = "Display a timer on debuff icons created by Debuff Watch",
+			["Name"] = "光环计时器",
+			["Desc"] = "显示于用户的Debuff关注建立的DEBUFF图标的计时器",
 		},
 		
 		["DebuffWatch"] = {
-			["Name"] = "Debuff Watch",
-			["Desc"] = "Display a big icon on the raid frames when a player has an important debuff",
+			["Name"] = "减益效果",
+			["Desc"] = "显示在RAID框架的大图标当玩家有重要的debuff",
 		},
 		
 		["RangeAlpha"] = {
-			["Name"] = "Out Of Range Alpha",
-			["Desc"] = "Set the transparency of units that are out of range",
+			["Name"] = "超出范围ALPH",
+			["Desc"] = "设置的单位，超出范围的透明度",
 		},
 		
 		["ShowRessurection"] = {
-			["Name"] = "Show Ressurection Icon",
-			["Desc"] = "Display incoming ressurections on players",
+			["Name"] = "显示复活的图标",
+			["Desc"] = "显示玩家复活的图标",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Health Text",
-			["Desc"] = "Show the amount of health the unit lost.",
+			["Name"] = "治疗数据",
+			["Desc"] = "显示治疗单位的损失量.",
 		},
 		
 		["Font"] = {
-			["Name"] = "Raid Frame Name Font",
-			["Desc"] = "Set a font for name text on raid frames",
+			["Name"] = "Raid框架名字字体",
+			["Desc"] = "设置RAID框架名字字体",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Raid Frame Health Font",
-			["Desc"] = "Set a font for health text on raid frames",
+			["Name"] = "Raid框架治疗字体",
+			["Desc"] = "设置RAID框架治疗字体",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "能量纹理",
+			["Desc"] = "设置能量条纹理",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "治疗条纹理",
+			["Desc"] = "设置治疗条纹理",
 		},
 		
 		["GroupBy"] = {
-			["Name"] = "Group By",
-			["Desc"] = "Define how raids groups are sorted",
+			["Name"] = "分组",
+			["Desc"] = "自定义raids组进行排序",
 		},
 	},
 	
 	["Tooltips"] = {
 		["Enable"] = {
-			["Name"] = "Enable Tooltips",
+			["Name"] = "启用工具提示",
 			["Desc"] = "Derp",
 		},
 		
 		["HideOnUnitFrames"] = {
-			["Name"] = "Hide on Unit Frames",
-			["Desc"] = "Don't display Tooltips on unit frames",
+			["Name"] = "隐藏在单元框架",
+			["Desc"] = "不要在单位框显示工具提示",
 		},
 		
 		["UnitHealthText"] = {
-			["Name"] = "Display Health Text",
-			["Desc"] = "Display health text on the tooltip health bar",
+			["Name"] = "显示治疗文本",
+			["Desc"] = "工具提示血条上显示的治疗条",
 		},
 		
 		["ShowSpec"] = {
-			["Name"] = "Specialization and iLevel",
-			["Desc"] = "Display player specialization and ilevel in tooltip",
+			["Name"] = "专业等级",
+			["Desc"] = "显示玩家专业在提示栏",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Health Bar Font",
-			["Desc"] = "Set a font to be used by the health bar below unit tooltips",
+			["Name"] = "治疗条字体",
+			["Desc"] = "设置字体要使用下面的单元工具提示的血条",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture to be used by the health bar below unit tooltips",
+			["Name"] = "治疗条纹理",
+			["Desc"] = "设置纹理要使用下面的单元工具提示的血条",
 		},
 	},
 	
 	["UnitFrames"] = {
 		["Enable"] = {
-			["Name"] = "Enable Unit Frames",
+			["Name"] = "启用组框架",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "Enable Player & Target Portrait",
-			["Desc"] = "Enable Player & Target Portrait",
+			["Name"] = "启用玩家与目标模型",
+			["Desc"] = "启用玩家与目标模型",
 		},
 		
 		["CastBar"] = {
-			["Name"] = "Cast Bar",
-			["Desc"] = "Enable cast bar for unit frames",
+			["Name"] = "施法条",
+			["Desc"] = "启用施法条的单位框架",
 		},
 		
 		["UnlinkCastBar"] = {
-			["Name"] = "Unlink Cast Bar",
-			["Desc"] = "Move player and target cast bar outside unit frame and allow moving of cast bar around the screen",
+			["Name"] = "取消施法条",
+			["Desc"] = "移动玩家和目标单元框外栏，并允许施法条在屏幕上移动",
 		},
 		
 		["CastBarIcon"] = {
-			["Name"] = "Cast Bar Icon",
-			["Desc"] = "Create an icon beside the cast bar",
+			["Name"] = "施法条图标",
+			["Desc"] = "建立施法栏旁边的图标",
 		},
 		
 		["CastBarLatency"] = {
-			["Name"] = "Cast Bar Latency",
-			["Desc"] = "Display your latency on the cast bar",
+			["Name"] = "施法条延迟",
+			["Desc"] = "显示施法条的延迟",
 		},
 		
 		["Smooth"] = {
-			["Name"] = "Smooth Bars",
-			["Desc"] = "Smooth out the updating of the health bars"..PerformanceSlight,
+			["Name"] = "流畅的条",
+			["Desc"] = "平滑治疗条的更新"..PerformanceSlight,
 		},
 		
 		["CombatLog"] = {
-			["Name"] = "Combat Feedback",
-			["Desc"] = "Display incoming heals and damage on the player unit frame",
+			["Name"] = "战斗信息反馈",
+			["Desc"] = "显示输入的治疗和损坏播放器单元框架",
 		},
 		
 		["WeakBar"] = {
-			["Name"] = "Weakened Soul Bar",
-			["Desc"] = "Display a bar to show the Weakened Soul debuff",
+			["Name"] = "虚弱灵魂条",
+			["Desc"] = "显示一栏显示的虚弱灵魂的debuff",
 		},
 		
 		["HealBar"] = {
-			["Name"] = "HealComm",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Name"] = "正被治疗",
+			["Desc"] = "显示栏显示输入的治疗及伤害减伤",
 		},
 		
 		["TotemBar"] = {
-			["Name"] = "Totem Bar",
-			["Desc"] = "Create a tukui style totem bar",
+			["Name"] = "图腾条",
+			["Desc"] = "启用tukui风格图腾",
 		},
 		
 		["AnticipationBar"] = {
-			["Name"] = "Rogue Anticipation Bar",
-			["Desc"] = "Display a bar showing rogue anticipation points",
+			["Name"] = "盗贼隐藏栏",
+			["Desc"] = "显示一栏显示盗贼预期点",
 		},
 		
 		["SerendipityBar"] = {
-			["Name"] = "Priest Serendipity Bar",
-			["Desc"] = "Display a bar showing priest serendipity stacks",
+			["Name"] = "牧师机缘栏",
+			["Desc"] = "显示一栏显示的牧师机缘巧合叠层",
 		},
 		
 		["OnlySelfDebuffs"] = {
-			["Name"] = "Display My Debuffs Only",
-			["Desc"] = "Only display our debuffs on the target frame",
+			["Name"] = "显示我只有减益",
+			["Desc"] = "只显示我们的减益效果的目标框架",
 		},
 		
 		["DarkTheme"] = {
-			["Name"] = "Dark Theme",
-			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
+			["Name"] = "黑暗的主题",
+			["Desc"] = "如果启用，单元框架将是一个暗色使用类彩色动力条",
 		},
 		
 		["Arena"] = {
@@ -610,18 +605,18 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Font"] = {
-			["Name"] = "Unit Frame Font",
-			["Desc"] = "Set a font for unit frames",
+			["Name"] = "单元框架字体",
+			["Desc"] = "设置字体的单元框架",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
+			["Name"] = "能力栏纹理",
+			["Desc"] = "设置能量条纹理",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
+			["Name"] = "治疗条纹理",
+			["Desc"] = "设置治疗条纹理",
 		},
 	},
 }
