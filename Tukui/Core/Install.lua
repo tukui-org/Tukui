@@ -229,8 +229,8 @@ Install:SetScript("OnEvent", function(self, event, addon)
 	local Name = UnitName("Player")
 	
 	if (event == "PLAYER_LOGOUT" and IsMac) then
-		local Data = TukuiData
-		local ConfigData = TukuiConfigShared
+		local Data = TukuiData.Settings
+		local ConfigData = TukuiConfigShared.Settings
 		
 		if (Data) then
 			 Data[Name] = TukuiDataPerChar
@@ -248,8 +248,12 @@ Install:SetScript("OnEvent", function(self, event, addon)
 			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
 			local Data = TukuiData
 			
-			if Data and Data[Name] then
-				TukuiDataPerChar = Data[Name]
+			if (Data) and (not Data.Settings) then
+				Data.Settings = {}
+			end
+			
+			if Data and Data.Settings[Name] then
+				TukuiDataPerChar = Data.Settings[Name]
 			else
 				TukuiDataPerChar = {}
 			end
@@ -263,8 +267,12 @@ Install:SetScript("OnEvent", function(self, event, addon)
 			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
 			local ConfigData = TukuiConfigShared
 			
-			if ConfigData and ConfigData[Name] then
-				TukuiConfigNotShared = ConfigData[Name]
+			if (ConfigData) and (not ConfigData.Settings) then
+				ConfigData.Settings = {}
+			end
+			
+			if ConfigData and ConfigData.Settings[Name] then
+				TukuiConfigNotShared = ConfigData.Settings[Name]
 			else
 				TukuiConfigNotShared = {}
 			end
