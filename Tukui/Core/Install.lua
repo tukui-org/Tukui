@@ -233,7 +233,7 @@ Install:SetScript("OnEvent", function(self, event, addon)
 		local ConfigData = TukuiConfigShared.Settings
 		
 		if (Data) then
-			 Data[Name] = TukuiDataPerChar
+			Data[Name] = TukuiDataPerChar
 		end	
 		
 		if (ConfigData) then
@@ -246,17 +246,24 @@ Install:SetScript("OnEvent", function(self, event, addon)
 
 		if (IsMac) and (not TukuiDataPerChar) then
 			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
+			if (not TukuiData) then
+				TukuiData = {}
+			end
+			
 			local Data = TukuiData
 			
-			if (Data) and (not Data.Settings) then
+			if (not Data.Settings) then
 				Data.Settings = {}
 			end
 			
 			if Data and Data.Settings[Name] then
 				TukuiDataPerChar = Data.Settings[Name]
-			else
-				TukuiDataPerChar = {}
 			end
+			
+			-- This is needed on live, I don't know why, not needed on Beta.
+			hooksecurefunc("ReloadUI", function()
+				TukuiData.Settings[Name] = TukuiDataPerChar
+			end)
 		end
 
 		if (not TukuiDataPerChar) then
@@ -265,17 +272,24 @@ Install:SetScript("OnEvent", function(self, event, addon)
 		
 		if (IsMac) and (not TukuiConfigNotShared) then
 			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
-			local ConfigData = TukuiConfigShared
+			if (not TukuiConfigShared) then
+				TukuiConfigShared = {}
+			end
 			
-			if (ConfigData) and (not ConfigData.Settings) then
+			local ConfigData = TukuiConfigShared
+
+			if (not ConfigData.Settings) then
 				ConfigData.Settings = {}
 			end
 			
-			if ConfigData and ConfigData.Settings[Name] then
+			if ConfigData.Settings[Name] then
 				TukuiConfigNotShared = ConfigData.Settings[Name]
-			else
-				TukuiConfigNotShared = {}
 			end
+			
+			-- This is needed on live, I don't know why, not needed on Beta.
+			hooksecurefunc("ReloadUI", function()
+				TukuiConfigShared.Settings[Name] = TukuiConfigNotShared
+			end)
 		end
 	
 		local IsInstalled = TukuiDataPerChar.InstallDone
