@@ -1,6 +1,7 @@
 local T, C = select(2, ...):unpack()
 
 local TukuiMedia = CreateFrame("Frame")
+local Locale = GetLocale()
 
 -- Create our own fonts
 local TukuiFont = CreateFont("TukuiFont")
@@ -12,12 +13,20 @@ local TukuiFontOutline = CreateFont("TukuiFontOutline")
 TukuiFontOutline:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
 
 local TukuiUFFont = CreateFont("TukuiUFFont")
-TukuiUFFont:SetFont(C["Medias"].AltFont, 12)
 TukuiUFFont:SetShadowColor(0, 0, 0)
 TukuiUFFont:SetShadowOffset(1.25, -1.25)
+if (Locale == "enUS" or Locale == "enGB" or Locale == "deDE" or Locale == "frFR") then
+	TukuiUFFont:SetFont(C["Medias"].AltFont, 12)
+else
+	TukuiUFFont:SetFont(C["Medias"].Font, 12)
+end
 
 local TukuiUFFontOutline = CreateFont("TukuiUFFontOutline")
-TukuiUFFontOutline:SetFont(C["Medias"].AltFont, 12, "THINOUTLINE")
+if (Locale == "enUS" or Locale == "enGB" or Locale == "deDE" or Locale == "frFR") then
+	TukuiUFFontOutline:SetFont(C["Medias"].AltFont, 12, "THINOUTLINE")
+else
+	TukuiUFFontOutline:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
+end
 
 local PixelFont = CreateFont("TukuiPixelFont")
 PixelFont:SetFont(C["Medias"].PixelFont, 12, "MONOCHROMEOUTLINE")
