@@ -475,6 +475,7 @@ local CreateConfigEditBox = function(parent, group, option, value, max)
 	EditBox.Box:SetScript("OnEscapePressed", EditBoxOnEnterPressed)
 	EditBox.Box:SetScript("OnEnterPressed", EditBoxOnEnterPressed)
 	EditBox.Box:SetScript("OnEditFocusLost", EditBoxOnEditFocusLost)
+	EditBox.Box:SetScript("OnTextChanged", EditBoxOnEnterPressed)
 	EditBox.Box:SetText(value)
 	
 	if (not max) then
