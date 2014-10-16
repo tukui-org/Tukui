@@ -6,21 +6,23 @@ function CD:UpdateCooldown(start, duration, enable, charges, maxcharges, forceSh
 	local Enabled = GetCVar("countdownForCooldowns")
 	
 	if (Enabled) then
-		local NumRegions = self:GetNumRegions()
-		
-		for i = 1, NumRegions do
-			local Region = select(i, self:GetRegions())
+		if not self.IsCooldownTextEdited then
+			local NumRegions = self:GetNumRegions()
 			
-			if Region.GetText and not self.IsCooldownTextEdited then
-				local Font = T.GetFont(C["Cooldowns"].Font)
-				Font = _G[Font]:GetFont()
+			for i = 1, NumRegions do
+				local Region = select(i, self:GetRegions())
+			
+				if Region.GetText then
+					local Font = T.GetFont(C["Cooldowns"].Font)
+					Font = _G[Font]:GetFont()
 				
-				Region:SetFont(Font, 14, "OUTLINE")
-				Region:Point("CENTER", 1, 0)
-				Region:SetTextColor(1, 0, 0)
-				
-				self.IsCooldownTextEdited = true
-			end 
+					Region:SetFont(Font, 14, "OUTLINE")
+					Region:Point("CENTER", 1, 0)
+					Region:SetTextColor(1, 0, 0)
+				end 
+			end
+			
+			self.IsCooldownTextEdited = true
 		end
 	end
 end
