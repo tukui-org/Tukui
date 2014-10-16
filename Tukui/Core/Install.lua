@@ -222,23 +222,62 @@ function Install:Launch()
 	self:SetAllPoints(UIParent)
 end
 
+Install:RegisterEvent("PLAYER_LOGOUT")
 Install:RegisterEvent("ADDON_LOADED")
 Install:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "Tukui") then
-		return
+	local IsMac = IsMacClient()
+	local Name = UnitName("Player")
+	
+	if (event == "PLAYER_LOGOUT" and IsMac) then
+		local Data = TukuiData
+		local ConfigData = TukuiConfigShared
+		
+		if (Data) then
+			 Data[Name] = TukuiDataPerChar
+		end	
+		
+		if (ConfigData) then
+			 ConfigData[Name] = TukuiConfigNotShared
+		end		
+	else
+		if (addon ~= "Tukui") then
+			return
+		end
+
+		if (IsMac) and (not TukuiDataPerChar) then
+			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
+			local Data = TukuiData
+			
+			if Data and Data[Name] then
+				TukuiDataPerChar = Data[Name]
+			else
+				TukuiDataPerChar = {}
+			end
+		end
+
+		if (not TukuiDataPerChar) then
+			TukuiDataPerChar = {}
+		end
+		
+		if (IsMac) and (not TukuiConfigNotShared) then
+			-- Work Around for OSX and saved variables per char. (6.0.2 Blizzard Bug)
+			local ConfigData = TukuiConfigShared
+			
+			if ConfigData and ConfigData[Name] then
+				TukuiConfigNotShared = ConfigData[Name]
+			else
+				TukuiConfigNotShared = {}
+			end
+		end
+	
+		local IsInstalled = TukuiDataPerChar.InstallDone
+	
+		if (not IsInstalled) then
+			self:Launch()
+		end
+	
+		self:UnregisterEvent("ADDON_LOADED")
 	end
-	
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
-	end
-	
-	local IsInstalled = TukuiDataPerChar.InstallDone
-	
-	if (not IsInstalled) then
-		self:Launch()
-	end
-	
-	self:UnregisterAllEvents()
 end)
 
 T["Install"] = Install
