@@ -37,6 +37,7 @@ function TukuiActionBars:DisableBlizzard()
 		
 		Button:UnregisterAllEvents()
 		Button:SetAttribute("statehidden", true)
+		Button:SetAttribute("showgrid", 1)
 	end
 	
 	hooksecurefunc("TalentFrame_LoadUI", function()
