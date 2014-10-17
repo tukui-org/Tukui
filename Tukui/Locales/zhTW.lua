@@ -250,3 +250,10 @@ L.Version = {} -- Version Check
 ------------------------------------------------
 
 L.Version.Outdated = "Your version of Tukui is out of date. You can download the latest version from www.tukui.org"
+
+------------------------------------------------
+L.Others = {} -- Miscellaneous
+------------------------------------------------
+
+L.Others.GlobalSettings = "Use Global Settings"
+L.Others.CharSettings = "Use Character Settings"

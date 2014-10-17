@@ -251,3 +251,10 @@ L.Version = {} -- Version Check
 ------------------------------------------------
 
 L.Version.Outdated = "Ваша версия Tukui устарела. Вы можете скачать последнюю версию на www.tukui.org"
+
+------------------------------------------------
+L.Others = {} -- Miscellaneous
+------------------------------------------------
+
+L.Others.GlobalSettings = "Use Global Settings"
+L.Others.CharSettings = "Use Character Settings"

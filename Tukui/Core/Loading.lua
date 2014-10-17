@@ -7,8 +7,18 @@ function Loading:LoadCustomSettings()
 		TukuiConfigNotShared = {}
 	end
 
-	local Settings = TukuiConfigNotShared
+	if (not TukuiConfigShared) then
+		TukuiConfigShared = {}
+	end
 
+	local Settings
+	
+	if (TukuiConfigPerAccount) then
+		Settings = TukuiConfigShared
+	else
+		Settings = TukuiConfigNotShared
+	end
+	
 	for group, options in pairs(Settings) do
 		if C[group] then
 			local Count = 0

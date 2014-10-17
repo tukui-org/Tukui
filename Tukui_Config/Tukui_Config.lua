@@ -10,7 +10,13 @@ if (Locale == "enGB") then
 end
 
 function TukuiConfig:SetOption(group, option, value)
-	local C = TukuiConfigNotShared
+	local C
+	
+	if (TukuiConfigPerAccount) then
+		C = TukuiConfigShared
+	else
+		C = TukuiConfigNotShared
+	end
 	
 	if (not C[group]) then
 		C[group] = {}
@@ -838,6 +844,8 @@ end
 -- Create the config window
 function TukuiConfig:CreateConfigWindow()
 	local C = Tukui[2]
+	local L = Tukui[3]
+	local SettingText = TukuiConfigPerAccount and L.Others.CharSettings or L.Others.GlobalSettings
 	
 	self:UpdateColorDefaults()
 	
@@ -850,7 +858,7 @@ function TukuiConfig:CreateConfigWindow()
 		end
 	end
 	
-	NumGroups = NumGroups + 2 -- Reload & Close buttons
+	NumGroups = NumGroups + 3 -- Reload & Close & Global buttons
 	
 	local Height = (12 + (NumGroups * 20) + ((NumGroups - 1) * 4)) -- Padding + (NumButtons * ButtonSize) + ((NumButtons - 1) * ButtonSpacing)
 	
@@ -908,6 +916,27 @@ function TukuiConfig:CreateConfigWindow()
 	ReloadButton.Text:SetFont(C.Medias.Font, 12)
 	ReloadButton.Text:Point("CENTER", ReloadButton)
 	ReloadButton.Text:SetText("|cff00FF00"..APPLY.."|r")
+	
+	local GlobalButton = CreateFrame("Button", nil, ConfigFrame)
+	GlobalButton:Size(132, 20)
+	GlobalButton:SetTemplate()
+	GlobalButton:SetScript("OnClick", function()
+		if not TukuiConfigPerAccount then
+			TukuiConfigPerAccount = true
+		else
+			TukuiConfigPerAccount = false
+		end
+		
+		ReloadUI()
+	end)
+	GlobalButton:StyleButton()
+	GlobalButton:SetFrameLevel(LeftWindow:GetFrameLevel() + 1)
+	GlobalButton:SetPoint("BOTTOM", ReloadButton, "TOP", 0, 4)
+	
+	GlobalButton.Text = GlobalButton:CreateFontString(nil, "OVERLAY")
+	GlobalButton.Text:SetFont(C.Medias.Font, 12)
+	GlobalButton.Text:Point("CENTER", GlobalButton)
+	GlobalButton.Text:SetText("|cff00FF00"..SettingText.."|r")
 	
 	local LastButton
 	local ButtonCount = 0

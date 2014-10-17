@@ -2,7 +2,7 @@
 ## Title: |cffff8000Tukui Config|r
 ## Notes: Tukui Config GUI
 ## Author: Hydra & Tukz
-## SavedVariables: TukuiConfigShared
+## SavedVariables: TukuiConfigShared, TukuiConfigPerAccount
 ## SavedVariablesPerCharacter: TukuiConfigNotShared
 ## RequiredDeps: Tukui
 

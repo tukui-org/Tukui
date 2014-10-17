@@ -250,3 +250,10 @@ L.Version = {} -- Version Check
 ------------------------------------------------
 
 L.Version.Outdated = "你的版本的需要更新，你可以从www.tukui.org下载最新版本。"
+
+------------------------------------------------
+L.Others = {} -- Miscellaneous
+------------------------------------------------
+
+L.Others.GlobalSettings = "Use Global Settings"
+L.Others.CharSettings = "Use Character Settings"
