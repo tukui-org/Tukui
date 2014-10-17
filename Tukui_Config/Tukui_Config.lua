@@ -615,7 +615,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	local Button = CreateFrame("Button", nil, DropDown)
 	Button:Size(16, 16)
 	Button:SetTemplate()
-	Button:Point("RIGHT", DropDown, -2, 0)
+	Button:Point("RIGHT", DropDown, -1, 2)
 	Button.Owner = DropDown
 	
 	local ButtonTex = Button:CreateTexture(nil, "OVERLAY")
@@ -630,12 +630,13 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	Label:SetShadowOffset(1.25, -1.25)
 	Label:SetPoint("LEFT", DropDown, "RIGHT", 5, 0)
 	
-	local List = CreateFrame("Frame", nil, DropDown)
+	local List = CreateFrame("Frame", nil, UIParent)
 	List:Point("TOPLEFT", DropDown, "BOTTOMLEFT", 0, -3)
 	List:SetTemplate()
 	List:Hide()
 	List:Width(100)
 	List:SetFrameLevel(DropDown:GetFrameLevel() + 3)
+	List:SetFrameStrata("HIGH")
 	List:EnableMouse(true)
 	List.Owner = DropDown
 	
