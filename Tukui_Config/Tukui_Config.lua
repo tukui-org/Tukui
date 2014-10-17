@@ -11,11 +11,13 @@ end
 
 function TukuiConfig:SetOption(group, option, value)
 	local C
+	local Realm = GetRealmName()
+	local Name = UnitName("Player")
 	
 	if (TukuiConfigPerAccount) then
-		C = TukuiConfigShared
+		C = TukuiConfigShared.Account
 	else
-		C = TukuiConfigNotShared
+		C = TukuiConfigShared[Realm][Name]
 	end
 	
 	if (not C[group]) then

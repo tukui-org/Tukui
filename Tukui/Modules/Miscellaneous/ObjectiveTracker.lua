@@ -63,7 +63,7 @@ function ObjectiveTracker:Enable()
 	local Frame = ObjectiveTrackerFrame
 	local Minimize = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
 	local ScenarioStageBlock = ScenarioStageBlock
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -T.ScreenHeight / 5, -T.ScreenHeight / 4
 	
 	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then

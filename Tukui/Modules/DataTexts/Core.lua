@@ -191,11 +191,11 @@ function TukuiDT:ResetGold()
 end
 
 function TukuiDT:Save()
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
+		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
 	
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	
 	if (not Data.Texts) then
 		Data.Texts = {}
@@ -209,16 +209,16 @@ function TukuiDT:Save()
 end
 
 function TukuiDT:AddDefaults()
-	TukuiDataPerChar.Texts = {}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts = {}
 	
-	TukuiDataPerChar.Texts[L.DataText.Guild] = {true, 1}
-	TukuiDataPerChar.Texts[L.DataText.Durability] = {true, 2}
-	TukuiDataPerChar.Texts[L.DataText.Friends] = {true, 3}
-	TukuiDataPerChar.Texts[L.DataText.FPSAndMS] = {true, 4}
-	TukuiDataPerChar.Texts[L.DataText.Memory] = {true, 5}
-	TukuiDataPerChar.Texts[L.DataText.Gold] = {true, 6}
-	TukuiDataPerChar.Texts[L.DataText.Power] = {true, 7}
-	TukuiDataPerChar.Texts[L.DataText.Time] = {true, 8}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Guild] = {true, 1}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Durability] = {true, 2}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Friends] = {true, 3}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.FPSAndMS] = {true, 4}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Memory] = {true, 5}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Gold] = {true, 6}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Power] = {true, 7}
+	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Time] = {true, 8}
 end
 
 function TukuiDT:Reset()
@@ -234,8 +234,8 @@ function TukuiDT:Reset()
 	
 	self:AddDefaults()
 	
-	if (TukuiDataPerChar and TukuiDataPerChar.Texts) then
-		for Name, Info in pairs(TukuiDataPerChar.Texts) do
+	if (TukuiData[GetRealmName()][UnitName("Player")] and TukuiData[GetRealmName()][UnitName("Player")].Texts) then
+		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("Player")].Texts) do
 			local Enabled, Num = Info[1], Info[2]
 
 			if (Enabled and (Num and Num > 0)) then
@@ -246,7 +246,7 @@ function TukuiDT:Reset()
 					self.Anchors[Num]:SetData(Object)
 				else
 					T.Print("DataText '" .. Name .. "' not found. Removing from cache.")
-					TukuiDataPerChar.Texts[Name] = {false, 0}
+					TukuiData[GetRealmName()][UnitName("Player")].Texts[Name] = {false, 0}
 				end
 			end
 		end
@@ -256,16 +256,16 @@ end
 function TukuiDT:Load()
 	self:CreateAnchors()
 	
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
+		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
 	
-	if (not TukuiDataPerChar.Texts) then
+	if (not TukuiData[GetRealmName()][UnitName("Player")].Texts) then
 		TukuiDT:AddDefaults()
 	end
 	
-	if (TukuiDataPerChar and TukuiDataPerChar.Texts) then
-		for Name, Info in pairs(TukuiDataPerChar.Texts) do
+	if (TukuiData[GetRealmName()][UnitName("Player")] and TukuiData[GetRealmName()][UnitName("Player")].Texts) then
+		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("Player")].Texts) do
 			local Enabled, Num = Info[1], Info[2]
 			
 			if (Enabled and (Num and Num > 0)) then
@@ -276,7 +276,7 @@ function TukuiDT:Load()
 					self.Anchors[Num]:SetData(Object)
 				else
 					T.Print("DataText '" .. Name .. "' not found. Removing from cache.")
-					TukuiDataPerChar.Texts[Name] = {false, 0}
+					TukuiData[GetRealmName()][UnitName("Player")].Texts[Name] = {false, 0}
 				end
 			end
 		end

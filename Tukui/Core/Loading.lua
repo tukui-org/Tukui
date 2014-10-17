@@ -3,20 +3,14 @@ local T, C, L = select(2, ...):unpack()
 local Loading = CreateFrame("Frame")
 
 function Loading:LoadCustomSettings()
-	if (not TukuiConfigNotShared) then
-		TukuiConfigNotShared = {}
-	end
-
-	if (not TukuiConfigShared) then
-		TukuiConfigShared = {}
-	end
-
 	local Settings
+	local Name = UnitName("Player")
+	local Realm = GetRealmName()
 	
 	if (TukuiConfigPerAccount) then
-		Settings = TukuiConfigShared
+		Settings = TukuiConfigShared.Account
 	else
-		Settings = TukuiConfigNotShared
+		Settings = TukuiConfigShared[Realm][Name]
 	end
 	
 	for group, options in pairs(Settings) do

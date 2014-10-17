@@ -11,12 +11,12 @@ function Install:ResetData()
 		T.DataTexts:Reset()
 	end
 	
-	if (TukuiConfigNotShared) then
-		TukuiConfigNotShared = {}
-	end
+	TukuiData[GetRealmName()][UnitName("Player")] = {}
 	
-	if (TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (TukuiConfigPerAccount) then
+		TukuiConfigShared.Account = {}
+	else
+		TukuiConfigShared[GetRealmName()][UnitName("Player")] = {}
 	end
 	
 	ReloadUI()
@@ -77,7 +77,7 @@ function Install:PrintStep(number)
 		self:Hide()
 		
 		if (number > self.MaxStepNumber) then
-			TukuiDataPerChar.InstallDone = true
+			TukuiData[GetRealmName()][UnitName("Player")].InstallDone = true
 			ReloadUI()
 		end
 		
@@ -94,7 +94,7 @@ function Install:PrintStep(number)
 		self.MiddleButton.Text:SetText("|cffFF0000"..RESET_TO_DEFAULT.."|r")
 		self.MiddleButton:SetScript("OnClick", self.ResetData)
 		self.CloseButton:Show()
-		if (TukuiDataPerChar.InstallDone) then
+		if (TukuiData[GetRealmName()][UnitName("Player")].InstallDone) then
 			self.MiddleButton:Show()
 		else
 			self.MiddleButton:Hide()
@@ -152,7 +152,7 @@ function Install:Launch()
 		if (event == "PLAYER_REGEN_DISABLED") then
 			Install:Hide()
 		else
-			if (not TukuiDataPerChar.InstallDone) then
+			if (not TukuiData[GetRealmName()][UnitName("Player")].InstallDone) then
 				Install:Show()
 			end
 		end
@@ -208,7 +208,7 @@ function Install:Launch()
 	self.MiddleButton.Text:SetText("|cffFF0000"..RESET_TO_DEFAULT.."|r")
 	self.MiddleButton:SetScript("OnClick", self.ResetData)
 	self.MiddleButton:SetScript("OnMouseUp", StyleClick)
-	if (TukuiDataPerChar.InstallDone) then
+	if (TukuiData[GetRealmName()][UnitName("Player")].InstallDone) then
 		self.MiddleButton:Show()
 	else
 		self.MiddleButton:Hide()
@@ -239,11 +239,49 @@ Install:SetScript("OnEvent", function(self, event, addon)
 		return
 	end
 
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	local Name = UnitName("Player")
+	local Realm = GetRealmName()
+	
+	if (not TukuiData) then
+		TukuiData = {}
+	end
+	
+	if (not TukuiData[Realm]) then
+		TukuiData[Realm] = {}
+	end
+	
+	if (not TukuiData[Realm][Name]) then
+		TukuiData[Realm][Name] = {}
+	end
+	
+	if (TukuiDataPerChar) then
+		TukuiData[Realm][Name] = TukuiDataPerChar
+		TukuiDataPerChar = nil
 	end
 
-	local IsInstalled = TukuiDataPerChar.InstallDone
+	-- Blizzard have too many issues with per character saved variables, we now move them (if they exists) to account saved variables.
+	if (not TukuiConfigShared) then
+		TukuiConfigShared = {}
+	end
+	
+	if (not TukuiConfigShared.Account) then
+		TukuiConfigShared.Account = {}
+	end
+
+	if (not TukuiConfigShared[Realm]) then
+		TukuiConfigShared[Realm] = {}
+	end
+	
+	if (not TukuiConfigShared[Realm][Name]) then
+		TukuiConfigShared[Realm][Name] = {}
+	end
+	
+	if (TukuiConfigNotShared) then
+		TukuiConfigShared[Realm][Name] = TukuiConfigNotShared
+		TukuiConfigNotShared = nil
+	end
+	
+	local IsInstalled = TukuiData[GetRealmName()][UnitName("Player")].InstallDone
 
 	if (not IsInstalled) then
 		self:Launch()

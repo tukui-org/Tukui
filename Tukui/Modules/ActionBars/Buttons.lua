@@ -32,7 +32,7 @@ function ActionBars:ShowAllButtons(bar, num)
 end
 
 function ActionBars:RemoveColumn(bar, num)
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 
 	if (not bar.NextColumnToHide) then
 		bar.NextColumnToHide = 6
@@ -61,7 +61,7 @@ function ActionBars:RemoveColumn(bar, num)
 end
 
 function ActionBars:RemoveButton(bar, num)
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 
 	if (not bar.NextButtonToHide) then
 		bar.NextButtonToHide = 12
@@ -119,7 +119,7 @@ local OnClick = function(self, button)
 	end
 	
 	local ShiftClick = IsShiftKeyDown()
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	local Text = self.Text
 	local Bar = self.Bar
 	local Num = self.Num
@@ -251,11 +251,11 @@ function ActionBars:CreateToggleButtons()
 end
 
 function ActionBars:LoadVariables()
-	if (not TukuiDataPerChar) then
-		TukuiDataPerChar = {}
+	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
+		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
 	
-	local Data = TukuiDataPerChar
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	
 	-- Hide Buttons
 	for bar = 2, 3 do

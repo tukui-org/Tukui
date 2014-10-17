@@ -26,7 +26,7 @@ function Movers:RestoreDefaults(button)
 	if (self.DragInfo and not self.DragInfo:IsShown()) then 
 		local FrameName = self:GetName()
 		local Data = Movers.Defaults[FrameName]
-		local SavedVariables = TukuiDataPerChar.Move
+		local SavedVariables = TukuiData[GetRealmName()][UnitName("Player")].Move
 	
 		if (button == "RightButton") and (Data) then
 			local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
@@ -59,7 +59,7 @@ end
 function Movers:OnDragStop()
 	self:StopMovingOrSizing()
 	
-	local Data = TukuiDataPerChar.Move
+	local Data = TukuiData[GetRealmName()][UnitName("Player")].Move
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
 	local Frame = self:GetName()
 	
@@ -144,11 +144,11 @@ end
 
 Movers:SetScript("OnEvent", function(self, event)
 	if (event == "PLAYER_ENTERING_WORLD") then
-		if not TukuiDataPerChar.Move then
-			TukuiDataPerChar.Move = {}
+		if not TukuiData[GetRealmName()][UnitName("Player")].Move then
+			TukuiData[GetRealmName()][UnitName("Player")].Move = {}
 		end
 	
-		local Data = TukuiDataPerChar.Move
+		local Data = TukuiData[GetRealmName()][UnitName("Player")].Move
 	
 		for Frame, Position in pairs(Data) do
 			local Frame = _G[Frame]

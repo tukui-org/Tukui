@@ -202,8 +202,8 @@ function TukuiChat:SkinToastFrame()
 end
 
 function TukuiChat:SetDefaultChatFramesPositions()
-	if (not TukuiDataPerChar.Chat) then
-		TukuiDataPerChar.Chat = {}
+	if (not TukuiData[GetRealmName()][UnitName("Player")].Chat) then
+		TukuiData[GetRealmName()][UnitName("Player")].Chat = {}
 	end
 	
 	local Width = T["Panels"].DataTextLeft:GetWidth()
@@ -239,7 +239,7 @@ function TukuiChat:SetDefaultChatFramesPositions()
 		end
 		
 		local Anchor1, Parent, Anchor2, X, Y = Frame:GetPoint()
-		TukuiDataPerChar.Chat["Frame" .. i] = {Anchor1, Anchor2, X, Y, Width, 111}
+		TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. i] = {Anchor1, Anchor2, X, Y, Width, 111}
 	end
 end
 
@@ -248,15 +248,15 @@ function TukuiChat:SaveChatFramePositionAndDimensions()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
 	
-	if not (TukuiDataPerChar.Chat) then
-		TukuiDataPerChar.Chat = {}
+	if not (TukuiData[GetRealmName()][UnitName("Player")].Chat) then
+		TukuiData[GetRealmName()][UnitName("Player")].Chat = {}
 	end
 	
-	TukuiDataPerChar.Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
+	TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
 end
 
 function TukuiChat:SetChatFramePosition()
-	if (not TukuiDataPerChar.Chat) then
+	if (not TukuiData[GetRealmName()][UnitName("Player")].Chat) then
 		return
 	end
 	
@@ -267,7 +267,7 @@ function TukuiChat:SetChatFramePosition()
 	end
 	
 	local ID = Frame:GetID()
-	local Settings = TukuiDataPerChar.Chat["Frame" .. ID]
+	local Settings = TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
 
 	if Settings then
 		local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
