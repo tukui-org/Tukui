@@ -294,6 +294,12 @@ function Tooltip:SetColor()
 end
 
 function Tooltip:OnUpdate(elapsed)
+	local Owner = self:GetOwner()
+
+    if (not Owner) then
+        return
+    end
+    
 	local Red, Green, Blue = self:GetBackdropColor()
 	local Owner = self:GetOwner():GetName()
 	local Anchor = self:GetAnchorType()
