@@ -370,6 +370,11 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Namensplaketten Schriftart",
 			["Desc"] = "Legt die Schriftart der Namensplaketten fest",
 		},
+		
+		["HealthText"] = {
+			["Name"] = "Show Health Text",
+			["Desc"] = "Add a text in the nameplate which show current health",
+		},
 	},
 	
 	["Party"] = {

@@ -365,6 +365,11 @@ TukuiConfig["zhCN"] = {
 			["Name"] = "姓名板字体",
 			["Desc"] = "设置姓名板字体",
 		},
+		
+		["HealthText"] = {
+			["Name"] = "Show Health Text",
+			["Desc"] = "Add a text in the nameplate which show current health",
+		},
 	},
 	
 	["Party"] = {

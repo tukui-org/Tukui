@@ -369,6 +369,11 @@ TukuiConfig["itIT"] = {
 			["Name"] = "NamePlates Font",
 			["Desc"] = "Set a font for nameplates",
 		},
+		
+		["HealthText"] = {
+			["Name"] = "Show Health Text",
+			["Desc"] = "Add a text in the nameplate which show current health",
+		},
 	},
 	
 	["Party"] = {

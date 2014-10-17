@@ -370,6 +370,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Définir la police de caractère des barres d'unités",
 		},
+		
+		["HealthText"] = {
+			["Name"] = "Show Health Text",
+			["Desc"] = "Add a text in the nameplate which show current health",
+		},
 	},
 	
 	["Party"] = {

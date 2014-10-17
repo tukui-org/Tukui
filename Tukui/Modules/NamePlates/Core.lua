@@ -56,21 +56,30 @@ function Plates:GetColor()
 	return Red, Green, Blue
 end
 
+function Plates:UpdateCastBar()
+	local Minimum, Maximum = self:GetMinMaxValues()
+	local Current = self:GetValue()
+	
+	self.NewCast:SetMinMaxValues(Minimum, Maximum)
+	self.NewCast:SetValue(Current)
+end
+
 function Plates:CastOnShow()
-	local NewPlate = self:GetParent()
-	local Height = Plates.PlateCastHeight
 	local Red, Blue, Green = self:GetStatusBarColor()
-	
-	self:ClearAllPoints()
-	self:SetPoint("TOP", NewPlate, 0, -Plates.PlateSpacing - Plates.PlateHeight)
-	self:SetPoint("LEFT", NewPlate)
-	self:SetPoint("RIGHT", NewPlate)
-	self:SetHeight(Height)
-	
-	self.Background:SetTexture(Red * .15, Blue * .15, Green * .15)
-	
-	self.Icon:ClearAllPoints()
-	self.Icon:SetPoint("RIGHT", NewPlate, "LEFT", -Plates.PlateSpacing, 0)
+
+	self.NewCast:Show()
+	self.NewCast:SetStatusBarColor(Red, Blue, Green)
+	self.NewCast.Background:SetTexture(Red * .15, Blue * .15, Green * .15)
+	self:SetScript("OnUpdate", Plates.UpdateCastBar)
+end
+
+function Plates:CastOnHide()
+	self:SetScript("OnUpdate", nil)
+	self.NewCast:Hide()
+end
+
+function Plates:CastOnHide()
+	self.NewCast:Hide()
 end
 
 function Plates:OnShow()
@@ -111,6 +120,13 @@ function Plates:OnShow()
 	self.NewLevel = Hex .. Level .. "|r"
 end
 
+function Plates:UpdateHealthText()
+	local MinHP, MaxHP = self.Health:GetMinMaxValues()
+	local CurrentHP = self.Health:GetValue()
+
+	self.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
+end
+
 function Plates:Skin(obj)
 	local Plate = obj
 	local Texture = T.GetTexture(C["NamePlates"].Texture)
@@ -147,6 +163,7 @@ function Plates:Skin(obj)
 	Plate.Health:SetParent(NewPlate)
 	Plate.Health.Texture = Plate.Health:GetStatusBarTexture()
 	Plate.Health.Texture:SetTexture(nil)
+	--Plate.Health:SetScript("OnChangedValue", Plates.UpdateHealthText)
 	
 	-- New Health
 	Plate.Health.NewTexture = Plate.Health:CreateTexture(nil, "ARTWORK", nil, -6)
@@ -172,6 +189,46 @@ function Plates:Skin(obj)
 	Plate.Threat:SetTexture(nil)
 	
 	-- Casting
+	Plate.Cast:SetAlpha(0)
+	Plate.Cast:SetFrameLevel(1)
+	
+	Plate.NewCast = CreateFrame("StatusBar", nil, Plate.Health)
+	Plate.NewCast:SetStatusBarTexture(C.Medias.Normal)
+	Plate.NewCast:SetMinMaxValues(0, 100)
+	Plate.NewCast:SetHeight(Plates.PlateCastHeight)
+	Plate.NewCast:SetWidth(C.NamePlates.Width)
+	Plate.NewCast:SetPoint("TOP", Plate.Health, "BOTTOM", 0, -4)
+	Plate.NewCast:SetValue(100)
+	Plate.NewCast.Background = Plate.NewCast:CreateTexture(nil, "BACKGROUND")
+	Plate.NewCast.Background:SetAllPoints()
+	Plate.NewCast:CreateShadow()
+	Plate.NewCast:Hide()
+	
+	Plate.Cast.Icon:SetTexCoord(unpack(T.IconCoord))
+	Plate.Cast.Icon:Size(self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
+
+	Plate.Cast.Icon.Backdrop = CreateFrame("Frame", nil, Plate.NewCast)
+	Plate.Cast.Icon.Backdrop:SetFrameLevel(Plate.Cast:GetFrameLevel() - 1)
+	Plate.Cast.Icon.Backdrop:SetAllPoints(Plate.Cast.Icon)
+	Plate.Cast.Icon.Backdrop:CreateShadow()
+	
+	Plate.Cast.Icon:SetParent(Plate.NewCast)
+	Plate.Cast.Icon:ClearAllPoints()
+	Plate.Cast.Icon:SetPoint("TOPRIGHT", Plate.Health, "TOPLEFT", -4, 0)
+	
+	Plate.Cast.Name:SetParent(Plate.NewCast)
+	Plate.Cast.Name:ClearAllPoints()
+	Plate.Cast.Name:Point("BOTTOM", Plate.NewCast, 0, -9)
+	Plate.Cast.Name:Point("LEFT", Plate.NewCast, 7, 0)
+	Plate.Cast.Name:Point("RIGHT", Plate.NewCast, -7, 0)
+	Plate.Cast.Name:SetFont(FontName, FontSize - (IsPixel and 2 or 4), FontFlags)
+	Plate.Cast.Name:SetShadowColor(0, 0, 0, 0)
+	
+	Plate.Cast.NameShadow:SetParent(Plate.NewCast)
+	Plate.Cast.NameShadow:ClearAllPoints()
+	Plate.Cast.NameShadow:SetPoint("CENTER", Plate.Cast.Name, "CENTER", 0, -2)
+	
+	--[[
 	Plate.Cast:SetParent(NewPlate)
 	Plate.Cast:SetStatusBarTexture(Texture)
 	Plate.Cast:CreateShadow()
@@ -195,6 +252,7 @@ function Plates:Skin(obj)
 	Plate.Cast.Name:Point("RIGHT", Plate.Cast, -7, 0)
 	Plate.Cast.Name:SetFont(FontName, FontSize - (IsPixel and 2 or 4), FontFlags)
 	Plate.Cast.Name:SetShadowColor(0, 0, 0, 0)
+	--]]
 	
 	Plate.Cast.Shield:SetTexture(nil) -- DON'T FORGET TO ADD "CHANGE COLOR" WHEN SHOW
 	
@@ -209,10 +267,22 @@ function Plates:Skin(obj)
 	Plate.NewName:SetPoint("RIGHT", NewPlate, 2, 0)
 	Plate.NewName:SetFont(FontName, FontSize - 2, FontFlags)
 	
+	-- Health Text
+	if C.NamePlates.HealthText then
+		Plate.Health.Text = Plate.Health:CreateFontString(nil, "OVERLAY")	
+		Plate.Health.Text:SetFont(FontName, FontSize - 3, FontFlags)
+		Plate.Health.Text:SetShadowColor(0, 0, 0, 0.4)
+		Plate.Health.Text:SetPoint("CENTER", Plate.Health)
+		Plate.Health.Text:SetTextColor(1,1,1)
+		--Plate.Health.Text:SetShadowOffset(T.Mult, -T.Mult)
+	end
+	
+	Plate.Cast.NewCast = Plate.NewCast
+	
 	-- OnShow Execution
 	Plate:HookScript("OnShow", self.OnShow)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
-	Plate.Cast:HookScript("OnSizeChanged", self.CastOnShow)
+	Plate.Cast:HookScript("OnHide", self.CastOnHide)
 	self.OnShow(Plate)
 	
 	-- Tell Tukui that X nameplate is Skinned
@@ -277,6 +347,10 @@ function Plates:Update()
 			end
 			
 			self.UpdateAggro(Plate)
+			
+			if C.NamePlates.HealthText then
+				self.UpdateHealthText(Plate)
+			end
 		else
 			NewPlate:Hide()
 		end

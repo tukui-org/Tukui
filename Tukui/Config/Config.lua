@@ -93,6 +93,7 @@ C["Misc"] = {
 
 C["NamePlates"] = {
 	["Enable"] = true,
+	["HealthText"] = false,
 	["Width"] = 120,
 	["Height"] = 8,
 	["CastHeight"] = 5,
