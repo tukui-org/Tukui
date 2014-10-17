@@ -8,7 +8,7 @@ oUF.colors.tapped = {
 }
 
 oUF.colors.disconnected = {
-	0.84, 0.75, 0.65
+	0.1, 0.1, 0.1
 }
 
 oUF.colors.power = {

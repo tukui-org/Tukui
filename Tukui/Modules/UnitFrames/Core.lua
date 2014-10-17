@@ -262,8 +262,10 @@ function TukuiUnitFrames:UpdateThreat(event, unit)
 	local Health = self.Health
 	local Class = select(2, UnitClass(unit))
 	local Color = not UnitIsPlayer(unit) and Colors.reaction[5] or C["UnitFrames"].DarkTheme and {0.2, 0.2, 0.2} or Colors.class[Class] or {0, 0, 0}
-
-	if Status and Status > 0 then
+	
+	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
+		Health:SetStatusBarColor(unpack(Colors.disconnected))
+	elseif Status and Status > 0 then
 		Health:SetStatusBarColor(1, 0, 0)
 	else
 		Health:SetStatusBarColor(Color[1], Color[2], Color[3])
