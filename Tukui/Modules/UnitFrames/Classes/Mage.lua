@@ -34,14 +34,8 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 		end
 	end
 
-	-- Shadow Effect Updates
-	ArcaneChargeBar:SetScript("OnShow", function(self)
-		TukuiUnitFrames.UpdateShadow(self, 12)
-	end)
-
-	ArcaneChargeBar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, 4)
-	end)
+	ArcaneChargeBar:SetScript("OnShow", TukuiUnitFrames.UpdateMageClassBars)
+	ArcaneChargeBar:SetScript("OnHide", TukuiUnitFrames.UpdateMageClassBars)
 
 	-- Totem Bar (Rune of Power)
 	if (C.UnitFrames.TotemBar) then
@@ -66,6 +60,9 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 
 		TotemBar[3]:Hide()
 		TotemBar[4]:Hide()
+		
+		TotemBar:SetScript("OnShow", TukuiUnitFrames.UpdateMageClassBars)
+		TotemBar:SetScript("OnHide", TukuiUnitFrames.UpdateMageClassBars)
 	end
 
 	-- Register

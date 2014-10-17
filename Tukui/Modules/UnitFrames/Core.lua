@@ -686,6 +686,27 @@ function TukuiUnitFrames:UpdatePriestClassBars()
 	end
 end
 
+function TukuiUnitFrames:UpdateMageClassBars()
+	local Frame = self:GetParent()
+	local Arcane = Frame.ArcaneChargeBar
+	local Totems = Frame.Totems
+	local Shadow = Frame.Shadow
+
+	if (Arcane and Arcane:IsShown()) and (Totems and Totems:IsShown()) then
+		Shadow:Point("TOPLEFT", -4, 21)
+		
+		Totems:ClearAllPoints()
+		Totems:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, 10)		
+	elseif (Arcane and Arcane:IsShown()) or (Totems and Totems:IsShown()) then
+		Shadow:Point("TOPLEFT", -4, 12)
+		
+		Totems:ClearAllPoints()
+		Totems:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, 1)
+	else
+		Shadow:Point("TOPLEFT", -4, 4)
+	end
+end
+
 function TukuiUnitFrames:UpdateDruidClassBars()
 	local Frame = self:GetParent()
 	local EclipseBar = Frame.EclipseBar
