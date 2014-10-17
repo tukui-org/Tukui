@@ -108,6 +108,7 @@ C["Party"] = {
 	["HealBar"] = true,
 	["ShowPlayer"] = true,
 	["ShowHealthText"] = true,
+	["RangeAlpha"] = 0.3,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",
 	["PowerTexture"] = "Tukui",

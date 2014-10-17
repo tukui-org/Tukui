@@ -417,6 +417,11 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Gesundheitsleisten Texture",
 			["Desc"] = "Lege die Texture für die Gesundheitsleisten fest",
 		},
+		
+		["RangeAlpha"] = {
+			["Name"] = "Außer Reichweite Alpha",
+			["Desc"] = "Legt die Tranzparenz für Einheiten fest die außer Reichweite sind",
+		},
 	},
 	
 	["Raid"] = {

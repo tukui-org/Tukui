@@ -417,6 +417,11 @@ TukuiConfig["esES"] = {
 			["Name"] = "Health Bar Texture",
 			["Desc"] = "Set a texture for health bars",
 		},
+		
+		["RangeAlpha"] = {
+			["Name"] = "Out Of Range Alpha",
+			["Desc"] = "Set the transparency of units that are out of range",
+		},
 	},
 	
 	["Raid"] = {

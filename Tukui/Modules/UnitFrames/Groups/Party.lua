@@ -200,6 +200,11 @@ function TukuiUnitFrames:Party()
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 	
+	local Range = {
+		insideAlpha = 1, 
+		outsideAlpha = C["Party"].RangeAlpha,
+	}
+	
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
@@ -214,6 +219,7 @@ function TukuiUnitFrames:Party()
 	self.RaidIcon = RaidIcon
 	self.PhaseIcon = PhaseIcon
 	self.Threat = Threat
+	self.Range = Range
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
 	self:Tag(Role, "[Tukui:Role]")
 end

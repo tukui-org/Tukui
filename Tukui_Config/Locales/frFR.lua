@@ -417,6 +417,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Texture de la barre de santé",
 			["Desc"] = "Définir une texture pour les barres de santé",
 		},
+		
+		["RangeAlpha"] = {
+			["Name"] = "Opacité hors-d'atteinte",
+			["Desc"] = "Défini l'opacité des unitées qui sont hors d'atteinte",
+		},
 	},
 	
 	["Raid"] = {

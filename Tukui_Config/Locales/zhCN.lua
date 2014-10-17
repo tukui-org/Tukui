@@ -412,6 +412,11 @@ TukuiConfig["zhCN"] = {
 			["Name"] = "治疗纹理",
 			["Desc"] = "设置治疗纹理",
 		},
+		
+		["RangeAlpha"] = {
+			["Name"] = "超出范围ALPH",
+			["Desc"] = "设置的单位，超出范围的透明度",
+		},
 	},
 	
 	["Raid"] = {
