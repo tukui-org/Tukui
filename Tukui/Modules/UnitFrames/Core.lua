@@ -779,6 +779,7 @@ function TukuiUnitFrames:GetRaidFramesAttributes()
 		"initial-height", T.Scale(50),
 		"showParty", true,
 		"showRaid", true,
+		"showPlayer", true,
 		"showSolo", false,
 		"xoffset", T.Scale(4),
 		"yOffset", T.Scale(-4),
