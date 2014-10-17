@@ -604,6 +604,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Arena"] = {
 			["Name"] = "Arena Frames",
 			["Desc"] = "Display arena opponents when inside a battleground or arena",

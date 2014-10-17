@@ -599,6 +599,11 @@ TukuiConfig["koKR"] = {
 			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Font"] = {
 			["Name"] = "Unit Frame Font",
 			["Desc"] = "Set a font for unit frames",

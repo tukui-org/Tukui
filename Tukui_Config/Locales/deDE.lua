@@ -599,6 +599,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Wenn eingeschalten, Werden die Einheitenfenster mit dunkel und die Powerbar in Klassen Farbe angezeit",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Arena"] = {
 			["Name"] = "Arena Frames",
 			["Desc"] = "Display arena opponents when inside a battleground or arena",

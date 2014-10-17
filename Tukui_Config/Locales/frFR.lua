@@ -604,6 +604,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Si activé, les cadres d'unités seront d'une couleur sombre avec les barres de puissance aux couleurs des classes",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Arena"] = {
 			["Name"] = "Arena Frames",
 			["Desc"] = "Display arena opponents when inside a battleground or arena",

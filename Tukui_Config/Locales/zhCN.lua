@@ -599,6 +599,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "如果启用，单元框架将是一个暗色使用类彩色动力条",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Arena"] = {
 			["Name"] = "Arena Frames",
 			["Desc"] = "Display arena opponents when inside a battleground or arena",

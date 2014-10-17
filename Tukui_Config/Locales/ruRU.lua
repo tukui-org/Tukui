@@ -604,6 +604,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Если включено, рамки юнитов окрасятся в тёмный цвет, а полоса ресурса в цвет класса",
 		},
 		
+		["Threat"] = {
+			["Name"] = "Enable threat display",
+			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+		},
+		
 		["Arena"] = {
 			["Name"] = "Arena Frames",
 			["Desc"] = "Display arena opponents when inside a battleground or arena",

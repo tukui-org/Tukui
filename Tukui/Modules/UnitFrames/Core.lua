@@ -253,10 +253,10 @@ function TukuiUnitFrames:UpdateNamePosition()
 end
 
 function TukuiUnitFrames:UpdateThreat(event, unit)
-	if not unit then
+	if (not unit) or (not C.UnitFrames.Threat) then
 		return
 	end
-	
+
 	local Colors = T["Colors"]
 	local Status = UnitThreatSituation(unit)
 	local Health = self.Health
