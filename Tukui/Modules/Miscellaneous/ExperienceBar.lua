@@ -98,6 +98,7 @@ function Experience:Create()
 	self:RegisterEvent("PLAYER_LEVEL_UP")
 	self:RegisterEvent("UPDATE_EXHAUSTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:RegisterEvent("PLAYER_UPDATE_RESTING")
 	
 	self:SetScript("OnEvent", self.Update)
 end
