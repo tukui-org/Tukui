@@ -120,6 +120,13 @@ function Movers:StartOrStopMoving()
 			Frame:SetScript("OnDragStart", self.OnDragStart)
 			Frame:SetScript("OnDragStop", self.OnDragStop)
 			Frame.DragInfo:Show()
+			
+			if Frame:GetHeight() < 15 then
+				Frame.CurrentHeight = Frame:GetHeight()
+				Frame:SetHeight(23)
+				Frame.OriginalHeight = Frame.SetHeight
+				Frame.SetHeight = function() end
+			end
 		else
 			if Frame.unit then
 				Frame.unit = Frame.oldunit
@@ -137,6 +144,12 @@ function Movers:StartOrStopMoving()
 			
 			if Frame.DragInfo then
 				Frame.DragInfo:Hide()
+			end
+			
+			if Frame.CurrentHeight then
+				Frame.SetHeight = Frame.OriginalHeight
+				Frame:SetHeight(Frame.CurrentHeight)
+				Frame.CurrentHeight = nil
 			end
 		end		
 	end
