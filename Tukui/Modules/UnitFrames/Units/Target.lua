@@ -286,7 +286,7 @@ function TukuiUnitFrames:Target()
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 	
-	if (C.UnitFrames.ComboBar) then
+	if (Class ~= "ROGUE") then -- rogue have this bar on player
 		local ComboPoints = CreateFrame("Frame", nil, self)
 		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		ComboPoints:Width(250)
