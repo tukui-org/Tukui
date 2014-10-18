@@ -231,35 +231,40 @@ function TukuiUnitFrames:Target()
 	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
 	-- Also the icons in PostCreateAura are not working.
 	--------------------------
-	local Buffs = CreateFrame("Frame", nil, self)
-	local Debuffs = CreateFrame("Frame", nil, self)
+	if (C.UnitFrames.TargetAuras) then
+		local Buffs = CreateFrame("Frame", nil, self)
+		local Debuffs = CreateFrame("Frame", nil, self)
 
-	Buffs:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
+		Buffs:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 
-	Buffs:SetHeight(26)
-	Buffs:SetWidth(252)
-	Buffs.size = 26
-	Buffs.num = 36
-	Buffs.numRow = 9
+		Buffs:SetHeight(26)
+		Buffs:SetWidth(252)
+		Buffs.size = 26
+		Buffs.num = 36
+		Buffs.numRow = 9
 
-	Debuffs:SetHeight(26)
-	Debuffs:SetWidth(252)
-	Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
-	Debuffs.size = 26
-	Debuffs.num = 36
+		Debuffs:SetHeight(26)
+		Debuffs:SetWidth(252)
+		Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
+		Debuffs.size = 26
+		Debuffs.num = 36
 
-	Buffs.spacing = 2
-	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+		Buffs.spacing = 2
+		Buffs.initialAnchor = "TOPLEFT"
+		Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+		Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 
-	Debuffs.spacing = 2
-	Debuffs.initialAnchor = "TOPRIGHT"
-	Debuffs["growth-y"] = "UP"
-	Debuffs["growth-x"] = "LEFT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
-	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+		Debuffs.spacing = 2
+		Debuffs.initialAnchor = "TOPRIGHT"
+		Debuffs["growth-y"] = "UP"
+		Debuffs["growth-x"] = "LEFT"
+		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+		
+		self.Buffs = Buffs
+		self.Debuffs = Debuffs
+	end
 	
 	if (C.UnitFrames.CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
@@ -339,9 +344,6 @@ function TukuiUnitFrames:Target()
 		-- Register
 		self.WeakenedSoul = WSBar
 	end
-
-	self.Buffs = Buffs
-	self.Debuffs = Debuffs
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
 	self.Name = Name

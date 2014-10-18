@@ -94,17 +94,21 @@ function TukuiUnitFrames:Arena()
 	Name:SetFontObject(Font)
 	Name.frequentUpdates = 0.2
 	
-	local Debuffs = CreateFrame("Frame", nil, self)
-	Debuffs:SetHeight(26)
-	Debuffs:SetWidth(200)
-	Debuffs:Point("LEFT", self, "RIGHT", 4, 0)
-	Debuffs.size = 26
-	Debuffs.num = 5
-	Debuffs.spacing = 2
-	Debuffs.initialAnchor = "LEFT"
-	Debuffs["growth-x"] = "RIGHT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	if (C.UnitFrames.ArenaAuras) then
+		local Debuffs = CreateFrame("Frame", nil, self)
+		Debuffs:SetHeight(26)
+		Debuffs:SetWidth(200)
+		Debuffs:Point("LEFT", self, "RIGHT", 4, 0)
+		Debuffs.size = 26
+		Debuffs.num = 5
+		Debuffs.spacing = 2
+		Debuffs.initialAnchor = "LEFT"
+		Debuffs["growth-x"] = "RIGHT"
+		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	
+		self.Debuffs = Debuffs
+	end
 	
 	local SpecIcon = CreateFrame("Frame", nil, self)
 	SpecIcon:Size(22)
@@ -172,7 +176,6 @@ function TukuiUnitFrames:Arena()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.Debuffs = Debuffs
 	self.PVPSpecIcon = SpecIcon
 	self.Trinket = Trinket
 	self.RaidIcon = RaidIcon

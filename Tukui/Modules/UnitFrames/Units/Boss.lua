@@ -88,29 +88,34 @@ function TukuiUnitFrames:Boss()
 	Name:SetFontObject(Font)
 	Name.frequentUpdates = 0.2
 	
-	local Buffs = CreateFrame("Frame", nil, self)
-	Buffs:SetHeight(26)
-	Buffs:SetWidth(252)
-	Buffs:Point("RIGHT", self, "LEFT", -4, 0)
-	Buffs.size = 26
-	Buffs.num = 3
-	Buffs.spacing = 2
-	Buffs.initialAnchor = "RIGHT"
-	Buffs["growth-x"] = "LEFT"
-	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	if (C.UnitFrames.BossAuras) then
+		local Buffs = CreateFrame("Frame", nil, self)
+		Buffs:SetHeight(26)
+		Buffs:SetWidth(252)
+		Buffs:Point("RIGHT", self, "LEFT", -4, 0)
+		Buffs.size = 26
+		Buffs.num = 3
+		Buffs.spacing = 2
+		Buffs.initialAnchor = "RIGHT"
+		Buffs["growth-x"] = "LEFT"
+		Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+		Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 
-	local Debuffs = CreateFrame("Frame", nil, self)
-	Debuffs:SetHeight(26)
-	Debuffs:SetWidth(200)
-	Debuffs:Point("LEFT", self, "RIGHT", 4, 0)
-	Debuffs.size = 26
-	Debuffs.num = 5
-	Debuffs.spacing = 2
-	Debuffs.initialAnchor = "LEFT"
-	Debuffs["growth-x"] = "RIGHT"
-	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+		local Debuffs = CreateFrame("Frame", nil, self)
+		Debuffs:SetHeight(26)
+		Debuffs:SetWidth(200)
+		Debuffs:Point("LEFT", self, "RIGHT", 4, 0)
+		Debuffs.size = 26
+		Debuffs.num = 5
+		Debuffs.spacing = 2
+		Debuffs.initialAnchor = "LEFT"
+		Debuffs["growth-x"] = "RIGHT"
+		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+	
+		self.Debuffs = Debuffs
+		self.Buffs = Buffs
+	end
 	
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
@@ -185,8 +190,6 @@ function TukuiUnitFrames:Boss()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.Debuffs = Debuffs
 	self.AltPowerBar = AltPowerBar
-	self.Buffs = Buffs
 	self.RaidIcon = RaidIcon
 end
