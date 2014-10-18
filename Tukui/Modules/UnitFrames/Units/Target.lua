@@ -248,11 +248,13 @@ function TukuiUnitFrames:Target()
 		Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
 		Debuffs.size = 26
 		Debuffs.num = 36
+		Debuffs.numRow = 9
 
 		Buffs.spacing = 2
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
+		Buffs.PostUpdate = TukuiUnitFrames.UpdateDebuffsHeaderPosition
 
 		Debuffs.spacing = 2
 		Debuffs.initialAnchor = "TOPRIGHT"

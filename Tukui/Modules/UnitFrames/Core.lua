@@ -209,6 +209,24 @@ function TukuiUnitFrames:UpdateBuffsHeaderPosition(height)
 	Buffs:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, height)
 end
 
+function TukuiUnitFrames:UpdateDebuffsHeaderPosition()
+	local NumBuffs = self.visibleBuffs
+	local PerRow = self.numRow
+	local Size = self.size
+	local Row = math.ceil((NumBuffs / PerRow))
+	local Parent = self:GetParent()
+	local Debuffs = Parent.Debuffs
+	local Y = Size * Row
+	local Addition = Size
+	
+	if NumBuffs == 0 then
+		Addition = 0
+	end
+	
+	Debuffs:ClearAllPoints() 
+	Debuffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", -2, Y + Addition)
+end
+
 function TukuiUnitFrames:CustomCastTimeText(duration)
 	local Value = format("%.1f / %.1f", self.channeling and duration or self.max - duration, self.max)
 
