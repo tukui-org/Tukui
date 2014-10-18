@@ -148,6 +148,7 @@ C["Tooltips"] = {
 	["HideOnUnitFrames"] = false,
 	["UnitHealthText"] = true,
 	["ShowSpec"] = true,
+	["MouseOver"] = false,
 	["HealthFont"] = "Tukui",
 	["HealthTexture"] = "Tukui",
 }

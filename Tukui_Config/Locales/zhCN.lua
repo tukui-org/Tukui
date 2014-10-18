@@ -512,6 +512,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["MouseOver"] = {
+			["Name"] = "Mouseover",
+			["Desc"] = "Enable mouseover tooltip",
+		},
+		
 		["HideOnUnitFrames"] = {
 			["Name"] = "隐藏在单元框架",
 			["Desc"] = "不要在单位框显示工具提示",

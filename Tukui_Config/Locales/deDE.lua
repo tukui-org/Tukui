@@ -517,6 +517,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["MouseOver"] = {
+			["Name"] = "Mouseover",
+			["Desc"] = "Enable mouseover tooltip",
+		},
+		
 		["HideOnUnitFrames"] = {
 			["Name"] = "Verstecke bei Einheitenfenster",
 			["Desc"] = "Zeige keinen Tooltip an Einheitenfenstern an",

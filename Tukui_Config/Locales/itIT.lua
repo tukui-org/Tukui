@@ -516,6 +516,11 @@ TukuiConfig["itIT"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["MouseOver"] = {
+			["Name"] = "Mouseover",
+			["Desc"] = "Enable mouseover tooltip",
+		},
+		
 		["HideOnUnitFrames"] = {
 			["Name"] = "Hide on Unit Frames",
 			["Desc"] = "Don't display Tooltips on unit frames",

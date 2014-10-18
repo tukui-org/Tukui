@@ -517,6 +517,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Использовать подсказки в стиле Tukui",
 		},
 		
+		["MouseOver"] = {
+			["Name"] = "Mouseover",
+			["Desc"] = "Enable mouseover tooltip",
+		},
+		
 		["HideOnUnitFrames"] = {
 			["Name"] = "Скрыть для рамок юнитов",
 			["Desc"] = "Не отображать подсказки на рамках юнитов",
