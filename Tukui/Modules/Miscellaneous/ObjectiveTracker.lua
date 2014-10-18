@@ -42,7 +42,7 @@ function ObjectiveTracker:UpdatePopup()
 end
 
 function ObjectiveTracker:AddHooks()
-	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton)
+	-- hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 end
 
