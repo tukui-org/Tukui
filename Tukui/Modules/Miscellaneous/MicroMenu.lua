@@ -18,8 +18,8 @@ MicroMenu.Buttons = {
 	end},
 	{text = ACHIEVEMENT_BUTTON,
 	func = function() ToggleAchievementFrame() end},
-	{text = QUESTLOG_BUTTON,
-	func = function() ToggleFrame(QuestLogFrame) end},
+	{text = WORLD_MAP.." / "..QUESTLOG_BUTTON,
+	func = function() ShowUIPanel(WorldMapFrame) end},
 	{text = MOUNTS,
 	func = function() TogglePetJournal(1) end},
 	{text = PETS,
@@ -32,7 +32,7 @@ MicroMenu.Buttons = {
 	func = function() PVEFrame_ToggleFrame() end},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function() 
-		if IsInGuild() then 
+		if IsInGuild() then
 			if (not GuildFrame) then
 				GuildFrame_LoadUI()
 			end 
