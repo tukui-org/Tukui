@@ -743,30 +743,6 @@ function TukuiUnitFrames:UpdateDruidClassBars()
 	end
 end
 
-function TukuiUnitFrames:UpdateRogueClassBars()
-	local Frame = self:GetParent()
-	local Combo = Frame.ComboPointsBar
-	local Anticipation = Frame.AnticipationBar
-	local Shadow = Frame.Shadow
-	
-	if (not Combo:IsShown()) then
-		Combo:Show()
-	end
-
-	if (Combo and Combo:IsShown()) and (Anticipation and Anticipation:IsShown()) then
-		Shadow:Point("TOPLEFT", -4, 21)
-	else
-		Shadow:Point("TOPLEFT", -4, 12)
-	end
-	
-	if (Anticipation and Anticipation:IsShown()) then
-		for i = 1, 5 do
-			local Pts = Combo[i]
-			Pts:SetAlpha(1)
-		end
-	end
-end
-
 function TukuiUnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",

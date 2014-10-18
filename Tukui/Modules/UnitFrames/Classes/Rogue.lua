@@ -8,63 +8,35 @@ if (Class ~= "ROGUE") then
 end
 
 TukuiUnitFrames.AddClassFeatures["ROGUE"] = function(self)
-	if (C.UnitFrames.ComboBar) then
-		local ComboPoints = CreateFrame("Frame", nil, self)
-		
-		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		ComboPoints:Width(250)
-		ComboPoints:Height(8)
-		ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
-		ComboPoints:SetBackdropColor(0, 0, 0)
-		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+	local AnticipationBar = CreateFrame("Frame", nil, self)
+	AnticipationBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+	AnticipationBar:Width(250)
+	AnticipationBar:Height(8)
+	AnticipationBar:SetBackdrop(TukuiUnitFrames.Backdrop)
+	AnticipationBar:SetBackdropColor(0, 0, 0)
+	AnticipationBar:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
-		for i = 1, 5 do
-			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
-			ComboPoints[i]:Height(8)
-			ComboPoints[i]:SetStatusBarTexture(C.Medias.Normal)
-		
-			if i == 1 then
-				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-				ComboPoints[i]:Width(250 / 5)
-			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
-				ComboPoints[i]:Width(250 / 5 - 1)
-			end					
-		end
+	for i = 1, 5 do
+		AnticipationBar[i] = CreateFrame("StatusBar", nil, AnticipationBar)
+		AnticipationBar[i]:Height(8)
+		AnticipationBar[i]:SetStatusBarTexture(C.Medias.Normal)
 	
-		ComboPoints:SetScript("OnShow", TukuiUnitFrames.UpdateRogueClassBars)
-		ComboPoints:SetScript("OnHide", TukuiUnitFrames.UpdateRogueClassBars)
-		
-		self.ComboPointsBar = ComboPoints
-		
-		if (C.UnitFrames.AnticipationBar) then
-			local AnticipationBar = CreateFrame("Frame", nil, self)
-			
-			AnticipationBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-			AnticipationBar:Width(250)
-			AnticipationBar:Height(8)
-			AnticipationBar:SetBackdrop(TukuiUnitFrames.Backdrop)
-			AnticipationBar:SetBackdropColor(0, 0, 0)
-			AnticipationBar:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
-			for i = 1, 5 do
-				AnticipationBar[i] = CreateFrame("StatusBar", nil, AnticipationBar)
-				AnticipationBar[i]:Height(8)
-				AnticipationBar[i]:SetStatusBarTexture(C.Medias.Normal)
-	
-				if i == 1 then
-					AnticipationBar[i]:Point("LEFT", AnticipationBar, "LEFT", 0, 0)
-					AnticipationBar[i]:Width(250 / 5)
-				else
-					AnticipationBar[i]:Point("LEFT", AnticipationBar[i-1], "RIGHT", 1, 0)
-					AnticipationBar[i]:Width(250 / 5 - 1)
-				end					
-			end
-	
-			AnticipationBar:SetScript("OnShow", TukuiUnitFrames.UpdateRogueClassBars)
-			AnticipationBar:SetScript("OnHide", TukuiUnitFrames.UpdateRogueClassBars)
-			
-			self.AnticipationBar = AnticipationBar
-		end
+		if i == 1 then
+			AnticipationBar[i]:Point("LEFT", AnticipationBar, "LEFT", 0, 0)
+			AnticipationBar[i]:Width(250 / 5)
+		else
+			AnticipationBar[i]:Point("LEFT", AnticipationBar[i-1], "RIGHT", 1, 0)
+			AnticipationBar[i]:Width(250 / 5 - 1)
+		end					
 	end
+	
+	AnticipationBar:SetScript("OnShow", function(self) 
+		TukuiUnitFrames.UpdateShadow(self, 12)
+	end)
+
+	AnticipationBar:SetScript("OnHide", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 4)
+	end)
+
+	self.AnticipationBar = AnticipationBar
 end
