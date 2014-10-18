@@ -599,6 +599,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "启用tukui风格图腾",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "盗贼隐藏栏",
 			["Desc"] = "显示一栏显示盗贼预期点",

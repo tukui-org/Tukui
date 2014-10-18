@@ -604,6 +604,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Создаёт панель тотемов в стиле tukui",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "Пполоса Предчувствия для разбойников",
 			["Desc"] = "Отображает панель Предчувствия разбойника с дополнительными комбо-поинтами",

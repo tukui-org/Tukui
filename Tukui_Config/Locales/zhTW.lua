@@ -604,6 +604,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "Create a tukui style totem bar",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "Rogue Anticipation Bar",
 			["Desc"] = "Display a bar showing rogue anticipation points",
@@ -627,11 +632,6 @@ TukuiConfig["zhTW"] = {
 		["Threat"] = {
 			["Name"] = "Enable threat display",
 			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
-		},
-		
-		["Arena"] = {
-			["Name"] = "Arena Frames",
-			["Desc"] = "Display arena opponents when inside a battleground or arena",
 		},
 		
 		["Arena"] = {

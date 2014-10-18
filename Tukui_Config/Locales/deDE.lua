@@ -599,6 +599,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Erstellt eine tukui style Totem Leiste",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "Schurke Erwartung Leite Anticipation Bar",
 			["Desc"] = "Zeige eine Leister für die Schurken Erwartungspunkte an",

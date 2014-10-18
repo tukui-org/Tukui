@@ -286,37 +286,41 @@ function TukuiUnitFrames:Target()
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 	
-	local ComboPoints = CreateFrame("Frame", nil, self)
-	ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	ComboPoints:Width(250)
-	ComboPoints:Height(8)
-	ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
-	ComboPoints:SetBackdropColor(0, 0, 0)
-	ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+	if (C.UnitFrames.ComboBar) then
+		local ComboPoints = CreateFrame("Frame", nil, self)
+		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+		ComboPoints:Width(250)
+		ComboPoints:Height(8)
+		ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
+		ComboPoints:SetBackdropColor(0, 0, 0)
+		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
-	for i = 1, 5 do
-		ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
-		ComboPoints[i]:Height(8)
-		ComboPoints[i]:SetStatusBarTexture(C.Medias.Normal)
+		for i = 1, 5 do
+			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
+			ComboPoints[i]:Height(8)
+			ComboPoints[i]:SetStatusBarTexture(C.Medias.Normal)
 		
-		if i == 1 then
-			ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-			ComboPoints[i]:Width(250 / 5)
-		else
-			ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
-			ComboPoints[i]:Width(250 / 5 - 1)
-		end					
-	end
+			if i == 1 then
+				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
+				ComboPoints[i]:Width(250 / 5)
+			else
+				ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
+				ComboPoints[i]:Width(250 / 5 - 1)
+			end					
+		end
 	
-	ComboPoints:SetScript("OnShow", function(self) 
-		TukuiUnitFrames.UpdateShadow(self, 12)
-		TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 14)
-	end)
+		ComboPoints:SetScript("OnShow", function(self) 
+			TukuiUnitFrames.UpdateShadow(self, 12)
+			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 14)
+		end)
 
-	ComboPoints:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, 4)
-		TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 4)
-	end)
+		ComboPoints:SetScript("OnHide", function(self)
+			TukuiUnitFrames.UpdateShadow(self, 4)
+			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 4)
+		end)
+		
+		self.ComboPointsBar = ComboPoints
+	end
 	
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
@@ -346,6 +350,5 @@ function TukuiUnitFrames:Target()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
-	self.ComboPointsBar = ComboPoints
 	self.RaidIcon = RaidIcon
 end

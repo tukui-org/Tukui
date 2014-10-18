@@ -597,6 +597,11 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Create a tukui style totem bar",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "Rogue Anticipation Bar",
 			["Desc"] = "Display a bar showing rogue anticipation points",

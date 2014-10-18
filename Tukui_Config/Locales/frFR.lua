@@ -604,6 +604,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Créer une barre de totem de style Tukui",
 		},
 		
+		["ComboBar"] = {
+			["Name"] = "Combo Points",
+			["Desc"] = "Enable the combo points bar",
+		},
+		
 		["AnticipationBar"] = {
 			["Name"] = "Barre d'anticipation Voleur",
 			["Desc"] = "Afficher une barre indiquant les points d'anticipation voleur",

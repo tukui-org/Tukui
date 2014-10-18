@@ -157,6 +157,7 @@ C["UnitFrames"] = {
 	["Enable"] = true,
 	["Portrait"] = false,
 	["CastBar"] = true,
+	["ComboBar"] = true,
 	["UnlinkCastBar"] = false,
 	["CastBarIcon"] = true,
 	["CastBarLatency"] = true,
