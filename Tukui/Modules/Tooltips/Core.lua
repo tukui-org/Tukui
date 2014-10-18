@@ -64,7 +64,8 @@ function Tooltip:SetTooltipDefaultAnchor(parent)
 	
 	if (C.Tooltips.MouseOver) then
 		if (parent ~= UIParent) then
-			self:SetOwner(parent, "ANCHOR_NONE")
+			self:SetOwner(Anchor)
+			self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 9)
 		else
 			self:SetOwner(parent, "ANCHOR_CURSOR")
 		end	
@@ -359,9 +360,7 @@ function Tooltip:Enable()
 		return
 	end
 	
-	if not C.Tooltips.MouseOver then
-		self:CreateAnchor()
-	end
+	self:CreateAnchor()
 	
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 
