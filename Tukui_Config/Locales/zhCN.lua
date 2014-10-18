@@ -475,6 +475,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "显示治疗单位的损失量.",
 		},
 		
+		["VerticalHealth"] = {
+			["Name"] = "Vertical Health",
+			["Desc"] = "Display health lost vertically",
+		},
+		
 		["Font"] = {
 			["Name"] = "Raid框架名字字体",
 			["Desc"] = "设置RAID框架名字字体",

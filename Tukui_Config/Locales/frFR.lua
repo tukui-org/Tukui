@@ -480,6 +480,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Indiquez le montant de la santé perdue de l'unité.",
 		},
 		
+		["VerticalHealth"] = {
+			["Name"] = "Vertical Health",
+			["Desc"] = "Display health lost vertically",
+		},
+		
 		["Font"] = {
 			["Name"] = "Police de caractère des noms",
 			["Desc"] = "Définir la police de caractère des noms des cadre de raid",

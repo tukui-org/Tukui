@@ -473,6 +473,11 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Show the amount of health the unit lost.",
 		},
 		
+		["VerticalHealth"] = {
+			["Name"] = "Vertical Health",
+			["Desc"] = "Display health lost vertically",
+		},
+		
 		["Font"] = {
 			["Name"] = "Raid Frame Name Font",
 			["Desc"] = "Set a font for name text on raid frames",

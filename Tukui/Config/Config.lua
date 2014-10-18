@@ -126,6 +126,7 @@ C["Raid"] = {
 	["ShowRessurection"] = true,
 	["ShowHealthText"] = true,
 	["ShowPets"] = true,
+	["VerticalHealth"] = false,
 	["MaxUnitPerColumn"] = 10,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",

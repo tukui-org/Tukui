@@ -480,6 +480,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Показывать количество недостающего здоровья.",
 		},
 		
+		["VerticalHealth"] = {
+			["Name"] = "Vertical Health",
+			["Desc"] = "Display health lost vertically",
+		},
+		
 		["Font"] = {
 			["Name"] = "Шрифт имен на рамках рейда",
 			["Desc"] = "Установить шрифт для имен на рамках рейда",

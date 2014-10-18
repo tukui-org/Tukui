@@ -480,6 +480,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Zeige die menge an Gesundheit die die einheit verloren hat.",
 		},
 		
+		["VerticalHealth"] = {
+			["Name"] = "Vertical Health",
+			["Desc"] = "Display health lost vertically",
+		},
+		
 		["Font"] = {
 			["Name"] = "Schlachtzugsfenster Namensschriftart",
 			["Desc"] = "Legt die Schriftart für die Namen im Schlachtzugsfenster an",
