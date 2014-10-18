@@ -623,7 +623,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	local Button = CreateFrame("Button", nil, DropDown)
 	Button:Size(16, 16)
 	Button:SetTemplate()
-	Button:Point("RIGHT", DropDown, -1, 2)
+	Button:Point("RIGHT", DropDown, -2, 0)
 	Button.Owner = DropDown
 	
 	local ButtonTex = Button:CreateTexture(nil, "OVERLAY")
