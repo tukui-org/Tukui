@@ -307,11 +307,9 @@ function Bags:CreateContainer(storagetype, ...)
 					ToggleBagsContainer.Text:SetTextColor(.4, .4, .4)
 				end
 			else
-				if BankFrame:IsShown() then
-					CloseBankFrame()
-				else
-					ToggleAllBags()
-				end
+				CloseAllBags()
+				CloseBankBagFrames()
+				CloseBankFrame()
 			end	
 		end)
 	
@@ -796,7 +794,7 @@ function Bags:ToggleBags()
 	end
 	
 	-- Bank Toggle
-	if Bank:IsShown() then
+	if Bag:IsShown() and Bank:IsShown() and not ReagentBankFrame:IsShown() then		
 		self.Bank:Show()
 		
 		for i = 5, 11 do
