@@ -58,6 +58,7 @@ local Enable = function(self)
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
+	self:SetScript("OnMouseDown", function() ToggleCharacter("PaperDollFrame") end)
 	self:Update()
 end
 
