@@ -581,6 +581,7 @@ end
 
 function Bags:UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
+	local FirstButton
 	
 	for Bag = 5, 1, -1 do
 		local ID = Bag - 1
@@ -589,7 +590,11 @@ function Bags:UpdateAllBags()
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"..Bag.."Item"..Item]
 			local Money = ContainerFrame1MoneyFrame
-
+			
+			if not FirstButton then
+				FirstButton = Button
+			end
+			
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
@@ -610,7 +615,7 @@ function Bags:UpdateAllBags()
 			Money:SetFrameLevel(2)
 			Money:SetScale(1)
 			
-			if (Bag == 5 and Item == Slots) then
+			if (Button == FirstButton) then
 				Button:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 10, -40)
 				LastRowButton = Button
 				LastButton = Button
