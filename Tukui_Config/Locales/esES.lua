@@ -643,5 +643,10 @@ TukuiConfig["esES"] = {
 			["Name"] = "Health Bar Texture",
 			["Desc"] = "Set a texture for health bars",
 		},
+		
+		["CastTexture"] = {
+			["Name"] = "Cast Bar Texture",
+			["Desc"] = "Set a texture for cast bars",
+		},
 	},
 }

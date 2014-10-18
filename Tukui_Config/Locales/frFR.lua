@@ -643,5 +643,10 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Texture de la barre de santé",
 			["Desc"] = "Définir une texture pour les barres de santé",
 		},
+		
+		["CastTexture"] = {
+			["Name"] = "Cast Bar Texture",
+			["Desc"] = "Set a texture for cast bars",
+		},
 	},
 }

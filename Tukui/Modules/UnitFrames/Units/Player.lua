@@ -7,6 +7,7 @@ local Class = select(2, UnitClass("player"))
 function TukuiUnitFrames:Player()
 	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 	local DarkTheme = C["UnitFrames"].DarkTheme
 
@@ -130,7 +131,7 @@ function TukuiUnitFrames:Player()
 
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiPlayerCastBar", self)
-		CastBar:SetStatusBarTexture(C.Medias.Normal)
+		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
 		CastBar:SetInside(Panel)
 

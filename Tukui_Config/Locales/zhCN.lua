@@ -638,5 +638,10 @@ TukuiConfig["zhCN"] = {
 			["Name"] = "治疗条纹理",
 			["Desc"] = "设置治疗条纹理",
 		},
+		
+		["CastTexture"] = {
+			["Name"] = "Cast Bar Texture",
+			["Desc"] = "Set a texture for cast bars",
+		},
 	},
 }

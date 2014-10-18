@@ -8,6 +8,7 @@ function TukuiUnitFrames:Target()
 	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 	
 	self:RegisterForClicks("AnyUp")
@@ -161,7 +162,7 @@ function TukuiUnitFrames:Target()
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
-		CastBar.Background:SetTexture(C.Medias.Normal)
+		CastBar.Background:SetTexture(CastTexture)
 		CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")

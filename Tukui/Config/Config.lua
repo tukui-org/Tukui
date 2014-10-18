@@ -173,4 +173,5 @@ C["UnitFrames"] = {
 	["Font"] = "Tukui UF Outline",
 	["PowerTexture"] = "Tukui",
 	["HealthTexture"] = "Tukui",
+	["CastTexture"] = "Tukui",
 }

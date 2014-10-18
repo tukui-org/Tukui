@@ -638,5 +638,10 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Gesundheitsleiste Texture",
 			["Desc"] = "Legit die Texture für die Gesundheitsleiste fest",
 		},
+		
+		["CastTexture"] = {
+			["Name"] = "Cast Bar Texture",
+			["Desc"] = "Set a texture for cast bars",
+		},
 	},
 }

@@ -643,5 +643,10 @@ TukuiConfig["ruRU"] = {
 			["Name"] = "Текстура плосы здоровтья",
 			["Desc"] = "Установить текстуру для плосы здоровтья",
 		},
+		
+		["CastTexture"] = {
+			["Name"] = "Cast Bar Texture",
+			["Desc"] = "Set a texture for cast bars",
+		},
 	},
 }
