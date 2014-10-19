@@ -42,7 +42,7 @@ function ObjectiveTracker:UpdatePopup()
 end
 
 function ObjectiveTracker:AddHooks()
-	-- hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
+	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 end
 
@@ -66,16 +66,11 @@ function ObjectiveTracker:Enable()
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -T.ScreenHeight / 5, -T.ScreenHeight / 4
 	
-	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
-		Anchor1, Parent, Anchor2, X, Y = unpack(Data.Move.TukuiObjectiveTracker)
+	if Data and Data.Move and Data.Move.ObjectiveTrackerFrame then
+		Anchor1, Parent, Anchor2, X, Y = unpack(Data.Move.ObjectiveTrackerFrame)
 	end
-	
-	ObjectiveTracker:Size(Frame:GetWidth(), 23)
-	ObjectiveTracker:SetMovable(true)
-	ObjectiveTracker:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 
-	Frame:SetParent(ObjectiveTracker)
-	Frame:SetPoint("TOPRIGHT")
+	Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 	Frame.ClearAllPoints = Noop
 	Frame.SetPoint = Noop
 
@@ -101,7 +96,7 @@ function ObjectiveTracker:Enable()
 	
 	ObjectiveTracker:AddHooks()
 	
-	Movers:RegisterFrame(ObjectiveTracker)
+	Movers:RegisterFrame(Frame)
 end
 
 Miscellaneous.ObjectiveTracker = ObjectiveTracker
