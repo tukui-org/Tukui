@@ -27,3 +27,5 @@ SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
 
 Tukui = Engine
+
+DisableAddOn("Tukui_ConfigUI")
