@@ -41,10 +41,14 @@ function ObjectiveTracker:UpdatePopup()
 	end
 end
 
+function ObjectiveTracker:SetTrackerPosition()
+	self:SetPoint("TOPRIGHT", ObjectiveTracker)
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
-	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self) self:SetPoint("TOPRIGHT", ObjectiveTracker) end)
+	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", self.SetTrackerPosition)
 end
 
 function ObjectiveTracker:Minimize()
