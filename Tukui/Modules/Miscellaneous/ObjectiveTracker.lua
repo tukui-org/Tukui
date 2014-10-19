@@ -72,6 +72,8 @@ function ObjectiveTracker:Enable()
 	
 	self:Size(235, 23)
 	self:SetPoint(Anchor1, Parent, Anchor2, X, Y)
+	self:AddHooks()
+	self.SetTrackerPosition(Frame)
 
 	Movers:RegisterFrame(self)
 	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
@@ -100,9 +102,6 @@ function ObjectiveTracker:Enable()
 	Minimize.Text:Point("CENTER", Minimize)
 	Minimize.Text:SetText("X")
 	Minimize:HookScript("OnClick", ObjectiveTracker.Minimize)
-	
-	ObjectiveTracker:AddHooks()
-	ObjectiveTracker.SetTrackerPosition(Frame)
 	
 	Frame.ClearAllPoints = function() end
 	Frame.SetPoint = function() end
