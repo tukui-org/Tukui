@@ -44,6 +44,7 @@ end
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
+	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self) self:SetPoint("TOPRIGHT", ObjectiveTracker) end)
 end
 
 function ObjectiveTracker:Minimize()
@@ -69,11 +70,10 @@ function ObjectiveTracker:Enable()
 	if Data and Data.Move and Data.Move.ObjectiveTrackerFrame then
 		Anchor1, Parent, Anchor2, X, Y = unpack(Data.Move.ObjectiveTrackerFrame)
 	end
-
-	Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
-	Frame.ClearAllPoints = Noop
-	Frame.SetPoint = Noop
-
+	
+	self:Size(235, 23)
+	self:SetPoint(Anchor1, Parent, Anchor2, X, Y)
+	
 	for i = 1, 5 do
 		local Module = ObjectiveTrackerFrame.MODULES[i]
 
@@ -96,7 +96,7 @@ function ObjectiveTracker:Enable()
 	
 	ObjectiveTracker:AddHooks()
 	
-	Movers:RegisterFrame(Frame)
+	Movers:RegisterFrame(self)
 end
 
 Miscellaneous.ObjectiveTracker = ObjectiveTracker
