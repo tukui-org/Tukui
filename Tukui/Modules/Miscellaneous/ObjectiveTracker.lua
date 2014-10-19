@@ -72,9 +72,10 @@ function ObjectiveTracker:Enable()
 	
 	self:Size(235, 23)
 	self:SetPoint(Anchor1, Parent, Anchor2, X, Y)
-	
+
 	Movers:RegisterFrame(self)
-	
+	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
+
 	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
 		self:ClearAllPoints()
 		self:SetPoint(unpack(Data.Move.TukuiObjectiveTracker))

@@ -49,7 +49,7 @@ end
 
 function Movers:RegisterFrame(frame)
 	local Anchor1, Parent, Anchor2, X, Y = frame:GetPoint()
-	
+
 	tinsert(self.Frames, frame)
 	
 	self:SaveDefaults(frame, Anchor1, Parent, Anchor2, X, Y)
