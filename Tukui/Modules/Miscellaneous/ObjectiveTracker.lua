@@ -70,8 +70,8 @@ function ObjectiveTracker:Enable()
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -T.ScreenHeight / 5, -T.ScreenHeight / 4
 	
-	if Data and Data.Move and Data.Move.ObjectiveTrackerFrame then
-		Anchor1, Parent, Anchor2, X, Y = unpack(Data.Move.ObjectiveTrackerFrame)
+	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
+		Anchor1, Parent, Anchor2, X, Y = unpack(Data.Move.TukuiObjectiveTracker)
 	end
 	
 	self:Size(235, 23)

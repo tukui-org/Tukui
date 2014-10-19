@@ -374,6 +374,8 @@ function Tooltip:Enable()
 		Tooltip:HookScript("OnShow", self.Skin)
 	end
 	
+	ItemRefCloseButton:SkinCloseButton()
+	
 	HealthBar:SetStatusBarTexture(T.GetTexture(C["Tooltips"].HealthTexture))
 	HealthBar:CreateBackdrop()
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
