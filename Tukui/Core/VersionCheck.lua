@@ -11,8 +11,6 @@ function TukuiVersion:Check(event, prefix, message, channel, sender)
 			return
 		end
 		
-		print(Version, tonumber(message))
-		
 		if (tonumber(message) > Version) then -- We recieved a higher version, we're outdated. :(
 			T.Print(L.Version.Outdated)
 			self:UnregisterEvent("CHAT_MSG_ADDON")
