@@ -23,29 +23,32 @@ function Movers:SaveDefaults(frame, a1, p, a2, x, y)
 end
 
 function Movers:RestoreDefaults(button)
-	if (self.DragInfo and not self.DragInfo:IsShown()) then 
-		local FrameName = self:GetName()
-		local Data = Movers.Defaults[FrameName]
-		local SavedVariables = TukuiData[GetRealmName()][UnitName("Player")].Move
+	local FrameName = self:GetParent():GetName()
+	local Data = Movers.Defaults[FrameName]
+	local SavedVariables = TukuiData[GetRealmName()][UnitName("Player")].Move
+
+	if (button == "RightButton") and (Data) then
+		local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
+		local Frame = _G[FrameName]
+		local Parent = _G[ParentName]
 	
-		if (button == "RightButton") and (Data) then
-			local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
-			local Frame = _G[FrameName]
-			local Parent = _G[ParentName]
+		Frame:ClearAllPoints()
+		Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 		
-			Frame:ClearAllPoints()
-			Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
-		
-			-- Delete Saved Variable
-			SavedVariables[FrameName] = nil
-		end
+		Frame.DragInfo:ClearAllPoints()
+		Frame.DragInfo:SetAllPoints(Frame)
+	
+		-- Delete Saved Variable
+		SavedVariables[FrameName] = nil
 	end
 end
 
 function Movers:RegisterFrame(frame)
+	local Anchor1, Parent, Anchor2, X, Y = frame:GetPoint()
+	
 	tinsert(self.Frames, frame)
 	
-	frame:HookScript("OnMouseUp", self.RestoreDefaults)
+	self:SaveDefaults(frame, Anchor1, Parent, Anchor2, X, Y)
 end
 
 function Movers:OnDragStart()
@@ -53,8 +56,6 @@ function Movers:OnDragStart()
 	local FrameParent = self:GetParent()
 	
 	self:StartMoving()
-	
-	Movers:SaveDefaults(FrameParent, Anchor1, Parent, Anchor2, X, Y)
 end
 
 function Movers:OnDragStop()
@@ -64,7 +65,6 @@ function Movers:OnDragStop()
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
 	local FrameName = self:GetParent():GetName()
 	local Frame = self:GetParent()
-	
 	
 	Frame:ClearAllPoints()
 	Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
@@ -90,6 +90,7 @@ function Movers:CreateDragInfo()
 	self.DragInfo:SetMovable(true)
 	self.DragInfo:RegisterForDrag("LeftButton")
 	self.DragInfo:Hide()
+	self.DragInfo:SetScript("OnMouseUp", Movers.RestoreDefaults)
 end
 
 function Movers:StartOrStopMoving()
