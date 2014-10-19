@@ -208,6 +208,9 @@ function Bags:CreateReagentContainer()
 	end
 	
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 20) - ButtonSpacing)
+	Reagent:SetScript("OnHide", function()
+		ReagentBankFrame:Hide()
+	end)
 	
 	-- Unlock window
 	local Unlock = ReagentBankFrameUnlockInfo
