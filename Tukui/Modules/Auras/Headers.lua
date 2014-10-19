@@ -45,8 +45,6 @@ function TukuiAuras:CreateHeaders()
 			else
 				Header.Backdrop.Text:SetText(L.Auras.MoveDebuffs)
 			end
-			
-			Movers:RegisterFrame(Header)
 		end
 		
 		Header:SetAttribute("minWidth", C["Auras"].BuffsPerRow * 35)
@@ -75,6 +73,8 @@ function TukuiAuras:CreateHeaders()
 		Buffs:SetAttribute("includeWeapons", 1)
 		Buffs:SetAttribute("consolidateDuration", -1)
 		Buffs:Show()
+		
+		Movers:RegisterFrame(Buffs)
 	
 		Proxy = Buffs:GetAttribute("consolidateProxy")
 		Proxy:HookScript("OnShow", function(self)
@@ -128,6 +128,8 @@ function TukuiAuras:CreateHeaders()
 		end
 		
 		Debuffs:SetAttribute("filter", "HARMFUL")
-		Debuffs:Show()		
+		Debuffs:Show()
+		
+		Movers:RegisterFrame(Debuffs)	
 	end
 end

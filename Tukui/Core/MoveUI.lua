@@ -12,6 +12,10 @@ Movers.Frames = {}
 Movers.Defaults = {}
 
 function Movers:SaveDefaults(frame, a1, p, a2, x, y)
+	if not a1 then
+		return
+	end
+	
 	if not p then
 		p = UIParent
 	end
@@ -45,7 +49,7 @@ end
 
 function Movers:RegisterFrame(frame)
 	local Anchor1, Parent, Anchor2, X, Y = frame:GetPoint()
-	
+	print(frame:GetName(), Anchor1, Parent, Anchor2, X, Y)
 	tinsert(self.Frames, frame)
 	
 	self:SaveDefaults(frame, Anchor1, Parent, Anchor2, X, Y)
