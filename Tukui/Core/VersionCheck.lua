@@ -18,14 +18,11 @@ function TukuiVersion:Check(event, prefix, message, channel, sender)
 	else
 		-- Tell everyone what version we use.
 		local Channel
-		local InInstance, InstanceType = IsInInstance()
 		
 		if IsInRaid() then
 			Channel = (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID"
 		elseif IsInGroup() then
 			Channel = (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY"
-		elseif (InInstance and InstanceType == "pvp") then
-			Channel = "BATTLEGROUND"
 		elseif IsInGuild() then
 			Channel = "GUILD"
 		end
