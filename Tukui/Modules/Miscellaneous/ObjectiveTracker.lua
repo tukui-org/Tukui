@@ -42,13 +42,12 @@ function ObjectiveTracker:UpdatePopup()
 end
 
 function ObjectiveTracker:SetTrackerPosition()
-	self:SetPoint("TOPRIGHT", ObjectiveTracker)
+	ObjectiveTrackerFrame:SetPoint("TOPRIGHT", ObjectiveTracker)
 end
 
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.SetQuestItemButton) -- TAINTING?!?
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
-	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", self.SetTrackerPosition)
 end
 
 function ObjectiveTracker:Minimize()
@@ -99,6 +98,10 @@ function ObjectiveTracker:Enable()
 	Minimize:HookScript("OnClick", ObjectiveTracker.Minimize)
 	
 	ObjectiveTracker:AddHooks()
+	ObjectiveTracker.SetTrackerPosition(Frame)
+	
+	Frame.ClearAllPoints = function() end
+	Frame.SetPoint = function() end
 	
 	Movers:RegisterFrame(self)
 end
