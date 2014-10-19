@@ -91,9 +91,9 @@ function TukuiDT:CreateAnchors()
 		self.Anchors[i] = Frame
 		
 		if (i == 1) then
-			Frame:Point("LEFT", DataTextLeft, 1, 1)
+			Frame:Point("LEFT", DataTextLeft, 1, 0)
 		elseif (i == 4) then
-			Frame:Point("LEFT", DataTextRight, 1, 1)
+			Frame:Point("LEFT", DataTextRight, 1, 0)
 		elseif (i == 7) then
 			Frame:Point("CENTER", MinimapDataTextOne, 0, 0)
 			Frame:Size(MinimapDataTextOne:GetWidth() - 2, MinimapDataTextOne:GetHeight() - 2)
