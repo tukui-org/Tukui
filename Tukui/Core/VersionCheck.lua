@@ -2,32 +2,38 @@
 
 local TukuiVersion = CreateFrame("Frame")
 local Version = tonumber(GetAddOnMetadata("Tukui", "Version"))
-local SendAddonMessage = SendAddonMessage
-local LE_PARTY_CATEGORY_HOME = LE_PARTY_CATEGORY_HOME
-local tonumber = tonumber
-local Outdated = L.Version.Outdated
+local MyName = UnitName("player") .. "-" .. GetRealmName()
+MyName = gsub(MyName, "%s+", "")
 
 function TukuiVersion:Check(event, prefix, message, channel, sender)
-	
 	if (event == "CHAT_MSG_ADDON") then
-		if (prefix ~= "TukuiVersion") or (sender == T.myname) then
+		if (prefix ~= "TukuiVersion") or (sender == MyName) then
 			return
 		end
 		
+		print(Version, tonumber(message))
+		
 		if (tonumber(message) > Version) then -- We recieved a higher version, we're outdated. :(
-			T.Print(Outdated)
+			T.Print(L.Version.Outdated)
 			self:UnregisterEvent("CHAT_MSG_ADDON")
 		end
 	else
 		-- Tell everyone what version we use.
-		if (not IsInGroup(LE_PARTY_CATEGORY_HOME)) or (not IsInRaid(LE_PARTY_CATEGORY_HOME)) then
-			SendAddonMessage("TukuiVersion", Version, "INSTANCE_CHAT")
-		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("TukuiVersion", Version, "RAID")
-		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendAddonMessage("TukuiVersion", Version, "PARTY")
+		local Channel
+		local InInstance, InstanceType = IsInInstance()
+		
+		if IsInRaid() then
+			Channel = (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID"
+		elseif IsInGroup() then
+			Channel = (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY"
+		elseif (InInstance and InstanceType == "pvp") then
+			Channel = "BATTLEGROUND"
 		elseif IsInGuild() then
-			SendAddonMessage("TukuiVersion", Version, "GUILD")
+			Channel = "GUILD"
+		end
+		
+		if Channel then -- Putting a small delay on the call just to be certain it goes out.
+			T.Delay(2, SendAddonMessage, "TukuiVersion", Version, Channel)
 		end
 	end
 end
