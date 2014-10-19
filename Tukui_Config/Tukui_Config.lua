@@ -184,6 +184,16 @@ local EditBoxOnEditFocusLost = function(self)
 	self:SetAutoFocus(false)
 end
 
+local EditBoxOnTextChange = function(self)
+	local Value = self:GetText()
+	
+	if (type(tonumber(Value)) == "number") then -- Assume we want a number, not a string
+		Value = tonumber(Value)
+	end
+	
+	TukuiConfig:SetOption(self.Group, self.Option, Value)
+end
+
 local EditBoxOnEnterPressed = function(self)
 	self:SetAutoFocus(false)
 	self:ClearFocus()
@@ -483,7 +493,7 @@ local CreateConfigEditBox = function(parent, group, option, value, max)
 	EditBox.Box:SetScript("OnEscapePressed", EditBoxOnEnterPressed)
 	EditBox.Box:SetScript("OnEnterPressed", EditBoxOnEnterPressed)
 	EditBox.Box:SetScript("OnEditFocusLost", EditBoxOnEditFocusLost)
-	EditBox.Box:SetScript("OnTextChanged", EditBoxOnEnterPressed)
+	EditBox.Box:SetScript("OnTextChanged", EditBoxOnTextChange)
 	EditBox.Box:SetText(value)
 	
 	if (not max) then
