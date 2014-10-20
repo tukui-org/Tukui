@@ -10,7 +10,9 @@ function ObjectiveTracker:SetQuestItemButton(block)
 	if (Button and not Button.IsSkinned) then
 		local Icon = Button.icon
 		
-		Button:SkinButton()
+		Button:SetNormalTexture("")
+		Button:CreateBackdrop()
+		Button.Backdrop:SetOutside(Button, 0, 0)
 		Button:StyleButton()
 		
 		Icon:SetTexCoord(.1,.9,.1,.9)
