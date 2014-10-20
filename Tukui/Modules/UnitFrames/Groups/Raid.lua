@@ -163,8 +163,8 @@ function TukuiUnitFrames:Raid()
 			ThirdBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT", 0, 0)			
 		end
 		
+		ThirdBar:SetFrameLevel(Health:GetFrameLevel() - 2)
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
-		
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 		
 		self.HealPrediction = {
