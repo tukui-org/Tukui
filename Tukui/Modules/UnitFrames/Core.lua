@@ -311,7 +311,7 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 			end
 		end
 		
-		if (C["UnitFrames"].DarkTheme ~= true and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["UnitFrames"].DarkTheme ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
+		if (C["UnitFrames"].DarkTheme ~= true and C["UnitFrames"].TargetEnemyHostileColor and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["UnitFrames"].DarkTheme ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
 			local Colors = T["Colors"]
 			local Color = Colors.reaction[UnitReaction(unit, "player")]
 			

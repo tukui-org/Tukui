@@ -554,6 +554,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["TargetEnemyHostileColor"] = {
+			["Name"] = "Enemy Target Hostile Color",
+			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+		},
+		
 		["Portrait"] = {
 			["Name"] = "Activer Joueur et portrait de la cible",
 			["Desc"] = "Activer Joueur et portrait de la cible",

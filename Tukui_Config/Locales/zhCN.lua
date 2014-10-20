@@ -524,7 +524,7 @@ TukuiConfig["zhCN"] = {
 		
 		["UnitHealthText"] = {
 			["Name"] = "显示血量数值",
-			["Desc"] = "在Tooltips上显示血量数值"",
+			["Desc"] = "在Tooltips上显示血量数值",
 		},
 		
 		["ShowSpec"] = {
@@ -547,6 +547,11 @@ TukuiConfig["zhCN"] = {
 		["Enable"] = {
 			["Name"] = "启用头像框架",
 			["Desc"] = "Derp",
+		},
+		
+		["TargetEnemyHostileColor"] = {
+			["Name"] = "Enemy Target Hostile Color",
+			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
 		},
 		
 		["Portrait"] = {

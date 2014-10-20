@@ -162,6 +162,7 @@ C["UnitFrames"] = {
 	["CastBarIcon"] = true,
 	["CastBarLatency"] = true,
 	["Smooth"] = true,
+	["TargetEnemyHostileColor"] = true,
 	["CombatLog"] = false,
 	["WeakBar"] = true,
 	["HealBar"] = true,

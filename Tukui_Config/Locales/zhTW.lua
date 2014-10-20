@@ -539,6 +539,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["TargetEnemyHostileColor"] = {
+			["Name"] = "Enemy Target Hostile Color",
+			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+		},
+		
 		["Portrait"] = {
 			["Name"] = "人物頭像",
 			["Desc"] = "顯示玩家與目標的人物頭像",

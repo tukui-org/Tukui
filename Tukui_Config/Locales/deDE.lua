@@ -554,6 +554,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["TargetEnemyHostileColor"] = {
+			["Name"] = "Enemy Target Hostile Color",
+			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+		},
+		
 		["CastBar"] = {
 			["Name"] = "Schalte Zauberleiste ein",
 			["Desc"] = "Schalte die Zauberleiste für die Einhatienfenster ein",

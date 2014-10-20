@@ -554,6 +554,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Использовать рамки юнитов Tukui",
 		},
 		
+		["TargetEnemyHostileColor"] = {
+			["Name"] = "Enemy Target Hostile Color",
+			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+		},
+		
 		["Portrait"] = {
 			["Name"] = "Enable Player & Target Portrait",
 			["Desc"] = "Enable Player & Target Portrait",
