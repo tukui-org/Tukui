@@ -44,12 +44,13 @@ function Experience:Update(event, owner)
 	
 	local Current, Max = self:GetExperience()
 	local Rested = GetXPExhaustion()
+	local IsRested = GetRestState()
 	
 	for i = 1, self.NumBars do
 		self["XPBar"..i]:SetMinMaxValues(0, Max)
 		self["XPBar"..i]:SetValue(Current)
 		
-		if Rested then
+		if (IsRested == 1 and Rested) then
 			self["RestedBar"..i]:SetMinMaxValues(0, Max)
 			self["RestedBar"..i]:SetValue(Rested + Current)
 		end
