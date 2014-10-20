@@ -53,6 +53,8 @@ function Experience:Update(event, owner)
 		if (IsRested == 1 and Rested) then
 			self["RestedBar"..i]:SetMinMaxValues(0, Max)
 			self["RestedBar"..i]:SetValue(Rested + Current)
+		else
+			self["RestedBar"..i]:SetValue(0)
 		end
 	end
 end
