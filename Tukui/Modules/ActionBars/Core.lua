@@ -93,6 +93,11 @@ function TukuiActionBars:ShowGrid()
 	end
 end
 
+function TukuiActionBars:ChangeBlizzardOptionsDescription()
+	InterfaceOptionsActionBarsPanelRight.Text:SetText(L.ActionBars.CenterBar)
+	InterfaceOptionsActionBarsPanelRightTwo.Text:SetText(SHOW_MULTIBAR3_TEXT)
+end
+
 function TukuiActionBars:AddPanels()
 	local Size = C.ActionBars.NormalButtonSize
 	local PetSize = C.ActionBars.PetButtonSize
@@ -179,8 +184,7 @@ function TukuiActionBars:AddPanels()
 		A7.Backdrop:SetTemplate()
 	end
 	
-	SHOW_MULTIBAR4_TEXT = SHOW_MULTIBAR3_TEXT
-	SHOW_MULTIBAR3_TEXT = L.ActionBars.CenterBar
+	InterfaceOptionsFrame:HookScript("OnShow", TukuiActionBars.ChangeBlizzardOptionsDescription)
 	
 	Panels.ActionBar1 = A1
 	Panels.ActionBar2 = A2
