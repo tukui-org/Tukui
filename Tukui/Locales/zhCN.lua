@@ -16,7 +16,7 @@ L.ChatFrames.LookingForGroup = "寻求组队"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
-L.DataText.AvoidanceBreakdown = "Avoidance Breakdown"
+L.DataText.AvoidanceBreakdown = "免伤统计"
 L.DataText.Level = "等级"
 L.DataText.Boss = "Boss"
 L.DataText.Miss = "未命中"
@@ -88,9 +88,9 @@ L.DataText.StatsFor = "统计数据 "
 L.DataText.HonorableKill = "荣誉击杀:"
 L.DataText.Death = "死亡:"
 L.DataText.HonorGained = "获得的荣誉:"
-L.DataText.DamageDone = "伤害的效果"
+L.DataText.DamageDone = "伤害造成"
 L.DataText.HealingDone = "治疗效果:"
-L.DataText.BaseAssault = "基地袭击:"
+L.DataText.BaseAssault = "袭击基地:"
 L.DataText.BaseDefend = "基地防御:"
 L.DataText.TowerAssault = "哨塔的攻击:"
 L.DataText.TowerDefend = "哨塔:"
@@ -235,15 +235,15 @@ L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : 启用或禁用
 L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : 安装或重置Tukui来恢复默认设置."
 L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : 显示的游戏配置窗口."
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : 移动框架."
-L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : 测试单元框架."
+L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : 测试头像."
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant
 ------------------------------------------------
 
 L.Merchant.NotEnoughMoney = "您没有足够的金钱来修理!"
-L.Merchant.RepairCost = "您的物品已经修好了"
-L.Merchant.SoldTrash = "您的垃圾物品已出售"
+L.Merchant.RepairCost = "修理装备花费"
+L.Merchant.SoldTrash = "出售垃圾获得"
 
 ------------------------------------------------
 L.Version = {} -- Version Check
@@ -255,5 +255,5 @@ L.Version.Outdated = "你的版本的需要更新，你可以从www.tukui.org下
 L.Others = {} -- Miscellaneous
 ------------------------------------------------
 
-L.Others.GlobalSettings = "Use Global Settings"
-L.Others.CharSettings = "Use Character Settings"
+L.Others.GlobalSettings = "使用全局通用设定"
+L.Others.CharSettings = "使用角色专用设定"

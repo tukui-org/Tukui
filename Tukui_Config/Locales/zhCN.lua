@@ -19,54 +19,54 @@ TukuiConfig["zhCN"] = {
 		
 		["UIScale"] = {
 			["Name"] = "UI比例",
-			["Desc"] = "设置自定义UI比例",
+			["Desc"] = "自定义UI缩放比例",
 		},
 		
 		["BackdropColor"] = {
 			["Name"] = "背景颜色",
-			["Desc"] = "决定框架的背景颜色”"..RestoreDefault,
+			["Desc"] = "设定tukui整体框架的背景颜色”"..RestoreDefault,
 		},
 		
 		["BorderColor"] = {
 			["Name"] = "边框颜色",
-			["Desc"] = "决定框架的边框颜色"..RestoreDefault,
+			["Desc"] = "设定tuikui整体框架的边框颜色"..RestoreDefault,
 		},
 		
 		["HideShadows"] = {
-			["Name"] = "显示或隐藏",
-			["Desc"] = "显示或者隐藏tukui框架",
+			["Name"] = "隐藏阴影",
+			["Desc"] = "在某些tukui框架开启或关闭阴影效果",
 		},
 	},
 	
 	["ActionBars"] = {
 		["Enable"] = {
-			["Name"] = "启用动作条",
+			["Name"] = "启用快捷列",
 			["Desc"] = "Derp",
 		},
 		
 		["HotKey"] = {
 			["Name"] = "快捷键",
-			["Desc"] = "在按钮上显示快捷键文字",
+			["Desc"] = "在快捷键上显示名字",
 		},
 		
 		["Macro"] = {
 			["Name"] = "宏键",
-			["Desc"] = "在按钮显示宏",
+			["Desc"] = "在快捷键显示宏的名字",
 		},
 		
 		["ShapeShift"] = {
-			["Name"] = "转变",
-			["Desc"] = "使用tukui风格皮肤",
+			["Name"] = "姿态列",
+			["Desc"] = "使用tukui姿态列",
 		},
 		
 		["Pet"] = {
 			["Name"] = "宠物",
-			["Desc"] = "使用tukui风格宠物皮肤",
+			["Desc"] = "使用tukui风格宠物控制列",
 		},
 		
 		["NormalButtonSize"] = {
 			["Name"] = "按钮大小",
-			["Desc"] = "设置一个动作栏按钮的大小",
+			["Desc"] = "设置一个快捷键的大小",
 		},
 		
 		["PetButtonSize"] = {
@@ -75,33 +75,33 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ButtonSpacing"] = {
-			["Name"] = "按钮的间隔",
-			["Desc"] = "设置操作栏按钮之间的间距",
+			["Name"] = "按键间隔",
+			["Desc"] = "设置每个之间快捷键的间距",
 		},
 		
 		["OwnShadowDanceBar"] = {
-			["Name"] = "暗影之舞条",
-			["Desc"] = "使用自己的暗影之舞动作条",
+			["Name"] = "暗影之舞",
+			["Desc"] = "使用独立的暗影之舞快捷列代替主快捷列",
 		},
 		
 		["OwnMetamorphosisBar"] = {
-			["Name"] = "幻化条",
-			["Desc"] = "使用幻化条",
+			["Name"] = "恶魔变形",
+			["Desc"] = "使用独立的恶魔变形快捷列代替主快捷列",
 		},
 		
 		["OwnWarriorStanceBar"] = {
 			["Name"] = "战士姿态",
-			["Desc"] = "启用战士姿态动作条",
+			["Desc"] = "每一种姿态都使用一个独立的快捷列",
 		},
 		
 		["HideBackdrop"] = {
 			["Name"] = "隐藏背景",
-			["Desc"] = "禁止在动作条的背景下",
+			["Desc"] = "不显示快捷列的背景",
 		},
 		
 		["Font"] = {
-			["Name"] = "动作条字体",
-			["Desc"] = "设置动作条字体",
+			["Name"] = "快捷列字体",
+			["Desc"] = "设置快捷列字体",
 		},
 	},
 	
@@ -112,28 +112,28 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Consolidate"] = {
-			["Name"] = "光环增强 ",
-			["Desc"] = "启用统一光环",
+			["Name"] = "光环合并 ",
+			["Desc"] = "合并团队buff",
 		},
 		
 		["Flash"] = {
-			["Name"] = "闪光光环",
-			["Desc"] = "闪光的光环时，持续时间较低"..PerformanceSlight,
+			["Name"] = "光环闪烁",
+			["Desc"] = "光环即将消失时闪烁"..PerformanceSlight,
 		},
 		
 		["ClassicTimer"] = {
 			["Name"] = "经典的计时器",
-			["Desc"] = "使用下面的光环文本定时器",
+			["Desc"] = "在光环下方显示倒数文字",
 		},
 		
-		["HideBuffs"] = {
-			["Name"] = "隐藏增益效果",
-			["Desc"] = "隐藏角色增益效果",
+	    ["HideBuffs"] = {
+			["Name"] = "隐藏增益",
+			["Desc"] = "不显示角色增益效果",
 		},
 		
 		["HideDebuffs"] = {
-			["Name"] = "隐藏负面效果",
-			["Desc"] = "隐藏角色负面效果",
+			["Name"] = "隐藏减益",
+			["Desc"] = "隐藏角色减益效果",
 		},
 		
 		["Animation"] = {
@@ -143,7 +143,7 @@ TukuiConfig["zhCN"] = {
 		
 		["BuffsPerRow"] = {
 			["Name"] = "每行增益效果",
-			["Desc"] = "创建一个新行数的设置显示每行增益效果",
+			["Desc"] = "设置每一行显示的数量",
 		},
 		
 		["Font"] = {
@@ -159,23 +159,23 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ButtonSize"] = {
-			["Name"] = "插槽尺寸",
-			["Desc"] = "设置背包插槽大小",
+			["Name"] = "格子尺寸",
+			["Desc"] = "设置背包格子大小",
 		},
 		
 		["Spacing"] = {
 			["Name"] = "间距",
-			["Desc"] = "设置背包的间距",
+			["Desc"] = "设置背包之间的间距",
 		},
 		
 		["ItemsPerRow"] = {
 			["Name"] = "每行物品",
-			["Desc"] = "设置多少插槽的每一行上的背包",
+			["Desc"] = "设置背包每一行格子的数量",
 		},
 		
 		["PulseNewItem"] = {
-			["Name"] = "闪光的新物品(s)",
-			["Desc"] = "在你的包新物品将有一个动画",
+			["Name"] = "高亮提示",
+			["Desc"] = "高亮动画提示背包新获的物品",
 		},
 		
 		["Font"] = {
@@ -184,9 +184,9 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["BagFilter"] = {
-			["Name"] = "使用背包过滤",
-			["Desc"] = "清理的时候自动删除您的包没用物品",
-			["Default"] = "清理的时候自动删除您的包没用物品",
+			["Name"] = "拾取过滤",
+			["Desc"] = "拾取物品时自动删除灰色物品",
+			["Default"] = "拾取物品时自动删除灰色物品",
 		},
 	},
 	
@@ -197,28 +197,28 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["WhisperSound"] = {
-			["Name"] = "私语声音",
-			["Desc"] = "收到私语的时候播放声音",
+			["Name"] = "密语提示",
+			["Desc"] = "收到密语的时候播放声音",
 		},
 		
 		["LinkColor"] = {
 			["Name"] = "URL链接颜色",
-			["Desc"] = "设置URL链接显示颜色"..RestoreDefault,
+			["Desc"] = "设置URL链接颜色"..RestoreDefault,
 		},
 		
 		["LinkBrackets"] = {
 			["Name"] = "URL链接括号",
-			["Desc"] = "包在括号中显示的URL链接",
+			["Desc"] = "将URL网址以括号括起",
 		},
 		
 		["LootFrame"] = {
 			["Name"] = "战利品框架",
-			["Desc"] = "建立一个独立的'掉落'聊天框",
+			["Desc"] = "建立一个独立掉落记录框",
 		},
 		
 		["Background"] = {
 			["Name"] = "聊天背景",
-			["Desc"] = "创建一个背景聊天框架",
+			["Desc"] = "创建一个聊天框背景",
 		},
 		
 		["ChatFont"] = {
@@ -228,26 +228,26 @@ TukuiConfig["zhCN"] = {
 		
 		["TabFont"] = {
 			["Name"] = "聊天标签字体",
-			["Desc"] = "设置字体被聊天标签使用",
+			["Desc"] = "设置聊天标签字体",
 		},
 		
 		["ScrollByX"] = {
 			["Name"] = "鼠标拖动",
-			["Desc"] = "设置行滚动时聊天会跳的数量",
+			["Desc"] = "设置鼠标滚轮滚动时拖动行数",
 		},
 	},
 	
 	["Cooldowns"] = {
 		["Font"] = {
 			["Name"] = "冷却时间字体",
-			["Desc"] = "设置冷却时间字体",
+			["Desc"] = "设置冷却计时字体",
 		},
 	},
 	
 	["DataTexts"] = {
 		["Battleground"] = {
 			["Name"] = "开启战场",
-			["Desc"] = "启动显示战场信息",
+			["Desc"] = "显示战场信息",
 		},
 		
 		["LocalTime"] = {
@@ -256,45 +256,45 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Time24HrFormat"] = {
-			["Name"] = "24小时时间格式",
-			["Desc"] = "允许设置的时间数据文字24小时格式.",
+			["Name"] = "24小时制",
+			["Desc"] = "以24小时制显示时间.",
 		},
 		
 		["NameColor"] = {
-			["Name"] = "标签颜色",
-			["Desc"] = "设置的数据文本标签的颜色"..RestoreDefault,
+			["Name"] = "项目颜色",
+			["Desc"] = "设置信息项目名的颜色"..RestoreDefault,
 		},
 		
 		["ValueColor"] = {
-			["Name"] = "彩色值",
-			["Desc"] = "设置颜色为文字数据值"..RestoreDefault,
+			["Name"] = "数值颜色",
+			["Desc"] = "设置信息数值颜色"..RestoreDefault,
 		},
 		
 		["Font"] = {
-			["Name"] = "数据文本字体",
-			["Desc"] = "设置字体要使用的数据文本",
+			["Name"] = "信息字体",
+			["Desc"] = "设置信息条的字体",
 		},
 	},
 	
 	["Merchant"] = {
 		["AutoSellGrays"] = {
 			["Name"] = "自动出售灰色的",
-			["Desc"] = "当访问商人，自动出售灰色物品",
+			["Desc"] = "自动出售灰色物品",
 		},
 		
 		["SellMisc"] = {
-			["Name"] = "卖杂项 物品",
-			["Desc"] = "自动售没用的东西不属于品质灰色",
+			["Name"] = "自动卖杂物",
+			["Desc"] = "自动售不是灰色物品但没用杂物",
 		},
 		
 		["AutoRepair"] = {
 			["Name"] = "自动修理",
-			["Desc"] = "访问商人的时候自动修理装备",
+			["Desc"] = "自动修理装备",
 		},
 		
 		["UseGuildRepair"] = {
 			["Name"] = "使用工会修理",
-			["Desc"] = "使用“自动修复”时，使用从公会银行资金",
+			["Desc"] = "启用自动修复时，使用公会银行资金",
 		},
 	},
 	
@@ -305,23 +305,23 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["AltPowerBarEnable"] = {
-			["Name"] = "启用按住Alt能量条",
+			["Name"] = "启用能量条",
 			["Desc"] = "Derp",
 		},
 		
 		["ExperienceEnable"] = {
 			["Name"] = "使用经验条",
-			["Desc"] = "使在屏幕的左边和右边的两个经验条.",
+			["Desc"] = "使用经验条",
 		},
 		
 		["ReputationEnable"] = {
 			["Name"] = "启用声望条",
-			["Desc"] = "使在屏幕的左边和右边的两个名声条.",
+			["Desc"] = "启用声望条",
 		},
 		
 		["ErrorFilterEnable"] = {
 			["Name"] = "启用过滤错误",
-			["Desc"] = "过滤掉从UI错误框架消息.",
+			["Desc"] = "过滤UI错误LUA消息.",
 		},
 	},
 	
@@ -352,8 +352,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["NonTargetAlpha"] = {
-			["Name"] = "非目标测试",
-			["Desc"] = "姓名板非目标测试",
+			["Name"] = "非目标淡出",
+			["Desc"] = "非当前目标的姓名板透明度",
 		},
 		
 		["Texture"] = {
@@ -367,102 +367,102 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealthText"] = {
-			["Name"] = "Show Health Text",
-			["Desc"] = "Add a text in the nameplate which show current health",
+			["Name"] = "显示血条文字",
+			["Desc"] = "添加在姓名板显示血条文字",
 		},
 	},
 	
 	["Party"] = {
 		["Enable"] = {
-			["Name"] = "队友框架",
+			["Name"] = "小队框架",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "模型",
-			["Desc"] = "队友框架显示的模型",
+			["Name"] = "人物头像",
+			["Desc"] = "在小队框架显示人物头像",
 		},
 		
 		["HealBar"] = {
 			["Name"] = "治疗提示",
-			["Desc"] = "Display a bar showing incoming heals & absorbs",
+			["Desc"] = "显示即将到来的治疗与吸收",
 		},
 		
 		["ShowPlayer"] = {
 			["Name"] = "显示玩家",
-			["Desc"] = "显示自己在框架",
+			["Desc"] = "在小队框架上显示自己",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "治疗数字",
-			["Desc"] = "显示治疗的损失量.",
+			["Name"] = "血量文字",
+			["Desc"] = "显示血量具体数值",
 		},
 		
 		["Font"] = {
-			["Name"] = "团队框名字字体",
-			["Desc"] = "设置团队名字的字体",
+			["Name"] = "框架字体",
+			["Desc"] = "设置小队框架字体",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "治疗团队框体",
-			["Desc"] = "设置治疗字体",
+			["Name"] = "血量字体",
+			["Desc"] = "小队框架的血量数值字体",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "能量纹理",
-			["Desc"] = "设置能量纹理",
+			["Name"] = "能量条材质",
+			["Desc"] = "设置能量条材质",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "治疗纹理",
-			["Desc"] = "设置治疗纹理",
+			["Name"] = "血量材质条",
+			["Desc"] = "设置血量材质条",
 		},
 		
-		["RangeAlpha"] = {
+	    ["RangeAlpha"] = {
 			["Name"] = "超出范围ALPH",
-			["Desc"] = "设置的单位，超出范围的透明度",
+			["Desc"] = "设定超出范围的透明度",
 		},
 	},
 	
 	["Raid"] = {
 		["Enable"] = {
-			["Name"] = "启用RAID框架",
+			["Name"] = "启用团队框架",
 			["Desc"] = "Derp",
 		},
 		
-		["ShowPets"] = {
-			["Name"] = "Show Pets",
+	    ["ShowPets"] = {
+			["Name"] = "显示宠物",
 			["Desc"] = "Derp",
 		},
 		
 		["MaxUnitPerColumn"] = {
-			["Name"] = "Raid members per column",
-			["Desc"] = "Change the max number of raid members per column",
+			["Name"] = "每列团队成员",
+			["Desc"] = "修改每列团队成员的最大数",
 		},
 		
 		["HealBar"] = {
-			["Name"] = "治疗",
-			["Desc"] = "显示治疗的损失量",
+			["Name"] = "治疗提示",
+			["Desc"] = "显示即将到来的治疗与吸收",
 		},
 		
 		["AuraWatch"] = {
-			["Name"] = "光环时间",
-			["Desc"] = "计时器显示在RAID框架的的角落",
+			["Name"] = "光环监视",
+			["Desc"] = "在团队框架的角落显示光环",
 		},
 		
 		["AuraWatchTimers"] = {
 			["Name"] = "光环计时器",
-			["Desc"] = "显示于用户的Debuff关注建立的DEBUFF图标的计时器",
+			["Desc"] = "显示debuff的秒数",
 		},
 		
 		["DebuffWatch"] = {
 			["Name"] = "减益效果",
-			["Desc"] = "显示在RAID框架的大图标当玩家有重要的debuff",
+			["Desc"] = "以大图标在团队框架上显示重要的debuff",
 		},
 		
 		["RangeAlpha"] = {
 			["Name"] = "超出范围ALPH",
-			["Desc"] = "设置的单位，超出范围的透明度",
+			["Desc"] = "设定超出范围的透明度",
 		},
 		
 		["ShowRessurection"] = {
@@ -471,102 +471,102 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "治疗数据",
-			["Desc"] = "显示治疗单位的损失量.",
+			["Name"] = "血量文字",
+			["Desc"] = "显示血量的具体数值",
 		},
 		
 		["VerticalHealth"] = {
-			["Name"] = "Vertical Health",
-			["Desc"] = "Display health lost vertically",
+			["Name"] = "纵向血量",
+			["Desc"] = "纵向显示损失的血量",
 		},
 		
 		["Font"] = {
-			["Name"] = "Raid框架名字字体",
-			["Desc"] = "设置RAID框架名字字体",
+			["Name"] = "框架字体",
+			["Desc"] = "设置团队框架的字体",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "Raid框架治疗字体",
-			["Desc"] = "设置RAID框架治疗字体",
+			["Name"] = "血量字体",
+			["Desc"] = "设置团队框架上血量数值的字体",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "能量纹理",
-			["Desc"] = "设置能量条纹理",
+			["Name"] = "能量条材质",
+			["Desc"] = "设置能量条材质",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "治疗条纹理",
-			["Desc"] = "设置治疗条纹理",
+			["Name"] = "血量材质条",
+			["Desc"] = "设置血量条材质",
 		},
 		
 		["GroupBy"] = {
 			["Name"] = "分组",
-			["Desc"] = "自定义raids组进行排序",
+			["Desc"] = "定义团队框架的排序方式",
 		},
 	},
 	
 	["Tooltips"] = {
 		["Enable"] = {
-			["Name"] = "启用工具提示",
+			["Name"] = "启用鼠标提示",
 			["Desc"] = "Derp",
 		},
 		
-		["MouseOver"] = {
-			["Name"] = "Mouseover",
-			["Desc"] = "Enable mouseover tooltip",
+			["MouseOver"] = {
+			["Name"] = "鼠标指向",
+			["Desc"] = "启用鼠标指向tooltip",
 		},
 		
 		["HideOnUnitFrames"] = {
-			["Name"] = "隐藏在单元框架",
-			["Desc"] = "不要在单位框显示工具提示",
+			["Name"] = "隐藏头像提示",
+			["Desc"] = "指向头像框架不显示Tooltips",
 		},
 		
 		["UnitHealthText"] = {
-			["Name"] = "显示治疗文本",
-			["Desc"] = "工具提示血条上显示的治疗条",
+			["Name"] = "显示血量数值",
+			["Desc"] = "在Tooltips上显示血量数值"",
 		},
 		
 		["ShowSpec"] = {
-			["Name"] = "专业等级",
-			["Desc"] = "显示玩家专业在提示栏",
+			["Name"] = "专精",
+			["Desc"] = "显示玩家的专精",
 		},
 		
 		["HealthFont"] = {
-			["Name"] = "治疗条字体",
-			["Desc"] = "设置字体要使用下面的单元工具提示的血条",
+			["Name"] = "血量条字体",
+			["Desc"] = "设置Tooltips血量数值的字体",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "治疗条纹理",
-			["Desc"] = "设置纹理要使用下面的单元工具提示的血条",
+			["Name"] = "血量材质条",
+			["Desc"] = "设置血量材质条",
 		},
 	},
 	
 	["UnitFrames"] = {
 		["Enable"] = {
-			["Name"] = "启用组框架",
+			["Name"] = "启用头像框架",
 			["Desc"] = "Derp",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "启用玩家与目标模型",
-			["Desc"] = "启用玩家与目标模型",
+			["Name"] = "人物头像",
+			["Desc"] = "显示玩家与目标人物头像",
 		},
 		
 		["CastBar"] = {
 			["Name"] = "施法条",
-			["Desc"] = "启用施法条的单位框架",
+			["Desc"] = "启用施法条",
 		},
 		
 		["UnlinkCastBar"] = {
-			["Name"] = "取消施法条",
-			["Desc"] = "移动玩家和目标单元框外栏，并允许施法条在屏幕上移动",
+			["Name"] = "解锁施法条",
+			["Desc"] = "使施法条独立，不依附玩家与目标框架，并允许施法条在屏幕上移动",
 		},
 		
 		["CastBarIcon"] = {
 			["Name"] = "施法条图标",
-			["Desc"] = "建立施法栏旁边的图标",
+			["Desc"] = "建立施法图标",
 		},
 		
 		["CastBarLatency"] = {
@@ -575,23 +575,23 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Smooth"] = {
-			["Name"] = "流畅的条",
-			["Desc"] = "平滑治疗条的更新"..PerformanceSlight,
+			["Name"] = "平滑特效",
+			["Desc"] = "使施法条看来更流畅"..PerformanceSlight,
 		},
 		
 		["CombatLog"] = {
 			["Name"] = "战斗信息反馈",
-			["Desc"] = "显示输入的治疗和损坏播放器单元框架",
+			["Desc"] = "在框架上显示受到的治疗和伤害",
 		},
 		
 		["WeakBar"] = {
 			["Name"] = "虚弱灵魂条",
-			["Desc"] = "显示一栏显示的虚弱灵魂的debuff",
+			["Desc"] = "显示的虚弱灵魂的debuff",
 		},
 		
 		["HealBar"] = {
-			["Name"] = "正被治疗",
-			["Desc"] = "显示栏显示输入的治疗及伤害减伤",
+			["Name"] = "治疗提示",
+			["Desc"] = "显示即将到来的治疗与吸收",
 		},
 		
 		["TotemBar"] = {
@@ -600,83 +600,83 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ComboBar"] = {
-			["Name"] = "Combo Points",
-			["Desc"] = "Enable the combo points bar",
+			["Name"] = "连击点",
+			["Desc"] = "使用连击条",
 		},
 		
 		["AnticipationBar"] = {
-			["Name"] = "盗贼隐藏栏",
-			["Desc"] = "显示一栏显示盗贼预期点",
+			["Name"] = "盗贼的连击点",
+			["Desc"] = "显示盗贼的连击点",
 		},
 		
 		["SerendipityBar"] = {
-			["Name"] = "牧师机缘栏",
-			["Desc"] = "显示一栏显示的牧师机缘巧合叠层",
+			["Name"] = "妙手回春",
+			["Desc"] = "显示牧师的妙手回春的层数",
 		},
 		
 		["OnlySelfDebuffs"] = {
-			["Name"] = "显示我只有减益",
-			["Desc"] = "只显示我们的减益效果的目标框架",
+			["Name"] = "只显示我造成的减益",
+			["Desc"] = "在目标框架上只显示我造成的减益效果",
 		},
 		
 		["DarkTheme"] = {
-			["Name"] = "黑暗的主题",
-			["Desc"] = "如果启用，单元框架将是一个暗色使用类彩色动力条",
+			["Name"] = "黑暗主题",
+			["Desc"] = "如果启用,血量条变成暗色而能量条变成职业颜色",
 		},
 		
-		["Threat"] = {
-			["Name"] = "Enable threat display",
-			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+			["Threat"] = {
+			["Name"] = "仇恨显示",
+			["Desc"] = "小队和团队成员的生命条将在获得仇恨时变化",
 		},
 		
 		["Arena"] = {
-			["Name"] = "Arena Frames",
-			["Desc"] = "Display arena opponents when inside a battleground or arena",
+			["Name"] = "竞技场框架",
+			["Desc"] = "在进入战场或竞技场时显示敌对玩家",
 		},
 		
 		["TargetAuras"] = {
-			["Name"] = "Target Auras",
-			["Desc"] = "Display buffs and debuffs on target",
+			["Name"] = "目标光环",
+			["Desc"] = "显示目标减益与玩家增益。",
 		},
 		
 		["FocusAuras"] = {
-			["Name"] = "Focus Auras",
-			["Desc"] = "Display buffs and debuffs on focus",
+			["Name"] = "焦点",
+			["Desc"] = "显示焦点的deff和debuff",
 		},
 		
 		["FocusTargetAuras"] = {
-			["Name"] = "Focus Target Auras",
-			["Desc"] = "Display buffs and debuffs on focus target",
+			["Name"] = "焦点目标",
+			["Desc"] = "显示焦点目标的deff和debuff",
 		},
 		
 		["ArenaAuras"] = {
-			["Name"] = "Arena Frames Auras",
-			["Desc"] = "Display debuffs on arena frames",
+			["Name"] = "竞技场框架光环",
+			["Desc"] = "在竞技场框架显示debuff",
 		},
 		
 		["BossAuras"] = {
-			["Name"] = "Boss Frames Auras",
-			["Desc"] = "Display debuffs on boss frames",
+			["Name"] = "boss框架光环",
+			["Desc"] = "在BOSS框架上显示buff",
 		},
 		
 		["Font"] = {
-			["Name"] = "单元框架字体",
-			["Desc"] = "设置字体的单元框架",
+			["Name"] = "框架字体",
+			["Desc"] = "设置框架文字的字体",
 		},
 		
 		["PowerTexture"] = {
-			["Name"] = "能力栏纹理",
-			["Desc"] = "设置能量条纹理",
+			["Name"] = "能量条材质",
+			["Desc"] = "设置能量条的材质",
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "治疗条纹理",
-			["Desc"] = "设置治疗条纹理",
+			["Name"] = "血量条材质",
+			["Desc"] = "设置血量条的材质",
 		},
-		
+			
 		["CastTexture"] = {
-			["Name"] = "Cast Bar Texture",
-			["Desc"] = "Set a texture for cast bars",
+			["Name"] = "施法条材质",
+			["Desc"] = "设置施法条的材质",
 		},
 	},
 }
