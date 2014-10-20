@@ -249,7 +249,8 @@ function TukuiUnitFrames:Player()
 		ThirdBar:SetWidth(250)
 		ThirdBar:SetStatusBarTexture(C.Medias.Normal)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
-
+		
+		ThirdBar:SetFrameLevel(Health:GetFrameLevel() - 2)
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 
@@ -289,6 +290,7 @@ function TukuiUnitFrames:Player()
 			Bar[i]:Height(8)
 			Bar[i]:SetStatusBarTexture(C.Medias.Normal)
 			Bar[i]:EnableMouse(true)
+			Bar[i]:SetFrameLevel(Health:GetFrameLevel())
 
 			if i == 1 then
 				Bar[i]:Width((250 / 4) - 2)
