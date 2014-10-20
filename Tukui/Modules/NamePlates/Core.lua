@@ -337,7 +337,7 @@ end
 function Plates:Update()
 	for Plate, NewPlate in pairs(self.Container) do
 		if Plate:IsShown() then
-			NewPlate:SetPoint("CENTER", WorldFrame, "BOTTOMLEFT", Plate:GetCenter())
+			NewPlate:SetPoint("CENTER", UIParent, "BOTTOMLEFT", Plate:GetCenter())
 			NewPlate:Show()
 			
 			if Plate:GetAlpha() == 1 then -- Is Targeted
