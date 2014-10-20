@@ -43,10 +43,6 @@ function TukuiChat:SetChatFont()
 	local Font = T.GetFont(C["Chat"].ChatFont)
 	local Path, _, Flag  = _G[Font]:GetFont()
 	local CurrentFont, CurrentSize = self:GetFont()
-
-	if (CurrentFont == Path) then
-		return
-	end
 	
 	self:SetFont(Path, CurrentSize, Flag)
 end
