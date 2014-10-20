@@ -765,6 +765,11 @@ end
 function Bags:ToggleBags()
 	local Bag = ContainerFrame1
 	local Bank = BankFrame
+	local MerchantFrame = MerchantFrame
+	
+	if (MerchantFrame:IsShown() and Bag:IsShown()) then
+		return
+	end
 
 	-- Bags Toggle
 	if Bag:IsShown() then
