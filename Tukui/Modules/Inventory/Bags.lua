@@ -767,7 +767,7 @@ function Bags:ToggleBags()
 	local Bank = BankFrame
 	local MerchantFrame = MerchantFrame
 	
-	if (MerchantFrame:IsShown() and Bag:IsShown()) then
+	if ((MerchantFrame:IsShown() or InboxFrame:IsVisible()) and Bag:IsShown()) then
 		return
 	end
 
