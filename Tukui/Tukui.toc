@@ -1,6 +1,6 @@
 ## Interface: 60000
 ## Author: Tukz & Hydra
-## Version: 16.07
+## Version: 16.08
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
