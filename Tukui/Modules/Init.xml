@@ -50,15 +50,16 @@
 	<Script file="Miscellaneous\Capture.lua"/>
 	<Script file="Miscellaneous\Ghost.lua"/>
 	
-	<!-- Maps -->
-	<Script file="Maps\Core.lua"/>
-	<Script file="Maps\Minimap.lua"/>
-	
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
 	<Script file="Auras\Core.lua"/>
 	<Script file="Auras\Auras.lua"/>
 	<Script file="Auras\Headers.lua"/>
+	
+	<!-- Maps -->
+	<Script file="Maps\Core.lua"/>
+	<Script file="Maps\Minimap.lua"/>
+	<Script file="Maps\Zonemap.lua"/>
 	
 	<!-- Data Text -->
 	<Script file="DataTexts\Core.lua"/>

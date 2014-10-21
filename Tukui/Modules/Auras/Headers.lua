@@ -124,7 +124,7 @@ function TukuiAuras:CreateHeaders()
 		if (C.Auras.HideBuffs) then
 			Debuffs:SetPoint("TOPRIGHT", UIParent, -184, -28)
 		else
-			Debuffs:SetPoint("TOP", Buffs, "BOTTOM", 0, -97)
+			Debuffs:SetPoint("TOP", Buffs, "BOTTOM", 0, -96)
 		end
 		
 		Debuffs:SetAttribute("filter", "HARMFUL")

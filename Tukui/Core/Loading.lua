@@ -111,13 +111,14 @@ function Loading:OnEvent(event, addon)
 			T["Miscellaneous"]["Capture"]:Enable()
 			T["Miscellaneous"]["Ghost"]:Enable()
 			
-		-- MINIMAP
-			T["Maps"]["Minimap"]:Enable()
-			
 		-- BUFFS
 			if (C.Auras.Enable) then
 				T["Auras"]:Enable()
 			end
+			
+		-- Maps
+			T["Maps"]["Minimap"]:Enable()
+			T["Maps"]["Zonemap"]:Enable()
 			
 		-- DATATEXTS
 			T["DataTexts"]:Enable()
