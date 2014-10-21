@@ -51,6 +51,9 @@ end
 function ZoneMap:AddHooks()
 	BattlefieldMinimap:HookScript("OnShow", ZoneMap.OnShow)
 	BattlefieldMinimap:HookScript("OnHide", ZoneMap.OnHide)
+	
+	-- Restore position of buffs if moved from minimap
+	hooksecurefunc(BattlefieldMinimap, "ClearAllPoints", ZoneMap.OnHide)
 end
 
 function ZoneMap:Enable()
