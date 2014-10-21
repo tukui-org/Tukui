@@ -14,7 +14,7 @@ function ZoneMap:SetMapAlpha()
 end
 
 function ZoneMap:OnShow()
-	local Buffs = T.Auras.Headers[1]
+	local Auras = T.Auras
 	local Check = select(2, BattlefieldMinimap:GetPoint())
 	
 	ZoneMap:SetMapAlpha()
@@ -23,28 +23,36 @@ function ZoneMap:OnShow()
 		return
 	end
 	
-	if (Buffs) then
-		local A1, P, A2, X, Y = Buffs:GetPoint()
+	if (Auras) then
+		local Buffs = T.Auras.Headers[1]
 		
-		X = tonumber(T.Round(X))
-		Y = tonumber(T.Round(Y))
+		if (Buffs) then
+			local A1, P, A2, X, Y = Buffs:GetPoint()
 		
-		if (A1 == "TOPRIGHT" and A2 == "TOPRIGHT" and X == -184 and Y == -28) then
-			Buffs:ClearAllPoints()
-			Buffs:SetPoint("TOPRIGHT", BattlefieldMinimap, "TOPLEFT", -14, 2)
+			X = tonumber(T.Round(X))
+			Y = tonumber(T.Round(Y))
+		
+			if (A1 == "TOPRIGHT" and A2 == "TOPRIGHT" and X == -184 and Y == -28) then
+				Buffs:ClearAllPoints()
+				Buffs:SetPoint("TOPRIGHT", BattlefieldMinimap, "TOPLEFT", -14, 2)
+			end
+		
+			Buffs.MovedByZoneMap = true
+			Buffs.OriginalPosition = {A1, P, A2, X, Y}
 		end
-		
-		Buffs.MovedByZoneMap = true
-		Buffs.OriginalPosition = {A1, P, A2, X, Y}
 	end
 end
 
 function ZoneMap:OnHide()
-	local Buffs = T.Auras.Headers[1]
+	local Auras = T.Auras
+	
+	if (Auras) then
+		local Buffs = T.Auras.Headers[1]
 
-	if (Buffs and Buffs.MovedByZoneMap) then
-		Buffs:ClearAllPoints()
-		Buffs:SetPoint(unpack(Buffs.OriginalPosition))
+		if (Buffs and Buffs.MovedByZoneMap) then
+			Buffs:ClearAllPoints()
+			Buffs:SetPoint(unpack(Buffs.OriginalPosition))
+		end
 	end
 end
 

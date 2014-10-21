@@ -9,7 +9,7 @@
 ## X-oUF: TukuiUnitFrameFramework
 ## Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1
-## X-Tukui-ProjectFolders: Tukui_Config, Tukui
+## X-Tukui-ProjectFolders: Tukui, Tukui_Config
 
 Core\Init.lua
 Config\Init.xml
