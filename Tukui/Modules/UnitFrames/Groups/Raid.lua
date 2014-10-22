@@ -200,6 +200,8 @@ function TukuiUnitFrames:Raid()
         RaidDebuffs.ShowDispelableDebuff = true
         RaidDebuffs.FilterDispelableDebuff = true
         RaidDebuffs.MatchBySpellName = true
+    	RaidDebuffs.ShowBossDebuff = true
+    	RaidDebuffs.BossDebuffPriority = 5
 
         RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
         RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
