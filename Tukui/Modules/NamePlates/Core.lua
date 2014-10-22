@@ -9,6 +9,7 @@ local Hider
 local Convert = T.RGBToHex
 local Scale = T.Scale
 local FrameNumber = 0
+local NameplateParent = WorldFrame
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 
@@ -337,7 +338,7 @@ end
 function Plates:Update()
 	for Plate, NewPlate in pairs(self.Container) do
 		if Plate:IsShown() then
-			NewPlate:SetPoint("CENTER", UIParent, "BOTTOMLEFT", Plate:GetCenter())
+			NewPlate:SetPoint("CENTER", NameplateParent, "BOTTOMLEFT", Plate:GetCenter())
 			NewPlate:Show()
 			
 			if Plate:GetAlpha() == 1 then -- Is Targeted
@@ -365,6 +366,12 @@ end
 function Plates:Enable()
 	if (not C.NamePlates.Enable) then
 		return
+	end
+	
+	CT_Viewport = IsAddOnLoaded("CT_Viewport")
+	
+	if CT_Viewport then
+		NameplateParent = UIParent
 	end
 
 	Hider = T["Panels"].Hider
