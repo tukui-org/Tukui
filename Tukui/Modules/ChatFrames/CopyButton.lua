@@ -94,6 +94,8 @@ function TukuiChat:CreateCopyFrame()
 
 	CopyFrame.EditBox = EditBox
 	CopyFrame.Close = Close
+
+	TukuiChat.CopyFrame = CopyFrame
 end
 
 function TukuiChat:CreateCopyButtons()
