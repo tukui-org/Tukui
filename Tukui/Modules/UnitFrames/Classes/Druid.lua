@@ -17,7 +17,7 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
 	DruidMana:SetStatusBarTexture(C.Medias.Normal)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)
-
+	DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 3)
 	DruidMana:SetBackdrop(TukuiUnitFrames.Backdrop)
 	DruidMana:SetBackdropColor(0, 0, 0)
 	DruidMana:SetBackdropBorderColor(0, 0, 0)
