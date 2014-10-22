@@ -21,9 +21,9 @@ local Update = function(self)
 	table.sort(L.DataText.Slots, function(a, b) return a[3] < b[3] end)
 	
 	if (Total > 0) then
-		self.Text:SetFormattedText("%s: %s%%", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. floor(L.DataText.Slots[1][3] * 100) .. "|r")
+		self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. floor(L.DataText.Slots[1][3] * 100) .. "%|r")
 	else
-		self.Text:SetFormattedText("%s: %s%%", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. "100" .. "|r")
+		self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. "100" .. "%|r")
 	end
 
 	Total = 0
