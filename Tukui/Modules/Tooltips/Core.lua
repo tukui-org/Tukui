@@ -352,6 +352,12 @@ function Tooltip:OnValueChanged()
 	local _, Max = HealthBar:GetMinMaxValues()
 	local Value = HealthBar:GetValue()
 	
+	if (Max == 1) then
+		self.Text:Hide()
+	else
+		self.Text:Show()
+	end
+	
 	self.Text:SetText(Short(Value) .. " / " .. Short(Max))
 end
 
