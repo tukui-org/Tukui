@@ -530,6 +530,14 @@ function Bags:SlotUpdate(id, button)
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
+	local IsProffBag = self:IsProffessionBag(id)
+	
+	-- Letting you style this
+	if IsProffBag then
+		
+	else
+		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
+	end
 	
 	if IsNewItem then
 		NewItem:SetAlpha(0)
