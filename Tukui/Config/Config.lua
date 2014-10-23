@@ -46,7 +46,7 @@ C["Bags"] = {
 	["ButtonSize"] = 28,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 11,
-	["PulseNewItem"] = false,
+	["PulseNewItem"] = true,
 	["Font"] = "Tukui Outline",
 	["BagFilter"] = false,
 }
