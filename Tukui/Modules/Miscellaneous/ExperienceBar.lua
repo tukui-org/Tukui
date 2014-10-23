@@ -23,10 +23,10 @@ function Experience:SetTooltip()
 		GameTooltip:SetOwner(Panel, "ANCHOR_TOPRIGHT", 0, 5)
 	end
 	
-	GameTooltip:AddLine(string.format("|cff4BAF4C"..XP..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
+	GameTooltip:AddLine(string.format("|cff0090FF"..XP..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
 	
 	if Rested then
-		GameTooltip:AddLine(string.format("|cff0090FF"..TUTORIAL_TITLE26..": +%d (%d%%)|r", Rested, Rested / Max * 100))
+		GameTooltip:AddLine(string.format("|cff4BAF4C"..TUTORIAL_TITLE26..": +%d (%d%%)|r", Rested, Rested / Max * 100))
 	end
 	
 	GameTooltip:Show()

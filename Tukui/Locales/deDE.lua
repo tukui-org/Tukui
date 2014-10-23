@@ -26,7 +26,6 @@ L.DataText.Parry = "Parieren"
 L.DataText.Avoidance = "Vermeidung"
 L.DataText.AvoidanceShort = "AVD: "
 L.DataText.Memory = "Speicher"
-L.DataText.Hit = "Trefferwertung"
 L.DataText.Power = "Angriffskraft"
 L.DataText.Mastery = "Meisterschaft"
 L.DataText.Crit = "Krit"
@@ -84,7 +83,7 @@ L.DataText.Healing = "Heilung: "
 L.DataText.Damage = "Schaden: "
 L.DataText.Honor = "Ehre: "
 L.DataText.KillingBlow = "Todesstöße: "
-L.DataText.StatsFor = "Stats für "
+L.DataText.StatsFor = "Werte für "
 L.DataText.HonorableKill = "Ehrenhafte Siege:"
 L.DataText.Death = "Tode:"
 L.DataText.HonorGained = "Ehre Bekommen:"
@@ -100,12 +99,12 @@ L.DataText.GraveyardAssault = "Friedhöfe angegriffen:"
 L.DataText.GraveyardDefend = "Friedhöfe verteidigt:"
 L.DataText.DemolisherDestroy = "Demolishers Destroyed:"
 L.DataText.GateDestroy = "Tore zerstört:"
-L.DataText.TotalMemory = "Gesammte Speicherauslastung:"
+L.DataText.TotalMemory = "Gesamte Speicherauslastung:"
 L.DataText.ControlBy = "Kontrolliert von:"
 L.DataText.CallToArms = "Ruf zu den Waffen" 
-L.DataText.ArmError = "Konnte keine Informationen für Ruf zu den Waffen abrufen."
-L.DataText.NoDungeonArm = "Keine Instanzen bieten derzeit Ruf zu den Waffen an."
-L.DataText.CartControl = "Loren Kontrolliert:"
+L.DataText.ArmError = "Es konnten keine Informationen für Ruf zu den Waffen abgerufen werden."
+L.DataText.NoDungeonArm = "Derzeit bietet keine der Instanzen Ruf zu den Waffen an."
+L.DataText.CartControl = "Loren kontrolliert:"
 L.DataText.VictoryPts = "Siegpunkte:"
 L.DataText.OrbPossession = "Erhaltene Kugeln:"
 L.DataText.Slots = {
@@ -206,14 +205,14 @@ L.Minimap.MoveMinimap = "Bewege Minimap"
 L.Miscellaneous = {} -- Miscellaneous
 ------------------------------------------------
 
-L.Miscellaneous.Repair = "Warnung! Du solltest so schnell wie möglich deine Austüstung Reparieren!"
+L.Miscellaneous.Repair = "Warnung! Du solltest so schnell wie möglich deine Austüstung reparieren!"
 
 ------------------------------------------------
 L.Auras = {} -- Aura Locales
 ------------------------------------------------
 
-L.Auras.MoveBuffs = "Bewege Buffs"
-L.Auras.MoveDebuffs = "Bewege Debuffs"
+L.Auras.MoveBuffs = "Bewege Stärkungszauber"
+L.Auras.MoveDebuffs = "Bewege Schwächungszauber"
 
 ------------------------------------------------
 L.Install = {} -- Installation of Tukui
@@ -221,9 +220,9 @@ L.Install = {} -- Installation of Tukui
 
 L.Install.Tutorial = "Tutorial"
 L.Install.Install = "Installation"
-L.Install.InstallStep0 = "Danke das du dich für Tukui entschieden hast!|n|nDu wirst nun in ein paar schritten durch den Installationsprozess durchgeführt.  Du kannst bei jedem schritt entscheiden was du haben möchtest oder nicht, oder aber auch überspringen."
-L.Install.InstallStep1 = "Der erste Schritt betrifft die wesentlichen Einstellungen. Dies wird | cffff0000empfohlen | r für jeden Benutzer, es sei denn, Du möchtest nur einen bestimmten Teil der Einstellungen anwenden.|n|nKlick 'Anwenden' um die einstellungen zu übernehmen und 'Weiter' um den Installationsprozess fortzufahren. Wenn du den schritt übersprigen möchtest, dann drücke 'Weiter'."
-L.Install.InstallStep2 = "Der zweite Schritt übernimmt die Chateinstellungen. Wenn Du ein neuer Benutzer dieser UI bist, wird dieser Schritt empfohlen.  Wenn Du mit dieser UI vertraut bist, könntest du diesen Schritt überspringen.|n|nKlicke auf 'Anwenden', um die Einstellungen zu übernehmen und auf 'Weiter', um den Installationsprozess fortsetzen. Wenn Du diesen Schritt überspringen möchten, klicke einfach auf 'Weiter'."
+L.Install.InstallStep0 = "Danke das du dich für Tukui entschieden hast!|n|nDu wirst nun in ein paar Schritten durch den Installationsprozess durchgeführt. Du kannst bei jedem Schritt entscheiden, was du haben möchtest oder nicht oder aber auch überspringen."
+L.Install.InstallStep1 = "Der erste Schritt betrifft die wesentlichen Einstellungen. Dies wird für jeden Benutzer | cffff0000empfohlen | r , es sei denn, Du möchtest nur einen bestimmten Teil der Einstellungen anwenden.|n|nKlick 'Anwenden' um die Einstellungen zu übernehmen und 'Weiter' um den Installationsprozess fortzufahren. Wenn du den Schritt übersprigen möchtest, dann drücke 'Weiter'."
+L.Install.InstallStep2 = "Der zweite Schritt übernimmt die Chateinstellungen. Wenn Du ein neuer Benutzer dieses UI bist, wird dieser Schritt empfohlen.  Wenn Du mit diesem UI vertraut bist, könntest du diesen Schritt überspringen.|n|nKlicke auf 'Anwenden', um die Einstellungen zu übernehmen und auf 'Weiter', um den Installationsprozess fortsetzen. Wenn Du diesen Schritt überspringen möchten, klicke einfach auf 'Weiter'."
 L.Install.InstallStep3 = "Installation fertig. Bitte klicke auf 'Fertig' Um dein UI neu zu laden. Viel spaß mit Tukui! Besuche uns unter www.tukui.org!"
 
 ------------------------------------------------
@@ -231,9 +230,9 @@ L.Help = {} -- /tukui help
 ------------------------------------------------
 
 L.Help.Title = "Tukui Kommandos:"
-L.Help.Datatexts = "'|cff00ff00dt|r' oder '|cff00ff00datatext|r' : Aktiviere oder deaktiviere die Datadext Konfiguration."
-L.Help.Install = "'|cff00ff00install|r' oder '|cff00ff00reset|r' : Installiere oder resette Tukui auf Standarteinstellungen."
-L.Help.Config = "'|cff00ff00c|r' oder '|cff00ff00config|r' : Zeige In-Game Konfigurations Fenster."
+L.Help.Datatexts = "'|cff00ff00dt|r' oder '|cff00ff00datatext|r' : Aktiviere oder Deaktiviere die Datatext Konfiguration."
+L.Help.Install = "'|cff00ff00install|r' oder '|cff00ff00reset|r' : Installiere oder Setze Tukui auf Standardeinstellungen zurück."
+L.Help.Config = "'|cff00ff00c|r' oder '|cff00ff00config|r' : Zeige das In-Game-Konfigurations Fenster."
 L.Help.Move = "'|cff00ff00move|r' oder '|cff00ff00moveui|r' : Bewege Fenster."
 L.Help.Test = "'|cff00ff00test|r' oder '|cff00ff00testui|r' : Teste Einheiten Fenster."
 
@@ -241,19 +240,19 @@ L.Help.Test = "'|cff00ff00test|r' oder '|cff00ff00testui|r' : Teste Einheiten Fe
 L.Merchant = {} -- Merchant
 ------------------------------------------------
 
-L.Merchant.NotEnoughMoney = "Du hast nicht genug Gold um deine Ausrüßtung zu reparieren"
-L.Merchant.RepairCost = "Deine Ausrüßtung wurde repariert für"
+L.Merchant.NotEnoughMoney = "Du hast nicht genug Gold, um deine Ausrüstung zu reparieren"
+L.Merchant.RepairCost = "Deine Ausrüstung wurde repariert für"
 L.Merchant.SoldTrash = "Dein Schrott wurde verkauft für"
 
 ------------------------------------------------
 L.Version = {} -- Version Check
 ------------------------------------------------
 
-L.Version.Outdated = "Deine Version von Tukui ist veraltet. Du kannst dir die aktuelle Version unter www.tukui.org downloaden."
+L.Version.Outdated = "Deine Version von Tukui ist veraltet. Du kannst dir die aktuelle Version unter www.tukui.org herunterladen."
 
 ------------------------------------------------
 L.Others = {} -- Miscellaneous
 ------------------------------------------------
 
-L.Others.GlobalSettings = "Use Global Settings"
-L.Others.CharSettings = "Use Character Settings"
+L.Others.GlobalSettings = "Benutze die globalen Einstellungen"
+L.Others.CharSettings = "Benutze die Charakter Einstellungen"

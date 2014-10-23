@@ -140,9 +140,6 @@ function Loading:OnEvent(event, addon)
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		-- OBJECTIVE TRACKER
 			T["Miscellaneous"]["ObjectiveTracker"]:Enable()
-		
-		-- BETA NOTE
-		T.BetaNote()	
 	end
 end
 
