@@ -117,7 +117,9 @@ T.NewTimer = function()
 end
 
 T.Delay = function(delay, func, ...)
-	assert(type(delay) == "number" and type(func) == "function")
+	if (type(delay) ~= "number" and type(func) ~= "function") then
+		return
+	end
 	
 	local Timer
 	
