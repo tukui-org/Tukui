@@ -133,11 +133,25 @@ T.Delay = function(delay, func, ...)
 	return true
 end
 
+<<<<<<< HEAD
 T.BetaNote = function()
 	IsBeta = match(T.Version, ".00")
 
 	if IsBeta then
 		DEFAULT_CHAT_FRAME:AddMessage(format("Welcome to |cffff8000Tukui|r Beta, build: %s", T.Version))
 		DEFAULT_CHAT_FRAME:AddMessage("To report any errors or bugs you may find in this beta, please visit: [|cffff8000|Hurl:http://git.tukui.org/Tukz/tukui/issues|hhttp://git.tukui.org/Tukz/tukui/issues|h|r]")
+=======
+T.Delay = function(delay, func, ...)
+	if (type(delay) ~= "number" and type(func) ~= "function") then
+		return
+	end
+	
+	local Timer
+	
+	if T.UnusedTimers[1] then
+		Timer = tremove(T.UnusedTimers, 1) -- Recycle a timer
+	else
+		Timer = T.NewTimer() -- Or make a new one if needed
+>>>>>>> FETCH_HEAD
 	end
 end
