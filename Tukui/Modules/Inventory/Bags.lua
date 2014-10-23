@@ -34,6 +34,24 @@ local BlizzardBank = {
 	BankFrameBag7,
 }
 
+local BagType = {
+	[8] = true,    -- Leatherworking Bag
+	[16] = true,   -- Inscription Bag
+	[32] = true,   -- Herb Bag
+	[64] = true,   -- Enchanting Bag
+	[128] = true,  -- Engineering Bag
+	[512] = true,  -- Gem Bag
+	[1024] = true, -- Mining Bag
+}
+
+function Bags:IsProffessionBag(bag)
+	local Type = select(2, GetContainerNumFreeSlots(bag))
+	
+	if BagType[Type] then
+		return true
+	end
+end
+
 function Bags:SkinBagButton()
 	if self.IsSkinned then
 		return
