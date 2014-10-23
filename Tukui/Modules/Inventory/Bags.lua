@@ -15,6 +15,7 @@ local BagHelpBox = BagHelpBox
 local ButtonSize, ButtonSpacing, ItemsPerRow
 local Bags = CreateFrame("Frame")
 local Inventory = T["Inventory"]
+local QuestColor = {1, 1, 0}
 
 local BlizzardBags = {
 	CharacterBag0Slot,
@@ -534,8 +535,6 @@ function Bags:SlotUpdate(id, button)
 	end
 	
 	if IsQuestItem then
-		local QuestColor = {1, 1, 0}
-		
 		if (button.BorderColor ~= QuestColor) then
 			button:SetBackdropBorderColor(1, 1, 0)
 			
