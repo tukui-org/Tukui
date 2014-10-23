@@ -132,12 +132,3 @@ T.Delay = function(delay, func, ...)
 	tinsert(WaitTable, {delay, func, {...}})
 	return true
 end
-
-T.BetaNote = function()
-	IsBeta = match(T.Version, ".00")
-
-	if IsBeta then
-		DEFAULT_CHAT_FRAME:AddMessage(format("Welcome to |cffff8000Tukui|r Beta, build: %s", T.Version))
-		DEFAULT_CHAT_FRAME:AddMessage("To report any errors or bugs you may find in this beta, please visit: [|cffff8000|Hurl:http://git.tukui.org/Tukz/tukui/issues|hhttp://git.tukui.org/Tukz/tukui/issues|h|r]")
-	end
-end
