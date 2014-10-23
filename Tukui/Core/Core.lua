@@ -98,49 +98,24 @@ T.ColorGradient = function(a, b, ...)
 	return R1 + (R2 - R1) * RelPercent, G1 + (G2 - G1) * RelPercent, B1 + (B2 - B1) * RelPercent
 end
 
-local WaitTable = {}
-local WaitFrame
+local TimerParent = CreateFrame("Frame")
+T.UnusedTimers = {}
 
-T.Delay = function(delay, func, ...)
-	if (type(delay) ~= "number" or type(func) ~= "function") then
-		return false
-	end
-	
-	if (WaitFrame == nil) then
-		WaitFrame = CreateFrame("Frame", nil, UIParent)
-		WaitFrame:SetScript("OnUpdate",function(self, elapsed)
-			local Count = #WaitTable
-			local i = 1
-			
-			while(i <= Count) do
-				local WaitRecord = tremove(WaitTable, i)
-				local Delay = tremove(WaitRecord, 1)
-				local Func = tremove(WaitRecord, 1)
-				local Args = tremove(WaitRecord, 1)
-				
-				if (Delay > elapsed) then
-					tinsert(WaitTable, i, {Delay - elapsed, Func, Args})
-					i = i + 1
-				else
-					Count = Count - 1
-					Func(unpack(Args))
-				end
-			end
-		end)
-	end
-	
-	tinsert(WaitTable, {delay, func, {...}})
-	return true
+local TimerOnFinished = function(self)
+	self.Func(unpack(self.Args))
+	tinsert(T.UnusedTimers, self)
 end
 
-<<<<<<< HEAD
-T.BetaNote = function()
-	IsBeta = match(T.Version, ".00")
+T.NewTimer = function()
+	local Parent = TimerParent:CreateAnimationGroup()
+	local Timer = Parent:CreateAnimation("Alpha")
+	
+	Timer:SetScript("OnFinished", TimerOnFinished)
+	Timer.Parent = Parent
+	
+	return Timer
+end
 
-	if IsBeta then
-		DEFAULT_CHAT_FRAME:AddMessage(format("Welcome to |cffff8000Tukui|r Beta, build: %s", T.Version))
-		DEFAULT_CHAT_FRAME:AddMessage("To report any errors or bugs you may find in this beta, please visit: [|cffff8000|Hurl:http://git.tukui.org/Tukz/tukui/issues|hhttp://git.tukui.org/Tukz/tukui/issues|h|r]")
-=======
 T.Delay = function(delay, func, ...)
 	if (type(delay) ~= "number" and type(func) ~= "function") then
 		return
@@ -152,6 +127,10 @@ T.Delay = function(delay, func, ...)
 		Timer = tremove(T.UnusedTimers, 1) -- Recycle a timer
 	else
 		Timer = T.NewTimer() -- Or make a new one if needed
->>>>>>> FETCH_HEAD
 	end
+	
+	Timer.Args = {...}
+	Timer.Func = func
+	Timer:SetDuration(delay)
+	Timer.Parent:Play()
 end
