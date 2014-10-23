@@ -117,7 +117,7 @@ T.NewTimer = function()
 end
 
 T.Delay = function(delay, func, ...)
-	if (type(delay) ~= "number" and type(func) ~= "function") then
+	if (type(delay) ~= "number" or type(func) ~= "function") then
 		return
 	end
 	
