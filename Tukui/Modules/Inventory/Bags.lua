@@ -45,7 +45,7 @@ local BagType = {
 	[32768] = true, -- Fishing Bag
 }
 
-function Bags:IsProffessionBag(bag)
+function Bags:IsProfessionBag(bag)
 	local Type = select(2, GetContainerNumFreeSlots(bag))
 	
 	if BagType[Type] then
@@ -530,10 +530,10 @@ function Bags:SlotUpdate(id, button)
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
-	local IsProffBag = self:IsProffessionBag(id)
+	local IsProfBag = self:IsProfessionBag(id)
 	
 	-- Letting you style this
-	if IsProffBag then
+	if IsProfBag then
 		
 	else
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
