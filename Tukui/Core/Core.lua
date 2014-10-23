@@ -98,37 +98,37 @@ T.ColorGradient = function(a, b, ...)
 	return R1 + (R2 - R1) * RelPercent, G1 + (G2 - G1) * RelPercent, B1 + (B2 - B1) * RelPercent
 end
 
-local WaitTable = {}
-local WaitFrame
+local TimerParent = CreateFrame("Frame")
+T.UnusedTimers = {}
+
+local TimerOnFinished = function(self)
+	self.Func(unpack(self.Args))
+	tinsert(T.UnusedTimers, self)
+end
+
+T.NewTimer = function()
+	local Parent = TimerParent:CreateAnimationGroup()
+	local Timer = Parent:CreateAnimation("Alpha")
+	
+	Timer:SetScript("OnFinished", TimerOnFinished)
+	Timer.Parent = Parent
+	
+	return Timer
+end
 
 T.Delay = function(delay, func, ...)
-	if (type(delay) ~= "number" or type(func) ~= "function") then
-		return false
+	assert(type(delay) == "number" and type(func) == "function")
+	
+	local Timer
+	
+	if T.UnusedTimers[1] then
+		Timer = tremove(T.UnusedTimers, 1) -- Recycle a timer
+	else
+		Timer = T.NewTimer() -- Or make a new one if needed
 	end
 	
-	if (WaitFrame == nil) then
-		WaitFrame = CreateFrame("Frame", nil, UIParent)
-		WaitFrame:SetScript("OnUpdate",function(self, elapsed)
-			local Count = #WaitTable
-			local i = 1
-			
-			while(i <= Count) do
-				local WaitRecord = tremove(WaitTable, i)
-				local Delay = tremove(WaitRecord, 1)
-				local Func = tremove(WaitRecord, 1)
-				local Args = tremove(WaitRecord, 1)
-				
-				if (Delay > elapsed) then
-					tinsert(WaitTable, i, {Delay - elapsed, Func, Args})
-					i = i + 1
-				else
-					Count = Count - 1
-					Func(unpack(Args))
-				end
-			end
-		end)
-	end
-	
-	tinsert(WaitTable, {delay, func, {...}})
-	return true
+	Timer.Args = {...}
+	Timer.Func = func
+	Timer:SetDuration(delay)
+	Timer.Parent:Play()
 end
