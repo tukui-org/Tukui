@@ -41,7 +41,7 @@ function Talent:GetItemLevel(unit)
 		end
 	end
 	
-	if (Total < 1 or Total < 1) then
+	if (Total < 1) then
 		return "..."
 	end
 	
