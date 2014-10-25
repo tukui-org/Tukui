@@ -639,6 +639,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "在进入战场或竞技场时显示敌对玩家",
 		},
 		
+		["Boss"] = {
+			["Name"] = "Boss Frames",
+			["Desc"] = "Display boss frames while doing pve",
+		},
+		
 		["TargetAuras"] = {
 			["Name"] = "目标光环",
 			["Desc"] = "显示目标减益与玩家增益。",

@@ -643,6 +643,11 @@ TukuiConfig["itIT"] = {
 			["Desc"] = "Display arena opponents when inside a battleground or arena",
 		},
 		
+		["Boss"] = {
+			["Name"] = "Boss Frames",
+			["Desc"] = "Display boss frames while doing pve",
+		},
+		
 		["TargetAuras"] = {
 			["Name"] = "Target Auras",
 			["Desc"] = "Display buffs and debuffs on target",

@@ -624,6 +624,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "在戰場或競技場顯示對手的頭像框架",
 		},
 		
+		["Boss"] = {
+			["Name"] = "Boss Frames",
+			["Desc"] = "Display boss frames while doing pve",
+		},
+		
 		["TargetAuras"] = {
 			["Name"] = "目標光環",
 			["Desc"] = "在目標頭像顯示增益和減益效果",

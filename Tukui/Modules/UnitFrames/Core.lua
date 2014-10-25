@@ -942,22 +942,24 @@ function TukuiUnitFrames:CreateUnits()
 		self:CreateArenaPreparationFrames()
 	end
 	
-	local Boss = {}
-	
-	for i = 1, 5 do
-		Boss[i] = oUF:Spawn("boss"..i, nil)
-		Boss[i]:SetParent(Panels.PetBattleHider)
-		if (i == 1) then
-			Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
-		else
-			Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
-		end
-		Boss[i]:Size(200, 29)
+	if (C.UnitFrames.Boss) then
+		local Boss = {}
 		
-		Movers:RegisterFrame(Boss[i])
-	end
+		for i = 1, 5 do
+			Boss[i] = oUF:Spawn("boss"..i, nil)
+			Boss[i]:SetParent(Panels.PetBattleHider)
+			if (i == 1) then
+				Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+			else
+				Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)             
+			end
+			Boss[i]:Size(200, 29)
+		
+			Movers:RegisterFrame(Boss[i])
+		end
 	
-	self.Units.Boss = Boss
+		self.Units.Boss = Boss
+	end
 	
 	if C.Party.Enable then
 		local Gap = C.Party.Portrait and 74 or 30
