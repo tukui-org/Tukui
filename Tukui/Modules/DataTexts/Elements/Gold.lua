@@ -115,9 +115,15 @@ end
 
 local OnMouseDown = function(self)
 	if BankFrame:IsShown() then
+		CloseBankBagFrames()
 		CloseBankFrame()
+		CloseAllBags()
 	else
-		ToggleAllBags()
+		if ContainerFrame1:IsShown() then
+			CloseAllBags()
+		else
+			ToggleAllBags()
+		end
 	end
 end
 
