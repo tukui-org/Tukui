@@ -783,7 +783,21 @@ end
 function Bags:ToggleBags()
 	local Bag = ContainerFrame1
 	local Bank = BankFrame
-
+	
+	-- Bag & Bank Close
+	if (self.Bag:IsShown() or self.Bank:IsShown()) then
+		if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then
+			return
+		end
+		
+		CloseAllBags()
+		CloseBankBagFrames()
+		CloseBankFrame()
+		
+		return
+	end
+	
+	-- Bag Open
 	if not self.Bag:IsShown() then
 		-- Bags Toggle
 		self:OpenBag(0, 1)
@@ -805,7 +819,7 @@ function Bags:ToggleBags()
 		end
 	end
 	
-	-- Bank Toggle
+	-- Bank Open
 	if not self.Bank:IsShown() then
 		if Bank:IsShown() then		
 			self.Bank:Show()
