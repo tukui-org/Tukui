@@ -58,8 +58,6 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	end
 	
 	EclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	EclipseBar:SetFrameStrata("MEDIUM")
-	EclipseBar:SetFrameLevel(8)
 	EclipseBar:Size(250, 8)
 	EclipseBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	EclipseBar:SetBackdropColor(0, 0, 0)
@@ -71,12 +69,16 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	EclipseBar.LunarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
 	EclipseBar.LunarBar:SetStatusBarTexture(C.Medias.Normal)
 	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
+	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
+	EclipseBar.LunarBar:SetFrameLevel(self.Health:GetFrameLevel())
+	
 
 	EclipseBar.SolarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.SolarBar:SetPoint("LEFT", EclipseBar.LunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 	EclipseBar.SolarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
 	EclipseBar.SolarBar:SetStatusBarTexture(C.Medias.Normal)
 	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
+	EclipseBar.SolarBar:SetFrameLevel(self.Health:GetFrameLevel())
 	
 	EclipseBar.Text = EclipseBar:CreateFontString(nil, "OVERLAY")
 	EclipseBar.Text:SetPoint("TOP", self.Panel)
