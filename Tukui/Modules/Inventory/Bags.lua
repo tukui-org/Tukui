@@ -949,7 +949,7 @@ function Bags:Enable()
 		self.Bank:Hide()
 	end)
 	
-	BankFrame:SetScript("OnHide", function()
+	BankFrame:HookScript("OnHide", function()
 		if self.Reagent and self.Reagent:IsShown() then
 			self.Reagent:Hide()
 		end
