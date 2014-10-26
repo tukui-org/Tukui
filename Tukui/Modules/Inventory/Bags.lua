@@ -840,10 +840,7 @@ function Bags:CloseAllBankBags()
 	end
 end
 
-function Bags:ToggleBags()
-	local Bag = ContainerFrame1
-	local Bank = BankFrame
-	
+function Bags:ToggleBags()	
 	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) then
 		self:OpenAllBankBags()
 		
