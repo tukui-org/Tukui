@@ -928,7 +928,7 @@ function Bags:Enable()
 	function ToggleBag() ToggleAllBags() end
 	function ToggleBackpack() ToggleAllBags() end
 	function OpenAllBags() ToggleAllBags() end
-	function OpenBackpack()  ToggleAllBags() end
+	function OpenBackpack() ToggleAllBags() end
 	function ToggleAllBags() self:ToggleBags() end
 	
 	-- Add Hooks
@@ -938,6 +938,10 @@ function Bags:Enable()
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:SetScript("OnEvent", self.OnEvent)
+	
+	-- Force an update, setting colors
+	ToggleAllBags()
+	ToggleAllBags()
 end
 
 Inventory.Bags = Bags
