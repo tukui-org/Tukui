@@ -926,6 +926,7 @@ function Bags:Enable()
 	local Bag = ContainerFrame1
 	local GameMenu = GameMenuFrame
 	local Bank = BankFrameItem1
+	local BankFrame = BankFrame
 	local DataTextLeft = T["Panels"].DataTextLeft
 	local DataTextRight = T["Panels"].DataTextRight
 	
@@ -946,6 +947,12 @@ function Bags:Enable()
 	
 	Bank:SetScript("OnHide", function()
 		self.Bank:Hide()
+	end)
+	
+	BankFrame:SetScript("OnHide", function()
+		if self.Reagent and self.Reagent:IsShown() then
+			self.Reagent:Hide()
+		end
 	end)
 	
 	-- Rewrite Blizzard Bags Functions
