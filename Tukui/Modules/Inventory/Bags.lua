@@ -862,7 +862,7 @@ function Bags:ToggleBags()
 		self:OpenAllBags()
 	end
 	
-	if not self.Bank:IsShown() then
+	if not self.Bank:IsShown() and BankFrame:IsShown() then
 		self:OpenAllBankBags()
 	end
 end
