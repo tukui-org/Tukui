@@ -841,7 +841,7 @@ function Bags:CloseAllBankBags()
 end
 
 function Bags:ToggleBags()	
-	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) then
+	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown())  and (not ReagentBankFrame:IsShown()) then
 		self:OpenAllBankBags()
 		
 		return
