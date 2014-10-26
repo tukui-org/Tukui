@@ -39,7 +39,7 @@ function Plates:GetColor()
 		-- Friendly NPC
 		Red, Green, Blue = unpack(Colors.reaction[5])
 		self.IsFriend  = true
-	elseif (Red + Green > 1.95) then
+	elseif (Red + Green + Blue > 1.59) then
 		-- Neutral NPC
 		Red, Green, Blue = unpack(Colors.reaction[4])
 		self.IsFriend  = false
