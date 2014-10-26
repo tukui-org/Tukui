@@ -396,8 +396,8 @@ TukuiConfig["zhTW"] = {
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "Health Text",
-			["Desc"] = "Show the amount of health the unit lost.",
+			["Name"] = "血量顯示",
+			["Desc"] = "顯示血量具體數值.",
 		},
 		
 		["Font"] = {
@@ -540,8 +540,8 @@ TukuiConfig["zhTW"] = {
 		},
 		
 		["TargetEnemyHostileColor"] = {
-			["Name"] = "Enemy Target Hostile Color",
-			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+			["Name"] = "敵對目標顏色",
+			["Desc"] = "敵對目標血條將會變色，而不是通用的顏色着色",
 		},
 		
 		["Portrait"] = {
@@ -623,12 +623,11 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "競技場頭像框架",
 			["Desc"] = "在戰場或競技場顯示對手的頭像框架",
 		},
-		
-		["Boss"] = {
-			["Name"] = "Boss Frames",
-			["Desc"] = "Display boss frames while doing pve",
+
+	    ["Boss"] = {
+			["Name"] = "首領框架",
+			["Desc"] = "在PVE環境顯示首領框架",
 		},
-		
 		["TargetAuras"] = {
 			["Name"] = "目標光環",
 			["Desc"] = "在目標頭像顯示增益和減益效果",

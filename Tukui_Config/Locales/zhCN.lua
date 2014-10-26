@@ -550,8 +550,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["TargetEnemyHostileColor"] = {
-			["Name"] = "Enemy Target Hostile Color",
-			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+			["Name"] = "敌对目标颜色",
+			["Desc"] = "敌对目标血条会变色，而不是通过类的颜色着色",
 		},
 		
 		["Portrait"] = {
@@ -640,8 +640,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Boss"] = {
-			["Name"] = "Boss Frames",
-			["Desc"] = "Display boss frames while doing pve",
+			["Name"] = "首领框架",
+			["Desc"] = "在PVE环境显示首领框架",
 		},
 		
 		["TargetAuras"] = {
@@ -650,7 +650,7 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["FocusAuras"] = {
-			["Name"] = "焦点",
+			["Name"] = "焦点光环",
 			["Desc"] = "显示焦点的deff和debuff",
 		},
 		
@@ -661,12 +661,12 @@ TukuiConfig["zhCN"] = {
 		
 		["ArenaAuras"] = {
 			["Name"] = "竞技场框架光环",
-			["Desc"] = "在竞技场框架显示debuff",
+			["Desc"] = "在竞技场框架显示debuff和debuff",
 		},
 		
 		["BossAuras"] = {
-			["Name"] = "boss框架光环",
-			["Desc"] = "在BOSS框架上显示buff",
+			["Name"] = "首领框架光环",
+			["Desc"] = "在首领框架上显示buff和debuff",
 		},
 		
 		["Font"] = {
