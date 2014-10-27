@@ -27,7 +27,7 @@ function Movers:SaveDefaults(frame, a1, p, a2, x, y)
 end
 
 function Movers:RestoreDefaults(button)
-	local FrameName = self:GetParent():GetName()
+	local FrameName = self.Parent:GetName()
 	local Data = Movers.Defaults[FrameName]
 	local SavedVariables = TukuiData[GetRealmName()][UnitName("Player")].Move
 
@@ -56,9 +56,6 @@ function Movers:RegisterFrame(frame)
 end
 
 function Movers:OnDragStart()
-	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
-	local FrameParent = self:GetParent()
-	
 	self:StartMoving()
 end
 
@@ -67,8 +64,8 @@ function Movers:OnDragStop()
 	
 	local Data = TukuiData[GetRealmName()][UnitName("Player")].Move
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
-	local FrameName = self:GetParent():GetName()
-	local Frame = self:GetParent()
+	local FrameName = self.Parent:GetName()
+	local Frame = self.Parent
 	
 	Frame:ClearAllPoints()
 	Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
@@ -89,12 +86,14 @@ function Movers:CreateDragInfo()
 	self.DragInfo.Text:SetText(self:GetName())
 	self.DragInfo.Text:SetPoint("CENTER")
 	self.DragInfo.Text:SetTextColor(1, 0, 0)
-	self.DragInfo:SetFrameLevel(self:GetFrameLevel() + 100)
+	self.DragInfo:SetFrameLevel(100)
 	self.DragInfo:SetFrameStrata("HIGH")
 	self.DragInfo:SetMovable(true)
 	self.DragInfo:RegisterForDrag("LeftButton")
 	self.DragInfo:Hide()
 	self.DragInfo:SetScript("OnMouseUp", Movers.RestoreDefaults)
+	
+	self.DragInfo.Parent = self.DragInfo:GetParent()
 end
 
 function Movers:StartOrStopMoving()
@@ -124,7 +123,16 @@ function Movers:StartOrStopMoving()
 			
 			Frame.DragInfo:SetScript("OnDragStart", self.OnDragStart)
 			Frame.DragInfo:SetScript("OnDragStop", self.OnDragStop)
+			Frame.DragInfo:SetParent(UIParent)
 			Frame.DragInfo:Show()
+			
+			if Frame.DragInfo:GetFrameLevel() ~= 100 then
+				Frame.DragInfo:SetFrameLevel(100)
+			end
+			
+			if Frame.DragInfo:GetFrameStrata() ~= "HIGH" then
+				Frame.DragInfo:SetFrameStrata("HIGH")
+			end
 			
 			if Frame.DragInfo:GetHeight() < 15 then
 				Frame.DragInfo:ClearAllPoints()
@@ -139,6 +147,7 @@ function Movers:StartOrStopMoving()
 			end
 
 			if Frame.DragInfo then
+				Frame.DragInfo:SetParent(Frame.DragInfo.Parent)
 				Frame.DragInfo:Hide()
 				Frame.DragInfo:SetScript("OnDragStart", nil)
 				Frame.DragInfo:SetScript("OnDragStop", nil)
