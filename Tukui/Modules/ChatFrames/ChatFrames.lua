@@ -158,6 +158,11 @@ function TukuiChat:StyleFrame(frame)
 	-- Mouse Wheel
 	Frame:SetScript("OnMouseWheel", TukuiChat.OnMouseWheel)
 	
+	-- Temp Chats
+	if (ID > 10) then
+		self.SetChatFont(Frame)
+	end
+	
 	-- Security for font, in case if revert back to WoW default we restore instantly the tukui font default.
 	hooksecurefunc(Frame, "SetFont", TukuiChat.SetChatFont)
 
