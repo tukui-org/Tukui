@@ -153,9 +153,11 @@ function Plates:Skin(obj)
 	
 	local NewPlate = self.Container[Plate]
 	NewPlate:Size(self.PlateWidth, self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
+	NewPlate:SetFrameStrata("BACKGROUND")
+	NewPlate:SetFrameLevel(2)
 	
 	-- Reference
-	-- NewPlate.BlizzardPlate = Plate
+	NewPlate.BlizzardPlate = Plate
 	Plate.NewPlate = NewPlate
 	
 	Plate.Frame:SetParent(Hider)
@@ -228,34 +230,7 @@ function Plates:Skin(obj)
 	Plate.Cast.NameShadow:SetParent(Plate.NewCast)
 	Plate.Cast.NameShadow:ClearAllPoints()
 	Plate.Cast.NameShadow:SetPoint("CENTER", Plate.Cast.Name, "CENTER", 0, -2)
-	
-	--[[
-	Plate.Cast:SetParent(NewPlate)
-	Plate.Cast:SetStatusBarTexture(Texture)
-	Plate.Cast:CreateShadow()
-	
-	Plate.Cast.Background = Plate.Cast:CreateTexture(nil, "BACKGROUND")
-	Plate.Cast.Background:SetAllPoints()
-	
-	Plate.Cast.Border:SetTexture(nil)
-	
-	Plate.Cast.Icon:SetTexCoord(unpack(T.IconCoord))
-	Plate.Cast.Icon:Size(self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
-	
-	Plate.Cast.Icon.Backdrop = CreateFrame("Frame", nil, Plate.Cast)
-	Plate.Cast.Icon.Backdrop:SetFrameLevel(Plate.Cast:GetFrameLevel() - 1)
-	Plate.Cast.Icon.Backdrop:SetAllPoints(Plate.Cast.Icon)
-	Plate.Cast.Icon.Backdrop:CreateShadow()
-	
-	Plate.Cast.Name:ClearAllPoints()
-	Plate.Cast.Name:Point("BOTTOM", Plate.Cast, 0, -9)
-	Plate.Cast.Name:Point("LEFT", Plate.Cast, 7, 0)
-	Plate.Cast.Name:Point("RIGHT", Plate.Cast, -7, 0)
-	Plate.Cast.Name:SetFont(FontName, FontSize - (IsPixel and 2 or 4), FontFlags)
-	Plate.Cast.Name:SetShadowColor(0, 0, 0, 0)
-	--]]
-	
-	Plate.Cast.Shield:SetTexture(nil) -- DON'T FORGET TO ADD "CHANGE COLOR" WHEN SHOW
+	Plate.Cast.Shield:SetTexture(nil)
 	
 	-- Level
 	Plate.Level:SetParent(Hider)
@@ -341,7 +316,7 @@ function Plates:Update()
 			NewPlate:SetPoint("CENTER", NameplateParent, "BOTTOMLEFT", Plate:GetCenter())
 			NewPlate:Show()
 			
-			if Plate:GetAlpha() == 1 then -- Is Targeted
+			if Plate:GetAlpha() == 1 then
 				NewPlate:SetAlpha(1)
 			else
 				NewPlate:SetAlpha(C.NamePlates.NonTargetAlpha)
