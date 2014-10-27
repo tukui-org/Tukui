@@ -10,24 +10,16 @@ local Update = function(self)
 	local Effective = Base + PosBuff + NegBuff
 	local RangedBase, RangedPosBuff, RangedNegBuff = UnitRangedAttackPower("player")
 	local RangedEffective = RangedBase + RangedPosBuff + RangedNegBuff
+	local SpellPower = GetSpellBonusDamage(7)
+	local AttackPower = Effective
 	local Text = L.DataText.AttackPower
-
-	HealPower = GetSpellBonusHealing()
-	SpellPower = GetSpellBonusDamage(7)
-	AttackPower = Effective
-
-	if (HealPower > SpellPower) then
-		Spell = HealPower
-	else
-		Spell = SpellPower
-	end
-
-	if (AttackPower > Spell and Class ~= "HUNTER") then
+	
+	if (AttackPower > SpellPower and Class ~= "HUNTER") then
 		Value = AttackPower
 	elseif (Class == "HUNTER") then
 		Value = RangedEffective
 	else
-		Value = Spell
+		Value = SpellPower
 		Text = L.DataText.Spell
 	end
 	
