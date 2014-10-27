@@ -35,6 +35,9 @@ function TukuiActionBars:CreateStanceBar()
 
 			Button:ClearAllPoints()
 			Button:Point("LEFT", Previous, "RIGHT", Spacing, 0)
+		else
+			Button:ClearAllPoints()
+			Button:Point("BOTTOMLEFT", StanceBar, "BOTTOMLEFT", Spacing, Spacing)		
 		end
 	end
 
