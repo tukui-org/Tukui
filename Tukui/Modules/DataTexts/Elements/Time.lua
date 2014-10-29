@@ -14,8 +14,8 @@ local tslu = 1
 
 local RaidFormat1 = "%s - %s (%d/%d)" -- Siege of Orgrimmar - Mythic (10/14)
 local RaidFormat2 = "%s - %s" -- Siege of Orgrimmar - Mythic
-local DayHourMinuteSecond = "%dd, %dh, %dm"
-local HourMinuteSecond = "%dh, %dm"
+local DayHourMinute = "%dd, %dh, %dm"
+local HourMinute = "%dh, %dm"
 local MinuteSecond = "%dm, %ds"
 
 local AMPM = {
@@ -27,9 +27,9 @@ local GetResetTime = function(seconds)
 	local Days, Hours, Minutes, Seconds = ChatFrame_TimeBreakDown(floor(seconds))
 	
 	if (Days > 0) then
-		return format(DayHourMinuteSecond, Days, Hours, Minutes) -- 7d, 2h, 5m
+		return format(DayHourMinute, Days, Hours, Minutes) -- 7d, 2h, 5m
 	elseif (Hours > 0) then
-		return format(HourMinuteSecond, Hours, Minutes) -- 12h, 32m
+		return format(HourMinute, Hours, Minutes) -- 12h, 32m
 	else
 		return format(MinuteSecond, Minutes, Seconds) -- 5m, 42s
 	end
