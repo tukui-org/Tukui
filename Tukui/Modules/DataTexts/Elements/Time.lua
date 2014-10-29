@@ -12,10 +12,28 @@ local CurrentHour
 local CurrentMin
 local tslu = 1
 
+local RaidFormat1 = "%s - %s (%d/%d)" -- Siege of Orgrimmar - Mythic (10/14)
+local RaidFormat2 = "%s - %s" -- Siege of Orgrimmar - Mythic
+local DayHourMinuteSecond = "%dd, %dh, %dm"
+local HourMinuteSecond = "%dh, %dm"
+local MinuteSecond = "%dm, %ds"
+
 local AMPM = {
 	TIMEMANAGER_PM,
 	TIMEMANAGER_AM,
 }
+
+local GetResetTime = function(seconds)
+	local Days, Hours, Minutes, Seconds = ChatFrame_TimeBreakDown(floor(seconds))
+	
+	if (Days > 0) then
+		return format(DayHourMinuteSecond, Days, Hours, Minutes) -- 7d, 2h, 5m
+	elseif (Hours > 0) then
+		return format(HourMinuteSecond, Hours, Minutes) -- 12h, 32m
+	else
+		return format(MinuteSecond, Minutes, Seconds) -- 5m, 42s
+	end
+end
 
 local GetFormattedTime = function()
 	local Use24Hour = C["DataTexts"].Time24HrFormat
@@ -89,15 +107,71 @@ local Update = function(self, t)
 	tslu = 1
 end
 
+local OnEnter = function(self)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
+	GameTooltip:ClearLines()
+	
+	local SavedInstances = GetNumSavedInstances()
+	local SavedWorldBosses = GetNumSavedWorldBosses()
+	
+	if (SavedWorldBosses > 0) then
+		GameTooltip:AddLine("World Bosses")
+		
+		for i = 1, SavedWorldBosses do
+			local Name, _, Reset = GetSavedWorldBossInfo(i)
+			
+			if (Name and Reset) then
+				local ResetTime = GetResetTime(Reset)
+				
+				GameTooltip:AddDoubleLine(Name, ResetTime, 1, 1, 1, 1, 1, 1)
+			end
+		end
+	end
+	
+	if ((SavedWorldBosses > 0) and (SavedInstances > 0)) then
+		-- Spacing
+		GameTooltip:AddLine(" ")
+	end
+	
+	if (SavedInstances > 0) then
+		GameTooltip:AddLine("Saved Raids")
+		
+		for i = 1, SavedInstances do
+			local Name, _, Reset, _, Locked, Extended, _, IsRaid, _, Difficulty, MaxBosses, DefeatedBosses = GetSavedInstanceInfo(i)
+			
+			if (IsRaid and Name and (Locked or Extended)) then
+				local ResetTime = GetResetTime(Reset)
+				
+				if (MaxBosses and MaxBosses > 0) and (DefeatedBosses and DefeatedBosses > 0) then
+					GameTooltip:AddDoubleLine(format(RaidFormat1, Name, Difficulty, DefeatedBosses, MaxBosses), ResetTime, 1, 1, 1, 1, 1, 1)
+				else
+					GameTooltip:AddDoubleLine(format(RaidFormat2, Name, Difficulty), ResetTime, 1, 1, 1, 1, 1, 1)
+				end
+			end
+		end
+	end
+	
+	GameTooltip:Show()
+end
+
+local OnLeave = function()
+	GameTooltip:Hide()
+end
+
 local Enable = function(self)
 	self:SetScript("OnUpdate", Update)
 	self:SetScript("OnMouseUp", GameTimeFrame_OnClick)
+	self:SetScript("OnEnter", OnEnter)
+	self:SetScript("OnLeave", OnLeave)
 	self:Update(1)
+	RequestRaidInfo()
 end
 
 local Disable = function(self)
 	self.Text:SetText("")
 	self:SetScript("OnUpdate", nil)
+	self:SetScript("OnEnter", nil)
+	self:SetScript("OnLeave", nil)
 end
 
 DataText:Register(L.DataText.Time, Enable, Disable, Update)
