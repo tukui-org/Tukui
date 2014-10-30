@@ -147,7 +147,8 @@ function TukuiUnitFrames:Arena()
 		CastBar.Text:SetFontObject(Font)
 		CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
-
+		CastBar.Text:SetWidth(166)
+		
 		CastBar.Button = CreateFrame("Frame", nil, CastBar)
 		CastBar.Button:Size(CastBar:GetHeight())
 		CastBar.Button:SetPoint("RIGHT", CastBar, "LEFT", -4, 0)
