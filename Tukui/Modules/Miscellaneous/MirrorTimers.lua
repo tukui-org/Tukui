@@ -17,7 +17,7 @@ function MirrorTimers:Update()
 
 			Bar:StripTextures()
 			Bar:SetBackdrop(Backdrop)
-			Bar:SetBackdropColor(unpack(C.Medias.BackdropColor))
+			Bar:SetBackdropColor(unpack(C.General.BackdropColor))
 			Bar:CreateShadow()
 			
 			Status:ClearAllPoints()

@@ -319,7 +319,7 @@ function TukuiActionBars:UpdateStanceBar(...)
 					Button:SetChecked(false)
 					
 					if Button.Backdrop then
-						Button.Backdrop:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+						Button.Backdrop:SetBackdropBorderColor(unpack(C.General.BorderColor))
 					end
 				end
 
