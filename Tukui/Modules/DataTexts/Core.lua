@@ -270,13 +270,15 @@ function TukuiDT:Load()
 			
 			if (Enabled and (Num and Num > 0)) then
 				local Object = self:GetDataText(Name)
-				
-				if Object then
-					Object:Enable()
-					self.Anchors[Num]:SetData(Object)
-				else
-					T.Print("DataText '" .. Name .. "' not found. Removing from cache.")
-					TukuiData[GetRealmName()][UnitName("Player")].Texts[Name] = {false, 0}
+
+				if self.Anchors[Num] then
+					if Object then
+						Object:Enable()
+						self.Anchors[Num]:SetData(Object)
+					else
+						T.Print("DataText '" .. Name .. "' not found. Removing from cache.")
+						TukuiData[GetRealmName()][UnitName("Player")].Texts[Name] = {false, 0}
+					end
 				end
 			end
 		end
