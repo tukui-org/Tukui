@@ -181,7 +181,7 @@ function TukuiUnitFrames:Party()
 		self.HealPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
-			absBar = ThirdBar,
+			absorbBar = ThirdBar,
 			maxOverflow = 1,
 		}
 	end

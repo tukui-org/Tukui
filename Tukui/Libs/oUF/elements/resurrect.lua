@@ -65,7 +65,6 @@ local Enable = function(self)
 		resurrect.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent('INCOMING_RESURRECT_CHANGED', Path, true)
-		self:RegisterEvent('UNIT_OTHER_PARTY_CHANGED', Path, true)
 
 		if(resurrect:IsObjectType('Texture') and not resurrect:GetTexture()) then
 			resurrect:SetTexture[[Interface\RaidFrame\Raid-Icon-Rez]]
@@ -79,7 +78,6 @@ local Disable = function(self)
 	local resurrect = self.ResurrectIcon
 	if(resurrect) then
 		self:UnregisterEvent('INCOMING_RESURRECT_CHANGED', Path)
-		self:UnregisterEvent('UNIT_OTHER_PARTY_CHANGED', Path)
 	end
 end
 
