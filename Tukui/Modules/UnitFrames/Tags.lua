@@ -86,9 +86,9 @@ oUF.Tags.Methods['Tukui:Role'] = function(unit)
 	local String = ""
 	
 	if Role == "TANK" then
-		String = "|cff0099CC" .. TANK .. "|r"
+		String = " |cff0099CC(" .. TANK .. ")|r"
 	elseif Role == "HEALER" then
-		String = "|cff00FF00" .. HEALER .. "|r"
+		String = " |cff00FF00(" .. HEALER .. ")|r"
 	end
 	
 	return String

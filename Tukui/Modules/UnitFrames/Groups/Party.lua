@@ -86,10 +86,6 @@ function TukuiUnitFrames:Party()
 	Name:SetPoint("TOPLEFT", -1, 18)
 	Name:SetFontObject(Font)
 	
-	local Role = Health:CreateFontString(nil, "OVERLAY")
-	Role:SetPoint("TOPRIGHT", 3, 18)
-	Role:SetFontObject(Font)
-	
 	if (C.Party.Portrait) then
 		local Portrait = CreateFrame("PlayerModel", nil, self)
 		
@@ -223,6 +219,5 @@ function TukuiUnitFrames:Party()
 	self.PhaseIcon = PhaseIcon
 	self.Threat = Threat
 	self.Range = Range
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
-	self:Tag(Role, "[Tukui:Role]")
+	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong][Tukui:Role]")
 end
