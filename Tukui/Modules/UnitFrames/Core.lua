@@ -678,6 +678,7 @@ function TukuiUnitFrames:UpdateBossAltPower(minimum, current, maximum)
 	if (not current) or (not maximum) then return end
 	
 	local r, g, b = T.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
+	
 	self:SetStatusBarColor(r, g, b)
 end
 

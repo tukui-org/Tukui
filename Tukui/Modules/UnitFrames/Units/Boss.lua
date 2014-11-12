@@ -165,15 +165,14 @@ function TukuiUnitFrames:Boss()
 		self.Castbar.Icon = CastBar.Icon
 	end
 	
-	local AltPowerBar = CreateFrame("StatusBar", nil, Health)
-	AltPowerBar:SetFrameLevel(Health:GetFrameLevel() + 1)
+	local AltPowerBar = CreateFrame("StatusBar", nil, self)
 	AltPowerBar:Height(4)
 	AltPowerBar:SetStatusBarTexture(C.Medias.Normal)
 	AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
 	AltPowerBar:SetStatusBarColor(0, 0, 0)
 	AltPowerBar:SetPoint("LEFT")
 	AltPowerBar:SetPoint("RIGHT")
-	AltPowerBar:SetPoint("TOP", Health, "TOP")
+	AltPowerBar:SetPoint("BOTTOM", Health, "TOP", 0, 1)
 	AltPowerBar:SetBackdrop({
 		bgFile = C.Medias.Blank, 
 		edgeFile = C.Medias.Blank, 
@@ -182,6 +181,7 @@ function TukuiUnitFrames:Boss()
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0)
+	AltPowerBar:CreateShadow()
 	AltPowerBar.PostUpdate = TukuiUnitFrames.UpdateBossAltPower
 	
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
