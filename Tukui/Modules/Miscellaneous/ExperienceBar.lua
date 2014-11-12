@@ -1,7 +1,6 @@
 local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
-local MaxLevel = MAX_PLAYER_LEVEL
 local Experience = CreateFrame("Frame", nil, UIParent)
 local HideTooltip = GameTooltip_Hide
 local Panels = T["Panels"]
@@ -37,9 +36,12 @@ function Experience:GetExperience()
 end
 
 function Experience:Update(event, owner)
-	if (UnitLevel("player") == MaxLevel) then
+	if (UnitLevel("player") == MAX_PLAYER_LEVEL) then
 		self:Disable()
+		
 		return
+	else
+		self:Enable()
 	end
 	
 	local Current, Max = self:GetExperience()
@@ -60,10 +62,6 @@ function Experience:Update(event, owner)
 end
 
 function Experience:Create()
-	if (UnitLevel("player") == MaxLevel) then
-		return
-	end
-	
 	for i = 1, self.NumBars do
 		local XPBar = CreateFrame("StatusBar", nil, UIParent)
 		local RestedBar = CreateFrame("StatusBar", nil, UIParent)
@@ -107,15 +105,32 @@ function Experience:Create()
 end
 
 function Experience:Enable()
-	self:Create()
+	if not self.IsCreated then
+		self:Create()
+		
+		self.IsCreated = true
+	end
+	
+	for i = 1, self.NumBars do
+		if not self["XPBar"..i]:IsShown() then
+			self["XPBar"..i]:Show()
+		end
+		
+		if not self["RestedBar"..i] then
+			self["RestedBar"..i]:Show()
+		end
+	end	
 end
 
 function Experience:Disable()
-	self:UnregisterAllEvents()
-	
 	for i = 1, self.NumBars do
-		self["XPBar"..i]:Hide()
-		self["RestedBar"..i]:Hide()
+		if self["XPBar"..i]:IsShown() then
+			self["XPBar"..i]:Hide()
+		end
+		
+		if self["RestedBar"..i]:IsShown() then
+			self["RestedBar"..i]:Hide()
+		end
 	end
 end
 
