@@ -1,7 +1,6 @@
 local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
-local MaxLevel = MAX_PLAYER_LEVEL
 local Reputation = CreateFrame("Frame", nil, UIParent)
 local HideTooltip = GameTooltip_Hide
 local Panels = T["Panels"]
@@ -31,18 +30,12 @@ function Reputation:SetTooltip()
 end
 
 function Reputation:Update()
-	if (not GetWatchedFactionInfo()) then
-		if self.RepBar1:IsVisible() then
-			self.RepBar1:Hide()
-			self.RepBar2:Hide()
-		end
+	if GetWatchedFactionInfo() then
+		self:Enable()
+	else
+		self:Disable()
 		
 		return
-	else
-		if (not self.RepBar1:IsVisible()) then
-			self.RepBar1:Show()
-			self.RepBar2:Show()
-		end
 	end
 	
 	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
@@ -55,10 +48,6 @@ function Reputation:Update()
 end
 
 function Reputation:Create()
-	if (UnitLevel("player") ~= MaxLevel) then
-		return
-	end
-	
 	for i = 1, self.NumBars do
 		local RepBar = CreateFrame("StatusBar", nil, UIParent)
 		
@@ -81,11 +70,6 @@ function Reputation:Create()
 		self["RepBar"..i] = RepBar
 	end
 	
-	if (not GetWatchedFactionInfo()) then
-		self.RepBar1:Hide()
-		self.RepBar2:Hide()
-	end
-	
 	self:RegisterEvent("UPDATE_FACTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	
@@ -93,14 +77,24 @@ function Reputation:Create()
 end
 
 function Reputation:Enable()
-	self:Create()
+	if not self.IsCreated then
+		self:Create()
+		
+		self.IsCreated = true
+	end
+	
+	for i = 1, self.NumBars do
+		if not self["RepBar"..i]:IsShown() then
+			self["RepBar"..i]:Show()
+		end
+	end
 end
 
 function Reputation:Disable()
-	self:UnregisterAllEvents()
-	
 	for i = 1, self.NumBars do
-		self["RepBar"..i]:Hide()
+		if self["RepBar"..i]:IsShown() then
+			self["RepBar"..i]:Hide()
+		end
 	end
 end
 
