@@ -1,6 +1,7 @@
 local T, C, L = select(2, ...):unpack()
 
 local DataText = T["DataTexts"]
+local Unknown = UNKNOWN
 
 local ZoneColors = {
 	["friendly"] = {0.1, 1.0, 0.1},
@@ -69,7 +70,7 @@ local OnEnter = function(self)
 		end
 	end
 	
-	Location = format("%s (%s, %s)", Text, XText, YText)
+	Location = format("%s (%s, %s)", Text or Unknown, XText or 0, YText or 0)
 	
 	GameTooltip:AddLine(LOCATION_COLON, 1, 1, 1)
 	
