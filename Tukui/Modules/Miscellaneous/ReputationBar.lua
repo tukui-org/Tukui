@@ -53,6 +53,8 @@ function Reputation:Create()
 		
 		RepBar:SetStatusBarTexture(C.Medias.Normal)
 		RepBar:EnableMouse()
+		RepBar:SetFrameStrata("MEDIUM")
+		RepBar:SetFrameLevel(1)
 		RepBar:CreateBackdrop()
 		RepBar:SetScript("OnEnter", Reputation.SetTooltip)
 		RepBar:SetScript("OnLeave", HideTooltip)
