@@ -116,7 +116,7 @@ function Experience:Enable()
 			self["XPBar"..i]:Show()
 		end
 		
-		if not self["RestedBar"..i] then
+		if not self["RestedBar"..i]:IsShown() then
 			self["RestedBar"..i]:Show()
 		end
 	end	
