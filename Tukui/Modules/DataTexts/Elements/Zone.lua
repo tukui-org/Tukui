@@ -70,9 +70,9 @@ local OnEnter = function(self)
 		end
 	end
 	
-	Location = format("%s (%s, %s)", Text or Unknown, XText or 0, YText or 0)
+	Location = format("%s |cffFFFFFF(%s, %s)|r", Text or Unknown, XText or 0, YText or 0)
 	
-	GameTooltip:AddLine(LOCATION_COLON, 1, 1, 1)
+	GameTooltip:AddLine(LOCATION_COLON)
 	
     if (PVPType == "sanctuary") then
 		Label = SANCTUARY_TERRITORY
@@ -88,7 +88,7 @@ local OnEnter = function(self)
 		Label = COMBAT_ZONE
     end
 	
-	GameTooltip:AddDoubleLine(Location, Label, 1, 1, 1, Color[1], Color[2], Color[3])
+	GameTooltip:AddDoubleLine(Location, Label, Color[1], Color[2], Color[3], Color[1], Color[2], Color[3])
 	
 	GameTooltip:Show()
 end
