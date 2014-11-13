@@ -56,6 +56,7 @@ function Experience:Update(event, owner)
 			self["RestedBar"..i]:SetMinMaxValues(0, Max)
 			self["RestedBar"..i]:SetValue(Rested + Current)
 		else
+			self["RestedBar"..i]:SetMinMaxValues(0, 1)
 			self["RestedBar"..i]:SetValue(0)
 		end
 	end
