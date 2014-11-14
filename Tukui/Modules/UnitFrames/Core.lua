@@ -19,7 +19,6 @@ local UnitPlayerControlled = UnitPlayerControlled
 local UnitIsGhost = UnitIsGhost
 local UnitIsDead = UnitIsDead
 local UnitPowerType = UnitPowerType
-local Class = select(2, UnitClass("player"))
 
 TukuiUnitFrames.Units = {}
 TukuiUnitFrames.Headers = {}
@@ -278,9 +277,9 @@ function TukuiUnitFrames:UpdateThreat(event, unit)
 	local Colors = T["Colors"]
 	local Status = UnitThreatSituation(unit)
 	local Health = self.Health
-	local Class = select(2, UnitClass(unit))
-	local Color = not UnitIsPlayer(unit) and Colors.reaction[5] or C["UnitFrames"].DarkTheme and {0.2, 0.2, 0.2} or Colors.class[Class] or {0, 0, 0}
-	
+	local Class = select(2, UnitClass(unit)) or UNKNOWN
+	local Color = not UnitIsPlayer(unit) and Colors.reaction[5] or C["UnitFrames"].DarkTheme and {0.2, 0.2, 0.2} or Colors.class[Class] or Colors.disconnected or {0, 0, 0}
+
 	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
 		Health:SetStatusBarColor(unpack(Colors.disconnected))
 	elseif Status and Status > 0 then
@@ -604,6 +603,8 @@ end
 
 -- create the icon
 function TukuiUnitFrames:CreateAuraWatch(frame)
+	local Class = select(2, UnitClass("player"))
+
 	local Auras = CreateFrame("Frame", nil, frame)
 	Auras:SetPoint("TOPLEFT", frame.Health, 2, -2)
 	Auras:SetPoint("BOTTOMRIGHT", frame.Health, -2, 2)
