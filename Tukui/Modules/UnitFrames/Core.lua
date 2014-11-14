@@ -305,10 +305,6 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 		
 		if (IsRaid) then
 			TukuiUnitFrames.UpdateThreat(self:GetParent(), nil, unit)
-			
-			if (unit == "player") then
-				unit = raid
-			end
 		end
 		
 		if (C["UnitFrames"].DarkTheme ~= true and C["UnitFrames"].TargetEnemyHostileColor and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["UnitFrames"].DarkTheme ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
@@ -327,7 +323,11 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 		if (min ~= max) then
 			r, g, b = T.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
-				self.Value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
+				if (IsRaid) then
+					self.Value:SetText("|cffff2222-"..TukuiUnitFrames.ShortValue(max-min).."|r")
+				else
+					self.Value:SetFormattedText("|cffAF5050%d|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", min, r * 255, g * 255, b * 255, floor(min / max * 100))
+				end
 			elseif (unit == "target" or (unit and strfind(unit, "boss%d"))) then
 				self.Value:SetFormattedText("|cffAF5050%s|r |cffD7BEA5-|r |cff%02x%02x%02x%d%%|r", TukuiUnitFrames.ShortValue(min), r * 255, g * 255, b * 255, floor(min / max * 100))
 			elseif (unit and strfind(unit, "arena%d")) or (unit == "focus") or (unit == "focustarget") then
