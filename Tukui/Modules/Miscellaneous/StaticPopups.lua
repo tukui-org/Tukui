@@ -43,6 +43,8 @@ function StaticPopups:Skin()
 	_G[Name.."ItemFrameIconTexture"]:Point("TOPLEFT", 2, -2)
 	_G[Name.."ItemFrameIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
 	_G[Name.."CloseButton"]:SkinCloseButton()
+	_G[Name.."CloseButton"].SetNormalTexture = function() end
+	_G[Name.."CloseButton"].SetPushedTexture = function() end
 end
 
 function StaticPopups:Enable()
