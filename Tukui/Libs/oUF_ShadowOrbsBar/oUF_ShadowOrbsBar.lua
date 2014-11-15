@@ -19,7 +19,7 @@ end
 
 local function Update(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'SHADOW_ORBS')) then return end
-
+	
 	local pb = self.ShadowOrbsBar
 	
 	if(pb.PreUpdate) then
@@ -27,7 +27,7 @@ local function Update(self, event, unit, powerType)
 	end
 
 	local numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
-	local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
+	local totalOrbs = UnitPowerMax("player", SPELL_POWER_SHADOW_ORBS)
 	
 	for i = 1, totalOrbs do
 		if i <= numOrbs then
@@ -58,7 +58,7 @@ local function Visibility(self, event, unit)
 		pb:Show()
 		
 		-- Here we set the number of orbs show
-		local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
+		local totalOrbs = UnitPowerMax("player", SPELL_POWER_SHADOW_ORBS)
 		local totalWidth = pb:GetWidth()
 		
 		if totalOrbs == 5 then
@@ -97,6 +97,7 @@ local function Enable(self, unit)
 		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("UNIT_POWER_FREQUENT", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)	
+		self:RegisterEvent("PLAYER_ENTERING_WORLD", Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:RegisterEvent("SPELLS_CHANGED", Visibility)
 		self:RegisterEvent("PLAYER_LEVEL_UP", Visibility)
@@ -125,6 +126,7 @@ local function Disable(self)
 		self:UnregisterEvent("UNIT_POWER", Path)
 		self:UnregisterEvent("UNIT_POWER_FREQUENT", Path)
 		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)	
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Path)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:UnregisterEvent("SPELLS_CHANGED", Visibility)
 		self:UnregisterEvent("PLAYER_LEVEL_UP", Visibility)
