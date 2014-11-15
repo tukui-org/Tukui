@@ -95,9 +95,11 @@ local function Enable(self, unit)
 		pb.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent("UNIT_POWER", Path)
+		self:RegisterEvent("UNIT_POWER_FREQUENT", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)	
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:RegisterEvent("SPELLS_CHANGED", Visibility)
 		self:RegisterEvent("PLAYER_LEVEL_UP", Visibility)
 
 		for i = 1, 5 do
@@ -122,8 +124,12 @@ local function Disable(self)
 	local pb = self.ShadowOrbsBar
 	if(pb) then
 		self:UnregisterEvent("UNIT_POWER", Path)
-		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
-		pb.Visibility:UnregisterEvent("PLAYER_TALENT_UPDATE")
+		self:UnregisterEvent("UNIT_POWER_FREQUENT", Path)
+		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)	
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Visibility)
+		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:UnregisterEvent("SPELLS_CHANGED", Visibility)
+		self:UnregisterEvent("PLAYER_LEVEL_UP", Visibility)
 	end
 end
 
