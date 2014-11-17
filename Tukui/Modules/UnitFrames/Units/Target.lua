@@ -338,6 +338,9 @@ function TukuiUnitFrames:Target()
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
 	
+	local Threat = Health:CreateTexture(nil, "OVERLAY")
+	Threat.Override = TukuiUnitFrames.UpdateThreat
+	
 	if (Class == "PRIEST" and C.UnitFrames.WeakBar) then
 		-- Weakened Soul Bar
 		local WSBar = CreateFrame("StatusBar", nil, Power)
@@ -360,4 +363,5 @@ function TukuiUnitFrames:Target()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.RaidIcon = RaidIcon
+	self.Threat = Threat
 end
