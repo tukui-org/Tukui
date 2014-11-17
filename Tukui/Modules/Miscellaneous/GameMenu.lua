@@ -39,7 +39,7 @@ function GameMenu:EnableTukuiConfig()
 	local Tukui = CreateFrame("Button", nil, Menu, "GameMenuButtonTemplate")
 	Tukui:Size(Logout:GetWidth(), Logout:GetHeight())
 	Tukui:SkinButton()
-	Tukui:Point("TOPLEFT", GameMenuButtonAddons, "BOTTOMLEFT", 0, -2)
+	Tukui:Point("TOPLEFT", GameMenuButtonAddons, "BOTTOMLEFT", 0, -1)
 	Tukui:SetText("Tukui")
 	Tukui:SetScript("OnClick", function(self)
 		if (not TukuiConfigFrame) then
@@ -56,7 +56,7 @@ function GameMenu:EnableTukuiConfig()
 	end)
 	
 	Logout:ClearAllPoints()
-	Logout:Point("TOPLEFT", Tukui, "BOTTOMLEFT", 0, -2)
+	Logout:Point("TOPLEFT", Tukui, "BOTTOMLEFT", 0, -1)
 	
 	self:AddHooks()
 	self.Tukui = Tukui
