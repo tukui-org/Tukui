@@ -287,6 +287,23 @@ function TukuiUnitFrames:UpdateThreat(event, unit)
 	end
 end
 
+function TukuiUnitFrames:PreUpdateHealth(unit)
+	local DarkTheme = C["UnitFrames"].DarkTheme
+	local HostileColor = C["UnitFrames"].TargetEnemyHostileColor
+	
+	if (DarkTheme == true) or (HostileColor ~= true) then
+		return
+	end
+	
+	local Parent = self:GetParent()
+	
+	if UnitIsEnemy(unit, "player") then
+		self.colorClass = false
+	else
+		self.colorClass = true
+	end
+end
+
 function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 	if (not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then
 		if (not UnitIsConnected(unit)) then
@@ -299,19 +316,6 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 	else
 		local r, g, b
 		local IsRaid = string.match(self:GetParent():GetName(), "Button") or false
-		
-		if (C["UnitFrames"].DarkTheme ~= true and C["UnitFrames"].TargetEnemyHostileColor and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["UnitFrames"].DarkTheme ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
-			local Colors = T["Colors"]
-			local Color = Colors.reaction[UnitReaction(unit, "player")]
-			
-			if Color then 
-				r, g, b = Color[1], Color[2], Color[3]
-				self:SetStatusBarColor(r, g, b)
-			else
-				r, g, b = 75/255,  175/255, 76/255
-				self:SetStatusBarColor(r, g, b)
-			end
-		end
 
 		if (min ~= max) then
 			r, g, b = T.ColorGradient(min, max, 0.69, 0.31, 0.31, 0.65, 0.63, 0.35, 0.33, 0.59, 0.33)

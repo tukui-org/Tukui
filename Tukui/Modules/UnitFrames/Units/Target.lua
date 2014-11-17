@@ -55,6 +55,7 @@ function TukuiUnitFrames:Target()
 		Health.colorReaction = true
 	end
 
+	Health.PreUpdate = TukuiUnitFrames.PreUpdateHealth
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 
 	if (C.UnitFrames.Smooth) then
