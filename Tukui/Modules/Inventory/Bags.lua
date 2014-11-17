@@ -526,6 +526,10 @@ function Bags:SkinTokens()
 end
 
 function Bags:SlotUpdate(id, button)
+	if not button then
+		return
+	end
+	
 	local ItemLink = GetContainerItemLink(id, button:GetID())
 	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
@@ -604,7 +608,9 @@ function Bags:BagUpdate(id)
 	for Slot = 1, Size do
 		local Button = _G["ContainerFrame"..(id + 1).."Item"..Slot]
 		
-		self:SlotUpdate(id, Button)
+		if Button then
+			self:SlotUpdate(id, Button)
+		end
 	end
 end
 
@@ -893,14 +899,18 @@ function Bags:OnEvent(event, ...)
 		if ID <= 28 then
 			local Button = _G["BankFrameItem"..ID]
 			
-			self:SlotUpdate(-1, Button)
+			if (Button) then
+				self:SlotUpdate(-1, Button)
+			end
 		end
-	else
+	elseif (event == "PLAYERREAGENTBANKSLOTS_CHANGED") then
 		local ID = ...
 		
 		local Button = _G["ReagentBankFrameItem"..ID]
 		
-		self:SlotUpdate(-3, Button)
+		if (Button) then
+			self:SlotUpdate(-3, Button)
+		end
 	end
 end
 
