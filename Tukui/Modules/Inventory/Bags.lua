@@ -225,6 +225,8 @@ function Bags:CreateReagentContainer()
 		Icon:SetInside()
 
 		LastButton = Button
+		
+		self:SlotUpdate(-3, Button)
 	end
 	
 	Reagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 20) - ButtonSpacing)
@@ -893,6 +895,12 @@ function Bags:OnEvent(event, ...)
 			
 			self:SlotUpdate(-1, Button)
 		end
+	else
+		local ID = ...
+		
+		local Button = _G["ReagentBankFrameItem"..ID]
+		
+		self:SlotUpdate(-3, Button)
 	end
 end
 
@@ -969,6 +977,7 @@ function Bags:Enable()
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
+	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:SetScript("OnEvent", self.OnEvent)
 	
 	-- Force an update, setting colors
