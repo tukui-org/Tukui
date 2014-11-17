@@ -13,8 +13,40 @@ local SHADOW_ORBS_SHOW_LEVEL = SHADOW_ORBS_SHOW_LEVEL
 
 local Colors = { 148/255, 130/255, 201/255 }
 
-local function UpdateOrbs(self)
+local function SetMaxOrbsNumber(self, orbs)
+	local pb = self.ShadowOrbsBar
+	local totalOrbs = orbs
 	
+	if (not totalOrbs) or (self.TotalOrbs == totalOrbs) then
+		return
+	end
+
+	local totalWidth = pb:GetWidth()
+	
+	if totalOrbs == 3 then
+		pb[4]:Hide()
+		pb[5]:Hide()
+		
+		for i = 1, totalOrbs do
+			local Width = totalWidth / totalOrbs
+			
+			if i == 3 then
+				pb[i]:SetPoint("RIGHT", pb, "RIGHT", 0, 0)
+				pb[i]:SetPoint("LEFT", pb[i-1], "RIGHT", 1, 0)
+			else
+				pb[i]:Width(Width)
+				pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+			end
+		end
+	else
+		for i = 1, totalOrbs do				
+			pb[i]:Show()
+			pb[i]:Width(pb[i].OriginalWidth)
+			pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
+		end
+	end
+	
+	self.TotalOrbs = totalOrbs
 end
 
 local function Update(self, event, unit, powerType)
@@ -28,6 +60,8 @@ local function Update(self, event, unit, powerType)
 
 	local numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
 	local totalOrbs = UnitPowerMax("player", SPELL_POWER_SHADOW_ORBS)
+	
+	SetMaxOrbsNumber(self, totalOrbs)
 	
 	for i = 1, totalOrbs do
 		if i <= numOrbs then
@@ -55,34 +89,11 @@ local function Visibility(self, event, unit)
 	local spec = GetSpecialization()
 
 	if (UnitLevel("player") >= SHADOW_ORBS_SHOW_LEVEL and spec == SPEC_PRIEST_SHADOW) then
+		local totalOrbs = UnitPowerMax("player", SPELL_POWER_SHADOW_ORBS)
+		
 		pb:Show()
 		
-		-- Here we set the number of orbs show
-		local totalOrbs = UnitPowerMax("player", SPELL_POWER_SHADOW_ORBS)
-		local totalWidth = pb:GetWidth()
-		
-		if totalOrbs == 5 then
-			for i = 1, totalOrbs do				
-				pb[i]:Show()
-				pb[i]:Width(pb[i].OriginalWidth)
-				pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
-			end
-		else
-			pb[4]:Hide()
-			pb[5]:Hide()
-			
-			for i = 1, totalOrbs do
-				local Width = totalWidth / totalOrbs
-				
-				if i == 3 then
-					pb[i]:SetPoint("RIGHT", pb, "RIGHT", 0, 0)
-					pb[i]:SetPoint("LEFT", pb[i-1], "RIGHT", 1, 0)
-				else
-					pb[i]:Width(Width)
-					pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
-				end
-			end		
-		end
+		SetMaxOrbsNumber(self, totalOrbs)
 	else
 		pb:Hide()
 	end
@@ -114,6 +125,7 @@ local function Enable(self, unit)
 			Point.OriginalWidth = Point:GetWidth()
 		end
 		
+		pb.TotalOrbs = 5
 		pb:Hide()
 		
 		return true
