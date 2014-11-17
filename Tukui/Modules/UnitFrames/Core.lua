@@ -967,6 +967,8 @@ function TukuiUnitFrames:CreateUnits()
 		local Gap = C.Party.Portrait and 74 or 30
 		
 		local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
+		Party:SetFrameStrata("BACKGROUND")
+		Party:SetFrameLevel(5)
 		Party:SetParent(Panels.PetBattleHider)
 		Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(T.ScreenHeight / 4))
 		
@@ -977,6 +979,8 @@ function TukuiUnitFrames:CreateUnits()
 	
 	if C.Raid.Enable then
 		local Raid = oUF:SpawnHeader(TukuiUnitFrames:GetRaidFramesAttributes())
+		Raid:SetFrameStrata("BACKGROUND")
+		Raid:SetFrameLevel(5)
 		Raid:SetParent(Panels.PetBattleHider)
 		Raid:Point("TOPLEFT", UIParent, "TOPLEFT", 30, -30)
 		
