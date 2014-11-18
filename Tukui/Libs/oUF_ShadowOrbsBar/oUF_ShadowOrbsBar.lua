@@ -7,7 +7,7 @@ assert(oUF, 'oUF_ShadowOrbsBar was unable to locate oUF install')
 local Colors = { 148/255, 130/255, 201/255 }
 
 local function Update(self, event, unit, powerType)
-	if(unit ~= 'player' or powerType ~= 'SHADOW_ORBS') then
+	if(unit ~= 'player' or (powerType and powerType ~= 'SHADOW_ORBS')) then
 		return
 	end
 
@@ -34,7 +34,7 @@ local function Update(self, event, unit, powerType)
 end
 
 local Path = function(self, ...)
-	return (self.ShadowOrbsBar.Override or Update) (self, ...)
+	return (self.ShadowOrbsBar.Override or Update)(self, ...)
 end
 
 local ForceUpdate = function(element)
@@ -84,7 +84,7 @@ local function Enable(self, unit)
 	if pb and unit == "player" then
 		pb.__owner = self
 		pb.ForceUpdate = ForceUpdate
-
+		
 		self:RegisterEvent("UNIT_POWER_FREQUENT", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
@@ -120,4 +120,4 @@ local function Disable(self)
 	end
 end
 
-oUF:AddElement('ShadowOrbsBar', Update, Enable, Disable)
+oUF:AddElement('ShadowOrbsBar', Path, Enable, Disable)
