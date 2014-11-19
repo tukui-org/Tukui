@@ -53,10 +53,10 @@ function Minimap:OnMove(enabled)
 end
 
 function Minimap:OnMouseClick(button)
-	if (button == "RightButton") then
-		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, self, 0, T.Scale(-3))
-	elseif (button == "MiddleButton") then
+	if (IsShiftKeyDown() and button == "RightButton") or (button == "MiddleButton") then
 		EasyMenu(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", T.Scale(-160), 0, "MENU", 2)
+	elseif (button == "RightButton") then
+		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, self, 0, T.Scale(-3))	
 	else
 		Minimap_OnClick(self)
 	end
