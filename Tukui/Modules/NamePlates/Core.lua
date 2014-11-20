@@ -13,14 +13,20 @@ local NameplateParent = WorldFrame
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 
+function Plates:RoundColors(r, g, b)
+	return floor(r*100+.5)/100, floor(g*100+.5)/100, floor(b*100+.5)/100
+end
+
 function Plates:GetColor()
 	local Colors = T["Colors"]
-	local Red, Green, Blue = self.Health:GetStatusBarColor()
-	
-	for Class, Color in pairs(RAID_CLASS_COLORS) do
-		local R, G, B = floor(Red * 100 + 0.5) / 100, floor(Green * 100 + 0.5) / 100, floor(Blue * 100 + 0.5) / 100
-		
-		if RAID_CLASS_COLORS[Class].r == R and RAID_CLASS_COLORS[Class].g == G and RAID_CLASS_COLORS[Class].b == B then
+	local Red, Green, Blue = Plates:RoundColors(self.Health:GetStatusBarColor())
+
+	for Class, _ in pairs(RAID_CLASS_COLORS) do
+		if Class == "MONK" then
+			Blue = Blue - 0.01
+		end
+
+		if RAID_CLASS_COLORS[Class].r == Red and RAID_CLASS_COLORS[Class].g == Green and RAID_CLASS_COLORS[Class].b == Blue then
 			Red, Green, Blue = unpack(Colors.class[Class])
 			
 			self.IsClass = true
@@ -31,21 +37,28 @@ function Plates:GetColor()
 		end
 	end
 	
-	if (Green + Blue == 0) then
-		-- Hostile Health
+	if (Red + Blue + Blue) == 1.59 then
+		-- Tapped
+		Red, Green, Blue = unpack(Colors.tapped)
+	elseif Green + Blue == 0 then
+		-- Hostile
 		Red, Green, Blue = unpack(Colors.reaction[2])
+		
 		self.IsFriend = false
-	elseif (Red + Blue == 0) then
+	elseif Red + Blue == 0 then
 		-- Friendly NPC
 		Red, Green, Blue = unpack(Colors.reaction[5])
+		
 		self.IsFriend  = true
-	elseif (Red + Green + Blue > 1.59) then
+	elseif Red + Green + Blue >= 1.58 then
 		-- Neutral NPC
 		Red, Green, Blue = unpack(Colors.reaction[4])
+		
 		self.IsFriend  = false
-	elseif (Red + Green == 0) then
+	elseif Red + Green == 0 then
 		-- Friendly Player
 		Red, Green, Blue = unpack(Colors.reaction[5])
+		
 		self.IsFriend  = true
 	else
 		self.IsFriend = false
