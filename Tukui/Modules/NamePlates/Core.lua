@@ -40,6 +40,8 @@ function Plates:GetColor()
 	if (Red + Blue + Blue) == 1.59 then
 		-- Tapped
 		Red, Green, Blue = unpack(Colors.tapped)
+		
+		self.IsFriend = false
 	elseif Green + Blue == 0 then
 		-- Hostile
 		Red, Green, Blue = unpack(Colors.reaction[2])
