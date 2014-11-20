@@ -33,6 +33,7 @@ TukuiUnitFrames.RaidBuffsTracking = {
 	},
 	DRUID = {
 		{774, "TOPLEFT", {0.8, 0.4, 0.8}},      -- Rejuvenation
+		{155777, "LEFT", {0.8, 0.4, 0.8}},      -- Germination
 		{8936, "TOPRIGHT", {0.2, 0.8, 0.2}},    -- Regrowth
 		{33763, "BOTTOMLEFT", {0.4, 0.8, 0.2}}, -- Lifebloom
 		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},  -- Wild Growth
@@ -334,7 +335,11 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 			end
 		else
 			if (unit == "player" and self:GetAttribute("normalUnit") ~= "pet") then
-				self.Value:SetText("|cff559655"..max.."|r")
+				if (IsRaid) then
+					self.Value:SetText(" ")
+				else
+					self.Value:SetText("|cff559655"..max.."|r")
+				end
 			elseif (unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
 				self.Value:SetText("|cff559655"..TukuiUnitFrames.ShortValue(max).."|r")
 			else
