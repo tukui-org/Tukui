@@ -5,6 +5,7 @@ local oUF = ns.oUF or oUF
 assert(oUF, 'oUF_ShadowOrbsBar was unable to locate oUF install')
 
 local Colors = { 148/255, 130/255, 201/255 }
+local LockResize = false
 
 local function Update(self, event, unit, powerType)
 	if(unit ~= 'player' or (powerType and powerType ~= 'SHADOW_ORBS')) then
@@ -18,9 +19,8 @@ local function Update(self, event, unit, powerType)
 	end
 
 	local numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
-	local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
 	
-	for i = 1, totalOrbs do
+	for i = 1, 5 do
 		if i <= numOrbs then
 			pb[i]:SetAlpha(1)
 		else
@@ -48,6 +48,10 @@ local function Visibility(self, event, unit)
 	if (UnitLevel("player") >= SHADOW_ORBS_SHOW_LEVEL and spec == SPEC_PRIEST_SHADOW) then
 		pb:Show()
 		
+		if LockResize then
+			return
+		end
+		
 		-- Here we set the number of orbs show
 		local totalOrbs = IsSpellKnown(SHADOW_ORB_MINOR_TALENT_ID) and 5 or 3
 		local totalWidth = pb:GetWidth()
@@ -58,6 +62,8 @@ local function Visibility(self, event, unit)
 				pb[i]:Width(pb[i].OriginalWidth)
 				pb[i]:Point("LEFT", i == 1 and pb or pb[i-1], i == 1 and "LEFT" or "RIGHT", i == 1 and 0 or 1, 0)
 			end
+			
+			LockResize = true
 		else
 			pb[4]:Hide()
 			pb[5]:Hide()
