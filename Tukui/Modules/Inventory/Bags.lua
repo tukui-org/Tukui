@@ -68,7 +68,35 @@ function Bags:SkinBagButton()
 	
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
-	
+
+	if C.Bags.PulseNewItem then
+		self.NewItemTexture:SetAtlas(nil) -- Has to be nil
+		self.NewItemTexture.SetAtlas = Noop
+		if not self.Backdrop then
+			self:CreateBackdrop()
+			self.Backdrop:Hide()
+			hooksecurefunc(self.NewItemTexture, 'Show', function()
+				self.Backdrop:Show()
+			end)
+			hooksecurefunc(self.NewItemTexture, 'Hide', function()
+				self.Backdrop:Hide()
+			end)
+			self.Backdrop:SetAllPoints()
+			self.Backdrop:SetFrameStrata(self:GetFrameStrata())
+			self.Backdrop:SetFrameLevel(self:GetFrameLevel() + 4)
+			self.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			self.Backdrop:SetScript('OnUpdate', function()
+				local r, g, b = self.IconBorder:GetVertexColor()
+				local a = self.NewItemTexture:GetAlpha()
+				self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+				self.Backdrop:SetBackdropBorderColor(r, g, b, a)
+			end)
+			self.Backdrop:SetScript('OnHide', function()
+				self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
+			end)
+		end
+	end
+
 	if Quest then
 		Quest:SetAlpha(0)
 	end
@@ -545,28 +573,6 @@ function Bags:SlotUpdate(id, button)
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
 	
-	if IsNewItem then
-		NewItem:SetAlpha(0)
-		
-		if C.Bags.PulseNewItem then
-			if not button.Animation then
-				button.Animation = button:CreateAnimationGroup()
-				button.Animation:SetLooping("BOUNCE")
-
-				button.FadeOut = button.Animation:CreateAnimation("Alpha")
-				button.FadeOut:SetChange(-0.5)
-				button.FadeOut:SetDuration(0.40)
-				button.FadeOut:SetSmoothing("IN_OUT")
-			end
-			
-			button.Animation:Play()
-		end
-	else
-		if button.Animation and button.Animation:IsPlaying() then
-			button.Animation:Stop()
-		end
-	end
-	
 	if IsQuestItem then
 		if (button.BorderColor ~= QuestColor) then
 			button:SetBackdropBorderColor(1, 1, 0)
@@ -637,12 +643,6 @@ function Bags:UpdateAllBags()
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			
-			Button.newitemglowAnim:Stop()
-			Button.newitemglowAnim.Play = Noop
-			
-			Button.flashAnim:Stop()
-			Button.flashAnim.Play = Noop
-
 			Money:ClearAllPoints()
 			Money:Show()
 			Money:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 8, -10)
