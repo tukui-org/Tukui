@@ -71,25 +71,6 @@ function Bags:SkinBagButton()
 
 	Border:SetTexture('')
 
-	local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
-	if quality and (quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[quality]) then
-		self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[quality].r, BAG_ITEM_QUALITY_COLORS[quality].g, BAG_ITEM_QUALITY_COLORS[quality].b);
-	else
-		self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-	end
-
-	hooksecurefunc(Border, 'SetVertexColor', function(border, r, g, b, a)
-		local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
-		if quality and quality > LE_ITEM_QUALITY_COMMON then
-			self:SetBackdropBorderColor(r, g, b)
-		else
-			self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-		end
-	end)
-	hooksecurefunc(Border, 'Hide', function(border)
-		self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-	end)
-
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
 
@@ -550,7 +531,7 @@ function Bags:SlotUpdate(id, button)
 	end
 	
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
+	local Texture, Count, Lock, Quality = GetContainerItemInfo(id, button:GetID())
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
@@ -562,6 +543,14 @@ function Bags:SlotUpdate(id, button)
 		
 	else
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
+	end
+
+	if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+		button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+	elseif IsQuestItem then
+		button:SetBackdropBorderColor(1, 1, 0)
+	else
+		button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 	end
 
 	if IsNewItem then
@@ -581,33 +570,26 @@ function Bags:SlotUpdate(id, button)
 				button.Backdrop:SetFrameStrata(button:GetFrameStrata())
 				button.Backdrop:SetFrameLevel(button:GetFrameLevel() + 4)
 				button.Backdrop:SetBackdropColor(0, 0, 0, 0)
-				button.Backdrop:SetScript('OnUpdate', function()
+				button.Backdrop:SetScript('OnUpdate', function(self)
 					button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 					if IsQuestItem then
-						button.Backdrop:SetBackdropBorderColor(1, 1, 0)
+						self:SetBackdropBorderColor(1, 1, 0)
 					else
-						button.Backdrop:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
+						self:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
 					end
-					button.Backdrop:SetAlpha(NewItem:GetAlpha())
+					self:SetAlpha(NewItem:GetAlpha())
 				end)
 				button.Backdrop:SetScript('OnHide', function(self)
-					local quality = select(4, GetContainerItemInfo(id, button:GetID()))
-					if quality and quality > LE_ITEM_QUALITY_COMMON then
-						if IsQuestItem then
-							button:SetBackdropBorderColor(1, 1, 0)
-						else
-							button:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
-						end
+					if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+						button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+					elseif IsQuestItem then
+						button:SetBackdropBorderColor(1, 1, 0)
 					else
 						button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 					end
 				end)
 			end
 		end
-	end
-
-	if IsQuestItem then
-		button:SetBackdropBorderColor(1, 1, 0)
 	end
 end
 
