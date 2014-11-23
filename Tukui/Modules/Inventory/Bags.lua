@@ -70,36 +70,38 @@ function Bags:SkinBagButton()
 	Icon:SetInside(self)
 
 	if C.Bags.PulseNewItem then
-		self.NewItemTexture:SetAtlas(nil) -- Has to be nil
-		self.NewItemTexture.SetAtlas = Noop
-		if not self.Backdrop then
-			self:CreateBackdrop()
-			self.Backdrop:Hide()
-			hooksecurefunc(self.NewItemTexture, 'Show', function()
-				self.Backdrop:Show()
-			end)
-			hooksecurefunc(self.NewItemTexture, 'Hide', function()
+		if self.NewItemTexture then
+			self.NewItemTexture:SetAtlas(nil) -- Has to be nil
+			self.NewItemTexture.SetAtlas = Noop
+			if not self.Backdrop then
+				self:CreateBackdrop()
 				self.Backdrop:Hide()
-			end)
-			self.Backdrop:SetAllPoints()
-			self.Backdrop:SetFrameStrata(self:GetFrameStrata())
-			self.Backdrop:SetFrameLevel(self:GetFrameLevel() + 4)
-			self.Backdrop:SetBackdropColor(0, 0, 0, 0)
-			self.Backdrop:SetScript('OnShow', function()
-				self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-				self.Backdrop:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
-			end)
-			self.Backdrop:SetScript('OnUpdate', function()
-				self.Backdrop:SetAlpha(self.NewItemTexture:GetAlpha())
-			end)
-			self.Backdrop:SetScript('OnHide', function()
-				local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
-				if quality and quality > LE_ITEM_QUALITY_COMMON then
-					self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
-				else
+				hooksecurefunc(self.NewItemTexture, 'Show', function()
+					self.Backdrop:Show()
+				end)
+				hooksecurefunc(self.NewItemTexture, 'Hide', function()
+					self.Backdrop:Hide()
+				end)
+				self.Backdrop:SetAllPoints()
+				self.Backdrop:SetFrameStrata(self:GetFrameStrata())
+				self.Backdrop:SetFrameLevel(self:GetFrameLevel() + 4)
+				self.Backdrop:SetBackdropColor(0, 0, 0, 0)
+				self.Backdrop:SetScript('OnShow', function()
 					self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-				end
-			end)
+					self.Backdrop:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
+				end)
+				self.Backdrop:SetScript('OnUpdate', function()
+					self.Backdrop:SetAlpha(self.NewItemTexture:GetAlpha())
+				end)
+				self.Backdrop:SetScript('OnHide', function()
+					local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+					if quality and quality > LE_ITEM_QUALITY_COMMON then
+						self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
+					else
+						self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+					end
+				end)
+			end
 		end
 	end
 
