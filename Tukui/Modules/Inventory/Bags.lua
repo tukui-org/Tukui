@@ -64,46 +64,22 @@ function Bags:SkinBagButton()
 	local Border = self.IconBorder
 	local BattlePay = self.BattlepayItemTexture
 	
-	Border:SetAlpha(0)
-	
+	Border:SetTexture('')
+
+	hooksecurefunc(Border, 'SetVertexColor', function(border, r, g, b, a)
+		local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+		if quality and quality > LE_ITEM_QUALITY_COMMON then
+			self:SetBackdropBorderColor(r, g, b)
+		else
+			self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+		end
+	end)
+	hooksecurefunc(Border, 'Hide', function(border)
+		self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+	end)
+
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
-
-	if C.Bags.PulseNewItem then
-		if self.NewItemTexture then
-			self.NewItemTexture:SetAtlas(nil) -- Has to be nil
-			self.NewItemTexture.SetAtlas = Noop
-			if not self.Backdrop then
-				self:CreateBackdrop()
-				self.Backdrop:Hide()
-				hooksecurefunc(self.NewItemTexture, 'Show', function()
-					self.Backdrop:Show()
-				end)
-				hooksecurefunc(self.NewItemTexture, 'Hide', function()
-					self.Backdrop:Hide()
-				end)
-				self.Backdrop:SetAllPoints()
-				self.Backdrop:SetFrameStrata(self:GetFrameStrata())
-				self.Backdrop:SetFrameLevel(self:GetFrameLevel() + 4)
-				self.Backdrop:SetBackdropColor(0, 0, 0, 0)
-				self.Backdrop:SetScript('OnShow', function()
-					self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-					self.Backdrop:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
-				end)
-				self.Backdrop:SetScript('OnUpdate', function()
-					self.Backdrop:SetAlpha(self.NewItemTexture:GetAlpha())
-				end)
-				self.Backdrop:SetScript('OnHide', function()
-					local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
-					if quality and quality > LE_ITEM_QUALITY_COMMON then
-						self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
-					else
-						self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
-					end
-				end)
-			end
-		end
-	end
 
 	if Quest then
 		Quest:SetAlpha(0)
@@ -239,7 +215,7 @@ function Bags:CreateReagentContainer()
 		Button:SetPushedTexture("")
 		Button:SetHighlightTexture("")
 		Button:SetTemplate()
-		Button.IconBorder:SetAlpha(0)
+		Button.IconBorder:SetTexture('')
 		
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Reagent, "TOPLEFT", 10, -10)
@@ -388,7 +364,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SetPushedTexture("")
 			Button:SetCheckedTexture("")
 			Button:SetTemplate()
-			Button.IconBorder:SetAlpha(0)
+			Button.IconBorder:SetTexture('')
 			Button:SkinButton()
 			
 			if LastButtonBag then
@@ -481,7 +457,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Bag:SetWidth(ButtonSize)
 			Bag:SetHeight(ButtonSize)
 
-			Bag.IconBorder:SetAlpha(0)
+			Bag.IconBorder:SetTexture('')
 			Bag.icon:SetTexCoord(unpack(T.IconCoord))
 			Bag.icon:SetInside()
 			Bag:SkinButton()
@@ -580,39 +556,51 @@ function Bags:SlotUpdate(id, button)
 	else
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
-	
-	if IsQuestItem then
-		if (button.BorderColor ~= QuestColor) then
-			button:SetBackdropBorderColor(1, 1, 0)
-			
-			button.BorderColor = QuestColor
+
+	if IsNewItem then
+		NewItem:SetAtlas(nil) -- Has to be nil
+		NewItem.SetAtlas = Noop
+		if C.Bags.PulseNewItem then
+			if not button.Backdrop then
+				button:CreateBackdrop()
+				button.Backdrop:Hide()
+				hooksecurefunc(NewItem, 'Show', function()
+					button.Backdrop:Show()
+				end)
+				hooksecurefunc(NewItem, 'Hide', function()
+					button.Backdrop:Hide()
+				end)
+				button.Backdrop:SetAllPoints()
+				button.Backdrop:SetFrameStrata(button:GetFrameStrata())
+				button.Backdrop:SetFrameLevel(button:GetFrameLevel() + 4)
+				button.Backdrop:SetBackdropColor(0, 0, 0, 0)
+				button.Backdrop:SetScript('OnUpdate', function()
+					button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+					if IsQuestItem then
+						button.Backdrop:SetBackdropBorderColor(1, 1, 0)
+					else
+						button.Backdrop:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
+					end
+					button.Backdrop:SetAlpha(NewItem:GetAlpha())
+				end)
+				button.Backdrop:SetScript('OnHide', function(self)
+					local quality = select(4, GetContainerItemInfo(id, button:GetID()))
+					if quality and quality > LE_ITEM_QUALITY_COMMON then
+						if IsQuestItem then
+							button:SetBackdropBorderColor(1, 1, 0)
+						else
+							button:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
+						end
+					else
+						button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+					end
+				end)
+			end
 		end
-		
-		return
 	end
-	
-	if ItemLink then
-		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-		
-		if (not Lock and Rarity and Rarity > 1) then
-			if (button.BorderColor ~= GetItemQualityColor(Rarity)) then
-				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 
-				button.BorderColor = GetItemQualityColor(Rarity)
-			end
-		else
-			if (button.BorderColor ~= C["General"].BorderColor) then
-				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-				
-				button.BorderColor = C["General"].BorderColor
-			end
-		end
-	else
-		if (button.BorderColor ~= C["General"].BorderColor) then
-			button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
-			button.BorderColor = C["General"].BorderColor
-		end
+	if IsQuestItem then
+		button:SetBackdropBorderColor(1, 1, 0)
 	end
 end
 
