@@ -531,7 +531,7 @@ function Bags:SlotUpdate(id, button)
 	end
 	
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
+	local Texture, Count, Lock, Quality = GetContainerItemInfo(id, button:GetID())
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
@@ -545,59 +545,50 @@ function Bags:SlotUpdate(id, button)
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
 	
+	if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+		button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+	elseif IsQuestItem then
+		button:SetBackdropBorderColor(1, 1, 0)
+	else
+		button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+	end
+
 	if IsNewItem then
-		NewItem:SetAlpha(0)
-		
+		button.NewItemTexture:SetAtlas(nil) -- Has to be nil
+		button.NewItemTexture.SetAtlas = Noop
 		if C.Bags.PulseNewItem then
-			if not button.Animation then
-				button.Animation = button:CreateAnimationGroup()
-				button.Animation:SetLooping("BOUNCE")
-
-				button.FadeOut = button.Animation:CreateAnimation("Alpha")
-				button.FadeOut:SetChange(-0.5)
-				button.FadeOut:SetDuration(0.40)
-				button.FadeOut:SetSmoothing("IN_OUT")
+			if not button.Backdrop then
+				button:CreateBackdrop()
+				button.Backdrop:Hide()
+				button.Backdrop:SetBackdropColor(0, 0, 0, 0)
+				hooksecurefunc(button.NewItemTexture, 'Show', function()
+					button.Backdrop:Show()
+				end)
+				hooksecurefunc(button.NewItemTexture, 'Hide', function()
+					button.Backdrop:Hide()
+				end)
+				button.Backdrop:SetAllPoints()
+				button.Backdrop:SetFrameStrata(button:GetFrameStrata())
+				button.Backdrop:SetFrameLevel(button:GetFrameLevel() + 4)
+				button.Backdrop:SetScript('OnUpdate', function(self)
+					button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+					if IsQuestItem then
+						button.Backdrop:SetBackdropBorderColor(1, 1, 0)
+					else
+						button.Backdrop:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+					end
+					button.Backdrop:SetAlpha(button.NewItemTexture:GetAlpha())
+				end)
+				button.Backdrop:SetScript('OnHide', function(self)
+					if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+						button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+					elseif IsQuestItem then
+						button:SetBackdropBorderColor(1, 1, 0)
+					else
+						button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+					end
+				end)
 			end
-			
-			button.Animation:Play()
-		end
-	else
-		if button.Animation and button.Animation:IsPlaying() then
-			button.Animation:Stop()
-		end
-	end
-	
-	if IsQuestItem then
-		if (button.BorderColor ~= QuestColor) then
-			button:SetBackdropBorderColor(1, 1, 0)
-			
-			button.BorderColor = QuestColor
-		end
-		
-		return
-	end
-	
-	if ItemLink then
-		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-		
-		if (not Lock and Rarity and Rarity > 1) then
-			if (button.BorderColor ~= GetItemQualityColor(Rarity)) then
-				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
-
-				button.BorderColor = GetItemQualityColor(Rarity)
-			end
-		else
-			if (button.BorderColor ~= C["General"].BorderColor) then
-				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-				
-				button.BorderColor = C["General"].BorderColor
-			end
-		end
-	else
-		if (button.BorderColor ~= C["General"].BorderColor) then
-			button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
-			button.BorderColor = C["General"].BorderColor
 		end
 	end
 end
@@ -637,12 +628,6 @@ function Bags:UpdateAllBags()
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			
-			Button.newitemglowAnim:Stop()
-			Button.newitemglowAnim.Play = Noop
-			
-			Button.flashAnim:Stop()
-			Button.flashAnim.Play = Noop
-
 			Money:ClearAllPoints()
 			Money:Show()
 			Money:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 8, -10)
