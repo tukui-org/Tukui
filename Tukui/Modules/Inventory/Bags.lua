@@ -93,7 +93,8 @@ function Bags:SkinBagButton()
 				self.Backdrop:SetAlpha(self.NewItemTexture:GetAlpha())
 			end)
 			self.Backdrop:SetScript('OnHide', function()
-				if select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID())) > LE_ITEM_QUALITY_COMMON then
+				local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+				if quality and quality > LE_ITEM_QUALITY_COMMON then
 					self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
 				else
 					self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
