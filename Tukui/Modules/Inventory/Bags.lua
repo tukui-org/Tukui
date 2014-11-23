@@ -65,10 +65,10 @@ function Bags:SkinBagButton()
 	local BattlePay = self.BattlepayItemTexture
 	
 	Border:SetAlpha(0)
-	
+
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
-	
+
 	if Quest then
 		Quest:SetAlpha(0)
 	end
@@ -544,7 +544,7 @@ function Bags:SlotUpdate(id, button)
 	else
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
-	
+
 	if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
 		button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 	elseif IsQuestItem then
