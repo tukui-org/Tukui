@@ -570,16 +570,16 @@ function Bags:SlotUpdate(id, button)
 				button.Backdrop:SetFrameStrata(button:GetFrameStrata())
 				button.Backdrop:SetFrameLevel(button:GetFrameLevel() + 4)
 				button.Backdrop:SetBackdropColor(0, 0, 0, 0)
-				button.Backdrop:SetScript('OnUpdate', function(self)
+				button.Backdrop:SetScript('OnUpdate', function(backdrop)
 					button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 					if IsQuestItem then
-						self:SetBackdropBorderColor(1, 1, 0)
+						backdrop:SetBackdropBorderColor(1, 1, 0)
 					else
-						self:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
+						backdrop:SetBackdropBorderColor(button.IconBorder:GetVertexColor())
 					end
-					self:SetAlpha(NewItem:GetAlpha())
+					backdrop:SetAlpha(NewItem:GetAlpha())
 				end)
-				button.Backdrop:SetScript('OnHide', function(self)
+				button.Backdrop:SetScript('OnHide', function(backdrop)
 					if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
 						button:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 					elseif IsQuestItem then
