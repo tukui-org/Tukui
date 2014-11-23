@@ -64,7 +64,19 @@ function Bags:SkinBagButton()
 	local Border = self.IconBorder
 	local BattlePay = self.BattlepayItemTexture
 	
+	self:SetNormalTexture("")
+	self:SetPushedTexture("")
+	self:SetTemplate()
+	self:StyleButton()
+
 	Border:SetTexture('')
+
+	local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+	if quality and (quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[quality]) then
+		self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[quality].r, BAG_ITEM_QUALITY_COLORS[quality].g, BAG_ITEM_QUALITY_COLORS[quality].b);
+	else
+		self:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+	end
 
 	hooksecurefunc(Border, 'SetVertexColor', function(border, r, g, b, a)
 		local quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
@@ -92,11 +104,6 @@ function Bags:SkinBagButton()
 	if BattlePay then
 		BattlePay:SetAlpha(0)
 	end
-	
-	self:SetNormalTexture("")
-	self:SetPushedTexture("")
-	self:SetTemplate()
-	self:StyleButton()
 	
 	self.IsSkinned = true
 end
@@ -687,7 +694,7 @@ function Bags:UpdateAllBankBags()
 		Button:SetFrameStrata("HIGH")
 		Button:SetFrameLevel(2)
 		Button:SetScale(1)
-		Button.IconBorder:SetAlpha(0)
+		Button.IconBorder:SetTexture('')
 		
 		BankFrameMoneyFrame:Hide()
 		
@@ -725,7 +732,7 @@ function Bags:UpdateAllBankBags()
 			Button:SetFrameStrata("HIGH")
 			Button:SetFrameLevel(2)
 			Button:SetScale(1)
-			Button.IconBorder:SetAlpha(0)
+			Button.IconBorder:SetTexture('')
 			
 			if (NumButtons == ItemsPerRow) then
 				Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(ButtonSpacing + ButtonSize))
