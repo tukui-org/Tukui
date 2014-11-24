@@ -100,6 +100,7 @@ function Panels:Enable()
 
 	local PetBattleHider = CreateFrame("Frame", nil, UIParent, "SecureHandlerStateTemplate")
 	PetBattleHider:SetAllPoints()
+	PetBattleHider:SetFrameStrata("LOW")
 	RegisterStateDriver(PetBattleHider, "visibility", "[petbattle] hide; show")
 
 	self.BottomLine = BottomLine
