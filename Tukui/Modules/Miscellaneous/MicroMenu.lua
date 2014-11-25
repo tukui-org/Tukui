@@ -5,9 +5,11 @@ local MicroMenu = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "U
 
 MicroMenu.Buttons = {
 	{text = CHARACTER_BUTTON,
-	func = function() ToggleCharacter("PaperDollFrame") end},
+	func = function() ToggleCharacter("PaperDollFrame") end,
+	notCheckable = true},
 	{text = SPELLBOOK_ABILITIES_BUTTON,
-	func = function() ToggleFrame(SpellBookFrame) end},
+	func = function() ToggleFrame(SpellBookFrame) end,
+	notCheckable = true},
 	{text = TALENTS_BUTTON,
 	func = function() 
 		if (not PlayerTalentFrame) then 
@@ -15,17 +17,23 @@ MicroMenu.Buttons = {
 		end
 		
 		ShowUIPanel(PlayerTalentFrame)
-	end},
+	end,
+	notCheckable = true},
 	{text = ACHIEVEMENT_BUTTON,
-	func = function() ToggleAchievementFrame() end},
+	func = function() ToggleAchievementFrame() end,
+	notCheckable = true},
 	{text = WORLD_MAP.." / "..QUESTLOG_BUTTON,
-	func = function() ShowUIPanel(WorldMapFrame) end},
+	func = function() ShowUIPanel(WorldMapFrame) end,
+	notCheckable = true},
 	{text = MOUNTS.." / "..PETS.." / "..TOY_BOX,
-	func = function() TogglePetJournal(1) end},
+	func = function() TogglePetJournal(1) end,
+	notCheckable = true},
 	{text = SOCIAL_BUTTON,
-	func = function() ToggleFriendsFrame(1) end},
+	func = function() ToggleFriendsFrame(1) end,
+	notCheckable = true},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE.." / "..COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
-	func = function() PVEFrame_ToggleFrame() end},
+	func = function() PVEFrame_ToggleFrame() end,
+	notCheckable = true},
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function() 
 		if IsInGuild() then
@@ -41,9 +49,12 @@ MicroMenu.Buttons = {
 			
 			LookingForGuildFrame_Toggle() 
 		end
-	end},
-	{text = RAID, func = function() ToggleFriendsFrame(4) end},
-	{text = HELP_BUTTON, func = function() ToggleHelpFrame() end},
+	end,
+	notCheckable = true},
+	{text = RAID, func = function() ToggleFriendsFrame(4) end,
+	notCheckable = true},
+	{text = HELP_BUTTON, func = function() ToggleHelpFrame() end,
+	notCheckable = true},
 	{text = CALENDAR_VIEW_EVENT, 
 	func = function()
 		if (not CalendarFrame) then
@@ -51,22 +62,12 @@ MicroMenu.Buttons = {
 		end
 		
 		Calendar_Toggle()
-	end},
-	{text = ENCOUNTER_JOURNAL, func = function() ToggleEncounterJournal() end},
-	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end},
+	end,
+	notCheckable = true},
+	{text = ENCOUNTER_JOURNAL, func = function() ToggleEncounterJournal() end,
+	notCheckable = true},
+	{text = GARRISON_LANDING_PAGE_TITLE, func = function() GarrisonLandingPageMinimapButton_OnClick() end,
+	notCheckable = true},
 }
-
---[[  do we really need this for WoD? 
-local TaintFix = CreateFrame("Frame")
-TaintFix:RegisterEvent("ADDON_LOADED")
-TaintFix:SetScript("OnEvent", function(self, event, addon)
-	if (addon ~= "Tukui") then
-		return
-	end
-	
-	ToggleFrame(SpellBookFrame)
-	PetJournal_LoadUI()
-end)
---]]
 
 Miscellaneous.MicroMenu = MicroMenu
