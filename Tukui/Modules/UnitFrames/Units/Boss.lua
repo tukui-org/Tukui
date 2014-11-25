@@ -69,6 +69,8 @@ function TukuiUnitFrames:Boss()
 	Power.Value:Point("RIGHT", -2, 0)
 	
 	Power.frequentUpdates = true
+	Power.displayAltPower = true
+	Power.altPowerColor = {1, 0, 0}
 	
 	if DarkTheme then
 		Power.colorTapping = true
