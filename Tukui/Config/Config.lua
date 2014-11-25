@@ -176,6 +176,7 @@ C["UnitFrames"] = {
 	["SerendipityBar"] = true,
 	["OnlySelfDebuffs"] = false,
 	["Threat"] = false,
+	["BossAltPowerText"] = false,
 	["DarkTheme"] = false,
 	["Arena"] = true,
 	["Boss"] = true,

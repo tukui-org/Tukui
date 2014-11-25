@@ -669,6 +669,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "在首领框架上显示buff和debuff",
 		},
 		
+		["BossAltPowerText"] = {
+			["Name"] = "Boss AltPower Text",
+			["Desc"] = "Display boss altpower text values on altpower bar",
+		},
+		
 		["Font"] = {
 			["Name"] = "框架字体",
 			["Desc"] = "设置框架文字的字体",

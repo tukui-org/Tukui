@@ -654,6 +654,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "在首領頭像顯示增益和減益效果",
 		},
 		
+		["BossAltPowerText"] = {
+			["Name"] = "Boss AltPower Text",
+			["Desc"] = "Display boss altpower text values on altpower bar",
+		},
+		
 		["Font"] = {
 			["Name"] = "框架字體",
 			["Desc"] = "設置框架文字的字體",

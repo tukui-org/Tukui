@@ -669,6 +669,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Display debuffs on boss frames",
 		},
 		
+		["BossAltPowerText"] = {
+			["Name"] = "Boss AltPower Text",
+			["Desc"] = "Display boss altpower text values on altpower bar",
+		},
+		
 		["Font"] = {
 			["Name"] = "Einheitenfenster Schriftart",
 			["Desc"] = "Legt die Schriftart für Einheitenfenster fest",

@@ -674,6 +674,11 @@ TukuiConfig["ptBR"] = {
 			["Desc"] = "Display debuffs on boss frames",
 		},
 		
+		["BossAltPowerText"] = {
+			["Name"] = "Boss AltPower Text",
+			["Desc"] = "Display boss altpower text values on altpower bar",
+		},
+		
 		["Font"] = {
 			["Name"] = "Unit Frame Font",
 			["Desc"] = "Set a font for unit frames",
