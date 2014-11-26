@@ -141,6 +141,8 @@ C["Raid"] = {
 		
 		["Value"] = "GROUP",
 	},
+	["TargetBorder"] = false,
+	["FocusBorder"] = false,
 }
 
 C["Tooltips"] = {
