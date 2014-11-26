@@ -178,7 +178,7 @@ local talentTbl = ({
         DRUID_RESTO = 'Magic',
     },
     MONK = {
-        MONK_WIND = 'Magic',
+        MONK_MIST = 'Magic',
     }
 })[PLAYER_CLASS]
 
