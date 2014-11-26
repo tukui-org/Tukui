@@ -828,7 +828,7 @@ function TukuiUnitFrames:GetRaidFramesAttributes()
 		"showParty", true,
 		"showRaid", true,
 		"showPlayer", true,
-		"showSolo", true,
+		"showSolo", false,
 		"xoffset", T.Scale(4),
 		"yOffset", T.Scale(-4),
 		"point", "TOP",
