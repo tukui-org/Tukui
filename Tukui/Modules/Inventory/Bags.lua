@@ -545,7 +545,7 @@ function Bags:SlotUpdate(id, button)
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
 	
-	if IsNewItem then
+	if IsNewItem and NewItem then
 		NewItem:SetAlpha(0)
 		
 		if C.Bags.PulseNewItem then
