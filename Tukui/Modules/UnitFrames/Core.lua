@@ -23,6 +23,10 @@ local UnitPowerType = UnitPowerType
 TukuiUnitFrames.Units = {}
 TukuiUnitFrames.Headers = {}
 TukuiUnitFrames.Framework = TukuiUnitFrameFramework
+TukuiUnitFrames.HighlightBorder = {
+	bgFile = "Interface\\Buttons\\WHITE8x8",
+	insets = {top = -2, left = -2, bottom = -2, right = -2}
+}
 
 TukuiUnitFrames.RaidBuffsTracking = {
 	PRIEST = {
@@ -183,6 +187,19 @@ function TukuiUnitFrames:MouseOnPlayer()
 	else
 		Status:Hide()
 		Status:SetText()
+	end
+end
+
+
+function TukuiUnitFrames:Highlight()
+	if UnitIsUnit("focus", self.unit) then
+		self.Highlight:SetBackdropColor(218/255, 197/255, 92/255, .7)
+		self.Highlight:Show()
+	elseif UnitIsUnit("target", self.unit) then
+		self.Highlight:SetBackdropColor(75/255,  175/255, 76/255, 1)
+		self.Highlight:Show()	
+	else
+		self.Highlight:Hide()
 	end
 end
 
@@ -811,7 +828,7 @@ function TukuiUnitFrames:GetRaidFramesAttributes()
 		"showParty", true,
 		"showRaid", true,
 		"showPlayer", true,
-		"showSolo", false,
+		"showSolo", true,
 		"xoffset", T.Scale(4),
 		"yOffset", T.Scale(-4),
 		"point", "TOP",

@@ -3,28 +3,6 @@ local T, C, L = select(2, ...):unpack()
 local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
-local border = {
-	bgFile = "Interface\\Buttons\\WHITE8x8",
-	insets = {top = -2, left = -2, bottom = -2, right = -2}}
-
-local ChangedTarget = function(self)
-	if UnitIsUnit('target', self.unit) then
-		self.TargetBorder:SetBackdropColor(.8, .8, .8, 1)
-		self.TargetBorder:Show()
-	else
-		self.TargetBorder:Hide()
-	end
-end
-
-local FocusTarget = function(self)
-	if UnitIsUnit('focus', self.unit) then
-		self.FocusHighlight:SetBackdropColor(.8, .8, .2, .7)
-		self.FocusHighlight:Show()
-	else
-		self.FocusHighlight:Hide()
-	end
-end
-
 function TukuiUnitFrames:Raid()
 	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HealthTexture = T.GetTexture(C["Raid"].HealthTexture)
@@ -252,30 +230,19 @@ function TukuiUnitFrames:Raid()
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 	
-	if C["Raid"].TargetBorder then
-		local TargetBorder = CreateFrame("Frame", nil, self)
-		TargetBorder:SetPoint("TOPLEFT", self, "TOPLEFT")
-		TargetBorder:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
-		TargetBorder:SetBackdrop(border)
-		TargetBorder:SetFrameLevel(0)
-		TargetBorder:Hide()
+	if C.Raid.Highlight then
+		local Highlight = CreateFrame("Frame", nil, self)
+		Highlight:SetPoint("TOPLEFT", self, "TOPLEFT")
+		Highlight:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
+		Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
+		Highlight:SetFrameLevel(0)
+		Highlight:Hide()
 		
-		self.TargetBorder = TargetBorder
-		self:RegisterEvent('PLAYER_TARGET_CHANGED', ChangedTarget)
-		self:RegisterEvent('RAID_ROSTER_UPDATE', ChangedTarget)
-	end
-	
-	if C["Raid"].FocusBorder then
-		local FocusBorder = CreateFrame("Frame", nil, self)
-		FocusBorder:SetPoint("TOPLEFT", self, "TOPLEFT")
-		FocusBorder:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
-		FocusBorder:SetBackdrop(border)
-		FocusBorder:SetFrameLevel(0)
-		FocusBorder:Hide()
+		self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
+		self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
+		self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)
 		
-		self.FocusHighlight = FocusBorder
-		self:RegisterEvent('PLAYER_FOCUS_CHANGED', FocusTarget)
-		self:RegisterEvent('RAID_ROSTER_UPDATE', FocusTarget)
+		self.Highlight = Highlight
 	end
 	
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameShort]")

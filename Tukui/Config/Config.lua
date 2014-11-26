@@ -127,6 +127,7 @@ C["Raid"] = {
 	["ShowHealthText"] = true,
 	["ShowPets"] = true,
 	["VerticalHealth"] = false,
+	["Highlight"] = true,
 	["MaxUnitPerColumn"] = 10,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",
@@ -141,8 +142,6 @@ C["Raid"] = {
 		
 		["Value"] = "GROUP",
 	},
-	["TargetBorder"] = false,
-	["FocusBorder"] = false,
 }
 
 C["Tooltips"] = {

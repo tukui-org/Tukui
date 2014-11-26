@@ -435,6 +435,12 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "顯示寵物",
 			["Desc"] = "Derp",
 		},
+		
+		["Highlight"] = {
+			["Name"] = "Highlight",
+			["Desc"] = "Highlight your current focus/target",
+		},
+		
 		["HealBar"] = {
 			["Name"] = "治療提示",
 			["Desc"] = "顯示即將到來的治療與吸收",

@@ -435,6 +435,11 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["Highlight"] = {
+			["Name"] = "Highlight",
+			["Desc"] = "Highlight your current focus/target",
+		},
+		
 		["MaxUnitPerColumn"] = {
 			["Name"] = "每列团队成员",
 			["Desc"] = "修改每列团队成员的最大数",
