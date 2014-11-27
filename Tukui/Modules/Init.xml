@@ -75,6 +75,7 @@
 	<Script file="DataTexts\Elements\Durability.lua"/>
 	<Script file="DataTexts\Elements\FPS.lua"/>
 	<Script file="DataTexts\Elements\Friends.lua"/>
+	<Script file="DataTexts\Elements\Garrison.lua"/>
 	<Script file="DataTexts\Elements\Gold.lua"/>
 	<Script file="DataTexts\Elements\Guild.lua"/>
 	<Script file="DataTexts\Elements\Haste.lua"/>
