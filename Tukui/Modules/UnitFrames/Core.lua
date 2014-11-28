@@ -357,7 +357,7 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 				else
 					self.Value:SetText("|cff559655"..max.."|r")
 				end
-			elseif (unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
+			elseif (unit == "target" or unit == "focus"  or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
 				self.Value:SetText("|cff559655"..TukuiUnitFrames.ShortValue(max).."|r")
 			else
 				self.Value:SetText(" ")
@@ -383,7 +383,7 @@ function TukuiUnitFrames:PostUpdatePower(unit, min, max)
 	else
 		if (min ~= max) then
 			if (pType == 0) then
-				if (unit == "target") then
+				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
 					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), TukuiUnitFrames.ShortValue(max - (max - min)))
 				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
 					self.Value:SetFormattedText("%d%%", floor(min / max * 100))
@@ -396,7 +396,7 @@ function TukuiUnitFrames:PostUpdatePower(unit, min, max)
 				self.Value:SetText(max - (max - min))
 			end
 		else
-			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d"))) then
+			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
 				self.Value:SetText(TukuiUnitFrames.ShortValue(min))
 			else
 				self.Value:SetText(min)
