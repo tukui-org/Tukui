@@ -48,7 +48,7 @@ function TukuiActionBars:CreateBar1()
 		end
 
 		if C.ActionBars.OwnShadowDanceBar then
-			Rogue = "[stance:3] 10; [bonusbar:1] 7;"
+			Rogue = "[stance:2] 10; [bonusbar:1] 7;"
 		else
 			Rogue = "[bonusbar:1] 7;"
 		end
