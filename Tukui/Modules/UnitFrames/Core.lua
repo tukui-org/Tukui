@@ -95,8 +95,13 @@ function TukuiUnitFrames:DisableBlizzard()
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 		
-		CompactRaidFrameManager:SetParent(Panels.Hider)
-		CompactUnitFrameProfiles:UnregisterAllEvents()
+		if CompactRaidFrameManager then
+			CompactRaidFrameManager:SetParent(Panels.Hider)
+		end
+		
+		if CompactUnitFrameProfiles then
+			CompactUnitFrameProfiles:UnregisterAllEvents()
+		end
 		
 		for i = 1, MAX_PARTY_MEMBERS do
 			local PartyMember = _G["PartyMemberFrame" .. i]
