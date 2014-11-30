@@ -5,7 +5,7 @@
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
 ## SavedVariablesPerCharacter: TukuiDataPerChar
-## OptionalDeps: Tukui_Config, Tukui_EditedConfig, Clique
+## OptionalDeps: Tukui_Config, Clique
 ## X-oUF: TukuiUnitFrameFramework
 ## Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1
