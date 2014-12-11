@@ -65,6 +65,11 @@ function ObjectiveTracker:Minimize()
 end
 
 function ObjectiveTracker:Enable()
+	-- http://git.tukui.org/Tukz/tukui/issues/80
+	if select(4, GetAddOnInfo("DugisGuideViewerZ")) then
+		return
+	end
+	
 	local Movers = T["Movers"]
 	local Frame = ObjectiveTrackerFrame
 	local Minimize = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
