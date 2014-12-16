@@ -12,7 +12,7 @@ function AltPowerBar:Update(unit, power)
 	local Power = UnitPower(unit, ALTERNATE_POWER_INDEX)
 	local MaxPower = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
 	local R, G, B = T.ColorGradient(Power, MaxPower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
-	local PowerName = select(10, UnitAlternatePowerInfo(unit)) or ""
+	local PowerName = select(10, UnitAlternatePowerInfo(unit)) or UNKNOWN
 	
 	Status:SetMinMaxValues(0, UnitPowerMax(unit, ALTERNATE_POWER_INDEX))
 	Status:SetValue(Power)
