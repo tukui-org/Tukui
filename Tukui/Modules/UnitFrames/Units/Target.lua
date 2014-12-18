@@ -78,6 +78,8 @@ function TukuiUnitFrames:Target()
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 	
 	Power.frequentUpdates = true
+	Power.displayAltPower = true
+	Power.altPowerColor = T["Colors"]["power"]["ALTPOWER"]
 	
 	--[[Power.colorPower = true
 	Power.frequentUpdates = true
