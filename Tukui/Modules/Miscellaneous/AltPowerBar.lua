@@ -3,33 +3,31 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local AltPowerBar = CreateFrame("Button")
 
-function AltPowerBar:Update(unit, power)
-	if (unit ~= "player" and power ~= "ALTERNATE") then
-		return
-	end
-	
+function AltPowerBar:Update()
 	local Status = self.Status
-	local Power = UnitPower(unit, ALTERNATE_POWER_INDEX)
-	local MaxPower = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
+	local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
+	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 	local R, G, B = T.ColorGradient(Power, MaxPower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
-	local PowerName = select(10, UnitAlternatePowerInfo(unit)) or UNKNOWN
+	local PowerName = select(10, UnitAlternatePowerInfo("player")) or UNKNOWN
 	
-	Status:SetMinMaxValues(0, UnitPowerMax(unit, ALTERNATE_POWER_INDEX))
+	Status:SetMinMaxValues(0, UnitPowerMax("player", ALTERNATE_POWER_INDEX))
 	Status:SetValue(Power)
 	Status:SetStatusBarColor(R, G, B)
 	Status.Text:SetText(PowerName..": "..Power.." / "..MaxPower)
 end
 
 function AltPowerBar:OnEvent(event, unit, power)
-	if (event == "UNIT_POWER" or event == "UNIT_MAXPOWER") then
-		self:Update(unit, power)
+	local AltPowerInfo = UnitAlternatePowerInfo("player")
+	
+	if (not AltPowerInfo or event == "UNIT_POWER_BAR_HIDE") then
+		self:Hide()
 	else
-		if UnitAlternatePowerInfo("player") then
-			self:Show()
-			self:Update("player", "ALTERNATE")
-		else
-			self:Hide()
+		if ((event == "UNIT_POWER" or event == "UNIT_MAXPOWER") and power ~= "ALTERNATE") then
+			return
 		end
+
+		self:Show()
+		self:Update()
 	end
 end
 
@@ -47,13 +45,11 @@ function AltPowerBar:Create()
 	self:SetTemplate()
 	self:SetFrameStrata(DataTextLeft:GetFrameStrata())
 	self:SetFrameLevel(DataTextLeft:GetFrameLevel() + 10)
-	self:RegisterEvent("UNIT_POWER")
-	self:RegisterEvent("UNIT_MAXPOWER")
 	self:RegisterEvent("UNIT_POWER_BAR_SHOW")
 	self:RegisterEvent("UNIT_POWER_BAR_HIDE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED")
-	self:RegisterEvent("PLAYER_REGEN_DISABLED")
+	self:RegisterUnitEvent("UNIT_POWER", "player")
+	self:RegisterUnitEvent("UNIT_MAXPOWER", "player")
 	self:SetScript("OnEvent", self.OnEvent)
 	self:SetScript("OnClick", self.Hide)
 	
