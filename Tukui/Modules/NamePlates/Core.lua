@@ -20,7 +20,7 @@ end
 function Plates:GetColor()
 	local Colors = T["Colors"]
 	local Red, Green, Blue = Plates:RoundColors(self.Health:GetStatusBarColor())
-
+	
 	for Class, _ in pairs(RAID_CLASS_COLORS) do
 		if Class == "MONK" then
 			Blue = Blue - 0.01
@@ -42,22 +42,22 @@ function Plates:GetColor()
 		Red, Green, Blue = unpack(Colors.tapped)
 		
 		self.IsFriend = false
-	elseif Green + Blue == 0 then
+	elseif Green + Blue <= 0 then
 		-- Hostile
 		Red, Green, Blue = unpack(Colors.reaction[2])
 		
 		self.IsFriend = false
-	elseif Red + Blue == 0 then
+	elseif Red + Blue <= 0 then
 		-- Friendly NPC
 		Red, Green, Blue = unpack(Colors.reaction[5])
 		
 		self.IsFriend  = true
-	elseif Red + Green + Blue >= 1.58 then
+	elseif Red + Green + Blue >= 1.95 then
 		-- Neutral NPC
 		Red, Green, Blue = unpack(Colors.reaction[4])
 		
 		self.IsFriend  = false
-	elseif Red + Green == 0 then
+	elseif Red + Green <= 0 then
 		-- Friendly Player
 		Red, Green, Blue = unpack(Colors.reaction[5])
 		
@@ -272,6 +272,7 @@ function Plates:Skin(obj)
 	
 	-- OnShow Execution
 	Plate:HookScript("OnShow", self.OnShow)
+	Plate:HookScript("OnUpdate", self.GetColor)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
 	Plate.Cast:HookScript("OnHide", self.CastOnHide)
 	self.OnShow(Plate)
