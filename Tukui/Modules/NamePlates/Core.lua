@@ -22,11 +22,13 @@ function Plates:GetColor()
 	local Red, Green, Blue = Plates:RoundColors(self.Health:GetStatusBarColor())
 	
 	for Class, _ in pairs(RAID_CLASS_COLORS) do
+		local AltBlue = Blue
+		
 		if Class == "MONK" then
-			Blue = Blue - 0.01
+			AltBlue = AltBlue - 0.01
 		end
 
-		if RAID_CLASS_COLORS[Class].r == Red and RAID_CLASS_COLORS[Class].g == Green and RAID_CLASS_COLORS[Class].b == Blue then
+		if RAID_CLASS_COLORS[Class].r == Red and RAID_CLASS_COLORS[Class].g == Green and RAID_CLASS_COLORS[Class].b == AltBlue then
 			Red, Green, Blue = unpack(Colors.class[Class])
 			
 			self.IsClass = true
@@ -99,6 +101,10 @@ function Plates:CastOnHide()
 end
 
 function Plates:OnShow()
+	if not self:IsShown() then
+		return
+	end
+	
 	local Colors = T["Colors"]
 	local Name = self.Name:GetText() or "Unknown"
 	local Level = self.Level:GetText() or ""
@@ -271,8 +277,7 @@ function Plates:Skin(obj)
 	Plate.Cast.NewCast = Plate.NewCast
 	
 	-- OnShow Execution
-	Plate:HookScript("OnShow", self.OnShow)
-	Plate:HookScript("OnUpdate", self.GetColor)
+	Plate:HookScript("OnUpdate", self.OnShow)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
 	Plate.Cast:HookScript("OnHide", self.CastOnHide)
 	self.OnShow(Plate)
