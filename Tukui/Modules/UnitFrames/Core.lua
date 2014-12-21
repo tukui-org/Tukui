@@ -700,12 +700,13 @@ function TukuiUnitFrames:EclipseDirection()
 	end
 end
 
-function TukuiUnitFrames:UpdateBossAltPower(minimum, current, maximum)
+function TukuiUnitFrames:UpdateAltPower(minimum, current, maximum)
 	if (not current) or (not maximum) then return end
 	
 	local r, g, b = T.ColorGradient(current, maximum, 0, .8 ,0 ,.8 ,.8 ,0 ,.8 ,0 ,0)
 	
 	self:SetStatusBarColor(r, g, b)
+	self:SetBackdropColor(r * 0.1, g * 0.1, b * 0.1)
 	
 	if self.Value then
 		local Text = self.Value

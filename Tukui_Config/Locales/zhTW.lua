@@ -660,7 +660,7 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "在首領頭像顯示增益和減益效果",
 		},
 		
-		["BossAltPowerText"] = {
+		["AltPowerText"] = {
 			["Name"] = "Boss AltPower Text",
 			["Desc"] = "Display boss altpower text values on altpower bar",
 		},

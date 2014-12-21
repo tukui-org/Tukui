@@ -674,7 +674,7 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Display debuffs on boss frames",
 		},
 		
-		["BossAltPowerText"] = {
+		["AltPowerText"] = {
 			["Name"] = "Boss AltPower Text",
 			["Desc"] = "Display boss altpower text values on altpower bar",
 		},

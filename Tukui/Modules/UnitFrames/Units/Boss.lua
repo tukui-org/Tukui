@@ -183,13 +183,13 @@ function TukuiUnitFrames:Boss()
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0)
 	AltPowerBar:CreateShadow()
 	
-	if C.UnitFrames.BossAltPowerText then
+	if C.UnitFrames.AltPowerText then
 		AltPowerBar.Value = AltPowerBar:CreateFontString(nil, "OVERLAY")
 		AltPowerBar.Value:SetFontObject(Font)
 		AltPowerBar.Value:Point("CENTER", 0, 0)
 	end
 	
-	AltPowerBar.PostUpdate = TukuiUnitFrames.UpdateBossAltPower
+	AltPowerBar.PostUpdate = TukuiUnitFrames.UpdateAltPower
 	
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
