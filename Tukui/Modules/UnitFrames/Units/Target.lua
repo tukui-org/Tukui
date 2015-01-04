@@ -182,13 +182,13 @@ function TukuiUnitFrames:Target()
 	
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
-		CastBar:SetStatusBarTexture(C.Medias.Normal)
+		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
 		CastBar:SetInside(Panel)
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
-		CastBar.Background:SetTexture(CastTexture)
+		CastBar.Background:SetTexture(C.Medias.Normal)
 		CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
@@ -218,7 +218,7 @@ function TukuiUnitFrames:Target()
 
 		if (C.UnitFrames.CastBarLatency) then
 			CastBar.SafeZone = CastBar:CreateTexture(nil, "ARTWORK")
-			CastBar.SafeZone:SetTexture(C.Medias.Normal)
+			CastBar.SafeZone:SetTexture(CastTexture)
 			CastBar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 		end
 
@@ -283,6 +283,7 @@ function TukuiUnitFrames:Target()
 		Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 		Buffs.PostUpdate = TukuiUnitFrames.UpdateDebuffsHeaderPosition
+		Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
 
 		Debuffs.spacing = 2
 		Debuffs.initialAnchor = "TOPRIGHT"

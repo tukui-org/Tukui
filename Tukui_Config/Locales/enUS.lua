@@ -626,6 +626,11 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Display My Debuffs Only",
 			["Desc"] = "Only display our debuffs on the target frame",
 		},
+
+		["OnlySelfBuffs"] = {
+			["Name"] = "Display My Buffs Only",
+			["Desc"] = "Only display our buffs on the target frame",
+		},
 		
 		["DarkTheme"] = {
 			["Name"] = "Dark Theme",

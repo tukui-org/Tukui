@@ -167,7 +167,7 @@ function TukuiUnitFrames:Player()
 
 		if (C.UnitFrames.CastBarLatency) then
 			CastBar.SafeZone = CastBar:CreateTexture(nil, "ARTWORK")
-			CastBar.SafeZone:SetTexture(C.Medias.Normal)
+			CastBar.SafeZone:SetTexture(CastTexture)
 			CastBar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 		end
 

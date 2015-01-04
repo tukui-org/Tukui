@@ -634,6 +634,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Отображать на рамке цели только дебаффы, налоденные вами",
 		},
 		
+		["OnlySelfBuffs"] = {
+			["Name"] = "Display My Buffs Only",
+			["Desc"] = "Only display our buffs on the target frame",
+		},
+		
 		["DarkTheme"] = {
 			["Name"] = "Тёмное оформление",
 			["Desc"] = "Если включено, рамки юнитов окрасятся в тёмный цвет, а полоса ресурса в цвет класса",

@@ -628,6 +628,11 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Zeige nur meine Debuffs",
 			["Desc"] = "Zeige nur meine eigenen Debuffs am Ziel an",
 		},
+
+		["OnlySelfBuffs"] = {
+			["Name"] = "Zeige nur meine Buffs",
+			["Desc"] = "Zeige nur meine eigenen Buffs am Ziel an",
+		},
 		
 		["DarkTheme"] = {
 			["Name"] = "Dark Theme",

@@ -614,6 +614,11 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "只顯示我造成的減益",
 			["Desc"] = "在目標框架上只顯示我造成的減益效果",
 		},
+
+		["OnlySelfBuffs"] = {
+			["Name"] = "Display My Buffs Only",
+			["Desc"] = "Only display our buffs on the target frame",
+		},
 		
 		["DarkTheme"] = {
 			["Name"] = "黑暗主題",

@@ -633,6 +633,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Afficher seulement mes affaiblissements",
 			["Desc"] = "Afficher seulement mes affaiblissements sur le cadre cible",
 		},
+
+		["OnlySelfBuffs"] = {
+			["Name"] = "Display My Buffs Only",
+			["Desc"] = "Only display our buffs on the target frame",
+		},
 		
 		["DarkTheme"] = {
 			["Name"] = "Theme sombre",
