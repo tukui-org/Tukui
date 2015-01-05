@@ -176,6 +176,7 @@ C["UnitFrames"] = {
 	["BossAuras"] = true,
 	["SerendipityBar"] = true,
 	["OnlySelfDebuffs"] = false,
+	["OnlySelfBuffs"] = false,
 	["Threat"] = false,
 	["AltPowerText"] = false,
 	["DarkTheme"] = false,
