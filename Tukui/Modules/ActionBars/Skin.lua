@@ -6,6 +6,7 @@ local Replace = string.gsub
 local SpellFlyout = SpellFlyout
 local FlyoutButtons = 0
 local ActionButton_HideOverlayGlow = ActionButton_HideOverlayGlow
+local Noop = function() end
 
 function TukuiActionBars:SkinButton()
 	local Name = self:GetName()
