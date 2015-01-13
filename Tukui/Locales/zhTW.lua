@@ -236,6 +236,7 @@ L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : 安裝或重置
 L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : 顯示設定介面"
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : 移動框架"
 L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : 測試頭像"
+L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant
@@ -257,3 +258,6 @@ L.Others = {} -- Miscellaneous
 
 L.Others.GlobalSettings = "使用全局通用設定"
 L.Others.CharSettings = "使用角色專用設定"
+L.Others.ProfileNotFound = "Profile not found"
+L.Others.ProfileSelection = "Please type a profile to use (example: /tukui profile Illidan-Tukz)"
+L.Others.ConfigNotFound = "Config not loaded."

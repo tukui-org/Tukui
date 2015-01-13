@@ -4,10 +4,14 @@ local AddOnCommands = {} -- Let people use /tukui for their mods
 
 local Split = function(cmd)
 	if cmd:find("%s") then
-		return strsplit(" ", strlower(cmd))
+		return strsplit(" ", cmd)
 	else
 		return cmd
 	end
+end
+
+local SplitServerCharacter = function(profile)
+	return strsplit("-", profile)
 end
 
 T.SlashHandler = function(cmd)
@@ -37,12 +41,13 @@ T.SlashHandler = function(cmd)
 		print(L.Help.Config)
 		print(L.Help.Move)
 		print(L.Help.Test)
+		print(L.Help.Profile)
 		print(" ")
 	elseif (arg1 == "c" or arg1 == "config") then
 		local Config = TukuiConfig
 		
 		if (not TukuiConfig) then
-			T.Print("Config not loaded.")
+			T.Print(L.Others.ConfigNotFound)
 			
 			return
 		end
@@ -63,7 +68,32 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "test" or arg1 == "testui") then
 		local Test = T["TestUI"]
 		
-		Test:EnableOrDisable()	
+		Test:EnableOrDisable()
+	elseif (arg1 == "profile" or arg1 == "p") then
+		if arg2 then
+			local Server, Character = SplitServerCharacter(arg2)
+
+			if Server and Character then
+				if TukuiData and TukuiData[Server] and TukuiData[Server][Character] then
+					local CurrentServer = GetRealmName()
+					local CurrentCharacter = UnitName("player")
+					
+					TukuiData[CurrentServer][CurrentCharacter] = TukuiData[Server][Character]
+					
+					if TukuiConfigShared and TukuiConfigShared[Server] and TukuiConfigShared[Server][Character] then
+						if not TukuiConfigPerAccount then
+							TukuiConfigShared[CurrentServer][CurrentCharacter] = TukuiConfigShared[Server][Character]
+						end
+					end
+					
+					ReloadUI()
+				else
+					T.Print(L.Others.ProfileNotFound)
+				end
+			end
+		else
+			T.Print(L.Others.ProfileSelection)
+		end
 	elseif AddOnCommands[arg1] then
 		AddOnCommands[arg1](arg2)
 	end

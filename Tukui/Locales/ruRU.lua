@@ -237,6 +237,7 @@ L.Help.Install = "'|cff00ff00install|r' или '|cff00ff00reset|r' : Устан�
 L.Help.Config = "'|cff00ff00c|r' или '|cff00ff00config|r' : Показать окно настроек."
 L.Help.Move = "'|cff00ff00move|r' или '|cff00ff00moveui|r' : Разблокировать и передвинуть элементы интерфейса."
 L.Help.Test = "'|cff00ff00test|r' или '|cff00ff00testui|r' : Тест элементов интерфейса."
+L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant
@@ -258,3 +259,6 @@ L.Others = {} -- Miscellaneous
 
 L.Others.GlobalSettings = "Use Global Settings"
 L.Others.CharSettings = "Use Character Settings"
+L.Others.ProfileNotFound = "Profile not found"
+L.Others.ProfileSelection = "Please type a profile to use (example: /tukui profile Illidan-Tukz)"
+L.Others.ConfigNotFound = "Config not loaded."
