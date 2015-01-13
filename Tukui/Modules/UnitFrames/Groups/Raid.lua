@@ -209,6 +209,7 @@ function TukuiUnitFrames:Raid()
         RaidDebuffs.count:SetTextColor(1, .9, 0)
 
         RaidDebuffs.SetDebuffTypeColor = RaidDebuffs.SetBackdropBorderColor
+        RaidDebuffs.Debuffs = TukuiUnitFrames.RaidDebuffsTracking
         
         self.RaidDebuffs = RaidDebuffs
 	end
