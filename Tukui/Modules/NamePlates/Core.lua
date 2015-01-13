@@ -75,19 +75,25 @@ function Plates:GetColor()
 end
 
 function Plates:UpdateCastBar()
+	local Red, Blue, Green = self:GetStatusBarColor()
 	local Minimum, Maximum = self:GetMinMaxValues()
 	local Current = self:GetValue()
+	local Shield = self.Shield
+	
+	if Shield:IsShown() then
+		self.NewCast:SetStatusBarColor(222/255, 95/255,  95/255)
+		self.NewCast.Background:SetTexture((222/255) * .15, (95/255) * .15, (95/255) * .15)
+	else
+		self.NewCast:SetStatusBarColor(Red, Blue, Green)
+		self.NewCast.Background:SetTexture(Red * .15, Blue * .15, Green * .15)	
+	end
 	
 	self.NewCast:SetMinMaxValues(Minimum, Maximum)
 	self.NewCast:SetValue(Current)
 end
 
 function Plates:CastOnShow()
-	local Red, Blue, Green = self:GetStatusBarColor()
-
 	self.NewCast:Show()
-	self.NewCast:SetStatusBarColor(Red, Blue, Green)
-	self.NewCast.Background:SetTexture(Red * .15, Blue * .15, Green * .15)
 	self:SetScript("OnUpdate", Plates.UpdateCastBar)
 end
 
