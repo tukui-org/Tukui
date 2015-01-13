@@ -61,6 +61,7 @@
 	<Script file="Maps\Core.lua"/>
 	<Script file="Maps\Minimap.lua"/>
 	<Script file="Maps\Zonemap.lua"/>
+	<Script file="Maps\Worldmap.lua"/>
 	
 	<!-- Data Text -->
 	<Script file="DataTexts\Core.lua"/>
