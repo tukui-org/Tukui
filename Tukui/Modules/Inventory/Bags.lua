@@ -537,6 +537,11 @@ function Bags:SlotUpdate(id, button)
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
 	local IsProfBag = self:IsProfessionBag(id)
+	local IconQuestTexture = button.IconQuestTexture
+	
+	if IconQuestTexture then
+		IconQuestTexture:SetAlpha(0)
+	end
 	
 	-- Letting you style this
 	if IsProfBag then
