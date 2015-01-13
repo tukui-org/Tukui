@@ -150,7 +150,7 @@ C["Tooltips"] = {
 	["UnitHealthText"] = true,
 	["ShowSpec"] = true,
 	["MouseOver"] = false,
-	["HealthFont"] = "Tukui",
+	["HealthFont"] = "Tukui Outline",
 	["HealthTexture"] = "Tukui",
 }
 

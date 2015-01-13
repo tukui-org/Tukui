@@ -5,12 +5,10 @@ local unpack = unpack
 local RaidColors = RAID_CLASS_COLORS
 local Tooltip = CreateFrame("Frame")
 local gsub, find, format = string.gsub, string.find, string.format
-local Noop = function() end
 local HealthBar = GameTooltipStatusBar
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 local CHAT_FLAG_DND = CHAT_FLAG_DND
 local LEVEL = LEVEL
-local PVP_ENABLED = PVP_ENABLED
 local BackdropColor = {0, 0, 0}
 local Short = T.ShortValue
 local ILevel, TalentSpec, LastUpdate = 0, "", 30
@@ -34,13 +32,12 @@ Tooltip.Tooltips = {
 	ItemRefTooltip,
 }
 
-Tooltip.Classification = {
-	WorldBoss = "|cffAF5050Boss|r",
-	RareElite = "|cffAF5050+ Rare|r",
-	Elite = "|cffAF5050+|r",
-	Rare = "|cffAF5050Rare|r",
+local Classification = {
+	worldboss = "|cffAF5050B |r",
+	rareelite = "|cffAF5050R+ |r",
+	elite = "|cffAF5050+ |r",
+	rare = "|cffAF5050R |r",
 }
-
 
 function Tooltip:CreateAnchor()
 	local DataTextRight = T["Panels"].DataTextRight
@@ -125,36 +122,47 @@ function Tooltip:OnTooltipSetUnit()
 	if (UnitIsUnit(Unit, "mouseover")) then
 		Unit = "mouseover"
 	end
-
+	
 	local Line1 = GameTooltipTextLeft1
 	local Line2 = GameTooltipTextLeft2
 	local Race = UnitRace(Unit)
 	local Class = UnitClass(Unit)
 	local Level = UnitLevel(Unit)
-	local Guild = GetGuildInfo(Unit)
+	local Guild, GuildRankName, _, GuildRealm = GetGuildInfo(Unit)
 	local Name, Realm = UnitName(Unit)
 	local CreatureType = UnitCreatureType(Unit)
-	local Classification = UnitClassification(Unit)
+	local CreatureClassification = UnitClassification(Unit)
+	local Relationship = UnitRealmRelationship(Unit);
 	local Title = UnitPVPName(Unit)
-	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
 	local Color = Tooltip:GetColor(Unit)
-	local Health = UnitHealth(Unit)
-	local MaxHealth = UnitHealthMax(Unit)
+	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
 	
 	if (not Color) then
 		Color = "|CFFFFFFFF"
 	end
 	
-	if (Title or Name) then
-		if Realm then
-			Line1:SetFormattedText("%s%s%s", Color, (Title or Name), Realm and Realm ~= "" and " - ".. Realm .."|r" or "|r")
-		else
-			Line1:SetFormattedText("%s%s%s", Color, (Title or Name), "|r")
+	if (UnitIsPlayer(Unit)) then
+		if Title then
+			Name = Title
+		end
+				
+		if(Realm and Realm ~= "") then
+			if IsShiftKeyDown() then
+				Name = Name.."-"..Realm
+			elseif(Relationship == LE_REALM_RELATION_COALESCED) then
+				Name = Name..FOREIGN_SERVER_LABEL
+			elseif(Relationship == LE_REALM_RELATION_VIRTUAL) then
+				Name = Name..INTERACTIVE_SERVER_LABEL
+			end
 		end
 	end
-
-	if (UnitIsPlayer(Unit) and UnitIsFriend("Player", Unit)) then
-		if (C.Tooltips.ShowSpec) then
+	
+	if Name then
+		Line1:SetFormattedText("%s%s%s", Color, Name, "|r")
+	end
+	
+	if (UnitIsPlayer(Unit) and UnitIsFriend("player", Unit)) then
+		if (C.Tooltips.ShowSpec and IsAltKeyDown()) then
 			local Talent = T.Tooltips.Talent
 			
 			ILevel = "..."
@@ -186,50 +194,45 @@ function Tooltip:OnTooltipSetUnit()
 				TalentSpec = Talent:GetTalentSpec() or NONE
 			end
 		end
-				
+		
 		if (UnitIsAFK(Unit)) then
 			self:AppendText((" %s"):format(CHAT_FLAG_AFK))
 		elseif UnitIsDND(Unit) then 
 			self:AppendText((" %s"):format(CHAT_FLAG_DND))
 		end
-		
-		local Offset = 2
-		if Guild then
-			Line2:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r")
-			Offset = Offset + 1
-		end
-
-		for i = Offset, NumLines do
-			local Line = _G["GameTooltipTextLeft"..i]
-			if (Line:GetText():find("^" .. LEVEL)) then
-				if Race then
-					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Race, Color, Class .."|r")
-				else
-					Line:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "??", Color, Class .."|r")
-				end
-				
-				break
-			end
-		end
 	end
-
-	for i = 1, NumLines do
+	
+	local Offset = 2
+	if ((UnitIsPlayer(Unit) and Guild)) then
+		if(GuildRealm and IsShiftKeyDown()) then
+			Guild = Guild.."-"..GuildRealm
+		end
+	
+		Line2:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == Guild and "|cff0090ff".. Guild .."|r" or "|cff00ff10".. Guild .."|r")
+		Offset = Offset + 1
+	end
+	
+	for i = Offset, NumLines do
 		local Line = _G["GameTooltipTextLeft"..i]
-		local Text = Line:GetText()
-		
-		if (Text and Text == PVP_ENABLED) then
-			Line:SetText()
+		if (Line:GetText():find("^" .. LEVEL)) then
+			if (UnitIsPlayer(Unit) and Race) then
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r %s %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "|cffAF5050??|r", Race, Color, Class .."|r")
+			else
+				Line:SetFormattedText("|cff%02x%02x%02x%s|r %s%s", R * 255, G * 255, B * 255, Level > 0 and Level or "|cffAF5050??|r", Classification[CreatureClassification] or "", CreatureType or "" .."|r")
+			end
+			
 			break
 		end
 	end
 	
-	if (UnitExists(Unit .. "target") and Unit ~= "player") then
+	if (UnitExists(Unit .. "target")) then
 		local Hex, R, G, B = Tooltip:GetColor(Unit .. "target")
 		
 		if (not R) and (not G) and (not B) then
 			R, G, B = 1, 1, 1
 		end
 		
+		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
 	
@@ -237,7 +240,7 @@ function Tooltip:OnTooltipSetUnit()
 		HealthBar.Text:SetText(Short(Health) .. " / " .. Short(MaxHealth))
 	end
 	
-	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit) and UnitIsFriend("Player", Unit)) then
+	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit) and UnitIsFriend("player", Unit) and IsAltKeyDown()) then
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..ILevel.."|r")
 		GameTooltip:AddLine(SPECIALIZATION..": |cff3eea23"..TalentSpec.."|r")
@@ -254,50 +257,50 @@ function Tooltip:SetColor()
 		Unit = 'mouseover'
 	end
 	
+	self:SetBackdropColor(unpack(C["General"].BackdropColor))
+	self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+	
 	local Reaction = Unit and UnitReaction(Unit, "player")
 	local Player = Unit and UnitIsPlayer(Unit)
 	local Tapped = Unit and UnitIsTapped(Unit)
 	local PlayerTapped = Unit and UnitIsTappedByPlayer(Unit)
-	local Connected = Unit and UnitIsConnected(Unit)
-	local Dead = Unit and UnitIsDead(Unit)
+	local Friend = Unit and UnitIsFriend("player", Unit)
 	local R, G, B
 	
-	self:SetBackdropColor(unpack(C["General"].BackdropColor))
-	self:SetBackdropBorderColor(0, 0, 0)
-	
-	if Player then
+	if Tapped and not PlayerTapped then
+		local Color = T.Colors
+		
+		HealthBar:SetStatusBarColor(unpack(Color.tapped))
+		HealthBar.Backdrop:SetBackdropBorderColor(unpack(Color.tapped))
+		self:SetBackdropBorderColor(unpack(Color.tapped))
+	elseif Player and Friend then
 		local Class = select(2, UnitClass(Unit))
 		local Color = T.Colors.class[Class]
+		
 		R, G, B = Color[1], Color[2], Color[3]
-		
 		HealthBar:SetStatusBarColor(R, G, B)
-		
-
-		self:SetBackdropBorderColor(R, G, B)
 		HealthBar.Backdrop:SetBackdropBorderColor(R, G, B)
+		self:SetBackdropBorderColor(R, G, B)
 	elseif Reaction then
 		local Color = T.Colors.reaction[Reaction]
+		
 		R, G, B = Color[1], Color[2], Color[3]
-		
 		HealthBar:SetStatusBarColor(R, G, B)
-		
-
-		self:SetBackdropBorderColor(R, G, B)
 		HealthBar.Backdrop:SetBackdropBorderColor(R, G, B)
+		self:SetBackdropBorderColor(R, G, B)
 	else
 		local Link = select(2, self:GetItem())
 		local Quality = Link and select(3, GetItemInfo(Link))
-		
+
 		if (Quality and Quality >= 2) then
 			R, G, B = GetItemQualityColor(Quality)
-			
 			self:SetBackdropBorderColor(R, G, B)
 		else
-			HealthBar:SetStatusBarColor(unpack(C["General"].BorderColor))
+			local Color = T.Colors
 			
-
-			self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+			HealthBar:SetStatusBarColor(unpack(Color.reaction[5]))
 			HealthBar.Backdrop:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+			self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 		end
 	end
 end
@@ -308,16 +311,12 @@ function Tooltip:OnUpdate(elapsed)
 	if (not Owner) then
 		return
 	end
-    
-	local Red, Green, Blue = self:GetBackdropColor()
+	
 	local Owner = self:GetOwner():GetName()
 	local Anchor = self:GetAnchorType()
-	
+
 	-- This ensures that default anchored world frame tips have the proper color.
-	if (Owner == "UIParent" and Anchor == "ANCHOR_CURSOR") and (Red ~= BackdropColor[1] or Green ~= BackdropColor[2] or Blue ~= BackdropColor[3]) then
-		BackdropColor[1] = Red
-		BackdropColor[2] = Green
-		BackdropColor[3] = Blue
+	if (Owner == "UIParent" and Anchor == "ANCHOR_CURSOR") then
 		self:SetBackdropColor(unpack(C["General"].BackdropColor))
 		self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 	end
@@ -332,8 +331,9 @@ function Tooltip:Skin()
 	Tooltip.SetColor(self)
 end
 
+
 function Tooltip:OnTooltipSetItem()
-	if (IsShiftKeyDown() or IsAltKeyDown()) then
+	if IsShiftKeyDown() then
 		local Item, Link = self:GetItem()
 		local ItemCount = GetItemCount(Link)
 		local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
@@ -348,17 +348,28 @@ function Tooltip:OnValueChanged()
 	if (not C["Tooltips"].UnitHealthText) then
 		return
 	end
-
+	
+	local unit = select(2, self:GetParent():GetUnit())
+	if(not unit) then
+		local GMF = GetMouseFocus()
+		if(GMF and GMF:GetAttribute("unit")) then
+			unit = GMF:GetAttribute("unit")
+		end
+	end
+	
 	local _, Max = HealthBar:GetMinMaxValues()
 	local Value = HealthBar:GetValue()
-	
 	if (Max == 1) then
 		self.Text:Hide()
 	else
 		self.Text:Show()
 	end
 	
-	self.Text:SetText(Short(Value) .. " / " .. Short(Max))
+	if (Value == 0 or (unit and UnitIsDeadOrGhost(unit))) then
+		self.Text:SetText(DEAD)
+	else
+		self.Text:SetText(Short(Value) .. " / " .. Short(Max))
+	end
 end
 
 function Tooltip:Enable()
@@ -369,11 +380,11 @@ function Tooltip:Enable()
 	self:CreateAnchor()
 	
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
-
+	
 	for _, Tooltip in pairs(Tooltip.Tooltips) do
 		if Tooltip == GameTooltip then
-			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
 			Tooltip:HookScript("OnUpdate", self.OnUpdate)
+			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
 			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
 		end
 		
@@ -382,9 +393,9 @@ function Tooltip:Enable()
 	
 	ItemRefCloseButton:SkinCloseButton()
 	
+	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 	HealthBar:SetStatusBarTexture(T.GetTexture(C["Tooltips"].HealthTexture))
 	HealthBar:CreateBackdrop()
-	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
 	HealthBar:ClearAllPoints()
 	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 4)
 	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 4)
@@ -392,9 +403,6 @@ function Tooltip:Enable()
 	if C["Tooltips"].UnitHealthText then
 		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
 		HealthBar.Text:SetFontObject(T.GetFont(C["Tooltips"].HealthFont))
-		HealthBar.Text:SetFont(HealthBar.Text:GetFont(), 12, "THINOUTLINE")
-		HealthBar.Text:SetShadowColor(0, 0, 0)
-		HealthBar.Text:SetShadowOffset(1.25, -1.25)
 		HealthBar.Text:Point("CENTER", HealthBar, "CENTER", 0, 6)
 	end
 end
