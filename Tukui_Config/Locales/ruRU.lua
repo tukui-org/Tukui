@@ -44,6 +44,11 @@ TukuiConfig["ruRU"] = {
 			["Desc"] = "Использовать панели команд в стиле Tukui",
 		},
 		
+		["EquipBorder"] = {
+			["Name"] = "Equipped Item Border",
+			["Desc"] = "Display Green Border on Equipped Items",
+		},
+
 		["HotKey"] = {
 			["Name"] = "Горячие клавиши",
 			["Desc"] = "Отображать текст назначнных клавиш на кнопках ",

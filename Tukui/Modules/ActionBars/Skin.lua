@@ -35,7 +35,7 @@ function TukuiActionBars:SkinButton()
 
 	if Border and Button.isSkinned then
 		Border:SetTexture('')
-		if Border:IsShown() then
+		if Border:IsShown() and C.ActionBars.EquipBorder then
 			Button:SetBackdropBorderColor(.08, .70, 0)
 		else
 			Button:SetBackdropBorderColor(unpack(C['General'].BorderColor))

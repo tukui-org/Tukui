@@ -44,6 +44,11 @@ TukuiConfig["zhTW"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["EquipBorder"] = {
+			["Name"] = "Equipped Item Border",
+			["Desc"] = "Display Green Border on Equipped Items",
+		},
+
 		["HotKey"] = {
 			["Name"] = "快捷鍵",
 			["Desc"] = "在快捷鍵上顯示熱鍵名稱",

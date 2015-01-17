@@ -44,6 +44,11 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["EquipBorder"] = {
+			["Name"] = "Equipped Item Border",
+			["Desc"] = "Display Green Border on Equipped Items",
+		},
+
 		["HotKey"] = {
 			["Name"] = "Hotkeys",
 			["Desc"] = "Zeige Hotkey Text an den Tasten",

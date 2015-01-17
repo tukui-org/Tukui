@@ -44,6 +44,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Derp",
 		},
 		
+		["EquipBorder"] = {
+			["Name"] = "Equipped Item Border",
+			["Desc"] = "Display Green Border on Equipped Items",
+		},
+
 		["HotKey"] = {
 			["Name"] = "Raccourcis clavier",
 			["Desc"] = "Afficher le texte de raccourcis sur les boutons",
