@@ -30,7 +30,9 @@ function TukuiActionBars:SkinButton()
 	
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	
+
+	TukuiActionBars.UpdateHotKey(Button)
+
 	if Border and Button.isSkinned then
 		Border:SetTexture('')
 		if Border:IsShown() then
