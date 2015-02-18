@@ -18,7 +18,7 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["UIScale"] = {
-			["Name"] = "UI比例",
+			["Name"] = "UI缩放",
 			["Desc"] = "自定义UI缩放比例",
 		},
 		
@@ -40,73 +40,68 @@ TukuiConfig["zhCN"] = {
 	
 	["ActionBars"] = {
 		["Enable"] = {
-			["Name"] = "启用快捷列",
+			["Name"] = "启用动作条",
 			["Desc"] = "Derp",
 		},
 		
-		["EquipBorder"] = {
-			["Name"] = "Equipped Item Border",
-			["Desc"] = "Display Green Border on Equipped Items",
-		},
-
 		["HotKey"] = {
-			["Name"] = "快捷键",
-			["Desc"] = "在快捷键上显示名字",
+			["Name"] = "动作条快捷键",
+			["Desc"] = "在动作条上显示快捷键",
 		},
 		
 		["Macro"] = {
 			["Name"] = "宏键",
-			["Desc"] = "在快捷键显示宏的名字",
+			["Desc"] = "在快捷键显示宏名称",
 		},
 		
 		["ShapeShift"] = {
 			["Name"] = "姿态列",
-			["Desc"] = "使用tukui姿态列",
+			["Desc"] = "启用tukui姿态列",
 		},
 		
 		["Pet"] = {
 			["Name"] = "宠物",
-			["Desc"] = "使用tukui风格宠物控制列",
+			["Desc"] = "启用tukui风格宠物动作条",
 		},
 		
 		["NormalButtonSize"] = {
 			["Name"] = "按钮大小",
-			["Desc"] = "设置一个快捷键的大小",
+			["Desc"] = "设置动作条按钮大小",
 		},
 		
 		["PetButtonSize"] = {
 			["Name"] = "宠物按钮的大小",
-			["Desc"] = "设置一个宠物的动作栏按钮的大小",
+			["Desc"] = "设置宠物动作条按钮大小",
 		},
 		
 		["ButtonSpacing"] = {
-			["Name"] = "按键间隔",
-			["Desc"] = "设置每个之间快捷键的间距",
+			["Name"] = "按键间距",
+			["Desc"] = "设置动作条上按钮的间距",
 		},
 		
 		["OwnShadowDanceBar"] = {
 			["Name"] = "暗影之舞",
-			["Desc"] = "使用独立的暗影之舞快捷列代替主快捷列",
+			["Desc"] = "启用tukui风格暗影之舞动作条",
 		},
 		
 		["OwnMetamorphosisBar"] = {
 			["Name"] = "恶魔变形",
-			["Desc"] = "使用独立的恶魔变形快捷列代替主快捷列",
+			["Desc"] = "启用tukui风格恶魔变形动作条",
 		},
 		
 		["OwnWarriorStanceBar"] = {
-			["Name"] = "战士姿态",
-			["Desc"] = "每一种姿态都使用一个独立的快捷列",
+			["Name"] = "战士姿态栏",
+			["Desc"] = "启用tukui风格姿态栏",
 		},
 		
 		["HideBackdrop"] = {
 			["Name"] = "隐藏背景",
-			["Desc"] = "不显示快捷列的背景",
+			["Desc"] = "隐藏动作条背景",
 		},
 		
 		["Font"] = {
-			["Name"] = "快捷列字体",
-			["Desc"] = "设置快捷列字体",
+			["Name"] = "动作条字体",
+			["Desc"] = "设置动作条字体",
 		},
 	},
 	
@@ -117,28 +112,28 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Consolidate"] = {
-			["Name"] = "光环合并 ",
-			["Desc"] = "合并团队buff",
+			["Name"] = "Buff合并 ",
+			["Desc"] = "合并右上角团队buff",
 		},
 		
 		["Flash"] = {
-			["Name"] = "光环闪烁",
-			["Desc"] = "光环即将消失时闪烁"..PerformanceSlight,
+			["Name"] = "Buff闪烁",
+			["Desc"] = "Buff即将消失时闪烁"..PerformanceSlight,
 		},
 		
 		["ClassicTimer"] = {
-			["Name"] = "经典的计时器",
-			["Desc"] = "在光环下方显示倒数文字",
+			["Name"] = "Buff计时",
+			["Desc"] = "在Buff下方显示计时",
 		},
 		
 	    ["HideBuffs"] = {
-			["Name"] = "隐藏增益",
-			["Desc"] = "不显示角色增益效果",
+			["Name"] = "隐藏Buff",
+			["Desc"] = "隐藏角色Buff",
 		},
 		
 		["HideDebuffs"] = {
-			["Name"] = "隐藏减益",
-			["Desc"] = "隐藏角色减益效果",
+			["Name"] = "隐藏Debuff",
+			["Desc"] = "隐藏角色的Debuff",
 		},
 		
 		["Animation"] = {
@@ -147,13 +142,13 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["BuffsPerRow"] = {
-			["Name"] = "每行增益效果",
-			["Desc"] = "设置每一行显示的数量",
+			["Name"] = "Buff显示数量",
+			["Desc"] = "设置每一行显示的Buff数量",
 		},
 		
 		["Font"] = {
-			["Name"] = "光环字体",
-			["Desc"] = "设置光环字体",
+			["Name"] = "Buff字体",
+			["Desc"] = "设置Buff字体",
 		},
 	},
 	
@@ -164,13 +159,13 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ButtonSize"] = {
-			["Name"] = "格子尺寸",
-			["Desc"] = "设置背包格子大小",
+			["Name"] = "背包尺寸",
+			["Desc"] = "设置背包格子尺寸",
 		},
 		
 		["Spacing"] = {
 			["Name"] = "间距",
-			["Desc"] = "设置背包之间的间距",
+			["Desc"] = "设置背包格子之间的间距",
 		},
 		
 		["ItemsPerRow"] = {
@@ -180,7 +175,7 @@ TukuiConfig["zhCN"] = {
 		
 		["PulseNewItem"] = {
 			["Name"] = "高亮提示",
-			["Desc"] = "高亮动画提示背包新获的物品",
+			["Desc"] = "高亮显示背包新获得物品",
 		},
 		
 		["Font"] = {
@@ -217,8 +212,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["LootFrame"] = {
-			["Name"] = "战利品框架",
-			["Desc"] = "建立一个独立掉落记录框",
+			["Name"] = "拾取框体",
+			["Desc"] = "Tukui风格拾取框体",
 		},
 		
 		["Background"] = {
@@ -237,7 +232,7 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ScrollByX"] = {
-			["Name"] = "鼠标拖动",
+			["Name"] = "鼠标滚轮",
 			["Desc"] = "设置鼠标滚轮滚动时拖动行数",
 		},
 	},
@@ -266,30 +261,30 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["NameColor"] = {
-			["Name"] = "项目颜色",
-			["Desc"] = "设置信息项目名的颜色"..RestoreDefault,
+			["Name"] = "字体颜色",
+			["Desc"] = "设置信息条上字体颜色"..RestoreDefault,
 		},
 		
 		["ValueColor"] = {
-			["Name"] = "数值颜色",
-			["Desc"] = "设置信息数值颜色"..RestoreDefault,
+			["Name"] = "数字颜色",
+			["Desc"] = "设置条上数字颜色"..RestoreDefault,
 		},
 		
 		["Font"] = {
-			["Name"] = "信息字体",
-			["Desc"] = "设置信息条的字体",
+			["Name"] = "信息条字体",
+			["Desc"] = "设置信息条上的字体",
 		},
 	},
 	
 	["Merchant"] = {
 		["AutoSellGrays"] = {
-			["Name"] = "自动出售灰色的",
+			["Name"] = "自动出售",
 			["Desc"] = "自动出售灰色物品",
 		},
 		
 		["SellMisc"] = {
-			["Name"] = "自动卖杂物",
-			["Desc"] = "自动售不是灰色物品但没用杂物",
+			["Name"] = "自动售卖",
+			["Desc"] = "自动售垃圾",
 		},
 		
 		["AutoRepair"] = {
@@ -299,7 +294,7 @@ TukuiConfig["zhCN"] = {
 		
 		["UseGuildRepair"] = {
 			["Name"] = "使用工会修理",
-			["Desc"] = "启用自动修复时，使用公会银行资金",
+			["Desc"] = "启用自动修复时，优先使用公会修理",
 		},
 	},
 	
@@ -315,8 +310,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ExperienceEnable"] = {
-			["Name"] = "使用经验条",
-			["Desc"] = "使用经验条",
+			["Name"] = "启用经验条",
+			["Desc"] = "启用经验条",
 		},
 		
 		["ReputationEnable"] = {
@@ -332,7 +327,7 @@ TukuiConfig["zhCN"] = {
 	
 	["NamePlates"] = {
 		["Enable"] = {
-			["Name"] = "启动姓名条",
+			["Name"] = "启动姓名板",
 			["Desc"] = "Derp"..PerformanceSlight,
 		},
 		
@@ -347,8 +342,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["CastHeight"] = {
-			["Name"] = "施放条高度",
-			["Desc"] = "设置姓名板施放条高度",
+			["Name"] = "施法条高度",
+			["Desc"] = "设置姓名板施法条高度",
 		},
 		
 		["Spacing"] = {
@@ -372,8 +367,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealthText"] = {
-			["Name"] = "显示血条文字",
-			["Desc"] = "添加在姓名板显示血条文字",
+			["Name"] = "显示血量数值",
+			["Desc"] = "在姓名板上显示血量数值",
 		},
 	},
 	
@@ -389,8 +384,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealBar"] = {
-			["Name"] = "治疗提示",
-			["Desc"] = "显示即将到来的治疗与吸收",
+			["Name"] = "治疗预估",
+			["Desc"] = "显示治疗预估",
 		},
 		
 		["ShowPlayer"] = {
@@ -399,8 +394,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "血量文字",
-			["Desc"] = "显示血量具体数值",
+			["Name"] = "血量数值",
+			["Desc"] = "在小队框架上显示血量数值",
 		},
 		
 		["Font"] = {
@@ -419,8 +414,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealthTexture"] = {
-			["Name"] = "血量材质条",
-			["Desc"] = "设置血量材质条",
+			["Name"] = "血量条材质",
+			["Desc"] = "设置血量条材质",
 		},
 		
 	    ["RangeAlpha"] = {
@@ -441,8 +436,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["Highlight"] = {
-			["Name"] = "Highlight",
-			["Desc"] = "Highlight your current focus/target",
+			["Name"] = "边框高亮显示",
+			["Desc"] = "边框高亮显示你的目标/焦点目标",
 		},
 		
 		["MaxUnitPerColumn"] = {
@@ -451,23 +446,23 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealBar"] = {
-			["Name"] = "治疗提示",
-			["Desc"] = "显示即将到来的治疗与吸收",
+			["Name"] = "治疗预估",
+			["Desc"] = "显示治疗预估",
 		},
 		
 		["AuraWatch"] = {
-			["Name"] = "光环监视",
-			["Desc"] = "在团队框架的角落显示光环",
+			["Name"] = "buff监视",
+			["Desc"] = "在团队框架的角落显示buff",
 		},
 		
 		["AuraWatchTimers"] = {
-			["Name"] = "光环计时器",
-			["Desc"] = "显示debuff的秒数",
+			["Name"] = "Debuff计时器",
+			["Desc"] = "显示debuff剩余时间",
 		},
 		
 		["DebuffWatch"] = {
-			["Name"] = "减益效果",
-			["Desc"] = "以大图标在团队框架上显示重要的debuff",
+			["Name"] = "Debuff",
+			["Desc"] = "以大图标在团队框架上显示重要的Debuff",
 		},
 		
 		["RangeAlpha"] = {
@@ -476,17 +471,17 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["ShowRessurection"] = {
-			["Name"] = "显示复活的图标",
-			["Desc"] = "显示玩家复活的图标",
+			["Name"] = "显示复活图标",
+			["Desc"] = "显示正在复活图标",
 		},
 		
 		["ShowHealthText"] = {
-			["Name"] = "血量文字",
+			["Name"] = "血量数值",
 			["Desc"] = "显示血量的具体数值",
 		},
 		
 		["VerticalHealth"] = {
-			["Name"] = "纵向血量",
+			["Name"] = "纵向生命条",
 			["Desc"] = "纵向显示损失的血量",
 		},
 		
@@ -524,17 +519,17 @@ TukuiConfig["zhCN"] = {
 		
 			["MouseOver"] = {
 			["Name"] = "鼠标指向",
-			["Desc"] = "启用鼠标指向tooltip",
+			["Desc"] = "启用鼠标指向",
 		},
 		
 		["HideOnUnitFrames"] = {
 			["Name"] = "隐藏头像提示",
-			["Desc"] = "指向头像框架不显示Tooltips",
+			["Desc"] = "指向头像框架不显示鼠标提示框体",
 		},
 		
 		["UnitHealthText"] = {
 			["Name"] = "显示血量数值",
-			["Desc"] = "在Tooltips上显示血量数值",
+			["Desc"] = "在鼠标提示框内显示血量数值",
 		},
 		
 		["ShowSpec"] = {
@@ -544,7 +539,7 @@ TukuiConfig["zhCN"] = {
 		
 		["HealthFont"] = {
 			["Name"] = "血量条字体",
-			["Desc"] = "设置Tooltips血量数值的字体",
+			["Desc"] = "设置鼠标提示框内血量数值的字体",
 		},
 		
 		["HealthTexture"] = {
@@ -561,12 +556,12 @@ TukuiConfig["zhCN"] = {
 		
 		["TargetEnemyHostileColor"] = {
 			["Name"] = "敌对目标颜色",
-			["Desc"] = "敌对目标血条会变色，而不是通过类的颜色着色",
+			["Desc"] = "敌对目标头像框体着色",
 		},
 		
 		["Portrait"] = {
-			["Name"] = "人物头像",
-			["Desc"] = "显示玩家与目标人物头像",
+			["Name"] = "头像框体",
+			["Desc"] = "显示玩家与目标头像框体",
 		},
 		
 		["CastBar"] = {
@@ -581,7 +576,7 @@ TukuiConfig["zhCN"] = {
 		
 		["CastBarIcon"] = {
 			["Name"] = "施法条图标",
-			["Desc"] = "建立施法图标",
+			["Desc"] = "启用施法图标",
 		},
 		
 		["CastBarLatency"] = {
@@ -605,8 +600,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["HealBar"] = {
-			["Name"] = "治疗提示",
-			["Desc"] = "显示即将到来的治疗与吸收",
+			["Name"] = "治疗预估",
+			["Desc"] = "显示治疗预估",
 		},
 		
 		["TotemBar"] = {
@@ -616,7 +611,7 @@ TukuiConfig["zhCN"] = {
 		
 		["ComboBar"] = {
 			["Name"] = "连击点",
-			["Desc"] = "使用连击条",
+			["Desc"] = "启用连击条",
 		},
 		
 		["AnticipationBar"] = {
@@ -626,19 +621,18 @@ TukuiConfig["zhCN"] = {
 		
 		["SerendipityBar"] = {
 			["Name"] = "妙手回春",
-			["Desc"] = "显示牧师的妙手回春的层数",
+			["Desc"] = "显示妙手回春的层数",
 		},
 		
 		["OnlySelfDebuffs"] = {
-			["Name"] = "只显示我造成的减益",
-			["Desc"] = "在目标框架上只显示我造成的减益效果",
+			["Name"] = "只显示我释放的Debuff",
+			["Desc"] = "在目标框架上只显示我释放的Debuff效果",
 		},
 
 		["OnlySelfBuffs"] = {
-			["Name"] = "Display My Buffs Only",
-			["Desc"] = "Only display our buffs on the target frame",
+			["Name"] = "只显示我释放的Buff",
+			["Desc"] = "在目标框架上只显示我释放的Buff效果",
 		},
-		
 		["DarkTheme"] = {
 			["Name"] = "黑暗主题",
 			["Desc"] = "如果启用,血量条变成暗色而能量条变成职业颜色",
@@ -660,23 +654,23 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["TargetAuras"] = {
-			["Name"] = "目标光环",
-			["Desc"] = "显示目标减益与玩家增益。",
+			["Name"] = "目标Buff",
+			["Desc"] = "目标头像框架上显示Buff与Debuff",
 		},
 		
 		["FocusAuras"] = {
-			["Name"] = "焦点光环",
-			["Desc"] = "显示焦点的deff和debuff",
+			["Name"] = "焦点Buff",
+			["Desc"] = "显示焦点的Buff和Debuff",
 		},
 		
 		["FocusTargetAuras"] = {
 			["Name"] = "焦点目标",
-			["Desc"] = "显示焦点目标的deff和debuff",
+			["Desc"] = "显示焦点目标的Buff和Debuff",
 		},
 		
 		["ArenaAuras"] = {
-			["Name"] = "竞技场框架光环",
-			["Desc"] = "在竞技场框架显示debuff和debuff",
+			["Name"] = "竞技场框架Buff",
+			["Desc"] = "在竞技场框架显示Buff和Debuff",
 		},
 		
 		["BossAuras"] = {
@@ -685,8 +679,8 @@ TukuiConfig["zhCN"] = {
 		},
 		
 		["AltPowerText"] = {
-			["Name"] = "AltPower Text",
-			["Desc"] = "Display altpower text values on altpower bar",
+			["Name"] = "能量条文本",
+			["Desc"] = "显示能量条文本数值",
 		},
 		
 		["Font"] = {
