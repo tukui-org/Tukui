@@ -23,7 +23,7 @@ end
 function TukuiFonts:ChangeWoWFonts()
 	local SetFont = self.SetFont
 	local NORMAL = C.Medias.Font
-	local COMBAT = C.Medias.DamageFont
+	local COMBAT = GetLocale() == "ruRU" and C.Medias.DamageFontRussian or C.Medias.DamageFont
 	local NUMBER = C.Medias.Font
 
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
