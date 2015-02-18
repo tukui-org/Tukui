@@ -8,6 +8,9 @@ C["Medias"] = {
 	["PixelFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\pixel_font.ttf]=],
 	["ActionBarFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\actionbar_font.ttf]=],
 	
+	-- FONTS (RUSSIAN)
+	["DamageFontRussian"] = [[Interface\AddOns\Tukui\Medias\Fonts\combat_font_rus.ttf]],
+	
 	-- Textures
 	["Normal"] = [[Interface\AddOns\Tukui\Medias\Textures\normTex]],
 	["Glow"] = [[Interface\AddOns\Tukui\Medias\Textures\glowTex]],
