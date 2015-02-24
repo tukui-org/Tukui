@@ -12,6 +12,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	local Shadow = self.Shadow
 
 	-- Runes
+    RunesBar:SetFrameLevel(0)
 	RunesBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	RunesBar:Size(250, 8)
 	RunesBar:SetBackdrop(TukuiUnitFrames.Backdrop)

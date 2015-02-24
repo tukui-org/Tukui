@@ -311,6 +311,10 @@ function Tooltip:OnUpdate(elapsed)
 	if (not Owner) then
 		return
 	end
+    
+    if (Owner:IsForbidden()) then
+        return
+    end
 	
 	local Owner = self:GetOwner():GetName()
 	local Anchor = self:GetAnchorType()

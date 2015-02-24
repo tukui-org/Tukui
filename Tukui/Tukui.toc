@@ -1,6 +1,6 @@
-## Interface: 60000
+## Interface: 60100
 ## Author: Tukz & Hydra
-## Version: 16.17
+## Version: 16.18
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
@@ -19,5 +19,3 @@ Locales\Init.xml
 Core\Init.xml
 Modules\Init.xml
 Core\Temp.lua
-
-
