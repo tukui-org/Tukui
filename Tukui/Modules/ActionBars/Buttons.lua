@@ -285,38 +285,38 @@ function ActionBars:LoadVariables()
 	end
 end
 
+function ActionBars:VehicleOnEvent(event)
+    if (CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN) then
+        self:Show()
+    else
+        self:Hide()
+    end
+end
+
+function ActionBars:VehicleOnClick()
+    if (UnitOnTaxi("player")) then
+        TaxiRequestEarlyLanding()
+    else
+        VehicleExit()
+    end
+end
+
 function ActionBars:CreateVehicleButtons()
-	local function Vehicle_OnEvent(self, event)
-		if ( CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN ) then
-			self:Show();
-		else
-			self:Hide();
-		end
-	end
-
-	local function Vehicle_OnClick(self)
-		if ( UnitOnTaxi("player") ) then
-			TaxiRequestEarlyLanding();
-		else
-			VehicleExit();
-		end
-	end
-
 	local VehicleLeft = CreateFrame("Button", nil, UIParent)
 	VehicleLeft:SetAllPoints(T.Panels.DataTextLeft)
 	VehicleLeft:SetFrameStrata("MEDIUM")
 	VehicleLeft:SetFrameLevel(10)
 	VehicleLeft:SetTemplate()
 	VehicleLeft:RegisterForClicks("AnyUp")
-	VehicleLeft:SetScript("OnClick", Vehicle_OnClick)
+	VehicleLeft:SetScript("OnClick", ActionBars.VehicleOnClick)
 	VehicleLeft:SetScript("OnLeave", GameTooltip_Hide)
-	VehicleLeft:RegisterEvent("PLAYER_ENTERING_WORLD");
-	VehicleLeft:RegisterEvent("UPDATE_BONUS_ACTIONBAR");
-	VehicleLeft:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR");
-	VehicleLeft:RegisterEvent("UNIT_ENTERED_VEHICLE");
-	VehicleLeft:RegisterEvent("UNIT_EXITED_VEHICLE");
-	VehicleLeft:RegisterEvent("VEHICLE_UPDATE");
-	VehicleLeft:SetScript("OnEvent", Vehicle_OnEvent)
+	VehicleLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
+	VehicleLeft:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+	VehicleLeft:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+	VehicleLeft:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	VehicleLeft:RegisterEvent("UNIT_EXITED_VEHICLE")
+	VehicleLeft:RegisterEvent("VEHICLE_UPDATE")
+	VehicleLeft:SetScript("OnEvent", ActionBars.VehicleOnEvent)
 	VehicleLeft:Hide()
 
 	VehicleLeft.Text = VehicleLeft:CreateFontString(nil, "OVERLAY")
@@ -331,15 +331,15 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight:SetFrameStrata("MEDIUM")
 	VehicleRight:SetFrameLevel(10)
 	VehicleRight:RegisterForClicks("AnyUp")
-	VehicleRight:SetScript("OnClick", Vehicle_OnClick)
+	VehicleRight:SetScript("OnClick", ActionBars.VehicleOnClick)
 	VehicleRight:SetScript("OnLeave", GameTooltip_Hide)
-	VehicleRight:RegisterEvent("PLAYER_ENTERING_WORLD");
-	VehicleRight:RegisterEvent("UPDATE_BONUS_ACTIONBAR");
-	VehicleRight:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR");
-	VehicleRight:RegisterEvent("UNIT_ENTERED_VEHICLE");
-	VehicleRight:RegisterEvent("UNIT_EXITED_VEHICLE");
-	VehicleRight:RegisterEvent("VEHICLE_UPDATE");
-	VehicleRight:SetScript("OnEvent", Vehicle_OnEvent)
+	VehicleRight:RegisterEvent("PLAYER_ENTERING_WORLD")
+	VehicleRight:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
+	VehicleRight:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+	VehicleRight:RegisterEvent("UNIT_ENTERED_VEHICLE")
+	VehicleRight:RegisterEvent("UNIT_EXITED_VEHICLE")
+	VehicleRight:RegisterEvent("VEHICLE_UPDATE")
+	VehicleRight:SetScript("OnEvent", ActionBars.VehicleOnEvent)
 	VehicleRight:Hide()
 
 	VehicleRight.Text = VehicleRight:CreateFontString(nil, "OVERLAY")
