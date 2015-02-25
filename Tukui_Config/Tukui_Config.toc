@@ -1,4 +1,4 @@
-## Interface: 60000
+## Interface: 60100
 ## Title: |cffff8000Tukui Config|r
 ## Notes: Tukui Config GUI
 ## Author: Hydra & Tukz
