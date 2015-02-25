@@ -287,6 +287,12 @@ end
 
 function ActionBars:VehicleOnEvent(event)
     if (CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN) then
+        if (UnitOnTaxi("player")) then
+            self.Text:SetText("|cffFF0000" .. TAXI_CANCEL_DESCRIPTION .. "|r")
+        else
+            self.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
+        end
+        
         self:Show()
     else
         self:Hide()
@@ -307,9 +313,9 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft:SetFrameStrata("MEDIUM")
 	VehicleLeft:SetFrameLevel(10)
 	VehicleLeft:SetTemplate()
+    VehicleLeft:SkinButton()
 	VehicleLeft:RegisterForClicks("AnyUp")
 	VehicleLeft:SetScript("OnClick", ActionBars.VehicleOnClick)
-	VehicleLeft:SetScript("OnLeave", GameTooltip_Hide)
 	VehicleLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
 	VehicleLeft:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 	VehicleLeft:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
@@ -322,7 +328,6 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft.Text = VehicleLeft:CreateFontString(nil, "OVERLAY")
 	VehicleLeft.Text:SetFont(C.Medias.Font, 12)
 	VehicleLeft.Text:Point("CENTER", 0, 0)
-	VehicleLeft.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleLeft.Text:SetShadowOffset(1.25, -1.25)
 
 	local VehicleRight = CreateFrame("Button", nil, UIParent)
@@ -332,7 +337,6 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight:SetFrameLevel(10)
 	VehicleRight:RegisterForClicks("AnyUp")
 	VehicleRight:SetScript("OnClick", ActionBars.VehicleOnClick)
-	VehicleRight:SetScript("OnLeave", GameTooltip_Hide)
 	VehicleRight:RegisterEvent("PLAYER_ENTERING_WORLD")
 	VehicleRight:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 	VehicleRight:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
@@ -345,7 +349,6 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight.Text = VehicleRight:CreateFontString(nil, "OVERLAY")
 	VehicleRight.Text:SetFont(C.Medias.Font, 12)
 	VehicleRight.Text:Point("CENTER", 0, 0)
-	VehicleRight.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
 	VehicleRight.Text:SetShadowOffset(1.25, -1.25)
 	
 	T.Panels.VehicleButtonLeft = VehicleLeft
