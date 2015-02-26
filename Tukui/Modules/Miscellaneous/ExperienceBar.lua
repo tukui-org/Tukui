@@ -15,11 +15,9 @@ function Experience:SetTooltip()
 	local Rested = GetXPExhaustion()
 	
 	if (self == Experience.XPBar1) then
-		Panel = Panels.DataTextLeft
-		GameTooltip:SetOwner(Panel, "ANCHOR_TOPLEFT", 0, 5)
+		GameTooltip:SetOwner(Panels.DataTextLeft, "ANCHOR_TOPLEFT", 0, 5)
 	else
-		Panel = Panels.DataTextRight
-		GameTooltip:SetOwner(Panel, "ANCHOR_TOPRIGHT", 0, 5)
+		GameTooltip:SetOwner(Panels.DataTextRight, "ANCHOR_TOPRIGHT", 0, 5)
 	end
 	
 	GameTooltip:AddLine(string.format("|cff0090FF"..XP..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))

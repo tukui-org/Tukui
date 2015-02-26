@@ -15,13 +15,11 @@ function Reputation:SetTooltip()
 	end
 	
 	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
-	
+
 	if (self == Reputation.RepBar1) then
-		Panel = Panels.DataTextLeft
-		GameTooltip:SetOwner(Panel, "ANCHOR_TOPLEFT", 0, 5)
+		GameTooltip:SetOwner(Panels.DataTextLeft, "ANCHOR_TOPLEFT", 0, 5)
 	else
-		Panel = Panels.DataTextRight
-		GameTooltip:SetOwner(Panel, "ANCHOR_TOPRIGHT", 0, 5)
+		GameTooltip:SetOwner(Panels.DataTextRight, "ANCHOR_TOPRIGHT", 0, 5)
 	end
 	
 	GameTooltip:AddLine(string.format("%s (%s)", Name, _G["FACTION_STANDING_LABEL" .. ID]))
