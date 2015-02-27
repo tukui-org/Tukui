@@ -286,7 +286,7 @@ function ActionBars:LoadVariables()
 end
 
 function ActionBars:VehicleOnEvent(event)
-    if (CanExitVehicle() and ActionBarController_GetCurrentActionBarState() == LE_ACTIONBAR_STATE_MAIN) then
+    if CanExitVehicle() then
         if (UnitOnTaxi("player")) then
             self.Text:SetText("|cffFF0000" .. TAXI_CANCEL_DESCRIPTION .. "|r")
         else
