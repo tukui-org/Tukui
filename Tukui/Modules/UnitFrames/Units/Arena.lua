@@ -97,7 +97,7 @@ function TukuiUnitFrames:Arena()
 	Name.frequentUpdates = 0.2
 	
 	if (C.UnitFrames.ArenaAuras) then
-		local Debuffs = CreateFrame("Frame", nil, self)
+		local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 		Debuffs:SetHeight(26)
 		Debuffs:SetWidth(200)
 		Debuffs:Point("LEFT", self, "RIGHT", 4, 0)

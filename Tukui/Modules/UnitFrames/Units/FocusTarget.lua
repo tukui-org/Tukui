@@ -91,7 +91,7 @@ function TukuiUnitFrames:FocusTarget()
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
 	
 	if (C.UnitFrames.FocusTargetAuras) then
-		local Buffs = CreateFrame("Frame", nil, self)
+		local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 		Buffs:SetHeight(26)
 		Buffs:SetWidth(252)
 		Buffs:Point("RIGHT", self, "LEFT", -4, 0)
@@ -103,7 +103,7 @@ function TukuiUnitFrames:FocusTarget()
 		Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 
-		local Debuffs = CreateFrame("Frame", nil, self)
+		local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 		Debuffs:SetHeight(26)
 		Debuffs:SetWidth(200)
 		Debuffs:Point("LEFT", self, "RIGHT", 4, 0)
