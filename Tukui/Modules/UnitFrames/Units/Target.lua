@@ -260,8 +260,8 @@ function TukuiUnitFrames:Target()
 	-- Also the icons in PostCreateAura are not working.
 	--------------------------
 	if (C.UnitFrames.TargetAuras) then
-		local Buffs = CreateFrame("Frame", nil, self)
-		local Debuffs = CreateFrame("Frame", nil, self)
+		local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
+		local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 
 		Buffs:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 
@@ -323,7 +323,7 @@ function TukuiUnitFrames:Target()
 	end
 	
 	if (C.UnitFrames.ComboBar) then
-		local ComboPoints = CreateFrame("Frame", nil, self)
+		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
 		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		ComboPoints:Width(250)
 		ComboPoints:Height(8)
