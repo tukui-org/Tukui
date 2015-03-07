@@ -264,10 +264,11 @@ function Tooltip:SetColor()
 	local Player = Unit and UnitIsPlayer(Unit)
 	local Tapped = Unit and UnitIsTapped(Unit)
 	local PlayerTapped = Unit and UnitIsTappedByPlayer(Unit)
+	local QuestMOB = Unit and UnitIsTappedByAllThreatList(Unit)
 	local Friend = Unit and UnitIsFriend("player", Unit)
 	local R, G, B
 	
-	if Tapped and not PlayerTapped then
+	if Tapped and not PlayerTapped and not QuestMOB then
 		local Color = T.Colors
 		
 		HealthBar:SetStatusBarColor(unpack(Color.tapped))
