@@ -102,7 +102,7 @@ function TukuiUnitFrames:Party()
 		self.Portrait = Portrait
 	end
 	
-	local Buffs = CreateFrame("Frame", nil, self)
+	local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 	Buffs:Point("TOPLEFT", C.Party.Portrait and self.Portrait:GetParent() or self, "BOTTOMLEFT", 0, -6)
 	Buffs:SetHeight(24)
 	Buffs:SetWidth(250)
@@ -114,7 +114,7 @@ function TukuiUnitFrames:Party()
 	Buffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 	Buffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 	
-	local Debuffs = CreateFrame("Frame", nil, self)
+	local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 	Debuffs:Point("LEFT", self, "RIGHT", 6, 0)
 	Debuffs:SetHeight(self:GetHeight())
 	Debuffs:SetWidth(250)
