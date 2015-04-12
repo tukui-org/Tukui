@@ -11,8 +11,10 @@ function TukuiActionBars:RangeOnUpdate(elapsed)
 	if (not self.rangeTimer) then
 		return
 	end
-	
-	TukuiActionBars.RangeUpdate(self)
+
+	if ( self.rangeTimer <= 0 ) then
+		TukuiActionBars.RangeUpdate(self)
+	end
 end
 
 function TukuiActionBars:RangeUpdate()
