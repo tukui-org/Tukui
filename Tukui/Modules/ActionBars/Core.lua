@@ -271,6 +271,7 @@ function TukuiActionBars:UpdatePetBar(...)
 end
 
 function TukuiActionBars:UpdateStanceBar(...)
+	if InCombatLockdown() then return end
 	local NumForms = GetNumShapeshiftForms()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
 	local PetSize = C.ActionBars.PetButtonSize
