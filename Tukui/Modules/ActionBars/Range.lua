@@ -18,14 +18,14 @@ function TukuiActionBars:RangeOnUpdate(elapsed)
 end
 
 function TukuiActionBars:RangeUpdate()
-	local Name = self:GetName()
-	local Icon = _G[Name.."Icon"]
-	local NormalTexture = _G[Name.."NormalTexture"]
+	local Icon = self.icon
+	local NormalTexture = self.NormalTexture
     local ID = self.action
+
     local IsUsable, NotEnoughMana = IsUsableAction(ID)
 	local HasRange = ActionHasRange(ID)
 	local InRange = IsActionInRange(ID)
-	
+
     if IsUsable then -- Usable
         if (HasRange and InRange == false) then -- Out of range
 			Icon:SetVertexColor(0.8, 0.1, 0.1)
