@@ -15,18 +15,10 @@ TukuiFontOutline:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
 local TukuiUFFont = CreateFont("TukuiUFFont")
 TukuiUFFont:SetShadowColor(0, 0, 0)
 TukuiUFFont:SetShadowOffset(1.25, -1.25)
-if (Locale == "enUS" or Locale == "enGB" or Locale == "deDE" or Locale == "frFR") then
-	TukuiUFFont:SetFont(C["Medias"].AltFont, 12)
-else
-	TukuiUFFont:SetFont(C["Medias"].Font, 12)
-end
+TukuiUFFont:SetFont(C["Medias"].UnitFrameFont, 12)
 
 local TukuiUFFontOutline = CreateFont("TukuiUFFontOutline")
-if (Locale == "enUS" or Locale == "enGB" or Locale == "deDE" or Locale == "frFR") then
-	TukuiUFFontOutline:SetFont(C["Medias"].AltFont, 12, "THINOUTLINE")
-else
-	TukuiUFFontOutline:SetFont(C["Medias"].Font, 12, "THINOUTLINE")
-end
+TukuiUFFontOutline:SetFont(C["Medias"].UnitFrameFont, 12, "THINOUTLINE")
 
 local PixelFont = CreateFont("TukuiPixelFont")
 PixelFont:SetFont(C["Medias"].PixelFont, 12, "MONOCHROMEOUTLINE")

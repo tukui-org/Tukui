@@ -1,16 +1,15 @@
 local T, C = unpack(select(2, ...))
 
+local Locale = GetLocale()
+
 C["Medias"] = {
-	-- Fonts (ENGLISH)
+	-- Fonts
 	["Font"] = [=[Interface\Addons\Tukui\Medias\Fonts\normal_font.ttf]=],
-	["AltFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\uf_font.ttf]],
+	["UnitFrameFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\uf_font.ttf]],
 	["DamageFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\combat_font.ttf]],
 	["PixelFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\pixel_font.ttf]=],
 	["ActionBarFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\actionbar_font.ttf]=],
-	
-	-- FONTS (RUSSIAN)
-	["DamageFontRussian"] = [[Interface\AddOns\Tukui\Medias\Fonts\combat_font_rus.ttf]],
-	
+
 	-- Textures
 	["Normal"] = [[Interface\AddOns\Tukui\Medias\Textures\normTex]],
 	["Glow"] = [[Interface\AddOns\Tukui\Medias\Textures\glowTex]],
@@ -28,3 +27,23 @@ C["Medias"] = {
 	["Whisper"] = [[Interface\AddOns\Tukui\Medias\Sounds\whisper.mp3]],
 	["Warning"] = [[Interface\AddOns\Tukui\Medias\Sounds\warning.mp3]],
 }
+
+if (Locale == "esES" or Locale == "esMX" or Locale == "itIT" or Locale == "ptBR" or Locale == "ruRU") then
+	C["Medias"].UnitFrameFont = C["Medias"].Font
+end
+
+if Locale == "koKR" then
+	C["Medias"].Font = [[Fonts\2002.TTF]]
+	C["Medias"].UnitFrameFont = [[Fonts\2002.TTF]]
+	C["Medias"].DamageFont = [[Fonts\2002.TTF]]
+elseif Locale == "zhTW" then
+	C["Medias"].Font = [[Fonts\bLEI00D.ttf]]
+	C["Medias"].UnitFrameFont = [[Fonts\bLEI00D.ttf]]
+	C["Medias"].DamageFont = [[Fonts\bLEI00D.ttf]]
+elseif Locale == "zhCN" then
+	C["Medias"].Font = [[Fonts\ARKai_T.TTF]]
+	C["Medias"].UnitFrameFont = [[Fonts\ARHei.TTF]]
+	C["Medias"].DamageFont = [[Fonts\ARKai_C.TTF]]
+elseif Locale == "ruRU" then
+	C["Medias"].DamageFont = [[Interface\AddOns\Tukui\Medias\Fonts\combat_font_rus.ttf]]
+end
