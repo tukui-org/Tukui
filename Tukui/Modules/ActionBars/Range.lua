@@ -21,10 +21,13 @@ function TukuiActionBars:RangeUpdate()
 	local Icon = self.icon
 	local NormalTexture = self.NormalTexture
     local ID = self.action
+    local IsUsable, NotEnoughMana, HasRange, InRange
 
-    local IsUsable, NotEnoughMana = IsUsableAction(ID)
-	local HasRange = ActionHasRange(ID)
-	local InRange = IsActionInRange(ID)
+	if ID then
+		IsUsable, NotEnoughMana = IsUsableAction(ID)
+		HasRange = ActionHasRange(ID)
+		InRange = IsActionInRange(ID)
+	end
 
     if IsUsable then -- Usable
         if (HasRange and InRange == false) then -- Out of range
