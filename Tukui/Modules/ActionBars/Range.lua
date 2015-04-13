@@ -12,7 +12,7 @@ function TukuiActionBars:RangeOnUpdate(elapsed)
 		return
 	end
 
-	if ( self.rangeTimer <= 0 ) then
+	if ( self.rangeTimer == TOOLTIP_UPDATE_TIME ) then
 		TukuiActionBars.RangeUpdate(self)
 	end
 end
