@@ -32,18 +32,10 @@ if (Locale == "esES" or Locale == "esMX" or Locale == "itIT" or Locale == "ptBR"
 	C["Medias"].UnitFrameFont = C["Medias"].Font
 end
 
-if Locale == "koKR" then
-	C["Medias"].Font = [[Fonts\2002.TTF]]
-	C["Medias"].UnitFrameFont = [[Fonts\2002.TTF]]
-	C["Medias"].DamageFont = [[Fonts\2002.TTF]]
-elseif Locale == "zhTW" then
-	C["Medias"].Font = [[Fonts\bLEI00D.ttf]]
-	C["Medias"].UnitFrameFont = [[Fonts\bLEI00D.ttf]]
-	C["Medias"].DamageFont = [[Fonts\bLEI00D.ttf]]
-elseif Locale == "zhCN" then
-	C["Medias"].Font = [[Fonts\ARKai_T.TTF]]
-	C["Medias"].UnitFrameFont = [[Fonts\ARHei.TTF]]
-	C["Medias"].DamageFont = [[Fonts\ARKai_C.TTF]]
+if (Locale == "koKR" or Locale == "zhTW" or Locale == "zhCN")then
+	C["Medias"].Font = STANDARD_TEXT_FONT
+	C["Medias"].UnitFrameFont = UNIT_NAME_FONT
+	C["Medias"].DamageFont = DAMAGE_TEXT_FONT
 elseif Locale == "ruRU" then
 	C["Medias"].DamageFont = [[Interface\AddOns\Tukui\Medias\Fonts\combat_font_rus.ttf]]
 end

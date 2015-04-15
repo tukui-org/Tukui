@@ -30,6 +30,13 @@ function GameMenu:AddHooks()
 
 	Menu:HookScript("OnShow", function(self)
 		self:SetHeight(self:GetHeight() + Addons:GetHeight() - 4)
+		local _, relTo, _, _, offY = Logout:GetPoint()
+		if relTo ~= GameMenu.Tukui then
+			GameMenu.Tukui:ClearAllPoints()
+			GameMenu.Tukui:Point("TOPLEFT", relTo, "BOTTOMLEFT", 0, -1)
+			Logout:ClearAllPoints()
+			Logout:Point("TOPLEFT", GameMenu.Tukui, "BOTTOMLEFT", 0, offY)
+		end
 	end)
 end
 
@@ -54,9 +61,6 @@ function GameMenu:EnableTukuiConfig()
 		
 		HideUIPanel(Menu)
 	end)
-	
-	Logout:ClearAllPoints()
-	Logout:Point("TOPLEFT", Tukui, "BOTTOMLEFT", 0, -1)
 	
 	self:AddHooks()
 	self.Tukui = Tukui

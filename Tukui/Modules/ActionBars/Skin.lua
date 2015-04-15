@@ -46,7 +46,12 @@ function TukuiActionBars:SkinButton()
 		local String = GetActionText(Action)
 		
 		if String then
-			local Text = string.sub(String, 1, 5)
+			local Text
+			if string.byte(String, 1) > 223 then
+				Text = string.sub(String, 1, 9)
+			else
+				Text = string.sub(String, 1, 4)
+			end
 			Btname:SetText(Text)
 		end
 	end
