@@ -8,10 +8,12 @@ if (Class ~= "PALADIN") then
 end
 
 TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
-	local HPBar = CreateFrame("Frame", nil, self)
+	local HPBar = CreateFrame("Frame", self:GetName()..'HolyPower', self)
 	local Shadow = self.Shadow
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Holy Power
+	HPBar:SetFrameStrata(self:GetFrameStrata())
 	HPBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	HPBar:Size(250, 8)
 	HPBar:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -19,9 +21,9 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	HPBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
-		HPBar[i] = CreateFrame("StatusBar", nil, HPBar)
+		HPBar[i] = CreateFrame("StatusBar", self:GetName()..'HolyPower'..i, HPBar)
 		HPBar[i]:Height(8)
-		HPBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		HPBar[i]:SetStatusBarTexture(PowerTexture)
 		HPBar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
 		if i == 1 then

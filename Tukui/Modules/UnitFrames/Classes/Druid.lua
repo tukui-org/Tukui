@@ -8,14 +8,16 @@ if (Class ~= "DRUID") then
 end
 
 TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
-	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-	local EclipseBar = CreateFrame("Frame", nil, self)
+	local DruidMana = CreateFrame("StatusBar", self:GetName()..'DruidMana', self.Health)
+	local EclipseBar = CreateFrame("Frame", self:GetName()..'EclipseBar', self)
 	local Font = T.GetFont(C["UnitFrames"].Font)
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Druid Mana
+	DruidMana:SetFrameStrata(self:GetFrameStrata())
 	DruidMana:Size(C.UnitFrames.Portrait and 214 or 250, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
-	DruidMana:SetStatusBarTexture(C.Medias.Normal)
+	DruidMana:SetStatusBarTexture(PowerTexture)
 	DruidMana:SetStatusBarColor(0.30, 0.52, 0.90)
 	DruidMana:SetFrameLevel(self.Health:GetFrameLevel() + 3)
 	DruidMana:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -57,6 +59,7 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 		TotemBar:SetScript("OnHide", TukuiUnitFrames.UpdateDruidClassBars)
 	end
 	
+	EclipseBar:SetFrameStrata(self:GetFrameStrata())
 	EclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	EclipseBar:Size(250, 8)
 	EclipseBar:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -67,16 +70,15 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	EclipseBar.LunarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.LunarBar:SetPoint("LEFT", EclipseBar, "LEFT", 0, 0)
 	EclipseBar.LunarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
-	EclipseBar.LunarBar:SetStatusBarTexture(C.Medias.Normal)
+	EclipseBar.LunarBar:SetStatusBarTexture(PowerTexture)
 	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
 	EclipseBar.LunarBar:SetStatusBarColor(.50, .52, .70)
 	EclipseBar.LunarBar:SetFrameLevel(self.Health:GetFrameLevel())
-	
 
 	EclipseBar.SolarBar = CreateFrame("StatusBar", nil, EclipseBar)
 	EclipseBar.SolarBar:SetPoint("LEFT", EclipseBar.LunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 	EclipseBar.SolarBar:SetSize(EclipseBar:GetWidth(), EclipseBar:GetHeight())
-	EclipseBar.SolarBar:SetStatusBarTexture(C.Medias.Normal)
+	EclipseBar.SolarBar:SetStatusBarTexture(PowerTexture)
 	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
 	EclipseBar.SolarBar:SetFrameLevel(self.Health:GetFrameLevel())
 	

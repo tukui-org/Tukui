@@ -8,10 +8,12 @@ if (Class ~= "WARLOCK") then
 end
 
 TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
-	local Bar = CreateFrame("Frame", nil, self)
+	local Bar = CreateFrame("Frame", self:GetName()..'WarlockSpecBars', self)
 	local Shadow = self.Shadow
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Warlock Class Bar
+	Bar:SetFrameStrata(self:GetFrameStrata())
 	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Bar:SetWidth(250)
 	Bar:SetHeight(8)
@@ -22,7 +24,7 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	for i = 1, 4 do
 		Bar[i] = CreateFrame("StatusBar", nil, Bar)
 		Bar[i]:Height(8)
-		Bar[i]:SetStatusBarTexture(C.Medias.Normal)
+		Bar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
 			Bar[i]:Width((250 / 4) - 2)

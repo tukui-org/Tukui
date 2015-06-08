@@ -8,10 +8,12 @@ if (Class ~= "DEATHKNIGHT") then
 end
 
 TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
-	local RunesBar = CreateFrame("Frame", nil, self)
+	local RunesBar = CreateFrame("Frame", self:GetName()..'RuneBar', self)
 	local Shadow = self.Shadow
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Runes
+	RunesBar:SetFrameStrata(self:GetFrameStrata())
     RunesBar:SetFrameLevel(0)
 	RunesBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	RunesBar:Size(250, 8)
@@ -20,9 +22,9 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	RunesBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 6 do
-		RunesBar[i] = CreateFrame("StatusBar", nil, RunesBar)
+		RunesBar[i] = CreateFrame("StatusBar", self:GetName()..'Rune'..i, RunesBar)
 		RunesBar[i]:Height(8)
-		RunesBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		RunesBar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
 			RunesBar[i]:Width(40)

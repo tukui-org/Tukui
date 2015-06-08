@@ -10,10 +10,12 @@ if (Class ~= "PRIEST") then
 end
 
 TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
-	local SOBar = CreateFrame("Frame", nil, self)
+	local SOBar = CreateFrame("Frame", self:GetName()..'ShadowOrbsBar', self)
 	local Shadow = self.Shadow
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Shadow Orbs Bar
+	SOBar:SetFrameStrata(self:GetFrameStrata())
 	SOBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	SOBar:Size(250, 8)
 	SOBar:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -21,9 +23,9 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 	SOBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
-		SOBar[i] = CreateFrame("StatusBar", nil, SOBar)
+		SOBar[i] = CreateFrame("StatusBar", self:GetName()..'ShadowOrbs'..i, SOBar)
 		SOBar[i]:Height(8)
-		SOBar[i]:SetStatusBarTexture(C.Medias.Normal)
+		SOBar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
 			SOBar[i]:Width((250 / 5))
@@ -48,9 +50,9 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 
 	if (C.UnitFrames.WeakBar) then
 		-- Weakened Soul Bar
-		local WSBar = CreateFrame("StatusBar", nil, self.Power)
+		local WSBar = CreateFrame("StatusBar", self:GetName()..'WeakenedSoul', self.Power)
 		WSBar:SetAllPoints(self.Power)
-		WSBar:SetStatusBarTexture(C.Medias.Normal)
+		WSBar:SetStatusBarTexture(PowerTexture)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
 		WSBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 		WSBar:SetBackdropColor(unpack(C["General"].BackdropColor))
@@ -77,7 +79,7 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 	end
 	
 	if (C.UnitFrames.SerendipityBar) then
-		local SerendipityBar = CreateFrame("Frame", nil, self)
+		local SerendipityBar = CreateFrame("Frame", self:GetName()..'SerendipityBar', self)
 		SerendipityBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		SerendipityBar:Width(250)
 		SerendipityBar:Height(8)
@@ -85,9 +87,9 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 		SerendipityBar:SetBackdropColor(0, 0, 0)
 
 		for i = 1, 2 do
-			SerendipityBar[i] = CreateFrame("StatusBar", nil, SerendipityBar)
+			SerendipityBar[i] = CreateFrame("StatusBar", self:GetName()..'Serendipity'..i, SerendipityBar)
 			SerendipityBar[i]:Height(8)
-			SerendipityBar[i]:SetStatusBarTexture(C.Medias.Normal)
+			SerendipityBar[i]:SetStatusBarTexture(PowerTexture)
 			SerendipityBar[i]:Point("LEFT", (i == 1 and SerendipityBar) or (SerendipityBar[i-1]), (i == 1 and "LEFT") or ("RIGHT"), (i == 1 and 0) or 1, 0)
 			SerendipityBar[i]:Width((i == 1 and 250 / 2) or (250 / 2 - 1))			
 		end

@@ -9,7 +9,10 @@ end
 
 TukuiUnitFrames.AddClassFeatures["ROGUE"] = function(self)
 	if (C.UnitFrames.AnticipationBar) then
-		local AnticipationBar = CreateFrame("Frame", nil, self)
+		local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+
+		local AnticipationBar = CreateFrame("Frame", self:GetName()..'AnticipationBar', self)
+		AnticipationBar:SetFrameStrata(self:GetFrameStrata())
 		AnticipationBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		AnticipationBar:Width(250)
 		AnticipationBar:Height(8)
@@ -18,9 +21,9 @@ TukuiUnitFrames.AddClassFeatures["ROGUE"] = function(self)
 		AnticipationBar:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
 		for i = 1, 5 do
-			AnticipationBar[i] = CreateFrame("StatusBar", nil, AnticipationBar)
+			AnticipationBar[i] = CreateFrame("StatusBar", self:GetName()..'Anticipation'..i, AnticipationBar)
 			AnticipationBar[i]:Height(8)
-			AnticipationBar[i]:SetStatusBarTexture(C.Medias.Normal)
+			AnticipationBar[i]:SetStatusBarTexture(PowerTexture)
 	
 			if i == 1 then
 				AnticipationBar[i]:Point("LEFT", AnticipationBar, "LEFT", 0, 0)

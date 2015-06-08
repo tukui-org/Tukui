@@ -19,6 +19,7 @@ function TukuiUnitFrames:Player()
 	self:CreateShadow()
 	
 	local Panel = CreateFrame("Frame", nil, self)
+	Panel:SetFrameStrata(self:GetFrameStrata())
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
@@ -27,6 +28,7 @@ function TukuiUnitFrames:Player()
 	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
+	Health:SetFrameStrata(self:GetFrameStrata())
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
@@ -61,6 +63,7 @@ function TukuiUnitFrames:Player()
 	end
 	
 	local Power = CreateFrame("StatusBar", nil, self)
+	Power:SetFrameStrata(self:GetFrameStrata())
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
@@ -93,7 +96,7 @@ function TukuiUnitFrames:Player()
 	
 	if C.UnitFrames.Portrait then
 		local Portrait = CreateFrame("PlayerModel", nil, Health)
-		
+		Portrait:SetFrameStrata(self:GetFrameStrata())
 		Portrait:Size(Health:GetHeight() + Power:GetHeight() + 1)
 		Portrait:SetPoint("TOPLEFT", self, "TOPLEFT", 0 ,0)
 		Portrait:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -110,27 +113,28 @@ function TukuiUnitFrames:Player()
 		self.Portrait = Portrait
 	end
 	
-	local Combat = Health:CreateTexture(nil, "OVERLAY")
+	local Combat = Health:CreateTexture(nil, "OVERLAY", 1)
 	Combat:Size(19, 19)
-	Combat:Point("LEFT",0,1)
+	Combat:Point("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 	
-	local Status = Panel:CreateFontString(nil, "OVERLAY")
+	local Status = Panel:CreateFontString(nil, "OVERLAY", 1)
 	Status:SetFontObject(Font)
 	Status:Point("CENTER", Panel, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
 
-	local Leader = Health:CreateTexture(nil, "OVERLAY")
+	local Leader = Health:CreateTexture(nil, "OVERLAY", 2)
 	Leader:Size(14, 14)
 	Leader:Point("TOPLEFT", 2, 8)
 
-	local MasterLooter = Health:CreateTexture(nil, "OVERLAY")
+	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", 2)
 	MasterLooter:Size(14, 14)
 	MasterLooter:Point("TOPRIGHT", -2, 8)
 
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiPlayerCastBar", self)
+		CastBar:SetFrameStrata(self:GetFrameStrata())
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
 		CastBar:SetInside(Panel)
@@ -205,7 +209,7 @@ function TukuiUnitFrames:Player()
 	end
 
 	if (C.UnitFrames.CombatLog) then
-		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
+		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY", 7)
 		CombatFeedbackText:SetFontObject(Font)
 		CombatFeedbackText:SetFont(CombatFeedbackText:GetFont(), 16, "THINOUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, 1)
@@ -231,25 +235,28 @@ function TukuiUnitFrames:Player()
 
 	if (C.UnitFrames.HealBar) then
 		local FirstBar = CreateFrame("StatusBar", nil, Health)
+		FirstBar:SetFrameStrata(self:GetFrameStrata())
 		FirstBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		FirstBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		FirstBar:SetWidth(250)
-		FirstBar:SetStatusBarTexture(C.Medias.Normal)
+		FirstBar:SetStatusBarTexture(HealthTexture)
 		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
 		FirstBar:SetMinMaxValues(0,1)
 
 		local SecondBar = CreateFrame("StatusBar", nil, Health)
+		SecondBar:SetFrameStrata(self:GetFrameStrata())
 		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		SecondBar:SetWidth(250)
-		SecondBar:SetStatusBarTexture(C.Medias.Normal)
+		SecondBar:SetStatusBarTexture(HealthTexture)
 		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
 
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
+		ThirdBar:SetFrameStrata(self:GetFrameStrata())
 		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		ThirdBar:SetWidth(250)
-		ThirdBar:SetStatusBarTexture(C.Medias.Normal)
+		ThirdBar:SetStatusBarTexture(HealthTexture)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
 		
 		ThirdBar:SetFrameLevel(Health:GetFrameLevel() - 2)
@@ -267,6 +274,7 @@ function TukuiUnitFrames:Player()
 	if (C.UnitFrames.TotemBar) then
 		-- Default layout of Totems match Shaman class.
 		local Bar = CreateFrame("Frame", nil, self)
+		Bar:SetFrameStrata(self:GetFrameStrata())
 		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		Bar:Size(250, 8)
 		Bar:Hide()
@@ -315,7 +323,7 @@ function TukuiUnitFrames:Player()
 		self.Totems = Bar
 	end
 	
-	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
+	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", 7)
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
 	

@@ -8,10 +8,12 @@ if (Class ~= "MONK") then
 end
 
 TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
-	local Harmony = CreateFrame("Frame", nil, self)
+	local Harmony = CreateFrame("Frame", self:GetName()..'Harmony', self)
 	local Shadow = self.Shadow
+	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Harmony Bar
+	Harmony:SetFrameStrata(self:GetFrameStrata())
 	Harmony:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Harmony:Size(250, 8)
 	Harmony:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -19,9 +21,9 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 	Harmony:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 6 do
-		Harmony[i] = CreateFrame("StatusBar", nil, Harmony)
+		Harmony[i] = CreateFrame("StatusBar", self:GetName()..'Harmony'..i, Harmony)
 		Harmony[i]:Height(8)
-		Harmony[i]:SetStatusBarTexture(C.Medias.Normal)
+		Harmony[i]:SetStatusBarTexture(PowerTexture)
 	end
 
 	-- Shadow Effect Updates

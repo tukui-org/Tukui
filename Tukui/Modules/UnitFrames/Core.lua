@@ -28,6 +28,8 @@ TukuiUnitFrames.HighlightBorder = {
 	insets = {top = -2, left = -2, bottom = -2, right = -2}
 }
 
+TukuiUnitFrames.AddClassFeatures = {}
+
 TukuiUnitFrames.RaidBuffsTrackingPosition = {
 	TOPLEFT = {6, 1},
 	TOPRIGHT = {-6, 1},
