@@ -132,21 +132,21 @@ function TukuiUnitFrames:Raid()
 		local FirstBar = CreateFrame("StatusBar", nil, Health)
 		local SecondBar = CreateFrame("StatusBar", nil, Health)
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
-		
+
 		FirstBar:Width(66)
 		FirstBar:Height(28)
-		FirstBar:SetStatusBarTexture(C.Medias.Normal)
+		FirstBar:SetStatusBarTexture(HealthTexture)
 		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
 		FirstBar:SetMinMaxValues(0,1)
-		
+
 		SecondBar:Width(66)
 		SecondBar:Height(28)
-		SecondBar:SetStatusBarTexture(C.Medias.Normal)
+		SecondBar:SetStatusBarTexture(HealthTexture)
 		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
-			
+
 		ThirdBar:Width(66)
 		ThirdBar:Height(28)
-		ThirdBar:SetStatusBarTexture(C.Medias.Normal)
+		ThirdBar:SetStatusBarTexture(HealthTexture)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
 		
 		if C.Raid.VerticalHealth then
@@ -163,7 +163,7 @@ function TukuiUnitFrames:Raid()
 			ThirdBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT", 0, 0)			
 		end
 		
-		ThirdBar:SetFrameLevel(Health:GetFrameLevel() - 2)
+		ThirdBar:SetFrameLevel(Health:GetFrameLevel())
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 		
