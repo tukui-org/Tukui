@@ -13,6 +13,7 @@ TukuiUnitFrames.AddClassFeatures["ROGUE"] = function(self)
 
 		local AnticipationBar = CreateFrame("Frame", self:GetName()..'AnticipationBar', self)
 		AnticipationBar:SetFrameStrata(self:GetFrameStrata())
+		AnticipationBar:SetFrameLevel(self:GetFrameLevel())
 		AnticipationBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		AnticipationBar:Width(250)
 		AnticipationBar:Height(8)

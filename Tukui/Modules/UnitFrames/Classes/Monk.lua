@@ -14,6 +14,7 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 
 	-- Harmony Bar
 	Harmony:SetFrameStrata(self:GetFrameStrata())
+	Harmony:SetFrameLevel(self:GetFrameLevel())
 	Harmony:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Harmony:Size(250, 8)
 	Harmony:SetBackdrop(TukuiUnitFrames.Backdrop)

@@ -16,6 +16,7 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 
 	-- Shadow Orbs Bar
 	SOBar:SetFrameStrata(self:GetFrameStrata())
+	SOBar:SetFrameLevel(self:GetFrameLevel())
 	SOBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	SOBar:Size(250, 8)
 	SOBar:SetBackdrop(TukuiUnitFrames.Backdrop)

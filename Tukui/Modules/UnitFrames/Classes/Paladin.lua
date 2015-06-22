@@ -14,6 +14,7 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 
 	-- Holy Power
 	HPBar:SetFrameStrata(self:GetFrameStrata())
+	HPBar:SetFrameLevel(self:GetFrameLevel())
 	HPBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	HPBar:Size(250, 8)
 	HPBar:SetBackdrop(TukuiUnitFrames.Backdrop)

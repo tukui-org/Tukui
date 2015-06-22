@@ -15,6 +15,7 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 
 	-- Druid Mana
 	DruidMana:SetFrameStrata(self:GetFrameStrata())
+	DruidMana:SetFrameLevel(self:GetFrameLevel())
 	DruidMana:Size(C.UnitFrames.Portrait and 214 or 250, 8)
 	DruidMana:Point("BOTTOMLEFT", self.Health, "BOTTOMLEFT", 0, 0)
 	DruidMana:SetStatusBarTexture(PowerTexture)

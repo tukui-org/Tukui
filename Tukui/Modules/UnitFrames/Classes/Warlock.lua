@@ -14,6 +14,7 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 
 	-- Warlock Class Bar
 	Bar:SetFrameStrata(self:GetFrameStrata())
+	Bar:SetFrameLevel(self:GetFrameLevel())
 	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 	Bar:SetWidth(250)
 	Bar:SetHeight(8)
