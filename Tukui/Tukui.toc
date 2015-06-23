@@ -1,6 +1,7 @@
-## Interface: 60100
-## Author: Tukz & Hydra
-## Version: 16.22
+## Interface: 60200
+## Authors: Tukz & Hydra
+## Maintainer: Tukz & Azilroka
+## Version: 16.30
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
