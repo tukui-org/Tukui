@@ -8,9 +8,9 @@ function AltPowerBar:Update()
 	local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
 	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 	local R, G, B = T.ColorGradient(Power, MaxPower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
-	local PowerName = select(10, UnitAlternatePowerInfo("player")) or UNKNOWN
+	local PowerName = select(11 , UnitAlternatePowerInfo("player")) or UNKNOWN
 	
-	Status:SetMinMaxValues(0, UnitPowerMax("player", ALTERNATE_POWER_INDEX))
+	Status:SetMinMaxValues(0, MaxPower)
 	Status:SetValue(Power)
 	Status:SetStatusBarColor(R, G, B)
 	Status.Text:SetText(PowerName..": "..Power.." / "..MaxPower)
