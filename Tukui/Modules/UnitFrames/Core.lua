@@ -257,10 +257,10 @@ function TukuiUnitFrames:UpdateNamePosition()
 end
 
 function TukuiUnitFrames:UpdateThreat(event, unit)
-	if (not unit) or (not C.UnitFrames.Threat) then
+	if (not C.UnitFrames.Threat) or (unit ~= self.unit) then
 		return
 	end
-	
+
 	local Panel = self.Panel
 	
 	if Panel then
