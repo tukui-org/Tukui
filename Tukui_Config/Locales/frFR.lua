@@ -380,6 +380,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Show Health Text",
 			["Desc"] = "Add a text in the nameplate which show current health",
 		},
+		
+		["NameTextColor"] = {
+			["Name"] = "Color Name Text",
+			["Desc"] = "Colors Name Text instead of Statusbars for Party/Raid Members.",
+		},
 	},
 	
 	["Party"] = {

@@ -2,75 +2,51 @@ local T, C, L = select(2, ...):unpack()
 
 local _G = _G
 local unpack = unpack
-local find, match = find, match
+local match, gsub = match, gsub
 local WorldFrame = WorldFrame
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
+local FACTION_BAR_COLORS = FACTION_BAR_COLORS
+
 local Hider
 local Convert = T.RGBToHex
 local Scale = T.Scale
-local FrameNumber = 0
 local NameplateParent = WorldFrame
+local NamePlateIndex
+
+local IsInGroup = IsInGroup
 
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 
-function Plates:RoundColors(r, g, b)
-	return floor(r*100+.5)/100, floor(g*100+.5)/100, floor(b*100+.5)/100
-end
-
 function Plates:GetColor()
 	local Colors = T["Colors"]
-	local Red, Green, Blue = Plates:RoundColors(self.Health:GetStatusBarColor())
-	
+
+	local Red, Green, Blue = self.Health:GetStatusBarColor()
+
 	for Class, _ in pairs(RAID_CLASS_COLORS) do
 		local AltBlue = Blue
-		
+
 		if Class == "MONK" then
 			AltBlue = AltBlue - 0.01
 		end
 
 		if RAID_CLASS_COLORS[Class].r == Red and RAID_CLASS_COLORS[Class].g == Green and RAID_CLASS_COLORS[Class].b == AltBlue then
 			Red, Green, Blue = unpack(Colors.class[Class])
-			
-			self.IsClass = true
-			self.IsFriend = false
-			self.Class = Class
-			
 			return Red, Green, Blue
 		end
 	end
-	
-	if (Red + Blue + Blue) == 1.59 then
-		-- Tapped
+
+	if (Red + Blue + Blue) == 1.59 then			-- Tapped
 		Red, Green, Blue = unpack(Colors.tapped)
-		
-		self.IsFriend = false
-	elseif Green + Blue <= 0 then
-		-- Hostile
+	elseif Green + Blue == 0 then				-- Hostile
 		Red, Green, Blue = unpack(Colors.reaction[2])
-		
-		self.IsFriend = false
-	elseif Red + Blue <= 0 then
-		-- Friendly NPC
+	elseif Red + Blue == 0 then					-- Friendly NPC
 		Red, Green, Blue = unpack(Colors.reaction[5])
-		
-		self.IsFriend  = true
-	elseif Red + Green + Blue >= 1.95 then
-		-- Neutral NPC
+	elseif Red + Green > 1.95 then				-- Neutral NPC
 		Red, Green, Blue = unpack(Colors.reaction[4])
-		
-		self.IsFriend  = false
-	elseif Red + Green <= 0 then
-		-- Friendly Player
+	elseif Red + Green == 0 then				-- Friendly Player
 		Red, Green, Blue = unpack(Colors.reaction[5])
-		
-		self.IsFriend  = true
-	else
-		self.IsFriend = false
 	end
-	
-	self.IsClass = false
-	self.Class = nil
-	
+
 	return Red, Green, Blue
 end
 
@@ -79,27 +55,21 @@ function Plates:UpdateCastBar()
 	local Minimum, Maximum = self:GetMinMaxValues()
 	local Current = self:GetValue()
 	local Shield = self.Shield
-	
+
 	if Shield:IsShown() then
-		self.NewCast:SetStatusBarColor(222/255, 95/255,  95/255)
+		self.NewCast:SetStatusBarColor(222/255, 95/255, 95/255)
 		self.NewCast.Background:SetTexture((222/255) * .15, (95/255) * .15, (95/255) * .15)
 	else
 		self.NewCast:SetStatusBarColor(Red, Blue, Green)
 		self.NewCast.Background:SetTexture(Red * .15, Blue * .15, Green * .15)	
 	end
-	
+
 	self.NewCast:SetMinMaxValues(Minimum, Maximum)
 	self.NewCast:SetValue(Current)
 end
 
 function Plates:CastOnShow()
 	self.NewCast:Show()
-	self:SetScript("OnUpdate", Plates.UpdateCastBar)
-end
-
-function Plates:CastOnHide()
-	self:SetScript("OnUpdate", nil)
-	self.NewCast:Hide()
 end
 
 function Plates:CastOnHide()
@@ -110,49 +80,56 @@ function Plates:OnShow()
 	if not self:IsShown() then
 		return
 	end
-	
-	local Colors = T["Colors"]
+
 	local Name = self.Name:GetText() or "Unknown"
 	local Level = self.Level:GetText() or ""
-	local Red, Green, Blue = Plates.GetColor(self)
 	local LevelRed, LevelGreen, LevelBlue = self.Level:GetTextColor()
 	local Hex = Convert(LevelRed, LevelGreen, LevelBlue)
 	local Boss, Dragon = self.Boss, self.Dragon
-	local Threat = self.Threat
-	local IsInGroup = select(2, UnitClass(Name))
-	
-	if IsInGroup then
-		-- Party/Raid members name will be class colored
-		local Class = IsInGroup
-		local R, G, B = unpack(Colors.class[Class])
-		local Color = Convert(R, G, B)
-		
-		Name = Color .. Name .. "|r"
-	end
-	
-	self.Health:ClearAllPoints()
-	self.Health:SetPoint("TOP", self.NewPlate)
-	self.Health:SetPoint("LEFT", self.NewPlate)
-	self.Health:SetPoint("RIGHT", self.NewPlate)
-	self.Health:SetHeight(Plates.PlateHeight)
-	self.Health.NewTexture:SetVertexColor(Red, Green, Blue)
-	self.Health.Background:SetTexture(Red * .15, Green * .15, Blue * .15)
-	
+
 	if Boss:IsShown() then
 		Level = "??"
 	elseif Dragon:IsShown() then
 		Level = Level .. "+"
 	end
-	
+
 	self.NewName:SetText(Hex .. Level .. "|r " .. Name)
-	self.NewLevel = Hex .. Level .. "|r"
+end
+
+function Plates:UpdateHealth()
+	self.NewHealth:SetMinMaxValues(self:GetMinMaxValues())
+	self.NewHealth:SetValue(self:GetValue())
+end
+
+function Plates:UpdateHealthColor()
+	if not self:IsShown() then
+		return
+	end
+
+	local Red, Green, Blue = Plates.GetColor(self)
+
+	if IsInGroup() then
+		local Name = self.Name:GetText() or "Unknown"
+		Name = gsub(Name, ' %(.%)$', '')			-- X-Realm Fix
+		local Class = select(2, UnitClass(Name))
+		if Class then
+			if C.NamePlates.NameTextColor then
+				self.NewName:SetTextColor(unpack(T["Colors"].class[Class]))
+			else
+				Red, Green, Blue = unpack(T["Colors"].class[Class])
+			end
+		end
+	end
+
+	self.NewPlate.Health:SetStatusBarColor(Red, Green, Blue)
+	self.NewPlate.Health.Background:SetTexture(Red * .15, Green * .15, Blue * .15)
 end
 
 function Plates:UpdateHealthText()
 	local MinHP, MaxHP = self.Health:GetMinMaxValues()
 	local CurrentHP = self.Health:GetValue()
 
-	self.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
+	self.NewPlate.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
 end
 
 function Plates:Skin(obj)
@@ -165,48 +142,31 @@ function Plates:Skin(obj)
 	if (Font == "TukuiPixelFont") then
 		IsPixel = true
 	end
-	
+
 	Plate.Bar, Plate.Frame = Plate:GetChildren()
-	
 	Plate.Health, Plate.Cast = Plate.Bar:GetChildren()
 	Plate.Threat, Plate.Border, Plate.Highlight, Plate.Level, Plate.Boss, Plate.Raid, Plate.Dragon = Plate.Bar:GetRegions()
 	Plate.Name = Plate.Frame:GetRegions()
 	Plate.Health.Texture = Plate.Health:GetRegions()
 	Plate.Cast.Texture, Plate.Cast.Border, Plate.Cast.Shield, Plate.Cast.Icon, Plate.Cast.Name, Plate.Cast.NameShadow = Plate.Cast:GetRegions()
 	Plate.Cast.Icon.Layer, Plate.Cast.Icon.Level = Plate.Cast.Icon:GetDrawLayer()
-	
-	-- Create the Name Plate ...
+
 	self.Container[Plate] = CreateFrame("Frame", nil, self)
-	
+
 	local NewPlate = self.Container[Plate]
 	NewPlate:Size(self.PlateWidth, self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
 	NewPlate:SetFrameStrata("BACKGROUND")
 	NewPlate:SetFrameLevel(2)
-	
+
 	-- Reference
 	NewPlate.BlizzardPlate = Plate
 	Plate.NewPlate = NewPlate
-	
+
 	Plate.Frame:SetParent(Hider)
-	
-	-- Original Health
-	Plate.Health:SetParent(NewPlate)
-	Plate.Health.Texture = Plate.Health:GetStatusBarTexture()
-	Plate.Health.Texture:SetTexture(nil)
-	--Plate.Health:SetScript("OnChangedValue", Plates.UpdateHealthText)
-	
-	-- New Health
-	Plate.Health.NewTexture = Plate.Health:CreateTexture(nil, "ARTWORK", nil, -6)
-	Plate.Health.NewTexture:SetAllPoints(Plate.Health.Texture)
-	Plate.Health.NewTexture:SetTexture(Texture)
-	Plate.Health.NewTexture:SetVertexColor(0, 1, 0)
-	
-	-- Health Backdrop
-	Plate.Health.Background = Plate.Health:CreateTexture(nil, "BACKGROUND")
-	Plate.Health.Background:SetAllPoints()
-	Plate.Health:CreateShadow()
-	
-	-- Textures
+	Plate.Level:SetParent(Hider)
+	Plate.Health:SetParent(Hider)
+	Plate.Cast:SetAlpha(0)
+
 	Plate.Border:SetAlpha(0)
 	Plate.Border:SetTexture(nil)
 	Plate.Highlight:SetAlpha(0)
@@ -217,121 +177,112 @@ function Plates:Skin(obj)
 	Plate.Dragon:SetTexture(nil)
 	Plate.Threat:SetAlpha(0)
 	Plate.Threat:SetTexture(nil)
-	
+
+	NewPlate.Health = CreateFrame("StatusBar", nil, NewPlate)
+	NewPlate.Health:Size(self.PlateWidth, self.PlateHeight)
+	NewPlate.Health:SetStatusBarTexture(Texture)
+	NewPlate.Health:SetPoint("CENTER", 0, 4)
+	NewPlate.Health:CreateShadow()
+
+	NewPlate.Health.Background = NewPlate.Health:CreateTexture(nil, "BACKGROUND", nil, -8)
+	NewPlate.Health.Background:SetTexture(Texture)
+	NewPlate.Health.Background:SetAllPoints()
+
 	-- Casting
-	Plate.Cast:SetAlpha(0)
-	Plate.Cast:SetFrameLevel(1)
-	
-	Plate.NewCast = CreateFrame("StatusBar", nil, Plate.Health)
-	Plate.NewCast:SetStatusBarTexture(C.Medias.Normal)
-	Plate.NewCast:SetMinMaxValues(0, 100)
-	Plate.NewCast:SetHeight(Plates.PlateCastHeight)
-	Plate.NewCast:SetWidth(C.NamePlates.Width)
-	Plate.NewCast:SetPoint("TOP", Plate.Health, "BOTTOM", 0, -4)
-	Plate.NewCast:SetValue(100)
-	Plate.NewCast.Background = Plate.NewCast:CreateTexture(nil, "BACKGROUND")
-	Plate.NewCast.Background:SetAllPoints()
-	Plate.NewCast:CreateShadow()
-	Plate.NewCast:Hide()
-	
+
+	NewPlate.Cast = CreateFrame("StatusBar", nil, NewPlate.Health)
+	NewPlate.Cast:SetStatusBarTexture(Texture)
+	NewPlate.Cast:SetMinMaxValues(0, 100)
+	NewPlate.Cast:SetHeight(Plates.PlateCastHeight)
+	NewPlate.Cast:SetWidth(C.NamePlates.Width)
+	NewPlate.Cast:SetPoint("TOP", NewPlate.Health, "BOTTOM", 0, -4)
+	NewPlate.Cast:SetValue(100)
+	NewPlate.Cast.Background = NewPlate.Cast:CreateTexture(nil, "BACKGROUND")
+	NewPlate.Cast.Background:SetAllPoints()
+	NewPlate.Cast:CreateShadow()
+	NewPlate.Cast:Hide()
+
 	Plate.Cast.Icon:SetTexCoord(unpack(T.IconCoord))
 	Plate.Cast.Icon:Size(self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
+	Plate.Cast.Icon:SetParent(NewPlate.Cast)
+	Plate.Cast.Icon:ClearAllPoints()
+	Plate.Cast.Icon:SetPoint("TOPRIGHT", NewPlate.Health, "TOPLEFT", -4, 0)
 
-	Plate.Cast.Icon.Backdrop = CreateFrame("Frame", nil, Plate.NewCast)
-	Plate.Cast.Icon.Backdrop:SetFrameLevel(Plate.Cast:GetFrameLevel() - 1)
+	Plate.Cast.Icon.Backdrop = CreateFrame("Frame", nil, NewPlate.Cast)
+	Plate.Cast.Icon.Backdrop:SetFrameLevel(NewPlate.Cast:GetFrameLevel() - 1)
 	Plate.Cast.Icon.Backdrop:SetAllPoints(Plate.Cast.Icon)
 	Plate.Cast.Icon.Backdrop:CreateShadow()
-	
-	Plate.Cast.Icon:SetParent(Plate.NewCast)
-	Plate.Cast.Icon:ClearAllPoints()
-	Plate.Cast.Icon:SetPoint("TOPRIGHT", Plate.Health, "TOPLEFT", -4, 0)
-	
-	Plate.Cast.Name:SetParent(Plate.NewCast)
+
+	Plate.Cast.Name:SetParent(NewPlate.Cast)
 	Plate.Cast.Name:ClearAllPoints()
-	Plate.Cast.Name:Point("BOTTOM", Plate.NewCast, 0, -9)
-	Plate.Cast.Name:Point("LEFT", Plate.NewCast, 7, 0)
-	Plate.Cast.Name:Point("RIGHT", Plate.NewCast, -7, 0)
+	Plate.Cast.Name:Point("BOTTOM", NewPlate.Cast, 0, -9)
+	Plate.Cast.Name:Point("LEFT", NewPlate.Cast, 7, 0)
+	Plate.Cast.Name:Point("RIGHT", NewPlate.Cast, -7, 0)
 	Plate.Cast.Name:SetFont(FontName, FontSize - (IsPixel and 2 or 4), FontFlags)
 	Plate.Cast.Name:SetShadowColor(0, 0, 0, 0)
-	
-	Plate.Cast.NameShadow:SetParent(Plate.NewCast)
+
+	Plate.Cast.NameShadow:SetParent(NewPlate.Cast)
 	Plate.Cast.NameShadow:ClearAllPoints()
 	Plate.Cast.NameShadow:SetPoint("CENTER", Plate.Cast.Name, "CENTER", 0, -2)
 	Plate.Cast.Shield:SetTexture(nil)
-	
-	-- Level
-	Plate.Level:SetParent(Hider)
-	Plate.Level:Hide()
-	
+
 	-- Name
 	Plate.NewName = NewPlate:CreateFontString(nil, "OVERLAY")
 	Plate.NewName:SetPoint("BOTTOM", NewPlate, "TOP", 0, 2)
 	Plate.NewName:SetPoint("LEFT", NewPlate, -2, 0)
 	Plate.NewName:SetPoint("RIGHT", NewPlate, 2, 0)
 	Plate.NewName:SetFont(FontName, FontSize - 2, FontFlags)
-	
-	-- Health Text
+
 	if C.NamePlates.HealthText then
-		Plate.Health.Text = Plate.Health:CreateFontString(nil, "OVERLAY")	
-		Plate.Health.Text:SetFont(FontName, FontSize - 3, FontFlags)
-		Plate.Health.Text:SetShadowColor(0, 0, 0, 0.4)
-		Plate.Health.Text:SetPoint("CENTER", Plate.Health)
-		Plate.Health.Text:SetTextColor(1,1,1)
-		--Plate.Health.Text:SetShadowOffset(T.Mult, -T.Mult)
+		NewPlate.Health.Text = NewPlate.Health:CreateFontString(nil, "OVERLAY")	
+		NewPlate.Health.Text:SetFont(FontName, FontSize - 3, FontFlags)
+		NewPlate.Health.Text:SetShadowColor(0, 0, 0, 0.4)
+		NewPlate.Health.Text:SetPoint("CENTER", NewPlate.Health)
+		NewPlate.Health.Text:SetTextColor(1, 1, 1)
 	end
-	
-	Plate.Cast.NewCast = Plate.NewCast
-	
+
+	Plate.Cast.NewCast = NewPlate.Cast
+	Plate.Health.NewHealth = NewPlate.Health
+
 	-- OnShow Execution
-	Plate:HookScript("OnUpdate", self.OnShow)
+	self.OnShow(Plate)
+	Plate:HookScript("OnShow", self.OnShow)
+	Plate.Health:HookScript('OnValueChanged', self.UpdateHealth)
 	Plate.Cast:HookScript("OnShow", self.CastOnShow)
 	Plate.Cast:HookScript("OnHide", self.CastOnHide)
-	self.OnShow(Plate)
-	
+	Plate.Cast:HookScript("OnValueChanged", self.UpdateCastBar)
+
 	-- Tell Tukui that X nameplate is Skinned
 	Plate.IsSkinned = true
-end
-
-function Plates:IsNamePlate(obj)
-	local Object = obj
-	local Name = Object:GetName()
-	
-	if (Name and Name:match("NamePlate")) then
-		return true
-	else
-		return false
-	end
+	NamePlateIndex = NamePlateIndex + 1
 end
 
 function Plates:Search()
-	local CurrentFrameNumber = WorldFrame:GetNumChildren()
-	
-	if (FrameNumber == CurrentFrameNumber) then
-		return
-	end
-	
-	for _, Object in pairs({WorldFrame:GetChildren()}) do
-		local IsPlate = self.IsNamePlate(self, Object)
-		
-		if (not Object.IsSkinned and IsPlate) then
-			self:Skin(Object)
+	if not NamePlateIndex then
+		for _, BlizzardPlate in next, {WorldFrame:GetChildren()} do
+			local Name = BlizzardPlate:GetName()
+			if Name and match(Name, "^NamePlate%d+$") then
+				NamePlateIndex = gsub(Name,"NamePlate","")
+				break
+			end
+		end
+	else
+		local BlizzardPlate = _G["NamePlate"..NamePlateIndex]
+		if BlizzardPlate and not BlizzardPlate.IsSkinned then
+			self:Skin(BlizzardPlate)
 		end
 	end
-	
-	FrameNumber = CurrentFrameNumber
 end
 
 function Plates:UpdateAggro()
 	if (self.Threat:IsShown()) then
 		if (not self.IsAggroColored) then
 			self.NewName:SetTextColor(1, 0, 0)
-		
 			self.IsAggroColored = true
 		end
 	else
 		if (self.IsAggroColored) then
 			self.NewName:SetTextColor(1, 1, 1)
-			
 			self.IsAggroColored = false
 		end
 	end
@@ -340,17 +291,18 @@ end
 function Plates:Update()
 	for Plate, NewPlate in pairs(self.Container) do
 		if Plate:IsShown() then
+			NewPlate:Hide()
 			NewPlate:SetPoint("CENTER", NameplateParent, "BOTTOMLEFT", Plate:GetCenter())
 			NewPlate:Show()
-			
+
 			if Plate:GetAlpha() == 1 then
 				NewPlate:SetAlpha(1)
 			else
 				NewPlate:SetAlpha(C.NamePlates.NonTargetAlpha)
 			end
-			
+
 			self.UpdateAggro(Plate)
-			
+			self.UpdateHealthColor(Plate)
 			if C.NamePlates.HealthText then
 				self.UpdateHealthText(Plate)
 			end
@@ -369,18 +321,16 @@ function Plates:Enable()
 	if (not C.NamePlates.Enable) then
 		return
 	end
-	
-	CT_Viewport = IsAddOnLoaded("CT_Viewport")
-	
-	if CT_Viewport then
+
+	if IsAddOnLoaded("CT_Viewport") then
 		NameplateParent = UIParent
 	end
 
 	Hider = T["Panels"].Hider
-	
+
 	SetCVar("bloatnameplates", 0)
 	SetCVar("bloatthreat", 0)
-	
+
 	self:SetAllPoints()
 	self.Container = {}
 	self:SetScript("OnUpdate", self.OnUpdate)
