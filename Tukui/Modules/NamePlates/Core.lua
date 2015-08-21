@@ -2,7 +2,7 @@ local T, C, L = select(2, ...):unpack()
 
 local _G = _G
 local unpack = unpack
-local match, gsub = match, gsub
+local string = string
 local WorldFrame = WorldFrame
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 local FACTION_BAR_COLORS = FACTION_BAR_COLORS
@@ -110,7 +110,7 @@ function Plates:UpdateHealthColor()
 
 	if IsInGroup() then
 		local Name = self.Name:GetText() or "Unknown"
-		Name = gsub(Name, ' %(.%)$', '')			-- X-Realm Fix
+		Name = string.gsub(Name, ' %(.%)$', '')			-- X-Realm Fix
 		local Class = select(2, UnitClass(Name))
 		if Class then
 			if C.NamePlates.NameTextColor then
@@ -261,8 +261,8 @@ function Plates:Search()
 	if not NamePlateIndex then
 		for _, BlizzardPlate in next, {WorldFrame:GetChildren()} do
 			local Name = BlizzardPlate:GetName()
-			if Name and match(Name, "^NamePlate%d+$") then
-				NamePlateIndex = gsub(Name,"NamePlate","")
+			if Name and string.match(Name, "^NamePlate%d+$") then
+				NamePlateIndex = string.gsub(Name,"NamePlate","")
 				break
 			end
 		end
