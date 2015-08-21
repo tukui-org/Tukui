@@ -607,7 +607,7 @@ AddAPI(Object:CreateFontString())
 Object = EnumerateFrames()
 
 while Object do
-	if (not Handled[Object:GetObjectType()]) then
+	if not Object:IsForbidden() and not Handled[Object:GetObjectType()] then	
 		AddAPI(Object)
 		Handled[Object:GetObjectType()] = true
 	end
