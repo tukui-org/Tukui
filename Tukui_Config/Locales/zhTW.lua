@@ -378,6 +378,11 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "血量文字",
 			["Desc"] = "在姓名板上顯示血量的具體數值.",
 		},
+		
+		["NameTextColor"] = {
+			["Name"] = "Color Name Text",
+			["Desc"] = "Colors Name Text instead of Statusbars for Party/Raid Members.",
+		},
 	},		
 	["Party"] = {
 		["Enable"] = {

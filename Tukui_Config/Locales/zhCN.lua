@@ -370,6 +370,11 @@ TukuiConfig["zhCN"] = {
 			["Name"] = "显示血量数值",
 			["Desc"] = "在姓名板上显示血量数值",
 		},
+		
+		["NameTextColor"] = {
+			["Name"] = "Color Name Text",
+			["Desc"] = "Colors Name Text instead of Statusbars for Party/Raid Members.",
+		},
 	},
 	
 	["Party"] = {
