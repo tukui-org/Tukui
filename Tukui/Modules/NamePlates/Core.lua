@@ -96,6 +96,14 @@ function Plates:OnShow()
 	self.NewName:SetText(Hex .. Level .. "|r " .. Name)
 end
 
+function Plates:OnEnter()
+	self.Health.Highlight:Show()
+end
+
+function Plates:OnLeave()
+	self.Health.Highlight:Hide()
+end
+
 function Plates:UpdateHealth()
 	self.NewHealth:SetMinMaxValues(self:GetMinMaxValues())
 	self.NewHealth:SetValue(self:GetValue())
@@ -151,12 +159,36 @@ function Plates:Skin(obj)
 	Plate.Cast.Texture, Plate.Cast.Border, Plate.Cast.Shield, Plate.Cast.Icon, Plate.Cast.Name, Plate.Cast.NameShadow = Plate.Cast:GetRegions()
 	Plate.Cast.Icon.Layer, Plate.Cast.Icon.Level = Plate.Cast.Icon:GetDrawLayer()
 
+--[[
+
+	-- PTR 6.2.2 NamePlate Changes
+
+	Plate.ArtContainer.HealthBar
+	Plate.ArtContainer.AbsorbBar
+	Plate.ArtContainer.Border
+	Plate.ArtContainer.Highlight
+	Plate.ArtContainer.LevelText
+	Plate.ArtContainer.RaidTargetIcon
+	Plate.ArtContainer.EliteIcon
+	Plate.ArtContainer.AggroWarningTexture
+	Plate.ArtContainer.HighLevelIcon	-- Boss Icon
+	Plate.NameContainer.NameText
+
+	Plate.ArtContainer.CastBar
+	Plate.ArtContainer.CastBarBorder
+	Plate.ArtContainer.CastBarSpellIcon
+	Plate.ArtContainer.CastBarFrameShield
+	Plate.ArtContainer.CastBarText
+	Plate.ArtContainer.CastBarTextBG
+]]
+
 	self.Container[Plate] = CreateFrame("Frame", nil, self)
 
 	local NewPlate = self.Container[Plate]
+	NewPlate:EnableMouse(true)
 	NewPlate:Size(self.PlateWidth, self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
 	NewPlate:SetFrameStrata("BACKGROUND")
-	NewPlate:SetFrameLevel(2)
+	NewPlate:SetFrameLevel(0)
 
 	-- Reference
 	NewPlate.BlizzardPlate = Plate
@@ -169,10 +201,10 @@ function Plates:Skin(obj)
 
 	Plate.Border:SetAlpha(0)
 	Plate.Border:SetTexture(nil)
-	Plate.Highlight:SetAlpha(0)
-	Plate.Highlight:SetTexture(nil)
 	Plate.Boss:SetAlpha(0)
 	Plate.Boss:SetTexture(nil)
+	Plate.Highlight:SetAlpha(0)
+	Plate.Highlight:SetTexture(nil)
 	Plate.Dragon:SetAlpha(0)
 	Plate.Dragon:SetTexture(nil)
 	Plate.Threat:SetAlpha(0)
@@ -181,12 +213,21 @@ function Plates:Skin(obj)
 	NewPlate.Health = CreateFrame("StatusBar", nil, NewPlate)
 	NewPlate.Health:Size(self.PlateWidth, self.PlateHeight)
 	NewPlate.Health:SetStatusBarTexture(Texture)
-	NewPlate.Health:SetPoint("CENTER", 0, 4)
+	NewPlate.Health:SetPoint("BOTTOM", 0, 0)
 	NewPlate.Health:CreateShadow()
+
+	NewPlate.Health.Highlight = NewPlate.Health:CreateTexture(nil, 'OVERLAY')
+	NewPlate.Health.Highlight:SetTexture(1, 1, 1, 0.3)
+	NewPlate.Health.Highlight:SetBlendMode("BLEND")
+	NewPlate.Health.Highlight:SetAllPoints()
+	NewPlate.Health.Highlight:Hide()
 
 	NewPlate.Health.Background = NewPlate.Health:CreateTexture(nil, "BACKGROUND", nil, -8)
 	NewPlate.Health.Background:SetTexture(Texture)
 	NewPlate.Health.Background:SetAllPoints()
+
+	NewPlate:HookScript('OnEnter', self.OnEnter)
+	NewPlate:HookScript('OnLeave', self.OnLeave)
 
 	-- Casting
 
@@ -228,7 +269,7 @@ function Plates:Skin(obj)
 
 	-- Name
 	Plate.NewName = NewPlate:CreateFontString(nil, "OVERLAY")
-	Plate.NewName:SetPoint("BOTTOM", NewPlate, "TOP", 0, 2)
+	Plate.NewName:SetPoint("BOTTOM", NewPlate.Health, "TOP", 0, 2)
 	Plate.NewName:SetPoint("LEFT", NewPlate, -2, 0)
 	Plate.NewName:SetPoint("RIGHT", NewPlate, 2, 0)
 	Plate.NewName:SetFont(FontName, FontSize - 2, FontFlags)
