@@ -96,12 +96,12 @@ function Plates:OnShow()
 	self.NewName:SetText(Hex .. Level .. "|r " .. Name)
 end
 
-function Plates:OnEnter()
-	self.Health.Highlight:Show()
-end
-
-function Plates:OnLeave()
-	self.Health.Highlight:Hide()
+function Plates:Highlight()
+	if self.Highlight:IsShown() then
+		self.NewPlate.Health.Highlight:Show()
+	else
+		self.NewPlate.Health.Highlight:Hide()
+	end
 end
 
 function Plates:UpdateHealth()
@@ -185,10 +185,9 @@ function Plates:Skin(obj)
 	self.Container[Plate] = CreateFrame("Frame", nil, self)
 
 	local NewPlate = self.Container[Plate]
-	NewPlate:EnableMouse(true)
 	NewPlate:Size(self.PlateWidth, self.PlateHeight + self.PlateCastHeight + self.PlateSpacing)
 	NewPlate:SetFrameStrata("BACKGROUND")
-	NewPlate:SetFrameLevel(0)
+	NewPlate:SetFrameLevel(2)
 
 	-- Reference
 	NewPlate.BlizzardPlate = Plate
@@ -199,8 +198,7 @@ function Plates:Skin(obj)
 	Plate.Health:SetParent(Hider)
 	Plate.Cast:SetAlpha(0)
 
-	Plate.Border:SetAlpha(0)
-	Plate.Border:SetTexture(nil)
+	Plate.Border:SetParent(Hider)
 	Plate.Boss:SetAlpha(0)
 	Plate.Boss:SetTexture(nil)
 	Plate.Highlight:SetAlpha(0)
@@ -220,14 +218,10 @@ function Plates:Skin(obj)
 	NewPlate.Health.Highlight:SetTexture(1, 1, 1, 0.3)
 	NewPlate.Health.Highlight:SetBlendMode("BLEND")
 	NewPlate.Health.Highlight:SetAllPoints()
-	NewPlate.Health.Highlight:Hide()
 
 	NewPlate.Health.Background = NewPlate.Health:CreateTexture(nil, "BACKGROUND", nil, -8)
 	NewPlate.Health.Background:SetTexture(Texture)
 	NewPlate.Health.Background:SetAllPoints()
-
-	NewPlate:HookScript('OnEnter', self.OnEnter)
-	NewPlate:HookScript('OnLeave', self.OnLeave)
 
 	-- Casting
 
@@ -344,6 +338,7 @@ function Plates:Update()
 
 			self.UpdateAggro(Plate)
 			self.UpdateHealthColor(Plate)
+			self.Highlight(Plate)
 			if C.NamePlates.HealthText then
 				self.UpdateHealthText(Plate)
 			end
