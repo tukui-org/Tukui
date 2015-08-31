@@ -17,24 +17,24 @@ function TukuiUnitFrames:Player()
 	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
-	
+
 	local Panel = CreateFrame("Frame", nil, self)
 	Panel:SetFrameStrata(self:GetFrameStrata())
+	Panel:SetFrameLevel(2)
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
-	Panel:SetFrameLevel(2)
-	Panel:SetFrameStrata("MEDIUM")
 	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
+	Health:SetFrameLevel(4)
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(HealthTexture)
 	
-	Health.Background = Health:CreateTexture(nil, "BORDER")
+	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
@@ -64,6 +64,7 @@ function TukuiUnitFrames:Player()
 	
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
+	Power:SetFrameLevel(4)
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
@@ -298,7 +299,7 @@ function TukuiUnitFrames:Player()
 		for i = 1, MAX_TOTEMS do
 			Bar[i] = CreateFrame("StatusBar", nil, Bar)
 			Bar[i]:Height(8)
-			Bar[i]:SetStatusBarTexture(C.Medias.Normal)
+			Bar[i]:SetStatusBarTexture(PowerTexture)
 			Bar[i]:EnableMouse(true)
 			Bar[i]:SetFrameLevel(Health:GetFrameLevel())
 
@@ -316,7 +317,7 @@ function TukuiUnitFrames:Player()
 
 			Bar[i].bg = Bar[i]:CreateTexture(nil, "BORDER")
 			Bar[i].bg:SetAllPoints()
-			Bar[i].bg:SetTexture(C.Medias.Normal)
+			Bar[i].bg:SetTexture(PowerTexture)
 			Bar[i].bg.multiplier = 0.3
 		end
 		

@@ -19,14 +19,15 @@ function TukuiUnitFrames:Target()
 	self:CreateShadow()
 
 	local Panel = CreateFrame("Frame", nil, self)
+	Panel:SetFrameStrata(self:GetFrameStrata())
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(2)
-	Panel:SetFrameStrata("MEDIUM")
 	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
+	Health:SetFrameStrata(self:GetFrameStrata())
 	Health:Height(26)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
@@ -63,6 +64,7 @@ function TukuiUnitFrames:Target()
 	end
 
 	local Power = CreateFrame("StatusBar", nil, self)
+	Power:SetFrameStrata(self:GetFrameStrata())
 	Power:Height(8)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
@@ -96,6 +98,7 @@ function TukuiUnitFrames:Target()
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
 	
 	local AltPowerBar = CreateFrame("StatusBar", nil, self)
+	AltPowerBar:SetFrameStrata(self:GetFrameStrata())
 	AltPowerBar:Height(8)
 	AltPowerBar:SetStatusBarTexture(PowerTexture)
 	AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
@@ -123,7 +126,7 @@ function TukuiUnitFrames:Target()
 	
 	if C.UnitFrames.Portrait then
 		local Portrait = CreateFrame("PlayerModel", nil, Health)
-		
+		Portrait:SetFrameStrata(self:GetFrameStrata())
 		Portrait:Size(Health:GetHeight() + Power:GetHeight() + 1)
 		Portrait:SetPoint("TOPRIGHT", self, "TOPRIGHT", 0 ,0)
 		Portrait:SetBackdrop(TukuiUnitFrames.Backdrop)
@@ -182,6 +185,7 @@ function TukuiUnitFrames:Target()
 	
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
+		CastBar:SetFrameStrata(self:GetFrameStrata())
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
 		CastBar:SetInside(Panel)
@@ -263,6 +267,7 @@ function TukuiUnitFrames:Target()
 		local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 		local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 
+		Buffs:SetFrameStrata(self:GetFrameStrata())
 		Buffs:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 
 		Buffs:SetHeight(26)
@@ -271,6 +276,7 @@ function TukuiUnitFrames:Target()
 		Buffs.num = 36
 		Buffs.numRow = 9
 
+		Buffs:SetFrameStrata(self:GetFrameStrata())
 		Debuffs:SetHeight(26)
 		Debuffs:SetWidth(252)
 		Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
@@ -324,6 +330,7 @@ function TukuiUnitFrames:Target()
 	
 	if (C.UnitFrames.ComboBar) then
 		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
+		ComboPoints:SetFrameStrata(self:GetFrameStrata())
 		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
 		ComboPoints:Width(250)
 		ComboPoints:Height(8)
@@ -368,6 +375,7 @@ function TukuiUnitFrames:Target()
 	if (Class == "PRIEST" and C.UnitFrames.WeakBar) then
 		-- Weakened Soul Bar
 		local WSBar = CreateFrame("StatusBar", nil, Power)
+		WSBar:SetFrameStrata(self:GetFrameStrata())
 		WSBar:SetAllPoints(Power)
 		WSBar:SetStatusBarTexture(PowerTexture)
 		WSBar:GetStatusBarTexture():SetHorizTile(false)
