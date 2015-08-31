@@ -837,13 +837,64 @@ function TukuiUnitFrames:GetPetRaidFramesAttributes()
 		]]
 end
 
+function TukuiUnitFrames:MainTankAttibutes()
+	return
+		"TukuiMainTank", 
+		nil, 
+		"solo,party,raid",
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]],
+		"initial-width", T.Scale(150),
+		"initial-height", T.Scale(22),
+		"showParty", false,
+		"showRaid", true,
+		"showPlayer", false,
+		"showSolo", false,
+		"groupFilter", "MAINTANK",
+		"xoffset", T.Scale(10),
+		"yOffset", T.Scale(-10),
+		"point", "TOP",
+		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
+		"columnSpacing", T.Scale(7),
+		"columnAnchorPoint", "LEFT"
+end
+
+function TukuiUnitFrames:MainTankTargetAttibutes()
+	return
+		"TukuiMainTankTarget", 
+		nil, 
+		"solo,party,raid",
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+			self:SetAttribute('unitsuffix', 'target')
+		]],
+		"initial-width", T.Scale(150),
+		"initial-height", T.Scale(22),
+		"showParty", false,
+		"showRaid", true,
+		"showPlayer", false,
+		"showSolo", false,
+		"groupFilter", "MAINTANK",
+		"xoffset", T.Scale(4),
+		"yOffset", T.Scale(-4),
+		"point", "TOP",
+		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
+		"columnSpacing", T.Scale(4),
+		"columnAnchorPoint", "LEFT"
+end
+
 function TukuiUnitFrames:Style(unit)
 	if (not unit) then
 		return
 	end
 	
 	local Parent = self:GetParent():GetName()
-	
+
 	if (unit == "player") then
 		TukuiUnitFrames.Player(self)
 	elseif (unit == "target") then
@@ -984,11 +1035,19 @@ function TukuiUnitFrames:CreateUnits()
 			TukuiUnitFrames.Headers.RaidPet = Pet
 			Movers:RegisterFrame(Pet)
 		end
-		
+--[[
+		local MainTank = oUF:SpawnHeader(TukuiUnitFrames:MainTankAttibutes())
+		MainTank:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+		Movers:RegisterFrame(MainTank)
+
+		local MainTankTarget = oUF:SpawnHeader(TukuiUnitFrames:MainTankTargetAttibutes())
+		MainTankTarget:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+		Movers:RegisterFrame(MainTankTarget)
+]]
 		TukuiUnitFrames.Headers.Raid = Raid
 		Movers:RegisterFrame(Raid)
 	end
-	
+
 	Movers:RegisterFrame(Player)
 	Movers:RegisterFrame(Target)
 	Movers:RegisterFrame(TargetOfTarget)
