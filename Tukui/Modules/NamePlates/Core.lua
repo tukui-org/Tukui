@@ -137,10 +137,13 @@ function Plates:UpdateHealthColor()
 end
 
 function Plates:UpdateHealthText()
-	local MinHP, MaxHP = self.ArtContainer.HealthBar:GetMinMaxValues()
+	-- local MinHP, MaxHP = self.ArtContainer.HealthBar:GetMinMaxValues()
 	local CurrentHP = self.ArtContainer.HealthBar:GetValue()
 
-	self.NewPlate.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
+	local Percent = floor(CurrentHP * 100)
+
+	-- self.NewPlate.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
+	self.NewPlate.Health.Text:SetText(Percent.."%")
 end
 
 function Plates:Skin(obj)
@@ -155,6 +158,7 @@ function Plates:Skin(obj)
 	end
 
 	local HealthBar = Plate.ArtContainer.HealthBar
+	-- local OverAbsorb = HealthBar.OverAbsorb
 	local AbsorbBar = Plate.ArtContainer.AbsorbBar
 	local Border = Plate.ArtContainer.Border
 	local Highlight = Plate.ArtContainer.Highlight
