@@ -137,13 +137,12 @@ function Plates:UpdateHealthColor()
 end
 
 function Plates:UpdateHealthText()
-	-- local MinHP, MaxHP = self.ArtContainer.HealthBar:GetMinMaxValues()
+	local MinHP, MaxHP = self.ArtContainer.HealthBar:GetMinMaxValues()
 	local CurrentHP = self.ArtContainer.HealthBar:GetValue()
-
-	local Percent = floor(CurrentHP * 100)
+	local Percent = (CurrentHP / MaxHP) * 100
 
 	-- self.NewPlate.Health.Text:SetText(T.ShortValue(CurrentHP).." / "..T.ShortValue(MaxHP))
-	self.NewPlate.Health.Text:SetText(Percent.."%")
+	self.NewPlate.Health.Text:SetFormattedText("%.1f%%", Percent)
 end
 
 function Plates:Skin(obj)
