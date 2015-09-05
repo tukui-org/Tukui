@@ -223,7 +223,7 @@ function Plates:Skin(obj)
 		NewPlate.Health.Text:SetTextColor(1, 1, 1)
 	end
 
-	NewPlate.Name = NewPlate:CreateFontString(nil, "OVERLAY")
+	NewPlate.Name = NewPlate.Health:CreateFontString(nil, "OVERLAY")
 	NewPlate.Name:SetPoint("BOTTOM", NewPlate.Health, "TOP", 0, 2)
 	NewPlate.Name:SetFont(FontName, FontSize - 2, FontFlags)
 
