@@ -50,6 +50,7 @@
 	<Script file="Miscellaneous\Capture.lua"/>
 	<Script file="Miscellaneous\Ghost.lua"/>
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>
+	<Script file="Miscellaneous\Invite.lua"/>
 	
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>

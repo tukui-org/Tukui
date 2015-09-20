@@ -96,8 +96,12 @@ function Loading:OnEvent(event, addon)
 				T["Miscellaneous"]["Reputation"]:Enable()
 			end
 
-			if (C["Misc"].ErrorFilterEnable) then
+			if C["Misc"].ErrorFilterEnable then
 				T["Miscellaneous"]["ErrorFilter"]:Enable()
+			end
+
+			if C["Misc"].AutoInviteEnable then
+				T["Miscellaneous"]["Invite"]:Enable()
 			end
 
 			T["Miscellaneous"]["MirrorTimers"]:Enable()

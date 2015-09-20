@@ -328,6 +328,11 @@ TukuiConfig["esMX"] = {
 			["Name"] = "Enable Error Filtering",
 			["Desc"] = "Filters out messages from the UIErrorsFrame.",
 		},
+		
+		["AutoInviteEnable"] = {
+			["Name"] = "Enable Auto Invites",
+			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+		},
 	},
 	
 	["NamePlates"] = {

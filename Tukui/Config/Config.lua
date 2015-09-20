@@ -90,6 +90,7 @@ C["Misc"] = {
 	["ExperienceEnable"] = true,
 	["ReputationEnable"] = true,
 	["ErrorFilterEnable"] = true,
+	["AutoInviteEnable"] = false,
 }
 
 C["NamePlates"] = {

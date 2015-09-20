@@ -333,6 +333,11 @@ TukuiConfig["ruRU"] = {
 			["Name"] = "Включить фильтр ошибок",
 			["Desc"] = "Фильтровать сообщения об ошибках (красный текст вверху экрана).",
 		},
+		
+		["AutoInviteEnable"] = {
+			["Name"] = "Enable Auto Invites",
+			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+		},
 	},
 	
 	["NamePlates"] = {

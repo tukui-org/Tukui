@@ -332,6 +332,11 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "啟用錯誤過濾",
 			["Desc"] = "過濾UI的LUA錯誤訊息",
 		},
+		
+		["AutoInviteEnable"] = {
+			["Name"] = "Enable Auto Invites",
+			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+		},
 	},
 	
 	["NamePlates"] = {

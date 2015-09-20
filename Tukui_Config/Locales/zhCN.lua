@@ -323,6 +323,11 @@ TukuiConfig["zhCN"] = {
 			["Name"] = "启用过滤错误",
 			["Desc"] = "过滤UI错误LUA消息.",
 		},
+		
+		["AutoInviteEnable"] = {
+			["Name"] = "Enable Auto Invites",
+			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+		},
 	},
 	
 	["NamePlates"] = {
