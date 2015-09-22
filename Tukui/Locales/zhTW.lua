@@ -207,6 +207,7 @@ L.Miscellaneous = {} -- Miscellaneous
 ------------------------------------------------
 
 L.Miscellaneous.Repair = "警告！你需要修裝！"
+L.Miscellaneous.InQueue = "I'm currently in Queue!"
 
 ------------------------------------------------
 L.Auras = {} -- Aura Locales
