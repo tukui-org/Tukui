@@ -124,6 +124,10 @@ function TukuiActionBars:AddPanels()
 	A2.Backdrop:SetAllPoints()
 	A2.Backdrop:Hide()
 	
+	A2.Anim = CreateAnimationGroup(A2):CreateAnimation("Width")
+	A2.Anim:SetDuration(0.3)
+	A2.Anim:SetSmoothing("InOut")
+	
 	-- Bar #3
 	local A3 = CreateFrame("Frame", "TukuiActionBar3", UIParent, "SecureHandlerStateTemplate")
 	A3:Point("BOTTOMLEFT", A1, "BOTTOMRIGHT", 6, 0)
@@ -134,6 +138,10 @@ function TukuiActionBars:AddPanels()
 	A3.Backdrop = CreateFrame("Frame", nil, A3)
 	A3.Backdrop:SetAllPoints()
 	A3.Backdrop:Hide()
+	
+	A3.Anim = CreateAnimationGroup(A2):CreateAnimation("Width")
+	A3.Anim:SetDuration(0.3)
+	A3.Anim:SetSmoothing("InOut")
 	
 	-- Bar #4
 	local A4 = CreateFrame("Frame", "TukuiActionBar4", UIParent, "SecureHandlerStateTemplate")
@@ -156,6 +164,10 @@ function TukuiActionBars:AddPanels()
 	A5.Backdrop = CreateFrame("Frame", nil, A5)
 	A5.Backdrop:SetAllPoints()
 	A5.Backdrop:Hide()
+	
+	A5.Anim = CreateAnimationGroup(A5):CreateAnimation("Height")
+	A5.Anim:SetDuration(0.3)
+	A5.Anim:SetSmoothing("InOut")
 	
 	-- Pet Bar
 	local A6 = CreateFrame("Frame", "TukuiPetActionBar", UIParent, "SecureHandlerStateTemplate")

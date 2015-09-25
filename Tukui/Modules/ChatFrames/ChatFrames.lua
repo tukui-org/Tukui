@@ -19,13 +19,15 @@ function TukuiChat:UpdateEditBoxColor()
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
 			
 			if (ID == 0) then
-				Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, unpack(C["General"].BorderColor))
+				Backdrop.Anim:SetChange(unpack(C["General"].BorderColor))
 			else
-				Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
+				Backdrop.Anim:SetChange(ChatTypeInfo[ChatType..ID].r, ChatTypeInfo[ChatType..ID].g, ChatTypeInfo[ChatType..ID].b)
 			end
 		else
-			Backdrop:SetAnimation("Gradient", "Border", 0, 0.5, ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
+			Backdrop.Anim:SetChange(ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
 		end
+		
+		Backdrop.Anim:Play()
 	end
 end
 
@@ -111,6 +113,11 @@ function TukuiChat:StyleFrame(frame)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
 	EditBox.Backdrop:SetBackdropColor(unpack(C["General"].BackdropColor))
+	
+	EditBox.Backdrop.Anim = CreateAnimationGroup(EditBox.Backdrop):CreateAnimation("Color")
+	EditBox.Backdrop.Anim:SetDuration(0.5)
+	EditBox.Backdrop.Anim:SetSmoothing("InOut")
+	EditBox.Backdrop.Anim:SetColorType("Border")
 	
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do

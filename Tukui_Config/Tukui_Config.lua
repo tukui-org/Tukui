@@ -221,10 +221,13 @@ end
 
 local ButtonOnClick = function(self)
 	if self.Toggled then
-		self.Tex:SetAnimation("Gradient", "texture", 0, 0.3, 1, 0, 0, nil, 0, 1, 0)
+		self.Anim:SetChange(1, 0, 0)
+		self.Anim:Play()
+		
 		self.Toggled = false
 	else
-		self.Tex:SetAnimation("Gradient", "texture", 0, 0.3, 0, 1, 0, nil, 1, 0, 0)
+		self.Anim:SetChange(0, 1, 0)
+		self.Anim:Play()
 		self.Toggled = true
 	end
 	
@@ -451,6 +454,11 @@ local CreateConfigButton = function(parent, group, option, value)
 	Button.Tex:SetPoint("TOPLEFT", 2, -2)
 	Button.Tex:SetPoint("BOTTOMRIGHT", -2, 2)
 	Button.Tex:SetTexture(1, 0, 0)
+	
+	Button.Anim = CreateAnimationGroup(Button.Tex):CreateAnimation("Color")
+	Button.Anim:SetDuration(0.5)
+	Button.Anim:SetSmoothing("InOut")
+	Button.Anim:SetColorType("Texture")
 	
 	Button.Check = ButtonCheck
 	Button.Uncheck = ButtonUncheck
@@ -1063,17 +1071,21 @@ function TukuiConfig:CreateConfigWindow()
 	CreditText:SetText(CreditString)
 	CreditText:Point("LEFT", Scrollable, "RIGHT", 4, 0)
 	
-	Scrollable:SetAnimation("Move", "Horizontal", -1250, 0.5)
+	Scrollable.Anim = CreateAnimationGroup(Scrollable):CreateAnimation("Move")
+	Scrollable.Anim:SetDuration(25)
+	Scrollable.Anim:SetOffset(-1250, 0)
 	
-	Scrollable:AnimOnFinished("Move", function(self)
+	Scrollable.Anim:SetScript("OnFinished", function(self)
 		if (not ConfigFrame:IsVisible()) then
 			return
 		end
 		
 		self:ClearAllPoints()
 		self:SetPoint("CENTER", CreditFrame)
-		self:SetAnimation("Move", "Horizontal", -1250, 0.5)
+		self.Anim:Play()
 	end)
+	
+	Scrollable.Anim:Play()
 	
 	ShowGroup("General") -- Show General options by default
 	

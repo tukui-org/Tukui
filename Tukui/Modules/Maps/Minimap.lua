@@ -167,6 +167,11 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone.Text:Height(12)
 	MinimapZone.Text:Width(MinimapZone:GetWidth() - 6)
 	
+	MinimapZone.Anim = CreateAnimationGroup(MinimapZone):CreateAnimation("Fade")
+	MinimapZone.Anim:SetDuration(0.3)
+	MinimapZone.Anim:SetSmoothing("InOut")
+	MinimapZone.Anim:SetChange(1)
+	
 	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 	MinimapCoords:SetTemplate()
 	MinimapCoords:Size(40, 22)
@@ -178,6 +183,11 @@ function Minimap:AddZoneAndCoords()
 	MinimapCoords.Text:SetFont(C["Medias"].Font, 12)
 	MinimapCoords.Text:Point("Center", 0, -1)
 	MinimapCoords.Text:SetText("0, 0")
+	
+	MinimapCoords.Anim = CreateAnimationGroup(MinimapCoords):CreateAnimation("Fade")
+	MinimapCoords.Anim:SetDuration(0.3)
+	MinimapCoords.Anim:SetSmoothing("InOut")
+	MinimapCoords.Anim:SetChange(1)
 	
 	-- Update zone text
 	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -243,13 +253,19 @@ end
 
 function Minimap:EnableMouseOver()
 	self:SetScript("OnEnter", function()
-		Minimap.MinimapZone:SetAnimation("FadeIn", 0.3)
-		Minimap.MinimapCoords:SetAnimation("FadeIn", 0.3)
+		Minimap.MinimapZone.Anim:SetChange(1)
+		Minimap.MinimapZone.Anim:Play()
+		
+		Minimap.MinimapCoords.Anim:SetChange(1)
+		Minimap.MinimapCoords.Anim:Play()
 	end)
 
 	self:SetScript("OnLeave", function()
-		Minimap.MinimapZone:SetAnimation("FadeOut", 0.3)
-		Minimap.MinimapCoords:SetAnimation("FadeOut", 0.3)
+		Minimap.MinimapZone.Anim:SetChange(0)
+		Minimap.MinimapZone.Anim:Play()
+		
+		Minimap.MinimapCoords.Anim:SetChange(0)
+		Minimap.MinimapCoords.Anim:Play()
 	end)
 end
 

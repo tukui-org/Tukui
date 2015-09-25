@@ -122,15 +122,11 @@ function Install:PrintStep(number)
 	
 	self.Text:SetText(Text)
 	
-	self.StatusBar:SetValue(number)
-	self.StatusBar:SetStatusBarColor(R, G, B)
-	self.StatusBar.Background:SetTexture(R, G, B)
-end
-
-local StyleClick = function(self)
-	self.Text:SetTextColor(0, 1, 0)
+	self.StatusBar.Anim:SetChange(number)
+	self.StatusBar.Anim:Play()
 	
-	self.Text:SetAnimation("Gradient", "Text", 0, 0.5, 1, 1, 1)
+	self.StatusBar.Anim2:SetChange(R, G, B)
+	self.StatusBar.Anim2:Play()
 end
 
 function Install:Launch()
@@ -160,7 +156,7 @@ function Install:Launch()
 
 	self.StatusBar = CreateFrame("StatusBar", nil, self)
 	self.StatusBar:SetStatusBarTexture(C.Medias.Normal)
-	self.StatusBar:Point("BOTTOM", self.Description, "TOP", 0, 8)
+	self.StatusBar:Point("BOTTOM", self.Description, "TOP", 0, 6)
 	self.StatusBar:Height(20)
 	self.StatusBar:Width(self.Description:GetWidth() - 4)
 	self.StatusBar:CreateBackdrop()
@@ -168,10 +164,15 @@ function Install:Launch()
 	self.StatusBar:SetStatusBarColor(R, G, B)
 	self.StatusBar:SetMinMaxValues(0, self.MaxStepNumber)
 	self.StatusBar:SetValue(0)
-	self.StatusBar.Background = self.StatusBar:CreateTexture(nil, "ARTWORK")
-	self.StatusBar.Background:SetAllPoints()
-	self.StatusBar.Background:SetAlpha(0.15)
-	self.StatusBar.Background:SetTexture(R, G, B)
+	
+	self.StatusBar.Anim = CreateAnimationGroup(self.StatusBar):CreateAnimation("Progress")
+	self.StatusBar.Anim:SetDuration(0.3)
+	self.StatusBar.Anim:SetSmoothing("InOut")
+	
+	self.StatusBar.Anim2 = CreateAnimationGroup(self.StatusBar):CreateAnimation("Color")
+	self.StatusBar.Anim2:SetDuration(0.3)
+	self.StatusBar.Anim2:SetSmoothing("InOut")
+	self.StatusBar.Anim2:SetColorType("StatusBar")
 	
 	self.Logo = self.StatusBar:CreateTexture(nil, "OVERLAY")
 	self.Logo:Size(256, 128)
@@ -179,7 +180,7 @@ function Install:Launch()
 	self.Logo:Point("TOP", self.Description, "TOP", -8, 88)
 
 	self.LeftButton = CreateFrame("Button", nil, self)
-	self.LeftButton:Point("TOPLEFT", self.Description, "BOTTOMLEFT", 0, -6)
+	self.LeftButton:Point("TOPLEFT", self.Description, "BOTTOMLEFT", 0, -4)
 	self.LeftButton:Size(128, 25)
 	self.LeftButton:SkinButton()
 	self.LeftButton:CreateShadow()
@@ -189,7 +190,7 @@ function Install:Launch()
 	self.LeftButton:SetScript("OnClick", function() self:Hide() end)
 	
 	self.RightButton = CreateFrame("Button", nil, self)
-	self.RightButton:Point("TOPRIGHT", self.Description, "BOTTOMRIGHT", 0, -6)
+	self.RightButton:Point("TOPRIGHT", self.Description, "BOTTOMRIGHT", 0, -4)
 	self.RightButton:Size(128, 25)
 	self.RightButton:SkinButton()
 	self.RightButton:CreateShadow()
@@ -207,7 +208,6 @@ function Install:Launch()
 	self.MiddleButton.Text:SetPoint("CENTER")
 	self.MiddleButton.Text:SetText("|cffFF0000"..RESET_TO_DEFAULT.."|r")
 	self.MiddleButton:SetScript("OnClick", self.ResetData)
-	self.MiddleButton:SetScript("OnMouseUp", StyleClick)
 	if (TukuiData[GetRealmName()][UnitName("Player")].InstallDone) then
 		self.MiddleButton:Show()
 	else
