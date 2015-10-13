@@ -1,5 +1,6 @@
 -- LibAnim-2.0 by Hydra
 local pairs = pairs
+local floor = floor
 local tinsert = tinsert
 local tremove = tremove
 local strlower = strlower
@@ -10,11 +11,24 @@ local WidthFrames = CreateFrame("Frame")
 local ColorFrames = CreateFrame("StatusBar")
 local ProgressFrames = CreateFrame("Frame")
 local SleepFrames = CreateFrame("Frame")
-local MoveAnim, FadeAnim, HeightAnim, WidthAnim, ColorAnim, ProgressAnim, SleepAnim
+local NumberFrames = CreateFrame("Frame")
+local MoveAnim, FadeAnim, HeightAnim, WidthAnim, ColorAnim, ProgressAnim, SleepAnim, NumberAnim
 local Texture = ColorFrames:CreateTexture()
 local Text = ColorFrames:CreateFontString()
 local AnimTypes = {}
 local Callbacks = {["OnPlay"] = {}, ["OnPause"] = {}, ["OnResume"] = {}, ["OnStop"] = {}, ["OnFinished"] = {}}
+
+-- Get the update frame by type
+local UpdateFrames = {
+	["move"] = MoveFrames,
+	["fade"] = AlphaFrames,
+	["height"] = HeightFrames,
+	["width"] = WidthFrames,
+	["color"] = ColorFrames,
+	["progress"] = ProgressFrames,
+	["sleep"] = SleepFrames,
+	["number"] = NumberFrames,
+}
 
 local GetColor = function(t, r1, g1, b1, r2, g2, b2)
 	return r1 + (r2 - r1) * t, g1 + (g2 - g1) * t, b1 + (b2 - b1) * t
@@ -88,7 +102,7 @@ local Smoothing = {
 }
 
 local AnimMethods = {
-	Animation = {
+	All = {
 		Play = function(self)
 			if (not self.Paused) then
 				AnimTypes[self.Type](self)
@@ -118,6 +132,16 @@ local AnimMethods = {
 		end,
 		
 		Stop = function(self)
+			local UpdateFrame = UpdateFrames[self.Type]
+			
+			for i = 1, #UpdateFrame do
+				if UpdateFrame[i] == self then
+					tremove(UpdateFrame, i)
+					
+					break
+				end
+			end
+			
 			self.Playing = false
 			self.Paused = false
 			self.Stopped = true
@@ -269,7 +293,7 @@ local AnimMethods = {
 			self.EndValueSetting = value or 0
 		end,
 		
-		GetChange = function(self, value)
+		GetChange = function(self)
 			return self.EndValueSetting
 		end,
 		
@@ -281,6 +305,36 @@ local AnimMethods = {
 	sleep = {
 		GetProgress = function(self)
 			return self.SleepTimer
+		end,
+	},
+	
+	number = {
+		SetChange = function(self, value)
+			self.EndNumberSetting = value or 0
+		end,
+		
+		GetChange = function(self)
+			return self.EndNumberSetting
+		end,
+		
+		SetPrefix = function(self, text)
+			self.Prefix = text or ""
+		end,
+		
+		GetPrefix = function(self)
+			return self.Prefix
+		end,
+		
+		SetPostfix = function(self, text)
+			self.Postfix = text or ""
+		end,
+		
+		GetPostfix = function(self)
+			return self.Postfix
+		end,
+		
+		GetProgress = function(self)
+			return self.NumberOffset
 		end,
 	},
 }
@@ -304,7 +358,7 @@ local GroupMethods = {
 	end,
 	
 	Pause = function(self)
-		-- Only pause current order
+		-- BUG?, only pause current order
 		for i = 1, #self.Animations do
 			if (self.Animations[i].Order == self.Order) then
 				self.Animations[i]:Pause()
@@ -321,9 +375,9 @@ local GroupMethods = {
 	end,
 	
 	Stop = function(self)
-		--[[for i = 1, #self.Animations do
+		for i = 1, #self.Animations do
 			self.Animations[i]:Stop()
-		end]]
+		end
 		
 		self.Playing = false
 		self.Paused = false
@@ -391,7 +445,7 @@ local GroupMethods = {
 		local Animation = {}
 		
 		-- General methods
-		for key, func in pairs(AnimMethods.Animation) do
+		for key, func in pairs(AnimMethods.All) do
 			Animation[key] = func
 		end
 		
@@ -463,6 +517,7 @@ end
 
 local Move = function(self)
 	if self:IsPlaying() then
+		--print('IsPlaying() bail')
 		return
 	end
 	
@@ -512,6 +567,10 @@ local FadeOnUpdate = function(self, elapsed)
 end
 
 local Fade = function(self)
+	if self:IsPlaying() then
+		return
+	end
+	
 	self.AlphaTimer = 0
 	self.StartAlpha = self.Owner:GetAlpha() or 1
 	self.EndAlpha = self.EndAlphaSetting or 0
@@ -531,7 +590,7 @@ local HeightOnUpdate = function(self, elapsed)
 		
 		if (HeightAnim and (not HeightAnim.Paused)) then
 			HeightAnim.HeightTimer = HeightAnim.HeightTimer + elapsed
-			HeightAnim.HeightOffset = Smoothing[HeightAnim.Smoothing](HeightAnim.HeightTimer, HeightAnim.StartHeight, HeightAnim.Change, HeightAnim.Duration)
+			HeightAnim.HeightOffset = Smoothing[HeightAnim.Smoothing](HeightAnim.HeightTimer, HeightAnim.StartHeight, HeightAnim.HeightChange, HeightAnim.Duration)
 			HeightAnim.Owner:SetHeight(HeightAnim.HeightOffset)
 			
 			if (HeightAnim.HeightTimer >= HeightAnim.Duration) then
@@ -557,7 +616,7 @@ local Height = function(self)
 	self.HeightTimer = 0
 	self.StartHeight = self.Owner:GetHeight() or 0
 	self.EndHeight = self.EndHeightSetting or 0
-	self.Change = self.EndHeight - self.StartHeight
+	self.HeightChange = self.EndHeight - self.StartHeight
 	
 	tinsert(HeightFrames, self)
 	
@@ -573,7 +632,7 @@ local WidthOnUpdate = function(self, elapsed)
 		
 		if (WidthAnim and (not WidthAnim.Paused)) then
 			WidthAnim.WidthTimer = WidthAnim.WidthTimer + elapsed
-			WidthAnim.WidthOffset = Smoothing[WidthAnim.Smoothing](WidthAnim.WidthTimer, WidthAnim.StartWidth, WidthAnim.Change, WidthAnim.Duration)
+			WidthAnim.WidthOffset = Smoothing[WidthAnim.Smoothing](WidthAnim.WidthTimer, WidthAnim.StartWidth, WidthAnim.WidthChange, WidthAnim.Duration)
 			WidthAnim.Owner:SetWidth(WidthAnim.WidthOffset)
 			
 			if (WidthAnim.WidthTimer >= WidthAnim.Duration) then
@@ -599,7 +658,7 @@ local Width = function(self)
 	self.WidthTimer = 0
 	self.StartWidth = self.Owner:GetWidth() or 0
 	self.EndWidth = self.EndWidthSetting or 0
-	self.Change = self.EndWidth - self.StartWidth
+	self.WidthChange = self.EndWidth - self.StartWidth
 	
 	tinsert(WidthFrames, self)
 	
@@ -655,7 +714,7 @@ local ProgressOnUpdate = function(self, elapsed)
 		
 		if (ProgressAnim and (not ProgressAnim.Paused)) then
 			ProgressAnim.ProgressTimer = ProgressAnim.ProgressTimer + elapsed
-			ProgressAnim.ValueOffset = Smoothing[ProgressAnim.Smoothing](ProgressAnim.ProgressTimer, ProgressAnim.StartValue, ProgressAnim.Change, ProgressAnim.Duration)
+			ProgressAnim.ValueOffset = Smoothing[ProgressAnim.Smoothing](ProgressAnim.ProgressTimer, ProgressAnim.StartValue, ProgressAnim.ProgressChange, ProgressAnim.Duration)
 			ProgressAnim.Owner:SetValue(ProgressAnim.ValueOffset)
 			
 			if (ProgressAnim.ProgressTimer >= ProgressAnim.Duration) then
@@ -677,7 +736,7 @@ local Progress = function(self)
 	self.ProgressTimer = 0
 	self.StartValue = self.Owner:GetValue() or 0
 	self.EndValue = self.EndValueSetting or 0
-	self.Change = self.EndValue - self.StartValue
+	self.ProgressChange = self.EndValue - self.StartValue
 	
 	tinsert(ProgressFrames, self)
 	
@@ -718,6 +777,46 @@ local Sleep = function(self)
 	end
 end
 
+-- Number
+local NumberOnUpdate = function(self, elapsed)
+	for i = 1, #self do
+		NumberAnim = self[i]
+		
+		if (NumberAnim and (not NumberAnim.Paused)) then
+			NumberAnim.NumberTimer = NumberAnim.NumberTimer + elapsed
+			NumberAnim.NumberOffset = Smoothing[NumberAnim.Smoothing](NumberAnim.NumberTimer, NumberAnim.StartNumber, NumberAnim.NumberChange, NumberAnim.Duration)
+			NumberAnim.Owner:SetText(NumberAnim.Prefix..floor(NumberAnim.NumberOffset)..NumberAnim.Postfix)
+			
+			if (NumberAnim.NumberTimer >= NumberAnim.Duration) then
+				table.remove(self, i)
+				NumberAnim.Owner:SetText(NumberAnim.Prefix..floor(NumberAnim.EndNumber)..NumberAnim.Postfix)
+				NumberAnim.Playing = false
+				NumberAnim:Callback("OnFinished")
+				NumberAnim.Group:CheckOrder()
+			end
+		end
+	end
+	
+	if (#self == 0) then
+		self:SetScript("OnUpdate", nil)
+	end
+end
+
+local Number = function(self)
+	self.NumberTimer = 0
+	self.StartNumber = tonumber(self.Owner:GetText()) or 0
+	self.EndNumber = self.EndNumberSetting or 0
+	self.NumberChange = self.EndNumberSetting - self.StartNumber
+	self.Prefix = self.Prefix or ""
+	self.Postfix = self.Postfix or ""
+	
+	tinsert(NumberFrames, self)
+	
+	if (not NumberFrames:GetScript("OnUpdate")) then
+		NumberFrames:SetScript("OnUpdate", NumberOnUpdate)
+	end
+end
+
 -- Store animation functions
 AnimTypes["move"] = Move
 AnimTypes["fade"] = Fade
@@ -726,3 +825,4 @@ AnimTypes["width"] = Width
 AnimTypes["color"] = Color
 AnimTypes["progress"] = Progress
 AnimTypes["sleep"] = Sleep
+AnimTypes["number"] = Number
