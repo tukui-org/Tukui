@@ -1,4 +1,10 @@
--- LibAnim-2.0 by Hydra
+-- LibAnim 2.0 by Hydra
+local Version = 2.0
+
+if (LibAnim and LibAnim >= Version) then
+	return
+end
+
 local pairs = pairs
 local floor = floor
 local tinsert = tinsert
@@ -135,7 +141,7 @@ local AnimMethods = {
 			local UpdateFrame = UpdateFrames[self.Type]
 			
 			for i = 1, #UpdateFrame do
-				if UpdateFrame[i] == self then
+				if (UpdateFrame[i] == self) then
 					tremove(UpdateFrame, i)
 					
 					break
@@ -517,7 +523,6 @@ end
 
 local Move = function(self)
 	if self:IsPlaying() then
-		--print('IsPlaying() bail')
 		return
 	end
 	
@@ -826,3 +831,5 @@ AnimTypes["color"] = Color
 AnimTypes["progress"] = Progress
 AnimTypes["sleep"] = Sleep
 AnimTypes["number"] = Number
+
+_G["LibAnim"] = Version
