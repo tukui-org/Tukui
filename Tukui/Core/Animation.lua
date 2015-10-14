@@ -1,7 +1,7 @@
 -- LibAnim 2.0 by Hydra
 local Version = 2.0
 
-if (LibAnim and LibAnim >= Version) then
+if (_LibAnim and _LibAnim >= Version) then
 	return
 end
 
@@ -832,4 +832,4 @@ AnimTypes["progress"] = Progress
 AnimTypes["sleep"] = Sleep
 AnimTypes["number"] = Number
 
-_G["LibAnim"] = Version
+_G["_LibAnim"] = Version
