@@ -70,30 +70,54 @@ T.SlashHandler = function(cmd)
 		
 		Test:EnableOrDisable()
 	elseif (arg1 == "profile" or arg1 == "p") then
-		if arg2 then
-			local Server, Character = SplitServerCharacter(arg2)
+        if not TukuiData then return end
+        
+        if TukuiConfigPerAccount then
+            T.Print("Your settings are currently set accross toons so you can't use this command!")
+            
+            return
+        end
+        
+        if not arg2 then
+            T.Print("/tukui profile list")
+            T.Print("/tukui profile #")
+            print(" ")
+        else
+            if arg2 == "list" or arg2 == "l" then
+                Tukui.Profiles = {}
+                
+                Tukui.Profiles.Data = {}
+                Tukui.Profiles.Options = {}
 
-			if Server and Character then
-				if TukuiData and TukuiData[Server] and TukuiData[Server][Character] then
-					local CurrentServer = GetRealmName()
-					local CurrentCharacter = UnitName("player")
-					
-					TukuiData[CurrentServer][CurrentCharacter] = TukuiData[Server][Character]
-					
-					if TukuiConfigShared and TukuiConfigShared[Server] and TukuiConfigShared[Server][Character] then
-						if not TukuiConfigPerAccount then
-							TukuiConfigShared[CurrentServer][CurrentCharacter] = TukuiConfigShared[Server][Character]
-						end
-					end
-					
-					ReloadUI()
-				else
-					T.Print(L.Others.ProfileNotFound)
-				end
-			end
-		else
-			T.Print(L.Others.ProfileSelection)
-		end
+                for Server, Table in pairs(TukuiData) do
+                    if not Server then return end
+
+                    if Server ~= "Gold" then
+                        for Character, Table in pairs(TukuiData[Server]) do
+                            tinsert(Tukui.Profiles.Data, TukuiData[Server][Character])
+                            tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
+
+                            print("Profile "..#Tukui.Profiles.Data..": ["..Server.."]-["..Character.."]")
+                        end
+                    end
+                end                
+            else
+                local CurrentServer = GetRealmName()
+                local CurrentCharacter = UnitName("player")
+                local Profile = tonumber(arg2)
+
+                if not Tukui.Profiles or not Tukui.Profiles.Data[Profile] then
+                    T.Print(L.Others.ProfileNotFound)
+
+                    return
+                end
+
+                TukuiData[CurrentServer][CurrentCharacter] = Tukui.Profiles.Data[Profile]
+                TukuiConfigShared[CurrentServer][CurrentCharacter] = Tukui.Profiles.Options[Profile]
+
+                ReloadUI()
+            end
+        end
 	elseif AddOnCommands[arg1] then
 		AddOnCommands[arg1](arg2)
 	end
