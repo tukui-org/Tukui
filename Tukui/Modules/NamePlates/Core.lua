@@ -178,7 +178,7 @@ function Plates:Skin(obj)
 	HealthBar:SetParent(Hider)
 	LevelText:SetParent(Hider)
 	Border:SetParent(Hider)
-	Name:SetParent(Hider)
+	Name:Kill()
 
 	CastBar:SetAlpha(0)
 
