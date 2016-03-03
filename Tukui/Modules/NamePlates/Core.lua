@@ -18,16 +18,16 @@ local IsInGroup = IsInGroup
 local Plates = CreateFrame("Frame", nil, WorldFrame)
 
 function Plates:GetColor()
-	local Colors = T["Colors"]
-
-	local Red, Green, Blue = self.ArtContainer.HealthBar:GetStatusBarColor()
+    local Colors = T["Colors"]
+    
+    local Red, Green, Blue = self.ArtContainer.HealthBar:GetStatusBarColor()
     
     -- Original colors too bright, decrease clarity a little
     Red = Red * 0.7
     Green = Green * 0.7
     Blue = Blue * 0.7
-
-	return Red, Green, Blue
+    
+    return Red, Green, Blue
 end
 
 function Plates:UpdateCastBar()
