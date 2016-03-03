@@ -88,7 +88,7 @@ function Minimap:StyleMinimap()
 	self.Ticket:SetAlpha(0)
 	
 	Mail:ClearAllPoints()
-	Mail:Point("TOPRIGHT", 3, 3)
+	Mail:Point("TOPRIGHT", 12, 29)
 	Mail:SetFrameLevel(self:GetFrameLevel() + 2)
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\mail")
