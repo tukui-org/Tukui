@@ -21,31 +21,11 @@ function Plates:GetColor()
 	local Colors = T["Colors"]
 
 	local Red, Green, Blue = self.ArtContainer.HealthBar:GetStatusBarColor()
-
-	for Class, _ in pairs(RAID_CLASS_COLORS) do
-		local AltBlue = Blue
-
-		if Class == "MONK" then
-			AltBlue = AltBlue - 0.01
-		end
-
-		if RAID_CLASS_COLORS[Class].r == Red and RAID_CLASS_COLORS[Class].g == Green and RAID_CLASS_COLORS[Class].b == AltBlue then
-			Red, Green, Blue = unpack(Colors.class[Class])
-			return Red, Green, Blue
-		end
-	end
-
-	if (Red + Blue + Blue) == 1.59 then			-- Tapped
-		Red, Green, Blue = unpack(Colors.tapped)
-	elseif Green + Blue == 0 then				-- Hostile
-		Red, Green, Blue = unpack(Colors.reaction[2])
-	elseif Red + Blue == 0 then					-- Friendly NPC
-		Red, Green, Blue = unpack(Colors.reaction[5])
-	elseif Red + Green > 1.95 then				-- Neutral NPC
-		Red, Green, Blue = unpack(Colors.reaction[4])
-	elseif Red + Green == 0 then				-- Friendly Player
-		Red, Green, Blue = unpack(Colors.reaction[5])
-	end
+    
+    -- Original colors too bright, decrease clarity a little
+    Red = Red * 0.7
+    Green = Green * 0.7
+    Blue = Blue * 0.7
 
 	return Red, Green, Blue
 end
