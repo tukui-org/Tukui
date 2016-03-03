@@ -252,27 +252,27 @@ function Minimap:UpdateZone()
 end
 
 function Minimap:EnableMouseOver()
-	self:SetScript("OnEnter", function()
+    self:SetScript("OnEnter", function()
         Minimap.MinimapZone:SetAlpha(1)
         Minimap.MinimapCoords:SetAlpha(1)
         
-		--Minimap.MinimapZone.Anim:SetChange(1)
-		--Minimap.MinimapZone.Anim:Play()
-		
-		--Minimap.MinimapCoords.Anim:SetChange(1)
-		--Minimap.MinimapCoords.Anim:Play()
-	end)
-
-	self:SetScript("OnLeave", function()
+        --Minimap.MinimapZone.Anim:SetChange(1)
+        --Minimap.MinimapZone.Anim:Play()
+        
+        --Minimap.MinimapCoords.Anim:SetChange(1)
+        --Minimap.MinimapCoords.Anim:Play()
+    end)
+    
+    self:SetScript("OnLeave", function()
         Minimap.MinimapZone:SetAlpha(0)
         Minimap.MinimapCoords:SetAlpha(0)
-            
-		--Minimap.MinimapZone.Anim:SetChange(0)
-		--Minimap.MinimapZone.Anim:Play()
-		
-		--Minimap.MinimapCoords.Anim:SetChange(0)
-		--Minimap.MinimapCoords.Anim:Play()
-	end)
+        
+        --Minimap.MinimapZone.Anim:SetChange(0)
+        --Minimap.MinimapZone.Anim:Play()
+        
+        --Minimap.MinimapCoords.Anim:SetChange(0)
+        --Minimap.MinimapCoords.Anim:Play()
+    end)
 end
 
 function Minimap:Enable()
