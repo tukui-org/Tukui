@@ -324,7 +324,7 @@ local OnEnter = function(self)
 	local totalonline = totalOnline + BNTotalOnline
 	local totalfriends = #friendTable + #BNTable
 	local zonec, classc, levelc, realmc, grouped
-    local isWoW, isHS, isD3, isHotS, isOW, isClient, isS2 = 0, 0, 0, 0, 0, 0, 0
+    local onWoW, onHS, onD3, onHotS, onOW, onClient, onS2 = 0, 0, 0, 0, 0, 0, 0
     
 	if (totalonline > 0) then
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
@@ -335,13 +335,6 @@ local OnEnter = function(self)
 			GameTooltip:AddLine(" ")
             
 			for i = 1, #friendTable do
-				if i > ((T.ScreenHeight / 10) / 2) then
-					GameTooltip:AddDoubleLine("...", "...")
-					GameTooltip:AddDoubleLine(" ", " ")
-					
-					break
-				end
-				
 				if friendTable[i][5] then
 					if GetRealZoneText() == friendTable[i][4] then
                         zonec = activezone
@@ -367,7 +360,7 @@ local OnEnter = function(self)
 		end
         
         GameTooltip:AddLine(" ")
-        GameTooltip:AddLine("|------------------------ "..battleNetString.." ------------------------|")
+        GameTooltip:AddLine("|--["..BATTLETAG.."]------------------------ "..battleNetString.." ------------------------["..NAME.."]--|")
         
 		if BNTotalOnline > 0 then
 			GameTooltip:AddLine(" ")
@@ -376,20 +369,13 @@ local OnEnter = function(self)
             
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
-					if i > ((T.ScreenHeight / 10) / 2) then
-						GameTooltip:AddDoubleLine("...", "...")
-						GameTooltip:AddDoubleLine(" ", " ")
-						
-						break
-					end
-					
 					if BNTable[i][6] == wowString then
-                        isWoW = isWoW + 1
+                        onWoW = onWoW + 1
                         
                         local Client = "World of Warcraft"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isWoW == 1 then
+                        if onWoW == 1 then
                             GameTooltip:AddLine(Client)
                         end
                         
@@ -438,12 +424,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "WTCG" then
-                        isHS = isHS + 1
+                        onHS = onHS + 1
                         
                         local Client = "Hearthstone"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isHS == 1 then
+                        if onHS == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cffD49E43"..Client.."|r", "")
                         end
@@ -456,12 +442,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "D3" then
-                        isD3 = isD3 + 1
+                        onD3 = onD3 + 1
                         
                         local Client = "Diablo III"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isD3 == 1 then
+                        if onD3 == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cffCC2200"..Client.."|r", "")
                         end
@@ -474,12 +460,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "Hero" then
-                        isHotS = isHotS + 1
+                        onHotS = onHotS + 1
                         
                         local Client = "Heroes of the Storm"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isHotS == 1 then
+                        if onHotS == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
                         end
@@ -492,12 +478,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "S2" then
-                        isS2 = isS2 + 1
+                        onS2 = onS2 + 1
                         
                         local Client = "Starcraft II"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isS2 == 1 then
+                        if onS2 == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
                         end
@@ -510,12 +496,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "OVERWATCH" then
-                        isOW = isOW + 1
+                        onOW = onOW + 1
                         
                         local Client = "OVERWATCH"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isOW == 1 then
+                        if onOW == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cffACE5EE"..Client.."|r", "")
                         end
@@ -528,12 +514,12 @@ local OnEnter = function(self)
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
 					if BNTable[i][6] == "App" then
-                        isClient = isClient + 1
+                        onClient = onClient + 1
                         
                         local Client = "Battle.NET Client"
                         local isBattleTag = BNTable[i][17]
                         
-                        if isClient == 1 then
+                        if onClient == 1 then
                             GameTooltip:AddDoubleLine(" ", " ")
                             GameTooltip:AddDoubleLine("|cff00B4FF"..Client.."|r", "")
                         end
