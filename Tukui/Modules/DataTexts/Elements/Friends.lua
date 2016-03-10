@@ -401,17 +401,8 @@ local OnEnter = function(self)
                             status = 3
                         end
 	
-						-- challengeLevel bug (Problem with b.net app?)
-						if (type(BNTable[i][16]) == "string") then
-							classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]]
-							levelc = {r=1, g=1, b=1}
-						else
-							classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]], GetQuestDifficultyColor(BNTable[i][16])
-                            
-							if classc == nil then
-                                classc = GetQuestDifficultyColor(BNTable[i][16])
-                            end
-						end
+				        classc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[BNTable[i][14]]
+				        levelc = GetQuestDifficultyColor(BNTable[i][16])
 						
 						if not classc then
 							classc = {r=1, g=1, b=1}
