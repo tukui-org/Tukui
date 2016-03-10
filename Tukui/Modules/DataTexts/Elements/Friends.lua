@@ -359,10 +359,9 @@ local OnEnter = function(self)
 			end
 		end
         
-        GameTooltip:AddLine(" ")
-        GameTooltip:AddLine("["..BATTLETAG.."]------------------------ "..battleNetString.." ------------------------["..NAME.."]")
-        
 		if BNTotalOnline > 0 then
+            GameTooltip:AddLine(" ")
+            GameTooltip:AddLine("["..BATTLETAG.."]------------------------ "..battleNetString.." ------------------------["..NAME.."]")
 			GameTooltip:AddLine(" ")
 
 			local status = 0
