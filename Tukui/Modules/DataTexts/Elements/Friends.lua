@@ -362,7 +362,6 @@ local OnEnter = function(self)
 		if BNTotalOnline > 0 then
             GameTooltip:AddLine(" ")
             GameTooltip:AddLine("["..BATTLETAG.."]------------------------ "..battleNetString.." ------------------------["..NAME.."]")
-			GameTooltip:AddLine(" ")
 
 			local status = 0
             
@@ -375,6 +374,7 @@ local OnEnter = function(self)
                         local isBattleTag = BNTable[i][17]
                         
                         if onWoW == 1 then
+                            GameTooltip:AddLine(" ")
                             GameTooltip:AddLine(Client)
                         end
                         
@@ -494,10 +494,10 @@ local OnEnter = function(self)
             
 			for i = 1, #BNTable do
 				if BNTable[i][7] then
-					if BNTable[i][6] == "OVERWATCH" then
+					if BNTable[i][6] == "Pro" then
                         onOW = onOW + 1
                         
-                        local Client = "OVERWATCH"
+                        local Client = "Overwatch"
                         local isBattleTag = BNTable[i][17]
                         
                         if onOW == 1 then
