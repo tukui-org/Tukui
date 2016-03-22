@@ -177,7 +177,7 @@ local function BuildBNTable(total)
 	
 	for i = 1, total do
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(toonID or presenceID)
+        local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
             if class == v then
@@ -199,7 +199,7 @@ local function UpdateBNTable(total)
 	for i = 1, #BNTable do
 		-- get guild roster information
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetToonInfo(toonID or presenceID)
+		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 		
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
             if class == v then
