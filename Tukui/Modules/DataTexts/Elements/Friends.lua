@@ -174,6 +174,10 @@ end
 local function BuildBNTable(total)
     BNTotalOnline = 0
     wipe(BNTable)
+    
+    if not BNConnected() then
+        return
+    end
 
     for i = 1, total do
         local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
@@ -195,6 +199,12 @@ end
 
 local function UpdateBNTable(total)
     BNTotalOnline = 0
+    
+    if not BNConnected() then
+        wipe(BNTable)
+        
+        return
+    end
 
     for i = 1, #BNTable do
         -- get guild roster information
