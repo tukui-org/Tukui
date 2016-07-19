@@ -16,7 +16,7 @@ end
 function TukuiPopups:CreatePopups()
 	for i = 1, TukuiPopups.Total do
 		local Frames = TukuiPopups.Frames
-		
+
 		Frames[i] = CreateFrame("Frame", nil, UIParent)
 		Frames[i]:SetSize(400, 60)
 		Frames[i]:SetFrameLevel(3)
@@ -55,7 +55,7 @@ function TukuiPopups:CreatePopups()
 		Frames[i].Button2:SetScript("OnClick", TukuiPopups.HidePopup)
 		Frames[i].Button2:HookScript("OnClick", TukuiPopups.HidePopup)
 		Frames[i].Button2:SkinButton()
-		
+
 		Frames[i].EditBox = CreateFrame("EditBox", nil, Frames[i])
 		Frames[i].EditBox:SetMultiLine(false)
 		Frames[i].EditBox:EnableMouse(true)
@@ -69,7 +69,7 @@ function TukuiPopups:CreatePopups()
 		Frames[i].EditBox.Backdrop:SetPoint("TOPLEFT", -4, 4)
 		Frames[i].EditBox.Backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
 		Frames[i].EditBox:Hide()
-		
+
 		if (i == 1) then
 			Frames[i].Anchor = CreateFrame("Frame", nil, Frames[i])
 			Frames[i].Anchor:SetSize(360, 30)
@@ -86,7 +86,7 @@ end
 
 function TukuiPopups:ShowPopup()
 	local Info = TukuiPopups.Popup[self]
-	
+
 	if not Info then
 		return
 	end
@@ -104,47 +104,47 @@ function TukuiPopups:ShowPopup()
 	local Button1 = Popup.Button1
 	local Button2 = Popup.Button2
 	local EditBox = Popup.EditBox
-	
+
 	Question:Clear()
 	EditBox:SetText("")
-	
+
 	if Info.Question then
 		Question:AddMessage(Info.Question)
 	end
-	
+
 	if Info.Answer1 then
 		Button1.Text:SetText(Info.Answer1)
 	else
 		Button1.Text:SetText(ACCEPT)
 	end
-	
+
 	if Info.Answer2 then
 		Button2.Text:SetText(Info.Answer2)
 	else
 		Button2.Text:SetText(CANCEL)
 	end
-	
+
 	if Info.Function1 then
 		Button1:SetScript("OnClick", Info.Function1)
 	else
 		Button1:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
-	
+
 	if Info.Function2 then
 		Button2:SetScript("OnClick", Info.Function2)
 	else
 		Button2:SetScript("OnClick", TukuiPopups.HidePopup)
 	end
-	
+
 	if Info.EditBox then
 		EditBox:Show()
 	else
 		EditBox:Hide()
 	end
-	
+
 	Button1:HookScript("OnClick", TukuiPopups.HidePopup)
 	Button2:HookScript("OnClick", TukuiPopups.HidePopup)
-	
+
 	Popup:Show()
 end
 

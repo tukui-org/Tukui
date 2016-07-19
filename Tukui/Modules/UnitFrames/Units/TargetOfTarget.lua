@@ -6,7 +6,7 @@ function TukuiUnitFrames:TargetOfTarget()
 	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
-	
+
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
@@ -21,21 +21,21 @@ function TukuiUnitFrames:TargetOfTarget()
 	Panel:SetFrameLevel(2)
 	Panel:SetFrameStrata("MEDIUM")
 	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
-	
+
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(18)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(HealthTexture)
 	Health.PostUpdate = T.PostUpdatePetColor
-	
+
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:Point("TOPLEFT", Health, -1, 1)
 	Health.Background:Point("BOTTOMRIGHT", Health, 1, -1)
-	Health.Background:SetTexture(0, 0, 0)
-	
+	Health.Background:SetColorTexture(0, 0, 0)
+
 	Health.frequentUpdates = true
-	
+
 	if DarkTheme then
 		Health.colorTapping = false
 		Health.colorDisconnected = false
@@ -48,7 +48,7 @@ function TukuiUnitFrames:TargetOfTarget()
 		Health.colorClass = true
 		Health.colorReaction = true
 	end
-	
+
 	if C.UnitFrames.Smooth then
 		Health.Smooth = true
 	end
@@ -57,11 +57,11 @@ function TukuiUnitFrames:TargetOfTarget()
 	Name:SetPoint("CENTER", Panel, "CENTER", 0, 0)
 	Name:SetFontObject(Font)
 	Name:SetJustifyH("CENTER")
-	
+
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
-	
+
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium]")
 	self.Panel = Panel
 	self.Health = Health

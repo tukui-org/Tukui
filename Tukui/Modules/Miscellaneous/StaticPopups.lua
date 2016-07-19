@@ -12,7 +12,7 @@ StaticPopups.Popups = {
 
 function StaticPopups:Skin()
 	local Name = self:GetName()
-	
+
 	_G[Name]:StripTextures()
 	_G[Name]:SetTemplate()
 	_G[Name]:CreateShadow()

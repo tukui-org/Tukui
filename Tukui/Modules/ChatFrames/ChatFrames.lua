@@ -10,14 +10,14 @@ local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
 -- Update editbox border color
 function TukuiChat:UpdateEditBoxColor()
-	local EditBox = ChatEdit_ChooseBoxForSend()	
+	local EditBox = ChatEdit_ChooseBoxForSend()
 	local ChatType = EditBox:GetAttribute("chatType")
 	local Backdrop = EditBox.Backdrop
-	
+
 	if Backdrop then
 		if (ChatType == "CHANNEL") then
 			local ID = GetChannelName(EditBox:GetAttribute("channelTarget"))
-			
+
 			if (ID == 0) then
 				Backdrop.Anim:SetChange(unpack(C["General"].BorderColor))
 			else
@@ -26,7 +26,7 @@ function TukuiChat:UpdateEditBoxColor()
 		else
 			Backdrop.Anim:SetChange(ChatTypeInfo[ChatType].r, ChatTypeInfo[ChatType].g, ChatTypeInfo[ChatType].b)
 		end
-		
+
 		Backdrop.Anim:Play()
 	end
 end
@@ -49,7 +49,7 @@ function TukuiChat:SetChatFont()
 	if (CurrentFont == Path and CurrentFlag == Flag) then
 		return
 	end
-	
+
 	self:SetFont(Path, CurrentSize, Flag)
 end
 
@@ -57,7 +57,7 @@ function TukuiChat:StyleFrame(frame)
 	if frame.IsSkinned then
 		return
 	end
-	
+
 	local Frame = frame
 	local ID = frame:GetID()
 	local FrameName = frame:GetName()
@@ -67,45 +67,45 @@ function TukuiChat:StyleFrame(frame)
 	local GetTabFont = T.GetFont(C["Chat"].TabFont)
 	local TabFont, TabFontSize, TabFontFlags = _G[GetTabFont]:GetFont()
 	local DataTextLeft = T.Panels.DataTextLeft
-	
+
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
 	end
-	
+
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function()
 		EditBox:Hide()
 	end)
-	
+
 	-- Style the tab font
 	TabText:SetFont(TabFont, TabFontSize, TabFontFlags)
 	TabText.SetFont = Noop
-	
+
 	if C.Chat.Background then
 		-- Tabs Alpha
 		Tab:SetAlpha(1)
 		Tab.SetAlpha = UIFrameFadeRemoveFrame
 	end
-	
+
 	Frame:SetClampRectInsets(0, 0, 0, 0)
 	Frame:SetClampedToScreen(false)
 	Frame:SetFading(false)
-	
+
 	-- Move the edit box
 	EditBox:ClearAllPoints()
 	EditBox:SetInside(DataTextLeft)
-	
+
 	-- Disable alt key usage
 	EditBox:SetAltArrowKeyMode(false)
-	
+
 	-- Hide editbox on login
 	EditBox:Hide()
-	
+
 	-- Hide editbox instead of fading
 	EditBox:HookScript("OnEditFocusLost", function(self)
 		self:Hide()
 	end)
-	
+
 	-- Create our own texture for edit box
 	EditBox:CreateBackdrop()
 	EditBox.Backdrop:ClearAllPoints()
@@ -113,18 +113,18 @@ function TukuiChat:StyleFrame(frame)
 	EditBox.Backdrop:SetFrameStrata("LOW")
 	EditBox.Backdrop:SetFrameLevel(1)
 	EditBox.Backdrop:SetBackdropColor(unpack(C["General"].BackdropColor))
-	
+
 	EditBox.Backdrop.Anim = CreateAnimationGroup(EditBox.Backdrop):CreateAnimation("Color")
 	EditBox.Backdrop.Anim:SetDuration(0.5)
 	EditBox.Backdrop.Anim:SetSmoothing("InOut")
 	EditBox.Backdrop.Anim:SetColorType("Border")
-	
+
 	-- Hide textures
 	for i = 1, #CHAT_FRAME_TEXTURES do
 		_G[FrameName..CHAT_FRAME_TEXTURES[i]]:SetTexture(nil)
 	end
 
-	-- Remove default chatframe tab textures				
+	-- Remove default chatframe tab textures
 	_G[format("ChatFrame%sTabLeft", ID)]:Kill()
 	_G[format("ChatFrame%sTabMiddle", ID)]:Kill()
 	_G[format("ChatFrame%sTabRight", ID)]:Kill()
@@ -132,7 +132,7 @@ function TukuiChat:StyleFrame(frame)
 	_G[format("ChatFrame%sTabSelectedLeft", ID)]:Kill()
 	_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 	_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
-	
+
 	_G[format("ChatFrame%sTabHighlightLeft", ID)]:Kill()
 	_G[format("ChatFrame%sTabHighlightMiddle", ID)]:Kill()
 	_G[format("ChatFrame%sTabHighlightRight", ID)]:Kill()
@@ -151,25 +151,29 @@ function TukuiChat:StyleFrame(frame)
 	_G[format("ChatFrame%sEditBoxFocusMid", ID)]:Kill()
 	_G[format("ChatFrame%sEditBoxFocusRight", ID)]:Kill()
 
+	_G[format("ChatFrame%sEditBoxLeft", ID)]:Kill()
+	_G[format("ChatFrame%sEditBoxMid", ID)]:Kill()
+	_G[format("ChatFrame%sEditBoxRight", ID)]:Kill()
+
 	-- Kill off editbox artwork
 	local A, B, C = select(6, EditBox:GetRegions())
 	A:Kill()
 	B:Kill()
 	C:Kill()
-	
+
 	-- Justify loot frame text at the right
 	if (not Frame.isDocked and ID == 4 and TabText:GetText() == LOOT) then
 		Frame:SetJustifyH("RIGHT")
 	end
-	
+
 	-- Mouse Wheel
 	Frame:SetScript("OnMouseWheel", TukuiChat.OnMouseWheel)
-	
+
 	-- Temp Chats
 	if (ID > 10) then
 		self.SetChatFont(Frame)
 	end
-	
+
 	-- Security for font, in case if revert back to WoW default we restore instantly the tukui font default.
 	hooksecurefunc(Frame, "SetFont", TukuiChat.SetChatFont)
 
@@ -203,10 +207,10 @@ function TukuiChat:SkinToastFrame()
 	Toast:ClearAllPoints()
 	Toast:SetFrameStrata("Medium")
 	Toast:SetFrameLevel(20)
-	
+
 	if C.Chat.Background then
 		local Backdrop = T["Panels"].LeftChatBG
-		
+
 		Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
 	else
 		Toast:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
@@ -217,16 +221,16 @@ function TukuiChat:SetDefaultChatFramesPositions()
 	if (not TukuiData[GetRealmName()][UnitName("Player")].Chat) then
 		TukuiData[GetRealmName()][UnitName("Player")].Chat = {}
 	end
-	
+
 	local Width = T["Panels"].DataTextLeft:GetWidth()
 
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		local ID = Frame:GetID()
-		
+
 		-- Set font size and chat frame size
 		Frame:Size(Width, 111)
-		
+
 		-- Set default chat frame position
 		if (ID == 1) then
 			Frame:ClearAllPoints()
@@ -237,19 +241,19 @@ function TukuiChat:SetDefaultChatFramesPositions()
 				Frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -47, 45)
 			end
 		end
-		
+
 		if (ID == 1) then
 			FCF_SetWindowName(Frame, "G, S & W")
 		end
-		
+
 		if (ID == 2) then
 			FCF_SetWindowName(Frame, "Log")
 		end
-		
+
 		if (not Frame.isLocked) then
 			FCF_SetLocked(Frame, 1)
 		end
-		
+
 		local Anchor1, Parent, Anchor2, X, Y = Frame:GetPoint()
 		TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. i] = {Anchor1, Anchor2, X, Y, Width, 111}
 	end
@@ -259,11 +263,11 @@ function TukuiChat:SaveChatFramePositionAndDimensions()
 	local Anchor1, _, Anchor2, X, Y = self:GetPoint()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
-	
+
 	if not (TukuiData[GetRealmName()][UnitName("Player")].Chat) then
 		TukuiData[GetRealmName()][UnitName("Player")].Chat = {}
 	end
-	
+
 	TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
 end
 
@@ -271,13 +275,13 @@ function TukuiChat:SetChatFramePosition()
 	if (not TukuiData[GetRealmName()][UnitName("Player")].Chat) then
 		return
 	end
-	
+
 	local Frame = self
-	
+
 	if not Frame:IsMovable() then
 		return
 	end
-	
+
 	local ID = Frame:GetID()
 	local Settings = TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
 
@@ -289,7 +293,7 @@ function TukuiChat:SetChatFramePosition()
 		Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
 		Frame:SetSize(Width, Height)
 	end
-	
+
 	if (not C.Chat.LootFrame) then
 		if (FCF_GetChatWindowInfo(ID) == LOOT) then
 			FCF_Close(Frame)
@@ -298,7 +302,7 @@ function TukuiChat:SetChatFramePosition()
 end
 
 function TukuiChat:Install()
-	-- Create our custom chatframes	
+	-- Create our custom chatframes
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
@@ -351,7 +355,7 @@ function TukuiChat:Install()
 	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
-	
+
 	-- Setup the spam chat frame
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
 	ChatFrame_AddChannel(ChatFrame3, TRADE)
@@ -359,7 +363,7 @@ function TukuiChat:Install()
 	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LocalDefense)
 	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.GuildRecruitment)
 	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LookingForGroup)
-	
+
 	-- Setup the right chat
 	if C.Chat.LootFrame then
 		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
@@ -369,7 +373,7 @@ function TukuiChat:Install()
 		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
 		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
 	end
-	
+
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
 	ToggleChatColorNamesByClassGroup(true, "EMOTE")
@@ -385,7 +389,7 @@ function TukuiChat:Install()
 	ToggleChatColorNamesByClassGroup(true, "RAID_LEADER")
 	ToggleChatColorNamesByClassGroup(true, "RAID_WARNING")
 	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND")
-	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND_LEADER")	
+	ToggleChatColorNamesByClassGroup(true, "BATTLEGROUND_LEADER")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL1")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL2")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL3")
@@ -393,9 +397,9 @@ function TukuiChat:Install()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
 	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT")
 	ToggleChatColorNamesByClassGroup(true, "INSTANCE_CHAT_LEADER")
-	
+
 	DEFAULT_CHAT_FRAME:SetUserPlaced(true)
-	
+
 	self:SetDefaultChatFramesPositions()
 end
 
@@ -427,30 +431,30 @@ function TukuiChat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		local Tab = _G["ChatFrame"..i.."Tab"]
-		
+
 		Tab.noMouseAlpha = 0
 		Tab:SetAlpha(0)
-		
+
 		self:StyleFrame(Frame)
 	end
-	
+
 	local CubeLeft = T["Panels"].CubeLeft
-	
+
 	-- Remember last channel
 	ChatTypeInfo.WHISPER.sticky = 1
 	ChatTypeInfo.BN_WHISPER.sticky = 1
 	ChatTypeInfo.OFFICER.sticky = 1
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
-	
+
 	if (not C.Chat.Background) then
 		CubeLeft:SetScript("OnMouseDown", function(self, Button)
-			if (Button == "LeftButton") then	
+			if (Button == "LeftButton") then
 				ToggleFrame(ChatMenu)
 			end
 		end)
 	end
-	
+
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
 	FriendsMicroButton:Kill()
@@ -461,7 +465,7 @@ function TukuiChat:AddHooks()
 	hooksecurefunc("FCF_OpenTemporaryWindow", TukuiChat.StyleTempFrame)
 	hooksecurefunc("FCF_RestorePositionAndDimensions", TukuiChat.SetChatFramePosition)
 	hooksecurefunc("FCF_SavePositionAndDimensions", TukuiChat.SaveChatFramePositionAndDimensions)
-	
+
 	if not C.Chat.Background then
 		hooksecurefunc("FCFTab_UpdateAlpha", TukuiChat.NoMouseAlpha)
 	end

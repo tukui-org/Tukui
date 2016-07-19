@@ -21,7 +21,7 @@ T.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
 	g = g <= 1 and g >= 0 and g or 0
 	b = b <= 1 and b >= 0 and b or 0
-	
+
 	return format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 end
 
@@ -39,7 +39,7 @@ end
 -- Add comma's to a number
 T.Comma = function(num)
 	local Left, Number, Right = match(num, "^([^%d]*%d)(%d*)(.-)$")
-	
+
 	return 	Left .. reverse(gsub(reverse(Number), "(%d%d%d)", "%1,")) .. Right
 end
 
@@ -54,7 +54,7 @@ end
 -- Format seconds to min/hour/day
 T.FormatTime = function(s)
 	local Day, Hour, Minute = 86400, 3600, 60
-	
+
 	if (s >= Day) then
 		return format("%dd", ceil(s / Day))
 	elseif (s >= Hour) then
@@ -64,7 +64,7 @@ T.FormatTime = function(s)
 	elseif (s >= Minute / 12) then
 		return floor(s)
 	end
-	
+
 	return format("%.1f", s)
 end
 
@@ -74,7 +74,7 @@ T.IconCoord = {0.08, 0.92, 0.08, 0.92}
 -- Color Gradient
 T.ColorGradient = function(a, b, ...)
 	local Percent
-	
+
 	if(b == 0) then
 		Percent = 0
 	else
@@ -83,11 +83,11 @@ T.ColorGradient = function(a, b, ...)
 
 	if (Percent >= 1) then
 		local R, G, B = select(select('#', ...) - 2, ...)
-		
+
 		return R, G, B
 	elseif (Percent <= 0) then
 		local R, G, B = ...
-		
+
 		return R, G, B
 	end
 
@@ -109,10 +109,10 @@ end
 T.NewTimer = function()
 	local Parent = TimerParent:CreateAnimationGroup()
 	local Timer = Parent:CreateAnimation("Alpha")
-	
+
 	Timer:SetScript("OnFinished", TimerOnFinished)
 	Timer.Parent = Parent
-	
+
 	return Timer
 end
 
@@ -120,15 +120,15 @@ T.Delay = function(delay, func, ...)
 	if (type(delay) ~= "number" or type(func) ~= "function") then
 		return
 	end
-	
+
 	local Timer
-	
+
 	if T.UnusedTimers[1] then
 		Timer = tremove(T.UnusedTimers, 1) -- Recycle a timer
 	else
 		Timer = T.NewTimer() -- Or make a new one if needed
 	end
-	
+
 	Timer.Args = {...}
 	Timer.Func = func
 	Timer:SetDuration(delay)

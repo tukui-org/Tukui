@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 if (GetLocale() ~= "ptBR") then
 	return
@@ -102,7 +102,7 @@ L.DataText.DemolisherDestroy = "Demolishers Destroyed:"
 L.DataText.GateDestroy = "Gates Destroyed:"
 L.DataText.TotalMemory = "Total Memory Usage:"
 L.DataText.ControlBy = "Controlled by:"
-L.DataText.CallToArms = "Call to Arms" 
+L.DataText.CallToArms = "Call to Arms"
 L.DataText.ArmError = "Could not get Call To Arms information."
 L.DataText.NoDungeonArm = "No dungeons are currently offering a Call To Arms."
 L.DataText.CartControl = "Carts Controlled:"

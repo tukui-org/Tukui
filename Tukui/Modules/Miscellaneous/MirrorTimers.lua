@@ -19,16 +19,16 @@ function MirrorTimers:Update()
 			Bar:SetBackdrop(Backdrop)
 			Bar:SetBackdropColor(unpack(C.General.BackdropColor))
 			Bar:CreateShadow()
-			
+
 			Status:ClearAllPoints()
 			Status:SetAllPoints(Bar)
 			Status:SetStatusBarTexture(C.Medias.Normal)
-			
+
 			Text:ClearAllPoints()
 			Text:SetPoint("CENTER", Bar)
 
 			Border:SetTexture(nil)
-			
+
 			Bar.isSkinned = true
 		end
 	end

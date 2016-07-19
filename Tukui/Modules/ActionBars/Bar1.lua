@@ -12,7 +12,7 @@ function TukuiActionBars:UpdateBar1()
 	for i = 1, Num do
 		Button = _G["ActionButton"..i]
 		ActionBar1:SetFrameRef("ActionButton"..i, Button)
-	end	
+	end
 
 	ActionBar1:Execute([[
 		Button = table.new()
@@ -21,7 +21,7 @@ function TukuiActionBars:UpdateBar1()
 		end
 	]])
 
-	ActionBar1:SetAttribute("_onstate-page", [[ 
+	ActionBar1:SetAttribute("_onstate-page", [[
 		if HasTempShapeshiftActionBar() then
 			newstate = GetTempShapeshiftBarIndex() or newstate
 		end
@@ -32,6 +32,7 @@ function TukuiActionBars:UpdateBar1()
 	]])
 
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
+	RegisterStateDriver(ActionBar1, "visibility", "[petbattle] hide; show")
 end
 
 function TukuiActionBars:CreateBar1()
@@ -40,35 +41,16 @@ function TukuiActionBars:CreateBar1()
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local ActionBar1 = Panels.ActionBar1
-	local Druid, Warrior, Priest, Rogue, Warlock, Monk = "", "", "", "", "", ""
-	
+	local Druid, Rogue = "", ""
+
 	if (C.ActionBars.SwitchBarOnStance) then
-		if C.ActionBars.OwnWarriorStanceBar then
-			Warrior = "[stance:1] 7; [stance:2] 8; [stance:3] 9;"
-		end
-
-		if C.ActionBars.OwnShadowDanceBar then
-			Rogue = "[stance:2] 10; [bonusbar:1] 7;"
-		else
-			Rogue = "[bonusbar:1] 7;"
-		end
-
-		if C.ActionBars.OwnMetamorphosisBar then
-			Warlock = "[stance:1] 10; "
-		end
-		
+		Rogue = "[bonusbar:1] 7;"
 		Druid = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
-		Priest = "[bonusbar:1] 7;"
-		Monk = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 	end
 
 	ActionBar1.Page = {
 		["DRUID"] = Druid,
-		["WARRIOR"] = Warrior,
-		["PRIEST"] = Priest,
 		["ROGUE"] = Rogue,
-		["WARLOCK"] = Warlock,
-		["MONK"] = Monk,
 		["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
 	}
 
@@ -76,11 +58,11 @@ function TukuiActionBars:CreateBar1()
 		local Condition = ActionBar1.Page["DEFAULT"]
 		local Class = select(2, UnitClass("player"))
 		local Page = ActionBar1.Page[Class]
-		
+
 		if Page then
 			Condition = Condition .. " " .. Page
 		end
-		
+
 		Condition = Condition .. " [form] 1; 1"
 
 		return Condition
@@ -114,7 +96,7 @@ function TukuiActionBars:CreateBar1()
 			MainMenuBar_OnEvent(self, event, ...)
 		end
 	end)
-	
+
 	for i = 1, Num do
 		local Button = _G["ActionButton"..i]
 		ActionBar1["Button"..i] = Button

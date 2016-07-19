@@ -37,15 +37,15 @@ function ActionBars:RemoveColumn(bar, num)
 	if (not bar.NextColumnToHide) then
 		bar.NextColumnToHide = 6
 	end
-	
+
 	if (bar.NextColumnToHide <= 1) then -- Reset the count at 1 button shown
 		bar.NextColumnToHide = 6
 		self:ShowAllButtons(bar, num)
 		Data["Bar"..num.."Buttons"] = bar.NextColumnToHide
-		
+
 		return
 	end
-	
+
 	local Button1 = bar["Button"..bar.NextColumnToHide]
 	local Button2 = bar["Button"..bar.NextColumnToHide + 6]
 
@@ -55,7 +55,7 @@ function ActionBars:RemoveColumn(bar, num)
 	--bar:Width((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
 	bar.Anim:SetChange((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
 	bar.Anim:Play()
-	
+
 	bar.NextColumnToHide = bar.NextColumnToHide - 1
 
 	Data["Bar"..num.."Buttons"] = bar.NextColumnToHide
@@ -67,23 +67,23 @@ function ActionBars:RemoveButton(bar, num)
 	if (not bar.NextButtonToHide) then
 		bar.NextButtonToHide = 12
 	end
-	
+
 	if (bar.NextButtonToHide <= 1) then -- Reset the count at 1 button shown
 		bar.NextButtonToHide = 12
 		self:ShowAllButtons(bar, num)
 		Data["Bar"..num.."Buttons"] = bar.NextButtonToHide
-		
+
 		return
 	end
 
 	local Button = bar["Button"..bar.NextButtonToHide]
-	
+
 	Button:Hide()
-	
+
 	--bar:Height((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
 	bar.Anim:SetChange((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
 	bar.Anim:Play()
-	
+
 	bar.NextButtonToHide = bar.NextButtonToHide - 1
 
 	Data["Bar"..num.."Buttons"] = bar.NextButtonToHide
@@ -95,10 +95,10 @@ function ActionBars:ShowTopButtons(bar)
 
 	for i = 7, (Value + 6) do
 		Button = bar["Button"..i]
-		
+
 		Button:Show()
 	end
-	
+
 	bar:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
 end
 
@@ -110,7 +110,7 @@ function ActionBars:HideTopButtons()
 		Bar2["Button"..i]:Hide()
 		Bar3["Button"..i]:Hide()
 	end
-	
+
 	Bar2:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
 	Bar3:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
 end
@@ -119,7 +119,7 @@ local OnClick = function(self, button)
 	if InCombatLockdown() then
 		return T.Print(error)
 	end
-	
+
 	local ShiftClick = IsShiftKeyDown()
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 	local Text = self.Text
@@ -128,28 +128,28 @@ local OnClick = function(self, button)
 
 	if (Bar:IsVisible()) then
 		if (ShiftClick and Num ~= 4) then -- Handle shift-clicks on the button
-			if (Num == 2 or Num ==  3) then	
+			if (Num == 2 or Num ==  3) then
 				ActionBars:RemoveColumn(Bar, Num)
 			else
 				ActionBars:RemoveButton(Bar, Num)
 			end
-			
+
 			return
 		else
 			-- Visibility
 			UnregisterStateDriver(Bar, "visibility")
 			Bar:Hide()
-			
+
 			if (Num == 4) then
 				ActionBars:HideTopButtons()
-				
+
 				BarButtons[2]:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
 				BarButtons[3]:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
 			end
-			
+
 			-- Move the button
 			self:ClearAllPoints()
-			
+
 			if (Num == 2) then
 				self:Point("RIGHT", Bar, "RIGHT", 0, 0)
 				Text:SetText(L.ActionBars.ArrowLeft)
@@ -164,7 +164,7 @@ local OnClick = function(self, button)
 				self:Point("LEFT", Bar, "RIGHT", 3, 0)
 				Text:SetText(L.ActionBars.ArrowLeft)
 			end
-			
+
 			-- Set value
 			Data["HideBar"..Num] = true
 		end
@@ -172,18 +172,18 @@ local OnClick = function(self, button)
 		-- Visibility
 		RegisterStateDriver(Bar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 		Bar:Show()
-		
+
 		if (Num == 4) then
 			local Bar2 = T.Panels["ActionBar2"]
 			local Bar3 = T.Panels["ActionBar3"]
-		
+
 			ActionBars:ShowTopButtons(Bar2)
 			ActionBars:ShowTopButtons(Bar3)
-			
+
 			BarButtons[2]:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
 			BarButtons[3]:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
 		end
-		
+
 		-- Move the button
 		self:ClearAllPoints()
 
@@ -201,7 +201,7 @@ local OnClick = function(self, button)
 			self:Point("TOP", Bar, "BOTTOM", 0, -3)
 			Text:SetText(L.ActionBars.ArrowRight)
 		end
-		
+
 		-- Set value
 		Data["HideBar"..Num] = false
 	end
@@ -212,22 +212,24 @@ function ActionBars:CreateToggleButtons()
 		local Bar = T.Panels["ActionBar" .. i]
 		local Width = Bar:GetWidth()
 		local Height = Bar:GetHeight()
-		
+
 		local Button = CreateFrame("Button", nil, UIParent)
+		Button:SetFrameStrata("BACKGROUND")
+		Button:SetFrameLevel(4)
 		Button:SetTemplate()
 		Button:RegisterForClicks("AnyUp")
 		Button:SetAlpha(0)
 		Button.Bar = Bar
 		Button.Num = i
-		
+
 		Button:SetScript("OnClick", OnClick)
 		Button:SetScript("OnEnter", OnEnter)
 		Button:SetScript("OnLeave", OnLeave)
-		
+
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
 		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
-		
+
 		if (i == 2) then
 			Button:Size(18, Height)
 			Button:Point("RIGHT", Bar, "LEFT", -3, 0)
@@ -245,9 +247,9 @@ function ActionBars:CreateToggleButtons()
 			Button:Point("TOP", Bar, "BOTTOM", 0, -3)
 			Button.Text:SetText(L.ActionBars.ArrowRight)
 		end
-		
+
 		BarButtons[i] = Button
-		
+
 		T.Panels["ActionBar" .. i .. "ToggleButton"] = Button
 	end
 end
@@ -256,9 +258,9 @@ function ActionBars:LoadVariables()
 	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
 		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
-	
+
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
-	
+
 	-- Hide Buttons
 	for bar = 2, 3 do
 		if Data["Bar"..bar.."Buttons"] then
@@ -267,7 +269,7 @@ function ActionBars:LoadVariables()
 			end
 		end
 	end
-	
+
 	-- Hide more buttons
 	for bar = 4, 5 do
 		if Data["Bar"..bar.."Buttons"] then
@@ -276,11 +278,11 @@ function ActionBars:LoadVariables()
 			end
 		end
 	end
-	
+
 	-- Hide Bars
 	for i = 2, 5 do
 		local Button = BarButtons[i]
-		
+
 		if Data["HideBar"..i] then
 			OnClick(Button)
 		end
@@ -288,25 +290,25 @@ function ActionBars:LoadVariables()
 end
 
 function ActionBars:VehicleOnEvent(event)
-    if CanExitVehicle() then
-        if (UnitOnTaxi("player")) then
-            self.Text:SetText("|cffFF0000" .. TAXI_CANCEL_DESCRIPTION .. "|r")
-        else
-            self.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
-        end
-        
-        self:Show()
-    else
-        self:Hide()
-    end
+	if CanExitVehicle() then
+		if (UnitOnTaxi("player")) then
+			self.Text:SetText("|cffFF0000" .. TAXI_CANCEL_DESCRIPTION .. "|r")
+		else
+			self.Text:SetText("|cffFF0000" .. LEAVE_VEHICLE .. "|r")
+		end
+
+		self:Show()
+	else
+		self:Hide()
+	end
 end
 
 function ActionBars:VehicleOnClick()
-    if (UnitOnTaxi("player")) then
-        TaxiRequestEarlyLanding()
-    else
-        VehicleExit()
-    end
+	if (UnitOnTaxi("player")) then
+		TaxiRequestEarlyLanding()
+	else
+		VehicleExit()
+	end
 end
 
 function ActionBars:CreateVehicleButtons()
@@ -314,7 +316,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleLeft:SetAllPoints(T.Panels.DataTextLeft)
 	VehicleLeft:SetFrameStrata("MEDIUM")
 	VehicleLeft:SetFrameLevel(10)
-    VehicleLeft:SkinButton()
+	VehicleLeft:SkinButton()
 	VehicleLeft:RegisterForClicks("AnyUp")
 	VehicleLeft:SetScript("OnClick", ActionBars.VehicleOnClick)
 	VehicleLeft:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -351,7 +353,7 @@ function ActionBars:CreateVehicleButtons()
 	VehicleRight.Text:SetFont(C.Medias.Font, 12)
 	VehicleRight.Text:Point("CENTER", 0, 0)
 	VehicleRight.Text:SetShadowOffset(1.25, -1.25)
-	
+
 	T.Panels.VehicleButtonLeft = VehicleLeft
 	T.Panels.VehicleButtonRight = VehicleRight
 end

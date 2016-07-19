@@ -60,9 +60,6 @@ local oUF = ns.oUF
 
 -- Order the list based upon the default UIs priorities.
 local priorities = STANDARD_TOTEM_PRIORITIES
-if(select(2, UnitClass'player') == 'SHAMAN') then
-	priorities = SHAMAN_TOTEM_PRIORITIES
-end
 
 local UpdateTooltip = function(self)
 	GameTooltip:SetTotem(self:GetID())
@@ -142,7 +139,8 @@ local Enable = function(self)
 				end
 			end
 		end
-
+		
+		-- Right click to remove totem
 		hooksecurefunc("TotemButton_Update", function(btot)
 			if(btot.slot > 0) then
 				local tot = totems[priorities[btot.slot]]
@@ -159,6 +157,9 @@ local Enable = function(self)
 			end
 		end)
 		
+		-- Fix a taint in combat because of right-click feature above
+		TotemFrame_AdjustPetFrame = function() end
+
 		self:RegisterEvent('PLAYER_TOTEM_UPDATE', Path, true)
 
 		TotemFrame.Show = TotemFrame.Hide

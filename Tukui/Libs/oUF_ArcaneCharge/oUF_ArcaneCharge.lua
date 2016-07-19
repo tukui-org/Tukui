@@ -6,54 +6,29 @@ if select(2, UnitClass('player')) ~= "MAGE" then return end
 
 local Colors = { 104/255, 205/255, 255/255 }
 
-local function UpdateBar(self, elapsed)
-	if not self.expirationTime then return end
-	self.elapsed = (self.elapsed or 0) + elapsed
-	if self.elapsed >= 0.5 then	
-		local timeLeft = self.expirationTime - GetTime()
-		if timeLeft > 0 then
-			self:SetValue(timeLeft)
-		else
-			self:SetScript("OnUpdate", nil)
-		end
-	end		
-end
-
-local Update = function(self, event)
-	local unit = self.unit or 'player'
-	local bar = self.ArcaneChargeBar
-	if(bar.PreUpdate) then bar:PreUpdate(event) end
-	
-	local arcaneCharges, maxCharges, duration, expirationTime = 0, 4
-	if bar:IsShown() then
-		for i = 1, 40 do
-			local count, _, start, timeLeft, _, _, _, spellID = select(4, UnitDebuff(unit, i))
-			if spellID == 36032 then
-				arcaneCharges = count or 0
-				duration = start
-				expirationTime = timeLeft
-			end
-		end	
-
-		for i = 1, maxCharges do
-			if duration and expirationTime then
-				bar[i]:SetMinMaxValues(0, duration)
-				bar[i].duration = duration
-				bar[i].expirationTime = expirationTime
-			end
-			
-			if i <= arcaneCharges then
-				bar[i]:SetValue(duration)
-				bar[i]:SetScript('OnUpdate', UpdateBar)
-			else
-				bar[i]:SetValue(0)
-				bar[i]:SetScript('OnUpdate', nil)
-			end
-		end		
+local Update = function(self, event, unit, powerType)
+	if unit ~= "player" and powerType ~= "ARCANE_CHARGES" then
+		return
 	end
 	
+	local bar = self.ArcaneChargeBar
+	local power = UnitPower("player", SPELL_POWER_ARCANE_CHARGES, true)
+	
+
+	if(bar.PreUpdate) then bar:PreUpdate(power) end
+
+	if bar:IsShown() then
+		for i = 1, 4 do
+			if i <= power then
+				bar[i]:SetAlpha(1)
+			else
+				bar[i]:SetAlpha(.3)
+			end
+		end
+	end
+
 	if(bar.PostUpdate) then
-		return bar:PostUpdate(event, arcaneCharges, maxCharges)
+		return bar:PostUpdate(power)
 	end
 end
 
@@ -66,6 +41,8 @@ local function Visibility(self, event, unit)
 	else
 		bar:Hide()
 	end
+	
+	Update(self, nil, "player", "ARCANE_CHARGES")
 end
 
 local Path = function(self, ...)
@@ -73,7 +50,7 @@ local Path = function(self, ...)
 end
 
 local ForceUpdate = function(element)
-	return Path(element.__owner, 'ForceUpdate', element.__owner.unit)
+	return Path(element.__owner, 'ForceUpdate', element.__owner.unit, "ARCANE_CHARGES")
 end
 
 local function Enable(self, unit)
@@ -82,8 +59,8 @@ local function Enable(self, unit)
 	if(bar) then
 		bar.__owner = self
 		bar.ForceUpdate = ForceUpdate
-		
-		self:RegisterEvent("UNIT_AURA", Path)
+
+		self:RegisterEvent("UNIT_POWER", Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
@@ -95,30 +72,22 @@ local function Enable(self, unit)
 			bar[i]:SetFrameLevel(bar:GetFrameLevel() + 1)
 			bar[i]:GetStatusBarTexture():SetHorizTile(false)
 			bar[i]:SetStatusBarColor(unpack(Colors))
-			bar[i]:SetMinMaxValues(0, 1)
-			bar[i]:SetValue(0)
-			
-			if bar[i].bg then
-				bar[i].bg:SetAlpha(0.15)
-				bar[i].bg:SetAllPoints()
-				bar[i].bg:SetTexture(unpack(Colors))
-			end	
 		end
-		
+
 		bar:Hide()
-		
+
 		return true
-	end	
+	end
 end
 
 local function Disable(self,unit)
 	local bar = self.ArcaneChargeBar
 
 	if(bar) then
-		self:UnregisterEvent("UNIT_AURA", Path)
+		self:UnregisterEvent("UNIT_POWER", Path)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 	end
 end
-			
+
 oUF:AddElement("ArcaneChargeBar",Path,Enable,Disable)

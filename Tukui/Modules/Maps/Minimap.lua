@@ -155,13 +155,13 @@ end
 function Minimap:AddZoneAndCoords()
 	local MinimapZone = CreateFrame("Frame", "TukuiMinimapZone", self)
 	MinimapZone:SetTemplate()
-	MinimapZone:Size(self:GetWidth() + 4, 22)
+	MinimapZone:Size(self:GetWidth() + 4, 19)
 	MinimapZone:Point("TOP", self, 0, 2)
 	MinimapZone:SetFrameStrata(self:GetFrameStrata())
 	MinimapZone:SetAlpha(0)
 	
 	MinimapZone.Text = MinimapZone:CreateFontString("TukuiMinimapZoneText", "OVERLAY")
-	MinimapZone.Text:SetFont(C["Medias"].Font, 12)
+	MinimapZone.Text:SetFont(C["Medias"].Font, 10)
 	MinimapZone.Text:Point("TOP", 0, -1)
 	MinimapZone.Text:SetPoint("BOTTOM")
 	MinimapZone.Text:Height(12)
@@ -174,13 +174,13 @@ function Minimap:AddZoneAndCoords()
 	
 	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 	MinimapCoords:SetTemplate()
-	MinimapCoords:Size(40, 22)
+	MinimapCoords:Size(40, 19)
 	MinimapCoords:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 2, 2)
 	MinimapCoords:SetFrameStrata(self:GetFrameStrata())
 	MinimapCoords:SetAlpha(0)
 	
 	MinimapCoords.Text = MinimapCoords:CreateFontString("TukuiMinimapCoordText", "OVERLAY")
-	MinimapCoords.Text:SetFont(C["Medias"].Font, 12)
+	MinimapCoords.Text:SetFont(C["Medias"].Font, 10)
 	MinimapCoords.Text:Point("Center", 0, -1)
 	MinimapCoords.Text:SetText("0, 0")
 	
@@ -252,27 +252,27 @@ function Minimap:UpdateZone()
 end
 
 function Minimap:EnableMouseOver()
-    self:SetScript("OnEnter", function()
-        Minimap.MinimapZone:SetAlpha(1)
-        Minimap.MinimapCoords:SetAlpha(1)
-        
-        --Minimap.MinimapZone.Anim:SetChange(1)
-        --Minimap.MinimapZone.Anim:Play()
-        
-        --Minimap.MinimapCoords.Anim:SetChange(1)
-        --Minimap.MinimapCoords.Anim:Play()
-    end)
-    
-    self:SetScript("OnLeave", function()
-        Minimap.MinimapZone:SetAlpha(0)
-        Minimap.MinimapCoords:SetAlpha(0)
-        
-        --Minimap.MinimapZone.Anim:SetChange(0)
-        --Minimap.MinimapZone.Anim:Play()
-        
-        --Minimap.MinimapCoords.Anim:SetChange(0)
-        --Minimap.MinimapCoords.Anim:Play()
-    end)
+	self:SetScript("OnEnter", function()
+		Minimap.MinimapZone:SetAlpha(1)
+		Minimap.MinimapCoords:SetAlpha(1)
+		
+		--Minimap.MinimapZone.Anim:SetChange(1)
+		--Minimap.MinimapZone.Anim:Play()
+		
+		--Minimap.MinimapCoords.Anim:SetChange(1)
+		--Minimap.MinimapCoords.Anim:Play()
+	end)
+	
+	self:SetScript("OnLeave", function()
+		Minimap.MinimapZone:SetAlpha(0)
+		Minimap.MinimapCoords:SetAlpha(0)
+		
+		--Minimap.MinimapZone.Anim:SetChange(0)
+		--Minimap.MinimapZone.Anim:Play()
+		
+		--Minimap.MinimapCoords.Anim:SetChange(0)
+		--Minimap.MinimapCoords.Anim:Play()
+	end)
 end
 
 function Minimap:Enable()

@@ -10,41 +10,24 @@ local Update = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'HOLY_POWER')) then return end
 
 	local hp = self.HolyPower
-	if(hp.PreUpdate) then hp:PreUpdate() end
-
 	local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
 	local numMax = UnitPowerMax('player', SPELL_POWER_HOLY_POWER)
-	local barWidth = self.HolyPower:GetWidth()
-	local spacing = select(4, self.HolyPower[4]:GetPoint())
-	local lastBar = 0
 	
-	if numMax ~= self.HolyPower.maxPower then
-		if numMax == 3 then
-			self.HolyPower[4]:Hide()
-			self.HolyPower[5]:Hide()
-			for i = 1, 3 do
-				if i ~= 3 then
-					self.HolyPower[i]:SetWidth(barWidth / 3)
-					lastBar = lastBar + (barWidth / 3 + spacing)
-				else
-					self.HolyPower[i]:SetWidth(barWidth - lastBar)
-				end
-			end
-		else
-			self.HolyPower[4]:Show()
-			self.HolyPower[5]:Show()
-			for i = 1, 5 do
-				self.HolyPower[i]:SetWidth(self.HolyPower[i].width)
-			end
-		end
-		self.HolyPower.maxPower = numMax
+	if(hp.PreUpdate) then 
+		hp:PreUpdate()
+	end
+	
+	if num > 0 then
+		hp:Show()
+	else
+		hp:Hide()
 	end
 
-	for i = 1, 5 do
+	for i = 1, numMax do
 		if(i <= num) then
 			self.HolyPower[i]:SetAlpha(1)
 		else
-			self.HolyPower[i]:SetAlpha(.2)
+			self.HolyPower[i]:SetAlpha(.3)
 		end
 	end
 
@@ -68,14 +51,16 @@ local function Enable(self)
 		hp.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent('UNIT_POWER', Path)
-		
+
 		for i = 1, 5 do
 			if not hp[i]:GetStatusBarTexture() then
 				hp[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
-			
+
 			hp[i].width = hp[i]:GetWidth()
 		end
+		
+		hp:Hide()
 
 		return true
 	end

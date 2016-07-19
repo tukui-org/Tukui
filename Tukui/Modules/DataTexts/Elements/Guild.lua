@@ -24,15 +24,15 @@ local function BuildGuildTable()
 	local _, name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	for i = 1, GetNumGuildMembers() do
 		name, rank, _, level, _, zone, note, officernote, connected, status, class, _, _, isMobile = GetGuildRosterInfo(i)
-		
+
 		if status == 1 then
 			status = "|cffff0000["..AFK.."]|r"
 		elseif status == 2 then
-			status = "|cffff0000["..DND.."]|r" 
+			status = "|cffff0000["..DND.."]|r"
 		else
 			status = ""
 		end
-		
+
 		guildTable[i] = { name, rank, level, zone, note, officernote, connected, status, class, isMobile }
 		if connected then totalOnline = totalOnline + 1 end
 	end
@@ -46,11 +46,11 @@ end
 local function UpdateGuildXP()
 	local currentXP, remainingXP = UnitGetGuildXP("player")
 	local nextLevelXP = currentXP + remainingXP
-	
+
 	if nextLevelXP == 0 or maxDailyXP == 0 then return end
-	
+
 	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
-	
+
 	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
 end
 
@@ -76,19 +76,19 @@ local function whisperClick(self,arg1,arg2,checked)
 end
 
 local function ToggleGuildFrame()
-	if IsInGuild() then 
-		if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end 
+	if IsInGuild() then
+		if not GuildFrame then LoadAddOn("Blizzard_GuildUI") end
 		GuildFrame_Toggle()
 		GuildFrame_TabClicked(GuildFrameTab2)
-	else 
-		if not LookingForGuildFrame then LoadAddOn("Blizzard_LookingForGuildUI") end 
-		LookingForGuildFrame_Toggle() 
+	else
+		if not LookingForGuildFrame then LoadAddOn("Blizzard_LookingForGuildUI") end
+		LookingForGuildFrame_Toggle()
 	end
 end
 
 local OnMouseUp = function(self, btn)
 	if btn ~= "RightButton" or not IsInGuild() then return end
-	
+
 	GameTooltip:Hide()
 
 	local classc, levelc, grouped
@@ -122,11 +122,11 @@ end
 
 local OnEnter = function(self)
 	if InCombatLockdown() or not IsInGuild() then return end
-	
+
 	GuildRoster()
 	UpdateGuildMessage()
 	BuildGuildTable()
-		
+
 	local name, rank, level, zone, note, officernote, connected, status, class, isMobile
 	local zonec, classc, levelc
 	local online = totalOnline
@@ -137,21 +137,21 @@ local OnEnter = function(self)
 	if GuildInfo and GuildLevel then
 		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	end
-	
+
 	if guildMotD ~= "" then GameTooltip:AddLine(" ") GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
-	
+
 	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine(" ")
 	if GuildLevel and GuildLevel ~= 25 then
 		--UpdateGuildXP()
-		
+
 		if guildXP[0] then
 			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
-			
+
 			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
 		end
 	end
-	
+
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
 	if standingID ~= 8 then -- Not Max Rep
 		barMax = barMax - barMin
@@ -159,12 +159,12 @@ local OnEnter = function(self)
 		barMin = 0
 		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
 	end
-	
+
 	if online > 1 then
 		local Count = 0
-		
+
 		GameTooltip:AddLine(" ")
-		for i = 1, #guildTable do			
+		for i = 1, #guildTable do
 			if online <= 1 then
 				break
 			end
@@ -178,12 +178,12 @@ local OnEnter = function(self)
 
 					break
 				end
-				
+
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
-				
+
 				if isMobile then zone = "" end
-				
+
 				if IsShiftKeyDown() then
 					GameTooltip:AddDoubleLine(string.format(nameRankString, name, rank), zone, classc.r, classc.g, classc.b, zonec.r, zonec.g, zonec.b)
 					if note ~= "" then GameTooltip:AddLine(string.format(noteString, note), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
@@ -191,7 +191,7 @@ local OnEnter = function(self)
 				else
 					GameTooltip:AddDoubleLine(string.format(levelNameStatusString, levelc.r*255, levelc.g*255, levelc.b*255, level, name, status), zone, classc.r,classc.g,classc.b, zonec.r,zonec.g,zonec.b)
 				end
-				
+
 				Count = Count + 1
 			end
 		end
@@ -210,14 +210,14 @@ end
 local Update = function(self)
 	if (not IsInGuild()) then
 		self.Text:SetText(DataText.NameColor .. L.DataText.NoGuild .. "|r") -- I need a string :(
-		
+
 		return
 	end
-	
+
 	GuildRoster() -- Bux Fix on 5.4.
 
 	totalOnline = select(3, GetNumGuildMembers())
-	
+
 	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. GUILD .. "|r", DataText.ValueColor .. totalOnline .. "|r")
 end
 
@@ -226,7 +226,7 @@ local Enable = function(self)
 	self:RegisterEvent("GUILD_ROSTER_UPDATE")
 	self:RegisterEvent("PLAYER_GUILD_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	
+
 	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnMouseUp", OnMouseUp)
 	self:SetScript("OnLeave", OnLeave)

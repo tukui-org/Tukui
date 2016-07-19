@@ -13,7 +13,7 @@ function Battle:AddActionBar()
 	Bar:SetTemplate()
 	Bar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 14)
 	Bar:Hide()
-	
+
 	self.ActionBar = Bar
 
 	RegisterStateDriver(Bar, "visibility", "[petbattle] show; hide")
@@ -58,11 +58,11 @@ function Battle:SkinPetButton()
 	self:SetNormalTexture("")
 	self.Icon:SetTexCoord(unpack(T.IconCoord))
 	self:StyleButton()
-	self.SelectedHighlight:SetTexture(0.9, 0.8, 0.1, 0.3)
+	self.SelectedHighlight:SetColorTexture(0.9, 0.8, 0.1, 0.3)
 	self.SelectedHighlight:SetInside(self.Backdrop)
 	self.pushed:SetInside(self.Backdrop)
 	self.hover:SetInside(self.Backdrop)
-	
+
 	if self.BetterIcon then
 		self.BetterIcon:ClearAllPoints()
 		self.BetterIcon:SetPoint("CENTER", self)
@@ -74,12 +74,12 @@ function Battle:AddActionBarHooks()
 		Bottom.PetSelectionFrame:ClearAllPoints()
 		Bottom.PetSelectionFrame:SetPoint("BOTTOM", Bottom.xpBar, "TOP", 0, 8)
 	end)
-	
+
 	hooksecurefunc("PetBattleFrame_UpdateActionBarLayout", function(self)
 		local Switch = Bottom.SwitchPetButton
 		local Catch = Bottom.CatchButton
 		local Forfeit = Bottom.ForfeitButton
-		
+
 		for i=1, NUM_BATTLE_PET_ABILITIES do
 			local Button = Bottom.abilityButtons[i]
 			Button.checked = true
@@ -93,7 +93,7 @@ function Battle:AddActionBarHooks()
 				Button:SetPoint("LEFT", PreviousButton, "RIGHT", 10, 0)
 			end
 		end
-		
+
 		Battle.SkinPetButton(Switch)
 		Switch:SetParent(Battle.ActionBar)
 		Switch:ClearAllPoints()

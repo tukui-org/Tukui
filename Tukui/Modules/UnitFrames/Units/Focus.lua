@@ -24,14 +24,14 @@ function TukuiUnitFrames:Focus()
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
-	Health.Background:SetTexture(0.1, 0.1, 0.1)
+	Health.Background:SetColorTexture(0.1, 0.1, 0.1)
 
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("LEFT", Health, "LEFT", 2, 0)
 
 	Health.frequentUpdates = true
-	
+
 	if DarkTheme then
 		Health.colorTapping = false
 		Health.colorDisconnected = false
@@ -59,7 +59,7 @@ function TukuiUnitFrames:Focus()
 
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(0.1, 0.1, 0.1)
+	Power.Background:SetColorTexture(.4, .4, .4)
 	Power.Background.multiplier = 0.3
 
 	Power.Value = Power:CreateFontString(nil, "OVERLAY")
@@ -67,21 +67,21 @@ function TukuiUnitFrames:Focus()
 	Power.Value:Point("RIGHT", Health, "RIGHT", -2, 0)
 
 	Power.frequentUpdates = true
-	
+
 	if DarkTheme then
 		Power.colorTapping = true
 		Power.colorClass = true
 		Power.colorClassNPC = true
 		Power.colorClassPet = true
-		Power.Background.multiplier = 0.1				
+		Power.Background.multiplier = 0.1
 	else
 		Power.colorPower = true
 	end
-	
+
 	if C.UnitFrames.Smooth then
 		Power.Smooth = true
 	end
-	
+
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
@@ -89,7 +89,7 @@ function TukuiUnitFrames:Focus()
 	Name:SetJustifyH("CENTER")
 	Name:SetFontObject(Font)
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
-	
+
 	if (C.UnitFrames.FocusAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 		Buffs:SetHeight(26)
@@ -115,14 +115,14 @@ function TukuiUnitFrames:Focus()
 		Debuffs["growth-x"] = "RIGHT"
 		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
-	
+
 		self.Debuffs = Debuffs
 		self.Buffs = Buffs
 	end
 
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", nil, self)
-		
+
 		CastBar:SetPoint("LEFT", 0, 0)
 		CastBar:SetPoint("RIGHT", -20, 0)
 		CastBar:SetPoint("BOTTOM", 0, -22)
@@ -132,7 +132,7 @@ function TukuiUnitFrames:Focus()
 		CastBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 		CastBar:SetBackdropColor(unpack(C.General.BackdropColor))
 		CastBar:CreateShadow()
-		
+
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
 		CastBar.Time:SetFontObject(Font)
 		CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
@@ -152,7 +152,7 @@ function TukuiUnitFrames:Focus()
 		CastBar.Button:SetBackdrop(TukuiUnitFrames.Backdrop)
 		CastBar.Button:SetBackdropColor(unpack(C.General.BackdropColor))
 		CastBar.Button:CreateShadow()
-		
+
 		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 		CastBar.Icon:SetAllPoints()
 		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
@@ -165,7 +165,7 @@ function TukuiUnitFrames:Focus()
 		self.Castbar = CastBar
 		self.Castbar.Icon = CastBar.Icon
 	end
-	
+
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)

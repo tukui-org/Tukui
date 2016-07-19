@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 if (GetLocale() ~= "zhTW") then
 	return
@@ -102,7 +102,7 @@ L.DataText.DemolisherDestroy = "石毀車摧毀:"
 L.DataText.GateDestroy = "大門摧毀:"
 L.DataText.TotalMemory = "總共使用記憶體:"
 L.DataText.ControlBy = "控制方:"
-L.DataText.CallToArms = "戰鬥的號角" 
+L.DataText.CallToArms = "戰鬥的號角"
 L.DataText.ArmError = "無法獲取戰鬥的號角"
 L.DataText.NoDungeonArm = "目前沒有地城獎勵"
 L.DataText.CartControl = "推車:"

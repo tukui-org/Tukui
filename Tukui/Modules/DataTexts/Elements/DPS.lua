@@ -37,35 +37,35 @@ local CreateFunctions = function(self)
 			PetGUID = UnitGUID("pet")
 		end
 	end
-	
-	function self:COMBAT_LOG_EVENT_UNFILTERED(...)		   
+
+	function self:COMBAT_LOG_EVENT_UNFILTERED(...)
 		if (not Events[select(2, ...)]) then
 			return
 		end
 
 		local ID = select(4, ...)
-		
+
 		if (ID == PlayerGUID or ID == PetGUID) then
 			if (select(2, ...) == "SWING_DAMAGE") then
 				LastDamage = select(12, ...)
 			else
 				LastDamage = select(15, ...)
 			end
-			
+
 			TotalDamage = TotalDamage + LastDamage
-		end       
+		end
 	end
-	
+
 	function self:PLAYER_REGEN_ENABLED()
 		self.Text:SetText(GetDPS())
 	end
-	
+
 	function self:PLAYER_REGEN_DISABLED()
 		CombatTime = 0
 		TotalDamage = 0
 		LastDamage = 0
 	end
-	
+
 	self.Functions = true
 end
 
@@ -75,7 +75,7 @@ local OnUpdate = function(self, t)
 	end
 
 	tslu = tslu + t
-	
+
 	if (tslu >= 1) then
 		tslu = 0
 		self.Text:SetText(GetDPS())
@@ -93,14 +93,14 @@ end
 local OnMouseDown = function()
 	CombatTime = 0
 	TotalDamage = 0
-	LastDamage = 0	
+	LastDamage = 0
 end
 
-local Enable = function(self)	
+local Enable = function(self)
 	if (not self.Functions) then
 		CreateFunctions(self)
 	end
-	
+
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")

@@ -13,7 +13,7 @@ function Reputation:SetTooltip()
 	if (not GetWatchedFactionInfo()) then
 		return
 	end
-	
+
 	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
 
 	if (self == Reputation.RepBar1) then
@@ -21,7 +21,7 @@ function Reputation:SetTooltip()
 	else
 		GameTooltip:SetOwner(Panels.DataTextRight, "ANCHOR_TOPRIGHT", 0, 5)
 	end
-	
+
 	GameTooltip:AddLine(string.format("%s (%s)", Name, _G["FACTION_STANDING_LABEL" .. ID]))
 	GameTooltip:AddLine(string.format("%d / %d (%d%%)", Value - Min, Max - Min, (Value - Min) / (Max - Min) * 100))
 	GameTooltip:Show()
@@ -32,12 +32,12 @@ function Reputation:Update()
 		self:Enable()
 	else
 		self:Disable()
-		
+
 		return
 	end
-	
+
 	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
-	
+
 	for i = 1, self.NumBars do
 		self["RepBar"..i]:SetMinMaxValues(Min, Max)
 		self["RepBar"..i]:SetValue(Value)
@@ -48,7 +48,7 @@ end
 function Reputation:Create()
 	for i = 1, self.NumBars do
 		local RepBar = CreateFrame("StatusBar", nil, UIParent)
-		
+
 		RepBar:SetStatusBarTexture(C.Medias.Normal)
 		RepBar:EnableMouse()
 		RepBar:SetFrameStrata("MEDIUM")
@@ -56,7 +56,7 @@ function Reputation:Create()
 		RepBar:CreateBackdrop()
 		RepBar:SetScript("OnEnter", Reputation.SetTooltip)
 		RepBar:SetScript("OnLeave", HideTooltip)
-		
+
 		if (C.Chat.Background) then
 			RepBar:Size(Panels.LeftChatBG:GetWidth() - 4, 6)
 			RepBar:Point("BOTTOM", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOP", 0, 4)
@@ -64,25 +64,25 @@ function Reputation:Create()
 		else
 			RepBar:SetOrientation("Vertical")
 			RepBar:Size(Panels.CubeLeft:GetWidth() - 4, Panels.LeftVerticalLine:GetHeight() - Panels.DataTextLeft:GetHeight() - 4)
-			RepBar:Point("TOP", i == 1 and Panels.LeftVerticalLine or Panels.RightVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)		
+			RepBar:Point("TOP", i == 1 and Panels.LeftVerticalLine or Panels.RightVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)
 		end
-		
+
 		self["RepBar"..i] = RepBar
 	end
-	
+
 	self:RegisterEvent("UPDATE_FACTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	
+
 	self:SetScript("OnEvent", self.Update)
 end
 
 function Reputation:Enable()
 	if not self.IsCreated then
 		self:Create()
-		
+
 		self.IsCreated = true
 	end
-	
+
 	for i = 1, self.NumBars do
 		if not self["RepBar"..i]:IsShown() then
 			self["RepBar"..i]:Show()

@@ -8,16 +8,5 @@ if (Class ~= "WARRIOR") then
 end
 
 TukuiUnitFrames.AddClassFeatures["WARRIOR"] = function(self)
-	-- Totem Bar (Demoralizing / Mocking / Skull Banner)
-	if (C.UnitFrames.TotemBar) then
-		T["Colors"].totems[1] = { 205/255, 92/255, 92/255 }
 
-		local TotemBar = self.Totems
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
-
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-	end
 end

@@ -21,15 +21,15 @@ local BGFrame = CreateFrame("Frame", nil, UIParent)
 
 function BGFrame:OnEnter()
 	local NumScores = GetNumBattlefieldScores()
-	
+
 	for i = 1, NumScores do
 		local Name, KillingBlows, HonorableKills, Deaths, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
-		
+
 		if (Name and Name == MyName) then
 			local CurMapID = GetCurrentMapAreaID()
 			local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 			local ClassColor = format("|cff%.2x%.2x%.2x", Color.r * 255, Color.g * 255, Color.b * 255)
-			SetMapToCurrentZone()			
+			SetMapToCurrentZone()
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:Point("BOTTOM", self, "TOP", 0, 1)
@@ -42,9 +42,9 @@ function BGFrame:OnEnter()
 			GameTooltip:AddDoubleLine(L.DataText.Honor, format("%d", HonorGained), 1, 1, 1)
 			GameTooltip:AddDoubleLine(L.DataText.Damage, DamageDone, 1, 1, 1)
 			GameTooltip:AddDoubleLine(L.DataText.Healing, HealingDone, 1, 1, 1)
-			
+
 			-- Add extra statistics based on what BG you're in.
-			if (CurMapID == WSG or CurMapID == TP) then 
+			if (CurMapID == WSG or CurMapID == TP) then
 				GameTooltip:AddDoubleLine(L.DataText.FlagCapture, GetBattlefieldStatData(i, 1), 1, 1, 1)
 				GameTooltip:AddDoubleLine(L.DataText.FlagReturn, GetBattlefieldStatData(i, 2), 1, 1, 1)
 			elseif (CurMapID == EOTS) then
@@ -65,8 +65,8 @@ function BGFrame:OnEnter()
 				GameTooltip:AddDoubleLine(L.DataText.VictoryPts, GetBattlefieldStatData(i, 2), 1, 1, 1)
 			elseif (CurrentMapID == SSM) then
 				GameTooltip:AddDoubleLine(L.DataText.CartControl, GetBattlefieldStatData(i, 1), 1, 1, 1)
-			end	
-			
+			end
+
 			GameTooltip:Show()
 		end
 	end
@@ -78,35 +78,35 @@ end
 
 function BGFrame:OnUpdate(t)
 	int = int - t
-	
+
 	if (int < 0) then
 		local Amount
 		RequestBattlefieldScoreData()
 		local NumScores = GetNumBattlefieldScores()
-		
+
 		for i = 1, NumScores do
 			local Name, KillingBlows, _, _, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
-			
+
 			if (HealingDone > DamageDone) then
 				Amount = (DataText.NameColor..L.DataText.Healing.."|r"..DataText.ValueColor..HealingDone.."|r")
 			else
 				Amount = (DataText.NameColor..L.DataText.Damage.."|r"..DataText.ValueColor..DamageDone.."|r")
 			end
-			
+
 			if (Name and Name == MyName) then
 				self.Text1:SetText(Amount)
 				self.Text2:SetText(DataText.NameColor..L.DataText.Honor.."|r"..DataText.ValueColor..format("%d", HonorGained).."|r")
 				self.Text3:SetText(DataText.NameColor..L.DataText.KillingBlow.."|r"..DataText.ValueColor..KillingBlows.."|r")
-			end   
+			end
 		end
-		
+
 		int  = 2
 	end
 end
 
 function BGFrame:OnEvent()
 	local InInstance, InstanceType = IsInInstance()
-	
+
 	if (InInstance and (InstanceType == "pvp")) then
 		self:Show()
 	else
@@ -126,6 +126,7 @@ function BGFrame:Enable()
 	BGFrame:SetAllPoints(DataTextLeft)
 	BGFrame:SetTemplate()
 	BGFrame:SetFrameLevel(4)
+	BGFrame:SetFrameStrata("BACKGROUND")
 
 	local Text1 = BGFrame:CreateFontString(nil, "OVERLAY")
 	Text1:SetFontObject(DataText.Font)

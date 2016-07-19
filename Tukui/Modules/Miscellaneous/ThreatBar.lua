@@ -11,7 +11,7 @@ function ThreatBar:OnEvent(event)
 	local Party = GetNumGroupMembers()
 	local Raid = GetNumGroupMembers()
 	local Pet = HasPetUI()
-	
+
 	if (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_DEAD") then
 		self:Hide()
 	elseif (event == "PLAYER_REGEN_ENABLED") then
@@ -40,14 +40,14 @@ function ThreatBar:OnUpdate()
 		local Text = self.Text
 		local Title = self.Title
 		local Dead = UnitIsDead("player")
-		
+
 		self:SetValue(ThreatValue)
 		Text:SetText(floor(ThreatValue) .. "%")
 		Title:SetText((UnitName("target") and UnitName("target") .. ":") or "")
-		
+
 		local R, G, B = GetColor(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
 		self:SetStatusBarColor(R, G, B)
-		
+
 		if Dead then
 			self:SetAlpha(0)
 		elseif (ThreatValue > 0) then
@@ -64,9 +64,9 @@ end
 
 function ThreatBar:Create()
 	DataTextRight = T["Panels"].DataTextRight
-	
+
 	self:Parent()
-	
+
 	self:Point("TOPLEFT", 2, -2)
 	self:Point("BOTTOMRIGHT", -2, 2)
 	self:SetFrameLevel(DataTextRight:GetFrameLevel() + 2)
@@ -74,32 +74,32 @@ function ThreatBar:Create()
 	self:SetStatusBarTexture(C.Medias.Normal)
 	self:SetMinMaxValues(0, 100)
 	self:SetAlpha(0)
-	
+
 	self.Text = self:CreateFontString(nil, "OVERLAY")
 	self.Text:SetFont(C.Medias.Font, 12)
 	self.Text:Point("RIGHT", self, -30, 0)
 	self.Text:SetShadowColor(0, 0, 0)
 	self.Text:SetShadowOffset(1.25, -1.25)
-	
+
 	self.Title = self:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C.Medias.Font, 12)
 	self.Title:Point("LEFT", self, 30, 0)
 	self.Title:SetShadowColor(0, 0, 0)
 	self.Title:SetShadowOffset(1.25, -1.25)
-	
+
 	self.Background = self:CreateTexture(nil, "BORDER")
 	self.Background:Point("TOPLEFT", self, 0, 0)
 	self.Background:Point("BOTTOMRIGHT", self, 0, 0)
-	self.Background:SetTexture(0.15, 0.15, 0.15)
-	
+	self.Background:SetColorTexture(0.15, 0.15, 0.15)
+
 	self:SetScript("OnShow", function(self)
 		self:SetScript("OnUpdate", self.OnUpdate)
 	end)
-	
+
 	self:SetScript("OnHide", function(self)
 		self:SetScript("OnUpdate", nil)
 	end)
-	
+
 	self:RegisterEvent("PLAYER_DEAD")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")

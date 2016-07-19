@@ -6,13 +6,13 @@ local format = format
 local Update = function(self)
 	local Base, Combat = GetPowerRegen()
 	local Value
-	
+
 	if InCombatLockdown() then
 		Value = floor(Combat * 5)
 	else
 		Value = floor(Base * 5)
 	end
-	
+
 	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Regen .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
 end
 

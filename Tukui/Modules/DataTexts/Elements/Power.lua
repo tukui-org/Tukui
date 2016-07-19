@@ -13,7 +13,7 @@ local Update = function(self)
 	local SpellPower = GetSpellBonusDamage(7)
 	local AttackPower = Effective
 	local Text = L.DataText.AttackPower
-	
+
 	if (AttackPower > SpellPower and Class ~= "HUNTER") then
 		Value = AttackPower
 	elseif (Class == "HUNTER") then
@@ -22,7 +22,7 @@ local Update = function(self)
 		Value = SpellPower
 		Text = L.DataText.Spell
 	end
-	
+
 	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. Text .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
 end
 

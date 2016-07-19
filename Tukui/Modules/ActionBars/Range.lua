@@ -20,7 +20,7 @@ end
 function TukuiActionBars:RangeUpdate()
 	local Icon = self.icon
 	local NormalTexture = self.NormalTexture
-    local ID = self.action
+	local ID = self.action
 
 	if not ID then return end
 

@@ -6,13 +6,13 @@ function Loading:LoadCustomSettings()
 	local Settings
 	local Name = UnitName("Player")
 	local Realm = GetRealmName()
-	
+
 	if (TukuiConfigPerAccount) then
 		Settings = TukuiConfigShared.Account
 	else
 		Settings = TukuiConfigShared[Realm][Name]
 	end
-	
+
 	for group, options in pairs(Settings) do
 		if C[group] then
 			local Count = 0
@@ -48,12 +48,12 @@ function Loading:OnEvent(event, addon)
 			if (C.General.AutoScale) then
 				C.General.UIScale = min(2, max(0.32, 768 / string.match(T.Resolution, "%d+x(%d+)")))
 			end
-			
-			T.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/C.General.UIScale
-			
+
+			T.Mult = 768/string.match(T.Resolution, "%d+x(%d+)")/C.General.UIScale
+
 		-- PANELS
 			T["Panels"]:Enable()
-		
+
 		-- INVENTORY
 			-- Bags
 			if (C.Bags.Enable) then
@@ -65,20 +65,20 @@ function Loading:OnEvent(event, addon)
 
 			-- Merchant
 			T["Inventory"]["Merchant"]:Enable()
-	
+
 			-- Bag Filter
 			if C["Bags"].BagFilter then
 				T["Inventory"]["BagFilter"]:Enable()
 			end
-		
+
 		-- ACTION BARS
 			if (C.ActionBars.Enable) then
 				T["ActionBars"]:Enable()
-			end	
-			
+			end
+
 		-- COOLDOWNS
 			T["Cooldowns"]:Enable()
-			
+
 		-- MISCELLANEOUS
 			if C["Misc"].ThreatBarEnable then
 				T["Miscellaneous"]["ThreatBar"]:Enable()
@@ -115,32 +115,33 @@ function Loading:OnEvent(event, addon)
 			T["Miscellaneous"]["Capture"]:Enable()
 			T["Miscellaneous"]["Ghost"]:Enable()
 			T["Miscellaneous"]["VehicleIndicator"]:Enable()
-			
+			T["Miscellaneous"]["TalkingHead"]:Enable()
+
 		-- BUFFS
 			if (C.Auras.Enable) then
 				T["Auras"]:Enable()
 			end
-			
+
 		-- Maps
 			T["Maps"]["Minimap"]:Enable()
 			T["Maps"]["Zonemap"]:Enable()
 			T["Maps"]["Worldmap"]:Enable()
-			
+
 		-- DATATEXTS
 			T["DataTexts"]:Enable()
-			
+
 		-- CHAT
 			T["Chat"]:Enable()
-			
+
 		-- UNITFRAMES
 			T["UnitFrames"]:Enable()
-			
+
 		-- TOOLTIPS
 			T["Tooltips"]:Enable()
-			
+
 		-- NAMEPLATES
 			T["NamePlates"]:Enable()
-			
+
 		-- PET BATTLES
 			T["PetBattles"]:Enable()
 	elseif (event == "PLAYER_ENTERING_WORLD") then

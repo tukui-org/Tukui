@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 local Inventory = T["Inventory"]
 local BagFilter = CreateFrame("Frame")
@@ -15,7 +15,7 @@ function BagFilter:OnEvent(event)
 	for bag = 0, 4 do
 		for slot = 1, GetContainerNumSlots(bag) do
 			Link = select(7, GetContainerItemInfo(bag, slot))
-			
+
 			for i = 1, #self.Trash do
 				if (Link and (GetItemInfo(Link) == GetItemInfo(self.Trash[i]))) then
 					PickupContainerItem(bag, slot)
@@ -30,17 +30,17 @@ function BagFilter:UpdateConfigDescription()
 	if (not IsAddOnLoaded("Tukui_Config")) then
 		return
 	end
-	
+
 	local Locale = GetLocale()
 	local Group = TukuiConfig[Locale]["Bags"]["BagFilter"]
-	
+
 	if Group then
 		local Desc = Group.Default
 		local Items = Desc .. TrashList -- 6.0 localize me
-		
+
 		for i = 1, #self.Trash do
 			local Name, Link = GetItemInfo(self.Trash[i])
-			
+
 			if (Name and Link) then
 				if i == 1 then
 					Items = Items .. "" .. Link
@@ -49,14 +49,14 @@ function BagFilter:UpdateConfigDescription()
 				end
 			end
 		end
-		
+
 		TukuiConfig[Locale]["Bags"]["BagFilter"]["Desc"] = Items
 	end
 end
 
 function BagFilter:AddItem(id)
 	tinsert(self.Trash, id)
-	
+
 	self:UpdateConfigDescription()
 end
 
@@ -65,7 +65,7 @@ function BagFilter:RemoveItem(id)
 		if (self.Trash[i] == id) then
 			tremove(self.Trash, i)
 			self:UpdateConfigDescription()
-			
+
 			break
 		end
 	end

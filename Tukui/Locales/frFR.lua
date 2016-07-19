@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 if (GetLocale() ~= "frFR") then
 	return
@@ -102,7 +102,7 @@ L.DataText.DemolisherDestroy = "Démolisseurs Détruits:"
 L.DataText.GateDestroy = "Portes Détruites:"
 L.DataText.TotalMemory = "Utilisation totale de la mémoire:"
 L.DataText.ControlBy = "Contrôlé par:"
-L.DataText.CallToArms = "Appel aux Armes" 
+L.DataText.CallToArms = "Appel aux Armes"
 L.DataText.ArmError = "Impossible d'obtenir des informations sur l'appel aux armes."
 L.DataText.NoDungeonArm = "Aucun donjons n'offre actuellement un appel aux armes."
 L.DataText.CartControl = "Chariots contrôlés:"

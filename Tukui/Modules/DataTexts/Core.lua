@@ -20,7 +20,7 @@ function TukuiDT:AddToMenu(name, data)
 	if self["Texts"][name] then
 		return
 	end
-	
+
 	self["Texts"][name] = data
 	tinsert(self.Menu, {text = name, notCheckable = true, func = self.Toggle, arg1 = data})
 end
@@ -30,7 +30,7 @@ local RemoveData = function(self)
 		self.Data.Position = 0
 		self.Data:Disable()
 	end
-	
+
 	self.Data = nil
 end
 
@@ -39,9 +39,9 @@ local SetData = function(self, object)
 	if self.Data then
 		RemoveData(self)
 	end
-	
+
 	local Panels = T["Panels"]
-	
+
 	-- Set the new data text
 	self.Data = object
 	self.Data:Enable()
@@ -69,11 +69,11 @@ function TukuiDT:CreateAnchors()
 	DataTextRight = Panels.DataTextRight
 	MinimapDataTextOne = Panels.MinimapDataTextOne
 	MinimapDataTextTwo = Panels.MinimapDataTextTwo
-	
+
 	if (MinimapDataTextOne and MinimapDataTextTwo) then
 		self.NumAnchors = self.NumAnchors + 2
 	end
-	
+
 	for i = 1, self.NumAnchors do
 		local Frame = CreateFrame("Button", nil, UIParent)
 		Frame:Size((DataTextLeft:GetWidth() / 3) - 1, DataTextLeft:GetHeight() - 2)
@@ -83,13 +83,13 @@ function TukuiDT:CreateAnchors()
 		Frame.SetData = SetData
 		Frame.RemoveData = RemoveData
 		Frame.Num = i
-		
+
 		Frame.Tex = Frame:CreateTexture()
 		Frame.Tex:SetAllPoints()
-		Frame.Tex:SetTexture(0.2, 1, 0.2, 0)
-		
+		Frame.Tex:SetColorTexture(0.2, 1, 0.2, 0)
+
 		self.Anchors[i] = Frame
-		
+
 		if (i == 1) then
 			Frame:Point("LEFT", DataTextLeft, 1, 0)
 		elseif (i == 4) then
@@ -112,7 +112,7 @@ local GetTooltipAnchor = function(self)
 	local Anchor = "ANCHOR_TOP"
 	local X = 0
 	local Y = T.Scale(5)
-	
+
 	if (Position >= 1 and Position <= 3) then
 		Anchor = "ANCHOR_TOPLEFT"
 		From = DataTextLeft
@@ -122,14 +122,14 @@ local GetTooltipAnchor = function(self)
 	elseif (Position == 7 and MinimapDataTextOne) or (Position == 8 and MinimapDataTextTwo) then
 		Anchor = "ANCHOR_BOTTOMLEFT"
 		Y = T.Scale(-5)
-		
+
 		if (Position == 7) then
 			From = MinimapDataTextOne
 		elseif (Position == 8) then
 			From = MinimapDataTextTwo
 		end
 	end
-	
+
 	return From, Anchor, X, Y
 end
 
@@ -142,7 +142,7 @@ local OnEnable = function(self)
 		self.Text:SetFontObject(T.GetFont(C["DataTexts"].Font))
 		self.FontUpdated = true
 	end
-	
+
 	self:Show()
 	self.Enabled = true
 end
@@ -160,7 +160,7 @@ function TukuiDT:Register(name, enable, disable, update)
 	Data.Text = Data:CreateFontString(nil, "OVERLAY")
 	--Data.Text:SetFont(self.Font, self.Size, self.Flags)
 	Data.Text:SetFontObject(T.GetFont(C["DataTexts"].Font))
-	
+
 	Data.Enabled = false
 	Data.GetTooltipAnchor = GetTooltipAnchor
 	Data.Enable = enable or function() end
@@ -184,7 +184,7 @@ end
 function TukuiDT:ResetGold()
 	local Realm = GetRealmName()
 	local Name = UnitName("player")
-	
+
 	TukuiData.Gold = {}
 	TukuiData.Gold[Realm] = {}
 	TukuiData.Gold[Realm][Name] = GetMoney()
@@ -194,13 +194,13 @@ function TukuiDT:Save()
 	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
 		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
-	
+
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
-	
+
 	if (not Data.Texts) then
 		Data.Texts = {}
 	end
-	
+
 	for Name, DataText in pairs(self.Texts) do
 		if DataText.Position then
 			Data.Texts[Name] = {DataText.Enabled, DataText.Position}
@@ -210,7 +210,7 @@ end
 
 function TukuiDT:AddDefaults()
 	TukuiData[GetRealmName()][UnitName("Player")].Texts = {}
-	
+
 	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Guild] = {true, 1}
 	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Durability] = {true, 2}
 	TukuiData[GetRealmName()][UnitName("Player")].Texts[L.DataText.Friends] = {true, 3}
@@ -225,15 +225,15 @@ function TukuiDT:Reset()
 	for i = 1, self.NumAnchors do
 		RemoveData(self.Anchors[i])
 	end
-	
+
 	for _, Data in pairs(self.Texts) do
 		if Data.Enabled then
 			Data:Disable()
 		end
 	end
-	
+
 	self:AddDefaults()
-	
+
 	if (TukuiData[GetRealmName()][UnitName("Player")] and TukuiData[GetRealmName()][UnitName("Player")].Texts) then
 		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("Player")].Texts) do
 			local Enabled, Num = Info[1], Info[2]
@@ -255,19 +255,19 @@ end
 
 function TukuiDT:Load()
 	self:CreateAnchors()
-	
+
 	if (not TukuiData[GetRealmName()][UnitName("Player")]) then
 		TukuiData[GetRealmName()][UnitName("Player")] = {}
 	end
-	
+
 	if (not TukuiData[GetRealmName()][UnitName("Player")].Texts) then
 		TukuiDT:AddDefaults()
 	end
-	
+
 	if (TukuiData[GetRealmName()][UnitName("Player")] and TukuiData[GetRealmName()][UnitName("Player")].Texts) then
 		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("Player")].Texts) do
 			local Enabled, Num = Info[1], Info[2]
-			
+
 			if (Enabled and (Num and Num > 0)) then
 				local Object = self:GetDataText(Name)
 

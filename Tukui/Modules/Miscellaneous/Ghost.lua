@@ -10,19 +10,19 @@ Ghost.Color = {0.31, 0.45, 0.63}
 
 function Ghost:OnShow()
 	local Button = Ghost.Button
-	
+
 	Button:Show()
 end
 
 function Ghost:OnHide()
 	local Button = Ghost.Button
-	
+
 	Button:Hide()
 end
 
 function Ghost:CreateButton()
 	local Button = CreateFrame("Button", nil, UIParent)
-	
+
 	Button:SetFrameStrata("MEDIUM")
 	Button:SetFrameLevel(10)
 	Button:SetTemplate()
@@ -48,20 +48,20 @@ function Ghost:Enable()
 	local DataRight = Panels.DataTextRight
 	local Icon = GhostFrameContentsFrame
 	local Text = GhostFrameContentsFrameText
-	
+
 	if DataRight then
 		self:CreateButton()
 		self:AddHooks()
-		
+
 		GhostFrame:StripTextures()
 		GhostFrame:ClearAllPoints()
 		GhostFrame:SetAllPoints(DataRight)
 		GhostFrame:SetFrameStrata(self.Button:GetFrameStrata())
 		GhostFrame:SetFrameLevel(self.Button:GetFrameLevel() + 1)
 		GhostFrame:SetAlpha(0)
-		
+
 		Icon:StripTextures()
-		
+
 		Text:SetText("")
 	end
 end

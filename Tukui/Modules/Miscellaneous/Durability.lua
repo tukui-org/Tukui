@@ -19,7 +19,7 @@ function Durability:Enable()
 	self.Warning:SetText(L.Miscellaneous.Repair)
 	self.Warning:SetTextColor(1, 0, 0)
 	self.Warning:Hide()
-	
+
 	DurabilityFrame:SetAlpha(0)
 	DurabilityFrame:Hide()
 	DurabilityFrame:HookScript("OnShow", self.OnShow)

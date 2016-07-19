@@ -1,17 +1,17 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<!-- Fonts -->
 	<Script file="Fonts\Core.lua"/>
-	
+
 	<!-- Panels -->
 	<Script file="Panels\Core.lua"/>
-	
+
 	<!-- Inventory -->
 	<Script file="Inventory\Core.lua"/>
 	<Script file="Inventory\Bags.lua"/>
 	<Script file="Inventory\Loot.lua"/>
 	<Script file="Inventory\Merchant.lua"/>
 	<Script file="Inventory\BagFilter.lua"/>
-	
+
 	<!-- Action Bars -->
 	<Script file="ActionBars\Core.lua"/>
 	<Script file="ActionBars\Skin.lua"/>
@@ -26,10 +26,10 @@
 	<Script file="ActionBars\Buttons.lua"/>
 	<Script file="ActionBars\Extra.lua"/>
 	<Script file="ActionBars\Bindings.lua"/>
-	
+
 	<!-- Cooldowns -->
 	<Script file="Cooldowns\Core.lua"/>
-	
+
 	<!-- Misc. -->
 	<Script file="Miscellaneous\Core.lua"/>
 	<Script file="Miscellaneous\AltPowerBar.lua"/>
@@ -51,19 +51,20 @@
 	<Script file="Miscellaneous\Ghost.lua"/>
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>
 	<Script file="Miscellaneous\Invite.lua"/>
-	
+	<Script file="Miscellaneous\TalkingHead.lua"/>
+
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
 	<Script file="Auras\Core.lua"/>
 	<Script file="Auras\Auras.lua"/>
 	<Script file="Auras\Headers.lua"/>
-	
+
 	<!-- Maps -->
 	<Script file="Maps\Core.lua"/>
 	<Script file="Maps\Minimap.lua"/>
 	<Script file="Maps\Zonemap.lua"/>
 	<Script file="Maps\Worldmap.lua"/>
-	
+
 	<!-- Data Text -->
 	<Script file="DataTexts\Core.lua"/>
 	<Script file="DataTexts\Anchors.lua"/>
@@ -82,10 +83,10 @@
 	<Script file="DataTexts\Elements\Guild.lua"/>
 	<Script file="DataTexts\Elements\Haste.lua"/>
 	<Script file="DataTexts\Elements\HPS.lua"/>
-    <Script file="DataTexts\Elements\Leech.lua"/>
+	<Script file="DataTexts\Elements\Leech.lua"/>
+	<Script file="DataTexts\Elements\Lootspec.lua"/>
 	<Script file="DataTexts\Elements\Mastery.lua"/>
 	<Script file="DataTexts\Elements\Memory.lua"/>
-    <Script file="DataTexts\Elements\Multistrike.lua"/>
 	<Script file="DataTexts\Elements\Power.lua"/>
 	<Script file="DataTexts\Elements\Regen.lua"/>
 	<Script file="DataTexts\Elements\Talent.lua"/>
@@ -93,13 +94,13 @@
 	<Script file="DataTexts\Elements\Battleground.lua"/>
 	<Script file="DataTexts\Elements\Versatility.lua"/>
 	<Script file="DataTexts\Elements\Zone.lua"/>
-	
+
 	<!-- ChatFrames -->
 	<Script file="ChatFrames\Core.lua"/>
 	<Script file="ChatFrames\ChatFrames.lua"/>
 	<Script file="ChatFrames\CopyURL.lua"/>
 	<Script file="ChatFrames\CopyButton.lua"/>
-	
+
 	<!-- UnitFrames -->
 	<Script file="UnitFrames\Core.lua"/>
 	<Script file="UnitFrames\Tracking.lua"/>
@@ -115,6 +116,7 @@
 	<Script file="UnitFrames\Classes\Warlock.lua"/>
 	<Script file="UnitFrames\Classes\Monk.lua"/>
 	<Script file="UnitFrames\Classes\Druid.lua"/>
+	<Script file="UnitFrames\Classes\DemonHunter.lua"/>
 	<Script file="UnitFrames\Units\Player.lua"/>
 	<Script file="UnitFrames\Units\Target.lua"/>
 	<Script file="UnitFrames\Units\TargetOfTarget.lua"/>
@@ -125,14 +127,15 @@
 	<Script file="UnitFrames\Units\Boss.lua"/>
 	<Script file="UnitFrames\Groups\Party.lua"/>
 	<Script file="UnitFrames\Groups\Raid.lua"/>
-	
+
 	<!-- Tooltips -->
 	<Script file="Tooltips\Core.lua"/>
 	<Script file="Tooltips\Talent.lua"/>
-	
+
 	<!-- NamePlates -->
 	<Script file="NamePlates\Core.lua"/>
-	
+	<Script file="NamePlates\Options.lua"/>
+
 	<!-- Pet Battles -->
 	<Script file="PetBattles\Core.lua"/>
 	<Script file="PetBattles\UnitFrames.lua"/>

@@ -25,6 +25,14 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		RunesBar[i] = CreateFrame("StatusBar", self:GetName()..'Rune'..i, RunesBar)
 		RunesBar[i]:Height(8)
 		RunesBar[i]:SetStatusBarTexture(PowerTexture)
+		RunesBar[i]:SetStatusBarColor(unpack(T.Colors.runes["READY"]))
+		
+		RunesBar[i].bg = CreateFrame("StatusBar", nil, RunesBar[i])
+		RunesBar[i].bg:SetFrameLevel(RunesBar[i]:GetFrameLevel() - 1)
+		RunesBar[i].bg:SetStatusBarTexture(PowerTexture)
+		RunesBar[i].bg:SetStatusBarColor(unpack(T.Colors.runes["CD"]))
+		RunesBar[i].bg:SetAlpha(0.20)
+		RunesBar[i].bg:SetAllPoints()
 
 		if i == 1 then
 			RunesBar[i]:Width(40)
@@ -44,7 +52,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 
 		local TotemBar = self.Totems
 		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
+		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 14)
 
 		TotemBar[1]:ClearAllPoints()
 		TotemBar[1]:SetAllPoints()

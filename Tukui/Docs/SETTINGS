@@ -1,6 +1,6 @@
 How can we edit default settings? It's easy with T16!
 
-It's important to not overwrite the original table. So if you want to edit, for example, 
+It's important to not overwrite the original table. So if you want to edit, for example,
 some of the unitframes default settings, it should be done this way somewhere in your addon:
 
 ------------------------------------------------------------------------------------------

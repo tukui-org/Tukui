@@ -29,12 +29,12 @@ function Battle:SkinUnitFrames()
 
 		Pet.HealthBarBG:Kill()
 		Pet.HealthBarFrame:Kill()
-		
+
 		Pet.HealthBarBackdrop = CreateFrame("Frame", nil, Pet)
 		Pet.HealthBarBackdrop:SetFrameLevel(Pet:GetFrameLevel() - 1)
 		Pet.HealthBarBackdrop:SetTemplate("Transparent")
 		Pet.HealthBarBackdrop:Width(Pet.healthBarWidth + 4)
-		
+
 		Pet.ActualHealthBar:SetTexture(C.Medias.Normal)
 
 		Pet.ActualHealthBar:ClearAllPoints()
@@ -44,7 +44,7 @@ function Battle:SkinUnitFrames()
 		Pet.PetTypeFrame:Size(100, 23)
 		Pet.PetTypeFrame:FontString("Text", C.Medias.Font, 12, "OUTLINE")
 		Pet.PetTypeFrame.Text:SetText("")
-		
+
 		Pet.SpeedIcon:SetAlpha(0)
 		Pet.SpeedUnderlay:SetAlpha(0)
 
@@ -99,10 +99,10 @@ function Battle:SkinUnitFrames()
 		Pet.Level:SetFontObject(NumberFont_Outline_Large)
 		Pet.Level:ClearAllPoints()
 		Pet.Level:Point("BOTTOMLEFT", Pet.Icon, "BOTTOMLEFT", 2, 2)
-		
+
 		Pet.BorderFlash:Kill()
 	end
-	
+
 	PetBattles.TopVersusText:ClearAllPoints()
 	PetBattles.TopVersusText:SetPoint("TOP", f, "TOP", 0, -46)
 
@@ -165,10 +165,10 @@ function Battle:AddUnitFramesHooks()
 		if not self.petOwner or not self.petIndex then return end
 
 		local Next = 1
-		
+
 		for i = 1, C_PetBattles.GetNumAuras(self.petOwner, self.petIndex) do
 			local AuraID, InstanceID, TurnsRemaining, IsBuff = C_PetBattles.GetAuraInfo(self.petOwner, self.petIndex, i)
-			
+
 			if (IsBuff and self.displayBuffs) or (not IsBuff and self.displayDebuffs) then
 				local Frame = self.frames[Next]
 
@@ -187,15 +187,15 @@ function Battle:AddUnitFramesHooks()
 				else
 					Frame.Backdrop:SetBackdropBorderColor(1, 0, 0)
 				end
-				
+
 				if TurnsRemaining > 0 then
 					Frame.Duration:SetText(TurnsRemaining)
 				end
-				
+
 				Frame.Duration:SetFont(C.Medias.Font, 14, "OUTLINE")
 				Frame.Duration:ClearAllPoints()
 				Frame.Duration:SetPoint("CENTER", Frame.Icon, "CENTER", 1, 0)
-			
+
 				Next = Next + 1
 			end
 		end
@@ -211,7 +211,7 @@ function Battle:AddUnitFramesHooks()
 	-- WEATHER
 	hooksecurefunc("PetBattleWeatherFrame_Update", function(self)
 		local Weather = C_PetBattles.GetAuraInfo(LE_BATTLE_PET_WEATHER, PET_BATTLE_PAD_INDEX, 1)
-		
+
 		if Weather then
 			self.Icon:Hide()
 			self.Name:Hide()

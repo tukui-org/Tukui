@@ -9,7 +9,7 @@ function AltPowerBar:Update()
 	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 	local R, G, B = T.ColorGradient(Power, MaxPower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
 	local PowerName = select(11 , UnitAlternatePowerInfo("player")) or UNKNOWN
-	
+
 	Status:SetMinMaxValues(0, MaxPower)
 	Status:SetValue(Power)
 	Status:SetStatusBarColor(R, G, B)
@@ -18,7 +18,7 @@ end
 
 function AltPowerBar:OnEvent(event, unit, power)
 	local AltPowerInfo = UnitAlternatePowerInfo("player")
-	
+
 	if (not AltPowerInfo or event == "UNIT_POWER_BAR_HIDE") then
 		self:Hide()
 	else
@@ -52,7 +52,7 @@ function AltPowerBar:Create()
 	self:RegisterUnitEvent("UNIT_MAXPOWER", "player")
 	self:SetScript("OnEvent", self.OnEvent)
 	self:SetScript("OnClick", self.Hide)
-	
+
 	self.Status = CreateFrame("StatusBar", nil, self)
 	self.Status:SetFrameLevel(self:GetFrameLevel() + 1)
 	self.Status:SetStatusBarTexture(C.Medias.Normal)

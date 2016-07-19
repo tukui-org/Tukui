@@ -4,15 +4,15 @@ local TukuiFonts = CreateFrame("Frame", nil, UIParent)
 
 function TukuiFonts:SetFont(font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	self:SetFont(font, size, style)
-	
+
 	if sr and sg and sb then
 		self:SetShadowColor(sr, sg, sb)
 	end
-	
+
 	if sox and soy then
 		self:SetShadowOffset(sox, soy)
 	end
-	
+
 	if r and g and b then
 		self:SetTextColor(r, g, b)
 	elseif r then

@@ -8,7 +8,7 @@ local format = format
 -- Note: This function is called via handlers, or when data text color is changed.
 local Update = function(self)
 	local Value = 1
-	
+
 	self.Text:SetText(format("%s: %s", "Data Name", Value))
 end
 

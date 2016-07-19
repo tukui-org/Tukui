@@ -11,14 +11,14 @@ local MAINMENUBAR_LATENCY_LABEL = MAINMENUBAR_LATENCY_LABEL
 
 local Update = function(self, t)
 	tslu = tslu - t
-	
+
 	if (tslu > 0) then
 		return
 	end
-	
+
 	local MS = select(3, GetNetStats())
 	local Rate = floor(GetFramerate())
-	
+
 	if (MS == 0) then
 		MS = "0"
 	end
@@ -31,10 +31,10 @@ local OnEnter = function(self)
 	if InCombatLockdown() then
 		return
 	end
-	
+
 	local _, _, HomeLatency, WorldLatency = GetNetStats()
 	local Latency = format(MAINMENUBAR_LATENCY_LABEL, HomeLatency, WorldLatency)
-	
+
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 	GameTooltip:AddLine(Latency)

@@ -6,13 +6,13 @@ local ToggleAllBags = ToggleAllBags
 
 local Update = function(self)
 	local Free, Total, Used = 0, 0, 0
-	
+
 	for i = 0, NUM_BAG_SLOTS do
 		Free, Total = Free + GetContainerNumFreeSlots(i), Total + GetContainerNumSlots(i)
 	end
-	
+
 	Used = Total - Free
-	
+
 	self.Text:SetFormattedText("%s: %s/%s", DataText.NameColor .. L.DataText.Bags .. "|r", DataText.ValueColor .. Used, Total .. "|r")
 end
 

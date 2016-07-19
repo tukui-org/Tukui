@@ -10,7 +10,7 @@ function TukuiUnitFrames:Target()
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
-	
+
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
@@ -35,14 +35,14 @@ function TukuiUnitFrames:Target()
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
-	Health.Background:SetTexture(.1, .1, .1)
-	
+	Health.Background:SetColorTexture(.1, .1, .1)
+
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
-	
+
 	Health.frequentUpdates = true
-	
+
 	if DarkTheme then
 		Health.colorTapping = false
 		Health.colorDisconnected = false
@@ -69,34 +69,34 @@ function TukuiUnitFrames:Target()
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power:SetStatusBarTexture(PowerTexture)
-	
+
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
-	Power.Background:SetTexture(.1, .1, .1)
+	Power.Background:SetColorTexture(.4, .4, .4)
 	Power.Background.multiplier = 0.3
-	
+
 	Power.Value = Power:CreateFontString(nil, "OVERLAY")
 	Power.Value:SetFontObject(Font)
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
-	
+
 	Power.frequentUpdates = true
-	
+
 	if DarkTheme then
 		Power.colorTapping = true
 		Power.colorClass = true
 		Power.colorClassNPC = true
 		Power.colorClassPet = true
-		Power.Background.multiplier = 0.1				
+		Power.Background.multiplier = 0.1
 	else
 		Power.colorPower = true
 	end
-	
+
 	if (C.UnitFrames.Smooth) then
 		Power.Smooth = true
 	end
 
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
-	
+
 	local AltPowerBar = CreateFrame("StatusBar", nil, self)
 	AltPowerBar:SetFrameStrata(self:GetFrameStrata())
 	AltPowerBar:Height(8)
@@ -107,23 +107,23 @@ function TukuiUnitFrames:Target()
 	AltPowerBar:SetPoint("RIGHT")
 	AltPowerBar:SetPoint("BOTTOM", Health, "BOTTOM", 0, 0)
 	AltPowerBar:SetBackdrop({
-		bgFile = C.Medias.Blank, 
-		edgeFile = C.Medias.Blank, 
-		tile = false, tileSize = 0, edgeSize = T.Scale(1), 
+		bgFile = C.Medias.Blank,
+		edgeFile = C.Medias.Blank,
+		tile = false, tileSize = 0, edgeSize = T.Scale(1),
 		insets = { left = 0, right = 0, top = T.Scale(-1), bottom = 0}
 	})
 	AltPowerBar:SetBackdropColor(0, 0, 0)
 	AltPowerBar:SetBackdropBorderColor(0, 0, 0)
 	AltPowerBar:SetFrameLevel(Health:GetFrameLevel() + 1)
-	
+
 	if C.UnitFrames.AltPowerText then
 		AltPowerBar.Value = AltPowerBar:CreateFontString(nil, "OVERLAY")
 		AltPowerBar.Value:SetFontObject(Font)
 		AltPowerBar.Value:Point("CENTER", 0, 0)
 	end
-	
+
 	AltPowerBar.PostUpdate = TukuiUnitFrames.UpdateAltPower
-	
+
 	if C.UnitFrames.Portrait then
 		local Portrait = CreateFrame("PlayerModel", nil, Health)
 		Portrait:SetFrameStrata(self:GetFrameStrata())
@@ -132,7 +132,7 @@ function TukuiUnitFrames:Target()
 		Portrait:SetBackdrop(TukuiUnitFrames.Backdrop)
 		Portrait:SetBackdropColor(0, 0, 0)
 		Portrait:CreateBackdrop()
-		
+
 		Portrait.Backdrop:SetOutside(Portrait, -1, 1)
 		Portrait.Backdrop:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
@@ -156,25 +156,25 @@ function TukuiUnitFrames:Target()
 		FirstBar:SetStatusBarTexture(HealthTexture)
 		FirstBar:SetStatusBarColor(0, 0.3, 0.15, 1)
 		FirstBar:SetMinMaxValues(0,1)
-		
+
 		local SecondBar = CreateFrame("StatusBar", nil, Health)
 		SecondBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		SecondBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		SecondBar:SetWidth(250)
 		SecondBar:SetStatusBarTexture(HealthTexture)
 		SecondBar:SetStatusBarColor(0, 0.3, 0, 1)
-		
+
 		local ThirdBar = CreateFrame("StatusBar", nil, Health)
 		ThirdBar:SetPoint("TOPLEFT", Health:GetStatusBarTexture(), "TOPRIGHT", 0, 0)
 		ThirdBar:SetPoint("BOTTOMLEFT", Health:GetStatusBarTexture(), "BOTTOMRIGHT", 0, 0)
 		ThirdBar:SetWidth(250)
 		ThirdBar:SetStatusBarTexture(HealthTexture)
 		ThirdBar:SetStatusBarColor(0.3, 0.3, 0, 1)
-		
+
 		ThirdBar:SetFrameLevel(Health:GetFrameLevel())
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
-		
+
 		self.HealPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
@@ -182,7 +182,7 @@ function TukuiUnitFrames:Target()
 			maxOverflow = 1,
 		}
 	end
-	
+
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
 		CastBar:SetFrameStrata(self:GetFrameStrata())
@@ -230,35 +230,35 @@ function TukuiUnitFrames:Target()
 		CastBar.CustomDelayText = TukuiUnitFrames.CustomCastDelayText
 		CastBar.PostCastStart = TukuiUnitFrames.CheckCast
 		CastBar.PostChannelStart = TukuiUnitFrames.CheckChannel
-		
+
 		if (C.UnitFrames.UnlinkCastBar) then
 			CastBar:ClearAllPoints()
 			CastBar:SetWidth(200)
 			CastBar:SetHeight(23)
 			CastBar:SetPoint("TOP", UIParent, "TOP", 0, -140)
 			CastBar:CreateShadow()
-			
+
 			if (C.UnitFrames.CastBarIcon) then
 				CastBar.Icon:ClearAllPoints()
 				CastBar.Icon:SetPoint("RIGHT", CastBar, "LEFT", -8, 0)
 				CastBar.Icon:SetSize(CastBar:GetHeight(), CastBar:GetHeight())
-			
+
 				CastBar.Button:ClearAllPoints()
 				CastBar.Button:SetAllPoints(CastBar.Icon)
 			end
-			
+
 			CastBar.Time:ClearAllPoints()
 			CastBar.Time:Point("RIGHT", CastBar, "RIGHT", -4, 0)
-			
+
 			CastBar.Text:ClearAllPoints()
 			CastBar.Text:Point("LEFT", CastBar, "LEFT", 4, 0)
-			
+
 			Movers:RegisterFrame(CastBar)
 		end
 
 		self.Castbar = CastBar
 	end
-	
+
 	------ Special Note ------
 	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
 	-- Also the icons in PostCreateAura are not working.
@@ -298,11 +298,11 @@ function TukuiUnitFrames:Target()
 		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
-		
+
 		self.Buffs = Buffs
 		self.Debuffs = Debuffs
 	end
-	
+
 	if (C.UnitFrames.CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY")
 		CombatFeedbackText:SetFontObject(Font)
@@ -327,7 +327,7 @@ function TukuiUnitFrames:Target()
 
 		self.CombatFeedbackText = CombatFeedbackText
 	end
-	
+
 	if (C.UnitFrames.ComboBar) then
 		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
 		ComboPoints:SetFrameStrata(self:GetFrameStrata())
@@ -338,21 +338,29 @@ function TukuiUnitFrames:Target()
 		ComboPoints:SetBackdropColor(0, 0, 0)
 		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
-		for i = 1, 5 do
+		for i = 1, 8 do
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 			ComboPoints[i]:Height(8)
 			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
-		
+
 			if i == 1 then
 				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-				ComboPoints[i]:Width(250 / 5)
+				ComboPoints[i]:Width(250 / 8 + 2)
+				
+				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
+				ComboPoints[i].Deeper = 250 / 6
+				ComboPoints[i].None = 250 / 5
 			else
 				ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
-				ComboPoints[i]:Width(250 / 5 - 1)
-			end					
+				ComboPoints[i]:Width(250 / 8 - 1)
+				
+				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
+				ComboPoints[i].Deeper = 250 / 6 - 1
+				ComboPoints[i].None = 250 / 5 - 1
+			end
 		end
-	
-		ComboPoints:SetScript("OnShow", function(self) 
+
+		ComboPoints:SetScript("OnShow", function(self)
 			TukuiUnitFrames.UpdateShadow(self, 12)
 			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 14)
 		end)
@@ -361,31 +369,16 @@ function TukuiUnitFrames:Target()
 			TukuiUnitFrames.UpdateShadow(self, 4)
 			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 4)
 		end)
-		
+
 		self.ComboPointsBar = ComboPoints
 	end
-	
+
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
-	
+
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
-	
-	if (Class == "PRIEST" and C.UnitFrames.WeakBar) then
-		-- Weakened Soul Bar
-		local WSBar = CreateFrame("StatusBar", nil, Power)
-		WSBar:SetFrameStrata(self:GetFrameStrata())
-		WSBar:SetAllPoints(Power)
-		WSBar:SetStatusBarTexture(PowerTexture)
-		WSBar:GetStatusBarTexture():SetHorizTile(false)
-		WSBar:SetBackdrop(TukuiUnitFrames.Backdrop)
-		WSBar:SetBackdropColor(unpack(C["General"].BackdropColor))
-		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
-
-		-- Register
-		self.WeakenedSoul = WSBar
-	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:DiffColor][level] [shortclassification]")
 	self.Name = Name

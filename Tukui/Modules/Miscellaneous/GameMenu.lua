@@ -50,16 +50,16 @@ function GameMenu:EnableTukuiConfig()
 		if (not TukuiConfigFrame) then
 			TukuiConfig:CreateConfigWindow()
 		end
-		
+
 		if TukuiConfigFrame:IsVisible() then
 			TukuiConfigFrame:Hide()
 		else
 			TukuiConfigFrame:Show()
 		end
-		
+
 		HideUIPanel(Menu)
 	end)
-	
+
 	hooksecurefunc('GameMenuFrame_UpdateVisibleButtons', self.AddHooks)
 	self.Tukui = Tukui
 end
@@ -73,7 +73,7 @@ function GameMenu:Enable()
 
 	Menu:SetTemplate()
 	Menu:CreateShadow()
-	
+
 	for i = 1, #self.Buttons do
 		local Button = _G["GameMenuButton"..self.Buttons[i]]
 		if (Button) then

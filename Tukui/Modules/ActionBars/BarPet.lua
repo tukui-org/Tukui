@@ -6,13 +6,13 @@ local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 function TukuiActionBars:CreatePetBar()
 	local Bar = T.Panels.PetActionBar
 	local Movers = T["Movers"]
-	
+
 	if (not C.ActionBars.Pet) then
 		Bar.Backdrop:StripTextures()
-		
+
 		return
 	end
-	
+
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local PetActionBarFrame = PetActionBarFrame
@@ -72,6 +72,6 @@ function TukuiActionBars:CreatePetBar()
 			TukuiActionBars:SkinPetButtons()
 		end
 	end)
-	
+
 	Movers:RegisterFrame(Bar)
 end

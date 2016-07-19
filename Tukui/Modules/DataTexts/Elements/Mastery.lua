@@ -5,7 +5,7 @@ local format = format
 
 local Update = function(self)
 	local Value = GetCombatRating(26)
-	
+
 	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Mastery .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r" .. "|r")
 end
 

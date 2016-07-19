@@ -11,17 +11,17 @@ function TestUI:SetUnit()
 	else
 		self.unit = self.oldunit
 	end
-	
+
 	self:SetAttribute("unit", self.unit)
 end
 
 function TestUI:EnableOrDisable()
 	local Frames = T["UnitFrames"].Units
-	
+
 	if (not Enabled and InCombatLockdown()) then
 		return T.Print(ERR_NOT_IN_COMBAT)
 	end
-	
+
 	if Enabled then
 		Enabled = false
 	else
@@ -30,13 +30,13 @@ function TestUI:EnableOrDisable()
 
 	for _, Frame in pairs(Frames) do
 		local Unit = Frame
-		
+
 		if Frame.unit then
 			self.SetUnit(Unit)
 		else
 			for i = 1, 5 do
 				Unit = Frame[i]
-				
+
 				self.SetUnit(Unit)
 			end
 		end

@@ -75,7 +75,7 @@ function Invite:Enable()
 			self.HideStaticPopup = false
 		end
 	end)
-	
+
 	AutoInvite:RegisterEvent("CHAT_MSG_WHISPER")
 	AutoInvite:RegisterEvent("CHAT_MSG_BN_WHISPER")
 	AutoInvite:SetScript("OnEvent", function(self, event, ...)

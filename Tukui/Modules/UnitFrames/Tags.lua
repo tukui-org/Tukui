@@ -8,7 +8,7 @@ local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 oUF.Tags.Events['Tukui:GetNameColor'] = 'UNIT_POWER'
 oUF.Tags.Methods['Tukui:GetNameColor'] = function(unit)
 	local Reaction = UnitReaction(unit, 'player')
-	
+
 	if (UnitIsPlayer(unit)) then
 		return _TAGS['raidcolor'](unit)
 	elseif (Reaction) then
@@ -23,7 +23,7 @@ oUF.Tags.Events['Tukui:DiffColor'] = 'UNIT_LEVEL'
 oUF.Tags.Methods['Tukui:DiffColor'] = function(unit)
 	local r, g, b
 	local Level = UnitLevel(unit)
-	
+
 	if (Level < 1) then
 		r, g, b = 0.69, 0.31, 0.31
 	else
@@ -40,7 +40,7 @@ oUF.Tags.Methods['Tukui:DiffColor'] = function(unit)
 			r, g, b = 0.55, 0.57, 0.61
 		end
 	end
-	
+
 	return string.format('|cff%02x%02x%02x', r * 255, g * 255, b * 255)
 end
 
@@ -84,13 +84,13 @@ oUF.Tags.Events['Tukui:Role'] = 'PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE'
 oUF.Tags.Methods['Tukui:Role'] = function(unit)
 	local Role = UnitGroupRolesAssigned(unit)
 	local String = ""
-	
+
 	if Role == "TANK" then
 		String = " |cff0099CC(" .. TANK .. ")|r"
 	elseif Role == "HEALER" then
 		String = " |cff00FF00(" .. HEALER .. ")|r"
 	end
-	
+
 	return String
 end
 

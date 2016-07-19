@@ -82,7 +82,7 @@ function TukuiChat:CreateCopyFrame()
 	end)
 
 	ScrollArea:SetScrollChild(EditBox)
-	
+
 	TukuiCopyScrollAreaScrollBar:SkinScrollBar()
 
 	local Close = CreateFrame("Button", nil, CopyFrame, "UIPanelCloseButton")

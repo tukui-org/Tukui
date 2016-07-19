@@ -10,17 +10,17 @@ function CollectGarbage:OnEvent(event, unit)
 
 		-- Just verifying that this clears the memory out :)
 		local Memory = T["DataTexts"]:GetDataText("Memory")
-		
+
 		if (Memory and Memory.Enabled) then
 			Memory:Update(10)
 		end
-		
+
 		self:UnregisterEvent(event)
 	else
 		if (unit ~= "player") then
 			return
 		end
-		
+
 		if UnitIsAFK(unit) then
 			collectgarbage("collect")
 		end

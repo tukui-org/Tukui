@@ -24,7 +24,7 @@ local UpdateMemory = function()
 	UpdateAddOnMemoryUsage()
 	local AddOnMem = 0
 	local TotalMem = 0
-	
+
 	for i = 1, #MemoryTable do
 		AddOnMem = GetAddOnMemoryUsage(MemoryTable[i][1])
 		MemoryTable[i][3] = AddOnMem
@@ -36,7 +36,7 @@ local UpdateMemory = function()
 			return a[3] > b[3]
 		end
 	end)
-	
+
 	return TotalMem
 end
 
@@ -47,7 +47,7 @@ local RebuildAddonList = function(self)
 	end
 
 	wipe(MemoryTable)
-	
+
 	for i = 1, AddOnCount do
 		MemoryTable[i] = { i, select(2, GetAddOnInfo(i)), 0, IsAddOnLoaded(i) }
 	end
@@ -55,11 +55,11 @@ end
 
 local Update = function(self, second)
 	int = int - second
-	
+
 	if (int < 0) then
 		RebuildAddonList(self)
 		local Total = UpdateMemory()
-		
+
 		self.Text:SetText(DataText.ValueColor .. FormatMemory(Total) .. "|r")
 		int = 10
 	end
@@ -71,26 +71,26 @@ local OnEnter = function(self)
 		GameTooltip:ClearLines()
 
 		local Bandwidth = GetAvailableBandwidth()
-		
+
 		if (Bandwidth ~= 0) then
 			GameTooltip:AddDoubleLine(L.DataText.Bandwidth , string.format(bandwidthString, Bandwidth),0.69, 0.31, 0.31,0.84, 0.75, 0.65)
 			GameTooltip:AddDoubleLine(L.DataText.Download , string.format(percentageString, GetDownloadedPercentage() * 100), 0.69, 0.31, 0.31, 0.84, 0.75, 0.65)
 			GameTooltip:AddLine(" ")
 		end
-		
+
 		local TotalMemory = UpdateMemory()
 		GameTooltip:AddDoubleLine(L.DataText.TotalMemory, FormatMemory(TotalMemory), 0.69, 0.31, 0.31,0.84, 0.75, 0.65)
 		GameTooltip:AddLine(" ")
-		
+
 		for i = 1, #MemoryTable do
 			if (MemoryTable[i][4]) then
 				local Red = MemoryTable[i][3] / TotalMemory
 				local Green = 1 - Red
-				
+
 				GameTooltip:AddDoubleLine(MemoryTable[i][2], FormatMemory(MemoryTable[i][3]), 1, 1, 1, Red, Green + .5, 0)
-			end						
+			end
 		end
-		
+
 		self.Text:SetText(DataText.ValueColor..FormatMemory(TotalMemory).."|r")
 		GameTooltip:Show()
 	end

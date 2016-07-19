@@ -28,33 +28,33 @@ end
 
 -- Awkward workaround to make an event delegation system
 local CreateFunctions = function(self)
-	function self:COMBAT_LOG_EVENT_UNFILTERED(...)		   
+	function self:COMBAT_LOG_EVENT_UNFILTERED(...)
 		if (not Events[select(2, ...)]) then
 			return
 		end
-		
+
 		--if (event == "PLAYER_REGEN_DISABLED") then return end
-		
+
 		local ID = select(4, ...)
-		
+
 		if (ID == PlayerGUID) then
 			AmountHealed = select(15, ...)
 			OverHeals = select(16, ...)
 			TotalHeals = TotalHeals + max(0, AmountHealed - OverHeals)
-		end      
+		end
 	end
-	
+
 	function self:PLAYER_REGEN_ENABLED()
 		self.Text:SetText(GetHPS())
 	end
-	
+
 	function self:PLAYER_REGEN_DISABLED()
 		TotalHeals = 0
 		CombatTime = 0
 		AmountHealed = 0
 		OverHeals = 0
 	end
-	
+
 	self.Functions = true
 end
 
@@ -65,9 +65,9 @@ local OnUpdate = function(self, t)
 	else
 		self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	end
-	
+
 	tslu = tslu + t
-	
+
 	if (tslu >= 1) then
 		tslu = 0
 		self.Text:SetText(GetHPS())
@@ -93,11 +93,11 @@ local Enable = function(self)
 	if (not self.Functions) then
 		CreateFunctions(self)
 	end
-	
+
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
---	self:RegisterEvent("UNIT_PET")
+	--self:RegisterEvent("UNIT_PET")
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnUpdate", OnUpdate)
 	self:SetScript("OnMouseDown", OnMouseDown)

@@ -18,11 +18,11 @@ C["Medias"] = {
 	["Blank"] = [[Interface\AddOns\Tukui\Medias\Textures\blank]],
 	["HoverButton"] = [[Interface\AddOns\Tukui\Medias\Textures\button_hover]],
 	["Logo"] = [[Interface\AddOns\Tukui\Medias\Textures\logo]],
-	
+
 	-- colors
 	["BorderColor"] = C.General.BorderColor or { .5, .5, .5 },
 	["BackdropColor"] = C.General.BackdropColor or { .1,.1,.1 },
-	
+
 	-- sound
 	["Whisper"] = [[Interface\AddOns\Tukui\Medias\Sounds\whisper.mp3]],
 	["Warning"] = [[Interface\AddOns\Tukui\Medias\Sounds\warning.mp3]],

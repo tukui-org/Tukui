@@ -14,10 +14,10 @@ function Timer:UpdateBar()
 		bgFile = C.Medias.Blank,
 		insets = {top = -T.Mult, left = -T.Mult, bottom = -T.Mult, right = -T.Mult},
 	}
-	
+
 	for i = 1, self:GetNumRegions() do
 		local Region = select(i, self:GetRegions())
-		
+
 		if Region:GetObjectType() == "Texture" then
 			Region:SetTexture(nil)
 		elseif Region:GetObjectType() == "FontString" then
@@ -25,7 +25,7 @@ function Timer:UpdateBar()
 			Region:SetShadowColor(0,0,0,0)
 		end
 	end
-	
+
 	self:Height(26)
 	self:StripTextures()
 	self:SetBackdrop(Backdrop)

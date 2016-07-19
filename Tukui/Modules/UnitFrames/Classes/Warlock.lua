@@ -8,8 +8,9 @@ if (Class ~= "WARLOCK") then
 end
 
 TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
-	local Bar = CreateFrame("Frame", self:GetName()..'WarlockSpecBars', self)
+	local Bar = CreateFrame("Frame", self:GetName()..'SoulShardsBar', self)
 	local Shadow = self.Shadow
+	local Totems = self.Totems
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Warlock Class Bar
@@ -22,16 +23,16 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	Bar:SetBackdropColor(0, 0, 0)
 	Bar:SetBackdropBorderColor(0, 0, 0)
 
-	for i = 1, 4 do
+	for i = 1, 5 do
 		Bar[i] = CreateFrame("StatusBar", nil, Bar)
 		Bar[i]:Height(8)
 		Bar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
-			Bar[i]:Width((250 / 4) - 2)
+			Bar[i]:Width((250 / 5))
 			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
 		else
-			Bar[i]:Width((250 / 4) - 1)
+			Bar[i]:Width((250 / 5) - 1)
 			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
 		end
 
@@ -40,15 +41,15 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
-
-	Bar:SetScript("OnShow", function(self)
-		TukuiUnitFrames.UpdateShadow(self, 12)
-	end)
-
-	Bar:SetScript("OnHide", function(self)
-		TukuiUnitFrames.UpdateShadow(self, 4)
-	end)
+	
+	-- Totem Bar (Hand of Gul'dan and Call Dreadstalkers)
+	if (C.UnitFrames.TotemBar) then
+		local TotemBar = self.Totems
+		
+		TotemBar:ClearAllPoints()
+		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 14)
+	end
 
 	-- Register
-	self.WarlockSpecBars = Bar
+	self.SoulShards = Bar
 end

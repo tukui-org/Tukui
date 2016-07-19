@@ -25,7 +25,6 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 		ArcaneChargeBar[i] = CreateFrame("StatusBar", self:GetName()..'ArcaneCharge'..i, ArcaneChargeBar)
 		ArcaneChargeBar[i]:Height(8)
 		ArcaneChargeBar[i]:SetStatusBarTexture(PowerTexture)
-		ArcaneChargeBar[i].bg = ArcaneChargeBar[i]:CreateTexture(nil, "ARTWORK")
 
 		if i == 1 then
 			ArcaneChargeBar[i]:Width((250 / 4) - 2)
@@ -36,36 +35,8 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 		end
 	end
 
-	ArcaneChargeBar:SetScript("OnShow", TukuiUnitFrames.UpdateMageClassBars)
-	ArcaneChargeBar:SetScript("OnHide", TukuiUnitFrames.UpdateMageClassBars)
-
-	-- Totem Bar (Rune of Power)
-	if (C.UnitFrames.TotemBar) then
-		T["Colors"].totems = {
-			[1] = { 132/255, 112/255, 255/255 },
-			[2] = { 132/255, 112/255, 255/255 },
-		}
-
-		local TotemBar = self.Totems
-		for i = 1, 2 do
-			TotemBar[i]:ClearAllPoints()
-			TotemBar[i]:Height(8)
-
-			if i == 1 then
-				TotemBar[i]:Width((250 / 2) - 1)
-				TotemBar[i]:SetPoint("LEFT", TotemBar, "LEFT", 0, 0)
-			else
-				TotemBar[i]:Width(250 / 2)
-				TotemBar[i]:SetPoint("LEFT", TotemBar[i-1], "RIGHT", 1, 0)
-			end
-		end
-
-		TotemBar[3]:Hide()
-		TotemBar[4]:Hide()
-		
-		TotemBar:SetScript("OnShow", TukuiUnitFrames.UpdateMageClassBars)
-		TotemBar:SetScript("OnHide", TukuiUnitFrames.UpdateMageClassBars)
-	end
+	ArcaneChargeBar:SetScript("OnShow", TukuiUnitFrames.MoveTotemBar)
+	ArcaneChargeBar:SetScript("OnHide", TukuiUnitFrames.MoveTotemBar)
 
 	-- Register
 	self.ArcaneChargeBar = ArcaneChargeBar

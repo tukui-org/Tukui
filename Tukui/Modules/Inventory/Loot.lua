@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 local Inventory = T["Inventory"]
 local Movers = T["Movers"]
 local Loot = CreateFrame("Frame")
@@ -7,22 +7,22 @@ local TopFrame = CreateFrame("Frame", nil, LootFrame)
 
 function Loot:Move()
 	local IsUnderMouse = GetCVar("lootUnderMouse")
-	
+
 	if (IsUnderMouse ~= "1") then
 		if not LootFrame.DragInfo then
 			Movers:RegisterFrame(LootFrame)
 		end
-		
+
 		if (not TukuiData[GetRealmName()][UnitName("Player")].Move) then
 			TukuiData[GetRealmName()][UnitName("Player")].Move = {}
 		end
-		
+
 		if not (TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame) then
 			TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame = {"TOPLEFT", "UIParent", "TOPLEFT", 16, -116}
 		end
-		
+
 		local A1, _, A2, X, Y = unpack(TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame)
-		
+
 		LootFrame:ClearAllPoints()
 		LootFrame:SetPoint(A1, UIParent, A2, X, Y)
 	end
@@ -34,7 +34,7 @@ function Loot:SkinLootFrame()
 	LootFrameInset:CreateBackdrop("Transparent")
 	LootFrameInset.Backdrop:CreateShadow()
 	LootFramePortraitOverlay:SetAlpha(0)
-	
+
 	LootFrameDownButton:StripTextures()
 	LootFrameDownButton:Size(LootFrame:GetWidth() - 6, 23)
 	LootFrameDownButton:SkinButton()
@@ -45,7 +45,7 @@ function Loot:SkinLootFrame()
 	LootFrameDownButton:Point("TOP", LootFrame, "BOTTOM", -1, -1)
 	LootFrameDownButton:CreateShadow()
 	LootFrameNext:SetAlpha(0)
-	
+
 	LootFrameUpButton:StripTextures()
 	LootFrameUpButton:Size(LootFrame:GetWidth() - 6, 23)
 	LootFrameUpButton:SkinButton()
@@ -68,7 +68,7 @@ function Loot:SkinLootFrame()
 	LootFrameCloseButton:SetPoint("RIGHT", TopFrame, "RIGHT", 8, 0)
 
 	local ItemText = select(19, LootFrame:GetRegions())
-	
+
 	ItemText:ClearAllPoints()
 	ItemText:SetPoint("LEFT", TopFrame, "LEFT", 6, 0)
 end
@@ -77,27 +77,27 @@ function Loot:SkinLootFrameButtons(i)
 	for i = 1, LootFrame.numLootItems do
 		local Button = _G["LootButton" .. i]
 		local Slot = (LOOTFRAME_NUMBUTTONS * (LootFrame.page - 1)) + i
-		
+
 		if Button then
 			local Icon = _G["LootButton" .. i .. "IconTexture"]
 			local Quest = _G["LootButton" .. i .. "IconQuestTexture"]
 			local IconTexture = Icon:GetTexture()
 			local IsQuestItem, QuestID, IsActive = select(6, GetLootSlotInfo(Slot))
-			
+
 			if (not Button.IsSkinned) then
 				Button:StripTextures()
 				Button:CreateBackdrop()
 				Button.Backdrop:SetOutside(Icon)
-				
+
 				Icon:SetTexture(IconTexture)
 				Icon:SetTexCoord(unpack(T.IconCoord))
 				Icon:SetInside()
-				
+
 				Quest:SetAlpha(0)
-				
+
 				Button.IsSkinned = true
 			end
-			
+
 			if (QuestID and not IsActive) then
 				Button.Backdrop:SetBackdropBorderColor(0.97, 0.85, 0.31) -- Quest item
 			elseif (QuestID or IsQuestItem) then

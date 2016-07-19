@@ -12,17 +12,17 @@ function Battle:SkinTooltips()
 		BattlePetTooltip,
 		FloatingPetBattleAbilityTooltip,
 	}
-	
+
 	for i, Tooltip in pairs(Tooltips) do
 		Tooltip.Background:SetTexture(nil)
-		
+
 		if Tooltip.Delimiter1 then
 			Tooltip.Delimiter1:SetTexture(nil)
 			Tooltip.Delimiter2:SetTexture(nil)
 		elseif Tooltip.Delimiter then
 			Tooltip.Delimiter:SetTexture(nil)
 		end
-		
+
 		Tooltip.BorderTop:SetTexture(nil)
 		Tooltip.BorderTopLeft:SetTexture(nil)
 		Tooltip.BorderTopRight:SetTexture(nil)
@@ -32,18 +32,18 @@ function Battle:SkinTooltips()
 		Tooltip.BorderBottomRight:SetTexture(nil)
 		Tooltip.BorderBottomLeft:SetTexture(nil)
 		Tooltip:SetTemplate()
-		
+
 		if Tooltip.CloseButton then
 			Tooltip.CloseButton:SkinCloseButton()
 		end
-	end	
+	end
 end
 
 function Battle:AddTooltipsHooks()
 	hooksecurefunc("PetBattleAbilityTooltip_Show", function()
 		local Tooltip = PetBattlePrimaryAbilityTooltip
 		local Anchor = Panels.DataTextLeft
-		
+
 		if Anchor then
 			Tooltip:ClearAllPoints()
 			Tooltip:SetPoint("BOTTOMLEFT", Anchor, "TOPLEFT", 0, 6)

@@ -14,7 +14,7 @@ local Update = function(self)
 	TargetLevel = UnitLevel("target")
 	PlayerLevel = UnitLevel("player")
 	local BaseMissChance, LevelDifference, Avoidance
-	
+
 	if TargetLevel == -1 then
 		BaseMissChance = (5 - (3*.2))  --Boss Value
 		LevelDifference = 3
@@ -28,7 +28,7 @@ local Update = function(self)
 		BaseMissChance = 5 --Sets miss chance of attacker level if no target exists, lv80=5, 81=4.2, 82=3.4, 83=2.6
 		LevelDifference = 0
 	end
-	
+
 	if (MyRace == "NightElf") then
 		BaseMissChance = BaseMissChance + 2
 	end
@@ -38,14 +38,14 @@ local Update = function(self)
 		Parry = (GetParryChance() - LevelDifference * 0.2)
 		Block = (GetBlockChance() - LevelDifference * 0.2)
 		Avoidance = (Dodge + Parry + Block)
-		
+
 		self.Text:SetText(DataText.NameColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
 	else
 		Dodge = (GetDodgeChance() + abs(LevelDifference * 0.2))
 		Parry = (GetParryChance() + abs(LevelDifference * 0.2))
 		Block = (GetBlockChance() + abs(LevelDifference * 0.2))
 		Avoidance = (Dodge + Parry + Block)
-		
+
 		self.Text:SetText(DataText.NameColor..L.DataText.AvoidanceShort.."|r"..DataText.ValueColor..format("%.2f", Avoidance).."|r")
 	end
 end
@@ -54,7 +54,7 @@ local OnEnter = function(self)
 	if (not InCombatLockdown()) then
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
-		
+
 		if (TargetLevel > 1) then
 			GameTooltip:AddDoubleLine(L.DataText.AvoidanceBreakdown.." ("..L.DataText.Level.." "..TargetLevel..")")
 		elseif (TargetLevel == -1) then
@@ -62,7 +62,7 @@ local OnEnter = function(self)
 		else
 			GameTooltip:AddDoubleLine(L.DataText.AvoidanceBreakdown.." ("..L.DataText.Level.." "..TargetLevel..")")
 		end
-		
+
 		GameTooltip:AddDoubleLine(L.DataText.Dodge, format("%.2f", Dodge) .. "%", 1, 1, 1, 1, 1, 1)
 		GameTooltip:AddDoubleLine(L.DataText.Parry, format("%.2f", Parry) .. "%", 1, 1, 1, 1, 1, 1)
 		GameTooltip:AddDoubleLine(L.DataText.Block, format("%.2f", Block) .. "%", 1, 1, 1, 1, 1, 1)

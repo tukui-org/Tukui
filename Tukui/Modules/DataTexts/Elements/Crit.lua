@@ -9,15 +9,15 @@ local Update = function(self)
 	local Spell = GetSpellCritChance(1)
 	local Ranged = GetRangedCritChance()
 	local Value
-	
+
 	if (Spell > Melee) then
 		Value = Spell
-	elseif (Class == "HUNTER") then    
+	elseif (Class == "HUNTER") then
 		Value = Ranged
 	else
 		Value = Melee
 	end
-	
+
 	self.Text:SetFormattedText("%s: %s%.2f%%", DataText.NameColor .. L.DataText.Crit .. "|r", DataText.ValueColor, Value)
 end
 

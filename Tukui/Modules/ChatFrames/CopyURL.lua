@@ -54,20 +54,20 @@ function TukuiChat:EnableURL()
 	local SetHyperlink = ItemRefTooltip.SetHyperlink
 
 	ItemRefTooltip.SetHyperlink = function(self, data, ...)
-        if (strsub(data, 1, 3) == "url") then
-            local ChatFrameEditBox = ChatEdit_ChooseBoxForSend()
+		if (strsub(data, 1, 3) == "url") then
+			local ChatFrameEditBox = ChatEdit_ChooseBoxForSend()
 
-            CurrentLink = (data):sub(5)
+			CurrentLink = (data):sub(5)
 
-            if (not ChatFrameEditBox:IsShown()) then
-                ChatEdit_ActivateChat(ChatFrameEditBox)
-            end
+			if (not ChatFrameEditBox:IsShown()) then
+				ChatEdit_ActivateChat(ChatFrameEditBox)
+			end
 
-            ChatFrameEditBox:Insert(CurrentLink)
-            ChatFrameEditBox:HighlightText()
-            CurrentLink = nil
-        else
-            SetHyperlink(self, data, ...)
+			ChatFrameEditBox:Insert(CurrentLink)
+			ChatFrameEditBox:HighlightText()
+			CurrentLink = nil
+		else
+			SetHyperlink(self, data, ...)
 		end
 	end
 end

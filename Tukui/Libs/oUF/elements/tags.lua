@@ -5,6 +5,8 @@
 local parent, ns = ...
 local oUF = ns.oUF
 
+local isBetaClient = select(4, GetBuildInfo()) >= 70000
+
 local _PATTERN = '%[..-%]+'
 
 local _ENV = {
@@ -15,6 +17,7 @@ local _ENV = {
 		return string.format("|cff%02x%02x%02x", r*255, g*255, b*255)
 	end,
 	ColorGradient = oUF.ColorGradient,
+	isBetaClient = isBetaClient,
 }
 local _PROXY = setmetatable(_ENV, {__index = _G})
 
@@ -122,6 +125,15 @@ local tagStrings = {
 		local _, x = UnitClass(u)
 		if(x) then
 			return Hex(_COLORS.class[x])
+		else
+			local id = u:match'arena(%d)$'
+			if(id) then
+				local specID = GetArenaOpponentSpec(tonumber(id))
+				if(specID and specID > 0) then
+					_, _, _, _, _, _, x = GetSpecializationInfoByID(specID)
+					return Hex(_COLORS.class[x])
+				end
+			end
 		end
 	end]],
 
@@ -263,15 +275,6 @@ local tagStrings = {
 		end
 	end]],
 
-	['pereclipse'] = [[function(u)
-		local m = UnitPowerMax('player', SPELL_POWER_ECLIPSE)
-		if(m == 0) then
-			return 0
-		else
-			return math.abs(UnitPower('player', SPELL_POWER_ECLIPSE)/m*100)
-		end
-	end]],
-
 	['curmana'] = [[function(unit)
 		return UnitPower(unit, SPELL_POWER_MANA)
 	end]],
@@ -281,36 +284,36 @@ local tagStrings = {
 	end]],
 
 	['soulshards'] = [[function()
-		if(IsPlayerSpell(WARLOCK_SOULBURN)) then
-			local num = UnitPower('player', SPELL_POWER_SOUL_SHARDS)
-			if(num > 0) then
-				return num
-			end
+		if(not isBetaClient and not IsPlayerSpell(WARLOCK_SOULBURN)) then
+			return
 		end
-	end]],
 
-	['holypower'] = [[function()
-		if(IsPlayerSpell(85673)) then
-			local num = UnitPower('player', SPELL_POWER_HOLY_POWER)
-			if(num > 0) then
-				return num
-			end
-		end
-	end]],
-
-	['chi'] = [[function()
-		local num = UnitPower('player', SPELL_POWER_CHI)
+		local num = UnitPower('player', SPELL_POWER_SOUL_SHARDS)
 		if(num > 0) then
 			return num
 		end
 	end]],
 
-	['shadoworbs'] = [[function()
-		if(IsPlayerSpell(95740)) then
-			local num = UnitPower('player', SPELL_POWER_SHADOW_ORBS)
-			if(num > 0) then
-				return num
-			end
+	['holypower'] = [[function()
+		if((isBetaClient and GetSpecialization() ~= SPEC_PALADIN_RETRIBUTION))
+			or (not isBetaClient and IsPlayerSpell(85673)) then
+			return
+		end
+
+		local num = UnitPower('player', SPELL_POWER_HOLY_POWER)
+		if(num > 0) then
+			return num
+		end
+	end]],
+
+	['chi'] = [[function()
+		if(isBetaClient and GetSpecialization() ~= SPEC_MONK_WINDWALKER) then
+			return
+		end
+
+		local num = UnitPower('player', SPELL_POWER_CHI)
+		if(num > 0) then
+			return num
 		end
 	end]],
 
@@ -320,7 +323,36 @@ local tagStrings = {
 			return 'Affix'
 		end
 	end]],
+
+	['arenaspec'] = [[function(u)
+		local id = u:match'arena(%d)$'
+		if(id) then
+			local specID = GetArenaOpponentSpec(tonumber(id))
+			if(specID and specID > 0) then
+				local _, specName = GetSpecializationInfoByID(specID)
+				return specName
+			end
+		end
+	end]],
 }
+
+if(isBetaClient) then
+	tagStrings['arcanecharges'] = [[function()
+		local num = UnitPower('player', SPELL_POWER_ARCANE_CHARGES)
+		if(num > 0) then
+			return num
+		end
+	end]]
+else
+	tagStrings['shadoworbs'] = [[function()
+		if(IsPlayerSpell(95740)) then
+			local num = UnitPower('player', SPELL_POWER_SHADOW_ORBS)
+			if(num > 0) then
+				return num
+			end
+		end
+	end]]
+end
 
 local tags = setmetatable(
 	{
@@ -383,7 +415,7 @@ local tagEvents = {
 	["smartlevel"]          = "UNIT_LEVEL PLAYER_LEVEL_UP UNIT_CLASSIFICATION_CHANGED",
 	["threat"]              = "UNIT_THREAT_SITUATION_UPDATE",
 	["threatcolor"]         = "UNIT_THREAT_SITUATION_UPDATE",
-	['cpoints']             = 'UNIT_COMBO_POINTS PLAYER_TARGET_CHANGED',
+	['cpoints']             = 'UNIT_POWER_FREQUENT PLAYER_TARGET_CHANGED',
 	['affix']				= 'UNIT_CLASSIFICATION_CHANGED',
 	['plus']				= 'UNIT_CLASSIFICATION_CHANGED',
 	['rare']                = 'UNIT_CLASSIFICATION_CHANGED',
@@ -396,14 +428,22 @@ local tagEvents = {
 	["perpp"]               = 'UNIT_MAXPOWER UNIT_POWER',
 	["offline"]             = "UNIT_HEALTH UNIT_CONNECTION",
 	["status"]              = "UNIT_HEALTH PLAYER_UPDATE_RESTING UNIT_CONNECTION",
-	["pereclipse"]          = 'UNIT_POWER',
 	['curmana']             = 'UNIT_POWER UNIT_MAXPOWER',
 	['maxmana']             = 'UNIT_POWER UNIT_MAXPOWER',
 	['soulshards']          = 'UNIT_POWER SPELLS_CHANGED',
 	['holypower']           = 'UNIT_POWER SPELLS_CHANGED',
-	['chi']                 = 'UNIT_POWER',
-	['shadoworbs']          = 'UNIT_POWER SPELLS_CHANGED',
+	['arenaspec']           = 'ARENA_PREP_OPPONENT_SPECIALIZATIONS'
 }
+
+if(isBetaClient) then
+	tagEvents['arcanecharges'] = 'UNIT_POWER SPELLS_CHANGED'
+	tagEvents['soulshards'] = 'UNIT_POWER'
+	tagEvents['chi'] = 'UNIT_POWER SPELLS_CHANGED'
+else
+	tagEvents['shadoworbs'] = 'UNIT_POWER SPELLS_CHANGED'
+	tagEvents['soulshards'] = 'UNIT_POWER SPELLS_CHANGED'
+	tagEvents['chi'] = 'UNIT_POWER'
+end
 
 local unitlessEvents = {
 	PLAYER_LEVEL_UP = true,
@@ -414,7 +454,7 @@ local unitlessEvents = {
 
 	GROUP_ROSTER_UPDATE = true,
 
-	UNIT_COMBO_POINTS = true
+	ARENA_PREP_OPPONENT_SPECIALIZATIONS = true,
 }
 
 local events = {}

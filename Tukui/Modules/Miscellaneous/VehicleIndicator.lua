@@ -6,14 +6,14 @@ local VehicleIndicator = CreateFrame("Frame")
 
 function VehicleIndicator:Enable()
 	local Indicator = VehicleSeatIndicator
-	
+
 	Indicator:ClearAllPoints()
 	Indicator:SetParent(UIParent)
 	Indicator:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
-	
+
 	-- This will block UIParent_ManageFramePositions() to be executed
 	Indicator.IsShown = function() return false end
-	
+
 	Movers:RegisterFrame(Indicator)
 end
 

@@ -13,23 +13,23 @@ end
 
 local Update = function()
 	local Text = DataText.NameColor .. L.DataText.Currency .. "|r"
-	
+
 	for i = 1, MAX_WATCHED_TOKENS do
 		local Name, Count = GetBackpackCurrencyInfo(i)
-		
+
 		if Name and Count then
 			if (i ~= 1) then
 				Text = Text .. " "
 			else
 				Text = ""
 			end
-			
+
 			local Words = {strsplit(" ", Name)}
-			
+
 			for _, Word in ipairs(Words) do
 				Text = Text .. DataText.NameColor .. strsub(Word, 1, 1) .. "|r"
 			end
-			
+
 			Text = Text .. DataText.NameColor .. ": |r" .. DataText.ValueColor .. Count .. "|r"
 		end
 	end

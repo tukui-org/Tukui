@@ -1,4 +1,4 @@
-﻿local T, C, L = select(2, ...):unpack()
+local T, C, L = select(2, ...):unpack()
 
 if (GetLocale() ~= "ruRU") then
 	return
@@ -102,7 +102,7 @@ L.DataText.DemolisherDestroy = "Разрушителей уничтожено:"
 L.DataText.GateDestroy = "Врат разрушено:"
 L.DataText.TotalMemory = "Общее использование памяти:"
 L.DataText.ControlBy = "Под контролем:"
-L.DataText.CallToArms = "Призыв к Оружию" 
+L.DataText.CallToArms = "Призыв к Оружию"
 L.DataText.ArmError = "Не могу получить информацию Призыва к Оружию."
 L.DataText.NoDungeonArm = "Призыва к Оружию на данный момент нет."
 L.DataText.CartControl = "Захваты вагонеток:"

@@ -7,7 +7,7 @@ function TukuiActionBars:CreateStanceBar()
 	if (not C.ActionBars.ShapeShift) then
 		return
 	end
-	
+
 	local Panels = T["Panels"]
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
@@ -37,7 +37,7 @@ function TukuiActionBars:CreateStanceBar()
 			Button:Point("LEFT", Previous, "RIGHT", Spacing, 0)
 		else
 			Button:ClearAllPoints()
-			Button:Point("BOTTOMLEFT", StanceBar, "BOTTOMLEFT", Spacing, Spacing)		
+			Button:Point("BOTTOMLEFT", StanceBar, "BOTTOMLEFT", Spacing, Spacing)
 		end
 	end
 
@@ -61,8 +61,8 @@ function TukuiActionBars:CreateStanceBar()
 			TukuiActionBars.UpdateStanceBar(self)
 		end
 	end)
-	
+
 	Movers:RegisterFrame(StanceBar)
-	
+
 	RegisterStateDriver(StanceBar, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
 end

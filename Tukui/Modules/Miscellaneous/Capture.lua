@@ -5,7 +5,7 @@ local Capture = CreateFrame("Frame")
 
 function Capture:Update()
 	local Frames = NUM_EXTENDED_UI_FRAMES
-	
+
 	if Frames then
 		for i=1, NUM_EXTENDED_UI_FRAMES do
 			local Bar = _G["WorldStateCaptureBar" .. i]

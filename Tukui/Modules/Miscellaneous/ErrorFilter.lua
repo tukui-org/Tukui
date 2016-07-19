@@ -11,7 +11,7 @@ TukuiError.Filter = {
 function TukuiError:OnEvent(event, msg)
 	if self.Filter[msg] then
 		UIErrorsFrame:AddMessage(msg, 1, 0, 0)
-	end	
+	end
 end
 
 function TukuiError:Enable()

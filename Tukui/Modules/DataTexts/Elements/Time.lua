@@ -25,7 +25,7 @@ local AMPM = {
 
 local GetResetTime = function(seconds)
 	local Days, Hours, Minutes, Seconds = ChatFrame_TimeBreakDown(floor(seconds))
-	
+
 	if (Days > 0) then
 		return format(DayHourMinute, Days, Hours, Minutes) -- 7d, 2h, 5m
 	elseif (Hours > 0) then
@@ -45,7 +45,7 @@ local GetFormattedTime = function()
 		local Hour24 = tonumber(date("%H"))
 		Hour = tonumber(date("%I"))
 		Minute = tonumber(date("%M"))
-		
+
 		if Use24Hour then
 			return Hour24, Minute, -1
 		else
@@ -54,12 +54,12 @@ local GetFormattedTime = function()
 			else
 				AmPm = 2
 			end
-			
+
 			return Hour, Minute, AmPm
 		end
 	else -- Server Time
 		Hour, Minute = GetGameTime()
-		
+
 		if Use24Hour then
 			return Hour, Minute, -1
 		else
@@ -67,16 +67,16 @@ local GetFormattedTime = function()
 				if (Hour > 12) then
 					Hour = Hour - 12
 				end
-				
+
 				AmPm = 1
 			else
 				if (Hour == 0) then
 					Hour = 12
 				end
-				
+
 				AmPm = 2
 			end
-			
+
 			return Hour, Minute, AmPm
 		end
 	end
@@ -84,64 +84,64 @@ end
 
 local Update = function(self, t)
 	tslu = tslu - t
-	
+
 	if (tslu > 0) then
 		return
 	end
-	
+
 	local Hour, Minute, AmPm = GetFormattedTime()
-	
+
 	if (CurrentHour == Hour and CurrentMin == Minute) then
 		return
 	end
-	
+
 	if (AmPm == -1) then
 		self.Text:SetFormattedText(EuropeString, DataText.ValueColor, Hour, DataText.ValueColor, Minute)
 	else
 		self.Text:SetFormattedText(UKString, DataText.ValueColor, Hour, DataText.ValueColor, Minute, DataText.NameColor, AMPM[AmPm])
 	end
-	
+
 	CurrentHour = Hour
 	CurrentMin = Minute
-	
+
 	tslu = 1
 end
 
 local OnEnter = function(self)
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	
+
 	local SavedInstances = GetNumSavedInstances()
 	local SavedWorldBosses = GetNumSavedWorldBosses()
-	
+
 	if (SavedWorldBosses > 0) then
 		GameTooltip:AddLine("World Bosses")
-		
+
 		for i = 1, SavedWorldBosses do
 			local Name, _, Reset = GetSavedWorldBossInfo(i)
-			
+
 			if (Name and Reset) then
 				local ResetTime = GetResetTime(Reset)
-				
+
 				GameTooltip:AddDoubleLine(Name, ResetTime, 1, 1, 1, 1, 1, 1)
 			end
 		end
 	end
-	
+
 	if ((SavedWorldBosses > 0) and (SavedInstances > 0)) then
 		-- Spacing
 		GameTooltip:AddLine(" ")
 	end
-	
+
 	if (SavedInstances > 0) then
 		GameTooltip:AddLine("Saved Raids")
-		
+
 		for i = 1, SavedInstances do
 			local Name, _, Reset, _, Locked, Extended, _, IsRaid, _, Difficulty, MaxBosses, DefeatedBosses = GetSavedInstanceInfo(i)
-			
+
 			if (IsRaid and Name and (Locked or Extended)) then
 				local ResetTime = GetResetTime(Reset)
-				
+
 				if (MaxBosses and MaxBosses > 0) and (DefeatedBosses and DefeatedBosses > 0) then
 					GameTooltip:AddDoubleLine(format(RaidFormat1, Name, Difficulty, DefeatedBosses, MaxBosses), ResetTime, 1, 1, 1, 1, 1, 1)
 				else
@@ -150,7 +150,7 @@ local OnEnter = function(self)
 			end
 		end
 	end
-	
+
 	GameTooltip:Show()
 end
 

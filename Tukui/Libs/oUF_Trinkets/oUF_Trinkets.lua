@@ -19,18 +19,18 @@ end
 local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance();
 	if instanceType ~= 'arena' then
-		self.Trinket:Hide(); 
+		self.Trinket:Hide();
 		return;
 	else
-		self.Trinket:Show(); 
+		self.Trinket:Show();
 	end
-	
+
 	if(self.Trinket.PreUpdate) then self.Trinket:PreUpdate(event) end
-	
+
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local _, eventType, _, sourceGUID, _, _, _, _, _, _, _, spellID = ...
 		if eventType == "SPELL_CAST_SUCCESS" and sourceGUID == UnitGUID(self.unit) and trinketSpells[spellID] then
-			CooldownFrame_SetTimer(self.Trinket.cooldownFrame, GetTime(), trinketSpells[spellID], 1)
+			CooldownFrame_Set(self.Trinket.cooldownFrame, GetTime(), trinketSpells[spellID], 1)
 		end
 	elseif event == "ARENA_OPPONENT_UPDATE" then
 		local unit, type = ...
@@ -40,9 +40,9 @@ local Update = function(self, event, ...)
 			end
 		end
 	elseif event == 'PLAYER_ENTERING_WORLD' then
-		CooldownFrame_SetTimer(self.Trinket.cooldownFrame, 1, 1, 1)
+		CooldownFrame_Set(self.Trinket.cooldownFrame, 1, 1, 1)
 	end
-	
+
 	if(self.Trinket.PostUpdate) then self.Trinket:PostUpdate(event) end
 end
 
@@ -51,30 +51,30 @@ local Enable = function(self)
 		self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", Update, true)
 		self:RegisterEvent("ARENA_OPPONENT_UPDATE", Update, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Update, true)
-		
+
 		if not self.Trinket.cooldownFrame then
 			self.Trinket.cooldownFrame = CreateFrame("Cooldown", nil, self.Trinket)
 			self.Trinket.cooldownFrame:SetAllPoints(self.Trinket)
 		end
-		
+
 		if not self.Trinket.Icon then
 			self.Trinket.Icon = self.Trinket:CreateTexture(nil, "BORDER")
 			self.Trinket.Icon:SetAllPoints(self.Trinket)
 			self.Trinket.Icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
 			self.Trinket.Icon:SetTexture(GetTrinketIcon('player'))
-		end	
-		
+		end
+
 		return true
 	end
 end
- 
+
 local Disable = function(self)
 	if self.Trinket then
 		self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED", Update)
 		self:UnregisterEvent("ARENA_OPPONENT_UPDATE", Update)
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Update)		
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Update)
 		self.Trinket:Hide()
 	end
 end
- 
+
 oUF:AddElement('Trinket', Update, Enable, Disable)

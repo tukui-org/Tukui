@@ -17,17 +17,17 @@ local Update = function(self)
 	local Text = GetMinimapZoneText()
 	local PVPType = GetZonePVPInfo()
 	local Color
-	
+
 	if ZoneColors[PVPType] then
 		Color = ZoneColors[PVPType]
 	else
 		Color = ZoneColors["else"]
 	end
-	
+
 	if (Text:len() > 18) then
 		Text = strsub(Text, 1, 12) .. "..."
 	end
-	
+
 	self.Text:SetText(Text)
 	self.Text:SetTextColor(Color[1], Color[2], Color[3])
 end
@@ -36,24 +36,24 @@ local OnEnter = function(self)
 	if InCombatLockdown() then
 		return
 	end
-	
+
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	
+
 	local Text = GetRealZoneText()
 	local PVPType, IsSubZonePvP, FactionName = GetZonePVPInfo()
 	local X, Y = GetPlayerMapPosition("player")
 	local XText, YText, Label, Location, Color
-	
+
 	if ZoneColors[PVPType] then
 		Color = ZoneColors[PVPType]
 	else
 		Color = ZoneColors["else"]
 	end
-	
+
 	X = floor(100 * X)
 	Y = floor(100 * Y)
-	
+
 	if (X == 0 and Y == 0) then
 		GameTooltip:AddLine("0, 0")
 	else
@@ -62,34 +62,34 @@ local OnEnter = function(self)
 		else
 			XText = X
 		end
-		
+
 		if (Y < 10) then
 			YText = "0"..Y
 		else
 			YText = Y
 		end
 	end
-	
+
 	Location = format("%s |cffFFFFFF(%s, %s)|r", Text or Unknown, XText or 0, YText or 0)
-	
+
 	GameTooltip:AddLine(LOCATION_COLON)
-	
-    if (PVPType == "sanctuary") then
+
+	if (PVPType == "sanctuary") then
 		Label = SANCTUARY_TERRITORY
-    elseif (PVPType == "arena") then
+	elseif (PVPType == "arena") then
 		Label = FREE_FOR_ALL_TERRITORY
-    elseif (PVPType == "friendly") then
+	elseif (PVPType == "friendly") then
 		Label = format(FACTION_CONTROLLED_TERRITORY, FactionName)
-    elseif (PVPType == "hostile") then
+	elseif (PVPType == "hostile") then
 		Label = format(FACTION_CONTROLLED_TERRITORY, FactionName)
-    elseif (PVPType == "contested") then
+	elseif (PVPType == "contested") then
 		Label = CONTESTED_TERRITORY
-    elseif (PVPType == "combat") then
+	elseif (PVPType == "combat") then
 		Label = COMBAT_ZONE
-    end
-	
+	end
+
 	GameTooltip:AddDoubleLine(Location, Label, Color[1], Color[2], Color[3], Color[1], Color[2], Color[3])
-	
+
 	GameTooltip:Show()
 end
 

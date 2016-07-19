@@ -37,37 +37,13 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	end
 
 	-- Shadow Effect Updates
-	Shadow:Point("TOPLEFT", -4, 12)
-	
-	-- Totem Bar (Consecration)
-	if (C.UnitFrames.TotemBar) then
-		T["Colors"].totems[1] = { 218/255, 225/255, 92/255 }
-		T["Colors"].totems[2] = { 218/255, 225/255, 92/255 }
+	HPBar:SetScript("OnShow", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 12)
+	end)
 
-		local TotemBar = self.Totems
-		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:Width(125)
-		TotemBar[1]:SetPoint("LEFT")
-		
-		TotemBar[2]:ClearAllPoints()
-		TotemBar[2]:Width(124)
-		TotemBar[2]:SetPoint("LEFT", TotemBar[1], "RIGHT", 1, 0)
-
-		for i = 3, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-
-		TotemBar:SetScript("OnShow", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 22)
-		end)
-
-		TotemBar:SetScript("OnHide", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 12)
-		end)
-	end
+	HPBar:SetScript("OnHide", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 4)
+	end)
 
 	-- Register
 	self.HolyPower = HPBar

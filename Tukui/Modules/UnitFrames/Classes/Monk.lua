@@ -25,34 +25,27 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 		Harmony[i] = CreateFrame("StatusBar", self:GetName()..'Harmony'..i, Harmony)
 		Harmony[i]:Height(8)
 		Harmony[i]:SetStatusBarTexture(PowerTexture)
-	end
-
-	-- Shadow Effect Updates
-	Shadow:Point("TOPLEFT", -4, 12)
-
-	-- Totem Bar (Black Ox / Jade Serpent Statue)
-	if (C.UnitFrames.TotemBar) then
-		T["Colors"].totems[1] = { 95/255, 222/255, 95/255 }
-
-		local TotemBar = self.Totems
-		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 10)
-
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
-
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
+		
+		if i == 1 then
+			Harmony[i]:Width((250 / 6) - 2)
+			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 0, 0)
+			Harmony[i].Ascension = Harmony[i]:GetWidth()
+			Harmony[i].NoTalent = 250 / 5
+		else
+			Harmony[i]:Width((250 / 6) - 1)
+			Harmony[i]:SetPoint("LEFT", Harmony[i-1], "RIGHT", 1, 0)
+			Harmony[i].Ascension = Harmony[i]:GetWidth()
+			Harmony[i].NoTalent = 250 / 5 - 1
 		end
-
-		TotemBar:SetScript("OnShow", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 22)
-		end)
-
-		TotemBar:SetScript("OnHide", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 12)
-		end)
 	end
+	
+	Harmony:SetScript("OnShow", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 12)
+	end)
+
+	Harmony:SetScript("OnHide", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 4)
+	end)
 
 	-- Register
 	self.HarmonyBar = Harmony
