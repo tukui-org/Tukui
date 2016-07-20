@@ -320,7 +320,7 @@ function TukuiUnitFrames:Player()
 
 		-- Totem Bar
 		for i = 1, MAX_TOTEMS do
-			Bar[i] = CreateFrame("StatusBar", nil, Bar)
+			Bar[i] = CreateFrame("StatusBar", "TukuiTotemBarSlot"..i, Bar)
 			Bar[i]:Height(16)
 			Bar[i]:SetStatusBarTexture(PowerTexture)
 			Bar[i]:EnableMouse(true)
