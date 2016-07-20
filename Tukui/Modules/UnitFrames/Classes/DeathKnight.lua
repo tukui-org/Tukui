@@ -31,7 +31,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		RunesBar[i].bg:SetFrameLevel(RunesBar[i]:GetFrameLevel() - 1)
 		RunesBar[i].bg:SetStatusBarTexture(PowerTexture)
 		RunesBar[i].bg:SetStatusBarColor(unpack(T.Colors.runes["CD"]))
-		RunesBar[i].bg:SetAlpha(0.20)
+		RunesBar[i].bg:SetAlpha(0.30)
 		RunesBar[i].bg:SetAllPoints()
 
 		if i == 1 then
