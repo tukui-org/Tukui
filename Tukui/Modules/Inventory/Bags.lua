@@ -244,7 +244,7 @@ function Bags:CreateReagentContainer()
 
 	UnlockButton:SkinButton()
 
-	Movers:RegisterFrame(Reagent)
+	--Movers:RegisterFrame(Reagent)
 
 	self.Reagent = Reagent
 	-- Couldn't access these.
@@ -835,7 +835,7 @@ function Bags:OpenAllBankBags()
 		if not self.Bank.MoverAdded then
 			local Movers = T["Movers"]
 
-			Movers:RegisterFrame(self.Bank)
+			--Movers:RegisterFrame(self.Bank)
 
 			self.Bank.MoverAdded = true
 		end
