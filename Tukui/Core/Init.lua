@@ -14,7 +14,9 @@ function Engine:unpack()
 	return self[1], self[2], self[3], self[4]
 end
 
-Engine[1].Resolution = ({GetScreenResolutions()})[GetCurrentResolution()] or GetCVar("gxWindowedResolution")
+Engine[1].WindowedMode = Display_DisplayModeDropDown:windowedmode()
+Engine[1].FullscreenMode = Display_DisplayModeDropDown:fullscreenmode()
+Engine[1].Resolution = ({GetScreenResolutions()})[GetCurrentResolution()] or (Engine[1].WindowedMode and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
 Engine[1].ScreenHeight = tonumber(string.match(Engine[1].Resolution, "%d+x(%d+)"))
 Engine[1].ScreenWidth = tonumber(string.match(Engine[1].Resolution, "(%d+)x+%d"))
 Engine[1].MyName = UnitName("player")
