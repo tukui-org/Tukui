@@ -4,6 +4,9 @@
 
 -- [[ Build the engine ]] --
 local AddOn, Engine = ...
+local Resolution = select(GetCurrentResolution(), GetScreenResolutions())
+local Windowed = Display_DisplayModeDropDown:windowedmode()
+local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
 
 Engine[1] = CreateFrame("Frame")
 Engine[2] = {}
@@ -14,9 +17,9 @@ function Engine:unpack()
 	return self[1], self[2], self[3], self[4]
 end
 
-Engine[1].WindowedMode = Display_DisplayModeDropDown:windowedmode()
-Engine[1].FullscreenMode = Display_DisplayModeDropDown:fullscreenmode()
-Engine[1].Resolution = ({GetScreenResolutions()})[GetCurrentResolution()] or (Engine[1].WindowedMode and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
+Engine[1].WindowedMode = Windowed
+Engine[1].FullscreenMode = Fullscreen
+Engine[1].Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
 Engine[1].ScreenHeight = tonumber(string.match(Engine[1].Resolution, "%d+x(%d+)"))
 Engine[1].ScreenWidth = tonumber(string.match(Engine[1].Resolution, "(%d+)x+%d"))
 Engine[1].MyName = UnitName("player")
