@@ -162,7 +162,9 @@ function Plates:SetupPlate(options)
 	CastBar:HookScript("OnShow", Plates.SetCastingIcon)
 	
 	-- UNIT NAME
-	Name:SetFont(FontName, 10, "OUTLINE")
+	Name:SetFont(FontName, 10) -- if we add outline, it cause lag? WTF?
+	Name:SetShadowColor(0, 0, 0)
+	Name:SetShadowOffset(1.25, -1.25)
 	hooksecurefunc(Name, "Show", Plates.SetName)
 	
 	-- WILL DO A BETTER VISUAL FOR THIS LATER
