@@ -154,6 +154,7 @@ function Experience:Create()
 		XPBar:SetScript("OnLeave", HideTooltip)
 
 		RestedBar:SetStatusBarTexture(C.Medias.Normal)
+		RestedBar:SetFrameStrata("BACKGROUND")
 		RestedBar:SetStatusBarColor(unpack(self.RestedColor))
 		RestedBar:SetAllPoints(XPBar)
 		RestedBar:SetOrientation(C.Chat.Background and "HORIZONTAL" or "Vertical")
