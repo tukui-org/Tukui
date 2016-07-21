@@ -75,7 +75,8 @@ function Plates:ColorHealth()
 				if (UnitIsFriend("player", self.unit)) then
 					r, g, b = unpack(T.Colors.reaction[5])
 				else
-					r, g, b = unpack(T.Colors.reaction[1])
+					local Reaction = UnitReaction("player", self.unit)
+					r, g, b = unpack(T.Colors.reaction[Reaction])
 				end
 			end
 		end
