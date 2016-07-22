@@ -813,7 +813,7 @@ function TukuiUnitFrames:MainTankTargetAttibutes()
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
-			self:SetAttribute('unitsuffix', 'target')
+			self:SetAttribute("unitsuffix", "target")
 		]],
 		"initial-width", T.Scale(150),
 		"initial-height", T.Scale(22),

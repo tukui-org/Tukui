@@ -82,7 +82,7 @@ T.ColorGradient = function(a, b, ...)
 	end
 
 	if (Percent >= 1) then
-		local R, G, B = select(select('#', ...) - 2, ...)
+		local R, G, B = select(select("#", ...) - 2, ...)
 
 		return R, G, B
 	elseif (Percent <= 0) then
@@ -91,7 +91,7 @@ T.ColorGradient = function(a, b, ...)
 		return R, G, B
 	end
 
-	local Num = (select('#', ...) / 3)
+	local Num = (select("#", ...) / 3)
 	local Segment, RelPercent = modf(Percent * (Num - 1))
 	local R1, G1, B1, R2, G2, B2 = select((Segment * 3) + 1, ...)
 

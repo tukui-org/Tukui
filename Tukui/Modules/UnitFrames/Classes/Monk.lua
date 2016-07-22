@@ -8,7 +8,7 @@ if (Class ~= "MONK") then
 end
 
 TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
-	local Harmony = CreateFrame("Frame", self:GetName()..'Harmony', self)
+	local Harmony = CreateFrame("Frame", self:GetName().."Harmony", self)
 	local Shadow = self.Shadow
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
@@ -22,7 +22,7 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 	Harmony:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 6 do
-		Harmony[i] = CreateFrame("StatusBar", self:GetName()..'Harmony'..i, Harmony)
+		Harmony[i] = CreateFrame("StatusBar", self:GetName().."Harmony"..i, Harmony)
 		Harmony[i]:Height(8)
 		Harmony[i]:SetStatusBarTexture(PowerTexture)
 		

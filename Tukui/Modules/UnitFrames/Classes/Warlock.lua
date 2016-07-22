@@ -8,7 +8,7 @@ if (Class ~= "WARLOCK") then
 end
 
 TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
-	local Bar = CreateFrame("Frame", nil, self)
+	local Bar = CreateFrame("Frame", self:GetName().."SoulShardsBar", self)
 	local Shadow = self.Shadow
 	local Totems = self.Totems
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)

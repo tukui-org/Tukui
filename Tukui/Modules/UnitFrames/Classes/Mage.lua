@@ -10,7 +10,7 @@ if (Class ~= "MAGE") then
 end
 
 TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
-	local ArcaneChargeBar = CreateFrame("Frame", self:GetName()..'ArcaneChargeBar', self)
+	local ArcaneChargeBar = CreateFrame("Frame", self:GetName().."ArcaneChargeBar", self)
 	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
 
 	-- Arcane Charges
@@ -22,7 +22,7 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 	ArcaneChargeBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 4 do
-		ArcaneChargeBar[i] = CreateFrame("StatusBar", self:GetName()..'ArcaneCharge'..i, ArcaneChargeBar)
+		ArcaneChargeBar[i] = CreateFrame("StatusBar", self:GetName().."ArcaneCharge"..i, ArcaneChargeBar)
 		ArcaneChargeBar[i]:Height(8)
 		ArcaneChargeBar[i]:SetStatusBarTexture(PowerTexture)
 
