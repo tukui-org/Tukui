@@ -20,8 +20,6 @@ function TukuiActionBars:CreateBar3()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
-		Button:SetFrameStrata("BACKGROUND")
-		Button:SetFrameLevel(15)
 
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)

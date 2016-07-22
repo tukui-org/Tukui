@@ -19,8 +19,6 @@ function TukuiActionBars:CreateBar4()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
-		Button:SetFrameStrata("BACKGROUND")
-		Button:SetFrameLevel(15)
 		Button:SetAttribute("flyoutDirection", "UP")
 
 		if (i == 1) then

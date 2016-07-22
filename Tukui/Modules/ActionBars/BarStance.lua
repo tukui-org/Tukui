@@ -27,7 +27,6 @@ function TukuiActionBars:CreateStanceBar()
 	for i = 1, NUM_STANCE_SLOTS do
 		local Button = _G["StanceButton"..i]
 
-		Button:SetFrameStrata("LOW")
 		Button:Show()
 
 		if (i ~= 1) then

@@ -28,8 +28,6 @@ function TukuiActionBars:CreatePetBar()
 		Button:SetParent(Bar)
 		Button:Size(PetSize)
 		Button:Show()
-		Button:SetFrameLevel(5)
-		Button:SetFrameStrata("BACKGROUND")
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Spacing, -Spacing)
