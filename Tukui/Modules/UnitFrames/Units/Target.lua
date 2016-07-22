@@ -259,10 +259,6 @@ function TukuiUnitFrames:Target()
 		self.Castbar = CastBar
 	end
 
-	------ Special Note ------
-	-- The animation is currently broken. I tried some things out but i dont get it working at the moment.
-	-- Also the icons in PostCreateAura are not working.
-	--------------------------
 	if (C.UnitFrames.TargetAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 		local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
