@@ -81,7 +81,7 @@ local OnLeave = function()
 end
 
 local createAuraIcon = function(icons, index)
-	local button = CreateFrame("Button", icons:GetName().."Button"..index or nil, icons)
+	local button = CreateFrame("Button", icons:GetName() and icons:GetName().."Button"..index or nil, icons)
 	button:RegisterForClicks'RightButtonUp'
 
 	local cd = CreateFrame("Cooldown", nil, button, "CooldownFrameTemplate")
