@@ -4,7 +4,7 @@
 
 -- [[ Build the engine ]] --
 local AddOn, Engine = ...
-local Resolution = select(GetCurrentResolution(), GetScreenResolutions())
+local Resolution = GetCurrentResolution() > 0 and select(GetCurrentResolution(), GetScreenResolutions()) or nil
 local Windowed = Display_DisplayModeDropDown:windowedmode()
 local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
 
