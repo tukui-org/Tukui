@@ -29,7 +29,7 @@ function TukuiPopups:CreatePopups()
 		Frames[i].Text:SetSize(380, 40)
 		Frames[i].Text:SetFont(C.Medias.Font, 12)
 		Frames[i].Text:SetInsertMode("TOP")
-		Frames[i].Text:SetFading(0)
+		Frames[i].Text:SetFading(false)
 		Frames[i].Text:AddMessage("")
 
 		Frames[i].Button1 = CreateFrame("Button", nil, Frames[i])
