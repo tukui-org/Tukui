@@ -191,6 +191,10 @@ function Experience:Create()
 end
 
 function Experience:Enable()
+	if not C.Misc.XPBars then
+		return
+	end
+	
 	if not self.IsCreated then
 		self:Create()
 
