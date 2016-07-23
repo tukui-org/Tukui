@@ -14,7 +14,10 @@ Popups.Popup["CLIENT_RESTART"] = {
 	Function1 = function(self)
 		RequireRestart = false
 		
-		Quit()
+		ForceQuit()
+	end,
+	Function2 = function(self)
+		RequireRestart = false
 	end,
 }
 
