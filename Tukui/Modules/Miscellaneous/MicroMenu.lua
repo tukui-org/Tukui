@@ -5,7 +5,7 @@ local MicroMenu = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "U
 
 -- PVE / PVP are not linked together to avoid tainting.
 PVEFrameTab1:Kill()
-PVEFrameTab2:Kill()
+PVEFrameTab2:Kill() -- On Click, it taint at battleground selection dropdown.
 
 MicroMenu.Buttons = {
 	{text = CHARACTER_BUTTON,
