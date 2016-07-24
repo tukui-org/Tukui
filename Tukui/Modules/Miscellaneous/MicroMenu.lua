@@ -3,6 +3,10 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local MicroMenu = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
 
+-- PVE / PVP are not linked together to avoid tainting.
+PVEFrameTab1:Kill()
+PVEFrameTab2:Kill()
+
 MicroMenu.Buttons = {
 	{text = CHARACTER_BUTTON,
 	func = function()
