@@ -129,7 +129,7 @@ function Experience:Update(event, owner)
 		end
 		
 		if BarType == "XP" then
-			r, g, b = unpack(self.AFColor)
+			r, g, b = unpack(self.XPColor)
 		elseif BarType == "ARTIFACT" then
 			r, g, b = unpack(self.AFColor)
 		else
