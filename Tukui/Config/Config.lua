@@ -89,7 +89,6 @@ C["Misc"] = {
 	["ErrorFilterEnable"] = true,
 	["AutoInviteEnable"] = false,
 	["TalkingHeadEnable"] = true,
-	["XPBars"] = true,
 }
 
 C["NamePlates"] = {

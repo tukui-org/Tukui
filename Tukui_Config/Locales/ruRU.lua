@@ -328,11 +328,6 @@ TukuiConfig["ruRU"] = {
 			["Name"] = "Enable Talking Head",
 			["Desc"] = "Display Blizzard Talking Head Frame.",
 		},
-		
-		["XPBars"] = {
-			["Name"] = "Enable XP Bars",
-			["Desc"] = "Display XP, Honor and Artifact XP Bars.",
-		},
 	},
 
 	["NamePlates"] = {
