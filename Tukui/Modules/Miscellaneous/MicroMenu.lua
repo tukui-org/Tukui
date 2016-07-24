@@ -68,7 +68,7 @@ MicroMenu.Buttons = {
 
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE.." / "..COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
 	func = function()
-		PVEFrame_ToggleFrame()
+		T.Print("Currently temporary disabled because it create a tainting bug, please press 'h' or 'i' to toggle this menu.")
 	end,
 	notCheckable = true},
 
