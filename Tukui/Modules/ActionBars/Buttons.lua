@@ -52,9 +52,7 @@ function ActionBars:RemoveColumn(bar, num)
 	Button1:Hide()
 	Button2:Hide()
 
-	--bar:Width((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
-	bar.Anim:SetChange((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
-	bar.Anim:Play()
+	bar:Width((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
 
 	bar.NextColumnToHide = bar.NextColumnToHide - 1
 
@@ -80,9 +78,7 @@ function ActionBars:RemoveButton(bar, num)
 
 	Button:Hide()
 
-	--bar:Height((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
-	bar.Anim:SetChange((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
-	bar.Anim:Play()
+	bar:Height((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
 
 	bar.NextButtonToHide = bar.NextButtonToHide - 1
 
