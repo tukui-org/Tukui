@@ -24,7 +24,6 @@ function Minimap:DisableMinimapElements()
 		"MiniMapVoiceChatFrame",
 		"MinimapNorthTag",
 		"MinimapZoneTextButton",
-		"MiniMapTracking",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
 		"GarrisonLandingPageMinimapButton",
@@ -53,10 +52,8 @@ function Minimap:OnMove(enabled)
 end
 
 function Minimap:OnMouseClick(button)
-	if (IsShiftKeyDown() and button == "RightButton") or (button == "MiddleButton") then
-		Lib_EasyMenu(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", T.Scale(-160), 0, "MENU", 2)
-	elseif (button == "RightButton") then
-		ToggleDropDownMenu(nil, nil, MiniMapTrackingDropDown, self, 0, T.Scale(-3))	
+	if (button == "RightButton") or (button == "MiddleButton") then
+		Miscellaneous.DropDown.Open(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", T.Scale(-160), 0, "MENU", 2)
 	else
 		Minimap_OnClick(self)
 	end
@@ -153,12 +150,15 @@ function GetMinimapShape()
 end
 
 function Minimap:AddZoneAndCoords()
-	local MinimapZone = CreateFrame("Frame", "TukuiMinimapZone", self)
+	local MinimapZone = CreateFrame("Button", "TukuiMinimapZone", self)
+	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
+	
 	MinimapZone:SetTemplate()
 	MinimapZone:Size(self:GetWidth() + 4, 19)
 	MinimapZone:Point("TOP", self, 0, 2)
 	MinimapZone:SetFrameStrata(self:GetFrameStrata())
 	MinimapZone:SetAlpha(0)
+	MinimapZone:EnableMouse()
 	
 	MinimapZone.Text = MinimapZone:CreateFontString("TukuiMinimapZoneText", "OVERLAY")
 	MinimapZone.Text:SetFont(C["Medias"].Font, 10)
@@ -172,7 +172,6 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone.Anim:SetSmoothing("InOut")
 	MinimapZone.Anim:SetChange(1)
 	
-	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 	MinimapCoords:SetTemplate()
 	MinimapCoords:Size(40, 19)
 	MinimapCoords:Point("BOTTOMLEFT", self, "BOTTOMLEFT", 2, 2)
@@ -201,6 +200,13 @@ function Minimap:AddZoneAndCoords()
 	
 	Minimap.MinimapZone = MinimapZone
 	Minimap.MinimapCoords = MinimapCoords
+	
+	-- Put tracking button over zone
+	MiniMapTracking:Kill()
+	MiniMapTrackingButtonBorder:Kill()
+	MiniMapTrackingButton:SetParent(MinimapZone)
+	MiniMapTrackingButton:ClearAllPoints()
+	MiniMapTrackingButton:SetAllPoints()
 end
 
 function Minimap:UpdateCoords(t)
@@ -255,23 +261,21 @@ function Minimap:EnableMouseOver()
 	self:SetScript("OnEnter", function()
 		Minimap.MinimapZone:SetAlpha(1)
 		Minimap.MinimapCoords:SetAlpha(1)
-		
-		--Minimap.MinimapZone.Anim:SetChange(1)
-		--Minimap.MinimapZone.Anim:Play()
-		
-		--Minimap.MinimapCoords.Anim:SetChange(1)
-		--Minimap.MinimapCoords.Anim:Play()
 	end)
 	
 	self:SetScript("OnLeave", function()
 		Minimap.MinimapZone:SetAlpha(0)
 		Minimap.MinimapCoords:SetAlpha(0)
-		
-		--Minimap.MinimapZone.Anim:SetChange(0)
-		--Minimap.MinimapZone.Anim:Play()
-		
-		--Minimap.MinimapCoords.Anim:SetChange(0)
-		--Minimap.MinimapCoords.Anim:Play()
+	end)
+	
+	MiniMapTrackingButton:SetScript("OnEnter", function()
+		Minimap.MinimapZone:SetAlpha(1)
+		Minimap.MinimapCoords:SetAlpha(1)
+	end)
+	
+	MiniMapTrackingButton:SetScript("OnLeave", function()
+		Minimap.MinimapZone:SetAlpha(0)
+		Minimap.MinimapCoords:SetAlpha(0)
 	end)
 end
 
