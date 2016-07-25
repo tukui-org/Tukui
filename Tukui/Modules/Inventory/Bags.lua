@@ -532,7 +532,13 @@ function Bags:SlotUpdate(id, button)
 	end
 
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-	local Texture, Count, Lock = GetContainerItemInfo(id, button:GetID())
+	
+	local Texture, Count, Lock, quality, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
+	
+	if button.ItemID == ItemID then
+		return
+	end
+	
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
@@ -580,6 +586,8 @@ function Bags:SlotUpdate(id, button)
 
 			button.BorderColor = QuestColor
 		end
+		
+		button.ItemID = ItemID
 
 		return
 	end
@@ -587,26 +595,19 @@ function Bags:SlotUpdate(id, button)
 	if ItemLink then
 		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
 
-		if (not Lock and Rarity and Rarity > 1) then
-			if (button.BorderColor ~= GetItemQualityColor(Rarity)) then
+		if (Rarity and Rarity > 1) then
 				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
-
 				button.BorderColor = GetItemQualityColor(Rarity)
-			end
 		else
-			if (button.BorderColor ~= C["General"].BorderColor) then
 				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
 				button.BorderColor = C["General"].BorderColor
-			end
 		end
 	else
-		if (button.BorderColor ~= C["General"].BorderColor) then
 			button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
 			button.BorderColor = C["General"].BorderColor
-		end
 	end
+	
+	button.ItemID = ItemID
 end
 
 function Bags:BagUpdate(id)
