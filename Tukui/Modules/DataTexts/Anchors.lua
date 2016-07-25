@@ -19,7 +19,7 @@ end
 local OnMouseDown = function(self)
 	CurrentFrame = self
 
-	Lib_EasyMenu(Menu, MenuFrame, "cursor", 0 , 0, "MENU", 2)
+	T.Miscellaneous.DropDown.Open(Menu, MenuFrame, "cursor", 0 , 0, "MENU", 2)
 end
 
 function TukuiDT:ToggleDataPositions()

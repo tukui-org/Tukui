@@ -306,7 +306,7 @@ local OnMouseUp = function(self, btn)
 		end
 	end
 
-	Lib_EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
+	T.Miscellaneous.DropDown.Open(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
 end
 
 local OnMouseDown = function(self, btn)
