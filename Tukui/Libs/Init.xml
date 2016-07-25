@@ -11,4 +11,7 @@
 	<Script file="oUF_ArcaneCharge\oUF_ArcaneCharge.lua"/>
 	<Script file="oUF_PVPSpecIcons\oUF_PVPSpecIcons.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
+	<Include file="DropDownMenu\UIDropDownMenuTemplates.xml"/>
+	<Script file="DropDownMenu\EasyMenu.lua"/>
+	<Script file="DropDownMenu\UIDropDownMenu.lua"/>
 </Ui>
