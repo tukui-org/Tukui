@@ -3,10 +3,6 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local MicroMenu = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
 
--- PVE / PVP are not linked together to avoid tainting.
-PVEFrameTab1:Kill()
-PVEFrameTab2:Kill() -- On Click, it taint at battleground selection dropdown.
-
 MicroMenu.Buttons = {
 	{text = CHARACTER_BUTTON,
 	func = function()
@@ -70,15 +66,9 @@ MicroMenu.Buttons = {
 	end,
 	notCheckable = true},
 
-	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE,
+	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE.." / "..COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
 	func = function()
 		PVEFrame_ToggleFrame()
-	end,
-	notCheckable = true},
-	
-	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP,
-	func = function()
-		TogglePVPUI()
 	end,
 	notCheckable = true},
 
