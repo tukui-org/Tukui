@@ -117,7 +117,7 @@ local OnMouseUp = function(self, btn)
 		end
 	end
 
-	EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
+	Lib_EasyMenu(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
 end
 
 local OnEnter = function(self)

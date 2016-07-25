@@ -19,7 +19,7 @@ end
 local OnMouseDown = function(self)
 	CurrentFrame = self
 
-	EasyMenu(Menu, MenuFrame, "cursor", 0 , 0, "MENU", 2)
+	Lib_EasyMenu(Menu, MenuFrame, "cursor", 0 , 0, "MENU", 2)
 end
 
 function TukuiDT:ToggleDataPositions()
