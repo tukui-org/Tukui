@@ -207,6 +207,7 @@ function Minimap:AddZoneAndCoords()
 	MiniMapTrackingButton:SetParent(MinimapZone)
 	MiniMapTrackingButton:ClearAllPoints()
 	MiniMapTrackingButton:SetAllPoints()
+	MiniMapTrackingButton:StripTextures()
 end
 
 function Minimap:UpdateCoords(t)
