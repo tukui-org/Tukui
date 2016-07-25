@@ -83,8 +83,11 @@ function Bags:SkinBagButton()
 
 	self:SetNormalTexture("")
 	self:SetPushedTexture("")
-	self:SetTemplate()
-	self:SetBackdropColor(nil) -- if we set a color, there is a fps drop, so let's keep the original black color.
+	self:SetBackdrop({
+	  edgeFile = C.Medias.Blank,
+	  edgeSize = T.Mult,
+	})
+	self:SetBackdropBorderColor(unpack(C.General.BorderColor))
 	self:StyleButton()
 
 	self.IsSkinned = true
