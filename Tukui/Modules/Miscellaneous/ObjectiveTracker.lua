@@ -17,6 +17,7 @@ function ObjectiveTracker:SetQuestItemButton(block)
 
 		Icon:SetTexCoord(.1,.9,.1,.9)
 		Icon:SetInside()
+		Icon:SetDrawLayer("OVERLAY")
 
 		Button.isSkinned = true
 	end
