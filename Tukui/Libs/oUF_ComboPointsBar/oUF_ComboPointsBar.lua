@@ -14,12 +14,64 @@ local Colors = {
 	[8] = {.33, .63, .33, 1},
 }
 
+local function GetMaxCombo()
+	local Class = select(2, UnitClass("player"))
+	local Anticipation = Class == "ROGUE" and select(4, GetTalentInfo(3, 2, 1))
+	local Deeper = Class == "ROGUE" and select(4, GetTalentInfo(3, 1, 1))
+	
+	return (Anticipation and 8) or (Deeper and 6) or 5
+end
+
+local SetMaxCombo = function(self)
+	local cpb = self.ComboPointsBar
+	local MaxCombo = GetMaxCombo()
+
+	if MaxCombo == 8 then
+		for i = 1, 8 do
+			cpb[i]:SetWidth(cpb[i].Anticipation)
+			cpb[i]:Show()
+		end
+	elseif MaxCombo == 6 then
+		for i = 1, 8 do
+			cpb[i]:SetWidth(cpb[i].Deeper)
+			
+			if i > 6 then
+				cpb[i]:Hide()
+			else
+				cpb[i]:Show()
+			end
+		end
+	else
+		for i = 1, 8 do
+			cpb[i]:SetWidth(cpb[i].None)
+			
+			if i > 5 then
+				cpb[i]:Hide()
+			else
+				cpb[i]:Show()
+			end
+		end
+	end
+	
+	cpb.MaxCombo = MaxCombo
+end
+
 local Update = function(self, event, unit, powerType)
 	if(self.unit ~= unit and (powerType and (powerType ~= 'COMBO_POINTS'))) then return end
 
 	local cpb = self.ComboPointsBar
 	local points
+	local max = GetMaxCombo()
+	local currentmax = cpb.MaxCombo
 
+	if cpb.PreUpdate then
+		cpb:PreUpdate(points)
+	end
+	
+	if max ~= currentmax then
+		SetMaxCombo(self)
+	end
+	
 	if UnitHasVehicleUI("player") then
 		points = GetComboPoints("vehicle", "target")
 	else
@@ -44,41 +96,7 @@ local Update = function(self, event, unit, powerType)
 	end
 
 	if cpb.PostUpdate then
-		cpb:PostUpdate(self, points)
-	end
-end
-
-local SetMaxCombo = function(self)
-	local Class = select(2, UnitClass("player"))
-	local Anticipation = Class == "ROGUE" and select(4, GetTalentInfo(3, 2, 1))
-	local Deeper = Class == "ROGUE" and select(4, GetTalentInfo(3, 1, 1))
-	local cpb = self.ComboPointsBar
-
-	if Anticipation then
-		for i = 1, 8 do
-			cpb[i]:SetWidth(cpb[i].Anticipation)
-			cpb[i]:Show()
-		end
-	elseif Deeper then
-		for i = 1, 8 do
-			cpb[i]:SetWidth(cpb[i].Deeper)
-			
-			if i > 6 then
-				cpb[i]:Hide()
-			else
-				cpb[i]:Show()
-			end
-		end
-	else
-		for i = 1, 8 do
-			cpb[i]:SetWidth(cpb[i].None)
-			
-			if i > 5 then
-				cpb[i]:Hide()
-			else
-				cpb[i]:Show()
-			end
-		end
+		cpb:PostUpdate(points)
 	end
 end
 
