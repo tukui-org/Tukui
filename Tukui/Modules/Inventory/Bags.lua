@@ -585,23 +585,15 @@ function Bags:SlotUpdate(id, button)
 			button.Animation:Play()
 		end
 	end
-
+	
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
-
-		return
-	end
-
-	if ItemLink then
-		local Name, _, Rarity, _, _, Type = GetItemInfo(ItemLink)
-
-		if (Rarity and Rarity > 1) then
-				button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
-		else
-				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-		end
+	elseif ItemLink then
+		local Rarity = select(3, GetItemInfo(ItemLink))
+		
+		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 	else
-			button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+		button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 	end
 end
 
