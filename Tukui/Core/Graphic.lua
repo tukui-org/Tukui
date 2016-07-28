@@ -12,8 +12,6 @@ Popups.Popup["CLIENT_RESTART"] = {
 	Answer1 = ACCEPT,
 	Answer2 = CANCEL,
 	Function1 = function(self)
-		RequireRestart = false
-		
 		ForceQuit()
 	end,
 	Function2 = function(self)
@@ -26,7 +24,7 @@ local Graphic = CreateFrame("Frame")
 Graphic:RegisterEvent("PLAYER_ENTERING_WORLD")
 Graphic:SetScript("OnEvent", function(self, event)
 	if (event == "DISPLAY_SIZE_CHANGED") then
-		if C.General.AutoScale and not RequireRestart then
+		if not RequireRestart then
 			Popups.ShowPopup("CLIENT_RESTART")
 		end
 			
