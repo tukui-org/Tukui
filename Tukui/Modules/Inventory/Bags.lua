@@ -591,7 +591,11 @@ function Bags:SlotUpdate(id, button)
 	elseif ItemLink then
 		local Rarity = select(3, GetItemInfo(ItemLink))
 		
-		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+		if Rarity then
+		    button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+	    else
+	        button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+	    end
 	else
 		button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 	end
