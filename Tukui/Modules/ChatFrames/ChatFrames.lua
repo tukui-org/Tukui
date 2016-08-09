@@ -427,6 +427,12 @@ function TukuiChat:PlayWhisperSound()
 	PlaySoundFile(C.Medias.Whisper)
 end
 
+function TukuiChat:SwitchSpokenDialect(button)
+	if (IsAltKeyDown() and button == "LeftButton") then
+		ToggleFrame(ChatMenu)
+	end
+end
+
 function TukuiChat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
@@ -434,6 +440,7 @@ function TukuiChat:Setup()
 
 		Tab.noMouseAlpha = 0
 		Tab:SetAlpha(0)
+		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 
 		self:StyleFrame(Frame)
 	end
