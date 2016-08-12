@@ -90,8 +90,6 @@ function TukuiUnitFrames:DisableBlizzard()
 		end
 	end
 
-	InterfaceOptionsFrameCategoriesButton9:SetHeight(0.00001)
-	InterfaceOptionsFrameCategoriesButton9:SetAlpha(0)
 	InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
 	InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 end
