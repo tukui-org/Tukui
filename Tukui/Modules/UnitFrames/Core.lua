@@ -400,6 +400,10 @@ local function clearbit(x, p)
 end
 
 function TukuiUnitFrames:UpdateTotemOverride(event, slot)
+	if slot > 4 then
+		return
+	end
+	
 	local Bar = self.Totems
 	local Priorities = Bar.__map
 
