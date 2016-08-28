@@ -56,8 +56,8 @@ function TukuiUnitFrames:DisableBlizzard()
 	end
 
 	if C["Raid"].Enable then
-		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
-		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+		InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
+		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 
 		if CompactRaidFrameManager then
 			CompactRaidFrameManager:SetParent(Panels.Hider)
@@ -89,9 +89,6 @@ function TukuiUnitFrames:DisableBlizzard()
 			HidePartyFrame = Noop
 		end
 	end
-
-	InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
-	InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
 end
 
 function TukuiUnitFrames:ShortValue()
