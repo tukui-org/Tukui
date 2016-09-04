@@ -45,6 +45,8 @@ function Experience:SetTooltip()
 		end
 		
 		GameTooltip:AddLine(string.format("|cffe6cc80"..ARTIFACT_POWER..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
+		GameTooltip:AddLine(" ");
+		GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(ArtifactWatchBar.numPointsAvailableToSpend), nil, nil, nil, true);
 	else
 		local Level = UnitHonorLevel("player")
 		local LevelMax = GetMaxPlayerHonorLevel()
