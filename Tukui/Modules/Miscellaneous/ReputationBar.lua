@@ -82,11 +82,16 @@ function Reputation:Enable()
 
 		self.IsCreated = true
 	end
-
-	for i = 1, self.NumBars do
-		if not self["RepBar"..i]:IsShown() then
-			self["RepBar"..i]:Show()
-		end
+	
+	local ShowArtifact = HasArtifactEquipped()
+	local PlayerLevel = UnitLevel("player")
+	
+	self.RepBar1:Show()
+	
+	if ShowArtifact ~= true and PlayerLevel ~= MAX_PLAYER_LEVEL then
+		self.RepBar2:Show()
+	else
+		self.RepBar2:Hide()
 	end
 end
 
