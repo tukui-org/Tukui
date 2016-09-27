@@ -50,9 +50,15 @@ local OnLeave = function(self)
 end
 
 local OnMouseDown = function()
-	local Group = GetActiveSpecGroup(false, false)
+	if not PlayerTalentFrame then
+		LoadAddOn("Blizzard_TalentUI")
+	end
 
-	SetActiveSpecGroup(Group == 1 and 2 or 1)
+	if not PlayerTalentFrame:IsShown() then
+		ShowUIPanel(PlayerTalentFrame)
+	else
+		HideUIPanel(PlayerTalentFrame)
+	end
 end
 
 local Enable = function(self)
