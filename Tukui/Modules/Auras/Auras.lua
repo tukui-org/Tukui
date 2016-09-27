@@ -55,11 +55,19 @@ function TukuiAuras:OnUpdate(elapsed)
 	if(TimeLeft <= 0) then
 		self.TimeLeft = nil
 		self.Duration:SetText("")
+		
+		if self.Enchant then
+			self.Dur = nil
+		end
 
 		return self:SetScript("OnUpdate", nil)
 	else
 		local Text = T.FormatTime(TimeLeft)
 		local r, g, b = T.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+		
+		if self.Enchant then
+			self.Bar:SetMinMaxValues(0, self.Dur)
+		end
 
 		self.Bar:SetValue(self.TimeLeft)
 		self.Bar:SetStatusBarColor(r, g, b)
@@ -126,6 +134,7 @@ function TukuiAuras:UpdateAura(index)
 			end
 
 			self.TimeLeft = nil
+			self.Dur = nil
 			self.Duration:SetText("")
 			self:SetScript("OnUpdate", nil)
 
@@ -167,10 +176,14 @@ function TukuiAuras:UpdateTempEnchant(slot)
 	end
 
 	if (Expiration) then
-		self.Dur = 3600
+		if not self.Dur then
+			self.Dur = Expiration / 1e3
+		end
+
 		self.Enchant = Enchant
 		self:SetScript("OnUpdate", TukuiAuras.OnUpdate)
 	else
+		self.Dur = nil
 		self.Enchant = nil
 		self.TimeLeft = nil
 		self:SetScript("OnUpdate", nil)
@@ -189,8 +202,6 @@ function TukuiAuras:OnAttributeChanged(attribute, value)
 	if (attribute == "index") then
 		return TukuiAuras.UpdateAura(self, value)
 	elseif(attribute == "target-slot") then
-		self.Bar:SetMinMaxValues(0, 3600)
-
 		return TukuiAuras.UpdateTempEnchant(self, value)
 	end
 end
