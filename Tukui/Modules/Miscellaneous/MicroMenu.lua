@@ -118,7 +118,7 @@ MicroMenu.Buttons = {
 	end,
 	notCheckable = true},
 
-	{text = GARRISON_LANDING_PAGE_TITLE,
+	{text = ORDER_HALL_LANDING_PAGE_TITLE,
 	func = function()
 		GarrisonLandingPageMinimapButton_OnClick()
 	end,
