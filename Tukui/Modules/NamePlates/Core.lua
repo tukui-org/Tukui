@@ -164,7 +164,7 @@ function Plates:SetupPlate(options)
 	CastBar:HookScript("OnShow", Plates.SetCastingIcon)
 	
 	-- UNIT NAME
-	Name:SetFont(FontName, 10) -- if we add outline, it cause lag? WTF?
+	Name:SetFont(FontName, 9, FontFlags)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	hooksecurefunc(Name, "Show", Plates.SetName)
@@ -217,7 +217,12 @@ function Plates:Enable()
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
 	
 	-- Set the Width of NamePlate
-	C_NamePlate.SetNamePlateOtherSize(C.NamePlates.Width, 45)
+	if tonumber(T.WoWBuild) >= 22881 then
+		C_NamePlate.SetNamePlateFriendlySize(C.NamePlates.Width, 45)
+		C_NamePlate.SetNamePlateEnemySize(C.NamePlates.Width, 45)
+	else
+		C_NamePlate.SetNamePlateOtherSize(C.NamePlates.Width, 45)
+	end
 end
 
 T["NamePlates"] = Plates

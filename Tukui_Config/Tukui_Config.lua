@@ -973,8 +973,8 @@ function TukuiConfig:CreateConfigWindow()
 				GroupPage:Size(300, GroupHeight)
 
 				local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-				ScrollFrame:Size(300, Height)
-				ScrollFrame:Point("TOPRIGHT", ConfigFrame)
+				ScrollFrame:SetSize(300, Height)
+				ScrollFrame:SetPoint("TOPRIGHT", ConfigFrame)
 				ScrollFrame:SetScrollChild(GroupPage)
 
 				local Slider = CreateFrame("Slider", nil, ScrollFrame)
@@ -1039,8 +1039,8 @@ function TukuiConfig:CreateConfigWindow()
 	CreditFrame:Point("TOP", ConfigFrame, "BOTTOM", 0, -3)
 
 	local ScrollFrame = CreateFrame("ScrollFrame", nil, ConfigFrame)
-	ScrollFrame:Size(443, 22)
-	ScrollFrame:Point("CENTER", CreditFrame, 0, 0)
+	ScrollFrame:SetSize(443, 22)
+	ScrollFrame:SetPoint("CENTER", CreditFrame, 0, 0)
 
 	local Scrollable = CreateFrame("Frame", nil, ScrollFrame)
 	Scrollable:Size(439, 22)

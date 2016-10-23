@@ -66,8 +66,8 @@ function TukuiChat:CreateCopyFrame()
 	CopyFrame.Minimized = true
 
 	local ScrollArea = CreateFrame("ScrollFrame", "TukuiCopyScrollArea", CopyFrame, "UIPanelScrollFrameTemplate")
-	ScrollArea:Point("TOPLEFT", CopyFrame, "TOPLEFT", 8, -30)
-	ScrollArea:Point("BOTTOMRIGHT", CopyFrame, "BOTTOMRIGHT", -30, 8)
+	ScrollArea:SetPoint("TOPLEFT", CopyFrame, "TOPLEFT", 8, -30)
+	ScrollArea:SetPoint("BOTTOMRIGHT", CopyFrame, "BOTTOMRIGHT", -30, 8)
 
 	local EditBox = CreateFrame("EditBox", nil, CopyFrame)
 	EditBox:SetMultiLine(true)

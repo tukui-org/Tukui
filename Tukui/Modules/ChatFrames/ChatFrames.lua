@@ -464,7 +464,12 @@ function TukuiChat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-	FriendsMicroButton:Kill()
+	
+	if tonumber(T.WoWBuild) >= 22881 then
+		QuickJoinToastButton:Kill()
+	else
+		FriendsMicroButton:Kill()
+	end
 end
 
 function TukuiChat:AddHooks()
