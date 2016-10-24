@@ -217,7 +217,7 @@ function Plates:Enable()
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
 	
 	-- Set the Width of NamePlate
-	if tonumber(T.WoWBuild) >= 22881 then
+	if T.WoWBuild >= 22881 then
 		C_NamePlate.SetNamePlateFriendlySize(C.NamePlates.Width, 45)
 		C_NamePlate.SetNamePlateEnemySize(C.NamePlates.Width, 45)
 	else

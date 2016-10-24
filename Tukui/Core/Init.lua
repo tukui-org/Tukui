@@ -29,6 +29,7 @@ Engine[1].MyRealm = select(2, UnitFactionGroup("player"))
 Engine[1].Version = GetAddOnMetadata(AddOn, "Version")
 Engine[1].VersionNumber = tonumber(Engine[1].Version)
 Engine[1].WoWPatch, Engine[1].WoWBuild, Engine[1].WoWPatchReleaseDate, Engine[1].TocVersion = GetBuildInfo()
+Engine[1].WoWBuild = tonumber(Engine[1].WoWBuild)
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI
