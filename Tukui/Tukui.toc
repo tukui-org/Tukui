@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## Authors: Tukz & Hydra
 ## Maintainer: Tukz & Azilroka
 ## Version: 17.05
