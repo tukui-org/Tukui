@@ -251,7 +251,8 @@ end
 
 function Tooltip:SetColor()
 	local GetMouseFocus = GetMouseFocus()
-	local Unit = (select(2, self:GetUnit())) or (GetMouseFocus and GetMouseFocus:GetAttribute("unit"))
+	
+	local Unit = select(2, self:GetUnit()) or (GetMouseFocus and GetMouseFocus.GetAttribute and GetMouseFocus:GetAttribute("unit"))
 
 	if (not Unit) and (UnitExists("mouseover")) then
 		Unit = 'mouseover'
