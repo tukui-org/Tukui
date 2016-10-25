@@ -217,14 +217,13 @@ function Minimap:UpdateCoords(t)
 		return
 	end
 	
-	if not GetPlayerMapPosition("player") then
-		Minimap.MinimapCoords.Text:SetText("?, ?")
-		
-		return
-	end
-	
 	local X, Y = GetPlayerMapPosition("player")
 	local XText, YText
+	
+	if not GetPlayerMapPosition("player") then
+		X = 0
+		Y = 0
+	end
 	
 	X = math.floor(100 * X)
 	Y = math.floor(100 * Y)
