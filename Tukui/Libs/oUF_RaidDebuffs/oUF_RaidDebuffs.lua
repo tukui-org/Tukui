@@ -51,7 +51,6 @@ local dispelFilter = ({
 	PRIEST = { Magic = true, Disease = true, },
 	SHAMAN = { Magic = false, Curse = true, },
 	PALADIN = { Magic = false, Poison = true, Disease = true, },
-	MAGE = { Curse = true, },
 	DRUID = { Magic = false, Curse = true, Poison = true, },
 	MONK = { Magic = false, Poison = true, Disease = true, },
 })[PLAYER_CLASS]
@@ -178,7 +177,7 @@ local talentTbl = ({
 		DRUID_RESTO = 'Magic',
 	},
 	MONK = {
-		MONK_WIND = 'Magic',
+		MONK_MIST = 'Magic',
 	}
 })[PLAYER_CLASS]
 
