@@ -44,6 +44,10 @@ local OnEnter = function(self)
 	local PVPType, IsSubZonePvP, FactionName = GetZonePVPInfo()
 	local X, Y = GetPlayerMapPosition("player")
 	local XText, YText, Label, Location, Color
+	
+		X = 0
+		Y = 0
+	end
 
 	if ZoneColors[PVPType] then
 		Color = ZoneColors[PVPType]
