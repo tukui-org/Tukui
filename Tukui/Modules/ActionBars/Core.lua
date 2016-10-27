@@ -342,6 +342,7 @@ function TukuiActionBars:AddHooks()
 	hooksecurefunc("ActionButton_HideOverlayGlow", self.StopButtonHighlight)
 	hooksecurefunc("ActionButton_UpdateHotkeys", self.UpdateHotKey)
 	hooksecurefunc(ExtraActionButton1.style, "SetTexture", self.DisableExtraButtonTexture)
+	hooksecurefunc(ZoneAbilityFrame.SpellButton.Style, "SetTexture", self.DisableExtraButtonTexture)
 	hooksecurefunc("PetActionButton_SetHotkeys", self.UpdateHotKey)
 end
 
