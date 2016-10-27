@@ -54,7 +54,7 @@ function Talent:GetItemLevel(unit)
 				
 				-- Total slots depend if one/two handed weapon
 				if (i == 15) then
-					if (EquipLoc and EquipLoc == "INVTYPE_2HWEAPON") then
+					if (ArtifactEquipped or (EquipLoc and EquipLoc == "INVTYPE_2HWEAPON")) then
 						TotalSlots = 15
 					end
 				end
