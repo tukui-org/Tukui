@@ -37,7 +37,7 @@ function Talent:GetItemLevel(unit)
 			local _, _, Rarity, _, _, _, _, _, EquipLoc = GetItemInfo(ItemLink)
 
 			--Check if we have an artifact equipped in main hand
-			if (EquipLoc and EquipLoc == "INVTYPE_WEAPONMAINHAND" and Tarity and Rarity == 6) then
+			if (EquipLoc and EquipLoc == "INVTYPE_WEAPONMAINHAND" and Rarity and Rarity == 6) then
 				ArtifactEquipped = true
 			end
 
