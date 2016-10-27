@@ -134,7 +134,6 @@
 
 	<!-- NamePlates -->
 	<Script file="NamePlates\Core.lua"/>
-	<Script file="NamePlates\Options.lua"/>
 
 	<!-- Pet Battles -->
 	<Script file="PetBattles\Core.lua"/>
