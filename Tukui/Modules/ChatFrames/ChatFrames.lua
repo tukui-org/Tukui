@@ -229,7 +229,7 @@ function TukuiChat:SetDefaultChatFramesPositions()
 		local ID = Frame:GetID()
 
 		-- Set font size and chat frame size
-		Frame:Size(Width, 111)
+		Frame:Size(Width, 108)
 
 		-- Set default chat frame position
 		if (ID == 1) then
@@ -255,7 +255,7 @@ function TukuiChat:SetDefaultChatFramesPositions()
 		end
 
 		local Anchor1, Parent, Anchor2, X, Y = Frame:GetPoint()
-		TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. i] = {Anchor1, Anchor2, X, Y, Width, 111}
+		TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. i] = {Anchor1, Anchor2, X, Y, Width, 108}
 	end
 end
 
