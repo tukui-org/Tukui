@@ -287,28 +287,30 @@ TukuiUnitFrames.RaidDebuffsTracking = {
 	-- Trial of Valor (By Anzor)
 	-- Odyn
 	[GetSpellInfo(228030)] = 6, -- Expel Light (need aura)
-	[GetSpellInfo(227807)] = 6, -- Storm of Justice x
-	[GetSpellInfo(228918)] = 6, -- Stormforged Spear x
-	[GetSpellInfo(227490)] = 6, -- Branded x
-	[GetSpellInfo(227491)] = 6, -- Branded x
-	[GetSpellInfo(227498)] = 6, -- Branded x
-	[GetSpellInfo(227499)] = 6, -- Branded x
-	[GetSpellInfo(227500)] = 6, -- Branded x
+	[GetSpellInfo(227807)] = 6, -- Storm of Justice
+	[GetSpellInfo(228918)] = 6, -- Stormforged Spear
+	[GetSpellInfo(227490)] = 6, -- Branded
+	[GetSpellInfo(227491)] = 6, -- Branded
+	[GetSpellInfo(227498)] = 6, -- Branded
+	[GetSpellInfo(227499)] = 6, -- Branded
+	[GetSpellInfo(227500)] = 6, -- Branded
 	[GetSpellInfo(231297)] = 6, -- Runic Brand (Mythic Only)
 
-	[GetSpellInfo(228228)] = 5, -- Flame Lick x
-	[GetSpellInfo(228248)] = 7, -- Frost Lick x
-	[GetSpellInfo(228253)] = 6, -- Shadow Lick x
-	--[GetSpellInfo(228768)] = 6, -- Salty Spittle x
-	--[GetSpellInfo(228758)] = 6, -- Fiery Phlegm x
-	--[GetSpellInfo(228769)] = 6, -- Dark Discharge x
+	-- Guarm
+	[GetSpellInfo(228228)] = 5, -- Flame Lick
+	[GetSpellInfo(228248)] = 7, -- Frost Lick
+	[GetSpellInfo(228253)] = 6, -- Shadow Lick
+	--[GetSpellInfo(228768)] = 6, -- Salty Spittle
+	--[GetSpellInfo(228758)] = 6, -- Fiery Phlegm
+	--[GetSpellInfo(228769)] = 6, -- Dark Discharge
 
-	[GetSpellInfo(228883)] = 6, -- Unholy Reckoning (Trash) x
-	[GetSpellInfo(228054)] = 7, -- Taint of the Sea  x
-	[GetSpellInfo(229119)] = 6, -- Orb of Corruption x
+	-- Helya
+	[GetSpellInfo(228883)] = 6, -- Unholy Reckoning (Trash)
+	[GetSpellInfo(228054)] = 7, -- Taint of the Sea
+	[GetSpellInfo(229119)] = 6, -- Orb of Corruption
 	[GetSpellInfo(228058)] = 6, -- Orb of Corrosion
-	[GetSpellInfo(193367)] = 6, -- Fetid Rot x
-	[GetSpellInfo(227982)] = 6, -- Bilewater Redox x
+	[GetSpellInfo(193367)] = 6, -- Fetid Rot
+	[GetSpellInfo(227982)] = 6, -- Bilewater Redox
 }
 
 ------------------------------------------------------------------------------------
