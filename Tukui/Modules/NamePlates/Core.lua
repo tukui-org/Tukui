@@ -60,6 +60,21 @@ function Plates:SetName()
 	end
 end
 
+-- This function below exist because with cannot modify the Blizzard var below in 7.1: 
+-- DefaultCompactNamePlateEnemyFrameOptions.displayNameWhenSelected
+-- Reason: Tainting
+-- Workaround: Hook CompactUnitFrame_UpdateName function
+-- Con of this workaround: More code update execution, so more cpu usage, but not by much
+
+function Plates:UpdateName()
+	local FrameName = self:GetName()
+	
+	if FrameName and FrameName:match("NamePlate") then
+		self.name:SetText(GetUnitName(self.unit, true))
+		self.name:Show()
+	end
+end
+
 function Plates:ColorHealth()
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
 		local r, g, b
@@ -221,6 +236,9 @@ function Plates:Enable()
 	else
 		C_NamePlate.SetNamePlateOtherSize(C.NamePlates.Width, 45)
 	end
+	
+	hooksecurefunc("CompactUnitFrame_UpdateName", self.UpdateName)
 end
 
 T["NamePlates"] = Plates
+
