@@ -8,26 +8,32 @@ local TukuiChat = T["Chat"]
 local Lines = {}
 local CopyFrame
 
-function TukuiChat:GetLines(...)
-	local Count = 1
+function TukuiChat:GetLines(frame)
+	local Count = 0
+	
+	for i = 1, frame:GetNumMessages() do
+		local Message, R, G, B = frame:GetMessageInfo(i)
+		
+		Count = Count + 1
 
-	for i = select("#", ...), 1, -1 do
-		local Region = select(i, ...)
-
-		if (Region:GetObjectType() == "FontString") then
-			Lines[Count] = tostring(Region:GetText())
-			Count = Count + 1
-		end
+		Lines[Count] = Message
 	end
-
-	return Count - 1
+	
+	return Count
 end
 
 function TukuiChat:CopyText(chatframe)
-	local _, Size = chatframe:GetFont()
+	local _, Size = FCF_GetChatWindowInfo(chatframe:GetID())
+	
+	if Size < 10 then
+		Size = 12
+	end
+	
 	FCF_SetChatWindowFontSize(chatframe, chatframe, 0.01)
-	local LineCount = self:GetLines(chatframe:GetRegions())
+	
+	local LineCount = self:GetLines(chatframe)
 	local Text = table.concat(Lines, "\n", 1, LineCount)
+	
 	FCF_SetChatWindowFontSize(chatframe, chatframe, Size)
 
 	if CopyFrame:IsVisible() then
