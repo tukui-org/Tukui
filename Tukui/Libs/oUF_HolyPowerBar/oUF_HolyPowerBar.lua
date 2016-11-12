@@ -12,6 +12,11 @@ local Update = function(self, event, unit, powerType)
 	local hp = self.HolyPower
 	local num = UnitPower(unit, SPELL_POWER_HOLY_POWER)
 	local numMax = UnitPowerMax('player', SPELL_POWER_HOLY_POWER)
+	local spec = GetSpecialization()
+	
+	if spec ~= 3 then
+		num = 0
+	end
 	
 	if(hp.PreUpdate) then 
 		hp:PreUpdate()
