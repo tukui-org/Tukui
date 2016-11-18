@@ -2,7 +2,7 @@ local T, C, L = select(2, ...):unpack()
 
 local _G = _G
 local Noop = function() end
-local Font
+local Font, FontPath
 local ReplaceBags = 0
 local LastButtonBag, LastButtonBank, LastButtonReagent
 local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
@@ -163,7 +163,7 @@ function Bags:CreateReagentContainer()
 	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "TOPLEFT", 0, 2)
 
 	SwitchBankButton.Text = SwitchBankButton:CreateFontString(nil, "OVERLAY")
-	SwitchBankButton.Text:SetFont(C.Medias.Font, 12)
+	SwitchBankButton.Text:SetFont(FontPath, 12)
 	SwitchBankButton.Text:SetJustifyH("LEFT")
 	SwitchBankButton.Text:SetShadowColor(0, 0, 0)
 	SwitchBankButton.Text:SetShadowOffset(T.Mult, -T.Mult)
@@ -192,7 +192,7 @@ function Bags:CreateReagentContainer()
 	SortButton:SetPoint("LEFT", SwitchBankButton, "RIGHT", 2, 0)
 	SortButton:SkinButton()
 	SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
-	SortButton.Text:SetFont(C.Medias.Font, 12)
+	SortButton.Text:SetFont(FontPath, 12)
 	SortButton.Text:SetJustifyH("LEFT")
 	SortButton.Text:SetShadowColor(0, 0, 0)
 	SortButton.Text:SetShadowOffset(T.Mult, -T.Mult)
@@ -303,7 +303,7 @@ function Bags:CreateContainer(storagetype, ...)
 		Sort:StripTextures()
 		Sort:SkinButton()
 		Sort.Text = Sort:CreateFontString(nil, "OVERLAY")
-		Sort.Text:SetFont(C.Medias.Font, 12)
+		Sort.Text:SetFont(FontPath, 12)
 		Sort.Text:SetJustifyH("LEFT")
 		Sort.Text:SetShadowColor(0, 0, 0)
 		Sort.Text:SetShadowOffset(T.Mult, -T.Mult)
@@ -415,7 +415,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SwitchReagentButton:SkinButton()
 		SwitchReagentButton:Point("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
 		SwitchReagentButton.Text = SwitchReagentButton:CreateFontString(nil, "OVERLAY")
-		SwitchReagentButton.Text:SetFont(C.Medias.Font, 12)
+		SwitchReagentButton.Text:SetFont(FontPath, 12)
 		SwitchReagentButton.Text:SetJustifyH("LEFT")
 		SwitchReagentButton.Text:SetShadowColor(0, 0, 0)
 		SwitchReagentButton.Text:SetShadowOffset(T.Mult, -T.Mult)
@@ -441,7 +441,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SortButton:SetPoint("LEFT", SwitchReagentButton, "RIGHT", 2, 0)
 		SortButton:SkinButton()
 		SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
-		SortButton.Text:SetFont(C.Medias.Font, 12)
+		SortButton.Text:SetFont(FontPath, 12)
 		SortButton.Text:SetJustifyH("LEFT")
 		SortButton.Text:SetShadowColor(0, 0, 0)
 		SortButton.Text:SetShadowOffset(T.Mult, -T.Mult)
@@ -951,6 +951,7 @@ function Bags:Enable()
 	--InterfaceOptionsControlsPanelReverseNewLoot:Hide()
 
 	Font = T.GetFont(C["Bags"].Font)
+	FontPath = _G[Font]:GetFont()
 	ButtonSize = C.Bags.ButtonSize
 	ButtonSpacing = C.Bags.Spacing
 	ItemsPerRow = C.Bags.ItemsPerRow
