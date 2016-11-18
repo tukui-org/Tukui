@@ -594,7 +594,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	local T, C = Tukui:unpack()
 
 	local DropDown = CreateFrame("Button", nil, parent)
-	DropDown:Size(100, 20)
+	DropDown:Size(150, 20)
 	DropDown:SetTemplate()
 	DropDown.Type = type
 	DropDown._Group = group
@@ -652,7 +652,7 @@ local CreateConfigDropDown = function(parent, group, option, value, type)
 	List:Point("TOPLEFT", DropDown, "BOTTOMLEFT", 0, -3)
 	List:SetTemplate()
 	List:Hide()
-	List:Width(100)
+	List:Width(150)
 	List:SetFrameLevel(DropDown:GetFrameLevel() + 3)
 	List:SetFrameStrata("HIGH")
 	List:EnableMouse(true)
