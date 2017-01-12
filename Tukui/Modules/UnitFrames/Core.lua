@@ -1007,7 +1007,7 @@ function TukuiUnitFrames:ShowArenaPreparation()
 			local SpecID = GetArenaOpponentSpec(i)
 
 			if (SpecID and SpecID > 0) then
-				local _, Spec, _, _, _, _, Class = GetSpecializationInfoByID(SpecID)
+				local _, Spec, _, _, _, Class = GetSpecializationInfoByID(SpecID)
 
 				if (Class) then
 					Frame.SpecClass:SetText(Spec.."  -  "..LOCALIZED_CLASS_NAMES_MALE[Class])
