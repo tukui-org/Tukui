@@ -130,7 +130,7 @@ local tagStrings = {
 			if(id) then
 				local specID = GetArenaOpponentSpec(tonumber(id))
 				if(specID and specID > 0) then
-					_, _, _, _, _, _, x = GetSpecializationInfoByID(specID)
+					_, _, _, _, _, x = GetSpecializationInfoByID(specID)
 					return Hex(_COLORS.class[x])
 				end
 			end
