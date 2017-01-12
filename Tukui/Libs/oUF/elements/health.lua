@@ -117,7 +117,7 @@ local Update = function(self, event, unit)
 
 	local r, g, b, t
 	if(health.colorClass and arenaPrep) then
-		local _, _, _, _, _, _, class = GetSpecializationInfoByID(GetArenaOpponentSpec(self.id))
+		local _, _, _, _, _, class = GetSpecializationInfoByID(GetArenaOpponentSpec(self.id))
 		t = self.colors.class[class]
 	elseif(health.colorTapping and not UnitPlayerControlled(unit) and
 		(isBetaClient and UnitIsTapDenied(unit) or not isBetaClient and UnitIsTapped(unit) and
