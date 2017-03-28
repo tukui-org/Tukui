@@ -67,6 +67,8 @@ end
 -- Con of this workaround: More code update execution, so more cpu usage, but not by much
 
 function Plates:UpdateName()
+	if self:IsForbidden() then return end -- 7.2
+	
 	local FrameName = self:GetName()
 	
 	if FrameName and FrameName:match("NamePlate") then
@@ -76,6 +78,8 @@ function Plates:UpdateName()
 end
 
 function Plates:ColorHealth()
+	if self:IsForbidden() then return end -- 7.2
+	
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
 		local r, g, b
 
@@ -117,6 +121,8 @@ function Plates:SetCastingIcon()
 end
 
 function Plates:SetupPlate(options)
+	if self:IsForbidden() then return end -- 7.2
+	
 	local HealthBar = self.healthBar
 	local Highlight = self.selectionHighlight
 	local Aggro = self.aggroHighlight
