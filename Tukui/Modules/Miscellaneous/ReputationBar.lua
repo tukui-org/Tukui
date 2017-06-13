@@ -25,7 +25,7 @@ function Reputation:SetTooltip()
 	GameTooltip:AddLine(string.format("%s (%s)", Name, _G["FACTION_STANDING_LABEL" .. ID]))
 	
 	if (Min ~= Max) and (Min > 0) then
-		GameTooltip:AddLine(string.format("%d / %d (%d%%)", Value - Min, Max - Min, (Value - Min) / (Max - Min) * 100))
+		GameTooltip:AddLine(string.format("%d%%", (Value - Min) / (Max - Min) * 100))
 	end
 	
 	GameTooltip:Show()
