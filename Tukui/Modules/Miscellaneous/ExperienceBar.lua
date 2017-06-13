@@ -32,10 +32,10 @@ function Experience:SetTooltip()
 			return
 		end
 		
-		GameTooltip:AddLine(string.format("|cff0090FF"..XP..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
+		GameTooltip:AddLine("|cff0090FF"..XP..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
 		
 		if (IsRested == 1 and Rested) then
-			GameTooltip:AddLine(string.format("|cff4BAF4C"..TUTORIAL_TITLE26..": +%d (%d%%)|r", Rested, Rested / Max * 100))
+			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. Rested / Max * 100 .. "%)|r")
 		end
 	elseif BarType == "ARTIFACT" then
 		Current, Max = Experience:GetArtifact()
@@ -44,7 +44,7 @@ function Experience:SetTooltip()
 			return
 		end
 		
-		GameTooltip:AddLine(string.format("|cffe6cc80"..ARTIFACT_POWER..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
+		GameTooltip:AddLine("|cffe6cc80"..ARTIFACT_POWER..": ".. Current .. " / " .. Max .. " (" ..  floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars ..")|r")
 		GameTooltip:AddLine(" ");
 		GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(ArtifactWatchBar.numPointsAvailableToSpend), nil, nil, nil, true);
 	else
@@ -58,9 +58,9 @@ function Experience:SetTooltip()
 			GameTooltip:AddLine(PVP_HONOR_PRESTIGE_AVAILABLE)
 			GameTooltip:AddLine(PVP_HONOR_XP_BAR_CANNOT_PRESTIGE_HERE) 
 		else
-			GameTooltip:AddLine(string.format("|cffee2222"..HONOR..": %d / %d (%d%% - %d/%d)|r", Current, Max, Current / Max * 100, Bars - (Bars * (Max - Current) / Max), Bars))
-			GameTooltip:AddLine(string.format("|cffcccccc"..RANK..": %d / %d|r", Level, LevelMax))
-			GameTooltip:AddLine(string.format("|cffcccccc"..PVP_PRESTIGE_RANK_UP_TITLE..": %d|r", Prestige))
+			GameTooltip:AddLine("|cffee2222"..HONOR..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
+			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. " / " .. LevelMax .. "|r")
+			GameTooltip:AddLine("|cffcccccc"..PVP_PRESTIGE_RANK_UP_TITLE..": " .. Prestige .. "|r")
 		end
 	end
 
