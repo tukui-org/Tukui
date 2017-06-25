@@ -338,8 +338,10 @@ function Tooltip:Skin()
 		self:SetTemplate()
 		self.IsSkinned = true
 	end
-
-	Tooltip.SetColor(self)
+	
+	if not self::IsForbidden() then
+		Tooltip.SetColor(self)
+	end
 end
 
 
