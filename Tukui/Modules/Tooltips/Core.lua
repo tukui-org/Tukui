@@ -339,7 +339,7 @@ function Tooltip:Skin()
 		self.IsSkinned = true
 	end
 	
-	if not self::IsForbidden() then
+	if not self:IsForbidden() then
 		Tooltip.SetColor(self)
 	end
 end
