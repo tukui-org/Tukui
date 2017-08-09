@@ -425,8 +425,9 @@ function Bags:CreateContainer(storagetype, ...)
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 
 			if (not ReagentBankFrame.isMade) then
-				self:CreateReagentContainer()
-				ReagentBankFrame.isMade = true
+				-- self:CreateReagentContainer()
+				-- ReagentBankFrame.isMade = true
+				ReagentBankFrame.isMade = self:CreateReagentContainer() -- Attempt to fix a conflict with TSM.
 			else
 				self.Reagent:Show()
 
