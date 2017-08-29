@@ -352,7 +352,7 @@ function Bags:CreateContainer(storagetype, ...)
 				CloseAllBags()
 				CloseBankBagFrames()
 				CloseBankFrame()
-				PlaySound("igBackPackClose")
+				PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 			end
 		end)
 
@@ -857,7 +857,7 @@ function Bags:CloseAllBags()
 	end
 
 	CloseAllBags()
-	PlaySound("igBackPackClose")
+	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
 
 function Bags:CloseAllBankBags()
