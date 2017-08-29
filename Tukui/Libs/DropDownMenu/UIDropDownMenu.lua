@@ -726,7 +726,14 @@ function Lib_UIDropDownMenuButton_OnClick(self)
 	end
 
 	if ( playSound ) then
-		PlaySound("UChatScrollButton");
+		local Build = select(2, GetBuildInfo())
+		Build = tonumber(Build)
+		
+		if (Build >= 24904) then
+			PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+		else
+			PlaySound("UChatScrollButton");
+		end
 	end
 end
 
