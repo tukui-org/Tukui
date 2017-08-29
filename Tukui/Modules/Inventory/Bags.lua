@@ -352,7 +352,12 @@ function Bags:CreateContainer(storagetype, ...)
 				CloseAllBags()
 				CloseBankBagFrames()
 				CloseBankFrame()
-				PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
+					
+				if (T.WoWBuild >= 24904) then
+					PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
+				else
+					PlaySound("igBackPackClose")
+				end
 			end
 		end)
 
@@ -857,7 +862,12 @@ function Bags:CloseAllBags()
 	end
 
 	CloseAllBags()
-	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
+	
+	if (T.WoWBuild >= 24904) then
+		PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
+	else
+		PlaySound("igBackPackClose")
+	end
 end
 
 function Bags:CloseAllBankBags()
