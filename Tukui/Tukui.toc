@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Authors: Tukz & Hydra
 ## Maintainer: Tukz & Azilroka
 ## Version: 17.12
