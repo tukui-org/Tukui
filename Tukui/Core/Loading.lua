@@ -49,7 +49,7 @@ function Loading:OnEvent(event, addon)
 				C.General.UIScale = min(2, max(0.32, 768 / string.match(T.Resolution, "%d+x(%d+)")))
 			end
 
-			T.Mult = 768/string.match(T.Resolution, "%d+x(%d+)")/C.General.UIScale
+			T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
 
 		-- PANELS
 			T["Panels"]:Enable()

@@ -352,7 +352,7 @@ function Bags:CreateContainer(storagetype, ...)
 				CloseAllBags()
 				CloseBankBagFrames()
 				CloseBankFrame()
-					
+
 				if (T.WoWBuild >= 24904) then
 					PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 				else
@@ -562,20 +562,20 @@ function Bags:SlotUpdate(id, button)
 	end
 
 	local ItemLink = GetContainerItemLink(id, button:GetID())
-	
+
 	local Texture, Count, Lock, quality, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
-	
+
 	if IsNewItem ~= true and button.Animation and button.Animation:IsPlaying() then
 		button.Animation:Stop()
 	end
-	
+
 	if (button.ItemID == ItemID) then
 		return
 	end
-	
+
 	button.ItemID = ItemID
-	
+
 	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
@@ -611,7 +611,7 @@ function Bags:SlotUpdate(id, button)
 			button.Animation:Play()
 		end
 	end
-	
+
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
 	elseif ItemLink then
@@ -633,7 +633,7 @@ function Bags:BagUpdate(id)
 			if not Button:IsShown() then
 				Button:Show()
 			end
-			
+
 			self:SlotUpdate(id, Button)
 		end
 	end
@@ -862,7 +862,7 @@ function Bags:CloseAllBags()
 	end
 
 	CloseAllBags()
-	
+
 	if (T.WoWBuild >= 24904) then
 		PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 	else
@@ -911,21 +911,21 @@ function Bags:OnEvent(event, ...)
 		self:BagUpdate(...)
 	elseif (event == "BAG_CLOSED") then
 		-- This is usually where the client find a bag swap in character or bank slots.
-		
+
 		local Bag = ... + 1
 
 		-- We need to hide buttons from a bag when closing it because they are not parented to the original frame
 		local Container = _G["ContainerFrame"..Bag]
 		local Size = Container.size
-		
+
 		for i = 1, Size do
 			local Button = _G["ContainerFrame"..Bag.."Item"..i]
-			
+
 			if Button then
 				Button:Hide()
 			end
 		end
-		
+
 		-- We close to refresh the all in one layout.
 		self:CloseAllBags()
 		self:CloseAllBankBags()

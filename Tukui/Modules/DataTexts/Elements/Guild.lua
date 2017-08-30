@@ -3,8 +3,8 @@ local T, C, L = select(2, ...):unpack()
 local DataText = T["DataTexts"]
 local format = format
 
-local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
-local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
+local tthead, ttsubh, ttoff = {r = 0.4, g = 0.78, b = 1}, {r = 0.75, g = 0.9, b = 1}, {r = .3, g = 1, b = .3}
+local activezone, inactivezone = {r = 0.3, g = 1.0, b = 0.3}, {r = 0.65, g = 0.65, b = 0.65}
 local displayString = string.join("", "%s: ", "%d")
 local guildInfoString = "%s [%d]"
 local guildInfoString2 = "%s: %d/%d"
@@ -44,7 +44,7 @@ local function BuildGuildTable()
 end
 
 local function UpdateGuildXP()
-	local currentXP, remainingXP = UnitGetGuildXP("player")
+	local currentXP, remainingXP = UnitGetGuildXP("player") -- This API is removed!
 	local nextLevelXP = currentXP + remainingXP
 
 	if nextLevelXP == 0 or maxDailyXP == 0 then return end
@@ -222,7 +222,7 @@ local Update = function(self)
 end
 
 local Enable = function(self)
-	self:RegisterEvent("GUILD_ROSTER_SHOW")
+	--self:RegisterEvent("GUILD_ROSTER_SHOW") -- This event is removed
 	self:RegisterEvent("GUILD_ROSTER_UPDATE")
 	self:RegisterEvent("PLAYER_GUILD_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")

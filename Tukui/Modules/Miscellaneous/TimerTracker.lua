@@ -31,7 +31,7 @@ function Timer:UpdateBar()
 	self:SetBackdrop(Backdrop)
 	self:SetBackdropColor(unpack(C.General.BackdropColor))
 	self:SetStatusBarTexture(C.Medias.Normal)
-	self:SetStatusBarColor(170/255, 10/255, 10/255)
+	self:SetStatusBarColor(170 / 255, 10 / 255, 10 / 255)
 	self:CreateShadow()
 end
 

@@ -34,9 +34,9 @@ function Install:Step1()
 	SetCVar("screenshotQuality", 8)
 	SetCVar("chatMouseScroll", 1)
 	SetCVar("chatStyle", "im")
-	SetCVar("WholeChatWindowClickable", 0)
+	--SetCVar("WholeChatWindowClickable", 0) -- This CVar is removed
 	--SetCVar("ConversationMode", "inline")
-	SetCVar("WhisperMode", "inline")
+	--SetCVar("WhisperMode", "inline") -- This CVar is removed
 	--SetCVar("BnWhisperMode", "inline")
 	SetCVar("showTutorials", 0)
 	SetCVar("autoQuestWatch", 1)

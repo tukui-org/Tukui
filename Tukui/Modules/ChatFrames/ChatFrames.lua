@@ -464,7 +464,7 @@ function TukuiChat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-	
+
 	if T.WoWBuild >= 22881 then
 		QuickJoinToastButton:Kill()
 	else

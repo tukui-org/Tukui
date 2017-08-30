@@ -25,7 +25,7 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 		Harmony[i] = CreateFrame("StatusBar", self:GetName().."Harmony"..i, Harmony)
 		Harmony[i]:Height(8)
 		Harmony[i]:SetStatusBarTexture(PowerTexture)
-		
+
 		if i == 1 then
 			Harmony[i]:Width((250 / 6) - 2)
 			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 0, 0)
@@ -38,7 +38,7 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 			Harmony[i].NoTalent = 250 / 5 - 1
 		end
 	end
-	
+
 	Harmony:SetScript("OnShow", function(self)
 		TukuiUnitFrames.UpdateShadow(self, 12)
 	end)

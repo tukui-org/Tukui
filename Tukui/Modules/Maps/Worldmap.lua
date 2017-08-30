@@ -7,9 +7,9 @@ function WorldMap:OnUpdate(elapsed)
 
 	if WorldMap.Interval < 0 then
 			local InInstance, _ = IsInInstance()
-		
+
 			local X, Y = GetPlayerMapPosition("player")
-		
+
 			if not GetPlayerMapPosition("player") then
 				X = 0
 				Y = 0

@@ -55,7 +55,7 @@ function TukuiAuras:OnUpdate(elapsed)
 	if(TimeLeft <= 0) then
 		self.TimeLeft = nil
 		self.Duration:SetText("")
-		
+
 		if self.Enchant then
 			self.Dur = nil
 		end
@@ -64,7 +64,7 @@ function TukuiAuras:OnUpdate(elapsed)
 	else
 		local Text = T.FormatTime(TimeLeft)
 		local r, g, b = T.ColorGradient(self.TimeLeft, self.Dur, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
-		
+
 		if self.Enchant then
 			self.Bar:SetMinMaxValues(0, self.Dur)
 		end
@@ -292,7 +292,7 @@ function TukuiAuras:Skin()
 end
 
 function TukuiAuras:OnEnterWorld()
-	for _, Header in next, TukuiAuras.Headers do
+	for _, Header in pairs(TukuiAuras.Headers) do
 		local Child = Header:GetAttribute("child1")
 		local i = 1
 		while(Child) do

@@ -209,7 +209,7 @@ function TukuiUnitFrames:Party()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.Role = Role
+	--self.Role = Role -- This is a global lookup
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 	self.Leader = Leader

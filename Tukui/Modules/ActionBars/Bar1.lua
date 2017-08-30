@@ -71,7 +71,7 @@ function TukuiActionBars:CreateBar1()
 	TukuiActionBars:UpdateBar1()
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ActionBar1:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE")
+	--ActionBar1:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE") -- This event is removed
 	ActionBar1:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 	ActionBar1:RegisterEvent("BAG_UPDATE")
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
@@ -83,7 +83,7 @@ function TukuiActionBars:CreateBar1()
 				Button:Size(Size)
 				Button:ClearAllPoints()
 				Button:SetParent(self)
-					
+
 				if (i == 1) then
 					Button:SetPoint("BOTTOMLEFT", Spacing, Spacing)
 				else

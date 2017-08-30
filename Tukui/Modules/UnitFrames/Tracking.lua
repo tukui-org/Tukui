@@ -103,7 +103,7 @@ TukuiUnitFrames.RaidDebuffsTracking = {
 	[GetSpellInfo(183634)] = 6, -- Shadowfel Burst, Archimonde
 	[GetSpellInfo(189895)] = 6, -- Void Star Fixate, Archimonde
 	[GetSpellInfo(190049)] = 6, -- Nether Corruption, Archimonde
-	
+
     -- LEGION
     -- The Emerald Nightmare
 
@@ -172,7 +172,7 @@ TukuiUnitFrames.RaidDebuffsTracking = {
 	[GetSpellInfo(207409)] = 6, -- Madness
 	[GetSpellInfo(211634)] = 6, -- The Infinite Dark
 	[GetSpellInfo(208385)] = 6, -- Tainted Discharge
-	
+
     -- The Nighthold
     -- Skorpyron
 	[GetSpellInfo(204766)] = 6, -- Energy Surge
@@ -283,7 +283,7 @@ TukuiUnitFrames.RaidDebuffsTracking = {
 	[GetSpellInfo(206221)] = 6, -- Empowered Bonds of Fel
 	[GetSpellInfo(208802)] = 6, -- Soul Corrosion
 	[GetSpellInfo(212686)] = 6, -- Flames of Sargeras
-	
+
 	-- Trial of Valor (By Anzor)
 	-- Odyn
 	[GetSpellInfo(228030)] = 6, -- Expel Light (need aura)

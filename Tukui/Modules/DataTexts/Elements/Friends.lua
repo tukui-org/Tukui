@@ -11,10 +11,10 @@ local worldOfWarcraftString = "World of Warcraft"
 local battleNetString = "Battle.NET"
 local wowString = "WoW"
 local totalOnlineString = L.DataText.Online .. "%s/%s"
-local tthead, ttsubh, ttoff = {r=0.4, g=0.78, b=1}, {r=0.75, g=0.9, b=1}, {r=.3,g=1,b=.3}
-local activezone, inactivezone = {r=0.3, g=1.0, b=0.3}, {r=0.65, g=0.65, b=0.65}
+local tthead, ttsubh, ttoff = {r = 0.4, g = 0.78, b = 1}, {r = 0.75, g = 0.9, b = 1}, {r = .3, g = 1, b = .3}
+local activezone, inactivezone = {r = 0.3, g = 1.0, b = 0.3}, {r = 0.65, g = 0.65, b = 0.65}
 local statusTable = { "|cffff0000[AFK]|r", "|cffff0000[DND]|r", "" }
-local groupedTable = { "|cffaaaaaa*|r", "" } 
+local groupedTable = { "|cffaaaaaa*|r", "" }
 local friendTable, BNTable = {}, {}
 local totalOnline, BNTotalOnline = 0, 0
 local BNGetGameAccountInfo = BNGetGameAccountInfo
@@ -27,7 +27,7 @@ Popups.Popup["BROADCAST"] = {
 	Answer2 = CANCEL,
 	Function1 = function(self)
 		local Parent = self:GetParent()
-		
+
 		BNSetCustomMessage(Parent.EditBox:GetText())
 	end,
 	EditBox = true,
@@ -36,12 +36,12 @@ Popups.Popup["BROADCAST"] = {
 local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 
 local menuList = {
-	{ text = OPTIONS_MENU, isTitle = true, notCheckable=true},
-	{ text = INVITE, hasArrow = true, notCheckable=true, },
-	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true, notCheckable=true, },			
-	{ text = PLAYER_STATUS, hasArrow = true, notCheckable=true,
+	{ text = OPTIONS_MENU, isTitle = true, notCheckable = true},
+	{ text = INVITE, hasArrow = true, notCheckable = true, },
+	{ text = CHAT_MSG_WHISPER_INFORM, hasArrow = true, notCheckable = true, },
+	{ text = PLAYER_STATUS, hasArrow = true, notCheckable = true,
 		menuList = {
-			{ text = "|cff2BC226"..AVAILABLE.."|r", notCheckable=true, func = function()
+			{ text = "|cff2BC226"..AVAILABLE.."|r", notCheckable = true, func = function()
 				if IsChatAFK() then
 					SendChatMessage("", "AFK")
 				elseif IsChatDND() then
@@ -49,20 +49,20 @@ local menuList = {
 				end
 			end },
 
-			{ text = "|cffE7E716"..DND.."|r", notCheckable=true, func = function()
+			{ text = "|cffE7E716"..DND.."|r", notCheckable = true, func = function()
 				if not IsChatDND() then
 					SendChatMessage("", "DND")
 				end
 			end },
 
-			{ text = "|cffFF0000"..AFK.."|r", notCheckable=true, func = function()
+			{ text = "|cffFF0000"..AFK.."|r", notCheckable = true, func = function()
 				if not IsChatAFK() then
 					SendChatMessage("", "AFK")
 				end
 			end },
 		},
 	},
-	{ text = BN_BROADCAST_TOOLTIP, notCheckable=true, func = function()
+	{ text = BN_BROADCAST_TOOLTIP, notCheckable = true, func = function()
 		Popups.ShowPopup("BROADCAST")
 	end },
 }
@@ -79,7 +79,7 @@ end
 
 local function RemoveTagNumber(tag)
 	local symbol = string.find(tag, "#")
-	
+
 	if (symbol) then
 		return string.sub(tag, 1, symbol - 1)
 	else
@@ -89,7 +89,7 @@ end
 
 local function inviteClick(self, arg1, arg2, checked)
 	menuFrame:Hide()
-	
+
 	if type(arg1) ~= ("number") then
 		InviteUnit(arg1)
 	else
@@ -99,7 +99,7 @@ end
 
 local function whisperClick(self,name,bnet)
 	menuFrame:Hide()
-	
+
 	if bnet then
 		ChatFrame_SendSmartTell(name)
 	else
@@ -150,7 +150,7 @@ local function UpdateFriendTable(total)
 			end
 		end
 
-		-- get the correct index in our table		
+		-- get the correct index in our table
 		local index = GetTableIndex(friendTable, 1, name)
 
 		-- we cannot find a friend in our table, so rebuild it
@@ -210,7 +210,7 @@ local function UpdateBNTable(total)
 			end
 		end
 
-		-- get the correct index in our table		
+		-- get the correct index in our table
 		local index = GetTableIndex(BNTable, 1, presenceID)
 
 		-- we cannot find a BN member in our table, so rebuild it
@@ -533,8 +533,8 @@ local OnEnter = function(self)
 		end
 
 		GameTooltip:Show()
-	else 
-		GameTooltip:Hide() 
+	else
+		GameTooltip:Hide()
 	end
 end
 
@@ -560,12 +560,12 @@ end
 local Enable = function(self)
 	self:RegisterEvent("BN_FRIEND_ACCOUNT_ONLINE")
 	self:RegisterEvent("BN_FRIEND_ACCOUNT_OFFLINE")
-	self:RegisterEvent("BN_FRIEND_TOON_ONLINE")
-	self:RegisterEvent("BN_FRIEND_TOON_OFFLINE")
-	self:RegisterEvent("BN_TOON_NAME_UPDATED")
+	--self:RegisterEvent("BN_FRIEND_TOON_ONLINE") -- This event is removed
+	--self:RegisterEvent("BN_FRIEND_TOON_OFFLINE") -- This event is removed
+	--self:RegisterEvent("BN_TOON_NAME_UPDATED") -- This event is removed
 	self:RegisterEvent("FRIENDLIST_UPDATE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("FRIENDLIST_SHOW")
+	--self:RegisterEvent("FRIENDLIST_SHOW") -- This event is removed
 	self:RegisterEvent("IGNORELIST_UPDATE")
 	self:RegisterEvent("MUTELIST_UPDATE")
 	self:RegisterEvent("PLAYER_FLAGS_CHANGED")

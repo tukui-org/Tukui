@@ -8,5 +8,5 @@ if (Class ~= "ROGUE") then
 end
 
 TukuiUnitFrames.AddClassFeatures["ROGUE"] = function(self)
-	
+
 end

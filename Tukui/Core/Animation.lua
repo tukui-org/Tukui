@@ -213,8 +213,8 @@ local AnimMethods = {
 
 	move = {
 		SetOffset = function(self, x, y)
-			self.XSetting  = x or 0
-			self.YSetting  = y or 0
+			self.XSetting = x or 0
+			self.YSetting = y or 0
 		end,
 
 		GetOffset = function(self)

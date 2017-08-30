@@ -27,7 +27,7 @@ Graphic:SetScript("OnEvent", function(self, event)
 		if not RequireRestart then
 			Popups.ShowPopup("CLIENT_RESTART")
 		end
-			
+
 		RequireRestart = true
 	else
 		local UseUIScale = GetCVar("useUiScale")

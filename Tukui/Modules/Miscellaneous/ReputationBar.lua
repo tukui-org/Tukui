@@ -28,10 +28,10 @@ function Reputation:SetTooltip()
 		local Val1 = Value - Min
 		local Val2 = Max - Min
 		local Val3 = (Value - Min) / (Max - Min) * 100
-		
+
 		GameTooltip:AddLine(Val1 .. " / " .. Val2 .. " (" .. floor(Val3) .. "%)")
 	end
-	
+
 	GameTooltip:Show()
 end
 
@@ -90,12 +90,12 @@ function Reputation:Enable()
 
 		self.IsCreated = true
 	end
-	
+
 	local ShowArtifact = HasArtifactEquipped()
 	local PlayerLevel = UnitLevel("player")
-	
+
 	self.RepBar1:Show()
-	
+
 	if ShowArtifact ~= true and PlayerLevel ~= MAX_PLAYER_LEVEL then
 		self.RepBar2:Show()
 	else

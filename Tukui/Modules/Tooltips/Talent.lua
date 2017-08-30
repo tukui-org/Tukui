@@ -29,7 +29,7 @@ function Talent:GetItemLevel(unit)
 	local Total, Item = 0, 0
 	local ArtefactEquiped = false
 	local TotalSlots = 16
-	
+
 	for i = 1, #Talent.SlotNames do
 		local ItemLink = GetInventoryItemLink(unit, GetInventorySlotInfo(("%sSlot"):format(Talent.SlotNames[i])))
 
@@ -44,14 +44,14 @@ function Talent:GetItemLevel(unit)
 			--If we have artifact equipped in main hand, then we should not count the offhand as it displays an incorrect item level
 			if (not ArtifactEquipped or (ArtifactEquipped and EquipLoc and EquipLoc ~= "INVTYPE_WEAPONOFFHAND")) then
 				local ItemLevel
-				
+
 				ItemLevel = GetDetailedItemLevelInfo(ItemLink)
 
 				if(ItemLevel and ItemLevel > 0) then
 					Item = Item + 1
 					Total = Total + ItemLevel
 				end
-				
+
 				-- Total slots depend if one/two handed weapon
 				if (i == 15) then
 					if (ArtifactEquipped or (EquipLoc and EquipLoc == "INVTYPE_2HWEAPON")) then
