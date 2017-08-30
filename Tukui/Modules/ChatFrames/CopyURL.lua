@@ -43,12 +43,12 @@ function TukuiChat:EnableURL()
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_PARTY_LEADER", TukuiChat.FindURL)
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID", TukuiChat.FindURL)
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID_LEADER", TukuiChat.FindURL)
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_BATTLEGROUND", TukuiChat.FindURL)
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_BATTLEGROUND_LEADER", TukuiChat.FindURL)
+	--ChatFrame_AddMessageEventFilter("CHAT_MSG_BATTLEGROUND", TukuiChat.FindURL) -- This event is removed
+	--ChatFrame_AddMessageEventFilter("CHAT_MSG_BATTLEGROUND_LEADER", TukuiChat.FindURL) -- This event is removed
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_SAY", TukuiChat.FindURL)
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", TukuiChat.FindURL)
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_WHISPER", TukuiChat.FindURL)
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_CONVERSATION", TukuiChat.FindURL)
+	--ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_CONVERSATION", TukuiChat.FindURL) -- This event is removed
 
 	local CurrentLink = nil
 	local SetHyperlink = ItemRefTooltip.SetHyperlink

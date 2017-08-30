@@ -18,7 +18,7 @@ end
 
 function TukuiActionBars:SetUpExtraActionButton()
 	local Holder = CreateFrame("Frame", "TukuiExtraActionButton", UIParent)
-	
+
 	Holder:Size(160, 80)
 	Holder:SetPoint("BOTTOM", 0, 250)
 
@@ -26,12 +26,12 @@ function TukuiActionBars:SetUpExtraActionButton()
 	ExtraActionBarFrame:ClearAllPoints()
 	ExtraActionBarFrame:SetPoint("CENTER", Holder, "CENTER", 0, 0)
 	ExtraActionBarFrame.ignoreFramePositionManager = true
-	
+
 	ZoneAbilityFrame:SetParent(UIParent)
 	ZoneAbilityFrame:ClearAllPoints()
 	ZoneAbilityFrame:SetPoint("CENTER", Holder, "CENTER", 0, 0)
 	ZoneAbilityFrame.ignoreFramePositionManager = true
-	
+
 	ZoneButton:SetTemplate()
 	ZoneButton:StyleButton()
 	ZoneButton:SetNormalTexture("")

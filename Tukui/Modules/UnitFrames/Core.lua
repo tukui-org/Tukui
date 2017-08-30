@@ -99,10 +99,10 @@ function TukuiUnitFrames:ShortValue()
 	local Value
 
 	if self >= 1000000 then
-		Value = format("%.1fm", self/1000000)
+		Value = format("%.1fm", self / 1000000)
 		return Value
 	elseif self >= 1000 then
-		Value = format("%.1fk", self/1000)
+		Value = format("%.1fk", self / 1000)
 		return Value
 	end
 end
@@ -157,10 +157,10 @@ end
 
 function TukuiUnitFrames:Highlight()
 	if UnitIsUnit("focus", self.unit) then
-		self.Highlight:SetBackdropColor(218/255, 197/255, 92/255, .7)
+		self.Highlight:SetBackdropColor(218 / 255, 197 / 255, 92 / 255, .7)
 		self.Highlight:Show()
 	elseif UnitIsUnit("target", self.unit) then
-		self.Highlight:SetBackdropColor(75/255,  175/255, 76/255, 1)
+		self.Highlight:SetBackdropColor(75 / 255, 175 / 255, 76 / 255, 1)
 		self.Highlight:Show()
 	else
 		self.Highlight:Hide()
@@ -400,7 +400,7 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 	if slot > 4 then
 		return
 	end
-	
+
 	local Bar = self.Totems
 	local Priorities = Bar.__map
 
@@ -421,7 +421,7 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 		Totem:SetMinMaxValues(0, Duration)
 		Totem:SetScript("OnUpdate", TukuiUnitFrames.UpdateTotemTimer)
 		Totem:SetStatusBarColor(R, G, B, A)
-		
+
 		if Totem.Icon then
 			Totem.Icon:SetTexture(Icon)
 			Totem.Icon:SetDesaturated(true)
@@ -432,7 +432,7 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 		Totem:SetAlpha(0)
 		Totem:SetValue(0)
 		Totem:SetScript("OnUpdate", nil)
-		
+
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
 		end
@@ -558,13 +558,13 @@ function TukuiUnitFrames:SetGridGroupRole()
 	local Role = UnitGroupRolesAssigned(self.unit)
 
 	if Role == "TANK" then
-		LFDRole:SetColorTexture(67/255, 110/255, 238/255,.3)
+		LFDRole:SetColorTexture(67 / 255, 110 / 255, 238 / 255,.3)
 		LFDRole:Show()
 	elseif Role == "HEALER" then
-		LFDRole:SetColorTexture(130/255,  255/255, 130/255, .15)
+		LFDRole:SetColorTexture(130 / 255, 255 / 255, 130 / 255, .15)
 		LFDRole:Show()
 	elseif Role == "DAMAGER" then
-		LFDRole:SetColorTexture(176/255, 23/255, 31/255, .27)
+		LFDRole:SetColorTexture(176 / 255, 23 / 255, 31 / 255, .27)
 		LFDRole:Show()
 	else
 		LFDRole:Hide()
@@ -687,15 +687,15 @@ function TukuiUnitFrames:MoveTotemBar()
 	local Arcane = Frame.ArcaneChargeBar
 	local Totems = Frame.Totems
 	local Shadow = Frame.Shadow
-	
+
 	local T_Y, S_Y = 5, 4
 
 	if (Arcane and Arcane:IsShown()) then
 		T_Y, S_Y = 14, 12
 	end
-	
+
 	Shadow:Point("TOPLEFT", -4, S_Y)
-	
+
 	Totems:ClearAllPoints()
 	Totems:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, T_Y)
 end
@@ -746,7 +746,7 @@ function TukuiUnitFrames:GetRaidFramesAttributes()
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", C["Raid"].GroupBy.Value,
-		"maxColumns", math.ceil(40/5),
+		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
 		"columnSpacing", T.Scale(4),
 		"columnAnchorPoint", "LEFT"
@@ -762,7 +762,7 @@ function TukuiUnitFrames:GetPetRaidFramesAttributes()
 		"showParty", false,
 		"showRaid", C["Raid"].ShowPets,
 		"showSolo", false,
-		"maxColumns", math.ceil(40/5),
+		"maxColumns", math.ceil(40 / 5),
 		"point", "TOP",
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
 		"columnSpacing", T.Scale(4),
@@ -920,7 +920,7 @@ function TukuiUnitFrames:CreateUnits()
 			if (i == 1) then
 				Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
 			else
-				Arena[i]:SetPoint("BOTTOM", Arena[i-1], "TOP", 0, 35)
+				Arena[i]:SetPoint("BOTTOM", Arena[i - 1], "TOP", 0, 35)
 			end
 			Arena[i]:Size(200, 29)
 
@@ -941,7 +941,7 @@ function TukuiUnitFrames:CreateUnits()
 			if (i == 1) then
 				Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
 			else
-				Boss[i]:SetPoint("BOTTOM", Boss[i-1], "TOP", 0, 35)
+				Boss[i]:SetPoint("BOTTOM", Boss[i - 1], "TOP", 0, 35)
 			end
 			Boss[i]:Size(200, 29)
 

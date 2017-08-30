@@ -128,7 +128,7 @@ end
 local Enable = function(self)
 	self:RegisterEvent("LFG_UPDATE_RANDOM_INFO")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:SetScript("OnEvent", OnEvent)
+	self:SetScript("OnEvent", OnEvent) -- This is a global call here!
 	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)

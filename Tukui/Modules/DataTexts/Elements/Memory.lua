@@ -11,7 +11,7 @@ local percentageString = "%.2f%%"
 
 local FormatMemory = function(memory)
 	if (memory > 999) then
-		local Memory = ((memory/1024) * Mult) / Mult
+		local Memory = ((memory / 1024) * Mult) / Mult
 		return string.format(MegabyteString, Memory)
 	else
 		local Memory = (memory * Mult) / Mult

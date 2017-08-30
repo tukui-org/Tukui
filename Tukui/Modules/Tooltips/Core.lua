@@ -191,11 +191,11 @@ function Tooltip:OnTooltipSetUnit()
 				end
 			else
 				local Best, Current, PVP = GetAverageItemLevel()
-				
+
 				ILevel = math.floor(Current) or UNKNOWN
 				MAXILevel = math.floor(Best) or UNKNOWN
 				PVPILevel = math.floor(PVP) or UNKNOWN
-				
+
 				TalentSpec = Talent:GetTalentSpec() or NONE
 			end
 		end
@@ -241,14 +241,14 @@ function Tooltip:OnTooltipSetUnit()
 		GameTooltip:AddLine(UnitName(Unit .. "target"), R, G, B)
 	end
 
-	if (C["Tooltips"].UnitHealthText and Health and MaxHealth) then
-		HealthBar.Text:SetText(Short(Health) .. " / " .. Short(MaxHealth))
+	if (C["Tooltips"].UnitHealthText and UnitHealth(Unit) and UnitHealthMax(Unit)) then
+		HealthBar.Text:SetText(Short(UnitHealth(Unit)) .. " / " .. Short(UnitHealthMax(Unit)))
 	end
 
 	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit) and UnitIsFriend("player", Unit) and IsAltKeyDown()) then
 		GameTooltip:AddLine(" ")
-		
-		 
+
+
 		if Unit == "player" then
 			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL.." ("..CURRENTLY_EQUIPPED .."): |cff3eea23"..ILevel.."|r")
 			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL.." ("..PVP.."): |cff3eea23"..PVPILevel.."|r")
@@ -256,7 +256,7 @@ function Tooltip:OnTooltipSetUnit()
 		else
 			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..ILevel.."|r")
 		end
-		
+
 		GameTooltip:AddLine(SPECIALIZATION..": |cff3eea23"..TalentSpec.."|r")
 	end
 
@@ -265,7 +265,7 @@ end
 
 function Tooltip:SetColor()
 	local GetMouseFocus = GetMouseFocus()
-	
+
 	local Unit = select(2, self:GetUnit()) or (GetMouseFocus and GetMouseFocus.GetAttribute and GetMouseFocus:GetAttribute("unit"))
 
 	if (not Unit) and (UnitExists("mouseover")) then
@@ -338,7 +338,7 @@ function Tooltip:Skin()
 		self:SetTemplate()
 		self.IsSkinned = true
 	end
-	
+
 	if not self:IsForbidden() then
 		Tooltip.SetColor(self)
 	end
@@ -365,7 +365,7 @@ function Tooltip:OnValueChanged()
 	local unit = select(2, self:GetParent():GetUnit())
 	if(not unit) then
 		local GMF = GetMouseFocus()
-		
+
 		if (GMF and GMF.GetAttribute and GMF:GetAttribute("unit")) then
 			unit = GMF:GetAttribute("unit")
 		end

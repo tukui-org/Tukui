@@ -16,13 +16,13 @@ local Update = function(self)
 	local BaseMissChance, LevelDifference, Avoidance
 
 	if TargetLevel == -1 then
-		BaseMissChance = (5 - (3*.2))  --Boss Value
+		BaseMissChance = (5 - (3 * .2))  --Boss Value
 		LevelDifference = 3
 	elseif TargetLevel > PlayerLevel then
-		BaseMissChance = (5 - ((TargetLevel - PlayerLevel)*.2)) --Mobs above player level
+		BaseMissChance = (5 - ((TargetLevel - PlayerLevel) * .2)) --Mobs above player level
 		LevelDifference = (TargetLevel - PlayerLevel)
 	elseif TargetLevel < PlayerLevel and TargetLevel > 0 then
-		BaseMissChance = (5 + ((PlayerLevel - TargetLevel)*.2)) --Mobs below player level
+		BaseMissChance = (5 + ((PlayerLevel - TargetLevel) * .2)) --Mobs below player level
 		LevelDifference = (TargetLevel - PlayerLevel)
 	else
 		BaseMissChance = 5 --Sets miss chance of attacker level if no target exists, lv80=5, 81=4.2, 82=3.4, 83=2.6

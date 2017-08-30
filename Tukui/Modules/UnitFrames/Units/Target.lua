@@ -342,14 +342,14 @@ function TukuiUnitFrames:Target()
 			if i == 1 then
 				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
 				ComboPoints[i]:Width(250 / 8 + 2)
-				
+
 				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6
 				ComboPoints[i].None = 250 / 5
 			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
+				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 				ComboPoints[i]:Width(250 / 8 - 1)
-				
+
 				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6 - 1
 				ComboPoints[i].None = 250 / 5 - 1

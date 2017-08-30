@@ -58,9 +58,9 @@ function TukuiUnitFrames:Player()
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
 	end
-	
+
 	Health.frequentUpdates = true
-	
+
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 
 	local Power = CreateFrame("StatusBar", nil, self)
@@ -93,7 +93,7 @@ function TukuiUnitFrames:Player()
 	if (C.UnitFrames.Smooth) then
 		Power.Smooth = true
 	end
-	
+
 	Power.Prediction = CreateFrame("StatusBar", nil, Power)
 	Power.Prediction:SetReverseFill(true)
 	Power.Prediction:SetPoint("TOP")
@@ -102,9 +102,9 @@ function TukuiUnitFrames:Player()
 	Power.Prediction:SetWidth(C.UnitFrames.Portrait and 214 or 250)
 	Power.Prediction:SetStatusBarTexture(PowerTexture)
 	Power.Prediction:SetStatusBarColor(1, 1, 1, .3)
-	
+
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
-	
+
 	-- Additional Power
 	local AdditionalPower = CreateFrame("StatusBar", self:GetName()..'AdditionalPower', Health)
 	AdditionalPower:SetFrameStrata(self:GetFrameStrata())
@@ -116,13 +116,13 @@ function TukuiUnitFrames:Player()
 	AdditionalPower:SetBackdrop(TukuiUnitFrames.Backdrop)
 	AdditionalPower:SetBackdropColor(0, 0, 0)
 	AdditionalPower:SetBackdropBorderColor(0, 0, 0)
-	
+
 	AdditionalPower.frequentUpdates = true
 
 	AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "BORDER")
 	AdditionalPower.Background:SetAllPoints()
 	AdditionalPower.Background:SetColorTexture(0.30, 0.52, 0.90, 0.2)
-	
+
 	AdditionalPower.Prediction = CreateFrame("StatusBar", nil, AdditionalPower)
 	AdditionalPower.Prediction:SetReverseFill(true)
 	AdditionalPower.Prediction:SetPoint("TOP")
@@ -347,7 +347,7 @@ function TukuiUnitFrames:Player()
 
 		self.Totems = Bar
 	end
-	
+
 	if (C.UnitFrames.ComboBar) and (Class == "ROGUE" or Class == "DRUID") then
 		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
 		ComboPoints:SetFrameStrata(self:GetFrameStrata())
@@ -366,14 +366,14 @@ function TukuiUnitFrames:Player()
 			if i == 1 then
 				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
 				ComboPoints[i]:Width(250 / 8 + 2)
-				
+
 				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6
 				ComboPoints[i].None = 250 / 5
 			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i-1], "RIGHT", 1, 0)
+				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 				ComboPoints[i]:Width(250 / 8 - 1)
-				
+
 				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6 - 1
 				ComboPoints[i].None = 250 / 5 - 1

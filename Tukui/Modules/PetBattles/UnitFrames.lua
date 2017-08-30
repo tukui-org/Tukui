@@ -56,7 +56,7 @@ function Battle:SkinUnitFrames()
 		if (i == 1) then
 			Pet.HealthBarBackdrop:Point("TOPLEFT", Pet.ActualHealthBar, "TOPLEFT", -2, 2)
 			Pet.HealthBarBackdrop:Point("BOTTOMLEFT", Pet.ActualHealthBar, "BOTTOMLEFT", -2, -2)
-			Pet.ActualHealthBar:SetVertexColor(171/255, 214/255, 116/255)
+			Pet.ActualHealthBar:SetVertexColor(171 / 255, 214 / 255, 116 / 255)
 			PetBattles.Ally2.iconPoint = Pet.IconBackdrop
 			PetBattles.Ally3.iconPoint = Pet.IconBackdrop
 
@@ -72,7 +72,7 @@ function Battle:SkinUnitFrames()
 		else
 			Pet.HealthBarBackdrop:Point("TOPRIGHT", Pet.ActualHealthBar, "TOPRIGHT", 2, 2)
 			Pet.HealthBarBackdrop:Point("BOTTOMRIGHT", Pet.ActualHealthBar, "BOTTOMRIGHT", 2, -2)
-			Pet.ActualHealthBar:SetVertexColor(196/255,  30/255,  60/255)
+			Pet.ActualHealthBar:SetVertexColor(196 / 255, 30 / 255, 60 / 255)
 			PetBattles.Enemy2.iconPoint = Pet.IconBackdrop
 			PetBattles.Enemy3.iconPoint = Pet.IconBackdrop
 
@@ -104,7 +104,7 @@ function Battle:SkinUnitFrames()
 	end
 
 	PetBattles.TopVersusText:ClearAllPoints()
-	PetBattles.TopVersusText:SetPoint("TOP", f, "TOP", 0, -46)
+	--PetBattles.TopVersusText:SetPoint("TOP", f, "TOP", 0, -46) -- Global lookup: f
 
 	for i, Pet in pairs(PetsHelping) do
 		Pet.BorderAlive:SetAlpha(0)

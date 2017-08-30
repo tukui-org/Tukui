@@ -7,8 +7,8 @@ local floor = math.floor
 local class = select(2, UnitClass("player"))
 local Noop = function() return end
 
-T.Mult = 768/string.match(T.Resolution, "%d+x(%d+)")/C.General.UIScale
-T.Scale = function(x) return T.Mult*math.floor(x/T.Mult+.5) end
+T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
+T.Scale = function(x) return T.Mult * math.floor(x / T.Mult + .5) end
 
 -- [[ API FUNCTIONS ]] --
 
@@ -26,11 +26,11 @@ end
 
 local function Point(obj, arg1, arg2, arg3, arg4, arg5)
 	-- anyone has a more elegant way for this?
-	if type(arg1)=="number" then arg1 = T.Scale(arg1) end
-	if type(arg2)=="number" then arg2 = T.Scale(arg2) end
-	if type(arg3)=="number" then arg3 = T.Scale(arg3) end
-	if type(arg4)=="number" then arg4 = T.Scale(arg4) end
-	if type(arg5)=="number" then arg5 = T.Scale(arg5) end
+	if type(arg1) == "number" then arg1 = T.Scale(arg1) end
+	if type(arg2) == "number" then arg2 = T.Scale(arg2) end
+	if type(arg3) == "number" then arg3 = T.Scale(arg3) end
+	if type(arg4) == "number" then arg4 = T.Scale(arg4) end
+	if type(arg5) == "number" then arg5 = T.Scale(arg5) end
 
 	obj:SetPoint(arg1, arg2, arg3, arg4, arg5)
 end
@@ -70,9 +70,9 @@ local function SetTemplate(f, t, tex)
 	end
 
 	f:SetBackdrop({
-	  bgFile = texture,
-	  edgeFile = C.Medias.Blank,
-	  tile = false, tileSize = 0, edgeSize = T.Mult,
+		bgFile = texture,
+		edgeFile = C.Medias.Blank,
+		tile = false, tileSize = 0, edgeSize = T.Mult,
 	})
 
 	if not f.isInsetDone then
@@ -545,9 +545,10 @@ local function SkinScrollBar(frame)
 		end
 
 		if frame:GetThumbTexture() then
-			if not thumbTrim then
+			--[[if not thumbTrim then -- This is a global lookup
 				thumbTrim = 3
-			end
+			end]]
+			local thumbTrim = 3
 
 			frame:GetThumbTexture():SetTexture(nil)
 

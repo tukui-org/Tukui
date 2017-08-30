@@ -22,7 +22,7 @@ local Noop = function() end
 function Plates:GetClassification(unit)
 	local CreatureClassification = UnitClassification(unit)
 	local String = ""
-	
+
 	if CreatureClassification == "elite" then
 		String = "[E]"
 	elseif CreatureClassification == "rare" then
@@ -32,7 +32,7 @@ function Plates:GetClassification(unit)
 	elseif CreatureClassification == "worldboss" then
 		String = "[WB]"
 	end
-	
+
 	return String
 end
 
@@ -55,12 +55,12 @@ function Plates:SetName()
 		else
 			Level = "[".. Level.. "]"
 		end
-	
+
 		self:SetText("|cffff0000".. Elite .."|r" .. LevelHexColor .. Level .."|r "..NameHexColor.. Text .."|r")
 	end
 end
 
--- This function below exist because with cannot modify the Blizzard var below in 7.1: 
+-- This function below exist because with cannot modify the Blizzard var below in 7.1:
 -- DefaultCompactNamePlateEnemyFrameOptions.displayNameWhenSelected
 -- Reason: Tainting
 -- Workaround: Hook CompactUnitFrame_UpdateName function
@@ -68,9 +68,9 @@ end
 
 function Plates:UpdateName()
 	if self:IsForbidden() then return end -- 7.2
-	
+
 	local FrameName = self:GetName()
-	
+
 	if FrameName and FrameName:match("NamePlate") then
 		self.name:SetText(GetUnitName(self.unit, true))
 		self.name:Show()
@@ -79,7 +79,7 @@ end
 
 function Plates:ColorHealth()
 	if self:IsForbidden() then return end -- 7.2
-	
+
 	if (self:GetName() and string.find(self:GetName(), "NamePlate")) then
 		local r, g, b
 
@@ -88,7 +88,7 @@ function Plates:ColorHealth()
 		else
 			if UnitIsPlayer(self.unit) then
 				local Class = select(2, UnitClass(self.unit))
-					
+
 				r, g, b = unpack(T.Colors.class[Class])
 			else
 				if (UnitIsFriend("player", self.unit)) then
@@ -110,19 +110,19 @@ function Plates:SetCastingIcon()
 	local Texture = Icon:GetTexture()
 	local Backdrop = self.IconBackdrop
 	local IconTexture = self.IconTexture
-	
+
 	if Texture then
 		Backdrop:SetAlpha(1)
 		IconTexture:SetTexture(Texture)
 	else
 		Backdrop:SetAlpha(0)
-		Icon:SetTexture(nil)		
+		Icon:SetTexture(nil)
 	end
 end
 
 function Plates:SetupPlate(options)
 	if self:IsForbidden() then return end -- 7.2
-	
+
 	local HealthBar = self.healthBar
 	local Highlight = self.selectionHighlight
 	local Aggro = self.aggroHighlight
@@ -136,12 +136,12 @@ function Plates:SetupPlate(options)
 	local Texture = T.GetTexture(C["NamePlates"].Texture)
 	local Font = T.GetFont(C["NamePlates"].Font)
 	local FontName, FontSize, FontFlags = _G[Font]:GetFont()
-	
+
 	if self.IsEdited then
 		HealthBar:SetHeight(C.NamePlates.Height)
 		CastBar:SetStatusBarTexture(Texture)
 		CastBar:SetHeight(C.NamePlates.CastHeight)
-		
+
 		return
 	end
 
@@ -159,11 +159,11 @@ function Plates:SetupPlate(options)
 	CastBar.background:ClearAllPoints()
 	CastBar.background:SetInside(0, 0)
 	CastBar:CreateShadow()
-	
+
 	if CastBar.border then
 		CastBar.border:SetAlpha(0)
 	end
-	
+
 	CastBar.IconBackdrop = CreateFrame("Frame", nil, CastBar)
 	CastBar.IconBackdrop:SetSize(CastBar.Icon:GetSize())
 	CastBar.IconBackdrop:SetPoint("TOPRIGHT", HealthBar, "TOPLEFT", -4, 0)
@@ -171,24 +171,24 @@ function Plates:SetupPlate(options)
 	CastBar.IconBackdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
 	CastBar.IconBackdrop:CreateShadow()
 	CastBar.IconBackdrop:SetFrameLevel(CastBar:GetFrameLevel() - 1 or 0)
-	
+
 	CastBar.Icon:SetParent(T.Panels.Hider)
-	
+
 	CastBar.IconTexture = CastBar:CreateTexture(nil, "OVERLAY")
 	CastBar.IconTexture:SetTexCoord(.08, .92, .08, .92)
 	CastBar.IconTexture:SetParent(CastBar.IconBackdrop)
 	CastBar.IconTexture:SetAllPoints(CastBar.IconBackdrop)
 
 	CastBar.Text:SetFont(FontName, 9, "OUTLINE")
-	
+
 	CastBar:HookScript("OnShow", Plates.SetCastingIcon)
-	
+
 	-- UNIT NAME
 	Name:SetFont(FontName, 9, FontFlags)
 	Name:SetShadowColor(0, 0, 0)
 	Name:SetShadowOffset(1.25, -1.25)
 	hooksecurefunc(Name, "Show", Plates.SetName)
-	
+
 	-- WILL DO A BETTER VISUAL FOR THIS LATER
 	Highlight:SetParent(T.Panels.Hider)
 	Highlight:ClearAllPoints()
@@ -202,17 +202,17 @@ function Plates:SetupPlate(options)
 	Spark:ClearAllPoints()
 	Classification:SetParent(T.Panels.Hider)
 	Classification:ClearAllPoints()
-	
+
 	self.IsEdited = true
 end
 
 function Plates:Enable()
 	local Enabled = C.NamePlates.Enable
-	
+
 	if not Enabled then
 		return
 	end
-	
+
 	if ClassNameplateManaBarFrame then
 		ClassNameplateManaBarFrame.Border:SetAlpha(0)
 		ClassNameplateManaBarFrame:SetStatusBarTexture(C.Medias.Normal)
@@ -221,20 +221,20 @@ function Plates:Enable()
 		ClassNameplateManaBarFrame:SetBackdropColor(.2, .2, .2)
 		ClassNameplateManaBarFrame:CreateShadow()
 	end
-	
+
 	hooksecurefunc("DefaultCompactNamePlateFrameSetupInternal", self.SetupPlate)
 	hooksecurefunc("CompactUnitFrame_UpdateHealthColor", self.ColorHealth)
-	
+
 	-- Disable Blizzard rescale
 	NamePlateDriverFrame.UpdateNamePlateOptions = Noop
-	
+
 	-- Make sure nameplates are always scaled at 1
 	SetCVar("NamePlateVerticalScale", "1")
 	SetCVar("NamePlateHorizontalScale", "1")
-	
+
 	-- Hide the option to rescale, because we will do it from Tukui settings.
 	InterfaceOptionsNamesPanelUnitNameplatesMakeLarger:Hide()
-	
+
 	-- Set the Width of NamePlate
 	if T.WoWBuild >= 22881 then
 		C_NamePlate.SetNamePlateFriendlySize(C.NamePlates.Width, 45)
@@ -242,7 +242,7 @@ function Plates:Enable()
 	else
 		C_NamePlate.SetNamePlateOtherSize(C.NamePlates.Width, 45)
 	end
-	
+
 	hooksecurefunc("CompactUnitFrame_UpdateName", self.UpdateName)
 end
 
