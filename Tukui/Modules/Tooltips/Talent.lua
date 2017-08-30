@@ -27,7 +27,7 @@ Talent.SlotNames = {
 
 function Talent:GetItemLevel(unit)
 	local Total, Item = 0, 0
-	local ArtefactEquiped = false
+	local ArtifactEquipped = false
 	local TotalSlots = 16
 
 	for i = 1, #Talent.SlotNames do

@@ -545,7 +545,7 @@ local function SkinScrollBar(frame)
 		end
 
 		if frame:GetThumbTexture() then
-			--[[if not thumbTrim then -- This is a global call!
+			--[[if not thumbTrim then -- This is a global lookup
 				thumbTrim = 3
 			end]]
 			local thumbTrim = 3
