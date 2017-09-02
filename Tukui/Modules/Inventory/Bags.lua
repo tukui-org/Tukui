@@ -107,7 +107,7 @@ function Bags:HideBlizzard()
 	BankClose:Hide()
 	BankPortraitTexture:Hide()
 	BagHelpBox:Kill()
-	BankFrame:EnableMouse(false)
+	BankFrame:HookScript('OnShow', function(self) self:EnableMouse(false) end)
 
 	for i = 1, 12 do
 		local CloseButton = _G["ContainerFrame"..i.."CloseButton"]
