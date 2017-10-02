@@ -989,6 +989,10 @@ function Bags:Enable()
 		end
 	end)
 
+	Bag:HookScript("OnShow", function() -- Cinematic Bug with Bags open.
+        self.Bag:Show()
+    end)
+
 	Bank:SetScript("OnHide", function()
 		self.Bank:Hide()
 	end)
