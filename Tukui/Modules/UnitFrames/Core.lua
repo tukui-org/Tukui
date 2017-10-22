@@ -1058,6 +1058,7 @@ function TukuiUnitFrames:Enable()
 	}
 
 	oUF:RegisterStyle("Tukui", TukuiUnitFrames.Style)
+	oUF:SetActiveStyle("Tukui")
 
 	self:DisableBlizzard()
 	self:CreateAnchor()
