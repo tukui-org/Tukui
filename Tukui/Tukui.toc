@@ -1,14 +1,14 @@
 ## Interface: 70300
-## Authors: Tukz & Hydra
-## Maintainer: Tukz & Azilroka
-## Version: 17.13
+## Author: Tukz & Hydra
+## X-Maintainer: Tukz & Azilroka
+## Version: 17.14
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
 ## SavedVariablesPerCharacter: TukuiDataPerChar
 ## OptionalDeps: Tukui_Config, Clique
 ## X-oUF: TukuiUnitFrameFramework
-## Website: http://www.tukui.org
+## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1
 ## X-Tukui-ProjectFolders: Tukui, Tukui_Config
 

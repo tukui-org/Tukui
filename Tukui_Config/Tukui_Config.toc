@@ -1,8 +1,8 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: |cffff8000Tukui Config|r
 ## Notes: Tukui Config GUI
-## Authors: Tukz & Hydra
-## Maintainer: Tukz & Azilroka
+## Author: Tukz & Hydra
+## X-Maintainer: Tukz & Azilroka
 ## SavedVariables: TukuiConfigShared, TukuiConfigPerAccount
 ## SavedVariablesPerCharacter: TukuiConfigNotShared
 ## RequiredDeps: Tukui
