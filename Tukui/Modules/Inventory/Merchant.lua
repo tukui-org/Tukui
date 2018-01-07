@@ -29,7 +29,7 @@ function Merchant:OnEvent()
 
 				if (Link and ID and type(Link) == "string") then
 					if (strmatch(Link, "battlepet:") or strmatch(Link, "keystone:")) then
-					-- Do nothing, never sell/destroy pets or keystones
+						-- Do nothing, never sell/destroy pets or keystones
 					else
 						local Price = 0
 						local Mult1, Mult2 = select(11, GetItemInfo(Link)), select(2, GetContainerItemInfo(Bag, Slot))
