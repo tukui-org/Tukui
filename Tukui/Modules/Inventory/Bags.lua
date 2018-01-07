@@ -616,7 +616,7 @@ function Bags:SlotUpdate(id, button)
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
 	elseif ItemLink then
-		local Rarity = select(3, GetItemInfo(ItemLink)) or 0
+		local Rarity = select(4, GetContainerItemInfo(id, button:GetID())) or 0
 
 		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
 	else
