@@ -1025,9 +1025,13 @@ function Bags:Enable()
 	--self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:SetScript("OnEvent", self.OnEvent)
 
-	-- Force an update, setting colors
-	ToggleAllBags()
-	ToggleAllBags()
+	if T.WoWBuild >= 25860 then
+		function ManageBackpackTokenFrame() end
+	else
+		ToggleAllBags()
+		ToggleAllBags()
+	end
+
 end
 
 Inventory.Bags = Bags
