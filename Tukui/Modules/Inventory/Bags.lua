@@ -543,6 +543,7 @@ function Bags:SkinTokens()
 		local Count = _G["BackpackTokenFrameToken"..i.."Count"]
 		local PreviousToken = _G["BackpackTokenFrameToken"..(i - 1)]
 
+        Token:SetParent(self.Bags)
 		Token:SetFrameStrata("HIGH")
 		Token:SetFrameLevel(5)
 		Token:SetScale(1)
