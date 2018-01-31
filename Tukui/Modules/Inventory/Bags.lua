@@ -1028,11 +1028,10 @@ function Bags:Enable()
 
 	if T.WoWBuild >= 25860 then
 		function ManageBackpackTokenFrame() end
-	else
-		ToggleAllBags()
-		ToggleAllBags()
 	end
 
+	ToggleAllBags()
+	ToggleAllBags()
 end
 
 Inventory.Bags = Bags
