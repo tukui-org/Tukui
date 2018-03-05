@@ -1,7 +1,7 @@
 ## Interface: 70300
 ## Author: Tukz & Hydra
 ## X-Maintainer: Tukz & Azilroka
-## Version: 17.16
+## Version: 17.17
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
