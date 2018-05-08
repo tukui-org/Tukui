@@ -75,9 +75,41 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 	
+
+	local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
+	CastBar:SetFrameStrata(self:GetFrameStrata())
+	CastBar:SetStatusBarTexture(CastTexture)
+	CastBar:SetFrameLevel(6)
+	CastBar:Height(4)
+	CastBar:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
+	CastBar:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
+
+	CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
+	CastBar.Background:SetAllPoints(CastBar)
+	CastBar.Background:SetTexture(CastTexture)
+	CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
+
+	CastBar.Button = CreateFrame("Frame", nil, CastBar)
+	CastBar.Button:Size(self:GetHeight())
+	CastBar.Button:SetTemplate()
+	CastBar.Button:CreateShadow()
+	CastBar.Button:Point("TOPRIGHT", self, "TOPLEFT", -6, 0)
+
+	CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
+	CastBar.Icon:SetAllPoints()
+	CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+
+	CastBar.PostCastStart = TukuiUnitFrames.CheckInterrupt
+	CastBar.PostCastInterruptible = TukuiUnitFrames.CheckInterrupt
+	CastBar.PostCastNotInterruptible = TukuiUnitFrames.CheckInterrupt
+	CastBar.PostChannelStart = TukuiUnitFrames.CheckInterrupt
+
+	self.Castbar = CastBar
 	self.Health = Health
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 	self.Name = Name
 	self.Power = Power
+	
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
 end

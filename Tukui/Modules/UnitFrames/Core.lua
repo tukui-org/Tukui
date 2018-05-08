@@ -167,6 +167,15 @@ function TukuiUnitFrames:Highlight()
 	end
 end
 
+function TukuiUnitFrames:HighlightPlate()
+	local Shadow = self.Shadow
+	if UnitIsUnit("target", self.unit) then
+		Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
+	else
+		Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+	end
+end
+
 function TukuiUnitFrames:UpdateShadow(height)
 	local Frame = self:GetParent()
 	local Shadow = Frame.Shadow
@@ -224,11 +233,18 @@ function TukuiUnitFrames:CheckInterrupt(unit)
 	if (unit == "vehicle") then
 		unit = "player"
 	end
+	
+	local Frame = self:GetParent()
+	local Power = Frame.Power
 
 	if (self.interrupt and UnitCanAttack("player", unit)) then
-		self:SetStatusBarColor(1, 0, 0, 0.5)
+		self:SetStatusBarColor(1, 0, 0, 0.7)
 	else
-		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)
+		if (unit:match("nameplate")) then
+			self:SetStatusBarColor(0, 1, 0, 0.8)
+		else
+			self:SetStatusBarColor(Power:GetStatusBarColor())
+		end
 	end
 end
 
