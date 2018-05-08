@@ -22,7 +22,7 @@ function AltPowerBar:OnEvent(event, unit, power)
 	if (not AltPowerInfo or event == "UNIT_POWER_BAR_HIDE") then
 		self:Hide()
 	else
-		if ((event == "UNIT_POWER" or event == "UNIT_MAXPOWER") and power ~= "ALTERNATE") then
+		if ((event == "UNIT_POWER_UPDATE" or event == "UNIT_MAXPOWER") and power ~= "ALTERNATE") then
 			return
 		end
 
@@ -48,8 +48,8 @@ function AltPowerBar:Create()
 	self:RegisterEvent("UNIT_POWER_BAR_SHOW")
 	self:RegisterEvent("UNIT_POWER_BAR_HIDE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterUnitEvent("UNIT_POWER", "player")
-	self:RegisterUnitEvent("UNIT_MAXPOWER", "player")
+	self:RegisterEvent("UNIT_POWER_UPDATE");
+	self:RegisterEvent("UNIT_MAXPOWER");
 	self:SetScript("OnEvent", self.OnEvent)
 	self:SetScript("OnClick", self.Hide)
 
