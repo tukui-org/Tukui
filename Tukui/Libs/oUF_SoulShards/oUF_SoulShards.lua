@@ -10,8 +10,8 @@ local Update = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType  ~= "SOUL_SHARDS")) then return end
 
 	local wsb = self.SoulShards
-	local numShards = UnitPower("player", SPELL_POWER_SOUL_SHARDS)
-	local maxShards = UnitPowerMax("player", SPELL_POWER_SOUL_SHARDS)
+	local numShards = UnitPower("player", Enum.PowerType.SoulShards)
+	local maxShards = UnitPowerMax("player", Enum.PowerType.SoulShards)
 
 	if (wsb.PreUpdate) then
 		wsb:PreUpdate(numShards)
