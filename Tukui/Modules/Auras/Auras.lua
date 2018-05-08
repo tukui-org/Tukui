@@ -95,7 +95,7 @@ function TukuiAuras:OnUpdate(elapsed)
 end
 
 function TukuiAuras:UpdateAura(index)
-	local Name, Rank, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
+	local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 
 	if (Name) then
 		if (not C.Auras.Consolidate) then
