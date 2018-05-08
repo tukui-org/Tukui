@@ -114,7 +114,7 @@ local Enable = function(self, unit)
 		cpb.__owner = self
 		cpb.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_POWER', Path, true)
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path, true)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 
@@ -142,7 +142,7 @@ end
 local Disable = function(self)
 	local cpb = self.ComboPointsBar
 	if(cpb) then
-		self:UnregisterEvent('UNIT_POWER', Path)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent('PLAYER_TARGET_CHANGED', Path)
 		self:UnregisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo)
 	end

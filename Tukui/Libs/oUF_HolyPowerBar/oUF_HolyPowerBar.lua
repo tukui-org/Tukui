@@ -55,7 +55,7 @@ local function Enable(self)
 		hp.__owner = self
 		hp.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_POWER', Path)
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 
 		for i = 1, 5 do
 			if not hp[i]:GetStatusBarTexture() then
@@ -74,7 +74,7 @@ end
 local function Disable(self)
 	local hp = self.HolyPower
 	if(hp) then
-		self:UnregisterEvent('UNIT_POWER', Path)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 	end
 end
 

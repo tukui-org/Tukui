@@ -44,7 +44,7 @@ local function Enable(self)
 		wsb.__owner = self
 		wsb.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent("UNIT_POWER", Path)
+		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 
 		for i = 1, 5 do
@@ -69,7 +69,7 @@ end
 local function Disable(self)
 	local wsb = self.SoulShards
 	if(wsb) then
-		self:UnregisterEvent("UNIT_POWER", Path)
+		self:UnregisterEvent("UNIT_POWER_UPDATE", Path)
 		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
 	end
 end

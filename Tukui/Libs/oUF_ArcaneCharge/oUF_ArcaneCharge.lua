@@ -60,7 +60,7 @@ local function Enable(self, unit)
 		bar.__owner = self
 		bar.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent("UNIT_POWER", Path)
+		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
@@ -84,7 +84,7 @@ local function Disable(self,unit)
 	local bar = self.ArcaneChargeBar
 
 	if(bar) then
-		self:UnregisterEvent("UNIT_POWER", Path)
+		self:UnregisterEvent("UNIT_POWER_UPDATE", Path)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Visibility)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 	end

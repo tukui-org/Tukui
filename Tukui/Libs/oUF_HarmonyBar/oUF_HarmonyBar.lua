@@ -89,7 +89,7 @@ local function Enable(self, unit)
 		hb.__owner = self
 		hb.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent("UNIT_POWER", Path)
+		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:RegisterEvent("UNIT_MAXPOWER", Path)
 
@@ -114,7 +114,7 @@ end
 
 local function Disable(self)
 	if self.HarmonyBar then
-		self:UnregisterEvent("UNIT_POWER", Path)
+		self:UnregisterEvent("UNIT_POWER_UPDATE", Path)
 		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:UnregisterEvent("UNIT_MAXPOWER", Path)
 	end
