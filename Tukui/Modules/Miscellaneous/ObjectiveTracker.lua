@@ -92,13 +92,17 @@ function ObjectiveTracker:Enable()
 	end
 
 	for i = 1, 5 do
-		local Module = ObjectiveTrackerFrame.MODULES[i]
+		local Modules = ObjectiveTrackerFrame.MODULES
+		
+		if Modules then
+			local Module = ObjectiveTrackerFrame.MODULES[i]
 
-		if Module then
-			local Header = Module.Header
+			if Module then
+				local Header = Module.Header
 
-			Header:StripTextures()
-			Header:Show()
+				Header:StripTextures()
+				Header:Show()
+			end
 		end
 	end
 
