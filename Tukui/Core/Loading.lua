@@ -124,23 +124,20 @@ function Loading:OnEvent(event, addon)
 
 		-- Maps
 			T["Maps"]["Minimap"]:Enable()
-			T["Maps"]["Zonemap"]:Enable()
+			-- T["Maps"]["Zonemap"]:Enable() --BROKEN
 			T["Maps"]["Worldmap"]:Enable()
 
 		-- DATATEXTS
 			T["DataTexts"]:Enable()
 
 		-- CHAT
-			T["Chat"]:Enable()
+			T["Chat"]:Enable() --BROKEN
 
 		-- UNITFRAMES
-			T["UnitFrames"]:Enable()
+			T["UnitFrames"]:Enable() --BROKEN
 
 		-- TOOLTIPS
 			T["Tooltips"]:Enable()
-
-		-- NAMEPLATES
-			T["NamePlates"]:Enable()
 
 		-- PET BATTLES
 			T["PetBattles"]:Enable()
