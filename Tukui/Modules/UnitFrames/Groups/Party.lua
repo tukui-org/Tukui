@@ -174,7 +174,7 @@ function TukuiUnitFrames:Party()
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 
-		self.HealPrediction = {
+		self.HealthPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
 			absorbBar = ThirdBar,
@@ -212,12 +212,12 @@ function TukuiUnitFrames:Party()
 	--self.Role = Role -- This is a global lookup
 	self.Buffs = Buffs
 	self.Debuffs = Debuffs
-	self.Leader = Leader
-	self.MasterLooter = MasterLooter
-	self.ReadyCheck = ReadyCheck
-	self.RaidIcon = RaidIcon
+	self.LeaderIndicator = Leader
+	self.MasterLooterIndicator = MasterLooter
+	self.ReadyCheckIndicator = ReadyCheck
+	self.RaidTargetIndicator = RaidIcon
 	self.PhaseIcon = PhaseIcon
-	self.Threat = Threat
+	self.ThreatIndicator = Threat
 	self.Range = Range
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong][Tukui:Role]")
 end

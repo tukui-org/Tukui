@@ -175,7 +175,7 @@ function TukuiUnitFrames:Target()
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 
-		self.HealPrediction = {
+		self.HealthPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
 			absorbBar = ThirdBar,
@@ -383,7 +383,7 @@ function TukuiUnitFrames:Target()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
-	self.AltPowerBar = AltPowerBar
-	self.RaidIcon = RaidIcon
-	self.Threat = Threat
+	self.AlternativePower = AltPowerBar
+	self.RaidTargetIndicator = RaidIcon
+	self.ThreatIndicator = Threat
 end

@@ -96,5 +96,5 @@ function TukuiUnitFrames:Pet()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 end

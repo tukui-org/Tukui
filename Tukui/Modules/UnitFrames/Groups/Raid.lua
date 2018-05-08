@@ -120,7 +120,7 @@ function TukuiUnitFrames:Raid()
 		ResurrectIcon:Size(16)
 		ResurrectIcon:SetPoint("CENTER")
 
-		self.ResurrectIcon = ResurrectIcon
+		self.ResurrectIndicator = ResurrectIcon
 	end
 
 	local Range = {
@@ -167,7 +167,7 @@ function TukuiUnitFrames:Raid()
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 
-		self.HealPrediction = {
+		self.HealthPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
 			absorbBar = ThirdBar,
@@ -252,9 +252,9 @@ function TukuiUnitFrames:Raid()
 	self.Power.bg = Power.Background
 	self.Panel = Panel
 	self.Name = Name
-	self.ReadyCheck = ReadyCheck
-	self.LFDRole = LFDRole
+	self.ReadyCheckIndicator = ReadyCheck
+	self.GroupRoleIndicator = LFDRole
 	self.Range = Range
-	self.RaidIcon = RaidIcon
-	self.Threat = Threat
+	self.RaidTargetIndicator = RaidIcon
+	self.ThreatIndicator = Threat
 end

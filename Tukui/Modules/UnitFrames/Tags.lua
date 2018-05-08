@@ -5,7 +5,7 @@ local TukuiUnitFrames = T["UnitFrames"]
 local DEAD = DEAD
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 
-oUF.Tags.Events['Tukui:GetNameColor'] = 'UNIT_POWER'
+oUF.Tags.Events['Tukui:GetNameColor'] = 'UNIT_POWER_UPDATE'
 oUF.Tags.Methods['Tukui:GetNameColor'] = function(unit)
 	local Reaction = UnitReaction(unit, 'player')
 

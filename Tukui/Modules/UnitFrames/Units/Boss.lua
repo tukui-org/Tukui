@@ -201,6 +201,6 @@ function TukuiUnitFrames:Boss()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.AltPowerBar = AltPowerBar
-	self.RaidIcon = RaidIcon
+	self.AlternativePower = AltPowerBar
+	self.RaidTargetIndicator = RaidIcon
 end

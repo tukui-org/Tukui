@@ -330,7 +330,11 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 	end
 end
 
-function TukuiUnitFrames:PostUpdatePower(unit, min, max)
+function TukuiUnitFrames:PostUpdatePower(unit, current, min, max)
+	if not min then
+		min = 0
+	end
+	
 	local Parent = self:GetParent()
 	local pType, pToken = UnitPowerType(unit)
 	local Colors = T["Colors"]
@@ -477,48 +481,57 @@ function TukuiUnitFrames:CreateAuraTimer(elapsed)
 end
 
 function TukuiUnitFrames:PostCreateAura(button)
-	button:SetTemplate("Default")
-	button:CreateShadow()
+	if button:GetName():match("NamePlate") then
+		button:CreateShadow()
+		button.cd:SetReverse()
+		button.icon:SetAllPoints()
+		button.icon:SetTexCoord(unpack(T.IconCoord))
+		button.icon:SetDrawLayer("ARTWORK")
+	else
+		button:SetTemplate("Default")
+		button:CreateShadow()
 
-	button.Remaining = button:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-	button.Remaining:Point("CENTER", 1, 0)
+		button.Remaining = button:CreateFontString(nil, "OVERLAY")
+		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+		button.Remaining:Point("CENTER", 1, 0)
 
-	button.cd.noOCC = true
-	button.cd.noCooldownCount = true
-	button.cd:SetReverse()
-	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
-	button.cd:ClearAllPoints()
-	button.cd:SetInside()
-	button.cd:SetHideCountdownNumbers(true)
+		button.cd.noOCC = true
+		button.cd.noCooldownCount = true
+		button.cd:SetReverse()
+		button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
+		button.cd:ClearAllPoints()
+		button.cd:SetInside()
+		button.cd:SetHideCountdownNumbers(true)
 
-	button.icon:SetInside()
-	button.icon:SetTexCoord(unpack(T.IconCoord))
-	button.icon:SetDrawLayer("ARTWORK")
+		button.icon:SetInside()
+		button.icon:SetTexCoord(unpack(T.IconCoord))
+		button.icon:SetDrawLayer("ARTWORK")
 
-	button.count:Point("BOTTOMRIGHT", 3, 3)
-	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
-	button.count:SetTextColor(0.84, 0.75, 0.65)
+		button.count:Point("BOTTOMRIGHT", 3, 3)
+		button.count:SetJustifyH("RIGHT")
+		button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
+		button.count:SetTextColor(0.84, 0.75, 0.65)
 
-	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
-	button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
-	button.overlay:SetParent(button.OverlayFrame)
-	button.count:SetParent(button.OverlayFrame)
-	button.Remaining:SetParent(button.OverlayFrame)
+		button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
+		button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
+		button.overlay:SetParent(button.OverlayFrame)
+		button.count:SetParent(button.OverlayFrame)
+		button.Remaining:SetParent(button.OverlayFrame)
 
-	button.Animation = button:CreateAnimationGroup()
-	button.Animation:SetLooping("BOUNCE")
+		button.Animation = button:CreateAnimationGroup()
+		button.Animation:SetLooping("BOUNCE")
 
-	button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
-	button.Animation.FadeOut:SetFromAlpha(1)
-	button.Animation.FadeOut:SetToAlpha(0)
-	button.Animation.FadeOut:SetDuration(.6)
-	button.Animation.FadeOut:SetSmoothing("IN_OUT")
+		button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
+		button.Animation.FadeOut:SetFromAlpha(1)
+		button.Animation.FadeOut:SetToAlpha(0)
+		button.Animation.FadeOut:SetDuration(.6)
+		button.Animation.FadeOut:SetSmoothing("IN_OUT")
+	end
+
 end
 
 function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
-	local _, _, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable = UnitAura(unit, index, button.filter)
+	local _, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable = UnitAura(unit, index, button.filter)
 
 	if button then
 		if(button.filter == "HARMFUL") then
@@ -554,7 +567,7 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 end
 
 function TukuiUnitFrames:SetGridGroupRole()
-	local LFDRole = self.LFDRole
+	local LFDRole = self.GroupRoleIndicator
 	local Role = UnitGroupRolesAssigned(self.unit)
 
 	if Role == "TANK" then
@@ -858,6 +871,8 @@ function TukuiUnitFrames:Style(unit)
 		else
 			TukuiUnitFrames.Raid(self)
 		end
+	elseif unit:match("nameplate") then
+		TukuiUnitFrames.Nameplates(self)
 	end
 
 	return self
@@ -988,6 +1003,21 @@ function TukuiUnitFrames:CreateUnits()
 		TukuiUnitFrames.Headers.Raid = Raid
 		Movers:RegisterFrame(Raid)
 	end
+	
+	local NameplateVars = {
+		-- important, strongly recommend to set these to 1
+		nameplateGlobalScale = 1,
+		NamePlateHorizontalScale = 1,
+		NamePlateVerticalScale = 1,
+		-- optional, you may use any values
+		nameplateLargerScale = 1,
+		nameplateMaxScale = 1,
+		nameplateMinScale = 1,
+		nameplateSelectedScale = 1,
+		nameplateSelfScale = 1,
+	}
+
+	oUF:SpawnNamePlates(nil, nil, NameplateVars)
 
 	Movers:RegisterFrame(Player)
 	Movers:RegisterFrame(Target)

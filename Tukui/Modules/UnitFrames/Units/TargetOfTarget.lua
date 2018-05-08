@@ -67,5 +67,5 @@ function TukuiUnitFrames:TargetOfTarget()
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Name = Name
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 end

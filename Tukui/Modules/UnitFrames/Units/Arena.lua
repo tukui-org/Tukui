@@ -182,7 +182,7 @@ function TukuiUnitFrames:Arena()
 	self.Name = Name
 	self.PVPSpecIcon = SpecIcon
 	self.Trinket = Trinket
-	self.RaidIcon = RaidIcon
+	self.RaidTargetIndicator = RaidIcon
 end
 
 function TukuiUnitFrames:CreateArenaPreparationFrames()
