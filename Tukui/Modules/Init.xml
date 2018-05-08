@@ -125,6 +125,7 @@
 	<Script file="UnitFrames\Units\FocusTarget.lua"/>
 	<Script file="UnitFrames\Units\Arena.lua"/>
 	<Script file="UnitFrames\Units\Boss.lua"/>
+	<Script file="UnitFrames\Units\Nameplates.lua"/>
 	<Script file="UnitFrames\Groups\Party.lua"/>
 	<Script file="UnitFrames\Groups\Raid.lua"/>
 
@@ -132,12 +133,10 @@
 	<Script file="Tooltips\Core.lua"/>
 	<Script file="Tooltips\Talent.lua"/>
 
-	<!-- NamePlates -->
-	<Script file="NamePlates\Core.lua"/>
-
 	<!-- Pet Battles -->
 	<Script file="PetBattles\Core.lua"/>
 	<Script file="PetBattles\UnitFrames.lua"/>
 	<Script file="PetBattles\Actions.lua"/>
 	<Script file="PetBattles\Others.lua"/>
+
 </Ui>
