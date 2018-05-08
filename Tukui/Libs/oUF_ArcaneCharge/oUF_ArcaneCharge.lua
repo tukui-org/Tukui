@@ -10,9 +10,9 @@ local Update = function(self, event, unit, powerType)
 	if unit ~= "player" and powerType ~= "ARCANE_CHARGES" then
 		return
 	end
-	
+
 	local bar = self.ArcaneChargeBar
-	local power = UnitPower("player", SPELL_POWER_ARCANE_CHARGES, true)
+	local power = UnitPower("player", Enum.PowerType.ArcaneCharges, true)
 	
 
 	if(bar.PreUpdate) then bar:PreUpdate(power) end
