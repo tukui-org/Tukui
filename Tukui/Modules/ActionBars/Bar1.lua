@@ -92,7 +92,7 @@ function TukuiActionBars:CreateBar1()
 				end
 			end
 		else
-			MainMenuBar_OnEvent(self, event, ...)
+			MainMenuBarMixin(self, event, ...)
 		end
 	end)
 

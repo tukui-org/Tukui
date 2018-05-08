@@ -33,4 +33,11 @@ function TukuiActionBars:CreateBar5()
 	Movers:RegisterFrame(ActionBar5)
 
 	RegisterStateDriver(ActionBar5, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+	
+	-- Sometime it resize right bars, revert when it happen
+	hooksecurefunc(MultiBarLeft, 'SetScale', function(self, scale) 
+			if scale ~= 1 then
+				self:SetScale(1)
+			end 
+	end)
 end

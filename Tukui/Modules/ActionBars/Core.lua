@@ -23,6 +23,9 @@ local Frames = {
 
 function TukuiActionBars:DisableBlizzard()
 	local Hider = Panels.Hider
+	
+	MainMenuBarArtFrame.RightEndCap.GetRight = function() return 0 end
+	function MainMenuBarMixin:ChangeMenuBarSizeAndPosition() return end
 
 	SetCVar("alwaysShowActionBars", 1)
 

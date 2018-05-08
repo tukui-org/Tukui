@@ -8,7 +8,7 @@ function TukuiActionBars:CreateBar4()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local MultiBarRight = MultiBarRight
 	local ActionBar4 = T.Panels.ActionBar4
-
+	
 	MultiBarRight:SetParent(ActionBar4)
 	MultiBarRight:SetScript("OnHide", function() ActionBar4.Backdrop:Hide() end)
 	MultiBarRight:SetScript("OnShow", function() ActionBar4.Backdrop:Show() end)
@@ -31,4 +31,11 @@ function TukuiActionBars:CreateBar4()
 	end
 
 	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
+	
+	-- Sometime it resize right bars, revert when it happen
+	hooksecurefunc(MultiBarRight, 'SetScale', function(self, scale) 
+			if scale ~= 1 then
+				self:SetScale(1)
+			end 
+	end)
 end
