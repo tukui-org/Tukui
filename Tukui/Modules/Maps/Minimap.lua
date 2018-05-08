@@ -21,7 +21,7 @@ function Minimap:DisableMinimapElements()
 		"MinimapBorderTop",
 		"MinimapZoomIn",
 		"MinimapZoomOut",
-		"MiniMapVoiceChatFrame",
+		--"MiniMapVoiceChatFrame",
 		"MinimapNorthTag",
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
@@ -196,7 +196,7 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
 
 	-- Update coordinates
-	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
+	-- MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords) --BROKEN
 
 	Minimap.MinimapZone = MinimapZone
 	Minimap.MinimapCoords = MinimapCoords
