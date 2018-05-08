@@ -31,6 +31,12 @@ function TukuiChat:UpdateEditBoxColor()
 	end
 end
 
+function TukuiChat:MoveAudioButtons()
+	ChatFrameChannelButton:Kill()
+	ChatFrameToggleVoiceDeafenButton:Kill()
+	ChatFrameToggleVoiceMuteButton:Kill()
+end
+
 function TukuiChat:NoMouseAlpha()
 	local Frame = self:GetName()
 	local Tab = _G[Frame .. "Tab"]
@@ -141,9 +147,9 @@ function TukuiChat:StyleFrame(frame)
 	_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 	_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sButtonFrameUpButton", ID)]:Kill()
-	_G[format("ChatFrame%sButtonFrameDownButton", ID)]:Kill()
-	_G[format("ChatFrame%sButtonFrameBottomButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameUpButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameDownButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameBottomButton", ID)]:Kill()
 	_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
 	_G[format("ChatFrame%sButtonFrame", ID)]:Kill()
 
@@ -203,7 +209,7 @@ end
 function TukuiChat:SkinToastFrame()
 	Toast:SetTemplate()
 	Toast:CreateShadow()
-	ToastCloseButton:SkinCloseButton()
+	--ToastCloseButton:SkinCloseButton()
 	Toast:ClearAllPoints()
 	Toast:SetFrameStrata("Medium")
 	Toast:SetFrameLevel(20)
@@ -303,7 +309,7 @@ end
 
 function TukuiChat:Install()
 	-- Create our custom chatframes
-	FCF_ResetChatWindows()
+	--FCF_ResetChatWindows() --BROKEN
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)

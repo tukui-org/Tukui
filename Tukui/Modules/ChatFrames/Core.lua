@@ -12,6 +12,7 @@ function TukuiChat:Enable()
 	self:EnableURL()
 	self:CreateCopyFrame()
 	self:CreateCopyButtons()
+	self:MoveAudioButtons()
 	self:AddHooks()
 
 	for i = 1, 10 do
