@@ -25,14 +25,12 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		RunesBar[i] = CreateFrame("StatusBar", self:GetName().."Rune"..i, RunesBar)
 		RunesBar[i]:Height(8)
 		RunesBar[i]:SetStatusBarTexture(PowerTexture)
-		RunesBar[i]:SetStatusBarColor(unpack(T.Colors.runes["READY"]))
-
-		RunesBar[i].bg = CreateFrame("StatusBar", nil, RunesBar[i])
-		RunesBar[i].bg:SetFrameLevel(RunesBar[i]:GetFrameLevel() - 1)
-		RunesBar[i].bg:SetStatusBarTexture(PowerTexture)
-		RunesBar[i].bg:SetStatusBarColor(unpack(T.Colors.runes["CD"]))
-		RunesBar[i].bg:SetAlpha(0.30)
-		RunesBar[i].bg:SetAllPoints()
+		RunesBar[i]:SetStatusBarColor(self.Power:GetStatusBarColor())
+		
+		RunesBar[i].bg = RunesBar[i]:CreateTexture(nil, "ARTWORK")
+		RunesBar[i].bg:SetAllPoints(RunesBar[i])
+		RunesBar[i].bg:SetTexture(PowerTexture)
+		RunesBar[i].bg:SetAlpha(0.4)
 
 		if i == 1 then
 			RunesBar[i]:Width(40)
@@ -42,6 +40,8 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 			RunesBar[i]:Point("LEFT", RunesBar[i-1], "RIGHT", 1, 0)
 		end
 	end
+	
+	RunesBar.colorSpec = true
 
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
