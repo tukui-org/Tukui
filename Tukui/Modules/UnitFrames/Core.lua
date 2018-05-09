@@ -1033,7 +1033,9 @@ function TukuiUnitFrames:CreateUnits()
 		nameplateSelfScale = 1,
 	}
 
-	oUF:SpawnNamePlates(nil, nil, NameplateVars)
+	if C.NamePlates.Enable then
+		oUF:SpawnNamePlates(nil, nil, NameplateVars)
+	end
 
 	Movers:RegisterFrame(Player)
 	Movers:RegisterFrame(Target)

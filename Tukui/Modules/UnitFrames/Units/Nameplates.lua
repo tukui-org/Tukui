@@ -3,22 +3,21 @@ local T, C, L = select(2, ...):unpack()
 local TukuiUnitFrames = T["UnitFrames"]
 
 function TukuiUnitFrames:Nameplates()
-	
-	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
-	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
-	local Font = T.GetFont(C["UnitFrames"].Font)
+	local HealthTexture = T.GetTexture(C["NamePlates"].Texture)
+	local PowerTexture = T.GetTexture(C["NamePlates"].Texture)
+	local CastTexture = T.GetTexture(C["NamePlates"].Texture)
+	local Font = T.GetFont(C["NamePlates"].Font)
 
 	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
-	self:SetSize(124, 15)
+	self:SetSize(C.NamePlates.Width, C.NamePlates.Height)
 	self:SetPoint("CENTER", 0, 0)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
 	Health:SetPoint("TOPLEFT")
-	Health:SetHeight(10)
+	Health:SetHeight(C.NamePlates.Height - C.NamePlates.CastHeight - 1)
 	Health:SetWidth(self:GetWidth())
 	Health:SetStatusBarTexture(HealthTexture)
 
@@ -36,18 +35,20 @@ function TukuiUnitFrames:Nameplates()
 	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -1, 4)
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
+	Name:SetFont(select(1, Name:GetFont()), 10, select(3, Name:GetFont()))
 	
 	local Level = Health:CreateFontString(nil, "OVERLAY")
 	Level:Point("BOTTOMRIGHT", Health, "TOPRIGHT", 2, 4)
 	Level:SetJustifyH("RIGHT")
 	Level:SetFontObject(Font)
+	Level:SetFont(select(1, Level:GetFont()), 10, select(3, Level:GetFont()))
 	
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
 	self:Tag(Level, "[shortclassification][Tukui:DiffColor][level]")
 	
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
-	Power:Height(4)
+	Power:Height(C.NamePlates.CastHeight)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power:SetStatusBarTexture(PowerTexture)
@@ -61,10 +62,10 @@ function TukuiUnitFrames:Nameplates()
 	Power.Smooth = true
 	
 	local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
-	Debuffs:SetHeight(16)
+	Debuffs:SetHeight(C.NamePlates.Height)
 	Debuffs:SetWidth(self:GetWidth())
 	Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
-	Debuffs.size = 16
+	Debuffs.size = C.NamePlates.Height
 	Debuffs.num = 36
 	Debuffs.numRow = 9
 
@@ -80,7 +81,7 @@ function TukuiUnitFrames:Nameplates()
 	CastBar:SetFrameStrata(self:GetFrameStrata())
 	CastBar:SetStatusBarTexture(CastTexture)
 	CastBar:SetFrameLevel(6)
-	CastBar:Height(4)
+	CastBar:Height(C.NamePlates.CastHeight)
 	CastBar:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	CastBar:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 

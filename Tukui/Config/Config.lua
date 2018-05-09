@@ -93,8 +93,8 @@ C["Misc"] = {
 
 C["NamePlates"] = {
 	["Enable"] = true,
-	["Width"] = 110,
-	["Height"] = 6,
+	["Width"] = 124,
+	["Height"] = 15,
 	["CastHeight"] = 4,
 	["Texture"] = "Tukui",
 	["Font"] = "Tukui Outline",
