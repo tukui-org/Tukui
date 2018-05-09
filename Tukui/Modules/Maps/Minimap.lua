@@ -196,7 +196,7 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
 
 	-- Update coordinates
-	-- MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords) --BROKEN
+	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
 
 	Minimap.MinimapZone = MinimapZone
 	Minimap.MinimapCoords = MinimapCoords
@@ -217,10 +217,10 @@ function Minimap:UpdateCoords(t)
 		return
 	end
 
-	local X, Y = GetPlayerMapPosition("player")
+	local X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
 	local XText, YText
 
-	if not GetPlayerMapPosition("player") then
+	if (not X) and (not Y) then
 		X = 0
 		Y = 0
 	end
