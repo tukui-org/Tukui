@@ -366,6 +366,9 @@ function TukuiActionBars:Enable()
 	self:SetUpExtraActionButton()
 	self:AddHooks()
 	self:LoadVariables()
+	
+	-- Hack to avoid right bars resizing according to user display resolution.
+	MinimapCluster.GetBottom = function() return 999999999 end
 end
 
 T["ActionBars"] = TukuiActionBars
