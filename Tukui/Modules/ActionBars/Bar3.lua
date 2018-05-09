@@ -20,7 +20,7 @@ function TukuiActionBars:CreateBar3()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
-		Button.Hide = function() end -- temp fix, it may cause taint
+		Button.noGrid = false
 
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)
@@ -31,13 +31,6 @@ function TukuiActionBars:CreateBar3()
 		end
 
 		ActionBar3["Button"..i] = Button
-	end
-
-	for i = 7, 12 do
-		local Button = _G["MultiBarBottomRightButton"..i]
-		local Button1 = _G["MultiBarBottomRightButton1"]
-
-		Button:SetFrameLevel(Button1:GetFrameLevel() - 2)
 	end
 
 	Movers:RegisterFrame(ActionBar3)
