@@ -547,7 +547,7 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 
 	if button then
 		if(button.filter == "HARMFUL") then
-			if(not UnitIsFriend("player", unit) and button.owner ~= "player" and button.owner ~= "vehicle") then
+			if(not UnitIsFriend("player", unit) and not button.isPlayer) then
 				button.icon:SetDesaturated(true)
 				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 			else
