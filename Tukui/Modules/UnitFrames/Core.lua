@@ -237,14 +237,10 @@ function TukuiUnitFrames:CheckInterrupt(unit)
 	local Frame = self:GetParent()
 	local Power = Frame.Power
 
-	if (self.interrupt and UnitCanAttack("player", unit)) then
+	if (self.notInterruptible and UnitCanAttack("player", unit)) then
 		self:SetStatusBarColor(1, 0, 0, 0.7)
 	else
-		if (unit:match("nameplate")) then
-			self:SetStatusBarColor(0, 1, 0, 0.8)
-		else
-			self:SetStatusBarColor(Power:GetStatusBarColor())
-		end
+		self:SetStatusBarColor(0, 1, 0, 0.7)
 	end
 end
 
