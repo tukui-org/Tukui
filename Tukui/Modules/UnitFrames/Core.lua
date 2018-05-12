@@ -495,7 +495,7 @@ end
 function TukuiUnitFrames:PostCreateAura(button)
 	if button:GetName():match("NamePlate") then
 		button:CreateShadow()
-		button.cd:SetReverse()
+		button.cd:SetReverse(true)
 		button.icon:SetAllPoints()
 		button.icon:SetTexCoord(unpack(T.IconCoord))
 		button.icon:SetDrawLayer("ARTWORK")
@@ -509,7 +509,7 @@ function TukuiUnitFrames:PostCreateAura(button)
 
 		button.cd.noOCC = true
 		button.cd.noCooldownCount = true
-		button.cd:SetReverse()
+		button.cd:SetReverse(true)
 		button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
 		button.cd:ClearAllPoints()
 		button.cd:SetInside()
