@@ -25,26 +25,19 @@ function TukuiUnitFrames:Nameplates()
 	Health.Background:SetAllPoints()
 	Health.Background:SetColorTexture(.1, .1, .1)	
 	
-	Health.colorHealth = true
+	Health.colorReaction = true
 	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.Smooth = true
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
-	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -1, 4)
+	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
 	Name:SetFont(select(1, Name:GetFont()), 10, select(3, Name:GetFont()))
 	
-	local Level = Health:CreateFontString(nil, "OVERLAY")
-	Level:Point("BOTTOMRIGHT", Health, "TOPRIGHT", 2, 4)
-	Level:SetJustifyH("RIGHT")
-	Level:SetFontObject(Font)
-	Level:SetFont(select(1, Level:GetFont()), 10, select(3, Level:GetFont()))
-	
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong]")
-	self:Tag(Level, "[shortclassification][Tukui:DiffColor][level]")
+	self:Tag(Name, "[shortclassification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
