@@ -6,8 +6,6 @@ function WorldMap:OnUpdate(elapsed)
 	WorldMap.Interval = WorldMap.Interval - elapsed
 
 	if WorldMap.Interval < 0 then
-		local InInstance, _ = IsInInstance()
-
 		local X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
 
 		if (not X) and (not Y) then
@@ -39,7 +37,7 @@ function WorldMap:CreateCoords()
 end
 
 function WorldMap:Enable()
-	WorldMap.Interval = 0.2
+	WorldMap.Interval = 2
 	WorldMap.UpdateEveryXSeconds = WorldMap.Interval
 	WorldMap:CreateCoords()
 	WorldMapFrame:HookScript("OnUpdate", WorldMap.OnUpdate)

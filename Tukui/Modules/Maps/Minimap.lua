@@ -246,7 +246,7 @@ function Minimap:UpdateCoords(t)
 		Minimap.MinimapCoords.Text:SetText(XText .. ", " .. YText)
 	end
 
-	Elapsed = 0.5
+	Elapsed = 2
 end
 
 function Minimap:UpdateZone()
