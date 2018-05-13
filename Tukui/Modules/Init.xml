@@ -10,7 +10,6 @@
 	<Script file="Inventory\Bags.lua"/>
 	<Script file="Inventory\Loot.lua"/>
 	<Script file="Inventory\Merchant.lua"/>
-	<Script file="Inventory\BagFilter.lua"/>
 
 	<!-- Action Bars -->
 	<Script file="ActionBars\Core.lua"/>

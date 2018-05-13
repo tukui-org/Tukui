@@ -5,22 +5,8 @@ local Merchant = CreateFrame("Frame")
 local strmatch = string.match
 local BlizzardMerchantClick = MerchantItemButton_OnModifiedClick
 
-Merchant.MerchantFilter = {
-	[6289]  = true, -- Raw Longjaw Mud Snapper
-	[6291]  = true, -- Raw Brilliant Smallfish
-	[6308]  = true, -- Raw Bristle Whisker Catfish
-	[6309]  = true, -- 17 Pound Catfish
-	[6310]  = true, -- 19 Pound Catfish
-	[41808] = true, -- Bonescale Snapper
-	[42336] = true, -- Bloodstone Band
-	[42337] = true, -- Sun Rock Ring
-	[43244] = true, -- Crystal Citrine Necklace
-	[43571] = true, -- Sewer Carp
-	[43572] = true, -- Magic Eater
-}
-
 function Merchant:OnEvent()
-	if C["Merchant"].AutoSellGrays or C["Merchant"].SellMisc then
+	if C["Merchant"].AutoSellGrays then
 		local Cost = 0
 
 		for Bag = 0, 4 do
@@ -39,12 +25,6 @@ function Merchant:OnEvent()
 						end
 
 						if (C["Merchant"].AutoSellGrays and select(3, GetItemInfo(Link)) == 0 and Price > 0) then
-							UseContainerItem(Bag, Slot)
-							PickupMerchantItem()
-							Cost = Cost + Price
-						end
-
-						if C["Merchant"].SellMisc and self.MerchantFilter[ID] then
 							UseContainerItem(Bag, Slot)
 							PickupMerchantItem()
 							Cost = Cost + Price

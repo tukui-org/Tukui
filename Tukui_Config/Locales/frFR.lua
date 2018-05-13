@@ -177,12 +177,6 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Police de caractère des sacs",
 			["Desc"] = "Définir une police pour les sacs",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Activez le filtre sac",
-			["Desc"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
-			["Default"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
-		},
 	},
 
 	["Chat"] = {
@@ -275,11 +269,6 @@ TukuiConfig["frFR"] = {
 		["AutoSellGrays"] = {
 			["Name"] = "Vendre automatiquement les objets gris",
 			["Desc"] = "Lors de la visite d'un vendeur , vendre automatiquement les objets de qualitée grise",
-		},
-
-		["SellMisc"] = {
-			["Name"] = "Vendre les objets divers.",
-			["Desc"] = "Vend automatiquement les objets inutiles qui ne sont pas de qualité grise",
 		},
 
 		["AutoRepair"] = {

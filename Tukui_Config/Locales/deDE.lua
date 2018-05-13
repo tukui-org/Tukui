@@ -177,12 +177,6 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Taschenschriftart",
 			["Desc"] = "Legt die Schriftart für die Tasche fest",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Schalte Taschen Filter ein",
-			["Desc"] = "Löscht automatisch unbrauchebare Items aus den Taschen wenn gelootet wird",
-			["Default"] = "Löscht automatisch unbrauchebare Items aus den Taschen wenn gelootet wird",
-		},
 	},
 
 	["Chat"] = {
@@ -275,11 +269,6 @@ TukuiConfig["deDE"] = {
 		["AutoSellGrays"] = {
 			["Name"] = "Automatisch Grau verkaufen",
 			["Desc"] = "Wenn ein Händler besucht wird, werden automatisch alle Gegenstände grauer Qualität verkauft",
-		},
-
-		["SellMisc"] = {
-			["Name"] = "Verkaufe Sonstige Gegenstände",
-			["Desc"] = "Verkauft automatisch unnütze Gegenstände nitcht grauer Qualität",
 		},
 
 		["AutoRepair"] = {

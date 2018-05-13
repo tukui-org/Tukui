@@ -170,12 +170,6 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Bag font",
 			["Desc"] = "Set a font for bags",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Enable Bag filter",
-			["Desc"] = "Automatically deletes useless items from your bags when looted",
-			["Default"] = "Automatically deletes useless items from your bags when looted",
-		},
 	},
 
 	["Chat"] = {
@@ -268,11 +262,6 @@ TukuiConfig["enUS"] = {
 		["AutoSellGrays"] = {
 			["Name"] = "Auto Sell Grays",
 			["Desc"] = "When visiting a vendor, automatically sell gray quality items",
-		},
-
-		["SellMisc"] = {
-			["Name"] = "Sell Misc. Items",
-			["Desc"] = "Automatically sells useless items that are not gray quality",
 		},
 
 		["AutoRepair"] = {

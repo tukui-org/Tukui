@@ -191,12 +191,6 @@ TukuiConfig["zhTW"] = {
 			["Name"] = "背包字體",
 			["Desc"] = "設定背包字體的大小",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "拾取過濾",
-			["Desc"] = "拾取物品時自動刪除灰色物品",
-			["Default"] = "拾取物品時自動刪除灰色物品",
-		},
 	},
 
 	["Chat"] = {
@@ -289,11 +283,6 @@ TukuiConfig["zhTW"] = {
 		["AutoSellGrays"] = {
 			["Name"] = "自動賣垃圾",
 			["Desc"] = "自動販賣灰色物品",
-		},
-
-		["SellMisc"] = {
-			["Name"] = "自動賣雜物",
-			["Desc"] = "自動販賣不是灰色品質但沒用的雜物",
 		},
 
 		["AutoRepair"] = {
