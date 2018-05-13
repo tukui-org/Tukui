@@ -16,6 +16,9 @@ L.ChatFrames.LookingForGroup = "寻求组队"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
+L.DataText.LootSpec = "Loot Specialization"
+L.DataText.Garrison = "Garrison"
+L.DataText.Zone = "Zone"
 L.DataText.AvoidanceBreakdown = "免伤统计"
 L.DataText.Level = "等级"
 L.DataText.Boss = "Boss"

@@ -16,6 +16,9 @@ L.ChatFrames.LookingForGroup = "ПоискСпутников"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
+L.DataText.LootSpec = "Loot Specialization"
+L.DataText.Garrison = "Garrison"
+L.DataText.Zone = "Zone"
 L.DataText.AvoidanceBreakdown = "Распределение"
 L.DataText.Level = "ур"
 L.DataText.Boss = "Босс"

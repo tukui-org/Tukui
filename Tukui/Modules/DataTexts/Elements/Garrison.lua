@@ -95,4 +95,4 @@ local Disable = function(self)
 	self:SetScript("OnLeave", nil)
 end
 
-DataText:Register(GARRISON_LOCATION_TOOLTIP, Enable, Disable, Update)
+DataText:Register(L.DataText.Garrison, Enable, Disable, Update)
