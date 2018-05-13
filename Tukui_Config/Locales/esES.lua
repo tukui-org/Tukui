@@ -177,12 +177,6 @@ TukuiConfig["esES"] = {
 			["Name"] = "Bag font",
 			["Desc"] = "Set a font for bags",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Enable Bag filter",
-			["Desc"] = "Automatically deletes useless items from your bags when looted",
-			["Default"] = "Automatically deletes useless items from your bags when looted",
-		},
 	},
 
 	["Chat"] = {

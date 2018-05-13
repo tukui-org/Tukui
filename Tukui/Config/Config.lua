@@ -46,7 +46,6 @@ C["Bags"] = {
 	["ItemsPerRow"] = 11,
 	["PulseNewItem"] = true,
 	["Font"] = "Tukui Outline",
-	["BagFilter"] = false,
 }
 
 C["Chat"] = {

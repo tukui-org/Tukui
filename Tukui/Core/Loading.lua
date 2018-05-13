@@ -66,11 +66,6 @@ function Loading:OnEvent(event, addon)
 			-- Merchant
 			T["Inventory"]["Merchant"]:Enable()
 
-			-- Bag Filter
-			if C["Bags"].BagFilter then
-				T["Inventory"]["BagFilter"]:Enable()
-			end
-
 		-- ACTION BARS
 			if (C.ActionBars.Enable) then
 				T["ActionBars"]:Enable()

@@ -177,12 +177,6 @@ TukuiConfig["deDE"] = {
 			["Name"] = "Taschenschriftart",
 			["Desc"] = "Legt die Schriftart für die Tasche fest",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Schalte Taschen Filter ein",
-			["Desc"] = "Löscht automatisch unbrauchebare Items aus den Taschen wenn gelootet wird",
-			["Default"] = "Löscht automatisch unbrauchebare Items aus den Taschen wenn gelootet wird",
-		},
 	},
 
 	["Chat"] = {

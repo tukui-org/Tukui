@@ -177,12 +177,6 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Police de caractère des sacs",
 			["Desc"] = "Définir une police pour les sacs",
 		},
-
-		["BagFilter"] = {
-			["Name"] = "Activez le filtre sac",
-			["Desc"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
-			["Default"] = "Supprime automatiquement les éléments inutiles de vos sacs quand ramassés",
-		},
 	},
 
 	["Chat"] = {
