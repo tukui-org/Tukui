@@ -276,11 +276,6 @@ TukuiConfig["zhCN"] = {
 			["Desc"] = "自动出售灰色物品",
 		},
 
-		["SellMisc"] = {
-			["Name"] = "自动售卖",
-			["Desc"] = "自动售垃圾",
-		},
-
 		["AutoRepair"] = {
 			["Name"] = "自动修理",
 			["Desc"] = "自动修理装备",

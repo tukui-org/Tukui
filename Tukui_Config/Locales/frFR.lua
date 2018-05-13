@@ -271,11 +271,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Lors de la visite d'un vendeur , vendre automatiquement les objets de qualitée grise",
 		},
 
-		["SellMisc"] = {
-			["Name"] = "Vendre les objets divers.",
-			["Desc"] = "Vend automatiquement les objets inutiles qui ne sont pas de qualité grise",
-		},
-
 		["AutoRepair"] = {
 			["Name"] = "Réparation Automatique",
 			["Desc"] = "Lors de la visite d'un marchand, réparer automatiquement votre équipement",

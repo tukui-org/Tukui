@@ -271,11 +271,6 @@ TukuiConfig["deDE"] = {
 			["Desc"] = "Wenn ein Händler besucht wird, werden automatisch alle Gegenstände grauer Qualität verkauft",
 		},
 
-		["SellMisc"] = {
-			["Name"] = "Verkaufe Sonstige Gegenstände",
-			["Desc"] = "Verkauft automatisch unnütze Gegenstände nitcht grauer Qualität",
-		},
-
 		["AutoRepair"] = {
 			["Name"] = "Automatisch reparieren",
 			["Desc"] = "Wenn ein Schmied besucht wird, wird automatisch deine Ausrüstung repariert",

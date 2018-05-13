@@ -75,7 +75,6 @@ C["DataTexts"] = {
 
 C["Merchant"] = {
 	["AutoSellGrays"] = true,
-	["SellMisc"] = true,
 	["AutoRepair"] = true,
 	["UseGuildRepair"] = false,
 }

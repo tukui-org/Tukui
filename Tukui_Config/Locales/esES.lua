@@ -271,11 +271,6 @@ TukuiConfig["esES"] = {
 			["Desc"] = "When visiting a vendor, automatically sell gray quality items",
 		},
 
-		["SellMisc"] = {
-			["Name"] = "Sell Misc. Items",
-			["Desc"] = "Automatically sells useless items that are not gray quality",
-		},
-
 		["AutoRepair"] = {
 			["Name"] = "Auto Repair",
 			["Desc"] = "When visiting a repair merchant, automatically repair our gear",
