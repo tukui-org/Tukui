@@ -97,6 +97,10 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.PostCastInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostCastNotInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostChannelStart = TukuiUnitFrames.CheckInterrupt
+	
+	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
+	RaidIcon:Size(self:GetHeight())
+	RaidIcon:Point("TOPLEFT", self, "TOPRIGHT", 4, 0)
 
 	self.Castbar = CastBar
 	self.Health = Health
@@ -104,6 +108,7 @@ function TukuiUnitFrames:Nameplates()
 	self.Debuffs = Debuffs
 	self.Name = Name
 	self.Power = Power
+	self.RaidTargetIndicator = RaidIcon
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
 end
