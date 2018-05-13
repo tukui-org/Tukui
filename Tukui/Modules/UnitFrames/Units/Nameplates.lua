@@ -111,4 +111,6 @@ function TukuiUnitFrames:Nameplates()
 	self.RaidTargetIndicator = RaidIcon
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
+	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate)
+	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", TukuiUnitFrames.HighlightPlate)
 end
