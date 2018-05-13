@@ -552,13 +552,13 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 
 	if button then
 		if(button.filter == "HARMFUL") then
-			if (button.isDebuff and button.isPlayer) or (unit == "player") then
+			if(not UnitIsFriend("player", unit) and not button.isPlayer) then
+				button.icon:SetDesaturated(true)
+				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+			else
 				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
-				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)				
-			else
-				button.icon:SetDesaturated(true)
-				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))				
+				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)					
 			end
 		else
 			if button.Animation then
