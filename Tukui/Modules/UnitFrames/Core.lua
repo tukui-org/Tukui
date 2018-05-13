@@ -552,7 +552,7 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 
 	if button then
 		if(button.filter == "HARMFUL") then
-			if (button.isDebuff and button.isPlayer and UnitIsEnemy("player", unit)) then
+			if (button.isDebuff and button.isPlayer) or (unit == "player") then
 				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
 				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)				
