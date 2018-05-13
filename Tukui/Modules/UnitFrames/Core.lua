@@ -561,25 +561,30 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 				button:SetBackdropBorderColor(unpack(C["General"].BorderColor))				
 			end
 		else
-			if (IsStealable or DType == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
-				button.Animation:Play()
-				button.Animation.Playing = true
-			else
-				button.Animation:Stop()
-				button.Animation.Playing = false
+			if button.Animation then
+				if (IsStealable or DType == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
+					button.Animation:Play()
+					button.Animation.Playing = true
+				else
+					button.Animation:Stop()
+					button.Animation.Playing = false
+				end
 			end
 		end
-
-		if Duration and Duration > 0 then
-			button.Remaining:Show()
-		else
-			button.Remaining:Hide()
+		
+		if button.Remaining then
+			if Duration and Duration > 0 then
+				button.Remaining:Show()
+			else
+				button.Remaining:Hide()
+			end
+			
+			button:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
 		end
 
 		button.Duration = Duration
 		button.TimeLeft = ExpirationTime
 		button.First = true
-		button:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
 	end
 end
 

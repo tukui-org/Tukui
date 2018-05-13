@@ -67,6 +67,7 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs["growth-y"] = "DOWN"
 	Debuffs["growth-x"] = "RIGHT"
 	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
+	Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 	
 
