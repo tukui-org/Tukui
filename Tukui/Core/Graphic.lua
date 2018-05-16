@@ -12,7 +12,7 @@ Popups.Popup["CLIENT_RESTART"] = {
 	Answer1 = ACCEPT,
 	Answer2 = CANCEL,
 	Function1 = function(self)
-		ForceQuit()
+		ReloadUI()
 	end,
 	Function2 = function(self)
 		RequireRestart = false
