@@ -193,23 +193,25 @@ function TukuiUnitFrames:Raid()
 		RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
 		RaidDebuffs.icon:SetInside(RaidDebuffs)
 
-		RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs)
-		RaidDebuffs.cd:SetAllPoints(RaidDebuffs)
+		RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs, "CooldownFrameTemplate")
+		RaidDebuffs.cd:SetInside(RaidDebuffs, 1, 1)
+		RaidDebuffs.cd:SetReverse(true)
+		RaidDebuffs.cd.noOCC = true
+		RaidDebuffs.cd.noCooldownCount = true
 		RaidDebuffs.cd:SetHideCountdownNumbers(true)
 
-		RaidDebuffs.ShowDispelableDebuff = true
-		RaidDebuffs.FilterDispelableDebuff = true
-		RaidDebuffs.MatchBySpellName = true
-		RaidDebuffs.ShowBossDebuff = true
-		RaidDebuffs.BossDebuffPriority = 5
-
+		RaidDebuffs.showDispellableDebuff = true
+		RaidDebuffs.onlyMatchSpellID = true
+		--RaidDebuffs.forceShow = true -- TEST
+		
+		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.time:SetFont(C.Medias.Font, 12, "OUTLINE")
+		RaidDebuffs.time:Point("CENTER", RaidDebuffs, 0, 0)
+	
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
-
-		RaidDebuffs.SetDebuffTypeColor = RaidDebuffs.SetBackdropBorderColor
-		RaidDebuffs.Debuffs = TukuiUnitFrames.RaidDebuffsTracking
 
 		self.RaidDebuffs = RaidDebuffs
 	end
