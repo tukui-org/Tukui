@@ -409,7 +409,7 @@ function TukuiUnitFrames:Player()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
-	self.Combat = Combat
+	self.CombatIndicator = Combat
 	self.Status = Status
 	self.LeaderIndicator = Leader
 	self.MasterLooterIndicator = MasterLooter
