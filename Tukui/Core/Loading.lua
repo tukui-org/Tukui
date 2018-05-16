@@ -111,6 +111,7 @@ function Loading:OnEvent(event, addon)
 			T["Miscellaneous"]["Ghost"]:Enable()
 			T["Miscellaneous"]["VehicleIndicator"]:Enable()
 			T["Miscellaneous"]["TalkingHead"]:Enable()
+			T["Miscellaneous"]["DeathRecap"]:Enable()
 
 		-- BUFFS
 			if (C.Auras.Enable) then

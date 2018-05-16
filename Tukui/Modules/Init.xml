@@ -51,6 +51,7 @@
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>
 	<Script file="Miscellaneous\Invite.lua"/>
 	<Script file="Miscellaneous\TalkingHead.lua"/>
+	<Script file="Miscellaneous\DeathRecap.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
