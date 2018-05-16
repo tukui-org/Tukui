@@ -497,7 +497,25 @@ function TukuiUnitFrames:CreateAuraTimer(elapsed)
 	end
 end
 
+function TukuiUnitFrames:CancelPlayerBuff(index)
+	CancelUnitBuff("player", self.index)
+end
+
 function TukuiUnitFrames:PostCreateAura(button)
+	-- Set "self.Buffs.isCancellable" to true to a buffs frame to be able to cancel click
+	local isCancellable = button:GetParent().isCancellable
+	
+	-- Right-click-cancel script
+	if isCancellable then
+		-- Add a button.index to allow CancelUnitAura to work with player
+		local Name = button:GetName()
+		local Index = tonumber(Name:gsub('%D',''))
+
+		button.index = Index
+		button:SetScript("OnMouseUp", TukuiUnitFrames.CancelPlayerBuff)
+	end
+	
+	-- Skin aura button
 	if button:GetName():match("NamePlate") then
 		button:CreateShadow()
 		button.cd:SetReverse(true)
@@ -544,7 +562,6 @@ function TukuiUnitFrames:PostCreateAura(button)
 		button.Animation.FadeOut:SetDuration(.6)
 		button.Animation.FadeOut:SetSmoothing("IN_OUT")
 	end
-
 end
 
 function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
