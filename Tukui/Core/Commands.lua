@@ -61,10 +61,13 @@ T.SlashHandler = function(cmd)
 		else
 			TukuiConfigFrame:Show()
 		end
-	elseif (arg1 == "move" or arg1 == "moveui") then
-		local Movers = T["Movers"]
-
-		Movers:StartOrStopMoving()
+	elseif (arg1 == "gold") and (arg2 == "reset") then
+		local MyRealm = GetRealmName()
+		local MyName = UnitName("player")
+		
+		TukuiData["Gold"] = {}
+		TukuiData["Gold"][GetRealmName()] = {}	
+		TukuiData["Gold"][GetRealmName()][UnitName("player")] = GetMoney()
 	elseif (arg1 == "test" or arg1 == "testui") then
 		local Test = T["TestUI"]
 
