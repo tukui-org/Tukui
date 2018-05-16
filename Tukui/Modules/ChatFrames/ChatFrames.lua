@@ -476,6 +476,10 @@ function TukuiChat:Setup()
 	else
 		FriendsMicroButton:Kill()
 	end
+	
+	VoiceChatPromptActivateChannel:SetTemplate()
+	VoiceChatPromptActivateChannel.AcceptButton:SkinButton()
+	VoiceChatPromptActivateChannel.CloseButton:SkinCloseButton()
 end
 
 function TukuiChat:AddHooks()
