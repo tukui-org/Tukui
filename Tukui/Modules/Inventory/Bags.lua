@@ -353,11 +353,7 @@ function Bags:CreateContainer(storagetype, ...)
 				CloseBankBagFrames()
 				CloseBankFrame()
 
-				if (T.WoWBuild >= 24904) then
-					PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
-				else
-					PlaySound("igBackPackClose")
-				end
+				PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 			end
 		end)
 
@@ -865,11 +861,7 @@ function Bags:CloseAllBags()
 
 	CloseAllBags()
 
-	if (T.WoWBuild >= 24904) then
-		PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
-	else
-		PlaySound("igBackPackClose")
-	end
+	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
 
 function Bags:CloseAllBankBags()
@@ -1035,9 +1027,8 @@ function Bags:Enable()
 	--self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:SetScript("OnEvent", self.OnEvent)
 
-	if T.WoWBuild >= 25860 then
-		function ManageBackpackTokenFrame() end
-	end
+
+	function ManageBackpackTokenFrame() end
 
 	ToggleAllBags()
 	ToggleAllBags()
