@@ -166,16 +166,6 @@ local function OnUpdate(self, elapsed)
 		if (timeLeft > 0) then
 			local text = T.FormatTime(timeLeft)
 			self.time:SetText(text)
-			
-			if (timeLeft <= 10) then
-				self.time:SetTextColor(unpack(C.Cooldowns.ExpireColor))
-			elseif (timeLeft <= 30) then
-				self.time:SetTextColor(unpack(C.Cooldowns.SecondsColor))
-			elseif (timeLeft <= 60) then
-				self.time:SetTextColor(unpack(C.Cooldowns.SecondsColor2))
-			else
-				self.time:SetTextColor(unpack(C.Cooldowns.NormalColor))
-			end
 		else
 			self:SetScript('OnUpdate', nil)
 			self.time:Hide()
