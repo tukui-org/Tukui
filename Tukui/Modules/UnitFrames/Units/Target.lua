@@ -272,7 +272,7 @@ function TukuiUnitFrames:Target()
 		Buffs.num = 36
 		Buffs.numRow = 9
 
-		Buffs:SetFrameStrata(self:GetFrameStrata())
+		Debuffs:SetFrameStrata(self:GetFrameStrata())
 		Debuffs:SetHeight(26)
 		Debuffs:SetWidth(252)
 		Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", -2, 2)
