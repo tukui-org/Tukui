@@ -498,6 +498,10 @@ function TukuiUnitFrames:CreateAuraTimer(elapsed)
 end
 
 function TukuiUnitFrames:CancelPlayerBuff(index)
+	if InCombatLockdown() then
+		return
+	end
+	
 	CancelUnitBuff("player", self.index)
 end
 
