@@ -1047,6 +1047,21 @@ function TukuiUnitFrames:OnEvent(event)
 	end
 end
 
+function TukuiUnitFrames:UpdateRaidDebuffIndicator()
+	local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+
+	if (ORD) then
+		ORD:ResetDebuffData()
+		
+		local _, InstanceType = IsInInstance()
+		if (InstanceType == "party" or InstanceType == "raid") then
+			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.RaidDebuffs.spells)
+		else
+			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.CCDebuffs.spells)
+		end
+	end
+end
+
 function TukuiUnitFrames:Enable()
 	if (not C.UnitFrames.Enable) then
 		return
@@ -1070,6 +1085,20 @@ function TukuiUnitFrames:Enable()
 		self:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
 		self:RegisterEvent("ARENA_OPPONENT_UPDATE")
 		self:SetScript("OnEvent", self.OnEvent)
+	end
+	
+	
+	if (C.UnitFrames.RaidDebuffs) then
+		local RaidDebuffs = CreateFrame("Frame")
+		RaidDebuffs:RegisterEvent("PLAYER_ENTERING_WORLD")
+		RaidDebuffs:SetScript("OnEvent", TukuiUnitFrames.UpdateRaidDebuffIndicator)
+	
+		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+		if (ORD) then
+			ORD.ShowDispellableDebuff = true
+			ORD.FilterDispellableDebuff = true
+			ORD.MatchBySpellName = false
+		end
 	end
 end
 
