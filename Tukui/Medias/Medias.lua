@@ -11,13 +11,12 @@ C["Medias"] = {
 	["ActionBarFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\actionbar_font.ttf]=],
 
 	-- Textures
-	["Normal"] = [[Interface\AddOns\Tukui\Medias\Textures\normTex]],
-	["Glow"] = [[Interface\AddOns\Tukui\Medias\Textures\glowTex]],
-	["Bubble"] = [[Interface\AddOns\Tukui\Medias\Textures\bubbleTex]],
-	["Copy"] = [[Interface\AddOns\Tukui\Medias\Textures\copy]],
-	["Blank"] = [[Interface\AddOns\Tukui\Medias\Textures\blank]],
-	["HoverButton"] = [[Interface\AddOns\Tukui\Medias\Textures\button_hover]],
-	["Logo"] = [[Interface\AddOns\Tukui\Medias\Textures\logo]],
+	["Normal"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Tukui1]],
+	["Glow"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Glow]],
+	["Bubble"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Bubble]],
+	["Copy"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Copy]],
+	["Blank"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Blank]],
+	["Logo"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Logo]],
 
 	-- colors
 	["BorderColor"] = C.General.BorderColor or { .5, .5, .5 },

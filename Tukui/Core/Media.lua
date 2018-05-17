@@ -24,8 +24,32 @@ local PixelFont = CreateFont("TukuiPixelFont")
 PixelFont:SetFont(C["Medias"].PixelFont, 12, "MONOCHROMEOUTLINE")
 
 local TextureTable = {
-	["Blank"] = "Interface\\BUTTONS\\WHITE8X8.tga",
-	["Tukui"] = C.Medias.Normal,
+	["Blank"] = [[Interface\BUTTONS\WHITE8X8]],
+	["Tukui"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Tukui1]],
+	["ElvUI1"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\ElvUI1]],
+	["ElvUI2"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\ElvUI2]],
+	["sRainbow1"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Rainbow1]],
+	["sRainbow2"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Rainbow2]],
+	["sGloss1"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy1]],
+	["sSword"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy2]],
+	["sBeam"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy3]],
+	["sStorm"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy4]],
+	["sCrater"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy5]],
+	["sStrokes"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy6]],
+	["sSponge"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy7]],
+	["sSimple1"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy8]],
+	["sGrudge"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy9]],
+	["sGrass"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy10]],
+	["sExplosion"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy11]],
+	["sWaterPaper"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy12]],
+	["sDarkStrokes"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy13]],
+	["sDrySwirl"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy14]],
+	["sCrosshatch"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy15]],
+	["sDoubleDragon"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy16]],
+	["sSingleDragon"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy17]],
+	["sSplitIce"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy18]],
+	["sWaterDroplets"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy19]],
+	["sPawPrints"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Simpy20]],
 }
 
 local FontTable = {

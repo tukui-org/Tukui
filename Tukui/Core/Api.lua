@@ -522,7 +522,7 @@ local function SkinScrollBar(frame)
 			ScrollUpButton.texture = ScrollUpButton:CreateTexture(nil, "OVERLAY")
 			Point(ScrollUpButton.texture, "TOPLEFT", 2, -2)
 			Point(ScrollUpButton.texture, "BOTTOMRIGHT", -2, 2)
-			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowup.tga]])
+			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowUp]])
 			ScrollUpButton.texture:SetVertexColor(unpack(C.General.BorderColor))
 		end
 
@@ -531,7 +531,7 @@ local function SkinScrollBar(frame)
 
 		if not ScrollDownButton.texture then
 			ScrollDownButton.texture = ScrollDownButton:CreateTexture(nil, "OVERLAY")
-			ScrollDownButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowdown.tga]])
+			ScrollDownButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowDown]])
 			ScrollDownButton.texture:SetVertexColor(unpack(C.General.BorderColor))
 			ScrollDownButton.texture:Point("TOPLEFT", 2, -2)
 			ScrollDownButton.texture:Point("BOTTOMRIGHT", -2, 2)
