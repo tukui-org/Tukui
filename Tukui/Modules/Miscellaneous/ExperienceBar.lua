@@ -24,7 +24,6 @@ function Experience:SetTooltip()
 
 	if BarType == "XP" then
 		local Rested = GetXPExhaustion()
-		print(Rested)
 		local IsRested = GetRestState()
 
 		Current, Max = Experience:GetExperience()
