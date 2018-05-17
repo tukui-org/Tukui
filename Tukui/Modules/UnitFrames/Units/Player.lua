@@ -20,7 +20,7 @@ function TukuiUnitFrames:Player()
 
 	local Panel = CreateFrame("Frame", nil, self)
 	Panel:SetFrameStrata(self:GetFrameStrata())
-	Panel:SetFrameLevel(2)
+	Panel:SetFrameLevel(3)
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)

@@ -23,7 +23,7 @@ function TukuiUnitFrames:Target()
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
-	Panel:SetFrameLevel(2)
+	Panel:SetFrameLevel(3)
 	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
 
 	local Health = CreateFrame("StatusBar", nil, self)
