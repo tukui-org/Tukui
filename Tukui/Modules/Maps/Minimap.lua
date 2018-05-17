@@ -220,14 +220,15 @@ function Minimap:UpdateCoords(t)
 	if (Elapsed > 0) then
 		return
 	end
-
-	local X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
-	local XText, YText
-
-	if (not X) and (not Y) then
-		X = 0
-		Y = 0
+	
+	local UnitMap = C_Map.GetBestMapForUnit("player")
+	local X, Y = 0, 0
+	
+	if UnitMap then
+		X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
 	end
+	
+	local XText, YText
 
 	X = math.floor(100 * X)
 	Y = math.floor(100 * Y)

@@ -6,11 +6,11 @@ function WorldMap:OnUpdate(elapsed)
 	WorldMap.Interval = WorldMap.Interval - elapsed
 
 	if WorldMap.Interval < 0 then
-		local X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
-
-		if (not X) and (not Y) then
-			X = 0
-			Y = 0
+		local UnitMap = C_Map.GetBestMapForUnit("player")
+		local X, Y = 0, 0
+		
+		if UnitMap then
+			X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
 		end
 
 		X = math.floor(100 * X)
