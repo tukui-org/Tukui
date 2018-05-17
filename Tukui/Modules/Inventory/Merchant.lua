@@ -6,7 +6,7 @@ local strmatch = string.match
 local BlizzardMerchantClick = MerchantItemButton_OnModifiedClick
 
 function Merchant:OnEvent()
-	if C["Merchant"].AutoSellGray then
+	if C["Merchant"].AutoSellGrays then
 		local Cost = 0
 
 		for Bag = 0, 4 do
