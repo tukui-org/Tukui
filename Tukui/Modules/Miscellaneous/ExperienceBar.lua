@@ -24,6 +24,7 @@ function Experience:SetTooltip()
 
 	if BarType == "XP" then
 		local Rested = GetXPExhaustion()
+		print(Rested)
 		local IsRested = GetRestState()
 
 		Current, Max = Experience:GetExperience()
@@ -35,7 +36,7 @@ function Experience:SetTooltip()
 		GameTooltip:AddLine("|cff0090FF"..XP..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
 
 		if (IsRested == 1 and Rested) then
-			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. Rested / Max * 100 .. "%)|r")
+			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)|r")
 		end
 	elseif BarType == "ARTIFACT" then
 		Current, Max = Experience:GetArtifact()
