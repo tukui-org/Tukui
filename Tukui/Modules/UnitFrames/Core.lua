@@ -1064,18 +1064,20 @@ function TukuiUnitFrames:CreateUnits()
 	end
 	
 	if C.NamePlates.Enable then
+		local Scale = UIParent:GetEffectiveScale()
+		
 		TukuiUnitFrames.NameplatesVars = {
-			-- important, strongly recommend to set these to 1
-			nameplateGlobalScale = 1,
-			NamePlateHorizontalScale = 1,
-			NamePlateVerticalScale = 1,
+			-- important, strongly recommend to set these to UIParent:GetEffectiveScale()
+			nameplateGlobalScale = Scale,
+			NamePlateHorizontalScale = Scale,
+			NamePlateVerticalScale = Scale,
 			
 			-- optional, you may use any values
-			nameplateLargerScale = 1,
-			nameplateMaxScale = 1,
-			nameplateMinScale = 1,
-			nameplateSelectedScale = 1,
-			nameplateSelfScale = 1,
+			nameplateLargerScale = Scale,
+			nameplateMaxScale = Scale,
+			nameplateMinScale = Scale,
+			nameplateSelectedScale = Scale,
+			nameplateSelfScale = Scale,
 		}
 		
 		oUF:SpawnNamePlates(nil, nil, NameplateVars)
