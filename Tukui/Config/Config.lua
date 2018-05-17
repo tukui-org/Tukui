@@ -7,8 +7,8 @@ local T, C, L = select(2, ...):unpack()
 C["General"] = {
 	["AutoScale"] = true,
 	["UIScale"] = 0.71,
-	["BackdropColor"] = {0.1, 0.1, 0.1},
-	["BorderColor"] = {0.6, 0.6, 0.6},
+	["BackdropColor"] = {0.15, 0.15, 0.15},
+	["BorderColor"] = {0, 0, 0},
 	["HideShadows"] = false,
 }
 

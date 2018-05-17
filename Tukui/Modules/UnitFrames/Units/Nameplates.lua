@@ -91,7 +91,7 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.Button:Point("TOPRIGHT", self, "TOPLEFT", -6, 0)
 
 	CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
-	CastBar.Icon:SetAllPoints()
+	CastBar.Icon:SetInside()
 	CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
 
 	CastBar.PostCastStart = TukuiUnitFrames.CheckInterrupt

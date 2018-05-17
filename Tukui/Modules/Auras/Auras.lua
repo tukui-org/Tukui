@@ -209,6 +209,8 @@ end
 function TukuiAuras:Skin()
 	local Proxy = self.IsProxy
 	local Font = T.GetFont(C["Auras"].Font)
+	
+	self:CreateShadow()
 
 	local Icon = self:CreateTexture(nil, "BORDER")
 	Icon:SetTexCoord(unpack(T.IconCoord))
@@ -223,6 +225,7 @@ function TukuiAuras:Skin()
 		Holder:Size(self:GetWidth(), 7)
 		Holder:SetPoint("TOP", self, "BOTTOM", 0, -1)
 		Holder:SetTemplate("Transparent")
+		Holder:CreateShadow()
 
 		local Bar = CreateFrame("StatusBar", nil, Holder)
 		Bar:SetInside()

@@ -40,15 +40,15 @@ local Classification = {
 }
 
 function Tooltip:CreateAnchor()
-	local DataTextRight = T["Panels"].DataTextRight
+	local DataTextLeft = T["Panels"].DataTextLeft
 	local Movers = T["Movers"]
 
 	local Anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
-	Anchor:Size(200, DataTextRight:GetHeight() - 4)
+	Anchor:Size(200, DataTextLeft:GetHeight() - 4)
 	Anchor:SetFrameStrata("TOOLTIP")
 	Anchor:SetFrameLevel(20)
 	Anchor:SetClampedToScreen(true)
-	Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2)
+	Anchor:SetPoint("BOTTOMLEFT", DataTextLeft, -6, 160)
 	Anchor:SetMovable(true)
 
 	self.Anchor = Anchor
@@ -62,13 +62,13 @@ function Tooltip:SetTooltipDefaultAnchor(parent)
 	if (C.Tooltips.MouseOver) then
 		if (parent ~= UIParent) then
 			self:SetOwner(Anchor)
-			self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 9)
+			self:SetAnchorType("ANCHOR_TOPLEFT", 0, 9)
 		else
 			self:SetOwner(parent, "ANCHOR_CURSOR")
 		end
 	else
 		self:SetOwner(Anchor)
-		self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 9)
+		self:SetAnchorType("ANCHOR_TOPLEFT", 0, 9)
 	end
 end
 
@@ -336,6 +336,7 @@ end
 function Tooltip:Skin()
 	if (not self.IsSkinned) then
 		self:SetTemplate()
+		self:CreateShadow()
 		self.IsSkinned = true
 	end
 
@@ -411,8 +412,9 @@ function Tooltip:Enable()
 	HealthBar:SetStatusBarTexture(T.GetTexture(C["Tooltips"].HealthTexture))
 	HealthBar:CreateBackdrop()
 	HealthBar:ClearAllPoints()
-	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 4)
-	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 4)
+	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 1, 4)
+	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -1, 4)
+	HealthBar.Backdrop:CreateShadow()
 
 	if C["Tooltips"].UnitHealthText then
 		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")

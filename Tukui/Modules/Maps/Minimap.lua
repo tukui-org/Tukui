@@ -72,6 +72,8 @@ function Minimap:StyleMinimap()
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
 	self:SetScript("OnMouseUp", Minimap.OnMouseClick)
+	
+	self.Backdrop:CreateShadow()
 
 	self.Ticket = CreateFrame("Frame", nil, Minimap)
 	self.Ticket:SetTemplate()
@@ -130,16 +132,18 @@ function Minimap:AddMinimapDataTexts()
 	local Panels = T["Panels"]
 
 	local MinimapDataTextOne = CreateFrame("Frame", nil, self)
-	MinimapDataTextOne:Size(self:GetWidth() / 2 + 2, 19)
-	MinimapDataTextOne:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -3)
+	MinimapDataTextOne:Size(self:GetWidth() + 2, 19)
+	MinimapDataTextOne:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -1, 0)
 	MinimapDataTextOne:SetTemplate()
 	MinimapDataTextOne:SetFrameStrata("LOW")
+	MinimapDataTextOne:CreateShadow()
 
 	local MinimapDataTextTwo = CreateFrame("Frame", nil, self)
-	MinimapDataTextTwo:Size(self:GetWidth() / 2 + 1, 19)
-	MinimapDataTextTwo:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -3)
+	MinimapDataTextTwo:Size(self:GetWidth() + 2, 19)
+	MinimapDataTextTwo:SetPoint("TOPLEFT", MinimapDataTextOne, "BOTTOMLEFT", 0, 0)
 	MinimapDataTextTwo:SetTemplate()
 	MinimapDataTextTwo:SetFrameStrata("LOW")
+	MinimapDataTextTwo:CreateShadow()
 
 	Panels.MinimapDataTextOne = MinimapDataTextOne
 	Panels.MinimapDataTextTwo = MinimapDataTextTwo

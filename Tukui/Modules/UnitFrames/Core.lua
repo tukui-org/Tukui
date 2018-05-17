@@ -521,11 +521,14 @@ function TukuiUnitFrames:PostCreateAura(button)
 	
 	-- Skin aura button
 	if button:GetName():match("NamePlate") then
+		button:SetTemplate("Default")
+		button:CreateShadow()
 		button:CreateShadow()
 		button.cd:SetReverse(true)
-		button.icon:SetAllPoints()
+		button.icon:SetInside()
 		button.icon:SetTexCoord(unpack(T.IconCoord))
 		button.icon:SetDrawLayer("ARTWORK")
+		button.count:SetFont(C.Medias.Font, 8, "THICKOUTLINE")
 	else
 		button:SetTemplate("Default")
 		button:CreateShadow()
@@ -938,12 +941,12 @@ function TukuiUnitFrames:CreateUnits()
 	
 	if C.UnitFrames.Enable then
 		local Player = oUF:Spawn("player")
-		Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 8)
+		Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 1, 8)
 		Player:SetParent(Panels.PetBattleHider)
 		Player:Size(250, 57)
 
 		local Target = oUF:Spawn("target")
-		Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 8)
+		Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", -1, 8)
 		Target:SetParent(Panels.PetBattleHider)
 		Target:Size(250, 57)
 

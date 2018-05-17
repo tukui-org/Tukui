@@ -87,11 +87,8 @@ function TukuiChat:StyleFrame(frame)
 	TabText:SetFont(TabFont, TabFontSize, TabFontFlags)
 	TabText.SetFont = Noop
 
-	if C.Chat.Background then
-		-- Tabs Alpha
-		Tab:SetAlpha(1)
-		Tab.SetAlpha = UIFrameFadeRemoveFrame
-	end
+	Tab:SetAlpha(1)
+	Tab.SetAlpha = UIFrameFadeRemoveFrame
 
 	Frame:SetClampRectInsets(0, 0, 0, 0)
 	Frame:SetClampedToScreen(false)
@@ -207,20 +204,15 @@ function TukuiChat:StyleTempFrame()
 end
 
 function TukuiChat:SkinToastFrame()
+	local Backdrop = T["Panels"].LeftChatBG
+	
 	Toast:SetTemplate()
 	Toast:CreateShadow()
 	--ToastCloseButton:SkinCloseButton()
 	Toast:ClearAllPoints()
 	Toast:SetFrameStrata("Medium")
 	Toast:SetFrameLevel(20)
-
-	if C.Chat.Background then
-		local Backdrop = T["Panels"].LeftChatBG
-
-		Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
-	else
-		Toast:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
-	end
+	Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
 end
 
 function TukuiChat:SetDefaultChatFramesPositions()
@@ -309,7 +301,7 @@ end
 
 function TukuiChat:Install()
 	-- Create our custom chatframes
-	--FCF_ResetChatWindows() --BROKEN
+	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
@@ -449,6 +441,10 @@ function TukuiChat:Setup()
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 
 		self:StyleFrame(Frame)
+		
+		if i == 2 then
+			CombatLogQuickButtonFrame_Custom:StripTextures()
+		end
 	end
 
 	local CubeLeft = T["Panels"].CubeLeft
@@ -459,14 +455,6 @@ function TukuiChat:Setup()
 	ChatTypeInfo.OFFICER.sticky = 1
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
-
-	if (not C.Chat.Background) then
-		CubeLeft:SetScript("OnMouseDown", function(self, Button)
-			if (Button == "LeftButton") then
-				ToggleFrame(ChatMenu)
-			end
-		end)
-	end
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
@@ -483,8 +471,5 @@ function TukuiChat:AddHooks()
 	hooksecurefunc("FCF_OpenTemporaryWindow", TukuiChat.StyleTempFrame)
 	hooksecurefunc("FCF_RestorePositionAndDimensions", TukuiChat.SetChatFramePosition)
 	hooksecurefunc("FCF_SavePositionAndDimensions", TukuiChat.SaveChatFramePositionAndDimensions)
-
-	if not C.Chat.Background then
-		hooksecurefunc("FCFTab_UpdateAlpha", TukuiChat.NoMouseAlpha)
-	end
+	hooksecurefunc("FCFTab_UpdateAlpha", TukuiChat.NoMouseAlpha)
 end

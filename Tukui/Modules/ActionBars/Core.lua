@@ -186,6 +186,14 @@ function TukuiActionBars:AddPanels()
 		A5.Backdrop:SetTemplate()
 		A6.Backdrop:SetTemplate()
 		A7.Backdrop:SetTemplate()
+		
+		A1:CreateShadow()
+		A2:CreateShadow()
+		A3:CreateShadow()
+		A4:CreateShadow()
+		A5:CreateShadow()
+		A6:CreateShadow()
+		A7:CreateShadow()
 	end
 
 	InterfaceOptionsFrame:HookScript("OnShow", TukuiActionBars.ChangeBlizzardOptionsDescription)

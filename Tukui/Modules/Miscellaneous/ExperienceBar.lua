@@ -161,20 +161,16 @@ function Experience:Create()
 		RestedBar:SetFrameStrata("BACKGROUND")
 		RestedBar:SetStatusBarColor(unpack(self.RestedColor))
 		RestedBar:SetAllPoints(XPBar)
-		RestedBar:SetOrientation(C.Chat.Background and "HORIZONTAL" or "Vertical")
+		RestedBar:SetOrientation("HORIZONTAL")
 		RestedBar:SetFrameLevel(XPBar:GetFrameLevel() - 1)
 		RestedBar:SetAlpha(.5)
+		RestedBar:SetReverseFill(i == 2 and true)
 
-		if (C.Chat.Background) then
-			XPBar:Size(Panels.LeftChatBG:GetWidth() - 4, 6)
-			XPBar:Point("BOTTOM", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOP", 0, 4)
-			XPBar:SetReverseFill(i == 2 and true)
-			RestedBar:SetReverseFill(i == 2 and true)
-		else
-			XPBar:SetOrientation("Vertical")
-			XPBar:Size(Panels.CubeLeft:GetWidth() - 4, Panels.LeftVerticalLine:GetHeight() - Panels.DataTextLeft:GetHeight() - 4)
-			XPBar:Point("TOP", i == 1 and Panels.LeftVerticalLine or Panels.RightVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)
-		end
+		XPBar:Size(Panels.LeftChatBG:GetWidth() - 2, 6)
+		XPBar:Point("BOTTOM", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOP", 0, 4)
+		XPBar:SetReverseFill(i == 2 and true)
+		
+		XPBar.Backdrop:CreateShadow()
 
 		self["XPBar"..i] = XPBar
 		self["RestedBar"..i] = RestedBar
