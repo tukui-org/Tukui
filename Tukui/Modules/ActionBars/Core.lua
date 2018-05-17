@@ -25,7 +25,8 @@ function TukuiActionBars:DisableBlizzard()
 	local Hider = Panels.Hider
 	
 	MainMenuBarArtFrame.RightEndCap.GetRight = function() return 0 end
-	function MainMenuBarMixin:ChangeMenuBarSizeAndPosition() return end
+	MainMenuBarMixin.ChangeMenuBarSizeAndPosition = function() return end
+	MinimapCluster.GetBottom = function() return 999999999 end
 
 	SetCVar("alwaysShowActionBars", 1)
 
@@ -366,9 +367,6 @@ function TukuiActionBars:Enable()
 	self:SetUpExtraActionButton()
 	self:AddHooks()
 	self:LoadVariables()
-	
-	-- Hack to avoid right bars resizing according to user display resolution.
-	MinimapCluster.GetBottom = function() return 999999999 end
 end
 
 T["ActionBars"] = TukuiActionBars
