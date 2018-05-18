@@ -12,6 +12,7 @@ function DeathRecap:OnEvent(event, addon)
 	DeathRecapFrame:StripTextures()
 	DeathRecapFrame.CloseXButton:SkinCloseButton()
 	DeathRecapFrame:SetTemplate("Transparent")
+	DeathRecapFrame:CreateShadow()
 	DeathRecapFrame.CloseButton:SkinButton()
 
 	for i=1, 5 do
