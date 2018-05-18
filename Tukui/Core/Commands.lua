@@ -33,6 +33,10 @@ T.SlashHandler = function(cmd)
 		local Install = T["Install"]
 
 		Install:Launch()
+	elseif (arg1 == "move" or arg1 == "moveui") then
+		local Movers = T["Movers"]
+
+		Movers:StartOrStopMoving()
 	elseif (arg1 == "" or arg1 == "help") then
 		print(" ")
 		print("|cffff8000".. L.Help.Title .."|r")
