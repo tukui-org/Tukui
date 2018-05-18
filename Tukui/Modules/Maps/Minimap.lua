@@ -158,7 +158,7 @@ function Minimap:AddZoneAndCoords()
 	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 
 	MinimapZone:SetTemplate()
-	MinimapZone:Size(self:GetWidth() + 4, 19)
+	MinimapZone:Size(self:GetWidth() + 2, 19)
 	MinimapZone:Point("TOP", self, 0, 2)
 	MinimapZone:SetFrameStrata(self:GetFrameStrata())
 	MinimapZone:SetAlpha(0)
