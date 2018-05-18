@@ -8,6 +8,7 @@ function TukuiUnitFrames:Nameplates()
 	local CastTexture = T.GetTexture(C["NamePlates"].Texture)
 	local Font = T.GetFont(C["NamePlates"].Font)
 
+	self:SetScale(UIParent:GetEffectiveScale())
 	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
@@ -35,7 +36,7 @@ function TukuiUnitFrames:Nameplates()
 	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
-	Name:SetFont(select(1, Name:GetFont()), 10, select(3, Name:GetFont()))
+	Name:SetFont(select(1, Name:GetFont()), 12, select(3, Name:GetFont()))
 	
 	self:Tag(Name, "[shortclassification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	
