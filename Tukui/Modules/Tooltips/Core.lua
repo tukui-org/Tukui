@@ -40,15 +40,15 @@ local Classification = {
 }
 
 function Tooltip:CreateAnchor()
-	local DataTextLeft = T["Panels"].DataTextLeft
+	local DataTextRight = T["Panels"].DataTextRight
 	local Movers = T["Movers"]
 
 	local Anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
-	Anchor:Size(200, DataTextLeft:GetHeight() - 4)
+	Anchor:Size(200, DataTextRight:GetHeight() - 2)
 	Anchor:SetFrameStrata("TOOLTIP")
 	Anchor:SetFrameLevel(20)
 	Anchor:SetClampedToScreen(true)
-	Anchor:SetPoint("BOTTOMLEFT", DataTextLeft, -6, 160)
+	Anchor:SetPoint("BOTTOMRIGHT", DataTextRIGHT, -28, 176)
 	Anchor:SetMovable(true)
 
 	self.Anchor = Anchor
@@ -62,13 +62,13 @@ function Tooltip:SetTooltipDefaultAnchor(parent)
 	if (C.Tooltips.MouseOver) then
 		if (parent ~= UIParent) then
 			self:SetOwner(Anchor)
-			self:SetAnchorType("ANCHOR_TOPLEFT", 0, 9)
+			self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 9)
 		else
 			self:SetOwner(parent, "ANCHOR_CURSOR")
 		end
 	else
 		self:SetOwner(Anchor)
-		self:SetAnchorType("ANCHOR_TOPLEFT", 0, 9)
+		self:SetAnchorType("ANCHOR_TOPRIGHT", 0, 9)
 	end
 end
 
