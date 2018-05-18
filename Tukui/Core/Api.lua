@@ -102,10 +102,8 @@ local function CreateShadow(f, t)
 	local shadow = CreateFrame("Frame", nil, f)
 	shadow:SetFrameLevel(1)
 	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:Point("TOPLEFT", -3, 3)
-	shadow:Point("BOTTOMLEFT", -3, -3)
-	shadow:Point("TOPRIGHT", 3, 3)
-	shadow:Point("BOTTOMRIGHT", 3, -3)
+	shadow:Point("TOPLEFT", -4, 4)
+	shadow:Point("BOTTOMRIGHT", 4, -4)
 
 	if C["General"].HideShadows then
 		shadow:SetBackdrop( {
@@ -114,8 +112,8 @@ local function CreateShadow(f, t)
 		})
 	else
 		shadow:SetBackdrop( {
-			edgeFile = C.Medias.Glow, edgeSize = T.Scale(3),
-			insets = {left = T.Scale(5), right = T.Scale(5), top = T.Scale(5), bottom = T.Scale(5)},
+			edgeFile = C.Medias.Glow, edgeSize = T.Scale(4),
+			insets = {left = T.Scale(4), right = T.Scale(4), top = T.Scale(4), bottom = T.Scale(4)},
 		})
 	end
 
