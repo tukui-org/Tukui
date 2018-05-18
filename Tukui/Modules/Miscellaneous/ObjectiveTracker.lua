@@ -108,6 +108,7 @@ function ObjectiveTracker:Enable()
 
 	ScenarioStageBlock:StripTextures()
 	ScenarioStageBlock:SetHeight(50)
+	ScenarioStageBlock:SetScript("OnShow", function(self) self:StripTextures() end)
 
 	Minimize:StripTextures()
 	Minimize:FontString("Text", C.Medias.Font, 12, "OUTLINE")
