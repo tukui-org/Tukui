@@ -85,14 +85,10 @@ function ObjectiveTracker:SetDefaultPosition()
 	ObjectiveTrackerFrame:ClearAllPoints()
 	ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
 	ObjectiveTrackerFrame:Height(SetObjectiveFrameHeight)
-
-	-- THIS CAUSE A C STACK SOMETIME< NEED A FIX ASAP
-	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_,_, Parent)
-		if (Parent ~= ObjectiveFrameHolder) then
-			ObjectiveTrackerFrame:ClearAllPoints()
-			ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder, 0, 0)
-		end
-	end)
+	
+	-- Force IsUserPlaced to always be true, which will avoid tracker to move
+	-- https://git.tukui.org/Blazeflack/BlizzardUserInterface/blob/master/Interface/FrameXML/UIParent.lua#L2939
+	ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 	
 	Movers:RegisterFrame(ObjectiveFrameHolder)
 	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
