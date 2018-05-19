@@ -77,6 +77,7 @@ function ObjectiveTracker:SetDefaultPosition()
 	local MaxHeight = ScreenHeight - GapFromTop
 	local SetObjectiveFrameHeight = min(MaxHeight, 480)
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -342, -342
+	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 
 	local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
 	ObjectiveFrameHolder:Size(130, 22)
@@ -92,6 +93,11 @@ function ObjectiveTracker:SetDefaultPosition()
 	
 	Movers:RegisterFrame(ObjectiveFrameHolder)
 	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
+	
+	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
+		ObjectiveFrameHolder:ClearAllPoints()
+		ObjectiveFrameHolder:SetPoint(unpack(Data.Move.TukuiObjectiveTracker))
+	end
 end
 
 function ObjectiveTracker:Skin()
