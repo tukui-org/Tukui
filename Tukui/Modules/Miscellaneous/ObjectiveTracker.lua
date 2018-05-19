@@ -349,7 +349,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ScenarioTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
-	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", ObjectiveTracker.UpdatePopup)
+	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 end
 
 function ObjectiveTracker:Enable()
