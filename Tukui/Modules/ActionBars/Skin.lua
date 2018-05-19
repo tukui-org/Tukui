@@ -128,6 +128,10 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
 	Button:SetTemplate()
+	
+	if C.ActionBars.HideBackdrop then
+		Button:CreateShadow()
+	end
 
 	if (C.ActionBars.HotKey) then
 		HotKey:SetFontObject(Font)
