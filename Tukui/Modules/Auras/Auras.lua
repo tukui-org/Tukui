@@ -222,7 +222,7 @@ function TukuiAuras:Skin()
 
 	if (not Proxy) then
 		local Holder = CreateFrame("Frame", nil, self)
-		Holder:Size(self:GetWidth(), 7)
+		Holder:Size(self:GetWidth(), 4)
 		Holder:SetPoint("TOP", self, "BOTTOM", 0, -1)
 		Holder:SetTemplate("Transparent")
 		Holder:CreateShadow()
