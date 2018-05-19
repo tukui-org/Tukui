@@ -225,7 +225,11 @@ function Minimap:UpdateCoords(t)
 	local X, Y = 0, 0
 	
 	if UnitMap then
-		X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
+		local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
+		
+		if GetPlayerMapPosition then
+			X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
+		end
 	end
 	
 	local XText, YText

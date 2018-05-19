@@ -10,7 +10,11 @@ function WorldMap:OnUpdate(elapsed)
 		local X, Y = 0, 0
 		
 		if UnitMap then
-			X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
+			local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
+
+			if GetPlayerMapPosition then
+				X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
+			end
 		end
 
 		X = math.floor(100 * X)
