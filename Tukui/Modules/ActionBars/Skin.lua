@@ -93,6 +93,10 @@ function TukuiActionBars:SkinButton()
 	Button:SetTemplate()
 	Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
 	Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+	
+	if C.ActionBars.HideBackdrop then
+		Button:CreateShadow()
+	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside()

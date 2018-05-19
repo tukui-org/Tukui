@@ -187,13 +187,22 @@ function TukuiActionBars:AddPanels()
 		A6.Backdrop:SetTemplate()
 		A7.Backdrop:SetTemplate()
 		
-		A1.Backdrop:CreateShadow()
-		A2.Backdrop:CreateShadow()
-		A3.Backdrop:CreateShadow()
-		A4.Backdrop:CreateShadow()
-		A5.Backdrop:CreateShadow()
-		A6.Backdrop:CreateShadow()
-		A7.Backdrop:CreateShadow()
+		A1.Backdrop:SetFrameLevel(A4:GetFrameLevel())
+		
+		if not C.General.HideShadows then
+			A1.Backdrop:CreateShadow()
+			A2.Backdrop:CreateShadow()
+			A3.Backdrop:CreateShadow()
+			A4.Backdrop:CreateShadow()
+			A5.Backdrop:CreateShadow()
+			A6.Backdrop:CreateShadow()
+			A7.Backdrop:CreateShadow()
+
+			A1.Backdrop.Shadow:Hide()
+
+			A4:SetScript("OnShow", function() A1.Backdrop.Shadow:Hide() end)
+			A4:SetScript("OnHide", function() A1.Backdrop.Shadow:Show() end)
+		end
 	end
 
 	InterfaceOptionsFrame:HookScript("OnShow", TukuiActionBars.ChangeBlizzardOptionsDescription)
