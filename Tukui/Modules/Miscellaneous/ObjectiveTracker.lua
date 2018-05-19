@@ -40,12 +40,12 @@ function ObjectiveTracker:OnClick()
 	if (ObjectiveTrackerFrame:IsVisible()) then
 		ObjectiveTrackerFrame:Hide()
 		
-		self.Texture:Point("CENTER", self, 2, 0)
+		self.Texture:SetPoint("CENTER", self, 2, 0)
 		self.Texture:SetTexture(C.Medias.PowerArrowLeft)
 	else
 		ObjectiveTrackerFrame:Show()
 		
-		self.Texture:Point("CENTER", self, -2, 0)
+		self.Texture:SetPoint("CENTER", self, -2, 0)
 		self.Texture:SetTexture(C.Medias.PowerArrowRight)
 	end
 end
@@ -53,7 +53,7 @@ end
 function ObjectiveTracker:CreateToggleButtons()
 	local Button = CreateFrame("Button", nil, UIParent)
 	Button:Size(16, 352)
-	Button:Point("RIGHT", UIParent, -6, 0)
+	Button:SetPoint("RIGHT", UIParent, -6, 0)
 	Button:CreateBackdrop()
 	Button:CreateShadow()
 	Button:SetAlpha(0)
@@ -65,7 +65,7 @@ function ObjectiveTracker:CreateToggleButtons()
 	
 	Button.Texture = Button:CreateTexture(nil, "OVERLAY")
 	Button.Texture:Size(14, 14)
-	Button.Texture:Point("CENTER", Button, 2, 0)
+	Button.Texture:SetPoint("CENTER", Button, 2, 0)
 	Button.Texture:SetVertexColor(unpack(CustomClassColor))
 	Button.Texture:SetTexture(C.Medias.PowerArrowLeft)
 end
@@ -76,21 +76,26 @@ function ObjectiveTracker:SetDefaultPosition()
 	local GapFromTop = ScreenHeight - GetTop
 	local MaxHeight = ScreenHeight - GapFromTop
 	local SetObjectiveFrameHeight = min(MaxHeight, 480)
+	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -342, -342
 
-	local ObjectiveFrameHolder = CreateFrame("Frame", nil, UIParent)
+	local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
 	ObjectiveFrameHolder:Size(130, 22)
-	ObjectiveFrameHolder:Point("TOPRIGHT", UIParent, -342, -342)
+	ObjectiveFrameHolder:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 
 	ObjectiveTrackerFrame:ClearAllPoints()
-	ObjectiveTrackerFrame:Point("TOP", ObjectiveFrameHolder)
+	ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
 	ObjectiveTrackerFrame:Height(SetObjectiveFrameHeight)
 
+	-- THIS CAUSE A C STACK SOMETIME< NEED A FIX ASAP
 	hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_,_, Parent)
 		if (Parent ~= ObjectiveFrameHolder) then
 			ObjectiveTrackerFrame:ClearAllPoints()
-			ObjectiveTrackerFrame:Point("TOP", ObjectiveFrameHolder, 0, 0)
+			ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder, 0, 0)
 		end
 	end)
+	
+	Movers:RegisterFrame(ObjectiveFrameHolder)
+	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
 end
 
 function ObjectiveTracker:Skin()
@@ -121,7 +126,7 @@ function ObjectiveTracker:Skin()
 
 					local HeaderBar = CreateFrame("StatusBar", nil, HeaderPanel)
 					HeaderBar:Size(232, 4)
-					HeaderBar:Point("CENTER", HeaderPanel, -6, -9)
+					HeaderBar:SetPoint("CENTER", HeaderPanel, -6, -9)
 					HeaderBar:SetStatusBarTexture(C.Medias.Blank)
 					HeaderBar:SetStatusBarColor(unpack(CustomClassColor))
 					HeaderBar:SetTemplate()
@@ -139,7 +144,6 @@ function ObjectiveTracker:SkinScenario()
 	local StageBlock = _G["ScenarioStageBlock"]
 	
 	StageBlock.NormalBG:SetTexture("")
-	
 	StageBlock.FinalBG:SetTexture("")
 	StageBlock.Stage:SetFont(C.Medias.Font, 17)
 	StageBlock.GlowTexture:SetTexture("")
@@ -157,7 +161,6 @@ function ObjectiveTracker:UpdateQuestItem(block)
 			QuestItemButton:SetTemplate()
 			QuestItemButton:CreateShadow()
 			QuestItemButton:StyleButton()
-			QuestItemButton:SetShadowOverlay(26, 26)
 			QuestItemButton:SetNormalTexture(nil)
 			
 			if (Icon) then
@@ -166,7 +169,7 @@ function ObjectiveTracker:UpdateQuestItem(block)
 		
 			if (Count) then
 				Count:ClearAllPoints()
-				Count:Point("BOTTOMRIGHT", QuestItemButton, 0, 3)
+				Count:SetPoint("BOTTOMRIGHT", QuestItemButton, 0, 3)
 				Count:SetFont(C.Medias.Font, 12)
 			end
 
@@ -215,7 +218,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 
 			if (Label) then
 				Label:ClearAllPoints()
-				Label:Point("CENTER", Bar, 0, 0)
+				Label:SetPoint("CENTER", Bar, 0, 0)
 				Label:SetFont(C.Medias.Font, 12)
 			end
 	
@@ -224,7 +227,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 				Icon:SetMask("")
 				Icon:SetTexCoord(.08, .92, .08, .92)
 				Icon:ClearAllPoints()
-				Icon:Point("RIGHT", Bar, 26, 0)
+				Icon:SetPoint("RIGHT", Bar, 26, 0)
 		
 				if not (Bar.NewBorder) then
 					Bar.NewBorder = CreateFrame("Frame", nil, Bar)
@@ -249,6 +252,57 @@ function ObjectiveTracker:UpdateProgressBarColors(Min)
 	end
 end
 
+function ObjectiveTracker:UpdatePopup()
+	for i = 1, GetNumAutoQuestPopUps() do
+		local ID, type = GetAutoQuestPopUp(i)
+		local Title = GetQuestLogTitle(GetQuestLogIndexByID(ID))
+		
+		if Title and Title ~= "" then
+			local Block = AUTO_QUEST_POPUP_TRACKER_MODULE:GetBlock(ID)
+			
+			if Block then
+				local Frame = Block.ScrollChild
+				
+				if not Frame.Backdrop then
+					Frame:CreateBackdrop()
+					
+					Frame.Backdrop:SetPoint("TOPLEFT", Frame, 40, -4)
+					Frame.Backdrop:SetPoint("BOTTOMRIGHT", Frame, 0, 4)
+					Frame.Backdrop:SetFrameLevel(0)
+					Frame.Backdrop:SetTemplate("Transparent")
+					Frame.Backdrop:CreateShadow()
+
+					Frame.FlashFrame.IconFlash:Hide()
+				end
+
+				if  type == "COMPLETE" then
+					Frame.QuestIconBg:SetAlpha(0)
+					Frame.QuestIconBadgeBorder:SetAlpha(0)
+					Frame.QuestionMark:ClearAllPoints()
+					Frame.QuestionMark:SetPoint("CENTER", Frame.Backdrop, "LEFT", 10, 0)
+					Frame.QuestionMark:SetParent(Frame.Backdrop)
+					Frame.QuestionMark:SetDrawLayer("OVERLAY", 7)
+					Frame.IconShine:Hide()
+				elseif type == "OFFER" then
+					Frame.QuestIconBg:SetAlpha(0)
+					Frame.QuestIconBadgeBorder:SetAlpha(0)
+					Frame.Exclamation:ClearAllPoints()
+					Frame.Exclamation:SetPoint("CENTER", Frame.Backdrop, "LEFT", 10, 0)
+					Frame.Exclamation:SetParent(Frame.Backdrop)
+					Frame.Exclamation:SetDrawLayer("OVERLAY", 7)
+				end
+
+				Frame.FlashFrame:Hide()
+				Frame.Bg:Hide()
+				
+				for _, v in pairs({Frame.BorderTopLeft, Frame.BorderTopRight, Frame.BorderBotLeft, Frame.BorderBotRight, Frame.BorderLeft, Frame.BorderRight, Frame.BorderTop, Frame.BorderBottom}) do
+					v:Hide()
+				end
+			end
+		end
+	end
+end
+
 local function SkinGroupFindButton(block)
 	local HasGroupFinderButton = block.hasGroupFinderButton
 	local GroupFinderButton = block.groupFinderButton
@@ -269,12 +323,12 @@ local function UpdatePositions(block)
 
 	if (ItemButton) then
 		local PointA, PointB, PointC, PointD, PointE = ItemButton:GetPoint()
-		ItemButton:Point(PointA, PointB, PointC, -6, -1)
+		ItemButton:SetPoint(PointA, PointB, PointC, -6, -1)
 	end
 	
 	if (GroupFinderButton) then
 		local GPointA, GPointB, GPointC, GPointD, GPointE = GroupFinderButton:GetPoint()
-		GroupFinderButton:Point(GPointA, GPointB, GPointC, -262, -4)
+		GroupFinderButton:SetPoint(GPointA, GPointB, GPointC, -262, -4)
 	end
 end
 
@@ -293,9 +347,13 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ScenarioTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
+	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", ObjectiveTracker.UpdatePopup)
 end
 
 function ObjectiveTracker:Enable()
+	OBJECTIVE_TRACKER_COLOR["Header"] = {r = CustomClassColor[1], g = CustomClassColor[2], b = CustomClassColor[3]}
+    OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {r = CustomClassColor[1]*1.2, g = CustomClassColor[2]*1.2, b = CustomClassColor[3]*1.2}
+	
 	self:AddHooks()
 	self:Disable()
 	self:CreateToggleButtons()
