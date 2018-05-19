@@ -28,12 +28,12 @@ end
 
 function ObjectiveTracker:OnEnter()
 	--self:SetFadeInTemplate(1, 1)
-	self.Backdrop.Border:SetBackdropBorderColor(unpack(CustomClassColor))
+	--self.Backdrop.Border:SetBackdropBorderColor(unpack(CustomClassColor))
 end
 
 function ObjectiveTracker:OnLeave()
 	--self:SetFadeOutTemplate(1, 0)
-	self.Backdrop.Border:SetBackdropBorderColor(unpack(C.General.BorderColor))
+	--self.Backdrop.Border:SetBackdropBorderColor(unpack(C.General.BorderColor))
 end
 
 function ObjectiveTracker:OnClick()
