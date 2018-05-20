@@ -90,6 +90,7 @@ local Credits = {
 	"Caith",
 	"Azilroka",
 	"Simpy",
+	"Aftermath",
 }
 
 local GetOrderedIndex = function(t)
