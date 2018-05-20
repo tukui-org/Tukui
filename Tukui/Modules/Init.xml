@@ -52,6 +52,7 @@
 	<Script file="Miscellaneous\Invite.lua"/>
 	<Script file="Miscellaneous\TalkingHead.lua"/>
 	<Script file="Miscellaneous\DeathRecap.lua"/>
+	<Script file="Miscellaneous\AFK.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
