@@ -174,10 +174,20 @@ end
 function TukuiUnitFrames:HighlightPlate()
 	local Shadow = self.Shadow
 	
-	if UnitIsUnit("target", self.unit) then
-		Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
-	else
-		Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+	if Shadow then
+		if UnitIsUnit("target", self.unit) then
+			if not Shadow:IsShown() then
+				Shadow:Show()
+			end
+			
+			Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
+		else
+			if C.General.HideShadows then
+				Shadow:Hide()
+			else
+				Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+			end
+		end
 	end
 end
 

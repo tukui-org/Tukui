@@ -111,6 +111,10 @@ function TukuiUnitFrames:Nameplates()
 	self.Name = Name
 	self.Power = Power
 	self.RaidTargetIndicator = RaidIcon
+	self.Shadow:SetBackdrop( {
+		edgeFile = C.Medias.Glow, edgeSize = T.Scale(4),
+		insets = {left = T.Scale(4), right = T.Scale(4), top = T.Scale(4), bottom = T.Scale(4)},
+	})
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate)
