@@ -12,6 +12,20 @@ T.Scale = function(x) return T.Mult * math.floor(x / T.Mult + .5) end
 
 -- [[ API FUNCTIONS ]] --
 
+local function SetFadeInTemplate(self, FadeTime, Alpha)
+	UIFrameFadeIn(self, FadeTime, self:GetAlpha(), Alpha)
+end
+
+local function SetFadeOutTemplate(self, FadeTime, Alpha)
+	UIFrameFadeOut(self, FadeTime, self:GetAlpha(), Alpha)
+end
+
+local function SetFontTemplate(self, Font, FontSize, ShadowOffsetX, ShadowOffsetY)
+	self:SetFont(Font, T.Scale(FontSize), "THINOUTLINE")
+	self:SetShadowColor(0, 0, 0, 1)
+	self:SetShadowOffset(T.Scale(ShadowOffsetX or 1), -T.Scale(ShadowOffsetY or 1))
+end
+
 local function Size(frame, width, height)
 	frame:SetSize(T.Scale(width), T.Scale(height or width))
 end
@@ -516,6 +530,9 @@ end
 local function AddAPI(object)
 	local mt = getmetatable(object).__index
 
+	if not object.SetFadeInTemplate then mt.SetFadeInTemplate = SetFadeInTemplate end
+	if not object.SetFadeOutTemplate then mt.SetFadeOutTemplate = SetFadeOutTemplate end
+	if not object.SetFontTemplate then mt.SetFontTemplate = SetFontTemplate end
 	if not object.Size then mt.Size = Size end
 	if not object.Point then mt.Point = Point end
 	if not object.SetOutside then mt.SetOutside = SetOutside end
