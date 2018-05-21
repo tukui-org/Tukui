@@ -27,47 +27,40 @@ function ObjectiveTracker:Disable()
 end
 
 function ObjectiveTracker:OnEnter()
-	--self:SetFadeInTemplate(1, 1)
-	--self.Backdrop.Border:SetBackdropBorderColor(unpack(CustomClassColor))
+	self:SetFadeInTemplate(1, 1)
 end
 
 function ObjectiveTracker:OnLeave()
-	--self:SetFadeOutTemplate(1, 0)
-	--self.Backdrop.Border:SetBackdropBorderColor(unpack(C.General.BorderColor))
+	self:SetFadeOutTemplate(1, 0)
 end
 
 function ObjectiveTracker:OnClick()
 	if (ObjectiveTrackerFrame:IsVisible()) then
 		ObjectiveTrackerFrame:Hide()
 		
-		self.Texture:SetPoint("CENTER", self, 2, 0)
-		self.Texture:SetTexture(C.Medias.PowerArrowLeft)
+		self.Toggle:SetText("<")
 	else
 		ObjectiveTrackerFrame:Show()
 		
-		self.Texture:SetPoint("CENTER", self, -2, 0)
-		self.Texture:SetTexture(C.Medias.PowerArrowRight)
+		self.Toggle:SetText(">")
 	end
 end
 
 function ObjectiveTracker:CreateToggleButtons()
 	local Button = CreateFrame("Button", nil, UIParent)
-	Button:Size(16, 352)
-	Button:SetPoint("RIGHT", UIParent, -6, 0)
-	Button:CreateBackdrop()
-	Button:CreateShadow()
+	Button:Size(32)
+	Button:SetPoint("TOPRIGHT", ObjectiveTrackerFrame, -6, 20)
 	Button:SetAlpha(0)
-	
 	Button:RegisterForClicks("AnyUp")
 	Button:SetScript("OnClick", self.OnClick)
 	Button:SetScript("OnEnter", self.OnEnter)
 	Button:SetScript("OnLeave", self.OnLeave)
 	
-	Button.Texture = Button:CreateTexture(nil, "OVERLAY")
-	Button.Texture:Size(14, 14)
-	Button.Texture:SetPoint("CENTER", Button, 2, 0)
-	Button.Texture:SetVertexColor(unpack(CustomClassColor))
-	Button.Texture:SetTexture(C.Medias.PowerArrowLeft)
+	Button.Toggle = Button:CreateFontString(nil, "OVERLAY")
+	Button.Toggle:SetFontTemplate(C.Medias.Font, 32)
+	Button.Toggle:Size(32)
+	Button.Toggle:SetPoint("CENTER")
+	Button.Toggle:SetText(">")
 end
 
 function ObjectiveTracker:SetDefaultPosition()
