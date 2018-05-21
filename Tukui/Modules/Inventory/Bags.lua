@@ -258,10 +258,7 @@ function Bags:CreateReagentContainer()
 
 	UnlockButton:SkinButton()
 
-	--Movers:RegisterFrame(Reagent)
-
 	self.Reagent = Reagent
-	-- Couldn't access these.
 	self.Reagent.SwitchBankButton = SwitchBankButton
 	self.Reagent.SortButton = SortButton
 end
@@ -273,16 +270,10 @@ function Bags:CreateContainer(storagetype, ...)
 	Container:SetPoint(...)
 	Container:SetFrameStrata("MEDIUM")
 	Container:SetFrameLevel(50)
-	--Container:RegisterForDrag("LeftButton","RightButton")
-	--Container:SetScript("OnDragStart", function(self) self:StartMoving() end)
-	--Container:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 	Container:Hide()
 	Container:SetTemplate()
-	--Container:SetClampedToScreen(true)
-	--Container:SetMovable(true)
-	--Container:SetUserPlaced(true)
+	Container:CreateShadow()
 	Container:EnableMouse(true)
-	--Container:RegisterForDrag("LeftButton","RightButton")
 
 	if (storagetype == "Bag") then
 		local Sort = BagItemAutoSortButton
@@ -303,6 +294,7 @@ function Bags:CreateContainer(storagetype, ...)
 		Sort:SetFrameStrata(Container:GetFrameStrata())
 		Sort:StripTextures()
 		Sort:SkinButton()
+		Sort:CreateShadow()
 		Sort.Text = Sort:CreateFontString(nil, "OVERLAY")
 		Sort.Text:SetFont(FontPath, 12)
 		Sort.Text:SetJustifyH("LEFT")
@@ -844,14 +836,6 @@ function Bags:OpenAllBankBags()
 				self:OpenBag(i, 1)
 			end
 		end
-
-		if not self.Bank.MoverAdded then
-			local Movers = T["Movers"]
-
-			--Movers:RegisterFrame(self.Bank)
-
-			self.Bank.MoverAdded = true
-		end
 	end
 end
 
@@ -952,8 +936,6 @@ function Bags:Enable()
 
 	SetSortBagsRightToLeft(false)
 	SetInsertItemsLeftToRight(true)
-	--InterfaceOptionsControlsPanelReverseCleanUpBags:Hide()
-	--InterfaceOptionsControlsPanelReverseNewLoot:Hide()
 
 	Font = T.GetFont(C["Bags"].Font)
 	FontPath = _G[Font]:GetFont()
@@ -1016,18 +998,10 @@ function Bags:Enable()
 
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
-	--self:RegisterEvent("ITEM_LOCK_CHANGED")
-	--self:RegisterEvent("BANKFRAME_OPENED")
-	--self:RegisterEvent("BANKFRAME_CLOSED")
-	--self:RegisterEvent("GUILDBANKFRAME_OPENED")
-	--self:RegisterEvent("GUILDBANKFRAME_CLOSED")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	--self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("BAG_CLOSED")
-	--self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:SetScript("OnEvent", self.OnEvent)
-
 
 	function ManageBackpackTokenFrame() end
 
