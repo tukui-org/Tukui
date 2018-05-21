@@ -166,6 +166,7 @@ function ObjectiveTracker:UpdateQuestItem(block)
 			QuestItemButton:SetNormalTexture(nil)
 			
 			if (Icon) then
+				Icon:SetInside()
 				Icon:SetTexCoord(.08, .92, .08, .92)
 			end
 		
