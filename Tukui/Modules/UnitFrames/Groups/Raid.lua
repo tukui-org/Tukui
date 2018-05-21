@@ -114,6 +114,7 @@ function TukuiUnitFrames:Raid()
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
+	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	if C["Raid"].ShowRessurection then
 		local ResurrectIcon = Health:CreateTexture(nil, "OVERLAY", 3)

@@ -396,7 +396,7 @@ function TukuiUnitFrames:Player()
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", 7)
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
-	RaidIcon:SetTexture("[[Interface\Tukui\Medias\Textures\Others\RaidIcons]]")
+	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat

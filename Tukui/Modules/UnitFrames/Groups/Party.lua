@@ -140,6 +140,7 @@ function TukuiUnitFrames:Party()
 	local RaidIcon = self:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(12, 12)
 	RaidIcon:SetPoint("TOPRIGHT", self, 1, 18)
+	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	local PhaseIcon = Health:CreateTexture(nil, 'OVERLAY')
 	PhaseIcon:SetSize(24, 24)

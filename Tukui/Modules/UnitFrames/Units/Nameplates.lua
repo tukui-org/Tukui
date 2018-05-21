@@ -103,6 +103,7 @@ function TukuiUnitFrames:Nameplates()
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:Size(self:GetHeight())
 	RaidIcon:Point("TOPLEFT", self, "TOPRIGHT", 4, 0)
+	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	self.Castbar = CastBar
 	self.Health = Health
