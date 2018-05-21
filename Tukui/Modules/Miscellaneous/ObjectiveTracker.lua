@@ -328,6 +328,86 @@ local function UpdatePositions(block)
 	end
 end
 
+function ObjectiveTracker:AddDash(block)
+	for i = 1, GetNumQuestWatches() do
+		local questIndex = GetQuestIndexForWatch(i)
+		
+		if questIndex then
+			local id = GetQuestWatchInfo(i)
+			local block = QUEST_TRACKER_MODULE:GetBlock(id)
+			local title, level, _, _, _, _, frequency = GetQuestLogTitle(questIndex)
+			
+			if block.lines then
+				for key, line in pairs(block.lines) do
+					if frequency == LE_QUEST_FREQUENCY_DAILY then
+						local red, green, blue = 1/4, 6/9, 1
+						
+						line.Dash:SetText("— ")
+						line.Dash:SetVertexColor(red, green, blue)
+					elseif frequency == LE_QUEST_FREQUENCY_WEEKLY then
+						local red, green, blue = 0, 252/255, 177/255
+						
+						line.Dash:SetText("— ")
+						line.Dash:SetVertexColor(red, green, blue)
+					else
+						local col = GetQuestDifficultyColor(level)
+						
+						line.Dash:SetText("— ")
+						line.Dash:SetVertexColor(col.r, col.g, col.b)
+					end
+				end
+			end
+		end
+	end
+end
+
+function ObjectiveTracker:SkinPOI(questID, style, index)
+	local Incomplete = self.poiTable["numeric"]
+	local Complete = self.poiTable["completed"]
+	
+	for i = 1, #Incomplete do
+		local Button = ObjectiveTrackerBlocksFrame.poiTable["numeric"][i]
+		
+		if not Button.IsSkinned then
+			Button.NormalTexture:SetTexture("")
+			Button.PushedTexture:SetTexture("")
+			Button.HighlightTexture:SetTexture("")
+			Button.Glow:SetAlpha(0)
+			Button:SetTemplate()
+			Button:CreateShadow()
+			
+			Button.IsSkinned = true
+		end
+	end
+	
+	for i = 1, #Complete do
+		local Button = ObjectiveTrackerBlocksFrame.poiTable["completed"][i]
+		
+		if not Button.IsSkinned then
+			Button.NormalTexture:SetTexture("")
+			Button.PushedTexture:SetTexture("")
+			Button.FullHighlightTexture:SetTexture("")
+			Button.Glow:SetAlpha(0)
+			Button:SetTemplate()
+			Button:CreateShadow()
+			
+			Button.IsSkinned = true
+		end
+	end
+end
+
+function ObjectiveTracker:SelectPOI(color)
+	local Shadow = self.Shadow
+	
+	if Shadow then
+		if self.used then
+			Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
+		else
+			Shadow:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+		end
+	end
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
 	hooksecurefunc("ScenarioBlocksFrame_OnLoad", self.SkinScenario)
@@ -344,11 +424,15 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
+	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.AddDash)
+	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
+	hooksecurefunc("QuestPOI_SetTextColor", self.SelectPOI)
 end
 
 function ObjectiveTracker:Enable()
 	OBJECTIVE_TRACKER_COLOR["Header"] = {r = CustomClassColor[1], g = CustomClassColor[2], b = CustomClassColor[3]}
     OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {r = CustomClassColor[1]*1.2, g = CustomClassColor[2]*1.2, b = CustomClassColor[3]*1.2}
+	QUEST_POI_COLOR_BLACK = 0.5
 	
 	self:AddHooks()
 	self:Disable()
