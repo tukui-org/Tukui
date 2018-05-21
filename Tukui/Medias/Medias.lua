@@ -4,11 +4,11 @@ local Locale = GetLocale()
 
 C["Medias"] = {
 	-- Fonts
-	["Font"] = [=[Interface\Addons\Tukui\Medias\Fonts\normal_font.ttf]=],
+	["Font"] = [[Interface\AddOns\Tukui\Medias\Fonts\normal_font.ttf]],
 	["UnitFrameFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\uf_font.ttf]],
-	["DamageFont"] = [[Interface\Addons\Tukui\Medias\Fonts\normal_font.ttf]],
-	["PixelFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\pixel_font.ttf]=],
-	["ActionBarFont"] = [=[Interface\Addons\Tukui\Medias\Fonts\actionbar_font.ttf]=],
+	["DamageFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\normal_font.ttf]],
+	["PixelFont"] = [=[Interface\AddOns\Tukui\Medias\Fonts\pixel_font.ttf]=],
+	["ActionBarFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\actionbar_font.ttf]],
 
 	-- Textures
 	["Normal"] = [[Interface\AddOns\Tukui\Medias\Textures\Status\Tukui1]],
