@@ -21,6 +21,7 @@ function TukuiActionBars:CreateBar3()
 		Button:Size(Size)
 		Button:ClearAllPoints()
 		Button.noGrid = false
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)

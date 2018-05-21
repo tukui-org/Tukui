@@ -20,6 +20,7 @@ function TukuiActionBars:CreateBar5()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("TOPRIGHT", ActionBar5, -Spacing, -Spacing)

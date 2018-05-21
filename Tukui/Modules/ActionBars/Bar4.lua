@@ -20,6 +20,7 @@ function TukuiActionBars:CreateBar4()
 		Button:Size(Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("flyoutDirection", "UP")
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
