@@ -89,6 +89,7 @@ function Bags:SkinBagButton()
 	})
 	self:SetBackdropBorderColor(unpack(C.General.BorderColor))
 	self:StyleButton()
+	self.IconOverlay:SetAlpha(0)
 
 	self.IsSkinned = true
 end
