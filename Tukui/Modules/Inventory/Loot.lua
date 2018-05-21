@@ -88,6 +88,7 @@ function Loot:SkinLootFrameButtons(i)
 				Button:StripTextures()
 				Button:CreateBackdrop()
 				Button.Backdrop:SetOutside(Icon)
+				Button.IconBorder:SetAlpha(0)
 
 				Icon:SetTexture(IconTexture)
 				Icon:SetTexCoord(unpack(T.IconCoord))
