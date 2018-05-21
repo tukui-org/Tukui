@@ -13,16 +13,12 @@ local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesB
 
 TukuiAuras.Headers = {}
 TukuiAuras.FlashTimer = 30
-TukuiAuras.ProxyIcon = "Interface\\Icons\\misc_arrowdown"
 
 function TukuiAuras:DisableBlizzardAuras()
 	BuffFrame:Kill()
 	TemporaryEnchantFrame:Kill()
-	--ConsolidatedBuffs:ClearAllPoints()
-	--ConsolidatedBuffs:Kill()
 	InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
 	InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)
-	--SetCVar("consolidateBuffs", 0)
 end
 
 function TukuiAuras:StartOrStopFlash(timeleft)
@@ -207,7 +203,6 @@ function TukuiAuras:OnAttributeChanged(attribute, value)
 end
 
 function TukuiAuras:Skin()
-	local Proxy = self.IsProxy
 	local Font = T.GetFont(C["Auras"].Font)
 	
 	self:CreateShadow()
@@ -220,74 +215,62 @@ function TukuiAuras:Skin()
 	Count:SetFontObject(Font)
 	Count:SetPoint("TOP", self, 1, -4)
 
-	if (not Proxy) then
-		local Holder = CreateFrame("Frame", nil, self)
-		Holder:Size(self:GetWidth(), 4)
-		Holder:SetPoint("TOP", self, "BOTTOM", 0, -1)
-		Holder:SetTemplate("Transparent")
-		Holder:CreateShadow()
+	local Holder = CreateFrame("Frame", nil, self)
+	Holder:Size(self:GetWidth(), 4)
+	Holder:SetPoint("TOP", self, "BOTTOM", 0, -1)
+	Holder:SetTemplate("Transparent")
+	Holder:CreateShadow()
 
-		local Bar = CreateFrame("StatusBar", nil, Holder)
-		Bar:SetInside()
-		Bar:SetStatusBarTexture(C.Medias.Blank)
-		Bar:SetStatusBarColor(0, 0.8, 0)
+	local Bar = CreateFrame("StatusBar", nil, Holder)
+	Bar:SetInside()
+	Bar:SetStatusBarTexture(C.Medias.Blank)
+	Bar:SetStatusBarColor(0, 0.8, 0)
 
-		local Duration = self:CreateFontString(nil, "OVERLAY")
-		Duration:SetFontObject(Font)
-		Duration:SetPoint("BOTTOM", 0, -17)
+	local Duration = self:CreateFontString(nil, "OVERLAY")
+	Duration:SetFontObject(Font)
+	Duration:SetPoint("BOTTOM", 0, -17)
 
-		if C.Auras.Flash then
-			local Animation = self:CreateAnimationGroup()
-			Animation:SetLooping("BOUNCE")
+	if C.Auras.Flash then
+		local Animation = self:CreateAnimationGroup()
+		Animation:SetLooping("BOUNCE")
 
-			local FadeOut = Animation:CreateAnimation("Alpha")
-			FadeOut:SetFromAlpha(1)
-			FadeOut:SetToAlpha(0.5)
-			FadeOut:SetDuration(0.6)
-			FadeOut:SetSmoothing("IN_OUT")
+		local FadeOut = Animation:CreateAnimation("Alpha")
+		FadeOut:SetFromAlpha(1)
+		FadeOut:SetToAlpha(0.5)
+		FadeOut:SetDuration(0.6)
+		FadeOut:SetSmoothing("IN_OUT")
 
-			self.Animation = Animation
-		end
-
-		if (C.Auras.Animation and not self.AuraGrowth) then
-			local AuraGrowth = self:CreateAnimationGroup()
-
-			local Grow = AuraGrowth:CreateAnimation("Scale")
-			Grow:SetOrder(1)
-			Grow:SetDuration(0.2)
-			Grow:SetScale(1.25, 1.25)
-
-			local Shrink = AuraGrowth:CreateAnimation("Scale")
-			Shrink:SetOrder(2)
-			Shrink:SetDuration(0.2)
-			Shrink:SetScale(0.75, 0.75)
-
-			self.AuraGrowth = AuraGrowth
-
-			self:SetScript("OnShow", function(self)
-				if self.AuraGrowth then
-					self.AuraGrowth:Play()
-				end
-			end)
-		end
-
-		self.Duration = Duration
-		self.Bar = Bar
-		self.Holder = Holder
-		self.Filter = self:GetParent():GetAttribute("filter")
-
-		self:SetScript("OnAttributeChanged", TukuiAuras.OnAttributeChanged)
-	else
-		local x = self:GetWidth()
-		local y = self:GetHeight()
-
-		local Overlay = self:CreateTexture(nil, "OVERLAY")
-		Overlay:SetTexture(TukuiAuras.ProxyIcon)
-		Overlay:SetInside()
-		Overlay:SetTexCoord(unpack(T.IconCoord))
-
-		self.Overlay = Overlay
+		self.Animation = Animation
 	end
+
+	if (C.Auras.Animation and not self.AuraGrowth) then
+		local AuraGrowth = self:CreateAnimationGroup()
+
+		local Grow = AuraGrowth:CreateAnimation("Scale")
+		Grow:SetOrder(1)
+		Grow:SetDuration(0.2)
+		Grow:SetScale(1.25, 1.25)
+
+		local Shrink = AuraGrowth:CreateAnimation("Scale")
+		Shrink:SetOrder(2)
+		Shrink:SetDuration(0.2)
+		Shrink:SetScale(0.75, 0.75)
+
+		self.AuraGrowth = AuraGrowth
+
+		self:SetScript("OnShow", function(self)
+			if self.AuraGrowth then
+				self.AuraGrowth:Play()
+			end
+		end)
+	end
+
+	self.Duration = Duration
+	self.Bar = Bar
+	self.Holder = Holder
+	self.Filter = self:GetParent():GetAttribute("filter")
+
+	self:SetScript("OnAttributeChanged", TukuiAuras.OnAttributeChanged)
 
 	self.Icon = Icon
 	self.Count = Count
