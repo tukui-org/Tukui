@@ -24,7 +24,7 @@ end
 
 local SetMaxCombo = function(self)
 	local cpb = self.ComboPointsBar
-	local MaxCombo = GetMaxCombo()
+	local MaxCombo = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 
 	if MaxCombo == 8 then
 		for i = 1, 8 do
