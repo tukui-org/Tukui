@@ -69,6 +69,7 @@ function TukuiChat:StyleFrame(frame)
 	local FrameName = frame:GetName()
 	local Tab = _G[FrameName.."Tab"]
 	local TabText = _G[FrameName.."TabText"]
+	local Scroll = _G[FrameName.."ScrollBar"]
 	local EditBox = _G[FrameName.."EditBox"]
 	local GetTabFont = T.GetFont(C["Chat"].TabFont)
 	local TabFont, TabFontSize, TabFontFlags = _G[GetTabFont]:GetFont()
@@ -77,11 +78,16 @@ function TukuiChat:StyleFrame(frame)
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
 	end
-
+	
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function()
 		EditBox:Hide()
 	end)
+	
+	-- Kill Scroll Bars
+	if Scroll then
+		Scroll:Kill()
+	end
 
 	-- Style the tab font
 	TabText:SetFont(TabFont, TabFontSize, TabFontFlags)
