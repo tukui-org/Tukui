@@ -21,6 +21,7 @@ local SCENARIO_TRACKER_MODULE = SCENARIO_TRACKER_MODULE
 -- Locals
 local Class = select(2, UnitClass("player"))
 local CustomClassColor = T.Colors.class[Class]
+local PreviousPOI
 
 function ObjectiveTracker:Disable()
 	ObjectiveTrackerFrameHeaderMenuMinimizeButton:Hide()
@@ -374,6 +375,7 @@ function ObjectiveTracker:SkinPOI(questID, style, index)
 			Button.HighlightTexture:SetTexture("")
 			Button.Glow:SetAlpha(0)
 			Button:SetTemplate()
+			Button:StyleButton()
 			Button:CreateShadow()
 			
 			Button.IsSkinned = true
@@ -389,6 +391,7 @@ function ObjectiveTracker:SkinPOI(questID, style, index)
 			Button.FullHighlightTexture:SetTexture("")
 			Button.Glow:SetAlpha(0)
 			Button:SetTemplate()
+			Button:StyleButton()
 			Button:CreateShadow()
 			
 			Button.IsSkinned = true
@@ -398,13 +401,23 @@ end
 
 function ObjectiveTracker:SelectPOI(color)
 	local Shadow = self.Shadow
-	
+
 	if Shadow then
-		if self.used then
-			Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
-		else
-			Shadow:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
+		local ID = GetQuestLogIndexByID(self.questID)
+		local Level = select(2, GetQuestLogTitle(ID))
+		local Color = GetQuestDifficultyColor(Level) or {r = 1, g = 1, b = 0, a = 1}
+		local Number = self.Number
+		
+		if PreviousPOI then
+			PreviousPOI:SetBackdropColor(unpack(C.Medias.BackdropColor))
+			PreviousPOI.Shadow:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
 		end
+
+		Shadow:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+
+		self:SetBackdropColor(0/255, 152/255, 34/255, 1)
+		
+		PreviousPOI = self
 	end
 end
 
@@ -426,13 +439,12 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(AUTO_QUEST_POPUP_TRACKER_MODULE, "Update", self.UpdatePopup)
 	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.AddDash)
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
-	hooksecurefunc("QuestPOI_SetTextColor", self.SelectPOI)
+	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
 end
 
 function ObjectiveTracker:Enable()
 	OBJECTIVE_TRACKER_COLOR["Header"] = {r = CustomClassColor[1], g = CustomClassColor[2], b = CustomClassColor[3]}
     OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {r = CustomClassColor[1]*1.2, g = CustomClassColor[2]*1.2, b = CustomClassColor[3]*1.2}
-	QUEST_POI_COLOR_BLACK = 0.5
 	
 	self:AddHooks()
 	self:Disable()
