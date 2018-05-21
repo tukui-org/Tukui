@@ -358,10 +358,6 @@ function TukuiUnitFrames:PostUpdateHealth(unit, min, max)
 end
 
 function TukuiUnitFrames:PostUpdatePower(unit, current, min, max)
-	if not min then
-		min = 0
-	end
-	
 	local Parent = self:GetParent()
 	local pType, pToken = UnitPowerType(unit)
 	local Colors = T["Colors"]
@@ -376,25 +372,25 @@ function TukuiUnitFrames:PostUpdatePower(unit, current, min, max)
 	elseif (UnitIsDead(unit) or UnitIsGhost(unit)) then
 		self.Value:SetText()
 	else
-		if (min ~= max) then
+		if (current ~= max) then
 			if (pType == 0) then
 				if (unit == "target" or (unit and strfind(unit, "boss%d"))) then
-					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(min / max * 100), TukuiUnitFrames.ShortValue(max - (max - min)))
+					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %s", floor(current / max * 100), TukuiUnitFrames.ShortValue(max - (max - current)))
 				elseif (unit == "player" and Parent:GetAttribute("normalUnit") == "pet" or unit == "pet") then
-					self.Value:SetFormattedText("%d%%", floor(min / max * 100))
+					self.Value:SetFormattedText("%d%%", floor(current / max * 100))
 				elseif (unit and strfind(unit, "arena%d")) or unit == "focus" or unit == "focustarget" then
-					self.Value:SetText(TukuiUnitFrames.ShortValue(min))
+					self.Value:SetText(TukuiUnitFrames.ShortValue(current))
 				else
-					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(min / max * 100), max - (max - min))
+					self.Value:SetFormattedText("%d%% |cffD7BEA5-|r %d", floor(current / max * 100), max - (max - current))
 				end
 			else
-				self.Value:SetText(max - (max - min))
+				self.Value:SetText(max - (max - current))
 			end
 		else
 			if (unit == "pet" or unit == "target" or unit == "focus" or unit == "focustarget" or (unit and strfind(unit, "arena%d")) or (unit and strfind(unit, "boss%d"))) then
-				self.Value:SetText(TukuiUnitFrames.ShortValue(min))
+				self.Value:SetText(TukuiUnitFrames.ShortValue(current))
 			else
-				self.Value:SetText(min)
+				self.Value:SetText(current)
 			end
 		end
 	end
