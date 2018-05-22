@@ -1024,11 +1024,11 @@ function TukuiUnitFrames:CreateUnits()
 		end
 
 		if C.Party.Enable then
-			local Gap = C.Party.Portrait and 74 or 30
+			local Gap = C.Party.Portrait and 74 or 28
 
 			local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
 			Party:SetParent(Panels.PetBattleHider)
-			Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -(T.ScreenHeight / 4))
+			Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -46)
 
 			TukuiUnitFrames.Headers.Party = Party
 
