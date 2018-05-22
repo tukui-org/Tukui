@@ -369,7 +369,7 @@ function ObjectiveTracker:SkinPOI(questID, style, index)
 	for i = 1, #Incomplete do
 		local Button = ObjectiveTrackerBlocksFrame.poiTable["numeric"][i]
 		
-		if Button and not Button.IsSkinned then
+		if not Button.IsSkinned then
 			Button.NormalTexture:SetTexture("")
 			Button.PushedTexture:SetTexture("")
 			Button.HighlightTexture:SetTexture("")
@@ -385,7 +385,7 @@ function ObjectiveTracker:SkinPOI(questID, style, index)
 	for i = 1, #Complete do
 		local Button = ObjectiveTrackerBlocksFrame.poiTable["completed"][i]
 		
-		if Button and not Button.IsSkinned then
+		if not Button.IsSkinned then
 			Button.NormalTexture:SetTexture("")
 			Button.PushedTexture:SetTexture("")
 			Button.FullHighlightTexture:SetTexture("")
