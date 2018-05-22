@@ -76,6 +76,28 @@ T.SlashHandler = function(cmd)
 		local Test = T["TestUI"]
 
 		Test:EnableOrDisable()
+	elseif (arg1 == "grid") then
+		local Grid = T.Miscellaneous.Grid
+		
+		if Grid.Enable then
+			Grid:Hide()
+			Grid.Enable = false
+		else
+			if arg2 then
+				local Number = tonumber(arg2)
+				
+				if Number then
+					Grid.BoxSize = Number
+				end
+			end
+			if Grid.BoxSize > 256 then
+				Grid.BoxSize = 256
+			end
+			
+			Grid:Show()
+			Grid.Enable = true
+			Grid.BoxSize = (math.ceil((tonumber(arg) or Grid.BoxSize) / 32) * 32)
+		end
 	elseif (arg1 == "profile" or arg1 == "p") then
 		if not TukuiData then return end
 

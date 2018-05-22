@@ -53,6 +53,7 @@
 	<Script file="Miscellaneous\TalkingHead.lua"/>
 	<Script file="Miscellaneous\DeathRecap.lua"/>
 	<Script file="Miscellaneous\AFK.lua"/>
+	<Script file="Miscellaneous\Grid.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
