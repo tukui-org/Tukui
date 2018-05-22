@@ -8,6 +8,9 @@ local ToastCloseButton = BNToastFrameCloseButton
 local TukuiChat = T["Chat"]
 local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
+-- Set default position for Voice Activation Alert
+TukuiChat.VoiceAlertPosition = {"BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 14}
+
 -- Update editbox border color
 function TukuiChat:UpdateEditBoxColor()
 	local EditBox = ChatEdit_ChooseBoxForSend()
@@ -468,8 +471,12 @@ function TukuiChat:Setup()
 	QuickJoinToastButton:Kill()
 	
 	VoiceChatPromptActivateChannel:SetTemplate()
+	VoiceChatPromptActivateChannel:CreateShadow()
 	VoiceChatPromptActivateChannel.AcceptButton:SkinButton()
 	VoiceChatPromptActivateChannel.CloseButton:SkinCloseButton()
+	VoiceChatPromptActivateChannel:SetPoint(unpack(TukuiChat.VoiceAlertPosition))
+	VoiceChatPromptActivateChannel.ClearAllPoints = Noop
+	VoiceChatPromptActivateChannel.SetPoint = Noop
 end
 
 function TukuiChat:AddHooks()
