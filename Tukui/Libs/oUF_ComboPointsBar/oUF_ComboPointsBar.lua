@@ -7,32 +7,17 @@ local Colors = {
 	[1] = {.69, .31, .31, 1},
 	[2] = {.65, .42, .31, 1},
 	[3] = {.65, .63, .35, 1},
-	[4] = {.46, .63, .35, 1},
+	[4] = {.50, .63, .35, 1},
 	[5] = {.33, .63, .33, 1},
-	[6] = {.33, .63, .33, 1},
-	[7] = {.33, .63, .33, 1},
-	[8] = {.33, .63, .33, 1},
+	[6] = {.03, .63, .33, 1},
 }
-
-local function GetMaxCombo()
-	local Class = select(2, UnitClass("player"))
-	local Anticipation = Class == "ROGUE" and select(4, GetTalentInfo(3, 2, 1))
-	local Deeper = Class == "ROGUE" and select(4, GetTalentInfo(3, 1, 1))
-	
-	return (Anticipation and 8) or (Deeper and 6) or 5
-end
 
 local SetMaxCombo = function(self)
 	local cpb = self.ComboPointsBar
 	local MaxCombo = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 
-	if MaxCombo == 8 then
-		for i = 1, 8 do
-			cpb[i]:SetWidth(cpb[i].Anticipation)
-			cpb[i]:Show()
-		end
-	elseif MaxCombo == 6 then
-		for i = 1, 8 do
+	if MaxCombo == 6 then
+		for i = 1, 6 do
 			cpb[i]:SetWidth(cpb[i].Deeper)
 			
 			if i > 6 then
@@ -42,7 +27,7 @@ local SetMaxCombo = function(self)
 			end
 		end
 	else
-		for i = 1, 8 do
+		for i = 1, 6 do
 			cpb[i]:SetWidth(cpb[i].None)
 			
 			if i > 5 then
@@ -61,7 +46,7 @@ local Update = function(self, event, unit, powerType)
 
 	local cpb = self.ComboPointsBar
 	local points
-	local max = GetMaxCombo()
+	local max = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 	local currentmax = cpb.MaxCombo
 
 	if cpb.PreUpdate then
@@ -80,7 +65,7 @@ local Update = function(self, event, unit, powerType)
 
 	if points then
 		-- update combos display
-		for i = 1, 8 do
+		for i = 1, 6 do
 			if i <= points then
 				cpb[i]:SetAlpha(1)
 			else
@@ -118,7 +103,7 @@ local Enable = function(self, unit)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 
-		for i = 1, 8 do
+		for i = 1, 6 do
 			local Point = cpb[i]
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])

@@ -358,23 +358,19 @@ function TukuiUnitFrames:Player()
 		ComboPoints:SetBackdropColor(0, 0, 0)
 		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
-		for i = 1, 8 do
+		for i = 1, 6 do
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 			ComboPoints[i]:Height(8)
 			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
 
 			if i == 1 then
 				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-				ComboPoints[i]:Width(250 / 8 + 2)
 
-				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6
 				ComboPoints[i].None = 250 / 5
 			else
 				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-				ComboPoints[i]:Width(250 / 8 - 1)
 
-				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
 				ComboPoints[i].Deeper = 250 / 6 - 1
 				ComboPoints[i].None = 250 / 5 - 1
 			end
