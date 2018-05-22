@@ -421,6 +421,21 @@ function ObjectiveTracker:SelectPOI(color)
 	end
 end
 
+function ObjectiveTracker:ShowObjectiveTrackerLevel()
+	for i = 1, GetNumQuestWatches() do
+		local questID, title, questLogIndex = GetQuestWatchInfo(i)
+		if ( not questID ) then
+			break
+		end
+		local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
+		if block then
+			local title, level = GetQuestLogTitle(questLogIndex)
+			local text = "["..level.."] "..title
+			block.HeaderText:SetText(text)
+		end
+	end
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
 	hooksecurefunc("ScenarioBlocksFrame_OnLoad", self.SkinScenario)
@@ -440,6 +455,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.AddDash)
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
+	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
 end
 
 function ObjectiveTracker:Enable()
