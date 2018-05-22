@@ -9,11 +9,11 @@ function TukuiUnitFrames:Nameplates()
 	local Font = T.GetFont(C["NamePlates"].Font)
 
 	self:SetScale(UIParent:GetEffectiveScale())
+	self:SetSize(C.NamePlates.Width, C.NamePlates.Height)
+	self:SetPoint("CENTER", 0, 0)
 	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
-	self:SetSize(C.NamePlates.Width, C.NamePlates.Height)
-	self:SetPoint("CENTER", 0, 0)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
