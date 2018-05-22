@@ -33,12 +33,15 @@ function TukuiActionBars:SkinButton()
 
 	TukuiActionBars.UpdateHotKey(Button)
 
-	if Border and Button.isSkinned then
-		Border:SetTexture('')
-		if Border:IsShown() and C.ActionBars.EquipBorder then
-			Button:SetBackdropBorderColor(.08, .70, 0)
+    if (Border) then
+		Border:SetTexture(C.Medias.Blank)
+		Border:SetInside(self, 1, 1)
+		Border:SetVertexColor(.08, .70, 0)
+		
+		if (Border:IsShown()) then
+			Border:SetVertexColor(.08, .70, 0)
 		else
-			Button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+			Border:SetVertexColor(0, 0, 0, 0)
 		end
 	end
 
