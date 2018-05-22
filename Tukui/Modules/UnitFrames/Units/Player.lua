@@ -366,13 +366,13 @@ function TukuiUnitFrames:Player()
 			if i == 1 then
 				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
 
-				ComboPoints[i].Deeper = 250 / 6
-				ComboPoints[i].None = 250 / 5
+				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6
+				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5
 			else
 				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 
-				ComboPoints[i].Deeper = 250 / 6 - 1
-				ComboPoints[i].None = 250 / 5 - 1
+				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6 - 1
+				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5 - 1
 			end
 		end
 

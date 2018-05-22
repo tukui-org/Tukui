@@ -2,6 +2,7 @@ local parent, ns = ...
 local oUF = ns.oUF
 
 local GetComboPoints = GetComboPoints
+local MaxComboPts = 6
 
 local Colors = {
 	[1] = {.69, .31, .31, 1},
@@ -16,19 +17,14 @@ local SetMaxCombo = function(self)
 	local cpb = self.ComboPointsBar
 	local MaxCombo = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 
-	if MaxCombo == 6 then
-		for i = 1, 6 do
-			cpb[i]:SetWidth(cpb[i].Deeper)
-			
-			if i > 6 then
-				cpb[i]:Hide()
-			else
-				cpb[i]:Show()
-			end
+	if MaxCombo == MaxComboPts then
+		for i = 1, MaxComboPts do
+			cpb[i]:SetWidth(cpb[i].BarSizeForMaxComboIs6)
+			cpb[i]:Show()
 		end
 	else
-		for i = 1, 6 do
-			cpb[i]:SetWidth(cpb[i].None)
+		for i = 1, MaxComboPts do
+			cpb[i]:SetWidth(cpb[i].BarSizeForMaxComboIs5)
 			
 			if i > 5 then
 				cpb[i]:Hide()
@@ -65,7 +61,7 @@ local Update = function(self, event, unit, powerType)
 
 	if points then
 		-- update combos display
-		for i = 1, 6 do
+		for i = 1, MaxComboPts do
 			if i <= points then
 				cpb[i]:SetAlpha(1)
 			else
@@ -103,7 +99,7 @@ local Enable = function(self, unit)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 
-		for i = 1, 6 do
+		for i = 1, MaxComboPts do
 			local Point = cpb[i]
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
