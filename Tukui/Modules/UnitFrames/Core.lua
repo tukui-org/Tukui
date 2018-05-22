@@ -253,9 +253,9 @@ function TukuiUnitFrames:CheckInterrupt(unit)
 	local Power = Frame.Power
 
 	if (self.notInterruptible and UnitCanAttack("player", unit)) then
-		self:SetStatusBarColor(1, 0, 0, 0.7)
+		self:SetStatusBarColor(0.87, 0.37, 0.37, 0.7)
 	else
-		self:SetStatusBarColor(0, 1, 0, 0.7)
+		self:SetStatusBarColor(0.29, 0.67, 0.30, 0.7)
 	end
 end
 
