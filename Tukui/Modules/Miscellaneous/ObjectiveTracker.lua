@@ -433,7 +433,7 @@ function ObjectiveTracker:ShowObjectiveTrackerLevel()
 		
 		if block then
 			local title, level = GetQuestLogTitle(questLogIndex)
-			local color = GetQuestDifficultyColor(tonumber(level))
+			local color = GetQuestDifficultyColor(level)
 			local hex = T.RGBToHex(color.r, color.g, color.b) or OBJECTIVE_TRACKER_COLOR["Header"]
 			local text = hex.."["..level.."]|r "..title
 
