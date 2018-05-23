@@ -424,13 +424,19 @@ end
 function ObjectiveTracker:ShowObjectiveTrackerLevel()
 	for i = 1, GetNumQuestWatches() do
 		local questID, title, questLogIndex = GetQuestWatchInfo(i)
+		
 		if ( not questID ) then
 			break
 		end
+		
 		local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
+		
 		if block then
 			local title, level = GetQuestLogTitle(questLogIndex)
-			local text = "["..level.."] "..title
+			local color = GetQuestDifficultyColor(tonumber(level))
+			local hex = T.RGBToHex(color.r, color.g, color.b) or OBJECTIVE_TRACKER_COLOR["Header"]
+			local text = hex.."["..level.."]|r "..title
+
 			block.HeaderText:SetText(text)
 		end
 	end
