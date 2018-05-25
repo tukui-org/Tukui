@@ -19,6 +19,7 @@ function TukuiActionBars:CreateBar4()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
+		Button.noGrid = false
 		Button:SetAttribute("flyoutDirection", "UP")
 		Button:SetAttribute("showgrid", 1)
 

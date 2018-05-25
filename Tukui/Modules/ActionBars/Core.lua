@@ -59,6 +59,8 @@ function TukuiActionBars:DisableBlizzard()
 	MainMenuBar.slideOut.IsPlaying = function()
 		return true
 	end
+	
+	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
 end
 
 function TukuiActionBars:ShowGrid()
