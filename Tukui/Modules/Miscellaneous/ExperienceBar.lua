@@ -51,8 +51,6 @@ function Experience:SetTooltip()
 		end
 	else
 		local Level = UnitHonorLevel("player")
-		local LevelMax = GetMaxPlayerHonorLevel()
-		local Prestige = UnitPrestige("player")
 
 		Current, Max = Experience:GetHonor()
 
@@ -61,8 +59,7 @@ function Experience:SetTooltip()
 			GameTooltip:AddLine(PVP_HONOR_XP_BAR_CANNOT_PRESTIGE_HERE)
 		else
 			GameTooltip:AddLine("|cffee2222"..HONOR..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
-			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. " / " .. LevelMax .. "|r")
-			GameTooltip:AddLine("|cffcccccc"..PVP_PRESTIGE_RANK_UP_TITLE..": " .. Prestige .. "|r")
+			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. "|r")
 		end
 	end
 
@@ -185,7 +182,6 @@ function Experience:Create()
 	self:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	self:RegisterEvent("HONOR_XP_UPDATE")
 	self:RegisterEvent("HONOR_LEVEL_UPDATE")
-	self:RegisterEvent("HONOR_PRESTIGE_UPDATE")
 
 	self:SetScript("OnEvent", self.Update)
 end
