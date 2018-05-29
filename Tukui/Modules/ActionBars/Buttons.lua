@@ -225,6 +225,8 @@ function ActionBars:CreateToggleButtons()
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
 		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
+		
+		Button:CreateShadow()
 
 		if (i == 2) then
 			Button:Size(18, Height)
