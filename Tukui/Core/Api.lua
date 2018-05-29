@@ -122,17 +122,16 @@ local function CreateShadow(f, t)
 	if C["General"].HideShadows then
 		shadow:SetBackdrop( {
 			edgeFile = nil, edgeSize = 0,
-			insets = {left = 0, right = 0, top = 0, bottom = 0},
 		})
 	else
 		shadow:SetBackdrop( {
 			edgeFile = C.Medias.Glow, edgeSize = T.Scale(4),
-			insets = {left = T.Scale(4), right = T.Scale(4), top = T.Scale(4), bottom = T.Scale(4)},
 		})
 	end
 
 	shadow:SetBackdropColor(0, 0, 0, 0)
 	shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+	
 	f.Shadow = shadow
 end
 
