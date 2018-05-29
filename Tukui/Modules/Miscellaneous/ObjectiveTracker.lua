@@ -70,7 +70,7 @@ function ObjectiveTracker:SetDefaultPosition()
 	local GapFromTop = ScreenHeight - GetTop
 	local MaxHeight = ScreenHeight - GapFromTop
 	local SetObjectiveFrameHeight = min(MaxHeight, 480)
-	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -206, -242
+	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -204, -242
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 
 	local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)

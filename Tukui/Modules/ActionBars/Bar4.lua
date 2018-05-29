@@ -33,11 +33,4 @@ function TukuiActionBars:CreateBar4()
 	end
 
 	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui][petbattle][overridebar] hide; show")
-	
-	-- Sometime it resize right bars, revert when it happen
-	--hooksecurefunc(MultiBarRight, 'SetScale', function(self, scale) 
-			--if scale ~= 1 then
-				--self:SetScale(1)
-			--end 
-	--end)
 end
