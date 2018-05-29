@@ -104,6 +104,23 @@ function TukuiActionBars:ChangeBlizzardOptionsDescription()
 	InterfaceOptionsActionBarsPanelRightTwo.Text:SetText(SHOW_MULTIBAR3_TEXT)
 end
 
+function TukuiActionBars:MovePetBar()
+	local PetBar = TukuiPetActionBar
+	local RightBar = TukuiActionBar5
+	local Data = TukuiData[GetRealmName()][UnitName("Player")].Move.TukuiActionBar5
+	
+	-- Don't run if player moved bar 5
+	if Data then
+		return
+	end
+	
+	if RightBar:IsShown() then
+		PetBar:SetPoint("RIGHT", RightBar, "LEFT", -6, 0)
+	else
+		PetBar:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
+	end
+end
+
 function TukuiActionBars:AddPanels()
 	local Size = C.ActionBars.NormalButtonSize
 	local PetSize = C.ActionBars.PetButtonSize
@@ -154,7 +171,7 @@ function TukuiActionBars:AddPanels()
 
 	-- Bar #5
 	local A5 = CreateFrame("Frame", "TukuiActionBar5", UIParent, "SecureHandlerStateTemplate")
-	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, -14)
+	A5:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
 	A5:SetHeight((Size * 12) + (Spacing * 13))
 	A5:SetWidth((Size * 1) + (Spacing * 2))
 	A5:SetFrameStrata("LOW")
@@ -171,6 +188,10 @@ function TukuiActionBars:AddPanels()
 	A6:SetFrameLevel(10)
 	A6.Backdrop = CreateFrame("Frame", nil, A6)
 	A6.Backdrop:SetAllPoints()
+	
+	-- Move Pet Bar if Bar 5 hidden
+	A5:SetScript("OnShow", self.MovePetBar)
+	A5:SetScript("OnHide", self.MovePetBar)
 
 	-- Stance Bar
 	local A7 = CreateFrame("Frame", "TukuiStanceBar", UIParent, "SecureHandlerStateTemplate")
