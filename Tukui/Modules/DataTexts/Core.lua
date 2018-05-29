@@ -7,8 +7,7 @@ local TukuiDT = CreateFrame("Frame")
 
 local DataTextLeft
 local DataTextRight
-local MinimapDataTextOne
-local MinimapDataTextTwo
+local MinimapDataText
 
 TukuiDT.DefaultNumAnchors = 6
 TukuiDT.NumAnchors = TukuiDT.DefaultNumAnchors
@@ -56,10 +55,8 @@ local SetData = function(self, object)
 		self.Data:SetParent(Panels.DataTextLeft)
 	elseif (Panels.DataTextRight and self.Data.Position >= 4 and self.Data.Position <= 6) then
 		self.Data:SetParent(Panels.DataTextRight)
-	elseif (Panels.MinimapDataTextOne and self.Data.Position == 7) then
-		self.Data:SetParent(Panels.MinimapDataTextOne)
-	elseif (Panels.MinimapDataTextTwo and self.Data.Position == 8) then
-		self.Data:SetParent(Panels.MinimapDataTextTwo)
+	elseif (Panels.MinimapDataText and self.Data.Position == 7) then
+		self.Data:SetParent(Panels.MinimapDataText)
 	end
 end
 
@@ -67,11 +64,10 @@ function TukuiDT:CreateAnchors()
 	local Panels = T["Panels"]
 	DataTextLeft = Panels.DataTextLeft
 	DataTextRight = Panels.DataTextRight
-	MinimapDataTextOne = Panels.MinimapDataTextOne
-	MinimapDataTextTwo = Panels.MinimapDataTextTwo
+	MinimapDataText = Panels.MinimapDataText
 
-	if (MinimapDataTextOne and MinimapDataTextTwo) then
-		self.NumAnchors = self.NumAnchors + 2
+	if (MinimapDataText) then
+		self.NumAnchors = self.NumAnchors + 1
 	end
 
 	for i = 1, self.NumAnchors do
@@ -95,11 +91,8 @@ function TukuiDT:CreateAnchors()
 		elseif (i == 4) then
 			Frame:Point("LEFT", DataTextRight, 1, 0)
 		elseif (i == 7) then
-			Frame:Point("CENTER", MinimapDataTextOne, 0, 0)
-			Frame:Size(MinimapDataTextOne:GetWidth() - 2, MinimapDataTextOne:GetHeight() - 2)
-		elseif (i == 8) then
-			Frame:Point("CENTER", MinimapDataTextTwo, 0, 0)
-			Frame:Size(MinimapDataTextTwo:GetWidth() - 2, MinimapDataTextTwo:GetHeight() - 2)
+			Frame:Point("CENTER", MinimapDataText, 0, 0)
+			Frame:Size(MinimapDataText:GetWidth() - 2, MinimapDataText:GetHeight() - 2)
 		else
 			Frame:Point("LEFT", self.Anchors[i-1], "RIGHT", 1, 0)
 		end
@@ -119,15 +112,10 @@ local GetTooltipAnchor = function(self)
 	elseif (Position >=4 and Position <= 6) then
 		Anchor = "ANCHOR_TOPRIGHT"
 		From = DataTextRight
-	elseif (Position == 7 and MinimapDataTextOne) or (Position == 8 and MinimapDataTextTwo) then
+	elseif (Position == 7 and MinimapDataText) then
 		Anchor = "ANCHOR_BOTTOMLEFT"
 		Y = T.Scale(-5)
-
-		if (Position == 7) then
-			From = MinimapDataTextOne
-		elseif (Position == 8) then
-			From = MinimapDataTextTwo
-		end
+		From = MinimapDataText
 	end
 
 	return From, Anchor, X, Y
@@ -158,7 +146,6 @@ function TukuiDT:Register(name, enable, disable, update)
 	Data:SetFrameStrata("MEDIUM")
 
 	Data.Text = Data:CreateFontString(nil, "OVERLAY")
-	--Data.Text:SetFont(self.Font, self.Size, self.Flags)
 	Data.Text:SetFontObject(T.GetFont(C["DataTexts"].Font))
 
 	Data.Enabled = false
@@ -217,8 +204,7 @@ function TukuiDT:AddDefaults()
 	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.FPSAndMS] = {true, 4}
 	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.Memory] = {true, 5}
 	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.Gold] = {true, 6}
-	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.Power] = {true, 7}
-	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.Time] = {true, 8}
+	TukuiData[GetRealmName()][UnitName("player")].Texts[L.DataText.Time] = {true, 7}
 end
 
 function TukuiDT:Reset()

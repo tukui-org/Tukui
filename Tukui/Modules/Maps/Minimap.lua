@@ -130,23 +130,20 @@ end
 
 function Minimap:AddMinimapDataTexts()
 	local Panels = T["Panels"]
+	local Backdrop = self.Backdrop
 
-	local MinimapDataTextOne = CreateFrame("Frame", nil, self)
-	MinimapDataTextOne:Size(self:GetWidth() + 2, 19)
-	MinimapDataTextOne:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -1, 0)
-	MinimapDataTextOne:SetTemplate()
-	MinimapDataTextOne:SetFrameStrata("LOW")
-	MinimapDataTextOne:CreateShadow()
+	local MinimapDataText = CreateFrame("Frame", nil, self)
+	MinimapDataText:Size(self:GetWidth() + 2, 19)
+	MinimapDataText:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -1, 0)
+	MinimapDataText:SetTemplate()
+	MinimapDataText:SetFrameStrata("LOW")
 
-	local MinimapDataTextTwo = CreateFrame("Frame", nil, self)
-	MinimapDataTextTwo:Size(self:GetWidth() + 2, 19)
-	MinimapDataTextTwo:SetPoint("TOPLEFT", MinimapDataTextOne, "BOTTOMLEFT", 0, 0)
-	MinimapDataTextTwo:SetTemplate()
-	MinimapDataTextTwo:SetFrameStrata("LOW")
-	MinimapDataTextTwo:CreateShadow()
+	-- Resize Minimap Backdrop
+	Backdrop:ClearAllPoints()
+	Backdrop:Point("TOPLEFT", self, "TOPLEFT", -1, 1)
+	Backdrop:Point("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -19)
 
-	Panels.MinimapDataTextOne = MinimapDataTextOne
-	Panels.MinimapDataTextTwo = MinimapDataTextTwo
+	Panels.MinimapDataText = MinimapDataText
 end
 
 function GetMinimapShape()
