@@ -48,7 +48,7 @@ function Tooltip:CreateAnchor()
 	Anchor:SetFrameStrata("TOOLTIP")
 	Anchor:SetFrameLevel(20)
 	Anchor:SetClampedToScreen(true)
-	Anchor:SetPoint("BOTTOMRIGHT", DataTextRIGHT, -28, 176)
+	Anchor:SetPoint("BOTTOMRIGHT", DataTextRIGHT, -27, 176)
 	Anchor:SetMovable(true)
 
 	self.Anchor = Anchor

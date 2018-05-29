@@ -54,7 +54,6 @@ C["Chat"] = {
 	["LinkColor"] = {0.08, 1, 0.36},
 	["LinkBrackets"] = true,
 	["LootFrame"] = true,
-	["Background"] = false,
 	["ScrollByX"] = 3,
 	["TabFont"] = "Tukui",
 	["ChatFont"] = "Tukui",

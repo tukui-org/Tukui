@@ -104,14 +104,16 @@ local GetTooltipAnchor = function(self)
 	local From
 	local Anchor = "ANCHOR_TOP"
 	local X = 0
-	local Y = T.Scale(5)
+	local Y = T.Scale(16)
 
 	if (Position >= 1 and Position <= 3) then
+		X = -1
 		Anchor = "ANCHOR_TOPLEFT"
-		From = DataTextLeft
+		From = T.Panels.LeftChatBG
 	elseif (Position >=4 and Position <= 6) then
+		X = 1
 		Anchor = "ANCHOR_TOPRIGHT"
-		From = DataTextRight
+		From = T.Panels.RightChatBG
 	elseif (Position == 7 and MinimapDataText) then
 		Anchor = "ANCHOR_BOTTOMLEFT"
 		Y = T.Scale(-5)

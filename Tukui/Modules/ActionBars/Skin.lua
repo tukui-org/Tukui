@@ -102,9 +102,7 @@ function TukuiActionBars:SkinButton()
 	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
-	Icon:SetInside()
 	Icon:SetDrawLayer('BACKGROUND', 7)
-
 
 	if (Normal) then
 		Normal:ClearAllPoints()
@@ -146,7 +144,6 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
-	Icon:SetInside()
 	Icon:SetDrawLayer('BACKGROUND', 7)
 
 	if (Pet) then

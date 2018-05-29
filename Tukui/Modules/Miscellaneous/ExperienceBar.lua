@@ -17,9 +17,9 @@ function Experience:SetTooltip()
 	local Current, Max
 
 	if (self == Experience.XPBar1) then
-		GameTooltip:SetOwner(Panels.DataTextLeft, "ANCHOR_TOPLEFT", 0, 5)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -1, 5)
 	else
-		GameTooltip:SetOwner(Panels.DataTextRight, "ANCHOR_TOPRIGHT", 0, 5)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 1, 5)
 	end
 
 	if BarType == "XP" then
