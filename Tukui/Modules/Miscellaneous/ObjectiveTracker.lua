@@ -121,7 +121,7 @@ function ObjectiveTracker:Skin()
 					HeaderPanel:SetOutside(Header, 1, 1)
 
 					local HeaderBar = CreateFrame("StatusBar", nil, HeaderPanel)
-					HeaderBar:Size(232, 4)
+					HeaderBar:Size(232, 2)
 					HeaderBar:SetPoint("CENTER", HeaderPanel, -6, -9)
 					HeaderBar:SetStatusBarTexture(C.Medias.Blank)
 					HeaderBar:SetStatusBarColor(unpack(CustomClassColor))
