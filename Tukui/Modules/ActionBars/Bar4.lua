@@ -25,6 +25,9 @@ function TukuiActionBars:CreateBar4()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
+			
+			ActionBar4:SetWidth((Button:GetWidth() * 12) + (Spacing * 13))
+			ActionBar4:SetHeight((Button:GetWidth() * 2) + (Spacing * 3))
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end

@@ -31,6 +31,9 @@ function TukuiActionBars:CreatePetBar()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Spacing, -Spacing)
+			
+			Bar:SetWidth(Button:GetWidth() + (Spacing * 2))
+			Bar:SetHeight((Button:GetWidth() * 10) + (Spacing * 11))
 		else
 			Button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, -Spacing)
 		end

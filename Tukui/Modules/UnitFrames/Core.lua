@@ -936,8 +936,8 @@ function TukuiUnitFrames:CreateAnchor()
 	end
 	
 	local Anchor = CreateFrame("Frame", "TukuiActionBarAnchor", UIParent)
-	Anchor:Size(768, 66)
-	Anchor:SetPoint("BOTTOM", UIParent, 0, 14)
+	Anchor:SetPoint("TOPLEFT", T.Panels.ActionBar2)
+	Anchor:SetPoint("BottomRight", T.Panels.ActionBar3)
 
 	TukuiUnitFrames.Anchor = Anchor
 end
@@ -947,12 +947,12 @@ function TukuiUnitFrames:CreateUnits()
 	
 	if C.UnitFrames.Enable then
 		local Player = oUF:Spawn("player")
-		Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 1, 8)
+		Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 8)
 		Player:SetParent(Panels.PetBattleHider)
 		Player:Size(250, 57)
 
 		local Target = oUF:Spawn("target")
-		Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", -1, 8)
+		Target:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 8)
 		Target:SetParent(Panels.PetBattleHider)
 		Target:Size(250, 57)
 
@@ -967,7 +967,7 @@ function TukuiUnitFrames:CreateUnits()
 		Pet:Size(129, 36)
 
 		local Focus = oUF:Spawn("focus")
-		Focus:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 300)
+		Focus:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 200)
 		Focus:SetParent(Panels.PetBattleHider)
 		Focus:Size(200, 29)
 
@@ -990,7 +990,7 @@ function TukuiUnitFrames:CreateUnits()
 				Arena[i] = oUF:Spawn("arena"..i, nil)
 				Arena[i]:SetParent(Panels.PetBattleHider)
 				if (i == 1) then
-					Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+					Arena[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 200)
 				else
 					Arena[i]:SetPoint("BOTTOM", Arena[i - 1], "TOP", 0, 35)
 				end
@@ -1011,7 +1011,7 @@ function TukuiUnitFrames:CreateUnits()
 				Boss[i] = oUF:Spawn("boss"..i, nil)
 				Boss[i]:SetParent(Panels.PetBattleHider)
 				if (i == 1) then
-					Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 300)
+					Boss[i]:SetPoint("BOTTOMRIGHT", TukuiUnitFrames.Anchor, "TOPRIGHT", 0, 200)
 				else
 					Boss[i]:SetPoint("BOTTOM", Boss[i - 1], "TOP", 0, 35)
 				end
