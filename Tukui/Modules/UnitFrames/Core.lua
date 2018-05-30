@@ -688,12 +688,12 @@ function TukuiUnitFrames:CreateAuraWatch(frame)
 			local Icon = CreateFrame("Frame", nil, Auras)
 			Icon.spellID = spell[1]
 			Icon.anyUnit = spell[4]
-			Icon:Width(6)
-			Icon:Height(6)
+			Icon:Width(8)
+			Icon:Height(8)
 			Icon:SetPoint(spell[2], 0, 0)
 
 			local Texture = Icon:CreateTexture(nil, "OVERLAY")
-			Texture:SetAllPoints(Icon)
+			Texture:SetInside(Icon)
 			Texture:SetTexture(C.Medias.Blank)
 
 			if (spell[3]) then
