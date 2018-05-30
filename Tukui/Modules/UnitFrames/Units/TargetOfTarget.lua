@@ -15,12 +15,12 @@ function TukuiUnitFrames:TargetOfTarget()
 	self:CreateShadow()
 
 	local Panel = CreateFrame("Frame", nil, self)
+	Panel:SetFrameStrata(self:GetFrameStrata())
+	Panel:SetFrameLevel(3)
 	Panel:SetTemplate()
 	Panel:Size(129, 17)
-	Panel:Point("BOTTOM", self, 0, 0)
-	Panel:SetFrameLevel(2)
-	Panel:SetFrameStrata("MEDIUM")
-	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
+	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
+	Panel:SetBackdropBorderColor(0, 0, 0, 0)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:Height(18)
@@ -32,7 +32,7 @@ function TukuiUnitFrames:TargetOfTarget()
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:Point("TOPLEFT", Health, -1, 1)
 	Health.Background:Point("BOTTOMRIGHT", Health, 1, -1)
-	Health.Background:SetColorTexture(0, 0, 0)
+	Health.Background:SetColorTexture(.1, .1, .1)
 
 	Health.frequentUpdates = true
 
