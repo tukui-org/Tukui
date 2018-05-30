@@ -76,6 +76,7 @@ function TukuiPopups:CreatePopups()
 			Frames[i].Anchor:SetPoint("BOTTOM", Frames[i], "TOP", 0, -2)
 			Frames[i].Anchor:SetTemplate("Transparent")
 			Frames[i].Anchor:SetFrameLevel(Frames[i]:GetFrameLevel() - 2)
+			Frames[i].Anchor:CreateShadow()
 			Frames[i]:SetPoint("TOP", UIParent, "TOP", 0, -10)
 		else
 			local Previous = Frames[i-1]

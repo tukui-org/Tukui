@@ -14,7 +14,7 @@ function StaticPopups:Skin()
 	local Name = self:GetName()
 
 	_G[Name]:StripTextures()
-	_G[Name]:SetTemplate()
+	_G[Name]:SetTemplate("Transparent")
 	_G[Name]:CreateShadow()
 	_G[Name.."Button1"]:SkinButton()
 	_G[Name.."Button2"]:SkinButton()
