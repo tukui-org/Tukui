@@ -133,8 +133,8 @@ function Minimap:AddMinimapDataTexts()
 	local Backdrop = self.Backdrop
 
 	local MinimapDataText = CreateFrame("Frame", nil, self)
-	MinimapDataText:Size(self:GetWidth() + 2, 19)
-	MinimapDataText:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -1, 0)
+	MinimapDataText:Size(self.Backdrop:GetWidth(), 19)
+	MinimapDataText:SetPoint("TOPLEFT", self.Backdrop, "BOTTOMLEFT", 0, 19)
 	MinimapDataText:SetTemplate()
 	MinimapDataText:SetFrameStrata("LOW")
 
