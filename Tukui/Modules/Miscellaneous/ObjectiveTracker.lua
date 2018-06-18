@@ -308,6 +308,7 @@ local function SkinGroupFindButton(block)
 		if not (GroupFinderButton.IsSkinned) then
 			GroupFinderButton:SkinButton()
 			GroupFinderButton:Size(18)
+			GroupFinderButton:CreateShadow()
 
 			GroupFinderButton.IsSkinned = true
 		end
