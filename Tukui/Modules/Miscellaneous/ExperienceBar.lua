@@ -14,7 +14,7 @@ Experience.HNColor = {222 / 255, 22 / 255, 22 / 255}
 
 function Experience:SetTooltip()
 	local BarType = self.BarType
-	local Current, Max
+	local Current, Max, Pts
 
 	if (self == Experience.XPBar1) then
 		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -1, 5)
@@ -38,16 +38,17 @@ function Experience:SetTooltip()
 			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)|r")
 		end
 	elseif BarType == "ARTIFACT" then
-		Current, Max = Experience:GetArtifact()
+		Current, Max, Pts = Experience:GetArtifact()
 
 		if Max == 0 then
 			return
 		end
 
 		GameTooltip:AddLine("|cffe6cc80"..ARTIFACT_POWER..": ".. Current .. " / " .. Max .. " (" ..  floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars ..")|r")
-		if (ArtifactWatchBar.numPointsAvailableToSpend > 0) then
+		
+		if (Pts > 0) then
 			GameTooltip:AddLine(" ");
-			GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(ArtifactWatchBar.numPointsAvailableToSpend), nil, nil, nil, true);
+			GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(Pts), nil, nil, nil, true);
 		end
 	else
 		local Level = UnitHonorLevel("player")
@@ -74,7 +75,7 @@ function Experience:GetArtifact()
 	local itemID, altItemID, name, icon, totalXP, pointsSpent, quality, artifactAppearanceID, appearanceModID, itemAppearanceID, altItemAppearanceID, altOnTop, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
 	local numPointsAvailableToSpend, xp, xpForNextPoint = ArtifactBarGetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalXP, artifactTier)
 
-	return xp, xpForNextPoint
+	return xp, xpForNextPoint, numPointsAvailableToSpend
 end
 
 function Experience:GetHonor()
