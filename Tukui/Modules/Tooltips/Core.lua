@@ -19,9 +19,12 @@ Tooltip.ItemRefTooltip = ItemRefTooltip
 
 Tooltip.Tooltips = {
 	GameTooltip,
+	ItemRefTooltip,
 	ItemRefShoppingTooltip1,
 	ItemRefShoppingTooltip2,
 	ItemRefShoppingTooltip3,
+	AutoCompleteBox,
+	FriendsTooltip,
 	ShoppingTooltip1,
 	ShoppingTooltip2,
 	ShoppingTooltip3,
@@ -29,7 +32,9 @@ Tooltip.Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
-	ItemRefTooltip,
+	ReputationParagonTooltip,
+	StoryTooltip,
+	EmbeddedItemTooltip,
 }
 
 local Classification = {
@@ -392,6 +397,7 @@ function Tooltip:Enable()
 		return
 	end
 
+	GameTooltip_SetBackdropStyle = function() end -- hope it doesn't taint
 	self:CreateAnchor()
 
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
