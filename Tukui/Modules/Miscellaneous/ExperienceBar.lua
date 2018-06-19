@@ -9,7 +9,7 @@ local Bars = 20
 Experience.NumBars = 2
 Experience.RestedColor = {75 / 255, 175 / 255, 76 / 255}
 Experience.XPColor = {0 / 255, 144 / 255, 255 / 255}
-Experience.AFColor = {229 / 255, 204 / 255, 127 / 255}
+Experience.AZColor = {229 / 255, 204 / 255, 127 / 255}
 Experience.HNColor = {222 / 255, 22 / 255, 22 / 255}
 
 function Experience:SetTooltip()
@@ -37,19 +37,21 @@ function Experience:SetTooltip()
 		if (IsRested == 1 and Rested) then
 			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)|r")
 		end
-	elseif BarType == "ARTIFACT" then
-		Current, Max, Pts = Experience:GetArtifact()
-
+	elseif BarType == "AZERITE" then
+		Current, Max, Level, Items = Experience:GetAzerite()
+		
 		if Max == 0 then
 			return
 		end
-
-		GameTooltip:AddLine("|cffe6cc80"..ARTIFACT_POWER..": ".. Current .. " / " .. Max .. " (" ..  floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars ..")|r")
 		
-		if (Pts > 0) then
-			GameTooltip:AddLine(" ");
-			GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(Pts), nil, nil, nil, true);
-		end
+		local RemainingXP = Max - Current
+		local AzeriteItem = Item:CreateFromItemLocation(Items)
+		local ItemName = AzeriteItem:GetItemName()
+
+		GameTooltip:SetText(AZERITE_POWER_TOOLTIP_TITLE:format(Level, RemainingXP), 0.90, 0.80, 0.50)
+		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
+
+		GameTooltip:Show()
 	else
 		local Level = UnitHonorLevel("player")
 
@@ -71,11 +73,12 @@ function Experience:GetExperience()
 	return UnitXP("player"), UnitXPMax("player")
 end
 
-function Experience:GetArtifact()
-	local itemID, altItemID, name, icon, totalXP, pointsSpent, quality, artifactAppearanceID, appearanceModID, itemAppearanceID, altItemAppearanceID, altOnTop, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
-	local numPointsAvailableToSpend, xp, xpForNextPoint = ArtifactBarGetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalXP, artifactTier)
+function Experience:GetAzerite()
+	local AzeriteItems = C_AzeriteItem.FindActiveAzeriteItem()
+	local XP, TotalXP = C_AzeriteItem.GetAzeriteItemXPInfo(AzeriteItems)
+	local Level = C_AzeriteItem.GetPowerLevel(AzeriteItems)
 
-	return xp, xpForNextPoint, numPointsAvailableToSpend
+	return XP, TotalXP, Level, AzeriteItems
 end
 
 function Experience:GetHonor()
@@ -87,7 +90,7 @@ function Experience:Update(event, owner)
 		return
 	end
 
-	local ShowArtifact = HasArtifactEquipped()
+	local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 	local PlayerLevel = UnitLevel("player")
 
 	local Current, Max = self:GetExperience()
@@ -106,10 +109,10 @@ function Experience:Update(event, owner)
 
 			Bar.BarType = "HONOR"
 		elseif (i == 2) then
-			if ShowArtifact then
-				Current, Max = self:GetArtifact()
+			if AzeriteItem then
+				Current, Max = self:GetAzerite()
 
-				Bar.BarType = "ARTIFACT"
+				Bar.BarType = "AZERITE"
 			else
 				Current, Max = self:GetHonor()
 
@@ -132,8 +135,8 @@ function Experience:Update(event, owner)
 
 		if BarType == "XP" then
 			r, g, b = unpack(self.XPColor)
-		elseif BarType == "ARTIFACT" then
-			r, g, b = unpack(self.AFColor)
+		elseif BarType == "AZERITE" then
+			r, g, b = unpack(self.AZColor)
 		else
 			r, g, b = unpack(self.HNColor)
 		end
