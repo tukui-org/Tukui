@@ -48,7 +48,8 @@ function Experience:SetTooltip()
 		local AzeriteItem = Item:CreateFromItemLocation(Items)
 		local ItemName = AzeriteItem:GetItemName()
 
-		GameTooltip:SetText(AZERITE_POWER_TOOLTIP_TITLE:format(Level, RemainingXP), 0.90, 0.80, 0.50)
+		GameTooltip:AddDoubleLine(ItemName..' ('..Level..')', format(ISLANDS_QUEUE_WEEKLY_QUEST_PROGRESS, Current, Max), 0.90, 0.80, 0.50)
+		GameTooltip:AddLine(' ')
 		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
 
 		GameTooltip:Show()
