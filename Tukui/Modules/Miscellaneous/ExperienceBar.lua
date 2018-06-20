@@ -102,6 +102,7 @@ function Experience:Update(event, owner)
 		local Bar = self["XPBar"..i]
 		local RestedBar = self["RestedBar"..i]
 		local r, g, b
+		local InstanceType = select(2, IsInInstance())
 
 		Bar.BarType = "XP"
 
@@ -110,7 +111,7 @@ function Experience:Update(event, owner)
 
 			Bar.BarType = "HONOR"
 		elseif (i == 2) then
-			if AzeriteItem then
+			if AzeriteItem and InstanceType ~= "pvp" and InstanceType ~= "arena" then
 				Current, Max = self:GetAzerite()
 
 				Bar.BarType = "AZERITE"
@@ -183,10 +184,12 @@ function Experience:Create()
 	self:RegisterEvent("UPDATE_EXHAUSTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_UPDATE_RESTING")
-	self:RegisterEvent("ARTIFACT_XP_UPDATE")
 	self:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	self:RegisterEvent("HONOR_XP_UPDATE")
 	self:RegisterEvent("HONOR_LEVEL_UPDATE")
+	self:RegisterEvent("AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED")
+	self:RegisterEvent("RESPEC_AZERITE_EMPOWERED_ITEM_CLOSED")
+	self:RegisterEvent("PLAYER_MONEY")
 
 	self:SetScript("OnEvent", self.Update)
 end
