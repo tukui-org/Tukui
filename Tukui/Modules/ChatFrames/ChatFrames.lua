@@ -72,7 +72,9 @@ function TukuiChat:StyleFrame(frame)
 	local FrameName = frame:GetName()
 	local Tab = _G[FrameName.."Tab"]
 	local TabText = _G[FrameName.."TabText"]
-	local Scroll = _G[FrameName.."ScrollBar"]
+	local Scroll = frame.ScrollBar
+	local ScrollBottom = frame.ScrollToBottomButton
+	local ScrollTex = _G[FrameName.."ThumbTexture"]
 	local EditBox = _G[FrameName.."EditBox"]
 	local GetTabFont = T.GetFont(C["Chat"].TabFont)
 	local TabFont, TabFontSize, TabFontFlags = _G[GetTabFont]:GetFont()
@@ -90,6 +92,8 @@ function TukuiChat:StyleFrame(frame)
 	-- Kill Scroll Bars
 	if Scroll then
 		Scroll:Kill()
+		ScrollBottom:Kill()
+		ScrollTex:Kill()
 	end
 
 	-- Style the tab font
@@ -467,7 +471,6 @@ function TukuiChat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-
 	QuickJoinToastButton:Kill()
 	
 	VoiceChatPromptActivateChannel:SetTemplate()
