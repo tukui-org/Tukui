@@ -57,12 +57,6 @@ function Loot:SkinLootFrame()
 	LootFrameUpButton:CreateShadow()
 	LootFramePrev:SetAlpha(0)
 
-	TopFrame:Size(LootFrame:GetWidth() - 6, 23)
-	TopFrame:SetFrameLevel(LootFrame:GetFrameLevel())
-	TopFrame:Point("TOPLEFT", 2, -32)
-	TopFrame:SetTemplate("Transparent")
-	TopFrame:CreateShadow()
-
 	LootFrameCloseButton:SkinCloseButton()
 	LootFrameCloseButton:ClearAllPoints()
 	LootFrameCloseButton:SetPoint("RIGHT", TopFrame, "RIGHT", 8, 0)
