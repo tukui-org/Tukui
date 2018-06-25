@@ -248,6 +248,16 @@ function TukuiUnitFrames:Raid()
 
 		self.Highlight = Highlight
 	end
+	
+	if Class == "PRIEST" then
+		local Atonement = CreateFrame("StatusBar", nil, Power)
+		Atonement:SetAllPoints()
+		Atonement:SetStatusBarTexture(C.Medias.Normal)
+		Atonement:SetFrameStrata(Power:GetFrameStrata())
+		Atonement:SetFrameLevel(Power:GetFrameLevel() + 1)
+		
+		self.Atonement = Atonement
+	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameShort]")
 	self.Health.bg = Health.Background

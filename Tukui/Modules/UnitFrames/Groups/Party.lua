@@ -199,6 +199,16 @@ function TukuiUnitFrames:Party()
 
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
+	
+	if Class == "PRIEST" then
+		local Atonement = CreateFrame("StatusBar", nil, Power)
+		Atonement:SetAllPoints()
+		Atonement:SetStatusBarTexture(C.Medias.Normal)
+		Atonement:SetFrameStrata(Power:GetFrameStrata())
+		Atonement:SetFrameLevel(Power:GetFrameLevel() + 1)
+		
+		self.Atonement = Atonement
+	end
 
 	local Range = {
 		insideAlpha = 1,
