@@ -38,6 +38,7 @@ function TukuiActionBars:SetUpExtraActionButton()
 	ZoneButton.Icon:SetInside()
 	ZoneButton.Icon:SetDrawLayer("ARTWORK")
 	ZoneButton.Icon:SetTexCoord(unpack(T.IconCoord))
+	ZoneButton:CreateShadow()
 
 	Texture:SetTexture("")
 	ZoneTexture:SetTexture("")

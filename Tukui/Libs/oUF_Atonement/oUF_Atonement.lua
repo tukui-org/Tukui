@@ -18,30 +18,30 @@ local function OnUpdate(self, elapsed)
 end
 
 local function Update(self)
-	local IsFound = false
 	local Unit = self.unit
 	local DiscSpec = 1
+	
+	self.Atonement.Active = false
 	
 	if GetSpecialization() == DiscSpec then
 		for i = 1, 40 do
 			local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
 
 			if SpellID == AtonementID then
-				IsFound = true
-
 				self.Atonement.Duration = Duration
 				self.Atonement.ExpirationTime = ExpirationTime
 				self.Atonement:Show()
 				self.Atonement:SetMinMaxValues(0, Duration)
 				self.Atonement:SetScript("OnUpdate", OnUpdate)
+				self.Atonement.Active = true
 
-				break
+				return
 			end
 		end
 		
-		if not IsFound then
-			self.Atonement:SetScript("OnUpdate", nil)
+		if not self.Atonement.Active then
 			self.Atonement:Hide()
+			self.Atonement:SetScript("OnUpdate", nil)
 		end
 	else
 		self.Atonement:Hide()
