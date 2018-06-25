@@ -5,7 +5,7 @@ if not oUF then return end
 
 local _, ns = ...
 local oUF = ns.oUF or _G.oUF
-assert(oUF, "oUF_AuraWatch cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
+assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
 
 local UnitBuff = UnitBuff
 local AtonementID = 194384
