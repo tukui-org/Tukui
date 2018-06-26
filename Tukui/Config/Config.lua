@@ -93,7 +93,6 @@ C["NamePlates"] = {
 	["Width"] = 180,
 	["Height"] = 18,
 	["CastHeight"] = 6,
-	["Texture"] = "Tukui",
 	["Font"] = "Tukui Outline",
 }
 
@@ -106,8 +105,6 @@ C["Party"] = {
 	["RangeAlpha"] = 0.3,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",
-	["PowerTexture"] = "Tukui",
-	["HealthTexture"] = "Tukui",
 }
 
 C["Raid"] = {
@@ -124,8 +121,6 @@ C["Raid"] = {
 	["MaxUnitPerColumn"] = 10,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",
-	["PowerTexture"] = "Tukui",
-	["HealthTexture"] = "Tukui",
 	["GroupBy"] = {
 		["Options"] = {
 			["Group"] = "GROUP",
@@ -144,7 +139,22 @@ C["Tooltips"] = {
 	["ShowSpec"] = true,
 	["MouseOver"] = false,
 	["HealthFont"] = "Tukui Outline",
-	["HealthTexture"] = "Tukui",
+	
+}
+
+C["Textures"] = {
+	["QuestProgressTexture"] = "Tukui",
+	["TTHealthTexture"] = "Tukui",
+	["UFPowerTexture"] = "Tukui",
+	["UFHealthTexture"] = "Tukui",
+	["UFCastTexture"] = "Tukui",
+	["UFPartyPowerTexture"] = "Tukui",
+	["UFPartyHealthTexture"] = "Tukui",
+	["UFRaidPowerTexture"] = "Tukui",
+	["UFRaidHealthTexture"] = "Tukui",
+	["NPHealthTexture"] = "Tukui",
+	["NPPowerTexture"] = "Tukui",
+	["NPCastTexture"] = "Tukui",
 }
 
 C["UnitFrames"] = {
@@ -174,7 +184,4 @@ C["UnitFrames"] = {
 	["Arena"] = true,
 	["Boss"] = true,
 	["Font"] = "Tukui UF Outline",
-	["PowerTexture"] = "Tukui",
-	["HealthTexture"] = "Tukui",
-	["CastTexture"] = "Tukui",
 }

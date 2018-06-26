@@ -10,7 +10,7 @@ end
 TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	local RunesBar = CreateFrame("Frame", self:GetName().."RuneBar", self)
 	local Shadow = self.Shadow
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
 	-- Runes
 	RunesBar:SetFrameStrata(self:GetFrameStrata())

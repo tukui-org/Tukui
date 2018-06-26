@@ -10,7 +10,7 @@ end
 TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	local HPBar = CreateFrame("Frame", self:GetName().."HolyPower", self)
 	local Shadow = self.Shadow
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
 	-- Holy Power
 	HPBar:SetFrameStrata(self:GetFrameStrata())

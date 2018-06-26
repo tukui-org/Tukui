@@ -4,7 +4,7 @@ local TukuiUnitFrames = T["UnitFrames"]
 
 function TukuiUnitFrames:TargetOfTarget()
 	local DarkTheme = C["UnitFrames"].DarkTheme
-	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 
 	self:RegisterForClicks("AnyUp")

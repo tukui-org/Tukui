@@ -4,8 +4,8 @@ local TukuiUnitFrames = T["UnitFrames"]
 
 function TukuiUnitFrames:Pet()
 	local DarkTheme = C["UnitFrames"].DarkTheme
-	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 
 	self:RegisterForClicks("AnyUp")

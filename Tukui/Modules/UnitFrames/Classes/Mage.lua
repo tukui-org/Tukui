@@ -11,7 +11,7 @@ end
 
 TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 	local ArcaneChargeBar = CreateFrame("Frame", self:GetName().."ArcaneChargeBar", self)
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
 	-- Arcane Charges
 	ArcaneChargeBar:SetFrameStrata(self:GetFrameStrata())

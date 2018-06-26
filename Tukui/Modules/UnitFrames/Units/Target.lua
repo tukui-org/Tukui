@@ -6,9 +6,9 @@ local Class = select(2, UnitClass("player"))
 
 function TukuiUnitFrames:Target()
 	local DarkTheme = C["UnitFrames"].DarkTheme
-	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
-	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+	local CastTexture = T.GetTexture(C["Textures"].UFCastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 
 	self:RegisterForClicks("AnyUp")

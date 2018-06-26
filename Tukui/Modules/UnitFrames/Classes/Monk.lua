@@ -10,7 +10,7 @@ end
 TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 	local Harmony = CreateFrame("Frame", self:GetName().."Harmony", self)
 	local Shadow = self.Shadow
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
 	-- Harmony Bar
 	Harmony:SetFrameStrata(self:GetFrameStrata())

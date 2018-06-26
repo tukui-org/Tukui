@@ -333,11 +333,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set the height of the cast bar on NamePlates",
 		},
 
-		["Texture"] = {
-			["Name"] = "NamePlates Texture",
-			["Desc"] = "Set a texture for nameplates",
-		},
-
 		["Font"] = {
 			["Name"] = "NamePlates Font",
 			["Desc"] = "Set a font for nameplates",
@@ -378,16 +373,6 @@ TukuiConfig["enUS"] = {
 		["HealthFont"] = {
 			["Name"] = "Party Frame Health Font",
 			["Desc"] = "Set a font for health text on party frames",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
 		},
 
 		["RangeAlpha"] = {
@@ -462,16 +447,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font for health text on raid frames",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
-		},
-
 		["GroupBy"] = {
 			["Name"] = "Group By",
 			["Desc"] = "Define how raids groups are sorted",
@@ -508,10 +483,55 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Health Bar Font",
 			["Desc"] = "Set a font to be used by the health bar below unit tooltips",
 		},
+	},
+	
+	["Textures"] = {
+		["QuestProgressTexture"] = {
+			["Name"] = "Quest [Progress]",
+		},
 
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture to be used by the health bar below unit tooltips",
+		["TTHealthTexture"] = {
+			["Name"] = "Tooltip [Health]",
+		},
+
+		["UFPowerTexture"] = {
+			["Name"] = "UnitFrames [Power]",
+		},
+
+		["UFHealthTexture"] = {
+			["Name"] = "UnitFrames [Health]",
+		},
+
+		["UFCastTexture"] = {
+			["Name"] = "UnitFrames [Cast]",
+		},
+
+		["UFPartyPowerTexture"] = {
+			["Name"] = "UnitFrames [Party Power]",
+		},
+
+		["UFPartyHealthTexture"] = {
+			["Name"] = "UnitFrames [Party Health]",
+		},
+
+		["UFRaidPowerTexture"] = {
+			["Name"] = "UnitFrames [Raid Power]",
+		},
+
+		["UFRaidHealthTexture"] = {
+			["Name"] = "UnitFrames [Raid Health]",
+		},
+
+		["NPHealthTexture"] = {
+			["Name"] = "Nameplates [Health]",
+		},
+
+		["NPPowerTexture"] = {
+			["Name"] = "Nameplates [Power]",
+		},
+
+		["NPCastTexture"] = {
+			["Name"] = "Nameplates [Cast]",
 		},
 	},
 
@@ -654,21 +674,6 @@ TukuiConfig["enUS"] = {
 		["Font"] = {
 			["Name"] = "Unit Frame Font",
 			["Desc"] = "Set a font for unit frames",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
-		},
-
-		["CastTexture"] = {
-			["Name"] = "Cast Bar Texture",
-			["Desc"] = "Set a texture for cast bars",
 		},
 	},
 }

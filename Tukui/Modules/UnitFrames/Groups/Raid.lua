@@ -5,8 +5,8 @@ local Class = select(2, UnitClass("player"))
 
 function TukuiUnitFrames:Raid()
 	local DarkTheme = C["UnitFrames"].DarkTheme
-	local HealthTexture = T.GetTexture(C["Raid"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["Raid"].PowerTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFRaidHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFRaidPowerTexture)
 	local Font = T.GetFont(C["Raid"].Font)
 	local HealthFont = T.GetFont(C["Raid"].HealthFont)
 

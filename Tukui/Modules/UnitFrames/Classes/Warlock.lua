@@ -11,7 +11,7 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	local Bar = CreateFrame("Frame", self:GetName().."SoulShardsBar", self)
 	local Shadow = self.Shadow
 	local Totems = self.Totems
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
 	-- Warlock Class Bar
 	Bar:SetFrameStrata(self:GetFrameStrata())

@@ -192,6 +192,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 		local BorderLeft = Bar.BorderLeft
 		local BorderRight = Bar.BorderRight
 		local BorderMid = Bar.BorderMid
+		local Texture = T.GetTexture(C["Textures"].QuestProgressTexture)
 
 		if not (Bar.IsSkinned) then
 			if (Backdrop) then Backdrop:Hide() Backdrop:SetAlpha(0) end
@@ -206,7 +207,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 			if (BorderMid) then BorderMid:SetAlpha(0) end
 
 			Bar:Height(20)
-			Bar:SetStatusBarTexture(C.Medias.Blank)
+			Bar:SetStatusBarTexture(Texture)
 			Bar:CreateBackdrop()
 			Bar.Backdrop:CreateShadow()
 			Bar.Backdrop:SetFrameStrata("BACKGROUND")

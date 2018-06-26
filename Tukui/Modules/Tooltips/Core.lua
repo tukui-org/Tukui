@@ -415,7 +415,7 @@ function Tooltip:Enable()
 	ItemRefCloseButton:SkinCloseButton()
 
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
-	HealthBar:SetStatusBarTexture(T.GetTexture(C["Tooltips"].HealthTexture))
+	HealthBar:SetStatusBarTexture(T.GetTexture(C["Textures"].TTHealthTexture))
 	HealthBar:CreateBackdrop()
 	HealthBar:ClearAllPoints()
 	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 1, 4)

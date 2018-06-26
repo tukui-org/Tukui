@@ -3,9 +3,9 @@ local T, C, L = select(2, ...):unpack()
 local TukuiUnitFrames = T["UnitFrames"]
 
 function TukuiUnitFrames:Nameplates()
-	local HealthTexture = T.GetTexture(C["NamePlates"].Texture)
-	local PowerTexture = T.GetTexture(C["NamePlates"].Texture)
-	local CastTexture = T.GetTexture(C["NamePlates"].Texture)
+	local HealthTexture = T.GetTexture(C["Textures"].NPHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].NPPowerTexture)
+	local CastTexture = T.GetTexture(C["Textures"].NPCastTexture)
 	local Font = T.GetFont(C["NamePlates"].Font)
 
 	self:SetScale(UIParent:GetEffectiveScale())

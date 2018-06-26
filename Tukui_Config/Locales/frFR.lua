@@ -340,11 +340,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la hauteur de la barre de incantation des barres d'unités",
 		},
 
-		["Texture"] = {
-			["Name"] = "Texture des barres d'unités",
-			["Desc"] = "Définir une texture pour les barres d'unités",
-		},
-
 		["Font"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Définir la police de caractère des barres d'unités",
@@ -385,16 +380,6 @@ TukuiConfig["frFR"] = {
 		["HealthFont"] = {
 			["Name"] = "Police du texte santé",
 			["Desc"] = "Définir la police de caractère de la santé des cadres de groupe",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
 		},
 
 		["RangeAlpha"] = {
@@ -469,16 +454,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la police de caractère de la santé des cadres de raid",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
-		},
-
 		["GroupBy"] = {
 			["Name"] = "Groupé par",
 			["Desc"] = "Définir le mode de tri des groupes de raid",
@@ -515,10 +490,55 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Police de la barre de santé",
 			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles ",
 		},
+	},
+	
+	["Textures"] = {
+		["QuestProgressTexture"] = {
+			["Name"] = "Quête [Progression]",
+		},
 
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé en-dessous des infobulles",
+		["TTHealthTexture"] = {
+			["Name"] = "Tooltip [Vie]",
+		},
+
+		["UFPowerTexture"] = {
+			["Name"] = "Barre d'unité [Puissance]",
+		},
+
+		["UFHealthTexture"] = {
+			["Name"] = "Barre d'unité [Vie]",
+		},
+
+		["UFCastTexture"] = {
+			["Name"] = "Barre d'unité [Incantation]",
+		},
+
+		["UFPartyPowerTexture"] = {
+			["Name"] = "Barre d'unité [Party Puissance]",
+		},
+
+		["UFPartyHealthTexture"] = {
+			["Name"] = "Barre d'unité [Party Vie]",
+		},
+
+		["UFRaidPowerTexture"] = {
+			["Name"] = "Barre d'unité [Raid Puissance]",
+		},
+
+		["UFRaidHealthTexture"] = {
+			["Name"] = "Barre d'unité [Raid Vie]",
+		},
+
+		["NPHealthTexture"] = {
+			["Name"] = "Nameplates [Vie]",
+		},
+
+		["NPPowerTexture"] = {
+			["Name"] = "Nameplates [Puissance]",
+		},
+
+		["NPCastTexture"] = {
+			["Name"] = "Nameplates [Incantation]",
 		},
 	},
 
@@ -661,21 +681,6 @@ TukuiConfig["frFR"] = {
 		["Font"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Défini une police de caractère pour les cadres unités",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
-		},
-
-		["CastTexture"] = {
-			["Name"] = "Cast Bar Texture",
-			["Desc"] = "Set a texture for cast bars",
 		},
 	},
 }

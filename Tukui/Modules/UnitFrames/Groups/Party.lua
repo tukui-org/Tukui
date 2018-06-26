@@ -5,8 +5,8 @@ local Class = select(2, UnitClass("player"))
 
 function TukuiUnitFrames:Party()
 	local DarkTheme = C["UnitFrames"].DarkTheme
-	local HealthTexture = T.GetTexture(C["Party"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["Party"].PowerTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFPartyHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPartyPowerTexture)
 	local Font = T.GetFont(C["Party"].Font)
 	local HealthFont = T.GetFont(C["Party"].HealthFont)
 
