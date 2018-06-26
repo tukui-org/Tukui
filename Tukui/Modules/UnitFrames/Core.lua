@@ -158,16 +158,25 @@ function TukuiUnitFrames:MouseOnPlayer()
 	end
 end
 
-
 function TukuiUnitFrames:Highlight()
 	if UnitIsUnit("focus", self.unit) then
-		self.Highlight:SetBackdropColor(218 / 255, 197 / 255, 92 / 255, .7)
-		self.Highlight:Show()
+		if C.General.HideShadows then
+			self.Shadow:SetBackdrop( {edgeFile = C.Medias.Glow, edgeSize = T.Scale(4) })
+		end
+		
+		self.Shadow:SetBackdropBorderColor(0, 1, 0, 1)
 	elseif UnitIsUnit("target", self.unit) then
-		self.Highlight:SetBackdropColor(75 / 255, 175 / 255, 76 / 255, 1)
-		self.Highlight:Show()
+		if C.General.HideShadows then
+			self.Shadow:SetBackdrop( {edgeFile = C.Medias.Glow, edgeSize = T.Scale(4) })
+		end
+		
+		self.Shadow:SetBackdropBorderColor(1, 1, 0, 1)
 	else
-		self.Highlight:Hide()
+		if C.General.HideShadows then
+			self.Shadow:SetBackdrop( {edgeFile = nil, edgeSize = 0 })
+		end
+		
+		self.Shadow:SetBackdropBorderColor(0, 0, 0, 1)
 	end
 end
 
@@ -777,7 +786,7 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 		]],
 		"initial-width", C.Party.Portrait and T.Scale(162) or T.Scale(206),
 		"initial-height", C.Party.Portrait and T.Scale(24) or T.Scale(40),
-		"showSolo", false,
+		"showSolo", true,
 		"showParty", true,
 		"showPlayer", C["Party"].ShowPlayer,
 		"showRaid", true,

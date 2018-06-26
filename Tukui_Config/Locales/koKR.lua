@@ -409,11 +409,6 @@ TukuiConfig["koKR"] = {
 			["Desc"] = "Derp",
 		},
 
-		["Highlight"] = {
-			["Name"] = "Highlight",
-			["Desc"] = "Highlight your current focus/target",
-		},
-
 		["MaxUnitPerColumn"] = {
 			["Name"] = "Raid members per column",
 			["Desc"] = "Change the max number of raid members per column",

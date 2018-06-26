@@ -234,20 +234,12 @@ function TukuiUnitFrames:Raid()
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 
-	if C.Raid.Highlight then
-		local Highlight = CreateFrame("Frame", nil, self)
-		Highlight:SetPoint("TOPLEFT", self, "TOPLEFT")
-		Highlight:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
-		Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
-		Highlight:SetFrameLevel(0)
-		Highlight:Hide()
-
-		self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
-		self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
-		self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)
-
-		self.Highlight = Highlight
-	end
+	local Highlight = CreateFrame("Frame", nil, self)
+	Highlight:SetPoint("TOPLEFT", self, "TOPLEFT")
+	Highlight:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
+	Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
+	Highlight:SetFrameLevel(0)
+	Highlight:Hide()
 	
 	if Class == "PRIEST" then
 		local Atonement = CreateFrame("StatusBar", nil, Power)
@@ -270,4 +262,9 @@ function TukuiUnitFrames:Raid()
 	self.Range = Range
 	self.RaidTargetIndicator = RaidIcon
 	self.ThreatIndicator = Threat
+	self.Highlight = Highlight
+	
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
+	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
+	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)
 end

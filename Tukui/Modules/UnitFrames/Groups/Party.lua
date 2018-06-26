@@ -200,6 +200,13 @@ function TukuiUnitFrames:Party()
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 	
+	local Highlight = CreateFrame("Frame", nil, self)
+	Highlight:SetPoint("TOPLEFT", self, "TOPLEFT")
+	Highlight:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
+	Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
+	Highlight:SetFrameLevel(0)
+	Highlight:Hide()
+	
 	if Class == "PRIEST" then
 		local Atonement = CreateFrame("StatusBar", nil, Power)
 		Atonement:SetAllPoints()
@@ -230,5 +237,10 @@ function TukuiUnitFrames:Party()
 	self.PhaseIcon = PhaseIcon
 	self.ThreatIndicator = Threat
 	self.Range = Range
+	self.Highlight = Highlight
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong][Tukui:Role]")
+	
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
+	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
+	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)
 end

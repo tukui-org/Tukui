@@ -99,7 +99,7 @@ C["NamePlates"] = {
 
 C["Party"] = {
 	["Enable"] = true,
-	["Portrait"] = true,
+	["Portrait"] = false,
 	["HealBar"] = true,
 	["ShowPlayer"] = true,
 	["ShowHealthText"] = true,
@@ -121,7 +121,6 @@ C["Raid"] = {
 	["ShowHealthText"] = true,
 	["ShowPets"] = true,
 	["VerticalHealth"] = false,
-	["Highlight"] = true,
 	["MaxUnitPerColumn"] = 10,
 	["Font"] = "Tukui UF",
 	["HealthFont"] = "Tukui UF Outline",
