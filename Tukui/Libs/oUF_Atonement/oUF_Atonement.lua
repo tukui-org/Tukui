@@ -23,14 +23,17 @@ local function Update(self)
 	
 	self.Atonement.Active = false
 	
-	if GetSpecialization() == DiscSpec and UnitIsFriend("player", Unit) then
+	if GetSpecialization() == DiscSpec then
+		if not self.Atonement:IsShown() then
+			self.Atonement:Show()
+		end
+		
 		for i = 1, 40 do
 			local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
 
 			if SpellID == AtonementID then
 				self.Atonement.Duration = Duration
 				self.Atonement.ExpirationTime = ExpirationTime
-				self.Atonement:Show()
 				self.Atonement:SetMinMaxValues(0, Duration)
 				self.Atonement:SetScript("OnUpdate", OnUpdate)
 				self.Atonement.Active = true
@@ -40,24 +43,31 @@ local function Update(self)
 		end
 		
 		if not self.Atonement.Active then
-			self.Atonement:Hide()
 			self.Atonement:SetScript("OnUpdate", nil)
+			self.Atonement:SetValue(0)
 		end
 	else
-		self.Atonement:Hide()
+		if self.Atonement:IsShown() then
+			self.Atonement:Hide()
+			self.Atonement:SetScript("OnUpdate", nil)
+			self.Atonement:SetValue(0)
+		end
 	end
 end
 
 local function Enable(self)
 	if self.Atonement then
 		self:RegisterEvent("UNIT_AURA", Update)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", Update)
 		
+		self.Atonement:SetMinMaxValues(0, 15)
+		self.Atonement:SetValue(0)
 		self.Atonement:SetStatusBarColor(207/255, 181/255, 59/255)
 		
 		if not self.Atonement.Backdrop then
 			self.Atonement.Backdrop = self.Atonement:CreateTexture(nil, "BACKGROUND")
 			self.Atonement.Backdrop:SetAllPoints()
-			self.Atonement.Backdrop:SetColorTexture(.1, .1, .1)
+			self.Atonement.Backdrop:SetColorTexture(207/255 * 0.2, 181/255 * 0.2, 59/255 * 0.2)
 		end
 
 		return true
@@ -69,6 +79,7 @@ end
 local function Disable(self)
 	if self.Attonement then
 		self:UnregisterEvent("UNIT_AURA", Update)
+		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Update)
 	end
 end
 
