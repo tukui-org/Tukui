@@ -60,6 +60,10 @@ function TukuiActionBars:DisableBlizzard()
 		return true
 	end
 	
+	-- Avoid Hiding Buttons on open/close spellbook
+	MultiActionBar_HideAllGrids = function() end
+	MultiActionBar_ShowAllGrids = function() end
+	
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
 end
 
