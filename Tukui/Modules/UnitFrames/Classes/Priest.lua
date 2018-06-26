@@ -15,7 +15,7 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 	Atonement:SetPoint("BOTTOM", 0, 0)
 	Atonement:SetStatusBarTexture(C.Medias.Normal)
 	Atonement:SetFrameStrata(self.Health:GetFrameStrata())
-	Atonement:SetFrameLevel(self.Health:GetFrameLevel() + 1)
+	Atonement:SetFrameLevel(self.Health:GetFrameLevel() + 4)
 	
 	Atonement.Backdrop = Atonement:CreateTexture(nil, "BACKGROUND")
 	Atonement.Backdrop:SetSize(250, 10)
