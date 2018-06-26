@@ -786,7 +786,7 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 		]],
 		"initial-width", C.Party.Portrait and T.Scale(162) or T.Scale(206),
 		"initial-height", C.Party.Portrait and T.Scale(24) or T.Scale(40),
-		"showSolo", true,
+		"showSolo", false,
 		"showParty", true,
 		"showPlayer", C["Party"].ShowPlayer,
 		"showRaid", true,
