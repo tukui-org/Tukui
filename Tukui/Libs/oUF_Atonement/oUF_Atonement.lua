@@ -23,7 +23,7 @@ local function Update(self)
 	
 	self.Atonement.Active = false
 	
-	if GetSpecialization() == DiscSpec then
+	if GetSpecialization() == DiscSpec and UnitIsFriend("player", Unit) then
 		for i = 1, 40 do
 			local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
 
