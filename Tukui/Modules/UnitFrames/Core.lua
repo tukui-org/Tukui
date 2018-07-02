@@ -535,55 +535,44 @@ function TukuiUnitFrames:PostCreateAura(button)
 	end
 	
 	-- Skin aura button
-	if button:GetName():match("NamePlate") then
-		button:SetTemplate("Default")
-		button:CreateShadow()
-		button:CreateShadow()
-		button.cd:SetReverse(true)
-		button.icon:SetInside()
-		button.icon:SetTexCoord(unpack(T.IconCoord))
-		button.icon:SetDrawLayer("ARTWORK")
-		button.count:SetFont(C.Medias.Font, 8, "THICKOUTLINE")
-	else
-		button:SetTemplate("Default")
-		button:CreateShadow()
+	button:SetTemplate("Default")
+	button:CreateShadow()
 
-		button.Remaining = button:CreateFontString(nil, "OVERLAY")
-		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-		button.Remaining:Point("CENTER", 1, 0)
+	button.Remaining = button:CreateFontString(nil, "OVERLAY")
+	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	button.Remaining:Point("CENTER", 1, 0)
 
-		button.cd.noOCC = true
-		button.cd.noCooldownCount = true
-		button.cd:SetReverse(true)
-		button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
-		button.cd:ClearAllPoints()
-		button.cd:SetInside()
-		button.cd:SetHideCountdownNumbers(true)
+	button.cd.noOCC = true
+	button.cd.noCooldownCount = true
+	button.cd:SetReverse(true)
+	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
+	button.cd:ClearAllPoints()
+	button.cd:SetInside()
+	button.cd:SetHideCountdownNumbers(true)
 
-		button.icon:SetInside()
-		button.icon:SetTexCoord(unpack(T.IconCoord))
-		button.icon:SetDrawLayer("ARTWORK")
+	button.icon:SetInside()
+	button.icon:SetTexCoord(unpack(T.IconCoord))
+	button.icon:SetDrawLayer("ARTWORK")
 
-		button.count:Point("BOTTOMRIGHT", 3, 3)
-		button.count:SetJustifyH("RIGHT")
-		button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
-		button.count:SetTextColor(0.84, 0.75, 0.65)
+	button.count:Point("BOTTOMRIGHT", 3, 3)
+	button.count:SetJustifyH("RIGHT")
+	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
+	button.count:SetTextColor(0.84, 0.75, 0.65)
 
-		button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
-		button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
-		button.overlay:SetParent(button.OverlayFrame)
-		button.count:SetParent(button.OverlayFrame)
-		button.Remaining:SetParent(button.OverlayFrame)
+	button.OverlayFrame = CreateFrame("Frame", nil, button, nil)
+	button.OverlayFrame:SetFrameLevel(button.cd:GetFrameLevel() + 1)
+	button.overlay:SetParent(button.OverlayFrame)
+	button.count:SetParent(button.OverlayFrame)
+	button.Remaining:SetParent(button.OverlayFrame)
 
-		button.Animation = button:CreateAnimationGroup()
-		button.Animation:SetLooping("BOUNCE")
+	button.Animation = button:CreateAnimationGroup()
+	button.Animation:SetLooping("BOUNCE")
 
-		button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
-		button.Animation.FadeOut:SetFromAlpha(1)
-		button.Animation.FadeOut:SetToAlpha(0)
-		button.Animation.FadeOut:SetDuration(.6)
-		button.Animation.FadeOut:SetSmoothing("IN_OUT")
-	end
+	button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
+	button.Animation.FadeOut:SetFromAlpha(1)
+	button.Animation.FadeOut:SetToAlpha(0)
+	button.Animation.FadeOut:SetDuration(.6)
+	button.Animation.FadeOut:SetSmoothing("IN_OUT")
 end
 
 function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
@@ -784,8 +773,8 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", C.Party.Portrait and T.Scale(162) or T.Scale(206),
-		"initial-height", C.Party.Portrait and T.Scale(24) or T.Scale(40),
+		"initial-width", T.Scale(206),
+		"initial-height", T.Scale(32),
 		"showSolo", false,
 		"showParty", true,
 		"showPlayer", C["Party"].ShowPlayer,
@@ -793,7 +782,7 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-66)
+		"yOffset", T.Scale(-60)
 end
 
 function TukuiUnitFrames:GetRaidFramesAttributes()
@@ -1033,11 +1022,9 @@ function TukuiUnitFrames:CreateUnits()
 		end
 
 		if C.Party.Enable then
-			local Gap = C.Party.Portrait and 74 or 28
-
 			local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
 			Party:SetParent(Panels.PetBattleHider)
-			Party:Point("TOPLEFT", UIParent, "TOPLEFT", Gap, -46)
+			Party:Point("TOPLEFT", UIParent, "TOPLEFT", 28, -(T.ScreenHeight / 2) + 240)
 
 			TukuiUnitFrames.Headers.Party = Party
 

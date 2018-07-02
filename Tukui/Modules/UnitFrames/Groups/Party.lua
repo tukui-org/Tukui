@@ -86,24 +86,8 @@ function TukuiUnitFrames:Party()
 	Name:SetPoint("TOPLEFT", -1, 18)
 	Name:SetFontObject(Font)
 
-	if (C.Party.Portrait) then
-		local Portrait = CreateFrame("PlayerModel", nil, self)
-
-		Portrait:Size(40)
-		Portrait:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -4,0)
-		Portrait:SetBackdrop(TukuiUnitFrames.Backdrop)
-		Portrait:SetBackdropColor(0, 0, 0)
-		Portrait:CreateBackdrop()
-
-		Portrait.Backdrop:SetOutside(Portrait, -1, 1)
-		Portrait.Backdrop:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-		Portrait.Backdrop:CreateShadow()
-
-		self.Portrait = Portrait
-	end
-
 	local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
-	Buffs:Point("TOPLEFT", C.Party.Portrait and self.Portrait:GetParent() or self, "BOTTOMLEFT", 0, -6)
+	Buffs:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
 	Buffs:SetHeight(24)
 	Buffs:SetWidth(250)
 	Buffs.size = 24
@@ -127,11 +111,11 @@ function TukuiUnitFrames:Party()
 
 	local Leader = self:CreateTexture(nil, "OVERLAY")
 	Leader:SetSize(16, 16)
-	Leader:SetPoint("TOPRIGHT", C.Party.Portrait and self.Portrait or self, "TOPLEFT", -4, 0)
+	Leader:SetPoint("TOPRIGHT", self, "TOPLEFT", -4, 0)
 
 	local MasterLooter = self:CreateTexture(nil, "OVERLAY")
 	MasterLooter:SetSize(16, 16)
-	MasterLooter:SetPoint("TOPRIGHT", C.Party.Portrait and self.Portrait or self, "TOPLEFT", -4.5, -20)
+	MasterLooter:SetPoint("TOPRIGHT", self, "TOPLEFT", -4.5, -20)
 
 	local ReadyCheck = Health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:SetPoint("CENTER", Health, "CENTER")
