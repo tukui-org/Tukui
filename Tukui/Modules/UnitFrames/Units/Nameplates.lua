@@ -27,7 +27,6 @@ function TukuiUnitFrames:Nameplates()
 	Health.Background:SetColorTexture(.1, .1, .1)	
 	
 	Health.colorReaction = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.Smooth = true
