@@ -5,16 +5,6 @@ local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For 
 
 TukuiConfig["enUS"] = {
 	["General"] = {
-		["AutoScale"] = {
-			["Name"] = "Auto Scale",
-			["Desc"] = "Automatically detect the best scale for your resolution",
-		},
-
-		["UIScale"] = {
-			["Name"] = "UI Scale",
-			["Desc"] = "Set a custom UI scale",
-		},
-
 		["BackdropColor"] = {
 			["Name"] = "Backdrop Color",
 			["Desc"] = "Set the backdrop color for all Tukui frames"..RestoreDefault,
@@ -28,6 +18,11 @@ TukuiConfig["enUS"] = {
 		["HideShadows"] = {
 			["Name"] = "Hide Shadows",
 			["Desc"] = "Display or hide shadows on certain Tukui frames",
+		},
+		
+		["Scaling"] = {
+			["Name"] = "UI Scale",
+			["Desc"] = "Define how big the user interface is displayed",
 		},
 	},
 

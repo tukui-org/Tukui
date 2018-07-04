@@ -6,10 +6,20 @@ local T, C, L = select(2, ...):unpack()
 
 C["General"] = {
 	["AutoScale"] = true,
-	["UIScale"] = 0.71,
 	["BackdropColor"] = {0.11, 0.11, 0.11},
 	["BorderColor"] = {0, 0, 0},
 	["HideShadows"] = false,
+	["Scaling"] = {
+		["Options"] = {
+			["Pixel Perfection"] = "Pixel Perfection",
+			["Small"] = "Small",
+			["Medium"] = "Medium",
+			["Large"] = "Large",
+			["Oversize"] = "Oversize",
+		},
+
+		["Value"] = "Pixel Perfection",
+	},
 }
 
 C["ActionBars"] = {

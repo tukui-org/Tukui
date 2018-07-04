@@ -12,16 +12,6 @@ local RestoreDefault = "\n|cffFFFF00Clic droit pour restaurer par défaut|r" -- 
 
 TukuiConfig["frFR"] = {
 	["General"] = {
-		["AutoScale"] = {
-			["Name"] = "Ajustement Automatique",
-			["Desc"] = "Détecter automatiquement la meilleure échelle pour la résolution",
-		},
-
-		["UIScale"] = {
-			["Name"] = "Echelle de l'interface utilisateur",
-			["Desc"] = "Réglez l'échelle de l'interface utilisateur personnalisée",
-		},
-
 		["BackdropColor"] = {
 			["Name"] = "Couleur de fond",
 			["Desc"] = "Réglez la couleur de fond pour tous les cadres Tukui"..RestoreDefault,
@@ -35,6 +25,11 @@ TukuiConfig["frFR"] = {
 		["HideShadows"] = {
 			["Name"] = "Masquer les Ombres",
 			["Desc"] = "Afficher ou masquer les ombres sur certains cadres de Tukui",
+		},
+		
+		["Scaling"] = {
+			["Name"] = "Échelle de l'UI",
+			["Desc"] = "Définir la taille de l'interface utilisateur",
 		},
 	},
 

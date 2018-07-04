@@ -45,16 +45,22 @@ function Loading:OnEvent(event, addon)
 			self:LoadCustomSettings()
 
 		-- LOAD AUTOMATIC SCALING IF AUTOSCALE IF ON
-			if (C.General.AutoScale) then
-				C.General.UIScale = min(2, max(0.32, 768 / string.match(T.Resolution, "%d+x(%d+)")))
-				
-				-- too small with automatic scale on 1440p and 4k monitor, adjust.
-				if C.General.UIScale < 0.64 then
-					C.General.UIScale = C.General.UIScale + (C.General.UIScale / 3)
-				end
-			end
+			local Scaling = C.General.Scaling.Value
+			local Adjust = (T.ScreenHeight / 10000) / 2
+			local UIScale = min(2, max(0.01, 768 / string.match(T.Resolution, "%d+x(%d+)")))
 
-			T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
+			if (Scaling == "Small") then
+				UIScale = 0.64
+			elseif (Scaling == "Medium") then
+				UIScale = 0.64 + Adjust
+			elseif (Scaling == "Large") then
+				UIScale = 0.64 + Adjust + Adjust
+			elseif (Scaling == "Oversize") then
+				UIScale = 0.64 + Adjust + Adjust + Adjust
+			end
+		
+			T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / UIScale
+			T.UIScale = UIScale
 
 		-- PANELS
 			T["Panels"]:Enable()

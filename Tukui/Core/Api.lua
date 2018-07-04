@@ -7,7 +7,7 @@ local floor = math.floor
 local class = select(2, UnitClass("player"))
 local Noop = function() return end
 
-T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
+T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / GetCVar("uiScale")
 T.Scale = function(x) return T.Mult * math.floor(x / T.Mult + .5) end
 
 -- [[ API FUNCTIONS ]] --

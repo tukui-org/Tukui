@@ -36,14 +36,14 @@ Graphic:SetScript("OnEvent", function(self, event)
 			SetCVar("useUiScale", 1)
 		end
 
-		if (format("%.2f", GetCVar("uiScale")) ~= format("%.2f", C.General.UIScale)) then
-			SetCVar("uiScale", C.General.UIScale)
+		if (format("%.2f", GetCVar("uiScale")) ~= format("%.2f", T.UIScale)) then
+			SetCVar("uiScale", T.UIScale)
 		end
 
 		-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is
 		-- the lowest value of UIParent scale by default
-		if (C.General.UIScale < 0.64) then
-			UIParent:SetScale(C.General.UIScale)
+		if (T.UIScale < 0.64) then
+			UIParent:SetScale(T.UIScale)
 		end
 
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
