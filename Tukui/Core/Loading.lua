@@ -47,6 +47,11 @@ function Loading:OnEvent(event, addon)
 		-- LOAD AUTOMATIC SCALING IF AUTOSCALE IF ON
 			if (C.General.AutoScale) then
 				C.General.UIScale = min(2, max(0.32, 768 / string.match(T.Resolution, "%d+x(%d+)")))
+				
+				-- too small with automatic scale on 1440p and 4k monitor, adjust.
+				if C.General.UIScale < 0.64 then
+					C.General.UIScale = C.General.UIScale + (C.General.UIScale / 3)
+				end
 			end
 
 			T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
