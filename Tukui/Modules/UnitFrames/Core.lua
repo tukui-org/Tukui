@@ -447,19 +447,15 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 
 	local Colors = T["Colors"]
 
-	local R, G, B = unpack(Colors.totems[slot])
-	local A = 0.6
-
 	if (HaveTotem) then
 		Totem:SetAlpha(1)
 		Totem.TimeLeft = (Start + Duration) - GetTime()
 		Totem:SetMinMaxValues(0, Duration)
 		Totem:SetScript("OnUpdate", TukuiUnitFrames.UpdateTotemTimer)
-		Totem:SetStatusBarColor(R, G, B, A)
+		Totem:SetStatusBarColor(0, 0, 0, 0.7)
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(Icon)
-			Totem.Icon:SetDesaturated(true)
 		end
 
 		Bar.activeTotems = setbit(Bar.activeTotems, 2 ^ (slot - 1))
