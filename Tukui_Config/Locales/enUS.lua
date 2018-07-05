@@ -94,11 +94,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Derp",
 		},
 
-		["Consolidate"] = {
-			["Name"] = "Consolidate Auras",
-			["Desc"] = "Enable consolidated auras",
-		},
-
 		["Flash"] = {
 			["Name"] = "Flash Auras",
 			["Desc"] = "Flash auras when their duration is low"..PerformanceSlight,

@@ -38,7 +38,6 @@ C["ActionBars"] = {
 
 C["Auras"] = {
 	["Enable"] = true,
-	["Consolidate"] = false,
 	["Flash"] = false,
 	["ClassicTimer"] = false,
 	["HideBuffs"] = false,

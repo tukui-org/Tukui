@@ -7,7 +7,6 @@ local DebuffTypeColor = DebuffTypeColor
 local NumberFontNormal = NumberFontNormal
 local BuffFrame = BuffFrame
 local TemporaryEnchantFrame = TemporaryEnchantFrame
-local ConsolidatedBuffs = ConsolidatedBuffs
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
@@ -94,17 +93,13 @@ function TukuiAuras:UpdateAura(index)
 	local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 
 	if (Name) then
-		if (not C.Auras.Consolidate) then
-			ShouldConsolidate = false
-		end
-
-		if (ShouldConsolidate or C.Auras.ClassicTimer) then
+		if (C.Auras.ClassicTimer) then
 			self.Holder:Hide()
 		else
 			self.Duration:Hide()
 		end
 
-		if (Duration > 0 and ExpirationTime and not ShouldConsolidate) then
+		if (Duration > 0 and ExpirationTime) then
 			local TimeLeft = ExpirationTime - GetTime()
 			if (not self.TimeLeft) then
 				self.TimeLeft = TimeLeft

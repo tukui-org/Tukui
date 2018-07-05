@@ -5,7 +5,6 @@ local TukuiAuras = T["Auras"]
 TukuiAuras.HeaderNames = {
 	"TukuiBuffHeader",
 	"TukuiDebuffHeader",
-	"TukuiConsolidatedHeader",
 }
 
 function TukuiAuras:CreateHeaders()

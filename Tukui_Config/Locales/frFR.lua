@@ -101,11 +101,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Derp",
 		},
 
-		["Consolidate"] = {
-			["Name"] = "Consolider les Auras",
-			["Desc"] = "Activer les Auras consolidés",
-		},
-
 		["Flash"] = {
 			["Name"] = "Surbrillance des Auras",
 			["Desc"] = "Surbrillance des auras lorsque leur durée est faible"..PerformanceSlight,
