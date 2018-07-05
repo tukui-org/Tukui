@@ -36,12 +36,7 @@ TukuiConfig["frFR"] = {
 	["ActionBars"] = {
 		["Enable"] = {
 			["Name"] = "Activer les barres d'action",
-			["Desc"] = "Derp",
-		},
-
-		["EquipBorder"] = {
-			["Name"] = "Equipped Item Border",
-			["Desc"] = "Display Green Border on Equipped Items",
+			["Desc"] = "Ehm...",
 		},
 
 		["HotKey"] = {
@@ -98,7 +93,7 @@ TukuiConfig["frFR"] = {
 	["Auras"] = {
 		["Enable"] = {
 			["Name"] = "Activer auras",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["Flash"] = {
@@ -140,7 +135,7 @@ TukuiConfig["frFR"] = {
 	["Bags"] = {
 		["Enable"] = {
 			["Name"] = "Activer les Sacs",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ButtonSize"] = {
@@ -172,7 +167,7 @@ TukuiConfig["frFR"] = {
 	["Chat"] = {
 		["Enable"] = {
 			["Name"] = "Activer la fenetre de discussion",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["WhisperSound"] = {
@@ -270,12 +265,12 @@ TukuiConfig["frFR"] = {
 	["Misc"] = {
 		["ThreatBarEnable"] = {
 			["Name"] = "Activer la barre de menace",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["AltPowerBarEnable"] = {
 			["Name"] = "Activer la barre Alt-Power",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ExperienceEnable"] = {
@@ -294,20 +289,20 @@ TukuiConfig["frFR"] = {
 		},
 
 		["AutoInviteEnable"] = {
-			["Name"] = "Enable Auto Invites",
-			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+			["Name"] = "Activer les invitations automatiques",
+			["Desc"] = "Acceptez automatiquement les invitations de groupe d'amis et de membres de guilde.",
 		},
 		
 		["TalkingHeadEnable"] = {
-			["Name"] = "Enable Talking Head",
-			["Desc"] = "Display Blizzard Talking Head Frame.",
+			["Name"] = "Activer le cadre des discussions PNJ",
+			["Desc"] = "Ehm...",
 		},
 	},
 
 	["NamePlates"] = {
 		["Enable"] = {
 			["Name"] = "Activer les barres d'unités",
-			["Desc"] = "Derp"..PerformanceSlight,
+			["Desc"] = "Ehm.."..PerformanceSlight,
 		},
 
 		["Width"] = {
@@ -334,7 +329,7 @@ TukuiConfig["frFR"] = {
 	["Party"] = {
 		["Enable"] = {
 			["Name"] = "Activer les cadres de groupe",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["HealBar"] = {
@@ -371,17 +366,17 @@ TukuiConfig["frFR"] = {
 	["Raid"] = {
 		["Enable"] = {
 			["Name"] = "Activer les cadres de raid",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ShowPets"] = {
-			["Name"] = "Show Pets",
-			["Desc"] = "Derp",
+			["Name"] = "Affichage des familiers",
+			["Desc"] = "Ehm...",
 		},
 
 		["MaxUnitPerColumn"] = {
-			["Name"] = "Raid members per column",
-			["Desc"] = "Change the max number of raid members per column",
+			["Name"] = "Nombre de joueurs par colonne",
+			["Desc"] = "Changer le nombre maximum de membres du raid par colonne",
 		},
 
 		["HealBar"] = {
@@ -420,8 +415,8 @@ TukuiConfig["frFR"] = {
 		},
 
 		["VerticalHealth"] = {
-			["Name"] = "Vertical Health",
-			["Desc"] = "Display health lost vertically",
+			["Name"] = "Santé verticale",
+			["Desc"] = "Afficher la santé perdue verticalement",
 		},
 
 		["Font"] = {
@@ -443,12 +438,12 @@ TukuiConfig["frFR"] = {
 	["Tooltips"] = {
 		["Enable"] = {
 			["Name"] = "Activer infobulles",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["MouseOver"] = {
-			["Name"] = "Mouseover",
-			["Desc"] = "Enable mouseover tooltip",
+			["Name"] = "Infobulle sur curseur",
+			["Desc"] = "Activer l'infobulle sur le curseur de la souris",
 		},
 
 		["HideOnUnitFrames"] = {
@@ -525,12 +520,12 @@ TukuiConfig["frFR"] = {
 	["UnitFrames"] = {
 		["Enable"] = {
 			["Name"] = "Activé cadre des unités",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["TargetEnemyHostileColor"] = {
-			["Name"] = "Enemy Target Hostile Color",
-			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+			["Name"] = "Couleur hostile de la cible ennemie",
+			["Desc"] = "La barre de santé de la cible ennemie sera colorée par l'hostilité plutôt que par la couleur de la classe",
 		},
 
 		["Portrait"] = {
@@ -604,53 +599,53 @@ TukuiConfig["frFR"] = {
 		},
 
 		["OnlySelfBuffs"] = {
-			["Name"] = "Display My Buffs Only",
-			["Desc"] = "Only display our buffs on the target frame",
+			["Name"] = "Afficher mes buffs uniquement",
+			["Desc"] = "Afficher uniquement nos buffs sur le cadre cible",
 		},
 
 		["Threat"] = {
-			["Name"] = "Enable threat display",
-			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+			["Name"] = "Activer l'affichage de la menace",
+			["Desc"] = "La barre de vie va devenir rouge si le joueur a l'aggro",
 		},
 
 		["Arena"] = {
-			["Name"] = "Arena Frames",
-			["Desc"] = "Display arena opponents when inside a battleground or arena",
+			["Name"] = "Cadres d'arène",
+			["Desc"] = "Afficher les adversaires de l'arène à l'intérieur d'un champ de bataille ou d'une arène",
 		},
 
 		["Boss"] = {
-			["Name"] = "Boss Frames",
-			["Desc"] = "Display boss frames while doing pve",
+			["Name"] = "Cadres de monstre",
+			["Desc"] = "Afficher les cadres de monstre en faisant pve",
 		},
 
 		["TargetAuras"] = {
-			["Name"] = "Target Auras",
-			["Desc"] = "Display buffs and debuffs on target",
+			["Name"] = "Auras de la cible",
+			["Desc"] = "Afficher les buffs et les debuffs sur la cible",
 		},
 
 		["FocusAuras"] = {
-			["Name"] = "Focus Auras",
-			["Desc"] = "Display buffs and debuffs on focus",
+			["Name"] = "Auras du focus",
+			["Desc"] = "Afficher les buffs et les debuffs du focus",
 		},
 
 		["FocusTargetAuras"] = {
-			["Name"] = "Focus Target Auras",
-			["Desc"] = "Display buffs and debuffs on focus target",
+			["Name"] = "Auras de la cible du focus",
+			["Desc"] = "Afficher les buffs et les debuffs sur la cible du focus",
 		},
 
 		["ArenaAuras"] = {
-			["Name"] = "Arena Frames Auras",
-			["Desc"] = "Display debuffs on arena frames",
+			["Name"] = "Auras sur les cadres d'arène",
+			["Desc"] = "Afficher les débuffs sur les cadres d'arène",
 		},
 
 		["BossAuras"] = {
-			["Name"] = "Boss Frames Auras",
-			["Desc"] = "Display debuffs on boss frames",
+			["Name"] = "Auras sur les cadres de monstre",
+			["Desc"] = "Afficher les débuffs sur les cadres de boss",
 		},
 
 		["AltPowerText"] = {
-			["Name"] = "AltPower Text",
-			["Desc"] = "Display altpower text values on altpower bar",
+			["Name"] = "Affichage du texte sur la barre de puissance alternative",
+			["Desc"] = "Ehm...",
 		},
 
 		["Font"] = {

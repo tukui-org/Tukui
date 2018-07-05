@@ -32,11 +32,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Derp",
 		},
 
-		["EquipBorder"] = {
-			["Name"] = "Equipped Item Border",
-			["Desc"] = "Display Green Border on Equipped Items",
-		},
-
 		["HotKey"] = {
 			["Name"] = "Hotkeys",
 			["Desc"] = "Display Hotkey text on buttons",
@@ -603,7 +598,7 @@ TukuiConfig["enUS"] = {
 
 		["Threat"] = {
 			["Name"] = "Enable threat display",
-			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+			["Desc"] = "Health Bar on party and raid members will turn red if they have aggro",
 		},
 
 		["Arena"] = {
