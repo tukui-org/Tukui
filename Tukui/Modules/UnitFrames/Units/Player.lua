@@ -293,7 +293,7 @@ function TukuiUnitFrames:Player()
 		}
 	end
 
-	if (C.UnitFrames.TotemBar) then
+	if (C.UnitFrames.TotemBar and not T.MyClass == "PRIEST") then
 		local Bar = CreateFrame("Frame", nil, self)
 		Bar:SetFrameStrata(self:GetFrameStrata())
 		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 5)
