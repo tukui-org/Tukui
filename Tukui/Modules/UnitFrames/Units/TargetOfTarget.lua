@@ -3,7 +3,6 @@ local T, C, L = select(2, ...):unpack()
 local TukuiUnitFrames = T["UnitFrames"]
 
 function TukuiUnitFrames:TargetOfTarget()
-	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 
@@ -35,19 +34,10 @@ function TukuiUnitFrames:TargetOfTarget()
 	Health.Background:SetColorTexture(.1, .1, .1)
 
 	Health.frequentUpdates = true
-
-	if DarkTheme then
-		Health.colorTapping = false
-		Health.colorDisconnected = false
-		Health.colorClass = false
-		Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
-		Health.Background:SetVertexColor(0, 0, 0, 1)
-	else
-		Health.colorTapping = true
-		Health.colorDisconnected = true
-		Health.colorClass = true
-		Health.colorReaction = true
-	end
+	Health.colorTapping = true
+	Health.colorDisconnected = true
+	Health.colorClass = true
+	Health.colorReaction = true
 
 	if C.UnitFrames.Smooth then
 		Health.Smooth = true

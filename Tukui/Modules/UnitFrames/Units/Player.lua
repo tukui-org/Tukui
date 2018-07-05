@@ -9,7 +9,6 @@ function TukuiUnitFrames:Player()
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 	local CastTexture = T.GetTexture(C["Textures"].UFCastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
-	local DarkTheme = C["UnitFrames"].DarkTheme
 
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
@@ -41,19 +40,11 @@ function TukuiUnitFrames:Player()
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
-
-	if DarkTheme then
-		Health.colorTapping = false
-		Health.colorDisconnected = false
-		Health.colorClass = false
-		Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
-		Health.Background:SetVertexColor(0, 0, 0, 1)
-	else
-		Health.colorTapping = true
-		Health.colorDisconnected = true
-		Health.colorClass = true
-		Health.colorReaction = true
-	end
+	
+	Health.colorTapping = true
+	Health.colorDisconnected = true
+	Health.colorClass = true
+	Health.colorReaction = true
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -81,14 +72,7 @@ function TukuiUnitFrames:Player()
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.frequentUpdates = true
-
-	if DarkTheme then
-		Power.colorTapping = true
-		Power.colorClass = true
-		Power.Background.multiplier = 0.1
-	else
-		Power.colorPower = true
-	end
+	Power.colorPower = true
 
 	if (C.UnitFrames.Smooth) then
 		Power.Smooth = true

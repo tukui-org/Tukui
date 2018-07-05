@@ -616,11 +616,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Only display our buffs on the target frame",
 		},
 
-		["DarkTheme"] = {
-			["Name"] = "Dark Theme",
-			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
-		},
-
 		["Threat"] = {
 			["Name"] = "Enable threat display",
 			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",

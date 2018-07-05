@@ -306,10 +306,9 @@ function TukuiUnitFrames:UpdateThreat(event, unit)
 end
 
 function TukuiUnitFrames:PreUpdateHealth(unit)
-	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HostileColor = C["UnitFrames"].TargetEnemyHostileColor
 
-	if (DarkTheme == true) or (HostileColor ~= true) then
+	if (HostileColor ~= true) then
 		return
 	end
 
@@ -1099,13 +1098,10 @@ function TukuiUnitFrames:ShowArenaPreparation()
 				local _, Spec, _, _, _, Class = GetSpecializationInfoByID(SpecID)
 
 				if (Class) then
+					local Color = self.Units.Arena[i].colors.class[Class]
+					
 					Frame.SpecClass:SetText(Spec.."  -  "..LOCALIZED_CLASS_NAMES_MALE[Class])
-
-					if (not C.UnitFrames.DarkTheme) then
-						local Color = self.Units.Arena[i].colors.class[Class]
-
-						Frame.Health:SetStatusBarColor(unpack(Color))
-					end
+					Frame.Health:SetStatusBarColor(unpack(Color))
 				else
 					Frame.Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
 				end

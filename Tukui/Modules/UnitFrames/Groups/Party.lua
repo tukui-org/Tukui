@@ -4,7 +4,6 @@ local TukuiUnitFrames = T["UnitFrames"]
 local Class = select(2, UnitClass("player"))
 
 function TukuiUnitFrames:Party()
-	local DarkTheme = C["UnitFrames"].DarkTheme
 	local HealthTexture = T.GetTexture(C["Textures"].UFPartyHealthTexture)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPartyPowerTexture)
 	local Font = T.GetFont(C["Party"].Font)
@@ -37,18 +36,10 @@ function TukuiUnitFrames:Party()
 		Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 	end
 
-	if DarkTheme then
-		Health.colorTapping = false
-		Health.colorDisconnected = false
-		Health.colorClass = false
-		Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
-		Health.Background:SetVertexColor(0, 0, 0, 1)
-	else
-		Health.colorTapping = true
-		Health.colorDisconnected = true
-		Health.colorClass = true
-		Health.colorReaction = true
-	end
+	Health.colorTapping = true
+	Health.colorDisconnected = true
+	Health.colorClass = true
+	Health.colorReaction = true
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -67,16 +58,7 @@ function TukuiUnitFrames:Party()
 	Power.Background.multiplier = 0.3
 
 	Power.frequentUpdates = true
-
-	if DarkTheme then
-		Power.colorTapping = true
-		Power.colorClass = true
-		Power.colorClassNPC = true
-		Power.colorClassPet = true
-		Power.Background.multiplier = 0.1
-	else
-		Power.colorPower = true
-	end
+	Power.colorPower = true
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true

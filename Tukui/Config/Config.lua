@@ -189,7 +189,6 @@ C["UnitFrames"] = {
 	["OnlySelfBuffs"] = false,
 	["Threat"] = false,
 	["AltPowerText"] = false,
-	["DarkTheme"] = false,
 	["Arena"] = true,
 	["Boss"] = true,
 	["Font"] = "Tukui UF Outline",
