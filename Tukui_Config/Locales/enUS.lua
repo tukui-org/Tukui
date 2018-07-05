@@ -183,11 +183,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Display URL links wrapped in brackets",
 		},
 
-		["LootFrame"] = {
-			["Name"] = "Loot Frame",
-			["Desc"] = "Create a seperate 'Loot' chat frame to the right",
-		},
-
 		["Background"] = {
 			["Name"] = "Chat Background",
 			["Desc"] = "Create a background for the left and right chat frames",
@@ -335,11 +330,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Derp",
 		},
 
-		["Portrait"] = {
-			["Name"] = "Portrait",
-			["Desc"] = "Display portrait on party frames",
-		},
-
 		["HealBar"] = {
 			["Name"] = "HealComm",
 			["Desc"] = "Display a bar showing incoming heals & absorbs",
@@ -466,7 +456,7 @@ TukuiConfig["enUS"] = {
 
 		["ShowSpec"] = {
 			["Name"] = "Specialization and iLevel",
-			["Desc"] = "Display player specialization and ilevel in tooltip",
+			["Desc"] = "Display player specialization and ilevel in tooltip when you press ALT",
 		},
 
 		["HealthFont"] = {

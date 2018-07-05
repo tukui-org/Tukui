@@ -554,7 +554,7 @@ local Update = function(self, event)
 		BuildFriendTable(Total)
 	end
 
-	self.Text:SetFormattedText("%s: %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline)
+	self.Text:SetFormattedText("%s %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline)
 end
 
 local Enable = function(self)

@@ -13,7 +13,7 @@ local Update = function(self)
 
 	Used = Total - Free
 
-	self.Text:SetFormattedText("%s: %s/%s", DataText.NameColor .. L.DataText.Bags .. "|r", DataText.ValueColor .. Used, Total .. "|r")
+	self.Text:SetFormattedText("%s %s/%s", DataText.NameColor .. L.DataText.Bags .. "|r", DataText.ValueColor .. Used, Total .. "|r")
 end
 
 local OnMouseUp = function(self)

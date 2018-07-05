@@ -13,7 +13,7 @@ local Update = function(self)
 		Value = floor(Base * 5)
 	end
 
-	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Regen .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
+	self.Text:SetFormattedText("%s %s", DataText.NameColor .. L.DataText.Regen .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
 end
 
 local Enable = function(self)

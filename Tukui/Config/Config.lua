@@ -38,7 +38,7 @@ C["ActionBars"] = {
 
 C["Auras"] = {
 	["Enable"] = true,
-	["Flash"] = false,
+	["Flash"] = true,
 	["ClassicTimer"] = false,
 	["HideBuffs"] = false,
 	["HideDebuffs"] = false,
@@ -61,7 +61,6 @@ C["Chat"] = {
 	["WhisperSound"] = true,
 	["LinkColor"] = {0.08, 1, 0.36},
 	["LinkBrackets"] = true,
-	["LootFrame"] = true,
 	["ScrollByX"] = 3,
 	["TabFont"] = "Tukui",
 	["ChatFont"] = "Tukui",
@@ -106,7 +105,6 @@ C["NamePlates"] = {
 
 C["Party"] = {
 	["Enable"] = true,
-	["Portrait"] = false,
 	["HealBar"] = true,
 	["ShowPlayer"] = true,
 	["ShowHealthText"] = true,

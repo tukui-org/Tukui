@@ -190,11 +190,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Affichage des liens URL entre crochets",
 		},
 
-		["LootFrame"] = {
-			["Name"] = "Fenetre de butin",
-			["Desc"] = "Créer une fenetre de butin séparé sur la droite",
-		},
-
 		["Background"] = {
 			["Name"] = "Fond de fenetre de discussion",
 			["Desc"] = "Créer un fond pour les cadres de discussion gauche et droit",
@@ -342,11 +337,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Derp",
 		},
 
-		["Portrait"] = {
-			["Name"] = "Portrait",
-			["Desc"] = "Afficher les portraits sur les cadres de groupe",
-		},
-
 		["HealBar"] = {
 			["Name"] = "HealComm",
 			["Desc"] = "Afficher une barre indiquant les soins et absorbe entrants",
@@ -473,12 +463,12 @@ TukuiConfig["frFR"] = {
 
 		["ShowSpec"] = {
 			["Name"] = "Spécialisation et iLevel",
-			["Desc"] = "Affichage de la spécialisation et du iLevel dans l'info-bulle",
+			["Desc"] = "Affichage de la spécialisation et du iLevel dans l'info-bulle lorsque vous appuyez sur ALT",
 		},
 
 		["HealthFont"] = {
 			["Name"] = "Police de la barre de santé",
-			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles ",
+			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles",
 		},
 	},
 	

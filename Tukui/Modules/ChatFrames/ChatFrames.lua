@@ -246,7 +246,7 @@ function TukuiChat:SetDefaultChatFramesPositions()
 		if (ID == 1) then
 			Frame:ClearAllPoints()
 			Frame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 50)
-		elseif (C.Chat.LootFrame and ID == 4) then
+		elseif (ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
 				Frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 50)
@@ -304,12 +304,6 @@ function TukuiChat:SetChatFramePosition()
 		Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
 		Frame:SetSize(Width, Height)
 	end
-
-	if (not C.Chat.LootFrame) then
-		if (FCF_GetChatWindowInfo(ID) == LOOT) then
-			FCF_Close(Frame)
-		end
-	end
 end
 
 function TukuiChat:Install()
@@ -321,12 +315,9 @@ function TukuiChat:Install()
 	FCF_OpenNewWindow(GENERAL)
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
-
-	if C.Chat.LootFrame then
-		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
-		ChatFrame4:Show()
-	end
+	FCF_OpenNewWindow(LOOT)
+	FCF_UnDockFrame(ChatFrame4)
+	--ChatFrame4:Show()
 
 	-- Set more chat groups
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
@@ -376,14 +367,12 @@ function TukuiChat:Install()
 	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LookingForGroup)
 
 	-- Setup the right chat
-	if C.Chat.LootFrame then
-		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-	end
+	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
 
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
