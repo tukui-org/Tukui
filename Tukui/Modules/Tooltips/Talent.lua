@@ -121,7 +121,7 @@ Talent:SetScript("OnEvent", function(self, event, ...)
 			
 		local GUID = UnitGUID("mouseover")
 			
-		if self.CurrentGUID == GUID then
+		if self.CurrentGUID == GUID and IsAltKeyDown() then
 			self.ILevel = self:GetItemLevel("mouseover")
 			self.Spec = self:GetTalentSpec("mouseover")
 			self.CurrentGUID = nil
