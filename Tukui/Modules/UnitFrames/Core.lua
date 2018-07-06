@@ -1001,7 +1001,7 @@ function TukuiUnitFrames:CreateUnits()
 		if C.Party.Enable then
 			local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
 			Party:SetParent(Panels.PetBattleHider)
-			Party:Point("TOPLEFT", UIParent, "TOPLEFT", 28, -(T.ScreenHeight / 2) + 240)
+			Party:Point("TOPLEFT", UIParent, "TOPLEFT", 28, -(UIParent:GetHeight() / 2) + 200)
 
 			TukuiUnitFrames.Headers.Party = Party
 
