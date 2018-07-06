@@ -11,11 +11,11 @@ oUF.Tags.Methods["Tukui:GetRaidNameColor"] = function(unit)
 	local R, G, B
 	
 	if Role == "TANK" then
-		R, G, B = 0.41, 0.80, 1.00 -- Blue for tanks
+		R, G, B = 0.4, 0.7, 1 -- Blue for tanks
 	elseif Role == "HEALER" then
-		R, G, B = 0.00, 1.00, 0.59 -- Green for healers
+		R, G, B = 0, 1, 0 -- Green for healers
 	else
-		R, G, B = 1, 1, 1 -- White for DPS or unknown role
+		R, G, B = 1, 1, 1  -- White for DPS or unknown role
 	end
 
 	return string.format("|cff%02x%02x%02x", R * 255, G * 255, B * 255)
