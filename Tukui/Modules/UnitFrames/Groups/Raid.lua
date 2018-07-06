@@ -87,11 +87,6 @@ function TukuiUnitFrames:Raid()
 	ReadyCheck:Width(12)
 	ReadyCheck:SetPoint("CENTER")
 
-	local LFDRole = Health:CreateTexture(nil, "OVERLAY")
-	LFDRole:SetInside(Panel)
-	LFDRole:SetColorTexture(0, 0, 0, 0)
-	LFDRole.Override = TukuiUnitFrames.SetGridGroupRole
-
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
@@ -165,9 +160,8 @@ function TukuiUnitFrames:Raid()
 		RaidDebuffs:SetHeight(22)
 		RaidDebuffs:SetWidth(22)
 		RaidDebuffs:SetPoint("CENTER", Health)
-		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 20)
-		RaidDebuffs:SetBackdrop(TukuiUnitFrames.Backdrop)
-		RaidDebuffs:SetBackdropColor(0, 0, 0)
+		RaidDebuffs:SetFrameStrata(Health:GetFrameStrata())
+		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 1)
 		RaidDebuffs:SetTemplate()
 		RaidDebuffs:CreateShadow()
 
@@ -198,20 +192,6 @@ function TukuiUnitFrames:Raid()
 		self.RaidDebuffs = RaidDebuffs
 	end
 
-	if (Class == "PRIEST" and C.UnitFrames.WeakBar) then
-		-- Weakened Soul Bar
-		local WSBar = CreateFrame("StatusBar", nil, Power)
-		WSBar:SetAllPoints(Power)
-		WSBar:SetStatusBarTexture(C.Medias.Normal)
-		WSBar:GetStatusBarTexture():SetHorizTile(false)
-		WSBar:SetBackdrop(TukuiUnitFrames.Backdrop)
-		WSBar:SetBackdropColor(unpack(C["General"].BackdropColor))
-		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
-
-		-- Register
-		self.WeakenedSoul = WSBar
-	end
-
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 
@@ -232,14 +212,13 @@ function TukuiUnitFrames:Raid()
 		self.Atonement = Atonement
 	end
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameShort]")
+	self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Panel = Panel
 	self.Name = Name
 	self.ReadyCheckIndicator = ReadyCheck
-	self.GroupRoleIndicator = LFDRole
 	self.Range = Range
 	self.RaidTargetIndicator = RaidIcon
 	self.ThreatIndicator = Threat

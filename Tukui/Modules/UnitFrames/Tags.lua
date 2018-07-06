@@ -5,29 +5,45 @@ local TukuiUnitFrames = T["UnitFrames"]
 local DEAD = DEAD
 local CHAT_FLAG_AFK = CHAT_FLAG_AFK
 
-oUF.Tags.Events['Tukui:GetNameColor'] = 'UNIT_POWER_UPDATE'
-oUF.Tags.Methods['Tukui:GetNameColor'] = function(unit)
-	local Reaction = UnitReaction(unit, 'player')
+oUF.Tags.Events["Tukui:GetRaidNameColor"] = "RAID_ROSTER_UPDATE GROUP_ROSTER_UPDATE"
+oUF.Tags.Methods["Tukui:GetRaidNameColor"] = function(unit)
+	local Role = UnitGroupRolesAssigned(unit)
+	local R, G, B
+	
+	if Role == "TANK" then
+		R, G, B = 0.41, 0.80, 1.00 -- Blue for tanks
+	elseif Role == "HEALER" then
+		R, G, B = 0.00, 1.00, 0.59 -- Green for healers
+	else
+		R, G, B = 1, 1, 1 -- White for DPS or unknown role
+	end
+
+	return string.format("|cff%02x%02x%02x", R * 255, G * 255, B * 255)
+end
+
+oUF.Tags.Events["Tukui:GetNameColor"] = "UNIT_POWER_UPDATE"
+oUF.Tags.Methods["Tukui:GetNameColor"] = function(unit)
+	local Reaction = UnitReaction(unit, "player")
 
 	if (UnitIsPlayer(unit)) then
-		return _TAGS['raidcolor'](unit)
+		return _TAGS["raidcolor"](unit)
 	elseif (Reaction) then
 		local c = T.Colors.reaction[Reaction]
-		return string.format('|cff%02x%02x%02x', c[1] * 255, c[2] * 255, c[3] * 255)
+		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
 	else
-		return string.format('|cff%02x%02x%02x', .84 * 255, .75 * 255, .65 * 255)
+		return string.format("|cff%02x%02x%02x", .84 * 255, .75 * 255, .65 * 255)
 	end
 end
 
-oUF.Tags.Events['Tukui:DiffColor'] = 'UNIT_LEVEL'
-oUF.Tags.Methods['Tukui:DiffColor'] = function(unit)
+oUF.Tags.Events["Tukui:DiffColor"] = "UNIT_LEVEL"
+oUF.Tags.Methods["Tukui:DiffColor"] = function(unit)
 	local r, g, b
 	local Level = UnitLevel(unit)
 
 	if (Level < 1) then
 		r, g, b = 0.69, 0.31, 0.31
 	else
-		local DiffColor = UnitLevel('target') - UnitLevel('player')
+		local DiffColor = UnitLevel("target") - UnitLevel("player")
 		if (DiffColor >= 5) then
 			r, g, b = 0.69, 0.31, 0.31
 		elseif (DiffColor >= 3) then
@@ -41,11 +57,11 @@ oUF.Tags.Methods['Tukui:DiffColor'] = function(unit)
 		end
 	end
 
-	return string.format('|cff%02x%02x%02x', r * 255, g * 255, b * 255)
+	return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
 end
 
-oUF.Tags.Events['Tukui:NameShort'] = 'UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE'
-oUF.Tags.Methods['Tukui:NameShort'] = function(unit)
+oUF.Tags.Events["Tukui:NameShort"] = "UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE"
+oUF.Tags.Methods["Tukui:NameShort"] = function(unit)
 	local Name = UnitName(unit) or UNKNOWN
 	local IsLeader = UnitIsGroupLeader(unit)
 	local IsAssistant = UnitIsGroupAssistant(unit) or UnitIsRaidOfficer(unit)
@@ -54,34 +70,34 @@ oUF.Tags.Methods['Tukui:NameShort'] = function(unit)
 	return TukuiUnitFrames.UTF8Sub(Lead..Assist..Name, 10, false)
 end
 
-oUF.Tags.Events['Tukui:NameMedium'] = 'UNIT_NAME_UPDATE'
-oUF.Tags.Methods['Tukui:NameMedium'] = function(unit)
+oUF.Tags.Events["Tukui:NameMedium"] = "UNIT_NAME_UPDATE"
+oUF.Tags.Methods["Tukui:NameMedium"] = function(unit)
 	local Name = UnitName(unit) or UNKNOWN
 	return TukuiUnitFrames.UTF8Sub(Name, 15, true)
 end
 
-oUF.Tags.Events['Tukui:NameLong'] = 'UNIT_NAME_UPDATE'
-oUF.Tags.Methods['Tukui:NameLong'] = function(unit)
+oUF.Tags.Events["Tukui:NameLong"] = "UNIT_NAME_UPDATE"
+oUF.Tags.Methods["Tukui:NameLong"] = function(unit)
 	local Name = UnitName(unit) or UNKNOWN
 	return TukuiUnitFrames.UTF8Sub(Name, 20, true)
 end
 
-oUF.Tags.Events['Tukui:Dead'] = 'UNIT_HEALTH'
-oUF.Tags.Methods['Tukui:Dead'] = function(unit)
+oUF.Tags.Events["Tukui:Dead"] = "UNIT_HEALTH"
+oUF.Tags.Methods["Tukui:Dead"] = function(unit)
 	if UnitIsDeadOrGhost(unit) then
 		return DEAD
 	end
 end
 
-oUF.Tags.Events['Tukui:AFK'] = 'PLAYER_FLAGS_CHANGED'
-oUF.Tags.Methods['Tukui:AFK'] = function(unit)
+oUF.Tags.Events["Tukui:AFK"] = "PLAYER_FLAGS_CHANGED"
+oUF.Tags.Methods["Tukui:AFK"] = function(unit)
 	if UnitIsAFK(unit) then
 		return CHAT_FLAG_AFK
 	end
 end
 
-oUF.Tags.Events['Tukui:Role'] = 'PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE'
-oUF.Tags.Methods['Tukui:Role'] = function(unit)
+oUF.Tags.Events["Tukui:Role"] = "PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE"
+oUF.Tags.Methods["Tukui:Role"] = function(unit)
 	local Role = UnitGroupRolesAssigned(unit)
 	local String = ""
 

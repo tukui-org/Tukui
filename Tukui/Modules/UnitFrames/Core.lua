@@ -611,24 +611,6 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 	end
 end
 
-function TukuiUnitFrames:SetGridGroupRole()
-	local LFDRole = self.GroupRoleIndicator
-	local Role = UnitGroupRolesAssigned(self.unit)
-
-	if Role == "TANK" then
-		LFDRole:SetColorTexture(67 / 255, 110 / 255, 238 / 255,.3)
-		LFDRole:Show()
-	elseif Role == "HEALER" then
-		LFDRole:SetColorTexture(130 / 255, 255 / 255, 130 / 255, .15)
-		LFDRole:Show()
-	elseif Role == "DAMAGER" then
-		LFDRole:SetColorTexture(176 / 255, 23 / 255, 31 / 255, .27)
-		LFDRole:Show()
-	else
-		LFDRole:Hide()
-	end
-end
-
 function TukuiUnitFrames:CreateAuraWatchIcon(icon)
 	icon:SetTemplate()
 	icon.icon:Point("TOPLEFT", 1, -1)
