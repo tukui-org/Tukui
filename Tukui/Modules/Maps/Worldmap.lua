@@ -10,10 +10,10 @@ function WorldMap:OnUpdate(elapsed)
 		local X, Y = 0, 0
 		
 		if UnitMap then
-			local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player")
+			local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, "player")
 
 			if GetPlayerMapPosition then
-				X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
+				X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
 			end
 		end
 

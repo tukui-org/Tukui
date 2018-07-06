@@ -26,10 +26,11 @@ function BGFrame:OnEnter()
 		local Name, KillingBlows, HonorableKills, Deaths, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
 
 		if (Name and Name == MyName) then
-			local CurMapID = GetCurrentMapAreaID()
+			local CurMapID = C_Map.GetBestMapForUnit("player")
+
 			local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 			local ClassColor = format("|cff%.2x%.2x%.2x", Color.r * 255, Color.g * 255, Color.b * 255)
-			SetMapToCurrentZone()
+
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, T.Scale(4))
 			GameTooltip:ClearLines()
 			GameTooltip:Point("BOTTOM", self, "TOP", 0, 1)
