@@ -6,16 +6,19 @@ local format = format
 local int = 2
 
 --Map IDs
-local WSG = 443
-local TP = 626
-local AV = 401
-local SOTA = 512
-local IOC = 540
-local EOTS = 482
-local TBFG = 736
-local AB = 461
-local TOK = 856
-local SSM = 860
+local WSG = 92
+local TP = 206
+local AV = 91
+local SOTA = 128
+local IOC = 169
+local EOTS = 112
+local TBFG = 275
+local AB = 93
+local TOK = 417
+local SSM = 423
+local DG = 519
+local SS = 907
+
 
 local BGFrame = CreateFrame("Frame", nil, UIParent)
 
@@ -26,8 +29,7 @@ function BGFrame:OnEnter()
 		local Name, KillingBlows, HonorableKills, Deaths, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
 
 		if (Name and Name == MyName) then
-			local CurMapID = C_Map.GetBestMapForUnit("player")
-
+			local CurrentMapID = C_Map.GetBestMapForUnit("player")
 			local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 			local ClassColor = format("|cff%.2x%.2x%.2x", Color.r * 255, Color.g * 255, Color.b * 255)
 
@@ -44,33 +46,41 @@ function BGFrame:OnEnter()
 			GameTooltip:AddDoubleLine(L.DataText.Damage, DamageDone, 1, 1, 1)
 			GameTooltip:AddDoubleLine(L.DataText.Healing, HealingDone, 1, 1, 1)
 
-			-- Add extra statistics based on what BG you're in.
-			if (CurMapID == WSG or CurMapID == TP) then
-				GameTooltip:AddDoubleLine(L.DataText.FlagCapture, GetBattlefieldStatData(i, 1), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.FlagReturn, GetBattlefieldStatData(i, 2), 1, 1, 1)
-			elseif (CurMapID == EOTS) then
-				GameTooltip:AddDoubleLine(L.DataText.FlagCapture, GetBattlefieldStatData(i, 1), 1, 1, 1)
-			elseif (CurMapID == AV) then
-				GameTooltip:AddDoubleLine(L.DataText.GraveyardAssault, GetBattlefieldStatData(i, 1), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.GraveyardDefend, GetBattlefieldStatData(i, 2), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.TowerAssault, GetBattlefieldStatData(i, 3), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.TowerDefend, GetBattlefieldStatData(i, 4), 1, 1, 1)
-			elseif (CurMapID == SOTA) then
-				GameTooltip:AddDoubleLine(L.DataText.DemolisherDestroy, GetBattlefieldStatData(i, 1), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.GateDestroy, GetBattlefieldStatData(i, 2), 1, 1, 1)
-			elseif (CurMapID == IOC or CurMapID == TBFG or CurMapID == AB) then
-				GameTooltip:AddDoubleLine(L.DataText.BaseAssault, GetBattlefieldStatData(i, 1), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.BaseDefend, GetBattlefieldStatData(i, 2), 1, 1, 1)
-			elseif (CurrentMapID == TOK) then
-				GameTooltip:AddDoubleLine(L.DataText.OrbPossession, GetBattlefieldStatData(i, 1), 1, 1, 1)
-				GameTooltip:AddDoubleLine(L.DataText.VictoryPts, GetBattlefieldStatData(i, 2), 1, 1, 1)
-			elseif (CurrentMapID == SSM) then
-				GameTooltip:AddDoubleLine(L.DataText.CartControl, GetBattlefieldStatData(i, 1), 1, 1, 1)
+			if CurrentMapID == WSG or CurrentMapID == TP then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+			elseif CurrentMapID == EOTS then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+			elseif CurrentMapID == AV then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3), GetBattlefieldStatData(i, 3),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4), GetBattlefieldStatData(i, 4),1,1,1)
+			elseif CurrentMapID == SOTA then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+			elseif CurrentMapID == IOC or CurrentMapID == TBFG or CurrentMapID == AB then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+			elseif CurrentMapID == TOK then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+			elseif CurrentMapID == SSM then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+			elseif CurrentMapID == DG then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3), GetBattlefieldStatData(i, 3),1,1,1)
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4), GetBattlefieldStatData(i, 4),1,1,1)
+			elseif CurrentMapID == SS then
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
 			end
-
-			GameTooltip:Show()
+			
+			break
 		end
 	end
+	
+	GameTooltip:Show()
 end
 
 function BGFrame:OnLeave()
