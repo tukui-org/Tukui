@@ -50,7 +50,7 @@ end
 function ObjectiveTracker:CreateToggleButtons()
 	local Button = CreateFrame("Button", nil, UIParent)
 	Button:Size(32)
-	Button:SetPoint("TOPRIGHT", ObjectiveTrackerFrame, -6, 20)
+	Button:SetPoint("TOPRIGHT", ObjectiveTrackerFrame, 13, 20)
 	Button:SetAlpha(0)
 	Button:RegisterForClicks("AnyUp")
 	Button:SetScript("OnClick", self.OnClick)
@@ -65,12 +65,7 @@ function ObjectiveTracker:CreateToggleButtons()
 end
 
 function ObjectiveTracker:SetDefaultPosition()
-	local GetTop = ObjectiveTrackerFrame:GetTop() or 0
-	local ScreenHeight = GetScreenHeight()
-	local GapFromTop = ScreenHeight - GetTop
-	local MaxHeight = ScreenHeight - GapFromTop
-	local SetObjectiveFrameHeight = min(MaxHeight, 480)
-	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -204, -242
+	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -228, -325
 	local Data = TukuiData[GetRealmName()][UnitName("Player")]
 
 	local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
@@ -79,7 +74,7 @@ function ObjectiveTracker:SetDefaultPosition()
 
 	ObjectiveTrackerFrame:ClearAllPoints()
 	ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
-	ObjectiveTrackerFrame:Height(SetObjectiveFrameHeight)
+	ObjectiveTrackerFrame:Height(396)
 
 	-- Force IsUserPlaced to always be true, which will avoid tracker to move
 	-- https://git.tukui.org/Blazeflack/BlizzardUserInterface/blob/master/Interface/FrameXML/UIParent.lua#L2939
@@ -121,6 +116,7 @@ function ObjectiveTracker:Skin()
 					HeaderPanel:SetFrameLevel(Header:GetFrameLevel() - 1)
 					HeaderPanel:SetFrameStrata("BACKGROUND")
 					HeaderPanel:SetOutside(Header, 1, 1)
+					
 
 					local HeaderBar = CreateFrame("StatusBar", nil, HeaderPanel)
 					HeaderBar:Size(ObjectiveTrackerFrame:GetWidth(), 2)

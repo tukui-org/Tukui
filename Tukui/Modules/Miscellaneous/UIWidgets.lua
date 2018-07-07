@@ -11,7 +11,7 @@ function UIWidgets:Enable()
 	
 	-- This is now the frame that contain capture bar and other shit like that.
 	MinimapWidget:ClearAllPoints()
-	MinimapWidget:SetPoint("TOP", 0, -100)
+	MinimapWidget:SetPoint("TOP", 3, -66)
 end
 
 Miscellaneous.UIWidgets = UIWidgets

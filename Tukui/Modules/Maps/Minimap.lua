@@ -99,6 +99,7 @@ function Minimap:StyleMinimap()
 	QueueStatusMinimapButtonBorder:Kill()
 	QueueStatusFrame:StripTextures()
 	QueueStatusFrame:SetTemplate()
+	QueueStatusFrame:CreateShadow()
 
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetParent(Minimap)
