@@ -41,6 +41,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		end
 	end
 	
+	RunesBar.PostUpdate = TukuiUnitFrames.RunesPostUpdate
 	RunesBar.colorSpec = true
 
 	-- Shadow Effect Updates

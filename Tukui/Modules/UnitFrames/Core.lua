@@ -740,6 +740,21 @@ function TukuiUnitFrames:MoveTotemBar()
 	Totems:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, T_Y)
 end
 
+function TukuiUnitFrames:RunesPostUpdate(runemap)
+	local Bar = self
+	local RuneMap = runemap
+	
+	for i, RuneID in next, RuneMap do
+		local IsReady = select(3, GetRuneCooldown(RuneID))
+		
+		if IsReady then
+			Bar[i]:SetAlpha(1)
+		else
+			Bar[i]:SetAlpha(0.5)
+		end
+	end
+end
+
 function TukuiUnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",
