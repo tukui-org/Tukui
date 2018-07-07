@@ -14,10 +14,12 @@ local IOC = 169
 local EOTS = 112
 local TBFG = 275
 local AB = 93
+local WAB = 837
 local TOK = 417
 local SSM = 423
 local DG = 519
 local SS = 907
+local SSvsTM = 623
 
 
 local BGFrame = CreateFrame("Frame", nil, UIParent)
@@ -74,6 +76,10 @@ function BGFrame:OnEnter()
 				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4), GetBattlefieldStatData(i, 4),1,1,1)
 			elseif CurrentMapID == SS then
 				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
+			elseif CurrentMapID == WAB then
+				-- I will do it when I see it live
+			elseif CurrentMapID == SSvsTM then
+				-- I will do it when I see it live
 			end
 			
 			break
