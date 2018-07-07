@@ -46,7 +46,7 @@
 	<Script file="Miscellaneous\StaticPopups.lua"/>
 	<Script file="Miscellaneous\TimerTracker.lua"/>
 	<Script file="Miscellaneous\Durability.lua"/>
-	<Script file="Miscellaneous\Capture.lua"/>
+	<Script file="Miscellaneous\UIWidgets.lua"/>
 	<Script file="Miscellaneous\Ghost.lua"/>
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>
 	<Script file="Miscellaneous\Invite.lua"/>
