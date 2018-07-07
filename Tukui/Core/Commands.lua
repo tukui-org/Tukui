@@ -112,9 +112,10 @@ T.SlashHandler = function(cmd)
 			T.Print("/tukui profile #")
 			print(" ")
 		else
+			local IsConfigLoaded = IsAddOnLoaded("Tukui_Config")
+			
 			if arg2 == "list" or arg2 == "l" then
 				Tukui.Profiles = {}
-
 				Tukui.Profiles.Data = {}
 				Tukui.Profiles.Options = {}
 
@@ -124,7 +125,26 @@ T.SlashHandler = function(cmd)
 					if Server ~= "Gold" then
 						for Character, Table in pairs(TukuiData[Server]) do
 							tinsert(Tukui.Profiles.Data, TukuiData[Server][Character])
-							tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
+							
+							if IsConfigLoaded then
+								if TukuiConfigShared and TukuiConfigShared[Server] and TukuiConfigShared[Server][Character] then
+									tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
+								else
+									if not TukuiConfigShared then
+										TukuiConfigShared = {}
+									end
+									
+									if not TukuiConfigShared[Server] then
+										TukuiConfigShared[Server] = {}
+									end
+									
+									if not TukuiConfigShared[Server][Character] then
+										TukuiConfigShared[Server][Character] = {}
+									end
+									
+									tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
+								end
+							end
 
 							print("Profile "..#Tukui.Profiles.Data..": ["..Server.."]-["..Character.."]")
 						end
@@ -142,7 +162,10 @@ T.SlashHandler = function(cmd)
 				end
 
 				TukuiData[CurrentServer][CurrentCharacter] = Tukui.Profiles.Data[Profile]
-				TukuiConfigShared[CurrentServer][CurrentCharacter] = Tukui.Profiles.Options[Profile]
+				
+				if IsConfigLoaded then
+					TukuiConfigShared[CurrentServer][CurrentCharacter] = Tukui.Profiles.Options[Profile]
+				end
 
 				ReloadUI()
 			end
