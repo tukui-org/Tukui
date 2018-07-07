@@ -4,28 +4,11 @@ local DataText = T["DataTexts"]
 local MyName = UnitName("player")
 local format = format
 local int = 2
-
---Map IDs
-local WSG = 92
-local TP = 206
-local AV = 91
-local SOTA = 128
-local IOC = 169
-local EOTS = 112
-local TBFG = 275
-local AB = 93
-local WAB = 837
-local TOK = 417
-local SSM = 423
-local DG = 519
-local SS = 907
-local SSvsTM = 623
-
-
 local BGFrame = CreateFrame("Frame", nil, UIParent)
 
 function BGFrame:OnEnter()
 	local NumScores = GetNumBattlefieldScores()
+	local NumExtraStats = GetNumBattlefieldStats()
 
 	for i = 1, NumScores do
 		local Name, KillingBlows, HonorableKills, Deaths, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
@@ -41,45 +24,15 @@ function BGFrame:OnEnter()
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L.DataText.StatsFor, ClassColor..Name.."|r")
 			GameTooltip:AddLine(" ")
-			GameTooltip:AddDoubleLine(L.DataText.KillingBlow, KillingBlows, 1, 1, 1)
-			GameTooltip:AddDoubleLine(L.DataText.HonorableKill, HonorableKills, 1, 1, 1)
-			GameTooltip:AddDoubleLine(L.DataText.Death, Deaths, 1, 1, 1)
-			GameTooltip:AddDoubleLine(L.DataText.Honor, format("%d", HonorGained), 1, 1, 1)
-			GameTooltip:AddDoubleLine(L.DataText.Damage, DamageDone, 1, 1, 1)
-			GameTooltip:AddDoubleLine(L.DataText.Healing, HealingDone, 1, 1, 1)
+			GameTooltip:AddDoubleLine(KILLING_BLOWS, KillingBlows, 1, 1, 1)
+			GameTooltip:AddDoubleLine(HONORABLE_KILLS, HonorableKills, 1, 1, 1)
+			GameTooltip:AddDoubleLine(DEATHS, Deaths, 1, 1, 1)
+			GameTooltip:AddDoubleLine(HONOR, format("%d", HonorGained), 1, 1, 1)
+			GameTooltip:AddDoubleLine(DAMAGE, DamageDone, 1, 1, 1)
+			GameTooltip:AddDoubleLine(HEALS, HealingDone, 1, 1, 1)
 
-			if CurrentMapID == WSG or CurrentMapID == TP then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-			elseif CurrentMapID == EOTS then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-			elseif CurrentMapID == AV then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3), GetBattlefieldStatData(i, 3),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4), GetBattlefieldStatData(i, 4),1,1,1)
-			elseif CurrentMapID == SOTA then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-			elseif CurrentMapID == IOC or CurrentMapID == TBFG or CurrentMapID == AB then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-			elseif CurrentMapID == TOK then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-			elseif CurrentMapID == SSM then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-			elseif CurrentMapID == DG then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(2), GetBattlefieldStatData(i, 2),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(3), GetBattlefieldStatData(i, 3),1,1,1)
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(4), GetBattlefieldStatData(i, 4),1,1,1)
-			elseif CurrentMapID == SS then
-				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(1), GetBattlefieldStatData(i, 1),1,1,1)
-			elseif CurrentMapID == WAB then
-				-- I will do it when I see it live
-			elseif CurrentMapID == SSvsTM then
-				-- I will do it when I see it live
+			for j = 1, NumExtraStats do
+				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(j), GetBattlefieldStatData(i, j), 1,1,1)
 			end
 			
 			break
@@ -98,8 +51,9 @@ function BGFrame:OnUpdate(t)
 
 	if (int < 0) then
 		local Amount
-		RequestBattlefieldScoreData()
 		local NumScores = GetNumBattlefieldScores()
+		
+		RequestBattlefieldScoreData()
 
 		for i = 1, NumScores do
 			local Name, KillingBlows, _, _, HonorGained, _, _, _, _, DamageDone, HealingDone = GetBattlefieldScore(i)
