@@ -13,17 +13,14 @@ end
 
 function ZoneMap:Skin()
 	local Map = BattlefieldMapFrame
-	
-	if Map then
-		local Tab = BattlefieldMapTab
+	local Tab = BattlefieldMapTab
 		
-		Map.BorderFrame:Kill()
-		Map.ScrollContainer:CreateBackdrop()
-		Map.ScrollContainer:CreateShadow()
-		Tab:StripTextures()
+	Map.BorderFrame:Kill()
+	Map.ScrollContainer:CreateBackdrop()
+	Map.ScrollContainer:CreateShadow()
+	Tab:StripTextures()
 
-		Map.IsSkinned = true
-	end
+	Map.IsSkinned = true
 end
 
 function ZoneMap:AddHooks()
@@ -45,7 +42,7 @@ function ZoneMap:Enable()
 	self:RegisterEvent("ADDON_LOADED")
 	self:SetScript("OnEvent", self.OnEvent)
 	
-	if BattlefieldMapFrame then
+	if BattlefieldMapFrame and not BattlefieldMapFrame.IsSkinned then
 		self:Skin()
 		self:AddHooks()
 	end
