@@ -139,10 +139,10 @@ function Loading:OnEvent(event, addon)
 			T["DataTexts"]:Enable()
 
 		-- CHAT
-			T["Chat"]:Enable() --BROKEN
+			T["Chat"]:Enable()
 
 		-- UNITFRAMES
-			T["UnitFrames"]:Enable() --BROKEN
+			T["UnitFrames"]:Enable()
 
 		-- TOOLTIPS
 			T["Tooltips"]:Enable()
