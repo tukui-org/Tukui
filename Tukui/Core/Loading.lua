@@ -132,7 +132,7 @@ function Loading:OnEvent(event, addon)
 
 		-- Maps
 			T["Maps"]["Minimap"]:Enable()
-			-- T["Maps"]["Zonemap"]:Enable() --BROKEN
+			T["Maps"]["Zonemap"]:Enable()
 			T["Maps"]["Worldmap"]:Enable()
 
 		-- DATATEXTS
