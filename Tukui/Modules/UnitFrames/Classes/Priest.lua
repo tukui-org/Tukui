@@ -10,12 +10,13 @@ if (Class ~= "PRIEST") then
 end
 
 TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
+	local Shadow = self.Shadow
 	local Atonement = CreateFrame("StatusBar", self:GetName().."Atonement", self)
+	
 	Atonement:SetHeight(8)
 	Atonement:Point("BOTTOMLEFT", C.UnitFrames.Portrait and self or self.Health, "TOPLEFT", 0, 1)
 	Atonement:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 1)
 	Atonement:SetStatusBarTexture(C.Medias.Normal)
-	Atonement:Hide()
 
 	Atonement.Backdrop = Atonement:CreateTexture(nil, "BACKGROUND")
 	Atonement.Backdrop:SetAllPoints()
@@ -29,7 +30,8 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 		TukuiUnitFrames.UpdateShadow(self, 4)
 	end)
 	
-	Atonement:Show()
+	-- Shadow Effect Updates
+	Shadow:Point("TOPLEFT", -4, 12)
 	
 	self.Atonement = Atonement
 end

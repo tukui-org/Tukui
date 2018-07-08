@@ -42,14 +42,6 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
 
-	-- Totem Bar (Hand of Gul'dan and Call Dreadstalkers)
-	if (C.UnitFrames.TotemBar) then
-		local TotemBar = self.Totems
-
-		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 14)
-	end
-
 	-- Register
 	self.SoulShards = Bar
 end

@@ -47,30 +47,6 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
 
-	-- Totem Bar (Risen Ally - Raise Dead)
-	if (C.UnitFrames.TotemBar) then
-		T["Colors"].totems[1] = {0.60, 0.40, 0}
-
-		local TotemBar = self.Totems
-		TotemBar:ClearAllPoints()
-		TotemBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 14)
-
-		TotemBar[1]:ClearAllPoints()
-		TotemBar[1]:SetAllPoints()
-
-		for i = 2, MAX_TOTEMS do
-			TotemBar[i]:Hide()
-		end
-
-		TotemBar:SetScript("OnShow", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 22)
-		end)
-
-		TotemBar:SetScript("OnHide", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 12)
-		end)
-	end
-
 	-- Register
 	self.Runes = RunesBar
 end
