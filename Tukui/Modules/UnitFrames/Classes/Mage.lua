@@ -35,9 +35,6 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 		end
 	end
 
-	ArcaneChargeBar:SetScript("OnShow", TukuiUnitFrames.MoveTotemBar)
-	ArcaneChargeBar:SetScript("OnHide", TukuiUnitFrames.MoveTotemBar)
-
 	-- Register
 	self.ArcaneChargeBar = ArcaneChargeBar
 end

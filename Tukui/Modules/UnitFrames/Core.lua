@@ -722,24 +722,6 @@ function TukuiUnitFrames:Update()
 	end
 end
 
-function TukuiUnitFrames:MoveTotemBar()
-	local Frame = self:GetParent()
-	local Arcane = Frame.ArcaneChargeBar
-	local Totems = Frame.Totems
-	local Shadow = Frame.Shadow
-
-	local T_Y, S_Y = 5, 4
-
-	if (Arcane and Arcane:IsShown()) then
-		T_Y, S_Y = 14, 12
-	end
-
-	Shadow:Point("TOPLEFT", -4, S_Y)
-
-	Totems:ClearAllPoints()
-	Totems:Point("BOTTOMLEFT", Frame, "TOPLEFT", 0, T_Y)
-end
-
 function TukuiUnitFrames:RunesPostUpdate(runemap)
 	local Bar = self
 	local RuneMap = runemap

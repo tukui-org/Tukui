@@ -26,7 +26,7 @@ TukuiUnitFrames.AddClassFeatures["SHAMAN"] = function(self)
 			Bar[i]:Width(32)
 			Bar[i]:SetStatusBarTexture(PowerTexture)
 			Bar[i]:EnableMouse(true)
-			Bar[i]:SetFrameLevel(Health:GetFrameLevel())
+			Bar[i]:SetFrameLevel(self.Health:GetFrameLevel())
 			Bar[i]:CreateShadow()
 			Bar[i]:IsMouseEnabled(true)
 
