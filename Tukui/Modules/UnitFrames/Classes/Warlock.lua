@@ -25,17 +25,14 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 
 	for i = 1, 5 do
 		Bar[i] = CreateFrame("StatusBar", "TukuiSoulShardBar"..i , Bar)
-		Bar[i]:Height(8)
+		Bar[i]:SetHeight(8)
 		Bar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
-			Bar[i]:Width((250 / 5))
+			Bar[i]:SetWidth((250 / 5))
 			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
-		elseif i == 5 then
-			Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
-			Bar[i]:Point("RIGHT", 0, 0)
 		else
-			Bar[i]:Width((250 / 5) - 1)
+			Bar[i]:SetWidth((250 / 5) - 1)
 			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
 		end
 

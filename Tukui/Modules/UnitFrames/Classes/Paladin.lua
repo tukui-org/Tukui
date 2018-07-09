@@ -16,27 +16,24 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	HPBar:SetFrameStrata(self:GetFrameStrata())
 	HPBar:SetFrameLevel(self:GetFrameLevel())
 	HPBar:SetHeight(8)
-	HPBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	HPBar:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
+	HPBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+	HPBar:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	HPBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	HPBar:SetBackdropColor(0, 0, 0)
 	HPBar:SetBackdropBorderColor(0, 0, 0)
 
 	for i = 1, 5 do
 		HPBar[i] = CreateFrame("StatusBar", self:GetName().."HolyPower"..i, HPBar)
-		HPBar[i]:Height(8)
+		HPBar[i]:SetHeight(8)
 		HPBar[i]:SetStatusBarTexture(PowerTexture)
 		HPBar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
 		if i == 1 then
-			HPBar[i]:Width(50)
-			HPBar[i]:Point("LEFT", HPBar, "LEFT", 0, 0)
-		elseif i == 5 then
-			HPBar[i]:Point("LEFT", HPBar[i-1], "RIGHT", 1, 0)
-			HPBar[i]:Point("RIGHT", 0, 0)
+			HPBar[i]:SetWidth(50)
+			HPBar[i]:SetPoint("LEFT", HPBar, "LEFT", 0, 0)
 		else
-			HPBar[i]:Width(49)
-			HPBar[i]:Point("LEFT", HPBar[i-1], "RIGHT", 1, 0)
+			HPBar[i]:SetWidth(49)
+			HPBar[i]:SetPoint("LEFT", HPBar[i-1], "RIGHT", 1, 0)
 		end
 	end
 

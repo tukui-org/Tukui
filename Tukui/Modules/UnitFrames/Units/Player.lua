@@ -305,24 +305,20 @@ function TukuiUnitFrames:Player()
 
 		for i = 1, 6 do
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
-			ComboPoints[i]:Height(8)
+			ComboPoints[i]:SetHeight(8)
 			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
 
 			if i == 1 then
-				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
+				ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
+				ComboPoints[i]:SetWidth(250 / 6)
 
-				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6
+				ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
 				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5
-			elseif i == 6 then
-				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-				ComboPoints[i]:Point("RIGHT", 0, 0)
-				
-				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6 - 1
-				ComboPoints[i].BarSizeForMaxComboIs5 = 0
 			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-
-				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6 - 1
+				ComboPoints[i]:SetWidth((250 / 6) - 1)
+				ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+				
+				ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
 				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5 - 1
 			end
 		end

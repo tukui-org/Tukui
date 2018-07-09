@@ -24,21 +24,16 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 
 	for i = 1, 6 do
 		Harmony[i] = CreateFrame("StatusBar", self:GetName().."Harmony"..i, Harmony)
-		Harmony[i]:Height(8)
+		Harmony[i]:SetHeight(8)
 		Harmony[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
-			Harmony[i]:Width((250 / 6) - 2)
+			Harmony[i]:SetWidth(250 / 6)
 			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 0, 0)
 			Harmony[i].Ascension = Harmony[i]:GetWidth()
 			Harmony[i].NoTalent = 250 / 5
-		elseif i == 6 then
-			Harmony[i]:Point("LEFT", Harmony[i-1], "RIGHT", 1, 0)
-			Harmony[i]:Point("RIGHT", 0, 0)
-			Harmony[i].Ascension = Harmony[i]:GetWidth()
-			Harmony[i].NoTalent = 0
 		else
-			Harmony[i]:Width((250 / 6) - 1)
+			Harmony[i]:SetWidth((250 / 6) - 1)
 			Harmony[i]:SetPoint("LEFT", Harmony[i-1], "RIGHT", 1, 0)
 			Harmony[i].Ascension = Harmony[i]:GetWidth()
 			Harmony[i].NoTalent = 250 / 5 - 1
