@@ -14,8 +14,8 @@ TukuiUnitFrames.AddClassFeatures["PRIEST"] = function(self)
 	local Atonement = CreateFrame("StatusBar", self:GetName().."Atonement", self)
 	
 	Atonement:SetHeight(8)
-	Atonement:Point("BOTTOMLEFT", C.UnitFrames.Portrait and self or self.Health, "TOPLEFT", 0, 1)
-	Atonement:Point("BOTTOMRIGHT", self.Health, "TOPRIGHT", 0, 1)
+	Atonement:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+	Atonement:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	Atonement:SetStatusBarTexture(C.Medias.Normal)
 
 	Atonement.Backdrop = Atonement:CreateTexture(nil, "BACKGROUND")

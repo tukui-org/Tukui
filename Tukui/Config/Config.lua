@@ -175,7 +175,6 @@ C["UnitFrames"] = {
 	["CombatLog"] = false,
 	["HealBar"] = true,
 	["TotemBar"] = true,
-	["AnticipationBar"] = true,
 	["TargetAuras"] = true,
 	["FocusAuras"] = true,
 	["FocusTargetAuras"] = true,

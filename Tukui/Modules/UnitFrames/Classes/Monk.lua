@@ -15,8 +15,9 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 	-- Harmony Bar
 	Harmony:SetFrameStrata(self:GetFrameStrata())
 	Harmony:SetFrameLevel(self:GetFrameLevel())
+	Harmony:SetHeight(8)
 	Harmony:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	Harmony:Size(250, 8)
+	Harmony:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	Harmony:SetBackdrop(TukuiUnitFrames.Backdrop)
 	Harmony:SetBackdropColor(0, 0, 0)
 	Harmony:SetBackdropBorderColor(0, 0, 0)
@@ -31,6 +32,11 @@ TukuiUnitFrames.AddClassFeatures["MONK"] = function(self)
 			Harmony[i]:SetPoint("LEFT", Harmony, "LEFT", 0, 0)
 			Harmony[i].Ascension = Harmony[i]:GetWidth()
 			Harmony[i].NoTalent = 250 / 5
+		elseif i == 6 then
+			Harmony[i]:Point("LEFT", Harmony[i-1], "RIGHT", 1, 0)
+			Harmony[i]:Point("RIGHT", 0, 0)
+			Harmony[i].Ascension = Harmony[i]:GetWidth()
+			Harmony[i].NoTalent = 0
 		else
 			Harmony[i]:Width((250 / 6) - 1)
 			Harmony[i]:SetPoint("LEFT", Harmony[i-1], "RIGHT", 1, 0)

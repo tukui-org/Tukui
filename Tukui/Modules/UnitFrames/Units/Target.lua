@@ -305,47 +305,6 @@ function TukuiUnitFrames:Target()
 		self.CombatFeedbackText = CombatFeedbackText
 	end
 
-	if (C.UnitFrames.ComboBar) then
-		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
-		ComboPoints:SetFrameStrata(self:GetFrameStrata())
-		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		ComboPoints:Width(250)
-		ComboPoints:Height(8)
-		ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
-		ComboPoints:SetBackdropColor(0, 0, 0)
-		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-
-		for i = 1, 6 do
-			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
-			ComboPoints[i]:Height(8)
-			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
-
-			if i == 1 then
-				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-
-				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6
-				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5
-			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-
-				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6 - 1
-				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5 - 1
-			end
-		end
-
-		ComboPoints:SetScript("OnShow", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 12)
-			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 14)
-		end)
-
-		ComboPoints:SetScript("OnHide", function(self)
-			TukuiUnitFrames.UpdateShadow(self, 4)
-			TukuiUnitFrames.UpdateBuffsHeaderPosition(self, 4)
-		end)
-
-		self.ComboPointsBar = ComboPoints
-	end
-
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)

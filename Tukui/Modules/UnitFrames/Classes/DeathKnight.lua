@@ -15,8 +15,9 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	-- Runes
 	RunesBar:SetFrameStrata(self:GetFrameStrata())
 	RunesBar:SetFrameLevel(self:GetFrameLevel())
+	RunesBar:SetHeight(8)
 	RunesBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	RunesBar:Size(250, 8)
+	RunesBar:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	RunesBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	RunesBar:SetBackdropColor(0, 0, 0)
 	RunesBar:SetBackdropBorderColor(0, 0, 0)
@@ -35,6 +36,9 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		if i == 1 then
 			RunesBar[i]:Width(40)
 			RunesBar[i]:Point("LEFT", RunesBar, "LEFT", 0, 0)
+		elseif i == 6 then
+			RunesBar[i]:Point("LEFT", RunesBar[i-1], "RIGHT", 1, 0)
+			RunesBar[i]:Point("RIGHT", 0, 0)
 		else
 			RunesBar[i]:Width(41)
 			RunesBar[i]:Point("LEFT", RunesBar[i-1], "RIGHT", 1, 0)

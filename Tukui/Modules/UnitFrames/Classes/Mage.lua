@@ -12,11 +12,13 @@ end
 TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 	local ArcaneChargeBar = CreateFrame("Frame", self:GetName().."ArcaneChargeBar", self)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+	local Shadow = self.Shadow
 
 	-- Arcane Charges
 	ArcaneChargeBar:SetFrameStrata(self:GetFrameStrata())
+	ArcaneChargeBar:SetHeight(8)
 	ArcaneChargeBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	ArcaneChargeBar:Size(250, 8)
+	ArcaneChargeBar:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	ArcaneChargeBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	ArcaneChargeBar:SetBackdropColor(0, 0, 0)
 	ArcaneChargeBar:SetBackdropBorderColor(0, 0, 0)
@@ -27,13 +29,27 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 		ArcaneChargeBar[i]:SetStatusBarTexture(PowerTexture)
 
 		if i == 1 then
-			ArcaneChargeBar[i]:Width((250 / 4) - 2)
+			ArcaneChargeBar[i]:Width((250 / 4) - 1)
 			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar, "LEFT", 0, 0)
+		elseif i == 4 then
+			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar[i-1], "RIGHT", 1, 0)
+			ArcaneChargeBar[i]:Point("RIGHT", 0, 0)
 		else
 			ArcaneChargeBar[i]:Width((250 / 4 - 1))
 			ArcaneChargeBar[i]:Point("LEFT", ArcaneChargeBar[i-1], "RIGHT", 1, 0)
 		end
 	end
+	
+	-- Shadow Effect Updates
+	Shadow:Point("TOPLEFT", -4, 12)
+	
+	ArcaneChargeBar:SetScript("OnShow", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 12)
+	end)
+
+	ArcaneChargeBar:SetScript("OnHide", function(self)
+		TukuiUnitFrames.UpdateShadow(self, 4)
+	end)
 
 	-- Register
 	self.ArcaneChargeBar = ArcaneChargeBar

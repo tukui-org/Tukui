@@ -16,9 +16,9 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	-- Warlock Class Bar
 	Bar:SetFrameStrata(self:GetFrameStrata())
 	Bar:SetFrameLevel(self:GetFrameLevel())
-	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	Bar:SetWidth(250)
 	Bar:SetHeight(8)
+	Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+	Bar:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	Bar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	Bar:SetBackdropColor(0, 0, 0)
 	Bar:SetBackdropBorderColor(0, 0, 0)
@@ -31,6 +31,9 @@ TukuiUnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 		if i == 1 then
 			Bar[i]:Width((250 / 5))
 			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
+		elseif i == 5 then
+			Bar[i]:Point("LEFT", Bar[i-1], "RIGHT", 1, 0)
+			Bar[i]:Point("RIGHT", 0, 0)
 		else
 			Bar[i]:Width((250 / 5) - 1)
 			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)

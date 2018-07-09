@@ -296,9 +296,9 @@ function TukuiUnitFrames:Player()
 	if (C.UnitFrames.ComboBar) and (Class == "ROGUE" or Class == "DRUID") then
 		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
 		ComboPoints:SetFrameStrata(self:GetFrameStrata())
+		ComboPoints:SetHeight(8)
 		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		ComboPoints:Width(250)
-		ComboPoints:Height(8)
+		ComboPoints:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 		ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
 		ComboPoints:SetBackdropColor(0, 0, 0)
 		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
@@ -313,6 +313,12 @@ function TukuiUnitFrames:Player()
 
 				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6
 				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5
+			elseif i == 6 then
+				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+				ComboPoints[i]:Point("RIGHT", 0, 0)
+				
+				ComboPoints[i].BarSizeForMaxComboIs6 = 250 / 6 - 1
+				ComboPoints[i].BarSizeForMaxComboIs5 = 0
 			else
 				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
 

@@ -15,8 +15,9 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	-- Holy Power
 	HPBar:SetFrameStrata(self:GetFrameStrata())
 	HPBar:SetFrameLevel(self:GetFrameLevel())
+	HPBar:SetHeight(8)
 	HPBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-	HPBar:Size(250, 8)
+	HPBar:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 	HPBar:SetBackdrop(TukuiUnitFrames.Backdrop)
 	HPBar:SetBackdropColor(0, 0, 0)
 	HPBar:SetBackdropBorderColor(0, 0, 0)
@@ -30,6 +31,9 @@ TukuiUnitFrames.AddClassFeatures["PALADIN"] = function(self)
 		if i == 1 then
 			HPBar[i]:Width(50)
 			HPBar[i]:Point("LEFT", HPBar, "LEFT", 0, 0)
+		elseif i == 5 then
+			HPBar[i]:Point("LEFT", HPBar[i-1], "RIGHT", 1, 0)
+			HPBar[i]:Point("RIGHT", 0, 0)
 		else
 			HPBar[i]:Width(49)
 			HPBar[i]:Point("LEFT", HPBar[i-1], "RIGHT", 1, 0)

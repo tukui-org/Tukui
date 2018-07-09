@@ -24,10 +24,6 @@ local function Update(self)
 	self.Atonement.Active = false
 	
 	if GetSpecialization() == DiscSpec then
-		if not self.Atonement:IsShown() then
-			self.Atonement:Show()
-		end
-		
 		for i = 1, 40 do
 			local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
 
@@ -36,6 +32,7 @@ local function Update(self)
 				self.Atonement.ExpirationTime = ExpirationTime
 				self.Atonement:SetMinMaxValues(0, Duration)
 				self.Atonement:SetScript("OnUpdate", OnUpdate)
+				self.Atonement:Show()
 				self.Atonement.Active = true
 
 				return
@@ -45,13 +42,13 @@ local function Update(self)
 		if not self.Atonement.Active then
 			self.Atonement:SetScript("OnUpdate", nil)
 			self.Atonement:SetValue(0)
+			self.Atonement:Hide()
 		end
 	else
-		if self.Atonement:IsShown() then
-			self.Atonement:Hide()
-			self.Atonement:SetScript("OnUpdate", nil)
-			self.Atonement:SetValue(0)
-		end
+		self.Atonement:Hide()
+		self.Atonement:SetScript("OnUpdate", nil)
+		self.Atonement:SetValue(0)
+		self.Atonement:Hide()
 	end
 end
 

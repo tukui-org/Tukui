@@ -576,11 +576,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Enable the combo points bar",
 		},
 
-		["AnticipationBar"] = {
-			["Name"] = "Rogue Anticipation Bar",
-			["Desc"] = "Display a bar showing rogue anticipation points",
-		},
-
 		["SerendipityBar"] = {
 			["Name"] = "Priest Serendipity Bar",
 			["Desc"] = "Display a bar showing priest serendipity stacks",

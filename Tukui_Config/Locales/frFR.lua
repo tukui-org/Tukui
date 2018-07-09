@@ -583,11 +583,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Enable the combo points bar",
 		},
 
-		["AnticipationBar"] = {
-			["Name"] = "Barre d'anticipation Voleur",
-			["Desc"] = "Afficher une barre indiquant les points d'anticipation voleur",
-		},
-
 		["SerendipityBar"] = {
 			["Name"] = "Barre 'heureux hasard' de Pretre",
 			["Desc"] = "Afficher une barre indiquant le nombre de cumul 'heureux hasard' pour les Pretres",
