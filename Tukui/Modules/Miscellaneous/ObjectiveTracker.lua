@@ -100,8 +100,6 @@ function ObjectiveTracker:Skin()
 				local Header = Modules.Header
 				Header:SetFrameStrata("HIGH")
 				Header:SetFrameLevel(10)
-				Header:ClearAllPoints()
-				Header:SetPoint("TOPLEFT", 0, 0)
 
 				local Background = Modules.Header.Background
 				Background:SetAtlas(nil)
@@ -119,7 +117,7 @@ function ObjectiveTracker:Skin()
 					
 
 					local HeaderBar = CreateFrame("StatusBar", nil, HeaderPanel)
-					HeaderBar:Size(ObjectiveTrackerFrame:GetWidth(), 2)
+					HeaderBar:Size(263, 2)
 					HeaderBar:SetPoint("CENTER", HeaderPanel, 0, -9)
 					HeaderBar:SetStatusBarTexture(C.Medias.Blank)
 					HeaderBar:SetStatusBarColor(unpack(CustomClassColor))
@@ -228,6 +226,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 				if not (Bar.NewBorder) then
 					Bar.NewBorder = CreateFrame("Frame", nil, Bar)
 					Bar.NewBorder:SetTemplate()
+					Bar.NewBorder:SetFrameLevel(Bar:GetFrameLevel() - 1)
 					Bar.NewBorder:CreateShadow()
 					Bar.NewBorder:SetOutside(Icon)
 					Bar.NewBorder:SetShown(Icon:IsShown())
