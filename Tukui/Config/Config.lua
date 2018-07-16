@@ -11,6 +11,7 @@ C["General"] = {
 	["Scaling"] = {
 		["Options"] = {
 			["Pixel Perfection"] = "Pixel Perfection",
+            ["Smallest"] = "Smallest",
 			["Small"] = "Small",
 			["Medium"] = "Medium",
 			["Large"] = "Large",
