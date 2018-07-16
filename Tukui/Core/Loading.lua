@@ -67,7 +67,7 @@ function Loading:OnEvent(event, addon)
 			end
         
             -- This is for 4K with pixel pecfection scaling
-            if (T.ScreenHeight >= 1600) then
+            if (T.ScreenHeight >= 1600) and (Scaling == "Pixel Perfection") then
                 UIScale = UIScale * 2 -- Pixel Perfection Scaling, X 2 to still be almost pixel perfect, should be around 0.71
             end
 		
