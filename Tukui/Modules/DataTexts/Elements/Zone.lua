@@ -42,10 +42,10 @@ local OnEnter = function(self)
 
 	local Text = GetRealZoneText()
 	local PVPType, IsSubZonePvP, FactionName = GetZonePVPInfo()
-	local X, Y = GetPlayerMapPosition("player")
+	local X, Y = C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit("player"), "player"):GetXY()
 	local XText, YText, Label, Location, Color
 
-	if not GetPlayerMapPosition("player") then
+	if (not X) and (not Y) then
 		X = 0
 		Y = 0
 	end
@@ -121,4 +121,4 @@ local Disable = function(self)
 	self:SetScript("OnLeave", nil)
 end
 
-DataText:Register(ZONE, Enable, Disable, Update)
+DataText:Register(L.DataText.Zone, Enable, Disable, Update)

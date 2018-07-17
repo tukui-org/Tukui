@@ -554,7 +554,7 @@ local Update = function(self, event)
 		BuildFriendTable(Total)
 	end
 
-	self.Text:SetFormattedText("%s: %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline)
+	self.Text:SetFormattedText("%s %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, totalOnline + BNTotalOnline)
 end
 
 local Enable = function(self)
@@ -574,7 +574,7 @@ local Enable = function(self)
 	self:RegisterEvent("BN_FRIEND_INVITE_LIST_INITIALIZED")
 	self:RegisterEvent("BN_FRIEND_INVITE_ADDED")
 	self:RegisterEvent("BN_FRIEND_INVITE_REMOVED")
-	self:RegisterEvent("BN_SELF_ONLINE")
+	--self:RegisterEvent("BN_SELF_ONLINE")
 	self:RegisterEvent("BN_BLOCK_LIST_UPDATED")
 	self:RegisterEvent("BN_CONNECTED")
 	self:RegisterEvent("BN_DISCONNECTED")

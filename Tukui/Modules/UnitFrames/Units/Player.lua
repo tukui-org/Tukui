@@ -5,11 +5,10 @@ local Movers = T["Movers"]
 local Class = select(2, UnitClass("player"))
 
 function TukuiUnitFrames:Player()
-	local HealthTexture = T.GetTexture(C["UnitFrames"].HealthTexture)
-	local PowerTexture = T.GetTexture(C["UnitFrames"].PowerTexture)
-	local CastTexture = T.GetTexture(C["UnitFrames"].CastTexture)
+	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
+	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+	local CastTexture = T.GetTexture(C["Textures"].UFCastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
-	local DarkTheme = C["UnitFrames"].DarkTheme
 
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
@@ -20,11 +19,11 @@ function TukuiUnitFrames:Player()
 
 	local Panel = CreateFrame("Frame", nil, self)
 	Panel:SetFrameStrata(self:GetFrameStrata())
-	Panel:SetFrameLevel(2)
+	Panel:SetFrameLevel(3)
 	Panel:SetTemplate()
 	Panel:Size(250, 21)
 	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
-	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
+	Panel:SetBackdropBorderColor(0, 0, 0, 0)
 
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
@@ -41,19 +40,11 @@ function TukuiUnitFrames:Player()
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
-
-	if DarkTheme then
-		Health.colorTapping = false
-		Health.colorDisconnected = false
-		Health.colorClass = false
-		Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
-		Health.Background:SetVertexColor(0, 0, 0, 1)
-	else
-		Health.colorTapping = true
-		Health.colorDisconnected = true
-		Health.colorClass = true
-		Health.colorReaction = true
-	end
+	
+	Health.colorTapping = true
+	Health.colorDisconnected = true
+	Health.colorClass = true
+	Health.colorReaction = true
 
 	if (C.UnitFrames.Smooth) then
 		Health.Smooth = true
@@ -81,14 +72,7 @@ function TukuiUnitFrames:Player()
 	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
 
 	Power.frequentUpdates = true
-
-	if DarkTheme then
-		Power.colorTapping = true
-		Power.colorClass = true
-		Power.Background.multiplier = 0.1
-	else
-		Power.colorPower = true
-	end
+	Power.colorPower = true
 
 	if (C.UnitFrames.Smooth) then
 		Power.Smooth = true
@@ -175,7 +159,7 @@ function TukuiUnitFrames:Player()
 		CastBar:SetFrameStrata(self:GetFrameStrata())
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
-		CastBar:SetInside(Panel)
+		CastBar:SetInside(Panel, 0, 0)
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
@@ -301,7 +285,7 @@ function TukuiUnitFrames:Player()
 		SecondBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 1)
 		FirstBar:SetFrameLevel(ThirdBar:GetFrameLevel() + 2)
 
-		self.HealPrediction = {
+		self.HealthPrediction = {
 			myBar = FirstBar,
 			otherBar = SecondBar,
 			absorbBar = ThirdBar,
@@ -309,74 +293,33 @@ function TukuiUnitFrames:Player()
 		}
 	end
 
-	if (C.UnitFrames.TotemBar) then
-		local Bar = CreateFrame("Frame", nil, self)
-		Bar:SetFrameStrata(self:GetFrameStrata())
-		Bar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 5)
-		Bar:Size(250, 8)
-
-		Bar.activeTotems = 0
-		Bar.Override = TukuiUnitFrames.UpdateTotemOverride
-
-		-- Totem Bar
-		for i = 1, MAX_TOTEMS do
-			Bar[i] = CreateFrame("StatusBar", "TukuiTotemBarSlot"..i, Bar)
-			Bar[i]:Height(16)
-			Bar[i]:SetStatusBarTexture(PowerTexture)
-			Bar[i]:EnableMouse(true)
-			Bar[i]:SetFrameLevel(Health:GetFrameLevel())
-			Bar[i]:CreateShadow()
-			Bar[i]:IsMouseEnabled(true)
-
-			if i == 1 then
-				Bar[i]:Width((250 / 4) - 2)
-				Bar[i]:Point("BOTTOMLEFT", Bar, "BOTTOMLEFT", 0, 0)
-			else
-				Bar[i]:Width((250 / 4) - 4)
-				Bar[i]:Point("BOTTOMLEFT", Bar[i-1], "BOTTOMRIGHT", 4, 0)
-			end
-
-			Bar[i]:SetMinMaxValues(0, 1)
-
-			Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER")
-			Bar[i].Icon:SetAllPoints()
-			Bar[i].Icon:SetAlpha(1)
-			Bar[i].Icon:Size(Bar[i]:GetWidth(), Bar[i]:GetWidth())
-			Bar[i].Icon:SetTexCoord(0.05, 0.95, 0.3, 0.7)
-		end
-
-		self.Totems = Bar
-	end
-
 	if (C.UnitFrames.ComboBar) and (Class == "ROGUE" or Class == "DRUID") then
 		local ComboPoints = CreateFrame("Frame", self:GetName()..'ComboPointsBar', self)
 		ComboPoints:SetFrameStrata(self:GetFrameStrata())
+		ComboPoints:SetHeight(8)
 		ComboPoints:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-		ComboPoints:Width(250)
-		ComboPoints:Height(8)
+		ComboPoints:Point("BOTTOMRIGHT", self, "TOPRIGHT", 0, 1)
 		ComboPoints:SetBackdrop(TukuiUnitFrames.Backdrop)
 		ComboPoints:SetBackdropColor(0, 0, 0)
 		ComboPoints:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 
-		for i = 1, 8 do
+		for i = 1, 6 do
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
-			ComboPoints[i]:Height(8)
+			ComboPoints[i]:SetHeight(8)
 			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
 
 			if i == 1 then
-				ComboPoints[i]:Point("LEFT", ComboPoints, "LEFT", 0, 0)
-				ComboPoints[i]:Width(250 / 8 + 2)
+				ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
+				ComboPoints[i]:SetWidth(250 / 6)
 
-				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
-				ComboPoints[i].Deeper = 250 / 6
-				ComboPoints[i].None = 250 / 5
+				ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
+				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5
 			else
-				ComboPoints[i]:Point("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-				ComboPoints[i]:Width(250 / 8 - 1)
-
-				ComboPoints[i].Anticipation = ComboPoints[i]:GetWidth()
-				ComboPoints[i].Deeper = 250 / 6 - 1
-				ComboPoints[i].None = 250 / 5 - 1
+				ComboPoints[i]:SetWidth((250 / 6) - 1)
+				ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
+				
+				ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
+				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5 - 1
 			end
 		end
 
@@ -396,6 +339,7 @@ function TukuiUnitFrames:Player()
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", 7)
 	RaidIcon:SetSize(16, 16)
 	RaidIcon:SetPoint("TOP", self, 0, 8)
+	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
@@ -409,12 +353,12 @@ function TukuiUnitFrames:Player()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
-	self.Combat = Combat
+	self.CombatIndicator = Combat
 	self.Status = Status
-	self.Leader = Leader
-	self.MasterLooter = MasterLooter
-	self.RaidIcon = RaidIcon
-	self.Threat = Threat
+	self.LeaderIndicator = Leader
+	self.MasterLooterIndicator = MasterLooter
+	self.RaidTargetIndicator = RaidIcon
+	self.ThreatIndicator = Threat
 	self.PowerPrediction = {}
 	self.PowerPrediction.mainBar = Power.Prediction
 	self.AdditionalPower = AdditionalPower

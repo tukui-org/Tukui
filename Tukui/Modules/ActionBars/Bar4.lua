@@ -8,7 +8,7 @@ function TukuiActionBars:CreateBar4()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local MultiBarRight = MultiBarRight
 	local ActionBar4 = T.Panels.ActionBar4
-
+	
 	MultiBarRight:SetParent(ActionBar4)
 	MultiBarRight:SetScript("OnHide", function() ActionBar4.Backdrop:Hide() end)
 	MultiBarRight:SetScript("OnShow", function() ActionBar4.Backdrop:Show() end)
@@ -19,10 +19,15 @@ function TukuiActionBars:CreateBar4()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
+		Button.noGrid = false
 		Button:SetAttribute("flyoutDirection", "UP")
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar4, Spacing, -Spacing)
+			
+			ActionBar4:SetWidth((Button:GetWidth() * 12) + (Spacing * 13))
+			ActionBar4:SetHeight((Button:GetWidth() * 2) + (Spacing * 3))
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end

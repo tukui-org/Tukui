@@ -31,6 +31,9 @@ function TukuiActionBars:CreatePetBar()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Spacing, -Spacing)
+			
+			Bar:SetWidth(Button:GetWidth() + (Spacing * 2))
+			Bar:SetHeight((Button:GetWidth() * 10) + (Spacing * 11))
 		else
 			Button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, -Spacing)
 		end
@@ -51,7 +54,7 @@ function TukuiActionBars:CreatePetBar()
 	Bar:RegisterEvent("PET_BAR_UPDATE")
 	Bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
 	Bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
-	Bar:RegisterEvent("PET_BAR_HIDE")
+	--Bar:RegisterEvent("PET_BAR_HIDE")
 	Bar:RegisterEvent("UNIT_PET")
 	Bar:RegisterEvent("UNIT_FLAGS")
 	Bar:RegisterEvent("UNIT_AURA")

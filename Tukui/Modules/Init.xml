@@ -46,11 +46,14 @@
 	<Script file="Miscellaneous\StaticPopups.lua"/>
 	<Script file="Miscellaneous\TimerTracker.lua"/>
 	<Script file="Miscellaneous\Durability.lua"/>
-	<Script file="Miscellaneous\Capture.lua"/>
+	<Script file="Miscellaneous\UIWidgets.lua"/>
 	<Script file="Miscellaneous\Ghost.lua"/>
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>
 	<Script file="Miscellaneous\Invite.lua"/>
 	<Script file="Miscellaneous\TalkingHead.lua"/>
+	<Script file="Miscellaneous\DeathRecap.lua"/>
+	<Script file="Miscellaneous\AFK.lua"/>
+	<Script file="Miscellaneous\Grid.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
@@ -124,6 +127,7 @@
 	<Script file="UnitFrames\Units\FocusTarget.lua"/>
 	<Script file="UnitFrames\Units\Arena.lua"/>
 	<Script file="UnitFrames\Units\Boss.lua"/>
+	<Script file="UnitFrames\Units\Nameplates.lua"/>
 	<Script file="UnitFrames\Groups\Party.lua"/>
 	<Script file="UnitFrames\Groups\Raid.lua"/>
 
@@ -131,12 +135,10 @@
 	<Script file="Tooltips\Core.lua"/>
 	<Script file="Tooltips\Talent.lua"/>
 
-	<!-- NamePlates -->
-	<Script file="NamePlates\Core.lua"/>
-
 	<!-- Pet Battles -->
 	<Script file="PetBattles\Core.lua"/>
 	<Script file="PetBattles\UnitFrames.lua"/>
 	<Script file="PetBattles\Actions.lua"/>
 	<Script file="PetBattles\Others.lua"/>
+
 </Ui>

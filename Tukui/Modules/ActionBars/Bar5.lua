@@ -20,9 +20,14 @@ function TukuiActionBars:CreateBar5()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
+		Button.noGrid = false
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("TOPRIGHT", ActionBar5, -Spacing, -Spacing)
+			
+			ActionBar5:SetHeight((Button:GetWidth() * 12) + (Spacing * 13))
+			ActionBar5:SetWidth((Button:GetWidth() * 1) + (Spacing * 2))
 		else
 			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
 		end

@@ -9,7 +9,7 @@ function TukuiActionBars:CreateBar3()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local MultiBarBottomRight = MultiBarBottomRight
 	local ActionBar3 = T.Panels.ActionBar3
-
+	
 	MultiBarBottomRight:SetParent(ActionBar3)
 	MultiBarBottomRight:SetScript("OnHide", function() ActionBar3.Backdrop:Hide() end)
 	MultiBarBottomRight:SetScript("OnShow", function() ActionBar3.Backdrop:Show() end)
@@ -20,9 +20,14 @@ function TukuiActionBars:CreateBar3()
 
 		Button:Size(Size)
 		Button:ClearAllPoints()
+		Button.noGrid = false
+		Button:SetAttribute("showgrid", 1)
 
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)
+			
+			ActionBar3:SetWidth((Button:GetWidth() * 6) + (Spacing * 7))
+			ActionBar3:SetHeight((Button:GetWidth() * 2) + (Spacing * 3))
 		elseif (i == 7) then
 			Button:SetPoint("TOPLEFT", ActionBar3, Spacing, -Spacing)
 		else
@@ -30,13 +35,6 @@ function TukuiActionBars:CreateBar3()
 		end
 
 		ActionBar3["Button"..i] = Button
-	end
-
-	for i = 7, 12 do
-		local Button = _G["MultiBarBottomRightButton"..i]
-		local Button1 = _G["MultiBarBottomRightButton1"]
-
-		Button:SetFrameLevel(Button1:GetFrameLevel() - 2)
 	end
 
 	Movers:RegisterFrame(ActionBar3)

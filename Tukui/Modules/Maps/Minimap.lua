@@ -21,7 +21,7 @@ function Minimap:DisableMinimapElements()
 		"MinimapBorderTop",
 		"MinimapZoomIn",
 		"MinimapZoomOut",
-		"MiniMapVoiceChatFrame",
+		--"MiniMapVoiceChatFrame",
 		"MinimapNorthTag",
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
@@ -72,10 +72,12 @@ function Minimap:StyleMinimap()
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
 	self:SetScript("OnMouseUp", Minimap.OnMouseClick)
+	
+	self.Backdrop:CreateShadow()
 
 	self.Ticket = CreateFrame("Frame", nil, Minimap)
 	self.Ticket:SetTemplate()
-	self.Ticket:Size(Minimap:GetWidth() + 4, 24)
+	self.Ticket:Size(Minimap:GetWidth() + 2, 24)
 	self.Ticket:SetFrameLevel(Minimap:GetFrameLevel() + 4)
 	self.Ticket:SetFrameStrata(Minimap:GetFrameStrata())
 	self.Ticket:Point("BOTTOM", 0, -47)
@@ -83,12 +85,13 @@ function Minimap:StyleMinimap()
 	self.Ticket.Text:SetPoint("CENTER")
 	self.Ticket.Text:SetText(HELP_TICKET_EDIT)
 	self.Ticket:SetAlpha(0)
+	self.Ticket:CreateShadow()
 
 	Mail:ClearAllPoints()
 	Mail:Point("TOPRIGHT", 12, 29)
 	Mail:SetFrameLevel(self:GetFrameLevel() + 2)
 	MailBorder:Hide()
-	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\mail")
+	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
 
 	QueueStatusMinimapButton:SetParent(Minimap)
 	QueueStatusMinimapButton:ClearAllPoints()
@@ -96,6 +99,7 @@ function Minimap:StyleMinimap()
 	QueueStatusMinimapButtonBorder:Kill()
 	QueueStatusFrame:StripTextures()
 	QueueStatusFrame:SetTemplate()
+	QueueStatusFrame:CreateShadow()
 
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetParent(Minimap)
@@ -128,21 +132,20 @@ end
 
 function Minimap:AddMinimapDataTexts()
 	local Panels = T["Panels"]
+	local Backdrop = self.Backdrop
 
-	local MinimapDataTextOne = CreateFrame("Frame", nil, self)
-	MinimapDataTextOne:Size(self:GetWidth() / 2 + 2, 19)
-	MinimapDataTextOne:SetPoint("TOPLEFT", self, "BOTTOMLEFT", -2, -3)
-	MinimapDataTextOne:SetTemplate()
-	MinimapDataTextOne:SetFrameStrata("LOW")
+	local MinimapDataText = CreateFrame("Frame", nil, self)
+	MinimapDataText:Size(self.Backdrop:GetWidth(), 19)
+	MinimapDataText:SetPoint("TOPLEFT", self.Backdrop, "BOTTOMLEFT", 0, 19)
+	MinimapDataText:SetTemplate()
+	MinimapDataText:SetFrameStrata("LOW")
 
-	local MinimapDataTextTwo = CreateFrame("Frame", nil, self)
-	MinimapDataTextTwo:Size(self:GetWidth() / 2 + 1, 19)
-	MinimapDataTextTwo:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 2, -3)
-	MinimapDataTextTwo:SetTemplate()
-	MinimapDataTextTwo:SetFrameStrata("LOW")
+	-- Resize Minimap Backdrop
+	Backdrop:ClearAllPoints()
+	Backdrop:Point("TOPLEFT", self, "TOPLEFT", -1, 1)
+	Backdrop:Point("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -19)
 
-	Panels.MinimapDataTextOne = MinimapDataTextOne
-	Panels.MinimapDataTextTwo = MinimapDataTextTwo
+	Panels.MinimapDataText = MinimapDataText
 end
 
 function GetMinimapShape()
@@ -154,7 +157,7 @@ function Minimap:AddZoneAndCoords()
 	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 
 	MinimapZone:SetTemplate()
-	MinimapZone:Size(self:GetWidth() + 4, 19)
+	MinimapZone:Size(self:GetWidth() + 2, 19)
 	MinimapZone:Point("TOP", self, 0, 2)
 	MinimapZone:SetFrameStrata(self:GetFrameStrata())
 	MinimapZone:SetAlpha(0)
@@ -216,14 +219,19 @@ function Minimap:UpdateCoords(t)
 	if (Elapsed > 0) then
 		return
 	end
-
-	local X, Y = GetPlayerMapPosition("player")
-	local XText, YText
-
-	if not GetPlayerMapPosition("player") then
-		X = 0
-		Y = 0
+	
+	local UnitMap = C_Map.GetBestMapForUnit("player")
+	local X, Y = 0, 0
+	
+	if UnitMap then
+		local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, "player")
+		
+		if GetPlayerMapPosition then
+			X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
+		end
 	end
+	
+	local XText, YText
 
 	X = math.floor(100 * X)
 	Y = math.floor(100 * Y)
@@ -246,7 +254,7 @@ function Minimap:UpdateCoords(t)
 		Minimap.MinimapCoords.Text:SetText(XText .. ", " .. YText)
 	end
 
-	Elapsed = 0.5
+	Elapsed = 2
 end
 
 function Minimap:UpdateZone()

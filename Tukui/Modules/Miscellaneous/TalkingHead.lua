@@ -15,7 +15,6 @@ function TalkingHead:OnEvent(event, addon)
 
 	if CustomPosition then
 		A1, Parent, A2, X, Y = unpack(CustomPosition)
-		--print(A1, Parent, A2, X, Y) -- Debug
 	end
 
 	Frame:ClearAllPoints()

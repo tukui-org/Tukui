@@ -9,17 +9,17 @@ local Bars = 20
 Experience.NumBars = 2
 Experience.RestedColor = {75 / 255, 175 / 255, 76 / 255}
 Experience.XPColor = {0 / 255, 144 / 255, 255 / 255}
-Experience.AFColor = {229 / 255, 204 / 255, 127 / 255}
+Experience.AZColor = {229 / 255, 204 / 255, 127 / 255}
 Experience.HNColor = {222 / 255, 22 / 255, 22 / 255}
 
 function Experience:SetTooltip()
 	local BarType = self.BarType
-	local Current, Max
+	local Current, Max, Pts
 
 	if (self == Experience.XPBar1) then
-		GameTooltip:SetOwner(Panels.DataTextLeft, "ANCHOR_TOPLEFT", 0, 5)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -1, 5)
 	else
-		GameTooltip:SetOwner(Panels.DataTextRight, "ANCHOR_TOPRIGHT", 0, 5)
+		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT", 1, 5)
 	end
 
 	if BarType == "XP" then
@@ -35,24 +35,26 @@ function Experience:SetTooltip()
 		GameTooltip:AddLine("|cff0090FF"..XP..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
 
 		if (IsRested == 1 and Rested) then
-			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. Rested / Max * 100 .. "%)|r")
+			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)|r")
 		end
-	elseif BarType == "ARTIFACT" then
-		Current, Max = Experience:GetArtifact()
-
+	elseif BarType == "AZERITE" then
+		Current, Max, Level, Items = Experience:GetAzerite()
+		
 		if Max == 0 then
 			return
 		end
+		
+		local RemainingXP = Max - Current
+		local AzeriteItem = Item:CreateFromItemLocation(Items)
+		local ItemName = AzeriteItem:GetItemName()
 
-		GameTooltip:AddLine("|cffe6cc80"..ARTIFACT_POWER..": ".. Current .. " / " .. Max .. " (" ..  floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars ..")|r")
-		if (ArtifactWatchBar.numPointsAvailableToSpend > 0) then
-			GameTooltip:AddLine(" ");
-			GameTooltip:AddLine(ARTIFACT_POWER_TOOLTIP_BODY:format(ArtifactWatchBar.numPointsAvailableToSpend), nil, nil, nil, true);
-		end
+		GameTooltip:AddDoubleLine(ItemName..' ('..Level..')', format(ISLANDS_QUEUE_WEEKLY_QUEST_PROGRESS, Current, Max), 0.90, 0.80, 0.50)
+		GameTooltip:AddLine(' ')
+		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
+
+		GameTooltip:Show()
 	else
 		local Level = UnitHonorLevel("player")
-		local LevelMax = GetMaxPlayerHonorLevel()
-		local Prestige = UnitPrestige("player")
 
 		Current, Max = Experience:GetHonor()
 
@@ -61,8 +63,7 @@ function Experience:SetTooltip()
 			GameTooltip:AddLine(PVP_HONOR_XP_BAR_CANNOT_PRESTIGE_HERE)
 		else
 			GameTooltip:AddLine("|cffee2222"..HONOR..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
-			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. " / " .. LevelMax .. "|r")
-			GameTooltip:AddLine("|cffcccccc"..PVP_PRESTIGE_RANK_UP_TITLE..": " .. Prestige .. "|r")
+			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. "|r")
 		end
 	end
 
@@ -73,11 +74,12 @@ function Experience:GetExperience()
 	return UnitXP("player"), UnitXPMax("player")
 end
 
-function Experience:GetArtifact()
-	local itemID, altItemID, name, icon, totalXP, pointsSpent, quality, artifactAppearanceID, appearanceModID, itemAppearanceID, altItemAppearanceID, altOnTop, artifactTier = C_ArtifactUI.GetEquippedArtifactInfo()
-	local numPointsAvailableToSpend, xp, xpForNextPoint = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(pointsSpent, totalXP, artifactTier)
+function Experience:GetAzerite()
+	local AzeriteItems = C_AzeriteItem.FindActiveAzeriteItem()
+	local XP, TotalXP = C_AzeriteItem.GetAzeriteItemXPInfo(AzeriteItems)
+	local Level = C_AzeriteItem.GetPowerLevel(AzeriteItems)
 
-	return xp, xpForNextPoint
+	return XP, TotalXP, Level, AzeriteItems
 end
 
 function Experience:GetHonor()
@@ -89,7 +91,7 @@ function Experience:Update(event, owner)
 		return
 	end
 
-	local ShowArtifact = HasArtifactEquipped()
+	local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 	local PlayerLevel = UnitLevel("player")
 
 	local Current, Max = self:GetExperience()
@@ -100,6 +102,7 @@ function Experience:Update(event, owner)
 		local Bar = self["XPBar"..i]
 		local RestedBar = self["RestedBar"..i]
 		local r, g, b
+		local InstanceType = select(2, IsInInstance())
 
 		Bar.BarType = "XP"
 
@@ -108,10 +111,10 @@ function Experience:Update(event, owner)
 
 			Bar.BarType = "HONOR"
 		elseif (i == 2) then
-			if ShowArtifact then
-				Current, Max = self:GetArtifact()
+			if AzeriteItem and InstanceType ~= "pvp" and InstanceType ~= "arena" then
+				Current, Max = self:GetAzerite()
 
-				Bar.BarType = "ARTIFACT"
+				Bar.BarType = "AZERITE"
 			else
 				Current, Max = self:GetHonor()
 
@@ -134,8 +137,8 @@ function Experience:Update(event, owner)
 
 		if BarType == "XP" then
 			r, g, b = unpack(self.XPColor)
-		elseif BarType == "ARTIFACT" then
-			r, g, b = unpack(self.AFColor)
+		elseif BarType == "AZERITE" then
+			r, g, b = unpack(self.AZColor)
 		else
 			r, g, b = unpack(self.HNColor)
 		end
@@ -161,20 +164,16 @@ function Experience:Create()
 		RestedBar:SetFrameStrata("BACKGROUND")
 		RestedBar:SetStatusBarColor(unpack(self.RestedColor))
 		RestedBar:SetAllPoints(XPBar)
-		RestedBar:SetOrientation(C.Chat.Background and "HORIZONTAL" or "Vertical")
+		RestedBar:SetOrientation("HORIZONTAL")
 		RestedBar:SetFrameLevel(XPBar:GetFrameLevel() - 1)
 		RestedBar:SetAlpha(.5)
+		RestedBar:SetReverseFill(i == 2 and true)
 
-		if (C.Chat.Background) then
-			XPBar:Size(Panels.LeftChatBG:GetWidth() - 4, 6)
-			XPBar:Point("BOTTOM", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOP", 0, 4)
-			XPBar:SetReverseFill(i == 2 and true)
-			RestedBar:SetReverseFill(i == 2 and true)
-		else
-			XPBar:SetOrientation("Vertical")
-			XPBar:Size(Panels.CubeLeft:GetWidth() - 4, Panels.LeftVerticalLine:GetHeight() - Panels.DataTextLeft:GetHeight() - 4)
-			XPBar:Point("TOP", i == 1 and Panels.LeftVerticalLine or Panels.RightVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)
-		end
+		XPBar:SetSize(i == 1 and Panels.LeftChatBG:GetWidth() or Panels.RightChatBG:GetWidth(), 6)
+		XPBar:Point("BOTTOMLEFT", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOPLEFT", 0, 4)
+		XPBar:SetReverseFill(i == 2 and true)
+		
+		XPBar.Backdrop:CreateShadow()
 
 		self["XPBar"..i] = XPBar
 		self["RestedBar"..i] = RestedBar
@@ -185,11 +184,12 @@ function Experience:Create()
 	self:RegisterEvent("UPDATE_EXHAUSTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_UPDATE_RESTING")
-	self:RegisterEvent("ARTIFACT_XP_UPDATE")
 	self:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	self:RegisterEvent("HONOR_XP_UPDATE")
 	self:RegisterEvent("HONOR_LEVEL_UPDATE")
-	self:RegisterEvent("HONOR_PRESTIGE_UPDATE")
+	self:RegisterEvent("AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED")
+	self:RegisterEvent("RESPEC_AZERITE_EMPOWERED_ITEM_CLOSED")
+	self:RegisterEvent("PLAYER_MONEY")
 
 	self:SetScript("OnEvent", self.Update)
 end

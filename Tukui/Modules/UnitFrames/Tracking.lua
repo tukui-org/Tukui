@@ -706,7 +706,7 @@ TukuiUnitFrames.DebuffsTracking["CCDebuffs"] = {
 
 TukuiUnitFrames.RaidBuffsTracking = {
 	PRIEST = {
-		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},             -- Prayer of Mending
+		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},             -- Prayer of Mending 
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},                -- Renew
 		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},            -- Power Word: Shield
 	},
@@ -725,7 +725,6 @@ TukuiUnitFrames.RaidBuffsTracking = {
 		{1022, "BOTTOMRIGHT", {0.2, 0.2, 1}, true}, 	     -- Hand of Protection
 		{1044, "BOTTOMRIGHT", {0.89, 0.45, 0}, true},	     -- Hand of Freedom
 		{6940, "BOTTOMRIGHT", {0.89, 0.1, 0.1}, true},	     -- Hand of Sacrifice
-		{114163, "BOTTOMLEFT", {0.81, 0.85, 0.1}, true},	 -- Eternal Flame
 	},
 
 	SHAMAN = {

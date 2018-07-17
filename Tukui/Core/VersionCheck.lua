@@ -28,7 +28,7 @@ function TukuiVersion:Check(event, prefix, message, channel, sender)
 		end
 
 		if Channel then -- Putting a small delay on the call just to be certain it goes out.
-			T.Delay(2, SendAddonMessage, "TukuiVersion", Version, Channel)
+			T.Delay(2, C_ChatInfo.SendAddonMessage, "TukuiVersion", Version, Channel)
 		end
 	end
 end
@@ -38,6 +38,6 @@ TukuiVersion:RegisterEvent("GROUP_ROSTER_UPDATE")
 TukuiVersion:RegisterEvent("CHAT_MSG_ADDON")
 TukuiVersion:SetScript("OnEvent", TukuiVersion.Check)
 
-RegisterAddonMessagePrefix("TukuiVersion")
+C_ChatInfo.RegisterAddonMessagePrefix("TukuiVersion")
 
 T["VersionCheck"] = TukuiVersion

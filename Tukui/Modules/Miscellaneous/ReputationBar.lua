@@ -56,24 +56,19 @@ end
 function Reputation:Create()
 	for i = 1, self.NumBars do
 		local RepBar = CreateFrame("StatusBar", nil, UIParent)
+		local XPBar1 = T.Miscellaneous.Experience.XPBar1
+		local XPBar2 = T.Miscellaneous.Experience.XPBar2
 
 		RepBar:SetStatusBarTexture(C.Medias.Normal)
 		RepBar:EnableMouse()
 		RepBar:SetFrameStrata("BACKGROUND")
-		RepBar:SetFrameLevel(3)
+		RepBar:SetFrameLevel(4)
 		RepBar:CreateBackdrop()
 		RepBar:SetScript("OnEnter", Reputation.SetTooltip)
 		RepBar:SetScript("OnLeave", HideTooltip)
-
-		if (C.Chat.Background) then
-			RepBar:Size(Panels.LeftChatBG:GetWidth() - 4, 6)
-			RepBar:Point("BOTTOM", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOP", 0, 4)
-			RepBar:SetReverseFill(i == 2 and true)
-		else
-			RepBar:SetOrientation("Vertical")
-			RepBar:Size(Panels.CubeLeft:GetWidth() - 4, Panels.LeftVerticalLine:GetHeight() - Panels.DataTextLeft:GetHeight() - 4)
-			RepBar:Point("TOP", i == 1 and Panels.LeftVerticalLine or Panels.RightVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)
-		end
+		RepBar:Size(Panels.LeftChatBG:GetWidth() - 2, 6)
+		RepBar:SetAllPoints(i == 1 and XPBar1 or i == 2 and XPBar2)
+		RepBar:SetReverseFill(i == 2 and true)
 
 		self["RepBar"..i] = RepBar
 	end

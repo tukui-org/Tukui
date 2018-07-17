@@ -25,9 +25,9 @@ function ActionBars:ShowAllButtons(bar, num)
 	end
 
 	if (num == 2 or num == 3) then
-		bar:Width((C.ActionBars.NormalButtonSize * 6) + (C.ActionBars.ButtonSpacing * 7))
+		bar:Width((MultiBarBottomLeftButton1:GetWidth() * 6) + (C.ActionBars.ButtonSpacing * 7))
 	elseif (num == 5) then
-		bar:Height((C.ActionBars.NormalButtonSize * 12) + (C.ActionBars.ButtonSpacing * 13))
+		bar:Height((MultiBarBottomLeftButton1:GetWidth() * 12) + (C.ActionBars.ButtonSpacing * 13))
 	end
 end
 
@@ -52,7 +52,7 @@ function ActionBars:RemoveColumn(bar, num)
 	Button1:Hide()
 	Button2:Hide()
 
-	bar:Width((C.ActionBars.NormalButtonSize * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
+	bar:Width((MultiBarBottomLeftButton1:GetWidth() * (bar.NextColumnToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextColumnToHide))
 
 	bar.NextColumnToHide = bar.NextColumnToHide - 1
 
@@ -78,7 +78,7 @@ function ActionBars:RemoveButton(bar, num)
 
 	Button:Hide()
 
-	bar:Height((C.ActionBars.NormalButtonSize * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
+	bar:Height((MultiBarBottomLeftButton1:GetWidth() * (bar.NextButtonToHide - 1)) + (C.ActionBars.ButtonSpacing * bar.NextButtonToHide))
 
 	bar.NextButtonToHide = bar.NextButtonToHide - 1
 
@@ -95,7 +95,7 @@ function ActionBars:ShowTopButtons(bar)
 		Button:Show()
 	end
 
-	bar:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
+	bar:Height((MultiBarBottomLeftButton1:GetWidth() * 2) + (C.ActionBars.ButtonSpacing * 3))
 end
 
 function ActionBars:HideTopButtons()
@@ -107,8 +107,8 @@ function ActionBars:HideTopButtons()
 		Bar3["Button"..i]:Hide()
 	end
 
-	Bar2:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
-	Bar3:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
+	Bar2:Height((MultiBarBottomLeftButton1:GetWidth() * 1) + (C.ActionBars.ButtonSpacing * 2))
+	Bar3:Height((MultiBarBottomRightButton1:GetWidth() * 1) + (C.ActionBars.ButtonSpacing * 2))
 end
 
 local OnClick = function(self, button)
@@ -139,8 +139,8 @@ local OnClick = function(self, button)
 			if (Num == 4) then
 				ActionBars:HideTopButtons()
 
-				BarButtons[2]:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
-				BarButtons[3]:Height((C.ActionBars.NormalButtonSize * 1) + (C.ActionBars.ButtonSpacing * 2))
+				BarButtons[2]:Height((MultiBarBottomLeftButton1:GetWidth() * 1) + (C.ActionBars.ButtonSpacing * 2))
+				BarButtons[3]:Height((MultiBarBottomLeftButton1:GetWidth() * 1) + (C.ActionBars.ButtonSpacing * 2))
 			end
 
 			-- Move the button
@@ -156,7 +156,7 @@ local OnClick = function(self, button)
 				self:Point("TOP", T.Panels.ActionBar1, "BOTTOM", 0, -3)
 				Text:SetText(L.ActionBars.ArrowUp)
 			elseif (Num == 5) then
-				self:Size(C.ActionBars.NormalButtonSize, Bar:GetHeight() - 40)
+				self:Size(MultiBarBottomLeftButton1:GetWidth(), Bar:GetHeight() - 40)
 				self:Point("LEFT", Bar, "RIGHT", 3, 0)
 				Text:SetText(L.ActionBars.ArrowLeft)
 			end
@@ -176,8 +176,8 @@ local OnClick = function(self, button)
 			ActionBars:ShowTopButtons(Bar2)
 			ActionBars:ShowTopButtons(Bar3)
 
-			BarButtons[2]:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
-			BarButtons[3]:Height((C.ActionBars.NormalButtonSize * 2) + (C.ActionBars.ButtonSpacing * 3))
+			BarButtons[2]:Height((MultiBarBottomLeftButton1:GetWidth() * 2) + (C.ActionBars.ButtonSpacing * 3))
+			BarButtons[3]:Height((MultiBarBottomLeftButton1:GetWidth() * 2) + (C.ActionBars.ButtonSpacing * 3))
 		end
 
 		-- Move the button
@@ -225,6 +225,8 @@ function ActionBars:CreateToggleButtons()
 		Button.Text = Button:CreateFontString(nil, "OVERLAY")
 		Button.Text:Point("CENTER", Button, 0, 0)
 		Button.Text:SetFont(C.Medias.ActionBarFont, 12)
+		
+		Button:CreateShadow()
 
 		if (i == 2) then
 			Button:Size(18, Height)

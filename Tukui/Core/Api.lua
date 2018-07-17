@@ -7,10 +7,24 @@ local floor = math.floor
 local class = select(2, UnitClass("player"))
 local Noop = function() return end
 
-T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / C.General.UIScale
+T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / GetCVar("uiScale")
 T.Scale = function(x) return T.Mult * math.floor(x / T.Mult + .5) end
 
 -- [[ API FUNCTIONS ]] --
+
+local function SetFadeInTemplate(self, FadeTime, Alpha)
+	UIFrameFadeIn(self, FadeTime, self:GetAlpha(), Alpha)
+end
+
+local function SetFadeOutTemplate(self, FadeTime, Alpha)
+	UIFrameFadeOut(self, FadeTime, self:GetAlpha(), Alpha)
+end
+
+local function SetFontTemplate(self, Font, FontSize, ShadowOffsetX, ShadowOffsetY)
+	self:SetFont(Font, T.Scale(FontSize), "THINOUTLINE")
+	self:SetShadowColor(0, 0, 0, 1)
+	self:SetShadowOffset(T.Scale(ShadowOffsetX or 1), -T.Scale(ShadowOffsetY or 1))
+end
 
 local function Size(frame, width, height)
 	frame:SetSize(T.Scale(width), T.Scale(height or width))
@@ -36,8 +50,8 @@ local function Point(obj, arg1, arg2, arg3, arg4, arg5)
 end
 
 local function SetOutside(obj, anchor, xOffset, yOffset)
-	xOffset = xOffset or 2
-	yOffset = yOffset or 2
+	xOffset = xOffset or (MakeInset and 2) or 1
+	yOffset = yOffset or (MakeInset and 2) or 1
 	anchor = anchor or obj:GetParent()
 
 	if obj:GetPoint() then obj:ClearAllPoints() end
@@ -47,8 +61,8 @@ local function SetOutside(obj, anchor, xOffset, yOffset)
 end
 
 local function SetInside(obj, anchor, xOffset, yOffset)
-	xOffset = xOffset or 2
-	yOffset = yOffset or 2
+	xOffset = xOffset or (MakeInset and 2) or 1
+	yOffset = yOffset or (MakeInset and 2) or 1
 	anchor = anchor or obj:GetParent()
 
 	if obj:GetPoint() then obj:ClearAllPoints() end
@@ -75,87 +89,8 @@ local function SetTemplate(f, t, tex)
 		tile = false, tileSize = 0, edgeSize = T.Mult,
 	})
 
-	if not f.isInsetDone then
-		f.insettop = f:CreateTexture(nil, "BORDER")
-		f.insettop:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
-		f.insettop:Point("TOPRIGHT", f, "TOPRIGHT", 1, -1)
-		f.insettop:Height(1)
-		f.insettop:SetColorTexture(0,0,0)
-		f.insettop:SetDrawLayer("BORDER", -7)
-
-		f.insetbottom = f:CreateTexture(nil, "BORDER")
-		f.insetbottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, -1)
-		f.insetbottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
-		f.insetbottom:Height(1)
-		f.insetbottom:SetColorTexture(0,0,0)
-		f.insetbottom:SetDrawLayer("BORDER", -7)
-
-		f.insetleft = f:CreateTexture(nil, "BORDER")
-		f.insetleft:Point("TOPLEFT", f, "TOPLEFT", -1, 1)
-		f.insetleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, -1)
-		f.insetleft:Width(1)
-		f.insetleft:SetColorTexture(0,0,0)
-		f.insetleft:SetDrawLayer("BORDER", -7)
-
-		f.insetright = f:CreateTexture(nil, "BORDER")
-		f.insetright:Point("TOPRIGHT", f, "TOPRIGHT", 1, 1)
-		f.insetright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, -1)
-		f.insetright:Width(1)
-		f.insetright:SetColorTexture(0,0,0)
-		f.insetright:SetDrawLayer("BORDER", -7)
-
-		f.insetinsidetop = f:CreateTexture(nil, "BORDER")
-		f.insetinsidetop:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
-		f.insetinsidetop:Point("TOPRIGHT", f, "TOPRIGHT", -1, 1)
-		f.insetinsidetop:Height(1)
-		f.insetinsidetop:SetColorTexture(0,0,0)
-		f.insetinsidetop:SetDrawLayer("BORDER", -7)
-
-		f.insetinsidebottom = f:CreateTexture(nil, "BORDER")
-		f.insetinsidebottom:Point("BOTTOMLEFT", f, "BOTTOMLEFT", 1, 1)
-		f.insetinsidebottom:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, 1)
-		f.insetinsidebottom:Height(1)
-		f.insetinsidebottom:SetColorTexture(0,0,0)
-		f.insetinsidebottom:SetDrawLayer("BORDER", -7)
-
-		f.insetinsideleft = f:CreateTexture(nil, "BORDER")
-		f.insetinsideleft:Point("TOPLEFT", f, "TOPLEFT", 1, -1)
-		f.insetinsideleft:Point("BOTTOMLEFT", f, "BOTTOMLEFT", -1, 1)
-		f.insetinsideleft:Width(1)
-		f.insetinsideleft:SetColorTexture(0,0,0)
-		f.insetinsideleft:SetDrawLayer("BORDER", -7)
-
-		f.insetinsideright = f:CreateTexture(nil, "BORDER")
-		f.insetinsideright:Point("TOPRIGHT", f, "TOPRIGHT", -1, -1)
-		f.insetinsideright:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, 1)
-		f.insetinsideright:Width(1)
-		f.insetinsideright:SetColorTexture(0,0,0)
-		f.insetinsideright:SetDrawLayer("BORDER", -7)
-
-		f.isInsetDone = true
-	end
-
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
-end
-
-local borders = {
-	"insettop",
-	"insetbottom",
-	"insetleft",
-	"insetright",
-	"insetinsidetop",
-	"insetinsidebottom",
-	"insetinsideleft",
-	"insetinsideright",
-}
-
-local function HideInsets(f)
-	for i, border in pairs(borders) do
-		if f[border] then
-			f[border]:SetColorTexture(0,0,0,0)
-		end
-	end
 end
 
 local function CreateBackdrop(f, t, tex)
@@ -181,25 +116,22 @@ local function CreateShadow(f, t)
 	local shadow = CreateFrame("Frame", nil, f)
 	shadow:SetFrameLevel(1)
 	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:Point("TOPLEFT", -3, 3)
-	shadow:Point("BOTTOMLEFT", -3, -3)
-	shadow:Point("TOPRIGHT", 3, 3)
-	shadow:Point("BOTTOMRIGHT", 3, -3)
+	shadow:Point("TOPLEFT", -4, 4)
+	shadow:Point("BOTTOMRIGHT", 4, -4)
 
 	if C["General"].HideShadows then
 		shadow:SetBackdrop( {
 			edgeFile = nil, edgeSize = 0,
-			insets = {left = 0, right = 0, top = 0, bottom = 0},
 		})
 	else
 		shadow:SetBackdrop( {
-			edgeFile = C.Medias.Glow, edgeSize = T.Scale(3),
-			insets = {left = T.Scale(5), right = T.Scale(5), top = T.Scale(5), bottom = T.Scale(5)},
+			edgeFile = C.Medias.Glow, edgeSize = T.Scale(4),
 		})
 	end
 
 	shadow:SetBackdropColor(0, 0, 0, 0)
 	shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+	
 	f.Shadow = shadow
 end
 
@@ -215,7 +147,7 @@ local function StyleButton(button)
 	if button.SetHighlightTexture and not button.hover then
 		local hover = button:CreateTexture()
 		hover:SetColorTexture(1, 1, 1, 0.3)
-		hover:SetInside()
+		hover:SetAllPoints(button)
 		button.hover = hover
 		button:SetHighlightTexture(hover)
 	end
@@ -223,7 +155,7 @@ local function StyleButton(button)
 	if button.SetPushedTexture and not button.pushed then
 		local pushed = button:CreateTexture()
 		pushed:SetColorTexture(0.9, 0.8, 0.1, 0.3)
-		pushed:SetInside()
+		pushed:SetAllPoints(button)
 		button.pushed = pushed
 		button:SetPushedTexture(pushed)
 	end
@@ -231,7 +163,7 @@ local function StyleButton(button)
 	if button.SetCheckedTexture and not button.checked then
 		local checked = button:CreateTexture()
 		checked:SetColorTexture(0,1,0,.3)
-		checked:SetInside()
+		checked:SetAllPoints(button)
 		button.checked = checked
 		button:SetCheckedTexture(checked)
 	end
@@ -239,7 +171,7 @@ local function StyleButton(button)
 	local cooldown = button:GetName() and _G[button:GetName().."Cooldown"]
 	if cooldown then
 		cooldown:ClearAllPoints()
-		cooldown:SetInside()
+		cooldown:SetAllPoints(button)
 	end
 end
 
@@ -522,7 +454,7 @@ local function SkinScrollBar(frame)
 			ScrollUpButton.texture = ScrollUpButton:CreateTexture(nil, "OVERLAY")
 			Point(ScrollUpButton.texture, "TOPLEFT", 2, -2)
 			Point(ScrollUpButton.texture, "BOTTOMRIGHT", -2, 2)
-			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowup.tga]])
+			ScrollUpButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowUp]])
 			ScrollUpButton.texture:SetVertexColor(unpack(C.General.BorderColor))
 		end
 
@@ -531,7 +463,7 @@ local function SkinScrollBar(frame)
 
 		if not ScrollDownButton.texture then
 			ScrollDownButton.texture = ScrollDownButton:CreateTexture(nil, "OVERLAY")
-			ScrollDownButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\arrowdown.tga]])
+			ScrollDownButton.texture:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowDown]])
 			ScrollDownButton.texture:SetVertexColor(unpack(C.General.BorderColor))
 			ScrollDownButton.texture:Point("TOPLEFT", 2, -2)
 			ScrollDownButton.texture:Point("BOTTOMRIGHT", -2, 2)
@@ -567,12 +499,39 @@ local function SkinScrollBar(frame)
 end
 
 ---------------------------------------------------
+-- Deprecated API, will be removed: Version + 2
+---------------------------------------------------
+
+-- V17 --
+local borders = {
+	"insettop",
+	"insetbottom",
+	"insetleft",
+	"insetright",
+	"insetinsidetop",
+	"insetinsidebottom",
+	"insetinsideleft",
+	"insetinsideright",
+}
+
+local function HideInsets(f)
+	for i, border in pairs(borders) do
+		if f[border] then
+			f[border]:SetColorTexture(0,0,0,0)
+		end
+	end
+end
+
+---------------------------------------------------
 -- Merge Tukui API with WoW API
 ---------------------------------------------------
 
 local function AddAPI(object)
 	local mt = getmetatable(object).__index
 
+	if not object.SetFadeInTemplate then mt.SetFadeInTemplate = SetFadeInTemplate end
+	if not object.SetFadeOutTemplate then mt.SetFadeOutTemplate = SetFadeOutTemplate end
+	if not object.SetFontTemplate then mt.SetFontTemplate = SetFontTemplate end
 	if not object.Size then mt.Size = Size end
 	if not object.Point then mt.Point = Point end
 	if not object.SetOutside then mt.SetOutside = SetOutside end

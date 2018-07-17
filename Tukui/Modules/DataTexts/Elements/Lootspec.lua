@@ -69,4 +69,4 @@ local Disable = function(self)
 	self.Text:SetText("")
 end
 
-DataText:Register("LootSpec", Enable, Disable, Update)
+DataText:Register(L.DataText.LootSpec, Enable, Disable, Update)

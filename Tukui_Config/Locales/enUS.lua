@@ -5,16 +5,6 @@ local RestoreDefault = "\n|cffFFFF00Right-click to restore to default|r" -- For 
 
 TukuiConfig["enUS"] = {
 	["General"] = {
-		["AutoScale"] = {
-			["Name"] = "Auto Scale",
-			["Desc"] = "Automatically detect the best scale for your resolution",
-		},
-
-		["UIScale"] = {
-			["Name"] = "UI Scale",
-			["Desc"] = "Set a custom UI scale",
-		},
-
 		["BackdropColor"] = {
 			["Name"] = "Backdrop Color",
 			["Desc"] = "Set the backdrop color for all Tukui frames"..RestoreDefault,
@@ -29,17 +19,17 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Hide Shadows",
 			["Desc"] = "Display or hide shadows on certain Tukui frames",
 		},
+		
+		["Scaling"] = {
+			["Name"] = "UI Scale",
+			["Desc"] = "Define how big the user interface is displayed",
+		},
 	},
 
 	["ActionBars"] = {
 		["Enable"] = {
 			["Name"] = "Enable action bars",
 			["Desc"] = "Derp",
-		},
-
-		["EquipBorder"] = {
-			["Name"] = "Equipped Item Border",
-			["Desc"] = "Display Green Border on Equipped Items",
 		},
 
 		["HotKey"] = {
@@ -97,11 +87,6 @@ TukuiConfig["enUS"] = {
 		["Enable"] = {
 			["Name"] = "Enable Auras",
 			["Desc"] = "Derp",
-		},
-
-		["Consolidate"] = {
-			["Name"] = "Consolidate Auras",
-			["Desc"] = "Enable consolidated auras",
 		},
 
 		["Flash"] = {
@@ -191,11 +176,6 @@ TukuiConfig["enUS"] = {
 		["LinkBrackets"] = {
 			["Name"] = "URL Link Brackets",
 			["Desc"] = "Display URL links wrapped in brackets",
-		},
-
-		["LootFrame"] = {
-			["Name"] = "Loot Frame",
-			["Desc"] = "Create a seperate 'Loot' chat frame to the right",
 		},
 
 		["Background"] = {
@@ -333,11 +313,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set the height of the cast bar on NamePlates",
 		},
 
-		["Texture"] = {
-			["Name"] = "NamePlates Texture",
-			["Desc"] = "Set a texture for nameplates",
-		},
-
 		["Font"] = {
 			["Name"] = "NamePlates Font",
 			["Desc"] = "Set a font for nameplates",
@@ -348,11 +323,6 @@ TukuiConfig["enUS"] = {
 		["Enable"] = {
 			["Name"] = "Enable Party Frames",
 			["Desc"] = "Derp",
-		},
-
-		["Portrait"] = {
-			["Name"] = "Portrait",
-			["Desc"] = "Display portrait on party frames",
 		},
 
 		["HealBar"] = {
@@ -380,16 +350,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font for health text on party frames",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
-		},
-
 		["RangeAlpha"] = {
 			["Name"] = "Out Of Range Alpha",
 			["Desc"] = "Set the transparency of units that are out of range",
@@ -405,11 +365,6 @@ TukuiConfig["enUS"] = {
 		["ShowPets"] = {
 			["Name"] = "Show Pets",
 			["Desc"] = "Derp",
-		},
-
-		["Highlight"] = {
-			["Name"] = "Highlight",
-			["Desc"] = "Highlight your current focus/target",
 		},
 
 		["MaxUnitPerColumn"] = {
@@ -467,16 +422,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font for health text on raid frames",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
-		},
-
 		["GroupBy"] = {
 			["Name"] = "Group By",
 			["Desc"] = "Define how raids groups are sorted",
@@ -506,17 +451,62 @@ TukuiConfig["enUS"] = {
 
 		["ShowSpec"] = {
 			["Name"] = "Specialization and iLevel",
-			["Desc"] = "Display player specialization and ilevel in tooltip",
+			["Desc"] = "Display player specialization and ilevel in tooltip when you press ALT",
 		},
 
 		["HealthFont"] = {
 			["Name"] = "Health Bar Font",
 			["Desc"] = "Set a font to be used by the health bar below unit tooltips",
 		},
+	},
+	
+	["Textures"] = {
+		["QuestProgressTexture"] = {
+			["Name"] = "Quest [Progress]",
+		},
 
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture to be used by the health bar below unit tooltips",
+		["TTHealthTexture"] = {
+			["Name"] = "Tooltip [Health]",
+		},
+
+		["UFPowerTexture"] = {
+			["Name"] = "UnitFrames [Power]",
+		},
+
+		["UFHealthTexture"] = {
+			["Name"] = "UnitFrames [Health]",
+		},
+
+		["UFCastTexture"] = {
+			["Name"] = "UnitFrames [Cast]",
+		},
+
+		["UFPartyPowerTexture"] = {
+			["Name"] = "UnitFrames [Party Power]",
+		},
+
+		["UFPartyHealthTexture"] = {
+			["Name"] = "UnitFrames [Party Health]",
+		},
+
+		["UFRaidPowerTexture"] = {
+			["Name"] = "UnitFrames [Raid Power]",
+		},
+
+		["UFRaidHealthTexture"] = {
+			["Name"] = "UnitFrames [Raid Health]",
+		},
+
+		["NPHealthTexture"] = {
+			["Name"] = "Nameplates [Health]",
+		},
+
+		["NPPowerTexture"] = {
+			["Name"] = "Nameplates [Power]",
+		},
+
+		["NPCastTexture"] = {
+			["Name"] = "Nameplates [Cast]",
 		},
 	},
 
@@ -586,11 +576,6 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Enable the combo points bar",
 		},
 
-		["AnticipationBar"] = {
-			["Name"] = "Rogue Anticipation Bar",
-			["Desc"] = "Display a bar showing rogue anticipation points",
-		},
-
 		["SerendipityBar"] = {
 			["Name"] = "Priest Serendipity Bar",
 			["Desc"] = "Display a bar showing priest serendipity stacks",
@@ -606,14 +591,9 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Only display our buffs on the target frame",
 		},
 
-		["DarkTheme"] = {
-			["Name"] = "Dark Theme",
-			["Desc"] = "If enabled, unit frames will be a dark color with class colored power bars",
-		},
-
 		["Threat"] = {
 			["Name"] = "Enable threat display",
-			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+			["Desc"] = "Health Bar on party and raid members will turn red if they have aggro",
 		},
 
 		["Arena"] = {
@@ -659,21 +639,6 @@ TukuiConfig["enUS"] = {
 		["Font"] = {
 			["Name"] = "Unit Frame Font",
 			["Desc"] = "Set a font for unit frames",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Power Bar Texture",
-			["Desc"] = "Set a texture for power bars",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Health Bar Texture",
-			["Desc"] = "Set a texture for health bars",
-		},
-
-		["CastTexture"] = {
-			["Name"] = "Cast Bar Texture",
-			["Desc"] = "Set a texture for cast bars",
 		},
 	},
 }

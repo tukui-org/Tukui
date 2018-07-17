@@ -9,7 +9,7 @@ local format = format
 local Update = function(self)
 	local Value = 1
 
-	self.Text:SetText(format("%s: %s", "Data Name", Value))
+	self.Text:SetText(format("%s %s", "Data Name", Value))
 end
 
 -- This function registers events/handlers, and calls an update immediately to set text value.

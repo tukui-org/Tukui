@@ -71,7 +71,7 @@ function GameMenu:Enable()
 	Header:ClearAllPoints()
 	Header:SetPoint("TOP", Menu, 0, 7)
 
-	Menu:SetTemplate()
+	Menu:SetTemplate("Transparent")
 	Menu:CreateShadow()
 
 	for i = 1, #self.Buttons do

@@ -9,8 +9,9 @@ oUF.colors.disconnected = {
 }
 
 oUF.colors.runes = {
-	["READY"] = {0.31, 0.45, 0.63},
-	["CD"] = {0.7, 0.7, 0.7},
+	[1] = {0.69, 0.31, 0.31},
+	[2] = {0.41, 0.80, 1.00},
+	[3] = {0.65, 0.63, 0.35},
 }
 
 oUF.colors.reaction = {

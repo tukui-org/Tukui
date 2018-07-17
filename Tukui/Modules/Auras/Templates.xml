@@ -39,8 +39,6 @@
 				local T = unpack(Tukui)
 				local TukuiAuras = T["Auras"]
 
-				self.IsProxy = true
-
 				TukuiAuras.Skin(self)
 			</OnLoad>
 		</Scripts>

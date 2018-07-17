@@ -1,4 +1,4 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: |cffff8000Tukui Config|r
 ## Notes: Tukui Config GUI
 ## Author: Tukz & Hydra
@@ -9,13 +9,4 @@
 
 Tukui_Config.lua
 Locales\enUS.lua
-Locales\deDE.lua
-Locales\esES.lua
-Locales\esMX.lua
 Locales\frFR.lua
-Locales\itIT.lua
-Locales\koKR.lua
-Locales\ptBR.lua
-Locales\ruRU.lua
-Locales\zhCN.lua
-Locales\zhTW.lua

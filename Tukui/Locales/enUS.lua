@@ -12,6 +12,9 @@ L.ChatFrames.LookingForGroup = "LookingForGroup"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
+L.DataText.LootSpec = "Loot Specialization"
+L.DataText.Garrison = "Garrison"
+L.DataText.Zone = "Zone"
 L.DataText.AvoidanceBreakdown = "Avoidance Breakdown"
 L.DataText.Level = "Lvl"
 L.DataText.Boss = "Boss"
@@ -258,4 +261,4 @@ L.Others.CharSettings = "Use Character Settings"
 L.Others.ProfileNotFound = "Profile not found"
 L.Others.ProfileSelection = "Please type a profile to use (example: /tukui profile Illidan-Tukz)"
 L.Others.ConfigNotFound = "Config not loaded."
-L.Others.ResolutionChanged = "We detected a resolution change on your World of Warcraft client. We HIGHLY RECOMMEND to restart your game. Do you want to proceed?"
+L.Others.ResolutionChanged = "We detected a resolution change on your World of Warcraft client. We HIGHLY RECOMMEND to reload your UI. Do you want to proceed?"

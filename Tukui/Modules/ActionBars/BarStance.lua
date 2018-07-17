@@ -15,7 +15,7 @@ function TukuiActionBars:CreateStanceBar()
 	local Movers = T["Movers"]
 
 	StanceBar:ClearAllPoints()
-	StanceBar:Point("BOTTOMLEFT", UIParent, 47, 199)
+	StanceBar:Point("BOTTOMLEFT", UIParent, 28, 204)
 
 	StanceBarFrame.ignoreFramePositionManager = true
 	StanceBarFrame:StripTextures()

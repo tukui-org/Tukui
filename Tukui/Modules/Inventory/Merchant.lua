@@ -24,7 +24,7 @@ function Merchant:OnEvent()
 							Price = Mult1 * Mult2
 						end
 
-						if (C["Merchant"].AutoSellGrays and select(3, GetItemInfo(Link)) == 0 and Price > 0) then
+						if (select(3, GetItemInfo(Link)) == 0 and Price > 0) then
 							UseContainerItem(Bag, Slot)
 							PickupMerchantItem()
 							Cost = Cost + Price

@@ -7,7 +7,7 @@ local Class = select(2, UnitClass("player"))
 local Update = function(self)
 	local Value = GetCombatRating(18)
 
-	self.Text:SetFormattedText("%s: %s", DataText.NameColor .. L.DataText.Haste .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
+	self.Text:SetFormattedText("%s %s", DataText.NameColor .. L.DataText.Haste .. "|r", DataText.ValueColor .. T.Comma(Value) .. "|r")
 end
 
 local Enable = function(self)

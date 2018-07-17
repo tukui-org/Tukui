@@ -89,6 +89,8 @@ local Credits = {
 	"Ishtara",
 	"Caith",
 	"Azilroka",
+	"Simpy",
+	"Aftermathh",
 }
 
 local GetOrderedIndex = function(t)
@@ -878,6 +880,7 @@ function TukuiConfig:CreateConfigWindow()
 	ConfigFrame:Size(447, Height)
 	ConfigFrame:Point("CENTER")
 	ConfigFrame:SetFrameStrata("HIGH")
+	ConfigFrame:SetMovable(true)
 
 	local LeftWindow = CreateFrame("Frame", "TukuiConfigFrameLeft", ConfigFrame)
 	LeftWindow:SetTemplate()
@@ -895,6 +898,11 @@ function TukuiConfig:CreateConfigWindow()
 	TitleFrame:SetTemplate()
 	TitleFrame:Size(447, 22)
 	TitleFrame:Point("BOTTOM", ConfigFrame, "TOP", 0, 3)
+	TitleFrame:EnableMouse(true)
+	TitleFrame:RegisterForDrag("LeftButton")
+	TitleFrame:SetScript("OnDragStart", function() TukuiConfigFrame:StartMoving() end)
+	TitleFrame:SetScript("OnDragStop", function() TukuiConfigFrame:StopMovingOrSizing() end)
+	
 
 	TitleFrame.Text = TitleFrame:CreateFontString(nil, "OVERLAY")
 	TitleFrame.Text:SetFont(C.Medias.Font, 16)

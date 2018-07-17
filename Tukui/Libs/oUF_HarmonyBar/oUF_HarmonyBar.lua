@@ -43,8 +43,8 @@ local function Update(self, event, unit, powerType)
 		Bar:PreUpdate(unit)
 	end
 
-	local Current = UnitPower("player", SPELL_POWER_CHI)
-	local Max = UnitPowerMax("player", SPELL_POWER_CHI)
+	local Current = UnitPower("player", Enum.PowerType.Chi)
+	local Max = UnitPowerMax("player", Enum.PowerType.Chi)
 	local Spec = GetSpecialization()
 
 	-- Determine if we need it show or not
@@ -89,7 +89,7 @@ local function Enable(self, unit)
 		hb.__owner = self
 		hb.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent("UNIT_POWER", Path)
+		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:RegisterEvent("UNIT_MAXPOWER", Path)
 
@@ -114,7 +114,7 @@ end
 
 local function Disable(self)
 	if self.HarmonyBar then
-		self:UnregisterEvent("UNIT_POWER", Path)
+		self:UnregisterEvent("UNIT_POWER_UPDATE", Path)
 		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:UnregisterEvent("UNIT_MAXPOWER", Path)
 	end

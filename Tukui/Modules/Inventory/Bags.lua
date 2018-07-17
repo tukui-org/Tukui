@@ -89,6 +89,7 @@ function Bags:SkinBagButton()
 	})
 	self:SetBackdropBorderColor(unpack(C.General.BorderColor))
 	self:StyleButton()
+	self.IconOverlay:SetAlpha(0)
 
 	self.IsSkinned = true
 end
@@ -155,11 +156,13 @@ function Bags:CreateReagentContainer()
 	Reagent:SetWidth(((ButtonSize + ButtonSpacing) * ItemsPerRow) + 22 - ButtonSpacing)
 	Reagent:SetPoint("BOTTOMLEFT", DataTextLeft, "TOPLEFT", 0, 6)
 	Reagent:SetTemplate()
+	Reagent:CreateShadow()
 	Reagent:SetFrameStrata(self.Bank:GetFrameStrata())
 	Reagent:SetFrameLevel(self.Bank:GetFrameLevel())
 
 	SwitchBankButton:Size((Reagent:GetWidth() / 2) - 1, 23)
 	SwitchBankButton:SkinButton()
+	SwitchBankButton:CreateShadow()
 	SwitchBankButton:Point("BOTTOMLEFT", Reagent, "TOPLEFT", 0, 2)
 
 	SwitchBankButton.Text = SwitchBankButton:CreateFontString(nil, "OVERLAY")
@@ -187,10 +190,12 @@ function Bags:CreateReagentContainer()
 	Deposit:Size(Reagent:GetWidth(), 23)
 	Deposit:Point("BOTTOMLEFT", SwitchBankButton, "TOPLEFT", 0, 2)
 	Deposit:SkinButton()
+	Deposit:CreateShadow()
 
 	SortButton:Size((Reagent:GetWidth() / 2) - 1, 23)
 	SortButton:SetPoint("LEFT", SwitchBankButton, "RIGHT", 2, 0)
 	SortButton:SkinButton()
+	SortButton:CreateShadow()
 	SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
 	SortButton.Text:SetFont(FontPath, 12)
 	SortButton.Text:SetJustifyH("LEFT")
@@ -257,10 +262,7 @@ function Bags:CreateReagentContainer()
 
 	UnlockButton:SkinButton()
 
-	--Movers:RegisterFrame(Reagent)
-
 	self.Reagent = Reagent
-	-- Couldn't access these.
 	self.Reagent.SwitchBankButton = SwitchBankButton
 	self.Reagent.SortButton = SortButton
 end
@@ -272,16 +274,10 @@ function Bags:CreateContainer(storagetype, ...)
 	Container:SetPoint(...)
 	Container:SetFrameStrata("MEDIUM")
 	Container:SetFrameLevel(50)
-	--Container:RegisterForDrag("LeftButton","RightButton")
-	--Container:SetScript("OnDragStart", function(self) self:StartMoving() end)
-	--Container:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 	Container:Hide()
 	Container:SetTemplate()
-	--Container:SetClampedToScreen(true)
-	--Container:SetMovable(true)
-	--Container:SetUserPlaced(true)
+	Container:CreateShadow()
 	Container:EnableMouse(true)
-	--Container:RegisterForDrag("LeftButton","RightButton")
 
 	if (storagetype == "Bag") then
 		local Sort = BagItemAutoSortButton
@@ -294,6 +290,7 @@ function Bags:CreateContainer(storagetype, ...)
 		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 27)
 		BagsContainer:Hide()
 		BagsContainer:SetTemplate()
+		BagsContainer:CreateShadow()
 
 		Sort:Size(Container:GetWidth(), 23)
 		Sort:ClearAllPoints()
@@ -302,6 +299,7 @@ function Bags:CreateContainer(storagetype, ...)
 		Sort:SetFrameStrata(Container:GetFrameStrata())
 		Sort:StripTextures()
 		Sort:SkinButton()
+		Sort:CreateShadow()
 		Sort.Text = Sort:CreateFontString(nil, "OVERLAY")
 		Sort.Text:SetFont(FontPath, 12)
 		Sort.Text:SetJustifyH("LEFT")
@@ -353,11 +351,7 @@ function Bags:CreateContainer(storagetype, ...)
 				CloseBankBagFrames()
 				CloseBankFrame()
 
-				if (T.WoWBuild >= 24904) then
-					PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
-				else
-					PlaySound("igBackPackClose")
-				end
+				PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 			end
 		end)
 
@@ -418,6 +412,7 @@ function Bags:CreateContainer(storagetype, ...)
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
 		SwitchReagentButton:Size((Container:GetWidth() / 2) - 1, 23)
 		SwitchReagentButton:SkinButton()
+		SwitchReagentButton:CreateShadow()
 		SwitchReagentButton:Point("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
 		SwitchReagentButton.Text = SwitchReagentButton:CreateFontString(nil, "OVERLAY")
 		SwitchReagentButton.Text:SetFont(FontPath, 12)
@@ -446,6 +441,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SortButton:Size((Container:GetWidth() / 2) - 1, 23)
 		SortButton:SetPoint("LEFT", SwitchReagentButton, "RIGHT", 2, 0)
 		SortButton:SkinButton()
+		SortButton:CreateShadow()
 		SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
 		SortButton.Text:SetFont(FontPath, 12)
 		SortButton.Text:SetJustifyH("LEFT")
@@ -462,9 +458,11 @@ function Bags:CreateContainer(storagetype, ...)
 		Purchase:CreateBackdrop()
 		Purchase.Backdrop:SetPoint("TOPLEFT", 50, 0)
 		Purchase.Backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
+		Purchase.Backdrop:CreateShadow()
 
 		BankBagsContainer:Size(Container:GetWidth(), BankSlotsFrame.Bag1:GetHeight() + ButtonSpacing + ButtonSpacing)
 		BankBagsContainer:SetTemplate()
+		BankBagsContainer:CreateShadow()
 		BankBagsContainer:SetPoint("BOTTOMLEFT", SwitchReagentButton, "TOPLEFT", 0, 2)
 		BankBagsContainer:SetFrameLevel(Container:GetFrameLevel())
 		BankBagsContainer:SetFrameStrata(Container:GetFrameStrata())
@@ -847,14 +845,6 @@ function Bags:OpenAllBankBags()
 				self:OpenBag(i, 1)
 			end
 		end
-
-		if not self.Bank.MoverAdded then
-			local Movers = T["Movers"]
-
-			--Movers:RegisterFrame(self.Bank)
-
-			self.Bank.MoverAdded = true
-		end
 	end
 end
 
@@ -865,11 +855,7 @@ function Bags:CloseAllBags()
 
 	CloseAllBags()
 
-	if (T.WoWBuild >= 24904) then
-		PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
-	else
-		PlaySound("igBackPackClose")
-	end
+	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
 
 function Bags:CloseAllBankBags()
@@ -959,8 +945,6 @@ function Bags:Enable()
 
 	SetSortBagsRightToLeft(false)
 	SetInsertItemsLeftToRight(true)
-	--InterfaceOptionsControlsPanelReverseCleanUpBags:Hide()
-	--InterfaceOptionsControlsPanelReverseNewLoot:Hide()
 
 	Font = T.GetFont(C["Bags"].Font)
 	FontPath = _G[Font]:GetFont()
@@ -1023,21 +1007,12 @@ function Bags:Enable()
 
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
-	--self:RegisterEvent("ITEM_LOCK_CHANGED")
-	--self:RegisterEvent("BANKFRAME_OPENED")
-	--self:RegisterEvent("BANKFRAME_CLOSED")
-	--self:RegisterEvent("GUILDBANKFRAME_OPENED")
-	--self:RegisterEvent("GUILDBANKFRAME_CLOSED")
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
-	--self:RegisterEvent("PLAYERBANKBAGSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("BAG_CLOSED")
-	--self:RegisterEvent("BAG_UPDATE_COOLDOWN")
 	self:SetScript("OnEvent", self.OnEvent)
 
-	if T.WoWBuild >= 25860 then
-		function ManageBackpackTokenFrame() end
-	end
+	function ManageBackpackTokenFrame() end
 
 	ToggleAllBags()
 	ToggleAllBags()

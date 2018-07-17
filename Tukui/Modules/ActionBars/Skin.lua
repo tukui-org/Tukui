@@ -33,12 +33,15 @@ function TukuiActionBars:SkinButton()
 
 	TukuiActionBars.UpdateHotKey(Button)
 
-	if Border and Button.isSkinned then
-		Border:SetTexture('')
-		if Border:IsShown() and C.ActionBars.EquipBorder then
-			Button:SetBackdropBorderColor(.08, .70, 0)
+    if (Border) then
+		Border:SetTexture(C.Medias.Blank)
+		Border:SetInside(self, 1, 1)
+		Border:SetVertexColor(.08, .70, 0)
+		
+		if (Border:IsShown()) then
+			Border:SetVertexColor(.08, .70, 0)
 		else
-			Button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
+			Border:SetVertexColor(0, 0, 0, 0)
 		end
 	end
 
@@ -93,11 +96,13 @@ function TukuiActionBars:SkinButton()
 	Button:SetTemplate()
 	Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
 	Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+	
+	if C.ActionBars.HideBackdrop then
+		Button:CreateShadow()
+	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
-	Icon:SetInside()
 	Icon:SetDrawLayer('BACKGROUND', 7)
-
 
 	if (Normal) then
 		Normal:ClearAllPoints()
@@ -124,6 +129,10 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
 	Button:SetTemplate()
+	
+	if C.ActionBars.HideBackdrop then
+		Button:CreateShadow()
+	end
 
 	if (C.ActionBars.HotKey) then
 		HotKey:SetFontObject(Font)
@@ -135,7 +144,6 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
-	Icon:SetInside()
 	Icon:SetDrawLayer('BACKGROUND', 7)
 
 	if (Pet) then

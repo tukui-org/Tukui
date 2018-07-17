@@ -12,16 +12,6 @@ local RestoreDefault = "\n|cffFFFF00Clic droit pour restaurer par défaut|r" -- 
 
 TukuiConfig["frFR"] = {
 	["General"] = {
-		["AutoScale"] = {
-			["Name"] = "Ajustement Automatique",
-			["Desc"] = "Détecter automatiquement la meilleure échelle pour la résolution",
-		},
-
-		["UIScale"] = {
-			["Name"] = "Echelle de l'interface utilisateur",
-			["Desc"] = "Réglez l'échelle de l'interface utilisateur personnalisée",
-		},
-
 		["BackdropColor"] = {
 			["Name"] = "Couleur de fond",
 			["Desc"] = "Réglez la couleur de fond pour tous les cadres Tukui"..RestoreDefault,
@@ -36,17 +26,17 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Masquer les Ombres",
 			["Desc"] = "Afficher ou masquer les ombres sur certains cadres de Tukui",
 		},
+		
+		["Scaling"] = {
+			["Name"] = "Échelle de l'UI",
+			["Desc"] = "Définir la taille de l'interface utilisateur",
+		},
 	},
 
 	["ActionBars"] = {
 		["Enable"] = {
 			["Name"] = "Activer les barres d'action",
-			["Desc"] = "Derp",
-		},
-
-		["EquipBorder"] = {
-			["Name"] = "Equipped Item Border",
-			["Desc"] = "Display Green Border on Equipped Items",
+			["Desc"] = "Ehm...",
 		},
 
 		["HotKey"] = {
@@ -103,12 +93,7 @@ TukuiConfig["frFR"] = {
 	["Auras"] = {
 		["Enable"] = {
 			["Name"] = "Activer auras",
-			["Desc"] = "Derp",
-		},
-
-		["Consolidate"] = {
-			["Name"] = "Consolider les Auras",
-			["Desc"] = "Activer les Auras consolidés",
+			["Desc"] = "Ehm...",
 		},
 
 		["Flash"] = {
@@ -150,7 +135,7 @@ TukuiConfig["frFR"] = {
 	["Bags"] = {
 		["Enable"] = {
 			["Name"] = "Activer les Sacs",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ButtonSize"] = {
@@ -182,7 +167,7 @@ TukuiConfig["frFR"] = {
 	["Chat"] = {
 		["Enable"] = {
 			["Name"] = "Activer la fenetre de discussion",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["WhisperSound"] = {
@@ -198,11 +183,6 @@ TukuiConfig["frFR"] = {
 		["LinkBrackets"] = {
 			["Name"] = "Lien URL entre crochets",
 			["Desc"] = "Affichage des liens URL entre crochets",
-		},
-
-		["LootFrame"] = {
-			["Name"] = "Fenetre de butin",
-			["Desc"] = "Créer une fenetre de butin séparé sur la droite",
 		},
 
 		["Background"] = {
@@ -285,12 +265,12 @@ TukuiConfig["frFR"] = {
 	["Misc"] = {
 		["ThreatBarEnable"] = {
 			["Name"] = "Activer la barre de menace",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["AltPowerBarEnable"] = {
 			["Name"] = "Activer la barre Alt-Power",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ExperienceEnable"] = {
@@ -309,20 +289,20 @@ TukuiConfig["frFR"] = {
 		},
 
 		["AutoInviteEnable"] = {
-			["Name"] = "Enable Auto Invites",
-			["Desc"] = "Automatically accept group invites from friends, and guild members.",
+			["Name"] = "Activer les invitations automatiques",
+			["Desc"] = "Acceptez automatiquement les invitations de groupe d'amis et de membres de guilde.",
 		},
 		
 		["TalkingHeadEnable"] = {
-			["Name"] = "Enable Talking Head",
-			["Desc"] = "Display Blizzard Talking Head Frame.",
+			["Name"] = "Activer le cadre des discussions PNJ",
+			["Desc"] = "Ehm...",
 		},
 	},
 
 	["NamePlates"] = {
 		["Enable"] = {
 			["Name"] = "Activer les barres d'unités",
-			["Desc"] = "Derp"..PerformanceSlight,
+			["Desc"] = "Ehm.."..PerformanceSlight,
 		},
 
 		["Width"] = {
@@ -340,11 +320,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la hauteur de la barre de incantation des barres d'unités",
 		},
 
-		["Texture"] = {
-			["Name"] = "Texture des barres d'unités",
-			["Desc"] = "Définir une texture pour les barres d'unités",
-		},
-
 		["Font"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Définir la police de caractère des barres d'unités",
@@ -354,12 +329,7 @@ TukuiConfig["frFR"] = {
 	["Party"] = {
 		["Enable"] = {
 			["Name"] = "Activer les cadres de groupe",
-			["Desc"] = "Derp",
-		},
-
-		["Portrait"] = {
-			["Name"] = "Portrait",
-			["Desc"] = "Afficher les portraits sur les cadres de groupe",
+			["Desc"] = "Ehm...",
 		},
 
 		["HealBar"] = {
@@ -387,16 +357,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la police de caractère de la santé des cadres de groupe",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
-		},
-
 		["RangeAlpha"] = {
 			["Name"] = "Opacité hors-d'atteinte",
 			["Desc"] = "Défini l'opacité des unitées qui sont hors d'atteinte",
@@ -406,22 +366,17 @@ TukuiConfig["frFR"] = {
 	["Raid"] = {
 		["Enable"] = {
 			["Name"] = "Activer les cadres de raid",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["ShowPets"] = {
-			["Name"] = "Show Pets",
-			["Desc"] = "Derp",
-		},
-
-		["Highlight"] = {
-			["Name"] = "Highlight",
-			["Desc"] = "Highlight your current focus/target",
+			["Name"] = "Affichage des familiers",
+			["Desc"] = "Ehm...",
 		},
 
 		["MaxUnitPerColumn"] = {
-			["Name"] = "Raid members per column",
-			["Desc"] = "Change the max number of raid members per column",
+			["Name"] = "Nombre de joueurs par colonne",
+			["Desc"] = "Changer le nombre maximum de membres du raid par colonne",
 		},
 
 		["HealBar"] = {
@@ -460,8 +415,8 @@ TukuiConfig["frFR"] = {
 		},
 
 		["VerticalHealth"] = {
-			["Name"] = "Vertical Health",
-			["Desc"] = "Display health lost vertically",
+			["Name"] = "Santé verticale",
+			["Desc"] = "Afficher la santé perdue verticalement",
 		},
 
 		["Font"] = {
@@ -474,16 +429,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la police de caractère de la santé des cadres de raid",
 		},
 
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
-		},
-
 		["GroupBy"] = {
 			["Name"] = "Groupé par",
 			["Desc"] = "Définir le mode de tri des groupes de raid",
@@ -493,12 +438,12 @@ TukuiConfig["frFR"] = {
 	["Tooltips"] = {
 		["Enable"] = {
 			["Name"] = "Activer infobulles",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["MouseOver"] = {
-			["Name"] = "Mouseover",
-			["Desc"] = "Enable mouseover tooltip",
+			["Name"] = "Infobulle sur curseur",
+			["Desc"] = "Activer l'infobulle sur le curseur de la souris",
 		},
 
 		["HideOnUnitFrames"] = {
@@ -513,29 +458,74 @@ TukuiConfig["frFR"] = {
 
 		["ShowSpec"] = {
 			["Name"] = "Spécialisation et iLevel",
-			["Desc"] = "Affichage de la spécialisation et du iLevel dans l'info-bulle",
+			["Desc"] = "Affichage de la spécialisation et du iLevel dans l'info-bulle lorsque vous appuyez sur ALT",
 		},
 
 		["HealthFont"] = {
 			["Name"] = "Police de la barre de santé",
-			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles ",
+			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles",
+		},
+	},
+	
+	["Textures"] = {
+		["QuestProgressTexture"] = {
+			["Name"] = "Quête [Progression]",
 		},
 
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé en-dessous des infobulles",
+		["TTHealthTexture"] = {
+			["Name"] = "Tooltip [Vie]",
+		},
+
+		["UFPowerTexture"] = {
+			["Name"] = "Barre d'unité [Puissance]",
+		},
+
+		["UFHealthTexture"] = {
+			["Name"] = "Barre d'unité [Vie]",
+		},
+
+		["UFCastTexture"] = {
+			["Name"] = "Barre d'unité [Incantation]",
+		},
+
+		["UFPartyPowerTexture"] = {
+			["Name"] = "Barre d'unité [Party Puissance]",
+		},
+
+		["UFPartyHealthTexture"] = {
+			["Name"] = "Barre d'unité [Party Vie]",
+		},
+
+		["UFRaidPowerTexture"] = {
+			["Name"] = "Barre d'unité [Raid Puissance]",
+		},
+
+		["UFRaidHealthTexture"] = {
+			["Name"] = "Barre d'unité [Raid Vie]",
+		},
+
+		["NPHealthTexture"] = {
+			["Name"] = "Nameplates [Vie]",
+		},
+
+		["NPPowerTexture"] = {
+			["Name"] = "Nameplates [Puissance]",
+		},
+
+		["NPCastTexture"] = {
+			["Name"] = "Nameplates [Incantation]",
 		},
 	},
 
 	["UnitFrames"] = {
 		["Enable"] = {
 			["Name"] = "Activé cadre des unités",
-			["Desc"] = "Derp",
+			["Desc"] = "Ehm...",
 		},
 
 		["TargetEnemyHostileColor"] = {
-			["Name"] = "Enemy Target Hostile Color",
-			["Desc"] = "Enemy target health bar will be colored by hostility instead of by class color",
+			["Name"] = "Couleur hostile de la cible ennemie",
+			["Desc"] = "La barre de santé de la cible ennemie sera colorée par l'hostilité plutôt que par la couleur de la classe",
 		},
 
 		["Portrait"] = {
@@ -593,11 +583,6 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Enable the combo points bar",
 		},
 
-		["AnticipationBar"] = {
-			["Name"] = "Barre d'anticipation Voleur",
-			["Desc"] = "Afficher une barre indiquant les points d'anticipation voleur",
-		},
-
 		["SerendipityBar"] = {
 			["Name"] = "Barre 'heureux hasard' de Pretre",
 			["Desc"] = "Afficher une barre indiquant le nombre de cumul 'heureux hasard' pour les Pretres",
@@ -609,78 +594,58 @@ TukuiConfig["frFR"] = {
 		},
 
 		["OnlySelfBuffs"] = {
-			["Name"] = "Display My Buffs Only",
-			["Desc"] = "Only display our buffs on the target frame",
-		},
-
-		["DarkTheme"] = {
-			["Name"] = "Theme sombre",
-			["Desc"] = "Si activé, les cadres d'unités seront d'une couleur sombre avec les barres de puissance aux couleurs des classes",
+			["Name"] = "Afficher mes buffs uniquement",
+			["Desc"] = "Afficher uniquement nos buffs sur le cadre cible",
 		},
 
 		["Threat"] = {
-			["Name"] = "Enable threat display",
-			["Desc"] = "Health Bar on party and raid members will turn if they have aggro",
+			["Name"] = "Activer l'affichage de la menace",
+			["Desc"] = "La barre de vie va devenir rouge si le joueur a l'aggro",
 		},
 
 		["Arena"] = {
-			["Name"] = "Arena Frames",
-			["Desc"] = "Display arena opponents when inside a battleground or arena",
+			["Name"] = "Cadres d'arène",
+			["Desc"] = "Afficher les adversaires de l'arène à l'intérieur d'un champ de bataille ou d'une arène",
 		},
 
 		["Boss"] = {
-			["Name"] = "Boss Frames",
-			["Desc"] = "Display boss frames while doing pve",
+			["Name"] = "Cadres de monstre",
+			["Desc"] = "Afficher les cadres de monstre en faisant pve",
 		},
 
 		["TargetAuras"] = {
-			["Name"] = "Target Auras",
-			["Desc"] = "Display buffs and debuffs on target",
+			["Name"] = "Auras de la cible",
+			["Desc"] = "Afficher les buffs et les debuffs sur la cible",
 		},
 
 		["FocusAuras"] = {
-			["Name"] = "Focus Auras",
-			["Desc"] = "Display buffs and debuffs on focus",
+			["Name"] = "Auras du focus",
+			["Desc"] = "Afficher les buffs et les debuffs du focus",
 		},
 
 		["FocusTargetAuras"] = {
-			["Name"] = "Focus Target Auras",
-			["Desc"] = "Display buffs and debuffs on focus target",
+			["Name"] = "Auras de la cible du focus",
+			["Desc"] = "Afficher les buffs et les debuffs sur la cible du focus",
 		},
 
 		["ArenaAuras"] = {
-			["Name"] = "Arena Frames Auras",
-			["Desc"] = "Display debuffs on arena frames",
+			["Name"] = "Auras sur les cadres d'arène",
+			["Desc"] = "Afficher les débuffs sur les cadres d'arène",
 		},
 
 		["BossAuras"] = {
-			["Name"] = "Boss Frames Auras",
-			["Desc"] = "Display debuffs on boss frames",
+			["Name"] = "Auras sur les cadres de monstre",
+			["Desc"] = "Afficher les débuffs sur les cadres de boss",
 		},
 
 		["AltPowerText"] = {
-			["Name"] = "AltPower Text",
-			["Desc"] = "Display altpower text values on altpower bar",
+			["Name"] = "Affichage du texte sur la barre de puissance alternative",
+			["Desc"] = "Ehm...",
 		},
 
 		["Font"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Défini une police de caractère pour les cadres unités",
-		},
-
-		["PowerTexture"] = {
-			["Name"] = "Texture de la barre de puissance",
-			["Desc"] = "Définir une texture pour les barres de puissance",
-		},
-
-		["HealthTexture"] = {
-			["Name"] = "Texture de la barre de santé",
-			["Desc"] = "Définir une texture pour les barres de santé",
-		},
-
-		["CastTexture"] = {
-			["Name"] = "Cast Bar Texture",
-			["Desc"] = "Set a texture for cast bars",
 		},
 	},
 }

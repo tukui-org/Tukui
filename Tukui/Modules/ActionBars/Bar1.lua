@@ -71,28 +71,26 @@ function TukuiActionBars:CreateBar1()
 	TukuiActionBars:UpdateBar1()
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-	--ActionBar1:RegisterEvent("KNOWN_CURRENCY_TYPES_UPDATE") -- This event is removed
-	ActionBar1:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-	ActionBar1:RegisterEvent("BAG_UPDATE")
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
-		if (event == "ACTIVE_TALENT_GROUP_CHANGED") then
-			TukuiActionBars:UpdateBar1()
-		elseif (event == "PLAYER_ENTERING_WORLD") then
+		if (event == "PLAYER_ENTERING_WORLD") then
 			for i = 1, Num do
 				local Button = _G["ActionButton"..i]
 				Button:Size(Size)
 				Button:ClearAllPoints()
 				Button:SetParent(self)
+				Button:SetAttribute("showgrid", 1)
 
 				if (i == 1) then
 					Button:SetPoint("BOTTOMLEFT", Spacing, Spacing)
+						
+					self:SetWidth((Button:GetWidth() * 12) + (Spacing * 13))
+					self:SetHeight((Button:GetWidth() * 1) + (Spacing * 2))
 				else
 					local Previous = _G["ActionButton"..i-1]
+						
 					Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
 				end
 			end
-		else
-			MainMenuBar_OnEvent(self, event, ...)
 		end
 	end)
 

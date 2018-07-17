@@ -8,6 +8,9 @@ local ToastCloseButton = BNToastFrameCloseButton
 local TukuiChat = T["Chat"]
 local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
+-- Set default position for Voice Activation Alert
+TukuiChat.VoiceAlertPosition = {"BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 14}
+
 -- Update editbox border color
 function TukuiChat:UpdateEditBoxColor()
 	local EditBox = ChatEdit_ChooseBoxForSend()
@@ -29,6 +32,12 @@ function TukuiChat:UpdateEditBoxColor()
 
 		Backdrop.Anim:Play()
 	end
+end
+
+function TukuiChat:MoveAudioButtons()
+	ChatFrameChannelButton:Kill()
+	ChatFrameToggleVoiceDeafenButton:Kill()
+	ChatFrameToggleVoiceMuteButton:Kill()
 end
 
 function TukuiChat:NoMouseAlpha()
@@ -63,6 +72,9 @@ function TukuiChat:StyleFrame(frame)
 	local FrameName = frame:GetName()
 	local Tab = _G[FrameName.."Tab"]
 	local TabText = _G[FrameName.."TabText"]
+	local Scroll = frame.ScrollBar
+	local ScrollBottom = frame.ScrollToBottomButton
+	local ScrollTex = _G[FrameName.."ThumbTexture"]
 	local EditBox = _G[FrameName.."EditBox"]
 	local GetTabFont = T.GetFont(C["Chat"].TabFont)
 	local TabFont, TabFontSize, TabFontFlags = _G[GetTabFont]:GetFont()
@@ -71,21 +83,25 @@ function TukuiChat:StyleFrame(frame)
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
 	end
-
+	
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function()
 		EditBox:Hide()
 	end)
+	
+	-- Kill Scroll Bars
+	if Scroll then
+		Scroll:Kill()
+		ScrollBottom:Kill()
+		ScrollTex:Kill()
+	end
 
 	-- Style the tab font
 	TabText:SetFont(TabFont, TabFontSize, TabFontFlags)
 	TabText.SetFont = Noop
 
-	if C.Chat.Background then
-		-- Tabs Alpha
-		Tab:SetAlpha(1)
-		Tab.SetAlpha = UIFrameFadeRemoveFrame
-	end
+	Tab:SetAlpha(1)
+	Tab.SetAlpha = UIFrameFadeRemoveFrame
 
 	Frame:SetClampRectInsets(0, 0, 0, 0)
 	Frame:SetClampedToScreen(false)
@@ -141,9 +157,9 @@ function TukuiChat:StyleFrame(frame)
 	_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 	_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sButtonFrameUpButton", ID)]:Kill()
-	_G[format("ChatFrame%sButtonFrameDownButton", ID)]:Kill()
-	_G[format("ChatFrame%sButtonFrameBottomButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameUpButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameDownButton", ID)]:Kill()
+	--_G[format("ChatFrame%sButtonFrameBottomButton", ID)]:Kill()
 	_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
 	_G[format("ChatFrame%sButtonFrame", ID)]:Kill()
 
@@ -201,20 +217,15 @@ function TukuiChat:StyleTempFrame()
 end
 
 function TukuiChat:SkinToastFrame()
+	local Backdrop = T["Panels"].LeftChatBG
+	
 	Toast:SetTemplate()
 	Toast:CreateShadow()
-	ToastCloseButton:SkinCloseButton()
+	--ToastCloseButton:SkinCloseButton()
 	Toast:ClearAllPoints()
 	Toast:SetFrameStrata("Medium")
 	Toast:SetFrameLevel(20)
-
-	if C.Chat.Background then
-		local Backdrop = T["Panels"].LeftChatBG
-
-		Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
-	else
-		Toast:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
-	end
+	Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
 end
 
 function TukuiChat:SetDefaultChatFramesPositions()
@@ -234,11 +245,11 @@ function TukuiChat:SetDefaultChatFramesPositions()
 		-- Set default chat frame position
 		if (ID == 1) then
 			Frame:ClearAllPoints()
-			Frame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 44, 50)
-		elseif (C.Chat.LootFrame and ID == 4) then
+			Frame:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 50)
+		elseif (ID == 4) then
 			if (not Frame.isDocked) then
 				Frame:ClearAllPoints()
-				Frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -44, 50)
+				Frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 50)
 			end
 		end
 
@@ -293,12 +304,6 @@ function TukuiChat:SetChatFramePosition()
 		Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
 		Frame:SetSize(Width, Height)
 	end
-
-	if (not C.Chat.LootFrame) then
-		if (FCF_GetChatWindowInfo(ID) == LOOT) then
-			FCF_Close(Frame)
-		end
-	end
 end
 
 function TukuiChat:Install()
@@ -310,12 +315,9 @@ function TukuiChat:Install()
 	FCF_OpenNewWindow(GENERAL)
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
-
-	if C.Chat.LootFrame then
-		FCF_OpenNewWindow(LOOT)
-		FCF_UnDockFrame(ChatFrame4)
-		ChatFrame4:Show()
-	end
+	FCF_OpenNewWindow(LOOT)
+	FCF_UnDockFrame(ChatFrame4)
+	--ChatFrame4:Show()
 
 	-- Set more chat groups
 	ChatFrame_RemoveAllMessageGroups(ChatFrame1)
@@ -365,14 +367,12 @@ function TukuiChat:Install()
 	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LookingForGroup)
 
 	-- Setup the right chat
-	if C.Chat.LootFrame then
-		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
-		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
-	end
+	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
+	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
+	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
 
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
@@ -443,6 +443,10 @@ function TukuiChat:Setup()
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 
 		self:StyleFrame(Frame)
+		
+		if i == 2 then
+			CombatLogQuickButtonFrame_Custom:StripTextures()
+		end
 	end
 
 	local CubeLeft = T["Panels"].CubeLeft
@@ -454,22 +458,17 @@ function TukuiChat:Setup()
 	ChatTypeInfo.RAID_WARNING.sticky = 1
 	ChatTypeInfo.CHANNEL.sticky = 1
 
-	if (not C.Chat.Background) then
-		CubeLeft:SetScript("OnMouseDown", function(self, Button)
-			if (Button == "LeftButton") then
-				ToggleFrame(ChatMenu)
-			end
-		end)
-	end
-
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-
-	if T.WoWBuild >= 22881 then
-		QuickJoinToastButton:Kill()
-	else
-		FriendsMicroButton:Kill()
-	end
+	QuickJoinToastButton:Kill()
+	
+	VoiceChatPromptActivateChannel:SetTemplate()
+	VoiceChatPromptActivateChannel:CreateShadow()
+	VoiceChatPromptActivateChannel.AcceptButton:SkinButton()
+	VoiceChatPromptActivateChannel.CloseButton:SkinCloseButton()
+	VoiceChatPromptActivateChannel:SetPoint(unpack(TukuiChat.VoiceAlertPosition))
+	VoiceChatPromptActivateChannel.ClearAllPoints = Noop
+	VoiceChatPromptActivateChannel.SetPoint = Noop
 end
 
 function TukuiChat:AddHooks()
@@ -477,8 +476,5 @@ function TukuiChat:AddHooks()
 	hooksecurefunc("FCF_OpenTemporaryWindow", TukuiChat.StyleTempFrame)
 	hooksecurefunc("FCF_RestorePositionAndDimensions", TukuiChat.SetChatFramePosition)
 	hooksecurefunc("FCF_SavePositionAndDimensions", TukuiChat.SaveChatFramePositionAndDimensions)
-
-	if not C.Chat.Background then
-		hooksecurefunc("FCFTab_UpdateAlpha", TukuiChat.NoMouseAlpha)
-	end
+	hooksecurefunc("FCFTab_UpdateAlpha", TukuiChat.NoMouseAlpha)
 end

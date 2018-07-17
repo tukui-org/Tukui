@@ -12,6 +12,7 @@ function TukuiChat:Enable()
 	self:EnableURL()
 	self:CreateCopyFrame()
 	self:CreateCopyButtons()
+	self:MoveAudioButtons()
 	self:AddHooks()
 
 	for i = 1, 10 do
@@ -31,6 +32,8 @@ function TukuiChat:Enable()
 	Whisper:SetScript("OnEvent", function(self, event)
 		TukuiChat:PlayWhisperSound()
 	end)
+	
+	FCF_UpdateButtonSide = function() end
 end
 
 T["Chat"] = TukuiChat

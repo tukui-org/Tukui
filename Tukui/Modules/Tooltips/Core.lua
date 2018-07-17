@@ -19,9 +19,12 @@ Tooltip.ItemRefTooltip = ItemRefTooltip
 
 Tooltip.Tooltips = {
 	GameTooltip,
+	ItemRefTooltip,
 	ItemRefShoppingTooltip1,
 	ItemRefShoppingTooltip2,
 	ItemRefShoppingTooltip3,
+	AutoCompleteBox,
+	FriendsTooltip,
 	ShoppingTooltip1,
 	ShoppingTooltip2,
 	ShoppingTooltip3,
@@ -29,7 +32,9 @@ Tooltip.Tooltips = {
 	WorldMapCompareTooltip1,
 	WorldMapCompareTooltip2,
 	WorldMapCompareTooltip3,
-	ItemRefTooltip,
+	ReputationParagonTooltip,
+	StoryTooltip,
+	EmbeddedItemTooltip,
 }
 
 local Classification = {
@@ -44,11 +49,11 @@ function Tooltip:CreateAnchor()
 	local Movers = T["Movers"]
 
 	local Anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
-	Anchor:Size(200, DataTextRight:GetHeight() - 4)
+	Anchor:Size(200, DataTextRight:GetHeight() - 2)
 	Anchor:SetFrameStrata("TOOLTIP")
 	Anchor:SetFrameLevel(20)
 	Anchor:SetClampedToScreen(true)
-	Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2)
+	Anchor:SetPoint("BOTTOMRIGHT", DataTextRIGHT, -27, 176)
 	Anchor:SetMovable(true)
 
 	self.Anchor = Anchor
@@ -162,48 +167,27 @@ function Tooltip:OnTooltipSetUnit()
 	end
 
 	if (UnitIsPlayer(Unit) and UnitIsFriend("player", Unit)) then
-		if (C.Tooltips.ShowSpec and IsAltKeyDown()) then
-			local Talent = T.Tooltips.Talent
-
-			ILevel = "..."
-			TalentSpec = "..."
-
-			if (Unit ~= "player") then
-				Talent.CurrentGUID = UnitGUID(Unit)
-				Talent.CurrentUnit = Unit
-
-				for i, _ in pairs(Talent.Cache) do
-					local Cache = Talent.Cache[i]
-
-					if Cache.GUID == Talent.CurrentGUID then
-						ILevel = Cache.ItemLevel or "..."
-						TalentSpec = Cache.TalentSpec or "..."
-						LastUpdate = Cache.LastUpdate and abs(Cache.LastUpdate - floor(GetTime())) or 30
-					end
-				end
-
-				if (Unit and (CanInspect(Unit))) and (not (InspectFrame and InspectFrame:IsShown())) then
-					local LastInspectTime = GetTime() - Talent.LastInspectRequest
-
-					Talent.NextUpdate = (LastInspectTime > InspectFreq) and InspectDelay or (InspectFreq - LastInspectTime + InspectDelay)
-
-					Talent:Show()
-				end
-			else
-				local Best, Current, PVP = GetAverageItemLevel()
-
-				ILevel = math.floor(Current) or UNKNOWN
-				MAXILevel = math.floor(Best) or UNKNOWN
-				PVPILevel = math.floor(PVP) or UNKNOWN
-
-				TalentSpec = Talent:GetTalentSpec() or NONE
-			end
-		end
+		local Talent = T.Tooltips.Talent
 
 		if (UnitIsAFK(Unit)) then
 			self:AppendText((" %s"):format(CHAT_FLAG_AFK))
 		elseif UnitIsDND(Unit) then
 			self:AppendText((" %s"):format(CHAT_FLAG_DND))
+		end
+		
+		if Talent.Spec or Talent.ILevel then
+			self:AddLine(" ")
+			
+			if Talent.ILevel then
+				self:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..Talent.ILevel.."|r")
+			end
+
+			if Talent.Spec then
+				self:AddLine(SPECIALIZATION..": |cff3eea23"..Talent.Spec.."|r")
+			end
+			
+			Talent.Spec = nil
+			Talent.ILevel = nil
 		end
 	end
 
@@ -243,21 +227,6 @@ function Tooltip:OnTooltipSetUnit()
 
 	if (C["Tooltips"].UnitHealthText and UnitHealth(Unit) and UnitHealthMax(Unit)) then
 		HealthBar.Text:SetText(Short(UnitHealth(Unit)) .. " / " .. Short(UnitHealthMax(Unit)))
-	end
-
-	if (C.Tooltips.ShowSpec and UnitIsPlayer(Unit) and UnitIsFriend("player", Unit) and IsAltKeyDown()) then
-		GameTooltip:AddLine(" ")
-
-
-		if Unit == "player" then
-			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL.." ("..CURRENTLY_EQUIPPED .."): |cff3eea23"..ILevel.."|r")
-			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL.." ("..PVP.."): |cff3eea23"..PVPILevel.."|r")
-			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL.." ("..MAXIMUM.."): |cff3eea23"..MAXILevel.."|r")
-		else
-			GameTooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..ILevel.."|r")
-		end
-
-		GameTooltip:AddLine(SPECIALIZATION..": |cff3eea23"..TalentSpec.."|r")
 	end
 
 	self.fadeOut = nil
@@ -336,6 +305,7 @@ end
 function Tooltip:Skin()
 	if (not self.IsSkinned) then
 		self:SetTemplate()
+		self:CreateShadow()
 		self.IsSkinned = true
 	end
 
@@ -391,6 +361,7 @@ function Tooltip:Enable()
 		return
 	end
 
+	GameTooltip_SetBackdropStyle = function() end -- hope it doesn't taint
 	self:CreateAnchor()
 
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
@@ -408,16 +379,21 @@ function Tooltip:Enable()
 	ItemRefCloseButton:SkinCloseButton()
 
 	HealthBar:SetScript("OnValueChanged", self.OnValueChanged)
-	HealthBar:SetStatusBarTexture(T.GetTexture(C["Tooltips"].HealthTexture))
+	HealthBar:SetStatusBarTexture(T.GetTexture(C["Textures"].TTHealthTexture))
 	HealthBar:CreateBackdrop()
 	HealthBar:ClearAllPoints()
-	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 2, 4)
-	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -2, 4)
+	HealthBar:Point("BOTTOMLEFT", HealthBar:GetParent(), "TOPLEFT", 1, 4)
+	HealthBar:Point("BOTTOMRIGHT", HealthBar:GetParent(), "TOPRIGHT", -1, 4)
+	HealthBar.Backdrop:CreateShadow()
 
 	if C["Tooltips"].UnitHealthText then
 		HealthBar.Text = HealthBar:CreateFontString(nil, "OVERLAY")
 		HealthBar.Text:SetFontObject(T.GetFont(C["Tooltips"].HealthFont))
 		HealthBar.Text:Point("CENTER", HealthBar, "CENTER", 0, 6)
+	end
+	
+	if C["Tooltips"].ShowSpec then
+		T.Tooltips.Talent:RegisterEvent("MODIFIER_STATE_CHANGED")
 	end
 end
 

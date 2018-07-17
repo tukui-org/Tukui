@@ -95,76 +95,42 @@ function Talent:GetTalentSpec(unit)
 	end
 end
 
-Talent:SetScript("OnUpdate", function(self, elapsed)
-	if not (C.Tooltips.ShowSpec) then
-		self:Hide()
-		self:SetScript("OnUpdate", nil)
-	end
-
-	self.NextUpdate = (self.NextUpdate or 0) - elapsed
-
-	if (self.NextUpdate) <= 0 then
-		self:Hide()
-
-		local GUID = UnitGUID("mouseover")
-
-		if not GUID then
-			return
+Talent:SetScript("OnEvent", function(self, event, ...)
+	if event == "MODIFIER_STATE_CHANGED" then
+		local Button, Pressed = ...
+		local GetMouseFocus = GetMouseFocus()
+		local Unit = (select(2, GameTooltip:GetUnit())) or (GetMouseFocus and GetMouseFocus.GetAttribute and GetMouseFocus:GetAttribute("unit"))
+			
+		if Button == "LALT" and Pressed == 1 then
+			if Unit then
+				local IsInspectable = CanInspect(Unit)
+				local IsPlayer = UnitIsPlayer(Unit)
+				local IsFriend = UnitIsFriend("player", Unit)
+				
+				self.CurrentGUID = UnitGUID(Unit)
+				
+				if IsPlayer and IsFriend and IsInspectable then
+					self:RegisterEvent("INSPECT_READY")
+					
+					NotifyInspect(Unit)
+				end
+			end
 		end
-
-		if (GUID == self.CurrentGUID) and (not (InspectFrame and InspectFrame:IsShown())) then
-			self.LastGUID = self.CurrentGUID
-			self.LastInspectRequest = GetTime()
-			self:RegisterEvent("INSPECT_READY")
-			NotifyInspect(self.CurrentUnit)
-		end
-	end
-end)
-
-Talent:SetScript("OnEvent", function(self, event, GUID)
-	if GUID ~= self.LastGUID or (InspectFrame and InspectFrame:IsShown()) then
+	else
 		self:UnregisterEvent("INSPECT_READY")
+			
+		local GUID = UnitGUID("mouseover")
+			
+		if self.CurrentGUID == GUID and IsAltKeyDown() then
+			self.ILevel = self:GetItemLevel("mouseover")
+			self.Spec = self:GetTalentSpec("mouseover")
+			self.CurrentGUID = nil
 
-		return
-	end
-
-	local ILVL = self:GetItemLevel("mouseover")
-	local TalentSpec = self:GetTalentSpec("mouseover")
-	local CurrentTime = GetTime()
-	local MatchFound
-
-	for i, Cache in ipairs(self.Cache) do
-		if Cache.GUID == GUID then
-			Cache.ItemLevel = ILVL
-			Cache.TalentSpec = TalentSpec
-			Cache.LastUpdate = floor(CurrentTime)
-
-			MatchFound = true
-
-			break
+			GameTooltip:SetUnit("mouseover")
 		end
+		
+		ClearInspectPlayer()
 	end
-
-	if (not MatchFound) then
-		local GUIDInfo = {
-			["GUID"] = GUID,
-			["ItemLevel"] = ILVL,
-			["TalentSpec"] = TalentSpec,
-			["LastUpdate"] = floor(CurrentTime)
-		}
-
-		self.Cache[#self.Cache + 1] = GUIDInfo
-	end
-
-	if (#self.Cache > 50) then
-		table.remove(self.Cache, 1)
-	end
-
-	GameTooltip:SetUnit("mouseover")
-
-	ClearInspectPlayer()
-
-	self:UnregisterEvent("INSPECT_READY")
 end)
 
 Tooltips.Talent = Talent
