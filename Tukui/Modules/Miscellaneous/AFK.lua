@@ -25,7 +25,6 @@ function AFK:UpdateTime(Value)
 	end
 
 	self.Time:SetText("|cffffffff" .. format("%.2d", Minutes) .. ":" .. format("%.2d", Seconds) .. "|r")
-	--self.Time:SetText("You have been away for|cffffffff : " .. format("%.2d", tostring(Minutes)) .. ":" .. format("%.2d", tostring(Seconds)) .. "|r")
 	
 	AFK.Minutes = Minutes
 	AFK.Seconds = Seconds
@@ -168,6 +167,10 @@ function AFK:Create()
 end
 
 function AFK:Enable()
+	if not C.General.AFKSaver then
+		return
+	end
+	
 	if not (self.IsCreated) then
 		self:Create()
 		self.IsCreated = true

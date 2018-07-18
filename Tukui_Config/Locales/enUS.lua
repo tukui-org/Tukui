@@ -24,6 +24,11 @@ TukuiConfig["enUS"] = {
 			["Name"] = "UI Scale",
 			["Desc"] = "Define how big the user interface is displayed",
 		},
+		
+		["AFKSaver"] = {
+			["Name"] = "AFK Screensaver",
+			["Desc"] = "Enable or disable the afk screensaver",
+		},
 	},
 
 	["ActionBars"] = {

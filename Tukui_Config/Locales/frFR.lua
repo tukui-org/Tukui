@@ -31,6 +31,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Échelle de l'UI",
 			["Desc"] = "Définir la taille de l'interface utilisateur",
 		},
+		
+		["AFKSaver"] = {
+			["Name"] = "Écran de veille AFK",
+			["Desc"] = "Active ou désactive l'écran de veille AFK",
+		},
 	},
 
 	["ActionBars"] = {

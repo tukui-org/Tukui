@@ -8,6 +8,7 @@ C["General"] = {
 	["BackdropColor"] = {0.11, 0.11, 0.11},
 	["BorderColor"] = {0, 0, 0},
 	["HideShadows"] = false,
+	["AFKSaver"] = true,
 	["Scaling"] = {
 		["Options"] = {
 			["Pixel Perfection"] = "Pixel Perfection",
