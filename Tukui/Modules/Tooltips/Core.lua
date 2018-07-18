@@ -309,7 +309,7 @@ function Tooltip:Skin()
 		self.IsSkinned = true
 	end
 
-	if not self:IsForbidden() then
+	if not self:IsForbidden() and self == GameTooltip then
 		Tooltip.SetColor(self)
 	end
 end
