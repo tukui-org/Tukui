@@ -54,6 +54,7 @@
 	<Script file="Miscellaneous\DeathRecap.lua"/>
 	<Script file="Miscellaneous\AFK.lua"/>
 	<Script file="Miscellaneous\Grid.lua"/>
+	<Script file="Miscellaneous\OrderHall.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>
