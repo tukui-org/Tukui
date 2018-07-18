@@ -44,6 +44,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Ehm...",
 		},
 
+		["EquipBorder"] = {
+			["Name"] = "Identification équipement",
+			["Desc"] = "Les bordures d'équipements dans la barre d'action sera coloré vert.",
+		},
+
 		["HotKey"] = {
 			["Name"] = "Raccourcis clavier",
 			["Desc"] = "Afficher le texte de raccourcis sur les boutons",

@@ -32,16 +32,13 @@ function TukuiActionBars:SkinButton()
 	HotKey:Point("TOPRIGHT", 0, -3)
 
 	TukuiActionBars.UpdateHotKey(Button)
-
-    if (Border) then
-		Border:SetTexture(C.Medias.Blank)
-		Border:SetInside(self, 1, 1)
-		Border:SetVertexColor(.08, .70, 0)
-		
-		if (Border:IsShown()) then
-			Border:SetVertexColor(.08, .70, 0)
+	
+	if Border and Button.isSkinned then
+		Border:SetTexture('')
+		if Border:IsShown() and C.ActionBars.EquipBorder then
+			Button:SetBackdropBorderColor(.08, .70, 0)
 		else
-			Border:SetVertexColor(0, 0, 0, 0)
+			Button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 		end
 	end
 

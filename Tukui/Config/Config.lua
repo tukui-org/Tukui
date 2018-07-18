@@ -26,6 +26,7 @@ C["General"] = {
 C["ActionBars"] = {
 	["Enable"] = true,
 	["HotKey"] = false,
+	["EquipBorder"] = true,
 	["Macro"] = false,
 	["ShapeShift"] = true,
 	["Pet"] = true,
