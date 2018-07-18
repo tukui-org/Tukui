@@ -56,11 +56,10 @@ function Panels:Enable()
 
 	local RightChatBG = CreateFrame("Frame", nil, DataTextRight)
 	RightChatBG:Size(370 + 12, 177)
-	RightChatBG:CreateBackdrop("Transparent")
 	RightChatBG:Point("BOTTOM", DataTextRight, "BOTTOM", 0, -6)
 	RightChatBG:SetFrameLevel(1)
 	RightChatBG:SetFrameStrata("BACKGROUND")
-	RightChatBG:CreateShadow()
+	RightChatBG:CreateBackdrop("Transparent")
 	RightChatBG.Backdrop:CreateShadow()
 
 	local TabsBGLeft = CreateFrame("Frame", nil, LeftChatBG)
