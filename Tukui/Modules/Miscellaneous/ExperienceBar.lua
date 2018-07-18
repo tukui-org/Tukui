@@ -150,7 +150,7 @@ end
 function Experience:Create()
 	for i = 1, self.NumBars do
 		local XPBar = CreateFrame("StatusBar", nil, UIParent)
-		local RestedBar = CreateFrame("StatusBar", nil, UIParent)
+		local RestedBar = CreateFrame("StatusBar", nil, XPBar)
 
 		XPBar:SetStatusBarTexture(C.Medias.Normal)
 		XPBar:EnableMouse()
@@ -195,6 +195,10 @@ function Experience:Create()
 end
 
 function Experience:Enable()
+	if not C.Misc.ExperienceEnable then
+		return
+	end
+	
 	if not self.IsCreated then
 		self:Create()
 
