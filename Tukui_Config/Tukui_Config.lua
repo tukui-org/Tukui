@@ -54,16 +54,16 @@ TukuiConfig.ColorDefaults = {
 	},
 
 	["General"] = {
-		["BackdropColor"] = {0.1, 0.1, 0.1},
-		["BorderColor"] = {0.6, 0.6, 0.6},
+		["BackdropColor"] = {0.11, 0.11, 0.11},
+		["BorderColor"] = {0, 0, 0},
 	},
 }
 
 function TukuiConfig:UpdateColorDefaults()
 	local C = Tukui[2]
 
-	self.ColorDefaults["General"]["BorderColor"] = {0.6, 0.6, 0.6}
-	self.ColorDefaults["General"]["BackdropColor"] = {0.1, 0.1, 0.1}
+	self.ColorDefaults["General"]["BorderColor"] = {0, 0, 0}
+	self.ColorDefaults["General"]["BackdropColor"] = {0.11, 0.11, 0.11}
 end
 
 -- Filter unwanted groups
