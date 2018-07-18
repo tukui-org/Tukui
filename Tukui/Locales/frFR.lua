@@ -241,6 +241,7 @@ L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : Afficher la fenêtre 
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Déplacer les cadres."
 L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : Tester les cadres d'unitées."
 L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
+L.Help.Grid = "'|cff00ff00grid|r' or '|cff00ff00grid 128|r' : Afficher une grille qui vous permet de mieux aligner les cadres. (Remplacez 128 par n'importe quel nombre pour la grille personnalisée)"
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant

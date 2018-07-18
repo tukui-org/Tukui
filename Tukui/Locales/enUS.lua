@@ -237,6 +237,7 @@ L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : Display in-game confi
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Move Frames."
 L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : Test Unit Frames."
 L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
+L.Help.Grid = "'|cff00ff00grid|r' or '|cff00ff00grid 128|r' : Display a grid which allow you to better align frames. (Change 128 to any number for custom grid)"
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant

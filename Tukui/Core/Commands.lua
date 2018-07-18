@@ -46,6 +46,7 @@ T.SlashHandler = function(cmd)
 		print(L.Help.Move)
 		print(L.Help.Test)
 		print(L.Help.Profile)
+		print(L.Help.Grid)
 		print(" ")
 	elseif (arg1 == "c" or arg1 == "config") then
 		local Config = TukuiConfig
