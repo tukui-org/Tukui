@@ -12,4 +12,5 @@
 	<Script file="MoveUI.lua"/>
 	<Script file="Loading.lua"/>
 	<Script file="TestUI.lua"/>
+	<Script file="Status.lua"/>
 </Ui>

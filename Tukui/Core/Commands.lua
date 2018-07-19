@@ -33,6 +33,10 @@ T.SlashHandler = function(cmd)
 		local Install = T["Install"]
 
 		Install:Launch()
+	elseif (arg1 == "status" or arg1 == "debug") then
+		local Status = TukuiStatus
+		
+		Status:ShowWindow()
 	elseif (arg1 == "move" or arg1 == "moveui") then
 		local Movers = T["Movers"]
 
@@ -47,6 +51,7 @@ T.SlashHandler = function(cmd)
 		print(L.Help.Test)
 		print(L.Help.Profile)
 		print(L.Help.Grid)
+		print(L.Help.Status)
 		print(" ")
 	elseif (arg1 == "c" or arg1 == "config") then
 		local Config = TukuiConfig
