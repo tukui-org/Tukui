@@ -460,7 +460,9 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.AddDash)
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
-	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
+	
+	-- Currently there is display a bug with this hook
+	-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
 end
 
 function ObjectiveTracker:Enable()
