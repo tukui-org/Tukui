@@ -8,6 +8,39 @@ local ToastCloseButton = BNToastFrameCloseButton
 local TukuiChat = T["Chat"]
 local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
+--guild
+CHAT_GUILD_GET = "|Hchannel:GUILD|hG|h %s "
+CHAT_OFFICER_GET = "|Hchannel:OFFICER|hO|h %s "
+
+--raid
+CHAT_RAID_GET = "|Hchannel:RAID|hR|h %s "
+CHAT_RAID_WARNING_GET = "RW %s "
+CHAT_RAID_LEADER_GET = "|Hchannel:RAID|hRL|h %s "
+
+--party
+CHAT_PARTY_GET = "|Hchannel:PARTY|hP|h %s "
+CHAT_PARTY_LEADER_GET ="|Hchannel:PARTY|hPL|h %s "
+CHAT_PARTY_GUIDE_GET ="|Hchannel:PARTY|hPG|h %s "
+
+--bg
+CHAT_BATTLEGROUND_GET = "|Hchannel:BATTLEGROUND|hB|h %s "
+CHAT_BATTLEGROUND_LEADER_GET = "|Hchannel:BATTLEGROUND|hBL|h %s "
+
+--whisper
+CHAT_WHISPER_INFORM_GET = "to %s "
+CHAT_WHISPER_GET = "from %s "
+CHAT_BN_WHISPER_INFORM_GET = "to %s "
+CHAT_BN_WHISPER_GET = "from %s "
+
+--say / yell
+CHAT_SAY_GET = "%s "
+CHAT_YELL_GET = "%s "
+
+--flags
+CHAT_FLAG_AFK = "[AFK] "
+CHAT_FLAG_DND = "[DND] "
+CHAT_FLAG_GM = "[GM] "
+
 -- Set default position for Voice Activation Alert
 TukuiChat.VoiceAlertPosition = {"BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 14}
 
@@ -446,6 +479,12 @@ function TukuiChat:Setup()
 		
 		if i == 2 then
 			CombatLogQuickButtonFrame_Custom:StripTextures()
+		else
+			local am = Frame.AddMessage
+			
+			Frame.AddMessage = function(frame, text, ...)
+				return am(frame, text:gsub('|h%[(%d+)%. .-%]|h', '|h%1|h'), ...)
+			end			
 		end
 	end
 
