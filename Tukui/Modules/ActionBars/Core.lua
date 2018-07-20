@@ -328,7 +328,7 @@ function TukuiActionBars:UpdateStanceBar(...)
 			Icon = _G[ButtonName.."Icon"]
 
 			if i <= NumForms then
-				Texture, Name, IsActive, IsCastable = GetShapeshiftFormInfo(i)
+				Texture, IsActive, IsCastable = GetShapeshiftFormInfo(i)
 
 				if not Icon then
 					return

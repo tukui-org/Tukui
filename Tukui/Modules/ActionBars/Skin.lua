@@ -21,98 +21,102 @@ function TukuiActionBars:SkinButton()
 	local Normal  = _G[Name.."NormalTexture"]
 	local BtnBG = _G[Name.."FloatingBG"]
 	local Font = T.GetFont(C["ActionBars"].Font)
+	
+	if not button.IsSkinned then
+		Flash:SetTexture("")
+		Button:SetNormalTexture("")
 
-	Flash:SetTexture("")
-	Button:SetNormalTexture("")
+		Count:ClearAllPoints()
+		Count:Point("BOTTOMRIGHT", 0, 2)
 
-	Count:ClearAllPoints()
-	Count:Point("BOTTOMRIGHT", 0, 2)
+		HotKey:ClearAllPoints()
+		HotKey:Point("TOPRIGHT", 0, -3)
+		
+		Count:SetFontObject(Font)
 
-	HotKey:ClearAllPoints()
-	HotKey:Point("TOPRIGHT", 0, -3)
+		if (Btname) then
+			if (C.ActionBars.Macro) then
+				Btname:SetFontObject(Font)
+				Btname:ClearAllPoints()
+				Btname:SetPoint("BOTTOM", 1, 1)
+			else
+				Btname:SetText("")
+				Btname:Kill()
+			end
+		end
+
+		if (BtnBG) then
+			BtnBG:Kill()
+		end
+
+		if (C.ActionBars.HotKey) then
+			HotKey:SetFontObject(Font)
+			HotKey.ClearAllPoints = Noop
+			HotKey.SetPoint = Noop
+		else
+			HotKey:SetText("")
+			HotKey:Kill()
+		end
+
+		if (Name:match("Extra")) then
+			Button.Pushed = true
+		end
+
+		Button:SetTemplate()
+		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+
+		if C.ActionBars.HideBackdrop then
+			Button:CreateShadow()
+		end
+
+		Icon:SetTexCoord(unpack(T.IconCoord))
+		Icon:SetDrawLayer('BACKGROUND', 7)
+
+		if (Normal) then
+			Normal:ClearAllPoints()
+			Normal:SetPoint("TOPLEFT")
+			Normal:SetPoint("BOTTOMRIGHT")
+
+			if (Button:GetChecked()) then
+				ActionButton_UpdateState(Button)
+			end
+		end
+		
+		if (Border) then
+			Border:SetTexture("")
+		end
+
+		Button:StyleButton()
+		Button.isSkinned = true
+	end
 
 	TukuiActionBars.UpdateHotKey(Button)
 	
-	if Border and Button.isSkinned then
-		Border:SetTexture('')
-		if Border:IsShown() and C.ActionBars.EquipBorder then
+	if (Border and C.ActionBars.EquipBorder) then
+		if (Border:IsShown()) then
 			Button:SetBackdropBorderColor(.08, .70, 0)
 		else
 			Button:SetBackdropBorderColor(unpack(C['General'].BorderColor))
 		end
 	end
 
+
 	if (Btname and Normal and C.ActionBars.Macro) then
 		local String = GetActionText(Action)
 
 		if String then
 			local Text
+			
 			if string.byte(String, 1) > 223 then
 				Text = string.sub(String, 1, 9)
 			else
 				Text = string.sub(String, 1, 4)
 			end
+			
 			Btname:SetText(Text)
 		end
 	end
-
-	if (Button.isSkinned) then
-		return
-	end
-
-	Count:SetFontObject(Font)
-
-	if (Btname) then
-		if (C.ActionBars.Macro) then
-			Btname:SetFontObject(Font)
-			Btname:ClearAllPoints()
-			Btname:SetPoint("BOTTOM", 1, 1)
-		else
-			Btname:SetText("")
-			Btname:Kill()
-		end
-	end
-
-	if (BtnBG) then
-		BtnBG:Kill()
-	end
-
-	if (C.ActionBars.HotKey) then
-		HotKey:SetFontObject(Font)
-		HotKey.ClearAllPoints = Noop
-		HotKey.SetPoint = Noop
-	else
-		HotKey:SetText("")
-		HotKey:Kill()
-	end
-
-	if (Name:match("Extra")) then
-		Button.Pushed = true
-	end
-
-	Button:SetTemplate()
-	Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
-	Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
-	
-	if C.ActionBars.HideBackdrop then
-		Button:CreateShadow()
-	end
-
-	Icon:SetTexCoord(unpack(T.IconCoord))
-	Icon:SetDrawLayer('BACKGROUND', 7)
-
-	if (Normal) then
-		Normal:ClearAllPoints()
-		Normal:SetPoint("TOPLEFT")
-		Normal:SetPoint("BOTTOMRIGHT")
-
-		if (Button:GetChecked()) then
-			ActionButton_UpdateState(Button)
-		end
-	end
-
-	Button:StyleButton()
-	Button.isSkinned = true
 end
 
 function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
