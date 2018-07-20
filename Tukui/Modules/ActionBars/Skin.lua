@@ -22,7 +22,7 @@ function TukuiActionBars:SkinButton()
 	local BtnBG = _G[Name.."FloatingBG"]
 	local Font = T.GetFont(C["ActionBars"].Font)
 	
-	if not button.IsSkinned then
+	if not Button.IsSkinned then
 		Flash:SetTexture("")
 		Button:SetNormalTexture("")
 
