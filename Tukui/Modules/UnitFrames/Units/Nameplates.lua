@@ -59,7 +59,7 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs:SetWidth(self:GetWidth())
 	Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
 	Debuffs.size = C.NamePlates.Height
-	Debuffs.num = 36
+	Debuffs.num = 9
 	Debuffs.numRow = 9
 
 	Debuffs.spacing = 2
