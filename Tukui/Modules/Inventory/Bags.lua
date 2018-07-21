@@ -261,6 +261,14 @@ function Bags:CreateReagentContainer()
 	Unlock:SetTemplate()
 
 	UnlockButton:SkinButton()
+	
+	-- Movers
+	local CustomPosition = TukuiData[T.MyRealm][T.MyName].Move.TukuiBank
+
+	if CustomPosition then
+		Reagent:ClearAllPoints()
+		Reagent:SetPoint("BOTTOMLEFT", TukuiBank, "BOTTOMLEFT", 0, 0)
+	end
 
 	self.Reagent = Reagent
 	self.Reagent.SwitchBankButton = SwitchBankButton
@@ -430,7 +438,6 @@ function Bags:CreateContainer(storagetype, ...)
 				ReagentBankFrame.isMade = self:CreateReagentContainer() -- Attempt to fix a conflict with TSM.
 			else
 				self.Reagent:Show()
-
 			end
 
 			for i = 5, 11 do
@@ -835,9 +842,25 @@ end
 
 function Bags:OpenAllBankBags()
 	local Bank = BankFrame
+	local CustomPosition = TukuiData[T.MyRealm][T.MyName].Move.TukuiBank
 
 	if Bank:IsShown() then
 		self.Bank:Show()
+		
+		if not self.Bank.MoverAdded then
+			local Movers = T["Movers"]
+
+			Movers:RegisterFrame(self.Bank)
+
+			self.Bank.MoverAdded = true
+		end
+		
+		if CustomPosition and not self.Bank.MoverApplied then
+			self.Bank:ClearAllPoints()
+			self.Bank:SetPoint(unpack(CustomPosition))
+			
+			self.Bank.MoverApplied = true
+		end
 
 		for i = 5, 11 do
 			if (not IsBagOpen(i)) then
