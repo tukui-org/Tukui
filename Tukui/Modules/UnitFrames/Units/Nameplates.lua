@@ -123,6 +123,7 @@ function TukuiUnitFrames:Nameplates()
 	-- Needed on nameplate else if will bug on AOE multi nameplates. (I'm not sure about this)
 	self:EnableMouse(false)
 	self.Health:EnableMouse(false)
+	self.Power:EnableMouse(false)
 	
 	-- Check highlight when created.
 	TukuiUnitFrames.HighlightPlate(self)
