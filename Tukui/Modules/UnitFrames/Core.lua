@@ -1023,6 +1023,7 @@ function TukuiUnitFrames:CreateUnits()
 				Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 4, 0)
 
 				TukuiUnitFrames.Headers.RaidPet = Pet
+				
 				Movers:RegisterFrame(Pet)
 			end
 	--[[
@@ -1035,6 +1036,7 @@ function TukuiUnitFrames:CreateUnits()
 			Movers:RegisterFrame(MainTankTarget)
 	]]
 			TukuiUnitFrames.Headers.Raid = Raid
+			
 			Movers:RegisterFrame(Raid)
 		end
 		

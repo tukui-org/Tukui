@@ -1,7 +1,7 @@
 ## Interface: 80000
 ## Author: Tukz & Hydra
 ## X-Maintainer: Tukz & Azilroka
-## Version: 18.03
+## Version: 18.04
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
