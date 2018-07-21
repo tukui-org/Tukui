@@ -53,7 +53,7 @@ local OnLeave = function(self)
 end
 
 local OnMouseUp = function(self)
-	if IsControlKeyDown() then
+	if IsControlKeyDown() or IsAltKeyDown() then
 		ChatFrame_ToggleMenu()
 		
 		return
