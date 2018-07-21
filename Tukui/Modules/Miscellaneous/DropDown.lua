@@ -54,6 +54,7 @@ function DropDown:Enable()
 		Menu:SetTemplate()
 		Menu:CreateShadow()
 		Menu.SetBackdropColor = Noop
+		Menu.SetBackdropBorderColor = Noop
 	end
 
 	hooksecurefunc("UIDropDownMenu_CreateFrames", self.Skin)
