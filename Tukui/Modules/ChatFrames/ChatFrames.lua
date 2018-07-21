@@ -501,6 +501,9 @@ function TukuiChat:Setup()
 	ChatFrameMenuButton:Kill()
 	QuickJoinToastButton:Kill()
 	
+	ChatMenu:ClearAllPoints()
+	ChatMenu:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 16)
+	
 	VoiceChatPromptActivateChannel:SetTemplate()
 	VoiceChatPromptActivateChannel:CreateShadow()
 	VoiceChatPromptActivateChannel.AcceptButton:SkinButton()

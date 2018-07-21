@@ -53,6 +53,12 @@ local OnLeave = function(self)
 end
 
 local OnMouseUp = function(self)
+	if IsControlKeyDown() then
+		ChatFrame_ToggleMenu()
+		
+		return
+	end
+	
 	if InCombatLockdown() then
 		return
 	end
