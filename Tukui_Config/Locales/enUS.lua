@@ -207,6 +207,11 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Mouse Scrolling",
 			["Desc"] = "Set the number of lines that the chat will jump when scrolling",
 		},
+		
+		["ShortChannelName"] = {
+			["Name"] = "Reduced channel name",
+			["Desc"] = "Reduces the names of the channels of the chat in abbreviation",
+		},
 	},
 
 	["Cooldowns"] = {

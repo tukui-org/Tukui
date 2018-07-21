@@ -214,6 +214,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Défilement de la souris",
 			["Desc"] = "Définissez le nombre de lignes que la fenetre de discussion va sauter lors du défilement",
 		},
+		
+		["ShortChannelName"] = {
+			["Name"] = "Nom des canaux réduit",
+			["Desc"] = "Réduit les noms des canaux du chat en abbreviation",
+		},
 	},
 
 	["Cooldowns"] = {
