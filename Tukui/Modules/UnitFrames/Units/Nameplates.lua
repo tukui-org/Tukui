@@ -30,6 +30,7 @@ function TukuiUnitFrames:Nameplates()
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.Smooth = true
+	Health.frequentUpdates = true
 	
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
@@ -118,6 +119,10 @@ function TukuiUnitFrames:Nameplates()
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate)
 	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", TukuiUnitFrames.HighlightPlate)
+	
+	-- Needed on nameplate else if will bug on AOE multi nameplates. (I'm not sure about this)
+	self:EnableMouse(false)
+	self.Health:EnableMouse(false)
 	
 	-- Check highlight when created.
 	TukuiUnitFrames.HighlightPlate(self)
