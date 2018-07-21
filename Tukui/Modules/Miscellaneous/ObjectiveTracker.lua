@@ -98,8 +98,6 @@ function ObjectiveTracker:Skin()
 			local Modules = Frame[i]
 			if (Modules) then
 				local Header = Modules.Header
-				Header:SetFrameStrata("HIGH")
-				Header:SetFrameLevel(10)
 
 				local Background = Modules.Header.Background
 				Background:SetAtlas(nil)
