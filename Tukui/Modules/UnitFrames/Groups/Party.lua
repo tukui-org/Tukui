@@ -173,6 +173,7 @@ function TukuiUnitFrames:Party()
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
 	
+	--[[
 	if Class == "PRIEST" then
 		local Atonement = CreateFrame("StatusBar", nil, Power)
 		Atonement:SetAllPoints()
@@ -182,6 +183,7 @@ function TukuiUnitFrames:Party()
 		
 		self.Atonement = Atonement
 	end
+	--]]
 
 	local Range = {
 		insideAlpha = 1,
