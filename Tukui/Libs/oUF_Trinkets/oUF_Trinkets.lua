@@ -14,7 +14,7 @@ local Update = function(self, event, ...)
 		self.Trinket:Show()
 	end
 
-	if(self.Trinket.PreUpdate) then self.Trinket:PreUpdate(event) end
+	if(self.Trinket.PreUpdate) then self.Trinket:PreUpdate(event, ...) end
 
 	if event == "ARENA_COOLDOWNS_UPDATE" then
 		local unit = ...
@@ -41,7 +41,7 @@ local Update = function(self, event, ...)
 		CooldownFrame_Set(self.Trinket.cooldownFrame, 1, 1, 1)
 	end
 
-	if(self.Trinket.PostUpdate) then self.Trinket:PostUpdate(event) end
+	if(self.Trinket.PostUpdate) then self.Trinket:PostUpdate(event, ...) end
 end
 
 local Enable = function(self)
