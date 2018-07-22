@@ -17,8 +17,13 @@ local function OnUpdate(self, elapsed)
 	self:SetValue(Timer)
 end
 
-local function Update(self)
+local function Update(self, event, ...)
 	local Unit = self.unit
+	
+	if Unit and Unit ~= self.unit then
+		return
+	end
+	
 	local DiscSpec = 1
 	
 	self.Atonement.Active = false
