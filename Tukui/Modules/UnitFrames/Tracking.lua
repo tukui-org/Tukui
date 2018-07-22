@@ -708,7 +708,8 @@ TukuiUnitFrames.RaidBuffsTracking = {
 	PRIEST = {
 		{41635, "BOTTOMRIGHT", {0.2, 0.7, 0.2}},             -- Prayer of Mending 
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},                -- Renew
-		{17, "TOPLEFT", {0.81, 0.85, 0.1}, true},            -- Power Word: Shield
+		{17, "TOPLEFT", {1, 1, 0}, true},                    -- Power Word: Shield
+		{194384, "TOPRIGHT", {0.81, 0.70, 0.23}, true},      -- Atonement
 	},
 
 	DRUID = {
