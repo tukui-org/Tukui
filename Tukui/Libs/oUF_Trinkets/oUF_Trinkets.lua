@@ -2,18 +2,11 @@ local _, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, 'oUF not loaded')
 
-local GetTrinketIcon = function(unit)
-	if UnitFactionGroup(unit) == "Horde" then
-		return "Interface\\Icons\\INV_Jewelry_TrinketPVP_02"
-	else
-		return "Interface\\Icons\\INV_Jewelry_TrinketPVP_01"
-	end
-end
-
 local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance()
 	
 	if instanceType ~= 'arena' then
+		self.Trinket.Icon:SetTexture("Interface\\Icons\\Ability_pvp_gladiatormedallion")
 		self.Trinket:Hide()
 		
 		return
@@ -51,14 +44,6 @@ local Update = function(self, event, ...)
 	if(self.Trinket.PostUpdate) then self.Trinket:PostUpdate(event) end
 end
 
-function TEST()
-	if unit == "arena1" then
-		Update(unit, 180)
-	elseif unit == "arena2" then
-		self:UpdateTrinket(unit, 120)
-	end
-end
-
 local Enable = function(self)
 	if self.Trinket then
 		self:RegisterEvent("ARENA_COOLDOWNS_UPDATE", Update, true)
@@ -74,7 +59,7 @@ local Enable = function(self)
 			self.Trinket.Icon = self.Trinket:CreateTexture(nil, "BORDER")
 			self.Trinket.Icon:SetAllPoints(self.Trinket)
 			self.Trinket.Icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-			self.Trinket.Icon:SetTexture(GetTrinketIcon('player'))
+			self.Trinket.Icon:SetTexture("Interface\\Icons\\Ability_pvp_gladiatormedallion")
 		end
 
 		return true
