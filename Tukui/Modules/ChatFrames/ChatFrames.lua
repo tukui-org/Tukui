@@ -217,7 +217,7 @@ function TukuiChat:StyleTempFrame()
 end
 
 function TukuiChat:SkinToastFrame()
-	Toast:SetTemplate()
+	Toast:SetTemplate("Transparent")
 	Toast:CreateShadow()
 	Toast.CloseButton:SkinCloseButton()
 end
