@@ -464,7 +464,7 @@ function TukuiChat:Setup()
 	ChatFrameMenuButton:Kill()
 	
 	QuickJoinToastButton:ClearAllPoints()
-	QuickJoinToastButton:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", -2, -18)
+	QuickJoinToastButton:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", -1, -18)
 	QuickJoinToastButton:EnableMouse(false)
 	QuickJoinToastButton.ClearAllPoints = Noop
 	QuickJoinToastButton.SetPoint = Noop
