@@ -217,15 +217,9 @@ function TukuiChat:StyleTempFrame()
 end
 
 function TukuiChat:SkinToastFrame()
-	local Backdrop = T["Panels"].LeftChatBG
-	
 	Toast:SetTemplate()
 	Toast:CreateShadow()
-	--ToastCloseButton:SkinCloseButton()
-	Toast:ClearAllPoints()
-	Toast:SetFrameStrata("Medium")
-	Toast:SetFrameLevel(20)
-	Toast:Point("BOTTOMLEFT", Backdrop, "TOPLEFT", 0, 6)
+	Toast.CloseButton:SkinCloseButton()
 end
 
 function TukuiChat:SetDefaultChatFramesPositions()
@@ -468,7 +462,13 @@ function TukuiChat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-	QuickJoinToastButton:Kill()
+	
+	QuickJoinToastButton:ClearAllPoints()
+	QuickJoinToastButton:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", -2, -18)
+	QuickJoinToastButton:EnableMouse(false)
+	QuickJoinToastButton.ClearAllPoints = Noop
+	QuickJoinToastButton.SetPoint = Noop
+	QuickJoinToastButton:SetAlpha(0)
 	
 	ChatMenu:ClearAllPoints()
 	ChatMenu:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 16)
