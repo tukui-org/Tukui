@@ -8,7 +8,6 @@ local oUF = ns.oUF or _G.oUF
 assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
 
 local UnitBuff = UnitBuff
-local AtonementID = 194384
 
 local function OnUpdate(self, elapsed)
 	local CurrentTime = GetTime()
@@ -25,6 +24,8 @@ local function Update(self, event, ...)
 	end
 	
 	local DiscSpec = 1
+	local AtonementID = 194384
+	local AtonementIDPvP = 214206
 	
 	self.Atonement.Active = false
 	
@@ -32,7 +33,11 @@ local function Update(self, event, ...)
 		for i = 1, 40 do
 			local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
 
-			if SpellID == AtonementID then
+			if not Buff then
+				break
+			end
+
+			if (SpellID == AtonementID) or (SpellID == AtonementIDPvP) then
 				self.Atonement.Duration = Duration
 				self.Atonement.ExpirationTime = ExpirationTime
 				self.Atonement:SetMinMaxValues(0, Duration)
