@@ -86,7 +86,7 @@ MicroMenu.Buttons = {
 
 	{text = RAID,
 	func = function()
-		ToggleFriendsFrame(4)
+		ToggleFriendsFrame(3)
 	end,
 	notCheckable = true},
 
