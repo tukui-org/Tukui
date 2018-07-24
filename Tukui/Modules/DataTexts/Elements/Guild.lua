@@ -203,7 +203,12 @@ local OnLeave = function() GameTooltip:Hide() end
 
 local OnMouseDown = function(self, btn)
 	if btn ~= "LeftButton" then return end
-	ToggleGuildFrame()
+	
+	if IsAltKeyDown() then
+		ToggleCommunitiesFrame()
+	else
+		ToggleGuildFrame()
+	end
 end
 
 
