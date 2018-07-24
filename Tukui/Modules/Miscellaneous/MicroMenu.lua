@@ -74,19 +74,13 @@ MicroMenu.Buttons = {
 
 	{text = ACHIEVEMENTS_GUILD_TAB,
 	func = function()
-		if IsInGuild() then
-			if (not GuildFrame) then
-				GuildFrame_LoadUI()
-			end
-
-			GuildFrame_Toggle()
-		else
-			if (not LookingForGuildFrame) then
-				LookingForGuildFrame_LoadUI()
-			end
-
-			LookingForGuildFrame_Toggle()
-		end
+		ToggleGuildFrame()
+	end,
+	notCheckable = true},
+	
+	{text = COMMUNITIES,
+	func = function()
+		ToggleCommunitiesFrame()
 	end,
 	notCheckable = true},
 
