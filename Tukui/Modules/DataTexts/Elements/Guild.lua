@@ -138,25 +138,20 @@ local OnEnter = function(self)
 		GameTooltip:AddDoubleLine(string.format(guildInfoString, GuildInfo, GuildLevel), string.format(guildInfoString2, L.DataText.Guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	end
 
-	if guildMotD ~= "" then GameTooltip:AddLine(" ") GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
-
-	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
-	GameTooltip:AddLine(" ")
-	if GuildLevel and GuildLevel ~= 25 then
-		--UpdateGuildXP()
-
-		if guildXP[0] then
-			local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
-
-			GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
-		end
+	if guildMotD ~= "" then
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1)
 	end
 
+	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
+
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
+	
 	if standingID ~= 8 then -- Not Max Rep
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
+		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
 	end
 
