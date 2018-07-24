@@ -16,6 +16,7 @@ L.ChatFrames.LookingForGroup = "RechercheDeGroupe"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
+L.DataText.Voice = "Disc. Audio"
 L.DataText.LootSpec = "Specialisation de loot"
 L.DataText.Garrison = "Fief"
 L.DataText.Zone = "Zone"

@@ -12,6 +12,7 @@ L.ChatFrames.LookingForGroup = "LookingForGroup"
 L.DataText = {} -- Data Text Locales
 ------------------------------------------------
 
+L.DataText.Voice = "Voice Chat"
 L.DataText.LootSpec = "Loot Specialization"
 L.DataText.Garrison = "Garrison"
 L.DataText.Zone = "Zone"

@@ -97,6 +97,7 @@
 	<Script file="DataTexts\Elements\Battleground.lua"/>
 	<Script file="DataTexts\Elements\Versatility.lua"/>
 	<Script file="DataTexts\Elements\Zone.lua"/>
+	<Script file="DataTexts\Elements\Voice.lua"/>
 
 	<!-- ChatFrames -->
 	<Script file="ChatFrames\Core.lua"/>
