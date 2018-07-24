@@ -25,6 +25,7 @@ for i = 1, LIB_UIDROPDOWNMENU_MAXLEVELS do
 	f:SetID(i);
 	f:SetSize(180, 10);
 	f:SetFrameStrata("FULLSCREEN_DIALOG");
+	f:SetFrameLevel(i)
 	local fontName, fontHeight, fontFlags = _G["Lib_DropDownList1Button1NormalText"]:GetFont();
 	LIB_UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = fontHeight;
 	for j = 1, LIB_UIDROPDOWNMENU_MAXBUTTONS do
