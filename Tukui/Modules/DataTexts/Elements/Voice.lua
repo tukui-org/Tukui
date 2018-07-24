@@ -95,7 +95,7 @@ local OnEnter = function(self)
 end
 
 local Enable = function(self)
-	self.Text:SetText(BINDING_HEADER_VOICE_CHAT)
+	self.Text:SetText(L.DataText.Voice)
 	self:SetScript("OnMouseUp", OnMouseUp)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
