@@ -197,29 +197,6 @@ local function FontString(parent, name, fontName, fontHeight, fontStyle)
 	return fs
 end
 
-local function HighlightTarget(self, event, unit)
-	if self.unit == "target" then return end
-
-	if UnitIsUnit("target", self.unit) then
-		self.HighlightTarget:Show()
-	else
-		self.HighlightTarget:Hide()
-	end
-end
-
-local function HighlightUnit(f, r, g, b)
-	if f.HighlightTarget then return end
-
-	local glowBorder = {edgeFile = C.Medias.Blank, edgeSize = 1}
-	f.HighlightTarget = CreateFrame("Frame", nil, f)
-	f.HighlightTarget:SetOutside()
-	f.HighlightTarget:SetBackdrop(glowBorder)
-	f.HighlightTarget:SetFrameLevel(f:GetFrameLevel() + 1)
-	f.HighlightTarget:SetBackdropBorderColor(r, g, b, 1)
-	f.HighlightTarget:Hide()
-	f:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightTarget)
-end
-
 local function StripTextures(Object, Kill, Text)
 	for i=1, Object:GetNumRegions() do
 		local Region = select(i, Object:GetRegions())
@@ -508,26 +485,6 @@ end
 -- Deprecated API, will be removed: Version + 2
 ---------------------------------------------------
 
--- V17 --
-local borders = {
-	"insettop",
-	"insetbottom",
-	"insetleft",
-	"insetright",
-	"insetinsidetop",
-	"insetinsidebottom",
-	"insetinsideleft",
-	"insetinsideright",
-}
-
-local function HideInsets(f)
-	for i, border in pairs(borders) do
-		if f[border] then
-			f[border]:SetColorTexture(0,0,0,0)
-		end
-	end
-end
-
 ---------------------------------------------------
 -- Merge Tukui API with WoW API
 ---------------------------------------------------
@@ -551,8 +508,6 @@ local function AddAPI(object)
 	if not object.Width then mt.Width = Width end
 	if not object.Height then mt.Height = Height end
 	if not object.FontString then mt.FontString = FontString end
-	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
-	if not object.HideInsets then mt.HideInsets = HideInsets end
 	if not object.SkinEditBox then mt.SkinEditBox = SkinEditBox end
 	if not object.SkinButton then mt.SkinButton = SkinButton end
 	if not object.SkinCloseButton then mt.SkinCloseButton = SkinCloseButton end
