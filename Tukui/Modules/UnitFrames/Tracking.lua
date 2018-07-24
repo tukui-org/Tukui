@@ -710,6 +710,7 @@ TukuiUnitFrames.RaidBuffsTracking = {
 		{139, "BOTTOMLEFT", {0.4, 0.7, 0.2}},                -- Renew
 		{17, "TOPLEFT", {1, 1, 0}, true},                    -- Power Word: Shield
 		{194384, "TOPRIGHT", {0.81, 0.70, 0.23}, true},      -- Atonement
+		{214206, "TOPRIGHT", {0.81, 0.70, 0.23}, true},      -- PVP Atonement
 	},
 
 	DRUID = {
