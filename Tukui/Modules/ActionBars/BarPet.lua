@@ -46,7 +46,7 @@ function TukuiActionBars:CreatePetBar()
 
 	TukuiActionBars:SkinPetButtons()
 
-	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nobonusbar:5] show; hide")
+	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nopossessbar,nobonusbar:5] show; hide")
 
 	Bar:RegisterEvent("PLAYER_CONTROL_LOST")
 	Bar:RegisterEvent("PLAYER_CONTROL_GAINED")
