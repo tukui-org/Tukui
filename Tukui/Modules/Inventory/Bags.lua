@@ -920,6 +920,8 @@ end
 function Bags:OnEvent(event, ...)
 	if (event == "BAG_UPDATE") then
 		self:BagUpdate(...)
+	elseif (event == "CURRENCY_DISPLAY_UPDATE") then
+		BackpackTokenFrame_Update()
 	elseif (event == "BAG_CLOSED") then
 		-- This is usually where the client find a bag swap in character or bank slots.
 
@@ -1033,6 +1035,7 @@ function Bags:Enable()
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("BAG_CLOSED")
+	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 	self:SetScript("OnEvent", self.OnEvent)
 
 	function ManageBackpackTokenFrame() end
