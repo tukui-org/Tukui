@@ -36,7 +36,6 @@ function TukuiUnitFrames:Party()
 		Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 	end
 
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

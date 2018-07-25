@@ -33,7 +33,6 @@ function TukuiUnitFrames:Arena()
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 
 	Health.frequentUpdates = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

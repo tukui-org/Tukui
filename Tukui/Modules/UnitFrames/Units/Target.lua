@@ -41,7 +41,6 @@ function TukuiUnitFrames:Target()
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 
 	Health.frequentUpdates = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

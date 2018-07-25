@@ -34,7 +34,6 @@ function TukuiUnitFrames:TargetOfTarget()
 	Health.Background:SetColorTexture(.1, .1, .1)
 
 	Health.frequentUpdates = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

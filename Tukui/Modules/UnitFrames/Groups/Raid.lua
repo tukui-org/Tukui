@@ -39,7 +39,6 @@ function TukuiUnitFrames:Raid()
 	end
 
 	Health.frequentUpdates = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

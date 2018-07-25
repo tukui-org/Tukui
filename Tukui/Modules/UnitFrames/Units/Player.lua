@@ -41,7 +41,6 @@ function TukuiUnitFrames:Player()
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
 	
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true

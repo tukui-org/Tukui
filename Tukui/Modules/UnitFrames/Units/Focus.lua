@@ -30,7 +30,6 @@ function TukuiUnitFrames:Focus()
 	Health.Value:Point("LEFT", Health, "LEFT", 2, 0)
 
 	Health.frequentUpdates = true
-	Health.colorTapping = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
