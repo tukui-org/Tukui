@@ -82,6 +82,11 @@ C["DataTexts"] = {
 	["Font"] = "Tukui",
 }
 
+C["Loot"] = {
+	["Enable"] = true,
+	["StandardLoot"] = false,
+}
+
 C["Merchant"] = {
 	["AutoSellGrays"] = true,
 	["AutoRepair"] = true,

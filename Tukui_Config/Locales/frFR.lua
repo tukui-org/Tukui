@@ -176,7 +176,7 @@ TukuiConfig["frFR"] = {
 
 	["Chat"] = {
 		["Enable"] = {
-			["Name"] = "Activer la fenetre de discussion",
+			["Name"] = "Activer la fenêtre de discussion",
 			["Desc"] = "Ehm...",
 		},
 
@@ -196,23 +196,23 @@ TukuiConfig["frFR"] = {
 		},
 
 		["Background"] = {
-			["Name"] = "Fond de fenetre de discussion",
+			["Name"] = "Fond de fenêtre de discussion",
 			["Desc"] = "Créer un fond pour les cadres de discussion gauche et droit",
 		},
 
 		["ChatFont"] = {
 			["Name"] = "Police",
-			["Desc"] = "Définir une police pour la fenetre de discussion",
+			["Desc"] = "Définir une police pour la fenêtre de discussion",
 		},
 
 		["TabFont"] = {
 			["Name"] = "Police de l'onglet",
-			["Desc"] = "Définir une police pour l'onglet de la fenetre de discussion",
+			["Desc"] = "Définir une police pour l'onglet de la fenêtre de discussion",
 		},
 
 		["ScrollByX"] = {
 			["Name"] = "Défilement de la souris",
-			["Desc"] = "Définissez le nombre de lignes que la fenetre de discussion va sauter lors du défilement",
+			["Desc"] = "Définissez le nombre de lignes que la fenêtre de discussion va sauter lors du défilement",
 		},
 		
 		["ShortChannelName"] = {
@@ -257,6 +257,18 @@ TukuiConfig["frFR"] = {
 		["Font"] = {
 			["Name"] = "Police de caractère	",
 			["Desc"] = "Définir une police pour les données texte",
+		},
+	},
+	
+	["Loot"] = {
+		["Enable"] = {
+			["Name"] = "Active loot",
+			["Desc"] = "Active notre fenêtre de loot",
+		},
+		
+		["StandardLoot"] = {
+			["Name"] = "Fenêtre de loot Blizzard",
+			["Desc"] = "Remplacez notre fenêtre de butin par celle que Blizzard propose.",
 		},
 	},
 

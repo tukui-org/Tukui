@@ -252,6 +252,18 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font to be used by the data texts",
 		},
 	},
+	
+	["Loot"] = {
+		["Enable"] = {
+			["Name"] = "Enable Loot",
+			["Desc"] = "Enable our loot frame window",
+		},
+		
+		["StandardLoot"] = {
+			["Name"] = "Blizzard Loot Frame",
+			["Desc"] = "Replace our loot frame with a skinned version of Blizzard loot frame",
+		},
+	},
 
 	["Merchant"] = {
 		["AutoSellGrays"] = {

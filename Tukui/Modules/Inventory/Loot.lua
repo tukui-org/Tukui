@@ -5,8 +5,9 @@
 
 local T, C, L = select(2, ...):unpack()
 local Inventory = T["Inventory"]
-local CustomLoot = CreateFrame("Frame")
+local Loot = CreateFrame("Frame")
 local Movers = T["Movers"]
+local LootFrame = LootFrame
 
 -- Lib Globals
 local _G = _G
@@ -34,8 +35,117 @@ local GetCursorPosition = GetCursorPosition
 local GetNumLootItems = GetNumLootItems
 local GetLootSlotInfo = GetLootSlotInfo
 
-function CustomLoot:OnEnter()
---local OnEnter = function(self)
+---------------------------------------
+-- Classic Blizzard Loot
+---------------------------------------
+
+function Loot:MoveStandardLoot()
+	local IsUnderMouse = GetCVar("lootUnderMouse")
+
+	if (IsUnderMouse ~= "1") then
+		if not LootFrame.DragInfo then
+			Movers:RegisterFrame(LootFrame)
+		end
+
+		if (not TukuiData[GetRealmName()][UnitName("Player")].Move) then
+			TukuiData[GetRealmName()][UnitName("Player")].Move = {}
+		end
+
+		if not (TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame) then
+			TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame = {"TOPLEFT", "UIParent", "TOPLEFT", 16, -116}
+		end
+
+		local A1, _, A2, X, Y = unpack(TukuiData[GetRealmName()][UnitName("Player")].Move.LootFrame)
+
+		LootFrame:ClearAllPoints()
+		LootFrame:SetPoint(A1, UIParent, A2, X, Y)
+	end
+end
+
+function Loot:SkinStandardLootFrame()
+	LootFrame:StripTextures()
+	LootFrameInset:StripTextures()
+	LootFrameInset:CreateBackdrop("Transparent")
+	LootFrameInset.Backdrop:CreateShadow()
+	LootFramePortraitOverlay:SetAlpha(0)
+
+	LootFrameDownButton:StripTextures()
+	LootFrameDownButton:Size(LootFrame:GetWidth() - 6, 23)
+	LootFrameDownButton:SkinButton()
+	LootFrameDownButton:FontString("Text", C.Medias.Font, 12)
+	LootFrameDownButton.Text:SetPoint("CENTER")
+	LootFrameDownButton.Text:SetText(NEXT)
+	LootFrameDownButton:ClearAllPoints()
+	LootFrameDownButton:Point("TOP", LootFrame, "BOTTOM", -1, -1)
+	LootFrameDownButton:CreateShadow()
+	LootFrameNext:SetAlpha(0)
+
+	LootFrameUpButton:StripTextures()
+	LootFrameUpButton:Size(LootFrame:GetWidth() - 6, 23)
+	LootFrameUpButton:SkinButton()
+	LootFrameUpButton:FontString("Text", C.Medias.Font, 12)
+	LootFrameUpButton.Text:SetPoint("CENTER")
+	LootFrameUpButton.Text:SetText(PREV)
+	LootFrameUpButton:ClearAllPoints()
+	LootFrameUpButton:Point("TOP", LootFrameDownButton, "BOTTOM", 0, -2)
+	LootFrameUpButton:CreateShadow()
+	LootFramePrev:SetAlpha(0)
+
+	LootFrameCloseButton:EnableMouse(false)
+	LootFrameCloseButton:StripTextures()
+
+	local ItemText = select(19, LootFrame:GetRegions())
+
+	ItemText:SetAlpha(0)
+end
+
+function Loot:SkinStandardLootFrameButtons(i)
+	for i = 1, LootFrame.numLootItems do
+		local Button = _G["LootButton" .. i]
+		local Slot = (LOOTFRAME_NUMBUTTONS * (LootFrame.page - 1)) + i
+
+		if Button then
+			local Icon = _G["LootButton" .. i .. "IconTexture"]
+			local Quest = _G["LootButton" .. i .. "IconQuestTexture"]
+			local IconTexture = Icon:GetTexture()
+			local IsQuestItem, QuestID, IsActive = select(6, GetLootSlotInfo(Slot))
+
+			if (not Button.IsSkinned) then
+				Button:StripTextures()
+				Button:CreateBackdrop()
+				Button.Backdrop:SetOutside(Icon)
+				Button.IconBorder:SetAlpha(0)
+
+				Icon:SetTexture(IconTexture)
+				Icon:SetTexCoord(unpack(T.IconCoord))
+				Icon:SetInside()
+
+				Quest:SetAlpha(0)
+
+				Button.IsSkinned = true
+			end
+
+			if (QuestID and not IsActive) then
+				Button.Backdrop:SetBackdropBorderColor(0.97, 0.85, 0.31) -- Quest item
+			elseif (QuestID or IsQuestItem) then
+				Button.Backdrop:SetBackdropBorderColor(0.97, 0.85, 0.31) -- Quest item
+			else
+				Button.Backdrop:SetBackdropBorderColor(unpack(C.General.BorderColor)) -- Recolor if the previous item in the slot was a quest item
+			end
+		end
+	end
+end
+
+function Loot:AddStandardLootHooks()
+	hooksecurefunc("LootFrame_UpdateButton", self.SkinStandardLootFrameButtons)
+	hooksecurefunc("LootFrame_Show", self.MoveStandardLoot)
+end
+
+---------------------------------------
+-- Tukui Loot
+---------------------------------------
+
+function Loot:OnEnter()
 	self.drop:SetStatusBarColor(1, 1, 1, 0.10)
 	self.drop:Show()
 
@@ -47,7 +157,7 @@ function CustomLoot:OnEnter()
 	end
 end
 
-function CustomLoot:OnLeave()
+function Loot:OnLeave()
 	self.drop:SetStatusBarColor(0, 0, 0, 0)
 	self.drop:Hide()
 
@@ -55,7 +165,7 @@ function CustomLoot:OnLeave()
 	ResetCursor()
 end
 
-function CustomLoot:OnClick()
+function Loot:OnClick()
 	LootFrame.selectedQuality = self.quality
 	LootFrame.selectedItemName = self.name:GetText()
 	LootFrame.selectedSlot = self:GetID()
@@ -70,7 +180,7 @@ function CustomLoot:OnClick()
 	end
 end
 
-function CustomLoot:OnShow()
+function Loot:OnShow()
 	if GameTooltip:IsOwned(self) then
 		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 		GameTooltip:SetLootItem(self:GetID())
@@ -78,22 +188,22 @@ function CustomLoot:OnShow()
 	end
 end
 
-function CustomLoot:AnchorSlots()
+function Loot:AnchorSlots()
 	local shownSlots = 0
 	for i = 1, #self.LootSlots do
 		local frame = self.LootSlots[i]
 		if frame:IsShown() then
 			shownSlots = shownSlots + 1
 
-			frame:Point("TOP", TukuiLootFrame, 4, (-8 + CustomLoot.IconSize) - (shownSlots * (CustomLoot.IconSize+1)))
+			frame:Point("TOP", TukuiLootFrame, 4, (-8 + Loot.IconSize) - (shownSlots * (Loot.IconSize+1)))
 		end
 	end
 
-	self:Height(max(shownSlots * CustomLoot.IconSize + 16, 20))
+	self:Height(max(shownSlots * Loot.IconSize + 16, 20))
 end
 
-function CustomLoot:CreateSlots(id)
-	local IconSize = (CustomLoot.IconSize - 2)
+function Loot:CreateSlots(id)
+	local IconSize = (Loot.IconSize - 2)
 
 	local frame = CreateFrame("Button", "TukuiLootSlot"..id, TukuiLootFrame)
 	frame:Height(IconSize)
@@ -105,10 +215,10 @@ function CustomLoot:CreateSlots(id)
 	
 	frame:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 
-	frame:SetScript("OnEnter", CustomLoot.OnEnter)
-	frame:SetScript("OnLeave", CustomLoot.OnLeave)
-	frame:SetScript("OnClick", CustomLoot.OnClick)
-	frame:SetScript("OnShow", CustomLoot.OnShow)
+	frame:SetScript("OnEnter", Loot.OnEnter)
+	frame:SetScript("OnLeave", Loot.OnLeave)
+	frame:SetScript("OnClick", Loot.OnClick)
+	frame:SetScript("OnShow", Loot.OnShow)
 
 	local iconFrame = CreateFrame("Frame", nil, frame)
 	iconFrame:Size(IconSize, IconSize)
@@ -153,16 +263,16 @@ function CustomLoot:CreateSlots(id)
 	return frame
 end
 
-function CustomLoot:LOOT_SLOT_CLEARED(_, slot)
+function Loot:LOOT_SLOT_CLEARED(_, slot)
 	if not TukuiLootFrame:IsShown() then 
 		return 
 	end
 
 	TukuiLootFrame.LootSlots[slot]:Hide()
-	CustomLoot.AnchorSlots(TukuiLootFrame)
+	Loot.AnchorSlots(TukuiLootFrame)
 end
 
-function CustomLoot:LOOT_CLOSED()
+function Loot:LOOT_CLOSED()
 	StaticPopup_Hide("LOOT_BIND")
 	TukuiLootFrame:Hide()
 
@@ -171,7 +281,7 @@ function CustomLoot:LOOT_CLOSED()
 	end
 end
 
-function CustomLoot:LOOT_OPENED(_, autoloot)
+function Loot:LOOT_OPENED(_, autoloot)
 	TukuiLootFrame:Show()
 
 	if not TukuiLootFrame:IsShown() then
@@ -220,7 +330,7 @@ function CustomLoot:LOOT_OPENED(_, autoloot)
 				Item = Item:gsub("\n", ", ")
 			end
 			
-			local LootFrameSlots = TukuiLootFrame.LootSlots[i] or CustomLoot:CreateSlots(i)
+			local LootFrameSlots = TukuiLootFrame.LootSlots[i] or Loot:CreateSlots(i)
 			local Color = ITEM_QUALITY_COLORS[Quality]
 			
 			if (Quantity and Quantity > 1) then
@@ -249,7 +359,7 @@ function CustomLoot:LOOT_OPENED(_, autoloot)
 			LootFrameSlots:Show()
 		end
 	else
-		local LootFrameSlots = TukuiLootFrame.LootSlots[1] or CustomLoot:CreateSlots(1)
+		local LootFrameSlots = TukuiLootFrame.LootSlots[1] or Loot:CreateSlots(1)
 		local Color = ITEM_QUALITY_COLORS[0]
 
 		LootFrameSlots.name:SetText("Empty Slot")
@@ -262,10 +372,21 @@ function CustomLoot:LOOT_OPENED(_, autoloot)
 		LootFrameSlots:Show()
 	end
 
-	CustomLoot.AnchorSlots(TukuiLootFrame)
+	Loot.AnchorSlots(TukuiLootFrame)
 end
 
-function CustomLoot:Enable()
+function Loot:Enable()
+	if not C.Loot.Enable then
+		return
+	end
+	
+	if C.Loot.StandardLoot then
+		self:SkinStandardLootFrame()
+		self:AddStandardLootHooks()
+		
+		return
+	end
+	
 	-- Locals
 	self.IconSize = 32
 	self.DefaultPosition = {"TOPLEFT", UIParent, "TOPLEFT", 50, -50}
@@ -292,7 +413,7 @@ function CustomLoot:Enable()
 	TukuiLootFrame.InvisFrame:SetAllPoints()
 	
 	TukuiLootFrame.Title = TukuiLootFrame.InvisFrame:CreateFontString(nil, "OVERLAY", 7)
-	TukuiLootFrame.Title:SetFontTemplate(C.Medias.Font, 14)
+	TukuiLootFrame.Title:SetFontTemplate(C.Medias.UnitFrameFont, 12)
 	TukuiLootFrame.Title:Point("CENTER", TukuiLootFrame.Overlay, 0, 1)
 	TukuiLootFrame.Title:SetTextColor(1, 0.82, 0)
 	
@@ -311,4 +432,4 @@ function CustomLoot:Enable()
 	tinsert(UISpecialFrames, "TukuiLootFrame")
 end
 
-Inventory.Loot = CustomLoot
+Inventory.Loot = Loot
