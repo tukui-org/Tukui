@@ -1,5 +1,5 @@
 local T, C, L = select(2, ...):unpack()
-local ObjectiveTracker = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
+local ObjectiveTracker = CreateFrame("Frame", nil, UIParent)
 local Misc = T["Miscellaneous"]
 local Movers = T["Movers"]
 
@@ -81,7 +81,6 @@ function ObjectiveTracker:SetDefaultPosition()
 	ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
 	Movers:RegisterFrame(ObjectiveFrameHolder)
-	Movers:SaveDefaults(self, Anchor1, Parent, Anchor2, X, Y)
 
 	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
 		ObjectiveFrameHolder:ClearAllPoints()
