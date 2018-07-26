@@ -6,6 +6,7 @@
 local T, C, L = select(2, ...):unpack()
 local Inventory = T["Inventory"]
 local CustomLoot = CreateFrame("Frame")
+local Movers = T["Movers"]
 
 -- Lib Globals
 local _G = _G
@@ -195,8 +196,18 @@ function CustomLoot:LOOT_OPENED(_, autoloot)
 		TukuiLootFrame:GetCenter()
 		TukuiLootFrame:Raise()
 	else
+		local SavedVar = TukuiData[GetRealmName()][UnitName("Player")].Move
+		local CustomLootPosition = TukuiData[GetRealmName()][UnitName("Player")].Move.TukuiLootFrame
+		local A1, P, A2, X, Y
+		
+		if CustomLootPosition then
+			A1, P, A2, X, Y = unpack(CustomLootPosition)
+		else
+			A1, P, A2, X, Y = "TOPLEFT", UIParent, "TOPLEFT", 50, -50
+		end
+		
 		TukuiLootFrame:ClearAllPoints()
-		TukuiLootFrame:Point("TOPLEFT", 50, -50)
+		TukuiLootFrame:Point(A1, P, A2, X, Y)
 	end
 
 	local Items = GetNumLootItems()
@@ -257,11 +268,13 @@ end
 function CustomLoot:Enable()
 	-- Locals
 	self.IconSize = 32
+	self.DefaultPosition = {"TOPLEFT", UIParent, "TOPLEFT", 50, -50}
 	
 	TukuiLootFrame = CreateFrame("Button", "TukuiLootFrame", UIParent)
 	TukuiLootFrame:SetClampedToScreen(true)
 	TukuiLootFrame:SetToplevel(true)
 	TukuiLootFrame:Size(198, 58)
+	TukuiLootFrame:SetPoint(unpack(self.DefaultPosition))
 	TukuiLootFrame.LootSlots = {}
 	TukuiLootFrame:SetScript("OnHide", function()
 		StaticPopup_Hide("CONFIRM_LOOT_DISTRIBUTION")
@@ -292,6 +305,9 @@ function CustomLoot:Enable()
 	end)
 	
 	LootFrame:UnregisterAllEvents()
+	
+	Movers:RegisterFrame(TukuiLootFrame)
+	
 	tinsert(UISpecialFrames, "TukuiLootFrame")
 end
 
