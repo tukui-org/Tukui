@@ -25,6 +25,11 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Define how big the user interface is displayed",
 		},
 		
+		["Themes"] = {
+			["Name"] = "Theme",
+			["Desc"] = "Applying a theme changes user interface look and feel",
+		},
+		
 		["AFKSaver"] = {
 			["Name"] = "AFK Screensaver",
 			["Desc"] = "Enable or disable the afk screensaver",

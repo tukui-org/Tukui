@@ -32,6 +32,11 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir la taille de l'interface utilisateur",
 		},
 		
+		["Themes"] = {
+			["Name"] = "Thème",
+			["Desc"] = "L'application d'un thème modifie l'interface",
+		},
+		
 		["AFKSaver"] = {
 			["Name"] = "Écran de veille AFK",
 			["Desc"] = "Active ou désactive l'écran de veille AFK",

@@ -21,6 +21,14 @@ C["General"] = {
 
 		["Value"] = "Pixel Perfection",
 	},
+	["Themes"] = {
+		["Options"] = {
+			["Tukui"] = "Tukui",
+            ["Tukui 17"] = "Tukui 17",
+		},
+
+		["Value"] = "Tukui",
+	},
 }
 
 C["ActionBars"] = {
