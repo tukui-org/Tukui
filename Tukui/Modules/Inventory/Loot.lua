@@ -331,7 +331,7 @@ function Loot:LOOT_OPENED(_, autoloot)
 			end
 			
 			local LootFrameSlots = TukuiLootFrame.LootSlots[i] or Loot:CreateSlots(i)
-			local Color = ITEM_QUALITY_COLORS[Quality]
+			local Color = ITEM_QUALITY_COLORS[Quality] or {r = 1, g = 1, b = 1}
 			
 			if (Quantity and Quantity > 1) then
 				LootFrameSlots.count:SetText(Quantity)
