@@ -26,6 +26,7 @@ function TukuiUnitFrames:Nameplates()
 	Health.Background:SetAllPoints()
 	Health.Background:SetColorTexture(.1, .1, .1)	
 	
+	Health.colorTapping = true
 	Health.colorReaction = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
@@ -38,7 +39,7 @@ function TukuiUnitFrames:Nameplates()
 	Name:SetFontObject(Font)
 	Name:SetFont(select(1, Name:GetFont()), 12, select(3, Name:GetFont()))
 	
-	self:Tag(Name, "[shortclassification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Name, "[shortclassification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameLong]")
 	
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())

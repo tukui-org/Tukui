@@ -37,6 +37,7 @@ function TukuiUnitFrames:TargetOfTarget()
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
+	Health.colorTapping = true
 
 	if C.UnitFrames.Smooth then
 		Health.Smooth = true

@@ -435,12 +435,11 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 	if slot > 4 then
 		return
 	end
-
+	
 	local Bar = self.Totems
-	local Priorities = Bar.__map
 
 	if Bar.PreUpdate then Bar:PreUpdate(slot) end
-
+	
 	local Totem = Bar[slot]
 	local HaveTotem, Name, Start, Duration, Icon = GetTotemInfo(slot)
 	local SpellID = select(7, GetSpellInfo(Name))
@@ -457,8 +456,23 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 		if Totem.Icon then
 			Totem.Icon:SetTexture(Icon)
 		end
-
-		Bar.activeTotems = setbit(Bar.activeTotems, 2 ^ (slot - 1))
+		
+		-- Workaround to allow right-click destroy totem
+		for i = 1, 4 do
+			local BlizzardTotem = _G["TotemFrameTotem"..i]
+			local Cooldown = _G["TotemFrameTotem"..i.."IconCooldown"]
+			
+			if BlizzardTotem:IsShown() then
+				local CancelButtonSlot = BlizzardTotem.slot
+				local CancelButton = _G["TotemFrameTotem"..CancelButtonSlot]
+				
+				CancelButton:ClearAllPoints()
+				CancelButton:SetAllPoints(Bar[i])
+				CancelButton:SetAlpha(0)
+				
+				Cooldown:SetAlpha(0)
+			end
+		end
 	else
 		Totem:SetAlpha(0)
 		Totem:SetValue(0)
@@ -467,8 +481,6 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
 		end
-
-		Bar.activeTotems = clearbit(Bar.activeTotems, 2 ^ (slot - 1))
 	end
 
 	if Bar.PostUpdate then

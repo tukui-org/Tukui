@@ -31,11 +31,24 @@ oUF.Tags.Methods["Tukui:GetNameColor"] = function(unit)
 		local c = T.Colors.reaction[Reaction]
 		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
 	else
-		return string.format("|cff%02x%02x%02x", .84 * 255, .75 * 255, .65 * 255)
+		return string.format("|cff%02x%02x%02x", 1, 1, 1)
 	end
 end
 
-oUF.Tags.Events["Tukui:DiffColor"] = "UNIT_LEVEL"
+oUF.Tags.Events["Tukui:GetNameHostilityColor"] = "UNIT_POWER_UPDATE"
+oUF.Tags.Methods["Tukui:GetNameHostilityColor"] = function(unit)
+	local Reaction = UnitReaction(unit, "player")
+
+	if (Reaction) then
+		local c = T.Colors.reaction[Reaction]
+		
+		return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
+	else
+		return string.format("|cff%02x%02x%02x", 1, 1, 1)
+	end
+end
+
+oUF.Tags.Events["Tukui:DiffColor"] = "UNIT_LEVEL PLAYER_LEVEL_UP"
 oUF.Tags.Methods["Tukui:DiffColor"] = function(unit)
 	local r, g, b
 	local Level = UnitLevel(unit)
@@ -43,7 +56,8 @@ oUF.Tags.Methods["Tukui:DiffColor"] = function(unit)
 	if (Level < 1) then
 		r, g, b = 0.69, 0.31, 0.31
 	else
-		local DiffColor = UnitLevel("target") - UnitLevel("player")
+		local DiffColor = UnitLevel(unit) - UnitLevel("player")
+		
 		if (DiffColor >= 5) then
 			r, g, b = 0.69, 0.31, 0.31
 		elseif (DiffColor >= 3) then

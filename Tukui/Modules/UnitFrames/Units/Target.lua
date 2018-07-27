@@ -44,6 +44,7 @@ function TukuiUnitFrames:Target()
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
+	Health.colorTapping = true
 
 	Health.PreUpdate = TukuiUnitFrames.PreUpdateHealth
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
