@@ -759,8 +759,8 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 			self:SetWidth(header:GetAttribute("initial-width"))
 			self:SetHeight(header:GetAttribute("initial-height"))
 		]],
-		"initial-width", T.Scale(206),
-		"initial-height", T.Scale(32),
+		"initial-width", T.Scale(180),
+		"initial-height", T.Scale(24),
 		"showSolo", false,
 		"showParty", true,
 		"showPlayer", C["Party"].ShowPlayer,
@@ -768,7 +768,7 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-60)
+		"yOffset", T.Scale(-50)
 end
 
 function TukuiUnitFrames:GetRaidFramesAttributes()
