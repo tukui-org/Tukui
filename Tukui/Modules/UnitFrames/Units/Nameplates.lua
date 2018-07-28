@@ -51,10 +51,12 @@ function TukuiUnitFrames:Nameplates()
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
 	Power.Background:SetColorTexture(.1, .1, .1)
-
+	
+	Power.IsHidden = false
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	Power.Smooth = true
+	Power.PostUpdate = TukuiUnitFrames.DisplayNameplatePowerAndCastBar
 	
 	local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 	Debuffs:SetHeight(C.NamePlates.Height)
@@ -99,6 +101,9 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.PostCastInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostCastNotInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostChannelStart = TukuiUnitFrames.CheckInterrupt
+	
+	CastBar:SetScript("OnShow", TukuiUnitFrames.DisplayNameplatePowerAndCastBar)
+	CastBar:SetScript("OnHide", TukuiUnitFrames.DisplayNameplatePowerAndCastBar)
 	
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:Size(self:GetHeight())

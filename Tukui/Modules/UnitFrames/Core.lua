@@ -734,6 +734,44 @@ function TukuiUnitFrames:Update()
 	end
 end
 
+function TukuiUnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
+	if not unit then
+		unit = self:GetParent().unit
+	end
+	
+	if not cur then
+		cur, max = UnitPower(unit), UnitPowerMax(unit)
+	end
+	
+	local CurrentPower = cur
+	local MaxPower = max
+	local Nameplate = self:GetParent()
+	local PowerBar = Nameplate.Power
+	local CastBar = Nameplate.Castbar
+	local Health = Nameplate.Health
+	local IsPowerHidden = PowerBar.IsHidden
+
+	if (not CastBar:IsShown()) and (CurrentPower and CurrentPower == 0) and (MaxPower and MaxPower == 0) then
+		if (not IsPowerHidden) then
+			Health:ClearAllPoints()
+			Health:SetAllPoints()
+
+			PowerBar:Hide()
+			PowerBar.IsHidden = true
+		end
+	else
+		if IsPowerHidden then
+			Health:ClearAllPoints()
+			Health:SetPoint("TOPLEFT")
+			Health:SetHeight(C.NamePlates.Height - C.NamePlates.CastHeight - 1)
+			Health:SetWidth(Nameplate:GetWidth())
+
+			PowerBar:Show()
+			PowerBar.IsHidden = false
+		end
+	end
+end
+
 function TukuiUnitFrames:RunesPostUpdate(runemap)
 	local Bar = self
 	local RuneMap = runemap
