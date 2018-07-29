@@ -14,12 +14,6 @@
 --		autoHideDelay - how long until the menu disappears
 --
 --
-
--- Check if already exist in another addon.
-if Lib_EasyMenu then
-	return
-end
-
 function Lib_EasyMenu(menuList, menuFrame, anchor, x, y, displayMode, autoHideDelay )
 	if ( displayMode == "MENU" ) then
 		menuFrame.displayMode = displayMode;
