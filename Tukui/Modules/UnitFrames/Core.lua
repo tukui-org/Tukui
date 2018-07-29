@@ -408,17 +408,6 @@ function TukuiUnitFrames:PostUpdatePower(unit, current, min, max)
 	end
 end
 
-function TukuiUnitFrames:UpdateTotemTimer(elapsed)
-	self.TimeLeft = self.TimeLeft - elapsed
-
-	if self.TimeLeft > 0 then
-		self:SetValue(self.TimeLeft)
-	else
-		self:SetValue(0)
-		self:SetScript("OnUpdate", nil)
-	end
-end
-
 local function hasbit(x, p)
 	return x % (p + p) >= p
 end
