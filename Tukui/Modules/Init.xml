@@ -55,6 +55,7 @@
 	<Script file="Miscellaneous\AFK.lua"/>
 	<Script file="Miscellaneous\Grid.lua"/>
 	<Script file="Miscellaneous\OrderHall.lua"/>
+	<Script file="Miscellaneous\UIErrorFilter.lua"/>
 
 	<!-- Auras -->
 	<Include file="Auras\Templates.xml"/>

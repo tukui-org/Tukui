@@ -137,6 +137,7 @@ function Loading:OnEvent(event, addon)
 			T["Miscellaneous"]["DeathRecap"]:Enable()
 			T["Miscellaneous"]["AFK"]:Enable()
 			T["Miscellaneous"]["OrderHall"]:Enable()
+			T["Miscellaneous"]["UIErrorFilter"]:Enable()
 
 		-- BUFFS
 			if (C.Auras.Enable) then
