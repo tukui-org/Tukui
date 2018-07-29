@@ -326,7 +326,7 @@ TukuiConfig["enUS"] = {
 
 	["NamePlates"] = {
 		["Enable"] = {
-			["Name"] = "Enable NamePlates",
+			["Name"] = "Enable Nameplates",
 			["Desc"] = "Derp"..PerformanceSlight,
 		},
 
@@ -348,6 +348,11 @@ TukuiConfig["enUS"] = {
 		["Font"] = {
 			["Name"] = "NamePlates Font",
 			["Desc"] = "Set a font for nameplates",
+		},
+
+		["OnlySelfDebuffs"] = {
+			["Name"] = "Display my debuffs only",
+			["Desc"] = "Only display our debuffs on nameplates",
 		},
 	},
 
@@ -614,8 +619,8 @@ TukuiConfig["enUS"] = {
 		},
 
 		["OnlySelfDebuffs"] = {
-			["Name"] = "Display My Debuffs Only",
-			["Desc"] = "Only display our debuffs on the target frame",
+			["Name"] = "Display my debuffs only",
+			["Desc"] = "Only display our debuffs on nameplates",
 		},
 
 		["OnlySelfBuffs"] = {

@@ -356,6 +356,11 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Police de caractère",
 			["Desc"] = "Définir la police de caractère des barres d'unités",
 		},
+
+		["OnlySelfDebuffs"] = {
+			["Name"] = "Afficher seulement mes affaiblissements",
+			["Desc"] = "Afficher seulement mes affaiblissements sur le cadre cible",
+		},
 	},
 
 	["Party"] = {

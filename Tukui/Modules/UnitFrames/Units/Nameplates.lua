@@ -59,11 +59,11 @@ function TukuiUnitFrames:Nameplates()
 	Power.PostUpdate = TukuiUnitFrames.DisplayNameplatePowerAndCastBar
 	
 	local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
-	Debuffs:SetHeight(C.NamePlates.Height)
+	Debuffs:SetHeight(18)
 	Debuffs:SetWidth(self:GetWidth())
 	Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
-	Debuffs.size = C.NamePlates.Height
-	Debuffs.num = 10
+	Debuffs.size = 18
+	Debuffs.num = 7
 	Debuffs.numRow = 1
 
 	Debuffs.spacing = 2
@@ -71,7 +71,7 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs["growth-y"] = "DOWN"
 	Debuffs["growth-x"] = "RIGHT"
 	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
-	Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs
 	
 
 	local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
