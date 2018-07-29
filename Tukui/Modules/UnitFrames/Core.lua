@@ -1115,6 +1115,9 @@ function TukuiUnitFrames:CreateUnits()
 			nameplateSelfScale = 1,
 		}
 		
+		SetCVar("nameplateSelectedScale", 1)
+		SetCVar("nameplateMinScale", 1)
+		
 		oUF:SpawnNamePlates(nil, nil, NameplateVars)
 	end
 end
