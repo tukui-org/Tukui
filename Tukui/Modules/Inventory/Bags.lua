@@ -433,9 +433,8 @@ function Bags:CreateContainer(storagetype, ...)
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 
 			if (not ReagentBankFrame.isMade) then
-				-- self:CreateReagentContainer()
-				-- ReagentBankFrame.isMade = true
-				ReagentBankFrame.isMade = self:CreateReagentContainer() -- Attempt to fix a conflict with TSM.
+				self:CreateReagentContainer()
+				ReagentBankFrame.isMade = true
 			else
 				self.Reagent:Show()
 			end
@@ -960,6 +959,14 @@ function Bags:OnEvent(event, ...)
 		if (Button) then
 			self:SlotUpdate(-3, Button)
 		end
+	elseif (event == "BANKFRAME_CLOSED") then
+		local Bank = self.Bank
+		
+		Bank:Hide()
+	elseif (event == "BANKFRAME_OPENED") then
+		local Bank = self.Bank
+		
+		Bank:Show()
 	end
 end
 
@@ -979,7 +986,7 @@ function Bags:Enable()
 
 	local Bag = ContainerFrame1
 	local GameMenu = GameMenuFrame
-	local Bank = BankFrameItem1
+	local BankItem1 = BankFrameItem1
 	local BankFrame = BankFrame
 	local DataTextLeft = T["Panels"].DataTextLeft
 	local DataTextRight = T["Panels"].DataTextRight
@@ -1003,14 +1010,14 @@ function Bags:Enable()
         self.Bag:Show()
     end)
 
-	Bank:SetScript("OnHide", function()
-		self.Bank:Hide()
-	end)
-
 	BankFrame:HookScript("OnHide", function()
 		if self.Reagent and self.Reagent:IsShown() then
 			self.Reagent:Hide()
 		end
+	end)
+	
+	BankItem1:SetScript("OnHide", function()
+		self.Bank:Hide()
 	end)
 
 	-- Rewrite Blizzard Bags Functions
@@ -1035,6 +1042,8 @@ function Bags:Enable()
 	self:RegisterEvent("PLAYERBANKSLOTS_CHANGED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("BAG_CLOSED")
+	self:RegisterEvent("BANKFRAME_CLOSED")
+	self:RegisterEvent("BANKFRAME_OPENED")
 	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 	self:SetScript("OnEvent", self.OnEvent)
 
