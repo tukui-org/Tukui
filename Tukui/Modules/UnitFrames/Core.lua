@@ -739,6 +739,10 @@ function TukuiUnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 		unit = self:GetParent().unit
 	end
 	
+	if not unit then
+		return
+	end
+	
 	if not cur then
 		cur, max = UnitPower(unit), UnitPowerMax(unit)
 	end
