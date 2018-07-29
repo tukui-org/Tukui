@@ -156,6 +156,8 @@ function AFK:Create()
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:SetScript("OnEvent", self.OnEvent)
 	
+	UIParent:HookScript("OnShow", function(self) if UnitIsAFK("player") then SendChatMessage("", "AFK") AFK:SetAFK(false) end end)
+	
 	self.Frame = Frame
 	self.PanelTop = TopPanel
 	self.BottomPanel = BottomPanel
