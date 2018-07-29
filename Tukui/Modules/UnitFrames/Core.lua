@@ -189,12 +189,12 @@ function TukuiUnitFrames:HighlightPlate()
 				Shadow:Show()
 			end
 			
-			Shadow:SetBackdropBorderColor(1, 1, 0, 0.8)
+			Shadow:SetBackdropBorderColor(1, 1, 0, 1)
 		else
 			if C.General.HideShadows then
 				Shadow:Hide()
 			else
-				Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+				Shadow:SetBackdropBorderColor(0, 0, 0, 1)
 			end
 		end
 	end
