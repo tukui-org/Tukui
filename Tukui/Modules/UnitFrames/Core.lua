@@ -447,14 +447,14 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 	local Colors = T["Colors"]
 
 	if (HaveTotem) then
-		Totem:SetAlpha(1)
-		Totem.TimeLeft = (Start + Duration) - GetTime()
-		Totem:SetMinMaxValues(0, Duration)
-		Totem:SetScript("OnUpdate", TukuiUnitFrames.UpdateTotemTimer)
-		Totem:SetStatusBarColor(0, 0, 0, 0.7)
+		Totem:Show()
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(Icon)
+		end
+		
+		if (Totem.Cooldown) then
+			Totem.Cooldown:SetCooldown(Start, Duration)
 		end
 		
 		-- Workaround to allow right-click destroy totem
@@ -474,9 +474,7 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 			end
 		end
 	else
-		Totem:SetAlpha(0)
-		Totem:SetValue(0)
-		Totem:SetScript("OnUpdate", nil)
+		Totem:Hide()
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
