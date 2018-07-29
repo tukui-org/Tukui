@@ -21,7 +21,7 @@ LIB_OPEN_DROPDOWNMENUS = {}; --used by UnitPopup only
 local Lib_UIDropDownMenuDelegate = CreateFrame("FRAME");
 for i = 1, LIB_UIDROPDOWNMENU_MAXLEVELS do
 	local listFrameName = "Lib_DropDownList"..i;	
-	local f = CreateFrame("Button", listFrameName, nil, "Lib_Tukui_UIDropDownListTemplate");
+	local f = CreateFrame("Button", listFrameName, nil, "Lib_UIDropDownListTemplate");
 	f:SetID(i);
 	f:SetSize(180, 10);
 	f:SetFrameStrata("FULLSCREEN_DIALOG");
@@ -29,7 +29,7 @@ for i = 1, LIB_UIDROPDOWNMENU_MAXLEVELS do
 	local fontName, fontHeight, fontFlags = _G["Lib_DropDownList1Button1NormalText"]:GetFont();
 	LIB_UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = fontHeight;
 	for j = 1, LIB_UIDROPDOWNMENU_MAXBUTTONS do
-		local b = CreateFrame("Button", listFrameName.."Button"..j, f, "Lib_Tukui_UIDropDownMenuButtonTemplate");
+		local b = CreateFrame("Button", listFrameName.."Button"..j, f, "Lib_UIDropDownMenuButtonTemplate");
 		b:SetID(j);
 	end
 end
@@ -201,7 +201,7 @@ function Lib_UIDropDownMenu_CreateFrames(level, index)
 
 	while ( level > LIB_UIDROPDOWNMENU_MAXLEVELS ) do
 		LIB_UIDROPDOWNMENU_MAXLEVELS = LIB_UIDROPDOWNMENU_MAXLEVELS + 1;
-		local newList = CreateFrame("Button", "Lib_DropDownList"..LIB_UIDROPDOWNMENU_MAXLEVELS, nil, "Lib_Tukui_UIDropDownListTemplate");
+		local newList = CreateFrame("Button", "Lib_DropDownList"..LIB_UIDROPDOWNMENU_MAXLEVELS, nil, "Lib_UIDropDownListTemplate");
 		newList:SetFrameStrata("FULLSCREEN_DIALOG");
 		newList:SetToplevel(1);
 		newList:Hide();
@@ -209,7 +209,7 @@ function Lib_UIDropDownMenu_CreateFrames(level, index)
 		newList:SetWidth(180)
 		newList:SetHeight(10)
 		for i=LIB_UIDROPDOWNMENU_MINBUTTONS+1, LIB_UIDROPDOWNMENU_MAXBUTTONS do
-			local newButton = CreateFrame("Button", "Lib_DropDownList"..LIB_UIDROPDOWNMENU_MAXLEVELS.."Button"..i, newList, "Lib_Tukui_UIDropDownMenuButtonTemplate");
+			local newButton = CreateFrame("Button", "Lib_DropDownList"..LIB_UIDROPDOWNMENU_MAXLEVELS.."Button"..i, newList, "Lib_UIDropDownMenuButtonTemplate");
 			newButton:SetID(i);
 		end
 	end
@@ -217,7 +217,7 @@ function Lib_UIDropDownMenu_CreateFrames(level, index)
 	while ( index > LIB_UIDROPDOWNMENU_MAXBUTTONS ) do
 		LIB_UIDROPDOWNMENU_MAXBUTTONS = LIB_UIDROPDOWNMENU_MAXBUTTONS + 1;
 		for i=1, LIB_UIDROPDOWNMENU_MAXLEVELS do
-			local newButton = CreateFrame("Button", "Lib_DropDownList"..i.."Button"..LIB_UIDROPDOWNMENU_MAXBUTTONS, _G["Lib_DropDownList"..i], "Lib_Tukui_UIDropDownMenuButtonTemplate");
+			local newButton = CreateFrame("Button", "Lib_DropDownList"..i.."Button"..LIB_UIDROPDOWNMENU_MAXBUTTONS, _G["Lib_DropDownList"..i], "Lib_UIDropDownMenuButtonTemplate");
 			newButton:SetID(LIB_UIDROPDOWNMENU_MAXBUTTONS);
 		end
 	end
