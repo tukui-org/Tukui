@@ -39,7 +39,7 @@ function TukuiUnitFrames:Nameplates()
 	Name:SetFontObject(Font)
 	Name:SetFont(select(1, Name:GetFont()), 12, select(3, Name:GetFont()))
 	
-	self:Tag(Name, "[shortclassification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameLong]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameLong]")
 	
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())

@@ -124,4 +124,21 @@ oUF.Tags.Methods["Tukui:Role"] = function(unit)
 	return String
 end
 
+oUF.Tags.Events["Tukui:Classification"] = "UNIT_CLASSIFICATION_CHANGED"
+oUF.Tags.Methods["Tukui:Classification"] = function(unit)
+	local C = UnitClassification(unit)
+	
+	if(C == 'rare') then
+		return '|cffffff00R|r'
+	elseif(C == 'rareelite') then
+		return '|cFFFF4500RE|r'
+	elseif(C == 'elite') then
+		return '|cFFFFA500E|r'
+	elseif(C == 'worldboss') then
+		return '|cffff0000WB|r'
+	elseif(C == 'minus') then
+		return '|cff888888M|r'
+	end
+end
+
 TukuiUnitFrames.Tags = oUF.Tags
