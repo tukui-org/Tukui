@@ -438,6 +438,34 @@ function ObjectiveTracker:ShowObjectiveTrackerLevel()
 	end
 end
 
+function ObjectiveTracker:SkinRewards()
+	local rewardsFrame = self.module.rewardsFrame
+	
+	rewardsFrame:StripTextures()
+	
+	if rewardsFrame.id then
+		for i = 1, 6 do
+			local rewardItem = rewardsFrame.Rewards[i]
+			
+			if rewardItem then
+				local Icon = rewardItem.ItemIcon
+				local Border = rewardItem.ItemBorder
+				local Label = rewardItem.Label
+				local ItemOverlay = rewardItem.ItemOverlay
+				
+				if Icon then
+					Icon:Size(18)
+					Icon:SetTexCoord(.08, .92, .08, .92)
+				end
+				
+				if Border then
+					Border:SetTexture("")
+				end
+			end
+		end
+	end
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
 	hooksecurefunc("ScenarioBlocksFrame_OnLoad", self.SkinScenario)
@@ -457,6 +485,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.AddDash)
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
+	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
 	
 	-- Currently there is display a bug with this hook
 	-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
