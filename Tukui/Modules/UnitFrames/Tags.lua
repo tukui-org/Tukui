@@ -129,15 +129,15 @@ oUF.Tags.Methods["Tukui:Classification"] = function(unit)
 	local C = UnitClassification(unit)
 
 	if(C == "rare") then
-		return "|cffffff00R|r"
+		return "|cffffff00R |r"
 	elseif(C == "rareelite") then
-		return "|cFFFF4500RE|r"
+		return "|cFFFF4500R+ |r"
 	elseif(C == "elite") then
-		return "|cFFFFA500E|r"
+		return "|cFFFFA500+ |r"
 	elseif(C == "worldboss") then
-		return "|cffff0000WB|r"
+		return "|cffff0000B |r"
 	elseif(C == "minus") then
-		return "|cff888888M|r"
+		return "|cff888888- |r"
 	end
 end
 
