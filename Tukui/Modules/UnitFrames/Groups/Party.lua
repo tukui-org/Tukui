@@ -70,7 +70,7 @@ function TukuiUnitFrames:Party()
 	local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
 	Buffs:Point("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
 	Buffs:SetHeight(24)
-	Buffs:SetWidth(250)
+	Buffs:SetWidth(206)
 	Buffs.size = 24
 	Buffs.num = 8
 	Buffs.numRow = 1

@@ -797,7 +797,7 @@ function TukuiUnitFrames:GetPartyFramesAttributes()
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
-		"yOffset", T.Scale(-50)
+		"yOffset", T.Scale(-60)
 end
 
 function TukuiUnitFrames:GetRaidFramesAttributes()
@@ -1046,7 +1046,7 @@ function TukuiUnitFrames:CreateUnits()
 		if C.Party.Enable then
 			local Party = oUF:SpawnHeader(TukuiUnitFrames:GetPartyFramesAttributes())
 			Party:SetParent(Panels.PetBattleHider)
-			Party:Point("TOPLEFT", UIParent, "TOPLEFT", 28, -(UIParent:GetHeight() / 2) + 200)
+			Party:Point("TOPLEFT", UIParent, "TOPLEFT", 28, -(UIParent:GetHeight() / 2) + 240)
 
 			TukuiUnitFrames.Headers.Party = Party
 
