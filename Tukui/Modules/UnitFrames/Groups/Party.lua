@@ -64,7 +64,7 @@ function TukuiUnitFrames:Party()
 	end
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
-	Name:SetPoint("TOPLEFT", -1, 18)
+	Name:SetPoint("TOPLEFT", 4, 6)
 	Name:SetFontObject(Font)
 
 	local Buffs = CreateFrame("Frame", self:GetName()..'Buffs', self)
@@ -191,7 +191,7 @@ function TukuiUnitFrames:Party()
 	self.ThreatIndicator = Threat
 	self.Range = Range
 	self.Highlight = Highlight
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong][Tukui:Role]")
+	self:Tag(Name, "[Tukui:NameLong][Tukui:Role]")
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
