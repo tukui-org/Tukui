@@ -31,7 +31,7 @@ function TukuiUnitFrames:Party()
 	if C.Party.ShowHealthText then
 		Health.Value = Health:CreateFontString(nil, "OVERLAY")
 		Health.Value:SetFontObject(HealthFont)
-		Health.Value:Point("RIGHT", Health, "RIGHT", 0, 0)
+		Health.Value:Point("TOPRIGHT", -3, 6)
 
 		Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 	end
