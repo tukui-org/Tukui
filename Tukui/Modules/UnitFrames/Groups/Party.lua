@@ -148,20 +148,6 @@ function TukuiUnitFrames:Party()
 		}
 	end
 
-	if (Class == "PRIEST" and C.UnitFrames.WeakBar) then
-		-- Weakened Soul Bar
-		local WSBar = CreateFrame("StatusBar", nil, Power)
-		WSBar:SetAllPoints(Power)
-		WSBar:SetStatusBarTexture(C.Medias.Normal)
-		WSBar:GetStatusBarTexture():SetHorizTile(false)
-		WSBar:SetBackdrop(TukuiUnitFrames.Backdrop)
-		WSBar:SetBackdropColor(unpack(C["General"].BackdropColor))
-		WSBar:SetStatusBarColor(0.75, 0.04, 0.04)
-
-		-- Register
-		self.WeakenedSoul = WSBar
-	end
-
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 	
