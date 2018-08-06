@@ -102,9 +102,9 @@ function TukuiUnitFrames:Party()
 	ReadyCheck:SetPoint("CENTER", Health, "CENTER")
 	ReadyCheck:SetSize(16, 16)
 
-	local RaidIcon = self:CreateTexture(nil, "OVERLAY")
-	RaidIcon:SetSize(12, 12)
-	RaidIcon:SetPoint("TOPRIGHT", self, 1, 18)
+	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
+	RaidIcon:SetSize(16, 16)
+	RaidIcon:SetPoint("CENTER", Health, "CENTER")
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
 	local PhaseIcon = Health:CreateTexture(nil, 'OVERLAY')
@@ -191,7 +191,7 @@ function TukuiUnitFrames:Party()
 	self.ThreatIndicator = Threat
 	self.Range = Range
 	self.Highlight = Highlight
-	self:Tag(Name, "[Tukui:NameLong][Tukui:Role]")
+	self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
