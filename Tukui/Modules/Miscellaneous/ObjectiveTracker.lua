@@ -454,7 +454,7 @@ function ObjectiveTracker:SkinRewards()
 				local ItemOverlay = rewardItem.ItemOverlay
 				
 				if Icon then
-					Icon:Size(18)
+					--Icon:Size(18)
 					Icon:SetTexCoord(.08, .92, .08, .92)
 				end
 				
