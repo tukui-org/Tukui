@@ -175,6 +175,10 @@ local function UpdateFriendTable(total)
 end
 
 local function BuildBNTable(total)
+	if not IsBNLogin() then
+		return
+	end
+	
 	BNTotalOnline = 0
 	wipe(BNTable)
 
@@ -197,6 +201,10 @@ local function BuildBNTable(total)
 end
 
 local function UpdateBNTable(total)
+	if not IsBNLogin() then
+		return
+	end
+	
 	BNTotalOnline = 0
 
 	for i = 1, #BNTable do
