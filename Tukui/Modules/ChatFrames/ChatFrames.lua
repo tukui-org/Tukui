@@ -352,13 +352,12 @@ function TukuiChat:Install()
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
 
-	-- Setup the spam chat frame
+	-- Move ChatFrame1 Globals Channels to ChatFrame3
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-	ChatFrame_AddChannel(ChatFrame3, TRADE)
-	ChatFrame_AddChannel(ChatFrame3, GENERAL)
-	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LocalDefense)
-	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.GuildRecruitment)
-	ChatFrame_AddChannel(ChatFrame3, L.ChatFrames.LookingForGroup)
+	
+	for _, Channel in pairs(ChatFrame1.channelList) do
+		ChatFrame_AddChannel(ChatFrame3, Channel)
+	end
 
 	-- Setup the right chat
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
