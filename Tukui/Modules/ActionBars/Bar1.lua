@@ -51,7 +51,7 @@ function TukuiActionBars:CreateBar1()
 	ActionBar1.Page = {
 		["DRUID"] = Druid,
 		["ROGUE"] = Rogue,
-		["DEFAULT"] = "[vehicleui:12] 12; [possessbar] 12; [overridebar] 14; [shapeshift] 13; [bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6;",
+		["DEFAULT"] = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;",
 	}
 
 	function ActionBar1:GetBar()
