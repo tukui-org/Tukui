@@ -35,6 +35,7 @@ Tooltip.Tooltips = {
 	ReputationParagonTooltip,
 	StoryTooltip,
 	EmbeddedItemTooltip,
+	GarrisonFollowerTooltip,
 }
 
 local Classification = {
