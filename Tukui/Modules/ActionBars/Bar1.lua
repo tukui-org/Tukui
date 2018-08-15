@@ -71,6 +71,8 @@ function TukuiActionBars:CreateBar1()
 	TukuiActionBars:UpdateBar1()
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
+	ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
 			for i = 1, Num do
@@ -90,6 +92,12 @@ function TukuiActionBars:CreateBar1()
 						
 					Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
 				end
+			end
+		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then
+			for i = 1, 12 do
+				local Button = _G["ActionButton"..i]
+
+				ActionButton_Update(Button)
 			end
 		end
 	end)
