@@ -1048,6 +1048,10 @@ function Bags:Enable()
 	self:SetScript("OnEvent", self.OnEvent)
 
 	function ManageBackpackTokenFrame() end
+	
+	if ContainerFrame5 then
+		ContainerFrame5:EnableMouse(false)
+	end
 
 	ToggleAllBags()
 	ToggleAllBags()
