@@ -318,8 +318,6 @@ function TukuiChat:Install()
 	ChatFrame_RemoveChannel(ChatFrame1, TRADE)
 	ChatFrame_RemoveChannel(ChatFrame1, GENERAL)
 	ChatFrame_RemoveChannel(ChatFrame1, L.ChatFrames.LocalDefense)
-	ChatFrame_RemoveChannel(ChatFrame1, L.ChatFrames.GuildRecruitment)
-	ChatFrame_RemoveChannel(ChatFrame1, L.ChatFrames.LookingForGroup)
 	ChatFrame_AddMessageGroup(ChatFrame1, "SAY")
 	ChatFrame_AddMessageGroup(ChatFrame1, "EMOTE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "YELL")
@@ -343,21 +341,19 @@ function TukuiChat:Install()
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_HORDE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_ALLIANCE")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BG_NEUTRAL")
-	ChatFrame_AddMessageGroup(ChatFrame1, "SYSTEM")
-	ChatFrame_AddMessageGroup(ChatFrame1, "ERRORS")
 	ChatFrame_AddMessageGroup(ChatFrame1, "AFK")
 	ChatFrame_AddMessageGroup(ChatFrame1, "DND")
-	ChatFrame_AddMessageGroup(ChatFrame1, "IGNORED")
 	ChatFrame_AddMessageGroup(ChatFrame1, "ACHIEVEMENT")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_WHISPER")
 	ChatFrame_AddMessageGroup(ChatFrame1, "BN_CONVERSATION")
 
 	-- Move ChatFrame1 Globals Channels to ChatFrame3
 	ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-	
-	for _, Channel in pairs(ChatFrame1.channelList) do
-		ChatFrame_AddChannel(ChatFrame3, Channel)
-	end
+
+	-- ChatFrame 3
+	ChatFrame_AddChannel(ChatFrame3, "General")
+	ChatFrame_AddChannel(ChatFrame3, "Trade")
+	ChatFrame_AddChannel(ChatFrame3, "LOcalDefense")
 
 	-- Setup the right chat
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
@@ -366,6 +362,9 @@ function TukuiChat:Install()
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
 	ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
 	ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
+	ChatFrame_AddMessageGroup(ChatFrame4, "SYSTEM")
+	ChatFrame_AddMessageGroup(ChatFrame4, "ERRORS")
+	ChatFrame_AddMessageGroup(ChatFrame4, "IGNORED")
 
 	-- Enable Classcolor
 	ToggleChatColorNamesByClassGroup(true, "SAY")
