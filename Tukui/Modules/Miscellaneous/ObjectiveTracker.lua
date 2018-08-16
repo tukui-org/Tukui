@@ -466,6 +466,15 @@ function ObjectiveTracker:SkinRewards()
 	end
 end
 
+function ObjectiveTracker:HideWorldQuestsPOI(worldQuestType, rarity, isElite, tradeskillLineIndex, inProgress, selected, isCriteria, isSpellTarget, isEffectivelyTracked)
+	if not self.IsHidden then
+		self:SetAlpha(0)
+		self:Disable()
+		
+		self.IsHidden = true
+	end
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
 	hooksecurefunc("ScenarioBlocksFrame_OnLoad", self.SkinScenario)
@@ -486,6 +495,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
+	hooksecurefunc("WorldMap_SetupWorldQuestButton", self.HideWorldQuestsPOI)
 	
 	-- Currently there is display a bug with this hook
 	-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
