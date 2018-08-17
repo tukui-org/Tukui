@@ -72,7 +72,7 @@ function TukuiUnitFrames:Party()
 	Buffs:SetHeight(24)
 	Buffs:SetWidth(206)
 	Buffs.size = 24
-	Buffs.num = 8
+	Buffs.num = 7
 	Buffs.numRow = 1
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "TOPLEFT"
