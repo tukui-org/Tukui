@@ -21,6 +21,8 @@ function TukuiActionBars:SetUpExtraActionButton()
 
 	Holder:Size(160, 80)
 	Holder:SetPoint("BOTTOM", 0, 250)
+	
+	Button:CreateShadow()
 
 	ExtraActionBarFrame:SetParent(UIParent)
 	ExtraActionBarFrame:ClearAllPoints()
@@ -38,7 +40,6 @@ function TukuiActionBars:SetUpExtraActionButton()
 	ZoneButton.Icon:SetInside()
 	ZoneButton.Icon:SetDrawLayer("ARTWORK")
 	ZoneButton.Icon:SetTexCoord(unpack(T.IconCoord))
-	ZoneButton:CreateShadow()
 
 	Texture:SetTexture("")
 	ZoneTexture:SetTexture("")
