@@ -353,7 +353,7 @@ function TukuiChat:Install()
 	-- ChatFrame 3
 	ChatFrame_AddChannel(ChatFrame3, "General")
 	ChatFrame_AddChannel(ChatFrame3, "Trade")
-	ChatFrame_AddChannel(ChatFrame3, "LOcalDefense")
+	ChatFrame_AddChannel(ChatFrame3, "LocalDefense")
 
 	-- Setup the right chat
 	ChatFrame_RemoveAllMessageGroups(ChatFrame4)
