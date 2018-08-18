@@ -17,8 +17,6 @@ local T17 = CreateFrame("Frame")
 
 function T17:MoveXPBars()
 	local Experience = Misc.Experience
-	local Bar1 = Experience.XPBar1
-	local Bar2 = Experience.XPBar2
 	local Reputation = Misc.Reputation
 	
 	for i = 1, Experience.NumBars do
