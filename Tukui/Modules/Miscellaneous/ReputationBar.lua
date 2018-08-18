@@ -94,15 +94,14 @@ function Reputation:Enable()
 		self.IsCreated = true
 	end
 
-	local ShowArtifact = HasArtifactEquipped()
-	local PlayerLevel = UnitLevel("player")
+	local HasAzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 
 	self.RepBar1:Show()
 
-	if ShowArtifact ~= true and PlayerLevel ~= MAX_PLAYER_LEVEL then
-		self.RepBar2:Show()
-	else
+	if HasAzeriteItem then
 		self.RepBar2:Hide()
+	else
+		self.RepBar2:Show()
 	end
 end
 
