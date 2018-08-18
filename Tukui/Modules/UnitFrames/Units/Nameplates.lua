@@ -96,6 +96,13 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 	CastBar.Icon:SetInside()
 	CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
+	
+	CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
+	CastBar.Text:SetFontObject(Font)
+	CastBar.Text:Point("CENTER", CastBar)
+	CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
+	CastBar.Text:SetWidth(C.NamePlates.Width)
+	CastBar.Text:SetJustifyH("CENTER")
 
 	CastBar.PostCastStart = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostCastInterruptible = TukuiUnitFrames.CheckInterrupt
