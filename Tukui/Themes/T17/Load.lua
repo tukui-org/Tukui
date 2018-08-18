@@ -9,33 +9,38 @@ local Themes = T["Themes"]
 local Panels = T["Panels"]
 local Misc = T["Miscellaneous"]
 local Chat = T["Chat"]
+local Tooltip = T["Tooltip"]
+local DataTexts = T["DataTexts"]
 
 -- Let's go
 local T17 = CreateFrame("Frame")
 
 function T17:MoveXPBars()
-	local Bars = Misc.Experience
-	local Bar1 = Bars.XPBar1
-	local Bar2 = Bars.XPBar2
+	local Experience = Misc.Experience
+	local Bar1 = Experience.XPBar1
+	local Bar2 = Experience.XPBar2
+	local Reputation = Misc.Reputation
 	
-	if Bar1 then
-		Bar1:ClearAllPoints()
-		Bar1:SetOrientation("Vertical")
-		Bar1:Size(8, 100)
-		Bar1:Point("TOP", Tukui_Minimalist_LeftVerticalLine, "TOP", 0, -Panels.DataTextLeft:GetHeight() / 2)
+	for i = 1, Experience.NumBars do
+		local Bar = Experience["XPBar"..i]
+		
+		Bar:ClearAllPoints()
+		Bar:SetOrientation("Vertical")
+		Bar:Size(8, 100)
+		Bar:SetReverseFill(i == 1 and true or false)
+		Bar:Point("TOP", i == 1 and Tukui_T17_LeftVerticalLine or Tukui_T17_RightVerticalLine, "TOP", 0, i == 1 and -Panels.DataTextLeft:GetHeight() / 2 or -Panels.DataTextRight:GetHeight() / 2)
 	end
 	
-	if Bar2 then
-		Bar2:ClearAllPoints()
-		Bar2:SetOrientation("Vertical")
-		Bar2:SetReverseFill(false)
-		Bar2:Size(8, 100)
-		Bar2:Point("TOP", Tukui_Minimalist_RightVerticalLine, "TOP", 0, -Panels.DataTextRight:GetHeight() / 2)
+	for i = 1, Reputation.NumBars do
+		local Bar = Reputation["RepBar"..i]
+		
+		Bar:SetOrientation("Vertical")
+		Bar:SetReverseFill(false)
 	end
 end
 
 function T17:AddLines()
-	local BottomLine = CreateFrame("Frame", "Tukui_Minimalist_BottomLine", UIParent)
+	local BottomLine = CreateFrame("Frame", "Tukui_T17_BottomLine", UIParent)
 	BottomLine:SetTemplate()
 	BottomLine:Size(2)
 	BottomLine:Point("BOTTOMLEFT", 18, 30)
@@ -44,7 +49,7 @@ function T17:AddLines()
 	BottomLine:SetFrameLevel(0)
 	BottomLine:CreateShadow()
 	
-	local LeftVerticalLine = CreateFrame("Frame", "Tukui_Minimalist_LeftVerticalLine", BottomLine)
+	local LeftVerticalLine = CreateFrame("Frame", "Tukui_T17_LeftVerticalLine", BottomLine)
 	LeftVerticalLine:SetTemplate()
 	LeftVerticalLine:Size(2, 130)
 	LeftVerticalLine:Point("BOTTOMLEFT", 0, 0)
@@ -53,7 +58,7 @@ function T17:AddLines()
 	LeftVerticalLine:SetAlpha(1)
 	LeftVerticalLine:CreateShadow()
 
-	local RightVerticalLine = CreateFrame("Frame", "Tukui_Minimalist_RightVerticalLine", BottomLine)
+	local RightVerticalLine = CreateFrame("Frame", "Tukui_T17_RightVerticalLine", BottomLine)
 	RightVerticalLine:SetTemplate()
 	RightVerticalLine:Size(2, 130)
 	RightVerticalLine:Point("BOTTOMRIGHT", 0, 0)
@@ -62,7 +67,7 @@ function T17:AddLines()
 	RightVerticalLine:SetAlpha(1)
 	RightVerticalLine:CreateShadow()
 	
-	local CubeLeft = CreateFrame("Frame", "Tukui_Minimalist_CubeLeft", LeftVerticalLine)
+	local CubeLeft = CreateFrame("Frame", "Tukui_T17_CubeLeft", LeftVerticalLine)
 	CubeLeft:SetTemplate()
 	CubeLeft:Size(10)
 	CubeLeft:Point("BOTTOM", LeftVerticalLine, "TOP", 0, 0)
@@ -70,7 +75,7 @@ function T17:AddLines()
 	CubeLeft:SetFrameLevel(0)
 	CubeLeft:CreateShadow()
 
-	local CubeRight = CreateFrame("Frame", "Tukui_Minimalist_CubeRight", RightVerticalLine)
+	local CubeRight = CreateFrame("Frame", "Tukui_T17_CubeRight", RightVerticalLine)
 	CubeRight:SetTemplate()
 	CubeRight:Size(10)
 	CubeRight:Point("BOTTOM", RightVerticalLine, "TOP", 0, 0)
@@ -111,11 +116,52 @@ function T17:SetupChat()
 	hooksecurefunc("FCFTab_UpdateAlpha", T17.NoMouseAlphaOnTab)
 end
 
+function T17:MoveTooltip()
+	local Anchor = TukuiTooltipAnchor
+	local DataTextRight = Panels.DataTextRight
+
+	Anchor:ClearAllPoints()
+	Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2)
+end
+
+function T17:GetTooltipAnchor()
+	local MapDT = Panels.MinimapDataText
+	local Position = self.Position
+	local From
+	local Anchor = "ANCHOR_TOP"
+	local X = 0
+	local Y = T.Scale(5)
+
+	if (Position >= 1 and Position <= 3) then
+		Anchor = "ANCHOR_TOPLEFT"
+		From = T.Panels.DataTextLeft
+	elseif (Position >=4 and Position <= 6) then
+		Anchor = "ANCHOR_TOPRIGHT"
+		From = T.Panels.DataTextRight
+	elseif (Position == 7 and MapDT) then
+		Anchor = "ANCHOR_BOTTOMLEFT"
+		Y = T.Scale(-5)
+		From = MapDT
+	end
+
+	return From, Anchor, X, Y
+end
+
+function T17:MoveDataTextTooltip()
+	local Texts = DataTexts.Texts
+	
+	for Name, Table in pairs(Texts) do
+		Table.GetTooltipAnchor = T17.GetTooltipAnchor
+	end
+end
+
 function T17:OnEvent(event)
 	if (C.General.Themes.Value == "Tukui 17") then
 		self:SetupChat()
 		self:AddLines()
 		self:MoveXPBars()
+		self:MoveTooltip()
+		self:MoveDataTextTooltip()
 	end
 end
 
