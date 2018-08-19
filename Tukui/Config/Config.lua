@@ -93,6 +93,7 @@ C["DataTexts"] = {
 C["Loot"] = {
 	["Enable"] = true,
 	["StandardLoot"] = false,
+	["Font"] = "Tukui",
 }
 
 C["Merchant"] = {

@@ -8,6 +8,7 @@ local Inventory = T["Inventory"]
 local Loot = CreateFrame("Frame")
 local Movers = T["Movers"]
 local LootFrame = LootFrame
+local Font
 
 -- Lib Globals
 local _G = _G
@@ -248,7 +249,7 @@ function Loot:CreateSlots(id)
 	name:Point("RIGHT", invsframe)
 	name:Point("LEFT", icon, "RIGHT", 4, 0)
 	name:SetNonSpaceWrap(true)
-	name:SetFontTemplate(C.Medias.Font, 12)
+	name:SetFontObject(Font)
 	frame.name = name
 	
 	local drop = CreateFrame("StatusBar", nil, frame)
@@ -387,6 +388,8 @@ function Loot:Enable()
 		return
 	end
 	
+	Font = T.GetFont(C.Loot.Font)
+	
 	-- Locals
 	self.IconSize = 32
 	self.DefaultPosition = {"TOPLEFT", UIParent, "TOPLEFT", 50, -50}
@@ -413,7 +416,7 @@ function Loot:Enable()
 	TukuiLootFrame.InvisFrame:SetAllPoints()
 	
 	TukuiLootFrame.Title = TukuiLootFrame.InvisFrame:CreateFontString(nil, "OVERLAY", 7)
-	TukuiLootFrame.Title:SetFontTemplate(C.Medias.UnitFrameFont, 12)
+	TukuiLootFrame.Title:SetFontObject(Font)
 	TukuiLootFrame.Title:Point("CENTER", TukuiLootFrame.Overlay, 0, 1)
 	TukuiLootFrame.Title:SetTextColor(1, 0.82, 0)
 	
