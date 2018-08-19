@@ -21,12 +21,15 @@ function T17:MoveXPBars()
 	
 	for i = 1, Experience.NumBars do
 		local Bar = Experience["XPBar"..i]
+		local RestedBar = Experience["RestedBar"..i]
 		
 		Bar:ClearAllPoints()
 		Bar:SetOrientation("Vertical")
 		Bar:Size(8, 100)
 		Bar:SetReverseFill(false)
 		Bar:Point("TOP", i == 1 and Tukui_T17_LeftVerticalLine or Tukui_T17_RightVerticalLine, "TOP", 0, i == 1 and -Panels.DataTextLeft:GetHeight() / 2 or -Panels.DataTextRight:GetHeight() / 2)
+		
+		RestedBar:SetOrientation("Vertical")
 	end
 	
 	for i = 1, Reputation.NumBars do
