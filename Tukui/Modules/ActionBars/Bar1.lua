@@ -96,8 +96,21 @@ function TukuiActionBars:CreateBar1()
 		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then
 			for i = 1, 12 do
 				local Button = _G["ActionButton"..i]
+				local Action = Button.action
+				local Icon = Button.icon
+					
+				if Action >= 120 then
+					local Texture = GetActionTexture(Action)
 
-				ActionButton_Update(Button)
+					if (Texture) then
+						Icon:SetTexture(Texture)
+						Icon:Show()
+					else
+						if Icon:IsShown() then
+							Icon:Hide()
+						end
+					end
+				end
 			end
 		end
 	end)
