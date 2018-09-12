@@ -45,7 +45,7 @@ function TukuiUnitFrames:DisableBlizzard()
 	if not C.UnitFrames.Enable then
 		return
 	end
-	
+
 	for i = 1, MAX_BOSS_FRAMES do
 		local Boss = _G["Boss"..i.."TargetFrame"]
 		local Health = _G["Boss"..i.."TargetFrame".."HealthBar"]
@@ -163,32 +163,32 @@ function TukuiUnitFrames:Highlight()
 		if C.General.HideShadows then
 			self.Shadow:SetBackdrop( {edgeFile = C.Medias.Glow, edgeSize = T.Scale(4) })
 		end
-		
+
 		self.Shadow:SetBackdropBorderColor(0, 1, 0, 1)
 	elseif UnitIsUnit("target", self.unit) then
 		if C.General.HideShadows then
 			self.Shadow:SetBackdrop( {edgeFile = C.Medias.Glow, edgeSize = T.Scale(4) })
 		end
-		
+
 		self.Shadow:SetBackdropBorderColor(1, 1, 0, 1)
 	else
 		if C.General.HideShadows then
 			self.Shadow:SetBackdrop( {edgeFile = nil, edgeSize = 0 })
 		end
-		
+
 		self.Shadow:SetBackdropBorderColor(0, 0, 0, 1)
 	end
 end
 
 function TukuiUnitFrames:HighlightPlate()
 	local Shadow = self.Shadow
-	
+
 	if Shadow then
 		if UnitIsUnit("target", self.unit) then
 			if not Shadow:IsShown() then
 				Shadow:Show()
 			end
-			
+
 			Shadow:SetBackdropBorderColor(1, 1, 0, 1)
 		else
 			if C.General.HideShadows then
@@ -257,7 +257,7 @@ function TukuiUnitFrames:CheckInterrupt(unit)
 	if (unit == "vehicle") then
 		unit = "player"
 	end
-	
+
 	local Frame = self:GetParent()
 	local Power = Frame.Power
 
@@ -311,8 +311,6 @@ function TukuiUnitFrames:PreUpdateHealth(unit)
 	if (HostileColor ~= true) then
 		return
 	end
-
-	local Parent = self:GetParent()
 
 	if UnitIsEnemy(unit, "player") then
 		self.colorClass = false
@@ -424,11 +422,11 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 	if slot > 4 then
 		return
 	end
-	
+
 	local Bar = self.Totems
 
 	if Bar.PreUpdate then Bar:PreUpdate(slot) end
-	
+
 	local Totem = Bar[slot]
 	local HaveTotem, Name, Start, Duration, Icon = GetTotemInfo(slot)
 	local SpellID = select(7, GetSpellInfo(Name))
@@ -441,24 +439,24 @@ function TukuiUnitFrames:UpdateTotemOverride(event, slot)
 		if Totem.Icon then
 			Totem.Icon:SetTexture(Icon)
 		end
-		
+
 		if (Totem.Cooldown) then
 			Totem.Cooldown:SetCooldown(Start, Duration)
 		end
-		
+
 		-- Workaround to allow right-click destroy totem
 		for i = 1, 4 do
 			local BlizzardTotem = _G["TotemFrameTotem"..i]
 			local Cooldown = _G["TotemFrameTotem"..i.."IconCooldown"]
-			
+
 			if BlizzardTotem:IsShown() then
 				local CancelButtonSlot = BlizzardTotem.slot
 				local CancelButton = _G["TotemFrameTotem"..CancelButtonSlot]
-				
+
 				CancelButton:ClearAllPoints()
 				CancelButton:SetAllPoints(Bar[i])
 				CancelButton:SetAlpha(0)
-				
+
 				Cooldown:SetAlpha(0)
 			end
 		end
@@ -510,14 +508,14 @@ function TukuiUnitFrames:CancelPlayerBuff(index)
 	if InCombatLockdown() then
 		return
 	end
-	
+
 	CancelUnitBuff("player", self.index)
 end
 
 function TukuiUnitFrames:PostCreateAura(button)
 	-- Set "self.Buffs.isCancellable" to true to a buffs frame to be able to cancel click
 	local isCancellable = button:GetParent().isCancellable
-	
+
 	-- Right-click-cancel script
 	if isCancellable then
 		-- Add a button.index to allow CancelUnitAura to work with player
@@ -527,7 +525,7 @@ function TukuiUnitFrames:PostCreateAura(button)
 		button.index = Index
 		button:SetScript("OnMouseUp", TukuiUnitFrames.CancelPlayerBuff)
 	end
-	
+
 	-- Skin aura button
 	button:SetTemplate("Default")
 	button:CreateShadow()
@@ -580,7 +578,7 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 			else
 				local color = DebuffTypeColor[DType] or DebuffTypeColor.none
 				button.icon:SetDesaturated(false)
-				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)					
+				button:SetBackdropBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
 			if button.Animation then
@@ -593,14 +591,14 @@ function TukuiUnitFrames:PostUpdateAura(unit, button, index, offset, filter, isD
 				end
 			end
 		end
-		
+
 		if button.Remaining then
 			if Duration and Duration > 0 then
 				button.Remaining:Show()
 			else
 				button.Remaining:Hide()
 			end
-			
+
 			button:SetScript("OnUpdate", TukuiUnitFrames.CreateAuraTimer)
 		end
 
@@ -725,15 +723,15 @@ function TukuiUnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 	if not unit then
 		unit = self:GetParent().unit
 	end
-	
+
 	if not unit then
 		return
 	end
-	
+
 	if not cur then
 		cur, max = UnitPower(unit), UnitPowerMax(unit)
 	end
-	
+
 	local CurrentPower = cur
 	local MaxPower = max
 	local Nameplate = self:GetParent()
@@ -766,10 +764,10 @@ end
 function TukuiUnitFrames:RunesPostUpdate(runemap)
 	local Bar = self
 	local RuneMap = runemap
-	
+
 	for i, RuneID in next, RuneMap do
 		local IsReady = select(3, GetRuneCooldown(RuneID))
-		
+
 		if IsReady then
 			Bar[i]:SetAlpha(1)
 		else
@@ -947,9 +945,9 @@ function TukuiUnitFrames:CreateAnchor()
 	if not C.UnitFrames.Enable then
 		return
 	end
-	
+
 	local Anchor = CreateFrame("Frame", "TukuiActionBarAnchor", UIParent)
-	
+
 	if T.Panels.ActionBar2 and T.Panels.ActionBar3 then
 		Anchor:SetPoint("TOPLEFT", T.Panels.ActionBar2)
 		Anchor:SetPoint("BottomRight", T.Panels.ActionBar3)
@@ -964,7 +962,7 @@ end
 
 function TukuiUnitFrames:CreateUnits()
 	local Movers = T["Movers"]
-	
+
 	if C.UnitFrames.Enable then
 		local Player = oUF:Spawn("player")
 		Player:SetPoint("BOTTOMLEFT", TukuiUnitFrames.Anchor, "TOPLEFT", 0, 8)
@@ -1020,8 +1018,6 @@ function TukuiUnitFrames:CreateUnits()
 			end
 
 			self.Units.Arena = Arena
-
-			self:CreateArenaPreparationFrames()
 		end
 
 		if (C.UnitFrames.Boss) then
@@ -1064,7 +1060,7 @@ function TukuiUnitFrames:CreateUnits()
 				Pet:Point("TOPLEFT", Raid, "TOPRIGHT", 4, 0)
 
 				TukuiUnitFrames.Headers.RaidPet = Pet
-				
+
 				Movers:RegisterFrame(Pet)
 			end
 	--[[
@@ -1077,10 +1073,10 @@ function TukuiUnitFrames:CreateUnits()
 			Movers:RegisterFrame(MainTankTarget)
 	]]
 			TukuiUnitFrames.Headers.Raid = Raid
-			
+
 			Movers:RegisterFrame(Raid)
 		end
-		
+
 		Movers:RegisterFrame(Player)
 		Movers:RegisterFrame(Target)
 		Movers:RegisterFrame(TargetOfTarget)
@@ -1088,7 +1084,7 @@ function TukuiUnitFrames:CreateUnits()
 		Movers:RegisterFrame(Focus)
 		Movers:RegisterFrame(FocusTarget)
 	end
-	
+
 	if C.NamePlates.Enable then
 		SetCVar("nameplateGlobalScale", 1)
 		SetCVar("NamePlateHorizontalScale", 1)
@@ -1098,55 +1094,8 @@ function TukuiUnitFrames:CreateUnits()
 		SetCVar("nameplateMinScale", 1)
 		SetCVar("nameplateSelectedScale", 1)
 		SetCVar("nameplateSelfScale", 1)
-		
+
 		oUF:SpawnNamePlates()
-	end
-end
-
-function TukuiUnitFrames:ShowArenaPreparation()
-	local NumOpps = GetNumArenaOpponentSpecs()
-
-	for i = 1, 5 do
-		local Frame = self.Units.ArenaPreparation[i]
-
-		if (i <= NumOpps) then
-			local SpecID = GetArenaOpponentSpec(i)
-
-			if (SpecID and SpecID > 0) then
-				local _, Spec, _, _, _, Class = GetSpecializationInfoByID(SpecID)
-
-				if (Class) then
-					local Color = self.Units.Arena[i].colors.class[Class]
-					
-					Frame.SpecClass:SetText(Spec.."  -  "..LOCALIZED_CLASS_NAMES_MALE[Class])
-					Frame.Health:SetStatusBarColor(unpack(Color))
-				else
-					Frame.Health:SetStatusBarColor(0.2, 0.2, 0.2, 1)
-				end
-
-				Frame:Show()
-			else
-				Frame:Hide()
-			end
-		else
-			Frame:Hide()
-		end
-	end
-end
-
-function TukuiUnitFrames:HideArenaPreparation()
-	for i = 1, 5 do
-		local Frame = self.Units.ArenaPreparation[i]
-
-		Frame:Hide()
-	end
-end
-
-function TukuiUnitFrames:OnEvent(event)
-	if (event == "ARENA_OPPONENT_UPDATE") then
-		self:HideArenaPreparation()
-	else
-		self:ShowArenaPreparation()
 	end
 end
 
@@ -1155,7 +1104,7 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 
 	if (ORD) then
 		ORD:ResetDebuffData()
-		
+
 		local _, InstanceType = IsInInstance()
 		if (InstanceType == "party" or InstanceType == "raid") then
 			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.RaidDebuffs.spells)
@@ -1178,19 +1127,11 @@ function TukuiUnitFrames:Enable()
 	self:CreateAnchor()
 	self:CreateUnits()
 
-	-- Arena Preparation
-	if (C.UnitFrames.Enable and C.UnitFrames.Arena) then
-		self:RegisterEvent("PLAYER_ENTERING_WORLD")
-		self:RegisterEvent("ARENA_PREP_OPPONENT_SPECIALIZATIONS")
-		self:RegisterEvent("ARENA_OPPONENT_UPDATE")
-		self:SetScript("OnEvent", self.OnEvent)
-	end
-	
 	if (C.UnitFrames.RaidDebuffs) then
 		local RaidDebuffs = CreateFrame("Frame")
 		RaidDebuffs:RegisterEvent("PLAYER_ENTERING_WORLD")
 		RaidDebuffs:SetScript("OnEvent", TukuiUnitFrames.UpdateRaidDebuffIndicator)
-	
+
 		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
 		if (ORD) then
 			ORD.ShowDispellableDebuff = true
