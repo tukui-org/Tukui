@@ -92,6 +92,7 @@ function TukuiUnitFrames:Boss()
 		Debuffs.spacing = 2
 		Debuffs.initialAnchor = "LEFT"
 		Debuffs["growth-x"] = "RIGHT"
+		Debuffs.onlyShowPlayer = true
 		Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = TukuiUnitFrames.PostUpdateAura
 
