@@ -18,7 +18,7 @@ function DeathRecap:OnEvent(event, addon)
 	for i=1, 5 do
 		local IconBorder = DeathRecapFrame["Recap"..i].SpellInfo.IconBorder
 		local Icon = DeathRecapFrame["Recap"..i].SpellInfo.Icon
-		
+
 		IconBorder:SetAlpha(0)
 		Icon:SetTexCoord(.08, .92, .08, .92)
 		DeathRecapFrame["Recap"..i].SpellInfo:CreateBackdrop()
@@ -28,8 +28,10 @@ function DeathRecap:OnEvent(event, addon)
 end
 
 function DeathRecap:Enable()
-	self:RegisterEvent("ADDON_LOADED")
-	self:SetScript("OnEvent", self.OnEvent)
+	if not AddOnSkins then
+		self:RegisterEvent("ADDON_LOADED")
+		self:SetScript("OnEvent", self.OnEvent)
+	end
 end
 
 Miscellaneous.DeathRecap = DeathRecap

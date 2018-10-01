@@ -46,8 +46,10 @@ function StaticPopups:Skin()
 end
 
 function StaticPopups:Enable()
-	for _, Frame in pairs(StaticPopups.Popups) do
-		self.Skin(Frame)
+	if not AddOnSkins then
+		for _, Frame in pairs(StaticPopups.Popups) do
+			self.Skin(Frame)
+		end
 	end
 end
 
