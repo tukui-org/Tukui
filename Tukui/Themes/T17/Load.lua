@@ -120,6 +120,11 @@ end
 
 function T17:MoveTooltip()
 	local Anchor = TukuiTooltipAnchor
+    
+    if not Anchor then
+        return
+    end
+    
 	local DataTextRight = Panels.DataTextRight
 
 	Anchor:ClearAllPoints()
