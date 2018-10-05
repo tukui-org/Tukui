@@ -127,8 +127,8 @@ C["Party"] = {
 	["ShowPlayer"] = true,
 	["ShowHealthText"] = true,
 	["RangeAlpha"] = 0.3,
-	["Font"] = "Tukui UF",
-	["HealthFont"] = "Tukui UF Outline",
+	["Font"] = "Tukui",
+	["HealthFont"] = "Tukui Outline",
 }
 
 C["Raid"] = {
@@ -143,8 +143,8 @@ C["Raid"] = {
 	["ShowPets"] = true,
 	["VerticalHealth"] = false,
 	["MaxUnitPerColumn"] = 10,
-	["Font"] = "Tukui UF",
-	["HealthFont"] = "Tukui UF Outline",
+	["Font"] = "Tukui",
+	["HealthFont"] = "Tukui Outline",
 	["GroupBy"] = {
 		["Options"] = {
 			["Group"] = "GROUP",
@@ -205,5 +205,5 @@ C["UnitFrames"] = {
 	["AltPowerText"] = false,
 	["Arena"] = true,
 	["Boss"] = true,
-	["Font"] = "Tukui UF Outline",
+	["Font"] = "Tukui Outline",
 }

@@ -76,7 +76,7 @@ end
 
 oUF.Tags.Events["Tukui:NameShort"] = "UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE"
 oUF.Tags.Methods["Tukui:NameShort"] = function(unit)
-	local Name = UnitName(unit) or UNKNOWN
+	local Name = UnitName(unit) or ""
 	local IsLeader = UnitIsGroupLeader(unit)
 	local IsAssistant = UnitIsGroupAssistant(unit) or UnitIsRaidOfficer(unit)
 	local Assist, Lead = IsAssistant and "[A] " or "", IsLeader and "[L] " or ""
@@ -86,13 +86,13 @@ end
 
 oUF.Tags.Events["Tukui:NameMedium"] = "UNIT_NAME_UPDATE"
 oUF.Tags.Methods["Tukui:NameMedium"] = function(unit)
-	local Name = UnitName(unit) or UNKNOWN
+	local Name = UnitName(unit) or ""
 	return TukuiUnitFrames.UTF8Sub(Name, 15, true)
 end
 
 oUF.Tags.Events["Tukui:NameLong"] = "UNIT_NAME_UPDATE"
 oUF.Tags.Methods["Tukui:NameLong"] = function(unit)
-	local Name = UnitName(unit) or UNKNOWN
+	local Name = UnitName(unit) or ""
 	return TukuiUnitFrames.UTF8Sub(Name, 20, true)
 end
 
