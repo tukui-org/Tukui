@@ -20,13 +20,14 @@ local function ClassBuff(id, point, color, anyUnit, onlyShowMissing, style, disp
 	end
 
 	return {
-        ["enabled"] = true, ["id"] = id, 
-        ["point"] = point, 
+        ["enabled"] = true,
+        ["id"] = id,
+        ["point"] = point,
         ["color"] = {["r"] = r, ["g"] = g, ["b"] = b},
-        ["anyUnit"] = anyUnit, 
-        ["onlyShowMissing"] = onlyShowMissing, 
-        ['style'] = style or 'coloredIcon', 
-        ['displayText'] = displayText or false, 
+        ["anyUnit"] = anyUnit,
+        ["onlyShowMissing"] = onlyShowMissing,
+        ['style'] = style or 'coloredIcon',
+        ['displayText'] = displayText or false,
         ['decimalThreshold'] = decimalThreshold or 5,
         ['textColor'] = {["r"] = r2, ["g"] = g2, ["b"] = b2},
         ['textThreshold'] = textThreshold or -1,
