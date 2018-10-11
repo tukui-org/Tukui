@@ -1100,16 +1100,21 @@ function TukuiUnitFrames:CreateUnits()
 end
 
 function TukuiUnitFrames:UpdateRaidDebuffIndicator()
-	local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+	local ORD = Plugin.oUF_RaidDebuffs or oUF_RaidDebuffs
 
 	if (ORD) then
-		ORD:ResetDebuffData()
-
 		local _, InstanceType = IsInInstance()
-		if (InstanceType == "party" or InstanceType == "raid") then
+        
+		if (ORD.RegisteredList ~= "RD") and (InstanceType == "party" or InstanceType == "raid") then
+            ORD:ResetDebuffData()
 			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.RaidDebuffs.spells)
+            ORD.RegisteredList = "RD"
 		else
-			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.CCDebuffs.spells)
+            if ORD.RegisteredList ~= "CC" then
+                ORD:ResetDebuffData()
+                ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.CCDebuffs.spells)
+                ORD.RegisteredList = "CC"
+            end
 		end
 	end
 end
@@ -1127,12 +1132,13 @@ function TukuiUnitFrames:Enable()
 	self:CreateAnchor()
 	self:CreateUnits()
 
-	if (C.UnitFrames.RaidDebuffs) then
+	if (C.Raid.DebuffWatch) then
+        local ORD = Plugin.oUF_RaidDebuffs or oUF_RaidDebuffs
 		local RaidDebuffs = CreateFrame("Frame")
+        
 		RaidDebuffs:RegisterEvent("PLAYER_ENTERING_WORLD")
 		RaidDebuffs:SetScript("OnEvent", TukuiUnitFrames.UpdateRaidDebuffIndicator)
-
-		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
+        
 		if (ORD) then
 			ORD.ShowDispellableDebuff = true
 			ORD.FilterDispellableDebuff = true
