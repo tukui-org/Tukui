@@ -1119,6 +1119,23 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 	end
 end
 
+function TukuiUnitFrames:PostUpdateArenaPreparation(event)
+	if self:IsElementEnabled('PVPSpecIcon') then
+		local _, instanceType = IsInInstance()
+		
+		if (instanceType == "arena") then
+			local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
+			
+			if specID and specID > 0 then
+				local _, _, _, icon = GetSpecializationInfoByID(specID);
+				self.PVPSpecIcon.Icon:SetTexture(icon)
+			else
+				self.PVPSpecIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
+			end
+		end
+	end
+end
+
 function TukuiUnitFrames:Enable()
 	self.Backdrop = {
 		bgFile = C.Medias.Blank,
