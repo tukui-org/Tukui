@@ -177,6 +177,7 @@ function TukuiUnitFrames:Raid()
 
 		RaidDebuffs.showDispellableDebuff = true
 		RaidDebuffs.onlyMatchSpellID = true
+		RaidDebuffs.FilterDispellableDebuff = true
 		--RaidDebuffs.forceShow = true -- TEST
 		
 		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
