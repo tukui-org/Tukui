@@ -169,5 +169,6 @@ function TukuiUnitFrames:Arena()
 	self.Trinket = Trinket
 	self.RaidTargetIndicator = RaidIcon
 
+	-- This post update is for SpecIcon
 	self.PostUpdate = TukuiUnitFrames.PostUpdateArenaPreparationSpec
 end
