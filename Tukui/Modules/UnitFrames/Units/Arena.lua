@@ -62,6 +62,7 @@ function TukuiUnitFrames:Arena()
 	Power.Value:Point("RIGHT", -2, 0)
 
 	Power.PostUpdate = TukuiUnitFrames.PostUpdatePower
+	Power.UpdateColorArenaPreparation = TukuiUnitFrames.UpdatePowerColorArenaPreparation
 
 	Power.frequentUpdates = true
 	Power.colorPower = true

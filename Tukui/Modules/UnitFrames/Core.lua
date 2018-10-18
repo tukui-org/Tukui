@@ -1085,34 +1085,27 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 end
 
 function TukuiUnitFrames:PostUpdateArenaPreparation(event)
-	local _, instanceType = IsInInstance()
-	
-	if (instanceType == "arena") then
-		if self:IsElementEnabled('PVPSpecIcon') then
-			local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
-			
-			if specID and specID > 0 then
-				local _, _, _, icon = GetSpecializationInfoByID(specID);
-				self.PVPSpecIcon.Icon:SetTexture(icon)
-			else
-				self.PVPSpecIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
-			end
-		end
-		
-		-- Cannot detect power type on arena prep, color it class color.
-		if self.Power then
-			local Power = self.Power
-			local Unit = self.unit
-			local PowerToken = select(2, UnitPowerType(Unit))
-			
-			if not PowerToken then
-				local Health = self.Health
-				local R, G, B = Health:GetStatusBarColor()
+	if (event == "ARENA_PREP_OPPONENT_SPECIALIZATIONS") and (self:IsElementEnabled('PVPSpecIcon')) then
+		local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
 
-				Power:SetStatusBarColor(R, G, B)
-			end
+		if specID and specID > 0 then
+			local icon = select(4, GetSpecializationInfoByID(specID))
+
+			self.PVPSpecIcon.Icon:SetTexture(icon)
+		else
+			self.PVPSpecIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
 		end
 	end
+end
+
+function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
+	-- because no idea if we can get power type here without the unit
+	local Power = self
+	local Frame = self:GetParent()
+	local Health = Frame.Health
+	local R, G, B = Health:GetStatusBarColor()
+
+	Power:SetStatusBarColor(R, G, B)
 end
 
 function TukuiUnitFrames:Enable()
