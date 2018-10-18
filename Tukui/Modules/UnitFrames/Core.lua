@@ -1084,7 +1084,7 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 	end
 end
 
-function TukuiUnitFrames:PostUpdateArenaPreparationSpec(event)
+function TukuiUnitFrames:PostUpdateArenaPreparationSpec()
 	local specIcon = self.PVPSpecIcon
 	local instanceType = select(2, IsInInstance())
 
