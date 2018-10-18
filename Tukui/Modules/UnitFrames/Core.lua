@@ -1084,20 +1084,6 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 	end
 end
 
-function TukuiUnitFrames:PostUpdateArenaPreparation(event)
-	if (event == "ARENA_PREP_OPPONENT_SPECIALIZATIONS") and (self:IsElementEnabled('PVPSpecIcon')) then
-		local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
-
-		if specID and specID > 0 then
-			local icon = select(4, GetSpecializationInfoByID(specID))
-
-			self.PVPSpecIcon.Icon:SetTexture(icon)
-		else
-			self.PVPSpecIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
-		end
-	end
-end
-
 function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	-- because no idea if we can get power type here without the unit
 	local Power = self
