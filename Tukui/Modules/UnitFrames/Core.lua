@@ -1085,10 +1085,10 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 end
 
 function TukuiUnitFrames:PostUpdateArenaPreparation(event)
-	if self:IsElementEnabled('PVPSpecIcon') then
-		local _, instanceType = IsInInstance()
-		
-		if (instanceType == "arena") then
+	local _, instanceType = IsInInstance()
+	
+	if (instanceType == "arena") then
+		if self:IsElementEnabled('PVPSpecIcon') then
 			local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
 			
 			if specID and specID > 0 then
@@ -1096,6 +1096,20 @@ function TukuiUnitFrames:PostUpdateArenaPreparation(event)
 				self.PVPSpecIcon.Icon:SetTexture(icon)
 			else
 				self.PVPSpecIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
+			end
+		end
+		
+		-- Cannot detect power type on arena prep, color it class color.
+		if self.Power then
+			local Power = self.Power
+			local Unit = self.unit
+			local PowerToken = select(2, UnitPowerType(Unit))
+			
+			if not PowerToken then
+				local Health = self.Health
+				local R, G, B = Health:GetStatusBarColor()
+
+				Power:SetStatusBarColor(R, G, B)
 			end
 		end
 	end
