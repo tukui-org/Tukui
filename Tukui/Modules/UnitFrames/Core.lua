@@ -1084,6 +1084,33 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 	end
 end
 
+function TukuiUnitFrames:PostUpdateArenaPreparationSpec(event)
+	local specIcon = self.PVPSpecIcon
+	local instanceType = select(2, IsInInstance())
+
+	if (instanceType == "arena") then
+		local specID = self.id and GetArenaOpponentSpec(tonumber(self.id))
+
+		if specID and specID > 0 then
+			local icon = select(4, GetSpecializationInfoByID(specID))
+			
+			specIcon.Icon:SetTexture(icon)
+		else
+			specIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
+		end
+	else
+		local faction = UnitFactionGroup(self.unit)
+		
+		if faction == "Horde" then
+			specIcon.Icon:SetTexture([[Interface\Icons\INV_BannerPVP_01]])
+		elseif faction == "Alliance" then
+			specIcon.Icon:SetTexture([[Interface\Icons\INV_BannerPVP_02]])
+		else
+			specIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
+		end
+	end
+end
+
 function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	-- because no idea if we can get power type here without the unit
 	local Power = self

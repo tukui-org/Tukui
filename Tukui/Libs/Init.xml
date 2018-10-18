@@ -10,8 +10,6 @@
 	<Script file="oUF_Atonement\oUF_Atonement.lua"/>
 	<Script file="oUF_HarmonyBar\oUF_HarmonyBar.lua"/>
 	<Script file="oUF_SoulShards\oUF_SoulShards.lua"/>
-	
-	<Script file="oUF_PVPSpecIcons\oUF_PVPSpecIcons.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
 	<Include file="DropDownMenu\UIDropDownMenuTemplates.xml"/>
 	<Script file="DropDownMenu\EasyMenu.lua"/>
