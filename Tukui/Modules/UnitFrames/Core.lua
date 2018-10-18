@@ -46,52 +46,17 @@ function TukuiUnitFrames:DisableBlizzard()
 		return
 	end
 
-	for i = 1, MAX_BOSS_FRAMES do
-		local Boss = _G["Boss"..i.."TargetFrame"]
-		local Health = _G["Boss"..i.."TargetFrame".."HealthBar"]
-		local Power = _G["Boss"..i.."TargetFrame".."ManaBar"]
-
-		Boss:UnregisterAllEvents()
-		Boss.Show = Noop
-		Boss:Hide()
-
-		Health:UnregisterAllEvents()
-		Power:UnregisterAllEvents()
-	end
-
-	if C["Raid"].Enable then
+	if C["Raid"].Enable and CompactRaidFrameManager then
+		-- Disable Blizzard Raid Frames.
+		CompactRaidFrameManager:UnregisterAllEvents()
+		CompactRaidFrameManager:Hide()
+		
+		CompactRaidFrameContainer:UnregisterAllEvents()
+		CompactRaidFrameContainer:Hide()
+		
+		-- Hide Raid Interface Options.
 		InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
-
-		if CompactRaidFrameManager then
-			CompactRaidFrameManager:SetParent(Panels.Hider)
-		end
-
-		if CompactUnitFrameProfiles then
-			CompactUnitFrameProfiles:UnregisterAllEvents()
-		end
-
-		for i = 1, MAX_PARTY_MEMBERS do
-			local PartyMember = _G["PartyMemberFrame" .. i]
-			local Health = _G["PartyMemberFrame" .. i .. "HealthBar"]
-			local Power = _G["PartyMemberFrame" .. i .. "ManaBar"]
-			local Pet = _G["PartyMemberFrame" .. i .."PetFrame"]
-			local PetHealth = _G["PartyMemberFrame" .. i .."PetFrame" .. "HealthBar"]
-
-			PartyMember:UnregisterAllEvents()
-			PartyMember:SetParent(Panels.Hider)
-			PartyMember:Hide()
-			Health:UnregisterAllEvents()
-			Power:UnregisterAllEvents()
-
-			Pet:UnregisterAllEvents()
-			Pet:SetParent(Panels.Hider)
-			PetHealth:UnregisterAllEvents()
-
-			HidePartyFrame()
-			ShowPartyFrame = Noop
-			HidePartyFrame = Noop
-		end
 	end
 end
 
