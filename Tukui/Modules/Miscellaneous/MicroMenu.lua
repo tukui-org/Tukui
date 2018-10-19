@@ -72,7 +72,7 @@ MicroMenu.Buttons = {
 	end,
 	notCheckable = true},
 	
-	{text = COMMUNITIES,
+	{text = GUILD .. " / " .. COMMUNITIES,
 	func = function()
 		ToggleCommunitiesFrame()
 	end,
