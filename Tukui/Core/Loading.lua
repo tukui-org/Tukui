@@ -166,6 +166,10 @@ function Loading:OnEvent(event, addon)
 		
 		-- Because peoples seem to not know about this?
 			print(T.WelcomeMessage)
+		
+		-- Taint Fix
+		ShowUIPanel(SpellBookFrame)
+		HideUIPanel(SpellBookFrame)
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		-- OBJECTIVE TRACKER
 			T["Miscellaneous"]["ObjectiveTracker"]:Enable()

@@ -12,11 +12,7 @@ MicroMenu.Buttons = {
 
 	{text = SPELLBOOK_ABILITIES_BUTTON,
 	func = function()
-		if InCombatLockdown() then
-			return
-		end
-			
-		ToggleFrame(SpellBookFrame)
+		ShowUIPanel(SpellBookFrame)
 	end,
 	notCheckable = true},
 
