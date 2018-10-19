@@ -69,7 +69,7 @@ oUF.colors.totems = {
 	[4] = oUF.colors.class[Class], -- Totem 4
 }
 
-oUF.colors.speccolors = {
+oUF.colors.specpowertypes = {
 	["WARRIOR"] = {
 		[71] = oUF.colors.power["RAGE"],
 		[72] = oUF.colors.power["RAGE"],

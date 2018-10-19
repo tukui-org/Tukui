@@ -1119,7 +1119,7 @@ function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	local Class = select(6, GetSpecializationInfoByID(specID))
 	
 	if Class then
-		local PowerColor = oUF.colors.speccolors[Class][specID]
+		local PowerColor = oUF.colors.specpowertypes[Class][specID]
 
 		if PowerColor then
 			local R, G, B = unpack(PowerColor)
