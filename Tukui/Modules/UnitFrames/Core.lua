@@ -1112,7 +1112,7 @@ function TukuiUnitFrames:PostUpdateArenaPreparationSpec()
 end
 
 function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
-	-- because no idea if we can get power type here without the unit
+	-- oUF is unable to get power color on arena preparation, so we add this feature here.
 	local Power = self
 	local Frame = Power:GetParent()
 	local Health = Frame.Health
