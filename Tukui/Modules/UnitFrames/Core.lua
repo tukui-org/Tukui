@@ -1116,9 +1116,16 @@ function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	local Power = self
 	local Frame = self:GetParent()
 	local Health = Frame.Health
-	local R, G, B = Health:GetStatusBarColor()
+	local Class = select(6, GetSpecializationInfoByID(specID))
+	local PowerColor = oUF.colors.speccolors[Class][specID]
 
-	Power:SetStatusBarColor(R, G, B)
+	if PowerColor then
+		local R, G, B = unpack(PowerColor)
+
+		Power:SetStatusBarColor(R, G, B)
+	else
+		Power:SetStatusBarColor(0, 0, 0)
+	end
 end
 
 function TukuiUnitFrames:Enable()

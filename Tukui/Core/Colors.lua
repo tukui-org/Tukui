@@ -69,4 +69,78 @@ oUF.colors.totems = {
 	[4] = oUF.colors.class[Class], -- Totem 4
 }
 
+oUF.colors.speccolors = {
+	["WARRIOR"] = {
+		[71] = oUF.colors.power["RAGE"],
+		[72] = oUF.colors.power["RAGE"],
+		[73] = oUF.colors.power["RAGE"],
+	},
+	
+	["PALADIN"] = {
+		[65] = oUF.colors.power["MANA"],
+		[66] = oUF.colors.power["MANA"],
+		[70] = oUF.colors.power["HOLY_POWER"],
+	},
+	
+	["HUNTER"] = {
+		[253] = oUF.colors.power["FOCUS"],
+		[254] = oUF.colors.power["FOCUS"],
+		[255] = oUF.colors.power["FOCUS"],
+	},
+	
+	["ROGUE"] = {
+		[259] = oUF.colors.power["ENERGY"],
+		[260] = oUF.colors.power["ENERGY"],
+		[261] = oUF.colors.power["ENERGY"],
+	},
+	
+	["PRIEST"] = {
+		[256] = oUF.colors.power["MANA"],
+		[257] = oUF.colors.power["MANA"],
+		[258] = oUF.colors.power["INSANITY"],
+	},
+	
+	["DEATHKNIGHT"] = {
+		[250] = oUF.colors.power["RUNIC_POWER"],
+		[251] = oUF.colors.power["RUNIC_POWER"],
+		[252] = oUF.colors.power["RUNIC_POWER"],
+	},
+	
+	["SHAMAN"] = {
+		[262] = oUF.colors.power["MAELSTROM"],
+		[263] = oUF.colors.power["MAELSTROM"],
+		[264] = oUF.colors.power["MANA"],
+	},
+	
+	["MAGE"] = {
+		[62] = oUF.colors.power["MANA"],
+		[63] = oUF.colors.power["MANA"],
+		[64] = oUF.colors.power["MANA"],
+	},
+	
+	["WARLOCK"] = {
+		[265] = oUF.colors.power["MANA"],
+		[266] = oUF.colors.power["MANA"],
+		[267] = oUF.colors.power["MANA"],
+	},
+	
+	["MONK"] = {
+		[268] = oUF.colors.power["ENERGY"],
+		[270] = oUF.colors.power["MANA"],
+		[269] = oUF.colors.power["ENERGY"],
+	},
+	
+	["DRUID"] = {
+		[102] = oUF.colors.power["LUNAR_POWER"],
+		[103] = oUF.colors.power["ENERGY"],
+		[104] = oUF.colors.power["RAGE"],
+		[105] = oUF.colors.power["MANA"],
+	},
+	
+	["DEMONHUNTER"] = {
+		[577] = oUF.colors.power["FURY"],
+		[581] = oUF.colors.power["PAIN"],
+	},
+}
+
 T["Colors"] = oUF.colors
