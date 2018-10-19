@@ -96,6 +96,12 @@ MicroMenu.Buttons = {
 	end,
 	notCheckable = true},
 
+	{text = VOICE,
+	func = function()
+		ToggleChannelFrame()
+	end,
+	notCheckable = true},
+
 	{text = RAID,
 	func = function()
 		ToggleFriendsFrame(3)
