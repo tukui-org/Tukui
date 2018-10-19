@@ -1114,7 +1114,7 @@ end
 function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	-- because no idea if we can get power type here without the unit
 	local Power = self
-	local Frame = self:GetParent()
+	local Frame = Power:GetParent()
 	local Health = Frame.Health
 	local Class = select(6, GetSpecializationInfoByID(specID))
 	
