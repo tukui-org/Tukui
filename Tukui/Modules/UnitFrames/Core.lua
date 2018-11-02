@@ -998,7 +998,7 @@ function TukuiUnitFrames:CreateUnits()
 				end
 				Boss[i]:Size(200, 29)
 
-			--	Movers:RegisterFrame(Boss[i])
+				Movers:RegisterFrame(Boss[i])
 			end
 
 			self.Units.Boss = Boss

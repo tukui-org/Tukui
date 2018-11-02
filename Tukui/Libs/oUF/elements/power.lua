@@ -43,7 +43,7 @@ The following options are listed by priority. The first check that returns true 
 .colorClassPet     - Use `self.colors.class[class]` to color the bar if the unit is player controlled, but not a player
                      (boolean)
 .colorReaction     - Use `self.colors.reaction[reaction]` to color the bar based on the player's reaction towards the
-                     unit. `neaction` is defined by the return value of
+                     unit. `reaction` is defined by the return value of
                      [UnitReaction](http://wowprogramming.com/docs/api/UnitReaction.html) (boolean)
 .colorSmooth       - Use `smoothGradient` if present or `self.colors.smooth` to color the bar with a smooth gradient
                      based on the player's current power percentage (boolean)
