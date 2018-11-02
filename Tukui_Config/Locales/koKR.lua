@@ -42,6 +42,11 @@ TukuiConfig["koKR"] = {
 			["Desc"] = "ㅇㅇ",
 		},
 
+		["AddNewSpells"] = {
+			["Name"] = "Automatically Add New Spells",
+			["Desc"] = "Derp",
+		},
+
 		["EquipBorder"] = {
 			["Name"] = "착용한 아이템 테두리",
 			["Desc"] = "착용한 아이템은 녹색 테두리로 보임",

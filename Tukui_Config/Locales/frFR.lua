@@ -26,17 +26,17 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Masquer les Ombres",
 			["Desc"] = "Afficher ou masquer les ombres sur certains cadres de Tukui",
 		},
-		
+
 		["Scaling"] = {
 			["Name"] = "Échelle de l'UI",
 			["Desc"] = "Définir la taille de l'interface utilisateur",
 		},
-		
+
 		["Themes"] = {
 			["Name"] = "Thème",
 			["Desc"] = "L'application d'un thème modifie l'interface",
 		},
-		
+
 		["AFKSaver"] = {
 			["Name"] = "Écran de veille AFK",
 			["Desc"] = "Active ou désactive l'écran de veille AFK",
@@ -47,6 +47,11 @@ TukuiConfig["frFR"] = {
 		["Enable"] = {
 			["Name"] = "Activer les barres d'action",
 			["Desc"] = "Ehm...",
+		},
+
+		["AddNewSpells"] = {
+			["Name"] = "Automatically Add New Spells",
+			["Desc"] = "Derp",
 		},
 
 		["EquipBorder"] = {
@@ -219,7 +224,7 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Défilement de la souris",
 			["Desc"] = "Définissez le nombre de lignes que la fenêtre de discussion va sauter lors du défilement",
 		},
-		
+
 		["ShortChannelName"] = {
 			["Name"] = "Nom des canaux réduit",
 			["Desc"] = "Réduit les noms des canaux du chat en abbreviation",
@@ -264,13 +269,13 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir une police pour les données texte",
 		},
 	},
-	
+
 	["Loot"] = {
 		["Enable"] = {
 			["Name"] = "Active loot",
 			["Desc"] = "Active notre fenêtre de loot",
 		},
-		
+
 		["StandardLoot"] = {
 			["Name"] = "Fenêtre de loot Blizzard",
 			["Desc"] = "Remplacez notre fenêtre de butin par celle que Blizzard propose.",
@@ -324,7 +329,7 @@ TukuiConfig["frFR"] = {
 			["Name"] = "Activer les invitations automatiques",
 			["Desc"] = "Acceptez automatiquement les invitations de groupe d'amis et de membres de guilde.",
 		},
-		
+
 		["TalkingHeadEnable"] = {
 			["Name"] = "Activer le cadre des discussions PNJ",
 			["Desc"] = "Ehm...",
@@ -503,7 +508,7 @@ TukuiConfig["frFR"] = {
 			["Desc"] = "Définir une police pour etre utilisé sur la barre de santé des unités en-dessous des infobulles",
 		},
 	},
-	
+
 	["Textures"] = {
 		["QuestProgressTexture"] = {
 			["Name"] = "Quête [Progression]",

@@ -16,19 +16,22 @@ local Panels = T["Panels"]
 
 local Frames = {
 	MainMenuBar, MainMenuBarArtFrame, OverrideActionBar,
-	PossessBarFrame, PetActionBarFrame, IconIntroTracker,
-	ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
+	PossessBarFrame, PetActionBarFrame, ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
 	TalentMicroButtonAlert, CollectionsMicroButtonAlert, EJMicroButtonAlert, CharacterMicroButtonAlert
 }
 
 function TukuiActionBars:DisableBlizzard()
 	local Hider = Panels.Hider
-	
+
 	MainMenuBarArtFrame.RightEndCap.GetRight = function() return 0 end
 	MainMenuBarMixin.ChangeMenuBarSizeAndPosition = function() return end
 	MinimapCluster.GetBottom = function() return 999999999 end
 
 	SetCVar("alwaysShowActionBars", 1)
+
+	if (not C.ActionBars.AddNewSpells) then
+		tinsert(Frames, IconIntroTracker)
+	end
 
 	for _, frame in pairs(Frames) do
 		frame:UnregisterAllEvents()
@@ -59,11 +62,11 @@ function TukuiActionBars:DisableBlizzard()
 	MainMenuBar.slideOut.IsPlaying = function()
 		return true
 	end
-	
+
 	-- Avoid Hiding Buttons on open/close spellbook
 	MultiActionBar_HideAllGrids = function() end
 	MultiActionBar_ShowAllGrids = function() end
-	
+
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
 end
 
@@ -112,12 +115,12 @@ function TukuiActionBars:MovePetBar()
 	local PetBar = TukuiPetActionBar
 	local RightBar = TukuiActionBar5
 	local Data = TukuiData[GetRealmName()][UnitName("Player")].Move.TukuiActionBar5
-	
+
 	-- Don't run if player moved bar 5
 	if Data then
 		return
 	end
-	
+
 	if RightBar:IsShown() then
 		PetBar:SetPoint("RIGHT", RightBar, "LEFT", -6, 0)
 	else
@@ -129,7 +132,7 @@ function TukuiActionBars:AddPanels()
 	local Size = C.ActionBars.NormalButtonSize
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	
+
 	-- Bar #1
 	local A1 = CreateFrame("Frame", "TukuiActionBar1", UIParent, "SecureHandlerStateTemplate")
 	A1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 14)
@@ -181,7 +184,7 @@ function TukuiActionBars:AddPanels()
 	A6:SetFrameLevel(10)
 	A6.Backdrop = CreateFrame("Frame", nil, A6)
 	A6.Backdrop:SetAllPoints()
-	
+
 	-- Move Pet Bar if Bar 5 hidden
 	A5:SetScript("OnShow", self.MovePetBar)
 	A5:SetScript("OnHide", self.MovePetBar)
@@ -202,9 +205,9 @@ function TukuiActionBars:AddPanels()
 		A5.Backdrop:SetTemplate()
 		A6.Backdrop:SetTemplate()
 		A7.Backdrop:SetTemplate()
-		
+
 		A1.Backdrop:SetFrameLevel(A4:GetFrameLevel())
-		
+
 		if not C.General.HideShadows then
 			A1.Backdrop:CreateShadow()
 			A2.Backdrop:CreateShadow()

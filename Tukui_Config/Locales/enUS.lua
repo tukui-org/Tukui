@@ -19,17 +19,17 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Hide Shadows",
 			["Desc"] = "Display or hide shadows on certain Tukui frames",
 		},
-		
+
 		["Scaling"] = {
 			["Name"] = "UI Scale",
 			["Desc"] = "Define how big the user interface is displayed",
 		},
-		
+
 		["Themes"] = {
 			["Name"] = "Theme",
 			["Desc"] = "Applying a theme changes user interface look and feel",
 		},
-		
+
 		["AFKSaver"] = {
 			["Name"] = "AFK Screensaver",
 			["Desc"] = "Enable or disable the afk screensaver",
@@ -39,6 +39,11 @@ TukuiConfig["enUS"] = {
 	["ActionBars"] = {
 		["Enable"] = {
 			["Name"] = "Enable action bars",
+			["Desc"] = "Derp",
+		},
+
+		["AddNewSpells"] = {
+			["Name"] = "Automatically Add New Spells",
 			["Desc"] = "Derp",
 		},
 
@@ -212,7 +217,7 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Mouse Scrolling",
 			["Desc"] = "Set the number of lines that the chat will jump when scrolling",
 		},
-		
+
 		["ShortChannelName"] = {
 			["Name"] = "Reduced channel name",
 			["Desc"] = "Reduces the names of the channels of the chat in abbreviation",
@@ -257,13 +262,13 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font to be used by the data texts",
 		},
 	},
-	
+
 	["Loot"] = {
 		["Enable"] = {
 			["Name"] = "Enable Loot",
 			["Desc"] = "Enable our loot frame window",
 		},
-		
+
 		["StandardLoot"] = {
 			["Name"] = "Blizzard Loot Frame",
 			["Desc"] = "Replace our loot frame with a skinned version of Blizzard loot frame",
@@ -317,7 +322,7 @@ TukuiConfig["enUS"] = {
 			["Name"] = "Enable Auto Invites",
 			["Desc"] = "Automatically accept group invites from friends, and guild members.",
 		},
-		
+
 		["TalkingHeadEnable"] = {
 			["Name"] = "Enable Talking Head",
 			["Desc"] = "Display Blizzard Talking Head Frame.",
@@ -496,7 +501,7 @@ TukuiConfig["enUS"] = {
 			["Desc"] = "Set a font to be used by the health bar below unit tooltips",
 		},
 	},
-	
+
 	["Textures"] = {
 		["QuestProgressTexture"] = {
 			["Name"] = "Quest [Progress]",

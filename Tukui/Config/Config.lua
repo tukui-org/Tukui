@@ -33,6 +33,7 @@ C["General"] = {
 
 C["ActionBars"] = {
 	["Enable"] = true,
+	["AddNewSpells"] = false,
 	["HotKey"] = false,
 	["EquipBorder"] = true,
 	["Macro"] = false,
@@ -163,7 +164,6 @@ C["Tooltips"] = {
 	["ShowSpec"] = true,
 	["MouseOver"] = false,
 	["HealthFont"] = "Tukui Outline",
-	
 }
 
 C["Textures"] = {
