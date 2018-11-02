@@ -20,7 +20,6 @@ function TukuiAuras:CreateHeaders()
 	for i = 1, 2 do
 		local Header
 
-
 		Header = CreateFrame("Frame", TukuiAuras.HeaderNames[i], Parent, "SecureAuraHeaderTemplate")
 		Header:SetClampedToScreen(true)
 		Header:SetMovable(true)

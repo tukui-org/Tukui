@@ -100,27 +100,27 @@ Talent:SetScript("OnEvent", function(self, event, ...)
 		local Button, Pressed = ...
 		local GetMouseFocus = GetMouseFocus()
 		local Unit = (select(2, GameTooltip:GetUnit())) or (GetMouseFocus and GetMouseFocus.GetAttribute and GetMouseFocus:GetAttribute("unit"))
-			
+
 		if Button == "LALT" and Pressed == 1 then
 			if Unit then
 				local IsInspectable = CanInspect(Unit)
 				local IsPlayer = UnitIsPlayer(Unit)
 				local IsFriend = UnitIsFriend("player", Unit)
-				
+
 				self.CurrentGUID = UnitGUID(Unit)
-				
+
 				if IsPlayer and IsFriend and IsInspectable then
 					self:RegisterEvent("INSPECT_READY")
-					
+
 					NotifyInspect(Unit)
 				end
 			end
 		end
 	else
 		self:UnregisterEvent("INSPECT_READY")
-			
+
 		local GUID = UnitGUID("mouseover")
-			
+
 		if self.CurrentGUID == GUID and IsAltKeyDown() then
 			self.ILevel = self:GetItemLevel("mouseover")
 			self.Spec = self:GetTalentSpec("mouseover")
@@ -128,7 +128,7 @@ Talent:SetScript("OnEvent", function(self, event, ...)
 
 			GameTooltip:SetUnit("mouseover")
 		end
-		
+
 		ClearInspectPlayer()
 	end
 end)

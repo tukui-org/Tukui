@@ -55,10 +55,10 @@ end
 local OnMouseUp = function(self)
 	if IsControlKeyDown() or IsAltKeyDown() then
 		ChatFrame_ToggleMenu()
-		
+
 		return
 	end
-	
+
 	if InCombatLockdown() then
 		return
 	end

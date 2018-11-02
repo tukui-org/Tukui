@@ -34,11 +34,11 @@ function BGFrame:OnEnter()
 			for j = 1, NumExtraStats do
 				GameTooltip:AddDoubleLine(GetBattlefieldStatInfo(j), GetBattlefieldStatData(i, j), 1,1,1)
 			end
-			
+
 			break
 		end
 	end
-	
+
 	GameTooltip:Show()
 end
 
@@ -52,7 +52,7 @@ function BGFrame:OnUpdate(t)
 	if (int < 0) then
 		local Amount
 		local NumScores = GetNumBattlefieldScores()
-		
+
 		RequestBattlefieldScoreData()
 
 		for i = 1, NumScores do

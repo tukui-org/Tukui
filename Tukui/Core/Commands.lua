@@ -35,7 +35,7 @@ T.SlashHandler = function(cmd)
 		Install:Launch()
 	elseif (arg1 == "status" or arg1 == "debug") then
 		local Status = TukuiStatus
-		
+
 		Status:ShowWindow()
 	elseif (arg1 == "move" or arg1 == "moveui") then
 		local Movers = T["Movers"]
@@ -74,9 +74,9 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "gold") and (arg2 == "reset") then
 		local MyRealm = GetRealmName()
 		local MyName = UnitName("player")
-		
+
 		TukuiData["Gold"] = {}
-		TukuiData["Gold"][GetRealmName()] = {}	
+		TukuiData["Gold"][GetRealmName()] = {}
 		TukuiData["Gold"][GetRealmName()][UnitName("player")] = GetMoney()
 	elseif (arg1 == "test" or arg1 == "testui") then
 		local Test = T["TestUI"]
@@ -84,14 +84,14 @@ T.SlashHandler = function(cmd)
 		Test:EnableOrDisable()
 	elseif (arg1 == "grid") then
 		local Grid = T.Miscellaneous.Grid
-		
+
 		if Grid.Enable then
 			Grid:Hide()
 			Grid.Enable = false
 		else
 			if arg2 then
 				local Number = tonumber(arg2)
-				
+
 				if Number then
 					Grid.BoxSize = Number
 				end
@@ -99,7 +99,7 @@ T.SlashHandler = function(cmd)
 			if Grid.BoxSize > 256 then
 				Grid.BoxSize = 256
 			end
-			
+
 			Grid:Show()
 			Grid.Enable = true
 			Grid.BoxSize = (math.ceil((tonumber(arg) or Grid.BoxSize) / 32) * 32)
@@ -119,7 +119,7 @@ T.SlashHandler = function(cmd)
 			print(" ")
 		else
 			local IsConfigLoaded = IsAddOnLoaded("Tukui_Config")
-			
+
 			if arg2 == "list" or arg2 == "l" then
 				Tukui.Profiles = {}
 				Tukui.Profiles.Data = {}
@@ -131,7 +131,7 @@ T.SlashHandler = function(cmd)
 					if Server ~= "Gold" then
 						for Character, Table in pairs(TukuiData[Server]) do
 							tinsert(Tukui.Profiles.Data, TukuiData[Server][Character])
-							
+
 							if IsConfigLoaded then
 								if TukuiConfigShared and TukuiConfigShared[Server] and TukuiConfigShared[Server][Character] then
 									tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
@@ -139,15 +139,15 @@ T.SlashHandler = function(cmd)
 									if not TukuiConfigShared then
 										TukuiConfigShared = {}
 									end
-									
+
 									if not TukuiConfigShared[Server] then
 										TukuiConfigShared[Server] = {}
 									end
-									
+
 									if not TukuiConfigShared[Server][Character] then
 										TukuiConfigShared[Server][Character] = {}
 									end
-									
+
 									tinsert(Tukui.Profiles.Options, TukuiConfigShared[Server][Character])
 								end
 							end
@@ -168,7 +168,7 @@ T.SlashHandler = function(cmd)
 				end
 
 				TukuiData[CurrentServer][CurrentCharacter] = Tukui.Profiles.Data[Profile]
-				
+
 				if IsConfigLoaded then
 					TukuiConfigShared[CurrentServer][CurrentCharacter] = Tukui.Profiles.Options[Profile]
 				end

@@ -14,7 +14,7 @@ function TukuiUnitFrames:Nameplates()
 	self:SetBackdrop(TukuiUnitFrames.Backdrop)
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
-	
+
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
 	Health:SetPoint("TOPLEFT")
@@ -24,23 +24,23 @@ function TukuiUnitFrames:Nameplates()
 
 	Health.Background = Health:CreateTexture(nil, "BORDER")
 	Health.Background:SetAllPoints()
-	Health.Background:SetColorTexture(.1, .1, .1)	
-	
+	Health.Background:SetColorTexture(.1, .1, .1)
+
 	Health.colorTapping = true
 	Health.colorReaction = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.Smooth = true
 	Health.frequentUpdates = true
-	
+
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:Point("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
 	Name:SetFont(select(1, Name:GetFont()), 12, select(3, Name:GetFont()))
-	
+
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameLong]")
-	
+
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
 	Power:Height(C.NamePlates.CastHeight)
@@ -51,13 +51,13 @@ function TukuiUnitFrames:Nameplates()
 	Power.Background = Power:CreateTexture(nil, "BORDER")
 	Power.Background:SetAllPoints()
 	Power.Background:SetColorTexture(.1, .1, .1)
-	
+
 	Power.IsHidden = false
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	Power.Smooth = true
 	Power.PostUpdate = TukuiUnitFrames.DisplayNameplatePowerAndCastBar
-	
+
 	local Debuffs = CreateFrame("Frame", self:GetName()..'Debuffs', self)
 	Debuffs:SetHeight(18)
 	Debuffs:SetWidth(self:GetWidth())
@@ -72,7 +72,7 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs["growth-x"] = "RIGHT"
 	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs
-	
+
 
 	local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
 	CastBar:SetFrameStrata(self:GetFrameStrata())
@@ -96,7 +96,7 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
 	CastBar.Icon:SetInside()
 	CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
-	
+
 	CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
 	CastBar.Text:SetFontObject(Font)
 	CastBar.Text:Point("CENTER", CastBar)
@@ -108,10 +108,10 @@ function TukuiUnitFrames:Nameplates()
 	CastBar.PostCastInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostCastNotInterruptible = TukuiUnitFrames.CheckInterrupt
 	CastBar.PostChannelStart = TukuiUnitFrames.CheckInterrupt
-	
+
 	CastBar:SetScript("OnShow", TukuiUnitFrames.DisplayNameplatePowerAndCastBar)
 	CastBar:SetScript("OnHide", TukuiUnitFrames.DisplayNameplatePowerAndCastBar)
-	
+
 	local RaidIcon = Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:Size(self:GetHeight())
 	RaidIcon:Point("TOPLEFT", self, "TOPRIGHT", 4, 0)
@@ -128,16 +128,16 @@ function TukuiUnitFrames:Nameplates()
 		edgeFile = C.Medias.Glow, edgeSize = T.Scale(4),
 		insets = {left = T.Scale(4), right = T.Scale(4), top = T.Scale(4), bottom = T.Scale(4)},
 	})
-	
+
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate)
 	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", TukuiUnitFrames.HighlightPlate)
-	
+
 	-- Needed on nameplate else if will bug on AOE multi nameplates. (I'm not sure about this)
 	self:EnableMouse(false)
 	self.Health:EnableMouse(false)
 	self.Power:EnableMouse(false)
-	
+
 	-- Check highlight when created.
 	TukuiUnitFrames.HighlightPlate(self)
 end

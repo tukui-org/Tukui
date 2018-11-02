@@ -8,7 +8,7 @@ function WorldMap:OnUpdate(elapsed)
 	if WorldMap.Interval < 0 then
 		local UnitMap = C_Map.GetBestMapForUnit("player")
 		local X, Y = 0, 0
-		
+
 		if UnitMap then
 			local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, "player")
 

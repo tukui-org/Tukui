@@ -18,7 +18,7 @@ local T17 = CreateFrame("Frame")
 function T17:MoveXPBars()
 	local Experience = Misc.Experience
 	local Reputation = Misc.Reputation
-	
+
     if Experience.NumBars then
         for i = 1, Experience.NumBars do
             local Bar = Experience["XPBar"..i]
@@ -34,7 +34,7 @@ function T17:MoveXPBars()
             RestedBar:SetReverseFill(false)
         end
     end
-	
+
     if Reputation.NumBars then
         for i = 1, Reputation.NumBars do
             local Bar = Reputation["RepBar"..i]
@@ -54,7 +54,7 @@ function T17:AddLines()
 	BottomLine:SetFrameStrata("BACKGROUND")
 	BottomLine:SetFrameLevel(0)
 	BottomLine:CreateShadow()
-	
+
 	local LeftVerticalLine = CreateFrame("Frame", "Tukui_T17_LeftVerticalLine", BottomLine)
 	LeftVerticalLine:SetTemplate()
 	LeftVerticalLine:Size(2, 130)
@@ -72,7 +72,7 @@ function T17:AddLines()
 	RightVerticalLine:SetFrameStrata("BACKGROUND")
 	RightVerticalLine:SetAlpha(1)
 	RightVerticalLine:CreateShadow()
-	
+
 	local CubeLeft = CreateFrame("Frame", "Tukui_T17_CubeLeft", LeftVerticalLine)
 	CubeLeft:SetTemplate()
 	CubeLeft:Size(10)
@@ -110,7 +110,7 @@ function T17:SetupChat()
 	RC:SetAlpha(0)
 	DTL:CreateShadow()
 	DTR:CreateShadow()
-	
+
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		local Tab = _G["ChatFrame"..i.."Tab"]
@@ -118,17 +118,17 @@ function T17:SetupChat()
 		Tab.SetAlpha = Frame.SetAlpha
 		Tab:SetAlpha(0)
 	end
-	
+
 	hooksecurefunc("FCFTab_UpdateAlpha", T17.NoMouseAlphaOnTab)
 end
 
 function T17:MoveTooltip()
 	local Anchor = TukuiTooltipAnchor
-    
+
     if not Anchor then
         return
     end
-    
+
 	local DataTextRight = Panels.DataTextRight
 
 	Anchor:ClearAllPoints()
@@ -160,7 +160,7 @@ end
 
 function T17:MoveDataTextTooltip()
 	local Texts = DataTexts.Texts
-	
+
 	for Name, Table in pairs(Texts) do
 		Table.GetTooltipAnchor = T17.GetTooltipAnchor
 	end

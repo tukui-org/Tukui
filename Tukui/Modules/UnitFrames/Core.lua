@@ -50,10 +50,10 @@ function TukuiUnitFrames:DisableBlizzard()
 		-- Disable Blizzard Raid Frames.
 		CompactRaidFrameManager:UnregisterAllEvents()
 		CompactRaidFrameManager:Hide()
-		
+
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()
-		
+
 		-- Hide Raid Interface Options.
 		InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
 		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
@@ -998,7 +998,7 @@ function TukuiUnitFrames:CreateUnits()
 				end
 				Boss[i]:Size(200, 29)
 
-				Movers:RegisterFrame(Boss[i])
+			--	Movers:RegisterFrame(Boss[i])
 			end
 
 			self.Units.Boss = Boss
@@ -1069,7 +1069,7 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 
 	if (ORD) then
 		local _, InstanceType = IsInInstance()
-        
+
 		if (ORD.RegisteredList ~= "RD") and (InstanceType == "party" or InstanceType == "raid") then
             ORD:ResetDebuffData()
 			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.RaidDebuffs.spells)
@@ -1093,14 +1093,14 @@ function TukuiUnitFrames:PostUpdateArenaPreparationSpec()
 
 		if specID and specID > 0 then
 			local icon = select(4, GetSpecializationInfoByID(specID))
-			
+
 			specIcon.Icon:SetTexture(icon)
 		else
 			specIcon.Icon:SetTexture([[INTERFACE\ICONS\INV_MISC_QUESTIONMARK]])
 		end
 	else
 		local faction = UnitFactionGroup(self.unit)
-		
+
 		if faction == "Horde" then
 			specIcon.Icon:SetTexture([[Interface\Icons\INV_BannerPVP_01]])
 		elseif faction == "Alliance" then
@@ -1117,7 +1117,7 @@ function TukuiUnitFrames:UpdatePowerColorArenaPreparation(specID)
 	local Frame = Power:GetParent()
 	local Health = Frame.Health
 	local Class = select(6, GetSpecializationInfoByID(specID))
-	
+
 	if Class then
 		local PowerColor = oUF.colors.specpowertypes[Class][specID]
 
@@ -1147,10 +1147,10 @@ function TukuiUnitFrames:Enable()
 	if (C.Raid.DebuffWatch) then
         local ORD = Plugin.oUF_RaidDebuffs or oUF_RaidDebuffs
 		local RaidDebuffs = CreateFrame("Frame")
-        
+
 		RaidDebuffs:RegisterEvent("PLAYER_ENTERING_WORLD")
 		RaidDebuffs:SetScript("OnEvent", TukuiUnitFrames.UpdateRaidDebuffIndicator)
-        
+
 		if (ORD) then
 			ORD.ShowDispellableDebuff = true
 			ORD.FilterDispellableDebuff = true

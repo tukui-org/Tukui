@@ -9,9 +9,9 @@ function OrderHall:OnEvent(event, addon)
 	end
 
 	local Frame = OrderHallCommandBar
-	
+
 	Frame:Kill()
-	
+
 	self:UnregisterAllEvents()
 end
 

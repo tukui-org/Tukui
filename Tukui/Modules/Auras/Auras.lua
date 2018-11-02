@@ -199,7 +199,7 @@ end
 
 function TukuiAuras:Skin()
 	local Font = T.GetFont(C["Auras"].Font)
-	
+
 	self:CreateShadow()
 
 	local Icon = self:CreateTexture(nil, "BORDER")

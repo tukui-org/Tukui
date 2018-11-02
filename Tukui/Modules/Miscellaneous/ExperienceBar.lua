@@ -39,11 +39,11 @@ function Experience:SetTooltip()
 		end
 	elseif BarType == "AZERITE" then
 		Current, Max, Level, Items = Experience:GetAzerite()
-		
+
 		if Max == 0 then
 			return
 		end
-		
+
 		local RemainingXP = Max - Current
 		local AzeriteItem = Item:CreateFromItemLocation(Items)
 		local ItemName = AzeriteItem:GetItemName()
@@ -172,7 +172,7 @@ function Experience:Create()
 		XPBar:SetSize(i == 1 and Panels.LeftChatBG:GetWidth() or Panels.RightChatBG:GetWidth(), 6)
 		XPBar:Point("BOTTOMLEFT", i == 1 and Panels.LeftChatBG or Panels.RightChatBG, "TOPLEFT", 0, 4)
 		XPBar:SetReverseFill(i == 2 and true)
-		
+
 		XPBar.Backdrop:CreateShadow()
 
 		self["XPBar"..i] = XPBar
@@ -198,7 +198,7 @@ function Experience:Enable()
 	if not C.Misc.ExperienceEnable then
 		return
 	end
-	
+
 	if not self.IsCreated then
 		self:Create()
 

@@ -71,7 +71,7 @@ MicroMenu.Buttons = {
 		PVEFrame_ToggleFrame()
 	end,
 	notCheckable = true},
-	
+
 	{text = GUILD .. " / " .. COMMUNITIES,
 	func = function()
 		ToggleCommunitiesFrame()

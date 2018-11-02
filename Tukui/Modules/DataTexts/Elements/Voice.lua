@@ -34,13 +34,13 @@ local menuList = {
 	},
 	{
 		text = ENABLE_VOICECHAT,
-		
+
 		func = function(self)
 			C_VoiceChat.ToggleDeafened()
 		end,
 
 		checked = IsVoiceChatEnabled,
-		
+
 		isNotRadio = true,
 	},
 }
@@ -61,15 +61,15 @@ end
 local OnEnter = function(self)
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	
+
 	local VoiceMode = C_VoiceChat.GetCommunicationMode()
 
 	if VoiceMode == Enum.CommunicationMode.PushToTalk then
 		local Key = C_VoiceChat.GetPushToTalkBinding()
-		
+
 		GameTooltip:AddDoubleLine(VOICE_CHAT_MODE, "|cffff0000["..PUSH_TO_TALK.."]|r")
 		GameTooltip:AddLine(" ")
-		
+
 		if Key then
 			GameTooltip:AddLine(VOICE_CHAT_NOTIFICATION_COMMS_MODE_PTT:format(GetBindingText(CreateKeyChordStringFromTable(Key))))
 		else
@@ -78,7 +78,7 @@ local OnEnter = function(self)
 	elseif VoiceMode == Enum.CommunicationMode.OpenMic then
 		GameTooltip:AddDoubleLine(VOICE_CHAT_MODE, "|cffff0000["..VOICE_CHAT_NOTIFICATION_COMMS_MODE_VOICE_ACTIVATED.."]|r")
 	end
-	
+
 	local UseNotBound = true
 	local UseParentheses = true
 	local BindingText = GetBindingKeyForAction("TOGGLECHATTAB", UseNotBound, UseParentheses)

@@ -111,7 +111,6 @@ function ObjectiveTracker:Skin()
 					HeaderPanel:SetFrameLevel(Header:GetFrameLevel() - 1)
 					HeaderPanel:SetFrameStrata("BACKGROUND")
 					HeaderPanel:SetOutside(Header, 1, 1)
-					
 
 					local HeaderBar = CreateFrame("StatusBar", nil, HeaderPanel)
 					HeaderBar:Size(263, 2)
@@ -420,13 +419,13 @@ end
 function ObjectiveTracker:ShowObjectiveTrackerLevel()
 	for i = 1, GetNumQuestWatches() do
 		local questID, title, questLogIndex = GetQuestWatchInfo(i)
-		
+
 		if ( not questID ) then
 			break
 		end
-		
+
 		local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
-		
+
 		if block then
 			local title, level = GetQuestLogTitle(questLogIndex)
 			local color = GetQuestDifficultyColor(level)
@@ -440,24 +439,24 @@ end
 
 function ObjectiveTracker:SkinRewards()
 	local rewardsFrame = self.module.rewardsFrame
-	
+
 	rewardsFrame:StripTextures()
-	
+
 	if rewardsFrame.id then
 		for i = 1, 6 do
 			local rewardItem = rewardsFrame.Rewards[i]
-			
+
 			if rewardItem then
 				local Icon = rewardItem.ItemIcon
 				local Border = rewardItem.ItemBorder
 				local Label = rewardItem.Label
 				local ItemOverlay = rewardItem.ItemOverlay
-				
+
 				if Icon then
 					--Icon:Size(18)
 					Icon:SetTexCoord(.08, .92, .08, .92)
 				end
-				
+
 				if Border then
 					Border:SetTexture("")
 				end
@@ -476,23 +475,23 @@ function ObjectiveTracker:SkinWorldQuestsPOI(worldQuestType, rarity, isElite, tr
 
 		self.IsSkinned = true
 	end
-	
+
 	self:SetNormalTexture("")
 	self:SetPushedTexture("")
 	self:SetHighlightTexture("")
-	
+
 	if selected then
 		self:SetBackdropColor(0/255, 152/255, 34/255, 1)
 	else
-		self:SetBackdropColor(unpack(C.Medias.BackdropColor))	
+		self:SetBackdropColor(unpack(C.Medias.BackdropColor))
 	end
-	
+
 	if rarity == LE_WORLD_QUEST_QUALITY_RARE then
 		self.Shadow:SetBackdropBorderColor(0.00, 0.44, 0.87)
 	elseif rarity == LE_WORLD_QUEST_QUALITY_EPIC then
 		self.Shadow:SetBackdropBorderColor(0.64, 0.21, 0.93)
 	end
-	
+
 	if PreviousPOI and PreviousPOI.IsSkinned then
 		PreviousPOI:SetBackdropColor(unpack(C.Medias.BackdropColor))
 		PreviousPOI.Shadow:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
@@ -520,7 +519,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
 	hooksecurefunc("WorldMap_SetupWorldQuestButton", self.SkinWorldQuestsPOI)
-	
+
 	-- Currently there is display a bug with this hook
 	-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)
 end

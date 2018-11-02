@@ -72,7 +72,7 @@ function Minimap:StyleMinimap()
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
 	self:SetScript("OnMouseUp", Minimap.OnMouseClick)
-	
+
 	self.Backdrop:CreateShadow()
 
 	self.Ticket = CreateFrame("Frame", nil, Minimap)
@@ -219,18 +219,18 @@ function Minimap:UpdateCoords(t)
 	if (Elapsed > 0) then
 		return
 	end
-	
+
 	local UnitMap = C_Map.GetBestMapForUnit("player")
 	local X, Y = 0, 0
-	
+
 	if UnitMap then
 		local GetPlayerMapPosition = C_Map.GetPlayerMapPosition(UnitMap, "player")
-		
+
 		if GetPlayerMapPosition then
 			X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
 		end
 	end
-	
+
 	local XText, YText
 
 	X = math.floor(100 * X)

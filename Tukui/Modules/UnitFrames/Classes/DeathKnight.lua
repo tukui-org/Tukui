@@ -27,7 +27,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 		RunesBar[i]:SetHeight(8)
 		RunesBar[i]:SetStatusBarTexture(PowerTexture)
 		RunesBar[i]:SetStatusBarColor(self.Power:GetStatusBarColor())
-		
+
 		RunesBar[i].bg = RunesBar[i]:CreateTexture(nil, "BACKGROUND")
 		RunesBar[i].bg:SetAllPoints(RunesBar[i])
 		RunesBar[i].bg:SetTexture(PowerTexture)
@@ -41,7 +41,7 @@ TukuiUnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 			RunesBar[i]:SetPoint("LEFT", RunesBar[i-1], "RIGHT", 1, 0)
 		end
 	end
-	
+
 	RunesBar.PostUpdate = TukuiUnitFrames.RunesPostUpdate
 	RunesBar.colorSpec = true
 

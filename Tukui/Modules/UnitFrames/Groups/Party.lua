@@ -150,21 +150,21 @@ function TukuiUnitFrames:Party()
 
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
-	
+
 	local Highlight = CreateFrame("Frame", nil, self)
 	Highlight:SetPoint("TOPLEFT", self, "TOPLEFT")
 	Highlight:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT")
 	Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	if Class == "PRIEST" then
 		local Atonement = CreateFrame("StatusBar", nil, Power)
 		Atonement:SetAllPoints()
 		Atonement:SetStatusBarTexture(C.Medias.Normal)
 		Atonement:SetFrameStrata(Power:GetFrameStrata())
 		Atonement:SetFrameLevel(Power:GetFrameLevel() + 1)
-		
+
 		self.Atonement = Atonement
 	end
 
@@ -190,7 +190,7 @@ function TukuiUnitFrames:Party()
 	self.Range = Range
 	self.Highlight = Highlight
 	self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
-	
+
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)

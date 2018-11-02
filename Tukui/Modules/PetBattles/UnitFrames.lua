@@ -208,8 +208,6 @@ function Battle:AddUnitFramesHooks()
 		self.Icon:SetTexCoord(unpack(T.IconCoord))
 	end)
 
-
-
 	-- WEATHER
 	hooksecurefunc("PetBattleWeatherFrame_Update", function(self)
 		local Weather = C_PetBattles.GetAuraInfo(LE_BATTLE_PET_WEATHER, PET_BATTLE_PAD_INDEX, 1)

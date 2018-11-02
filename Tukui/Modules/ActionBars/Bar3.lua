@@ -9,7 +9,7 @@ function TukuiActionBars:CreateBar3()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local MultiBarBottomRight = MultiBarBottomRight
 	local ActionBar3 = T.Panels.ActionBar3
-	
+
 	MultiBarBottomRight:SetParent(ActionBar3)
 	MultiBarBottomRight:SetScript("OnHide", function() ActionBar3.Backdrop:Hide() end)
 	MultiBarBottomRight:SetScript("OnShow", function() ActionBar3.Backdrop:Show() end)
@@ -25,7 +25,7 @@ function TukuiActionBars:CreateBar3()
 
 		if (i == 1) then
 			Button:SetPoint("BOTTOMLEFT", ActionBar3, Spacing, Spacing)
-			
+
 			ActionBar3:SetWidth((Button:GetWidth() * 6) + (Spacing * 7))
 			ActionBar3:SetHeight((Button:GetWidth() * 2) + (Spacing * 3))
 		elseif (i == 7) then

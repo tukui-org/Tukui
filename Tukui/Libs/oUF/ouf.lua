@@ -162,7 +162,7 @@ for k, v in next, {
 
 	--[[ frame:Enable(asState)
 	Used to toggle the visibility of a unit frame based on the existence of its unit. This is a reference to
-	`RegisterUnitWatch`.
+	`negisterUnitWatch`.
 
 	* self    - unit frame
 	* asState - if true, the frame's "state-unitexists" attribute will be set to a boolean value denoting whether the

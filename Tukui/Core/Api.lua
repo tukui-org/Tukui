@@ -112,9 +112,9 @@ end
 
 local function CreateShadow(f, t)
 	if f.Shadow then return end
-	
+
 	local Level = f:GetFrameLevel()
-	
+
 	if Level < 0 then
 		Level = 0
 	end
@@ -137,7 +137,7 @@ local function CreateShadow(f, t)
 
 	shadow:SetBackdropColor(0, 0, 0, 0)
 	shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
-	
+
 	f.Shadow = shadow
 end
 

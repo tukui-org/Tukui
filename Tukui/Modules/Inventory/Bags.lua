@@ -261,7 +261,7 @@ function Bags:CreateReagentContainer()
 	Unlock:SetTemplate()
 
 	UnlockButton:SkinButton()
-	
+
 	-- Movers
 	local CustomPosition = TukuiData[T.MyRealm][T.MyName].Move.TukuiBank
 
@@ -846,7 +846,7 @@ function Bags:OpenAllBankBags()
 
 	if Bank:IsShown() then
 		self.Bank:Show()
-		
+
 		if not self.Bank.MoverAdded then
 			local Movers = T["Movers"]
 
@@ -854,11 +854,11 @@ function Bags:OpenAllBankBags()
 
 			self.Bank.MoverAdded = true
 		end
-		
+
 		if CustomPosition and not self.Bank.MoverApplied then
 			self.Bank:ClearAllPoints()
 			self.Bank:SetPoint(unpack(CustomPosition))
-			
+
 			self.Bank.MoverApplied = true
 		end
 
@@ -962,11 +962,11 @@ function Bags:OnEvent(event, ...)
 		end
 	elseif (event == "BANKFRAME_CLOSED") then
 		local Bank = self.Bank
-		
+
 		Bank:Hide()
 	elseif (event == "BANKFRAME_OPENED") then
 		local Bank = self.Bank
-		
+
 		Bank:Show()
 	end
 end
@@ -1016,7 +1016,7 @@ function Bags:Enable()
 			self.Reagent:Hide()
 		end
 	end)
-	
+
 	BankItem1:SetScript("OnHide", function()
 		self.Bank:Hide()
 	end)
@@ -1028,7 +1028,7 @@ function Bags:Enable()
 	function OpenAllBags() ToggleAllBags() end
 	function OpenBackpack() ToggleAllBags() end
 	function ToggleAllBags() self:ToggleBags() end
-	
+
 	-- Destroy bubbles help boxes
 	for i = 1, 13 do
 		local HelpBox = _G["ContainerFrame"..i.."ExtraBagSlotsHelpBox"]
@@ -1049,7 +1049,7 @@ function Bags:Enable()
 	self:SetScript("OnEvent", self.OnEvent)
 
 	function ManageBackpackTokenFrame() end
-	
+
 	if ContainerFrame5 then
 		ContainerFrame5:EnableMouse(false)
 	end

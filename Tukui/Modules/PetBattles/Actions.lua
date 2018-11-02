@@ -56,7 +56,7 @@ function Battle:SkinActionBar()
 		self:StripTextures()
 		self:SetStatusBarTexture(C.Medias.Normal)
 	end)
-	
+
 	Bottom.xpBar.Backdrop:CreateShadow()
 end
 

@@ -43,17 +43,6 @@ local function BuildGuildTable()
 	end)
 end
 
-local function UpdateGuildXP()
-	local currentXP, remainingXP = UnitGetGuildXP("player") -- This API is removed!
-	local nextLevelXP = currentXP + remainingXP
-
-	if nextLevelXP == 0 or maxDailyXP == 0 then return end
-
-	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
-
-	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
-end
-
 local function UpdateGuildMessage()
 	guildMotD = GetGuildRosterMOTD()
 end
@@ -146,7 +135,7 @@ local OnEnter = function(self)
 	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
-	
+
 	if standingID ~= 8 then -- Not Max Rep
 		barMax = barMax - barMin
 		barValue = barValue - barMin
@@ -198,7 +187,7 @@ local OnLeave = function() GameTooltip:Hide() end
 
 local OnMouseDown = function(self, btn)
 	if btn ~= "LeftButton" then return end
-	
+
 	ToggleCommunitiesFrame()
 end
 

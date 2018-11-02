@@ -83,11 +83,11 @@ function Reputation:Enable()
 	if not C.Misc.ExperienceEnable then
 		return -- it need xp bar enabled
 	end
-	
+
 	if not C.Misc.ReputationEnable then
 		return
 	end
-	
+
 	if not self.IsCreated then
 		self:Create()
 

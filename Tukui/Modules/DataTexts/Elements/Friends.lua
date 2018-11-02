@@ -178,7 +178,7 @@ local OnMouseUp = function(self, btn)
 	if btn ~= "RightButton" then
 		return
 	end
-    
+
     if not BNConnected() then
         return
     end
@@ -238,13 +238,13 @@ local OnEnter = function(self)
 	if InCombatLockdown() then
 		return
 	end
-    
+
     if not BNConnected() then
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		GameTooltip:AddLine(BN_CHAT_DISCONNECTED)
         GameTooltip:Show()
-        
+
         return
     end
 
@@ -262,7 +262,7 @@ local OnEnter = function(self)
 
 			for i = 1, #BNTable do
                 local BNName = RemoveTagNumber(BNTable[i][3])
-                
+
 				if BNTable[i][7] then
 					if BNTable[i][6] == wowString then
                         local isBattleTag = BNTable[i][17]
@@ -306,39 +306,39 @@ local OnEnter = function(self)
                             GameTooltip:AddDoubleLine("  "..BNTable[i][15], BNTable[i][11], zonec.r, zonec.g, zonec.b, realmc.r, realmc.g, realmc.b)
                         end
 					end
-                    
+
 					if BNTable[i][6] == "BSAp" or BNTable[i][6] == "App" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Battle.net")
 					end
-                    
+
 					if BNTable[i][6] == "D3" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Diablo 3")
 					end
-                    
+
 					if BNTable[i][6] == "Hero" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Heroes of the Storm")
 					end
-                    
+
 					if BNTable[i][6] == "S1" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "StarCraft: Remastered")
 					end
-                    
+
 					if BNTable[i][6] == "S2" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "StarCraft 2")
 					end
-                    
+
 					if BNTable[i][6] == "WTCG" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Hearthstone")
 					end
-                    
+
 					if BNTable[i][6] == "Pro" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Overwatch")
 					end
-                    
+
 					if BNTable[i][6] == "DST2" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Destiny 2")
 					end
-                    
+
 					if BNTable[i][6] == "VIPR" then
 						GameTooltip:AddDoubleLine("|cffeeeeee"..BNName.."|r", "Call of Duty: Black Ops 4")
 					end
@@ -355,10 +355,10 @@ end
 local Update = function(self, event)
     if not BNConnected() then
         self.Text:SetFormattedText("%s %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, NOT_APPLICABLE)
-        
+
         return
     end
-    
+
 	local BNTotal = BNGetNumFriends()
 	local Total = GetNumFriends()
 
@@ -396,7 +396,7 @@ local Enable = function(self)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
 	self:SetScript("OnEvent", Update)
-    
+
 	self:Update()
 end
 

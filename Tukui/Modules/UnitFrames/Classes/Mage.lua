@@ -36,10 +36,10 @@ TukuiUnitFrames.AddClassFeatures["MAGE"] = function(self)
 			ArcaneChargeBar[i]:SetPoint("LEFT", ArcaneChargeBar[i-1], "RIGHT", 1, 0)
 		end
 	end
-	
+
 	-- Shadow Effect Updates
 	Shadow:Point("TOPLEFT", -4, 12)
-	
+
 	ArcaneChargeBar:SetScript("OnShow", function(self)
 		TukuiUnitFrames.UpdateShadow(self, 12)
 	end)

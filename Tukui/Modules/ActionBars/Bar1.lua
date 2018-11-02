@@ -84,12 +84,12 @@ function TukuiActionBars:CreateBar1()
 
 				if (i == 1) then
 					Button:SetPoint("BOTTOMLEFT", Spacing, Spacing)
-						
+
 					self:SetWidth((Button:GetWidth() * 12) + (Spacing * 13))
 					self:SetHeight((Button:GetWidth() * 1) + (Spacing * 2))
 				else
 					local Previous = _G["ActionButton"..i-1]
-						
+
 					Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
 				end
 			end
@@ -98,7 +98,7 @@ function TukuiActionBars:CreateBar1()
 				local Button = _G["ActionButton"..i]
 				local Action = Button.action
 				local Icon = Button.icon
-					
+
 				if Action >= 120 then
 					local Texture = GetActionTexture(Action)
 

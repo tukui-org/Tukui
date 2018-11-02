@@ -83,12 +83,12 @@ function TukuiChat:StyleFrame(frame)
 	if Tab.conversationIcon then
 		Tab.conversationIcon:Kill()
 	end
-	
+
 	-- Hide editbox every time we click on a tab
 	Tab:HookScript("OnClick", function()
 		EditBox:Hide()
 	end)
-	
+
 	-- Kill Scroll Bars
 	if Scroll then
 		Scroll:Kill()
@@ -435,7 +435,7 @@ function TukuiChat:Setup()
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 
 		self:StyleFrame(Frame)
-		
+
 		if i == 2 then
 			CombatLogQuickButtonFrame_Custom:StripTextures()
 		else
@@ -460,17 +460,17 @@ function TukuiChat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-	
+
 	QuickJoinToastButton:ClearAllPoints()
 	QuickJoinToastButton:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", -1, -18)
 	QuickJoinToastButton:EnableMouse(false)
 	QuickJoinToastButton.ClearAllPoints = Noop
 	QuickJoinToastButton.SetPoint = Noop
 	QuickJoinToastButton:SetAlpha(0)
-	
+
 	ChatMenu:ClearAllPoints()
 	ChatMenu:SetPoint("BOTTOMLEFT", T.Panels.LeftChatBG, "TOPLEFT", 0, 16)
-	
+
 	VoiceChatPromptActivateChannel:SetTemplate()
 	VoiceChatPromptActivateChannel:CreateShadow()
 	VoiceChatPromptActivateChannel.AcceptButton:SkinButton()
@@ -478,7 +478,7 @@ function TukuiChat:Setup()
 	VoiceChatPromptActivateChannel:SetPoint(unpack(TukuiChat.VoiceAlertPosition))
 	VoiceChatPromptActivateChannel.ClearAllPoints = Noop
 	VoiceChatPromptActivateChannel.SetPoint = Noop
-	
+
 	if C.Chat.ShortChannelName then
 		--guild
 		CHAT_GUILD_GET = "|Hchannel:GUILD|hG|h %s "

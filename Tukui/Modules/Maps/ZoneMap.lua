@@ -14,7 +14,7 @@ end
 function ZoneMap:Skin()
 	local Map = BattlefieldMapFrame
 	local Tab = BattlefieldMapTab
-		
+
 	Map.BorderFrame:Kill()
 	Map.ScrollContainer:CreateBackdrop()
 	Map.ScrollContainer:CreateShadow()
@@ -31,7 +31,7 @@ function ZoneMap:OnEvent(event, addon)
 	if addon ~= "Blizzard_BattlefieldMap" then
 		return
 	end
-	
+
 	if not BattlefieldMapFrame.IsSkinned then
 		self:Skin()
 		self:AddHooks()
@@ -41,7 +41,7 @@ end
 function ZoneMap:Enable()
 	self:RegisterEvent("ADDON_LOADED")
 	self:SetScript("OnEvent", self.OnEvent)
-	
+
 	if BattlefieldMapFrame and not BattlefieldMapFrame.IsSkinned then
 		self:Skin()
 		self:AddHooks()

@@ -179,11 +179,11 @@ function TukuiUnitFrames:Raid()
 		RaidDebuffs.onlyMatchSpellID = true
 		RaidDebuffs.FilterDispellableDebuff = true
 		--RaidDebuffs.forceShow = true -- TEST
-		
+
 		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.time:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.time:Point("CENTER", RaidDebuffs, 0, 0)
-	
+
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
@@ -201,7 +201,7 @@ function TukuiUnitFrames:Raid()
 	Highlight:SetBackdrop(TukuiUnitFrames.HighlightBorder)
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	--[[
 	if Class == "PRIEST" then
 		local Atonement = CreateFrame("StatusBar", nil, Power)
@@ -209,7 +209,7 @@ function TukuiUnitFrames:Raid()
 		Atonement:SetStatusBarTexture(C.Medias.Normal)
 		Atonement:SetFrameStrata(Power:GetFrameStrata())
 		Atonement:SetFrameLevel(Power:GetFrameLevel() + 1)
-		
+
 		self.Atonement = Atonement
 	end
 	--]]
@@ -225,7 +225,7 @@ function TukuiUnitFrames:Raid()
 	self.RaidTargetIndicator = RaidIcon
 	self.ThreatIndicator = Threat
 	self.Highlight = Highlight
-	
+
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
 	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)

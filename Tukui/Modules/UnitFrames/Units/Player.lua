@@ -40,7 +40,7 @@ function TukuiUnitFrames:Player()
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
-	
+
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
@@ -316,7 +316,7 @@ function TukuiUnitFrames:Player()
 			else
 				ComboPoints[i]:SetWidth((250 / 6) - 1)
 				ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-				
+
 				ComboPoints[i].BarSizeForMaxComboIs6 = ComboPoints[i]:GetWidth()
 				ComboPoints[i].BarSizeForMaxComboIs5 = 250 / 5 - 1
 			end
@@ -342,7 +342,7 @@ function TukuiUnitFrames:Player()
 
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
-	
+
 	if (C.UnitFrames.TotemBar) and (Class == "SHAMAN" or Class == "MONK") then
 		local Bar = CreateFrame("Frame", "TukuiTotemBar", self)
 		Bar:SetFrameStrata(self:GetFrameStrata())
@@ -370,13 +370,13 @@ function TukuiUnitFrames:Player()
 			Bar[i].Icon:SetInside()
 			Bar[i].Icon:SetAlpha(1)
 			Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			
+
 			Bar[i].Cooldown = CreateFrame('Cooldown', nil, Bar[i], 'CooldownFrameTemplate')
         	Bar[i].Cooldown:SetInside()
 		end
-		
+
 		Movers:RegisterFrame(Bar)
-		
+
 		-- To allow right-click destroy totem.
 		TotemFrame:SetParent(UIParent)
 

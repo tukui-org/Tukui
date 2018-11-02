@@ -25,14 +25,14 @@ function AFK:UpdateTime(Value)
 	end
 
 	self.Time:SetText("|cffffffff" .. format("%.2d", Minutes) .. ":" .. format("%.2d", Seconds) .. "|r")
-	
+
 	AFK.Minutes = Minutes
 	AFK.Seconds = Seconds
 end
 
 function AFK:OnUpdate(Elapsed)
 	self.Update = (self.Update or 0) + Elapsed
-	
+
 	if (self.Update > 1.0) then
 		self.Total = (self.Total or 0) + 1
 
@@ -48,27 +48,27 @@ end
 function AFK:SetAFK(status)
 	if (status) then
 		ShowUIPanel(WorldMapFrame) -- Avoid Lua errors on M keypress
-		
+
 		UIParent:Hide()
 		UIFrameFadeIn(self.Frame, 1, self.Frame:GetAlpha(), 1)
-	
+
 		self:SetScript("OnUpdate", self.OnUpdate)
 
 		self.IsAFK = true
 	elseif (self.IsAFK) then
 		self.Total = 0
-		
+
 		HideUIPanel(WorldMapFrame)  -- Avoid Lua errors on M keypress
-	
+
 		UIFrameFadeOut(self.Frame, 0.5, self.Frame:GetAlpha(), 0)
 		UIParent:Show()
-		
+
 		self:SetScript("OnUpdate", nil)
-		
+
 		self.IsAFK = false
 	end
 end
-	
+
 function AFK:OnEvent(event, ...)
 	if (event == "PLAYER_REGEN_DISABLED" or event == "LFG_PROPOSAL_SHOW" or event == "UPDATE_BATTLEFIELD_STATUS") then
 		if (event == "UPDATE_BATTLEFIELD_STATUS") then
@@ -83,7 +83,7 @@ function AFK:OnEvent(event, ...)
 		if (event == "PLAYER_REGEN_DISABLED") then
 			self:RegisterEvent("PLAYER_REGEN_ENABLED", "OnEvent")
 		end
-	
+
 		return
 	end
 
@@ -102,13 +102,13 @@ end
 
 function AFK:Create()
 	local Font = C.Medias.Font
-	
+
 	local Frame = CreateFrame("Frame", nil)
 	Frame:SetFrameLevel(5)
 	Frame:SetScale(UIParent:GetScale())
 	Frame:SetAllPoints(UIParent)
 	Frame:SetAlpha(0)
-	
+
 	local TopPanel = CreateFrame("Frame", nil, Frame)
 	TopPanel:SetFrameLevel(Frame:GetFrameLevel() - 1)
 	TopPanel:Size(UIParent:GetWidth()+8, 42)
@@ -122,7 +122,7 @@ function AFK:Create()
 	BottomPanel:Point("BOTTOM", Frame, 0, -4)
 	BottomPanel:CreateBackdrop()
 	BottomPanel:CreateShadow()
-	
+
 	local Class = select(2, UnitClass("player"))
 	local CustomClassColor = T.Colors.class[Class]
 
@@ -135,18 +135,18 @@ function AFK:Create()
 	LocalDate:Point("LEFT", TopPanel, 28, -2)
 	LocalDate:SetFontTemplate(Font, 14, 3, 3)
 	LocalDate:SetTextColor(unpack(CustomClassColor))
-	
+
 	local Time = Frame:CreateFontString(nil, "OVERLAY")
 	Time:Point("CENTER", TopPanel, 0, -2)
 	Time:SetFontTemplate(Font, 16, 3, 3)
 	Time:SetTextColor(unpack(CustomClassColor))
-	
+
 	local Name = Frame:CreateTexture(nil, "OVERLAY")
 	Name:Size(256, 128)
 	Name:SetTexture(C.Medias.Logo)
 	Name:Point("CENTER", BottomPanel, -8, 48)
 
-	local Version = Frame:CreateFontString(nil, "OVERLAY")  
+	local Version = Frame:CreateFontString(nil, "OVERLAY")
 	Version:Point("CENTER", BottomPanel, 0, -18)
 	Version:SetFontTemplate(Font, 24, 3, 3)
 	Version:SetText("Version " .. T.Version)
@@ -155,9 +155,9 @@ function AFK:Create()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:SetScript("OnEvent", self.OnEvent)
-	
+
 	UIParent:HookScript("OnShow", function(self) if UnitIsAFK("player") then SendChatMessage("", "AFK") AFK:SetAFK(false) end end)
-	
+
 	self.Frame = Frame
 	self.PanelTop = TopPanel
 	self.BottomPanel = BottomPanel
@@ -172,7 +172,7 @@ function AFK:Enable()
 	if not C.General.AFKSaver then
 		return
 	end
-	
+
 	if not (self.IsCreated) then
 		self:Create()
 		self.IsCreated = true

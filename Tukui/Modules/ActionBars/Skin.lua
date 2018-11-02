@@ -21,7 +21,7 @@ function TukuiActionBars:SkinButton()
 	local Normal  = _G[Name.."NormalTexture"]
 	local BtnBG = _G[Name.."FloatingBG"]
 	local Font = T.GetFont(C["ActionBars"].Font)
-	
+
 	if not Button.IsSkinned then
 		Flash:SetTexture("")
 		Button:SetNormalTexture("")
@@ -31,7 +31,7 @@ function TukuiActionBars:SkinButton()
 
 		HotKey:ClearAllPoints()
 		HotKey:Point("TOPRIGHT", 0, -3)
-		
+
 		Count:SetFontObject(Font)
 
 		if (Btname) then
@@ -82,7 +82,7 @@ function TukuiActionBars:SkinButton()
 				ActionButton_UpdateState(Button)
 			end
 		end
-		
+
 		if (Border) then
 			Border:SetTexture("")
 		end
@@ -92,7 +92,7 @@ function TukuiActionBars:SkinButton()
 	end
 
 	TukuiActionBars.UpdateHotKey(Button)
-	
+
 	if (Border and C.ActionBars.EquipBorder) then
 		if (Border:IsShown()) then
 			Button:SetBackdropBorderColor(.08, .70, 0)
@@ -107,13 +107,13 @@ function TukuiActionBars:SkinButton()
 
 		if String then
 			local Text
-			
+
 			if string.byte(String, 1) > 223 then
 				Text = string.sub(String, 1, 9)
 			else
 				Text = string.sub(String, 1, 4)
 			end
-			
+
 			Btname:SetText(Text)
 		end
 	end
@@ -130,7 +130,7 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
 	Button:SetTemplate()
-	
+
 	if C.ActionBars.HideBackdrop then
 		Button:CreateShadow()
 	end

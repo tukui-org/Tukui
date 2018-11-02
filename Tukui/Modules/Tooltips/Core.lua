@@ -175,10 +175,10 @@ function Tooltip:OnTooltipSetUnit()
 		elseif UnitIsDND(Unit) then
 			self:AppendText((" %s"):format(CHAT_FLAG_DND))
 		end
-		
+
 		if Talent.Spec or Talent.ILevel then
 			self:AddLine(" ")
-			
+
 			if Talent.ILevel then
 				self:AddLine(STAT_AVERAGE_ITEM_LEVEL..": |cff3eea23"..Talent.ILevel.."|r")
 			end
@@ -186,7 +186,7 @@ function Tooltip:OnTooltipSetUnit()
 			if Talent.Spec then
 				self:AddLine(SPECIALIZATION..": |cff3eea23"..Talent.Spec.."|r")
 			end
-			
+
 			Talent.Spec = nil
 			Talent.ILevel = nil
 		end
@@ -392,7 +392,7 @@ function Tooltip:Enable()
 		HealthBar.Text:SetFontObject(T.GetFont(C["Tooltips"].HealthFont))
 		HealthBar.Text:Point("CENTER", HealthBar, "CENTER", 0, 6)
 	end
-	
+
 	if C["Tooltips"].ShowSpec then
 		T.Tooltips.Talent:RegisterEvent("MODIFIER_STATE_CHANGED")
 	end

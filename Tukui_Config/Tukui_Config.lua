@@ -902,7 +902,6 @@ function TukuiConfig:CreateConfigWindow()
 	TitleFrame:RegisterForDrag("LeftButton")
 	TitleFrame:SetScript("OnDragStart", function() TukuiConfigFrame:StartMoving() end)
 	TitleFrame:SetScript("OnDragStop", function() TukuiConfigFrame:StopMovingOrSizing() end)
-	
 
 	TitleFrame.Text = TitleFrame:CreateFontString(nil, "OVERLAY")
 	TitleFrame.Text:SetFont(C.Medias.Font, 16)

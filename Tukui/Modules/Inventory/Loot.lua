@@ -213,7 +213,7 @@ function Loot:CreateSlots(id)
 	frame:CreateBackdrop()
 	frame:CreateShadow()
 	frame:SetID(id)
-	
+
 	frame:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 
 	frame:SetScript("OnEnter", Loot.OnEnter)
@@ -232,7 +232,7 @@ function Loot:CreateSlots(id)
 	icon:SetTexCoord(.1, .9, .1, .9)
 	icon:SetInside()
 	frame.icon = icon
-	
+
 	local invsframe = CreateFrame("Frame", nil, frame)
 	invsframe:SetFrameLevel(frame:GetFrameLevel() + 5)
 	invsframe:SetAllPoints()
@@ -251,22 +251,22 @@ function Loot:CreateSlots(id)
 	name:SetNonSpaceWrap(true)
 	name:SetFontObject(Font)
 	frame.name = name
-	
+
 	local drop = CreateFrame("StatusBar", nil, frame)
 	drop:SetFrameLevel(frame:GetFrameLevel() + 5)
 	drop:SetInside(frame, 1, 1)
 	drop:SetStatusBarTexture(C.Medias.Blank)
 	drop:SetStatusBarColor(0, 0, 0, 0)
 	frame.drop = drop
-	
+
 	TukuiLootFrame.LootSlots[id] = frame
-	
+
 	return frame
 end
 
 function Loot:LOOT_SLOT_CLEARED(_, slot)
-	if not TukuiLootFrame:IsShown() then 
-		return 
+	if not TukuiLootFrame:IsShown() then
+		return
 	end
 
 	TukuiLootFrame.LootSlots[slot]:Hide()
@@ -288,7 +288,7 @@ function Loot:LOOT_OPENED(_, autoloot)
 	if not TukuiLootFrame:IsShown() then
 		CloseLoot(not autoLoot)
 	end
-	
+
 	if IsFishingLoot() then
 		TukuiLootFrame.Title:SetText("Fishy Loot")
 	elseif not UnitIsFriend("player", "target") and UnitIsDead("target") then
@@ -310,13 +310,13 @@ function Loot:LOOT_OPENED(_, autoloot)
 		local SavedVar = TukuiData[GetRealmName()][UnitName("Player")].Move
 		local CustomLootPosition = TukuiData[GetRealmName()][UnitName("Player")].Move.TukuiLootFrame
 		local A1, P, A2, X, Y
-		
+
 		if CustomLootPosition then
 			A1, P, A2, X, Y = unpack(CustomLootPosition)
 		else
 			A1, P, A2, X, Y = "TOPLEFT", UIParent, "TOPLEFT", 50, -50
 		end
-		
+
 		TukuiLootFrame:ClearAllPoints()
 		TukuiLootFrame:Point(A1, P, A2, X, Y)
 	end
@@ -330,10 +330,10 @@ function Loot:LOOT_OPENED(_, autoloot)
 			if (GetLootSlotType(i) == LOOT_SLOT_MONEY) then
 				Item = Item:gsub("\n", ", ")
 			end
-			
+
 			local LootFrameSlots = TukuiLootFrame.LootSlots[i] or Loot:CreateSlots(i)
 			local Color = ITEM_QUALITY_COLORS[Quality] or {r = 1, g = 1, b = 1}
-			
+
 			if (Quantity and Quantity > 1) then
 				LootFrameSlots.count:SetText(Quantity)
 				LootFrameSlots.count:Show()
@@ -380,20 +380,20 @@ function Loot:Enable()
 	if not C.Loot.Enable then
 		return
 	end
-	
+
 	if C.Loot.StandardLoot then
 		self:SkinStandardLootFrame()
 		self:AddStandardLootHooks()
-		
+
 		return
 	end
-	
+
 	Font = T.GetFont(C.Loot.Font)
-	
+
 	-- Locals
 	self.IconSize = 32
 	self.DefaultPosition = {"TOPLEFT", UIParent, "TOPLEFT", 50, -50}
-	
+
 	TukuiLootFrame = CreateFrame("Button", "TukuiLootFrame", UIParent)
 	TukuiLootFrame:SetClampedToScreen(true)
 	TukuiLootFrame:SetToplevel(true)
@@ -404,34 +404,34 @@ function Loot:Enable()
 		StaticPopup_Hide("CONFIRM_LOOT_DISTRIBUTION")
 		CloseLoot()
 	end)
-	
+
 	TukuiLootFrame.Overlay = CreateFrame("Frame", nil, TukuiLootFrame)
 	TukuiLootFrame.Overlay:Size(198+16, 28)
 	TukuiLootFrame.Overlay:Point("TOP", TukuiLootFrame, -16, 22)
 	TukuiLootFrame.Overlay:CreateBackdrop()
 	TukuiLootFrame.Overlay:CreateShadow()
-	
+
 	TukuiLootFrame.InvisFrame = CreateFrame("Frame", nil, TukuiLootFrame)
 	TukuiLootFrame.InvisFrame:SetFrameLevel(TukuiLootFrame:GetFrameLevel() + 5)
 	TukuiLootFrame.InvisFrame:SetAllPoints()
-	
+
 	TukuiLootFrame.Title = TukuiLootFrame.InvisFrame:CreateFontString(nil, "OVERLAY", 7)
 	TukuiLootFrame.Title:SetFontObject(Font)
 	TukuiLootFrame.Title:Point("CENTER", TukuiLootFrame.Overlay, 0, 1)
 	TukuiLootFrame.Title:SetTextColor(1, 0.82, 0)
-	
+
 	self:RegisterEvent("LOOT_OPENED")
 	self:RegisterEvent("LOOT_SLOT_CLEARED")
 	self:RegisterEvent("LOOT_CLOSED")
-	
+
 	self:SetScript("OnEvent", function(self, event, ...)
 		self[event](self, event, ...)
 	end)
-	
+
 	LootFrame:UnregisterAllEvents()
-	
+
 	Movers:RegisterFrame(TukuiLootFrame)
-	
+
 	tinsert(UISpecialFrames, "TukuiLootFrame")
 end
 

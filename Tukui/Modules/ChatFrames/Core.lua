@@ -32,7 +32,7 @@ function TukuiChat:Enable()
 	Whisper:SetScript("OnEvent", function(self, event)
 		TukuiChat:PlayWhisperSound()
 	end)
-	
+
 	FCF_UpdateButtonSide = function() end
 end
 
