@@ -81,6 +81,15 @@ function Bags:SkinBagButton()
 		BattlePay:SetAlpha(0)
 	end
 
+	self.AutoCastShine = CreateFrame('Frame', '$parentShine', self, 'AutoCastShineTemplate')
+
+	for _, sparks in pairs(self.AutoCastShine.sparkles) do
+		sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
+	end
+
+	self:HookScript("OnEnter", function(self) AutoCastShine_AutoCastStop(self.AutoCastShine) end)
+	self:HookScript("OnHide", function(self) AutoCastShine_AutoCastStop(self.AutoCastShine) end)
+
 	self:SetNormalTexture("")
 	self:SetPushedTexture("")
 	self:SetBackdrop({
@@ -568,13 +577,11 @@ function Bags:SlotUpdate(id, button)
 		return
 	end
 
-	local ItemLink = GetContainerItemLink(id, button:GetID())
-
-	local Texture, Count, Lock, quality, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
+	local _, _, _, Rarity, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 
-	if IsNewItem ~= true and button.Animation and button.Animation:IsPlaying() then
-		button.Animation:Stop()
+	if IsNewItem ~= true and button.AutoCastShine then
+		AutoCastShine_AutoCastStop(button.AutoCastShine)
 	end
 
 	if (button.ItemID == ItemID) then
@@ -583,8 +590,8 @@ function Bags:SlotUpdate(id, button)
 
 	button.ItemID = ItemID
 
-	local IsQuestItem, QuestId, IsActive = GetContainerItemQuestInfo(id, button:GetID())
-	local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
+	local IsQuestItem, _, IsActive = GetContainerItemQuestInfo(id, button:GetID())
+	--local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
 	local IsProfBag = self:IsProfessionBag(id)
 	local IconQuestTexture = button.IconQuestTexture
@@ -600,33 +607,20 @@ function Bags:SlotUpdate(id, button)
 		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
 	end
 
+	if IsQuestItem then
+		button:SetBackdropBorderColor(1, 1, 0)
+	elseif Rarity > 1 then
+		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
+	else
+		button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
+	end
+
 	if IsNewItem and NewItem then
 		NewItem:SetAlpha(0)
 
 		if C.Bags.PulseNewItem then
-			if not button.Animation then
-				button.Animation = button:CreateAnimationGroup()
-				button.Animation:SetLooping("BOUNCE")
-
-				button.FadeOut = button.Animation:CreateAnimation("Alpha")
-				button.FadeOut:SetFromAlpha(1)
-				button.FadeOut:SetToAlpha(0)
-				button.FadeOut:SetDuration(0.40)
-				button.FadeOut:SetSmoothing("IN_OUT")
-			end
-
-			button.Animation:Play()
+			AutoCastShine_AutoCastStart(button.AutoCastShine, button:GetBackdropBorderColor())
 		end
-	end
-
-	if IsQuestItem then
-		button:SetBackdropBorderColor(1, 1, 0)
-	elseif ItemLink then
-		local Rarity = select(4, GetContainerItemInfo(id, button:GetID())) or 0
-
-		button:SetBackdropBorderColor(GetItemQualityColor(Rarity))
-	else
-		button:SetBackdropBorderColor(unpack(C["General"].BorderColor))
 	end
 end
 
