@@ -580,10 +580,6 @@ function Bags:SlotUpdate(id, button)
 	local _, _, _, Rarity, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 
-	if IsNewItem ~= true and button.AutoCastShine then
-		AutoCastShine_AutoCastStop(button.AutoCastShine)
-	end
-
 	if (button.ItemID == ItemID) then
 		return
 	end
