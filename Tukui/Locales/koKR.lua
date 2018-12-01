@@ -223,7 +223,6 @@ L.Install = {} -- Installation of Tukui
 L.Install.Tutorial = "튜토리얼"
 L.Install.Install = "설치"
 L.Install.InstallStep0 = "Tukui를 선택해주셔서 감사합니다!|n|n간단히 몇 단계만 거치면 설치가 됩니다. 각 단계별로, 제시된 설정을 적용하거나 무시할 수 있습니다."
-L.Install.InstallStep1 = "첫 단계는 기본 설정입니다. 부분적인 설정만 적용하고 싶은 게 아니라면, 모두에게 |cffff0000권장|r됩니다.|n|n
 L.Install.InstallStep1 = [["첫 단계는 기본 설정입니다. 부분적인 설정만 적용하고 싶은 게 아니라면, 모두에게 |cffff0000권장|r됩니다.|n|n
 '적용'을 눌러 설정을 적용하고, '다음'을 눌러 설치를 계속하세요.
 이 단계를 건너뛰려면 '다음'을 누르세요."]]
