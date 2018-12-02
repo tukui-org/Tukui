@@ -73,7 +73,6 @@ function TukuiUnitFrames:Nameplates()
 	Debuffs.PostCreateIcon = TukuiUnitFrames.PostCreateAura
 	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs
 
-
 	local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
 	CastBar:SetFrameStrata(self:GetFrameStrata())
 	CastBar:SetStatusBarTexture(CastTexture)

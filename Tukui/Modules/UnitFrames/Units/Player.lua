@@ -372,7 +372,7 @@ function TukuiUnitFrames:Player()
 			Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 			Bar[i].Cooldown = CreateFrame('Cooldown', nil, Bar[i], 'CooldownFrameTemplate')
-        	Bar[i].Cooldown:SetInside()
+			Bar[i].Cooldown:SetInside()
 		end
 
 		Movers:RegisterFrame(Bar)

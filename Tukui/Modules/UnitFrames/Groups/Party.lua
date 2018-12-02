@@ -60,7 +60,7 @@ function TukuiUnitFrames:Party()
 	Power.colorPower = true
 
 	if (C.UnitFrames.Smooth) then
-		Health.Smooth = true
+		Power.Smooth = true
 	end
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")

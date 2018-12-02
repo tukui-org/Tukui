@@ -41,10 +41,6 @@ function TukuiUnitFrames:Arena()
 		Health.Smooth = true
 	end
 
-	if (C.UnitFrames.Smooth) then
-		Health.Smooth = true
-	end
-
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:Height(6)

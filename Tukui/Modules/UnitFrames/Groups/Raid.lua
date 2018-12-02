@@ -67,7 +67,7 @@ function TukuiUnitFrames:Raid()
 	Power.colorPower = true
 
 	if (C.UnitFrames.Smooth) then
-		Health.Smooth = true
+		Power.Smooth = true
 	end
 
 	local Panel = CreateFrame("Frame", nil, self)
