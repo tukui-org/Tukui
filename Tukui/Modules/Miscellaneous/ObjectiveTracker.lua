@@ -518,7 +518,12 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
-	hooksecurefunc("WorldMap_SetupWorldQuestButton", self.SkinWorldQuestsPOI)
+	
+	if T.WoWBuild < 28724 then
+		hooksecurefunc("WorldMap_SetupWorldQuestButton", self.SkinWorldQuestsPOI)
+	else
+		hooksecurefunc(QuestUtil, "SetupWorldQuestButton", self.SkinWorldQuestsPOI)
+	end
 
 	-- Currently there is display a bug with this hook
 	-- hooksecurefunc(QUEST_TRACKER_MODULE, "Update", self.ShowObjectiveTrackerLevel)

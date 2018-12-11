@@ -63,9 +63,11 @@ function TukuiActionBars:DisableBlizzard()
 		return true
 	end
 
-	-- Avoid Hiding Buttons on open/close spellbook
-	MultiActionBar_HideAllGrids = function() end
-	MultiActionBar_ShowAllGrids = function() end
+	if T.WoWBuild < 28724 then
+		-- Avoid Hiding Buttons on open/close spellbook
+		MultiActionBar_HideAllGrids = function() end
+		MultiActionBar_ShowAllGrids = function() end
+	end
 
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
 end
@@ -73,36 +75,41 @@ end
 function TukuiActionBars:ShowGrid()
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button
+		local Reason = nil
+		
+		if T.WoWBuild >= 28724 then
+			Reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT
+		end
 
 		Button = _G[format("ActionButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
 		Button:SetAttribute("statehidden", true)
 		Button:Show()
-		ActionButton_ShowGrid(Button)
+		ActionButton_ShowGrid(Button, Reason)
 
 		Button = _G[format("MultiBarRightButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
 		Button:SetAttribute("statehidden", true)
 		Button:Show()
-		ActionButton_ShowGrid(Button)
+		ActionButton_ShowGrid(Button, Reason)
 
 		Button = _G[format("MultiBarBottomRightButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
 		Button:SetAttribute("statehidden", true)
 		Button:Show()
-		ActionButton_ShowGrid(Button)
+		ActionButton_ShowGrid(Button, Reason)
 
 		Button = _G[format("MultiBarLeftButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
 		Button:SetAttribute("statehidden", true)
 		Button:Show()
-		ActionButton_ShowGrid(Button)
+		ActionButton_ShowGrid(Button, Reason)
 
 		Button = _G[format("MultiBarBottomLeftButton%d", i)]
 		Button:SetAttribute("showgrid", 1)
 		Button:SetAttribute("statehidden", true)
 		Button:Show()
-		ActionButton_ShowGrid(Button)
+		ActionButton_ShowGrid(Button, Reason)
 	end
 end
 

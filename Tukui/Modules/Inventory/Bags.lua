@@ -484,7 +484,10 @@ function Bags:CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame["Bag"..i]
-			Bag.HighlightFrame:Kill() -- Bugged Texture on Bank Bag Slot
+			
+			if T.WoWBuild < 28724 then
+				Bag.HighlightFrame:Kill() -- Bugged Texture on Bank Bag Slot
+			end
 
 			Bag:SetParent(BankBagsContainer)
 			Bag:SetWidth(ButtonSize)
