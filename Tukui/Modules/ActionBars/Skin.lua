@@ -242,44 +242,6 @@ function TukuiActionBars:StyleFlyout()
 	TukuiActionBars.SkinFlyoutButtons()
 end
 
-local ProcBackdrop = {
-	edgeFile = C.Medias.Blank, edgeSize = T.Mult,
-	insets = {left = T.Mult, right = T.Mult, top = T.Mult, bottom = T.Mult},
-}
-
--- NOTE: Try to find a better animation for this.
-function TukuiActionBars:StartButtonHighlight()
-	if self.overlay then
-		self.overlay:Hide()
-		ActionButton_HideOverlayGlow(self)
-	end
-
-	if not self.Animation then
-		local NewProc = CreateFrame("Frame", nil, self)
-		NewProc:SetBackdrop(ProcBackdrop)
-		NewProc:SetBackdropBorderColor(1, 1, 0)
-		NewProc:SetAllPoints(self)
-
-		self.NewProc = NewProc
-
-		local Animation = self.NewProc:CreateAnimationGroup()
-		Animation:SetLooping("BOUNCE")
-
-		local FadeOut = Animation:CreateAnimation("Alpha")
-		FadeOut:SetFromAlpha(1)
-		FadeOut:SetToAlpha(0)
-		FadeOut:SetDuration(0.40)
-		FadeOut:SetSmoothing("IN_OUT")
-
-		self.Animation = Animation
-	end
-
-	if not self.Animation:IsPlaying() then
-		self.Animation:Play()
-		self.NewProc:Show()
-	end
-end
-
 function TukuiActionBars:StopButtonHighlight()
 	if self.Animation and self.Animation:IsPlaying() then
 		self.Animation:Stop()
