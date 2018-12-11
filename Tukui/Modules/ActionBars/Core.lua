@@ -22,11 +22,7 @@ local Frames = {
 
 function TukuiActionBars:DisableBlizzard()
 	local Hider = Panels.Hider
-
-	MainMenuBarArtFrame.RightEndCap.GetRight = function() return 0 end
-	MainMenuBarMixin.ChangeMenuBarSizeAndPosition = function() return end
-	MinimapCluster.GetBottom = function() return 999999999 end
-
+	
 	SetCVar("alwaysShowActionBars", 1)
 
 	if (not C.ActionBars.AddNewSpells) then
@@ -58,10 +54,6 @@ function TukuiActionBars:DisableBlizzard()
 			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		end
 	end)
-
-	MainMenuBar.slideOut.IsPlaying = function()
-		return true
-	end
 
 	if T.WoWBuild < 28724 then
 		-- Avoid Hiding Buttons on open/close spellbook

@@ -126,6 +126,7 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	local HotKey = _G[Button:GetName().."HotKey"]
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
+	local NormalTex = _G[Button:GetName().."NormalTexture2"]
 
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
@@ -141,7 +142,7 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		HotKey:Point("TOPRIGHT", 0, -3)
 	else
 		HotKey:SetText("")
-		HotKey:Kill()
+		HotKey:SetAlpha(0)
 	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
@@ -161,8 +162,7 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		self.UpdateHotKey(Button)
 	end
 
-	Button:SetNormalTexture("")
-	Button.SetNormalTexture = Noop
+	NormalTex:SetAlpha(0)
 
 	Flash:SetTexture("")
 

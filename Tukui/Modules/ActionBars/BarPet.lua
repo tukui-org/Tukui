@@ -20,7 +20,6 @@ function TukuiActionBars:CreatePetBar()
 
 	PetActionBarFrame:UnregisterEvent("PET_BAR_SHOWGRID")
 	PetActionBarFrame:UnregisterEvent("PET_BAR_HIDEGRID")
-	PetActionBarFrame.showgrid = 1
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Button = _G["PetActionButton"..i]
