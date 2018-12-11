@@ -126,7 +126,6 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	local HotKey = _G[Button:GetName().."HotKey"]
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
-	local NormalTex = _G[Button:GetName().."NormalTexture2"]
 
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)

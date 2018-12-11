@@ -330,6 +330,8 @@ function TukuiActionBars:UpdateStanceBar(...)
 
 			Button = _G[ButtonName]
 			Icon = _G[ButtonName.."Icon"]
+			
+			Button:SetNormalTexture("")
 
 			if i <= NumForms then
 				Texture, IsActive, IsCastable = GetShapeshiftFormInfo(i)
