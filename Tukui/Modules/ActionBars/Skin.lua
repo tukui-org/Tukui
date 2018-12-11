@@ -162,8 +162,6 @@ function TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		self.UpdateHotKey(Button)
 	end
 
-	NormalTex:SetAlpha(0)
-
 	Flash:SetTexture("")
 
 	if Normal then

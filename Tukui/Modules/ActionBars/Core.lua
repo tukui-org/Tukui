@@ -243,6 +243,8 @@ function TukuiActionBars:UpdatePetBar(...)
 		local PetAutoCastableTexture = _G[ButtonName.."AutoCastable"]
 		local PetAutoCastShine = _G[ButtonName.."Shine"]
 		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled = GetPetActionInfo(i)
+		
+		PetActionButton:SetNormalTexture("")
 
 		if (not IsToken) then
 			PetActionIcon:SetTexture(Texture)

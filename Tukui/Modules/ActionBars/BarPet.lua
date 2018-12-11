@@ -17,16 +17,15 @@ function TukuiActionBars:CreatePetBar()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local PetActionBarFrame = PetActionBarFrame
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
-
-	PetActionBarFrame:UnregisterEvent("PET_BAR_SHOWGRID")
-	PetActionBarFrame:UnregisterEvent("PET_BAR_HIDEGRID")
+	
+	PetActionBarFrame:RegisterEvent("PET_BAR_SHOWGRID")
+	PetActionBarFrame:RegisterEvent("PET_BAR_HIDEGRID")
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Button = _G["PetActionButton"..i]
 		Button:ClearAllPoints()
 		Button:SetParent(Bar)
 		Button:Size(PetSize)
-		Button:Show()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Spacing, -Spacing)
@@ -42,7 +41,7 @@ function TukuiActionBars:CreatePetBar()
 	end
 
 	hooksecurefunc("PetActionBar_Update", TukuiActionBars.UpdatePetBar)
-
+	
 	TukuiActionBars:SkinPetButtons()
 
 	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nopossessbar,nobonusbar:5] show; hide")
@@ -53,7 +52,6 @@ function TukuiActionBars:CreatePetBar()
 	Bar:RegisterEvent("PET_BAR_UPDATE")
 	Bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
 	Bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
-	--Bar:RegisterEvent("PET_BAR_HIDE")
 	Bar:RegisterEvent("UNIT_PET")
 	Bar:RegisterEvent("UNIT_FLAGS")
 	Bar:RegisterEvent("UNIT_AURA")
