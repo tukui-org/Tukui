@@ -18,7 +18,7 @@ local EventTraceEnabled = false
 local EventTrace = CreateFrame("Frame")
 EventTrace:SetScript("OnEvent", function(self, event)
 	if (event ~= "GET_ITEM_INFO_RECEIVED" and event ~= "COMBAT_LOG_EVENT_UNFILTERED") then
-		print(event)
+		T.Print(event)
 	end
 end)
 
