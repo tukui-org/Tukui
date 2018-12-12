@@ -95,9 +95,17 @@ function Loot:SkinStandardLootFrame()
 	LootFrameCloseButton:EnableMouse(false)
 	LootFrameCloseButton:StripTextures()
 
-	local ItemText = select(19, LootFrame:GetRegions())
+	if T.WoWBuild < 28724 then
+		local ItemText = select(19, LootFrame:GetRegions())
 
-	ItemText:SetAlpha(0)
+		ItemText:SetAlpha(0)
+	else
+		local ItemText = select(7, LootFrame:GetRegions())
+		
+		ItemText:SetAlpha(0)
+		LootFrame.NineSlice:StripTextures()
+		LootFrameInset.NineSlice:StripTextures()
+	end
 end
 
 function Loot:SkinStandardLootFrameButtons(i)
