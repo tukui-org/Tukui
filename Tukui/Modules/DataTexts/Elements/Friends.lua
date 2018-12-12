@@ -109,18 +109,21 @@ local function BuildBNTable(total)
 
 	for i = 1, total do
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
+		
+		if (toonID or presenceID) then
+			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 
-		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
-			if class == v then
-				class = k
+			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+				if class == v then
+					class = k
+				end
 			end
-		end
 
-		BNTable[i] = { presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
+			BNTable[i] = { presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
 
-		if isOnline then
-			BNTotalOnline = BNTotalOnline + 1
+			if isOnline then
+				BNTotalOnline = BNTotalOnline + 1
+			end
 		end
 	end
 end
@@ -131,45 +134,48 @@ local function UpdateBNTable(total)
 	for i = 1, #BNTable do
 		-- get guild roster information
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
+		
+		if (toonID or presenceID) then
+			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 
-		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
-			if class == v then
-				class = k
+			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+				if class == v then
+					class = k
+				end
 			end
-		end
 
-		-- get the correct index in our table
-		local index = GetTableIndex(BNTable, 1, presenceID)
+			-- get the correct index in our table
+			local index = GetTableIndex(BNTable, 1, presenceID)
 
-		-- we cannot find a BN member in our table, so rebuild it
-		if index == -1 then
-			BuildBNTable(total)
-			return
-		end
+			-- we cannot find a BN member in our table, so rebuild it
+			if index == -1 then
+				BuildBNTable(total)
+				return
+			end
 
-		-- update on-line status for all members
-		BNTable[index][7] = isOnline
+			-- update on-line status for all members
+			BNTable[index][7] = isOnline
 
-		-- update information only for on-line members
-		if isOnline then
-			BNTable[index][2] = presenceName
-			BNTable[index][3] = battleTag
-			BNTable[index][4] = toonName
-			BNTable[index][5] = toonID
-			BNTable[index][6] = client
-			BNTable[index][8] = isAFK
-			BNTable[index][9] = isDND
-			BNTable[index][10] = noteText
-			BNTable[index][11] = realmName
-			BNTable[index][12] = faction
-			BNTable[index][13] = race
-			BNTable[index][14] = class
-			BNTable[index][15] = zoneName
-			BNTable[index][16] = level
-			BNTable[index][17] = isBattleTagPresence
+			-- update information only for on-line members
+			if isOnline then
+				BNTable[index][2] = presenceName
+				BNTable[index][3] = battleTag
+				BNTable[index][4] = toonName
+				BNTable[index][5] = toonID
+				BNTable[index][6] = client
+				BNTable[index][8] = isAFK
+				BNTable[index][9] = isDND
+				BNTable[index][10] = noteText
+				BNTable[index][11] = realmName
+				BNTable[index][12] = faction
+				BNTable[index][13] = race
+				BNTable[index][14] = class
+				BNTable[index][15] = zoneName
+				BNTable[index][16] = level
+				BNTable[index][17] = isBattleTagPresence
 
-			BNTotalOnline = BNTotalOnline + 1
+				BNTotalOnline = BNTotalOnline + 1
+			end
 		end
 	end
 end
