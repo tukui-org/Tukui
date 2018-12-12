@@ -14,6 +14,14 @@ local SplitServerCharacter = function(profile)
 	return strsplit("-", profile)
 end
 
+local EventTraceEnabled = false
+local EventTrace = CreateFrame("Frame")
+EventTrace:SetScript("OnEvent", function(self, event)
+	if (event ~= "GET_ITEM_INFO_RECEIVED" and event ~= "COMBAT_LOG_EVENT_UNFILTERED") then
+		print(event)
+	end
+end)
+
 T.SlashHandler = function(cmd)
 	local arg1, arg2 = Split(cmd)
 
@@ -37,6 +45,16 @@ T.SlashHandler = function(cmd)
 		local Status = TukuiStatus
 
 		Status:ShowWindow()
+	elseif (arg1 == "events" or arg1 == "trace") then
+		if EventTraceEnabled then
+			EventTrace:UnregisterAllEvents()
+			
+			EventTraceEnabled = false
+		else
+			EventTrace:RegisterAllEvents()
+			
+			EventTraceEnabled = true
+		end
 	elseif (arg1 == "move" or arg1 == "moveui") then
 		local Movers = T["Movers"]
 
