@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80000
 ## Author: Tukz & Hydra
 ## X-Maintainer: Tukz & Azilroka
 ## Version: 18.19
