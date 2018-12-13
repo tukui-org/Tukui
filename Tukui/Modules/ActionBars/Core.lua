@@ -237,7 +237,7 @@ end
 function TukuiActionBars:UpdatePetBar(...)
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local ButtonName = "PetActionButton" .. i
-		PetActionButton = _G[ButtonName]
+		local PetActionButton = _G[ButtonName]
 
 		PetActionButton:SetNormalTexture("")
 	end
