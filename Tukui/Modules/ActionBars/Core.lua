@@ -16,7 +16,7 @@ local Panels = T["Panels"]
 
 local Frames = {
 	MainMenuBar, MainMenuBarArtFrame, OverrideActionBar,
-	PossessBarFrame, PetActionBarFrame, ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
+	PossessBarFrame, ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight,
 	TalentMicroButtonAlert, CollectionsMicroButtonAlert, EJMicroButtonAlert, CharacterMicroButtonAlert
 }
 
@@ -235,79 +235,11 @@ function TukuiActionBars:AddPanels()
 end
 
 function TukuiActionBars:UpdatePetBar(...)
-	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local ButtonName = "PetActionButton" .. i
-		local PetActionButton = _G[ButtonName]
-		local PetActionIcon = _G[ButtonName.."Icon"]
-		local PetActionBackdrop = PetActionButton.Backdrop
-		local PetAutoCastableTexture = _G[ButtonName.."AutoCastable"]
-		local PetAutoCastShine = _G[ButtonName.."Shine"]
-		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled = GetPetActionInfo(i)
-		
+		PetActionButton = _G[ButtonName]
+
 		PetActionButton:SetNormalTexture("")
-
-		if (not IsToken) then
-			PetActionIcon:SetTexture(Texture)
-			PetActionButton.tooltipName = Name
-		else
-			PetActionIcon:SetTexture(_G[Texture])
-			PetActionButton.tooltipName = _G[Name]
-		end
-
-		PetActionButton.IsToken = IsToken
-		PetActionButton.tooltipSubtext = SubText
-
-		if (IsActive) then
-			PetActionButton:SetChecked(1)
-
-			if PetActionBackdrop then
-				PetActionBackdrop:SetBackdropBorderColor(0, 1, 0)
-			end
-
-			if IsPetAttackAction(i) then
-				PetActionButton_StartFlash(PetActionButton)
-			end
-		else
-			PetActionButton:SetChecked()
-
-			if PetActionBackdrop then
-				PetActionBackdrop:SetBackdropBorderColor(unpack(C.General.BorderColor))
-			end
-
-			if IsPetAttackAction(i) then
-				PetActionButton_StopFlash(PetActionButton)
-			end
-		end
-
-		if AutoCastAllowed then
-			PetAutoCastableTexture:Show()
-		else
-			PetAutoCastableTexture:Hide()
-		end
-
-		if AutoCastEnabled then
-			AutoCastShine_AutoCastStart(PetAutoCastShine)
-		else
-			AutoCastShine_AutoCastStop(PetAutoCastShine)
-		end
-
-		if Texture then
-			if (GetPetActionSlotUsable(i)) then
-				SetDesaturation(PetActionIcon, nil)
-			else
-				SetDesaturation(PetActionIcon, 1)
-			end
-
-			PetActionIcon:Show()
-		else
-			PetActionIcon:Hide()
-		end
-
-		if (not PetHasActionBar() and Texture and Name ~= "PET_ACTION_FOLLOW") then
-			PetActionButton_StopFlash(PetActionButton)
-			SetDesaturation(PetActionIcon, 1)
-			PetActionButton:SetChecked(0)
-		end
 	end
 end
 

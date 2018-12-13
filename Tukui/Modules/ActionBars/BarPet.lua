@@ -17,15 +17,13 @@ function TukuiActionBars:CreatePetBar()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local PetActionBarFrame = PetActionBarFrame
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
-	
-	PetActionBarFrame:RegisterEvent("PET_BAR_SHOWGRID")
-	PetActionBarFrame:RegisterEvent("PET_BAR_HIDEGRID")
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Button = _G["PetActionButton"..i]
 		Button:ClearAllPoints()
 		Button:SetParent(Bar)
 		Button:Size(PetSize)
+		Button:SetNormalTexture("")
 		Button:Show()
 
 		if (i == 1) then
@@ -40,37 +38,16 @@ function TukuiActionBars:CreatePetBar()
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button
 	end
+	
+	PetActionBarFrame:EnableMouse(0)
+	PetActionBarFrame:ClearAllPoints()
+	PetActionBarFrame:SetParent(T.Panels.Hider)
 
 	hooksecurefunc("PetActionBar_Update", TukuiActionBars.UpdatePetBar)
 	
 	TukuiActionBars:SkinPetButtons()
 
 	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nopossessbar,nobonusbar:5] show; hide")
-
-	Bar:RegisterEvent("PLAYER_CONTROL_LOST")
-	Bar:RegisterEvent("PLAYER_CONTROL_GAINED")
-	Bar:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED")
-	Bar:RegisterEvent("PET_BAR_UPDATE")
-	Bar:RegisterEvent("PET_BAR_UPDATE_USABLE")
-	Bar:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
-	Bar:RegisterEvent("UNIT_PET")
-	Bar:RegisterEvent("UNIT_FLAGS")
-	Bar:RegisterEvent("UNIT_AURA")
-	Bar:SetScript("OnEvent", function(self, event, arg1)
-		if (event == "PET_BAR_UPDATE")
-			or (event == "UNIT_PET" and arg1 == "player")
-			or (event == "PLAYER_CONTROL_LOST")
-			or (event == "PLAYER_CONTROL_GAINED")
-			or (event == "PLAYER_FARSIGHT_FOCUS_CHANGED")
-			or (event == "UNIT_FLAGS")
-			or (arg1 == "pet" and (event == "UNIT_AURA")) then
-				TukuiActionBars:UpdatePetBar()
-		elseif event == "PET_BAR_UPDATE_COOLDOWN" then
-			PetActionBar_UpdateCooldowns()
-		else
-			TukuiActionBars:SkinPetButtons()
-		end
-	end)
 
 	Movers:RegisterFrame(Bar)
 end
