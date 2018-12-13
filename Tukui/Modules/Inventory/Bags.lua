@@ -511,6 +511,7 @@ function Bags:CreateContainer(storagetype, ...)
 		BankBagsContainer:Hide()
 
 		BankFrame:EnableMouse(false)
+		BankFrame.NineSlice:SetAlpha(0)
 
 		Container.BagsContainer = BankBagsContainer
 		Container.ReagentButton = SwitchReagentButton
