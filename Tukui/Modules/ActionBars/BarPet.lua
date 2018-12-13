@@ -26,6 +26,7 @@ function TukuiActionBars:CreatePetBar()
 		Button:ClearAllPoints()
 		Button:SetParent(Bar)
 		Button:Size(PetSize)
+		Button:Show()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Spacing, -Spacing)
