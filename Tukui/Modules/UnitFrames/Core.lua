@@ -1157,6 +1157,24 @@ function TukuiUnitFrames:Enable()
 			ORD.MatchBySpellName = false
 		end
 	end
+	
+	if T.WoWBuild >= 28724 then
+		-- Remove this 8.1 ugly bar
+		local PNPFrames = {
+			ClassNameplateManaBarFrame, 
+			ClassNameplateManaBarFrame.Border, 
+			ClassNameplateManaBarFrame.FeedbackFrame, 
+			ClassNameplateManaBarFrame.FullPowerFrame, 
+			ClassNameplateManaBarFrame.ManaCostPredictionBar, 
+			ClassNameplateManaBarFrame.background, 
+			ClassNameplateManaBarFrame.Texture
+		}
+
+		for _, PNPFrame in pairs(PNPFrames) do
+			PNPFrame:ClearAllPoints()
+			PNPFrame:SetParent(T.Panels.Hider)
+		end
+	end
 end
 
 T["UnitFrames"] = TukuiUnitFrames
