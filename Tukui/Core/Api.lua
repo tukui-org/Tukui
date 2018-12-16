@@ -50,8 +50,8 @@ local function Point(obj, arg1, arg2, arg3, arg4, arg5)
 end
 
 local function SetOutside(obj, anchor, xOffset, yOffset)
-	xOffset = xOffset or (MakeInset and 2) or 1
-	yOffset = yOffset or (MakeInset and 2) or 1
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
 	anchor = anchor or obj:GetParent()
 
 	if obj:GetPoint() then obj:ClearAllPoints() end
@@ -61,8 +61,8 @@ local function SetOutside(obj, anchor, xOffset, yOffset)
 end
 
 local function SetInside(obj, anchor, xOffset, yOffset)
-	xOffset = xOffset or (MakeInset and 2) or 1
-	yOffset = yOffset or (MakeInset and 2) or 1
+	xOffset = xOffset or 1
+	yOffset = yOffset or 1
 	anchor = anchor or obj:GetParent()
 
 	if obj:GetPoint() then obj:ClearAllPoints() end
@@ -242,8 +242,6 @@ local function SkinButton(Frame, Strip)
 	end)
 
 	Frame:HookScript("OnLeave", function(self)
-		local Color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
-
 		self:SetBackdropColor(C.General.BackdropColor[1], C.General.BackdropColor[2], C.General.BackdropColor[3])
 		self:SetBackdropBorderColor(C.General.BorderColor[1], C.General.BorderColor[2], C.General.BorderColor[3])
 	end)
