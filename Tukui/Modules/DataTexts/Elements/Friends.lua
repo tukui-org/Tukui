@@ -100,7 +100,11 @@ end
 local function whisperClick(self, name, bnet)
 	menuFrame:Hide()
 
-    ChatFrame_SendSmartTell(name)
+    if bnet then
+		ChatFrame_SendBNetTell(name)
+	else
+		SetItemRef("player:"..name, format("|Hplayer:%1$s|h[%1$s]|h",name), "LeftButton")
+	end
 end
 
 local function BuildBNTable(total)
@@ -109,7 +113,7 @@ local function BuildBNTable(total)
 
 	for i = 1, total do
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		
+
 		if (toonID or presenceID) then
 			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 
@@ -134,7 +138,7 @@ local function UpdateBNTable(total)
 	for i = 1, #BNTable do
 		-- get guild roster information
 		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-		
+
 		if (toonID or presenceID) then
 			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
 
