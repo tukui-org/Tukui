@@ -124,7 +124,7 @@ local OnClick = function(self, button)
 
 	if (Bar:IsVisible()) then
 		if (ShiftClick and Num ~= 4) then -- Handle shift-clicks on the button
-			if (Num == 2 or Num ==  3) then
+			if (Num == 2 or Num == 3) then
 				ActionBars:RemoveColumn(Bar, Num)
 			else
 				ActionBars:RemoveButton(Bar, Num)
@@ -204,7 +204,7 @@ local OnClick = function(self, button)
 end
 
 function ActionBars:CreateToggleButtons()
-	for i = 2, 5  do
+	for i = 2, 5 do
 		local Bar = T.Panels["ActionBar" .. i]
 		local Width = Bar:GetWidth()
 		local Height = Bar:GetHeight()

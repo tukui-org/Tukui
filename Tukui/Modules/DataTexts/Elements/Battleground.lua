@@ -71,7 +71,7 @@ function BGFrame:OnUpdate(t)
 			end
 		end
 
-		int  = 2
+		int = 2
 	end
 end
 

@@ -1,8 +1,6 @@
 local T, C, L = select(2, ...):unpack()
 
 local DataText = T["DataTexts"]
-local format = format
-local Class = select(2, UnitClass("player"))
 
 local Update = function(self)
 	local Value = GetCombatRating(18)

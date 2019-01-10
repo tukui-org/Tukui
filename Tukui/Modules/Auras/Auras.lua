@@ -4,10 +4,8 @@ local TukuiAuras = T["Auras"]
 local unpack = unpack
 local GetTime = GetTime
 local DebuffTypeColor = DebuffTypeColor
-local NumberFontNormal = NumberFontNormal
 local BuffFrame = BuffFrame
 local TemporaryEnchantFrame = TemporaryEnchantFrame
-local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
 TukuiAuras.Headers = {}
@@ -129,7 +127,7 @@ function TukuiAuras:UpdateAura(index)
 			self.Duration:SetText("")
 			self:SetScript("OnUpdate", nil)
 
-			local min, max  = self.Bar:GetMinMaxValues()
+			local min, max = self.Bar:GetMinMaxValues()
 
 			self.Bar:SetValue(max)
 			self.Bar:SetStatusBarColor(0, 0.8, 0)

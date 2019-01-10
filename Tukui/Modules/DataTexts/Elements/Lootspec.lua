@@ -3,8 +3,6 @@ local T, C, L = select(2, ...):unpack()
 --[[ This datatext is from: SanUI, by Pyrates ]] --
 
 local DataText = T["DataTexts"]
-local format = format
-local Class = T.MyClass
 
 local CurrentLootSpecName
 local CurrentCharSpecName

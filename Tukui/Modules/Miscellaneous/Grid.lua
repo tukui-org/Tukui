@@ -11,11 +11,11 @@ Align.BoxSize = 128
 
 function Align:Show()
 	if not self.Frame then
-        Align:Create()
+		Align:Create()
 	elseif self.Frame.boxSize ~= Align.BoxSize then
-        self.Frame:Hide()
-        Align:Create()
-    else
+		self.Frame:Hide()
+		Align:Create()
+	else
 		self.Frame:Show()
 	end
 end
@@ -77,15 +77,15 @@ end
 
 SLASH_TOGGLEGRID1 = "/showgrid"
 SlashCmdList["TOGGLEGRID"] = function(arg)
-    if Align.Enable then
-        Align:Hide()
-        Align.Enable = false
-    else
-        Align.BoxSize = (math.ceil((tonumber(arg) or Align.BoxSize) / 32) * 32)
-    if Align.BoxSize > 256 then Align.BoxSize = 256 end
-        Align:Show()
-        Align.Enable = true
-    end
+	if Align.Enable then
+		Align:Hide()
+		Align.Enable = false
+	else
+		Align.BoxSize = (math.ceil((tonumber(arg) or Align.BoxSize) / 32) * 32)
+	if Align.BoxSize > 256 then Align.BoxSize = 256 end
+		Align:Show()
+		Align.Enable = true
+	end
 end
 
 Miscellaneous.Grid = Align

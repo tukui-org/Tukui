@@ -19,30 +19,30 @@ function T17:MoveXPBars()
 	local Experience = Misc.Experience
 	local Reputation = Misc.Reputation
 
-    if Experience.NumBars then
-        for i = 1, Experience.NumBars do
-            local Bar = Experience["XPBar"..i]
-            local RestedBar = Experience["RestedBar"..i]
+	if Experience.NumBars then
+		for i = 1, Experience.NumBars do
+			local Bar = Experience["XPBar"..i]
+			local RestedBar = Experience["RestedBar"..i]
 
-            Bar:ClearAllPoints()
-            Bar:SetOrientation("Vertical")
-            Bar:Size(8, 100)
-            Bar:SetReverseFill(false)
-            Bar:Point("TOP", i == 1 and Tukui_T17_LeftVerticalLine or Tukui_T17_RightVerticalLine, "TOP", 0, i == 1 and -Panels.DataTextLeft:GetHeight() / 2 or -Panels.DataTextRight:GetHeight() / 2)
+			Bar:ClearAllPoints()
+			Bar:SetOrientation("Vertical")
+			Bar:Size(8, 100)
+			Bar:SetReverseFill(false)
+			Bar:Point("TOP", i == 1 and Tukui_T17_LeftVerticalLine or Tukui_T17_RightVerticalLine, "TOP", 0, i == 1 and -Panels.DataTextLeft:GetHeight() / 2 or -Panels.DataTextRight:GetHeight() / 2)
 
-            RestedBar:SetOrientation("Vertical")
-            RestedBar:SetReverseFill(false)
-        end
-    end
+			RestedBar:SetOrientation("Vertical")
+			RestedBar:SetReverseFill(false)
+		end
+	end
 
-    if Reputation.NumBars then
-        for i = 1, Reputation.NumBars do
-            local Bar = Reputation["RepBar"..i]
+	if Reputation.NumBars then
+		for i = 1, Reputation.NumBars do
+			local Bar = Reputation["RepBar"..i]
 
-            Bar:SetOrientation("Vertical")
-            Bar:SetReverseFill(false)
-        end
-    end
+			Bar:SetOrientation("Vertical")
+			Bar:SetReverseFill(false)
+		end
+	end
 end
 
 function T17:AddLines()
@@ -125,9 +125,9 @@ end
 function T17:MoveTooltip()
 	local Anchor = TukuiTooltipAnchor
 
-    if not Anchor then
-        return
-    end
+	if not Anchor then
+		return
+	end
 
 	local DataTextRight = Panels.DataTextRight
 

@@ -58,7 +58,7 @@ function AFK:SetAFK(status)
 	elseif (self.IsAFK) then
 		self.Total = 0
 
-		HideUIPanel(WorldMapFrame)  -- Avoid Lua errors on M keypress
+		HideUIPanel(WorldMapFrame) -- Avoid Lua errors on M keypress
 
 		UIFrameFadeOut(self.Frame, 0.5, self.Frame:GetAlpha(), 0)
 		UIParent:Show()

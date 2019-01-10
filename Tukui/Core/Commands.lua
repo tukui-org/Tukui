@@ -48,11 +48,11 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "events" or arg1 == "trace") then
 		if EventTraceEnabled then
 			EventTrace:UnregisterAllEvents()
-			
+
 			EventTraceEnabled = false
 		else
 			EventTrace:RegisterAllEvents()
-			
+
 			EventTraceEnabled = true
 		end
 	elseif (arg1 == "move" or arg1 == "moveui") then

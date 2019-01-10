@@ -4,7 +4,6 @@ local Miscellaneous = T["Miscellaneous"]
 local Ghost = CreateFrame("Frame")
 local Panels = T["Panels"]
 local GhostFrame = GhostFrame
-local Noop = function() end
 
 Ghost.Color = {0.31, 0.45, 0.63}
 

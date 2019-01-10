@@ -5,7 +5,6 @@ local TukuiActionBars = T["ActionBars"]
 local IsUsableAction = IsUsableAction
 local IsActionInRange = IsActionInRange
 local ActionHasRange = ActionHasRange
-local HasAction = HasAction
 
 function TukuiActionBars:RangeOnUpdate(elapsed)
 	if (not self.rangeTimer) then

@@ -49,13 +49,13 @@ function Loading:OnEvent(event, addon)
 			local Adjust = (T.ScreenHeight / 10000) / 2
 			local UIScale = min(2, max(0.01, 768 / string.match(T.Resolution, "%d+x(%d+)")))
 
-            if (Scaling == "Smallest") then
-                if (T.ScreenHeight >= 1600) then
-                    -- 0.35555556416512 + 0.108 = 0.463 on 4K monitor
-                    UIScale = UIScale + Adjust
-                else
-                    UIScale = 0.64 - Adjust
-                end
+			if (Scaling == "Smallest") then
+				if (T.ScreenHeight >= 1600) then
+					-- 0.35555556416512 + 0.108 = 0.463 on 4K monitor
+					UIScale = UIScale + Adjust
+				else
+					UIScale = 0.64 - Adjust
+				end
 			elseif (Scaling == "Small") then
 				UIScale = 0.64
 			elseif (Scaling == "Medium") then
@@ -66,10 +66,10 @@ function Loading:OnEvent(event, addon)
 				UIScale = 0.64 + Adjust + Adjust + Adjust
 			end
 
-            -- This is for 4K with pixel pecfection scaling
-            if (T.ScreenHeight >= 1600) and (Scaling == "Pixel Perfection") then
-                UIScale = UIScale * 2 -- Pixel Perfection Scaling, X 2 to still be almost pixel perfect, should be around 0.71
-            end
+			-- This is for 4K with pixel pecfection scaling
+			if (T.ScreenHeight >= 1600) and (Scaling == "Pixel Perfection") then
+				UIScale = UIScale * 2 -- Pixel Perfection Scaling, X 2 to still be almost pixel perfect, should be around 0.71
+			end
 
 			T.Mult = 768 / string.match(T.Resolution, "%d+x(%d+)") / UIScale
 			T.UIScale = UIScale

@@ -25,8 +25,6 @@ local Update = function(self)
 	else
 		self.Text:SetFormattedText("%s %s", DataText.NameColor .. L.DataText.Armor .. "|r", DataText.ValueColor .. "100" .. "%|r")
 	end
-
-	Total = 0
 end
 
 local OnEnter = function(self)

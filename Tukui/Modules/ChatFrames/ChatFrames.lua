@@ -4,7 +4,6 @@ local _G = _G
 local format = format
 local Noop = function() end
 local Toast = BNToastFrame
-local ToastCloseButton = BNToastFrameCloseButton
 local TukuiChat = T["Chat"]
 local UIFrameFadeRemoveFrame = UIFrameFadeRemoveFrame
 
@@ -52,7 +51,7 @@ end
 
 function TukuiChat:SetChatFont()
 	local Font = T.GetFont(C["Chat"].ChatFont)
-	local Path, _, Flag  = _G[Font]:GetFont()
+	local Path, _, Flag = _G[Font]:GetFont()
 	local CurrentFont, CurrentSize, CurrentFlag = self:GetFont()
 
 	if (CurrentFont == Path and CurrentFlag == Flag) then

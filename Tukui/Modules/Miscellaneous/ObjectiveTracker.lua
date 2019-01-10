@@ -518,7 +518,7 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestPOI_GetButton", self.SkinPOI)
 	hooksecurefunc("QuestPOI_SelectButton", self.SelectPOI)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
-	
+
 	if T.WoWBuild < 28724 then
 		hooksecurefunc("WorldMap_SetupWorldQuestButton", self.SkinWorldQuestsPOI)
 	else
@@ -531,7 +531,7 @@ end
 
 function ObjectiveTracker:Enable()
 	OBJECTIVE_TRACKER_COLOR["Header"] = {r = CustomClassColor[1], g = CustomClassColor[2], b = CustomClassColor[3]}
-    OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {r = CustomClassColor[1]*1.2, g = CustomClassColor[2]*1.2, b = CustomClassColor[3]*1.2}
+	OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {r = CustomClassColor[1]*1.2, g = CustomClassColor[2]*1.2, b = CustomClassColor[3]*1.2}
 	OBJECTIVE_TRACKER_COLOR["Complete"] = { r = 0, g = 1, b = 0 }
 	OBJECTIVE_TRACKER_COLOR["Normal"] = { r = 1, g = 1, b = 1 }
 

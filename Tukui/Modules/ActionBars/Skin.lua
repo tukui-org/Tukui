@@ -3,9 +3,7 @@ local T, C, L = select(2, ...):unpack()
 local TukuiActionBars = T["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local Replace = string.gsub
-local SpellFlyout = SpellFlyout
 local FlyoutButtons = 0
-local ActionButton_HideOverlayGlow = ActionButton_HideOverlayGlow
 local Noop = function() end
 
 function TukuiActionBars:SkinButton()
@@ -16,9 +14,9 @@ function TukuiActionBars:SkinButton()
 	local Count = _G[Name.."Count"]
 	local Flash	 = _G[Name.."Flash"]
 	local HotKey = _G[Name.."HotKey"]
-	local Border  = _G[Name.."Border"]
+	local Border = _G[Name.."Border"]
 	local Btname = _G[Name.."Name"]
-	local Normal  = _G[Name.."NormalTexture"]
+	local Normal = _G[Name.."NormalTexture"]
 	local BtnBG = _G[Name.."FloatingBG"]
 	local Font = T.GetFont(C["ActionBars"].Font)
 
@@ -176,9 +174,9 @@ end
 function TukuiActionBars:SkinPetButtons()
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Name = "PetActionButton"..i
-		local Button  = _G[Name]
-		local Icon  = _G[Name.."Icon"]
-		local Normal  = _G[Name.."NormalTexture2"] -- ?? 2
+		local Button = _G[Name]
+		local Icon = _G[Name.."Icon"]
+		local Normal = _G[Name.."NormalTexture2"] -- ?? 2
 
 		TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, true)
 	end
@@ -187,9 +185,9 @@ end
 function TukuiActionBars:SkinStanceButtons()
 	for i=1, NUM_STANCE_SLOTS do
 		local Name = "StanceButton"..i
-		local Button  = _G[Name]
-		local Icon  = _G[Name.."Icon"]
-		local Normal  = _G[Name.."NormalTexture"]
+		local Button = _G[Name]
+		local Icon = _G[Name.."Icon"]
+		local Normal = _G[Name.."NormalTexture"]
 
 		TukuiActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, false)
 	end

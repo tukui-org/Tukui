@@ -44,10 +44,8 @@ end
 function Minimap:OnMove(enabled)
 	if enabled then
 		self:SetBackdropBorderColor(1, 0, 0)
-		Map:Hide()
 	else
 		self:SetBackdropBorderColor(unpack(C["General"].BorderColor))
-		Map:Show()
 	end
 end
 

@@ -1,7 +1,6 @@
 local T, C, L = select(2, ...):unpack()
 
 local DataText = T["DataTexts"]
-local format = format
 local int = 1
 local MemoryTable = {}
 local KilobyteString, MegabyteString
@@ -22,11 +21,10 @@ end
 local UpdateMemory = function()
 	-- Update the memory usages of the addons
 	UpdateAddOnMemoryUsage()
-	local AddOnMem = 0
 	local TotalMem = 0
 
 	for i = 1, #MemoryTable do
-		AddOnMem = GetAddOnMemoryUsage(MemoryTable[i][1])
+		local AddOnMem = GetAddOnMemoryUsage(MemoryTable[i][1])
 		MemoryTable[i][3] = AddOnMem
 		TotalMem = TotalMem + AddOnMem
 	end

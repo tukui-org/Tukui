@@ -101,7 +101,7 @@ function Loot:SkinStandardLootFrame()
 		ItemText:SetAlpha(0)
 	else
 		local ItemText = select(7, LootFrame:GetRegions())
-		
+
 		ItemText:SetAlpha(0)
 		LootFrame.NineSlice:StripTextures()
 		LootFrameInset.NineSlice:StripTextures()

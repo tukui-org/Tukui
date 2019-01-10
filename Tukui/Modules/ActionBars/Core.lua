@@ -3,14 +3,12 @@ local T, C, L = select(2, ...):unpack()
 local TukuiActionBars = CreateFrame("Frame")
 local _G = _G
 local format = format
-local Noop = function() end
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS
 local MainMenuBar, MainMenuBarArtFrame = MainMenuBar, MainMenuBarArtFrame
 local OverrideActionBar = OverrideActionBar
 local PossessBarFrame = PossessBarFrame
-local PetActionBarFrame = PetActionBarFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
 local Panels = T["Panels"]
 
@@ -22,7 +20,7 @@ local Frames = {
 
 function TukuiActionBars:DisableBlizzard()
 	local Hider = Panels.Hider
-	
+
 	SetCVar("alwaysShowActionBars", 1)
 
 	if (not C.ActionBars.AddNewSpells) then
@@ -68,7 +66,7 @@ function TukuiActionBars:ShowGrid()
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button
 		local Reason = nil
-		
+
 		if T.WoWBuild >= 28724 then
 			Reason = ACTION_BUTTON_SHOW_GRID_REASON_EVENT
 		end
@@ -262,7 +260,7 @@ function TukuiActionBars:UpdateStanceBar(...)
 
 			Button = _G[ButtonName]
 			Icon = _G[ButtonName.."Icon"]
-			
+
 			Button:SetNormalTexture("")
 
 			if i <= NumForms then

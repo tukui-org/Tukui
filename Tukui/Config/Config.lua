@@ -12,7 +12,7 @@ C["General"] = {
 	["Scaling"] = {
 		["Options"] = {
 			["Pixel Perfection"] = "Pixel Perfection",
-            ["Smallest"] = "Smallest",
+			["Smallest"] = "Smallest",
 			["Small"] = "Small",
 			["Medium"] = "Medium",
 			["Large"] = "Large",
@@ -24,7 +24,7 @@ C["General"] = {
 	["Themes"] = {
 		["Options"] = {
 			["Tukui"] = "Tukui",
-            ["Tukui 17"] = "Tukui 17",
+			["Tukui 17"] = "Tukui 17",
 		},
 
 		["Value"] = "Tukui",

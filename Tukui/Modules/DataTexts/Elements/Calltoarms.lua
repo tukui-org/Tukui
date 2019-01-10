@@ -98,7 +98,7 @@ local OnEnter = function(self)
 			AllUnavailable = false
 			local RolesString = MakeString(TankReward, HealerReward, DPSReward)
 
-			if (RolesString ~= "   ")  then
+			if (RolesString ~= "   ") then
 				GameTooltip:AddDoubleLine(Name .. ":", RolesString, 1, 1, 1)
 			end
 

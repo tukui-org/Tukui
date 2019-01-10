@@ -92,10 +92,7 @@ function Bags:SkinBagButton()
 
 	self:SetNormalTexture("")
 	self:SetPushedTexture("")
-	self:SetBackdrop({
-	  edgeFile = C.Medias.Blank,
-	  edgeSize = T.Mult,
-	})
+	self:SetBackdrop({ edgeFile = C.Medias.Blank, edgeSize = T.Mult })
 	self:SetBackdropBorderColor(unpack(C.General.BorderColor))
 	self:StyleButton()
 	self.IconOverlay:SetAlpha(0)
@@ -1003,8 +1000,8 @@ function Bags:Enable()
 	end)
 
 	Bag:HookScript("OnShow", function() -- Cinematic Bug with Bags open.
-        self.Bag:Show()
-    end)
+		self.Bag:Show()
+	end)
 
 	BankFrame:HookScript("OnHide", function()
 		if self.Reagent and self.Reagent:IsShown() then

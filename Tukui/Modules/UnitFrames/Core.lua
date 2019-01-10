@@ -1071,15 +1071,15 @@ function TukuiUnitFrames:UpdateRaidDebuffIndicator()
 		local _, InstanceType = IsInInstance()
 
 		if (ORD.RegisteredList ~= "RD") and (InstanceType == "party" or InstanceType == "raid") then
-            ORD:ResetDebuffData()
+			ORD:ResetDebuffData()
 			ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.RaidDebuffs.spells)
-            ORD.RegisteredList = "RD"
+			ORD.RegisteredList = "RD"
 		else
-            if ORD.RegisteredList ~= "CC" then
-                ORD:ResetDebuffData()
-                ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.CCDebuffs.spells)
-                ORD.RegisteredList = "CC"
-            end
+			if ORD.RegisteredList ~= "CC" then
+				ORD:ResetDebuffData()
+				ORD:RegisterDebuffs(TukuiUnitFrames.DebuffsTracking.CCDebuffs.spells)
+				ORD.RegisteredList = "CC"
+			end
 		end
 	end
 end
@@ -1145,7 +1145,7 @@ function TukuiUnitFrames:Enable()
 	self:CreateUnits()
 
 	if (C.Raid.DebuffWatch) then
-        local ORD = Plugin.oUF_RaidDebuffs or oUF_RaidDebuffs
+		local ORD = Plugin.oUF_RaidDebuffs or oUF_RaidDebuffs
 		local RaidDebuffs = CreateFrame("Frame")
 
 		RaidDebuffs:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -1157,16 +1157,16 @@ function TukuiUnitFrames:Enable()
 			ORD.MatchBySpellName = false
 		end
 	end
-	
+
 	if T.WoWBuild >= 28724 then
 		-- Remove this 8.1 ugly bar
 		local PNPFrames = {
-			ClassNameplateManaBarFrame, 
-			ClassNameplateManaBarFrame.Border, 
-			ClassNameplateManaBarFrame.FeedbackFrame, 
-			ClassNameplateManaBarFrame.FullPowerFrame, 
-			ClassNameplateManaBarFrame.ManaCostPredictionBar, 
-			ClassNameplateManaBarFrame.background, 
+			ClassNameplateManaBarFrame,
+			ClassNameplateManaBarFrame.Border,
+			ClassNameplateManaBarFrame.FeedbackFrame,
+			ClassNameplateManaBarFrame.FullPowerFrame,
+			ClassNameplateManaBarFrame.ManaCostPredictionBar,
+			ClassNameplateManaBarFrame.background,
 			ClassNameplateManaBarFrame.Texture
 		}
 

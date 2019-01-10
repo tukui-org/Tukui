@@ -38,13 +38,13 @@ function TukuiActionBars:CreatePetBar()
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button
 	end
-	
+
 	PetActionBarFrame:EnableMouse(0)
 	PetActionBarFrame:ClearAllPoints()
 	PetActionBarFrame:SetParent(T.Panels.Hider)
 
 	hooksecurefunc("PetActionBar_Update", TukuiActionBars.UpdatePetBar)
-	
+
 	TukuiActionBars:SkinPetButtons()
 
 	RegisterStateDriver(Bar, "visibility", "[pet,nopetbattle,novehicleui,nooverridebar,nopossessbar,nobonusbar:5] show; hide")

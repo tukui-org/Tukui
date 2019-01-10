@@ -16,7 +16,7 @@ local Update = function(self)
 	local BaseMissChance, LevelDifference, Avoidance
 
 	if TargetLevel == -1 then
-		BaseMissChance = (5 - (3 * .2))  --Boss Value
+		BaseMissChance = (5 - (3 * .2)) --Boss Value
 		LevelDifference = 3
 	elseif TargetLevel > PlayerLevel then
 		BaseMissChance = (5 - ((TargetLevel - PlayerLevel) * .2)) --Mobs above player level

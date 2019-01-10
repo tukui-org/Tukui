@@ -100,7 +100,7 @@ end
 local function whisperClick(self, name, bnet)
 	menuFrame:Hide()
 
-    if bnet then
+	if bnet then
 		ChatFrame_SendBNetTell(name)
 	else
 		SetItemRef("player:"..name, format("|Hplayer:%1$s|h[%1$s]|h",name), "LeftButton")
@@ -189,9 +189,9 @@ local OnMouseUp = function(self, btn)
 		return
 	end
 
-    if not BNConnected() then
-        return
-    end
+	if not BNConnected() then
+		return
+	end
 
 	GameTooltip:Hide()
 
@@ -249,14 +249,14 @@ local OnEnter = function(self)
 		return
 	end
 
-    if not BNConnected() then
+	if not BNConnected() then
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		GameTooltip:AddLine(BN_CHAT_DISCONNECTED)
-        GameTooltip:Show()
+		GameTooltip:Show()
 
-        return
-    end
+		return
+	end
 
 	local totalonline = BNTotalOnline
 	local zonec, classc, levelc, realmc, grouped
@@ -265,17 +265,17 @@ local OnEnter = function(self)
 		GameTooltip:SetOwner(self:GetTooltipAnchor())
 		GameTooltip:ClearLines()
 		GameTooltip:AddDoubleLine(L.DataText.FriendsList, format(totalOnlineString, totalonline, #BNTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
-        GameTooltip:AddLine(" ")
+		GameTooltip:AddLine(" ")
 
 		if BNTotalOnline > 0 then
 			local status = 0
 
 			for i = 1, #BNTable do
-                local BNName = RemoveTagNumber(BNTable[i][3])
+				local BNName = RemoveTagNumber(BNTable[i][3])
 
 				if BNTable[i][7] then
 					if BNTable[i][6] == wowString then
-                        local isBattleTag = BNTable[i][17]
+						local isBattleTag = BNTable[i][17]
 
 						if (BNTable[i][8] == true) then
 							status = 1
@@ -300,21 +300,21 @@ local OnEnter = function(self)
 
 						GameTooltip:AddDoubleLine(format(clientLevelNameString, BNName,levelc.r*255,levelc.g*255,levelc.b*255,BNTable[i][16],classc.r*255,classc.g*255,classc.b*255,BNTable[i][4],groupedTable[grouped], 255, 0, 0, statusTable[status]), "World of Warcraft")
 
-                        if IsShiftKeyDown() then
-                            if GetRealZoneText() == BNTable[i][15] then
-                                zonec = activezone
-                            else
-                                zonec = inactivezone
-                            end
+						if IsShiftKeyDown() then
+							if GetRealZoneText() == BNTable[i][15] then
+								zonec = activezone
+							else
+								zonec = inactivezone
+							end
 
-                            if GetRealmName() == BNTable[i][11] then
-                                realmc = activezone
-                            else
-                                realmc = inactivezone
-                            end
+							if GetRealmName() == BNTable[i][11] then
+								realmc = activezone
+							else
+								realmc = inactivezone
+							end
 
-                            GameTooltip:AddDoubleLine("  "..BNTable[i][15], BNTable[i][11], zonec.r, zonec.g, zonec.b, realmc.r, realmc.g, realmc.b)
-                        end
+							GameTooltip:AddDoubleLine("  "..BNTable[i][15], BNTable[i][11], zonec.r, zonec.g, zonec.b, realmc.r, realmc.g, realmc.b)
+						end
 					end
 
 					if BNTable[i][6] == "BSAp" or BNTable[i][6] == "App" then
@@ -363,11 +363,11 @@ local OnEnter = function(self)
 end
 
 local Update = function(self, event)
-    if not BNConnected() then
-        self.Text:SetFormattedText("%s %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, NOT_APPLICABLE)
+	if not BNConnected() then
+		self.Text:SetFormattedText("%s %s%s", DataText.NameColor .. FRIENDS .. "|r", DataText.ValueColor, NOT_APPLICABLE)
 
-        return
-    end
+		return
+	end
 
 	local BNTotal = BNGetNumFriends()
 	local Total = GetNumFriends()
