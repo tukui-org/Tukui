@@ -118,6 +118,7 @@ function Bags:HideBlizzard()
 	BankPortraitTexture:Hide()
 	BagHelpBox:Kill()
 	BankFrame:HookScript('OnShow', function(self) self:EnableMouse(false) end)
+	BankFrame.NineSlice:SetAlpha(0)
 
 	for i = 1, 12 do
 		local CloseButton = _G["ContainerFrame"..i.."CloseButton"]
@@ -484,7 +485,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame["Bag"..i]
-			
+
 			if T.WoWBuild < 28724 then
 				Bag.HighlightFrame:Kill() -- Bugged Texture on Bank Bag Slot
 			end
