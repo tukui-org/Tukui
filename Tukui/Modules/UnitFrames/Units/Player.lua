@@ -343,7 +343,7 @@ function TukuiUnitFrames:Player()
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
 
-	if (C.UnitFrames.TotemBar) and (Class == "SHAMAN" or Class == "MONK") then
+	if (C.UnitFrames.TotemBar) then
 		local Bar = CreateFrame("Frame", "TukuiTotemBar", self)
 		Bar:SetFrameStrata(self:GetFrameStrata())
 		Bar:Point("TOPLEFT", Minimap, "BOTTOMLEFT", -1, -42)
