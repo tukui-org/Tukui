@@ -382,10 +382,13 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:SetFrameLevel(2)
 			Button:SetNormalTexture("")
 			Button:SetPushedTexture("")
-			Button:SetCheckedTexture("")
 			Button:SetTemplate()
 			Button.IconBorder:SetAlpha(0)
 			Button:SkinButton()
+			
+			if T.WoWBuild < 29664 then
+				Button:SetCheckedTexture("")
+			end
 
 			if LastButtonBag then
 				Button:SetPoint("LEFT", LastButtonBag, "RIGHT", ButtonSpacing, 0)
