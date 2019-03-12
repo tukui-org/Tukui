@@ -100,7 +100,7 @@ function TukuiActionBars:SkinButton()
 	end
 
 
-	if (Btname and Normal and C.ActionBars.Macro) then
+	if (Action and Btname and Normal and C.ActionBars.Macro) then
 		local String = GetActionText(Action)
 
 		if String then
