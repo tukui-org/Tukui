@@ -216,9 +216,16 @@ function Tooltip:OnTooltipSetUnit()
 	end
 
 	if (UnitExists(Unit .. "target")) then
-		local Hex, R, G, B = Tooltip:GetColor(Unit .. "target")
-
-		if (not R) and (not G) and (not B) then
+		local UnitTarget = Unit.."target"
+		local Class = select(2, UnitClass(UnitTarget))
+		local Reaction = UnitReaction(UnitTarget, "player")
+		local R, G, B
+		
+		if (UnitIsPlayer(UnitTarget) and not UnitHasVehicleUI(UnitTarget)) then
+			R, G, B = unpack(T.Colors.class[Class])
+		elseif Reaction then
+			R, G, B = unpack(T.Colors.reaction[Reaction])
+		else
 			R, G, B = 1, 1, 1
 		end
 
@@ -369,12 +376,12 @@ function Tooltip:Enable()
 
 	for _, Tooltip in pairs(Tooltip.Tooltips) do
 		if Tooltip == GameTooltip then
-			Tooltip:HookScript("OnUpdate", self.OnUpdate)
-			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
-			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
+			Tooltip:SetScript("OnUpdate", self.OnUpdate)
+			Tooltip:SetScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
+			Tooltip:SetScript("OnTooltipSetItem", self.OnTooltipSetItem)
 		end
 
-		Tooltip:HookScript("OnShow", self.Skin)
+		Tooltip:SetScript("OnShow", self.Skin)
 	end
 
 	ItemRefCloseButton:SkinCloseButton()
