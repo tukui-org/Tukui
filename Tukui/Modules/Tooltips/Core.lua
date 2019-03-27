@@ -376,12 +376,12 @@ function Tooltip:Enable()
 
 	for _, Tooltip in pairs(Tooltip.Tooltips) do
 		if Tooltip == GameTooltip then
-			Tooltip:SetScript("OnUpdate", self.OnUpdate)
+			Tooltip:HookScript("OnUpdate", self.OnUpdate)
 			Tooltip:SetScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
-			Tooltip:SetScript("OnTooltipSetItem", self.OnTooltipSetItem)
+			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
 		end
 
-		Tooltip:SetScript("OnShow", self.Skin)
+		Tooltip:HookScript("OnShow", self.Skin)
 	end
 
 	ItemRefCloseButton:SkinCloseButton()
