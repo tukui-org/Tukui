@@ -53,6 +53,10 @@ function GameMenu:Enable()
 
 		Menu:SetTemplate("Transparent")
 		Menu:CreateShadow()
+		
+		if T.TocVersion >= 80200 then
+			Menu.Border:StripTextures()
+		end
 
 		for _, Button in pairs({Menu:GetChildren()}) do
 			if Button.IsObjectType and Button:IsObjectType("Button") then
