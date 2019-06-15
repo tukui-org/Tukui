@@ -43,6 +43,10 @@ function StaticPopups:Skin()
 	_G[Name.."CloseButton"]:SkinCloseButton()
 	_G[Name.."CloseButton"].SetNormalTexture = function() end
 	_G[Name.."CloseButton"].SetPushedTexture = function() end
+
+	if T.WoWBuild >= 30827 then
+		_G[Name].Border:StripTextures()
+	end
 end
 
 function StaticPopups:Enable()

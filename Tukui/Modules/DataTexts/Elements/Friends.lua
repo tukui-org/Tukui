@@ -193,7 +193,7 @@ local OnMouseUp = function(self, btn)
 		return
 	end
 
-	GameTooltip:Hide()
+	GameTooltip_Hide()
 
 	local menuCountWhispers = 0
 	local menuCountInvites = 0
@@ -238,10 +238,6 @@ local OnMouseDown = function(self, btn)
 	if btn == "LeftButton" then
 		ToggleFriendsFrame()
 	end
-end
-
-local OnLeave = function()
-	GameTooltip:Hide()
 end
 
 local OnEnter = function(self)
@@ -358,7 +354,7 @@ local OnEnter = function(self)
 
 		GameTooltip:Show()
 	else
-		GameTooltip:Hide()
+		GameTooltip_Hide()
 	end
 end
 
@@ -404,7 +400,7 @@ local Enable = function(self)
 	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnMouseUp", OnMouseUp)
 	self:SetScript("OnEnter", OnEnter)
-	self:SetScript("OnLeave", OnLeave)
+	self:SetScript("OnLeave", GameTooltip_Hide)
 	self:SetScript("OnEvent", Update)
 
 	self:Update()
