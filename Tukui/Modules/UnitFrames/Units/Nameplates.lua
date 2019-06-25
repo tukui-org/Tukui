@@ -128,9 +128,9 @@ function TukuiUnitFrames:Nameplates()
 		insets = {left = T.Scale(4), right = T.Scale(4), top = T.Scale(4), bottom = T.Scale(4)},
 	})
 
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate)
-	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate)
-	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", TukuiUnitFrames.HighlightPlate)
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.HighlightPlate, true)
+	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", TukuiUnitFrames.HighlightPlate, true)
+	self:RegisterEvent("NAME_PLATE_UNIT_REMOVED", TukuiUnitFrames.HighlightPlate, true)
 
 	-- Needed on nameplate else if will bug on AOE multi nameplates. (I'm not sure about this)
 	self:EnableMouse(false)

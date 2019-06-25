@@ -61,7 +61,7 @@ local function Enable(self, unit)
 		bar.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
 
 		for i = 1, 4 do

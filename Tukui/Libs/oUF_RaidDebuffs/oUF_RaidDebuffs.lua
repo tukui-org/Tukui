@@ -309,8 +309,8 @@ local function Enable(self)
 	end
 	--Need to run these always
 	self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec)
-	self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
-	self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec)
+	self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
+	self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 end
 
 local function Disable(self)

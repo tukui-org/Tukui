@@ -68,7 +68,7 @@ local function Enable(self)
 	
 	if Bar then
 		self:RegisterEvent("UNIT_AURA", Update)
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
+		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec)
 		
 		Bar:SetMinMaxValues(0, 15)

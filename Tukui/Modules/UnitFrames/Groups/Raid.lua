@@ -226,7 +226,7 @@ function TukuiUnitFrames:Raid()
 	self.ThreatIndicator = Threat
 	self.Highlight = Highlight
 
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight)
-	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight)
-	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight)
+	self:RegisterEvent("PLAYER_TARGET_CHANGED", TukuiUnitFrames.Highlight, true)
+	self:RegisterEvent("RAID_ROSTER_UPDATE", TukuiUnitFrames.Highlight, true)
+	self:RegisterEvent("PLAYER_FOCUS_CHANGED", TukuiUnitFrames.Highlight, true)
 end
