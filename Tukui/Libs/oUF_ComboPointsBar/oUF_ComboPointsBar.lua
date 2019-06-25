@@ -95,7 +95,7 @@ local Enable = function(self, unit)
 		cpb.__owner = self
 		cpb.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_POWER_UPDATE', Path, true)
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 

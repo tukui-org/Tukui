@@ -62,7 +62,7 @@ local function Enable(self, unit)
 
 		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Visibility, true)
-		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility)
+		self:RegisterEvent("PLAYER_ENTERING_WORLD", Visibility, true)
 
 		for i = 1, 4 do
 			if not bar[i]:GetStatusBarTexture() then
