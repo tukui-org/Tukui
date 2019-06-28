@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80200
 ## Title: |cffff8000Tukui Config|r
 ## Notes: Tukui Config GUI
 ## Author: Tukz & Hydra
