@@ -4,7 +4,7 @@
 
 -- [[ Build the engine ]] --
 local AddOn, Engine = ...
-local Resolution = GetCurrentResolution() > 0 and select(GetCurrentResolution(), GetScreenResolutions()) or nil
+local Resolution = select(1, GetPhysicalScreenSize()).."x"..select(2, GetPhysicalScreenSize())
 local Windowed = Display_DisplayModeDropDown:windowedmode()
 local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
 
@@ -19,7 +19,7 @@ end
 
 Engine[1].WindowedMode = Windowed
 Engine[1].FullscreenMode = Fullscreen
-Engine[1].Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
+Engine[1].Resolution = Resolution
 Engine[1].ScreenHeight = tonumber(string.match(Engine[1].Resolution, "%d+x(%d+)"))
 Engine[1].ScreenWidth = tonumber(string.match(Engine[1].Resolution, "(%d+)x+%d"))
 Engine[1].MyName = UnitName("player")
