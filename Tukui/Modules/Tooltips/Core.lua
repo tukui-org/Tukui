@@ -375,14 +375,12 @@ function Tooltip:Enable()
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 
 	for _, Tooltip in pairs(Tooltip.Tooltips) do
-		if Tooltip == GameTooltip then
-			Tooltip:HookScript("OnUpdate", self.OnUpdate)
-			Tooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
-			Tooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
-		end
-
 		Tooltip:HookScript("OnShow", self.Skin)
 	end
+	
+	GameTooltip:HookScript("OnUpdate", self.OnUpdate)
+	GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
+	GameTooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
 
 	ItemRefCloseButton:SkinCloseButton()
 
