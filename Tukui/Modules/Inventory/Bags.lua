@@ -16,6 +16,13 @@ local ButtonSize, ButtonSpacing, ItemsPerRow
 local Bags = CreateFrame("Frame")
 local Inventory = T["Inventory"]
 local QuestColor = {1, 1, 0}
+local Bag_Normal = 1
+local Bag_SoulShard = 2
+local Bag_Profession = 3
+local Bag_Quiver = 4
+local BAGTYPE_QUIVER = 0x0001 + 0x0002 
+local BAGTYPE_SOUL = 0x004
+local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 + 0x0400
 
 local BlizzardBags = {
 	CharacterBag0Slot,
@@ -34,23 +41,37 @@ local BlizzardBank = {
 	BankSlotsFrame["Bag7"],
 }
 
-local BagType = {
-	[8] = true,     -- Leatherworking Bag
-	[16] = true,    -- Inscription Bag
-	[32] = true,    -- Herb Bag
-	[64] = true,    -- Enchanting Bag
-	[128] = true,   -- Engineering Bag
-	[512] = true,   -- Gem Bag
-	[1024] = true,  -- Mining Bag
-	[32768] = true, -- Fishing Bag
+local BagProfessions = {
+	[8] = "Leatherworking",
+	[16] = "Inscription",
+	[32] = "Herb",
+	[64] = "Enchanting",
+	[128] = "Engineering",
+	[512] = "Gem",
+	[1024] = "Mining",
+	[32768] = "Fishing",
 }
 
-function Bags:IsProfessionBag(bag)
-	local Type = select(2, GetContainerNumFreeSlots(bag))
+function Bags:GetBagProfessionType(bag)
+	local BagType = select(2, GetContainerNumFreeSlots(bag))
 
-	if BagType[Type] then
-		return true
+	if BagProfessions[BagType] then
+		return BagProfessions[BagType]
 	end
+end
+
+function Bags:GetBagType(bag)
+	local bagType = select(2, GetContainerNumFreeSlots(bag))
+
+	if bit.band(bagType, BAGTYPE_QUIVER) > 0 then
+		return Bag_Quiver
+	elseif bit.band(bagType, BAGTYPE_SOUL) > 0 then
+		return Bag_SoulShard
+	elseif bit.band(bagType, BAGTYPE_PROFESSION) > 0 then
+		return Bag_Profession
+	end
+
+	return Bag_Normal
 end
 
 function Bags:SkinBagButton()
@@ -594,19 +615,15 @@ function Bags:SlotUpdate(id, button)
 	local IsQuestItem, _, IsActive = GetContainerItemQuestInfo(id, button:GetID())
 	--local IsBattlePayItem = IsBattlePayItem(id, button:GetID())
 	local NewItem = button.NewItemTexture
-	local IsProfBag = self:IsProfessionBag(id)
+	--local IsProfBag = self:IsProfessionBag(id)
 	local IconQuestTexture = button.IconQuestTexture
 
 	if IconQuestTexture then
 		IconQuestTexture:SetAlpha(0)
 	end
 
-	-- Letting you style this
-	if IsProfBag then
+			
 
-	else
-		--button:SetBackdropColor(unpack(C["General"].BackdropColor))
-	end
 
 	if IsQuestItem then
 		button:SetBackdropBorderColor(1, 1, 0)
@@ -634,6 +651,43 @@ function Bags:BagUpdate(id)
 		if Button then
 			if not Button:IsShown() then
 				Button:Show()
+			end
+			
+			local BagType = Bags:GetBagType(id)
+			
+			if (BagType ~= 1) and (not Button.IsTypeStatusCreated) then
+				Button.TypeStatus = CreateFrame("StatusBar", nil, Button)
+				Button.TypeStatus:Point("BOTTOMLEFT", 1, 1)
+				Button.TypeStatus:Point("BOTTOMRIGHT", -1, 1)
+				Button.TypeStatus:Height(3)
+				Button.TypeStatus:SetStatusBarTexture(C.Medias.Blank)
+
+				Button.IsTypeStatusCreated = true
+			end
+			
+			if BagType == 2 then
+				Button.TypeStatus:SetStatusBarColor(unpack(T.Colors.class["WARLOCK"])) -- purple indicator
+			elseif BagType == 3 then
+				local ProfessionType = Bags:GetBagProfessionType(id)
+				if ProfessionType == "Leatherworking" then
+					Button.TypeStatus:SetStatusBarColor(102/255, 51/255, 0/255)
+				elseif ProfessionType == "Inscription" then
+					Button.TypeStatus:SetStatusBarColor(204/255, 204/255, 0/255)
+				elseif ProfessionType == "Herb" then
+					Button.TypeStatus:SetStatusBarColor(0/255, 153/255, 0/255)
+				elseif ProfessionType == "Enchanting" then
+					Button.TypeStatus:SetStatusBarColor(230/255, 25/255, 128/255)
+				elseif ProfessionType == "Engineering" then
+					Button.TypeStatus:SetStatusBarColor(25/255, 230/255, 230/255)
+				elseif ProfessionType == "Gem" then
+					Button.TypeStatus:SetStatusBarColor(232/255, 252/255, 252/255)
+				elseif ProfessionType == "Mining" then
+					Button.TypeStatus:SetStatusBarColor(138/255, 40/255, 40/255)
+				elseif ProfessionType == "Fishing" then
+					Button.TypeStatus:SetStatusBarColor(54/255, 54/255, 226/255)
+				end
+			elseif BagType == 4 then
+				Button.TypeStatus:SetStatusBarColor(unpack(T.Colors.class["HUNTER"])) -- green indicator
 			end
 
 			self:SlotUpdate(id, Button)
