@@ -394,6 +394,10 @@ function Tooltip:Enable()
 	if C["Tooltips"].ShowSpec then
 		T.Tooltips.Talent:RegisterEvent("MODIFIER_STATE_CHANGED")
 	end
+	
+	-- WoW 8.2 bug? Tooltip ClampedToScreen switching to false randomly for no reason
+	GameTooltip:SetClampedToScreen(true)
+	GameTooltip.SetClampedToScreen = function() end
 end
 
 T["Tooltips"] = Tooltip
