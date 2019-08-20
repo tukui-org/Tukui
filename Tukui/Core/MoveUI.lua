@@ -91,6 +91,7 @@ function Movers:CreateDragInfo()
 	self.DragInfo:SetMovable(true)
 	self.DragInfo:RegisterForDrag("LeftButton")
 	self.DragInfo:Hide()
+	self.DragInfo:SetClampedToScreen(true)
 	self.DragInfo:SetScript("OnMouseUp", Movers.RestoreDefaults)
 
 	self.DragInfo.Parent = self.DragInfo:GetParent()
