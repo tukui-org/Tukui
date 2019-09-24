@@ -112,10 +112,9 @@ local function BuildBNTable(total)
 	wipe(BNTable)
 
 	for i = 1, total do
-		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-
-		if (toonID or presenceID) then
-			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
+		local accountInfo = C_BattleNet.GetFriendAccountInfo(i)
+		if accountInfo then
+			local class = accountInfo.gameAccountInfo.className
 
 			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
 				if class == v then
@@ -123,9 +122,9 @@ local function BuildBNTable(total)
 				end
 			end
 
-			BNTable[i] = { presenceID, presenceName, battleTag, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level }
+			BNTable[i] = { accountInfo.bnetAccountID, accountInfo.accountName, accountInfo.battleTag, accountInfo.gameAccountInfo.characterName, accountInfo.gameAccountInfo.gameAccountID, accountInfo.gameAccountInfo.clientProgram, accountInfo.gameAccountInfo.isOnline, accountInfo.isAFK, accountInfo.isDND, accountInfo.note, accountInfo.gameAccountInfo.realmName, accountInfo.gameAccountInfo.factionName, accountInfo.gameAccountInfo.raceName, class, accountInfo.gameAccountInfo.areaName, accountInfo.gameAccountInfo.characterLevel }
 
-			if isOnline then
+			if accountInfo.gameAccountInfo.isOnline then
 				BNTotalOnline = BNTotalOnline + 1
 			end
 		end
@@ -136,20 +135,11 @@ local function UpdateBNTable(total)
 	BNTotalOnline = 0
 
 	for i = 1, #BNTable do
-		-- get guild roster information
-		local presenceID, presenceName, battleTag, isBattleTagPresence, toonName, toonID, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR = BNGetFriendInfo(i)
-
-		if (toonID or presenceID) then
-			local hasFocus, _, _, realmName, realmID, faction, race, class, guild, zoneName, level, gameText = BNGetGameAccountInfo(toonID or presenceID)
-
-			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
-				if class == v then
-					class = k
-				end
-			end
-
+		local accountInfo = C_BattleNet.GetFriendAccountInfo(i)
+		if accountInfo then
 			-- get the correct index in our table
-			local index = GetTableIndex(BNTable, 1, presenceID)
+			local index = GetTableIndex(BNTable, 1, accountInfo.bnetAccountID)
+			local class = accountInfo.gameAccountInfo.className
 
 			-- we cannot find a BN member in our table, so rebuild it
 			if index == -1 then
@@ -157,26 +147,32 @@ local function UpdateBNTable(total)
 				return
 			end
 
+			for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+				if class == v then
+					class = k
+				end
+			end
+
 			-- update on-line status for all members
-			BNTable[index][7] = isOnline
+			BNTable[index][7] = accountInfo.gameAccountInfo.isOnline
 
 			-- update information only for on-line members
-			if isOnline then
-				BNTable[index][2] = presenceName
-				BNTable[index][3] = battleTag
-				BNTable[index][4] = toonName
-				BNTable[index][5] = toonID
-				BNTable[index][6] = client
-				BNTable[index][8] = isAFK
-				BNTable[index][9] = isDND
-				BNTable[index][10] = noteText
-				BNTable[index][11] = realmName
-				BNTable[index][12] = faction
-				BNTable[index][13] = race
+			if accountInfo.gameAccountInfo.isOnline then
+				BNTable[index][2] = accountInfo.accountName
+				BNTable[index][3] = accountInfo.battleTag
+				BNTable[index][4] = accountInfo.gameAccountInfo.characterName
+				BNTable[index][5] = accountInfo.gameAccountInfo.gameAccountID
+				BNTable[index][6] = accountInfo.gameAccountInfo.clientProgram
+				BNTable[index][8] = accountInfo.isAFK
+				BNTable[index][9] = accountInfo.isDND
+				BNTable[index][10] = accountInfo.note
+				BNTable[index][11] = accountInfo.gameAccountInfo.realmName
+				BNTable[index][12] = accountInfo.gameAccountInfo.factionName
+				BNTable[index][13] = accountInfo.gameAccountInfo.raceName
 				BNTable[index][14] = class
-				BNTable[index][15] = zoneName
-				BNTable[index][16] = level
-				BNTable[index][17] = isBattleTagPresence
+				BNTable[index][15] = accountInfo.gameAccountInfo.areaName
+				BNTable[index][16] = accountInfo.gameAccountInfo.characterLevel
+				BNTable[index][17] = accountInfo.isBattleTagFriend
 
 				BNTotalOnline = BNTotalOnline + 1
 			end
@@ -395,7 +391,6 @@ local Enable = function(self)
 	self:RegisterEvent("BN_DISCONNECTED")
 	self:RegisterEvent("BN_INFO_CHANGED")
 	self:RegisterEvent("BATTLETAG_INVITE_SHOW")
-	self:RegisterEvent("PARTY_REFER_A_FRIEND_UPDATED")
 
 	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnMouseUp", OnMouseUp)
