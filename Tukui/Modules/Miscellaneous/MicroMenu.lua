@@ -117,22 +117,6 @@ MicroMenu.Buttons = {
 		GarrisonLandingPageMinimapButton_OnClick()
 	end,
 	notCheckable = true},
-
-	{text = SOCIAL_TWITTER_COMPOSE_NEW_TWEET,
-	func = function()
-		if not SocialPostFrame then
-			LoadAddOn("Blizzard_SocialUI")
-		end
-
-		local IsTwitterEnabled = C_Social.IsSocialEnabled()
-
-		if IsTwitterEnabled then
-			Social_SetShown(true)
-		else
-			T.Print(SOCIAL_TWITTER_TWEET_NOT_LINKED)
-		end
-	end,
-	notCheckable = true},
 }
 
 Miscellaneous.MicroMenu = MicroMenu

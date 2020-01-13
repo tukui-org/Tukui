@@ -3,7 +3,7 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local GameMenu = CreateFrame("Frame")
 local Menu = GameMenuFrame
-local Header = GameMenuFrameHeader
+local Header = GameMenuFrame.Header
 local Logout = GameMenuButtonLogout
 local Addons = GameMenuButtonAddons
 
@@ -47,7 +47,7 @@ function GameMenu:Enable()
 	end
 
 	if not AddOnSkins then
-		Header:SetTexture("")
+		Header:StripTextures()
 		Header:ClearAllPoints()
 		Header:SetPoint("TOP", Menu, 0, 7)
 
