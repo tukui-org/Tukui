@@ -3,9 +3,13 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local GameMenu = CreateFrame("Frame")
 local Menu = GameMenuFrame
-local Header = GameMenuFrame.Header
+local Header = GameMenuFrameHeader
 local Logout = GameMenuButtonLogout
 local Addons = GameMenuButtonAddons
+
+if T.WoWBuild >= 33051 then
+    Header = GameMenuFrame.Header
+end
 
 function GameMenu:AddHooks()
 	Menu:SetHeight(Menu:GetHeight() + Logout:GetHeight() - 4)
@@ -47,7 +51,11 @@ function GameMenu:Enable()
 	end
 
 	if not AddOnSkins then
-		Header:StripTextures()
+        if T.WoWBuild >= 33051 then
+            Header:StripTextures()
+        else
+            Header:SetTexture("")
+        end
 		Header:ClearAllPoints()
 		Header:SetPoint("TOP", Menu, 0, 7)
 
