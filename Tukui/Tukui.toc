@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Author: Tukz & Hydra
 ## X-Maintainer: Tukz & Azilroka
-## Version: 18.27
+## Version: 18.28
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData
