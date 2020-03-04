@@ -18,6 +18,12 @@ local Update = function(self)
 		Value = AttackPower
 	elseif (Class == "HUNTER") then
 		Value = RangedEffective
+	elseif (Class == "WARLOCK") then
+		Value = GetSpellBonusDamage(6)
+		Text = L.DataText.Spell
+	elseif (Class == "MAGE") then
+		Value = GetSpellBonusDamage(5)
+		Text = L.DataText.Spell
 	else
 		Value = SpellPower
 		Text = L.DataText.Spell
