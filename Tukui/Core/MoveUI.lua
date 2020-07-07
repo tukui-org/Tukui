@@ -75,10 +75,6 @@ function Movers:OnDragStop()
 	Frame:ClearAllPoints()
 	Frame:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 
-	if not Parent then
-		Parent = UIParent
-	end
-
 	Data[FrameName] = {Anchor1, Parent:GetName(), Anchor2, X, Y}
 end
 
