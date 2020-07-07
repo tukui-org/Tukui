@@ -64,6 +64,11 @@ function Movers:OnDragStop()
 
 	local Data = TukuiData[GetRealmName()][UnitName("Player")].Move
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
+	
+	if not Parent then
+		Parent = UIParent
+	end
+	
 	local FrameName = self.Parent:GetName()
 	local Frame = self.Parent
 
