@@ -1,0 +1,126 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- Fonts -->
+	<Script file="Fonts\Fonts.lua"/>
+	
+	<!-- Data Text -->
+	<Script file="DataTexts\Core.lua"/>
+	<Script file="DataTexts\Anchors.lua"/>
+	<Script file="DataTexts\Elements\Armor.lua"/>
+	<Script file="DataTexts\Elements\Bags.lua"/>
+	<Script file="DataTexts\Elements\Character.lua"/>
+	<Script file="DataTexts\Elements\Coords.lua"/>
+	<Script file="DataTexts\Elements\Crit.lua"/>
+	<Script file="DataTexts\Elements\DPS.lua"/>
+	<Script file="DataTexts\Elements\Friends.lua"/>
+	<Script file="DataTexts\Elements\Gold.lua"/>
+	<Script file="DataTexts\Elements\Guild.lua"/>
+	<Script file="DataTexts\Elements\HPS.lua"/>
+	<Script file="DataTexts\Elements\Micromenu.lua"/>
+	<Script file="DataTexts\Elements\Power.lua"/>
+	<Script file="DataTexts\Elements\Regen.lua"/>
+	<Script file="DataTexts\Elements\System.lua"/>
+	<Script file="DataTexts\Elements\Time.lua"/>
+	<Script file="DataTexts\Elements\Battleground.lua"/>
+	<Script file="DataTexts\Elements\Zone.lua"/>
+	<Script file="DataTexts\Elements\Voice.lua"/>
+	
+	<!-- ChatFrames -->
+	<Script file="ChatFrames\ChatFrames.lua"/>
+	<Script file="ChatFrames\CopyURL.lua"/>
+	<Script file="ChatFrames\CopyText.lua"/>
+	<Script file="ChatFrames\Bubbles.lua"/>
+
+	<!-- Inventory -->
+	<Script file="Inventory\Bags.lua"/>
+	<Script file="Inventory\Loot.lua"/>
+	<Script file="Inventory\GroupLoot.lua"/>
+	<Script file="Inventory\Merchant.lua"/>
+
+	<!-- Action Bars -->
+	<Script file="ActionBars\Core.lua"/>
+	<Script file="ActionBars\Skin.lua"/>
+	<Script file="ActionBars\Bar1.lua"/>
+	<Script file="ActionBars\Bar2.lua"/>
+	<Script file="ActionBars\Bar3.lua"/>
+	<Script file="ActionBars\Bar4.lua"/>
+	<Script file="ActionBars\Bar5.lua"/>
+	<Script file="ActionBars\BarPet.lua"/>
+	<Script file="ActionBars\BarStance.lua"/>
+	<Script file="ActionBars\Extra.lua"/>
+
+	<!-- Cooldowns -->
+	<Script file="Cooldowns\Cooldowns.lua"/>
+
+	<!-- Misc. -->
+	<Script file="Miscellaneous\AFK.lua"/>
+	<Script file="Miscellaneous\AltPowerBar.lua"/>
+	<Script file="Miscellaneous\DeathRecap.lua"/>
+	<Script file="Miscellaneous\DropDown.lua"/>
+	<Script file="Miscellaneous\Durability.lua"/>
+	<Script file="Miscellaneous\Errors.lua"/>
+	<Script file="Miscellaneous\ExperienceBar.lua"/>
+	<Script file="Miscellaneous\GameMenu.lua"/>
+	<Script file="Miscellaneous\GarbageCollection.lua"/>
+	<Script file="Miscellaneous\Ghost.lua"/>
+	<Script file="Miscellaneous\Grid.lua"/>
+	<Script file="Miscellaneous\Keybinds.lua"/>
+	<Script file="Miscellaneous\LossControl.lua"/>
+	<Script file="Miscellaneous\MicroMenu.lua"/>
+	<Script file="Miscellaneous\MirrorTimers.lua"/>
+	<Script file="Miscellaneous\ObjectiveTracker.lua"/>
+	<Script file="Miscellaneous\OrderHall.lua"/>
+	<Script file="Miscellaneous\ReputationBar.lua"/>
+	<Script file="Miscellaneous\StaticPopups.lua"/>
+	<Script file="Miscellaneous\TalkingHead.lua"/>
+	<Script file="Miscellaneous\ThreatBar.lua"/>
+	<Script file="Miscellaneous\TimerTracker.lua"/>
+	<Script file="Miscellaneous\UIErrorFilter.lua"/>
+	<Script file="Miscellaneous\UIWidgets.lua"/>
+	<Script file="Miscellaneous\VehicleIndicator.lua"/>
+
+	<!-- Auras -->
+	<Include file="Auras\Templates.xml"/>
+	<Script file="Auras\Auras.lua"/>
+	<Script file="Auras\Headers.lua"/>
+
+	<!-- Maps -->
+	<Script file="Maps\Minimap.lua"/>
+	<Script file="Maps\Zonemap.lua"/>
+	<Script file="Maps\Worldmap.lua"/>
+
+	<!-- UnitFrames -->
+	<Script file="UnitFrames\Core.lua"/>
+	<Script file="UnitFrames\Tracking.lua"/>
+	<Script file="UnitFrames\Tags.lua"/>
+	<Script file="UnitFrames\Classes\Warrior.lua"/>
+	<Script file="UnitFrames\Classes\Paladin.lua"/>
+	<Script file="UnitFrames\Classes\Hunter.lua"/>
+	<Script file="UnitFrames\Classes\Rogue.lua"/>
+	<Script file="UnitFrames\Classes\Priest.lua"/>
+	<Script file="UnitFrames\Classes\Shaman.lua"/>
+	<Script file="UnitFrames\Classes\Mage.lua"/>
+	<Script file="UnitFrames\Classes\Warlock.lua"/>
+	<Script file="UnitFrames\Classes\Druid.lua"/>
+	<Script file="UnitFrames\Classes\DeathKnight.lua"/>
+	<Script file="UnitFrames\Classes\DemonHunter.lua"/>
+	<Script file="UnitFrames\Classes\Monk.lua"/>
+	<Script file="UnitFrames\Units\Player.lua"/>
+	<Script file="UnitFrames\Units\Target.lua"/>
+	<Script file="UnitFrames\Units\TargetOfTarget.lua"/>
+	<Script file="UnitFrames\Units\Pet.lua"/>
+	<Script file="UnitFrames\Units\Focus.lua"/>
+	<Script file="UnitFrames\Units\FocusTarget.lua"/>
+	<Script file="UnitFrames\Units\Nameplates.lua"/>
+	<Script file="UnitFrames\Units\Arena.lua"/>
+	<Script file="UnitFrames\Units\Boss.lua"/>
+	<Script file="UnitFrames\Groups\Party.lua"/>
+	<Script file="UnitFrames\Groups\Raid.lua"/>
+
+	<!-- Tooltips -->
+	<Script file="Tooltips\Tooltips.lua"/>
+	
+	<!-- Pet Battles -->
+	<Script file="PetBattles\UnitFrames.lua"/>
+	<Script file="PetBattles\Actions.lua"/>
+	<Script file="PetBattles\Others.lua"/>
+</Ui>

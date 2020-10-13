@@ -1,0 +1,47 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Button name="AurasTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+		<Size x="30" y="30"/>
+
+		<Attributes>
+			<Attribute name="type" value="cancelaura"/>
+		</Attributes>
+
+		<Scripts>
+			<OnLoad>
+				local T = unpack(Tukui)
+				local Auras = T["Auras"]
+
+				Auras.Skin(self)
+
+				self:RegisterForClicks("RightButtonUp")
+			</OnLoad>
+
+			<OnEnter>
+				local GameTooltip = GameTooltip
+
+				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT", -5, -5)
+				
+				if (self:GetAttribute("index")) then
+					GameTooltip:SetUnitAura(SecureButton_GetUnit(self:GetParent()), self:GetID(), self.Filter)
+				elseif (self:GetAttribute("target-slot")) then
+					GameTooltip:SetInventoryItem("player", self:GetID())
+				end
+			</OnEnter>
+
+			<OnLeave function="GameTooltip_Hide" />
+		</Scripts>
+	</Button>
+
+	<Frame name="AurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
+		<Size x="30" y="30"/>
+
+		<Scripts>
+			<OnLoad>
+				local T = unpack(Tukui)
+				local Auras = T["Auras"]
+
+				Auras.Skin(self)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
