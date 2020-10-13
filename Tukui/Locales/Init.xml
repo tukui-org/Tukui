@@ -1,6 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<!-- UI -->
-	<Script file="enUS.lua"/>
-	<Script file="frFR.lua"/>
-	<Script file="koKR.lua"/>
-</Ui>
