@@ -726,6 +726,8 @@ end
 
 function Chat:Enable()
 	if (not C.Chat.Enable) then
+		self:AddPanels()
+		
 		return
 	end
 	
