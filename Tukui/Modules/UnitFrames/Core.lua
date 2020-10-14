@@ -245,18 +245,18 @@ end
 
 function UnitFrames:DisplayPlayerAndPetNames(event)
 	if event == "PLAYER_REGEN_DISABLED" then
-		self.Power.Value:SetAlpha(1)
+		self.Power.Value:Show()
 		self.Name:SetAlpha(0)
 
 		if self.unit ~= "player" then
-			self.Health.Value:SetAlpha(1)
+			self.Health.Value:Show()
 		end
 	else
-		self.Power.Value:SetAlpha(0)
+		self.Power.Value:Hide()
 		self.Name:SetAlpha(1)
 
 		if self.unit ~= "player" then
-			self.Health.Value:SetAlpha(0)
+			self.Health.Value:Hide()
 		end
 	end
 end
