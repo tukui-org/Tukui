@@ -20,7 +20,7 @@ function ActionBars:CreateBar5()
 	ActionBar5:SetFrameLevel(10)
 	
 	if C.ActionBars.RightBarsAtBottom then
-		ActionBar5:SetPoint("BOTTOM", UIParent, "BOTTOM", 504, 12)
+		ActionBar5:SetPoint("BOTTOM", UIParent, "BOTTOM", -504, 12)
 		ActionBar5:SetWidth((Size * 6) + (Spacing * 7))
 		ActionBar5:SetHeight((Size * 2) + (Spacing * 3))
 	else

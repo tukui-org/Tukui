@@ -20,7 +20,7 @@ function ActionBars:CreateBar4()
 	ActionBar4:SetFrameLevel(10)
 	
 	if C.ActionBars.RightBarsAtBottom then
-		ActionBar4:SetPoint("BOTTOM", UIParent, "BOTTOM", -504, 12)
+		ActionBar4:SetPoint("BOTTOM", UIParent, "BOTTOM", 504, 12)
 		ActionBar4:SetWidth((Size * 6) + (Spacing * 7))
 		ActionBar4:SetHeight((Size * 2) + (Spacing * 3))
 	else
