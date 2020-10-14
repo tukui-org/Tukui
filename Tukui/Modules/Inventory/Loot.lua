@@ -108,6 +108,7 @@ function Loot:SkinStandardLootFrameButtons(i)
 
 		if Button then
 			local Icon = _G["LootButton" .. i .. "IconTexture"]
+			local Quest = _G["LootButton" .. i .. "IconQuestTexture"]
 			local IconTexture = Icon:GetTexture()
 			local Quality = select(5, GetLootSlotInfo(Slot))
 			local Color = ITEM_QUALITY_COLORS[Quality] or {r = 0, g = 0, b = 0}
@@ -121,11 +122,17 @@ function Loot:SkinStandardLootFrameButtons(i)
 				Icon:SetTexture(IconTexture)
 				Icon:SetTexCoord(unpack(T.IconCoord))
 				Icon:SetInside()
+				
+				Quest:SetAlpha(0)
 
 				Button.IsSkinned = true
 			end
-
-			Button.Backdrop:SetBorderColor(Color.r, Color.g, Color.b)
+			
+			if Quest:IsShown() then
+				Button.Backdrop:SetBorderColor(1, 1, 0)
+			else
+				Button.Backdrop:SetBorderColor(Color.r, Color.g, Color.b)
+			end
 		end
 	end
 end
