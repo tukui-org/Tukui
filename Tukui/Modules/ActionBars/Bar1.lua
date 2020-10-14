@@ -9,6 +9,8 @@ function ActionBars:CreateBar1()
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local Druid, Rogue, Warrior, Priest = "", "", "", ""
+	local ButtonsPerRow = C.ActionBars.Bar1ButtonsPerRow
+	local NumRow = ceil(12 / ButtonsPerRow)
 	
 	local ActionBar1 = CreateFrame("Frame", "TukuiActionBar1", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
@@ -16,8 +18,8 @@ function ActionBars:CreateBar1()
 	ActionBar1:SetFrameLevel(10)
 	ActionBar1:CreateBackdrop()
 	ActionBar1:CreateShadow()
-	ActionBar1:SetWidth((Size * 6) + (Spacing * 7))
-	ActionBar1:SetHeight((Size * 2) + (Spacing * 3))
+	ActionBar1:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
+	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
 
 	if (C.ActionBars.SwitchBarOnStance) then
 		Rogue = "[bonusbar:1] 7;"
@@ -78,6 +80,9 @@ function ActionBars:CreateBar1()
 	ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
+			local NumPerRows = ButtonsPerRow
+			local NextRowButtonAnchor = _G["ActionButton1"]
+			
 			for i = 1, Num do
 				local Button = _G["ActionButton"..i]
 				local PreviousButton = _G["ActionButton"..i-1]
@@ -92,8 +97,11 @@ function ActionBars:CreateBar1()
 
 				if (i == 1) then
 					Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
-				elseif (i == 7) then
-					Button:SetPoint("BOTTOMLEFT", ActionBar1, "BOTTOMLEFT", Spacing, Spacing)
+				elseif (i == NumPerRows + 1) then
+					Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+						
+					NumPerRows = NumPerRows + ButtonsPerRow
+					NextRowButtonAnchor = _G["ActionButton"..i]
 				else
 					Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 				end

@@ -8,6 +8,8 @@ function ActionBars:CreateBar2()
 	local Movers = T["Movers"]
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
+	local ButtonsPerRow = C.ActionBars.Bar2ButtonsPerRow
+	local NumRow = ceil(12 / ButtonsPerRow)
 	
 	if not C.ActionBars.BottomLeftBar then
 		MultiBarBottomLeft:SetShown(false)
@@ -19,8 +21,8 @@ function ActionBars:CreateBar2()
 	ActionBar2:SetPoint("BOTTOM", UIParent, "BOTTOM", -251, 12)
 	ActionBar2:SetFrameStrata("LOW")
 	ActionBar2:SetFrameLevel(10)
-	ActionBar2:SetWidth((Size * 6) + (Spacing * 7))
-	ActionBar2:SetHeight((Size * 2) + (Spacing * 3))
+	ActionBar2:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
+	ActionBar2:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
 	
 	if C.ActionBars.ShowBackdrop then
 		ActionBar2:CreateBackdrop()
@@ -30,6 +32,9 @@ function ActionBars:CreateBar2()
 	MultiBarBottomLeft:SetShown(true)
 	MultiBarBottomLeft:SetParent(ActionBar2)
 	MultiBarBottomLeft.QuickKeybindGlow:SetParent(T.Hider)
+	
+	local NumPerRows = ButtonsPerRow
+	local NextRowButtonAnchor = _G["MultiBarBottomLeftButton1"]
 
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button = _G["MultiBarBottomLeftButton"..i]
@@ -44,8 +49,11 @@ function ActionBars:CreateBar2()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", ActionBar2, "TOPLEFT", Spacing, -Spacing)
-		elseif (i == 7) then
-			Button:SetPoint("BOTTOMLEFT", ActionBar2, "BOTTOMLEFT", Spacing, Spacing)
+		elseif (i == NumPerRows + 1) then
+			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+			NumPerRows = NumPerRows + ButtonsPerRow
+			NextRowButtonAnchor = _G["MultiBarBottomLeftButton"..i]
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end

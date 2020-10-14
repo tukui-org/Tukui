@@ -14,13 +14,15 @@ function ActionBars:CreatePetBar()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local PetActionBarFrame = PetActionBarFrame
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
+	local ButtonsPerRow = C.ActionBars.BarPetButtonsPerRow
+	local NumRow = ceil(10 / ButtonsPerRow)
 	
 	local Bar = CreateFrame("Frame", "TukuiPetActionBar", T.PetHider, "SecureHandlerStateTemplate")
 	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 213)
 	Bar:SetFrameStrata("LOW")
 	Bar:SetFrameLevel(10)
-	Bar:SetWidth((PetSize * 5) + (Spacing * 6))
-	Bar:SetHeight((PetSize * 2) + (Spacing * 3))
+	Bar:SetWidth((PetSize * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
+	Bar:SetHeight((PetSize * NumRow) + (Spacing * (NumRow + 1)))
 	
 	if C.ActionBars.ShowBackdrop then
 		Bar:CreateBackdrop()
@@ -30,9 +32,14 @@ function ActionBars:CreatePetBar()
 	PetActionBarFrame:EnableMouse(0)
 	PetActionBarFrame:ClearAllPoints()
 	PetActionBarFrame:SetParent(T.Hider)
+	
+	local NumPerRows = ButtonsPerRow
+	local NextRowButtonAnchor = _G["PetActionButton1"]
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Button = _G["PetActionButton"..i]
+		local PreviousButton = _G["PetActionButton"..i-1]
+		
 		Button:SetParent(Bar)
 		Button:ClearAllPoints()
 		Button:SetSize(PetSize, PetSize)
@@ -41,10 +48,13 @@ function ActionBars:CreatePetBar()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
-		elseif (i == 6) then
-			Button:SetPoint("TOP", _G["PetActionButton1"], "BOTTOM", 0, -Spacing)
+		elseif (i == NumPerRows + 1) then
+			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+			NumPerRows = NumPerRows + ButtonsPerRow
+			NextRowButtonAnchor = _G["PetActionButton"..i]
 		else
-			Button:SetPoint("LEFT", _G["PetActionButton"..(i - 1)], "RIGHT", Spacing, 0)
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
 		
 		if Button:IsEventRegistered("UPDATE_BINDINGS") then

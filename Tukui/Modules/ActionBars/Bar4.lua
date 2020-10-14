@@ -8,6 +8,8 @@ function ActionBars:CreateBar4()
 	local Movers = T["Movers"]
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
+	local ButtonsPerRow = C.ActionBars.Bar4ButtonsPerRow
+	local NumRow = ceil(12 / ButtonsPerRow)
 	
 	if not C.ActionBars.RightBar then
 		MultiBarRight:SetShown(false)
@@ -18,16 +20,9 @@ function ActionBars:CreateBar4()
 	local ActionBar4 = CreateFrame("Frame", "TukuiActionBar4", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar4:SetFrameStrata("LOW")
 	ActionBar4:SetFrameLevel(10)
-	
-	if C.ActionBars.RightBarsAtBottom then
-		ActionBar4:SetPoint("BOTTOM", UIParent, "BOTTOM", 504, 12)
-		ActionBar4:SetWidth((Size * 6) + (Spacing * 7))
-		ActionBar4:SetHeight((Size * 2) + (Spacing * 3))
-	else
-		ActionBar4:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
-		ActionBar4:SetHeight((Size * 12) + (Spacing * 13))
-		ActionBar4:SetWidth((Size * 1) + (Spacing * 2))
-	end
+	ActionBar4:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
+	ActionBar4:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
+	ActionBar4:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
 	
 	if C.ActionBars.ShowBackdrop then
 		ActionBar4:CreateBackdrop()
@@ -37,6 +32,9 @@ function ActionBars:CreateBar4()
 	MultiBarRight:SetShown(true)
 	MultiBarRight:SetParent(ActionBar4)
 	MultiBarRight.QuickKeybindGlow:SetParent(T.Hider)
+	
+	local NumPerRows = ButtonsPerRow
+	local NextRowButtonAnchor = _G["MultiBarRightButton1"]
 
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button = _G["MultiBarRightButton"..i]
@@ -49,20 +47,15 @@ function ActionBars:CreateBar4()
 		
 		ActionBars:SkinButton(Button)
 		
-		if C.ActionBars.RightBarsAtBottom then
-			if (i == 1) then
-				Button:SetPoint("TOPLEFT", ActionBar4, "TOPLEFT", Spacing, -Spacing)
-			elseif (i == 7) then
-				Button:SetPoint("BOTTOMLEFT", ActionBar4, "BOTTOMLEFT", Spacing, Spacing)
-			else
-				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
-			end
+		if (i == 1) then
+			Button:SetPoint("TOPLEFT", ActionBar4, "TOPLEFT", Spacing, -Spacing)
+		elseif (i == NumPerRows + 1) then
+			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+			NumPerRows = NumPerRows + ButtonsPerRow
+			NextRowButtonAnchor = _G["MultiBarRightButton"..i]
 		else
-			if (i == 1) then
-				Button:SetPoint("TOPRIGHT", ActionBar4, "TOPRIGHT", -Spacing, -Spacing)
-			else
-				Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
-			end
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
 
 		ActionBar4["Button"..i] = Button
