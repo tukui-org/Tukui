@@ -28,6 +28,7 @@ C["ActionBars"] = {
 	["BottomLeftBar"] = true,
 	["BottomRightBar"] = true,
 	["RightBar"] = false,
+	["RightBarsAtBottom"] = false,
 	["LeftBar"] = false,
 	["HotKey"] = false,
 	["EquipBorder"] = true,

@@ -37,6 +37,7 @@ local ActionBars = function(self)
 	Window:CreateSwitch("ActionBars", "EquipBorder", "Highlight equipped item if they are in action bars")
 	Window:CreateSwitch("ActionBars", "SwitchBarOnStance", "Switch bar on stance changes")
 	Window:CreateSwitch("ActionBars", "ShowBackdrop", "Show the actionbar backdrop")
+	Window:CreateSwitch("ActionBars", "RightBarsAtBottom", "Move right bars at the bottom and set them horizontal")
 
 	Window:CreateSection("Sizing")
 	Window:CreateSlider("ActionBars", "NormalButtonSize", "Set button size", 20, 48, 1)

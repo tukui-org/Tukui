@@ -16,11 +16,18 @@ function ActionBars:CreateBar5()
 	end
 	
 	local ActionBar5 = CreateFrame("Frame", "TukuiActionBar5", T.PetHider, "SecureHandlerStateTemplate")
-	ActionBar5:SetPoint("RIGHT", UIParent, "RIGHT", -72, 8)
 	ActionBar5:SetFrameStrata("LOW")
 	ActionBar5:SetFrameLevel(10)
-	ActionBar5:SetHeight((Size * 12) + (Spacing * 13))
-	ActionBar5:SetWidth((Size * 1) + (Spacing * 2))
+	
+	if C.ActionBars.RightBarsAtBottom then
+		ActionBar5:SetPoint("BOTTOM", UIParent, "BOTTOM", 504, 12)
+		ActionBar5:SetWidth((Size * 6) + (Spacing * 7))
+		ActionBar5:SetHeight((Size * 2) + (Spacing * 3))
+	else
+		ActionBar5:SetPoint("RIGHT", UIParent, "RIGHT", -72, 8)
+		ActionBar5:SetHeight((Size * 12) + (Spacing * 13))
+		ActionBar5:SetWidth((Size * 1) + (Spacing * 2))
+	end
 	
 	if C.ActionBars.ShowBackdrop then
 		ActionBar5:CreateBackdrop()
@@ -42,10 +49,20 @@ function ActionBars:CreateBar5()
 		
 		ActionBars:SkinButton(Button)
 
-		if (i == 1) then
-			Button:SetPoint("TOPRIGHT", ActionBar5, "TOPRIGHT", -Spacing, -Spacing)
+		if C.ActionBars.RightBarsAtBottom then
+			if (i == 1) then
+				Button:SetPoint("TOPLEFT", ActionBar5, "TOPLEFT", Spacing, -Spacing)
+			elseif (i == 7) then
+				Button:SetPoint("BOTTOMLEFT", ActionBar5, "BOTTOMLEFT", Spacing, Spacing)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			end
 		else
-			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+			if (i == 1) then
+				Button:SetPoint("TOPRIGHT", ActionBar5, "TOPRIGHT", -Spacing, -Spacing)
+			else
+				Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+			end
 		end
 
 		ActionBar5["Button"..i] = Button

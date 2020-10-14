@@ -16,11 +16,18 @@ function ActionBars:CreateBar4()
 	end
 	
 	local ActionBar4 = CreateFrame("Frame", "TukuiActionBar4", T.PetHider, "SecureHandlerStateTemplate")
-	ActionBar4:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
 	ActionBar4:SetFrameStrata("LOW")
 	ActionBar4:SetFrameLevel(10)
-	ActionBar4:SetHeight((Size * 12) + (Spacing * 13))
-	ActionBar4:SetWidth((Size * 1) + (Spacing * 2))
+	
+	if C.ActionBars.RightBarsAtBottom then
+		ActionBar4:SetPoint("BOTTOM", UIParent, "BOTTOM", -504, 12)
+		ActionBar4:SetWidth((Size * 6) + (Spacing * 7))
+		ActionBar4:SetHeight((Size * 2) + (Spacing * 3))
+	else
+		ActionBar4:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
+		ActionBar4:SetHeight((Size * 12) + (Spacing * 13))
+		ActionBar4:SetWidth((Size * 1) + (Spacing * 2))
+	end
 	
 	if C.ActionBars.ShowBackdrop then
 		ActionBar4:CreateBackdrop()
@@ -41,11 +48,21 @@ function ActionBars:CreateBar4()
 		Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
 		
 		ActionBars:SkinButton(Button)
-
-		if (i == 1) then
-			Button:SetPoint("TOPRIGHT", ActionBar4, "TOPRIGHT", -Spacing, -Spacing)
+		
+		if C.ActionBars.RightBarsAtBottom then
+			if (i == 1) then
+				Button:SetPoint("TOPLEFT", ActionBar4, "TOPLEFT", Spacing, -Spacing)
+			elseif (i == 7) then
+				Button:SetPoint("BOTTOMLEFT", ActionBar4, "BOTTOMLEFT", Spacing, Spacing)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			end
 		else
-			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+			if (i == 1) then
+				Button:SetPoint("TOPRIGHT", ActionBar4, "TOPRIGHT", -Spacing, -Spacing)
+			else
+				Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, -Spacing)
+			end
 		end
 
 		ActionBar4["Button"..i] = Button
