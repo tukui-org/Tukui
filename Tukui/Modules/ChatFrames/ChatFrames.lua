@@ -644,7 +644,10 @@ function Chat:Setup()
 	end
 
 	self:AddToggles()
+	self:DisplayChat()
+end
 
+function Chat:DisplayChat()
 	if C.General.Themes.Value == "Tukui" then
 		local Data = TukuiData[T.MyRealm][T.MyName]
 
@@ -728,6 +731,7 @@ function Chat:Enable()
 	if (not C.Chat.Enable) then
 		self:AddPanels()
 		self:AddToggles()
+		self:DisplayChat()
 		
 		return
 	end
