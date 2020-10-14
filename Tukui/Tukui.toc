@@ -1,4 +1,4 @@
-## Interface: 90002
+## Interface: 90001
 ## Author: Tukz
 ## X-Maintainer: Tukz & Azilroka & Hydra
 ## Version: 20.00
