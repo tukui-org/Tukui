@@ -16,10 +16,13 @@ function ActionBars:CreateBar1()
 	ActionBar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
 	ActionBar1:SetFrameStrata("LOW")
 	ActionBar1:SetFrameLevel(10)
-	ActionBar1:CreateBackdrop()
-	ActionBar1:CreateShadow()
 	ActionBar1:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
+	
+	if C.ActionBars.ShowBackdrop then
+		ActionBar2:CreateBackdrop()
+		ActionBar2:CreateShadow()
+	end
 
 	if (C.ActionBars.SwitchBarOnStance) then
 		Rogue = "[bonusbar:1] 7;"
