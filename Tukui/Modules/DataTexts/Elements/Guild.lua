@@ -183,7 +183,7 @@ local OnMouseDown = function(self, btn)
 	if btn ~= "LeftButton" then return end
 
 	if IsInGuild() then
-		ToggleGuildFrame()
+		ToggleCommunitiesFrame()
 	end
 end
 
