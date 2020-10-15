@@ -175,7 +175,7 @@ function UnitFrames:Target()
 		
 		Portrait.Texture:SetAllPoints(Portrait)
 		
-		if (C.UnitFrames.CastBar and C.UnitFrames.CastBarIcon) then
+		if (C.UnitFrames.CastBar and C.UnitFrames.CastBarIcon) and not (C.UnitFrames.UnlinkCastBar) then
 			self.Castbar.Icon:ClearAllPoints()
 			self.Castbar.Icon:SetAllPoints(Portrait)
 		end
