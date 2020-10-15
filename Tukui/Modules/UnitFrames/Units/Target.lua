@@ -23,7 +23,7 @@ function UnitFrames:Target()
 
 	local Panel = CreateFrame("Frame", nil, self)
 	Panel:SetFrameStrata(self:GetFrameStrata())
-	Panel:CreateBackdrop(C.UnitFrames.Portrait and "Transparent")
+	Panel:CreateBackdrop()
 	Panel:SetSize(250, 21)
 	Panel:SetPoint("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel:SetFrameLevel(3)
@@ -181,6 +181,8 @@ function UnitFrames:Target()
 		end
 
 		self.Portrait = Portrait.Texture
+		self.Portrait.Backdrop = Portrait.Backdrop
+		self.Portrait.Shadow = Portrait.Shadow
 	end
 
 	if (C.UnitFrames.TargetAuras) then

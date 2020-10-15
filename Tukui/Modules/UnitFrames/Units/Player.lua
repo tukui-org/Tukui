@@ -24,7 +24,7 @@ function UnitFrames:Player()
 	local Panel = CreateFrame("Frame", nil, self)
 	Panel:SetFrameStrata(self:GetFrameStrata())
 	Panel:SetFrameLevel(3)
-	Panel:CreateBackdrop(C.UnitFrames.Portrait and "Transparent")
+	Panel:CreateBackdrop()
 	Panel:SetSize(250, 21)
 	Panel:SetPoint("BOTTOM", self, "BOTTOM", 0, 0)
 	Panel.Backdrop:SetBorderColor(0, 0, 0, 0)
@@ -77,7 +77,7 @@ function UnitFrames:Player()
 	Power.Prediction:SetPoint("TOP")
 	Power.Prediction:SetPoint("BOTTOM")
 	Power.Prediction:SetPoint("RIGHT", Power:GetStatusBarTexture(), "RIGHT")
-	Power.Prediction:SetWidth(C.UnitFrames.Portrait and 214 or 250)
+	Power.Prediction:SetWidth(250)
 	Power.Prediction:SetStatusBarTexture(PowerTexture)
 	Power.Prediction:SetStatusBarColor(1, 1, 1, .3)
 
@@ -273,6 +273,8 @@ function UnitFrames:Player()
 		end
 
 		self.Portrait = Portrait.Texture
+		self.Portrait.Backdrop = Portrait.Backdrop
+		self.Portrait.Shadow = Portrait.Shadow
 	end
 
 	if (C.UnitFrames.CombatLog) then
