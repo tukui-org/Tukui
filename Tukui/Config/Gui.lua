@@ -104,6 +104,7 @@ local Chat = function(self)
 	Window:CreateSlider("Chat", "RightHeight", "Set right chat height", 150, 600, 10)
 
 	Window:CreateSection("Styling")
+	Window:CreateSwitch("Chat", "SkinBubbles", "Skin bubbles")
 	Window:CreateSwitch("Chat", "ShortChannelName", "Shorten channel names")
 	Window:CreateSlider("Chat", "ScrollByX", "Set lines to scroll", 1, 6, 1)
 	Window:CreateSlider("Chat", "BackgroundAlpha", "Set chat background alpha", 40, 100, 1)

@@ -79,6 +79,7 @@ C["Chat"] = {
 		["Value"] = "All",
 	},
 	["BubblesTextSize"] = 9,
+	["SkinBubbles"] = true,
 	["LeftWidth"] = 370,
 	["LeftHeight"] = 185,
 	["RightWidth"] = 370,

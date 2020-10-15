@@ -65,8 +65,10 @@ function Bubbles:Enable()
         SetCVar("chatBubblesParty", 1)
     end
 	
-	self.Elapsed = 0
-	self:SetScript("OnUpdate", self.OnUpdate)
+	if C.Chat.SkinBubbles then
+		self.Elapsed = 0
+		self:SetScript("OnUpdate", self.OnUpdate)
+	end
 end
 
 Chat.Bubbles = Bubbles
