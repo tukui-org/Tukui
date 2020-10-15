@@ -20,8 +20,8 @@ function ActionBars:CreateBar1()
 	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
 	
 	if C.ActionBars.ShowBackdrop then
-		ActionBar2:CreateBackdrop()
-		ActionBar2:CreateShadow()
+		ActionBar1:CreateBackdrop()
+		ActionBar1:CreateShadow()
 	end
 
 	if (C.ActionBars.SwitchBarOnStance) then
