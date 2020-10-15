@@ -73,6 +73,7 @@ function Bags:SkinBagButton()
 
 	local Icon = _G[self:GetName().."IconTexture"]
 	local Quest = _G[self:GetName().."IconQuestTexture"]
+	local Count = _G[self:GetName().."Count"]
 	local JunkIcon = self.JunkIcon
 	local Border = self.IconBorder
 	local BattlePay = self.BattlepayItemTexture
@@ -81,6 +82,10 @@ function Bags:SkinBagButton()
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
+	
+	Count:ClearAllPoints()
+	Count:SetPoint("BOTTOMRIGHT", 1, 1)
+	Count:SetFont(C.Medias.Font, 12, "OUTLINE")
 
 	if Quest then
 		Quest:SetAlpha(0)
@@ -565,7 +570,7 @@ function Bags:SlotUpdate(id, button)
 		end
 	end
 
-	if QuestItem then
+	if C.Bags.IdentifyQuestItems and QuestItem then
 		if not button.QuestTex then
 			button.Quest = CreateFrame("Frame", nil, button)
 			button.Quest:SetSize(8, button:GetHeight())

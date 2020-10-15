@@ -77,6 +77,9 @@ local Bags = function(self)
 
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("Bags", "Enable", "Enable bag module")
+	
+	Window:CreateSection("Styling")
+	Window:CreateSwitch("Bags", "IdentifyQuestItems", "Identify quest items in bags with an exclamation mark?")
 
 	Window:CreateSection("Sizing")
 	Window:CreateSlider("Bags", "ButtonSize", "Set bag slot size", 20, 36, 1)
