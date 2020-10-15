@@ -112,7 +112,7 @@ function Tooltip:OnTooltipSetUnit()
 			Guild = ""
 		end
 
-		Line1:SetFormattedText("%s%s%s%s", Color, Name, Guild, "|r")
+		Line1:SetFormattedText("%s%s%s", Color, Name, "|r")
 	end
 
 	if (UnitIsPlayer(Unit) and UnitIsFriend("player", Unit)) then
