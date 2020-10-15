@@ -8,7 +8,7 @@
 ## SavedVariablesPerCharacter: TukuiSettingsPerChar
 ## OptionalDeps: Clique
 ## X-Website: http://www.tukui.org
-## X-Tukui-ProjectID: 1
+## X-Tukui-ProjectID: -1
 ## X-Tukui-ProjectFolders: Tukui
 
 Core\Init.lua
