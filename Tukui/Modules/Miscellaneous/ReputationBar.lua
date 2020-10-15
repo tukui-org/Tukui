@@ -69,6 +69,9 @@ function Reputation:Create()
 		RepBar:SetReverseFill(i == 2 and true)
 		
 		RepBar.Backdrop:SetOutside()
+		RepBar.Backdrop:CreateShadow()
+		
+		RepBar.Backdrop.Shadow:Hide()
 
 		self["RepBar"..i] = RepBar
 	end
@@ -92,6 +95,9 @@ function Reputation:Enable()
 
 	if (UnitLevel("player") == MAX_PLAYER_LEVEL) or (self.RepBar2:GetParent() ~= UIParent) then
 		self.RepBar1:Show()
+		
+		self.RepBar1.Backdrop.Shadow:Show()
+		self.RepBar2.Backdrop.Shadow:Show()
 	else
 		self.RepBar1:Hide()
 	end
