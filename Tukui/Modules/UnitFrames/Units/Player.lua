@@ -89,15 +89,6 @@ function UnitFrames:Player()
 	Name:SetFontObject(Font)
 	Name:SetAlpha(0)
 
-	if C.UnitFrames.Portrait then
-		local Portrait = CreateFrame("PlayerModel", nil, Panel)
-		
-		Portrait:SetAllPoints()
-		Portrait:SetFrameLevel(Panel:GetFrameLevel() - 1)
-
-		self.Portrait = Portrait
-	end
-
 	if C.UnitFrames.PlayerAuras and C.UnitFrames.PlayerAuraBars then
 		local Gap = (T.MyClass == "ROGUE" or T.MyClass == "DRUID") and 8 or 0
 		local AuraBars = CreateFrame("Frame", self:GetName().."AuraBars", self)
@@ -255,6 +246,33 @@ function UnitFrames:Player()
 		end
 
 		self.Castbar = CastBar
+	end
+	
+	if C.UnitFrames.Portrait then
+		local Portrait = CreateFrame("Frame", nil, self)
+		
+		if C.UnitFrames.Portrait2D then
+			Portrait.Texture = Portrait:CreateTexture(nil, "OVERLAY")
+			Portrait.Texture:SetTexCoord(0.1,0.9,0.1,0.9)
+		else
+			Portrait.Texture = CreateFrame("PlayerModel", nil, Portrait)
+		end
+		
+		Portrait:SetSize(57, 57)
+		Portrait:SetPoint("RIGHT", self, "LEFT", -10, 0)
+		Portrait:CreateBackdrop()
+		Portrait:CreateShadow()
+		
+		Portrait.Backdrop:SetOutside()
+		
+		Portrait.Texture:SetAllPoints(Portrait)
+		
+		if (C.UnitFrames.CastBar and C.UnitFrames.CastBarIcon) then
+			self.Castbar.Icon:ClearAllPoints()
+			self.Castbar.Icon:SetAllPoints(Portrait)
+		end
+
+		self.Portrait = Portrait.Texture
 	end
 
 	if (C.UnitFrames.CombatLog) then
