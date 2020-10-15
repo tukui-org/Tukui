@@ -99,7 +99,10 @@ function ActionBars:UpdateStanceBar()
 	else
 		self.Bars.Stance:SetAlpha(1)
 		self.Bars.Stance:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
-		self.Bars.Stance.Backdrop:SetPoint("TOPLEFT", 0, 0)
+		
+		if self.Bars.Stance.Backdrop then
+			self.Bars.Stance.Backdrop:SetPoint("TOPLEFT", 0, 0)
+		end
 
 		for i = 1, NUM_STANCE_SLOTS do
 			local ButtonName = "StanceButton"..i
