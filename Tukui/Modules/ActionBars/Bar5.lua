@@ -9,7 +9,13 @@ function ActionBars:CreateBar5()
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local ButtonsPerRow = C.ActionBars.Bar5ButtonsPerRow
-	local NumRow = ceil(12 / ButtonsPerRow)
+	local NumButtons = C.ActionBars.Bar5NumButtons
+	
+	if NumButtons <= ButtonsPerRow then
+		ButtonsPerRow = NumButtons
+	end
+	
+	local NumRow = ceil(NumButtons / ButtonsPerRow)
 	
 	if not C.ActionBars.LeftBar then
 		MultiBarLeft:SetShown(false)
@@ -40,22 +46,27 @@ function ActionBars:CreateBar5()
 		local Button = _G["MultiBarLeftButton"..i]
 		local PreviousButton = _G["MultiBarLeftButton"..i-1]
 
-		Button:SetSize(Size, Size)
-		Button:ClearAllPoints()
-		Button:SetAttribute("showgrid", 1)
-		Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
-		
-		ActionBars:SkinButton(Button)
+		if i <= NumButtons then
+			Button:SetSize(Size, Size)
+			Button:ClearAllPoints()
+			Button:SetAttribute("showgrid", 1)
+			Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
 
-		if (i == 1) then
-			Button:SetPoint("TOPLEFT", ActionBar5, "TOPLEFT", Spacing, -Spacing)
-		elseif (i == NumPerRows + 1) then
-			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+			ActionBars:SkinButton(Button)
 
-			NumPerRows = NumPerRows + ButtonsPerRow
-			NextRowButtonAnchor = _G["MultiBarLeftButton"..i]
+			if (i == 1) then
+				Button:SetPoint("TOPLEFT", ActionBar5, "TOPLEFT", Spacing, -Spacing)
+			elseif (i == NumPerRows + 1) then
+				Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+				NumPerRows = NumPerRows + ButtonsPerRow
+				NextRowButtonAnchor = _G["MultiBarLeftButton"..i]
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			end
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			Button:SetParent(T.Hider)
+			Button:Hide()
 		end
 
 		ActionBar5["Button"..i] = Button
