@@ -52,6 +52,12 @@ function ActionBars:DisableBlizzard()
 		ActionButton_UpdateRangeIndicator = Noop
 	end
 	
+	if not C.ActionBars.AutoAddNewSpell then
+		IconIntroTracker:UnregisterAllEvents()
+		
+		RegisterStateDriver(IconIntroTracker, "visibility", "hide")
+	end
+	
 	-- Micro Menu
 	MicroButtonAndBagsBar:ClearAllPoints()
 	MicroButtonAndBagsBar:SetPoint("TOP", UIParent, "TOP", 0, 200)

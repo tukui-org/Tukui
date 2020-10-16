@@ -49,6 +49,7 @@ C["ActionBars"] = {
 	["PetButtonSize"] = 32,
 	["ButtonSpacing"] = 4,
 	["ShowBackdrop"] = true,
+	["AutoAddNewSpell"] = false,
 	["Font"] = "Tukui Outline",
 }
 

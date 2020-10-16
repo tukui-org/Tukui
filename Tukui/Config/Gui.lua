@@ -32,6 +32,7 @@ local ActionBars = function(self)
 	Window:CreateSwitch("ActionBars", "ShapeShift", "Enable shapeshift")
 	Window:CreateSwitch("ActionBars", "HotKey", "Enable hotkeys text")
 	Window:CreateSwitch("ActionBars", "Macro", "Enable macro text")
+	Window:CreateSwitch("ActionBars", "AutoAddNewSpell", "Auto add new spell to actionbars?")
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("ActionBars", "EquipBorder", "Highlight equipped item if they are in action bars")
