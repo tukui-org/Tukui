@@ -156,8 +156,8 @@ function MicroMenu:Enable()
 	
 	Buttons:SetAllPoints(RightChat)
 	Buttons:CreateBackdrop()
-	Buttons:SetFrameStrata("MEDIUM")
-	Buttons:SetFrameLevel(6)
+	Buttons:SetFrameStrata("HIGH")
+	Buttons:SetFrameLevel(50)
 	Buttons:Hide()
 
 	for i, Option in pairs(MicroMenu.Buttons) do
