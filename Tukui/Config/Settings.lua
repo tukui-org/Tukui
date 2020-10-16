@@ -62,6 +62,7 @@ C["Auras"] = {
 C["Bags"] = {
 	["Enable"] = true,
 	["IdentifyQuestItems"] = true,
+	["FlashNewItems"] = true,
 	["ButtonSize"] = 28,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 11,

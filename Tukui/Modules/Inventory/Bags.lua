@@ -594,7 +594,7 @@ function Bags:SlotUpdate(id, button)
 		end
 	end
 
-	if IsNewItem then
+	if C.Bags.FlashNewItems and IsNewItem then
 		if not button.Animation then
 			button.Animation = button:CreateAnimationGroup()
 			button.Animation:SetLooping("BOUNCE")
