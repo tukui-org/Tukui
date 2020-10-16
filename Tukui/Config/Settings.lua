@@ -125,7 +125,6 @@ C["Misc"] = {
 	["AutoRepair"] = true,
 	["AFKSaver"] = false,
 	["TalkingHeadEnable"] = true,
-	["FadeWorldMapWhileMoving"] = false,
 	["UIErrorSize"] = 16,
 	["UIErrorFont"] = "Tukui Outline",
 	["ObjectiveTrackerFont"] = "Tukui Outline",

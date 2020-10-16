@@ -227,6 +227,10 @@ function WorldMap:AddMoving()
 end
 
 function WorldMap:Enable()
+	if not C.Misc.WorldMapEnable then
+		return
+	end
+	
 	-- Set Scaling
 	Scaling = C.General.WorldMapScale / 100
 	
@@ -258,16 +262,3 @@ function WorldMap:Enable()
 end
 
 T["Maps"].Worldmap = WorldMap
-
-function WorldMapFloorNavigationFrameMixin:Refresh()
-	local mapID = self:GetParent():GetMapID();
-	local mapGroupID = C_Map.GetMapGroupID(mapID);
-	print(self:GetName())
-	if mapGroupID then
-		UIDropDownMenu_Initialize(self, self.InitializeDropDown);
-		UIDropDownMenu_SetSelectedValue(self, mapID);
-		self:Show();
-	else
-		self:Hide();
-	end
-end
