@@ -35,6 +35,7 @@ local ActionBars = function(self)
 	Window:CreateSwitch("ActionBars", "AutoAddNewSpell", "Auto add new spell to actionbars?")
 
 	Window:CreateSection("Styling")
+	Window:CreateSwitch("ActionBars", "ProcAnim", "Our own spell flashing proc animation?")
 	Window:CreateSwitch("ActionBars", "EquipBorder", "Highlight equipped item if they are in action bars")
 	Window:CreateSwitch("ActionBars", "SwitchBarOnStance", "Switch bar on stance changes")
 	Window:CreateSwitch("ActionBars", "ShowBackdrop", "Show the actionbar backdrop")

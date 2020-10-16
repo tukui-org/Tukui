@@ -236,8 +236,11 @@ function ActionBars:AddHooks()
 	hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
 	hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
 	hooksecurefunc("ActionButton_UpdateRangeIndicator", ActionBars.RangeUpdate)
-	hooksecurefunc("ActionButton_ShowOverlayGlow", ActionBars.StartHighlight)
-	hooksecurefunc("ActionButton_HideOverlayGlow", ActionBars.StopHightlight)
+	
+	if C.ActionBars.ProcAnim then
+		hooksecurefunc("ActionButton_ShowOverlayGlow", ActionBars.StartHighlight)
+		hooksecurefunc("ActionButton_HideOverlayGlow", ActionBars.StopHightlight)
+	end
 end
 
 function ActionBars:Enable()

@@ -50,6 +50,7 @@ C["ActionBars"] = {
 	["ButtonSpacing"] = 4,
 	["ShowBackdrop"] = true,
 	["AutoAddNewSpell"] = false,
+	["ProcAnim"] = true,
 	["Font"] = "Tukui Outline",
 }
 
