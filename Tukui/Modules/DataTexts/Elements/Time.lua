@@ -6,6 +6,23 @@ local format = format
 local date = date
 local Interval = 10
 local Timer = 0
+local RaidFormat1 = "%s - %s (%d/%d)" -- Siege of Orgrimmar - Mythic (10/14)
+local RaidFormat2 = "%s - %s" -- Siege of Orgrimmar - Mythic
+local DayHourMinute = "%dd, %dh, %dm"
+local HourMinute = "%dh, %dm"
+local MinuteSecond = "%dm, %ds"
+
+local GetResetTime = function(seconds)
+	local Days, Hours, Minutes, Seconds = ChatFrame_TimeBreakDown(floor(seconds))
+
+	if (Days > 0) then
+		return format(DayHourMinute, Days, Hours, Minutes) -- 7d, 2h, 5m
+	elseif (Hours > 0) then
+		return format(HourMinute, Hours, Minutes) -- 12h, 32m
+	else
+		return format(MinuteSecond, Minutes, Seconds) -- 5m, 42s
+	end
+end
 
 local Update = function(self, Elapsed)
 	Timer = Timer - Elapsed
