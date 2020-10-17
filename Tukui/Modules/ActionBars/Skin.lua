@@ -30,6 +30,7 @@ function ActionBars:SkinButton(button)
 
 		HotKey:ClearAllPoints()
 		HotKey:SetPoint("TOPRIGHT", 0, -3)
+		HotKey:SetFontObject(Font)
 
 		Count:SetFontObject(Font)
 
