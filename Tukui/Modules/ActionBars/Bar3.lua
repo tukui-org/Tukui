@@ -47,14 +47,14 @@ function ActionBars:CreateBar3()
 		local Button = _G["MultiBarBottomRightButton"..i]
 		local PreviousButton = _G["MultiBarBottomRightButton"..i-1]
 		
+		Button:SetSize(Size, Size)
+		Button:ClearAllPoints()
+		Button:SetAttribute("showgrid", 1)
+		Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+
+		ActionBars:SkinButton(Button)
+		
 		if i <= NumButtons then
-			Button:SetSize(Size, Size)
-			Button:ClearAllPoints()
-			Button:SetAttribute("showgrid", 1)
-			Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
-
-			ActionBars:SkinButton(Button)
-
 			if (i == 1) then
 				Button:SetPoint("TOPLEFT", ActionBar3, "TOPLEFT", Spacing, -Spacing)
 			elseif (i == NumPerRows + 1) then
@@ -66,8 +66,7 @@ function ActionBars:CreateBar3()
 				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 			end
 		else
-			Button:SetParent(T.Hider)
-			Button:Hide()
+			Button:SetPoint("TOP", UIParent, "TOP", 0, 200)
 		end
 
 		ActionBar3["Button"..i] = Button
