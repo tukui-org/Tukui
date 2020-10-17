@@ -178,4 +178,5 @@ function UnitFrames:FocusTarget()
 	self.Power.bg = Power.Background
 	self.Name = Name
 	self.RaidTargetIndicator = RaidIcon
+	self.onUpdateFrequency = 0.1
 end
