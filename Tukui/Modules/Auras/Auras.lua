@@ -203,7 +203,10 @@ end
 function Auras:Skin()
 	local Font = T.GetFont(C["Auras"].Font)
 
+	self:CreateBackdrop()
 	self:CreateShadow()
+	
+	self.Backdrop:SetFrameLevel(self:GetFrameLevel() - 2)
 
 	local Icon = self:CreateTexture(nil, "BORDER")
 	Icon:SetTexCoord(unpack(T.IconCoord))
@@ -266,7 +269,6 @@ function Auras:Skin()
 
 	self.Icon = Icon
 	self.Count = Count
-	self:CreateBackdrop("Default")
 end
 
 function Auras:OnEnterWorld()
