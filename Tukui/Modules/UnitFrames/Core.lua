@@ -422,12 +422,10 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 		else
 			-- These classes can purge, show them
 			if button.Animation then
-				if (IsStealable or DType == "Magic") and not UnitIsFriend("player", unit) and not button.Animation.Playing then
+				if (IsStealable or DType == "Magic") and UnitIsEnemy("player", unit) then
 					button.Animation:Play()
-					button.Animation.Playing = true
 				else
 					button.Animation:Stop()
-					button.Animation.Playing = false
 				end
 			end
 		end
