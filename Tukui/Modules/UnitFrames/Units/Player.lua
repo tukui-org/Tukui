@@ -82,6 +82,21 @@ function UnitFrames:Player()
 	Power.Prediction:SetStatusBarColor(1, 1, 1, .3)
 
 	Power.PostUpdate = UnitFrames.PostUpdatePower
+	
+	local AdditionalPower = CreateFrame("StatusBar", self:GetName().."AdditionalPower", Health)
+	AdditionalPower:SetHeight(6)
+	AdditionalPower:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+	AdditionalPower:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+	AdditionalPower:SetStatusBarTexture(HealthTexture)
+	AdditionalPower:SetFrameLevel(Health:GetFrameLevel() + 1)
+	AdditionalPower:CreateBackdrop()
+	AdditionalPower:SetStatusBarColor(unpack(T.Colors.power.MANA))
+	AdditionalPower.Backdrop:SetOutside()
+
+	AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "ARTWORK")
+	AdditionalPower.Background:SetAllPoints(AdditionalPower)
+	AdditionalPower.Background:SetTexture(HealthTexture)
+	AdditionalPower.Background:SetColorTexture(T.Colors.power.MANA[1], T.Colors.power.MANA[2], T.Colors.power.MANA[3], C.UnitFrames.StatusBarBackgroundMultiplier / 100)
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", Panel, "LEFT", 4, 0)
@@ -447,6 +462,7 @@ function UnitFrames:Player()
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
+	self.AdditionalPower = AdditionalPower
 	self.Name = Name
 	self.Power.bg = Power.Background
 	self.CombatIndicator = Combat
