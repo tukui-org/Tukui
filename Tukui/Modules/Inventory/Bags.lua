@@ -1155,8 +1155,8 @@ function Bags:Enable()
 	end
 	
 	-- Add Text Cooldowns Timer
-	hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-	hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
+	--hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
+	--hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
 
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
