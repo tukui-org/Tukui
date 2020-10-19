@@ -131,7 +131,7 @@ function Tukz:MoveTooltip()
 	local DataTextRight = T.DataTexts.Panels.Right
 
 	Anchor:ClearAllPoints()
-	Anchor:SetPoint("BOTTOMRIGHT", DataTextRight, 0, 2)
+	Anchor:SetPoint("BOTTOMRIGHT", UIParent, -34, 20)
 end
 
 function Tukz:GetTooltipAnchor()
