@@ -127,8 +127,6 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	local Cooldown = _G[Button:GetName().."Cooldown"]
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
-	
-	Cooldown:SetAlpha(0)
 
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)

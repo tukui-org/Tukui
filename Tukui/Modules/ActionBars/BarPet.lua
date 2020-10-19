@@ -66,6 +66,7 @@ function ActionBars:CreatePetBar()
 	end
 
 	hooksecurefunc("PetActionBar_Update", ActionBars.UpdatePetBar)
+	hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
 
 	ActionBars:SkinPetButtons()
 

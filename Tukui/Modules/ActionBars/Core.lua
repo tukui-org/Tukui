@@ -82,11 +82,52 @@ function ActionBars:MovePetBar()
 end
 
 function ActionBars:UpdatePetBar()
-	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local ButtonName = "PetActionButton" .. i
 		local PetActionButton = _G[ButtonName]
 
 		PetActionButton:SetNormalTexture("")
+	end
+end
+
+function ActionBars:OnUpdatePetBarCooldownText(elapsed)
+	local Now = GetTime()
+	local Timer = Now - self.StartTimer
+	local Cooldown = self.DurationTimer - Timer
+	
+	self.Elapsed = self.Elapsed - elapsed
+
+	if self.Elapsed < 0 then
+		if Cooldown <= 0 then
+			self.Text:SetText("")
+
+			self:SetScript("OnUpdate", nil)
+		else
+			self.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+			self.Text:SetTextColor(1, 0, 0)
+			self.Text:SetText(T.FormatTime(Cooldown))
+		end
+		
+		self.Elapsed = .1
+	end
+end
+
+function ActionBars.UpdatePetBarCooldownText()
+	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
+		local Cooldown = _G["PetActionButton"..i.."Cooldown"]
+		local Start, Duration, Enable = GetPetActionCooldown(i)
+		
+		if Enable and Enable ~= 0 and Start > 0 and Duration > 0 then
+			if not Cooldown.Text then
+				Cooldown.Text = Cooldown:CreateFontString(nil, "OVERLAY")
+				Cooldown.Text:SetPoint("CENTER", 1, 0)
+			end
+			
+			Cooldown.StartTimer = Start
+			Cooldown.DurationTimer = Duration
+			Cooldown.Elapsed = .1
+			Cooldown:SetScript("OnUpdate", ActionBars.OnUpdatePetBarCooldownText)
+		end
 	end
 end
 
