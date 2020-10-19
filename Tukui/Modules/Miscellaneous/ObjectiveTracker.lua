@@ -38,31 +38,32 @@ end
 function ObjectiveTracker:OnClick()
 	if (ObjectiveTrackerFrame:IsVisible()) then
 		ObjectiveTrackerFrame:Hide()
-
-		self.Toggle:SetText("<")
 	else
 		ObjectiveTrackerFrame:Show()
-
-		self.Toggle:SetText(">")
 	end
 end
 
 function ObjectiveTracker:CreateToggleButtons()
 	local Button = CreateFrame("Button", nil, UIParent)
 	
-	Button:SetSize(32, 32)
-	Button:SetPoint("TOPRIGHT", ObjectiveTrackerFrame, 13, 20)
+	Button:SetSize(216, 32)
 	Button:SetAlpha(0)
+	Button:CreateBackdrop()
+	Button:SetPoint("TOPLEFT", ObjectiveTrackerFrame, -25, 24)
 	Button:RegisterForClicks("AnyUp")
 	Button:SetScript("OnClick", self.OnClick)
 	Button:SetScript("OnEnter", self.OnEnter)
 	Button:SetScript("OnLeave", self.OnLeave)
+	
+	Button.Backdrop:SetInside(Button, 0, 19)
+	Button.Backdrop:SetBackdropColor(unpack(T.Colors.class[T.MyClass]))
+	Button.Backdrop:CreateShadow()
 
 	Button.Toggle = Button:CreateFontString(nil, "OVERLAY")
-	Button.Toggle:SetFontTemplate(C.Medias.Font, 32)
-	Button.Toggle:SetSize(32, 32)
-	Button.Toggle:SetPoint("CENTER")
-	Button.Toggle:SetText(">")
+	Button.Toggle:SetFont(C.Medias.Font, 12, "OUTLINE")
+	Button.Toggle:SetSize(214, 32)
+	Button.Toggle:SetPoint("RIGHT")
+	Button.Toggle:SetText(BINDING_NAME_TOGGLEQUESTLOG)
 end
 
 function ObjectiveTracker:SetDefaultPosition()
