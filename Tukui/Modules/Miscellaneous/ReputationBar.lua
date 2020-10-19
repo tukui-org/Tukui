@@ -63,6 +63,7 @@ function Reputation:Create()
 		RepBar:SetFrameStrata("BACKGROUND")
 		RepBar:SetFrameLevel(5)
 		RepBar:CreateBackdrop()
+		RepBar:CreateShadow()
 		RepBar:SetScript("OnEnter", Reputation.SetTooltip)
 		RepBar:SetScript("OnLeave", HideTooltip)
 		RepBar:SetSize(i == 1 and T.Chat.Panels.LeftChat:GetWidth() - 2 or T.Chat.Panels.RightChat:GetWidth() - 2, 6)
@@ -93,17 +94,12 @@ function Reputation:Enable()
 
 		self.IsCreated = true
 	end
-
-	if (UnitLevel("player") == MAX_PLAYER_LEVEL) or (self.RepBar2:GetParent() ~= UIParent) then
-		self.RepBar1:Show()
-		
-		self.RepBar1.Backdrop.Shadow:Show()
-		self.RepBar2.Backdrop.Shadow:Show()
-	else
-		self.RepBar1:Hide()
+	
+	for i = 1, self.NumBars do
+		if not self["RepBar"..i]:IsShown() then
+			self["RepBar"..i]:Show()
+		end
 	end
-
-	self.RepBar2:Show()
 end
 
 function Reputation:Disable()
