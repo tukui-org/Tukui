@@ -103,7 +103,6 @@ function ActionBars:OnUpdatePetBarCooldownText(elapsed)
 
 			self:SetScript("OnUpdate", nil)
 		else
-			self.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 			self.Text:SetTextColor(1, 0, 0)
 			self.Text:SetText(T.FormatTime(Cooldown))
 		end
@@ -119,8 +118,13 @@ function ActionBars.UpdatePetBarCooldownText()
 		
 		if Enable and Enable ~= 0 and Start > 0 and Duration > 0 then
 			if not Cooldown.Text then
+				local Font = T.GetFont(C["Cooldowns"].Font)
+				
+				Font = _G[Font]:GetFont()
+
 				Cooldown.Text = Cooldown:CreateFontString(nil, "OVERLAY")
 				Cooldown.Text:SetPoint("CENTER", 1, 0)
+				Cooldown.Text:SetFont(Font, 14, "THINOUTLINE")
 			end
 			
 			Cooldown.StartTimer = Start
