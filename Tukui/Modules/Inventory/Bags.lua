@@ -44,6 +44,23 @@ local BagProfessions = {
 
 local BagSize = {}
 
+function Bags:SetTokensPosition()
+	local Money = ContainerFrame1MoneyFrame
+	
+	MAX_WATCHED_TOKENS = 2
+
+	-- Set Position
+	Token1:ClearAllPoints()
+	Token1:SetPoint("LEFT", Money, "RIGHT", 0, -2)
+	Token2:ClearAllPoints()
+	Token2:SetPoint("LEFT", Token1, "RIGHT", 0, 0)
+	Token3:SetParent(T.Hider)
+	
+	-- Skin Icons
+	Token1.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	Token2.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+end
+
 function Bags:GetBagProfessionType(bag)
 	local BagType = select(2, GetContainerNumFreeSlots(bag))
 
@@ -1118,6 +1135,7 @@ function Bags:Enable()
 	self:CreateContainer("Bag", "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 50)
 	self:CreateContainer("Bank", "BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 50)
 	self:HideBlizzard()
+	self:SetTokensPosition()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()
@@ -1167,6 +1185,7 @@ function Bags:Enable()
 	self:RegisterEvent("MERCHANT_CLOSED")
 	self:RegisterEvent("MAIL_CLOSED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
+	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 	self:SetScript("OnEvent", self.OnEvent)
 
 	for i = 1, 13 do
