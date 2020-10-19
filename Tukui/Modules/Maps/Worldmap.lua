@@ -128,13 +128,13 @@ function WorldMap:CreateCoords()
 	self.Coords.PlayerText = self.Coords:CreateFontString(nil, "OVERLAY")
 	self.Coords.PlayerText:SetFontTemplate(C.Medias.Font, 16)
 	self.Coords.PlayerText:SetTextColor(1, 1, 1)
-	self.Coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapFrame.BorderFrame, "BOTTOMLEFT", 18, 16)
+	self.Coords.PlayerText:SetPoint("BOTTOMRIGHT", WorldMapFrame.BorderFrame, "BOTTOMRIGHT", -18, 16)
 	self.Coords.PlayerText:SetText("")
 	
 	self.Coords.CursorText = self.Coords:CreateFontString(nil, "OVERLAY")
 	self.Coords.CursorText:SetFontTemplate(C.Medias.Font, 16)
 	self.Coords.CursorText:SetTextColor(1, 1, 1)
-	self.Coords.CursorText:SetPoint("BOTTOMLEFT", WorldMapFrame.BorderFrame, "BOTTOMLEFT", 18, 34)
+	self.Coords.CursorText:SetPoint("BOTTOMRIGHT", WorldMapFrame.BorderFrame, "BOTTOMRIGHT", -18, 34)
 	self.Coords.CursorText:SetText("")
 end
 
