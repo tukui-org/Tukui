@@ -85,11 +85,13 @@ function ActionBars:SkinButton(button)
 			KeybindTex:SetTexture("")
 		end
 		
-		if Button.UpdateHotkeys then
-			hooksecurefunc(Button, "UpdateHotkeys", ActionBars.BetterHotKeyText)
+		if C.ActionBars.HotKey then
+			if Button.UpdateHotkeys then
+				hooksecurefunc(Button, "UpdateHotkeys", ActionBars.BetterHotKeyText)
+			end
+
+			ActionBars.BetterHotKeyText(Button)
 		end
-		
-		ActionBars.BetterHotKeyText(Button)
 		
 		Button:StyleButton()
 		Button.isSkinned = true
@@ -180,7 +182,9 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		Button.QuickKeybindHighlightTexture:SetTexture("")
 	end
 	
-	ActionBars.BetterHotKeyText(Button)
+	if C.ActionBars.HotKey then
+		ActionBars.BetterHotKeyText(Button)
+	end
 
 	Button:StyleButton()
 	Button.isSkinned = true

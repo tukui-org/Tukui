@@ -332,7 +332,10 @@ function ActionBars:AddHooks()
 	hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
 	hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
 	hooksecurefunc("ActionButton_UpdateRangeIndicator", ActionBars.RangeUpdate)
-	hooksecurefunc("PetActionButton_SetHotkeys", self.BetterHotKeyText)
+	
+	if C.ActionBars.HotKey then
+		hooksecurefunc("PetActionButton_SetHotkeys", self.BetterHotKeyText)
+	end
 	
 	if C.ActionBars.ProcAnim then
 		hooksecurefunc("ActionButton_ShowOverlayGlow", ActionBars.StartHighlight)
