@@ -11,4 +11,5 @@
 	<Script file="oUF_HarmonyBar\oUF_HarmonyBar.lua"/>
 	<Script file="oUF_SoulShards\oUF_SoulShards.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
+	<Script file="oUF_QuestIcon\oUF_QuestIcon.lua"/>
 </Ui>
