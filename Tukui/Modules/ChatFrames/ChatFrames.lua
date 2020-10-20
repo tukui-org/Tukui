@@ -663,6 +663,8 @@ function Chat:DisplayChat()
 end
 
 function Chat:AddToast()
+	-- TESTING CMD : /run BNToastFrame:AddToast(BN_TOAST_TYPE_ONLINE, 1)
+	
 	if not self.IsSkinned then
 		local Glow = BNToastFrameGlowFrame
 		
@@ -675,11 +677,9 @@ function Chat:AddToast()
 		
 		self.IsSkinned = true
 	end
-	
-	local Anchor = C.General.Themes.Value == "Tukui" and T.Chat.Panels.LeftChat or T.DataTexts.Panels.Left
 
 	self:ClearAllPoints()
-	self:SetPoint("BOTTOMLEFT", Anchor, "TOPLEFT", 0, 16)
+	self:SetPoint("BOTTOMLEFT", T.Chat.Panels.LeftChat, "TOPLEFT", 0, 26)
 end
 
 function Chat:AddHooks()
