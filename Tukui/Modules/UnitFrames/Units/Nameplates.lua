@@ -131,9 +131,13 @@ function UnitFrames:Nameplates()
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
 	
-	local QuestIcon = self:CreateTexture(nil, "OVERLAY")
-	QuestIcon:SetSize(C.NamePlates.Height, C.NamePlates.Height)
-	QuestIcon:SetPoint("LEFT", self, "RIGHT", 4, 0)
+	if C.NamePlates.QuestIcon then
+		local QuestIcon = self:CreateTexture(nil, "OVERLAY")
+		QuestIcon:SetSize(C.NamePlates.Height, C.NamePlates.Height)
+		QuestIcon:SetPoint("LEFT", self, "RIGHT", 4, 0)
+		
+		self.QuestIcon = QuestIcon
+	end
 
 	self.Health = Health
 	self.Health.bg = Health.Background
@@ -143,7 +147,6 @@ function UnitFrames:Nameplates()
 	self.Power.bg = Power.Background
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
-	self.QuestIcon = QuestIcon
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 	self:RegisterEvent("NAME_PLATE_UNIT_ADDED", UnitFrames.Highlight, true)

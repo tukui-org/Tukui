@@ -144,6 +144,7 @@ C["NamePlates"] = {
 	["NameplateCastBar"] = true,
 	["Font"] = "Tukui Outline",
 	["OnlySelfDebuffs"] = true,
+	["QuestIcon"] = true,
 	["HighlightColor"] = {1, 1, 0},
 	["HighlightSize"] = 10,
 }
