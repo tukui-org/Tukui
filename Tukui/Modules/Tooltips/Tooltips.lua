@@ -16,7 +16,7 @@ function Tooltip:CreateAnchor()
 	self.Anchor:SetFrameStrata("TOOLTIP")
 	self.Anchor:SetFrameLevel(20)
 	self.Anchor:SetClampedToScreen(true)
-	self.Anchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 183)
+	self.Anchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 211)
 	self.Anchor:SetMovable(true)
 end
 

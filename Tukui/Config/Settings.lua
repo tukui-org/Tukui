@@ -69,9 +69,9 @@ C["Bags"] = {
 	["Enable"] = true,
 	["IdentifyQuestItems"] = true,
 	["FlashNewItems"] = true,
-	["ButtonSize"] = 28,
+	["ButtonSize"] = 32,
 	["Spacing"] = 4,
-	["ItemsPerRow"] = 11,
+	["ItemsPerRow"] = 12,
 }
 
 C["Chat"] = {
@@ -87,10 +87,10 @@ C["Chat"] = {
 	},
 	["BubblesTextSize"] = 9,
 	["SkinBubbles"] = true,
-	["LeftWidth"] = 370,
-	["LeftHeight"] = 185,
-	["RightWidth"] = 370,
-	["RightHeight"] = 185,
+	["LeftWidth"] = 450,
+	["LeftHeight"] = 200,
+	["RightWidth"] = 450,
+	["RightHeight"] = 200,
 	["RightChatAlignRight"] = true,
 	["BackgroundAlpha"] = 70,
 	["WhisperSound"] = true,
