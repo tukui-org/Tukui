@@ -56,10 +56,6 @@ function ActionBars:CreatePetBar()
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
-		
-		if Button:IsEventRegistered("UPDATE_BINDINGS") then
-			Button:UnregisterEvent("UPDATE_BINDINGS")
-		end
 
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button

@@ -2,6 +2,7 @@ local T, C, L = select(2, ...):unpack()
 
 local ActionBars = T["ActionBars"]
 local format = format
+local Replace = string.gsub
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS
@@ -277,10 +278,61 @@ function ActionBars:StopHightlight()
 	end
 end
 
+function ActionBars:BetterHotKeyText()
+	local HotKey = self.HotKey
+	local Text = HotKey:GetText()
+	local Indicator = _G["RANGE_INDICATOR"]
+
+	if (not Text) then
+		return
+	end
+
+	Text = Replace(Text, "(s%-)", "S")
+	Text = Replace(Text, "(a%-)", "A")
+	Text = Replace(Text, "(c%-)", "C")
+	Text = Replace(Text, KEY_MOUSEWHEELDOWN , "MDn")
+	Text = Replace(Text, KEY_MOUSEWHEELUP , "MUp")
+	Text = Replace(Text, KEY_BUTTON3, "M3")
+	Text = Replace(Text, KEY_BUTTON4, "M4")
+	Text = Replace(Text, KEY_BUTTON5, "M5")
+	Text = Replace(Text, KEY_MOUSEWHEELUP, "MU")
+	Text = Replace(Text, KEY_MOUSEWHEELDOWN, "MD")
+	Text = Replace(Text, KEY_NUMPAD0, "N0")
+	Text = Replace(Text, KEY_NUMPAD1, "N1")
+	Text = Replace(Text, KEY_NUMPAD2, "N2")
+	Text = Replace(Text, KEY_NUMPAD3, "N3")
+	Text = Replace(Text, KEY_NUMPAD4, "N4")
+	Text = Replace(Text, KEY_NUMPAD5, "N5")
+	Text = Replace(Text, KEY_NUMPAD6, "N6")
+	Text = Replace(Text, KEY_NUMPAD7, "N7")
+	Text = Replace(Text, KEY_NUMPAD8, "N8")
+	Text = Replace(Text, KEY_NUMPAD9, "N9")
+	Text = Replace(Text, KEY_NUMPADDECIMAL, "N.")
+	Text = Replace(Text, KEY_NUMPADDIVIDE, "N/")
+	Text = Replace(Text, KEY_NUMPADMINUS, "N-")
+	Text = Replace(Text, KEY_NUMPADMULTIPLY, "N*")
+	Text = Replace(Text, KEY_NUMPADPLUS, "N+")
+	Text = Replace(Text, KEY_PAGEUP, "PU")
+	Text = Replace(Text, KEY_PAGEDOWN, "PD")
+	Text = Replace(Text, KEY_SPACE, "SpB")
+	Text = Replace(Text, KEY_INSERT, "Ins")
+	Text = Replace(Text, KEY_HOME, "Hm")
+	Text = Replace(Text, KEY_DELETE, "Del")
+	Text = Replace(Text, KEY_BACKSPACE, "Bks")
+	Text = Replace(Text, KEY_INSERT_MAC, "Hlp") -- mac
+
+	if HotKey:GetText() == Indicator then
+		HotKey:SetText("")
+	else
+		HotKey:SetText(Text)
+	end
+end
+
 function ActionBars:AddHooks()
 	hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
 	hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
 	hooksecurefunc("ActionButton_UpdateRangeIndicator", ActionBars.RangeUpdate)
+	hooksecurefunc("PetActionButton_SetHotkeys", self.BetterHotKeyText)
 	
 	if C.ActionBars.ProcAnim then
 		hooksecurefunc("ActionButton_ShowOverlayGlow", ActionBars.StartHighlight)
