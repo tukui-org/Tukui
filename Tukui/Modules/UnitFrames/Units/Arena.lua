@@ -151,7 +151,7 @@ function UnitFrames:Arena()
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 
-	self:Tag(Name, "[Tukui:GetNameColor][name] - [arenaspec]")
+	self:Tag(Name, "[raidcolor][Tukui:NameLong] - [arenaspec]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
