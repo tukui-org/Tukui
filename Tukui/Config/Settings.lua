@@ -286,6 +286,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["Missing HP"] = "|cff549654-[missinghp]|r",
 		},
 
 		["Value"] = "|cff549654[perhp]%|r",
@@ -296,6 +297,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["Missing HP"] = "|cff549654-[missinghp]|r",
 		},
 
 		["Value"] = "|cff549654[perhp]%|r",
@@ -306,6 +308,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["Missing HP"] = "|cff549654-[missinghp]|r",
 		},
 
 		["Value"] = "|cff549654[perhp]%|r",
