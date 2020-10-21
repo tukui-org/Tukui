@@ -100,6 +100,7 @@ function UnitFrames:TargetOfTarget()
 	if C.UnitFrames.HealComm then
 		local myBar = CreateFrame("StatusBar", nil, Health)
 		local otherBar = CreateFrame("StatusBar", nil, Health)
+		local absorbBar = CreateFrame("StatusBar", nil, Health)
 
 		myBar:SetFrameLevel(Health:GetFrameLevel())
 		myBar:SetStatusBarTexture(HealthTexture)
@@ -112,14 +113,23 @@ function UnitFrames:TargetOfTarget()
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
 		otherBar:SetPoint("TOP")
 		otherBar:SetPoint("BOTTOM")
-		otherBar:SetPoint("LEFT", myBar:GetStatusBarTexture(), "RIGHT")
+		otherBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
 		otherBar:SetWidth(129)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
+		
+		absorbBar:SetFrameLevel(Health:GetFrameLevel())
+		absorbBar:SetPoint("TOP")
+		absorbBar:SetPoint("BOTTOM")
+		absorbBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
+		absorbBar:SetWidth(129)
+		absorbBar:SetStatusBarTexture(HealthTexture)
+		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
 
 		local HealthPrediction = {
 			myBar = myBar,
 			otherBar = otherBar,
+			absorbBar = absorbBar,
 			maxOverflow = 1,
 		}
 
