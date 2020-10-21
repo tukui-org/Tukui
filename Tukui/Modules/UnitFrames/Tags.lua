@@ -140,4 +140,18 @@ oUF.Tags.Methods["Tukui:Classification"] = function(unit)
 	end
 end
 
+oUF.Tags.Events["Tukui:Role"] = "PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE"
+oUF.Tags.Methods["Tukui:Role"] = function(unit)
+	local Role = UnitGroupRolesAssigned(unit)
+	local String = ""
+
+	if Role == "TANK" then
+		String = " |cff0099CC(" .. TANK .. ")|r"
+	elseif Role == "HEALER" then
+		String = " |cff00FF00(" .. HEALER .. ")|r"
+	end
+
+	return String
+end
+
 UnitFrames.Tags = oUF.Tags
