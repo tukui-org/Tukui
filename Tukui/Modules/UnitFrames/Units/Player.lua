@@ -467,7 +467,7 @@ function UnitFrames:Player()
 	self:HookScript("OnLeave", UnitFrames.MouseOnPlayer)
 
 	-- Register with oUF
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:Classification][Tukui:DiffColor][level]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	self.Panel = Panel
 	self.Health = Health
 	self.Health.bg = Health.Background

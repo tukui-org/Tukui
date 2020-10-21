@@ -299,7 +299,7 @@ function UnitFrames:Target()
 		self.HealthPrediction = HealthPrediction
 	end
 
-	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameLong] [Tukui:Classification][Tukui:DiffColor][level]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	self.Name = Name
 	self.Panel = Panel
 	self.Health = Health
