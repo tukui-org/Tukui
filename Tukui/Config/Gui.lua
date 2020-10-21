@@ -343,6 +343,15 @@ local UnitFrames = function(self)
 	Window:CreateSection("Target")
 	Window:CreateDropdown("UnitFrames", "TargetHealthTag", "Health tag on target")
 	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
+	
+	Window:CreateSection("Focus")
+	Window:CreateDropdown("UnitFrames", "FocusHealthTag", "Health tag on target")
+	
+	Window:CreateSection("FocusTarget")
+	Window:CreateDropdown("UnitFrames", "FocusTargetHealthTag", "Health tag on target")
+	
+	Window:CreateSection("Boss")
+	Window:CreateDropdown("UnitFrames", "BossHealthTag", "Health tag on target")
 end
 
 GUI:AddWidgets(General)

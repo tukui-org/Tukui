@@ -29,12 +29,14 @@ function UnitFrames:Focus()
 	Health.Background:SetTexture(HealthTexture)
     Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+	
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
+	Health.Value:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 4)
 
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
-
-	Health.PostUpdate = UnitFrames.PostUpdateHealth
 
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
@@ -189,6 +191,7 @@ function UnitFrames:Focus()
 	Highlight:Hide()
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Health.Value, C.UnitFrames.FocusHealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

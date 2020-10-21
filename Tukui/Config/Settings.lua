@@ -280,4 +280,34 @@ C["UnitFrames"] = {
 
 		["Value"] = "|cff549654[Tukui:CurrentHP]|r",
 	},
+	["FocusHealthTag"] = {
+		["Options"] = {
+			["None"] = "",
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "|cff549654[perhp]%|r",
+	},
+	["FocusTargetHealthTag"] = {
+		["Options"] = {
+			["None"] = "",
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "|cff549654[perhp]%|r",
+	},
+	["BossHealthTag"] = {
+		["Options"] = {
+			["None"] = "",
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "|cff549654[perhp]%|r",
+	},
 }
