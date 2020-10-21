@@ -183,7 +183,7 @@ function UnitFrames:FocusTarget()
 		self.HealthPrediction = HealthPrediction
 	end
 	
-	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameMedium]")
 	self:Tag(Health.Value, C.UnitFrames.FocusTargetHealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background

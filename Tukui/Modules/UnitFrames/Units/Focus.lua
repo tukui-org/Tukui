@@ -190,7 +190,7 @@ function UnitFrames:Focus()
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
 
-	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameMedium]")
 	self:Tag(Health.Value, C.UnitFrames.FocusHealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
