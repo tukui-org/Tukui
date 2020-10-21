@@ -674,3 +674,10 @@ C_UI.Reload = function()
 end
 
 T.Toolkit = Toolkit
+
+---------------------------------------------------
+-- Deprecated Functions
+---------------------------------------------------
+
+-- :SetTemplate moved to :CreateBackdrop, please update your addons as soon as possible
+Toolkit.API.SetTemplate = Toolkit.API.CreateBackdrop
