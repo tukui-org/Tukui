@@ -195,26 +195,32 @@ end
 
 function Tooltip:Skin(style)
 	if (not self.IsSkinned) then
-		self:CreateBackdrop()
-		self:CreateShadow()
+		if self ~= GameTooltipTooltip then
+			self:CreateBackdrop()
+			self:CreateShadow()
+		end
+		
 		self.IsSkinned = true
 	end
 	
 	local Link = select(2, self:GetItem())
 	local R, G, B
+	local Backdrop = self.Backdrop
 	
-	if Link then
-		local Quality = select(3, GetItemInfo(Link))
-		
-		if Quality then
-			R, G, B = GetItemQualityColor(Quality)
-		else
-			R, G, B = unpack(C["General"].BorderColor)
-		end
+	if Backdrop then
+		if Link then
+			local Quality = select(3, GetItemInfo(Link))
 
-		self.Backdrop:SetBorderColor(R, G, B)
-	else
-		self.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
+			if Quality then
+				R, G, B = GetItemQualityColor(Quality)
+			else
+				R, G, B = unpack(C["General"].BorderColor)
+			end
+
+			Backdrop:SetBorderColor(R, G, B)
+		else
+			Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
+		end
 	end
 	
 	self:ClearBackdrop()
