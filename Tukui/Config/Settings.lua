@@ -223,7 +223,7 @@ C["Textures"] = {
 
 C["UnitFrames"] = {
 	["Enable"] = true,
-	["TotemBar"] = true,
+	["TotemBar"] = T.MyClass == "SHAMAN" and true or false,
 	["HealComm"] = true,
 	["PlayerAuraBars"] = false,
 	["ScrollingCombatText"] = false,
@@ -241,7 +241,6 @@ C["UnitFrames"] = {
 	["CastBarLatency"] = true,
 	["Smooth"] = true,
 	["TargetEnemyHostileColor"] = true,
-	["ShowTargetManaText"] = false,
 	["CombatLog"] = true,
 	["PlayerAuras"] = true,
 	["TargetAuras"] = true,
@@ -263,4 +262,22 @@ C["UnitFrames"] = {
 	["HighlightSize"] = 10,
 	["HighlightColor"] = {0, 1, 0},
 	["RangeAlpha"] = 0.3,
+	["PlayerHealthTag"] = {
+		["Options"] = {
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "|cff549654[Tukui:CurrentHP]|r",
+	},
+	["TargetHealthTag"] = {
+		["Options"] = {
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "|cff549654[Tukui:CurrentHP]|r",
+	},
 }

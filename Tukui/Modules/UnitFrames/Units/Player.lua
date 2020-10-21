@@ -50,8 +50,6 @@ function UnitFrames:Player()
 	Health.colorClass = true
 	Health.colorReaction = true
 
-	Health.PostUpdate = UnitFrames.PostUpdateHealth
-
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
 	Power:SetFrameLevel(4)
@@ -468,6 +466,7 @@ function UnitFrames:Player()
 
 	-- Register with oUF
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Health.Value, C.UnitFrames.PlayerHealthTag.Value)
 	self.Panel = Panel
 	self.Health = Health
 	self.Health.bg = Health.Background

@@ -51,7 +51,6 @@ function UnitFrames:Target()
 	Health.colorTapping = true
 
 	Health.PreUpdate = UnitFrames.PreUpdateHealth
-	Health.PostUpdate = UnitFrames.PostUpdateHealth
 
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
@@ -64,13 +63,6 @@ function UnitFrames:Target()
 	Power.Background:SetTexture(PowerTexture)
 	Power.Background:SetAllPoints(Power)
 	Power.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
-
-	if C.UnitFrames.ShowTargetManaText then
-		Power.Value = Power:CreateFontString(nil, "OVERLAY")
-		Power.Value:SetFontObject(Font)
-		Power.Value:SetPoint("RIGHT", -4, 4)
-		Power.PostUpdate = UnitFrames.PostUpdatePower
-	end
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
@@ -300,6 +292,7 @@ function UnitFrames:Target()
 	end
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
+	self:Tag(Health.Value, C.UnitFrames.TargetHealthTag.Value)
 	self.Name = Name
 	self.Panel = Panel
 	self.Health = Health

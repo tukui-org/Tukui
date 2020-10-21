@@ -109,6 +109,13 @@ oUF.Tags.Methods["Tukui:Dead"] = function(unit)
 	end
 end
 
+oUF.Tags.Events["Tukui:CurrentHP"] = "UNIT_HEALTH"
+oUF.Tags.Methods["Tukui:CurrentHP"] = function(unit)
+	local HP = UnitFrames.ShortValue(UnitHealth(unit))
+	
+	return HP
+end
+
 oUF.Tags.Events["Tukui:AFK"] = "PLAYER_FLAGS_CHANGED"
 oUF.Tags.Methods["Tukui:AFK"] = function(unit)
 	if UnitIsAFK(unit) then

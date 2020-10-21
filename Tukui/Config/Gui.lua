@@ -295,16 +295,12 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "Enable", "Enable unitframe module")
 	Window:CreateSwitch("UnitFrames", "OOCNameLevel", "Display my name/level while out of combat")
 	Window:CreateSwitch("UnitFrames", "OOCPetNameLevel", "Display my pet name/level while out of combat")
-	Window:CreateSwitch("UnitFrames", "ShowTargetManaText", "Display power text on target")
 	Window:CreateSwitch("UnitFrames", "Portrait", "Enable unit portraits")
 	Window:CreateSwitch("UnitFrames", "CastBar", "Enable castbar")
 	Window:CreateSwitch("UnitFrames", "HealComm", "Enable HealComm")
 	Window:CreateSwitch("UnitFrames", "Boss", "Enable boss unit frames")
 	Window:CreateSwitch("UnitFrames", "Arena", "Enable arena unit frames")
-
-	if T.MyClass == "SHAMAN" then
-		Window:CreateSwitch("UnitFrames", "TotemBar", "Enable totem bar")
-	end
+	Window:CreateSwitch("UnitFrames", "TotemBar", "Enable totem bar")
 
 	Window:CreateSection("Scrolling combat text")
 	Window:CreateSwitch("UnitFrames", "ScrollingCombatText", "Enable scrolling combat text")
@@ -332,7 +328,6 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "ComboBar", "Enable combo point bar")
 	Window:CreateSwitch("UnitFrames", "Smooth", "Enable smooth health transitions")
 	Window:CreateSwitch("UnitFrames", "CombatLog", "Enable combat feedback text")
-	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
 	Window:CreateSwitch("UnitFrames", "Portrait2D", "Use 2D Portrait")
 	Window:CreateDropdown("UnitFrames", "Font", "Set unitframe font", "Font")
 	Window:CreateColorSelection("UnitFrames", "HealCommSelfColor", "HealComm - my heals")
@@ -341,6 +336,13 @@ local UnitFrames = function(self)
 	Window:CreateSlider("UnitFrames", "RaidIconSize", "Size of raid icons", 16, 32, 1)
 	Window:CreateSlider("UnitFrames", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
 	Window:CreateSlider("UnitFrames", "RangeAlpha", "Set out of range alpha (focus/arena/boss)", 0, 1, 0.1)
+	
+	Window:CreateSection("Player")
+	Window:CreateDropdown("UnitFrames", "PlayerHealthTag", "Health tag on player")
+	
+	Window:CreateSection("Target")
+	Window:CreateDropdown("UnitFrames", "TargetHealthTag", "Health tag on target")
+	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
 end
 
 GUI:AddWidgets(General)
