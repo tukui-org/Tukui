@@ -66,9 +66,11 @@ local function Enable(self)
 	if (QuestIcon) then
 		QuestIcon.__owner = self
 		QuestIcon.ForceUpdate = ForceUpdate
-		
-		QuestIcon:SetTexture([[Interface\QuestFrame\AutoQuest-Parts]])
-		QuestIcon:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
+
+		if not QuestIcon:GetTexture() then
+			QuestIcon:SetTexture([[Interface\QuestFrame\AutoQuest-Parts]])
+			QuestIcon:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
+		end
 
 		self:RegisterEvent("QUEST_LOG_UPDATE", Path, true)
 		self:RegisterEvent("NAME_PLATE_UNIT_ADDED", Path, true)
