@@ -44,7 +44,7 @@ function UnitFrames:Nameplates()
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
 
-	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameLong]")
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameMedium]")
 
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
