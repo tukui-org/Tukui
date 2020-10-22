@@ -173,7 +173,7 @@ function UnitFrames:Party()
 	self.ReadyCheckIndicator = ReadyCheck
 	self.RaidTargetIndicator = RaidIcon
 	self.Range = Range
-	self:Tag(Name, "[level] [Tukui:NameLong]")
+	self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
 	self.Highlight = Highlight
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
