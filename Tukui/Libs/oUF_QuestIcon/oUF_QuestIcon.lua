@@ -35,6 +35,10 @@ local FindPlateWithQuest = function(self, unit)
 end
 
 local Update = function(self, event)
+	if IsInInstance() then
+		return
+	end
+	
 	local QuestIcon = self.QuestIcon
 	local Unit = self.unit
 	local NumPlates = C_NamePlate.GetNamePlates()
