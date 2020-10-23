@@ -19,15 +19,21 @@ local FindPlateWithQuest = function(self, unit)
 				local r, g, b = Line:GetTextColor()
 
 				if (r > 0.99 and r <= 1) and (g > 0.82 and g < 0.83) and (b >= 0 and b < 0.01) then
-					QuestIcon:Show()
+					if not QuestIcon:IsShown() then
+						QuestIcon:Show()
+					end
 
 					break
 				else
-					QuestIcon:Hide()
+					if QuestIcon:IsShown() then
+						QuestIcon:Hide()
+					end
 				end
 			end
 		else
-			QuestIcon:Hide()
+			if QuestIcon:IsShown() then
+				QuestIcon:Hide()
+			end
 		end
 
 		ScanTooltip:Hide()
