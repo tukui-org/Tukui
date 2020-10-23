@@ -12,9 +12,10 @@ end
 
 local DisplayQuestIcon = function(self)
 	local QuestIcon = self.QuestIcon
-	local Name = UnitName(self.unit)
+	local GUID = UnitGUID(self.unit) or ""
+	local ID = tonumber(strmatch(GUID, "%-(%d-)%-%x-$"), 10)
 	
-	if Cache[Name] == "QUEST" then
+	if Cache[ID] == "QUEST" then
 		if not QuestIcon:IsShown() then
 			QuestIcon:Show()
 		end
@@ -29,9 +30,10 @@ local FindPlateWithQuest = function(self, unit)
 	local QuestIcon = self.QuestIcon
 	
 	if QuestIcon then
-		local Name = UnitName(unit)
+		local GUID = UnitGUID(unit) or ""
+		local ID = tonumber(strmatch(GUID, "%-(%d-)%-%x-$"), 10)
 		
-		if not Cache[Name] then
+		if not Cache[ID] then
 			ScanTooltip:ClearLines()
 			ScanTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
 			ScanTooltip:SetUnit(unit)
@@ -40,7 +42,7 @@ local FindPlateWithQuest = function(self, unit)
 			local NumLines = ScanTooltip:NumLines()
 			local Name = UnitName(unit)
 			
-			Cache[Name] = "NOQUEST"
+			Cache[ID] = "NOQUEST"
 
 			if NumLines >= 3 then
 				for i = 3, NumLines do
@@ -48,7 +50,7 @@ local FindPlateWithQuest = function(self, unit)
 					local r, g, b = Line:GetTextColor()
 
 					if (r > 0.99 and r <= 1) and (g > 0.82 and g < 0.83) and (b >= 0 and b < 0.01) then
-						Cache[Name] = "QUEST"
+						Cache[ID] = "QUEST"
 						
 						break
 					end
@@ -107,6 +109,8 @@ local function Enable(self)
 			QuestIcon:SetTexture([[Interface\QuestFrame\AutoQuest-Parts]])
 			QuestIcon:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
 		end
+		
+		QuestIcon:Hide()
 
 		self:RegisterEvent("QUEST_ACCEPTED", Path, true)
 		self:RegisterEvent("QUEST_REMOVED", Path, true)
