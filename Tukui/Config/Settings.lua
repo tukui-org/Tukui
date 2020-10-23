@@ -147,6 +147,17 @@ C["NamePlates"] = {
 	["QuestIcon"] = true,
 	["HighlightColor"] = {1, 1, 0},
 	["HighlightSize"] = 10,
+	["ColorThreat"] = false, 
+	["NamePlateHealthTag"] = {
+		["Options"] = {
+			["None"] = "",
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+		},
+
+		["Value"] = "",
+	},
 }
 
 C["Party"] = {
