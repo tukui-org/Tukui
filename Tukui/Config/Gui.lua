@@ -184,7 +184,7 @@ local NamePlates = function(self)
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("NamePlates", "Enable", "Enable nameplate module")
 	Window:CreateSwitch("NamePlates", "NameplateCastBar", "Enable nameplate cast")
-	Window:CreateSwitch("NamePlates", "QuestIcon", "[BETA/WIP] Enable nameplate quest icon indicator")
+	Window:CreateSwitch("NamePlates", "QuestIcon", "Enable nameplate quest icon indicator")
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("NamePlates", "OnlySelfDebuffs", "Display only our debuffs")
