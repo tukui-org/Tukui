@@ -1,7 +1,7 @@
 ## Interface: 90001
 ## Author: Tukz
 ## X-Maintainer: Tukz & Azilroka & Hydra
-## Version: 20.04
+## Version: 20.05
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter
