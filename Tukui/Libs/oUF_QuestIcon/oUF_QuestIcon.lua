@@ -61,7 +61,7 @@ end
 local Update = function(self, event)
 	local InstanceType = select(2, IsInInstance())
 	
-	if InstanceType ~= "pvp" and InstanceType ~= "arena" then
+	if InstanceType == "pvp" or InstanceType == "arena" then
 		return
 	end
 	
