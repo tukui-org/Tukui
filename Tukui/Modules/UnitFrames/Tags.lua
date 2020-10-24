@@ -9,18 +9,15 @@ UnitFrames.ShortNameLength = 10
 
 oUF.Tags.Events["Tukui:GetRaidNameColor"] = "RAID_ROSTER_UPDATE GROUP_ROSTER_UPDATE"
 oUF.Tags.Methods["Tukui:GetRaidNameColor"] = function(unit)
-	local IsPlayer = UnitIsPlayer(unit)
-	local Reaction = UnitReaction(unit, "player")
-	local R, G, B = 1, 1, 1
+	local Role = UnitGroupRolesAssigned(unit)
+	local R, G, B
 
-	if IsPlayer then
-		local Class = select(2, UnitClass(unit))
-
-		if Class then
-			R, G, B = unpack(T.Colors.class[Class])
-		end
-	elseif Reaction then
-		R, G, B = unpack(T.Colors.reaction[Reaction])
+	if Role == "TANK" then
+		R, G, B = 0.4, 0.7, 1 -- Blue for tanks
+	elseif Role == "HEALER" then
+		R, G, B = 0, 1, 0 -- Green for healers
+	else
+		R, G, B = 1, 1, 1 -- White for DPS or unknown role
 	end
 
 	return string.format("|cff%02x%02x%02x", R * 255, G * 255, B * 255)
