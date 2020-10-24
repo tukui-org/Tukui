@@ -88,8 +88,14 @@ function UnitFrames:Raid()
 		insideAlpha = 1,
 		outsideAlpha = C["Raid"].RangeAlpha,
 	}
+	
+	if C.Raid.StatusTrack then
+		local StatusTrack = CreateFrame("Frame", nil, Health)
+		StatusTrack:SetAllPoints()
+		StatusTrack.Texture = C.Medias.Normal
 
-	if C.Raid.RaidBuffs.Value ~= "Hide" then
+		self.StatusTrack = StatusTrack
+	elseif C.Raid.RaidBuffs.Value ~= "Hide" then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", Health)
 		local onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self"
 		local filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID"

@@ -186,6 +186,7 @@ C["Raid"] = {
 	["HeightSize"] = 55,
 	["HighlightColor"] = {0, 1, 0},
 	["HighlightSize"] = 10,
+	["StatusTrack"] = false,
 	["GroupBy"] = {
 		["Options"] = {
 			["Group"] = "GROUP",
