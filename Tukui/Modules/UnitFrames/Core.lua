@@ -500,9 +500,11 @@ function UnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 			PowerBar:SetAlpha(0)
 			PowerBar.IsHidden = true
 			
-			CastBar:ClearAllPoints()
-			CastBar:SetSize(Health:GetWidth(), PowerBar:GetHeight())
-			CastBar:SetPoint("BOTTOM", Health, "BOTTOM", 0, 0)
+			if CastBar then
+				CastBar:ClearAllPoints()
+				CastBar:SetSize(Health:GetWidth(), PowerBar:GetHeight())
+				CastBar:SetPoint("BOTTOM", Health, "BOTTOM", 0, 0)
+			end
 		end
 	else
 		if IsPowerHidden then
@@ -511,8 +513,10 @@ function UnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 			Health:SetPoint("TOPRIGHT")
 			Health:SetHeight(Nameplate:GetHeight() - PowerBar:GetHeight() - 1)
 			
-			CastBar:ClearAllPoints()
-			CastBar:SetAllPoints(PowerBar)
+			if CastBar then
+				CastBar:ClearAllPoints()
+				CastBar:SetAllPoints(PowerBar)
+			end
 
 			PowerBar:SetAlpha(1)
 			PowerBar.IsHidden = false

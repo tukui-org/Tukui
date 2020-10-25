@@ -15,14 +15,19 @@ function Bubbles:Skin(bubble)
 
 		Text:SetFont(C.Medias.Font, C.Chat.BubblesTextSize)
 		
-		Frame:ClearBackdrop()
+		if not Frame.ClearBackdrop then
+			Frame:StripTextures()
+		else
+			Frame:ClearBackdrop()
+			
+			Tail:SetAlpha(0)
+		end
+		
 		Frame:CreateBackdrop("Transparent")
 		
 		Frame.Backdrop:SetScale(UIParent:GetEffectiveScale())
 		Frame.Backdrop:SetInside(Frame, Gap, Gap)
 		Frame.Backdrop:CreateShadow()
-		
-		Tail:SetAlpha(0)
 	end
 
 	Bubble.IsSkinned = true

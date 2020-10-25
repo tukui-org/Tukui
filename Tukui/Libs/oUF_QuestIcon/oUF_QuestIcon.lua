@@ -2,13 +2,9 @@ local parent, ns = ...
 local oUF = ns.oUF
 local ScanTooltip = CreateFrame("GameTooltip", "oUF_QuestIconTooltip", UIParent, "GameTooltipTemplate")
 
-Cache = {
+local Cache = {
 	-- Cache for NPCs
 }
-
-local ClearCache = function(self)
-	Cache = {}
-end
 
 local DisplayQuestIcon = function(self)
 	local QuestIcon = self.QuestIcon
@@ -63,12 +59,14 @@ local FindPlateWithQuest = function(self, unit)
 end
 
 local Update = function(self, event)
-	if IsInInstance() then
+	local InstanceType = select(2, IsInInstance())
+	
+	if InstanceType == "pvp" or InstanceType == "arena" then
 		return
 	end
 	
 	if event ~= "NAME_PLATE_UNIT_ADDED" then
-		ClearCache()
+		Cache = {}
 	end
 	
 	local QuestIcon = self.QuestIcon
