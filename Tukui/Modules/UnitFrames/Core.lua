@@ -677,7 +677,7 @@ function UnitFrames:GetRaidFramesAttributes()
 		"showParty", true,
 		"showRaid", true,
 		"showPlayer", true,
-		"showSolo", true,
+		"showSolo", false,
 		"xoffset", 4,
 		"yOffset", -4,
 		"point", "TOP",
