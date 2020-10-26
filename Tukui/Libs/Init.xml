@@ -12,5 +12,5 @@
 	<Script file="oUF_SoulShards\oUF_SoulShards.lua"/>
 	<Script file="oUF_HolyPowerBar\oUF_HolyPowerBar.lua"/>
 	<Script file="oUF_QuestIcon\oUF_QuestIcon.lua"/>
-	<Script file="oUF_StatusTrack\oUF_StatusTrack.lua"/>
+	<Script file="oUF_AuraTrack\oUF_AuraTrack.lua"/>
 </Ui>

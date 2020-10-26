@@ -89,12 +89,16 @@ function UnitFrames:Raid()
 		outsideAlpha = C["Raid"].RangeAlpha,
 	}
 	
-	if C.Raid.StatusTrack then
-		local StatusTrack = CreateFrame("Frame", nil, Health)
-		StatusTrack:SetAllPoints()
-		StatusTrack.Texture = C.Medias.Normal
+	if C.Raid.AuraTrack then
+		local AuraTrack = CreateFrame("Frame", nil, Health)
+		AuraTrack:SetAllPoints()
+		AuraTrack.Texture = C.Medias.Normal
+		AuraTrack.Icons = C.Raid.AuraTrackIcons
+		AuraTrack.Thickness = C.Raid.AuraTrackThickness
+		AuraTrack.IconSize = C.Raid.AuraTrackIconSize
+		AuraTrack.Spacing = C.Raid.AuraTrackSpacing
 
-		self.StatusTrack = StatusTrack
+		self.AuraTrack = AuraTrack
 	elseif C.Raid.RaidBuffs.Value ~= "Hide" then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", Health)
 		local onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self"
