@@ -42,8 +42,6 @@ local Tracker = {
 	[102352] = {0.2, 0.8, 0.8}, -- Cenarion Ward (HoT)
 	[200389] = {1, 1, 0.4}, -- Cultivation
 	
-	[315014] = {1, 1, 0.4}, -- TESTING
-	
 	--[[ PALADIN ]]
 	[53563] = {0.7, 0.3, 0.7}, -- Beacon of Light
 	[156910] = {0.7, 0.3, 0.7}, -- Beacon of Faith
