@@ -117,6 +117,7 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 		AuraTrack.Auras[id].Cooldown = CreateFrame("Cooldown", nil, AuraTrack.Auras[id], "CooldownFrameTemplate")
 		AuraTrack.Auras[id].Cooldown:SetAllPoints()
 		AuraTrack.Auras[id].Cooldown:SetReverse(true)
+		AuraTrack.Auras[id].Cooldown:SetHideCountdownNumbers(true)
 	end
 	
 	AuraTrack.Auras[id].Expiration = expiration
