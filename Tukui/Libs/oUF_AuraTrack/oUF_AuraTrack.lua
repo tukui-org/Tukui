@@ -177,6 +177,10 @@ local UpdateBar = function(self, unit, spellID, texture, id, expiration, duratio
 end
 
 local Update = function(self, event, unit)
+	if self.unit ~= unit then
+		return
+	end
+	
 	local ID = 0
 	local MaxAuras = self.AuraTrack.MaxAuras or 40
 	
