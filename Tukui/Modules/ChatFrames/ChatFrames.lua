@@ -168,6 +168,10 @@ function Chat:StyleFrame(frame)
 
 	-- Mouse Wheel
 	Frame:SetScript("OnMouseWheel", Chat.OnMouseWheel)
+	
+	-- Copy Buttons
+	Frame:HookScript("OnEnter", function(self) self.CopyButton:SetAlpha(1) end)
+	Frame:HookScript("OnLeave", function(self) self.CopyButton:SetAlpha(0) end)
 
 	-- Temp Chats
 	if (ID > 10) then

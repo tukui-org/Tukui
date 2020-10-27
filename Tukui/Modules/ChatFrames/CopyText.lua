@@ -9,7 +9,7 @@ function Copy:OnTextCopied()
 	local RightChat = T.Chat.Panels.RightChat
 	
 	Frame:SetTextCopyable(false)
-	Frame:EnableMouse(false)
+	Frame:EnableMouse(true)
 	Frame:SetOnTextCopiedCallback(nil)
 	Frame.IsCopyEnabled = false
 	
@@ -22,7 +22,6 @@ function Copy:EnterSelectMode(chatframe)
 	local Frame = chatframe or SELECTED_CHAT_FRAME
 
 	Frame:SetTextCopyable(true)
-	Frame:EnableMouse(true)
 	Frame:SetOnTextCopiedCallback(Copy.OnTextCopied)
 end
 
@@ -74,17 +73,17 @@ function Copy:Enable()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 
-		local Button = CreateFrame("Button", nil, Frame)
-		Button:SetPoint("TOPRIGHT", 0, 0)
-		Button:SetSize(20, 20)
-		Button:SetNormalTexture(C.Medias.Copy)
-		Button:SetAlpha(0)
-		Button:CreateBackdrop()
-		Button.ChatFrame = Frame
+		Frame.CopyButton = CreateFrame("Button", nil, Frame)
+		Frame.CopyButton:SetPoint("TOPRIGHT", 0, 0)
+		Frame.CopyButton:SetSize(20, 20)
+		Frame.CopyButton:SetNormalTexture(C.Medias.Copy)
+		Frame.CopyButton:SetAlpha(0)
+		Frame.CopyButton:CreateBackdrop()
+		Frame.CopyButton.ChatFrame = Frame
 
-		Button:SetScript("OnMouseUp", self.OnMouseUp)
-		Button:SetScript("OnEnter", self.OnEnter)
-		Button:SetScript("OnLeave", self.OnLeave)
+		Frame.CopyButton:SetScript("OnMouseUp", self.OnMouseUp)
+		Frame.CopyButton:SetScript("OnEnter", self.OnEnter)
+		Frame.CopyButton:SetScript("OnLeave", self.OnLeave)
 	end
 end
 
