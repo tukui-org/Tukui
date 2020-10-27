@@ -33,7 +33,7 @@ function Copy:OnMouseUp()
 	
 	if Frame.IsCopyEnabled then
 		Frame:SetTextCopyable(false)
-		Frame:EnableMouse(false)
+		Frame:EnableMouse(true)
 		Frame:SetOnTextCopiedCallback(nil)
 		Frame.IsCopyEnabled = false
 		
