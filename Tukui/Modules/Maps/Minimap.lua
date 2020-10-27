@@ -46,7 +46,7 @@ end
 
 function Minimap:OnMouseClick(button)
 	if (button == "RightButton") or (button == "MiddleButton") then
-		Miscellaneous.DropDown.Open(Miscellaneous.MicroMenu.Buttons, Miscellaneous.MicroMenu, "cursor", -160, 0, "MENU", 2)
+		MiniMapTracking_OnMouseDown(MiniMapTracking)
 	else
 		Minimap_OnClick(self)
 	end
@@ -184,13 +184,9 @@ function Minimap:AddZoneAndCoords()
 	-- Update coordinates
 	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
 	
-	-- Put tracking button over zone
+	-- Kill tracking button
 	MiniMapTracking:Kill()
 	MiniMapTrackingButtonBorder:Kill()
-	MiniMapTrackingButton:SetParent(MinimapZone)
-	MiniMapTrackingButton:ClearAllPoints()
-	MiniMapTrackingButton:SetAllPoints()
-	MiniMapTrackingButton:StripTextures()
 
 	-- Register
 	Minimap.MinimapZone = MinimapZone

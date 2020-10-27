@@ -5,7 +5,33 @@ local Popups = T["Popups"]
 local Miscellaneous = T.Miscellaneous
 
 local OnMouseDown = function()
-	Miscellaneous.MicroMenu.Panel:Show()
+	local MicroMenu = Miscellaneous.MicroMenu
+	
+	if MicroMenu:IsShown() then
+		MicroMenu:Hide()
+		
+		UpdateMicroButtonsParent(T.Hider)
+		
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			
+			if Button.Backdrop then
+				Button.Backdrop:Hide()
+			end
+		end
+	else
+		MicroMenu:Show()
+		
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			
+			if Button.Backdrop then
+				Button.Backdrop:Show()
+			end
+		end
+		
+		UpdateMicroButtonsParent(T.PetHider)
+	end
 end
 
 local Enable = function(self)

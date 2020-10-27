@@ -74,6 +74,7 @@
 	<Script file="Miscellaneous\TalkingHead.lua"/>
 	<Script file="Miscellaneous\ThreatBar.lua"/>
 	<Script file="Miscellaneous\TimerTracker.lua"/>
+	<Script file="Miscellaneous\Tutorials.lua"/>
 	<Script file="Miscellaneous\UIErrorFilter.lua"/>
 	<Script file="Miscellaneous\UIWidgets.lua"/>
 	<Script file="Miscellaneous\VehicleIndicator.lua"/>

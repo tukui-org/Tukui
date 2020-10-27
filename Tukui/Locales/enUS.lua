@@ -134,6 +134,7 @@ L.Help.Grid = "'|cff00ff00grid|r' or '|cff00ff00grid 128|r' : Display a grid whi
 L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Install or reset Tukui to default settings."
 L.Help.Keybinds = "'|cff00ff00kb|r' or '|cff00ff00keybinds|r' : Set Keybinds on action bars. (character specific) For account-wide, please add 'account' parameter (/tukui kb account)"
 L.Help.Load = "'|cff00ff00load X|r' or '|cff00ff00unload X|r' : Load or unload an addon. X = addon name."
+L.Help.MicroMenu = "'|cff00ff00mm|r' or '|cff00ff00micromenu|r' : Toggle Micro Menu."
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Move Frames."
 L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
 L.Help.Status = "'|cff00ff00status|r' or '|cff00ff00debug|r' : Show a debug window with information needed to investigate a bug in the UI"

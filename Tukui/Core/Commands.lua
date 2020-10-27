@@ -37,10 +37,39 @@ T.SlashHandler = function(cmd)
 		print(L.Help.Install)
 		print(L.Help.Keybinds)
 		print(L.Help.Load)
+		print(L.Help.MicroMenu)
 		print(L.Help.Move)
 		print(L.Help.Profile)
 		print(L.Help.Status)
 		print(L.Help.Test)
+	elseif (arg1 == "mm") or (arg1 == "micromenu") then
+		local MicroMenu = T.Miscellaneous.MicroMenu
+
+		if MicroMenu:IsShown() then
+			MicroMenu:Hide()
+
+			UpdateMicroButtonsParent(T.Hider)
+
+			for i = 1, #MICRO_BUTTONS do
+				local Button = _G[MICRO_BUTTONS[i]]
+
+				if Button.Backdrop then
+					Button.Backdrop:Hide()
+				end
+			end
+		else
+			MicroMenu:Show()
+
+			for i = 1, #MICRO_BUTTONS do
+				local Button = _G[MICRO_BUTTONS[i]]
+
+				if Button.Backdrop then
+					Button.Backdrop:Show()
+				end
+			end
+
+			UpdateMicroButtonsParent(T.PetHider)
+		end
 	elseif (arg1 == "fn") then
 		local Name = GetMouseFocus():GetName()
 		
