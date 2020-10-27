@@ -136,6 +136,7 @@ L.Help.Keybinds = "'|cff00ff00kb|r' or '|cff00ff00keybinds|r' : Set Keybinds on 
 L.Help.Load = "'|cff00ff00load X|r' or '|cff00ff00unload X|r' : Load or unload an addon. X = addon name."
 L.Help.MicroMenu = "'|cff00ff00mm|r' or '|cff00ff00micromenu|r' : Toggle Micro Menu."
 L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Move Frames."
+L.Help.ObjectiveTracker = "'|cff00ff00ot|r' or '|cff00ff00quests|r' : Toggle objective tracker."
 L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
 L.Help.Status = "'|cff00ff00status|r' or '|cff00ff00debug|r' : Show a debug window with information needed to investigate a bug in the UI"
 L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : Test Unit Frames."

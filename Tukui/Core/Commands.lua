@@ -39,6 +39,7 @@ T.SlashHandler = function(cmd)
 		print(L.Help.Load)
 		print(L.Help.MicroMenu)
 		print(L.Help.Move)
+		print(L.Help.ObjectiveTracker)
 		print(L.Help.Profile)
 		print(L.Help.Status)
 		print(L.Help.Test)
@@ -69,6 +70,12 @@ T.SlashHandler = function(cmd)
 			end
 
 			UpdateMicroButtonsParent(T.PetHider)
+		end
+	elseif (arg1 == "ot") or (arg1 == "quests") then
+		if (ObjectiveTrackerFrame:IsVisible()) then
+			ObjectiveTrackerFrame:Hide()
+		else
+			ObjectiveTrackerFrame:Show()
 		end
 	elseif (arg1 == "fn") then
 		local Name = GetMouseFocus():GetName()
