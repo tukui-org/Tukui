@@ -170,11 +170,12 @@ function WorldMap:SkinMap()
 	
 	Frame:CreateBackdrop()
 	Frame.Backdrop:ClearAllPoints()
-	Frame.Backdrop:SetOutside(Child)
+	Frame.Backdrop:SetPoint("LEFT", 1, 0)
+	Frame.Backdrop:SetPoint("RIGHT", -2, 0)
+	Frame.Backdrop:SetPoint("TOP", 0, -66)
+	Frame.Backdrop:SetPoint("BOTTOM")
 	Frame.Backdrop:CreateShadow()
 	Frame:EnableMouse(false)
-	
-	Scroll:EnableMouseWheel(false)
 
 	Blackout:StripTextures()
 	Blackout:EnableMouse(false)
