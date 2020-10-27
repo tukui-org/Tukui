@@ -58,7 +58,7 @@ local menuList = {
 
 local function inviteClick(self, arg1, arg2, checked)
 	menuFrame:Hide()
-	InviteUnit(arg1)
+	C_PartyInfo.InviteUnit(arg1)
 end
 
 local function whisperClick(self,arg1,arg2,checked)

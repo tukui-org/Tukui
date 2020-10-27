@@ -96,7 +96,7 @@ local function inviteClick(self, arg1, arg2, checked)
 	menuFrame:Hide()
 
 	if type(arg1) ~= ("number") then
-		InviteUnit(arg1)
+		C_PartyInfo.InviteUnit(arg1)
 	else
 		BNInviteFriend(arg1);
 	end
