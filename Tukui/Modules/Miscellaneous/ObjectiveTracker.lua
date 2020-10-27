@@ -462,7 +462,6 @@ function ObjectiveTracker:Enable()
 
 	self:AddHooks()
 	self:Disable()
-	self:CreateToggleButtons()
 	self:SetDefaultPosition()
 	self:SkinScenario()
 end
