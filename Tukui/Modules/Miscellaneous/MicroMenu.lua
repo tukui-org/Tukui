@@ -25,12 +25,52 @@ function MicroMenu:AddHooks()
 	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
 end
 
+function MicroMenu:OnEsc(key)
+	if self:IsShown() and key == string.upper(KEY_ESCAPE) then
+		self:Toggle()
+	end
+end
+
+function MicroMenu:Update()
+	if self:IsShown() then
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			
+			if Button.Backdrop then
+				Button.Backdrop:Show()
+			end
+		end
+		
+		UpdateMicroButtonsParent(T.PetHider)
+	else
+		UpdateMicroButtonsParent(T.Hider)
+		
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			
+			if Button.Backdrop then
+				Button.Backdrop:Hide()
+			end
+		end
+	end
+end
+
+function MicroMenu:Toggle()
+	if self:IsShown() then
+		self:Hide()
+	else
+		self:Show()
+	end
+end
+
 function MicroMenu:Enable()
 	MicroMenu:AddHooks()
 	
 	MicroMenu:SetSize(284, 34)
 	MicroMenu:SetPoint("BOTTOM", 0, 400)
 	MicroMenu:Hide()
+	MicroMenu:SetScript("OnHide", self.Update)
+	MicroMenu:SetScript("OnShow", self.Update)
 	
 	MicroButtonAndBagsBar:StripTextures()
 	MicroButtonAndBagsBar:SetParent(MicroMenu)
@@ -61,6 +101,8 @@ function MicroMenu:Enable()
 	UpdateMicroButtonsParent(T.Hider)
 	
 	T.Movers:RegisterFrame(MicroMenu)
+	
+	tinsert(UISpecialFrames, "TukuiMicroMenu")
 end
 
 Miscellaneous.MicroMenu = MicroMenu

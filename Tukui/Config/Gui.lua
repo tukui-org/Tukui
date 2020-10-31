@@ -13,7 +13,7 @@ local General = function(self)
 	Window:CreateDropdown("General", "Themes", "Set UI theme")
 
 	Window:CreateSection("Scaling")
-	Window:CreateSlider("General", "UIScale", "Set UI scale", 0.35, 0.79, 0.01)
+	Window:CreateSlider("General", "UIScale", "Set UI scale", 0.35, 1, 0.01)
 	Window:CreateSlider("General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
 	Window:CreateSlider("General", "WorldMapScale", "Set world map scale (%)", 40, 100, 1)
 
