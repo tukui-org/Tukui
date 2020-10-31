@@ -16,11 +16,7 @@ T.Popups.Popup["TUKUI_RESET_SETTINGS"] = {
 
 -- Reset GUI settings
 function Install:ResetSettings()
-	if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General and TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal then
-		TukuiSettings = {}
-	else
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
-	end
+	TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
 
 	T:VerifyDataTable()
 end

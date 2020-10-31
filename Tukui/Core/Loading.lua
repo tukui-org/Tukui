@@ -44,12 +44,14 @@ function Loading:LoadCustomSettings()
 	if not TukuiSettings then
 		TukuiSettings = {}
 	end
-
+	
+	-- Globals settings will be removed in the next coming weeks, if currently using globals, move into current character profile
 	if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General and TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal == true then
-		Settings = TukuiSettings
-	else
-		Settings = TukuiSettingsPerCharacter[T.MyRealm][T.MyName]
+		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettings
+		TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal = false
 	end
+
+	Settings = TukuiSettingsPerCharacter[T.MyRealm][T.MyName]
 
 	for group, options in pairs(Settings) do
 		if C[group] then
