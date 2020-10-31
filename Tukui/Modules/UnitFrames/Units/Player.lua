@@ -292,8 +292,7 @@ function UnitFrames:Player()
 
 	if (C.UnitFrames.CombatLog) then
 		local CombatFeedbackText = Health:CreateFontString(nil, "OVERLAY", 7)
-		CombatFeedbackText:SetFontObject(Font)
-		CombatFeedbackText:SetFont(CombatFeedbackText:GetFont(), 14, "THINOUTLINE")
+		CombatFeedbackText:SetFont(select(1, _G[Font]:GetFont()), 14, "THINOUTLINE")
 		CombatFeedbackText:SetPoint("CENTER", 0, -1)
 		CombatFeedbackText.colors = {
 			DAMAGE = {0.69, 0.31, 0.31},
