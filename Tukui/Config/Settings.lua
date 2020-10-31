@@ -12,6 +12,9 @@ C["General"] = {
 	["UIScale"] = T.PerfectScale,
 	["MinimapScale"] = 100,
 	["WorldMapScale"] = 50,
+	["Profiles"] = {
+		["Options"] = {},
+	},
 
 	["Themes"] = {
 		["Options"] = {

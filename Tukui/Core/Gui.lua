@@ -60,6 +60,8 @@ local LastActiveWindow
 
 local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
 
+local MySelectedProfile = T.MyRealm.."-"..T.MyName
+
 local CreditLines = {"A very special thanks to", "", "Elv", "Hydra", "Haste", "Nightcracker", "Haleth", "Caellian", "Shestak", "Tekkub", "Roth", "Alza", "P3lim", "Tulla", "Hungtar", "Ishtara", "Caith", "Azilroka", "Simpy", "Aftermathh"}
 
 local GUI = CreateFrame("Frame", "TukuiGUI", UIParent)
@@ -67,6 +69,20 @@ GUI.Windows = {}
 GUI.Buttons = {}
 GUI.Queue = {}
 GUI.Widgets = {}
+
+T.Popups.Popup["TUKUI_SWITCH_PROFILE"] = {
+	Question = "Are you sure you want to switch your profile? If you accept, this current profile will be erased and replaced the character you selected!",
+	Answer1 = ACCEPT,
+	Answer2 = CANCEL,
+	Function1 = function(self)
+		local SelectedServer, SelectedNickname = strsplit("-", MySelectedProfile)
+
+		TukuiData[T.MyRealm][T.MyName] = TukuiData[SelectedServer][SelectedNickname]
+		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettingsPerCharacter[SelectedServer][SelectedNickname]
+		
+		ReloadUI()
+	end,
+}
 
 local SetValue = function(group, option, value)
 	if (type(C[group][option]) == "table") then
@@ -1954,6 +1970,20 @@ GUI.PLAYER_REGEN_ENABLED = function(self, event)
 		self:Show()
 		self:SetAlpha(1)
 		self.CombatClosed = false
+	end
+end
+
+GUI.SetProfile = function(self)
+	local Dropdown = self:GetParent()
+	local Profile = Dropdown.Current:GetText()
+	local MyProfileName = T.MyRealm.."-"..T.MyName
+
+	if Profile and Profile ~= T.MyRealm.."-"..T.MyName then
+		MySelectedProfile = Profile
+		
+		GUI:Toggle()
+					
+		T.Popups.ShowPopup("TUKUI_SWITCH_PROFILE")
 	end
 end
 

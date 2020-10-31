@@ -38,14 +38,9 @@ function Loading:LoadCustomSettings()
 	end
 
 	if (not TukuiSettingsPerCharacter[T.MyRealm][T.MyName]) then
-		if TukuiSettingsPerChar ~= nil then
-			-- old table for gui settings, TukuiSettingsPerChar is now deprecated and will be removed in a future build
-			TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettingsPerChar
-		else
-			TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
-		end
+		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
 	end
-
+	
 	if not TukuiSettings then
 		TukuiSettings = {}
 	end
@@ -90,10 +85,33 @@ function Loading:LoadCustomSettings()
 	end
 end
 
+function Loading:LoadProfiles()
+	local Profiles = C.General.Profiles
+	local Menu = Profiles.Options
+	local Data = TukuiData
+	local GUISettings = TukuiSettingsPerCharacter
+	local Nickname = T.MyName
+	local Server = T.MyRealm
+	
+	for Index, Table in pairs(GUISettings) do
+		local Server = Index
+		
+		for Nickname, Settings in pairs(Table) do
+			local ProfileName = Server.."-"..Nickname
+			local MyProfileName = T.MyRealm.."-"..T.MyName
+			
+			if MyProfileName ~= ProfileName then
+				Menu[ProfileName] = ProfileName
+			end
+		end
+	end
+end
+
 function Loading:Enable()
 	local Toolkit = T.Toolkit
 
 	self:StoreDefaults()
+	self:LoadProfiles()
 	self:LoadCustomSettings()
 
 	Toolkit.Settings.BackdropColor = C.General.BackdropColor

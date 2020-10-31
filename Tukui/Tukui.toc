@@ -5,7 +5,6 @@
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter
-## SavedVariablesPerCharacter: TukuiSettingsPerChar
 ## OptionalDeps: Clique
 ## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1

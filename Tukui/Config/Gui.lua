@@ -5,6 +5,10 @@ local GUI = T["GUI"]
 local General = function(self)
 	local Window = self:CreateWindow("General", true)
 
+	Window:CreateSection("Profiles")
+	local Profile = Window:CreateDropdown("General", "Profiles", "Import a profile from another character")
+	Profile.Menu:HookScript("OnHide", GUI.SetProfile)
+	
 	Window:CreateSection("Theme")
 	Window:CreateDropdown("General", "Themes", "Set UI theme")
 
