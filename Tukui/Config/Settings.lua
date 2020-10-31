@@ -137,7 +137,6 @@ C["Misc"] = {
 	["TalkingHeadEnable"] = true,
 	["UIErrorSize"] = 16,
 	["UIErrorFont"] = "Tukui Outline",
-	["ObjectiveTrackerFont"] = "Tukui Outline",
 }
 
 C["NamePlates"] = {
