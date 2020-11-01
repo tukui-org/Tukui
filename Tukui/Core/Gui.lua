@@ -609,7 +609,7 @@ end
 GUI.Widgets.CreateSlider = CreateSlider
 
 -- Dropdown Menu
-local DropdownWidth = 134
+local DropdownWidth = 180
 local SelectedHighlightAlpha = 0.2
 local ListItemsToShow = 8
 local LastActiveDropdown
