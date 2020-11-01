@@ -48,7 +48,10 @@ function Loading:LoadCustomSettings()
 	-- Globals settings will be removed in the next coming weeks, if currently using globals, move into current character profile
 	if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General and TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal == true then
 		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettings
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal = false
+		
+		if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General then
+			TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal = false
+		end
 	end
 
 	Settings = TukuiSettingsPerCharacter[T.MyRealm][T.MyName]
