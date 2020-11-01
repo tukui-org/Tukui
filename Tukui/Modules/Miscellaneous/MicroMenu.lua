@@ -107,6 +107,10 @@ function MicroMenu:Enable()
 		else
 			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 0)
 		end
+		
+		if Button.tooltipText ~= MAINMENU_BUTTON then
+			Button:SetScript("OnEnter", nil)
+		end
 	end
 	
 	UpdateMicroButtonsParent(T.Hider)
