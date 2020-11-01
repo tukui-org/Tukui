@@ -46,7 +46,13 @@ end
 
 function Minimap:OnMouseClick(button)
 	if (button == "RightButton") or (button == "MiddleButton") then
-		MiniMapTracking_OnMouseDown(MiniMapTracking)
+		local MicroMenu = T.Miscellaneous.MicroMenu
+		
+		if MicroMenu then
+			MicroMenu:Toggle()
+		else
+			MiniMapTracking_OnMouseDown(MiniMapTracking)
+		end
 	else
 		Minimap_OnClick(self)
 	end
