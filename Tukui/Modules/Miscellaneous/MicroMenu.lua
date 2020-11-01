@@ -55,6 +55,10 @@ function MicroMenu:Update()
 end
 
 function MicroMenu:Toggle()
+	if self ~= MicroMenu then
+		self = MicroMenu
+	end
+	
 	if self:IsShown() then
 		self:Hide()
 	else
@@ -107,9 +111,10 @@ function MicroMenu:Enable()
 		else
 			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 0)
 		end
-		
+
 		if Button.tooltipText ~= MAINMENU_BUTTON then
 			Button:SetScript("OnEnter", nil)
+			Button:HookScript("OnClick", MicroMenu.Toggle)
 		end
 	end
 	
