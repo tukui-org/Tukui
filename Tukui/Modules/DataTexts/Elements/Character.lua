@@ -68,13 +68,15 @@ local OnEnter = function(self)
 		
 		-- Display durability
 		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("|CFFFFFFFF"..DURABILITY.."|r")
+		GameTooltip:AddLine("|CFFFFFFFF"..DURABILITY.."|r ("..floor(L.DataText.Slots[1][3] * 100).."%)")
 
 		for i = 1, 11 do
 			if (L.DataText.Slots[i][3] ~= 1000) then
 				local Green, Red
+				
 				Green = L.DataText.Slots[i][3] * 2
 				Red = 1 - Green
+				
 				GameTooltip:AddDoubleLine(L.DataText.Slots[i][2]..":", floor(L.DataText.Slots[i][3] * 100).."%", Red + 1, Green, 0, Red + 1, Green, 0)
 			end
 		end
