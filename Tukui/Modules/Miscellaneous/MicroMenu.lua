@@ -26,10 +26,12 @@ function MicroMenu:Update()
 				Button.Backdrop:Show()
 			end
 			
-			if not Button:IsEnabled() then
-				Button.Text:SetAlpha(0.5)
-			else
-				Button.Text:SetAlpha(1)
+			if Button.Text then
+				if (not Button:IsEnabled()) or (not Button:IsShown()) then
+					Button.Text:SetAlpha(0.5)
+				else
+					Button.Text:SetAlpha(1)
+				end
 			end
 		end
 		
