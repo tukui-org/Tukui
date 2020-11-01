@@ -2,6 +2,7 @@ local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
 local MicroMenu = CreateFrame("Frame", "TukuiMicroMenu", UIParent)
+local Noop = function() return end
 
 function MicroMenu:HideAlerts()
 	HelpTip:HideAllSystem("MicroButtons")
@@ -89,9 +90,22 @@ function MicroMenu:Enable()
 		
 		Button:StripTextures()
 		Button:SetAlpha(0)
-		Button:CreateBackdrop()
 		Button:ClearAllPoints()
 		Button:SetSize(230, 29)
+		
+		-- Reposition them
+		if i == 1 then
+			Button:SetPoint("TOP", MicroMenu, "TOP", 0, -14)
+		else
+			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 0)
+		end
+
+		if Button.tooltipText ~= MAINMENU_BUTTON then
+			Button:SetScript("OnEnter", Noop)
+			Button:HookScript("OnClick", MicroMenu.Toggle)
+		end
+		
+		Button:SkinButton()
 		Button.Backdrop:SetParent(MicroMenu)
 		Button.Backdrop:ClearAllPoints()
 		Button.Backdrop:SetInside(Button, 2, 2)
@@ -104,18 +118,6 @@ function MicroMenu:Enable()
 		Button.Text:SetText(Button.tooltipText)
 		Button.Text:SetPoint("CENTER", 2, 1)
 		Button.Text:SetTextColor(1, 1, 1)
-		
-		-- Reposition them
-		if i == 1 then
-			Button:SetPoint("TOP", MicroMenu, "TOP", 0, -14)
-		else
-			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 0)
-		end
-
-		if Button.tooltipText ~= MAINMENU_BUTTON then
-			Button:SetScript("OnEnter", nil)
-			Button:HookScript("OnClick", MicroMenu.Toggle)
-		end
 	end
 	
 	UpdateMicroButtonsParent(T.Hider)
