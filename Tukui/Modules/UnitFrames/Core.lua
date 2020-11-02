@@ -349,7 +349,7 @@ function UnitFrames:PostCreateAura(button)
 	if isCancellable then
 		-- Add a button.index to allow CancelUnitAura to work with player
 		local Name = button:GetName()
-		local Index = tonumber(Name:gsub("%D",""))
+		local Index = Name:gsub("%D+" , "")
 
 		button.index = Index
 		button:SetScript("OnMouseUp", UnitFrames.CancelPlayerBuff)
