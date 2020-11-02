@@ -76,7 +76,7 @@ function UnitFrames:Target()
 	AltPowerBar:CreateBackdrop()
 	AltPowerBar.Backdrop:SetOutside()
 
-	AltPowerBar.Background = AltPowerBar:CreateTexture(nil, "ARTWORK")
+	AltPowerBar.Background = AltPowerBar:CreateTexture(nil, "BORDER")
 	AltPowerBar.Background:SetAllPoints(AltPowerBar)
 	AltPowerBar.Background:SetTexture(HealthTexture)
 	AltPowerBar.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100

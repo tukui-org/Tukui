@@ -19,10 +19,10 @@ UnitFrames.AddClassFeatures["PRIEST"] = function(self)
 	Atonement:CreateBackdrop()
 	Atonement.Backdrop:SetOutside()
 
-	Atonement.Background = Atonement:CreateTexture(nil, "BACKGROUND")
+	Atonement.Background = Atonement:CreateTexture(nil, "BORDER")
 	Atonement.Background:SetTexture(HealthTexture)
 	Atonement.Background:SetAllPoints()
-	Atonement.Background:SetColorTexture(207/255 * 0.2, 181/255 * 0.2, 59/255 * 0.2)
+	Atonement.Background:SetColorTexture(207/255 * .2, 181/255 * .2, 59/255 * .2)
 
 	-- Register it with oUF
 	self.Atonement = Atonement

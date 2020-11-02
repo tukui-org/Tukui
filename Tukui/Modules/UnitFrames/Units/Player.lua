@@ -91,7 +91,7 @@ function UnitFrames:Player()
 	AdditionalPower:SetStatusBarColor(unpack(T.Colors.power.MANA))
 	AdditionalPower.Backdrop:SetOutside()
 
-	AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "ARTWORK")
+	AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "BORDER")
 	AdditionalPower.Background:SetAllPoints(AdditionalPower)
 	AdditionalPower.Background:SetTexture(HealthTexture)
 	AdditionalPower.Background:SetColorTexture(T.Colors.power.MANA[1], T.Colors.power.MANA[2], T.Colors.power.MANA[3], C.UnitFrames.StatusBarBackgroundMultiplier / 100)
