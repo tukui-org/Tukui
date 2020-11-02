@@ -98,6 +98,10 @@ function Loading:LoadProfiles()
 	local Nickname = T.MyName
 	local Server = T.MyRealm
 	
+	if not GUISettings then
+		return
+	end
+	
 	for Index, Table in pairs(GUISettings) do
 		local Server = Index
 		
