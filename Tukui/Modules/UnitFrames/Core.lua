@@ -351,7 +351,7 @@ function UnitFrames:PostCreateAura(button)
 		local Name = button:GetName()
 		local Index = Name:gsub("%D+" , "")
 
-		button.index = Index
+		button.index = tonumber(Index)
 		button:SetScript("OnMouseUp", UnitFrames.CancelPlayerBuff)
 	end
 
