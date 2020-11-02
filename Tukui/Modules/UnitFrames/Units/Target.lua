@@ -66,6 +66,22 @@ function UnitFrames:Target()
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
+	
+	local AltPowerBar = CreateFrame("StatusBar", self:GetName().."AltPowerBar", Health)
+	AltPowerBar:SetHeight(6)
+	AltPowerBar:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+	AltPowerBar:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+	AltPowerBar:SetStatusBarTexture(HealthTexture)
+	AltPowerBar:SetFrameLevel(Health:GetFrameLevel() + 1)
+	AltPowerBar:CreateBackdrop()
+	AltPowerBar.Backdrop:SetOutside()
+
+	AltPowerBar.Background = AltPowerBar:CreateTexture(nil, "ARTWORK")
+	AltPowerBar.Background:SetAllPoints(AltPowerBar)
+	AltPowerBar.Background:SetTexture(HealthTexture)
+	AltPowerBar.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+	
+	AltPowerBar.colorSmooth = true
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", Panel, "LEFT", 4, 0)
@@ -299,5 +315,7 @@ function UnitFrames:Target()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
+	self.AlternativePower = AltPowerBar
+	self.AlternativePower.bg = AltPowerBar.Background
 	self.RaidTargetIndicator = RaidIcon
 end
