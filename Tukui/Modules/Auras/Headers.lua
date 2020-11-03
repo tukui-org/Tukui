@@ -64,7 +64,7 @@ function Auras:CreateHeaders()
 
 	if (not C.Auras.HideDebuffs) then
 		if (C.Auras.HideBuffs) then
-			Buffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -30, 2)
+			Debuffs:SetPoint("TOPRIGHT", Minimap, "TOPLEFT", -30, 2)
 		else
 			Debuffs:SetPoint("TOP", Buffs, "BOTTOM", 0, -95)
 		end
