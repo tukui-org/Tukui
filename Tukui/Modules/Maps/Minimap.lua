@@ -101,7 +101,7 @@ function Minimap:StyleMinimap()
 	QueueStatusFrame:CreateShadow()
 
 	Mail:ClearAllPoints()
-	Mail:SetPoint("TOPRIGHT", 12, 29)
+	Mail:SetPoint("TOPRIGHT", 4, 4)
 	Mail:SetFrameLevel(self:GetFrameLevel() + 2)
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
@@ -149,6 +149,7 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone:SetSize(self:GetWidth() + 2, 19)
 	MinimapZone:SetPoint("TOP", self, 0, 2)
 	MinimapZone:SetFrameStrata(self:GetFrameStrata())
+	MinimapZone:SetFrameLevel(self:GetFrameLevel() + 10)
 	MinimapZone:SetAlpha(0)
 	MinimapZone:EnableMouse()
 
@@ -190,9 +191,13 @@ function Minimap:AddZoneAndCoords()
 	-- Update coordinates
 	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
 	
-	-- Kill tracking button
+	-- Put tracking button over zone
 	MiniMapTracking:Kill()
 	MiniMapTrackingButtonBorder:Kill()
+	MiniMapTrackingButton:SetParent(MinimapZone)
+	MiniMapTrackingButton:ClearAllPoints()
+	MiniMapTrackingButton:SetAllPoints()
+	MiniMapTrackingButton:StripTextures()
 
 	-- Register
 	Minimap.MinimapZone = MinimapZone

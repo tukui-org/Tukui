@@ -259,7 +259,7 @@ function Tooltip:SetHealthValue(unit)
 		self.Text:SetText(DEAD)
 	else
 		local Health, MaxHealth = UnitHealth(unit), UnitHealthMax(unit)
-		local String = (Health and MaxHealth and (floor(Health / MaxHealth * 100) .. "%")) or "???"
+		local String = (Health and MaxHealth and T.ShortValue(Health).." / "..T.ShortValue(MaxHealth)) or "???"
 
 		self.Text:SetText(String)
 	end
