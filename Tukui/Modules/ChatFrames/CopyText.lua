@@ -56,11 +56,15 @@ function Copy:OnMouseUp()
 end
 
 function Copy:OnEnter()
-	self:SetAlpha(1)
+	local Button = self.CopyButton or self
+	
+	Button:SetAlpha(1)
 end
 
 function Copy:OnLeave()
-	self:SetAlpha(0)
+	local Button = self.CopyButton or self
+	
+	Button:SetAlpha(0)
 end
 
 
@@ -84,6 +88,9 @@ function Copy:Enable()
 		Frame.CopyButton:SetScript("OnMouseUp", self.OnMouseUp)
 		Frame.CopyButton:SetScript("OnEnter", self.OnEnter)
 		Frame.CopyButton:SetScript("OnLeave", self.OnLeave)
+
+		Frame:HookScript("OnEnter", self.OnEnter)
+		Frame:HookScript("OnLeave", self.OnLeave)
 	end
 end
 
