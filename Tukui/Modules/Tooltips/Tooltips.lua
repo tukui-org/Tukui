@@ -245,12 +245,14 @@ end
 function Tooltip:OnTooltipSetItem()
 	if IsShiftKeyDown() then
 		local Item, Link = self:GetItem()
-		local ItemCount = GetItemCount(Link)
-		local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
-		local Count = "|cFFCA3C3C"..TOTAL.."|r "..ItemCount
+		
+		if Link then
+			local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
+			local Level = "|cFFCA3C3C"..ITEM_LEVEL_ABBR.."|r "..GetDetailedItemLevelInfo(Link)
 
-		self:AddLine(" ")
-		self:AddDoubleLine(Link and Link ~= nil and ID, ItemCount and ItemCount > 1 and Count)
+			self:AddLine(" ")
+			self:AddDoubleLine(ID, Level)
+		end
 	end
 end
 

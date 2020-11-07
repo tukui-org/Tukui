@@ -72,6 +72,7 @@ C["Bags"] = {
 	["Enable"] = true,
 	["IdentifyQuestItems"] = true,
 	["FlashNewItems"] = true,
+	["ItemLevel"] = true,
 	["ButtonSize"] = 32,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 12,
@@ -128,6 +129,7 @@ C["Loot"] = {
 }
 
 C["Misc"] = {
+	["ItemLevel"] = true,
 	["ThreatBar"] = true,
 	["WorldMapEnable"] = true,
 	["ExperienceEnable"] = true,

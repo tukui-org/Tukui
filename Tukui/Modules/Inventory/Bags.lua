@@ -563,7 +563,7 @@ function Bags:SlotUpdate(id, button)
 	end
 
 	local _, _, _, Rarity, _, _, _, _, _, ItemID = GetContainerItemInfo(id, button:GetID())
-	local itemLink = GetContainerItemLink(id, button:GetID())
+	local ItemLink = GetContainerItemLink(id, button:GetID())
 	local QuestItem = false
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	
@@ -577,8 +577,8 @@ function Bags:SlotUpdate(id, button)
 
 	button.ItemID = ItemID
 
-	if itemLink then
-		local itemName, itemString, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture = GetItemInfo(itemLink)
+	if ItemLink then
+		local itemName, itemString, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture = GetItemInfo(ItemLink)
 
 		if itemString then
 			if (itemType == TRANSMOG_SOURCE_2) then
@@ -637,6 +637,33 @@ function Bags:SlotUpdate(id, button)
 		
 		if not button.Animation:IsPlaying() then
 			button.Animation:Play()
+		end
+	end
+	
+	if C.Bags.ItemLevel then
+		if ItemLink then
+			local Level = GetDetailedItemLevelInfo(ItemLink)
+			local ItemType = select(6, GetItemInfo(ItemLink))
+
+			if (ItemType == "Armor" or ItemType == "Weapon") and Level > 1 then
+				if not button.ItemLevel then
+					button.ItemLevel = button:CreateFontString(nil, "OVERLAY")
+					button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
+					button.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
+					button.ItemLevel:SetJustifyH("RIGHT")
+					button.ItemLevel:SetTextColor(0, 1, 0)
+				end
+
+				button.ItemLevel:SetText(Level)
+			else
+				if button.ItemLevel then
+					button.ItemLevel:SetText("")
+				end
+			end
+		else
+			if button.ItemLevel then
+				button.ItemLevel:SetText("")
+			end
 		end
 	end
 end

@@ -63,6 +63,7 @@
 	<Script file="Miscellaneous\GarbageCollection.lua"/>
 	<Script file="Miscellaneous\Ghost.lua"/>
 	<Script file="Miscellaneous\Grid.lua"/>
+	<Script file="Miscellaneous\ItemLevel.lua"/>
 	<Script file="Miscellaneous\Keybinds.lua"/>
 	<Script file="Miscellaneous\LossControl.lua"/>
 	<Script file="Miscellaneous\MicroMenu.lua"/>

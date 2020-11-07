@@ -89,6 +89,7 @@ local Bags = function(self)
 
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("Bags", "Enable", "Enable bag module")
+	Window:CreateSwitch("Bags", "ItemLevel", "Display ILevel on bags armors and weapons items")
 	
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("Bags", "IdentifyQuestItems", "Identify quest items in bags with an exclamation mark?")
@@ -162,6 +163,8 @@ end
 local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
 				
+	Window:CreateSection("Items Level")
+	Window:CreateSwitch("Misc", "ItemLevel", "Display items level on character and inspect frames")
 	Window:CreateSection("Threat")
 	Window:CreateSwitch("Misc", "ThreatBar", "Enable Threat Bar")
 	Window:CreateSection("World Map")
