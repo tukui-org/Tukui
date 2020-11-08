@@ -21,7 +21,7 @@ local StyleFont = function(fs, font, size)
 	fs:SetShadowOffset(1, -1)
 end
 
-local Texture = "Interface\\AddOns\\Tukui\\Medias\\Textures\\Status\\ElvUI2"
+local Texture = C.Medias.Normal
 local Blank = C.Medias.Blank
 
 local ArrowUp = "Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\ArrowUp"
