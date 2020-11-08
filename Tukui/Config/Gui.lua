@@ -198,7 +198,6 @@ local NamePlates = function(self)
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("NamePlates", "OnlySelfDebuffs", "Display only our debuffs")
 	Window:CreateColorSelection("NamePlates", "HighlightColor", "Highlight texture color")
-	Window:CreateDropdown("NamePlates", "HealthTag", "Health tag on nameplates")
 	
 	Window:CreateSection("Sizing")
 	Window:CreateSlider("NamePlates", "Width", "Set nameplate width", 60, 200, 10)
@@ -207,6 +206,9 @@ local NamePlates = function(self)
 
 	Window:CreateSection("Font")
 	Window:CreateDropdown("NamePlates", "Font", "Set nameplate font", "Font")
+	
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("NamePlates", "HealthTag", "Health tag on nameplates")
 end
 
 local Party = function(self)
