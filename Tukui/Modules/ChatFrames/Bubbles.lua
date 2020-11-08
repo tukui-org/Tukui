@@ -75,7 +75,7 @@ function Bubbles:Update(bubble)
 					if Class then
 						Frame.Name:SetTextColor(unpack(T.Colors.class[Class]))
 					else
-						Frame.Name:SetTextColor(1, 1, 1)
+						Frame.Name:SetTextColor(0, 1, 0)
 					end
 
 					break
