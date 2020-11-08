@@ -230,16 +230,12 @@ function UnitFrames:CheckChannel(unit, name, rank)
 end
 
 function UnitFrames:PreUpdateHealth(unit)
-	local HostileColor = C["UnitFrames"].TargetEnemyHostileColor
-
-	if (HostileColor ~= true) then
-		return
-	end
-
-	if UnitIsEnemy(unit, "player") then
-		self.colorClass = false
-	else
-		self.colorClass = true
+	if C["UnitFrames"].TargetEnemyHostileColor then
+		if UnitIsEnemy(unit, "player") then
+			self.colorClass = false
+		else
+			self.colorClass = true
+		end
 	end
 end
 
