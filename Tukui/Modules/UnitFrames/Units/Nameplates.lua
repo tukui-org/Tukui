@@ -8,6 +8,7 @@ function UnitFrames:Nameplates()
 	local CastTexture = T.GetTexture(C["Textures"].NPCastTexture)
 	local Font = T.GetFont(C["NamePlates"].Font)
 	local NumDebuffsPerRow = math.ceil(C.NamePlates.Width / 26)
+	local NameLenght = C.NamePlates.HealthTag.Value == "" and "[Tukui:NameMedium]" or "[Tukui:NameShort]"
 
 	self:SetScale(UIParent:GetEffectiveScale())
 	self:SetSize(C.NamePlates.Width, C.NamePlates.Height)
@@ -142,8 +143,8 @@ function UnitFrames:Nameplates()
 		self.QuestIcon = QuestIcon
 	end
 
-	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameMedium]")
-	self:Tag(Health.Value, C.NamePlates.NamePlateHealthTag.Value)
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor]"..NameLenght)
+	self:Tag(Health.Value, C.NamePlates.HealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Debuffs = Debuffs
