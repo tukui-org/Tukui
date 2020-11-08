@@ -15,31 +15,38 @@ function ItemLevel:Update()
 		if not self.ItemLevel then
 			self.ItemLevel = self:CreateFontString(nil, "OVERLAY")
 			self.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
-			self.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
+			self.ItemLevel:SetFont(C.Medias.Font, 14, "OUTLINE")
 			self.ItemLevel:SetJustifyH("RIGHT")
-			self.ItemLevel:SetTextColor(0, 1, 0)
 		end
 	end
 	
 	local SlotID = self:GetID()
 	
 	if (SlotID >= INVSLOT_FIRST_EQUIPPED and SlotID <= INVSLOT_LAST_EQUIPPED) then
-		local Level
+		local Level, Rarity
 		
 		if IsTarget then
 			local ItemLink = GetInventoryItemLink("target", SlotID)
 			
 			if ItemLink then
 				Level = GetDetailedItemLevelInfo(ItemLink)
+				Rarity = GetInventoryItemQuality("target", SlotID)
 			end
 		else
 			local Button = Item:CreateFromEquipmentSlot(SlotID)
 			
 			Level = Button:GetCurrentItemLevel()
+			Rarity = GetInventoryItemQuality("player", SlotID)
 		end
 		
 		if Level then
 			self.ItemLevel:SetText(Level)
+			
+			if Rarity then
+				self.ItemLevel:SetTextColor(GetItemQualityColor(Rarity))
+			else
+				self.ItemLevel:SetTextColor(1, 1, 1)
+			end
 		else
 			self.ItemLevel:SetText("")
 		end

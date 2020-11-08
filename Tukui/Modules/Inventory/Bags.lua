@@ -643,7 +643,7 @@ function Bags:SlotUpdate(id, button)
 	if C.Bags.ItemLevel then
 		if ItemLink then
 			local Level = GetDetailedItemLevelInfo(ItemLink)
-			local ClassID = select(12, GetItemInfo(ItemLink))
+			local _, _, Rarity, _, _, _, _, _, _, _, _, ClassID = GetItemInfo(ItemLink)
 
 			if (ClassID == LE_ITEM_CLASS_ARMOR or ClassID == LE_ITEM_CLASS_WEAPON) and Level > 1 then
 				if not button.ItemLevel then
@@ -651,10 +651,15 @@ function Bags:SlotUpdate(id, button)
 					button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
 					button.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
 					button.ItemLevel:SetJustifyH("RIGHT")
-					button.ItemLevel:SetTextColor(0, 1, 0)
 				end
 
 				button.ItemLevel:SetText(Level)
+				
+				if Rarity then
+					button.ItemLevel:SetTextColor(GetItemQualityColor(Rarity))
+				else
+					button.ItemLevel:SetTextColor(1, 1, 1)
+				end
 			else
 				if button.ItemLevel then
 					button.ItemLevel:SetText("")
