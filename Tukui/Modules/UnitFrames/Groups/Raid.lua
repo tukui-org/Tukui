@@ -45,8 +45,6 @@ function UnitFrames:Raid()
 	Health.colorReaction = true
 	Health.isRaid = true
 
-	Health.PostUpdate = UnitFrames.PostUpdateHealth
-
 	-- Power
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetHeight(3)
@@ -208,6 +206,7 @@ function UnitFrames:Raid()
 	Highlight:Hide()
 
 	self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
+	self:Tag(Health.Value, C.Raid.HealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

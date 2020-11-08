@@ -205,6 +205,17 @@ C["Raid"] = {
 
 		["Value"] = "GROUP",
 	},
+	["HealthTag"] = {
+		["Options"] = {
+			["None"] = "",
+			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
+			["Percent"] = "|cff549654[perhp]%|r",
+			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["Missing HP"] = "|cffFF0000[missinghp]|r",
+		},
+
+		["Value"] = "",
+	},
 }
 
 C["Tooltips"] = {

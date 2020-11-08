@@ -259,6 +259,9 @@ local Raid = function(self)
 	Window:CreateSection("Font")
 	Window:CreateDropdown("Raid", "Font", "Set raid font", "Font")
 	Window:CreateDropdown("Raid", "HealthFont", "Set raid health font", "Font")
+	
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("Raid", "HealthTag", "Health tag raid unit")
 end
 
 local Tooltips = function(self)
