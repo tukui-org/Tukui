@@ -34,17 +34,20 @@ function UnitFrames:Nameplates()
     Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
+	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value:SetFontObject(Font)
+	Health.Value:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 4)
+	
 	Health.colorTapping = true
 	Health.colorReaction = true
 	Health.colorDisconnected = true
 	Health.colorClass = true
+	Health.colorThreat = C.NamePlates.ColorThreat
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
 	Name:SetJustifyH("LEFT")
 	Name:SetFontObject(Font)
-
-	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameMedium]")
 
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
@@ -139,6 +142,8 @@ function UnitFrames:Nameplates()
 		self.QuestIcon = QuestIcon
 	end
 
+	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor][Tukui:NameMedium]")
+	self:Tag(Health.Value, C.NamePlates.NamePlateHealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Debuffs = Debuffs

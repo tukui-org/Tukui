@@ -192,12 +192,14 @@ local NamePlates = function(self)
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("NamePlates", "Enable", "Enable nameplate module")
 	Window:CreateSwitch("NamePlates", "NameplateCastBar", "Enable nameplate cast")
+	Window:CreateSwitch("NamePlates", "ColorThreat", "Enable nameplate coloring by threat")
 	Window:CreateSwitch("NamePlates", "QuestIcon", "Enable nameplate quest icon indicator")
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("NamePlates", "OnlySelfDebuffs", "Display only our debuffs")
 	Window:CreateColorSelection("NamePlates", "HighlightColor", "Highlight texture color")
-
+	Window:CreateDropdown("NamePlates", "NamePlateHealthTag", "Health tag on nameplates")
+	
 	Window:CreateSection("Sizing")
 	Window:CreateSlider("NamePlates", "Width", "Set nameplate width", 60, 200, 10)
 	Window:CreateSlider("NamePlates", "Height", "Set nameplate height", 12, 24, 1)
