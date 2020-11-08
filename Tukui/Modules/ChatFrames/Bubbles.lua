@@ -4,40 +4,87 @@ local Chat = T["Chat"]
 local Bubbles = CreateFrame("Frame")
 local GetAllChatBubbles = C_ChatBubbles.GetAllChatBubbles
 
-function Bubbles:Skin(bubble)
+local Messages = {}
+
+function Bubbles:Update(bubble)
 	local Bubble = bubble
 	local Frame = bubble:GetChildren()
 
 	if Frame and not Frame:IsForbidden() then
-		local Tail = Frame.Tail
-		local Text = Frame.String
-		local Gap = (UIParent:GetEffectiveScale() <= 0.60 and 20) or 10
+		if not Bubble.IsSkinned then
+			local Tail = Frame.Tail
+			local Text = Frame.String
+			local Scaling = UIParent:GetEffectiveScale()
+			local Gap = (Scaling <= 0.60 and 20) or 10
 
-		Text:SetFont(C.Medias.Font, C.Chat.BubblesTextSize)
-		
-		if not Frame.ClearBackdrop then
-			Frame:StripTextures()
-		else
-			Frame:ClearBackdrop()
-			
-			Tail:SetAlpha(0)
+			Text:SetFont(C.Medias.Font, C.Chat.BubblesTextSize)
+
+			if not Frame.ClearBackdrop then
+				Frame:StripTextures()
+			else
+				Frame:ClearBackdrop()
+
+				Tail:SetAlpha(0)
+			end
+
+			Frame:CreateBackdrop("Transparent")
+
+			Frame.Backdrop:SetScale(Scaling)
+			Frame.Backdrop:SetInside(Frame, Gap, Gap)
+			Frame.Backdrop:CreateShadow()
+
+			Frame.Name = Frame:CreateFontString(nil, "OVERLAY")
+			Frame.Name:SetScale(Scaling)
+			Frame.Name:SetFont(C.Medias.Font, 14, "OUTLINE")
+			Frame.Name:SetPoint("BOTTOMLEFT", Frame.Backdrop, "TOPLEFT", 0, 4)
+
+			Bubble.IsSkinned = true
 		end
 		
-		Frame:CreateBackdrop("Transparent")
+		if not C.Chat.BubblesNames then
+			return
+		end
 		
-		Frame.Backdrop:SetScale(UIParent:GetEffectiveScale())
-		Frame.Backdrop:SetInside(Frame, Gap, Gap)
-		Frame.Backdrop:CreateShadow()
-	end
+		local Message = Frame.String:GetText()
 
-	Bubble.IsSkinned = true
+		for Nickname, Table in pairs(Messages) do
+			if (Message == Table.Message) then
+				local Guid = Messages[Nickname].Guid
+				local _, Class, Name, GuidName, GuidServer
+
+				if Guid then
+					_, Class, _, _, _, GuidName, GuidServer = GetPlayerInfoByGUID(Guid)
+
+					if GuidServer == "" then
+						GuidServer = T.MyRealm
+					end
+
+					Name = GuidName.."-"..GuidServer
+				else
+					Name = Nickname
+				end
+
+				if Nickname == Name then
+					local Text = GuidName or Name
+
+					Frame.Name:SetText(Text..":")
+
+					if Class then
+						Frame.Name:SetTextColor(unpack(T.Colors.class[Class]))
+					else
+						Frame.Name:SetTextColor(1, 1, 1)
+					end
+
+					break
+				end
+			end
+		end
+	end
 end
 
 function Bubbles:Scan()
 	for Index, Bubble in pairs(GetAllChatBubbles()) do
-		if (not Bubble.IsSkinned) then
-			self:Skin(Bubble)
-		end
+		self:Update(Bubble)
 	end
 end
 
@@ -48,6 +95,16 @@ function Bubbles:OnUpdate(elapsed)
 		self:Scan()
 		
 		self.Elapsed = 0
+	end
+end
+
+function Bubbles:OnEvent(event, message, nickname, _, _, test, _, _, _, _, _, _, guid)
+	if event == "PLAYER_ENTERING_WORLD" then
+		Messages = {}
+	else
+		Messages[nickname] = {}
+		Messages[nickname].Guid = guid
+		Messages[nickname].Message = message
 	end
 end
 
@@ -73,6 +130,23 @@ function Bubbles:Enable()
 	if C.Chat.SkinBubbles then
 		self.Elapsed = 0
 		self:SetScript("OnUpdate", self.OnUpdate)
+	end
+	
+	if C.Chat.BubblesNames then
+		Bubbles:RegisterEvent("CHAT_MSG_SAY")
+		Bubbles:RegisterEvent("CHAT_MSG_YELL")
+		Bubbles:RegisterEvent("CHAT_MSG_MONSTER_SAY")
+		Bubbles:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+		Bubbles:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+		if Setting == "All" then
+			Bubbles:RegisterEvent("CHAT_MSG_PARTY")
+			Bubbles:RegisterEvent("CHAT_MSG_PARTY_LEADER")
+			Bubbles:RegisterEvent("CHAT_MSG_RAID")
+			Bubbles:RegisterEvent("CHAT_MSG_RAID_LEADER")
+		end
+
+		Bubbles:SetScript("OnEvent", self.OnEvent)
 	end
 end
 

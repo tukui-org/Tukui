@@ -110,6 +110,7 @@ local Chat = function(self)
 	Window:CreateSwitch("Chat", "TextFading", "Fade the chat message after inactivity?")
 	Window:CreateDropdown("Chat", "Bubbles", "Chat bubbles")
 	Window:CreateSlider("Chat", "BubblesTextSize", "Set bubbles text size", 6, 16, 1)
+	Window:CreateSwitch("Chat", "BubblesNames", "Display name in bubbles?")
 
 	Window:CreateSection("Size [Tukui theme only]")
 	Window:CreateSlider("Chat", "LeftWidth", "Set left chat width", 300, 600, 1)

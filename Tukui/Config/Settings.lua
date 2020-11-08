@@ -106,6 +106,7 @@ C["Chat"] = {
 	["TextFadingTimer"] = 60,
 	["TabFont"] = "Tukui",
 	["ChatFont"] = "Tukui",
+	["BubblesNames"] = true,
 }
 
 C["Cooldowns"] = {
