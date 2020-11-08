@@ -12,12 +12,10 @@ function ItemLevel:Update()
 	local IsTarget = string.find(Name, "Inspect") and true or false
 	
 	if not self.ItemLevel then
-		if not self.ItemLevel then
-			self.ItemLevel = self:CreateFontString(nil, "OVERLAY")
-			self.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
-			self.ItemLevel:SetFont(C.Medias.Font, 14, "OUTLINE")
-			self.ItemLevel:SetJustifyH("RIGHT")
-		end
+		self.ItemLevel = self:CreateFontString(nil, "OVERLAY")
+		self.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
+		self.ItemLevel:SetFont(C.Medias.Font, 14, "OUTLINE")
+		self.ItemLevel:SetJustifyH("RIGHT")
 	end
 	
 	local SlotID = self:GetID()
