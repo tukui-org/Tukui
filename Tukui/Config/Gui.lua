@@ -203,12 +203,12 @@ local NamePlates = function(self)
 	Window:CreateSlider("NamePlates", "Width", "Set nameplate width", 60, 200, 10)
 	Window:CreateSlider("NamePlates", "Height", "Set nameplate height", 12, 24, 1)
 	Window:CreateSlider("NamePlates", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
-
-	Window:CreateSection("Font")
-	Window:CreateDropdown("NamePlates", "Font", "Set nameplate font", "Font")
 	
 	Window:CreateSection("Tags")
 	Window:CreateDropdown("NamePlates", "HealthTag", "Health tag on nameplates")
+
+	Window:CreateSection("Font")
+	Window:CreateDropdown("NamePlates", "Font", "Set nameplate font", "Font")
 end
 
 local Party = function(self)
@@ -225,13 +225,13 @@ local Party = function(self)
 	Window:CreateSwitch("Party", "ShowManaText", "Display mana text values")
 	Window:CreateColorSelection("Party", "HighlightColor", "Highlight texture color")
 	Window:CreateSlider("Party", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
+	
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("Party", "HealthTag", "Health tag party unit")
 
 	Window:CreateSection("Font")
 	Window:CreateDropdown("Party", "Font", "Set party font", "Font")
 	Window:CreateDropdown("Party", "HealthFont", "Set party health font", "Font")
-	
-	Window:CreateSection("Tags")
-	Window:CreateDropdown("Party", "HealthTag", "Health tag party unit")
 end
 
 local Raid = function(self)
@@ -262,13 +262,13 @@ local Raid = function(self)
 	Window:CreateSlider("Raid", "AuraTrackThickness", "Thickness size of status bars in pixel", 2, 10, 1)
 	Window:CreateSlider("Raid", "AuraTrackIconSize", "Size of icons in pixel", 6, 18, 1)
 	Window:CreateSlider("Raid", "AuraTrackSpacing", "Spacing between icons in pixel", 2, 10, 1)
+	
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("Raid", "HealthTag", "Health tag raid unit")
 
 	Window:CreateSection("Font")
 	Window:CreateDropdown("Raid", "Font", "Set raid font", "Font")
 	Window:CreateDropdown("Raid", "HealthFont", "Set raid health font", "Font")
-	
-	Window:CreateSection("Tags")
-	Window:CreateDropdown("Raid", "HealthTag", "Health tag raid unit")
 end
 
 local Tooltips = function(self)
