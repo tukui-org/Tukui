@@ -36,7 +36,8 @@ function UnitFrames:Party()
 		Health.Value = Health:CreateFontString(nil, "OVERLAY")
 		Health.Value:SetFontObject(Font)
 		Health.Value:SetPoint("TOPRIGHT", -4, 6)
-		Health.PostUpdate = UnitFrames.PostUpdateHealth
+		
+		self:Tag(Health.Value, C.Party.HealthTag.Value)
 	end
 
 	Health.colorDisconnected = true

@@ -225,6 +225,9 @@ local Party = function(self)
 	Window:CreateSection("Font")
 	Window:CreateDropdown("Party", "Font", "Set party font", "Font")
 	Window:CreateDropdown("Party", "HealthFont", "Set party health font", "Font")
+	
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("Party", "HealthTag", "Health tag party unit")
 end
 
 local Raid = function(self)
