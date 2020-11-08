@@ -54,10 +54,13 @@ function Bubbles:Update(bubble)
 
 				if Guid then
 					_, Class, _, _, _, GuidName, GuidServer = GetPlayerInfoByGUID(Guid)
-
+					
 					if GuidServer == "" then
 						GuidServer = T.MyRealm
 					end
+					
+					-- Remove spaces
+					GuidServer = GuidServer:gsub("%s+", "")
 
 					Name = GuidName.."-"..GuidServer
 				else
