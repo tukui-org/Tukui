@@ -342,6 +342,7 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "AurasBelow", "Move auras below unitframes")
 
 	Window:CreateSection("Styling")
+	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
 	Window:CreateSlider("UnitFrames", "StatusBarBackgroundMultiplier", "Health and Power background % opacity", 0, 50, 1)
 	Window:CreateSwitch("UnitFrames", "UnlinkCastBar", "Unlink cast bars from unitframes")
 	Window:CreateSwitch("UnitFrames", "CastBarIcon", "Display castbar spell icon")
@@ -358,21 +359,12 @@ local UnitFrames = function(self)
 	Window:CreateSlider("UnitFrames", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
 	Window:CreateSlider("UnitFrames", "RangeAlpha", "Set out of range alpha (focus/arena/boss)", 0, 1, 0.1)
 	
-	Window:CreateSection("Player")
-	Window:CreateDropdown("UnitFrames", "PlayerHealthTag", "Health tag on player")
-	
-	Window:CreateSection("Target")
-	Window:CreateDropdown("UnitFrames", "TargetHealthTag", "Health tag on target")
-	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
-	
-	Window:CreateSection("Focus")
-	Window:CreateDropdown("UnitFrames", "FocusHealthTag", "Health tag on target")
-	
-	Window:CreateSection("FocusTarget")
-	Window:CreateDropdown("UnitFrames", "FocusTargetHealthTag", "Health tag on target")
-	
-	Window:CreateSection("Boss")
-	Window:CreateDropdown("UnitFrames", "BossHealthTag", "Health tag on target")
+	Window:CreateSection("Tags")
+	Window:CreateDropdown("UnitFrames", "PlayerHealthTag", "Health tag on player frame")
+	Window:CreateDropdown("UnitFrames", "TargetHealthTag", "Health tag on target frame")
+	Window:CreateDropdown("UnitFrames", "FocusHealthTag", "Health tag on focus frame")
+	Window:CreateDropdown("UnitFrames", "FocusTargetHealthTag", "Health tag on focus target frame")
+	Window:CreateDropdown("UnitFrames", "BossHealthTag", "Health tag on boss frames")
 end
 
 GUI:AddWidgets(General)
