@@ -6,11 +6,62 @@ local GetAllChatBubbles = C_ChatBubbles.GetAllChatBubbles
 
 local Messages = {}
 
-function Bubbles:Update(bubble)
+function Bubbles:Update()
+	local Message = self.String:GetText()
+	
+	-- No need to update
+	if not Message or Message == "" or Message == self.Message then
+		return
+	end
+
+	-- Reset name
+	self.Name:Hide()
+
+	-- Refresh name if found
+	for Nickname, Table in pairs(Messages) do
+		if (Message == Table.Message) then
+			local Guid = Messages[Nickname].Guid
+			local _, Class, Name, GuidName, GuidServer
+
+			if Guid then
+				_, Class, _, _, _, GuidName, GuidServer = GetPlayerInfoByGUID(Guid)
+
+				if GuidServer == "" then
+					GuidServer = T.MyRealm
+				end
+
+				-- Remove spaces
+				GuidServer = GuidServer:gsub("%s+", "")
+
+				Name = GuidName.."-"..GuidServer
+			else
+				Name = Nickname
+			end
+
+			if Nickname == Name then
+				local Text = GuidName or Name
+
+				self.Name:Show()
+				self.Name:SetText(Text..":")
+				self.Message = Message
+
+				if Class then
+					self.Name:SetTextColor(unpack(T.Colors.class[Class]))
+				else
+					self.Name:SetTextColor(0, 1, 0)
+				end
+
+				break
+			end
+		end
+	end
+end
+
+function Bubbles:Skin(bubble)
 	local Bubble = bubble
 	local Frame = bubble:GetChildren()
 
-	if Frame and not Frame:IsForbidden() then
+	if Frame and not Frame:IsForbidden() and not Frame.IsSkinned then
 		if not Bubble.IsSkinned then
 			local Tail = Frame.Tail
 			local Text = Frame.String
@@ -37,57 +88,21 @@ function Bubbles:Update(bubble)
 			Frame.Name:SetScale(Scaling)
 			Frame.Name:SetFont(C.Medias.Font, 14, "OUTLINE")
 			Frame.Name:SetPoint("BOTTOMLEFT", Frame.Backdrop, "TOPLEFT", 0, 4)
+			
+			if C.Chat.BubblesNames then
+				Frame:HookScript("OnShow", Bubbles.Update)
+				
+				Bubbles.Update(Frame)
+			end
 
 			Bubble.IsSkinned = true
-		end
-		
-		if not C.Chat.BubblesNames then
-			return
-		end
-		
-		local Message = Frame.String:GetText()
-
-		for Nickname, Table in pairs(Messages) do
-			if (Message == Table.Message) then
-				local Guid = Messages[Nickname].Guid
-				local _, Class, Name, GuidName, GuidServer
-
-				if Guid then
-					_, Class, _, _, _, GuidName, GuidServer = GetPlayerInfoByGUID(Guid)
-					
-					if GuidServer == "" then
-						GuidServer = T.MyRealm
-					end
-					
-					-- Remove spaces
-					GuidServer = GuidServer:gsub("%s+", "")
-
-					Name = GuidName.."-"..GuidServer
-				else
-					Name = Nickname
-				end
-
-				if Nickname == Name then
-					local Text = GuidName or Name
-
-					Frame.Name:SetText(Text..":")
-
-					if Class then
-						Frame.Name:SetTextColor(unpack(T.Colors.class[Class]))
-					else
-						Frame.Name:SetTextColor(0, 1, 0)
-					end
-
-					break
-				end
-			end
 		end
 	end
 end
 
 function Bubbles:Scan()
 	for Index, Bubble in pairs(GetAllChatBubbles()) do
-		self:Update(Bubble)
+		self:Skin(Bubble)
 	end
 end
 
