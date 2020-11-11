@@ -131,6 +131,7 @@ C["Loot"] = {
 
 C["Misc"] = {
 	["ItemLevel"] = true,
+	["MicroEscToggle"] = true,
 	["ThreatBar"] = true,
 	["WorldMapEnable"] = true,
 	["ExperienceEnable"] = true,

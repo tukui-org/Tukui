@@ -12,12 +12,6 @@ function MicroMenu:AddHooks()
 	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
 end
 
-function MicroMenu:OnEsc(key)
-	if self:IsShown() and key == string.upper(KEY_ESCAPE) then
-		self:Toggle()
-	end
-end
-
 function MicroMenu:Update()
 	if self:IsShown() then
 		for i = 1, #MICRO_BUTTONS do
@@ -37,11 +31,6 @@ function MicroMenu:Update()
 		end
 		
 		UpdateMicroButtonsParent(T.PetHider)
-		
-		-- Hide Game Menu if visible
-		if GameMenuFrame:IsShown() then
-			GameMenuFrame:Hide()
-		end
 	else
 		UpdateMicroButtonsParent(T.Hider)
 		
@@ -58,6 +47,13 @@ end
 function MicroMenu:Toggle()
 	if self ~= MicroMenu then
 		self = MicroMenu
+	end
+	
+	-- Hide Game Menu if visible
+	if GameMenuFrame:IsShown() then
+		HideUIPanel(GameMenuFrame)
+		
+		return
 	end
 	
 	if self:IsShown() then
@@ -125,6 +121,14 @@ function MicroMenu:Enable()
 	T.Movers:RegisterFrame(MicroMenu)
 	
 	tinsert(UISpecialFrames, "TukuiMicroMenu")
+	
+	-- On ESC toggle micro menu instead of game menu
+	if C.Misc.MicroEscToggle then
+		self.Captor = CreateFrame("Button", "TukuiMicroMenuCaptor", UIParent, "SecureActionButtonTemplate")
+		self.Captor:SetScript("OnClick", MicroMenu.Toggle)
+		
+		SetOverrideBindingClick(self.Captor, true, "ESCAPE", "TukuiMicroMenuCaptor")
+	end
 end
 
 Miscellaneous.MicroMenu = MicroMenu

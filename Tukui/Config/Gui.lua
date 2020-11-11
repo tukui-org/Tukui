@@ -163,7 +163,9 @@ end
 
 local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
-				
+	
+	Window:CreateSection("Micro Menu")
+	Window:CreateSwitch("Misc", "MicroEscToggle", "Toggle micro menu instead of game menu on 'Escape' keypress")
 	Window:CreateSection("Items Level")
 	Window:CreateSwitch("Misc", "ItemLevel", "Display items level on character and inspect frames")
 	Window:CreateSection("Threat")
