@@ -113,6 +113,9 @@ local function Enable(self)
 		self:RegisterEvent("QUEST_ACCEPTED", Path, true)
 		self:RegisterEvent("QUEST_REMOVED", Path, true)
 		self:RegisterEvent("NAME_PLATE_UNIT_ADDED", Path, true)
+		
+		--  Make sure showQuestTrackingTooltips is ON, this plugin rely on that
+		SetCVar("showQuestTrackingTooltips", 1)
 
 		return true
 	end
