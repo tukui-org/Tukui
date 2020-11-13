@@ -73,6 +73,7 @@ function MicroMenu:Enable()
 	MicroMenu:SetScript("OnShow", self.Update)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
+	--MicroMenu:SetScript("OnKeyDown", function(self, b) print(b) end)
 	
 	MicroButtonAndBagsBar:StripTextures()
 	MicroButtonAndBagsBar:SetParent(MicroMenu)
@@ -122,12 +123,12 @@ function MicroMenu:Enable()
 	
 	tinsert(UISpecialFrames, "TukuiMicroMenu")
 	
-	-- On ESC toggle micro menu instead of game menu
-	if C.Misc.MicroEscToggle then
+	-- Toggle micro menu keybind
+	if C.Misc.MicroToggle.Value ~= "" then
 		self.Captor = CreateFrame("Button", "TukuiMicroMenuCaptor", UIParent, "SecureActionButtonTemplate")
 		self.Captor:SetScript("OnClick", MicroMenu.Toggle)
 		
-		SetOverrideBindingClick(self.Captor, true, "ESCAPE", "TukuiMicroMenuCaptor")
+		SetOverrideBindingClick(self.Captor, true, C.Misc.MicroToggle.Value, "TukuiMicroMenuCaptor")
 	end
 end
 
