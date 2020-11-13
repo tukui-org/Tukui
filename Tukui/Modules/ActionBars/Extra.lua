@@ -42,16 +42,21 @@ function ActionBars:SetupExtraButton()
 	local ZoneHolder = CreateFrame("Frame", "TukuiZoneAbilitiesButtons", UIParent)
 	local Bar = ExtraActionBarFrame
 	local Icon = ExtraActionButton1Icon
-
+	
+	Bar:EnableMouse(0)
+	
 	ExtraHolder:SetSize(160, 80)
 	ExtraHolder:SetPoint("BOTTOM", 0, 250)
 	
 	ZoneHolder:SetSize(160, 80)
 	ZoneHolder:SetPoint("BOTTOM", 0, 330)
 	
-	Container:SetParent(ExtraHolder)
+	Button:SetParent(ExtraHolder)
+	Button:ClearAllPoints()
+	Button:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
+	
 	Container:ClearAllPoints()
-	Container:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
+	Container:SetPoint("TOP", UIParent, "TOP", 0, 200)
 	Container.ignoreFramePositionManager = true
 	
 	Button:StripTextures()
