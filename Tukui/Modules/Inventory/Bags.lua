@@ -397,7 +397,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SearchBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() self:SetText("") end)
 		SearchBox:SetScript("OnEnterPressed", function(self) self:ClearFocus() self:SetText("") end)
 		SearchBox:SetScript("OnTextChanged", function(self) SetItemSearch(self:GetText()) end)
-		SearchBox:SetScript("OnEditFocusLost", function(self) self.Title:Show() SetItemSearch("") self.Backdrop:SetBorderColor(.3, .3, .3, 1) end)
+		SearchBox:SetScript("OnEditFocusLost", function(self) self.Backdrop:SetBorderColor(.3, .3, .3, 1) end)
 		SearchBox:SetScript("OnEditFocusGained", function(self) self.Title:Hide() self.Backdrop:SetBorderColor(1, 1, 1, 1) end)
 
 		ToggleBags:SetSize(16, 16)
