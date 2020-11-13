@@ -51,7 +51,6 @@ function ActionBars:SetupExtraButton()
 	ZoneHolder:SetSize(160, 80)
 	ZoneHolder:SetPoint("BOTTOM", 0, 330)
 	
-	Button:SetParent(ExtraHolder)
 	Button:ClearAllPoints()
 	Button:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
 	
