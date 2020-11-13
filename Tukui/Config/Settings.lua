@@ -150,7 +150,7 @@ C["Misc"] = {
 			["ALT-M"] = "ALT-M",
 		},
 
-		["Value"] = "ESCAPE",
+		["Value"] = "ALT-M",
 	},
 }
 
