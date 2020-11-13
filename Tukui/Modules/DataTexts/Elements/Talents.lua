@@ -25,7 +25,7 @@ local Update = function(self)
 		CurrentLootSpecName = CurrentCharSpecName
 	end
 
-	self.Text:SetText(CurrentLootSpecName)
+	self.Text:SetText(CurrentCharSpecName)
 end
 
 local OnLeave = function()
@@ -45,14 +45,32 @@ local OnEnter = function(self)
 	GameTooltip:Show()
 end
 
+local OnMouseDown = function()
+	if InCombatLockdown() then
+		return
+	end
+	
+	if not PlayerTalentFrame then
+		LoadAddOn("Blizzard_TalentUI")
+	end
+
+	if not PlayerTalentFrame:IsShown() then
+		ShowUIPanel(PlayerTalentFrame)
+	else
+		HideUIPanel(PlayerTalentFrame)
+	end
+end
+
 local Enable = function(self)
 	self:RegisterEvent("PLAYER_TALENT_UPDATE")
 	self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:RegisterEvent("CONFIRM_TALENT_WIPE")
 
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
+	self:SetScript("OnMouseDown", OnMouseDown)
 
 	self:Update()
 end
@@ -63,8 +81,9 @@ local Disable = function(self)
 	self:SetScript("OnEvent", nil)
 	self:SetScript("OnEnter", nil)
 	self:SetScript("OnLeave", nil)
+	self:SetScript("OnMouseDown", nil)
 
 	self.Text:SetText("")
 end
 
-DataText:Register("Loot Specialization", Enable, Disable, Update)
+DataText:Register("Talents", Enable, Disable, Update)

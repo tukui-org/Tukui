@@ -15,11 +15,11 @@
 	<Script file="DataTexts\Elements\Gold.lua"/>
 	<Script file="DataTexts\Elements\Guild.lua"/>
 	<Script file="DataTexts\Elements\HPS.lua"/>
-	<Script file="DataTexts\Elements\LootSpec.lua"/>
 	<Script file="DataTexts\Elements\Micromenu.lua"/>
 	<Script file="DataTexts\Elements\Power.lua"/>
 	<Script file="DataTexts\Elements\Regen.lua"/>
 	<Script file="DataTexts\Elements\System.lua"/>
+	<Script file="DataTexts\Elements\Talents.lua"/>
 	<Script file="DataTexts\Elements\Time.lua"/>
 	<Script file="DataTexts\Elements\Battleground.lua"/>
 	<Script file="DataTexts\Elements\Zone.lua"/>
