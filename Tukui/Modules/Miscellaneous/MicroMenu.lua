@@ -52,8 +52,6 @@ function MicroMenu:Toggle()
 	-- Hide Game Menu if visible
 	if GameMenuFrame:IsShown() then
 		HideUIPanel(GameMenuFrame)
-		
-		return
 	end
 	
 	if self:IsShown() then
