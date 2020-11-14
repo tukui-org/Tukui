@@ -96,6 +96,10 @@ T.SlashHandler = function(cmd)
 			ReloadUI()
 		end
 	elseif (arg1 == "kb" or arg1 == "keybinds") then
+		if InCombatLockdown() then
+			return
+		end
+		
 		if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
 			return
 		end
