@@ -1,7 +1,7 @@
 local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
-local AltPowerBar = CreateFrame("Button")
+local AltPowerBar = CreateFrame("Button", "TukuiAltPowerBar", T.PetHider)
 
 function AltPowerBar:Update()
 	local Status = self.Status
@@ -38,9 +38,10 @@ end
 
 function AltPowerBar:Create()
 	self:DisableBlizzardBar()
-	self:SetParent(T.DataTexts.Panels.Left)
-	self:SetAllPoints(T.DataTexts.Panels.Left)
+	self:SetSize(370, 23)
+	self:SetPoint("TOP", 0, -28)
 	self:CreateBackdrop()
+	self:CreateShadow()
 	self:SetFrameStrata(T.DataTexts.Panels.Left:GetFrameStrata())
 	self:SetFrameLevel(T.DataTexts.Panels.Left:GetFrameLevel() + 10)
 	self:RegisterEvent("UNIT_POWER_BAR_SHOW")
@@ -60,6 +61,8 @@ function AltPowerBar:Create()
 	self.Status.Text:SetPoint("CENTER", self, "CENTER", 0, 0)
 	self.Status.Text:SetShadowColor(0, 0, 0)
 	self.Status.Text:SetShadowOffset(1.25, -1.25)
+	
+	T.Movers:RegisterFrame(self)
 end
 
 function AltPowerBar:Enable()
