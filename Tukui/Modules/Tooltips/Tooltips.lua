@@ -322,11 +322,18 @@ function Tooltip:SetCompareItemBorderColor(anchorFrame)
 	end
 end
 
+function Tooltip:ResetBorderColor()
+	if self.Backdrop then
+		self.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
+	end
+end
+
 function Tooltip:AddHooks()
 	hooksecurefunc("SharedTooltip_SetBackdropStyle", self.Skin)
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 	hooksecurefunc("GameTooltip_ShowCompareItem", self.SetCompareItemBorderColor)
 	hooksecurefunc("GameTooltip_UnitColor", self.SetUnitBorderColor)
+	hooksecurefunc("GameTooltip_ClearMoney", self.ResetBorderColor)
 
 	GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
 	GameTooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
