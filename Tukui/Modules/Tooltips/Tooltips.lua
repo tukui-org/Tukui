@@ -202,7 +202,7 @@ function Tooltip:Skin(style)
 		
 		self.IsSkinned = true
 	end
-	
+
 	local Link = select(2, self:GetItem())
 	local R, G, B
 	local Backdrop = self.Backdrop
@@ -216,14 +216,14 @@ function Tooltip:Skin(style)
 			else
 				R, G, B = unpack(C["General"].BorderColor)
 			end
-
+			
 			Backdrop:SetBorderColor(R, G, B)
 		else
 			Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 		end
+		
+		self:ClearBackdrop()
 	end
-	
-	self:ClearBackdrop()
 end
 
 function Tooltip:SkinHealthBar()
