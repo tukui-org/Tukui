@@ -10,6 +10,10 @@ local Classification = {
 	rare = "|cffAF5050R |r",
 }
 
+Tooltip.BackdropStyle = {
+	bgFile = C.Medias.Blank,
+}
+
 function Tooltip:CreateAnchor()
 	self.Anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
 	self.Anchor:SetSize(200, 21)
@@ -221,9 +225,10 @@ function Tooltip:Skin(style)
 		else
 			Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 		end
-		
-		self:ClearBackdrop()
 	end
+	
+	self:SetBackdrop(Tooltip.BackdropStyle)
+	self:SetBackdropColor(unpack(C.General.BackdropColor))
 end
 
 function Tooltip:SkinHealthBar()
@@ -348,8 +353,6 @@ function Tooltip:Enable()
 	self:AddHooks()
 	self:SkinHealthBar()
 
-	--ItemRefCloseButton:SkinCloseButton()
-
 	if C.Tooltips.HideInCombat then
 		self:RegisterEvent("PLAYER_REGEN_DISABLED")
 		self:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -365,6 +368,9 @@ function Tooltip:Enable()
 	end
 	
 	Tooltip.Skin(GameTooltip)
+	Tooltip.Skin(ItemRefTooltip)
+	
+	ItemRefTooltip.CloseButton:SkinCloseButton()
 	
 	T.Movers:RegisterFrame(self.Anchor)
 end
