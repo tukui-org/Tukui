@@ -120,7 +120,6 @@ C["DataTexts"] = {
 	["ValueColor"] = {1, 1, 1},
 	["ClassColor"] = false,
 	["HighlightColor"] = {1, 1, 0},
-	["Hour24"] = false,
 	["Font"] = "Tukui",
 }
 

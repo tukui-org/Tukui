@@ -28,9 +28,14 @@ local Update = function(self, Elapsed)
 	Timer = Timer - Elapsed
 
 	if Timer < 0 then
-		local String = C.DataTexts.Hour24 and "%H:%M|r" or "%I:%M|r %p"
-
-		self.Text:SetFormattedText("%s", date(DataText.ValueColor .. String))
+		local LocalTime = GetCVar("timeMgrUseLocalTime") == "1" and true or false
+		local MilitaryTime = GetCVar("timeMgrUseMilitaryTime") == "0" and true or false
+		local Hour = LocalTime == true and tonumber(date("%I")) or select(1, GetGameTime())
+		local Min = LocalTime == true and tonumber(date("%M")) or select(2, GetGameTime())
+		
+		local CurrentTime = GameTime_GetFormattedTime(Hour, Min, true)
+		
+		self.Text:SetText(DataText.ValueColor .. CurrentTime)
 
 		Timer = Interval
 	end
@@ -87,11 +92,19 @@ local OnLeave = function()
 	GameTooltip:Hide()
 end
 
+local OnMouseUp = function(button, click)
+	if click == "RightButton" then
+		TimeManager_Toggle()
+	else
+		GameTimeFrame_OnClick()
+	end
+end
+
 local Enable = function(self)
 	self:SetScript("OnUpdate", Update)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", OnLeave)
-	self:SetScript("OnMouseUp", GameTimeFrame_OnClick)
+	self:SetScript("OnMouseUp", OnMouseUp)
 end
 
 local Disable = function(self)
