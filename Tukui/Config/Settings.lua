@@ -142,7 +142,6 @@ C["Misc"] = {
 	["MicroToggle"] = {
 		["Options"] = {
 			["None"] = "",
-			["ESCAPE"] = "ESCAPE",
 			["M"] = "M",
 			["SHIFT-M"] = "SHIFT-M",
 			["CTRL-M"] = "CTRL-M",
