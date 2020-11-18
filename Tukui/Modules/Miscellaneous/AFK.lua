@@ -153,9 +153,9 @@ function AFK:Create()
 	Time:SetTextColor(unpack(CustomClassColor))
 
 	local Name = Frame:CreateTexture(nil, "OVERLAY")
-	Name:SetSize(256, 256)
+	Name:SetSize(128, 128)
 	Name:SetTexture(C.Medias.Logo)
-	Name:SetPoint("CENTER", BottomPanel, 0, 120)
+	Name:SetPoint("CENTER", BottomPanel, 0, 60)
 
 	local Version = Frame:CreateFontString(nil, "OVERLAY")
 	Version:SetPoint("CENTER", BottomPanel, 0, -18)
