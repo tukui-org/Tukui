@@ -25,13 +25,13 @@ function Status:ShowWindow()
 	self.FrameLogo:SetFrameLevel(self:GetFrameLevel() + 1)
 
 	self.Logo = self.FrameLogo:CreateTexture(nil, "OVERLAY")
-	self.Logo:SetSize(256, 128)
+	self.Logo:SetSize(192, 192)
 	self.Logo:SetTexture(C.Medias.Logo)
-	self.Logo:SetPoint("TOP", self, "TOP", -8, 68)
+	self.Logo:SetPoint("TOP", self, "TOP", 0, 116)
 
 	self.Title = self:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C.Medias.Font, 16, "THINOUTLINE")
-	self.Title:SetPoint("TOP", 0, -66)
+	self.Title:SetPoint("TOP", 0, -86)
 	self.Title:SetText("DEBUG STATUS WINDOW")
 
 	self.Version = self:CreateFontString(nil, "OVERLAY")
