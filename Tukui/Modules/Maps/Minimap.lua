@@ -45,13 +45,19 @@ function Minimap:DisableMinimapElements()
 end
 
 function Minimap:OnMouseClick(button)
-	if (button == "RightButton") or (button == "MiddleButton") then
+	if (button == "RightButton") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
 		
 		if MicroMenu then
 			MicroMenu:Toggle()
 		else
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
+		end
+	elseif (button == "MiddleButton") then
+		if InCombatLockdown() then
+			T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
+		else
+			GarrisonLandingPage_Toggle()
 		end
 	else
 		Minimap_OnClick(self)
@@ -109,6 +115,9 @@ function Minimap:StyleMinimap()
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetParent(Minimap)
 	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+	
+	GarrisonLandingPageMinimapButton:ClearAllPoints()
+	GarrisonLandingPageMinimapButton:SetPoint("TOPRIGHT")
 
 	GuildInstanceDifficulty:ClearAllPoints()
 	GuildInstanceDifficulty:SetParent(Minimap)
