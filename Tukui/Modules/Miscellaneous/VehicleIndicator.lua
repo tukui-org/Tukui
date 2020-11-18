@@ -9,6 +9,7 @@ function VehicleIndicator:Enable()
 
 	Indicator:ClearAllPoints()
 	Indicator:SetParent(UIParent)
+	Indicator:SetFrameStrata("BACKGROUND")
 	Indicator:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
 
 	-- This will block UIParent_ManageFramePositions() to be executed
