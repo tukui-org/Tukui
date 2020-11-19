@@ -30,7 +30,7 @@ local Update = function(self, Elapsed)
 	if Timer < 0 then
 		local LocalTime = GetCVar("timeMgrUseLocalTime") == "1" and true or false
 		local MilitaryTime = GetCVar("timeMgrUseMilitaryTime") == "0" and true or false
-		local Hour = LocalTime == true and tonumber(date("%I")) or select(1, GetGameTime())
+		local Hour = LocalTime == true and tonumber(date("%H")) or select(1, GetGameTime())
 		local Min = LocalTime == true and tonumber(date("%M")) or select(2, GetGameTime())
 		
 		local CurrentTime = GameTime_GetFormattedTime(Hour, Min, true)
