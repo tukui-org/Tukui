@@ -25,7 +25,7 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
-		"GarrisonLandingPageMinimapButton",
+		--"GarrisonLandingPageMinimapButton",
 	}
 
 	for i, FrameName in pairs(HiddenFrames) do
@@ -388,6 +388,69 @@ function Minimap:AddTaxiEarlyExit()
 	Minimap.EarlyExitButton.Text:SetShadowOffset(1.25, -1.25)
 end
 
+function Minimap:StopPulse()
+	if Minimap.Animation and Minimap.Animation:IsPlaying() then
+		Minimap.Animation:Stop()
+		
+		if Minimap.Backdrop then
+			Minimap.Backdrop:SetBorderColor(unpack(C.General.BackdropColor))
+		end
+		
+		if T.DataTexts.Panels.Minimap and T.DataTexts.Panels.Minimap.Backdrop then
+			local Backdrop = T.DataTexts.Panels.Minimap.Backdrop
+			
+			Backdrop:SetBorderColor(unpack(C.General.BackdropColor))
+		end
+	end
+end
+
+function Minimap:StartPulse()
+	local Backdrop = Minimap.Backdrop
+	local R, G, B = 1, 1, 0
+	
+	if not Minimap.Animation then
+		Minimap.Animation = Minimap:CreateAnimationGroup()
+		Minimap.Animation:SetLooping("BOUNCE")
+
+		Minimap.Animation.FadeOut = Minimap.Animation:CreateAnimation("Alpha")
+		Minimap.Animation.FadeOut:SetFromAlpha(1)
+		Minimap.Animation.FadeOut:SetToAlpha(.6)
+		Minimap.Animation.FadeOut:SetDuration(.3)
+		Minimap.Animation.FadeOut:SetSmoothing("IN_OUT")
+	end
+
+	if Backdrop then
+		Backdrop.BorderTop:SetColorTexture(R, G, B)
+		Backdrop.BorderLeft:SetColorTexture(R, G, B)
+		Backdrop.BorderRight:SetColorTexture(R, G, B)
+	end
+
+	if T.DataTexts.Panels.Minimap and T.DataTexts.Panels.Minimap.Backdrop then
+		Backdrop = T.DataTexts.Panels.Minimap.Backdrop
+
+		Backdrop.BorderBottom:SetColorTexture(R, G, B)
+		Backdrop.BorderLeft:SetColorTexture(R, G, B)
+		Backdrop.BorderRight:SetColorTexture(R, G, B)
+	else
+		Backdrop.BorderBottom:SetColorTexture(R, G, B)
+	end
+
+	if not Minimap.Animation:IsPlaying() then
+		Minimap.Animation:Play()
+		
+		T.Print("[|cffffff00"..MINIMAP_LABEL.."|r] "..MINIMAP_GARRISON_LANDING_PAGE_TOOLTIP.." (|cffff0000"..KEY_BUTTON3.."|r)")
+	end
+end
+
+function Minimap:MoveGarrisonButton()
+	GarrisonLandingPageMinimapButton:ClearAllPoints()
+	GarrisonLandingPageMinimapButton:SetPoint("TOPLEFT", 24, -8)
+end
+
+function Minimap:AddHooks()
+	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
+end
+
 function Minimap:Enable()
 	self:DisableMinimapElements()
 	self:StyleMinimap()
@@ -397,6 +460,7 @@ function Minimap:Enable()
 	self:EnableMouseOver()
 	self:EnableMouseWheelZoom()
 	self:AddTaxiEarlyExit()
+	self:AddHooks()
 end
 
 -- Need to be sized as soon as possible, because of LibDBIcon10
