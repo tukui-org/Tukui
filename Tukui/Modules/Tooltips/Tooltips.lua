@@ -198,6 +198,10 @@ function Tooltip:SetUnitBorderColor()
 end
 
 function Tooltip:Skin(style)
+	if self:IsForbidden() then
+		return
+	end
+	
 	if (not self.IsSkinned) then
 		if self ~= GameTooltipTooltip then
 			self:CreateBackdrop()
