@@ -121,49 +121,68 @@ function UnitFrames:Player()
 		T.Movers:RegisterFrame(AuraBars)
 
 		self.AuraBars = AuraBars
-	elseif (C.UnitFrames.PlayerAuras) then
-		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
-		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
+	else
+		if (C.UnitFrames.PlayerBuffs) then
+			local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 
-		Buffs:SetFrameStrata(self:GetFrameStrata())
-		Buffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -1, 4)
+			Buffs:SetFrameStrata(self:GetFrameStrata())
+			Buffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", -1, 4)
 
-		Buffs:SetHeight(28)
-		Buffs:SetWidth(252)
-		Buffs.size = 28
-		Buffs.num = 32
-		Buffs.numRow = 4
+			Buffs:SetHeight(28)
+			Buffs:SetWidth(252)
+			Buffs.size = 28
+			Buffs.num = 32
+			Buffs.numRow = 4
 
-		Debuffs:SetFrameStrata(self:GetFrameStrata())
-		Debuffs:SetHeight(28)
-		Debuffs:SetWidth(252)
-		Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", 0, 18)
-		Debuffs.size = 28
-		Debuffs.num = 16
-		Debuffs.numRow = 2
+			Buffs.spacing = 4
+			Buffs.initialAnchor = "TOPLEFT"
+			Buffs.PostCreateIcon = UnitFrames.PostCreateAura
+			Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+			Buffs.PostUpdate = C.UnitFrames.PlayerDebuffs and UnitFrames.UpdateDebuffsHeaderPosition
+			Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
 
-		Buffs.spacing = 4
-		Buffs.initialAnchor = "TOPLEFT"
-		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
-		Buffs.PostUpdate = UnitFrames.UpdateDebuffsHeaderPosition
-		Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
-		Buffs.isCancellable = true
+			if C.UnitFrames.AurasBelow then
+				Buffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, -32)
+			end
 
-		Debuffs.spacing = 4
-		Debuffs.initialAnchor = "TOPRIGHT"
-		Debuffs["growth-y"] = "UP"
-		Debuffs["growth-x"] = "LEFT"
-		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
-
-		if C.UnitFrames.AurasBelow then
-			Buffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, -32)
-			Debuffs["growth-y"] = "DOWN"
+			self.Buffs = Buffs
 		end
 
-		self.Buffs = Buffs
-		self.Debuffs = Debuffs
+		if (C.UnitFrames.PlayerDebuffs) then
+			local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
+
+			Debuffs:SetFrameStrata(self:GetFrameStrata())
+			Debuffs:SetHeight(28)
+			Debuffs:SetWidth(252)
+			
+			if self.Buffs then
+				Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", 0, 18)
+			else
+				Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 1, 4)
+			end
+				
+			Debuffs.size = 28
+			Debuffs.num = 16
+			Debuffs.numRow = 2
+
+			Debuffs.spacing = 4
+			Debuffs.initialAnchor = "TOPRIGHT"
+			Debuffs["growth-y"] = "UP"
+			Debuffs["growth-x"] = "LEFT"
+			Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
+			Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+			Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
+
+			if C.UnitFrames.AurasBelow then
+				if not C.UnitFrames.PlayerBuffs then
+					Debuffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, -32)
+				end
+				
+				Debuffs["growth-y"] = "DOWN"
+			end
+
+			self.Debuffs = Debuffs
+		end
 	end
 
 	local Combat = Health:CreateTexture(nil, "OVERLAY", 1)
