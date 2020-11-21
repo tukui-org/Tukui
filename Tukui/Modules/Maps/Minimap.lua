@@ -25,7 +25,6 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
-		--"GarrisonLandingPageMinimapButton",
 	}
 
 	for i, FrameName in pairs(HiddenFrames) do
@@ -83,6 +82,12 @@ function Minimap:StyleMinimap()
 	self.Backdrop:SetFrameStrata("BACKGROUND")
 	self.Backdrop:SetFrameLevel(2)
 	self.Backdrop:CreateShadow()
+	
+	self.Backdrop.Shadow:ClearAllPoints()
+	self.Backdrop.Shadow:SetPoint("TOP", 0, 4)
+	self.Backdrop.Shadow:SetPoint("BOTTOM", 0, -22)
+	self.Backdrop.Shadow:SetPoint("LEFT", -4, 0)
+	self.Backdrop.Shadow:SetPoint("RIGHT", 4, 0)
 
 	self.Ticket = CreateFrame("Frame", nil, Minimap)
 	self.Ticket:CreateBackdrop()
@@ -122,6 +127,8 @@ function Minimap:StyleMinimap()
 	GuildInstanceDifficulty:ClearAllPoints()
 	GuildInstanceDifficulty:SetParent(Minimap)
 	GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+	
+	GarrisonLandingPageMinimapButton:SetParent(T.Hider)
 end
 
 function Minimap:PositionMinimap()
@@ -138,10 +145,12 @@ function Minimap:AddMinimapDataTexts()
 	local Backdrop = self.Backdrop
 
 	local MinimapDataText = CreateFrame("Frame", nil, self)
-	MinimapDataText:SetSize(self.Backdrop:GetWidth(), 19)
-	MinimapDataText:SetPoint("TOPLEFT", self.Backdrop, "BOTTOMLEFT", 0, 0)
+	MinimapDataText:SetSize(Backdrop:GetWidth(), 19)
+	MinimapDataText:SetPoint("TOPLEFT", Backdrop, "BOTTOMLEFT", 0, 0)
 	MinimapDataText:CreateBackdrop()
-	MinimapDataText:CreateShadow()
+	
+	MinimapDataText.Backdrop:SetFrameStrata(Minimap.Backdrop:GetFrameStrata())
+	MinimapDataText.Backdrop:SetFrameLevel(Minimap.Backdrop:GetFrameLevel())
 
 	T.DataTexts.Panels.Minimap = MinimapDataText
 end
@@ -279,6 +288,10 @@ end
 
 function Minimap:EnableMouseOver()
 	self:SetScript("OnEnter", function()
+		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+			return
+		end
+		
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(1)
 		Minimap.MinimapZone.Anim:Play()
@@ -289,6 +302,10 @@ function Minimap:EnableMouseOver()
 	end)
 
 	self:SetScript("OnLeave", function()
+		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+			return
+		end
+		
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(0)
 		Minimap.MinimapZone.Anim:Play()
@@ -299,6 +316,10 @@ function Minimap:EnableMouseOver()
 	end)
 	
 	MiniMapTrackingButton:SetScript("OnEnter", function()
+		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+			return
+		end
+		
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(1)
 		Minimap.MinimapZone.Anim:Play()
@@ -309,6 +330,10 @@ function Minimap:EnableMouseOver()
 	end)
 
 	MiniMapTrackingButton:SetScript("OnLeave", function()
+		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+			return
+		end
+		
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(0)
 		Minimap.MinimapZone.Anim:Play()
@@ -388,55 +413,36 @@ function Minimap:AddTaxiEarlyExit()
 	Minimap.EarlyExitButton.Text:SetShadowOffset(1.25, -1.25)
 end
 
-function Minimap:StopPulse()
-	if Minimap.Animation and Minimap.Animation:IsPlaying() then
-		Minimap.Animation:Stop()
-		
-		if Minimap.Backdrop then
-			Minimap.Backdrop:SetBorderColor(unpack(C.General.BackdropColor))
-		end
-		
-		if T.DataTexts.Panels.Minimap and T.DataTexts.Panels.Minimap.Backdrop then
-			local Backdrop = T.DataTexts.Panels.Minimap.Backdrop
-			
-			Backdrop:SetBorderColor(unpack(C.General.BackdropColor))
-		end
+function Minimap:StopHighlight()
+	if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+		Minimap.Highlight.Animation:Stop()
+		Minimap.Highlight:Hide()
 	end
 end
 
-function Minimap:StartPulse()
-	local Backdrop = Minimap.Backdrop
-	local R, G, B = 1, 1, 0
+function Minimap:StartHighlight()
+	if not Minimap.Highlight then
+		Minimap.Highlight = CreateFrame("Frame", nil, Minimap, "BackdropTemplate")
+		Minimap.Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = 10})
+		Minimap.Highlight:SetPoint("TOP", 0, 10)
+		Minimap.Highlight:SetPoint("BOTTOM", 0, -30)
+		Minimap.Highlight:SetPoint("LEFT", -10, 0)
+		Minimap.Highlight:SetPoint("RIGHT", 10, 0)
+		Minimap.Highlight:SetBackdropBorderColor(212/255, 175/255, 55/255)
+		
+		Minimap.Highlight.Animation = Minimap.Highlight:CreateAnimationGroup()
+		Minimap.Highlight.Animation:SetLooping("BOUNCE")
+		
+		Minimap.Highlight.Animation.Bounce = Minimap.Highlight.Animation:CreateAnimation("Alpha")
+		Minimap.Highlight.Animation.Bounce:SetFromAlpha(1)
+		Minimap.Highlight.Animation.Bounce:SetToAlpha(.6)
+		Minimap.Highlight.Animation.Bounce:SetDuration(.3)
+		Minimap.Highlight.Animation.Bounce:SetSmoothing("IN_OUT")
+	end
 	
-	if not Minimap.Animation then
-		Minimap.Animation = Minimap:CreateAnimationGroup()
-		Minimap.Animation:SetLooping("BOUNCE")
-
-		Minimap.Animation.FadeOut = Minimap.Animation:CreateAnimation("Alpha")
-		Minimap.Animation.FadeOut:SetFromAlpha(1)
-		Minimap.Animation.FadeOut:SetToAlpha(.6)
-		Minimap.Animation.FadeOut:SetDuration(.3)
-		Minimap.Animation.FadeOut:SetSmoothing("IN_OUT")
-	end
-
-	if Backdrop then
-		Backdrop.BorderTop:SetColorTexture(R, G, B)
-		Backdrop.BorderLeft:SetColorTexture(R, G, B)
-		Backdrop.BorderRight:SetColorTexture(R, G, B)
-	end
-
-	if T.DataTexts.Panels.Minimap and T.DataTexts.Panels.Minimap.Backdrop then
-		Backdrop = T.DataTexts.Panels.Minimap.Backdrop
-
-		Backdrop.BorderBottom:SetColorTexture(R, G, B)
-		Backdrop.BorderLeft:SetColorTexture(R, G, B)
-		Backdrop.BorderRight:SetColorTexture(R, G, B)
-	else
-		Backdrop.BorderBottom:SetColorTexture(R, G, B)
-	end
-
-	if not Minimap.Animation:IsPlaying() then
-		Minimap.Animation:Play()
+	if not Minimap.Highlight.Animation:IsPlaying() then
+		Minimap.Highlight:Show()
+		Minimap.Highlight.Animation:Play()
 		
 		T.Print("[|cffffff00"..MINIMAP_LABEL.."|r] "..MINIMAP_GARRISON_LANDING_PAGE_TOOLTIP.." (|cffff0000"..KEY_BUTTON3.."|r)")
 	end
@@ -448,7 +454,8 @@ function Minimap:MoveGarrisonButton()
 end
 
 function Minimap:AddHooks()
-	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Play", self.StartHighlight)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Stop", self.StopHighlight)
 end
 
 function Minimap:Enable()
