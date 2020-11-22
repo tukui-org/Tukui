@@ -16,7 +16,6 @@ local Tukz = CreateFrame("Frame")
 
 function Tukz:MoveXPBars()
 	local Experience = Misc.Experience
-	local Reputation = Misc.Reputation
 
 	if Experience and Experience.NumBars then
 		for i = 1, Experience.NumBars do
@@ -31,18 +30,6 @@ function Tukz:MoveXPBars()
 
 			RestedBar:SetOrientation("Vertical")
 			RestedBar:SetReverseFill(false)
-		end
-	end
-
-	if Reputation and Reputation.NumBars then
-		for i = 1, Reputation.NumBars do
-			local Bar = Reputation["RepBar"..i]
-			local XPBar = Experience["XPBar"..i]
-
-			Bar:ClearAllPoints()
-			Bar:SetAllPoints(XPBar)
-			Bar:SetOrientation("Vertical")
-			Bar:SetReverseFill(false)
 		end
 	end
 end

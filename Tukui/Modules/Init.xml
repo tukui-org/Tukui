@@ -71,7 +71,6 @@
 	<Script file="Miscellaneous\MirrorTimers.lua"/>
 	<Script file="Miscellaneous\ObjectiveTracker.lua"/>
 	<Script file="Miscellaneous\OrderHall.lua"/>
-	<Script file="Miscellaneous\ReputationBar.lua"/>
 	<Script file="Miscellaneous\StaticPopups.lua"/>
 	<Script file="Miscellaneous\TimeManager.lua"/>
 	<Script file="Miscellaneous\TalkingHead.lua"/>

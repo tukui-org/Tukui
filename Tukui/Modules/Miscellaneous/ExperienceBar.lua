@@ -2,7 +2,9 @@ local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
 local Experience = CreateFrame("Frame", nil, UIParent)
+local Menu = CreateFrame("Frame", "TukuiExperienceMenu", UIParent, "UIDropDownMenuTemplate")
 local HideTooltip = GameTooltip_Hide
+local BarSelected
 local Bars = 20
 
 Experience.NumBars = 2
@@ -61,6 +63,13 @@ function Experience:SetTooltip()
 		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
 
 		GameTooltip:Show()
+	elseif BarType == "REP" then
+		local Current, Max = Experience:GetReputation()
+		local Name, ID = GetWatchedFactionInfo()
+		local Colors = FACTION_BAR_COLORS
+		local Hex = T.RGBToHex(Colors[ID].r, Colors[ID].g, Colors[ID].b)
+		
+		GameTooltip:AddLine(Hex..Name..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
 	else
 		local Level = UnitHonorLevel("player")
 
@@ -94,14 +103,15 @@ function Experience:GetHonor()
 	return UnitHonor("player"), UnitHonorMax("player")
 end
 
-function Experience:Update(event, owner)
-	if (event == "UNIT_INVENTORY_CHANGED" and owner ~= "player") then
-		return
-	end
+function Experience:GetReputation()
+	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
+	
+	return Value, Max
+end
 
+function Experience:Update()
 	local PlayerLevel = UnitLevel("player")
-	local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
-	local Current, Max = self:GetExperience()
+	local Current, Max
 	local Rested = GetXPExhaustion()
 	local IsRested = GetRestState()
 
@@ -109,32 +119,19 @@ function Experience:Update(event, owner)
 		local Bar = self["XPBar"..i]
 		local RestedBar = self["RestedBar"..i]
 		local r, g, b
-		local InstanceType = select(2, IsInInstance())
-		local HavePetXP = select(2, HasPetUI())
-
-		Bar.BarType = "XP"
-		
-		if (i == 1 and PlayerLevel == MAX_PLAYER_LEVEL) then
-			Current, Max = self:GetHonor()
-
-			Bar.BarType = "HONOR"
-		elseif (i == 2) then
-			if HavePetXP then
-				Current, Max = GetPetExperience()
-				
-				Bar.BarType = "PETXP"
-			elseif AzeriteItem and InstanceType ~= "pvp" and InstanceType ~= "arena" then
-				Current, Max = self:GetAzerite()
-
-				Bar.BarType = "AZERITE"
-			else
-				Current, Max = self:GetHonor()
-
-				Bar.BarType = "HONOR"
-			end
-		end
-
 		local BarType = Bar.BarType
+
+		if BarType == "HONOR" then
+			Current, Max = self:GetHonor()
+		elseif BarType == "PETXP" then
+			Current, Max = GetPetExperience()
+		elseif BarType == "AZERITE" then
+			Current, Max = self:GetAzerite()
+		elseif BarType == "REP" then
+			Current, Max = self:GetReputation()
+		else
+			Current, Max = self:GetExperience()
+		end
 
 		Bar:SetMinMaxValues(0, Max)
 		Bar:SetValue(Current)
@@ -153,6 +150,11 @@ function Experience:Update(event, owner)
 			r, g, b = unpack(self.PetXPColor)
 		elseif BarType == "AZERITE" then
 			r, g, b = unpack(self.AZColor)
+		elseif BarType == "REP" then
+			local Colors = FACTION_BAR_COLORS
+			local ID = select(2, GetWatchedFactionInfo())
+			
+			r, g, b = Colors[ID].r, Colors[ID].g, Colors[ID].b
 		else
 			r, g, b = unpack(self.HNColor)
 		end
@@ -161,11 +163,85 @@ function Experience:Update(event, owner)
 	end
 end
 
+Experience.Menu = {
+	{
+		text = XP,
+		func = function()
+			BarSelected.BarType = "XP"
+			
+			Experience:Update()
+		end,
+		notCheckable = true
+	},
+	{
+		text = HONOR,
+		func = function()
+			BarSelected.BarType = "HONOR"
+			
+			Experience:Update()
+		end,
+		notCheckable = true
+	},
+	{
+		text = "Azerite",
+		func = function()
+			local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
+			local InstanceType = select(2, IsInInstance())
+			
+			if AzeriteItem and InstanceType ~= "pvp" and InstanceType ~= "arena" then
+				BarSelected.BarType = "AZERITE"
+
+				Experience:Update()
+			else
+				T.Print("You currently don't have any item with azerith at the moment")
+			end
+		end,
+		notCheckable = true
+	},
+	{
+		text = PET.." "..XP,
+		func = function()
+			local HavePetXP = select(2, HasPetUI())
+			
+			if HavePetXP then
+				BarSelected.BarType = "PETXP"
+
+				Experience:Update()
+			else
+				T.Print("You don't have any pet with experience at the moment")
+			end
+		end,
+		notCheckable = true
+	},
+	{
+		text = REPUTATION,
+		func = function()
+			local IsTracked = GetWatchedFactionInfo()
+			
+			if IsTracked then
+				BarSelected.BarType = "REP"
+			
+				Experience:Update()
+			else
+				T.Print("You don't have any reputation tracking enabled at the moment")
+			end
+		end,
+		notCheckable = true
+	},
+}
+
+
+function Experience:DisplayMenu()
+	BarSelected = self
+	
+	EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
+end
+
 function Experience:Create()
 	for i = 1, self.NumBars do
 		local XPBar = CreateFrame("StatusBar", "TukuiExperienceBar" .. i, UIParent)
 		local RestedBar = CreateFrame("StatusBar", nil, XPBar)
-
+		
 		XPBar:SetStatusBarTexture(C.Medias.Normal)
 		XPBar:EnableMouse()
 		XPBar:SetFrameStrata("BACKGROUND")
@@ -173,6 +249,7 @@ function Experience:Create()
 		XPBar:CreateBackdrop()
 		XPBar:SetScript("OnEnter", Experience.SetTooltip)
 		XPBar:SetScript("OnLeave", HideTooltip)
+		XPBar:SetScript("OnMouseUp", Experience.DisplayMenu)
 
 		RestedBar:SetStatusBarTexture(C.Medias.Normal)
 		RestedBar:SetFrameStrata("BACKGROUND")
@@ -190,6 +267,12 @@ function Experience:Create()
 		XPBar.Backdrop:SetFrameLevel(XPBar:GetFrameLevel() - 2)
 		XPBar.Backdrop:SetOutside()
 		XPBar.Backdrop:CreateShadow()
+		
+		if i == 1 then
+			XPBar.BarType = "XP"
+		else
+			XPBar.BarType = "HONOR"
+		end
 
 		self["XPBar"..i] = XPBar
 		self["RestedBar"..i] = RestedBar
@@ -203,7 +286,6 @@ function Experience:Create()
 	self:RegisterEvent("UPDATE_EXHAUSTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("PLAYER_UPDATE_RESTING")
-	self:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	self:RegisterEvent("HONOR_XP_UPDATE")
 	self:RegisterEvent("HONOR_LEVEL_UPDATE")
 	self:RegisterEvent("AZERITE_ITEM_EXPERIENCE_CHANGED")
@@ -220,10 +302,8 @@ function Experience:Enable()
 		return
 	end
 
-	if not self.IsCreated then
+	if not self.XPBar1 then
 		self:Create()
-
-		self.IsCreated = true
 	end
 
 	for i = 1, self.NumBars do

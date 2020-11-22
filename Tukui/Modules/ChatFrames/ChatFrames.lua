@@ -397,14 +397,9 @@ function Chat:HideChatFrame(button, id)
 
 	if C.Misc.ExperienceEnable then
 		local XP = T.Miscellaneous.Experience["XPBar"..id]
-		local Rep = T.Miscellaneous.Reputation["RepBar"..id]
 
 		if XP then
 			XP:Hide()
-		end
-		
-		if Rep then
-			Rep:Hide()
 		end
 	end
 	
@@ -448,14 +443,9 @@ function Chat:ShowChatFrame(button, id)
 
 	if C.Misc.ExperienceEnable then
 		local XP = T.Miscellaneous.Experience["XPBar"..id]
-		local Rep = T.Miscellaneous.Reputation["RepBar"..id]
 		
 		if XP then
 			XP:Show()
-		end
-		
-		if Rep and GetWatchedFactionInfo() then
-			Rep:Show()
 		end
 	end
 	
