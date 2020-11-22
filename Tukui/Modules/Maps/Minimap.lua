@@ -53,10 +53,12 @@ function Minimap:OnMouseClick(button)
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
 		end
 	elseif (button == "MiddleButton") then
-		if InCombatLockdown() then
-			T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
-		else
-			GarrisonLandingPage_Toggle()
+		if GarrisonLandingPageMinimapButton:IsShown() then
+			if InCombatLockdown() then
+				T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
+			else
+				GarrisonLandingPage_Toggle()
+			end
 		end
 	else
 		Minimap_OnClick(self)
@@ -120,15 +122,10 @@ function Minimap:StyleMinimap()
 	MiniMapInstanceDifficulty:ClearAllPoints()
 	MiniMapInstanceDifficulty:SetParent(Minimap)
 	MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-	
-	GarrisonLandingPageMinimapButton:ClearAllPoints()
-	GarrisonLandingPageMinimapButton:SetPoint("TOPRIGHT")
 
 	GuildInstanceDifficulty:ClearAllPoints()
 	GuildInstanceDifficulty:SetParent(Minimap)
 	GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-	
-	GarrisonLandingPageMinimapButton:SetParent(T.Hider)
 end
 
 function Minimap:PositionMinimap()
@@ -428,7 +425,7 @@ function Minimap:StartHighlight()
 		Minimap.Highlight:SetPoint("BOTTOM", 0, -30)
 		Minimap.Highlight:SetPoint("LEFT", -10, 0)
 		Minimap.Highlight:SetPoint("RIGHT", 10, 0)
-		Minimap.Highlight:SetBackdropBorderColor(212/255, 175/255, 55/255)
+		Minimap.Highlight:SetBackdropBorderColor(1, 1, 0)
 		
 		Minimap.Highlight.Animation = Minimap.Highlight:CreateAnimationGroup()
 		Minimap.Highlight.Animation:SetLooping("BOUNCE")
@@ -450,10 +447,11 @@ end
 
 function Minimap:MoveGarrisonButton()
 	GarrisonLandingPageMinimapButton:ClearAllPoints()
-	GarrisonLandingPageMinimapButton:SetPoint("TOPLEFT", 24, -8)
+	GarrisonLandingPageMinimapButton:SetPoint("TOP", UIParent, "TOP", 200, 0)
 end
 
 function Minimap:AddHooks()
+	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Play", self.StartHighlight)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Stop", self.StopHighlight)
 end
