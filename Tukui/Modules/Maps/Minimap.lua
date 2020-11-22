@@ -447,7 +447,7 @@ end
 
 function Minimap:MoveGarrisonButton()
 	GarrisonLandingPageMinimapButton:ClearAllPoints()
-	GarrisonLandingPageMinimapButton:SetPoint("TOP", UIParent, "TOP", 200, 0)
+	GarrisonLandingPageMinimapButton:SetPoint("TOP", UIParent, "TOP", 0, 200)
 end
 
 function Minimap:AddHooks()
