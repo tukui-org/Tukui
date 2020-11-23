@@ -13,6 +13,66 @@ Experience.XPColor = {0 / 255, 144 / 255, 255 / 255}
 Experience.PetXPColor = {255 / 255, 255 / 255, 105 / 255}
 Experience.AZColor = {229 / 255, 204 / 255, 127 / 255}
 Experience.HNColor = {222 / 255, 22 / 255, 22 / 255}
+Experience.Menu = {
+	{
+		text = XP,
+		func = function()
+			BarSelected.BarType = "XP"
+			
+			Experience:Update()
+			
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+		end,
+		notCheckable = true
+	},
+	{
+		text = HONOR,
+		func = function()
+			BarSelected.BarType = "HONOR"
+			
+			Experience:Update()
+			
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+		end,
+		notCheckable = true
+	},
+	{
+		text = "Azerite",
+		func = function()
+			BarSelected.BarType = "AZERITE"
+
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+		end,
+		notCheckable = true,
+		disabled = true,
+	},
+	{
+		text = PET.." "..XP,
+		func = function()
+			BarSelected.BarType = "PETXP"
+
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+		end,
+		notCheckable = true,
+		disabled = true,
+	},
+	{
+		text = REPUTATION,
+		func = function()
+			BarSelected.BarType = "REP"
+
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+		end,
+		notCheckable = true,
+		disabled = true,
+	},
+}
 
 function Experience:SetTooltip()
 	local BarType = self.BarType
@@ -191,67 +251,6 @@ function Experience:Update()
 		Bar:SetStatusBarColor(R, G, B)
 	end
 end
-
-Experience.Menu = {
-	{
-		text = XP,
-		func = function()
-			BarSelected.BarType = "XP"
-			
-			Experience:Update()
-			
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
-		notCheckable = true
-	},
-	{
-		text = HONOR,
-		func = function()
-			BarSelected.BarType = "HONOR"
-			
-			Experience:Update()
-			
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
-		notCheckable = true
-	},
-	{
-		text = "Azerite",
-		func = function()
-			BarSelected.BarType = "AZERITE"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
-		notCheckable = true,
-		disabled = true,
-	},
-	{
-		text = PET.." "..XP,
-		func = function()
-			BarSelected.BarType = "PETXP"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
-		notCheckable = true,
-		disabled = true,
-	},
-	{
-		text = REPUTATION,
-		func = function()
-			BarSelected.BarType = "REP"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
-		notCheckable = true,
-		disabled = true,
-	},
-}
 
 function Experience:DisplayMenu()
 	BarSelected = self
