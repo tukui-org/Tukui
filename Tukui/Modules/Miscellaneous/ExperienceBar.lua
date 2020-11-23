@@ -121,6 +121,24 @@ function Experience:Update()
 		local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 		local HavePetXP = select(2, HasPetUI())
 		
+		if AzeriteItem then
+			Experience.Menu[3].disabled = false
+		else
+			Experience.Menu[3].disabled = true
+		end
+		
+		if HavePetXP then
+			Experience.Menu[4].disabled = false
+		else
+			Experience.Menu[4].disabled = true
+		end
+		
+		if GetWatchedFactionInfo() then
+			Experience.Menu[5].disabled = false
+		else
+			Experience.Menu[5].disabled = true
+		end
+		
 		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not GetWatchedFactionInfo()) then
 			local MoreText = ""
 			
@@ -205,7 +223,8 @@ Experience.Menu = {
 
 			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
-		notCheckable = true
+		notCheckable = true,
+		disabled = true,
 	},
 	{
 		text = PET.." "..XP,
@@ -216,7 +235,8 @@ Experience.Menu = {
 
 			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
-		notCheckable = true
+		notCheckable = true,
+		disabled = true,
 	},
 	{
 		text = REPUTATION,
@@ -227,10 +247,10 @@ Experience.Menu = {
 
 			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
-		notCheckable = true
+		notCheckable = true,
+		disabled = true,
 	},
 }
-
 
 function Experience:DisplayMenu()
 	BarSelected = self
