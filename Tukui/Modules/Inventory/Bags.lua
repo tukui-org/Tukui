@@ -604,7 +604,7 @@ function Bags:SlotUpdate(id, button)
 		button.Quest:Show()
 		button.Backdrop:SetBorderColor(1, 1, 0)
 	else
-		if IsCosmeticItem(Item) and not IsBound then
+		if Item and IsCosmeticItem(Item) and not IsBound then
 			button.IconOverlay:SetAlpha(1)
 		else
 			button.IconOverlay:SetAlpha(0)
