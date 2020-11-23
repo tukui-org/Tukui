@@ -454,6 +454,10 @@ function Minimap:AddHooks()
 	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Play", self.StartHighlight)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Stop", self.StopHighlight)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapPulseAnim, "Play", self.StartHighlight)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapPulseAnim, "Stop", self.StopHighlight)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapAlertAnim, "Play", self.StartHighlight)
+	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapAlertAnim, "Stop", self.StopHighlight)
 end
 
 function Minimap:Enable()
