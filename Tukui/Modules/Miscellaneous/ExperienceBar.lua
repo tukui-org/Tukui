@@ -120,6 +120,7 @@ function Experience:Update()
 		local R, G, B
 		local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 		local HavePetXP = select(2, HasPetUI())
+		local WatchedFaction = GetWatchedFactionInfo()
 		
 		if AzeriteItem then
 			Experience.Menu[3].disabled = false
@@ -133,13 +134,13 @@ function Experience:Update()
 			Experience.Menu[4].disabled = true
 		end
 		
-		if GetWatchedFactionInfo() then
+		if WatchedFaction then
 			Experience.Menu[5].disabled = false
 		else
 			Experience.Menu[5].disabled = true
 		end
 		
-		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not GetWatchedFactionInfo()) then
+		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not WatchedFaction) then
 			local MoreText = ""
 			
 			if Bar.BarType == "REP" then
@@ -254,6 +255,8 @@ Experience.Menu = {
 
 function Experience:DisplayMenu()
 	BarSelected = self
+	
+	Experience:Update()
 	
 	EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
 end
