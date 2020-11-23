@@ -62,6 +62,10 @@ function MicroMenu:Toggle()
 end
 
 function MicroMenu:Enable()
+	if not C.Misc.MicroMenu then
+		return
+	end
+	
 	MicroMenu:AddHooks()
 	
 	MicroMenu:SetSize(250, 374)

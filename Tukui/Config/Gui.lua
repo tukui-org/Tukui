@@ -164,6 +164,7 @@ local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
 	
 	Window:CreateSection("Micro Menu")
+	Window:CreateSwitch("Misc", "MicroMenu", "Enable our micro menu (if using another micro menu addon, you may need to turn this off)")
 	Window:CreateDropdown("Misc", "MicroToggle", "Select a keybind for toggling micro menu")
 	Window:CreateSection("Items Level")
 	Window:CreateSwitch("Misc", "ItemLevel", "Display items level on character and inspect frames")

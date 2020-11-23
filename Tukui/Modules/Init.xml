@@ -15,7 +15,7 @@
 	<Script file="DataTexts\Elements\Gold.lua"/>
 	<Script file="DataTexts\Elements\Guild.lua"/>
 	<Script file="DataTexts\Elements\HPS.lua"/>
-	<Script file="DataTexts\Elements\Micromenu.lua"/>
+	<Script file="DataTexts\Elements\MicroMenu.lua"/>
 	<Script file="DataTexts\Elements\Power.lua"/>
 	<Script file="DataTexts\Elements\Regen.lua"/>
 	<Script file="DataTexts\Elements\System.lua"/>

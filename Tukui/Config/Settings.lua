@@ -129,6 +129,7 @@ C["Loot"] = {
 }
 
 C["Misc"] = {
+	["MicroMenu"] = true,
 	["ItemLevel"] = true,
 	["ThreatBar"] = true,
 	["WorldMapEnable"] = true,
