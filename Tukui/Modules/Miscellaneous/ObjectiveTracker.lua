@@ -343,47 +343,6 @@ local function UpdatePositions(block)
 	end
 end
 
-function ObjectiveTracker:UpdatePOI()
-	if self:GetParent() ~= ObjectiveTrackerBlocksFrame then
-		return
-	end
-	
-	if not self.IsSkinned then
-		self.NormalTexture:SetTexture("")
-		self.PushedTexture:SetTexture("")
-		self.HighlightTexture:SetTexture("")
-		self:CreateBackdrop()
-		self.Backdrop:SetFrameLevel(0)
-		self.Backdrop:SetOutside()
-		self:StyleButton()
-		self.Backdrop:CreateShadow()
-
-		self.IsSkinned = true	
-	end
-	
-	if self.Glow then
-		self.Glow:SetAlpha(0)
-	end
-	
-	if self.NormalTexture then
-		self.NormalTexture:SetAlpha(0)
-	end
-	
-	if self.selected then
-		local R, G, B = unpack(T.Colors.class[T.MyClass])
-		
-		self.Backdrop.Shadow:SetBackdropBorderColor(R, G, B)
-		self.Backdrop:SetBackdropColor(0/255, 152/255, 34/255, 1)
-	else
-		self.Backdrop.Shadow:SetBackdropBorderColor(unpack(C.Medias.BorderColor))
-		self.Backdrop:SetBackdropColor(unpack(C.Medias.BackdropColor))
-	end
-	
-	if self.style == "numeric" then
-		self.Display:SetNumber(self.index)
-	end
-end
-
 function ObjectiveTracker:SkinRewards()
 	local rewardsFrame = self.module.rewardsFrame
 
@@ -432,7 +391,6 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
 	hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
-	hooksecurefunc("QuestPOI_UpdateButtonStyle", self.UpdatePOI)
 end
 
 function ObjectiveTracker:Enable()
