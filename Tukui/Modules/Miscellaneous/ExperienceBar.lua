@@ -110,7 +110,6 @@ function Experience:GetReputation()
 end
 
 function Experience:Update()
-	local PlayerLevel = UnitLevel("player")
 	local Current, Max
 	local Rested = GetXPExhaustion()
 	local IsRested = GetRestState()
@@ -118,25 +117,51 @@ function Experience:Update()
 	for i = 1, self.NumBars do
 		local Bar = self["XPBar"..i]
 		local RestedBar = self["RestedBar"..i]
-		local r, g, b
-		local BarType = Bar.BarType
+		local R, G, B
+		local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
+		local HavePetXP = select(2, HasPetUI())
+		
+		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not GetWatchedFactionInfo()) then
+			local MoreText = ""
+			
+			if Bar.BarType == "REP" then
+				MoreText = " Please select a reputation to track in your character panel!"
+			end
+			
+			T.Print("[|CFFFFFF00" .. POWER_TYPE_EXPERIENCE .. "|r] You cannot track |CFFFF0000".. Bar.BarType .."|r at the moment, switching to |CFF00FF00XP|r"..MoreText)
+			
+			Bar.BarType = "XP"
+		end
 
-		if BarType == "HONOR" then
+		if Bar.BarType == "HONOR" then
 			Current, Max = self:GetHonor()
-		elseif BarType == "PETXP" then
+			
+			R, G, B = unpack(self.HNColor)
+		elseif Bar.BarType == "PETXP" then
 			Current, Max = GetPetExperience()
-		elseif BarType == "AZERITE" then
+			
+			R, G, B = unpack(self.PetXPColor)
+		elseif Bar.BarType == "AZERITE" then
 			Current, Max = self:GetAzerite()
-		elseif BarType == "REP" then
+			
+			R, G, B = unpack(self.AZColor)
+		elseif Bar.BarType == "REP" then
 			Current, Max = self:GetReputation()
+			
+			local Colors = FACTION_BAR_COLORS
+			local ID = select(2, GetWatchedFactionInfo())
+			
+			R, G, B = Colors[ID].r, Colors[ID].g, Colors[ID].b
 		else
 			Current, Max = self:GetExperience()
+			
+			R, G, B = unpack(self.XPColor)
 		end
 
 		Bar:SetMinMaxValues(0, Max)
 		Bar:SetValue(Current)
 
-		if (BarType == "XP" and IsRested == 1 and Rested) then
+		if (Bar.BarType == "XP" and IsRested == 1 and Rested) then
 			RestedBar:Show()
 			RestedBar:SetMinMaxValues(0, Max)
 			RestedBar:SetValue(Rested + Current)
@@ -144,22 +169,7 @@ function Experience:Update()
 			RestedBar:Hide()
 		end
 
-		if BarType == "XP" then
-			r, g, b = unpack(self.XPColor)
-		elseif BarType == "PETXP" then
-			r, g, b = unpack(self.PetXPColor)
-		elseif BarType == "AZERITE" then
-			r, g, b = unpack(self.AZColor)
-		elseif BarType == "REP" then
-			local Colors = FACTION_BAR_COLORS
-			local ID = select(2, GetWatchedFactionInfo())
-			
-			r, g, b = Colors[ID].r, Colors[ID].g, Colors[ID].b
-		else
-			r, g, b = unpack(self.HNColor)
-		end
-
-		Bar:SetStatusBarColor(r, g, b)
+		Bar:SetStatusBarColor(R, G, B)
 	end
 end
 
@@ -170,6 +180,8 @@ Experience.Menu = {
 			BarSelected.BarType = "XP"
 			
 			Experience:Update()
+			
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -179,52 +191,41 @@ Experience.Menu = {
 			BarSelected.BarType = "HONOR"
 			
 			Experience:Update()
+			
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
 	{
 		text = "Azerite",
 		func = function()
-			local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
-			local InstanceType = select(2, IsInInstance())
-			
-			if AzeriteItem and InstanceType ~= "pvp" and InstanceType ~= "arena" then
-				BarSelected.BarType = "AZERITE"
+			BarSelected.BarType = "AZERITE"
 
-				Experience:Update()
-			else
-				T.Print("You currently don't have any item with azerith at the moment")
-			end
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
 	{
 		text = PET.." "..XP,
 		func = function()
-			local HavePetXP = select(2, HasPetUI())
-			
-			if HavePetXP then
-				BarSelected.BarType = "PETXP"
+			BarSelected.BarType = "PETXP"
 
-				Experience:Update()
-			else
-				T.Print("You don't have any pet with experience at the moment")
-			end
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
 	{
 		text = REPUTATION,
 		func = function()
-			local IsTracked = GetWatchedFactionInfo()
-			
-			if IsTracked then
-				BarSelected.BarType = "REP"
-			
-				Experience:Update()
-			else
-				T.Print("You don't have any reputation tracking enabled at the moment")
-			end
+			BarSelected.BarType = "REP"
+
+			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -241,6 +242,7 @@ function Experience:Create()
 	for i = 1, self.NumBars do
 		local XPBar = CreateFrame("StatusBar", "TukuiExperienceBar" .. i, UIParent)
 		local RestedBar = CreateFrame("StatusBar", nil, XPBar)
+		local Data = TukuiData[T.MyRealm][T.MyName]
 		
 		XPBar:SetStatusBarTexture(C.Medias.Normal)
 		XPBar:EnableMouse()
@@ -268,10 +270,15 @@ function Experience:Create()
 		XPBar.Backdrop:SetOutside()
 		XPBar.Backdrop:CreateShadow()
 		
-		if i == 1 then
-			XPBar.BarType = "XP"
+		-- Default settings
+		if Data.Misc["TukuiExperienceBar" .. i] then
+			XPBar.BarType = Data.Misc["TukuiExperienceBar" .. i]
 		else
-			XPBar.BarType = "HONOR"
+			if i == 1 then
+				XPBar.BarType = "XP"
+			else
+				XPBar.BarType = "HONOR"
+			end
 		end
 
 		self["XPBar"..i] = XPBar
@@ -282,6 +289,7 @@ function Experience:Create()
 	end
 
 	self:RegisterEvent("PLAYER_XP_UPDATE")
+	self:RegisterEvent("UPDATE_FACTION")
 	self:RegisterEvent("PLAYER_LEVEL_UP")
 	self:RegisterEvent("UPDATE_EXHAUSTION")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")

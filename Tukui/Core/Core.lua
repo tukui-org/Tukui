@@ -196,6 +196,10 @@ T.VerifyDataTable = function()
 		}
 	end
 	
+	if (not TukuiData[GetRealmName()][UnitName("player")].Misc) then
+		TukuiData[GetRealmName()][UnitName("player")].Misc = {}
+	end
+	
 	if (not TukuiData[GetRealmName()][UnitName("player")].Installation) then
 		TukuiData[GetRealmName()][UnitName("player")].Installation = {}
 	end
