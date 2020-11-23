@@ -562,8 +562,7 @@ function Bags:SlotUpdate(id, button)
 		return
 	end
 
-	local _, _, _, Rarity, _, _, Item, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
-	local ItemLink = GetContainerItemLink(id, button:GetID())
+	local _, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
 	local QuestItem = false
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 
@@ -585,6 +584,12 @@ function Bags:SlotUpdate(id, button)
 				QuestItem = true
 			end
 		end
+		
+		if IsCosmeticItem(ItemLink) and not IsBound then
+			button.IconOverlay:SetAlpha(1)
+		else
+			button.IconOverlay:SetAlpha(0)
+		end
 	end
 
 	if C.Bags.IdentifyQuestItems and QuestItem then
@@ -604,12 +609,6 @@ function Bags:SlotUpdate(id, button)
 		button.Quest:Show()
 		button.Backdrop:SetBorderColor(1, 1, 0)
 	else
-		if Item and IsCosmeticItem(Item) and not IsBound then
-			button.IconOverlay:SetAlpha(1)
-		else
-			button.IconOverlay:SetAlpha(0)
-		end
-		
 		if Rarity then
 			button.Backdrop:SetBorderColor(GetItemQualityColor(Rarity))
 		else
