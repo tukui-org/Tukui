@@ -8,6 +8,10 @@ if (Class ~= "DEATHKNIGHT") then
 end
 
 UnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
+	if not C.UnitFrames.ClassBar then
+		return
+	end
+	
 	local RunesBar = CreateFrame("Frame", self:GetName().."RuneBar", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 

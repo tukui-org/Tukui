@@ -8,6 +8,10 @@ if (Class ~= "PALADIN") then
 end
 
 UnitFrames.AddClassFeatures["PALADIN"] = function(self)
+	if not C.UnitFrames.ClassBar then
+		return
+	end
+	
 	local Bar = CreateFrame("Frame", self:GetName().."HolyPower", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 

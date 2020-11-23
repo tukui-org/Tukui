@@ -320,6 +320,7 @@ local UnitFrames = function(self)
 
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("UnitFrames", "Enable", "Enable unitframe module")
+	Window:CreateSwitch("UnitFrames", "ClassBar", "Enable class bar (example: holy power)")
 	Window:CreateSwitch("UnitFrames", "OOCNameLevel", "Display my name/level while out of combat")
 	Window:CreateSwitch("UnitFrames", "OOCPetNameLevel", "Display my pet name/level while out of combat")
 	Window:CreateSwitch("UnitFrames", "Portrait", "Enable unit portraits")

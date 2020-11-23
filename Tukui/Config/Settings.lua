@@ -278,6 +278,7 @@ C["Textures"] = {
 C["UnitFrames"] = {
 	["Enable"] = true,
 	["TotemBar"] = T.MyClass == "SHAMAN" and true or false,
+	["ClassBar"] = true,
 	["HealComm"] = true,
 	["PlayerAuraBars"] = false,
 	["ScrollingCombatText"] = false,

@@ -8,6 +8,10 @@ if (Class ~= "MAGE") then
 end
 
 UnitFrames.AddClassFeatures["MAGE"] = function(self)
+	if not C.UnitFrames.ClassBar then
+		return
+	end
+	
 	local ArcaneChargeBar = CreateFrame("Frame", self:GetName().."ArcaneChargeBar", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 

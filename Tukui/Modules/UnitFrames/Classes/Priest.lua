@@ -8,6 +8,10 @@ if (Class ~= "PRIEST") then
 end
 
 UnitFrames.AddClassFeatures["PRIEST"] = function(self)
+	if not C.UnitFrames.ClassBar then
+		return
+	end
+	
 	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
 	local Atonement = CreateFrame("StatusBar", self:GetName().."Atonement", self.Health)
 
