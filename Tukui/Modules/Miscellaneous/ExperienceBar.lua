@@ -29,10 +29,6 @@ Experience.Menu = {
 		text = HONOR,
 		func = function()
 			BarSelected.BarType = "HONOR"
-			
-			Experience:Update()
-			
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -40,10 +36,6 @@ Experience.Menu = {
 		text = "Azerite",
 		func = function()
 			BarSelected.BarType = "AZERITE"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -52,10 +44,6 @@ Experience.Menu = {
 		text = PET.." "..XP,
 		func = function()
 			BarSelected.BarType = "PETXP"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -64,10 +52,6 @@ Experience.Menu = {
 		text = REPUTATION,
 		func = function()
 			BarSelected.BarType = "REP"
-
-			Experience:Update()
-
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -258,6 +242,8 @@ function Experience:DisplayMenu()
 	Experience:Update()
 	
 	EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
+	
+	TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 end
 
 function Experience:Create()
