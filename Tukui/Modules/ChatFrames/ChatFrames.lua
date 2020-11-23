@@ -650,7 +650,7 @@ function Chat:AddToast()
 	end
 
 	self:ClearAllPoints()
-	self:SetPoint("BOTTOMLEFT", T.Chat.Panels.LeftChat, "TOPLEFT", 0, 26)
+	self:SetPoint("BOTTOMLEFT", T.Chat.Panels.LeftChat, "TOPLEFT", 0, 16)
 end
 
 function Chat:AddHooks()
