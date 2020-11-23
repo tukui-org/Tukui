@@ -29,6 +29,8 @@ Experience.Menu = {
 		text = HONOR,
 		func = function()
 			BarSelected.BarType = "HONOR"
+			
+			Experience:Update()
 		end,
 		notCheckable = true
 	},
@@ -36,6 +38,8 @@ Experience.Menu = {
 		text = "Azerite",
 		func = function()
 			BarSelected.BarType = "AZERITE"
+			
+			Experience:Update()
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -44,6 +48,8 @@ Experience.Menu = {
 		text = PET.." "..XP,
 		func = function()
 			BarSelected.BarType = "PETXP"
+			
+			Experience:Update()
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -52,6 +58,8 @@ Experience.Menu = {
 		text = REPUTATION,
 		func = function()
 			BarSelected.BarType = "REP"
+			
+			Experience:Update()
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -153,6 +161,30 @@ function Experience:GetReputation()
 	return Value, Max
 end
 
+function Experience:VerifyMenu()
+	local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
+	local HavePetXP = select(2, HasPetUI())
+	local WatchedFaction = GetWatchedFactionInfo()
+	
+	if AzeriteItem then
+		Experience.Menu[3].disabled = false
+	else
+		Experience.Menu[3].disabled = true
+	end
+
+	if HavePetXP then
+		Experience.Menu[4].disabled = false
+	else
+		Experience.Menu[4].disabled = true
+	end
+
+	if WatchedFaction then
+		Experience.Menu[5].disabled = false
+	else
+		Experience.Menu[5].disabled = true
+	end
+end
+
 function Experience:Update()
 	local Current, Max
 	local Rested = GetXPExhaustion()
@@ -165,24 +197,6 @@ function Experience:Update()
 		local AzeriteItem = C_AzeriteItem.FindActiveAzeriteItem()
 		local HavePetXP = select(2, HasPetUI())
 		local WatchedFaction = GetWatchedFactionInfo()
-		
-		if AzeriteItem then
-			Experience.Menu[3].disabled = false
-		else
-			Experience.Menu[3].disabled = true
-		end
-		
-		if HavePetXP then
-			Experience.Menu[4].disabled = false
-		else
-			Experience.Menu[4].disabled = true
-		end
-		
-		if WatchedFaction then
-			Experience.Menu[5].disabled = false
-		else
-			Experience.Menu[5].disabled = true
-		end
 		
 		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not WatchedFaction) then
 			local MoreText = ""
@@ -239,7 +253,7 @@ end
 function Experience:DisplayMenu()
 	BarSelected = self
 	
-	Experience:Update()
+	Experience:VerifyMenu()
 	
 	EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
 	
