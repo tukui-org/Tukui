@@ -38,25 +38,19 @@ function ActionBars:SkinZoneAbilities()
 end
 
 function ActionBars:SetupExtraButton()
-	local ExtraHolder = CreateFrame("Frame", "TukuiExtraActionButton", UIParent)
-	local ZoneHolder = CreateFrame("Frame", "TukuiZoneAbilitiesButtons", UIParent)
+	local Holder = CreateFrame("Frame", "TukuiExtraActionButton", UIParent)
 	local Bar = ExtraActionBarFrame
 	local Icon = ExtraActionButton1Icon
-	
+
 	Bar:EnableMouse(false)
 	
-	ExtraHolder:SetSize(160, 80)
-	ExtraHolder:SetPoint("BOTTOM", 0, 250)
+	Holder:SetSize(160, 80)
+	Holder:SetPoint("BOTTOM", 0, 250)
 	
-	ZoneHolder:SetSize(160, 80)
-	ZoneHolder:SetPoint("TOP", 0, -370)
-	
-	Button:ClearAllPoints()
-	Button:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
-	
-	Container:EnableMouse(false)
+	Container:SetParent(Holder)
 	Container:ClearAllPoints()
-	Container:SetPoint("CENTER", ZoneHolder, "CENTER", 0, 0)
+	Container:SetPoint("CENTER", Holder, "CENTER", 0, 0)
+	Container:EnableMouse(false)
 	Container.ignoreFramePositionManager = true
 	
 	Button:StripTextures()
@@ -73,12 +67,8 @@ function ActionBars:SetupExtraButton()
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	
 	ZoneAbilities.Style:SetAlpha(0)
-	ZoneAbilities:SetParent(ZoneHolder)
-	ZoneAbilities:ClearAllPoints()
-	ZoneAbilities:SetPoint("CENTER")
 	
-	Movers:RegisterFrame(ExtraHolder)
-	Movers:RegisterFrame(ZoneHolder)
+	Movers:RegisterFrame(Holder)
 
 	hooksecurefunc("ExtraActionBar_Update", self.DisableExtraButtonTexture)
 	hooksecurefunc(ZoneAbilities, "UpdateDisplayedZoneAbilities", ActionBars.SkinZoneAbilities)
