@@ -49,13 +49,13 @@ function ActionBars:SetupExtraButton()
 	ExtraHolder:SetPoint("BOTTOM", 0, 250)
 	
 	ZoneHolder:SetSize(160, 80)
-	ZoneHolder:SetPoint("BOTTOM", 0, 330)
+	ZoneHolder:SetPoint("TOP", 0, -300)
 	
 	Button:ClearAllPoints()
 	Button:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
 	
 	Container:ClearAllPoints()
-	Container:SetPoint("TOP", UIParent, "TOP", 0, 200)
+	Container:SetPoint("CENTER", ZoneHolder, "CENTER", 0, 0)
 	Container.ignoreFramePositionManager = true
 	
 	Button:StripTextures()
