@@ -43,7 +43,7 @@ function ActionBars:SetupExtraButton()
 	local Bar = ExtraActionBarFrame
 	local Icon = ExtraActionButton1Icon
 	
-	Bar:EnableMouse(0)
+	Bar:EnableMouse(false)
 	
 	ExtraHolder:SetSize(160, 80)
 	ExtraHolder:SetPoint("BOTTOM", 0, 250)
@@ -54,6 +54,7 @@ function ActionBars:SetupExtraButton()
 	Button:ClearAllPoints()
 	Button:SetPoint("CENTER", ExtraHolder, "CENTER", 0, 0)
 	
+	Container:EnableMouse(false)
 	Container:ClearAllPoints()
 	Container:SetPoint("CENTER", ZoneHolder, "CENTER", 0, 0)
 	Container.ignoreFramePositionManager = true
