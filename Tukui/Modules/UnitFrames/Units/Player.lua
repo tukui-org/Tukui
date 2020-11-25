@@ -172,7 +172,6 @@ function UnitFrames:Player()
 			Debuffs["growth-x"] = "LEFT"
 			Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 			Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
-			Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 
 			if C.UnitFrames.AurasBelow then
 				if not C.UnitFrames.PlayerBuffs then
