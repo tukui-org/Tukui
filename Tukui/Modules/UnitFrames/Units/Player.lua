@@ -140,6 +140,7 @@ function UnitFrames:Player()
 			Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
 			Buffs.PostUpdate = C.UnitFrames.PlayerDebuffs and UnitFrames.UpdateDebuffsHeaderPosition
 			Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
+			Buffs.isCancellable = true
 
 			if C.UnitFrames.AurasBelow then
 				Buffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, -32)
