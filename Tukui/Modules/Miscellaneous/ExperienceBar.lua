@@ -31,6 +31,8 @@ Experience.Menu = {
 			BarSelected.BarType = "HONOR"
 			
 			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -40,6 +42,8 @@ Experience.Menu = {
 			BarSelected.BarType = "AZERITE"
 			
 			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -50,6 +54,8 @@ Experience.Menu = {
 			BarSelected.BarType = "PETXP"
 			
 			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -60,6 +66,8 @@ Experience.Menu = {
 			BarSelected.BarType = "REP"
 			
 			Experience:Update()
+
+			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
