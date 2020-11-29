@@ -199,12 +199,14 @@ local function Update(self, t)
 		local FPS = DataText.NameColor.."FPS|r"
 		local MS = DataText.NameColor.."MS|r"
 
-		self.Text:SetFormattedText(FPS.." %s%d|r "..MS.." %s%d|r",
-			statusColors[framerate >= 30 and 1 or (framerate >= 20 and framerate < 30) and 2 or (framerate >= 10 and framerate < 20) and 3 or 4],
-			framerate,
-			statusColors[latency < 150 and 1 or (latency >= 150 and latency < 300) and 2 or (latency >= 300 and latency < 500) and 3 or 4],
-			latency)
+		self.Text:SetFormattedText(
+			FPS.." %s%d|r "..MS.." %s%d|r", DataText.StatusColors[framerate >= 30 and 1 or (framerate >= 20 and framerate < 30) and 2 or (framerate >= 10 and framerate < 20) and 3 or 4], 
+			framerate, DataText.StatusColors[latency < 150 and 1 or (latency >= 150 and latency < 300) and 2 or (latency >= 300 and latency < 500) and 3 or 4], 
+			latency
+		)
+		
 		int2 = 1
+		
 		if enteredFrame then
 			OnEnter(self)
 		end
