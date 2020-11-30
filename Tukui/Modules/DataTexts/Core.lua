@@ -8,6 +8,12 @@ DataTexts.DataTexts = {}
 DataTexts.Anchors = {}
 DataTexts.Menu = {}
 DataTexts.Panels = {}
+DataTexts.StatusColors = {
+	"|cff0CD809",
+	"|cffE8DA0F",
+	"|cffFF9000",
+	"|cffD80909"
+}
 
 function DataTexts:AddToMenu(name, data)
 	if self["DataTexts"][name] then
