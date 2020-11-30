@@ -135,11 +135,56 @@ end
 
 function ObjectiveTracker:SkinScenario()
 	local StageBlock = _G["ScenarioStageBlock"]
+	local Widgets = ScenarioStageBlock.WidgetContainer
+	local WidgetFrames = Widgets and Widgets.widgetFrames
 
 	StageBlock.NormalBG:SetTexture("")
+	StageBlock.NormalBG:SetAlpha(0)
 	StageBlock.FinalBG:SetTexture("")
+	StageBlock.FinalBG:SetAlpha(0)
 	StageBlock.Stage:SetFont(C.Medias.Font, 17)
 	StageBlock.GlowTexture:SetTexture("")
+	
+	for _, Frame in pairs(WidgetFrames) do
+		if not Frame.IsSkinned then
+			for i = 1, Frame:GetNumRegions() do
+				local Region = select(i, Frame:GetRegions())
+				
+				if (Region and Region:GetObjectType() == "Texture") then
+					if Region:GetAtlas() then
+						local Atlas = Region:GetAtlas()
+						
+						if Atlas and string.find(Atlas, "frame") then
+							Region:SetTexture("")
+							
+							Frame:CreateBackdrop("Transparent")
+
+							Frame.Backdrop:ClearAllPoints()
+							Frame.Backdrop:SetPoint("TOP", 0, -10)
+							Frame.Backdrop:SetPoint("LEFT", 0, 0)
+							Frame.Backdrop:SetPoint("RIGHT", -33, 0)
+							Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
+							Frame.Backdrop:SetSize(214, 60)
+							Frame.Backdrop:SetFrameLevel(0)
+							Frame.Backdrop:CreateShadow()
+						end
+					end
+				end
+			end
+			
+			Frame.IsSkinned = true
+		end
+	end
+	
+	if IsInJailersTower() then
+		local Container = _G.ScenarioBlocksFrame.MawBuffsBlock.Container
+		
+		Container:StripTextures()
+		Container:HookScript("OnClick", Container.StripTextures)
+		
+		Container.List:StripTextures()
+		Container.List:HookScript("OnShow", ObjectiveTracker.SkinAnimaButtons)
+	end
 end
 
 function ObjectiveTracker:UpdateQuestItem(block)
@@ -367,6 +412,27 @@ function ObjectiveTracker:SkinRewards()
 					Border:SetTexture("")
 				end
 			end
+		end
+	end
+end
+
+function ObjectiveTracker:SkinAnimaButtons()
+	if not self.buffPool then
+		return
+	end
+	
+	for mawBuff in self.buffPool:EnumerateActive() do
+		if mawBuff:IsShown() and not mawBuff.IsSkinned then
+			mawBuff.Border:SetAlpha(0)
+			mawBuff.CircleMask:Hide()
+			mawBuff.CountRing:SetAlpha(0)
+			mawBuff.HighlightBorder:SetColorTexture(1, 1, 1, .25)
+			mawBuff.Icon:SetTexCoord(.1, .9, .1, .9)
+			mawBuff:CreateBackdrop()
+			mawBuff.Backdrop:CreateShadow()
+			mawBuff.Backdrop:SetOutside(mawBuff.Icon)
+
+			mawBuff.IsSkinned = true
 		end
 	end
 end
