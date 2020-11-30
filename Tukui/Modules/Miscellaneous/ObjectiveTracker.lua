@@ -145,34 +145,36 @@ function ObjectiveTracker:SkinScenario()
 	StageBlock.Stage:SetFont(C.Medias.Font, 17)
 	StageBlock.GlowTexture:SetTexture("")
 	
-	for _, Frame in pairs(WidgetFrames) do
-		if not Frame.IsSkinned then
-			for i = 1, Frame:GetNumRegions() do
-				local Region = select(i, Frame:GetRegions())
-				
-				if (Region and Region:GetObjectType() == "Texture") then
-					if Region:GetAtlas() then
-						local Atlas = Region:GetAtlas()
-						
-						if Atlas and string.find(Atlas, "frame") then
-							Region:SetTexture("")
-							
-							Frame:CreateBackdrop("Transparent")
+	if WidgetFrames then
+		for _, Frame in pairs(WidgetFrames) do
+			if not Frame.IsSkinned then
+				for i = 1, Frame:GetNumRegions() do
+					local Region = select(i, Frame:GetRegions())
 
-							Frame.Backdrop:ClearAllPoints()
-							Frame.Backdrop:SetPoint("TOP", 0, -10)
-							Frame.Backdrop:SetPoint("LEFT", 0, 0)
-							Frame.Backdrop:SetPoint("RIGHT", -33, 0)
-							Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
-							Frame.Backdrop:SetSize(214, 60)
-							Frame.Backdrop:SetFrameLevel(0)
-							Frame.Backdrop:CreateShadow()
+					if (Region and Region:GetObjectType() == "Texture") then
+						if Region:GetAtlas() then
+							local Atlas = Region:GetAtlas()
+
+							if Atlas and string.find(Atlas, "frame") then
+								Region:SetTexture("")
+
+								Frame:CreateBackdrop("Transparent")
+
+								Frame.Backdrop:ClearAllPoints()
+								Frame.Backdrop:SetPoint("TOP", 0, -10)
+								Frame.Backdrop:SetPoint("LEFT", 0, 0)
+								Frame.Backdrop:SetPoint("RIGHT", -33, 0)
+								Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
+								Frame.Backdrop:SetSize(214, 60)
+								Frame.Backdrop:SetFrameLevel(0)
+								Frame.Backdrop:CreateShadow()
+							end
 						end
 					end
 				end
+
+				Frame.IsSkinned = true
 			end
-			
-			Frame.IsSkinned = true
 		end
 	end
 	
