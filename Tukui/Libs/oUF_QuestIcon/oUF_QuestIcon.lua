@@ -44,25 +44,9 @@ local Scan = function(self, unit)
 				for i = 3, NumLines do
 					local Line = _G[ScanTooltip:GetName().."TextLeft"..i]
 					local r, g, b = Line:GetTextColor()
-					local QuestTitle = Line:GetText()
-
+					
 					if (r > 0.99 and r <= 1) and (g > 0.82 and g < 0.83) and (b >= 0 and b < 0.01) then
-						for j = 1, C_QuestLog.GetNumQuestWatches() do
-							local QuestID = C_QuestLog.GetQuestIDForQuestWatchIndex(j)
-							local Title = C_QuestLog.GetTitleForQuestID(QuestID)
-
-							if Title == QuestTitle then
-								local IsComplete = C_QuestLog.IsComplete(QuestID)
-								
-								if IsComplete then
-									Cache[ID] = "NOQUEST"
-								else
-									Cache[ID] = "QUEST"
-								end
-								
-								break
-							end
-						end
+						Cache[ID] = "QUEST"
 						
 						break
 					end
