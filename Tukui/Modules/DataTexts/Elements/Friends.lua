@@ -212,8 +212,8 @@ local OnMouseUp = function(self, btn)
 				realID = BNTable[i][2]
 				menuCountWhispers = menuCountWhispers + 1
 				menuList[3].menuList[menuCountWhispers] = {text = "|cff00ccff"..RemoveTagNumber(BNTable[i][3].."|r"), arg1 = realID, arg2 = true, notCheckable=true, func = whisperClick}
-
-				if BNTable[i][6] == wowString and UnitFactionGroup("player") == BNTable[i][12] and BNTable[i][11] == string.gsub(T.MyRealm, "%s+", "") then
+				
+				if BNTable[i][6] == wowString and UnitFactionGroup("player") == BNTable[i][12] then
 					local levelc = GetQuestDifficultyColor(BNTable[i][16])
 
 					if T.Colors.class[BNTable[i][14]] then
