@@ -335,7 +335,7 @@ local OnEnter = function(self)
 
 								GameTooltip:AddDoubleLine(format(clientLevelNameString, BNName, levelc.r * 255, levelc.g * 255, levelc.b * 255, BNTable[i][16], classc.r * 255, classc.g * 255, classc.b * 255, BNTable[i][4], groupedTable[grouped], 255, 0, 0, statusTable[status]), ProjectID)
 
-								if IsShiftKeyDown() and CanCooperateWithGameAccount(BNTable[i][5]) then
+								if IsShiftKeyDown() then
 									if GetRealZoneText() == BNTable[i][15] then
 										zonec = activezone
 									else
