@@ -102,7 +102,7 @@ function UnitFrames:Player()
 	Name:SetFontObject(Font)
 	Name:SetAlpha(0)
 
-	if C.UnitFrames.PlayerAuras and C.UnitFrames.PlayerAuraBars then
+	if C.UnitFrames.PlayerAuraBars then
 		local Gap = (T.MyClass == "ROGUE" or T.MyClass == "DRUID") and 8 or 0
 		local AuraBars = CreateFrame("Frame", self:GetName().."AuraBars", self)
 
