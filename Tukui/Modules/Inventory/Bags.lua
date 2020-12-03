@@ -1146,6 +1146,8 @@ function Bags:OnEvent(event, ...)
 		self:UpdateAllBankBags()
 	elseif (event == "SOULBIND_FORGE_INTERACTION_STARTED") then
 		self:OpenAllBags()
+	elseif (event == "SOULBIND_FORGE_INTERACTION_ENDED") then
+		self:CloseAllBags()
 	end
 end
 
@@ -1228,6 +1230,7 @@ function Bags:Enable()
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 	self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
+	self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	self:SetScript("OnEvent", self.OnEvent)
 
 	for i = 1, 13 do
