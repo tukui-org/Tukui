@@ -1144,6 +1144,8 @@ function Bags:OnEvent(event, ...)
 
 		Bank:Show()
 		self:UpdateAllBankBags()
+	elseif (event == "SOULBIND_FORGE_INTERACTION_STARTED") then
+		self:OpenAllBags()
 	end
 end
 
@@ -1209,6 +1211,8 @@ function Bags:Enable()
 		end
 	end
 	
+	OpenAllBagsMatchingContext = Noop
+	
 	-- Add Text Cooldowns Timer
 	--hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
 	--hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
@@ -1223,6 +1227,7 @@ function Bags:Enable()
 	self:RegisterEvent("MAIL_CLOSED")
 	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
+	self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
 	self:SetScript("OnEvent", self.OnEvent)
 
 	for i = 1, 13 do
