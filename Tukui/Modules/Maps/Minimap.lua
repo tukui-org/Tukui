@@ -87,7 +87,7 @@ function Minimap:StyleMinimap()
 	
 	self.Backdrop.Shadow:ClearAllPoints()
 	self.Backdrop.Shadow:SetPoint("TOP", 0, 4)
-	self.Backdrop.Shadow:SetPoint("BOTTOM", 0, -22)
+	self.Backdrop.Shadow:SetPoint("BOTTOM", 0, -23)
 	self.Backdrop.Shadow:SetPoint("LEFT", -4, 0)
 	self.Backdrop.Shadow:SetPoint("RIGHT", 4, 0)
 
