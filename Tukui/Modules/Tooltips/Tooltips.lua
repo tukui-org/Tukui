@@ -257,7 +257,8 @@ function Tooltip:OnTooltipSetItem()
 		
 		if Link then
 			local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
-			local Level = "|cFFCA3C3C"..ITEM_LEVEL_ABBR.."|r "..GetDetailedItemLevelInfo(Link)
+			local Level = GetDetailedItemLevelInfo(Link) or 1
+			local Text = "|cFFCA3C3C"..ITEM_LEVEL_ABBR.."|r "..Level
 
 			self:AddLine(" ")
 			self:AddDoubleLine(ID, Level)
