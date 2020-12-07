@@ -4,15 +4,6 @@ local oUF = ns.oUF
 local GetComboPoints = GetComboPoints
 local MaxComboPts = 6
 
-local Colors = {
-	[1] = {.69, .31, .31, 1},
-	[2] = {.65, .42, .31, 1},
-	[3] = {.65, .63, .35, 1},
-	[4] = {.50, .63, .35, 1},
-	[5] = {.33, .63, .33, 1},
-	[6] = {.03, .63, .33, 1},
-}
-
 local SetMaxCombo = function(self)
 	local cpb = self.ComboPointsBar
 	local MaxCombo = UnitPowerMax("player", Enum.PowerType.ComboPoints)
@@ -44,6 +35,8 @@ local Update = function(self, event, unit, powerType)
 	local points
 	local max = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 	local currentmax = cpb.MaxCombo
+	local UnitChargedPowerPoints = GetUnitChargedPowerPoints("player")
+	local ChargedPoint = UnitChargedPowerPoints and UnitChargedPowerPoints[1]
 
 	if cpb.PreUpdate then
 		cpb:PreUpdate(points)
@@ -67,7 +60,13 @@ local Update = function(self, event, unit, powerType)
 			else
 				cpb[i]:SetAlpha(.3)
 			end
+			
+			cpb[i]:SetStatusBarColor(unpack(cpb.Colors[i]))
 		end
+	end
+	
+	if ChargedPoint then
+		cpb[ChargedPoint]:SetStatusBarColor(unpack(cpb.Colors[7]))
 	end
 
 	if points > 0 then
@@ -91,13 +90,24 @@ end
 
 local Enable = function(self, unit)
 	local cpb = self.ComboPointsBar
+	
 	if(cpb) then
 		cpb.__owner = self
 		cpb.ForceUpdate = ForceUpdate
+		cpb.Colors = {
+			[1] = {1, 0, 0, 1}, -- Combo 1
+			[2] = {1, 0, 0, 1}, -- Combo 2
+			[3] = {1, 0, 0, 1}, -- Combo 3
+			[4] = {1, 0, 0, 1}, -- Combo 4
+			[5] = {1, 0, 0, 1}, -- Combo 5
+			[6] = {1, 0, 0, 1}, -- Combo 6
+			[7] = {.33, .73, 1, 1}, -- Echoing Reprimand Highlight
+		}
 
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
+		self:RegisterEvent('UNIT_POWER_POINT_CHARGE', Path)
 
 		for i = 1, MaxComboPts do
 			local Point = cpb[i]
@@ -106,7 +116,7 @@ local Enable = function(self, unit)
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
 
-			Point:SetStatusBarColor(unpack(Colors[i]))
+			Point:SetStatusBarColor(unpack(cpb.Colors[i]))
 			Point:SetFrameLevel(cpb:GetFrameLevel() + 1)
 			Point:GetStatusBarTexture():SetHorizTile(false)
 			
@@ -127,6 +137,7 @@ local Disable = function(self)
 		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent('PLAYER_TARGET_CHANGED', Path)
 		self:UnregisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo)
+		self:UnregisterEvent('UNIT_POWER_POINT_CHARGE', Path)
 	end
 end
 
