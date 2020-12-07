@@ -261,7 +261,7 @@ function Tooltip:OnTooltipSetItem()
 			local Text = "|cFFCA3C3C"..ITEM_LEVEL_ABBR.."|r "..Level
 
 			self:AddLine(" ")
-			self:AddDoubleLine(ID, Level)
+			self:AddDoubleLine(ID, Text)
 		end
 	end
 end
