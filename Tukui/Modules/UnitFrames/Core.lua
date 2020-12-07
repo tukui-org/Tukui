@@ -50,9 +50,11 @@ function UnitFrames:DisableBlizzard()
 
 	if C["Raid"].Enable and CompactRaidFrameManager then
 		-- Disable Blizzard Raid Frames.
+		CompactRaidFrameManager:SetParent(T.Hider)
 		CompactRaidFrameManager:UnregisterAllEvents()
 		CompactRaidFrameManager:Hide()
-
+		
+		CompactRaidFrameContainer:SetParent(T.Hider)
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()
 
