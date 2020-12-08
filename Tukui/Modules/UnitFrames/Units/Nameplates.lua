@@ -73,6 +73,7 @@ function UnitFrames:Nameplates()
 	Buffs.size = self:GetHeight()
 	Buffs.num = 3
 	Buffs.numRow = 1
+	Buffs.disableMouse = true
 	Buffs.spacing = 2
 	Buffs.initialAnchor = "BOTTOMLEFT"
 	Buffs["growth-y"] = "DOWN"
