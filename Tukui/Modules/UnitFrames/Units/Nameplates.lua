@@ -65,6 +65,21 @@ function UnitFrames:Nameplates()
 	Power.IsHidden = false
 	Power.colorPower = true
 	Power.PostUpdate = UnitFrames.DisplayNameplatePowerAndCastBar
+	
+	local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
+	Buffs:SetHeight(self:GetHeight(), self:GetHeight())
+	Buffs:SetWidth((self:GetHeight() * 3) + 4)
+	Buffs:SetPoint("LEFT", self, "RIGHT", 6, 0)
+	Buffs.size = self:GetHeight()
+	Buffs.num = 3
+	Buffs.numRow = 1
+	Buffs.spacing = 2
+	Buffs.initialAnchor = "BOTTOMLEFT"
+	Buffs["growth-y"] = "DOWN"
+	Buffs["growth-x"] = "RIGHT"
+	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
+	Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Buffs.CustomFilter = UnitFrames.BuffIsStealable
 
 	local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
 	Debuffs:SetHeight(24)
@@ -147,6 +162,7 @@ function UnitFrames:Nameplates()
 	self:Tag(Health.Value, C.NamePlates.HealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
+	self.Buffs = Buffs
 	self.Debuffs = Debuffs
 	self.Name = Name
 	self.Power = Power

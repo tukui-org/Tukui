@@ -430,8 +430,6 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 				
 				button:SetScript("OnUpdate", nil)
 			end
-
-			
 		end
 
 		if (button.cd) then
@@ -452,6 +450,15 @@ end
 function UnitFrames:Update()
 	for _, element in ipairs(self.__elements) do
 		element(self, "UpdateElement", self.unit)
+	end
+end
+
+function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType, duration, expiration, caster, isStealable)
+	-- We want to use this custom filter for mythic+, so we ignore pvp
+	local IsPlayer = UnitIsPlayer("player", unit)
+
+	if (not IsPlayer) and (isStealable) then
+		return true
 	end
 end
 
