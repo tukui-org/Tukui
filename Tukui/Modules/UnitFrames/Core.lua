@@ -453,11 +453,11 @@ function UnitFrames:Update()
 	end
 end
 
-function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType, duration, expiration, caster, isStealable)
+function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType)
 	-- We want to use this custom filter for mythic+, so we ignore pvp
-	local IsPlayer = UnitIsPlayer("player", unit)
-
-	if (not IsPlayer) and (isStealable) then
+	local IsPlayer = UnitIsPlayer("player", unit) or false
+	
+	if not (IsPlayer) and (debuffType == "Magic") then
 		return true
 	end
 end
