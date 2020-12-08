@@ -376,7 +376,7 @@ end
 
 local function Enable(self, unit)
 	local element = self.Castbar
-	if(element and unit) then
+	if(element and unit and not unit:match('%wtarget$')) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 

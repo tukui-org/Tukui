@@ -64,48 +64,6 @@ function UnitFrames:FocusTarget()
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 	
-	if (C.UnitFrames.CastBar) then
-		local CastBar = CreateFrame("StatusBar", "TukuiFocusTargetCastBar", self)
-
-		CastBar:SetAllPoints(Power)
-		CastBar:SetStatusBarTexture(CastTexture)
-		CastBar:SetFrameLevel(6)
-		
-		CastBar.Backdrop = CreateFrame("Frame", nil, CastBar, "BackdropTemplate")
-		CastBar.Backdrop:SetAllPoints()
-		CastBar.Backdrop:SetFrameLevel(CastBar:GetFrameLevel() - 1)
-		CastBar.Backdrop:SetBackdrop(UnitFrames.Backdrop)
-		CastBar.Backdrop:SetBackdropColor(unpack(C.General.BackdropColor))
-
-		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
-		CastBar.Text:SetFontObject(Font)
-		CastBar.Text:SetPoint("CENTER", CastBar)
-		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
-		CastBar.Text:SetWidth(C.NamePlates.Width)
-		CastBar.Text:SetJustifyH("CENTER")
-
-		CastBar.Button = CreateFrame("Frame", nil, CastBar)
-		CastBar.Button:SetSize(16, 16)
-		CastBar.Button:SetPoint("RIGHT", self, "LEFT", -6, 0)
-		CastBar.Button:CreateBackdrop()
-		
-		CastBar.Button.Backdrop:SetOutside()
-		CastBar.Button.Backdrop:SetBackdropBorderColor(unpack(C.General.BackdropColor))
-		CastBar.Button.Backdrop:CreateShadow()
-
-		CastBar.Icon = CastBar.Button:CreateTexture(nil, "ARTWORK")
-		CastBar.Icon:SetAllPoints()
-		CastBar.Icon:SetTexCoord(unpack(T.IconCoord))
-
-		CastBar.CustomTimeText = UnitFrames.CustomCastTimeText
-		CastBar.CustomDelayText = UnitFrames.CustomCastDelayText
-		CastBar.PostCastStart = UnitFrames.CheckCast
-		CastBar.PostChannelStart = UnitFrames.CheckChannel
-
-		self.Castbar = CastBar
-		self.Castbar.Icon = CastBar.Icon
-	end
-	
 	if (C.UnitFrames.FocusAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
