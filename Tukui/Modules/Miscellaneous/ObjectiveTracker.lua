@@ -133,62 +133,6 @@ function ObjectiveTracker:Skin()
 	end
 end
 
-function ObjectiveTracker:SkinScenario()
-	local StageBlock = _G["ScenarioStageBlock"]
-	local Widgets = ScenarioStageBlock.WidgetContainer
-	local WidgetFrames = Widgets and Widgets.widgetFrames
-
-	StageBlock.NormalBG:SetTexture("")
-	StageBlock.NormalBG:SetAlpha(0)
-	StageBlock.FinalBG:SetTexture("")
-	StageBlock.FinalBG:SetAlpha(0)
-	StageBlock.Stage:SetFont(C.Medias.Font, 17)
-	StageBlock.GlowTexture:SetTexture("")
-	
-	if WidgetFrames then
-		for _, Frame in pairs(WidgetFrames) do
-			if not Frame.IsSkinned then
-				for i = 1, Frame:GetNumRegions() do
-					local Region = select(i, Frame:GetRegions())
-
-					if (Region and Region:GetObjectType() == "Texture") then
-						if Region:GetAtlas() then
-							local Atlas = Region:GetAtlas()
-
-							if Atlas and string.find(Atlas, "frame") then
-								Region:SetTexture("")
-
-								Frame:CreateBackdrop("Transparent")
-
-								Frame.Backdrop:ClearAllPoints()
-								Frame.Backdrop:SetPoint("TOP", 0, -10)
-								Frame.Backdrop:SetPoint("LEFT", 0, 0)
-								Frame.Backdrop:SetPoint("RIGHT", -33, 0)
-								Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
-								Frame.Backdrop:SetSize(214, 60)
-								Frame.Backdrop:SetFrameLevel(0)
-								Frame.Backdrop:CreateShadow()
-							end
-						end
-					end
-				end
-
-				Frame.IsSkinned = true
-			end
-		end
-	end
-	
-	if IsInJailersTower() then
-		local Container = _G.ScenarioBlocksFrame.MawBuffsBlock.Container
-		
-		Container:StripTextures()
-		Container:HookScript("OnClick", Container.StripTextures)
-		
-		Container.List:StripTextures()
-		Container.List:HookScript("OnShow", ObjectiveTracker.SkinAnimaButtons)
-	end
-end
-
 function ObjectiveTracker:UpdateQuestItem(block)
 	local QuestItemButton = block.itemButton
 
@@ -439,10 +383,65 @@ function ObjectiveTracker:SkinAnimaButtons()
 	end
 end
 
+function ObjectiveTracker:SkinScenario()
+	local StageBlock = _G["ScenarioStageBlock"]
+	local Widgets = ScenarioStageBlock.WidgetContainer
+	local WidgetFrames = Widgets and Widgets.widgetFrames
+	
+	StageBlock.NormalBG:SetTexture("")
+	StageBlock.NormalBG:SetAlpha(0)
+	StageBlock.FinalBG:SetTexture("")
+	StageBlock.FinalBG:SetAlpha(0)
+	StageBlock.Stage:SetFont(C.Medias.Font, 17)
+	StageBlock.GlowTexture:SetTexture("")
+	
+	if WidgetFrames then
+		for _, Frame in pairs(WidgetFrames) do
+			if not Frame.IsSkinned then
+				for i = 1, Frame:GetNumRegions() do
+					local Region = select(i, Frame:GetRegions())
+
+					if (Region and Region:GetObjectType() == "Texture") then
+						if Region:GetAtlas() then
+							local Atlas = Region:GetAtlas()
+							
+							if Atlas and string.find(Atlas, "frame") then
+								Region:SetParent(T.Hider)
+
+								Frame:CreateBackdrop("Transparent")
+
+								Frame.Backdrop:ClearAllPoints()
+								Frame.Backdrop:SetPoint("TOP", 0, -10)
+								Frame.Backdrop:SetPoint("LEFT", 0, 0)
+								Frame.Backdrop:SetPoint("RIGHT", -33, 0)
+								Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
+								Frame.Backdrop:SetSize(214, 60)
+								Frame.Backdrop:SetFrameLevel(0)
+								Frame.Backdrop:CreateShadow()
+							end
+						end
+					end
+				end
+
+				Frame.IsSkinned = true
+			end
+		end
+	end
+	
+	if IsInJailersTower() then
+		local Container = _G.ScenarioBlocksFrame.MawBuffsBlock.Container
+		
+		Container:StripTextures()
+		Container:HookScript("OnClick", Container.StripTextures)
+		
+		Container.List:StripTextures()
+		Container.List:HookScript("OnShow", ObjectiveTracker.SkinAnimaButtons)
+	end
+end
+
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
-	hooksecurefunc("ScenarioBlocksFrame_OnLoad", self.SkinScenario)
-	hooksecurefunc(SCENARIO_CONTENT_TRACKER_MODULE, "Update", self.SkinScenario)
+	hooksecurefunc("ScenarioStage_CustomizeBlock", self.SkinScenario)
 	hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", self.UpdateQuestItem)
 	hooksecurefunc(WORLD_QUEST_TRACKER_MODULE, "AddObjective", self.UpdateQuestItem)
 	hooksecurefunc(CAMPAIGN_QUEST_TRACKER_MODULE, "AddObjective", self.UpdateQuestItem)
