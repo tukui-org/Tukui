@@ -836,6 +836,8 @@ function UnitFrames:CreateUnits()
 			end
 
 			self.Units.Arena = Arena
+			
+			SetCVar("showArenaEnemyFrames", 0)
 		end
 
 		
