@@ -43,29 +43,6 @@ function ObjectiveTracker:OnClick()
 	end
 end
 
-function ObjectiveTracker:CreateToggleButtons()
-	local Button = CreateFrame("Button", nil, UIParent)
-	
-	Button:SetSize(216, 32)
-	Button:SetAlpha(0)
-	Button:CreateBackdrop()
-	Button:SetPoint("TOPLEFT", ObjectiveTrackerFrame, -25, 24)
-	Button:RegisterForClicks("AnyUp")
-	Button:SetScript("OnClick", self.OnClick)
-	Button:SetScript("OnEnter", self.OnEnter)
-	Button:SetScript("OnLeave", self.OnLeave)
-	
-	Button.Backdrop:SetInside(Button, 0, 19)
-	Button.Backdrop:SetBackdropColor(unpack(T.Colors.class[T.MyClass]))
-	Button.Backdrop:CreateShadow()
-
-	Button.Toggle = Button:CreateFontString(nil, "OVERLAY")
-	Button.Toggle:SetFont(C.Medias.Font, 12, "OUTLINE")
-	Button.Toggle:SetSize(214, 32)
-	Button.Toggle:SetPoint("RIGHT")
-	Button.Toggle:SetText(BINDING_NAME_TOGGLEQUESTLOG)
-end
-
 function ObjectiveTracker:SetDefaultPosition()
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -228, -325
 	local Data = TukuiData[T.MyRealm][T.MyName]
@@ -460,6 +437,14 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
 end
 
+function ObjectiveTracker:Toggle()
+	if (ObjectiveTrackerFrame:IsVisible()) then
+		ObjectiveTrackerFrame:Hide()
+	else
+		ObjectiveTrackerFrame:Show()
+	end
+end
+
 function ObjectiveTracker:Enable()
 	OBJECTIVE_TRACKER_COLOR["Header"] = {
 		r = ClassColor[1], 
@@ -489,6 +474,12 @@ function ObjectiveTracker:Enable()
 	self:Disable()
 	self:SetDefaultPosition()
 	self:SkinScenario()
+	
+	-- Add a keybind for toggling (SHIFT-O)
+	self.ToggleButton = CreateFrame("Button", "TukuiObjectiveTrackerToggleButton", UIParent, "SecureActionButtonTemplate")
+	self.ToggleButton:SetScript("OnClick", self.Toggle)
+
+	SetOverrideBindingClick(self.ToggleButton, true, "SHIFT-O", "TukuiObjectiveTrackerToggleButton")
 end
 
 Misc.ObjectiveTracker = ObjectiveTracker
