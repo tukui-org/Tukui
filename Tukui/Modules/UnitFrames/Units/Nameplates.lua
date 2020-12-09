@@ -99,7 +99,7 @@ function UnitFrames:Nameplates()
 	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs
 
 	if C.NamePlates.NameplateCastBar then
-		local CastBar = CreateFrame("StatusBar", "TukuiTargetCastBar", self)
+		local CastBar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		CastBar:SetFrameStrata(self:GetFrameStrata())
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
@@ -144,7 +144,7 @@ function UnitFrames:Nameplates()
 	RaidIcon:SetPoint("LEFT", self, "RIGHT", 4, 0)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
-	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
+	local Highlight = CreateFrame("Frame", self:GetName().."Highlight", self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.NamePlates.HighlightSize})
 	Highlight:SetOutside(self, C.NamePlates.HighlightSize, C.NamePlates.HighlightSize)
 	Highlight:SetBackdropBorderColor(unpack(C.NamePlates.HighlightColor))

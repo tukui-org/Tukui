@@ -339,9 +339,10 @@ function UnitFrames:CancelPlayerBuff(index)
 	CancelUnitBuff("player", self.index)
 end
 
-function UnitFrames:PostCreateAura(button)
+function UnitFrames:PostCreateAura(button, unit)
 	-- Set "self.Buffs.isCancellable" to true to a buffs frame to be able to cancel click
 	local isCancellable = button:GetParent().isCancellable
+	local isAnimated = button:GetParent().isAnimated
 
 	-- Right-click-cancel script
 	if isCancellable then
@@ -380,14 +381,16 @@ function UnitFrames:PostCreateAura(button)
 	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 
-	button.Animation = button:CreateAnimationGroup()
-	button.Animation:SetLooping("BOUNCE")
+	if isAnimated then
+		button.Animation = button:CreateAnimationGroup()
+		button.Animation:SetLooping("BOUNCE")
 
-	button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
-	button.Animation.FadeOut:SetFromAlpha(1)
-	button.Animation.FadeOut:SetToAlpha(.3)
-	button.Animation.FadeOut:SetDuration(.3)
-	button.Animation.FadeOut:SetSmoothing("IN_OUT")
+		button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
+		button.Animation.FadeOut:SetFromAlpha(1)
+		button.Animation.FadeOut:SetToAlpha(.3)
+		button.Animation.FadeOut:SetDuration(.3)
+		button.Animation.FadeOut:SetSmoothing("IN_OUT")
+	end
 end
 
 function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
@@ -455,7 +458,7 @@ end
 
 function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType)
 	-- We want to use this custom filter for mythic+, so we ignore pvp
-	local IsPlayer = UnitIsPlayer("player", unit) or false
+	local IsPlayer = UnitIsPlayer(unit) or false
 	
 	if not (IsPlayer) and (debuffType == "Magic") then
 		return true

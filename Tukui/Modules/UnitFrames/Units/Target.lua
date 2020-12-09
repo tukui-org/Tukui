@@ -204,7 +204,7 @@ function UnitFrames:Target()
 		Buffs.size = 28
 		Buffs.num = 32
 		Buffs.numRow = 4
-
+		Buffs.isAnimated = true
 		Buffs.spacing = 4
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
