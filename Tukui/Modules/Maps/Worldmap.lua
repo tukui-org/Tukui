@@ -92,16 +92,10 @@ function WorldMap:SetLargeWorldMap()
 	
 	Background:Hide()
 	
-	CloseButton:SetParent(WorldMapFrame)
-	CloseButton:SetFrameStrata("TOOLTIP")
-	CloseButton:ClearAllPoints()
-	CloseButton:SetPoint("TOPRIGHT", -78, -77)
-	CloseButton:Show()
-	
 	MoveButton:Show()
 	
 	CloseButton:ClearAllPoints()
-	CloseButton:SetPoint("TOPRIGHT", -101, -68)
+	CloseButton:SetPoint("TOPLEFT", 4, -70)
 end
 
 function WorldMap:SetSmallWorldMap()
