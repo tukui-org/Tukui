@@ -92,9 +92,16 @@ function WorldMap:SetLargeWorldMap()
 	
 	Background:Hide()
 	
-	CloseButton:Hide()
+	CloseButton:SetParent(WorldMapFrame)
+	CloseButton:SetFrameStrata("TOOLTIP")
+	CloseButton:ClearAllPoints()
+	CloseButton:SetPoint("TOPRIGHT", -78, -77)
+	CloseButton:Show()
 	
 	MoveButton:Show()
+	
+	CloseButton:ClearAllPoints()
+	CloseButton:SetPoint("TOPRIGHT", -101, -68)
 end
 
 function WorldMap:SetSmallWorldMap()
@@ -114,9 +121,10 @@ function WorldMap:SetSmallWorldMap()
 		
 		Background:Show()
 		
-		CloseButton:Show()
-		
 		MoveButton:Hide()
+		
+		CloseButton:ClearAllPoints()
+		CloseButton:SetPoint("TOPRIGHT", 5, 5)
 	end
 end
 
@@ -197,18 +205,6 @@ function WorldMap:AddMoving()
     WorldMap.MoveButton.Texture:SetSize(16, 16)
     WorldMap.MoveButton.Texture:SetPoint("CENTER")
 	WorldMap.MoveButton.Texture:SetTexture([[Interface\Buttons\UI-RefreshButton]])
-	
-	--[[ WORKLATER - TAINTING IN COMBAT ]]
-	--WorldMap.ExitButton = CreateFrame("Button", nil, WorldMapFrame)
-	--WorldMap.ExitButton:SetSize(16, 16)
-	--WorldMap.ExitButton:SetPoint("TOPRIGHT", -104, -78)
-	--WorldMap.ExitButton:SetFrameLevel(WorldMapFrameCloseButton:GetFrameLevel())
-	--WorldMap.ExitButton:SetScript("OnClick", ToggleWorldMap)
-	
-    --WorldMap.ExitButton.Texture = WorldMap.ExitButton:CreateTexture(nil, "OVERLAY")
-    --WorldMap.ExitButton.Texture:SetSize(16, 16)
-    --WorldMap.ExitButton.Texture:SetPoint("CENTER")
-	--WorldMap.ExitButton.Texture:SetTexture([[Interface\Buttons\UI-SortArrow]])
 
 	WorldMapFrame:SetMovable(true)
 	WorldMapFrame:SetUserPlaced(true)
@@ -245,6 +241,10 @@ function WorldMap:Enable()
 	
 	WorldMapFrame.BlackoutFrame.Blackout:SetTexture()
 	WorldMapFrame.BlackoutFrame:EnableMouse(false)
+	
+	WorldMapFrameCloseButton:SetParent(WorldMapFrame)
+	WorldMapFrameCloseButton:SetFrameStrata(self.MoveButton:GetFrameStrata())
+	WorldMapFrameCloseButton:SetFrameLevel(self.MoveButton:GetFrameLevel())
 	
 	hooksecurefunc(WorldMapFrame, "Maximize", self.SetLargeWorldMap)
 	hooksecurefunc(WorldMapFrame, "Minimize", self.SetSmallWorldMap)
