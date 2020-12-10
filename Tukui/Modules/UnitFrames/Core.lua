@@ -459,8 +459,9 @@ end
 function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType)
 	-- We want to use this custom filter for mythic+, so we ignore pvp
 	local IsPlayer = UnitIsPlayer(unit) or false
+	local InInstance, InstanceType = IsInInstance()
 	
-	if not (IsPlayer) and (debuffType == "Magic") then
+	if (InstanceType == "pvp" and debuffType == "Magic") or (not IsPlayer and debuffType == "Magic") then
 		return true
 	end
 end
@@ -792,7 +793,7 @@ function UnitFrames:CreateUnits()
 			local Party = oUF:SpawnHeader(UnitFrames:GetPartyFramesAttributes())
 		
 			Party:SetParent(T.PetHider)
-			Party:SetPoint("TOPLEFT", T.PetHider, "TOPLEFT", 28, -(T.PetHider:GetHeight() / 2) + 200)
+			Party:SetPoint("LEFT", T.PetHider, "LEFT", 28, 0)
 
 			if C.Party.ShowPets then
 				local Pet = oUF:SpawnHeader(UnitFrames:GetPetPartyFramesAttributes())
@@ -812,7 +813,7 @@ function UnitFrames:CreateUnits()
 		if C.Raid.Enable then
 			local Raid = oUF:SpawnHeader(UnitFrames:GetRaidFramesAttributes())
 			Raid:SetParent(T.PetHider)
-			Raid:SetPoint("TOPLEFT", T.PetHider, "TOPLEFT", 30, -30)
+			Raid:SetPoint("LEFT", T.PetHider, "LEFT", 28, 0)
 
 			if C.Raid.ShowPets then
 				local Pet = oUF:SpawnHeader(UnitFrames:GetPetRaidFramesAttributes())
