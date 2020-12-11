@@ -894,17 +894,14 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 
 	if (ORD) then
 		local _, InstanceType = IsInInstance()
+		ORD:ResetDebuffData()
 
-		if (ORD.RegisteredList ~= "RD") and (InstanceType == "party" or InstanceType == "raid") then
-			ORD:ResetDebuffData()
-			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.RaidDebuffs.spells)
-			ORD.RegisteredList = "RD"
+		if (InstanceType == "party" or InstanceType == "raid") then
+			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvE.spells)
+		elseif (InstanceType == "pvp") then
+			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells)
 		else
-			if ORD.RegisteredList ~= "CC" then
-				ORD:ResetDebuffData()
-				ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.CCDebuffs.spells)
-				ORD.RegisteredList = "CC"
-			end
+			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells) -- replace this one later with a new list
 		end
 	end
 end

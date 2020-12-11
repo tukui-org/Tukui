@@ -123,8 +123,8 @@ function UnitFrames:Raid()
 
 	if C.Raid.DebuffWatch then
 		local RaidDebuffs = CreateFrame("Frame", nil, Health)
-		RaidDebuffs:SetHeight(20)
-		RaidDebuffs:SetWidth(20)
+		RaidDebuffs:SetHeight(Health:GetHeight() - 12)
+		RaidDebuffs:SetWidth(Health:GetHeight() - 12)
 		RaidDebuffs:SetPoint("CENTER", Health)
 		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 10)
 		RaidDebuffs:CreateBackdrop()
@@ -140,9 +140,8 @@ function UnitFrames:Raid()
 		RaidDebuffs.cd.noCooldownCount = true
 		RaidDebuffs.cd:SetHideCountdownNumbers(true)
 		RaidDebuffs.cd:SetAlpha(.7)
-		RaidDebuffs.showDispellableDebuff = true
 		RaidDebuffs.onlyMatchSpellID = true
-		RaidDebuffs.FilterDispellableDebuff = true
+		RaidDebuffs.showDispellableDebuff = false
 		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.time:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.time:SetPoint("CENTER", RaidDebuffs, 1, 0)

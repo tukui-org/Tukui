@@ -183,6 +183,11 @@ function UnitFrames:Focus()
 		self.HealthPrediction = HealthPrediction
 	end
 	
+	local Range = {
+		insideAlpha = 1,
+		outsideAlpha = C["Party"].RangeAlpha,
+	}
+	
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.UnitFrames.HighlightSize})
 	Highlight:SetOutside(self, C.UnitFrames.HighlightSize, C.UnitFrames.HighlightSize)
@@ -199,6 +204,7 @@ function UnitFrames:Focus()
 	self.Name = Name
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
+	self.Range = Range
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 end
