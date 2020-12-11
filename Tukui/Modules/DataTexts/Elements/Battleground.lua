@@ -15,9 +15,7 @@ function BGFrame:OnEnter()
 		local Columns = C_PvP.GetMatchPVPStatColumns()
 		
 		if Name and Name == T.MyName then
-			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", 0, 4)
-			GameTooltip:ClearLines()
-			GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, 1)
+			GameTooltip:SetOwner(T.Chat.Panels.LeftChat, "ANCHOR_TOPLEFT", 0, 16)
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L.DataText.StatsFor, ClassColor..Name.."|r")
 			GameTooltip:AddLine(" ")
