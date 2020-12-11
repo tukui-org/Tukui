@@ -615,7 +615,7 @@ function UnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",
 		nil,
-		"custom [@raid6,exists] hide;show",
+		"solo,party",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -637,7 +637,7 @@ function UnitFrames:GetPetPartyFramesAttributes()
 	return
 		"TukuiPartyPet",
 		"SecureGroupPetHeaderTemplate",
-		"custom [@raid6,exists] hide;show",
+		"solo,party",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -656,7 +656,7 @@ function UnitFrames:GetPetPartyFramesAttributes()
 end
 
 function UnitFrames:GetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid6,exists] show;hide" or "solo,party,raid"
+	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show"
 
 	return
 		"TukuiRaid",
@@ -673,20 +673,50 @@ function UnitFrames:GetRaidFramesAttributes()
 		"showRaid", true,
 		"showPlayer", true,
 		"showSolo", false,
-		"xoffset", 4,
-		"yOffset", -4,
+		"xoffset", 10,
+		"yOffset", -10,
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", C["Raid"].GroupBy.Value,
 		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
-		"columnSpacing", 4,
+		"columnSpacing", 10,
+		"columnAnchorPoint", "LEFT"
+end
+
+function UnitFrames:GetBigRaidFramesAttributes()
+	local Properties = "custom [@raid21,exists] show; hide"
+
+	return
+		"TukuiRaid40",
+		nil,
+		Properties,
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]],
+		"initial-width", C.Raid.Raid40WidthSize,
+		"initial-height", C.Raid.Raid40HeightSize,
+		"showParty", true,
+		"showRaid", true,
+		"showPlayer", true,
+		"showSolo", false,
+		"xoffset", 10,
+		"yOffset", -10,
+		"point", "TOP",
+		"groupFilter", "1,2,3,4,5,6,7,8",
+		"groupingOrder", "1,2,3,4,5,6,7,8",
+		"groupBy", C["Raid"].GroupBy.Value,
+		"maxColumns", math.ceil(40 / 5),
+		"unitsPerColumn", C["Raid"].Raid40MaxUnitPerColumn,
+		"columnSpacing", 10,
 		"columnAnchorPoint", "LEFT"
 end
 
 function UnitFrames:GetPetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid6,exists] show;hide" or "solo,party,raid"
+	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show"
 
 	return
 		"TukuiRaidPet",
@@ -699,12 +729,39 @@ function UnitFrames:GetPetRaidFramesAttributes()
 		"maxColumns", math.ceil(40 / 5),
 		"point", "TOP",
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
-		"columnSpacing", 4,
+		"columnSpacing", 10,
 		"columnAnchorPoint", "LEFT",
-		"yOffset", -4,
-		"xOffset", 4,
+		"yOffset", -10,
+		"xOffset", 10,
 		"initial-width", C.Raid.WidthSize,
 		"initial-height", C.Raid.HeightSize,
+		"oUF-initialConfigFunction", [[
+			local header = self:GetParent()
+			self:SetWidth(header:GetAttribute("initial-width"))
+			self:SetHeight(header:GetAttribute("initial-height"))
+		]]
+end
+
+function UnitFrames:GetBigPetRaidFramesAttributes()
+	local Properties = "custom [@raid21,exists] show; hide"
+
+	return
+		"TukuiRaid40Pet",
+		"SecureGroupPetHeaderTemplate",
+		Properties,
+		"showParty", C["Raid"].ShowPets,
+		"showRaid", C["Raid"].ShowPets,
+		"showPlayer", true,
+		"showSolo", false,
+		"maxColumns", math.ceil(40 / 5),
+		"point", "TOP",
+		"unitsPerColumn", C["Raid"].Raid40MaxUnitPerColumn,
+		"columnSpacing", 10,
+		"columnAnchorPoint", "LEFT",
+		"yOffset", -10,
+		"xOffset", 10,
+		"initial-width", C.Raid.Raid40WidthSize,
+		"initial-height", C.Raid.Raid40HeightSize,
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -813,21 +870,37 @@ function UnitFrames:CreateUnits()
 		if C.Raid.Enable then
 			local Raid = oUF:SpawnHeader(UnitFrames:GetRaidFramesAttributes())
 			Raid:SetParent(T.PetHider)
-			Raid:SetPoint("LEFT", T.PetHider, "LEFT", 28, 0)
+			Raid:SetPoint("LEFT", T.PetHider, "LEFT", 28, 100)
 
 			if C.Raid.ShowPets then
 				local Pet = oUF:SpawnHeader(UnitFrames:GetPetRaidFramesAttributes())
 				Pet:SetParent(T.PetHider)
-				Pet:SetPoint("TOPLEFT", Raid, "TOPRIGHT", 4, 0)
+				Pet:SetPoint("TOPLEFT", Raid, "TOPRIGHT", 10, 0)
 
 				UnitFrames.Headers.RaidPet = Pet
 
 				Movers:RegisterFrame(Pet, "Raid Pets")
 			end
+			
+			local Raid40 = oUF:SpawnHeader(UnitFrames:GetBigRaidFramesAttributes())
+			Raid40:SetParent(T.PetHider)
+			Raid40:SetPoint("TOPLEFT", T.PetHider, "TOPLEFT", 30, -30)
+
+			if C.Raid.ShowPets then
+				local Pet40 = oUF:SpawnHeader(UnitFrames:GetBigPetRaidFramesAttributes())
+				Pet40:SetParent(T.PetHider)
+				Pet40:SetPoint("TOPLEFT", Raid40, "TOPRIGHT", 10, 0)
+
+				UnitFrames.Headers.Raid40Pet = Pet40
+
+				Movers:RegisterFrame(Pet40, "Raid 26/40 Pets")
+			end
 
 			UnitFrames.Headers.Raid = Raid
+			UnitFrames.Headers.Raid40 = Raid40
 
 			Movers:RegisterFrame(Raid, "Raid")
+			Movers:RegisterFrame(Raid40, "Raid 26/40")
 		end
 		
 		if (C.UnitFrames.Arena) then
