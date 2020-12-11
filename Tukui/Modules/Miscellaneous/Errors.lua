@@ -11,7 +11,7 @@ function Errors:Enable()
 	UIErrorsFrame:ClearAllPoints()
 	UIErrorsFrame:SetPoint("TOP", 0, -300)
 	
-	T.Movers:RegisterFrame(UIErrorsFrame)
+	T.Movers:RegisterFrame(UIErrorsFrame, "UI Errors")
 end
 
 Miscellaneous.Errors = Errors

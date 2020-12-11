@@ -1000,7 +1000,7 @@ function Bags:OpenAllBags()
 		if not self.Bag.MoverAdded then
 			local Movers = T["Movers"]
 
-			Movers:RegisterFrame(self.Bag)
+			Movers:RegisterFrame(self.Bag, "Bags")
 
 			self.Bag.MoverAdded = true
 		end
@@ -1017,7 +1017,7 @@ function Bags:OpenAllBankBags()
 		if not self.Bank.MoverAdded then
 			local Movers = T["Movers"]
 
-			Movers:RegisterFrame(self.Bank)
+			Movers:RegisterFrame(self.Bank, "Bank")
 
 			self.Bank.MoverAdded = true
 		end

@@ -121,7 +121,7 @@ function MicroMenu:Enable()
 	
 	UpdateMicroButtonsParent(T.Hider)
 	
-	T.Movers:RegisterFrame(MicroMenu)
+	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	
 	tinsert(UISpecialFrames, "TukuiMicroMenu")
 	

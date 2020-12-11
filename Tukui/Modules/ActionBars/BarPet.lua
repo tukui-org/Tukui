@@ -68,7 +68,7 @@ function ActionBars:CreatePetBar()
 
 	RegisterStateDriver(Bar, "visibility", "[@pet,exists,nopossessbar] show; hide")
 
-	Movers:RegisterFrame(Bar)
+	Movers:RegisterFrame(Bar, "Pet Action Bar")
 	
 	self.Bars.Pet = Bar
 end

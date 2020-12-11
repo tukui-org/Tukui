@@ -298,8 +298,8 @@ function DataTexts:Enable()
 		self.BGFrame:Enable()
 	end
 	
-	T.Movers:RegisterFrame(DataTextLeft)
-	T.Movers:RegisterFrame(DataTextRight)
+	T.Movers:RegisterFrame(DataTextLeft, "Left Data Text & Chat")
+	T.Movers:RegisterFrame(DataTextRight, "Right Data Text & Chat")
 end
 
 DataTexts:RegisterEvent("PLAYER_LOGOUT")

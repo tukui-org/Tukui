@@ -135,7 +135,7 @@ function Minimap:PositionMinimap()
 	self:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -28, -28)
 	self:SetMovable(true)
 
-	Movers:RegisterFrame(self)
+	Movers:RegisterFrame(self, "Minimap")
 end
 
 function Minimap:AddMinimapDataTexts()

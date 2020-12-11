@@ -158,7 +158,7 @@ function UnitFrames:Target()
 			CastBar.Text:ClearAllPoints()
 			CastBar.Text:SetPoint("LEFT", CastBar, "LEFT", 4, 0)
 
-			Movers:RegisterFrame(CastBar)
+			Movers:RegisterFrame(CastBar, "Target Cast Bar")
 		end
 
 		self.Castbar = CastBar

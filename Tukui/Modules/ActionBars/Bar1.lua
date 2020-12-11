@@ -137,7 +137,7 @@ function ActionBars:CreateBar1()
 		ActionBar1["Button"..i] = Button
 	end
 
-	Movers:RegisterFrame(ActionBar1)
+	Movers:RegisterFrame(ActionBar1, "Action Bar #1")
 	
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1

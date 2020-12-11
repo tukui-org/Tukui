@@ -140,7 +140,7 @@ function GroupLoot:AddMover()
 	self.Mover:SetPoint("TOP", UIParent, 0, 0)
 	self.Mover:SetSize(284, 22)
 
-	T.Movers:RegisterFrame(self.Mover)
+	T.Movers:RegisterFrame(self.Mover, "Group Loot")
 end
 
 function GroupLoot:AddHooks()

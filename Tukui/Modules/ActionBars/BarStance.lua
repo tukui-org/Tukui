@@ -63,7 +63,7 @@ function ActionBars:CreateStanceBar()
 		end
 	end)
 
-	Movers:RegisterFrame(StanceBar)
+	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
 	
 	self.Bars.Stance = StanceBar
 end

@@ -377,5 +377,5 @@ function Tooltip:Enable()
 	
 	ItemRefTooltip.CloseButton:SkinCloseButton()
 	
-	T.Movers:RegisterFrame(self.Anchor)
+	T.Movers:RegisterFrame(self.Anchor, "Tooltip")
 end

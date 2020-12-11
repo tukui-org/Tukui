@@ -59,7 +59,7 @@ function Auras:CreateHeaders()
 		Buffs:SetAttribute("includeWeapons", 1)
 		Buffs:Show()
 
-		Movers:RegisterFrame(Buffs)
+		Movers:RegisterFrame(Buffs, "Buffs")
 	end
 
 	if (not C.Auras.HideDebuffs) then
@@ -72,6 +72,6 @@ function Auras:CreateHeaders()
 		Debuffs:SetAttribute("filter", "HARMFUL")
 		Debuffs:Show()
 
-		Movers:RegisterFrame(Debuffs)
+		Movers:RegisterFrame(Debuffs, "Debuffs")
 	end
 end

@@ -56,7 +56,7 @@ function ObjectiveTracker:SetDefaultPosition()
 	ObjectiveTrackerFrame:SetHeight(396)
 	ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
-	Movers:RegisterFrame(ObjectiveFrameHolder)
+	Movers:RegisterFrame(ObjectiveFrameHolder, "Objectives Tracker")
 
 	if Data and Data.Move and Data.Move.TukuiObjectiveTracker then
 		ObjectiveFrameHolder:ClearAllPoints()

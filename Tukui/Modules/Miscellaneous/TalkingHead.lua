@@ -41,7 +41,7 @@ function TalkingHead:OnEvent(event, addon)
 		Frame.IsSkinned = true
 	end
 	
-	Movers:RegisterFrame(Frame)
+	Movers:RegisterFrame(Frame, "Talking Head")
 end
 
 function TalkingHead:Enable()

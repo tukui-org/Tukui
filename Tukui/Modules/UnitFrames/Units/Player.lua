@@ -118,7 +118,7 @@ function UnitFrames:Player()
 		AuraBars.spellNameObject = Font
 		AuraBars.spellTimeObject = Font
 
-		T.Movers:RegisterFrame(AuraBars)
+		T.Movers:RegisterFrame(AuraBars, "Player Aura Bars")
 
 		self.AuraBars = AuraBars
 	else
@@ -274,7 +274,7 @@ function UnitFrames:Player()
 			CastBar.Text:ClearAllPoints()
 			CastBar.Text:SetPoint("LEFT", CastBar, "LEFT", 4, 0)
 
-			Movers:RegisterFrame(CastBar)
+			Movers:RegisterFrame(CastBar, "Player Cast Bar")
 		end
 
 		self.Castbar = CastBar
@@ -399,7 +399,7 @@ function UnitFrames:Player()
 
 		self.FloatingCombatFeedback = ScrollingCombatText
 
-		T.Movers:RegisterFrame(ScrollingCombatText)
+		T.Movers:RegisterFrame(ScrollingCombatText, "Player SCT")
 	end
 
 	if C.UnitFrames.HealComm then
@@ -479,7 +479,7 @@ function UnitFrames:Player()
 			Bar[i].Cooldown:SetFrameLevel(Bar[i]:GetFrameLevel())
 		end
 
-		Movers:RegisterFrame(Bar)
+		Movers:RegisterFrame(Bar, "Totem Bar")
 
 		-- To allow right-click destroy totem.
 		TotemFrame:SetParent(UIParent)

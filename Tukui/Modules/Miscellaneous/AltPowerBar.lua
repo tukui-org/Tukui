@@ -62,7 +62,7 @@ function AltPowerBar:Create()
 	self.Status.Text:SetShadowColor(0, 0, 0)
 	self.Status.Text:SetShadowOffset(1.25, -1.25)
 	
-	T.Movers:RegisterFrame(self)
+	T.Movers:RegisterFrame(self, "Alternative Power Bar")
 end
 
 function AltPowerBar:Enable()

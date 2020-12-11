@@ -802,12 +802,12 @@ function UnitFrames:CreateUnits()
 
 				UnitFrames.Headers.RaidPet = Pet
 
-				Movers:RegisterFrame(Pet)
+				Movers:RegisterFrame(Pet, "Pet")
 			end
 
 			UnitFrames.Headers.Party = Party
 
-			Movers:RegisterFrame(Party)
+			Movers:RegisterFrame(Party, "Party")
 		end
 
 		if C.Raid.Enable then
@@ -822,12 +822,12 @@ function UnitFrames:CreateUnits()
 
 				UnitFrames.Headers.RaidPet = Pet
 
-				Movers:RegisterFrame(Pet)
+				Movers:RegisterFrame(Pet, "Raid Pets")
 			end
 
 			UnitFrames.Headers.Raid = Raid
 
-			Movers:RegisterFrame(Raid)
+			Movers:RegisterFrame(Raid, "Raid")
 		end
 		
 		if (C.UnitFrames.Arena) then
@@ -843,7 +843,7 @@ function UnitFrames:CreateUnits()
 				end
 				Arena[i]:SetSize(164, 20)
 
-				Movers:RegisterFrame(Arena[i])
+				Movers:RegisterFrame(Arena[i], "Arena #"..i)
 			end
 
 			self.Units.Arena = Arena
@@ -865,18 +865,18 @@ function UnitFrames:CreateUnits()
 				end
 				Boss[i]:SetSize(164, 20)
 
-				Movers:RegisterFrame(Boss[i])
+				Movers:RegisterFrame(Boss[i], "Boss #"..i)
 			end
 
 			self.Units.Boss = Boss
 		end
 
-		Movers:RegisterFrame(Player)
-		Movers:RegisterFrame(Target)
-		Movers:RegisterFrame(TargetOfTarget)
-		Movers:RegisterFrame(Pet)
-		Movers:RegisterFrame(Focus)
-		Movers:RegisterFrame(FocusTarget)
+		Movers:RegisterFrame(Player, "Player")
+		Movers:RegisterFrame(Target, "Target")
+		Movers:RegisterFrame(TargetOfTarget, "Target of Target")
+		Movers:RegisterFrame(Pet, "Pet")
+		Movers:RegisterFrame(Focus, "Focus")
+		Movers:RegisterFrame(FocusTarget, "Focus Target")
 	end
 
 	if C.NamePlates.Enable then

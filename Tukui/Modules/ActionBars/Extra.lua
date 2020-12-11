@@ -68,7 +68,7 @@ function ActionBars:SetupExtraButton()
 	
 	ZoneAbilities.Style:SetAlpha(0)
 	
-	Movers:RegisterFrame(Holder)
+	Movers:RegisterFrame(Holder, "Extra Buttons")
 
 	hooksecurefunc("ExtraActionBar_Update", self.DisableExtraButtonTexture)
 	hooksecurefunc(ZoneAbilities, "UpdateDisplayedZoneAbilities", ActionBars.SkinZoneAbilities)

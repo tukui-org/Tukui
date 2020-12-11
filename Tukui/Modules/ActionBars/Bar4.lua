@@ -73,7 +73,7 @@ function ActionBars:CreateBar4()
 
 	RegisterStateDriver(ActionBar4, "visibility", "[vehicleui] hide; show")
 	
-	Movers:RegisterFrame(ActionBar4)
+	Movers:RegisterFrame(ActionBar4, "Action Bar #4")
 	
 	self.Bars.Bar4 = ActionBar4
 end

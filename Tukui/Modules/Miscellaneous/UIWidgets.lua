@@ -14,7 +14,7 @@ function UIWidgets:Enable()
 	MinimapWidget:SetPoint("TOP", 3, -66)
 	MinimapWidget:SetSize(220, 20)
 	
-	T.Movers:RegisterFrame(MinimapWidget)
+	T.Movers:RegisterFrame(MinimapWidget, "UI Widgets")
 end
 
 Miscellaneous.UIWidgets = UIWidgets

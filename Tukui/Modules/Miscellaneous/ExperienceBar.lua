@@ -358,7 +358,7 @@ function Experience:Create()
 		self["RestedBar"..i] = RestedBar
 
 		-- Add moving
-		T.Movers:RegisterFrame(XPBar)
+		T.Movers:RegisterFrame(XPBar, "XP Bar #"..i)
 	end
 
 	self:RegisterEvent("PLAYER_XP_UPDATE")

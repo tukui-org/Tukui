@@ -83,7 +83,7 @@ function TimeManager:OnEvent(event, addon)
 	TimeManagerAlarmMessageEditBox.Right:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
 	
-	T.Movers:RegisterFrame(TimeManagerFrame)
+	T.Movers:RegisterFrame(TimeManagerFrame, "Time Manager Frame")
 	
 	self:UnregisterAllEvents()
 end
