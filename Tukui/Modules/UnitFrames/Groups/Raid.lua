@@ -92,9 +92,8 @@ function UnitFrames:Raid()
 		AuraTrack:SetAllPoints()
 		AuraTrack.Texture = C.Medias.Normal
 		AuraTrack.Icons = C.Raid.AuraTrackIcons
+		AuraTrack.SpellTextures = C.Raid.AuraTrackSpellTextures
 		AuraTrack.Thickness = C.Raid.AuraTrackThickness
-		AuraTrack.IconSize = C.Raid.AuraTrackIconSize
-		AuraTrack.Spacing = C.Raid.AuraTrackSpacing
 
 		self.AuraTrack = AuraTrack
 	elseif C.Raid.RaidBuffs.Value ~= "Hide" then

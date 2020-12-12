@@ -7,8 +7,8 @@ local oUF = ns.oUF
 	.Thickness : Thickness of the statusbar
 	.Tracker : Table of buffs spell id to track, if not spiecified, use default listing
 	.Texture : Texture you want to use for status bars
-	.Spacing : Set the spacing between icons
 	.Icons : Set to true if you wish to use squared icons instead of status bars
+	.SpellTextures : Spell Textures instead of colored squares
 	.MaxAuras : Set the max amount of status or icons shows
 
 	Example:
@@ -29,6 +29,11 @@ local Tracker = {
 	[17] = {0.89, 0.1, 0.1}, -- Power Word: Shield
 	[47788] = {0.86, 0.45, 0}, -- Guardian Spirit
 	[33206] = {0, 0, 0.74}, -- Pain Suppression
+	
+	[47536] = {0, 0, 0.74}, -- test
+	[33206] = {0, 0, 0.74}, -- test
+	[10060] = {0, 0, 0.74}, -- test
+	[586] = {0, 0, 0.74}, -- test
 	
 	--[[ DRUID ]]
 	[774] = {0.8, 0.4, 0.8}, -- Rejuvenation
@@ -89,8 +94,6 @@ end
 local UpdateIcon = function(self, unit, spellID, texture, id, expiration, duration)
 	local AuraTrack = self.AuraTrack
 	
-	AuraTrack.MaxAuras = AuraTrack.MaxAuras or floor(AuraTrack:GetWidth() / (AuraTrack.IconSize + AuraTrack.Spacing))
-	
 	if id > AuraTrack.MaxAuras then
 		return
 	end
@@ -113,6 +116,7 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 		
 		AuraTrack.Auras[id].Texture = AuraTrack.Auras[id]:CreateTexture(nil, "ARTWORK")
 		AuraTrack.Auras[id].Texture:SetAllPoints()
+		AuraTrack.Auras[id].Texture:SetTexCoord(.1, .9, .1, .9)
 		
 		AuraTrack.Auras[id].Cooldown = CreateFrame("Cooldown", nil, AuraTrack.Auras[id], "CooldownFrameTemplate")
 		AuraTrack.Auras[id].Cooldown:SetAllPoints()
@@ -122,10 +126,15 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 	
 	AuraTrack.Auras[id].Expiration = expiration
 	AuraTrack.Auras[id].Duration = duration
-	AuraTrack.Auras[id].Texture:SetColorTexture(r, g, b)
 	AuraTrack.Auras[id].Backdrop:SetColorTexture(r * 0.2, g * 0.2, b * 0.2)
 	AuraTrack.Auras[id].Cooldown:SetCooldown(expiration - duration, duration)
 	AuraTrack.Auras[id]:Show()
+	
+	if AuraTrack.SpellTextures then
+		AuraTrack.Auras[id].Texture:SetTexture(texture)
+	else
+		AuraTrack.Auras[id].Texture:SetColorTexture(r, g, b)
+	end
 end
 
 local UpdateBar = function(self, unit, spellID, texture, id, expiration, duration)
@@ -183,7 +192,14 @@ local Update = function(self, event, unit)
 	end
 	
 	local ID = 0
-	local MaxAuras = self.AuraTrack.MaxAuras or 40
+	
+	if self.AuraTrack:GetWidth() == 0 then
+		return
+	end
+	
+	self.AuraTrack.MaxAuras = self.AuraTrack.MaxAuras or 4
+	self.AuraTrack.Spacing = self.AuraTrack.Spacing or 6
+	self.AuraTrack.IconSize = (self.AuraTrack:GetWidth() / self.AuraTrack.MaxAuras) - (self.AuraTrack.Spacing) - (self.AuraTrack.Spacing / (self.AuraTrack.MaxAuras))
 	
 	for i = 1, 40 do
 		local name, texture, count, debuffType, duration, expiration, caster, isStealable,
@@ -201,7 +217,7 @@ local Update = function(self, event, unit)
 		end
 	end
 	
-	for i = ID + 1, MaxAuras do
+	for i = ID + 1, self.AuraTrack.MaxAuras do
 		if self.AuraTrack.Auras[i] and self.AuraTrack.Auras[i]:IsShown() then
 			self.AuraTrack.Auras[i]:SetScript("OnUpdate", nil)
 			self.AuraTrack.Auras[i]:Hide()
@@ -226,9 +242,9 @@ local function Enable(self)
 		
 		AuraTrack.Tracker = AuraTrack.Tracker or Tracker
 		AuraTrack.Thickness = AuraTrack.Thickness or 5
-		AuraTrack.IconSize = AuraTrack.IconSize or 12
 		AuraTrack.Texture = AuraTrack.Texture or [[Interface\\TargetingFrame\\UI-StatusBar]]
-		AuraTrack.Spacing = AuraTrack.Spacing or 6
+		AuraTrack.SpellTextures = AuraTrack.SpellTextures or AuraTrack.Icons == nil and true
+		AuraTrack.Icons = AuraTrack.Icons or AuraTrack.Icons == nil and true
 		AuraTrack.Auras = {}
 			
 		self:RegisterEvent("UNIT_AURA", Path)
