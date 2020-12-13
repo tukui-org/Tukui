@@ -246,14 +246,14 @@ function UnitFrames:DisplayPlayerAndPetNames(event)
 		self.Power.Value:Show()
 		self.Name:SetAlpha(0)
 
-		if self.unit ~= "player" then
+		if self.unit == "pet" then
 			self.Health.Value:Show()
 		end
 	else
 		self.Power.Value:Hide()
 		self.Name:SetAlpha(1)
 
-		if self.unit ~= "player" then
+		if self.unit == "pet" then
 			self.Health.Value:Hide()
 		end
 	end
