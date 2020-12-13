@@ -273,6 +273,10 @@ function Tooltip:SetHealthValue(unit)
 		local Health, MaxHealth = UnitHealth(unit), UnitHealthMax(unit)
 		local String = (Health and MaxHealth and T.ShortValue(Health).." / "..T.ShortValue(MaxHealth)) or "???"
 
+		if not self.Text:IsShown() then
+			self.Text:Show()
+		end
+		
 		self.Text:SetText(String)
 	end
 end
@@ -335,6 +339,10 @@ end
 function Tooltip:ResetBorderColor()
 	if self.Backdrop then
 		self.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
+		
+		HealthBar:SetStatusBarColor(0, 1, 0)
+		HealthBar.Backdrop:SetBorderColor(0, 1, 0)
+		HealthBar.Text:Hide()
 	end
 end
 
