@@ -29,11 +29,7 @@ local Tracker = {
 	[17] = {0.89, 0.1, 0.1}, -- Power Word: Shield
 	[47788] = {0.86, 0.45, 0}, -- Guardian Spirit
 	[33206] = {0, 0, 0.74}, -- Pain Suppression
-	
-	[47536] = {0, 0, 0.74}, -- test
-	[33206] = {0, 0, 0.74}, -- test
-	[10060] = {0, 0, 0.74}, -- test
-	[586] = {0, 0, 0.74}, -- test
+	[10060] = {0, 0, 0.74}, -- Power Infusion
 	
 	--[[ DRUID ]]
 	[774] = {0.8, 0.4, 0.8}, -- Rejuvenation

@@ -3,3 +3,5 @@
 ----------------------------------
 
 local T, C, L = select(2, ...):unpack()
+
+-- /dump C_UIWidgetManager.GetObjectiveTrackerWidgetSetID()
