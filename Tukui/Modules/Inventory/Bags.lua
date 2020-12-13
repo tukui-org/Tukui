@@ -94,6 +94,8 @@ function Bags:SkinBagButton()
 	local JunkIcon = self.JunkIcon
 	local Border = self.IconBorder
 	local BattlePay = self.BattlepayItemTexture
+	
+	self:SetFrameLevel(0)
 
 	Border:SetAlpha(0)
 
@@ -595,11 +597,21 @@ function Bags:SlotUpdate(id, button)
 	if C.Bags.IdentifyQuestItems and QuestItem then
 		if not button.QuestTex then
 			button.Quest = CreateFrame("Frame", nil, button)
-			button.Quest:SetSize(8, button:GetHeight())
-			button.Quest:CreateBackdrop()
-			button.Quest:SetPoint("TOPLEFT")
-			button.Quest.Backdrop:SetBorderColor(1, 1, 0)
-			button.Quest.Texture = button.Quest:CreateTexture(nil, "OVERLAY")
+			button.Quest:SetFrameLevel(button:GetFrameLevel())
+			button.Quest:SetSize(8, button:GetHeight() - 2)
+			button.Quest:SetPoint("TOPLEFT", 1, -1)
+			
+			button.Quest.Backdrop = button.Quest:CreateTexture(nil, "ARTWORK", 0)
+			button.Quest.Backdrop:SetAllPoints()
+			button.Quest.Backdrop:SetColorTexture(unpack(C.General.BackdropColor))
+			
+			button.Quest.BorderRight = button.Quest:CreateTexture(nil, "ARTWORK", nil, 1)
+			button.Quest.BorderRight:SetSize(1, 1)
+			button.Quest.BorderRight:SetPoint("TOPRIGHT", button.Quest, "TOPRIGHT", 1, 0)
+			button.Quest.BorderRight:SetPoint("BOTTOMRIGHT", button.Quest, "BOTTOMRIGHT", 1, 0)
+			button.Quest.BorderRight:SetColorTexture(1, 1, 0)
+			
+			button.Quest.Texture = button.Quest:CreateTexture(nil, "OVERLAY", -1)
 			button.Quest.Texture:SetTexture("Interface\\QuestFrame\\AutoQuest-Parts")
 			button.Quest.Texture:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
 			button.Quest.Texture:SetSize(8, 16)
@@ -652,7 +664,7 @@ function Bags:SlotUpdate(id, button)
 
 			if (ClassID == LE_ITEM_CLASS_ARMOR or ClassID == LE_ITEM_CLASS_WEAPON) and Level > 1 then
 				if not button.ItemLevel then
-					button.ItemLevel = button:CreateFontString(nil, "OVERLAY")
+					button.ItemLevel = button:CreateFontString(nil, "ARTWORK")
 					button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
 					button.ItemLevel:SetFont(C.Medias.Font, 12, "OUTLINE")
 					button.ItemLevel:SetJustifyH("RIGHT")
