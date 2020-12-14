@@ -6,16 +6,19 @@ local Tukz = CreateFrame("Frame")
 
 function Tukz:SkinOmniBarButton()
 	for i = 1, #self.active do
-		if self.active[i] and not self.active[i].IsSkinned then
-			self.active[i]:CreateBackdrop()
+		if self.active[i] then
+			if not self.active[i].IsSkinned then
+				self.active[i]:CreateBackdrop()
 
-			self.active[i].Backdrop:CreateShadow()
-			self.active[i].Backdrop:SetFrameLevel(self.active[i]:GetFrameLevel() - 1)
+				self.active[i].Backdrop:CreateShadow()
+				self.active[i].Backdrop:SetFrameLevel(self.active[i]:GetFrameLevel() - 1)
 
+				self.active[i].icon:SetInside()
+
+				self.active[i].IsSkinned = true
+			end
+			
 			self.active[i].icon:SetTexCoord(.1, .9, .1, .9)
-			self.active[i].icon:SetInside()
-
-			self.active[i].IsSkinned = true
 		end
 	end
 end
