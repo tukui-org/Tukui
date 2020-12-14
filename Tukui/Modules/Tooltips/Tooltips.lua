@@ -215,6 +215,8 @@ function Tooltip:Skin(style)
 	local R, G, B
 	local Backdrop = self.Backdrop
 	
+	HealthBar:Hide()
+	
 	if Backdrop then
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
