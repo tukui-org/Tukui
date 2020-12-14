@@ -656,7 +656,7 @@ function UnitFrames:GetPetPartyFramesAttributes()
 end
 
 function UnitFrames:GetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show"
+	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show; hide"
 
 	return
 		"TukuiRaid",
@@ -716,7 +716,7 @@ function UnitFrames:GetBigRaidFramesAttributes()
 end
 
 function UnitFrames:GetPetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show"
+	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show; hide"
 
 	return
 		"TukuiRaidPet",

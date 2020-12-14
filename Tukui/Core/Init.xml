@@ -12,4 +12,5 @@
 	<Script file="Status.lua"/>
 	<Script file="Modules.lua"/>
 	<Script file="Gui.lua"/>
+	<Script file="Tukz.lua"/>
 </Ui>
