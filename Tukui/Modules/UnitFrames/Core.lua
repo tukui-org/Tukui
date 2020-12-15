@@ -460,8 +460,8 @@ function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffTy
 	-- We want to use this custom filter for mythic+, so we ignore pvp
 	local IsPlayer = UnitIsPlayer(unit) or false
 	local InInstance, InstanceType = IsInInstance()
-	
-	if (InstanceType == "pvp" and debuffType == "Magic") or (not IsPlayer and debuffType == "Magic") then
+
+	if ((InstanceType == "pvp" or InstanceType == "arena") and debuffType == "Magic") or (not IsPlayer and debuffType == "Magic") then
 		return true
 	end
 end
