@@ -615,7 +615,7 @@ function UnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",
 		nil,
-		"solo,party",
+		"custom [@raid6,exists] hide; [@raid1,exists] show; [@party1,exists] show; hide",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
@@ -637,7 +637,7 @@ function UnitFrames:GetPetPartyFramesAttributes()
 	return
 		"TukuiPartyPet",
 		"SecureGroupPetHeaderTemplate",
-		"solo,party",
+		"custom [@raid6,exists] hide; [@raid1,exists] show; [@party1,exists] show; hide",
 		"oUF-initialConfigFunction", [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute("initial-width"))
