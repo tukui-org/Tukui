@@ -446,29 +446,6 @@ function ObjectiveTracker:Toggle()
 end
 
 function ObjectiveTracker:Enable()
-	OBJECTIVE_TRACKER_COLOR["Header"] = {
-		r = ClassColor[1], 
-		g = ClassColor[2], 
-		b = ClassColor[3],
-	}
-	
-	OBJECTIVE_TRACKER_COLOR["HeaderHighlight"] = {
-		r = ClassColor[1]*1.2, 
-		g = ClassColor[2]*1.2, 
-		b = ClassColor[3]*1.2,
-	}
-	
-	OBJECTIVE_TRACKER_COLOR["Complete"] = { 
-		r = 0, 
-		g = 1, 
-		b = 0,
-	}
-	
-	OBJECTIVE_TRACKER_COLOR["Normal"] = { 
-		r = 1, 
-		g = 1, 
-		b = 1,
-	}
 
 	self:AddHooks()
 	self:Disable()
