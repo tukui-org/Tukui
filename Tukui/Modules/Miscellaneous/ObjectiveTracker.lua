@@ -446,7 +446,6 @@ function ObjectiveTracker:Toggle()
 end
 
 function ObjectiveTracker:Enable()
-
 	self:AddHooks()
 	self:Disable()
 	self:SetDefaultPosition()
