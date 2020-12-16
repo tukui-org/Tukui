@@ -1069,14 +1069,14 @@ function Bags:CloseAllBankBags()
 	end
 end
 
-function Bags:ToggleBags()
+function Bags:ToggleBags(openonly)
 	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) and (not ReagentBankFrame:IsShown()) then
 		self:OpenAllBankBags()
 
 		return
 	end
 
-	if (self.Bag:IsShown() or self.Bank:IsShown()) then
+	if (not openonly) and (self.Bag:IsShown() or self.Bank:IsShown()) then
 		if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then
 			return
 		end
@@ -1212,9 +1212,9 @@ function Bags:Enable()
 	function UpdateContainerFrameAnchors() end
 	function ToggleBag() ToggleAllBags() end
 	function ToggleBackpack() ToggleAllBags() end
-	function OpenAllBags() ToggleAllBags() end
-	function OpenBackpack() ToggleAllBags() end
-	function ToggleAllBags() self:ToggleBags() end
+	function OpenAllBags() ToggleAllBags(true) end
+	function OpenBackpack() ToggleAllBags(true) end
+	function ToggleAllBags(openonly) self:ToggleBags(openonly) end
 
 	-- Destroy bubbles help boxes
 	for i = 1, 13 do
