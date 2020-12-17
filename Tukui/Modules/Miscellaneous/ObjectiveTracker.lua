@@ -384,16 +384,16 @@ function ObjectiveTracker:SkinScenario()
 							
 							if Atlas and string.find(Atlas, "frame") then
 								Region:SetParent(T.Hider)
-
+								
 								Frame:CreateBackdrop("Transparent")
 
 								Frame.Backdrop:ClearAllPoints()
 								Frame.Backdrop:SetPoint("TOP", 0, -10)
-								Frame.Backdrop:SetPoint("LEFT", 0, 0)
+								Frame.Backdrop:SetPoint("LEFT", 4, 0)
 								Frame.Backdrop:SetPoint("RIGHT", -33, 0)
 								Frame.Backdrop:SetPoint("BOTTOM", 0, 4)
 								Frame.Backdrop:SetSize(214, 60)
-								Frame.Backdrop:SetFrameLevel(0)
+								Frame.Backdrop:SetFrameLevel(1)
 								Frame.Backdrop:CreateShadow()
 							end
 						end
@@ -409,9 +409,19 @@ function ObjectiveTracker:SkinScenario()
 		local Container = _G.ScenarioBlocksFrame.MawBuffsBlock.Container
 		
 		Container:StripTextures()
-		Container:HookScript("OnClick", Container.StripTextures)
+		
+		Container:CreateBackdrop("Transparent")
+		Container.Backdrop:ClearAllPoints()
+		Container.Backdrop:SetPoint("TOPLEFT", 15, -10)
+		Container.Backdrop:SetPoint("BOTTOMRIGHT", -33, 10)
+		Container.Backdrop:CreateShadow()
+		Container.SetAtlas = Noop
+		Container.SetPushedAtlas = Noop
+		Container.SetHighlightAtlas = Noop
 		
 		Container.List:StripTextures()
+		Container.List:CreateBackdrop("Transparent")
+		Container.List.Backdrop:CreateShadow()
 		Container.List:HookScript("OnShow", ObjectiveTracker.SkinAnimaButtons)
 	end
 end
