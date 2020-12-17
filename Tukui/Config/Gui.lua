@@ -249,7 +249,7 @@ local Raid = function(self)
 	Window:CreateSlider("Raid", "MaxUnitPerColumn", "Set max units per column", 1, 15, 1)
 	Window:CreateSlider("Raid", "WidthSize", "Set unit width", 79, 150, 1)
 	Window:CreateSlider("Raid", "HeightSize", "Set unit height", 45, 150, 1)
-	Window:CreateSlider("Raid", "Padding40", "Spacing in pixels between units", 0, 20, 1)
+	Window:CreateSlider("Raid", "Padding", "Spacing in pixels between units", 0, 20, 1)
 	
 	Window:CreateSection("|cf00fff00[RAID 20->40]|r Settings")
 	Window:CreateSlider("Raid", "Raid40MaxUnitPerColumn", "Set max units per column", 1, 15, 1)
