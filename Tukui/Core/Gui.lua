@@ -1834,7 +1834,7 @@ GUI.Enable = function(self)
 	self:UnpackQueue()
 
 	-- Set the frame height
-	local Height = (HeaderHeight * 2) + (Spacing + 2) + (self.WindowCount * MenuButtonHeight) + ((self.WindowCount) * Spacing)
+	local Height = (HeaderHeight * 2) + (Spacing + 2) + ((self.WindowCount - 1) * MenuButtonHeight) + ((self.WindowCount) * Spacing)
 
 	self:SetHeight(Height)
 
