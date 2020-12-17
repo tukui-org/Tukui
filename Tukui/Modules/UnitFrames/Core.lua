@@ -673,15 +673,15 @@ function UnitFrames:GetRaidFramesAttributes()
 		"showRaid", true,
 		"showPlayer", true,
 		"showSolo", true,
-		"xoffset", 10,
-		"yOffset", -10,
+		"xoffset", C.Raid.Padding,
+		"yOffset", -C.Raid.Padding,
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", C["Raid"].GroupBy.Value,
 		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
-		"columnSpacing", 10,
+		"columnSpacing", C.Raid.Padding,
 		"columnAnchorPoint", "LEFT"
 end
 
@@ -703,15 +703,15 @@ function UnitFrames:GetBigRaidFramesAttributes()
 		"showRaid", true,
 		"showPlayer", true,
 		"showSolo", true,
-		"xoffset", 10,
-		"yOffset", -10,
+		"xoffset", C.Raid.Padding40,
+		"yOffset", -C.Raid.Padding40,
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"groupBy", C["Raid"].GroupBy.Value,
 		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].Raid40MaxUnitPerColumn,
-		"columnSpacing", 10,
+		"columnSpacing", C.Raid.Padding40,
 		"columnAnchorPoint", "LEFT"
 end
 
@@ -729,10 +729,10 @@ function UnitFrames:GetPetRaidFramesAttributes()
 		"maxColumns", math.ceil(40 / 5),
 		"point", "TOP",
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
-		"columnSpacing", 10,
+		"columnSpacing", C.Raid.Padding,
 		"columnAnchorPoint", "LEFT",
-		"yOffset", -10,
-		"xOffset", 10,
+		"yOffset", -C.Raid.Padding,
+		"xOffset", C.Raid.Padding,
 		"initial-width", C.Raid.WidthSize,
 		"initial-height", C.Raid.HeightSize,
 		"oUF-initialConfigFunction", [[
@@ -756,10 +756,10 @@ function UnitFrames:GetBigPetRaidFramesAttributes()
 		"maxColumns", math.ceil(40 / 5),
 		"point", "TOP",
 		"unitsPerColumn", C["Raid"].Raid40MaxUnitPerColumn,
-		"columnSpacing", 10,
+		"columnSpacing", C.Raid.Padding40,
 		"columnAnchorPoint", "LEFT",
-		"yOffset", -10,
-		"xOffset", 10,
+		"yOffset", -C.Raid.Padding40,
+		"xOffset", C.Raid.Padding40,
 		"initial-width", C.Raid.Raid40WidthSize,
 		"initial-height", C.Raid.Raid40HeightSize,
 		"oUF-initialConfigFunction", [[
@@ -875,7 +875,7 @@ function UnitFrames:CreateUnits()
 			if C.Raid.ShowPets then
 				local Pet = oUF:SpawnHeader(UnitFrames:GetPetRaidFramesAttributes())
 				Pet:SetParent(T.PetHider)
-				Pet:SetPoint("TOPLEFT", Raid, "TOPRIGHT", 10, 0)
+				Pet:SetPoint("TOPLEFT", Raid, "TOPRIGHT", C.Raid.Padding, 0)
 
 				UnitFrames.Headers.RaidPet = Pet
 
@@ -889,7 +889,7 @@ function UnitFrames:CreateUnits()
 			if C.Raid.ShowPets then
 				local Pet40 = oUF:SpawnHeader(UnitFrames:GetBigPetRaidFramesAttributes())
 				Pet40:SetParent(T.PetHider)
-				Pet40:SetPoint("TOPLEFT", Raid40, "TOPRIGHT", 10, 0)
+				Pet40:SetPoint("TOPLEFT", Raid40, "TOPRIGHT", C.Raid.Padding40, 0)
 
 				UnitFrames.Headers.Raid40Pet = Pet40
 
