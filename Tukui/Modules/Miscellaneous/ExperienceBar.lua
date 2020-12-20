@@ -43,6 +43,8 @@ Experience.Menu = {
 			BarSelected.BarType = "AZERITE"
 			
 			Experience:Update()
+            
+            TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -117,10 +119,10 @@ function Experience:SetTooltip()
 			return
 		end
 
-		GameTooltip:AddLine("|cff0090FF"..XP..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
+		GameTooltip:AddDoubleLine("|cff0090FF"..XP..":|r", Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "%)")
 
 		if (IsRested == 1 and Rested) then
-			GameTooltip:AddLine("|cff4BAF4C"..TUTORIAL_TITLE26..": +" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)|r")
+			GameTooltip:AddDoubleLine("|cff4BAF4C"..TUTORIAL_TITLE26..":|r", "+" .. Rested .." (" .. floor(Rested / Max * 100) .. "%)")
 		end
 	elseif BarType == "ANIMA" then
 		Current, Max = Experience:GetAnima()
@@ -131,8 +133,8 @@ function Experience:SetTooltip()
 		
 		local Level = C_CovenantSanctumUI.GetRenownLevel()
 		
-		GameTooltip:AddLine("|cffFF3333"..COVENANT_SANCTUM_TAB_RENOWN.." "..LEVEL..": " .. Level)
-		GameTooltip:AddLine("|cff99CCFF"..ANIMA_DIVERSION_CURRENCY_TOOLTIP_TITLE..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "%)")
+		GameTooltip:AddDoubleLine("|cffFF3333"..COVENANT_SANCTUM_TAB_RENOWN.." "..LEVEL..": ", Level)
+		GameTooltip:AddDoubleLine("|cff99CCFF"..ANIMA_DIVERSION_CURRENCY_TOOLTIP_TITLE..": ", Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "%)")
 	elseif BarType == "PETXP" then
 		Current, Max = GetPetExperience()
 
@@ -140,7 +142,7 @@ function Experience:SetTooltip()
 			return
 		end
 
-		GameTooltip:AddLine("|cffFFFF66Pet XP: " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
+		GameTooltip:AddDoubleLine("|cff0090FF"..PET.." "..XP..":|r", Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "%)")
 	elseif BarType == "AZERITE" then
 		Current, Max, Level, Items = Experience:GetAzerite()
 
@@ -155,8 +157,6 @@ function Experience:SetTooltip()
 		GameTooltip:AddDoubleLine(ItemName..' ('..Level..')', format(ISLANDS_QUEUE_WEEKLY_QUEST_PROGRESS, Current, Max), 0.90, 0.80, 0.50)
 		GameTooltip:AddLine(' ')
 		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
-
-		GameTooltip:Show()
 	elseif BarType == "REP" then
 		local Current, Max, Standing = Experience:GetReputation()
 		local Name, ID = GetWatchedFactionInfo()
@@ -175,8 +175,8 @@ function Experience:SetTooltip()
 			GameTooltip:AddLine(PVP_HONOR_PRESTIGE_AVAILABLE)
 			GameTooltip:AddLine(PVP_HONOR_XP_BAR_CANNOT_PRESTIGE_HERE)
 		else
-			GameTooltip:AddLine("|cffee2222"..HONOR..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
-			GameTooltip:AddLine("|cffcccccc"..RANK..": " .. Level .. "|r")
+			GameTooltip:AddDoubleLine("|cffee2222"..HONOR..":|r", Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "%)")
+			GameTooltip:AddDoubleLine("|cffee2222"..RANK..":|r", Level)
 		end
 	end
 
@@ -190,6 +190,7 @@ end
 function Experience:GetAzerite()
 	local AzeriteItems = C_AzeriteItem.FindActiveAzeriteItem()
 	local XP, TotalXP = C_AzeriteItem.GetAzeriteItemXPInfo(AzeriteItems)
+    
 	local Level = C_AzeriteItem.GetPowerLevel(AzeriteItems)
 
 	return XP, TotalXP, Level, AzeriteItems
