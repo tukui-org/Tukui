@@ -85,6 +85,18 @@ Experience.Menu = {
 	},
 }
 
+Experience.Standing = {
+    [0] = UNKNOWN,
+    [1] = FACTION_STANDING_LABEL1,
+    [2] = FACTION_STANDING_LABEL2,
+    [3] = FACTION_STANDING_LABEL3,
+    [4] = FACTION_STANDING_LABEL4,
+    [5] = FACTION_STANDING_LABEL5,
+    [6] = FACTION_STANDING_LABEL6,
+    [7] = FACTION_STANDING_LABEL7,
+    [8] = FACTION_STANDING_LABEL8,
+}
+
 function Experience:SetTooltip()
 	local BarType = self.BarType
 	local Current, Max, Pts
@@ -146,12 +158,14 @@ function Experience:SetTooltip()
 
 		GameTooltip:Show()
 	elseif BarType == "REP" then
-		local Current, Max = Experience:GetReputation()
+		local Current, Max, Standing = Experience:GetReputation()
 		local Name, ID = GetWatchedFactionInfo()
 		local Colors = FACTION_BAR_COLORS
 		local Hex = T.RGBToHex(Colors[ID].r, Colors[ID].g, Colors[ID].b)
 		
-		GameTooltip:AddLine(Hex..Name..": " .. Current .. " / " .. Max .. " (" .. floor(Current / Max * 100) .. "% - " .. floor(Bars - (Bars * (Max - Current) / Max)) .. "/" .. Bars .. ")|r")
+		GameTooltip:AddLine(Name)
+        GameTooltip:AddLine("|cffffffff" .. Current .. " / " .. Max .. "|r")
+        GameTooltip:AddLine(Hex .. Standing .. "|r")
 	else
 		local Level = UnitHonorLevel("player")
 
@@ -186,12 +200,13 @@ function Experience:GetHonor()
 end
 
 function Experience:GetReputation()
-	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
+	local Name, Standing, Min, Max, Value, Faction = GetWatchedFactionInfo()
     
     local BarMax = Max - Min
     local BarValue = Value - Min
+    local BarStanding = Experience.Standing[Standing]
 	
-	return BarValue, BarMax
+	return BarValue, BarMax, BarStanding
 end
 
 function Experience:GetAnima()
