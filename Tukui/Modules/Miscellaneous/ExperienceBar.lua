@@ -187,8 +187,11 @@ end
 
 function Experience:GetReputation()
 	local Name, ID, Min, Max, Value = GetWatchedFactionInfo()
+    
+    local BarMax = Max - Min
+    local BarValue = Value - Min
 	
-	return Value, Max
+	return BarValue, BarMax
 end
 
 function Experience:GetAnima()
