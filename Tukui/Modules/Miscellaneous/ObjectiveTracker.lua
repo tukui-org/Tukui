@@ -44,7 +44,7 @@ function ObjectiveTracker:OnClick()
 end
 
 function ObjectiveTracker:SetDefaultPosition()
-	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -228, -325
+	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -68, -240
 	local Data = TukuiData[T.MyRealm][T.MyName]
 
 	local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
@@ -53,7 +53,7 @@ function ObjectiveTracker:SetDefaultPosition()
 
 	ObjectiveTrackerFrame:ClearAllPoints()
 	ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
-	ObjectiveTrackerFrame:SetHeight(396)
+    ObjectiveTrackerFrame:SetHeight(T.ScreenHeight - 520)
 	ObjectiveTrackerFrame.IsUserPlaced = function() return true end
 
 	Movers:RegisterFrame(ObjectiveFrameHolder, "Objectives Tracker")
