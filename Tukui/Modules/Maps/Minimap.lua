@@ -76,6 +76,8 @@ function Minimap:StyleMinimap()
 	local HelpOpenTicketButton = HelpOpenTicketButton
 	local Tracking = MiniMapTrackingButton
 
+	self:SetArchBlobRingScalar(0)
+	self:SetQuestBlobRingScalar(0)
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
 	self:SetScript("OnMouseUp", Minimap.OnMouseClick)
