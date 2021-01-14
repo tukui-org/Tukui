@@ -437,6 +437,7 @@ function ObjectiveTracker:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 		Bar:SetStatusBarTexture(Texture)
 		Bar:SetStatusBarColor(unpack(T.Colors.class[T.MyClass]))
 		Bar:CreateBackdrop()
+		
 		Bar.Backdrop:CreateShadow()
 		Bar.Backdrop:SetFrameLevel(Bar:GetFrameLevel())
 		Bar.Backdrop:SetOutside(Bar)
