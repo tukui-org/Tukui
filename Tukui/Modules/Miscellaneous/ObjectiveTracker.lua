@@ -23,10 +23,6 @@ local SCENARIO_TRACKER_MODULE = SCENARIO_TRACKER_MODULE
 local Class = select(2, UnitClass("player"))
 local ClassColor = T.Colors.class[Class]
 
-function ObjectiveTracker:Disable()
-	ObjectiveTrackerFrameHeaderMenuMinimizeButton:Hide()
-end
-
 function ObjectiveTracker:OnEnter()
 	self:SetFadeInTemplate(1, 1)
 end
@@ -457,9 +453,16 @@ end
 
 function ObjectiveTracker:Enable()
 	self:AddHooks()
-	self:Disable()
 	self:SetDefaultPosition()
 	self:SkinScenario()
+	
+	-- Skin Minimize Button
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton:CreateBackdrop()
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:SetFrameLevel(ObjectiveTrackerFrameHeaderMenuMinimizeButton:GetFrameLevel() + 1)
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture = ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:CreateTexture(nil, "OVERLAY")
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetSize(10, 10)
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetPoint("CENTER")
+	ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetTexture(C.Medias.ArrowUp)
 	
 	-- Add a keybind for toggling (SHIFT-O)
 	self.ToggleButton = CreateFrame("Button", "TukuiObjectiveTrackerToggleButton", UIParent, "SecureActionButtonTemplate")

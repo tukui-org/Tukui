@@ -61,13 +61,13 @@ T.FormatTime = function(s)
 	local Day, Hour, Minute = 86400, 3600, 60
 
 	if (s >= Day) then
-		return format("%dd", floor(s / Day))
+		return format("%dd", ceil(s / Day))
 	elseif (s >= Hour) then
-		return format("%dh", floor(s / Hour))
+		return format("%dh", ceil(s / Hour))
 	elseif (s >= Minute) then
-		return format("%dm", floor(s / Minute))
+		return format("%dm", ceil(s / Minute))
 	elseif (s >= Minute / 12) then
-		return floor(s)
+		return ceil(s)
 	end
 
 	return format("%.1f", s)

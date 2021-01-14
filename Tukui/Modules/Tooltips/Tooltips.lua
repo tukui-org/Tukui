@@ -90,7 +90,6 @@ function Tooltip:OnTooltipSetUnit()
 	end
 	
 	local Line1 = GameTooltipTextLeft1
-	local Line2 = GameTooltipTextLeft2
 	local Race = UnitRace(Unit)
 	local Class = UnitClass(Unit)
 	local Level = UnitLevel(Unit)
@@ -100,23 +99,19 @@ function Tooltip:OnTooltipSetUnit()
 	local CreatureClassification = UnitClassification(Unit)
 	local Relationship = UnitRealmRelationship(Unit);
 	local Title = UnitPVPName(Unit)
+	local IsEnemy = UnitIsEnemy("player", Unit)
 	local Color = Tooltip:GetTextColor(Unit) or "|CFFFFFFFF"
 	local R, G, B = GetQuestDifficultyColor(Level).r, GetQuestDifficultyColor(Level).g, GetQuestDifficultyColor(Level).b
-
-	if (UnitIsPlayer(Unit)) then
-		if Title then
-			Name = Title
-		end
-	end
-
+	
 	if Name then
+		local Extra = ""
+		local GuildColor = IsEnemy and "|cffff0000" or "|cff00ff00"
+		
 		if (UnitIsPlayer(Unit) and Guild) then
-			Guild = " |cff00ff00["..Guild.."]|r"
-		else
-			Guild = ""
+			Extra = GuildColor.."["..Guild.."]|r"
 		end
 
-		Line1:SetFormattedText("%s%s%s", Color, Name, "|r")
+		Line1:SetFormattedText("%s%s%s %s", Color, Name, "|r", Extra)
 	end
 
 	if (UnitIsPlayer(Unit) and UnitIsFriend("player", Unit)) then
@@ -131,6 +126,12 @@ function Tooltip:OnTooltipSetUnit()
 
 	for i = Offset, NumLines do
 		local Line = _G["GameTooltipTextLeft"..i]
+		
+		if (UnitIsPlayer(Unit) and Guild) then
+			if Line:GetText():find(Guild) then
+				Line:SetText(Realm)
+			end
+		end
 		
 		if (Line and Line:GetText() and Line:GetText():find("^" .. LEVEL)) then
 			if (UnitIsPlayer(Unit) and Race) then
