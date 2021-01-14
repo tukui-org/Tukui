@@ -175,13 +175,6 @@ function Movers:StartOrStopMoving()
 			if Frame.DragInfo:GetFrameStrata() ~= "HIGH" then
 				Frame.DragInfo:SetFrameStrata("HIGH")
 			end
-
-			if Frame.DragInfo:GetHeight() < 15 then
-				Frame.DragInfo:ClearAllPoints()
-				Frame.DragInfo:SetWidth(Frame:GetWidth())
-				Frame.DragInfo:SetHeight(23)
-				Frame.DragInfo:SetPoint("TOP", Frame)
-			end
 		else
 			if Frame.unit then
 				Frame.unit = Frame.oldunit
@@ -193,11 +186,6 @@ function Movers:StartOrStopMoving()
 				Frame.DragInfo:Hide()
 				Frame.DragInfo:SetScript("OnDragStart", nil)
 				Frame.DragInfo:SetScript("OnDragStop", nil)
-
-				if Frame.DragInfo.CurrentHeight then
-					Frame.DragInfo:ClearAllPoints()
-					Frame.DragInfo:SetAllPoints(Frame)
-				end
 			end
 		end
 	end
