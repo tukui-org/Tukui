@@ -82,10 +82,6 @@ function WorldMap:SetLargeWorldMap()
 
 	WorldMapFrame:OnFrameSizeChanged()
 	
-	if WorldMapFrame:GetMapID() then
-		WorldMapFrame.NavBar:Refresh()
-	end
-	
 	Nav:Hide()
 	
 	Borders:SetAlpha(0)
