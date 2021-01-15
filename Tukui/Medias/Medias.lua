@@ -20,6 +20,7 @@ C["Medias"] = {
 	["Sort"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Sort]],
 	["ArrowUp"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowUp]],
 	["ArrowDown"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowDown]],
+	["Close"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Close]],
 
 	-- colors
 	["BorderColor"] = C.General.BorderColor or { 0, 0, 0 },

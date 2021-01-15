@@ -91,7 +91,8 @@ function WorldMap:SetLargeWorldMap()
 	MoveButton:Show()
 	
 	CloseButton:ClearAllPoints()
-	CloseButton:SetPoint("TOPLEFT", 4, -70)
+	CloseButton:SetPoint("TOPLEFT", 4, -68)
+	CloseButton.Backdrop:Show()
 end
 
 function WorldMap:SetSmallWorldMap()
@@ -115,6 +116,7 @@ function WorldMap:SetSmallWorldMap()
 		
 		CloseButton:ClearAllPoints()
 		CloseButton:SetPoint("TOPRIGHT", 5, 5)
+		CloseButton.Backdrop:Hide()
 	end
 end
 
@@ -239,6 +241,15 @@ function WorldMap:Enable()
 	WorldMapFrameCloseButton:SetParent(WorldMapFrame)
 	WorldMapFrameCloseButton:SetFrameStrata(self.MoveButton:GetFrameStrata())
 	WorldMapFrameCloseButton:SetFrameLevel(self.MoveButton:GetFrameLevel())
+	
+	WorldMapFrameCloseButton:CreateBackdrop()
+	WorldMapFrameCloseButton.Backdrop:SetInside(WorldMapFrameCloseButton, 6, 6)
+	WorldMapFrameCloseButton.Backdrop:CreateShadow()
+	WorldMapFrameCloseButton.Backdrop:SetFrameLevel(WorldMapFrameCloseButton:GetFrameLevel() + 1)
+	WorldMapFrameCloseButton.Backdrop.Texture = WorldMapFrameCloseButton.Backdrop:CreateTexture(nil, "OVERLAY")
+	WorldMapFrameCloseButton.Backdrop.Texture:SetSize(12, 12)
+	WorldMapFrameCloseButton.Backdrop.Texture:SetPoint("CENTER")
+	WorldMapFrameCloseButton.Backdrop.Texture:SetTexture(C.Medias.Close)
 	
 	hooksecurefunc(WorldMapFrame, "Maximize", self.SetLargeWorldMap)
 	hooksecurefunc(WorldMapFrame, "Minimize", self.SetSmallWorldMap)
