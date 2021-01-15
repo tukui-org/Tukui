@@ -217,6 +217,10 @@ function WorldMap:AddMoving()
 	end)
 end
 
+function WorldMap:UpdateMapFading()
+	FadeMap(WorldMapFrame, C.Misc.FadeWorldMapAlpha / 100)
+end
+
 function WorldMap:Enable()
 	if not C.Misc.WorldMapEnable then
 		return
@@ -244,6 +248,7 @@ function WorldMap:Enable()
 	hooksecurefunc(WorldMapFrame, "Minimize", self.SetSmallWorldMap)
 	hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", self.SynchronizeDisplayState)
 	hooksecurefunc(WorldMapFrame, "UpdateMaximizedSize", self.UpdateMaximizedSize)
+	hooksecurefunc(PlayerMovementFrameFader, "AddDeferredFrame", self.UpdateMapFading)
 
 	-- Always use bigger map on Tukui
 	SetCVar("miniWorldMap", 0)

@@ -133,6 +133,7 @@ C["Misc"] = {
 	["ItemLevel"] = true,
 	["ThreatBar"] = true,
 	["WorldMapEnable"] = true,
+	["FadeWorldMapAlpha"] = 100,
 	["ExperienceEnable"] = true,
 	["AutoSellJunk"] = true,
 	["AutoRepair"] = true,
