@@ -5,6 +5,7 @@ local UnitFrames = T["UnitFrames"]
 function UnitFrames:Pet()
 	local HealthTexture = T.GetTexture(C["Textures"].UFHealthTexture)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+	local CastTexture = T.GetTexture(C["Textures"].UFCastTexture)
 	local Font = T.GetFont(C["UnitFrames"].Font)
 
 	self:RegisterForClicks("AnyUp")
@@ -165,6 +166,39 @@ function UnitFrames:Pet()
 		}
 
 		self.HealthPrediction = HealthPrediction
+	end
+	
+	if (C.UnitFrames.CastBar) then
+		local CastBar = CreateFrame("StatusBar", "TukuiPetCastBar", self)
+		CastBar:SetFrameStrata(self:GetFrameStrata())
+		CastBar:SetStatusBarTexture(CastTexture)
+		CastBar:SetFrameLevel(6)
+		CastBar:SetInside(Panel, 0, 0)
+
+		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
+		CastBar.Background:SetAllPoints(CastBar)
+		CastBar.Background:SetTexture(C.Medias.Normal)
+		CastBar.Background:SetVertexColor(0.15, 0.15, 0.15)
+
+		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
+		CastBar.Time:SetFontObject(Font)
+		CastBar.Time:SetPoint("RIGHT", Panel, "RIGHT", -4, 0)
+		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
+		CastBar.Time:SetJustifyH("RIGHT")
+
+		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
+		CastBar.Text:SetFontObject(Font)
+		CastBar.Text:SetPoint("LEFT", Panel, "LEFT", 4, 0)
+		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
+		CastBar.Text:SetWidth(166)
+		CastBar.Text:SetJustifyH("LEFT")
+
+		CastBar.CustomTimeText = UnitFrames.CustomCastTimeText
+		CastBar.CustomDelayText = UnitFrames.CustomCastDelayText
+		CastBar.PostCastStart = UnitFrames.CheckCast
+		CastBar.PostChannelStart = UnitFrames.CheckChannel
+
+		self.Castbar = CastBar
 	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium] [Tukui:DiffColor][level]")
