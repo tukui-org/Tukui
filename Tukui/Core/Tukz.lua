@@ -44,6 +44,11 @@ function Tukz:DefaultOmniBarSettings()
 	self.settings.glow = false
 	self.settings.size = 32
 	self.settings.padding = 6
+	self.settings.locked = true
+	self.settings.center = true
+	self.settings.growUpward = false
+	self.settings.columns = 7
+	self.settings.border = false
 
 	self:SetPoint("CENTER", UIParent, "CENTER", 0, -200)
 end
