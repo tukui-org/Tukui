@@ -162,6 +162,7 @@ C["NamePlates"] = {
 	["Font"] = "Tukui Outline",
 	["OnlySelfDebuffs"] = true,
 	["QuestIcon"] = true,
+	["ClassIcon"] = true,
 	["HighlightColor"] = {1, 1, 0},
 	["HighlightSize"] = 10,
 	["ColorThreat"] = false, 

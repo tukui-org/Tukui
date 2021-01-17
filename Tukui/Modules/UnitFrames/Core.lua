@@ -149,6 +149,27 @@ function UnitFrames:Highlight()
 	end
 end
 
+function UnitFrames:UpdateNameplateClassIcon()
+	if UnitIsPlayer(self.unit) then
+		local Class = select(2, UnitClass(self.unit))
+		
+		if Class then
+			local Left, Right, Top, Bottom = unpack(CLASS_ICON_TCOORDS[Class])
+
+			-- Remove borders on icon
+			Left = Left + (Right - Left) * 0.075
+			Right = Right - (Right - Left) * 0.075
+			Top = Top + (Bottom - Top) * 0.075
+			Bottom = Bottom - (Bottom - Top) * 0.075
+
+			self.ClassIcon.Texture:SetTexCoord(Left, Right, Top, Bottom)
+			self.ClassIcon:SetAlpha(1)
+		end
+	else
+		self.ClassIcon:SetAlpha(0)
+	end
+end
+
 function UnitFrames:PostCreateAuraBar(bar)
 	if not bar.Backdrop then
 		bar:CreateBackdrop("Transparent")

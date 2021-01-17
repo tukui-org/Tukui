@@ -195,6 +195,7 @@ local NamePlates = function(self)
 	Window:CreateSwitch("NamePlates", "NameplateCastBar", "Enable nameplate cast")
 	Window:CreateSwitch("NamePlates", "ColorThreat", "Enable nameplate coloring by threat")
 	Window:CreateSwitch("NamePlates", "QuestIcon", "Enable nameplate quest icon indicator")
+	Window:CreateSwitch("NamePlates", "ClassIcon", "Enable nameplate class icon indicator (PvP recommended)")
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("NamePlates", "OnlySelfDebuffs", "Display only our debuffs")

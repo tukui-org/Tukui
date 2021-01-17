@@ -158,6 +158,25 @@ function UnitFrames:Nameplates()
 		
 		self.QuestIcon = QuestIcon
 	end
+	
+	if C.NamePlates.ClassIcon then
+		local ClassIcon = CreateFrame("Frame", self:GetName().."Class", self)
+		ClassIcon:SetSize(self:GetHeight() + 14, self:GetHeight() + 14)
+		ClassIcon:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)
+		ClassIcon:CreateBackdrop()
+		ClassIcon.Backdrop:CreateShadow()
+		ClassIcon.Texture = ClassIcon:CreateTexture(nil, "OVERLAY")
+		ClassIcon.Texture:SetAllPoints(ClassIcon)
+		ClassIcon.Texture:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
+		
+		-- Reposition castbar icon to cover class icon
+		self.Castbar.Button:ClearAllPoints()
+		self.Castbar.Button:SetAllPoints(ClassIcon)
+		
+		self.ClassIcon = ClassIcon
+		
+		self:RegisterEvent("NAME_PLATE_UNIT_ADDED", UnitFrames.UpdateNameplateClassIcon, true)
+	end
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor]"..NameLength)
 	self:Tag(Health.Value, C.NamePlates.HealthTag.Value)
