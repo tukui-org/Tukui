@@ -238,9 +238,9 @@ function UnitFrames:CheckInterrupt(unit)
 	local Power = Frame.Power
 
 	if (self.notInterruptible and UnitCanAttack("player", unit)) then
-		self:SetStatusBarColor(0.87, 0.37, 0.37, 0.7)
+		self:SetStatusBarColor(1, 0, 0, 1)
 	else
-		self:SetStatusBarColor(0.29, 0.67, 0.30, 0.7)
+		self:SetStatusBarColor(0, 1, 0, 1)
 	end
 end
 
@@ -478,7 +478,7 @@ function UnitFrames:Update()
 end
 
 function UnitFrames:BuffIsStealable(unit, button, name, texture, count, debuffType)
-	-- We want to use this custom filter for mythic+, so we ignore pvp
+	-- We want to use this custom filter for mythic+, bg, arena
 	local IsPlayer = UnitIsPlayer(unit) or false
 	local InInstance, InstanceType = IsInInstance()
 

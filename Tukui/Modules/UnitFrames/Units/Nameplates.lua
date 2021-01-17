@@ -165,6 +165,7 @@ function UnitFrames:Nameplates()
 		ClassIcon:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)
 		ClassIcon:CreateBackdrop()
 		ClassIcon.Backdrop:CreateShadow()
+		
 		ClassIcon.Texture = ClassIcon:CreateTexture(nil, "OVERLAY")
 		ClassIcon.Texture:SetAllPoints(ClassIcon)
 		ClassIcon.Texture:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
@@ -172,6 +173,12 @@ function UnitFrames:Nameplates()
 		-- Reposition castbar icon to cover class icon
 		self.Castbar.Button:ClearAllPoints()
 		self.Castbar.Button:SetAllPoints(ClassIcon)
+		
+		self.Castbar.Button.Shadow:ClearAllPoints()
+		self.Castbar.Button.Shadow:SetOutside(self.Castbar.Button, 4, 4)
+		self.Castbar.Button.Shadow:SetBackdropBorderColor(0, 1, 0, 1)
+		self.Castbar.Button.Shadow:SetFrameLevel(ClassIcon:GetFrameLevel() + 2)
+		self.Castbar.Button.Shadow:SetFrameStrata(ClassIcon:GetFrameStrata())
 		
 		self.ClassIcon = ClassIcon
 		
