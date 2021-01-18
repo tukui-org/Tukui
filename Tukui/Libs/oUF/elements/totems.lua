@@ -156,11 +156,6 @@ local function Enable(self)
 
 		self:RegisterEvent('PLAYER_TOTEM_UPDATE', Path, true)
 
-		TotemFrame:UnregisterEvent('PLAYER_TOTEM_UPDATE')
-		TotemFrame:UnregisterEvent('PLAYER_ENTERING_WORLD')
-		TotemFrame:UnregisterEvent('UPDATE_SHAPESHIFT_FORM')
-		TotemFrame:UnregisterEvent('PLAYER_TALENT_UPDATE')
-
 		return true
 	end
 end
@@ -171,11 +166,6 @@ local function Disable(self)
 		for i = 1, #element do
 			element[i]:Hide()
 		end
-
-		TotemFrame:RegisterEvent('PLAYER_TOTEM_UPDATE')
-		TotemFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
-		TotemFrame:RegisterEvent('UPDATE_SHAPESHIFT_FORM')
-		TotemFrame:RegisterEvent('PLAYER_TALENT_UPDATE')
 
 		self:UnregisterEvent('PLAYER_TOTEM_UPDATE', Path)
 	end
