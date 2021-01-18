@@ -806,31 +806,20 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 			end
 		elseif(event == 'NAME_PLATE_UNIT_ADDED' and unit) then
 			local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
-
 			if(not nameplate) then return end
-			
-			local widgets = UnitWidgetSet(unit)
-				
+
 			if(not nameplate.unitFrame) then
 				nameplate.style = style
 
 				nameplate.unitFrame = CreateFrame('Button', prefix..nameplate:GetName(), nameplate)
 				nameplate.unitFrame:EnableMouse(false)
 				nameplate.unitFrame.isNamePlate = true
-					
-				nameplate.UnitFrame.WidgetContainer:SetParent(UIParent)
 
 				Private.UpdateUnits(nameplate.unitFrame, unit)
 
 				walkObject(nameplate.unitFrame, unit)
 			else
 				Private.UpdateUnits(nameplate.unitFrame, unit)
-			end
-				
-			if widgets then
-				nameplate.unitFrame:SetAlpha(0)
-			else
-				nameplate.unitFrame:SetAlpha(1)
 			end
 
 			nameplate.unitFrame:SetAttribute('unit', unit)
