@@ -237,10 +237,18 @@ function UnitFrames:CheckInterrupt(unit)
 	local Frame = self:GetParent()
 	local Power = Frame.Power
 
-	if (self.notInterruptible and UnitCanAttack("player", unit)) then
-		self:SetStatusBarColor(1, 0, 0, 1)
+	if (self.notInterruptible) then
+		self:SetStatusBarColor(0.85, 0.09, 0.09, 1)
+		
+		if C.NamePlates.ClassIcon and self.Button.Shadow and unit:find("nameplate") then
+			self.Button.Shadow:SetBackdropBorderColor(0.85, 0.09, 0.09, 1)
+		end
 	else
-		self:SetStatusBarColor(0, 1, 0, 1)
+		self:SetStatusBarColor(0.29, 0.75, 0.30, 1)
+		
+		if C.NamePlates.ClassIcon and self.Button.Shadow and unit:find("nameplate") then
+			self.Button.Shadow:SetBackdropBorderColor(0.29, 0.75, 0.30, 1)
+		end
 	end
 end
 

@@ -164,6 +164,7 @@ function UnitFrames:Nameplates()
 		ClassIcon:SetSize(self:GetHeight() + 14, self:GetHeight() + 14)
 		ClassIcon:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)
 		ClassIcon:CreateBackdrop()
+		ClassIcon:SetAlpha(0)
 		ClassIcon.Backdrop:CreateShadow()
 		
 		ClassIcon.Texture = ClassIcon:CreateTexture(nil, "OVERLAY")
@@ -176,8 +177,7 @@ function UnitFrames:Nameplates()
 		
 		self.Castbar.Button.Shadow:ClearAllPoints()
 		self.Castbar.Button.Shadow:SetOutside(self.Castbar.Button, 4, 4)
-		self.Castbar.Button.Shadow:SetBackdropBorderColor(0, 1, 0, 1)
-		self.Castbar.Button.Shadow:SetFrameLevel(ClassIcon:GetFrameLevel() + 2)
+		self.Castbar.Button.Shadow:SetFrameLevel(ClassIcon:GetFrameLevel() + 1)
 		self.Castbar.Button.Shadow:SetFrameStrata(ClassIcon:GetFrameStrata())
 		
 		self.ClassIcon = ClassIcon
