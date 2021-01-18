@@ -219,12 +219,23 @@ local function Update(self, event, unit)
 	end
 
 	local cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
-	element:SetMinMaxValues(min or 0, max)
+	
+	if element.smoothing then
+		element:SetMinMaxSmoothedValue(min or 0, max)
 
-	if(UnitIsConnected(unit)) then
-		element:SetValue(cur)
+		if(UnitIsConnected(unit)) then
+			element:SetSmoothedValue(cur)
+		else
+			element:SetSmoothedValue(max)
+		end
 	else
-		element:SetValue(max)
+		element:SetMinMaxValues(min or 0, max)
+
+		if(UnitIsConnected(unit)) then
+			element:SetValue(cur)
+		else
+			element:SetValue(max)
+		end
 	end
 
 	element.cur = cur
@@ -387,6 +398,11 @@ local function Enable(self)
 			self:RegisterEvent('UNIT_POWER_FREQUENT', Path)
 		else
 			self:RegisterEvent('UNIT_POWER_UPDATE', Path)
+		end
+		
+		if(element.smoothing) then
+			element.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
+			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
 		end
 
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)

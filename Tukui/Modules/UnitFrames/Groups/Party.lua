@@ -161,6 +161,12 @@ function UnitFrames:Party()
 	Highlight:SetBackdropBorderColor(unpack(C.Party.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
 
 	self.Health = Health
 	self.Health.bg = Health.Background

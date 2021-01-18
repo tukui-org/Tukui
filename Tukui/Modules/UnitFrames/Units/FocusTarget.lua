@@ -141,6 +141,12 @@ function UnitFrames:FocusTarget()
 		self.HealthPrediction = HealthPrediction
 	end
 	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
+	
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameMedium]")
 	self:Tag(Health.Value, C.UnitFrames.FocusTargetHealthTag.Value)
 	self.Health = Health

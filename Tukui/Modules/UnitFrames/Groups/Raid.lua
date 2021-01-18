@@ -203,6 +203,12 @@ function UnitFrames:Raid()
 	Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
 
 	self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
 	self:Tag(Health.Value, C.Raid.HealthTag.Value)

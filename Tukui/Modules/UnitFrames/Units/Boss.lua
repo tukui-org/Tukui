@@ -190,6 +190,12 @@ function UnitFrames:Boss()
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
 	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
+	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameMedium]")

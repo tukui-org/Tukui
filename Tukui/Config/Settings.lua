@@ -325,6 +325,7 @@ C["UnitFrames"] = {
 	["HighlightSize"] = 10,
 	["HighlightColor"] = {0, 1, 0},
 	["RangeAlpha"] = 0.3,
+	["Smoothing"] = false,
 	["PlayerHealthTag"] = {
 		["Options"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",

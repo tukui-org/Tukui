@@ -323,6 +323,12 @@ function UnitFrames:Target()
 
 		self.HealthPrediction = HealthPrediction
 	end
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	self:Tag(Health.Value, C.UnitFrames.TargetHealthTag.Value)

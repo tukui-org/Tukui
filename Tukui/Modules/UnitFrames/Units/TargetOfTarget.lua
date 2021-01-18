@@ -135,6 +135,11 @@ function UnitFrames:TargetOfTarget()
 
 		self.HealthPrediction = HealthPrediction
 	end
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium]")
 	self.Panel = Panel

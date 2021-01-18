@@ -184,6 +184,12 @@ function UnitFrames:Nameplates()
 		
 		self:RegisterEvent("NAME_PLATE_UNIT_ADDED", UnitFrames.UpdateNameplateClassIcon, true)
 	end
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameHostilityColor]"..NameLength)
 	self:Tag(Health.Value, C.NamePlates.HealthTag.Value)

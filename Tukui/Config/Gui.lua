@@ -357,6 +357,7 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "AurasBelow", "Move auras below unitframes")
 
 	Window:CreateSection("Styling")
+	Window:CreateSwitch("UnitFrames", "Smoothing", "Animate health and power bars |cff00ff00[NEW/BETA/WIP]|r")
 	Window:CreateSwitch("UnitFrames", "TargetEnemyHostileColor", "Enemy health bar colored by hostile reaction color")
 	Window:CreateSlider("UnitFrames", "StatusBarBackgroundMultiplier", "Health and Power background % opacity", 0, 50, 1)
 	Window:CreateSwitch("UnitFrames", "UnlinkCastBar", "Unlink cast bars from unitframes")

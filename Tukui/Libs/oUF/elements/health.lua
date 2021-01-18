@@ -162,12 +162,23 @@ local function Update(self, event, unit)
 	end
 
 	local cur, max = UnitHealth(unit), UnitHealthMax(unit)
-	element:SetMinMaxValues(0, max)
+	
+	if element.smoothing then
+		element:SetMinMaxSmoothedValue(0, max)
 
-	if(UnitIsConnected(unit)) then
-		element:SetValue(cur)
+		if(UnitIsConnected(unit)) then
+			element:SetSmoothedValue(cur)
+		else
+			element:SetSmoothedValue(max)
+		end
 	else
-		element:SetValue(max)
+		element:SetMinMaxValues(0, max)
+
+		if(UnitIsConnected(unit)) then
+			element:SetValue(cur)
+		else
+			element:SetValue(max)
+		end
 	end
 
 	element.cur = cur
@@ -299,6 +310,11 @@ local function Enable(self, unit)
 
 		if(element.colorThreat) then
 			self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', ColorPath)
+		end
+		
+		if(element.smoothing) then
+			element.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
+			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
 		end
 
 		self:RegisterEvent('UNIT_HEALTH', Path)

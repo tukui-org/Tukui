@@ -509,7 +509,13 @@ function UnitFrames:Player()
 	self.PowerPrediction = {}
 	self.PowerPrediction.mainBar = Power.Prediction
 	self.RestingIndicator = RestingIndicator
-
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
+	
 	-- Classes
 	UnitFrames.AddClassFeatures[Class](self)
 

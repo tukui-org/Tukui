@@ -200,6 +200,12 @@ function UnitFrames:Pet()
 
 		self.Castbar = CastBar
 	end
+	
+	-- Enable smoothing bars animation?
+	if C.UnitFrames.Smoothing then
+		Health.smoothing = true
+		Power.smoothing = true
+	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium] [Tukui:DiffColor][level]")
 	self.Panel = Panel
