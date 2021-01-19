@@ -72,7 +72,7 @@ function UnitFrames:Raid()
 	Name:SetPoint("CENTER")
 	Name:SetFontObject(Font)
 
-	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY", 2)
+	local ReadyCheck = Power:CreateTexture(nil, "OVERLAY", nil, 2)
 	ReadyCheck:SetHeight(12)
 	ReadyCheck:SetWidth(12)
 	ReadyCheck:SetPoint("CENTER")

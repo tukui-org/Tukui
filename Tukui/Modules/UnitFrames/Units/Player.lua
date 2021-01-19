@@ -185,22 +185,22 @@ function UnitFrames:Player()
 		end
 	end
 
-	local Combat = Health:CreateTexture(nil, "OVERLAY", 1)
+	local Combat = Health:CreateTexture(nil, "OVERLAY", nil, 1)
 	Combat:SetSize(19, 19)
 	Combat:SetPoint("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
-	local Status = Panel:CreateFontString(nil, "OVERLAY", 1)
+	local Status = Panel:CreateFontString(nil, "OVERLAY", nil, 1)
 	Status:SetFontObject(Font)
 	Status:SetPoint("CENTER", Panel, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
 
-	local Leader = Health:CreateTexture(nil, "OVERLAY", 2)
+	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	Leader:SetSize(14, 14)
 	Leader:SetPoint("TOPLEFT", 2, 8)
 
-	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", 2)
+	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	MasterLooter:SetSize(14, 14)
 	MasterLooter:SetPoint("TOPRIGHT", -2, 8)
 
@@ -370,12 +370,12 @@ function UnitFrames:Player()
 		self.ComboPointsBar = ComboPoints
 	end
 
-	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", 7)
+	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", nil, 7)
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
-	local RestingIndicator = Panel:CreateTexture(nil, "OVERLAY", 7)
+	local RestingIndicator = Panel:CreateTexture(nil, "OVERLAY", nil, 7)
 	RestingIndicator:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\Resting]])
 	RestingIndicator:SetSize(20, 20)
 	RestingIndicator:SetPoint("CENTER", Panel, "CENTER", 0, 0)
