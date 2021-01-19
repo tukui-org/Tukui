@@ -173,6 +173,7 @@ function ObjectiveTracker:UpdateProgressBar(_, line)
 			if (BorderRight) then BorderRight:SetAlpha(0) end
 			if (BorderMid) then BorderMid:SetAlpha(0) end
 
+			Bar:StripTextures()
 			Bar:SetHeight(20)
 			Bar:SetStatusBarTexture(Texture)
 			Bar:SetStatusBarColor(unpack(T.Colors.class[T.MyClass]))
