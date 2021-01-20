@@ -64,6 +64,7 @@ end
 function RaidUtilities:Enable()
 	self:SetSize((ButtonSize * 11) + (4 * 10), (ButtonSize * 2) + (4 * 1))
 	self:SetPoint("BOTTOMRIGHT", -186, 230)
+	self:Hide()
 	
 	for i = 1, #Icons do
 		local Icon = Icons[i].Icon
