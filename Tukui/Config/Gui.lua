@@ -20,6 +20,7 @@ local General = function(self)
 	Window:CreateSection("Border & Backdrop")
 	Window:CreateColorSelection("General", "BackdropColor", "Backdrop color")
 	Window:CreateColorSelection("General", "BorderColor", "Border color")
+	Window:CreateSwitch("General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("General", "HideShadows", "Hide frame shadows")
 end
 

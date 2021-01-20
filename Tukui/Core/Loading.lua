@@ -124,7 +124,7 @@ function Loading:Enable()
 	self:LoadCustomSettings()
 
 	Toolkit.Settings.BackdropColor = C.General.BackdropColor
-	Toolkit.Settings.BorderColor = C.General.BorderColor
+	Toolkit.Settings.BorderColor = C.General.ClassColorBorder and T.Colors.class[T.MyClass] or C.General.BorderColor
 	Toolkit.Settings.UIScale = C.General.UIScale
 
 	if C.General.HideShadows then
