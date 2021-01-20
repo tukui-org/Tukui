@@ -146,19 +146,19 @@ function RaidUtilities:Enable()
 			Diamond:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Diamond:SetSize(ButtonSize, ButtonSize)
 			Diamond:SetPoint("TOPLEFT", Circle, "TOPRIGHT", 4, 0)
-			Circle.ID = 3
+			Diamond.ID = 3
 			
 			local Triangle = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetTriangle", Icons[2].Icon, "Set "..Icons[2].Icon.." on current target")
 			Triangle:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Triangle:SetSize(ButtonSize, ButtonSize)
 			Triangle:SetPoint("TOPLEFT", Diamond, "TOPRIGHT", 4, 0)
-			Circle.ID = 4
+			Triangle.ID = 4
 			
 			local Moon = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetMoon", Icons[7].Icon, "Set "..Icons[7].Icon.." on current target")
 			Moon:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Moon:SetSize(ButtonSize, ButtonSize)
 			Moon:SetPoint("BOTTOMLEFT", Remove, "BOTTOMRIGHT", 4, 0)
-			Circle.ID = 5
+			Moon.ID = 5
 			
 			local Square = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetSquare", Icons[1].Icon, "Set "..Icons[1].Icon.." on current target")
 			Square:SetScript("OnClick", RaidUtilities.SetRaidTarget)
