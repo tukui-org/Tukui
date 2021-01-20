@@ -68,6 +68,7 @@ end
 function RaidUtilities:Enable()
 	self:SetSize(450, (ButtonSize * 2) + (4 * 1))
 	self:SetPoint("BOTTOMRIGHT", -40, 229)
+	self:SetFrameStrata("BACKGROUND")
 	self:Hide()
 	
 	for i = 1, #Icons do
