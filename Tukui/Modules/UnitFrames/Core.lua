@@ -240,7 +240,7 @@ function UnitFrames:CheckInterrupt(unit)
 	if (self.notInterruptible) then
 		self:SetStatusBarColor(0.85, 0.09, 0.09, 1)
 		
-		if C.NamePlates.ClassIcon and self.Button.Shadow and unit:find("nameplate") then
+		if C.NamePlates.ClassIcon and unit:find("nameplate") and self.Button and self.Button.Shadow then
 			self.Button.Shadow:SetBackdropBorderColor(0.85, 0.09, 0.09, 1)
 		end
 	else
