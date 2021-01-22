@@ -426,35 +426,6 @@ function ObjectiveTracker:SkinScenario()
 	end
 end
 
-function ObjectiveTracker:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
-	local Bar = self.Bar
-	
-	if Bar and not Bar.IsSkinned then
-		local Texture = T.GetTexture(C["Textures"].QuestProgressTexture)
-		
-		Bar.BGLeft:SetAlpha(0)
-		Bar.BGRight:SetAlpha(0)
-		Bar.BGCenter:SetAlpha(0)
-		Bar.BorderLeft:SetAlpha(0)
-		Bar.BorderRight:SetAlpha(0)
-		Bar.BorderCenter:SetAlpha(0)
-		Bar:SetStatusBarTexture(Texture)
-		Bar:SetStatusBarColor(unpack(T.Colors.class[T.MyClass]))
-		Bar:CreateBackdrop()
-		
-		Bar.Backdrop:CreateShadow()
-		Bar.Backdrop:SetFrameLevel(Bar:GetFrameLevel())
-		Bar.Backdrop:SetOutside(Bar)
-		
-		Bar.IsSkinned = true
-	end
-	
-	if widgetInfo.text == "" then
-		self.Bar:ClearAllPoints()
-		self.Bar:SetPoint("TOP", UIParent, "TOP", 0, -28)
-	end
-end
-
 function ObjectiveTracker:AddHooks()
 	hooksecurefunc("ObjectiveTracker_Update", self.Skin)
 	hooksecurefunc("ScenarioStage_CustomizeBlock", self.SkinScenario)
@@ -473,8 +444,6 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
 	hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)
 	hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
-	
-	hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", self.SkinUIWidgetStatusBar)
 end
 
 function ObjectiveTracker:Toggle()

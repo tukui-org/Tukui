@@ -818,7 +818,7 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 				nameplate.unitFrame:EnableMouse(false)
 				nameplate.unitFrame.isNamePlate = true
 					
-				nameplate.UnitFrame.WidgetContainer:SetParent(UIParent)
+				nameplate.UnitFrame.WidgetContainer:SetParent(WorldFrame)
 
 				Private.UpdateUnits(nameplate.unitFrame, unit)
 
