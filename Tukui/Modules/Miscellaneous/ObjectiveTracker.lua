@@ -217,7 +217,7 @@ end
 
 function ObjectiveTracker:UpdateProgressBarColors(Min)
 	if (self.Bar and Min) then
-		local R, G, B = T.ColorGradient(Min, 100, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
+		local R, G, B = T.ColorGradient(Min, 100, .8, 0, 0, .8, .8, 0, 0, .8, 0)
 		
 		self.Bar:SetStatusBarColor(R, G, B)
 	end
@@ -440,6 +440,9 @@ function ObjectiveTracker:AddHooks()
 	hooksecurefunc(SCENARIO_CONTENT_TRACKER_MODULE, "AddProgressBar", self.UpdateProgressBar)
 	hooksecurefunc(SCENARIO_TRACKER_MODULE, "AddProgressBar", self.UpdateProgressBar)
 	hooksecurefunc(UI_WIDGET_TRACKER_MODULE, "AddProgressBar", self.UpdateProgressBar)
+	hooksecurefunc("BonusObjectiveTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
+	hooksecurefunc("ObjectiveTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
+	hooksecurefunc("ScenarioTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 	hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
 	hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)

@@ -7,7 +7,7 @@ function AltPowerBar:Update()
 	local Status = self.Status
 	local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
 	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX) or 0
-	local R, G, B = T.ColorGradient(Power, MaxPower, 0, .8, 0, .8, .8, 0, .8, 0, 0)
+	local R, G, B = T.ColorGradient(Power, MaxPower, .8, 0, 0, .8, .8, 0, 0, .8, 0)
 	local PowerName = GetUnitPowerBarStrings("player") or UNKNOWN
 
 	Status:SetMinMaxValues(0, MaxPower)
