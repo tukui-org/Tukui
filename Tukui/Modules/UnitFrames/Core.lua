@@ -249,6 +249,9 @@ function UnitFrames:SetStatusCastBarColor(unit)
 	end
 end
 
+-- Deprecated, CheckInterrupt was renamed to SetStatusCastBarColor and will be removed soon
+UnitFrames.CheckInterrupt = UnitFrames.SetStatusCastBarColor
+
 function UnitFrames:CheckCast(unit, name, rank, castid)
 	UnitFrames.SetStatusCastBarColor(self, unit)
 end
