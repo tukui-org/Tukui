@@ -229,35 +229,32 @@ function UnitFrames:CustomCastDelayText(duration)
 	self.Time:SetText(Value)
 end
 
-function UnitFrames:CheckInterrupt(unit)
+function UnitFrames:SetStatusCastBarColor(unit)
 	if (unit == "vehicle") then
 		unit = "player"
 	end
 
-	local Frame = self:GetParent()
-	local Power = Frame.Power
-
 	if (self.notInterruptible) then
-		self:SetStatusBarColor(0.85, 0.09, 0.09, 1)
-		
-		if C.NamePlates.ClassIcon and unit:find("nameplate") and self.Button and self.Button.Shadow then
-			self.Button.Shadow:SetBackdropBorderColor(0.85, 0.09, 0.09, 1)
-		end
+		self:SetStatusBarColor(unpack(C.UnitFrames.NotInterruptibleColor))
+	elseif (self.casting) then
+		self:SetStatusBarColor(unpack(C.UnitFrames.CastingColor))
+	elseif (self.channeling) then
+		self:SetStatusBarColor(unpack(C.UnitFrames.ChannelingColor))
 	else
-		self:SetStatusBarColor(0.29, 0.75, 0.30, 1)
-		
-		if C.NamePlates.ClassIcon and unit:find("nameplate") and self.Button and self.Button.Shadow then
-			self.Button.Shadow:SetBackdropBorderColor(0.29, 0.75, 0.30, 1)
-		end
+		self:SetStatusBarColor(1, 1, 1)
+	end
+	
+	if C.NamePlates.ClassIcon and unit:find("nameplate") and self.Button and self.Button.Shadow then
+		self.Button.Shadow:SetBackdropBorderColor(self:GetStatusBarColor())
 	end
 end
 
 function UnitFrames:CheckCast(unit, name, rank, castid)
-	UnitFrames.CheckInterrupt(self, unit)
+	UnitFrames.SetStatusCastBarColor(self, unit)
 end
 
 function UnitFrames:CheckChannel(unit, name, rank)
-	UnitFrames.CheckInterrupt(self, unit)
+	UnitFrames.SetStatusCastBarColor(self, unit)
 end
 
 function UnitFrames:PreUpdateHealth(unit)

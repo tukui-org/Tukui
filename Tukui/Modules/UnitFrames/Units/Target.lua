@@ -112,6 +112,11 @@ function UnitFrames:Target()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(166)
 		CastBar.Text:SetJustifyH("LEFT")
+		
+		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
+		CastBar.Spark:SetSize(8, CastBar:GetHeight())
+		CastBar.Spark:SetBlendMode("ADD")
+		CastBar.Spark:SetPoint("CENTER", CastBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 
 		if (C.UnitFrames.CastBarIcon) then
 			CastBar.Button = CreateFrame("Frame", nil, CastBar)

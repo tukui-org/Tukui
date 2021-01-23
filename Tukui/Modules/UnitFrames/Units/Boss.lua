@@ -83,6 +83,11 @@ function UnitFrames:Boss()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(CastBar:GetWidth())
 		CastBar.Text:SetJustifyH("CENTER")
+		
+		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
+		CastBar.Spark:SetSize(8, CastBar:GetHeight())
+		CastBar.Spark:SetBlendMode("ADD")
+		CastBar.Spark:SetPoint("CENTER", CastBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 
 		CastBar.Button = CreateFrame("Frame", nil, CastBar)
 		CastBar.Button:SetSize(16, 16)

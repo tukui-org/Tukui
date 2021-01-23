@@ -130,11 +130,14 @@ function UnitFrames:Nameplates()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(C.NamePlates.Width)
 		CastBar.Text:SetJustifyH("CENTER")
+		
+		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
+		CastBar.Spark:SetSize(8, CastBar:GetHeight())
+		CastBar.Spark:SetBlendMode("ADD")
+		CastBar.Spark:SetPoint("CENTER", CastBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 
-		CastBar.PostCastStart = UnitFrames.CheckInterrupt
-		CastBar.PostCastInterruptible = UnitFrames.CheckInterrupt
-		CastBar.PostCastNotInterruptible = UnitFrames.CheckInterrupt
-		CastBar.PostChannelStart = UnitFrames.CheckInterrupt
+		CastBar.PostCastStart = UnitFrames.CheckCast
+		CastBar.PostChannelStart = UnitFrames.CheckChannel
 
 		self.Castbar = CastBar
 	end
