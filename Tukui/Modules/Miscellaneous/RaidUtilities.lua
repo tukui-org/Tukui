@@ -65,6 +65,33 @@ function RaidUtilities:SetRaidTarget()
 	SetRaidTarget("target", self.ID)
 end
 
+function RaidUtilities:SetCountdown()
+	C_PartyInfo.DoCountdown(10)
+end
+
+function RaidUtilities:Disband()
+	StaticPopup_Show("DISBAND_RAID")
+end
+
+function RaidUtilities:DisplayMessage()
+	local Leader = UnitIsGroupLeader("player")
+	local Assistant = UnitIsGroupAssistant("player")
+	
+	if Leader or Assistant then
+		local Status = Leader and "leader" or "assistant"
+		local InstanceType = select(2, GetInstanceInfo())
+		
+		if InstanceType ~= "pvp" and InstanceType ~= "arena" then
+			T.Print("You are currently a |cff00ff00raid " .. Status .. "|r")
+			T.Print("You can toggle raid utilities with |cffff8800/tukui ru|r or |cffff8800/tukui markers|r")
+			
+			-- No need to display this message again
+			self:UnregisterEvent("GROUP_ROSTER_UPDATE")
+			self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+		end
+	end
+end
+
 function RaidUtilities:Enable()
 	self:SetSize(450, (ButtonSize * 2) + (4 * 1))
 	self:SetPoint("BOTTOMRIGHT", -40, 229)
@@ -110,25 +137,25 @@ function RaidUtilities:Enable()
 			RoleCheck:SetSize(ButtonSize, ButtonSize)
 			RoleCheck:SetPoint("TOPLEFT", CancelAll, "TOPRIGHT", 13, 0)
 			
-			local RaidToParty = RaidUtilities:CreateBasicButton(self:GetName().."ButtonRaidToParty", "|TInterface\\GroupFrame\\UI-Group-AssistantIcon:14:14:0:0|t", "Convert Raid to Party")
-			RaidToParty:SetScript("OnClick", ConvertToParty)
-			RaidToParty:SetSize(ButtonSize, ButtonSize)
-			RaidToParty:SetPoint("TOPLEFT", RoleCheck, "TOPRIGHT", 4, 0)
+			local Countdown = RaidUtilities:CreateBasicButton(self:GetName().."ButtonCountdown", "|TInterface\\Buttons\\JumpUpArrow:14:14:0:0|t", "Start a 10 second countdown")
+			Countdown:SetScript("OnClick", RaidUtilities.SetCountdown)
+			Countdown:SetSize(ButtonSize, ButtonSize)
+			Countdown:SetPoint("TOPLEFT", RoleCheck, "TOPRIGHT", 4, 0)
 			
 			local ReadyCheck = RaidUtilities:CreateBasicButton(self:GetName().."ButtonReadyCheck", "|TInterface\\RaidFrame\\ReadyCheck-Ready:14:14:0:0|t", "Let's do a Ready Check!")
 			ReadyCheck:SetScript("OnClick", DoReadyCheck)
 			ReadyCheck:SetSize(ButtonSize, ButtonSize)
 			ReadyCheck:SetPoint("BOTTOMLEFT", CancelAll, "BOTTOMRIGHT", 13, 0)
 			
-			local PartyToRaid = RaidUtilities:CreateBasicButton(self:GetName().."ButtonPartyToRaid", "|TInterface\\GroupFrame\\UI-Group-LeaderIcon:14:14:0:0|t", "Convert Party to Raid")
-			PartyToRaid:SetScript("OnClick", ConvertToRaid)
-			PartyToRaid:SetSize(ButtonSize, ButtonSize)
-			PartyToRaid:SetPoint("TOPLEFT", ReadyCheck, "TOPRIGHT", 4, 0)
+			local Disband = RaidUtilities:CreateBasicButton(self:GetName().."ButtonDisband", "|TInterface\\RaidFrame\\ReadyCheck-NotReady:14:14:0:0|t", "Disband the entire raid")
+			Disband:SetScript("OnClick", RaidUtilities.Disband)
+			Disband:SetSize(ButtonSize, ButtonSize)
+			Disband:SetPoint("TOPLEFT", ReadyCheck, "TOPRIGHT", 4, 0)
 			
 			local Remove = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetRemove", PassIcon, "Remove marker on current target (if any)")
 			Remove:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Remove:SetSize(ButtonSize, ButtonSize + ButtonSize + 4)
-			Remove:SetPoint("TOPLEFT", RaidToParty, "TOPRIGHT", 13, 0)
+			Remove:SetPoint("TOPLEFT", Countdown, "TOPRIGHT", 13, 0)
 			Remove.ID = 0
 			
 			local Star = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetStar", Icons[5].Icon, "Set "..Icons[5].Icon.." on current target")
@@ -180,6 +207,10 @@ function RaidUtilities:Enable()
 			Skull.ID = 8
 		end
 	end
+	
+	self:RegisterEvent("GROUP_ROSTER_UPDATE")
+	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:SetScript("OnEvent", self.DisplayMessage)
 	
 	Movers:RegisterFrame(self, "Raid Utilities")
 end
