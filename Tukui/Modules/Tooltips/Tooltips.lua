@@ -214,8 +214,6 @@ function Tooltip:Skin(style)
 	local R, G, B
 	local Backdrop = self.Backdrop
 	
-	HealthBar:Hide()
-	
 	if Backdrop then
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
@@ -338,11 +336,15 @@ function Tooltip:SetCompareItemBorderColor(anchorFrame)
 end
 
 function Tooltip:ResetBorderColor()
+	if self ~= GameTooltip then
+		return
+	end
+	
 	if self.Backdrop then
 		self.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 		
-		HealthBar:SetStatusBarColor(0, 1, 0)
 		HealthBar.Backdrop:SetBorderColor(0, 1, 0)
+		HealthBar:SetStatusBarColor(0, 1, 0)
 		HealthBar.Text:Hide()
 	end
 end
@@ -383,6 +385,8 @@ function Tooltip:Enable()
 	
 	Tooltip.Skin(GameTooltip)
 	Tooltip.Skin(ItemRefTooltip)
+	
+	HealthBar:Hide()
 	
 	ItemRefTooltip.CloseButton:SkinCloseButton()
 	
