@@ -40,7 +40,7 @@ function UIWidgets:Enable()
 	self.Holder:SetPoint("TOP", 3, -96)
 
 	-- This is now the frame that contain capture bar and other shit like that.
-	MinimapWidget:SetParent(Holder)
+	MinimapWidget:SetParent(self.Holder)
 	MinimapWidget:ClearAllPoints()
 	MinimapWidget:SetPoint("CENTER")
 	
