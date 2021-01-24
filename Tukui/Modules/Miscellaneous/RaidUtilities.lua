@@ -82,7 +82,7 @@ function RaidUtilities:DisplayMessage()
 		local InstanceType = select(2, GetInstanceInfo())
 		
 		if InstanceType ~= "pvp" and InstanceType ~= "arena" then
-			T.Print("You are currently a |cff00ff00raid " .. Status .. "|r")
+			T.Print("You are currently a |cff00ff00group " .. Status .. "|r")
 			T.Print("You can toggle raid utilities with |cffff8800/tukui ru|r or |cffff8800/tukui markers|r")
 			
 			-- No need to display this message again
