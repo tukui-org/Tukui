@@ -220,6 +220,10 @@ function ObjectiveTracker:UpdateProgressBarColors(Min)
 		local R, G, B = T.ColorGradient(Min, 100, .8, 0, 0, .8, .8, 0, 0, .8, 0)
 		
 		self.Bar:SetStatusBarColor(R, G, B)
+		
+		if self.Bar.Backdrop then
+			self.Bar.Backdrop:SetBackdropColor(R * .2, G * .2, B * .2)
+		end
 	end
 end
 

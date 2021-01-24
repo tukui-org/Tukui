@@ -7,13 +7,19 @@ function AltPowerBar:Update()
 	local Status = self.Status
 	local Power = UnitPower("player", ALTERNATE_POWER_INDEX)
 	local MaxPower = UnitPowerMax("player", ALTERNATE_POWER_INDEX) or 0
+	local Percent = math.floor(Power / MaxPower * 100 + .5) or 0
 	local R, G, B = T.ColorGradient(Power, MaxPower, .8, 0, 0, .8, .8, 0, 0, .8, 0)
 	local PowerName = GetUnitPowerBarStrings("player") or UNKNOWN
 
 	Status:SetMinMaxValues(0, MaxPower)
 	Status:SetValue(Power)
 	Status:SetStatusBarColor(R, G, B)
-	Status.Text:SetText(PowerName..": "..Power.." / "..MaxPower)
+	
+	Status.Text:SetText(PowerName)
+	
+	Status.Percent:SetText(Percent .. "%")
+	
+	self.Backdrop:SetBackdropColor(R * .2, G * .2, B * .2)
 end
 
 function AltPowerBar:OnEvent(event, unit, power)
@@ -38,7 +44,7 @@ end
 
 function AltPowerBar:Create()
 	self:DisableBlizzardBar()
-	self:SetSize(370, 23)
+	self:SetSize(180, 17)
 	self:SetPoint("TOP", 0, -28)
 	self:CreateBackdrop()
 	self:CreateShadow()
@@ -57,10 +63,12 @@ function AltPowerBar:Create()
 	self.Status:SetInside(DataTextLeft)
 
 	self.Status.Text = self.Status:CreateFontString(nil, "OVERLAY")
-	self.Status.Text:SetFont(C.Medias.Font, 12)
-	self.Status.Text:SetPoint("CENTER", self, "CENTER", 0, 0)
-	self.Status.Text:SetShadowColor(0, 0, 0)
-	self.Status.Text:SetShadowOffset(1.25, -1.25)
+	self.Status.Text:SetFont(C.Medias.Font, 12, "OUTLINE")
+	self.Status.Text:SetPoint("CENTER", self, "CENTER", 0, -23)
+	
+	self.Status.Percent = self.Status:CreateFontString(nil, "OVERLAY")
+	self.Status.Percent:SetFont(C.Medias.Font, 12, "OUTLINE")
+	self.Status.Percent:SetPoint("CENTER", self, "CENTER", 0, 0)
 	
 	T.Movers:RegisterFrame(self, "Alternative Power Bar")
 end
