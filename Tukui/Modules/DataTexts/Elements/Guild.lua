@@ -62,12 +62,13 @@ local OnEnter = function(self)
 	GameTooltip:AddDoubleLine(GuildName, "|cff00ff00"..FRIENDS_LIST_ONLINE.."|r |cffffffff("..NumOnlineMembers..")|r")
 	GameTooltip:AddLine(" ")
 	
+	local InviteID = 0
+	local WhisperID = 0
+	
 	-- List the character
 	for i = 1, NumTotalMembers do
 		local Name, Rank, RankIndex, Level, Class, Zone, Note, OfficerNote, Online, Status, ClassFileName, AchievementPoints, AchievementRank, IsMobile, IsSoReligible, StandingID = GetGuildRosterInfo(i)
 		local Server = string.gsub(T.MyRealm, "%s+", "")
-		local InviteID = 0
-		local WhisperID = 0
 		
 		-- Remove server from string
 		Name = string.gsub(Name, "-"..Server, "")
