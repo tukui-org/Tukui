@@ -419,6 +419,7 @@ local Disable = function(self)
 	self.Text:SetText("")
 	
 	self:UnregisterAllEvents()
+	
 	self:SetScript("OnMouseDown", nil)
 	self:SetScript("OnEnter", nil)
 	self:SetScript("OnLeave", nil)

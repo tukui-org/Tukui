@@ -127,12 +127,15 @@ local Enable = function(self)
 	self:SetScript("OnLeave", GameTooltip_Hide)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnEvent", Update)
+	
 	self:Update()
 end
 
 local Disable = function(self)
 	self.Text:SetText("")
+	
 	self:UnregisterAllEvents()
+	
 	self:SetScript("OnMouseDown", nil)
 	self:SetScript("OnLeave", nil)
 	self:SetScript("OnEnter", nil)
