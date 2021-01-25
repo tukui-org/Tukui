@@ -108,8 +108,8 @@ local DisplayBattleNetFriends = function()
 						local Level = LevelHexColor..Account.characterLevel.."|r"
 						local Class = EnglishClass(Account.className)
 						local ClassColor = T.Colors.class[Class]
-						local ClassHex = T.RGBToHex(unpack(ClassColor))
-						local Name = ClassHex..Account.characterName.."|r"
+						local ClassHexColor = T.RGBToHex(unpack(ClassColor))
+						local Name = ClassHexColor..Account.characterName.."|r"
 						
 						-- WoW Classic Detected
 						if Account.wowProjectID == 2 then
@@ -293,6 +293,12 @@ local OnMouseDown = function(self, button)
 		local InviteList = Options[2].menuList
 		local WhisperList = Options[3].menuList
 		
+		-- Reset whisper menu
+		wipe(WhisperList)
+
+		-- Reset invite menu
+		wipe(InviteList)
+		
 		-- Update battle.net menu listing for invites and whispers
 		for i = 1, #BattleNetTable do
 			local Friend = BattleNetTable[i]
@@ -359,11 +365,11 @@ local OnMouseDown = function(self, button)
 					local LevelColor = GetQuestDifficultyColor(Level)
 					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
 					local Class = EnglishClass(Friend.className)
-					local ClassColor = T.RGBToHex(unpack(T.Colors.class[Class]))
+					local ClassHexColor = T.RGBToHex(unpack(T.Colors.class[Class]))
 					
 					-- Adding Battle.net Whisper
 					WhisperList[WhisperID] = {
-						text = ClassColor..Name.."|r", 
+						text = ClassHexColor..Name.."|r", 
 						arg1 = Name, 
 						arg2 = false,
 						notCheckable = true, 
@@ -371,7 +377,7 @@ local OnMouseDown = function(self, button)
 					}
 					
 					InviteList[InviteID] = {
-						text = LevelHexColor..Level.."|r "..ClassColor..Name.."|r",
+						text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r",
 						arg1 = Name,
 						notCheckable = true, 
 						func = InviteFriend,
