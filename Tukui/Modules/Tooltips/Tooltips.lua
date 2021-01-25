@@ -388,6 +388,7 @@ function Tooltip:Enable()
 	
 	Tooltip.Skin(GameTooltip)
 	Tooltip.Skin(ItemRefTooltip)
+	Tooltip.Skin(EmbeddedItemTooltip)
 	
 	HealthBar:Hide()
 	

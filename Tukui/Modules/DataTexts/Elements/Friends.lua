@@ -127,6 +127,9 @@ local DisplayBattleNetFriendsOnTooltip = function()
 end
 
 local UpdateBattleNetFriendsCache = function(total)
+	-- Reset battle.net cache
+	wipe(BattleNetTable)
+	
 	for i = 1, total do
 		local Infos = C_BattleNet.GetFriendAccountInfo(i)
 		
@@ -201,6 +204,9 @@ local DisplayFriendsOnTooltip = function()
 end
 
 local UpdateFriendsCache = function(total)
+	-- Reset WoW friends cache
+	wipe(FriendsTable)
+	
 	for i = 1, total do
 		local Infos = C_FriendList.GetFriendInfoByIndex(i)
 		
