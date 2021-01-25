@@ -241,12 +241,13 @@ local OnEnter = function(self)
 		local Total = FriendsNumber + BNetNumber
 		local ZoneColor, ClassColor, LevelColor, RealmColor
 		local ShiftDown = IsShiftKeyDown()
+		
+		UpdateBattleNetFriendsCache(BNetNumber)
+		UpdateFriendsCache(FriendsNumber)
 
 		if OnlineBNet > 0 then
 			GameTooltip:AddDoubleLine("Battle.net:", OnlineBNet .. "/" .. BNetNumber)
 			GameTooltip:AddLine(" ")
-			
-			UpdateBattleNetFriendsCache(BNetNumber)
 
 			DisplayBattleNetFriendsOnTooltip()
 		end
@@ -258,8 +259,6 @@ local OnEnter = function(self)
 		if OnlineFriends > 0 then
 			GameTooltip:AddDoubleLine("World of Warcraft:", OnlineFriends .. "/" .. FriendsNumber)
 			GameTooltip:AddLine(" ")
-			
-			UpdateFriendsCache(FriendsNumber)
 
 			DisplayFriendsOnTooltip()
 		end
