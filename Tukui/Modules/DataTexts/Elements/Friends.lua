@@ -86,7 +86,7 @@ local RemoveTagNumber = function(tag)
 	end
 end
 
-local DisplayBattleNetFriends = function()
+local DisplayBattleNetFriendsOnTooltip = function()
 	for i = 1, #BattleNetTable do
 		local Friend = BattleNetTable[i]
 		
@@ -126,7 +126,7 @@ local DisplayBattleNetFriends = function()
 	end
 end
 
-local UpdateBattleNetList = function(total)
+local UpdateBattleNetFriendsCache = function(total)
 	for i = 1, total do
 		local Infos = C_BattleNet.GetFriendAccountInfo(i)
 		
@@ -175,7 +175,7 @@ local UpdateBattleNetList = function(total)
 	end
 end
 
-local DisplayFriends = function()
+local DisplayFriendsOnTooltip = function()
 	for i = 1, #FriendsTable do
 		local Friend = FriendsTable[i]
 		
@@ -200,7 +200,7 @@ local DisplayFriends = function()
 	end
 end
 
-local UpdateFriendList = function(total)
+local UpdateFriendsCache = function(total)
 	for i = 1, total do
 		local Infos = C_FriendList.GetFriendInfoByIndex(i)
 		
@@ -240,9 +240,9 @@ local OnEnter = function(self)
 			GameTooltip:AddDoubleLine("Battle.net:", OnlineBNet .. "/" .. BNetNumber)
 			GameTooltip:AddLine(" ")
 			
-			UpdateBattleNetList(BNetNumber)
+			UpdateBattleNetFriendsCache(BNetNumber)
 
-			DisplayBattleNetFriends()
+			DisplayBattleNetFriendsOnTooltip()
 		end
 
 		if OnlineBNet > 0 and OnlineFriends > 0 then
@@ -253,9 +253,9 @@ local OnEnter = function(self)
 			GameTooltip:AddDoubleLine("World of Warcraft:", OnlineFriends .. "/" .. FriendsNumber)
 			GameTooltip:AddLine(" ")
 			
-			UpdateFriendList(FriendsNumber)
+			UpdateFriendsCache(FriendsNumber)
 
-			DisplayFriends()
+			DisplayFriendsOnTooltip()
 		end
 
 		GameTooltip:Show()
