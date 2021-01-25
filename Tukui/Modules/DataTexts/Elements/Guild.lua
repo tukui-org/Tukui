@@ -68,10 +68,9 @@ local OnEnter = function(self)
 	-- List the character
 	for i = 1, NumTotalMembers do
 		local Name, Rank, RankIndex, Level, Class, Zone, Note, OfficerNote, Online, Status, ClassFileName, AchievementPoints, AchievementRank, IsMobile, IsSoReligible, StandingID = GetGuildRosterInfo(i)
-		local Server = string.gsub(T.MyRealm, "%s+", "")
 		
 		-- Remove server from string
-		Name = string.gsub(Name, "-"..Server, "")
+		Name = string.gsub(Name, "-"..T.MyRealm, "")
 		
 		if Online then
 			if Name ~= T.MyName then
