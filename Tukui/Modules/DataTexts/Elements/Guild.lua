@@ -34,7 +34,7 @@ local OnMouseDown = function(self, button)
 		ToggleGuildFrame()
 	end
 	
-	if button == "RightButton" then
+	if button == "RightButton" and IsInGuild() then
 		T.Miscellaneous.DropDown.Open(Options, Menu, "cursor", 0, 0, "MENU", 2)
 	end
 end
