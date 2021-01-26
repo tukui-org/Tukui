@@ -269,10 +269,14 @@ function Chat:Reset()
 	FCF_DockFrame(ChatFrame3)
 	FCF_OpenNewWindow(Chat.RightChatName)
 	FCF_UnDockFrame(ChatFrame4)
+	FCF_OpenNewWindow(NPC_NAMES_DROPDOWN_ALL)
+	FCF_SetLocked(ChatFrame5, 1)
+	FCF_DockFrame(ChatFrame5)
 	FCF_SetChatWindowFontSize(nil, ChatFrame1, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame2, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame3, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame4, 12)
+	FCF_SetChatWindowFontSize(nil, ChatFrame5, 12)
 	FCF_SetWindowName(ChatFrame1, "G, S & W")
 	FCF_SetWindowName(ChatFrame2, "Log")
 
@@ -286,7 +290,7 @@ function Chat:Reset()
 	end
 	
 	-- Remove everything in first 4 chat windows
-	for i = 1, 4 do
+	for i = 1, 5 do
 		if i ~= 2 then
 			local ChatFrame = _G["ChatFrame"..i]
 
@@ -308,11 +312,13 @@ function Chat:Reset()
 	-- ChatFrame 1 Setup --
 	-----------------------
 	
-	ChatGroup = {"SAY", "EMOTE", "YELL", "GUILD","OFFICER", "GUILD_ACHIEVEMENT", "WHISPER", "MONSTER_SAY", "MONSTER_EMOTE", "MONSTER_YELL", "MONSTER_WHISPER", "MONSTER_BOSS_EMOTE", "MONSTER_BOSS_WHISPER", "PARTY", "PARTY_LEADER", "RAID", "RAID_LEADER", "RAID_WARNING", "INSTANCE_CHAT", "INSTANCE_CHAT_LEADER", "BG_HORDE", "BG_ALLIANCE", "BG_NEUTRAL", "AFK", "DND", "ACHIEVEMENT", "BN_WHISPER", "BN_CONVERSATION"}
+	ChatGroup = {"SAY", "EMOTE", "YELL", "GUILD","OFFICER", "GUILD_ACHIEVEMENT", "WHISPER", "PARTY", "PARTY_LEADER", "RAID", "RAID_LEADER", "RAID_WARNING", "INSTANCE_CHAT", "INSTANCE_CHAT_LEADER", "BG_HORDE", "BG_ALLIANCE", "BG_NEUTRAL", "AFK", "DND", "ACHIEVEMENT", "BN_WHISPER", "BN_CONVERSATION"}
 	
 	for _, v in ipairs(ChatGroup) do
 		ChatFrame_AddMessageGroup(_G.ChatFrame1, v)
 	end
+	
+	FCF_SelectDockFrame(ChatFrame1)
 
 	-----------------------
 	-- ChatFrame 3 Setup --
@@ -349,7 +355,16 @@ function Chat:Reset()
 	
 	FCF_RestorePositionAndDimensions(Chat4)
 	FCF_SetTabPosition(Chat4, 0)
-	FCF_SelectDockFrame(ChatFrame1)
+	
+	-----------------------
+	-- ChatFrame 5 Setup --
+	-----------------------
+	
+	ChatGroup = {"MONSTER_SAY", "MONSTER_EMOTE", "MONSTER_YELL", "MONSTER_WHISPER", "MONSTER_BOSS_EMOTE", "MONSTER_BOSS_WHISPER"}
+	
+	for _, v in ipairs(ChatGroup) do
+		ChatFrame_AddMessageGroup(_G.ChatFrame5, v)
+	end
 end
 
 function Chat:OnMouseWheel(delta)
