@@ -33,6 +33,9 @@ function ActionBars:CreatePetBar()
 	PetActionBarFrame:ClearAllPoints()
 	PetActionBarFrame:SetParent(T.Hider)
 	
+	-- overwrite PetActionBar_Update, causing a lot of taint with original
+	PetActionBar_Update = ActionBars.UpdatePetBar
+	
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["PetActionButton1"]
 
@@ -61,7 +64,6 @@ function ActionBars:CreatePetBar()
 		Bar["Button"..i] = Button
 	end
 
-	hooksecurefunc("PetActionBar_Update", ActionBars.UpdatePetBar)
 	hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
 
 	ActionBars:SkinPetButtons()

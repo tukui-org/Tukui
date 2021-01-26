@@ -83,12 +83,92 @@ function ActionBars:MovePetBar()
 end
 
 function ActionBars:UpdatePetBar()
-	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
-		local ButtonName = "PetActionButton" .. i
-		local PetActionButton = _G[ButtonName]
+	local Button, Icon, CastTexture, ShineTexture
+	
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+		local PetActionButton = "PetActionButton" .. i
+		
+		Button = _G[PetActionButton]
+		Icon = _G[PetActionButton.."Icon"]
+		CastTexture = _G[PetActionButton.."AutoCastable"]
+		ShineTexture = _G[PetActionButton.."Shine"]
+		
+		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled, SpellID = GetPetActionInfo(i)
+		
+		if not IsToken then
+			Icon:SetTexture(Texture)
+			Button.tooltipName = Name
+		else
+			Icon:SetTexture(_G[Texture])
+			Button.tooltipName = _G[Name]
+		end
+		
+		Button.isToken = IsToken
+		
+		if SpellID then
+			local spell = Spell:CreateFromSpellID(SpellID)
+			
+			Button.spellDataLoadedCancelFunc = spell:ContinueWithCancelOnSpellLoad(function()
+				Button.tooltipSubtext = spell:GetSpellSubtext();
+			end)
+		end
+		
+		if IsActive then
+			if IsPetAttackAction(i) then
+				PetActionButton_StartFlash(Button)
+				
+				Button:GetCheckedTexture():SetAlpha(0.5)
+			else
+				PetActionButton_StopFlash(Button)
+				
+				Button:GetCheckedTexture():SetAlpha(1.0)
+			end
+			
+			Button:SetChecked(true)
+		else
+			PetActionButton_StopFlash(Button)
+			
+			Button:SetChecked(false)
+		end
+		
+		if AutoCastAllowed then
+			CastTexture:Show()
+		else
+			CastTexture:Hide()
+		end
+		
+		if AutoCastEnabled then
+			AutoCastShine_AutoCastStart(ShineTexture)
+		else
+			AutoCastShine_AutoCastStop(ShineTexture)
+		end
 
-		PetActionButton:SetNormalTexture("")
+		if Texture then
+			if GetPetActionSlotUsable(i) then
+				Icon:SetVertexColor(1, 1, 1)
+			else
+				Icon:SetVertexColor(0.4, 0.4, 0.4)
+			end
+			
+			Icon:Show()
+			
+			Button:SetNormalTexture("")
+		else
+			Icon:Hide()
+			
+			Button:SetNormalTexture("")
+		end
+		
+		SharedActionButton_RefreshSpellHighlight(Button, HasPetActionHighlightMark(i))
 	end
+	
+	PetActionBar_UpdateCooldowns()
+	
+	if not PetHasActionBar() then
+		HidePetActionBar()
+	end
+	
+	PetActionBarFrame.rangeTimer = -1
 end
 
 function ActionBars:OnUpdatePetBarCooldownText(elapsed)
