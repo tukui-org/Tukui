@@ -44,7 +44,7 @@ function Minimap:DisableMinimapElements()
 end
 
 function Minimap:OnMouseClick(button)
-	if (button == "RightButton") then
+	if (button == "MiddleButton") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
 		
 		if MicroMenu then
@@ -52,7 +52,7 @@ function Minimap:OnMouseClick(button)
 		else
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
 		end
-	elseif (button == "MiddleButton") then
+	elseif (button == "RightButton") then
 		if GarrisonLandingPageMinimapButton:IsShown() then
 			if InCombatLockdown() then
 				T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
