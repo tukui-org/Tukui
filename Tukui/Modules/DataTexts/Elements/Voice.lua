@@ -49,6 +49,12 @@ local OnMouseUp = function(self, btn)
 	if btn == "RightButton" then
 		T.Miscellaneous.DropDown.Open(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
 	else
+		if InCombatLockdown() then
+			T.Print(ERR_NOT_IN_COMBAT)
+
+			return
+		end
+		
 		ToggleChannelFrame()
 	end
 end

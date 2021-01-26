@@ -24,65 +24,73 @@ local Update = function(self)
 end
 
 local OnEnter = function(self)
-	if (not InCombatLockdown()) then
-		PaperDollFrame_UpdateStats()
-		
-		GameTooltip:SetOwner(self:GetTooltipAnchor())
-		GameTooltip:ClearLines()
-		
-		local Objects = CharacterStatsPane.statsFramePool.activeObjects
-		
-		-- Sort attributes
-		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r", T.MyRealm)
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("|CFFFFFFFF"..PET_BATTLE_STATS_LABEL.."|r")
-		GameTooltip:AddDoubleLine("|CF00FFF00"..LEVEL.."|r", UnitLevel("player"))
-		GameTooltip:AddDoubleLine("|CF00FFF00"..ITEM_UPGRADE_STAT_AVERAGE_ITEM_LEVEL.."|r", GetAverageItemLevel())
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ATTRIBUTES.."|r")
-		
-		for Table in pairs(Objects) do
-			local Label = Table.Label:GetText()
-			local Value = Table.Value:GetText()
-			local Percent = string.find(Value, "%%")
-			
-			
-			if not Percent then
-				GameTooltip:AddDoubleLine("|CF00FFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
-			end
-		end
-		
-		-- Sort enhancements
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ENHANCEMENTS.."|r")
-		
-		for Table in pairs(Objects) do
-			local Label = Table.Label:GetText()
-			local Value = Table.Value:GetText()
-			local Percent = string.find(Value, "%%")
-			
-			if Percent then
-				GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
-			end
-		end
-		
-		-- Display durability
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine("|CFFFFFFFF"..DURABILITY.."|r ("..floor(L.DataText.Slots[1][3] * 100).."%)")
+	PaperDollFrame_UpdateStats()
 
-		for i = 1, 11 do
-			if (L.DataText.Slots[i][3] ~= 1000) then
-				local Green, Red
-				
-				Green = L.DataText.Slots[i][3] * 2
-				Red = 1 - Green
-				
-				GameTooltip:AddDoubleLine(L.DataText.Slots[i][2]..":", floor(L.DataText.Slots[i][3] * 100).."%", Red + 1, Green, 0, Red + 1, Green, 0)
-			end
-		end
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
+	GameTooltip:ClearLines()
 
-		GameTooltip:Show()
+	local Objects = CharacterStatsPane.statsFramePool.activeObjects
+
+	-- Sort attributes
+	GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r", T.MyRealm)
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine("|CFFFFFFFF"..PET_BATTLE_STATS_LABEL.."|r")
+	GameTooltip:AddDoubleLine("|CF00FFF00"..LEVEL.."|r", UnitLevel("player"))
+	GameTooltip:AddDoubleLine("|CF00FFF00"..ITEM_UPGRADE_STAT_AVERAGE_ITEM_LEVEL.."|r", GetAverageItemLevel())
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ATTRIBUTES.."|r")
+
+	for Table in pairs(Objects) do
+		local Label = Table.Label:GetText()
+		local Value = Table.Value:GetText()
+		local Percent = string.find(Value, "%%")
+
+
+		if not Percent then
+			GameTooltip:AddDoubleLine("|CF00FFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+		end
 	end
+
+	-- Sort enhancements
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ENHANCEMENTS.."|r")
+
+	for Table in pairs(Objects) do
+		local Label = Table.Label:GetText()
+		local Value = Table.Value:GetText()
+		local Percent = string.find(Value, "%%")
+
+		if Percent then
+			GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+		end
+	end
+
+	-- Display durability
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine("|CFFFFFFFF"..DURABILITY.."|r ("..floor(L.DataText.Slots[1][3] * 100).."%)")
+
+	for i = 1, 11 do
+		if (L.DataText.Slots[i][3] ~= 1000) then
+			local Green, Red
+
+			Green = L.DataText.Slots[i][3] * 2
+			Red = 1 - Green
+
+			GameTooltip:AddDoubleLine(L.DataText.Slots[i][2]..":", floor(L.DataText.Slots[i][3] * 100).."%", Red + 1, Green, 0, Red + 1, Green, 0)
+		end
+	end
+
+	GameTooltip:Show()
+end
+
+local ToggleCharacter = function(self)
+	if InCombatLockdown() then
+		T.Print(ERR_NOT_IN_COMBAT)
+		
+		return
+	end
+	
+	ToggleCharacter("PaperDollFrame")
 end
 
 local Enable = function(self)
@@ -92,7 +100,7 @@ local Enable = function(self)
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", GameTooltip_Hide)
-	self:SetScript("OnMouseDown", function() ToggleCharacter("PaperDollFrame") end)
+	self:SetScript("OnMouseDown", ToggleCharacter)
 	self:Update()
 	self.Text:SetText(ClassColor..T.MyName.."|r")
 end

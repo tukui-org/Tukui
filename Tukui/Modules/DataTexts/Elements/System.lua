@@ -117,10 +117,6 @@ end
 
 local ipTypes = {"IPv4", "IPv6"}
 local function OnEnter(self)
-	if (InCombatLockdown()) then
-		return
-	end
-	
 	enteredFrame = true
 	local cpuProfiling = GetCVar("scriptProfile") == "1"
 	GameTooltip:SetOwner(self:GetTooltipAnchor())

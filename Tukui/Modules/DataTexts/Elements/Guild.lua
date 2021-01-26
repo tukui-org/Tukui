@@ -31,6 +31,12 @@ end
 
 local OnMouseDown = function(self, button)
 	if button == "LeftButton" then
+		if InCombatLockdown() then
+			T.Print(ERR_NOT_IN_COMBAT)
+
+			return
+		end
+		
 		ToggleGuildFrame()
 	end
 	

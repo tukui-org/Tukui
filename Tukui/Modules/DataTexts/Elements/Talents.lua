@@ -47,6 +47,8 @@ end
 
 local OnMouseDown = function()
 	if InCombatLockdown() then
+		T.Print(ERR_NOT_IN_COMBAT)
+		
 		return
 	end
 	

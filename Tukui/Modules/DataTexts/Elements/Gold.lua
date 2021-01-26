@@ -33,35 +33,33 @@ local FormatTooltipMoney = function(money)
 end
 
 local OnEnter = function(self)
-	if (not InCombatLockdown()) then
-		GameTooltip:SetOwner(self:GetTooltipAnchor())
-		GameTooltip:ClearLines()
-		GameTooltip:AddLine(L.DataText.Session)
-		GameTooltip:AddDoubleLine(L.DataText.Earned, FormatMoney(Profit), 1, 1, 1, 1, 1, 1)
-		GameTooltip:AddDoubleLine(L.DataText.Spent, FormatMoney(Spent), 1, 1, 1, 1, 1, 1)
+	GameTooltip:SetOwner(self:GetTooltipAnchor())
+	GameTooltip:ClearLines()
+	GameTooltip:AddLine(L.DataText.Session)
+	GameTooltip:AddDoubleLine(L.DataText.Earned, FormatMoney(Profit), 1, 1, 1, 1, 1, 1)
+	GameTooltip:AddDoubleLine(L.DataText.Spent, FormatMoney(Spent), 1, 1, 1, 1, 1, 1)
 
-		if (Profit < Spent) then
-			GameTooltip:AddDoubleLine(L.DataText.Deficit, FormatMoney(Profit-Spent), 1, 0, 0, 1, 1, 1)
-		elseif ((Profit-Spent) > 0) then
-			GameTooltip:AddDoubleLine(L.DataText.Profit, FormatMoney(Profit-Spent), 0, 1, 0, 1, 1, 1)
-		end
-
-		GameTooltip:AddLine(" ")
-
-		local TotalGold = 0
-		GameTooltip:AddLine(L.DataText.Character)
-
-		for key, value in pairs(TukuiGold[MyRealm]) do
-			GameTooltip:AddDoubleLine(key, FormatTooltipMoney(value), 1, 1, 1, 1, 1, 1)
-			TotalGold = TotalGold + value
-		end
-
-		GameTooltip:AddLine(" ")
-		GameTooltip:AddLine(L.DataText.Server)
-		GameTooltip:AddDoubleLine(L.DataText.TotalGold, FormatTooltipMoney(TotalGold), 1, 1, 1, 1, 1, 1)
-
-		GameTooltip:Show()
+	if (Profit < Spent) then
+		GameTooltip:AddDoubleLine(L.DataText.Deficit, FormatMoney(Profit-Spent), 1, 0, 0, 1, 1, 1)
+	elseif ((Profit-Spent) > 0) then
+		GameTooltip:AddDoubleLine(L.DataText.Profit, FormatMoney(Profit-Spent), 0, 1, 0, 1, 1, 1)
 	end
+
+	GameTooltip:AddLine(" ")
+
+	local TotalGold = 0
+	GameTooltip:AddLine(L.DataText.Character)
+
+	for key, value in pairs(TukuiGold[MyRealm]) do
+		GameTooltip:AddDoubleLine(key, FormatTooltipMoney(value), 1, 1, 1, 1, 1, 1)
+		TotalGold = TotalGold + value
+	end
+
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddLine(L.DataText.Server)
+	GameTooltip:AddDoubleLine(L.DataText.TotalGold, FormatTooltipMoney(TotalGold), 1, 1, 1, 1, 1, 1)
+
+	GameTooltip:Show()
 end
 
 local Update = function(self, event)

@@ -96,6 +96,12 @@ local OnMouseUp = function(button, click)
 	if click == "RightButton" then
 		TimeManager_Toggle()
 	else
+		if InCombatLockdown() then
+			T.Print(ERR_NOT_IN_COMBAT)
+
+			return
+		end
+		
 		GameTimeFrame_OnClick()
 	end
 end
