@@ -16,7 +16,7 @@ end
 function Alerts:AddHolder()
 	self.Holder = CreateFrame("Frame", "TukuiAlerts", UIParent)
 	self.Holder:SetSize(200, 17)
-	self.Holder:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 336)
+	self.Holder:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 226)
 end
 
 function Alerts:Enable()
