@@ -597,11 +597,7 @@ Toolkit.Functions.OnEvent = function(self, event, ...)
 		SetCVar("uiScale", self.Settings.UIScale)
 		SetCVar("useUiScale", 1)
 		
-		-- Allow 4K and WQHD Resolution to have an UIScale lower than 0.64, which is
-		-- the lowest value of UIParent scale by default
-		if (self.Settings.UIScale < 0.64) then
-			UIParent:SetScale(self.Settings.UIScale)
-		end
+		UIParent:SetScale(self.Settings.UIScale)
 	elseif event == "ADDON_LOADED" then
 		local Addon = ...
 		
@@ -660,18 +656,6 @@ end
 Toolkit:RegisterEvent("PLAYER_LOGIN")
 Toolkit:RegisterEvent("ADDON_LOADED")
 Toolkit:SetScript("OnEvent", Toolkit.Functions.OnEvent)
-
----------------------------------------------------
--- Rewrite WoW Globals Functions
----------------------------------------------------
-
-C_UI.Reload = function()
-	SetCVar("useUiScale", 1)
-	SetCVar("uiScale", Toolkit.Settings.UIScale)
-
-	-- Reload now
-	Reload()
-end
 
 T.Toolkit = Toolkit
 
