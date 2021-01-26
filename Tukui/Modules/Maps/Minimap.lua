@@ -416,6 +416,10 @@ function Minimap:StopHighlight()
 	if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 		Minimap.Highlight.Animation:Stop()
 		Minimap.Highlight:Hide()
+		
+		Minimap.Notification = false
+		
+		GarrisonLandingPageMinimapButton:EnableMouse(false)
 	end
 end
 
@@ -443,13 +447,19 @@ function Minimap:StartHighlight()
 		Minimap.Highlight:Show()
 		Minimap.Highlight.Animation:Play()
 		
-		T.Print("[|cffffff00"..MINIMAP_LABEL.."|r] "..MINIMAP_GARRISON_LANDING_PAGE_TOOLTIP.." (|cffff0000"..KEY_BUTTON3.."|r)")
+		T.Print("You have minimap notification, click on it to toggle your landing page")
+		
+		Minimap.Notification = true
+		
+		GarrisonLandingPageMinimapButton:EnableMouse(true)
 	end
 end
 
 function Minimap:MoveGarrisonButton()
+	GarrisonLandingPageMinimapButton:SetAlpha(0)
 	GarrisonLandingPageMinimapButton:ClearAllPoints()
-	GarrisonLandingPageMinimapButton:SetPoint("TOP", UIParent, "TOP", 0, 200)
+	GarrisonLandingPageMinimapButton:SetAllPoints(Minimap)
+	GarrisonLandingPageMinimapButton:EnableMouse(false)
 end
 
 function Minimap:AddHooks()
