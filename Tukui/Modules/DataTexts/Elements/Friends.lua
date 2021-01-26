@@ -104,7 +104,7 @@ local DisplayBattleNetFriendsOnTooltip = function()
 					
 					if Game == "World of Warcraft" then
 						local LevelColor = GetQuestDifficultyColor(Account.characterLevel)
-						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
+						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 						local Level = LevelHexColor..Account.characterLevel.."|r"
 						local Class = EnglishClass(Account.className)
 						local ClassColor = T.Colors.class[Class]
@@ -189,7 +189,7 @@ local DisplayFriendsOnTooltip = function()
 				local Name = Friend.name
 				local Level = Friend.level
 				local LevelColor = GetQuestDifficultyColor(Level)
-				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
+				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Class = EnglishClass(Friend.className)
 				local ClassColor = T.Colors.class[Class]
 				local ClassHexColor = T.RGBToHex(unpack(ClassColor))
@@ -337,7 +337,7 @@ local OnMouseDown = function(self, button)
 							local Name = Account.characterName
 							local Level = Account.characterLevel
 							local LevelColor = GetQuestDifficultyColor(Level)
-							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
+							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 							local Class = EnglishClass(Account.className)
 							local ClassColor = T.Colors.class[Class]
 							local ClassHexColor = T.RGBToHex(unpack(ClassColor))
@@ -368,7 +368,7 @@ local OnMouseDown = function(self, button)
 					local Name = Friend.name
 					local Level = Friend.level
 					local LevelColor = GetQuestDifficultyColor(Level)
-					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
+					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 					local Class = EnglishClass(Friend.className)
 					local ClassHexColor = T.RGBToHex(unpack(T.Colors.class[Class]))
 					

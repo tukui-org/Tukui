@@ -77,7 +77,7 @@ local OnEnter = function(self)
 				local Class = EnglishClass(Class)
 				local ClassHexColor = T.RGBToHex(unpack(T.Colors.class[Class]))
 				local LevelColor = GetQuestDifficultyColor(Level)
-				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.r, LevelColor.r)
+				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Left = LevelHexColor..Level.." "..ClassHexColor..Name.."|r"
 				local Right = GetSubZoneText() == Zone and "|cff00ff00"..Zone.."|r" or "|cffffffff"..Zone.."|r"
 
