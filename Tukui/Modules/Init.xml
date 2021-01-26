@@ -30,6 +30,7 @@
 	<Script file="ChatFrames\CopyURL.lua"/>
 	<Script file="ChatFrames\CopyText.lua"/>
 	<Script file="ChatFrames\Bubbles.lua"/>
+	<Script file="ChatFrames\ChatHistory.lua"/>
 
 	<!-- Inventory -->
 	<Script file="Inventory\Bags.lua"/>

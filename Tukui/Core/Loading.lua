@@ -177,11 +177,6 @@ function Loading:OnEvent(event)
 
 		-- restore original stopwatch commands
 		SlashCmdList["STOPWATCH"] = Stopwatch_Toggle
-
-		-- welcome message
-		local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
-
-		T.Print("Welcome "..HexClassColor..T.MyName.."|r! For a commands list, type /tukui")
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		T["Miscellaneous"]["ObjectiveTracker"]:Enable()
 		
@@ -195,6 +190,11 @@ function Loading:OnEvent(event)
 	elseif (event == "VARIABLES_LOADED") then
 		T["Loading"]:Enable()
 		T["GUI"]:Enable()
+		
+		-- welcome message
+		local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
+
+		T.Print("Welcome "..HexClassColor..T.MyName.."|r! For a commands list, type /tukui")
 	end
 end
 

@@ -4,7 +4,7 @@
 ## Version: 20.15
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
-## SavedVariables: TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter
+## SavedVariables: TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory
 ## OptionalDeps: Clique
 ## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1

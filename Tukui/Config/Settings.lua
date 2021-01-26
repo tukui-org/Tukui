@@ -108,6 +108,7 @@ C["Chat"] = {
 	["TabFont"] = "Tukui",
 	["ChatFont"] = "Tukui",
 	["BubblesNames"] = true,
+	["LogMax"] = 250,
 }
 
 C["Cooldowns"] = {

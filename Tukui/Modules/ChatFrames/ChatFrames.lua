@@ -718,6 +718,7 @@ function Chat:Enable()
 	self.Copy:Enable()
 	self.Link:Enable()
 	self.Bubbles:Enable()
+	self.History:Enable()
 
 	for i = 1, 10 do
 		local ChatFrame = _G["ChatFrame"..i]
