@@ -75,7 +75,7 @@ local OnEnter = function(self)
 		if Online then
 			if Name ~= T.MyName then
 				local Class = EnglishClass(Class)
-				local ClassHexColor = T.RGBToHex(unpack(T.Colors.class[Class]))
+				local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 				local LevelColor = GetQuestDifficultyColor(Level)
 				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Left = LevelHexColor..Level.." "..ClassHexColor..Name.."|r"

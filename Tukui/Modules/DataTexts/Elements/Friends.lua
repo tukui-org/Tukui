@@ -107,8 +107,7 @@ local DisplayBattleNetFriendsOnTooltip = function()
 						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 						local Level = LevelHexColor..Account.characterLevel.."|r"
 						local Class = EnglishClass(Account.className)
-						local ClassColor = T.Colors.class[Class]
-						local ClassHexColor = T.RGBToHex(unpack(ClassColor))
+						local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 						local Name = ClassHexColor..Account.characterName.."|r"
 						
 						-- WoW Classic Detected
@@ -191,8 +190,7 @@ local DisplayFriendsOnTooltip = function()
 				local LevelColor = GetQuestDifficultyColor(Level)
 				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Class = EnglishClass(Friend.className)
-				local ClassColor = T.Colors.class[Class]
-				local ClassHexColor = T.RGBToHex(unpack(ClassColor))
+				local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 				local Area = Friend.area
 				local Left = ClassHexColor..Name.."|r ("..LevelHexColor..Level.."|r)"
 				local Right = GetSubZoneText() == Area and "|cff00ff00"..Area.."|r" or "|cffffffff"..Area.."|r"
@@ -339,8 +337,7 @@ local OnMouseDown = function(self, button)
 							local LevelColor = GetQuestDifficultyColor(Level)
 							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 							local Class = EnglishClass(Account.className)
-							local ClassColor = T.Colors.class[Class]
-							local ClassHexColor = T.RGBToHex(unpack(ClassColor))
+							local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 							
 							InviteID = InviteID + 1
 
@@ -370,7 +367,7 @@ local OnMouseDown = function(self, button)
 					local LevelColor = GetQuestDifficultyColor(Level)
 					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 					local Class = EnglishClass(Friend.className)
-					local ClassHexColor = T.RGBToHex(unpack(T.Colors.class[Class]))
+					local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 					
 					-- Adding Battle.net Whisper
 					WhisperList[WhisperID] = {
