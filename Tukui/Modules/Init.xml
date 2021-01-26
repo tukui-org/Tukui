@@ -54,6 +54,7 @@
 	<Script file="Cooldowns\Cooldowns.lua"/>
 
 	<!-- Misc. -->
+	<Script file="Miscellaneous\Alerts.lua"/>
 	<Script file="Miscellaneous\AFK.lua"/>
 	<Script file="Miscellaneous\AltPowerBar.lua"/>
 	<Script file="Miscellaneous\DeathRecap.lua"/>
