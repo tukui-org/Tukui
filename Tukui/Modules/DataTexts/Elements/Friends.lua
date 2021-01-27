@@ -103,7 +103,7 @@ local DisplayBattleNetFriendsOnTooltip = function()
 					local Right = "|cffffffff"..Game.."|r"
 					
 					if Game == "World of Warcraft" then
-						local LevelColor = GetQuestDifficultyColor(Account.characterLevel)
+						local LevelColor = Account.characterLevel and GetQuestDifficultyColor(Account.characterLevel) or {1, 1, 1}
 						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 						local Level = LevelHexColor..Account.characterLevel.."|r"
 						local Class = EnglishClass(Account.className)
@@ -187,7 +187,7 @@ local DisplayFriendsOnTooltip = function()
 			if IsConnected then
 				local Name = Friend.name
 				local Level = Friend.level
-				local LevelColor = GetQuestDifficultyColor(Level)
+				local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Class = EnglishClass(Friend.className)
 				local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
@@ -340,7 +340,7 @@ local OnMouseDown = function(self, button)
 							local AccountID = Account.gameAccountID
 							local Name = Account.characterName
 							local Level = Account.characterLevel
-							local LevelColor = GetQuestDifficultyColor(Level)
+							local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 							local Class = EnglishClass(Account.className)
 							local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
@@ -370,7 +370,7 @@ local OnMouseDown = function(self, button)
 					
 					local Name = Friend.name
 					local Level = Friend.level
-					local LevelColor = GetQuestDifficultyColor(Level)
+					local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 					local Class = EnglishClass(Friend.className)
 					local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
