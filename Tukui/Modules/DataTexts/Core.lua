@@ -46,8 +46,8 @@ local SetData = function(self, object)
 	self.Data:Enable()
 	self.Data.Text:SetPoint("RIGHT", self, 0, 0)
 	self.Data.Text:SetPoint("LEFT", self, 0, 0)
-	self.Data.Text:SetPoint("TOP", self, 0, -1)
-	self.Data.Text:SetPoint("BOTTOM", self, 0, -1)
+	self.Data.Text:SetPoint("TOP", self, 0, 0)
+	self.Data.Text:SetPoint("BOTTOM", self, 0, 0)
 	self.Data.Position = self.Num
 	self.Data:SetAllPoints(self.Data.Text)
 
