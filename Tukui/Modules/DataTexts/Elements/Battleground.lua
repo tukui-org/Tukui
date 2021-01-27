@@ -90,19 +90,19 @@ function BGFrame:Enable()
 
 	local Text1 = BGFrame:CreateFontString(nil, "OVERLAY")
 	Text1:SetFontObject(DataText.Font)
-	Text1:SetPoint("LEFT", 30, -1)
+	Text1:SetPoint("LEFT", 30, 0)
 	Text1:SetHeight(BGFrame:GetHeight())
 	BGFrame.Text1 = Text1
 
 	local Text2 = BGFrame:CreateFontString(nil, "OVERLAY")
 	Text2:SetFontObject(DataText.Font)
-	Text2:SetPoint("CENTER", 0, -1)
+	Text2:SetPoint("CENTER", 0, 0)
 	Text2:SetHeight(BGFrame:GetHeight())
 	BGFrame.Text2 = Text2
 
 	local Text3 = BGFrame:CreateFontString(nil, "OVERLAY")
 	Text3:SetFontObject(DataText.Font)
-	Text3:SetPoint("RIGHT", -30, -1)
+	Text3:SetPoint("RIGHT", -30, 0)
 	Text3:SetHeight(BGFrame:GetHeight())
 	BGFrame.Text3 = Text3
 

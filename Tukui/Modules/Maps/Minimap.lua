@@ -108,7 +108,8 @@ function Minimap:StyleMinimap()
 	
 	QueueStatusMinimapButton:SetParent(Minimap)
 	QueueStatusMinimapButton:ClearAllPoints()
-	QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 0, 0)
+	QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 2, -2)
+	QueueStatusMinimapButton:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() + 2)
 	QueueStatusMinimapButtonBorder:Kill()
 		 
 	QueueStatusFrame:StripTextures()
@@ -116,8 +117,8 @@ function Minimap:StyleMinimap()
 	QueueStatusFrame:CreateShadow()
 
 	Mail:ClearAllPoints()
-	Mail:SetPoint("TOPRIGHT", 4, 4)
-	Mail:SetFrameLevel(self:GetFrameLevel() + 2)
+	Mail:SetPoint("BOTTOMRIGHT", 3, -4)
+	Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
 	
