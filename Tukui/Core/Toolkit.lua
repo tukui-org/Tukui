@@ -594,8 +594,8 @@ end
 
 Toolkit.Functions.OnEvent = function(self, event, ...)
 	if event == "PLAYER_LOGIN" then
-		SetCVar("uiScale", self.Settings.UIScale)
 		SetCVar("useUiScale", 1)
+		SetCVar("uiScale", self.Settings.UIScale)
 		
 		UIParent:SetScale(self.Settings.UIScale)
 	elseif event == "ADDON_LOADED" then
