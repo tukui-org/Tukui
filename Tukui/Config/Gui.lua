@@ -347,6 +347,7 @@ local UnitFrames = function(self)
 	Window:CreateSlider("UnitFrames", "ScrollingCombatTextRadius", "Area size of the scrolling combat text", 50, 500, 10)
 	Window:CreateSlider("UnitFrames", "ScrollingCombatTextDisplayTime", "Number of seconds the text remain to be seen", .5, 3, .1)
 	Window:CreateDropdown("UnitFrames", "ScrollingCombatTextFont", "Set scrolling combat font", "Font")
+	Window:CreateDropdown("UnitFrames", "ScrollingCombatTextAnim", "Which animation you want to use?")
 
 	Window:CreateSection("Auras")
 	Window:CreateSwitch("UnitFrames", "PlayerBuffs", "Enable player buffs")

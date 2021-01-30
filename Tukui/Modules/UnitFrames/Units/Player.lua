@@ -400,20 +400,20 @@ function UnitFrames:Player()
 		ScrollingCombatText.useCLEU = C.UnitFrames.ScrollingCombatTextIcon and true or false
 		ScrollingCombatText.format = "%1$s |T%2$s:0:0:0:0:64:64:4:60:4:60|t"
 		ScrollingCombatText.animationsByEvent = {
-			["ABSORB"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["BLOCK"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["DEFLECT"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["DODGE"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["ENERGIZE"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["EVADE"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["HEAL"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["IMMUNE"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["INTERRUPT"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["MISS"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["PARRY"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["REFLECT"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["RESIST"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
-			["WOUND"] = C.UnitFrames.ScrollingCombatTextFontAnim.Value,
+			["ABSORB"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["BLOCK"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["DEFLECT"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["DODGE"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["ENERGIZE"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["EVADE"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["HEAL"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["IMMUNE"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["INTERRUPT"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["MISS"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["PARRY"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["REFLECT"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["RESIST"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["WOUND"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
 		}
 
 		for i = 1, 6 do
