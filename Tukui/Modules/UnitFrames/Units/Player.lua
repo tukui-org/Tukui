@@ -397,6 +397,8 @@ function UnitFrames:Player()
 		ScrollingCombatText.fontHeight = C.UnitFrames.ScrollingCombatTextFontSize
 		ScrollingCombatText.radius = 100
 		ScrollingCombatText.fontFlags = DamageFontFlag
+		ScrollingCombatText.useCLEU = true
+		ScrollingCombatText.format = "%1$s |T%2$s:0:0:0:0:64:64:4:60:4:60|t"
 
 		for i = 1, 6 do
 			ScrollingCombatText[i] = ScrollingCombatText:CreateFontString("TukuiPlayerFrameScrollingCombatTextFont" .. i, "OVERLAY")
