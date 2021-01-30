@@ -340,9 +340,12 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "Arena", "Enable arena unit frames")
 	Window:CreateSwitch("UnitFrames", "TotemBar", "Enable totem bar")
 
-	Window:CreateSection("Scrolling combat text")
+	Window:CreateSection("Scrolling combat text for yourself")
 	Window:CreateSwitch("UnitFrames", "ScrollingCombatText", "Enable scrolling combat text")
+	Window:CreateSwitch("UnitFrames", "ScrollingCombatTextIcon", "Display icon on on scrolling combat text")
 	Window:CreateSlider("UnitFrames", "ScrollingCombatTextFontSize", "Text size of scrolling", 10, 80, 1)
+	Window:CreateSlider("UnitFrames", "ScrollingCombatTextRadius", "Area size of the scrolling combat text", 50, 500, 10)
+	Window:CreateSlider("UnitFrames", "ScrollingCombatTextDisplayTime", "Number of seconds the text remain to be seen", .5, 3, .1)
 	Window:CreateDropdown("UnitFrames", "ScrollingCombatTextFont", "Set scrolling combat font", "Font")
 
 	Window:CreateSection("Auras")

@@ -195,8 +195,8 @@ local multipliersByFlag = {
 
 local xOffsetsByAnimation = {
 	["diagonal"  ] = 24,
-	["fountain"  ] = 24,
-	["horizontal"] = 8,
+	["fountain"  ] = 96,
+	["horizontal"] = 72,
 	["random"    ] = 0,
 	["static"    ] = 0,
 	["vertical"  ] = 8,
