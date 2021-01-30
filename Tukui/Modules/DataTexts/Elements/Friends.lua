@@ -191,7 +191,7 @@ local DisplayFriendsOnTooltip = function()
 				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Class = EnglishClass(Friend.className)
 				local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
-				local Area = Friend.area
+				local Area = Friend.area or UNKNOWN
 				local Left = ClassHexColor..Name.."|r ("..LevelHexColor..Level.."|r)"
 				local Right = GetSubZoneText() == Area and "|cff00ff00"..Area.."|r" or "|cffffffff"..Area.."|r"
 				
@@ -236,8 +236,6 @@ local OnEnter = function(self)
 	local TotalOnline = OnlineFriends + OnlineBNet
 	
 	if TotalOnline > 0 then
-		local Total = FriendsNumber + BNetNumber
-		local ZoneColor, ClassColor, LevelColor, RealmColor
 		local ShiftDown = IsShiftKeyDown()
 		
 		UpdateBattleNetFriendsCache(BNetNumber)

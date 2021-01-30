@@ -80,12 +80,13 @@ local OnEnter = function(self)
 		
 		if Online then
 			if Name ~= T.MyName then
+				local Area = Zone or UNKNOWN
 				local Class = EnglishClass(Class)
 				local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 				local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 				local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 				local Left = LevelHexColor..Level.." "..ClassHexColor..Name.."|r"
-				local Right = GetSubZoneText() == Zone and "|cff00ff00"..Zone.."|r" or "|cffffffff"..Zone.."|r"
+				local Right = GetSubZoneText() == Area and "|cff00ff00"..Area.."|r" or "|cffffffff"..Area.."|r"
 
 				GameTooltip:AddDoubleLine(Left, Right)
 				
