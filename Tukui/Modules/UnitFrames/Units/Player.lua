@@ -414,6 +414,7 @@ function UnitFrames:Player()
 			["REFLECT"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
 			["RESIST"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
 			["WOUND"] = C.UnitFrames.ScrollingCombatTextAnim.Value,
+			["COMBAT"   ] = C.UnitFrames.ScrollingCombatTextAnim.Value,
 		}
 
 		for i = 1, 6 do

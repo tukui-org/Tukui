@@ -172,6 +172,7 @@ local animationsByEvent = {
 	["REFLECT"  ] = "fountain",
 	["RESIST"   ] = "fountain",
 	["WOUND"    ] = "fountain",
+	["COMBAT"   ] = "fountain",
 }
 
 local animationsByFlag = {
@@ -258,8 +259,14 @@ local function flush(self)
 	end
 end
 
-local function Update(self, _, unit, event, flag, amount, school, texture)
+local function Update(self, event, unit, category, flag, amount, school, texture)
+	if event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_REGEN_DISABLED" then
+		unit = "player"
+		category = "COMBAT"
+	end
+	
 	if self.unit ~= unit then return end
+	
 	local element = self.FloatingCombatFeedback
 
 	local unitGUID = UnitGUID(unit)
@@ -268,25 +275,35 @@ local function Update(self, _, unit, event, flag, amount, school, texture)
 		element.unitGUID = unitGUID
 	end
 
-	local animation = element.animationsByEvent[event]
+	local animation = element.animationsByEvent[category]
 	if not animation then return end
 
 	animation = element.animationsByFlag[flag] or animation
 
-	local color = element.tryToColorBySchool[event] and element.schoolColors[school] or element.colors[event]
+	local color = element.tryToColorBySchool[category] and element.schoolColors[school] or element.colors[category] or rgb(255, 0, 0)
 
 	local text
-	if event == "WOUND" then
+	if category == "WOUND" then
 		if amount ~= 0	then
 			text = element.abbreviateNumbers and AbbreviateNumbers(amount) or BreakUpLargeNumbers(amount)
 		elseif flag ~= "" and flag ~= "CRITICAL" and flag ~= "CRUSHING" and flag ~= "GLANCING" then
 			text = _G[flag]
 		end
+	elseif category == "COMBAT" then
+		if event == "PLAYER_REGEN_DISABLED" then
+			color = rgb(255, 0, 0)
+
+			text = "+ "..COMBAT
+		else
+			color = rgb(0, 255, 0)
+
+			text = "- "..COMBAT
+		end
 	else
 		if amount ~= 0 then
 			text = element.abbreviateNumbers and AbbreviateNumbers(amount) or BreakUpLargeNumbers(amount)
 		else
-			text = _G[event]
+			text = _G[category]
 		end
 	end
 
@@ -565,6 +582,9 @@ local function Enable(self)
 		element:SetScript("OnHide", flush)
 		element:SetScript("OnShow", flush)
 		element:EnableCLEU(element.useCLEU, true)
+		
+		self:RegisterEvent("PLAYER_REGEN_ENABLED", Path, true)
+		self:RegisterEvent("PLAYER_REGEN_DISABLED", Path, true)
 
 		return true
 	end
@@ -580,6 +600,8 @@ local function Disable(self)
 		flush(element)
 
 		self:UnregisterEvent("UNIT_COMBAT", Path)
+		self:UnregisterEvent("PLAYER_REGEN_ENABLED", Path, true)
+		self:UnregisterEvent("PLAYER_REGEN_DISABLED", Path, true)
 
 		unGUIDe(self)
 
