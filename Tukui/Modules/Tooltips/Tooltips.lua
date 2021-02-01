@@ -111,7 +111,7 @@ function Tooltip:OnTooltipSetUnit()
 		end
 		
 		if Realm then
-			local RealmColor = IsEnemy and "|cffff0000" or "|cff00ff00"
+			local RealmColor = IsEnemy and "|cffDE5E5E" or "|cff4AAB4D"
 			
 			Extra = RealmColor.."["..Realm.."]|r"
 		end
