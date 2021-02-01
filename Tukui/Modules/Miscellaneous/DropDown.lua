@@ -55,6 +55,7 @@ function DropDown:Enable()
 
 	for i = 1, getn(self.ChatMenus) do
 		Menu = _G[self.ChatMenus[i]]
+		Menu:StripTextures()
 		Menu:CreateBackdrop()
 		Menu:CreateShadow()
 	end
