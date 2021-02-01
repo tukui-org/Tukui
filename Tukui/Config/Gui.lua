@@ -288,6 +288,7 @@ local Tooltips = function(self)
 
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("Tooltips", "Enable", "Enable tooltip module")
+	Window:CreateSwitch("Tooltips", "DisplayTitle", "Display player title in their name")
 	Window:CreateSwitch("Tooltips", "UnitHealthText", "Enable unit health text")
 	Window:CreateSwitch("Tooltips", "AlwaysCompareItems", "Always compare items")
 

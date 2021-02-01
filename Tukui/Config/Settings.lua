@@ -261,6 +261,7 @@ C["Raid"] = {
 
 C["Tooltips"] = {
 	["Enable"] = true,
+	["DisplayTitle"] = false,
 	["HideInCombat"] = false,
 	["AlwaysCompareItems"] = false,
 	["UnitHealthText"] = true,

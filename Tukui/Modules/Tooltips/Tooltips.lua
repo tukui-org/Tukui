@@ -116,6 +116,10 @@ function Tooltip:OnTooltipSetUnit()
 			Extra = RealmColor.."["..Realm.."]|r"
 		end
 		
+		if C.Tooltips.DisplayTitle then
+			Name = Title
+		end
+		
 		Line1:SetFormattedText("%s%s%s %s", Color, Name, "|r", Extra)
 	end
 
