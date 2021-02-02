@@ -213,6 +213,7 @@ function Tooltip:Skin(style)
 	end
 	
 	if (not self.IsSkinned) then
+		self:StripTextures()
 		self:CreateBackdrop()
 		self:CreateShadow()
 		
