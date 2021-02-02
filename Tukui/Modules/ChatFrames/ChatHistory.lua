@@ -66,6 +66,11 @@ function History:OnEvent(event, ...)
 end
 
 function History:Enable()
+	-- Disable if we don't want any lines
+	if C.Chat.LogMax == 0 then
+		return
+	end
+	
 	-- This is the global table where we save chat
 	TukuiChatHistory = type(TukuiChatHistory) == "table" and TukuiChatHistory or {}
 	
