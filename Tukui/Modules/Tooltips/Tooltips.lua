@@ -116,7 +116,7 @@ function Tooltip:OnTooltipSetUnit()
 			Extra = RealmColor.."["..Realm.."]|r"
 		end
 		
-		if C.Tooltips.DisplayTitle then
+		if C.Tooltips.DisplayTitle and Title then
 			Name = Title
 		end
 		
