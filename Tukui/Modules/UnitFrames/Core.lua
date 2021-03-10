@@ -594,9 +594,6 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 	if (HaveTotem) then
 		Totem.Slot = slot
-		Totem.Duration = Duration
-		Totem.Start = Start
-		Totem.Elapsed = 0
 		Totem:Show()
 
 		if Totem.Icon then
@@ -605,8 +602,6 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 		if (Totem.Cooldown) then
 			Totem.Cooldown:SetCooldown(Start, Duration)
-
-			Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 		end
 
 		-- Workaround to allow right-click destroy totem
@@ -627,8 +622,6 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		end
 	else
 		Totem:Hide()
-		Totem:SetScript("OnUpdate", nil)
-		Totem.Elapsed = 0
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
