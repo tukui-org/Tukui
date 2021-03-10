@@ -1158,6 +1158,8 @@ function Bags:OnEvent(event, ...)
 		self:UpdateAllBankBags()
 	elseif (event == "SOULBIND_FORGE_INTERACTION_STARTED") then
 		self:OpenAllBags()
+		
+		ItemButtonUtil.OpenAndFilterBags(SoulbindViewer)
 	elseif (event == "SOULBIND_FORGE_INTERACTION_ENDED") then
 		self:CloseAllBags()
 	end
@@ -1225,11 +1227,11 @@ function Bags:Enable()
 		end
 	end
 	
-	OpenAllBagsMatchingContext = Noop
+	OpenAllBagsMatchingContext = function() return 4 end
 	
 	-- Add Text Cooldowns Timer
-	--hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-	--hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
+	-- hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
+	-- hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
 
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
