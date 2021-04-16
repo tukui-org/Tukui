@@ -207,8 +207,8 @@ function Tooltip:SetUnitBorderColor()
 	end
 end
 
-function Tooltip:Skin(style)
-	if self:IsForbidden() or self == GameTooltipTooltip then
+function Tooltip:Skin()
+	if self:IsForbidden() then
 		return
 	end
 	
@@ -219,29 +219,6 @@ function Tooltip:Skin(style)
 		
 		self.IsSkinned = true
 	end
-
-	local Link = select(2, self:GetItem())
-	local R, G, B
-	local Backdrop = self.Backdrop
-	
-	if Backdrop then
-		if Link then
-			local Quality = select(3, GetItemInfo(Link))
-
-			if Quality then
-				R, G, B = GetItemQualityColor(Quality)
-			else
-				R, G, B = unpack(C["General"].BorderColor)
-			end
-			
-			Backdrop:SetBorderColor(R, G, B)
-		else
-			Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
-		end
-	end
-	
-	self:SetBackdrop(Tooltip.BackdropStyle)
-	self:SetBackdropColor(unpack(C.General.BackdropColor))
 end
 
 function Tooltip:SkinHealthBar()
@@ -260,6 +237,29 @@ function Tooltip:SkinHealthBar()
 	end
 end
 
+function Tooltip:SetItemBorderColor(tooltip)
+	local Tooltip = tooltip
+	local Link = select(2, Tooltip:GetItem())
+	local R, G, B
+	local Backdrop = Tooltip.Backdrop
+	
+	if Backdrop then
+		if Link then
+			local Quality = select(3, GetItemInfo(Link))
+
+			if Quality then
+				R, G, B = GetItemQualityColor(Quality)
+			else
+				R, G, B = unpack(C["General"].BorderColor)
+			end
+			
+			Backdrop:SetBorderColor(R, G, B)
+		else
+			Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
+		end
+	end
+end
+
 function Tooltip:OnTooltipSetItem()
 	if IsShiftKeyDown() then
 		local Item, Link = self:GetItem()
@@ -273,6 +273,8 @@ function Tooltip:OnTooltipSetItem()
 			self:AddDoubleLine(ID, Text)
 		end
 	end
+	
+	Tooltip:SetItemBorderColor(self)
 end
 
 function Tooltip:SetHealthValue(unit)
@@ -362,8 +364,14 @@ function Tooltip:ResetBorderColor()
 	end
 end
 
+function Tooltip:SetBackdropStyle()
+	self:SetBackdrop(Tooltip.BackdropStyle)
+	self:SetBackdropColor(unpack(C.General.BackdropColor))
+	self:SetBackdropBorderColor(unpack(C.General.BackdropColor))
+end
+
 function Tooltip:AddHooks()
-	hooksecurefunc("SharedTooltip_SetBackdropStyle", self.Skin)
+	hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 	hooksecurefunc("GameTooltip_ShowCompareItem", self.SetCompareItemBorderColor)
 	hooksecurefunc("GameTooltip_UnitColor", self.SetUnitBorderColor)
@@ -399,6 +407,8 @@ function Tooltip:Enable()
 	Tooltip.Skin(GameTooltip)
 	Tooltip.Skin(ItemRefTooltip)
 	Tooltip.Skin(EmbeddedItemTooltip)
+	Tooltip.Skin(ShoppingTooltip1)
+	Tooltip.Skin(ShoppingTooltip2)
 	
 	HealthBar:Hide()
 	
