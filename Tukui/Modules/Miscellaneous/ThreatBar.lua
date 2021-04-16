@@ -101,7 +101,7 @@ function ThreatBar:Create()
 	self:SetScript("OnEvent", self.OnEvent)
 	
 	-- Register for moving
-	Movers:RegisterFrame(self, "Talking Head")
+	Movers:RegisterFrame(self, "Threat Bar")
 end
 
 function ThreatBar:Enable()
