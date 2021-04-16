@@ -35,6 +35,7 @@ function Movers:RestoreDefaults(button)
 		local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
 		local Frame = _G[FrameName]
 		local Parent = _G[ParentName]
+		local Name = Frame.MoverName or Frame:GetName() or UNKNOWN
 
 		if not Parent then
 			Parent = UIParent
@@ -45,6 +46,8 @@ function Movers:RestoreDefaults(button)
 
 		Frame.DragInfo:ClearAllPoints()
 		Frame.DragInfo:SetAllPoints(Frame)
+		
+		Frame.DragInfo.Text:SetText(Name)
 
 		-- Delete Saved Variable
 		SavedVariables[FrameName] = nil
@@ -65,10 +68,13 @@ end
 
 function Movers:OnDragFollowMe()
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
+	local Name = self.Parent.MoverName or self.Parent:GetName() or UNKNOWN
 
 	if not Parent then
 		Parent = UIParent
 	end
+	
+	self.Text:SetText(Name.."\n|cffff9300X: "..T.Round(X).."|r ".."|cff79bde9Y: "..T.Round(Y).."|r")
 	
 	self.Parent:ClearAllPoints()
 	self.Parent:SetPoint(Anchor1, Parent, Anchor2, X, Y)
