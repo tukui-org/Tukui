@@ -10,7 +10,7 @@ function TalkingHead:OnEvent(event, addon)
 	end
 
 	local Frame = TalkingHeadFrame
-	local CustomPosition = TukuiData[T.MyRealm][T.MyName].Move["TalkingHeadFrame"]
+	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move["TalkingHeadFrame"]
 	local A1, Parent, A2, X, Y = "TOP", UIParent, "TOP", 0, -10
 	
 	if CustomPosition then

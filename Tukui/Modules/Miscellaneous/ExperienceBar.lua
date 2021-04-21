@@ -22,7 +22,7 @@ Experience.Menu = {
 			
 			Experience:Update()
 			
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -33,7 +33,7 @@ Experience.Menu = {
 			
 			Experience:Update()
 
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true
 	},
@@ -44,7 +44,7 @@ Experience.Menu = {
 			
 			Experience:Update()
             
-            TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+            TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -56,7 +56,7 @@ Experience.Menu = {
 			
 			Experience:Update()
 
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -68,7 +68,7 @@ Experience.Menu = {
 			
 			Experience:Update()
 
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -80,7 +80,7 @@ Experience.Menu = {
 			
 			Experience:Update()
 
-			TukuiData[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
 		end,
 		notCheckable = true,
 		disabled = true,
@@ -334,7 +334,7 @@ function Experience:Create()
 	for i = 1, self.NumBars do
 		local XPBar = CreateFrame("StatusBar", "TukuiExperienceBar" .. i, UIParent)
 		local RestedBar = CreateFrame("StatusBar", nil, XPBar)
-		local Data = TukuiData[T.MyRealm][T.MyName]
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 		
 		XPBar:SetStatusBarTexture(C.Medias.Normal)
 		XPBar:EnableMouse()

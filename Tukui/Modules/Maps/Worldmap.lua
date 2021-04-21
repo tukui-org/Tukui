@@ -49,7 +49,7 @@ end
 
 function WorldMap:SynchronizeDisplayState()
 	if WorldMapFrame:IsMaximized() then
-		local Data = TukuiData[T.MyRealm][T.MyName]
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 		local A1, P, A2, X, Y = "CENTER", UIParent, "CENTER", 0, 30
 		
 		if Data.WorldMapPosition then
@@ -209,7 +209,7 @@ function WorldMap:AddMoving()
 		WorldMapFrame:StopMovingOrSizing()
 
 		local A1, P, A2, X, Y = WorldMapFrame:GetPoint()
-		local Data = TukuiData[T.MyRealm][T.MyName]
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 		Data.WorldMapPosition = {A1, "UIParent", A2, X, Y}
 	end)

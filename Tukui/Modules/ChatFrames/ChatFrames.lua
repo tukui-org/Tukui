@@ -197,14 +197,14 @@ function Chat:SaveChatFramePositionAndDimensions()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
 
-	TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
 end
 
 function Chat:SetChatFramePosition()
 	local Frame = self
 	local ID = Frame:GetID()
 
-	local Settings = TukuiData[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
+	local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
 
 	if Settings then
 		if C.General.Themes.Value == "Tukui" then
@@ -440,7 +440,7 @@ function Chat:HideChatFrame(button, id)
 	button.state = "hidden"
 	button.Texture:SetTexture(C.Medias.ArrowUp)
 
-	local Data = TukuiData[T.MyRealm][T.MyName]
+	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 	if id == 1 then
 		Data.ChatLeftHidden = true
@@ -486,7 +486,7 @@ function Chat:ShowChatFrame(button, id)
 	button.state = "show"
 	button.Texture:SetTexture(C.Medias.ArrowDown)
 
-	local Data = TukuiData[T.MyRealm][T.MyName]
+	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 	if id == 1 then
 		Data.ChatLeftHidden = false
@@ -635,7 +635,7 @@ end
 
 function Chat:DisplayChat()
 	if C.General.Themes.Value == "Tukui" then
-		local Data = TukuiData[T.MyRealm][T.MyName]
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 		if Data.ChatLeftHidden then
 			-- Need to delay this one, because of docked tabs

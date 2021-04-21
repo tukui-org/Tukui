@@ -31,8 +31,8 @@ function History:Print()
 
 	History.IsPrinting = true
 
-	for i = #TukuiChatHistory, 1, -1 do
-		Temp = TukuiChatHistory[i]
+	for i = #TukuiDatabase.ChatHistory, 1, -1 do
+		Temp = TukuiDatabase.ChatHistory[i]
 
 		ChatFrame_MessageEventHandler(ChatFrame1, Temp[EntryEvent], unpack(Temp))
 	end
@@ -48,10 +48,10 @@ function History:Save(event, ...)
 		Temp[EntryEvent] = event
 		Temp[EntryTime] = time()
 
-		table.insert(TukuiChatHistory, 1, Temp)
+		table.insert(TukuiDatabase.ChatHistory, 1, Temp)
 
-		for i = LogMax, #TukuiChatHistory do
-			table.remove(TukuiChatHistory, LogMax)
+		for i = LogMax, #TukuiDatabase.ChatHistory do
+			table.remove(TukuiDatabase.ChatHistory, LogMax)
 		end
 	end
 end
@@ -70,9 +70,6 @@ function History:Enable()
 	if C.Chat.LogMax == 0 then
 		return
 	end
-	
-	-- This is the global table where we save chat
-	TukuiChatHistory = type(TukuiChatHistory) == "table" and TukuiChatHistory or {}
 	
 	-- Max number of entries logged
 	LogMax = C.Chat.LogMax

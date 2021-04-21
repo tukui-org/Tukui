@@ -47,11 +47,11 @@ function Loot:MoveStandardLoot()
 			Movers:RegisterFrame(LootFrame, "Loot Frame")
 		end
 
-		if not (TukuiData[T.MyRealm][T.MyName].Move.LootFrame) then
-			TukuiData[T.MyRealm][T.MyName].Move.LootFrame = {"TOPLEFT", "UIParent", "TOPLEFT", 16, -116}
+		if not (TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.LootFrame) then
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.LootFrame = {"TOPLEFT", "UIParent", "TOPLEFT", 16, -116}
 		end
 
-		local A1, _, A2, X, Y = unpack(TukuiData[T.MyRealm][T.MyName].Move.LootFrame)
+		local A1, _, A2, X, Y = unpack(TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.LootFrame)
 
 		LootFrame:ClearAllPoints()
 		LootFrame:SetPoint(A1, UIParent, A2, X, Y)
@@ -310,8 +310,8 @@ function Loot:LOOT_OPENED(_, autoloot)
 		TukuiLootFrame:GetCenter()
 		TukuiLootFrame:Raise()
 	else
-		local SavedVar = TukuiData[T.MyRealm][T.MyName].Move
-		local CustomLootPosition = TukuiData[T.MyRealm][T.MyName].Move.TukuiLootFrame
+		local SavedVar = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move
+		local CustomLootPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiLootFrame
 		local A1, P, A2, X, Y
 
 		if CustomLootPosition then

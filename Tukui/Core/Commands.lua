@@ -146,8 +146,8 @@ T.SlashHandler = function(cmd)
 				end
 				
 				-- Remove saved position settings
-				TukuiData[T.MyRealm][T.MyName].Move.TukuiLeftDataTextBox = nil
-				TukuiData[T.MyRealm][T.MyName].Move.TukuiRightDataTextBox = nil
+				TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiLeftDataTextBox = nil
+				TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiRightDataTextBox = nil
 			end
 		end
 	elseif (arg1 == "dt" or arg1 == "datatext") then

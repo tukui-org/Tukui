@@ -67,8 +67,8 @@ end
 function ActionBars:MovePetBar()
 	local PetBar = TukuiPetActionBar
 	local RightBar = TukuiActionBar5
-	local Data1 = TukuiData[T.MyRealm][T.MyName].Move.TukuiActionBar5
-	local Data2 = TukuiData[T.MyRealm][T.MyName].Move.TukuiPetActionBar
+	local Data1 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiActionBar5
+	local Data2 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiPetActionBar
 
 	-- Don't run if player moved bar 5 or pet bar
 	if Data1 or Data2 then

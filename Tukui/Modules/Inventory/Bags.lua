@@ -1021,7 +1021,7 @@ end
 
 function Bags:OpenAllBankBags()
 	local Bank = BankFrame
-	local CustomPosition = TukuiData[T.MyRealm][T.MyName].Move.TukuiBank
+	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBank
 
 	if Bank:IsShown() then
 		self.Bank:Show()

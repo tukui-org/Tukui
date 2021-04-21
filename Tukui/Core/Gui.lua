@@ -77,8 +77,8 @@ T.Popups.Popup["TUKUI_SWITCH_PROFILE"] = {
 	Function1 = function(self)
 		local SelectedServer, SelectedNickname = strsplit("-", MySelectedProfile)
 
-		TukuiData[T.MyRealm][T.MyName] = TukuiData[SelectedServer][SelectedNickname]
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettingsPerCharacter[SelectedServer][SelectedNickname]
+		TukuiDatabase.Variables[T.MyRealm][T.MyName] = TukuiDatabase.Variables[SelectedServer][SelectedNickname]
+		TukuiDatabase.Settings[T.MyRealm][T.MyName] = TukuiDatabase.Settings[SelectedServer][SelectedNickname]
 		
 		ReloadUI()
 	end,
@@ -97,19 +97,19 @@ local SetValue = function(group, option, value)
 
 	local Settings
 
-	if (not TukuiSettingsPerCharacter) then
-		TukuiSettingsPerCharacter = {}
+	if (not TukuiDatabase.Settings) then
+		TukuiDatabase.Settings = {}
 	end
 
-	if (not TukuiSettingsPerCharacter[T.MyRealm]) then
-		TukuiSettingsPerCharacter[T.MyRealm] = {}
+	if (not TukuiDatabase.Settings[T.MyRealm]) then
+		TukuiDatabase.Settings[T.MyRealm] = {}
 	end
 
-	if (not TukuiSettingsPerCharacter[T.MyRealm][T.MyName]) then
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
+	if (not TukuiDatabase.Settings[T.MyRealm][T.MyName]) then
+		TukuiDatabase.Settings[T.MyRealm][T.MyName] = {}
 	end
 
-	Settings = TukuiSettingsPerCharacter[T.MyRealm][T.MyName]
+	Settings = TukuiDatabase.Settings[T.MyRealm][T.MyName]
 
 	if (not Settings[group]) then
 		Settings[group] = {}

@@ -27,34 +27,7 @@ function Loading:StoreDefaults()
 end
 
 function Loading:LoadCustomSettings()
-	local Settings
-
-	if (not TukuiSettingsPerCharacter) then
-		TukuiSettingsPerCharacter = {}
-	end
-
-	if (not TukuiSettingsPerCharacter[T.MyRealm]) then
-		TukuiSettingsPerCharacter[T.MyRealm] = {}
-	end
-
-	if (not TukuiSettingsPerCharacter[T.MyRealm][T.MyName]) then
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = {}
-	end
-	
-	if not TukuiSettings then
-		TukuiSettings = {}
-	end
-	
-	-- Globals settings will be removed in the next coming weeks, if currently using globals, move into current character profile
-	if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General and TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal == true then
-		TukuiSettingsPerCharacter[T.MyRealm][T.MyName] = TukuiSettings
-		
-		if TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General then
-			TukuiSettingsPerCharacter[T.MyRealm][T.MyName].General.UseGlobal = false
-		end
-	end
-
-	Settings = TukuiSettingsPerCharacter[T.MyRealm][T.MyName]
+	local Settings = TukuiDatabase.Settings[T.MyRealm][T.MyName]
 
 	for group, options in pairs(Settings) do
 		if C[group] then
@@ -93,8 +66,8 @@ end
 function Loading:LoadProfiles()
 	local Profiles = C.General.Profiles
 	local Menu = Profiles.Options
-	local Data = TukuiData
-	local GUISettings = TukuiSettingsPerCharacter
+	local Data = TukuiDatabase.Variables
+	local GUISettings = TukuiDatabase.Settings
 	local Nickname = T.MyName
 	local Server = T.MyRealm
 	
@@ -132,7 +105,135 @@ function Loading:Enable()
 	end
 end
 
+function Loading:MergeDatabase()
+	if TukuiData then
+		TukuiDatabase["Variables"] = TukuiData
+		
+		TukuiData = nil
+	end
+	
+	if TukuiSettingsPerCharacter then
+		TukuiDatabase["Settings"] = TukuiSettingsPerCharacter
+		
+		TukuiSettingsPerCharacter = nil
+	end
+	
+	if TukuiGold then
+		TukuiDatabase["Gold"] = TukuiGold
+		
+		TukuiGold = nil
+	end
+	
+	if TukuiChatHistory then
+		TukuiDatabase["ChatHistory"] = TukuiChatHistory 
+		
+		TukuiChatHistory = nil
+	end
+end
+
+function Loading:VerifyDatabase()
+	if not TukuiDatabase then
+		TukuiDatabase = {}
+		
+		TukuiDatabase["Variables"] = {}
+		TukuiDatabase["Settings"] = {}
+		TukuiDatabase["Gold"] = {}
+		TukuiDatabase["ChatHistory"] = {}
+	end
+	
+	-- VARIABLES
+	if not TukuiDatabase.Variables then
+		TukuiDatabase.Variables = {}
+	end
+	
+	if not TukuiDatabase.Variables[T.MyRealm] then
+		TukuiDatabase.Variables[T.MyRealm] = {}
+	end
+	
+	if not TukuiDatabase.Variables[T.MyRealm][T.MyName] then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName] = {}
+	end
+	
+	if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Move then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Move = {}
+	end
+	
+	if not TukuiDatabase.Variables[T.MyRealm][T.MyName].ActionBars then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].ActionBars = {}
+	end
+	
+	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) then
+		local DataTexts = T.DataTexts
+		
+		DataTexts:AddDefaults()
+	end
+	
+	if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat = {
+			["Frame1"] = {
+				"BOTTOMLEFT",
+				"BOTTOMLEFT",
+				34,
+				50,
+				370,
+				108,
+			},
+			["Frame4"] = {
+				"BOTTOMRIGHT",
+				"BOTTOMRIGHT",
+				-34,
+				50,
+				370,
+				108,
+			},
+			["Frame3"] = {
+				"TOPLEFT",
+				"TOPLEFT",
+				0,
+				0,
+				370,
+				108,
+			},
+			["Frame2"] = {
+				"TOPLEFT",
+				"TOPLEFT",
+				0,
+				0,
+				370,
+				108,
+			},
+		}
+	end
+	
+	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Misc) then
+		TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Misc = {}
+	end
+	
+	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Installation) then
+		TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Installation = {}
+	end
+	
+	-- SETTINGS
+	if (not TukuiDatabase.Settings) then
+		TukuiDatabase.Settings = {}
+	end
+	
+	if not TukuiDatabase.Settings[T.MyRealm] then
+		TukuiDatabase.Settings[T.MyRealm] = {}
+	end
+	
+	if not TukuiDatabase.Settings[T.MyRealm][T.MyName] then
+		TukuiDatabase.Settings[T.MyRealm][T.MyName] = {}
+	end
+end
+
 function Loading:OnEvent(event)
+	-- We verify everything is ok with our savedvariables
+	self:VerifyDatabase()
+	
+	-- Patch 9.0 was using different table to save settings, when players will hit 9.1, we need to move their settings into our new table
+	self:MergeDatabase()
+	
 	if (event == "PLAYER_LOGIN") then
 		T["Inventory"]["Bags"]:Enable()
 		T["Inventory"]["Loot"]:Enable()

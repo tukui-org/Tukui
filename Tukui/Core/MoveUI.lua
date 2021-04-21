@@ -29,7 +29,7 @@ end
 function Movers:RestoreDefaults(button)
 	local FrameName = self.Parent:GetName()
 	local Data = Movers.Defaults[FrameName]
-	local SavedVariables = TukuiData[T.MyRealm][T.MyName].Move
+	local SavedVariables = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move
 
 	if (button == "RightButton") and (Data) then
 		local Anchor1, ParentName, Anchor2, X, Y = unpack(Data)
@@ -91,7 +91,7 @@ function Movers:OnDragStop()
 	self:StopMovingOrSizing()
 	self:SetScript("OnUpdate", nil)
 
-	local Data = TukuiData[T.MyRealm][T.MyName].Move
+	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
 	local FrameName = self.Parent:GetName()
 	local Frame = self.Parent
@@ -211,9 +211,7 @@ end
 
 Movers:SetScript("OnEvent", function(self, event)
 	if (event == "PLAYER_ENTERING_WORLD") then
-		T.VerifyDataTable()
-			
-		local Data = TukuiData[T.MyRealm][T.MyName].Move
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move
 
 		for Frame, Position in pairs(Data) do
 			local Frame = _G[Frame]

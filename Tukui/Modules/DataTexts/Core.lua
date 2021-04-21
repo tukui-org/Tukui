@@ -186,11 +186,11 @@ function DataTexts:ResetGold()
 end
 
 function DataTexts:Save()
-	if (not TukuiData[GetRealmName()][UnitName("player")]) then
-		TukuiData[GetRealmName()][UnitName("player")] = {}
+	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")]) then
+		TukuiDatabase.Variables[GetRealmName()][UnitName("player")] = {}
 	end
 
-	local Data = TukuiData[GetRealmName()][UnitName("player")]
+	local Data = TukuiDatabase.Variables[GetRealmName()][UnitName("player")]
 
 	for Name, DataText in pairs(self.DataTexts) do
 		if DataText.Position then
@@ -200,15 +200,15 @@ function DataTexts:Save()
 end
 
 function DataTexts:AddDefaults()
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts = {}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts = {}
 
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["Guild"] = {true, 1}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["Character"] = {true, 2}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["Friends"] = {true, 3}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["System"] = {true, 4}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["MicroMenu"] = {true, 5}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["Gold"] = {true, 6}
-	TukuiData[GetRealmName()][UnitName("player")].DataTexts["Time"] = {true, 7}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["Guild"] = {true, 1}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["Character"] = {true, 2}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["Friends"] = {true, 3}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["System"] = {true, 4}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["MicroMenu"] = {true, 5}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["Gold"] = {true, 6}
+	TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts["Time"] = {true, 7}
 end
 
 function DataTexts:Reset()
@@ -224,8 +224,8 @@ function DataTexts:Reset()
 
 	self:AddDefaults()
 
-	if (TukuiData[GetRealmName()][UnitName("player")] and TukuiData[GetRealmName()][UnitName("player")].DataTexts) then
-		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("player")].DataTexts) do
+	if (TukuiDatabase.Variables[GetRealmName()][UnitName("player")] and TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) then
+		for Name, Info in pairs(TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) do
 			local Enabled, Num = Info[1], Info[2]
 
 			if (Enabled and (Num and Num > 0)) then
@@ -236,7 +236,7 @@ function DataTexts:Reset()
 					self.Anchors[Num]:SetData(Object)
 				else
 					T.Print("DataText '" .. Name .. "' not found. Removing. Replace with [|cff00ff00/tukui dt|r]")
-					TukuiData[GetRealmName()][UnitName("player")].DataTexts[Name] = {false, 0}
+					TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts[Name] = {false, 0}
 				end
 			end
 		end
@@ -246,10 +246,8 @@ end
 function DataTexts:SetTexts()
 	self:CreateAnchors()
 
-	T:VerifyDataTable()
-
-	if (TukuiData[GetRealmName()][UnitName("player")] and TukuiData[GetRealmName()][UnitName("player")].DataTexts) then
-		for Name, Info in pairs(TukuiData[GetRealmName()][UnitName("player")].DataTexts) do
+	if (TukuiDatabase.Variables[GetRealmName()][UnitName("player")] and TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) then
+		for Name, Info in pairs(TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) do
 			local Enabled, Num = Info[1], Info[2]
 
 			if (Enabled and (Num and Num > 0)) then
@@ -261,7 +259,7 @@ function DataTexts:SetTexts()
 						self.Anchors[Num]:SetData(Object)
 					else
 						T.Print("DataText '" .. Name .. "' not found. Removing. Replace with [|cff00ff00/tukui dt|r]")
-						TukuiData[GetRealmName()][UnitName("player")].DataTexts[Name] = {false, 0}
+						TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts[Name] = {false, 0}
 					end
 				end
 			end
