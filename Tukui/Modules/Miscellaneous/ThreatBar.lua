@@ -6,6 +6,7 @@ local format = string.format
 local floor = math.floor
 local UnitName = UnitName
 local ThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", UIParent)
+local Timer = 1
 
 function ThreatBar:OnEvent(event)
 	local Party = GetNumGroupMembers()
@@ -25,7 +26,13 @@ function ThreatBar:OnEvent(event)
 	end
 end
 
-function ThreatBar:OnUpdate()
+function ThreatBar:OnUpdate(elapsed)
+	Timer = Timer - elapsed
+	
+	if Timer > 0 then
+		return
+	end
+
 	local GetColor = T.ColorGradient
 
 	if UnitAffectingCombat("player") then
@@ -52,6 +59,8 @@ function ThreatBar:OnUpdate()
 			self:SetAlpha(0)
 		end
 	end
+	
+	Timer = 1
 end
 
 function ThreatBar:Create()
@@ -101,7 +110,7 @@ function ThreatBar:Create()
 	self:SetScript("OnEvent", self.OnEvent)
 	
 	-- Register for moving
-	Movers:RegisterFrame(self, "Threat Bar")
+	Movers:RegisterFrame(self, "Talking Head")
 end
 
 function ThreatBar:Enable()
