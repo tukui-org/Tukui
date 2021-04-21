@@ -190,12 +190,6 @@ function UnitFrames:Player()
 	Combat:SetPoint("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
-	local Status = Panel:CreateFontString(nil, "OVERLAY", nil, 1)
-	Status:SetFontObject(Font)
-	Status:SetPoint("CENTER", Panel, "CENTER", 0, 0)
-	Status:SetTextColor(0.69, 0.31, 0.31)
-	Status:Hide()
-
 	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	Leader:SetSize(14, 14)
 	Leader:SetPoint("TOPLEFT", 2, 8)
@@ -380,10 +374,10 @@ function UnitFrames:Player()
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
 
-	local RestingIndicator = Panel:CreateTexture(nil, "OVERLAY", nil, 7)
+	local RestingIndicator = Health:CreateTexture(nil, "OVERLAY", nil, 7)
 	RestingIndicator:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\Resting]])
-	RestingIndicator:SetSize(20, 20)
-	RestingIndicator:SetPoint("CENTER", Panel, "CENTER", 0, 0)
+	RestingIndicator:SetSize(24, 24)
+	RestingIndicator:SetPoint("LEFT", Health, "LEFT", 4, 0)
 
 	if C.UnitFrames.ScrollingCombatText then
 		local DamageFont = T.GetFont(C.UnitFrames.ScrollingCombatTextFont)
@@ -511,9 +505,14 @@ function UnitFrames:Player()
 		self.Totems = Bar
 	end
 
+	local Status = Health:CreateTexture(nil, "OVERLAY", nil, 7)
+	Status:SetTexture("Interface\\PvPRankBadges\\PvPRank"..T.MyFaction)
+	Status:SetSize(24, 24)
+	Status:SetPoint("LEFT", Health, "LEFT", 4, 0)
+	Status:Hide()
 
-	self:HookScript("OnEnter", UnitFrames.MouseOnPlayer)
-	self:HookScript("OnLeave", UnitFrames.MouseOnPlayer)
+	self:HookScript("OnEnter", UnitFrames.ShowWarMode)
+	self:HookScript("OnLeave", UnitFrames.ShowWarMode)
 
 	-- Register with oUF
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")

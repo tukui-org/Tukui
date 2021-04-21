@@ -111,19 +111,22 @@ function UnitFrames:UTF8Sub(i, dots)
 	end
 end
 
-function UnitFrames:MouseOnPlayer()
+function UnitFrames:ShowWarMode()
 	local Status = self.Status
 	local MouseOver = GetMouseFocus()
 
-	if (MouseOver == self) then
+	if (C_PvP.IsWarModeDesired()) and (MouseOver == self) and (not InCombatLockdown()) then
 		Status:Show()
-
-		if (UnitIsPVP("player")) then
-			Status:SetText("PVP")
+		
+		if self.RestingIndicator then
+			self.RestingIndicator:SetAlpha(0)
 		end
 	else
 		Status:Hide()
-		Status:SetText()
+		
+		if self.RestingIndicator then
+			self.RestingIndicator:SetAlpha(1)
+		end
 	end
 end
 
