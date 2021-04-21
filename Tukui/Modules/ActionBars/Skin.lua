@@ -87,10 +87,10 @@ function ActionBars:SkinButton(button)
 		
 		if C.ActionBars.HotKey then
 			if Button.UpdateHotkeys then
-				hooksecurefunc(Button, "UpdateHotkeys", ActionBars.BetterHotKeyText)
+				hooksecurefunc(Button, "UpdateHotkeys", ActionBars.SetHotKeyText)
 			end
 
-			ActionBars.BetterHotKeyText(Button)
+			ActionBars.SetHotKeyText(Button)
 		end
 		
 		Button:StyleButton()
@@ -183,7 +183,7 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	end
 	
 	if C.ActionBars.HotKey then
-		ActionBars.BetterHotKeyText(Button)
+		ActionBars.SetHotKeyText(Button)
 	end
 
 	Button:StyleButton()
