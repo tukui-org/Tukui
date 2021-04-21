@@ -15,7 +15,7 @@ end
 
 function Status:ShowWindow()
 	self:Show()
-	self:SetSize(300, 430)
+	self:SetSize(300, 450)
 	self:SetPoint("CENTER")
 	self:CreateBackdrop("Transparent")
 	self:CreateShadow()
@@ -50,12 +50,18 @@ function Status:ShowWindow()
 	self.UIScale.Value = C.General.UIScale
 	self.UIScale:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.UIScale:SetPoint("TOP", self.Addons, 0, -20)
-	self.UIScale:SetText("Scaling: "..self.UIScale.Value)
+	self.UIScale:SetText("Scaling: "..T.Round(self.UIScale.Value, 2))
+	
+	self.RecommendedUIScale = self:CreateFontString(nil, "OVERLAY")
+	self.RecommendedUIScale.Value = T.PerfectScale
+	self.RecommendedUIScale:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	self.RecommendedUIScale:SetPoint("TOP", self.UIScale, 0, -20)
+	self.RecommendedUIScale:SetText("Recommended Scale: "..T.Round(self.RecommendedUIScale.Value, 2))
 
 	self.WoWBuild = self:CreateFontString(nil, "OVERLAY")
 	self.WoWBuild.Value = T.WoWPatch.." ("..T.WoWBuild..")"
 	self.WoWBuild:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-	self.WoWBuild:SetPoint("TOP", self.UIScale, 0, -20)
+	self.WoWBuild:SetPoint("TOP", self.RecommendedUIScale, 0, -20)
 	self.WoWBuild:SetText("Version of WoW: "..self.WoWBuild.Value)
 
 	self.Language = self:CreateFontString(nil, "OVERLAY")
