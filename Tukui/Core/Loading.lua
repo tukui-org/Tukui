@@ -186,22 +186,6 @@ function Loading:VerifyDatabase()
 				370,
 				108,
 			},
-			["Frame3"] = {
-				"TOPLEFT",
-				"TOPLEFT",
-				0,
-				0,
-				370,
-				108,
-			},
-			["Frame2"] = {
-				"TOPLEFT",
-				"TOPLEFT",
-				0,
-				0,
-				370,
-				108,
-			},
 		}
 	end
 	

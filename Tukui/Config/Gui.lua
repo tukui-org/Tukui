@@ -129,7 +129,7 @@ local Chat = function(self)
 	Window:CreateSlider("Chat", "BackgroundAlpha", "Set chat background alpha", 40, 100, 1)
 	Window:CreateSlider("Chat", "TextFadingTimer", "Timer that chat text should fade?", 10, 600, 10)
 	Window:CreateSwitch("Chat", "LinkBrackets", "Display URL links in brackets")
-	Window:CreateSwitch("Chat", "RightChatAlignRight", "Align text to right on second chat frame")
+	Window:CreateSwitch("Chat", "RightChatAlignRight", "Align text to right on right chat frame")
 	Window:CreateColorSelection("Chat", "LinkColor", "Link color")
 
 	Window:CreateSection("Font")
