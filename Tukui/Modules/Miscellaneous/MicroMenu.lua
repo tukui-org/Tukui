@@ -75,12 +75,12 @@ function MicroMenu:Enable()
 	MicroMenu:SetScript("OnShow", self.Update)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
-	--MicroMenu:SetScript("OnKeyDown", function(self, b) print(b) end)
 	
 	MicroButtonAndBagsBar:StripTextures()
 	MicroButtonAndBagsBar:SetParent(MicroMenu)
 	MicroButtonAndBagsBar:ClearAllPoints()
 	MicroButtonAndBagsBar:SetPoint("CENTER", -1, 23)
+	
 	MainMenuBarBackpackButton:SetParent(T.Hider)
 	
 	for i = 1, #MICRO_BUTTONS do
@@ -132,6 +132,10 @@ function MicroMenu:Enable()
 		
 		SetOverrideBindingClick(self.Captor, true, C.Misc.MicroToggle.Value, "TukuiMicroMenuCaptor")
 	end
+	
+	-- 9.1, menu it at top (wtf?!), move it back to original position
+	GameMenuFrame:ClearAllPoints()
+	GameMenuFrame:SetPoint("CENTER", UIParent)
 end
 
 Miscellaneous.MicroMenu = MicroMenu
