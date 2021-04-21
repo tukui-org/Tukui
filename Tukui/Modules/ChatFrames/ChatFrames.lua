@@ -200,41 +200,53 @@ function Chat:SaveChatFramePositionAndDimensions()
 	TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
 end
 
+function Chat:Dock(frame)
+	FCF_DockFrame(frame, #FCFDock_GetChatFrames(GENERAL_CHAT_DOCK) + 1, true)
+end
+
+function Chat:Undock(frame)
+	FCF_UnDockFrame(frame)
+	FCF_SetTabPosition(frame, 0)
+end
+
 function Chat:SetChatFramePosition()
 	local Frame = self
 	local ID = Frame:GetID()
+	local Tab = _G["ChatFrame"..ID.."Tab"]
 
-	local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
+	if Tab:IsShown() then
+		local Name = _G["ChatFrame"..ID.."TabText"]:GetText()
+		
+		if not Frame.isDocked and Name ~= Chat.RightChatName then
+			Chat:Dock(Frame)
+		end
 
-	if Settings then
 		if C.General.Themes.Value == "Tukui" then
-			local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
-			local Movers = T.Movers
-
 			if ID == 1 then
 				Frame:SetParent(T.DataTexts.Panels.Left)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
 				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 2)
-			elseif (ID == 4) then
-				if Frame:IsShown() and not Frame.isDocked then
-					Frame:SetParent(T.DataTexts.Panels.Right)
-					Frame:SetUserPlaced(true)
-					Frame:ClearAllPoints()
-					Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
-					Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 2)
+			end
 
-					if C.Chat.RightChatAlignRight then
-						Frame:SetJustifyH("RIGHT")
-					end
+			if Name == Chat.RightChatName then
+				if Frame.isDocked then
+					Chat:Undock(Frame)
+				end
+
+				Frame:SetParent(T.DataTexts.Panels.Right)
+				Frame:SetUserPlaced(true)
+				Frame:ClearAllPoints()
+				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
+				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 2)
+
+				if C.Chat.RightChatAlignRight then
+					Frame:SetJustifyH("RIGHT")
 				end
 			end
 		else
-			if not Frame:IsMovable() then
-				return
-			end
-
+			local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
 			local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
 
 			Frame:SetUserPlaced(true)
@@ -242,7 +254,7 @@ function Chat:SetChatFramePosition()
 			Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
 			Frame:SetSize(Width, Height)
 
-			if (ID == 4) and (C.Chat.RightChatAlignRight) then
+			if (Name == Chat.RightChatName) and (C.Chat.RightChatAlignRight) then
 				Frame:SetJustifyH("RIGHT")
 			end
 		end
@@ -264,7 +276,6 @@ function Chat:Reset()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
-	FCF_OpenNewWindow(GLOBAL_CHANNELS)
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
 	FCF_OpenNewWindow(Chat.RightChatName)
@@ -272,6 +283,9 @@ function Chat:Reset()
 	FCF_OpenNewWindow(NPC_NAMES_DROPDOWN_ALL)
 	FCF_SetLocked(ChatFrame5, 1)
 	FCF_DockFrame(ChatFrame5)
+	FCF_OpenNewWindow(GLOBAL_CHANNELS)
+	FCF_SetLocked(ChatFrame6, 1)
+	FCF_DockFrame(ChatFrame6)
 	FCF_SetChatWindowFontSize(nil, ChatFrame1, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame2, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame3, 12)
@@ -290,8 +304,8 @@ function Chat:Reset()
 	end
 	
 	-- Remove everything in first 4 chat windows
-	for i = 1, 5 do
-		if i ~= 2 then
+	for i = 1, 6 do
+		if i ~= 2 and i ~= 3 then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
@@ -319,23 +333,6 @@ function Chat:Reset()
 	end
 	
 	FCF_SelectDockFrame(ChatFrame1)
-
-	-----------------------
-	-- ChatFrame 3 Setup --
-	-----------------------
-
-	for i = 1, #Channels do
-		ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
-		ChatFrame_AddChannel(ChatFrame3, Channels[i])
-	end
-	
-	-- Adjust Chat Colors
-	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
-	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
-	ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 	
 	-----------------------
 	-- ChatFrame 4 Setup --
@@ -365,6 +362,23 @@ function Chat:Reset()
 	for _, v in ipairs(ChatGroup) do
 		ChatFrame_AddMessageGroup(_G.ChatFrame5, v)
 	end
+	
+	-----------------------
+	-- ChatFrame 6 Setup --
+	-----------------------
+
+	for i = 1, #Channels do
+		ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
+		ChatFrame_AddChannel(ChatFrame6, Channels[i])
+	end
+	
+	-- Adjust Chat Colors
+	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
+	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
+	ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
+	ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
+	ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
+	ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 end
 
 function Chat:OnMouseWheel(delta)
