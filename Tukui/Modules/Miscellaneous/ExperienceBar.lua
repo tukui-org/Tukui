@@ -267,14 +267,6 @@ function Experience:Update()
 		local R, G, B
 		
 		if (Bar.BarType == "AZERITE" and not AzeriteItem) or (Bar.BarType == "PETXP" and not HavePetXP) or (Bar.BarType == "REP" and not WatchedFaction) or (Bar.BarType == "ANIMA" and AnimaCurrencyInfo.quantity == 0 and AnimaCurrencyInfo.maxQuantity == 0) then
-			local MoreText = ""
-			
-			if Bar.BarType == "REP" then
-				MoreText = " Please select a reputation to track in your character panel!"
-			end
-			
-			T.Print("[|CFFFFFF00" .. POWER_TYPE_EXPERIENCE .. "|r] You cannot track |CFFFF0000".. Bar.BarType .."|r at the moment, switching to |CFF00FF00XP|r"..MoreText)
-			
 			Bar.BarType = "XP"
 		end
 
