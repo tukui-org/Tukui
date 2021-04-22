@@ -247,12 +247,15 @@ function Chat:SetChatFramePosition()
 			end
 		else
 			local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
-			local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
+			
+			if Settings then
+				local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
 
-			Frame:SetUserPlaced(true)
-			Frame:ClearAllPoints()
-			Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
-			Frame:SetSize(Width, Height)
+				Frame:SetUserPlaced(true)
+				Frame:ClearAllPoints()
+				Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
+				Frame:SetSize(Width, Height)
+			end
 
 			if (Name == Chat.RightChatName) and (C.Chat.RightChatAlignRight) then
 				Frame:SetJustifyH("RIGHT")
