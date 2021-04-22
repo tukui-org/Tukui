@@ -1,4 +1,4 @@
-## Interface: 90005
+## Interface: 90100
 ## Author: Tukz
 ## X-Maintainer: Tukz & Azilroka & Hydra
 ## Version: 20.17
