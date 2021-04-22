@@ -996,14 +996,8 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 
 		if (InstanceType == "party" or InstanceType == "raid") then
 			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvE.spells)
-		elseif (InstanceType == "pvp") then
-			if (T.MyClass == "PRIEST") or (T.MyClass == "PALADIN" and GetActiveSpecGroup() == 1) or (T.MyClass == "SHAMAN" and GetActiveSpecGroup() == 3) or (T.MyClass == "DRUID" and GetActiveSpecGroup() == 4) or (T.MyClass == "MONK" and GetActiveSpecGroup() == 2) then
-				ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells)
-			else
-				ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.CrowdControl.spells)
-			end
 		else
-			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells) -- replace this one later with a new list
+			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells)
 		end
 	end
 end
