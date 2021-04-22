@@ -180,7 +180,7 @@ function DataTexts:ResetGold()
 	local MyRealm = GetRealmName()
 	local MyName = UnitName("player")
 
-	TukuiGold = {}
+	TukuiDatabase.Gold = {}
 	TukuiGold[MyRealm] = {}
 	TukuiGold[MyRealm][MyName] = GetMoney()
 end
