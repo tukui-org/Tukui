@@ -36,10 +36,6 @@ function Install:ResetData()
 	ReloadUI()
 end
 
-function Install:DeprecatedCheck()
-	
-end
-
 function Install:SetDefaultsCVars()
 	-- CVars
 	SetCVar("countdownForCooldowns", 1)
@@ -97,8 +93,6 @@ Install:SetScript("OnEvent", function(self, event)
 
 			TukuiDatabase.Variables[T.MyRealm][T.MyName].Installation.Done = true
 		end
-			
-		self:DeprecatedCheck()
 	end
 end)
 
