@@ -248,7 +248,7 @@ function Chat:SetChatFramePosition()
 		else
 			local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
 			
-			if Settings then
+			if Settings and Frame:IsMovable() then
 				local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
 
 				Frame:SetUserPlaced(true)
