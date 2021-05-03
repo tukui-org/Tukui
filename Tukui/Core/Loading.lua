@@ -136,11 +136,6 @@ end
 function Loading:VerifyDatabase()
 	if not TukuiDatabase then
 		TukuiDatabase = {}
-		
-		TukuiDatabase["Variables"] = {}
-		TukuiDatabase["Settings"] = {}
-		TukuiDatabase["Gold"] = {}
-		TukuiDatabase["ChatHistory"] = {}
 	end
 	
 	-- VARIABLES
@@ -210,6 +205,16 @@ function Loading:VerifyDatabase()
 	
 	if not TukuiDatabase.Settings[T.MyRealm][T.MyName] then
 		TukuiDatabase.Settings[T.MyRealm][T.MyName] = {}
+	end
+	
+	-- Chat History
+	if not TukuiDatabase.ChatHistory then
+		TukuiDatabase.ChatHistory = {}
+	end
+	
+	-- Gold
+	if not TukuiDatabase.Gold then
+		TukuiDatabase.Gold = {}
 	end
 end
 
