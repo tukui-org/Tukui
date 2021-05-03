@@ -22,26 +22,7 @@ local UnitPowerType = UnitPowerType
 UnitFrames.oUF = oUF
 UnitFrames.Units = {}
 UnitFrames.Headers = {}
-
-UnitFrames.HighlightBorder = {
-	bgFile = "Interface\\Buttons\\WHITE8x8",
-	insets = {top = -2, left = -2, bottom = -2, right = -2}
-}
-
 UnitFrames.AddClassFeatures = {}
-
-UnitFrames.NameplatesVariables = {
-	nameplateMaxAlpha = 1,
-	nameplateMinAlpha = 1,
-	nameplateSelectedAlpha = 1,
-	nameplateNotSelectedAlpha = 1,
-	nameplateMaxScale = 1,
-	nameplateMinScale = 1,
-	nameplateSelectedScale = 1,
-	nameplateSelfScale = 1,
-	nameplateSelfAlpha = 1,
-	nameplateOccludedAlphaMult = 1,
-}
 
 function UnitFrames:DisableBlizzard()
 	if not C.UnitFrames.Enable then
@@ -1016,8 +997,25 @@ end
 
 function UnitFrames:Enable()
 	self.Backdrop = {
-		bgFile = C.Medias.Blank,
-		insets = {top = -1, left = -1, bottom = -1, right = -1},
+		bgFile = C.Medias.Blank, 
+		insets = {top = -1, left = -1, bottom = -1, right = -1}
+	}
+	
+	self.HighlightBorder = {
+		bgFile = "Interface\\Buttons\\WHITE8x8",
+		insets = {top = -2, left = -2, bottom = -2, right = -2}
+	}
+	
+	self.NameplatesVariables = {
+		nameplateMaxAlpha = 1,
+		nameplateMinAlpha = C.NamePlates.NotSelectedAlpha / 100,
+		nameplateSelectedAlpha = 1,
+		nameplateNotSelectedAlpha = C.NamePlates.NotSelectedAlpha / 100,
+		nameplateOccludedAlphaMult = 1,
+		nameplateMaxAlphaDistance = 0,
+		nameplateMaxScale = 1,
+		nameplateMinScale = 1,
+		nameplateSelectedScale = C.NamePlates.SelectedScale / 100,
 	}
 
 	oUF:RegisterStyle("Tukui", UnitFrames.Style)

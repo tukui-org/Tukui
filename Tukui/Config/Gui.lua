@@ -201,6 +201,8 @@ local NamePlates = function(self)
 	Window:CreateSwitch("NamePlates", "ClassIcon", "Enable nameplate class icon indicator (PvP recommended)")
 
 	Window:CreateSection("Styling")
+	Window:CreateSlider("NamePlates", "NotSelectedAlpha", "Set not selected nameplate alpha (%)", 0, 100, 1)
+	Window:CreateSlider("NamePlates", "SelectedScale", "Set scaling of selected plate (%)", 100, 200, 1)
 	Window:CreateSwitch("NamePlates", "OnlySelfDebuffs", "Display only our debuffs")
 	Window:CreateColorSelection("NamePlates", "HighlightColor", "Highlight texture color")
 	
