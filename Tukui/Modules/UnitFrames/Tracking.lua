@@ -1,385 +1,300 @@
 local T, C, L = select(2, ...):unpack()
 
 local UnitFrames = T["UnitFrames"]
+local Popups = T["Popups"]
+local Tracking = CreateFrame("Frame", "TukuiTracking", UIParent)
 
-UnitFrames.DebuffsTracking = {}
+Popups.Popup["TRACKING_ADD_PVE"] = {
+	Question = "Which spell id would you like to add?",
+	Answer1 = ACCEPT,
+	Answer2 = CANCEL,
+	Function1 = function(self)
+		local Parent = self:GetParent()
+		local SpellID = tonumber(Parent.EditBox:GetText())
+		local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvE
+		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+		local Values = {["enable"] = true, ["priority"] = 1, ["stackThreshold"] = 0}
+		local TrackingTitle = "|CFF00FF00[DEBUFF TRACKING] |r"
+		local PVETitle = "|CFF567AFF[PVE] |r"
 
-------------------------------------------------------------------------------------
--- Locales functions and tables
-------------------------------------------------------------------------------------
+		if Name then
+			if Table[SpellID] then
+				T.Print(TrackingTitle..PVETitle.."Sorry, |CFFFFFF00"..Name.."|r is already tracked")
+			else
+				T.Print(TrackingTitle..PVETitle.."You have added |CFFFFFF00"..Name.."|r")
+				
+				Table[SpellID] = Values
+				
+				Tracking.PVE.Text:SetText(Name)
+				Tracking.PVE.Icon.Texture:SetTexture(Icon)
+				Tracking.PVE.SpellID = SpellID
+			end
+		else
+			T.Print(TrackingTitle..PVETitle.."Sorry, this spell id doesn't exist")
+		end
+	end,
+	EditBox = true,
+}
 
-local function Priority(priorityOverride)
-	return {["enable"] = true, ["priority"] = priorityOverride or 0, ["stackThreshold"] = 0}
+Popups.Popup["TRACKING_ADD_PVP"] = {
+	Question = "Which spell id would you like to add?",
+	Answer1 = ACCEPT,
+	Answer2 = CANCEL,
+	Function1 = function(self)
+		local Parent = self:GetParent()
+		local SpellID = tonumber(Parent.EditBox:GetText())
+		local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvP
+		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+		local Values = {["enable"] = true, ["priority"] = 1, ["stackThreshold"] = 0}
+		local TrackingTitle = "|CFF00FF00[DEBUFF TRACKING] |r"
+		local PVPTitle = "|CFFFF5252[PVP] |r"
+
+		if Name then
+			if Table[SpellID] then
+				T.Print(TrackingTitle..PVPTitle.."Sorry, |CFFFFFF00"..Name.."|r is already tracked")
+			else
+				T.Print(TrackingTitle..PVPTitle.."You have added |CFFFFFF00"..Name.."|r")
+				
+				Table[SpellID] = Values
+				
+				Tracking.PVP.Text:SetText(Name)
+				Tracking.PVP.Icon.Texture:SetTexture(Icon)
+				Tracking.PVP.SpellID = SpellID
+			end
+		else
+			T.Print(TrackingTitle..PVPTitle.."Sorry, this spell id doesn't exist")
+		end
+	end,
+	EditBox = true,
+}
+
+function Tracking:GetSpell(button, cat)
+	local Count = 0
+	local ID = button.ID
+	local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking[cat]
+	
+	for SpellID, Values in pairs(Table) do
+		Count = Count + 1
+
+		if Count == ID then
+			local Name, Rank, IconPath, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+
+			return SpellID, Name, IconPath
+		end
+	end
 end
 
-------------------------------------------------------------------------------------
--- RAID DEBUFFS (TRACKING LIST)
-------------------------------------------------------------------------------------
+function Tracking:RemoveSpell()
+	local Cat = self.Cat
+	local SpellID = self.SpellID
+	local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking[Cat]
+	
+	if SpellID and Table[SpellID] then
+		Table[SpellID] = nil
+		
+		self.ID = 0
+		self.Next:Click()
+	end
+end
 
-UnitFrames.DebuffsTracking["PvE"] = {
-	["type"] = "Whitelist",
-	["spells"] = {
-	-- Mythic+ Dungeons
-		-- General Affix
-		[209858] = Priority(), -- Necrotic
-		[226512] = Priority(), -- Sanguine
-		[240559] = Priority(), -- Grievous
-		[240443] = Priority(), -- Bursting
-		-- Shadowlands Affix
-		[342494] = Priority(), -- Belligerent Boast (Prideful)
+function Tracking:Update()
+	local Button = self:GetParent()
+	local Cat = Button.Cat
+	local ID = Button.ID
+	local Texture = self.Texture:GetTexture()
+	local Icon = Button.Icon.Texture
+	local Text = Button.Text
+	
+	if Texture == C.Medias.ArrowDown then
+		Button.ID = Button.ID + 1
+	else
+		Button.ID = Button.ID - 1
+	end
+	
+	local SpellID, Name, IconPath = Tracking:GetSpell(Button, Cat)
 
-	-- Shadowlands Dungeons
-		-- Halls of Atonement
-		[335338] = Priority(), -- Ritual of Woe
-		[326891] = Priority(), -- Anguish
-		[329321] = Priority(), -- Jagged Swipe 1
-		[344993] = Priority(), -- Jagged Swipe 2
-		[319603] = Priority(), -- Curse of Stone
-		[319611] = Priority(), -- Turned to Stone
-		[325876] = Priority(), -- Curse of Obliteration
-		[326632] = Priority(), -- Stony Veins
-		[323650] = Priority(), -- Haunting Fixation
-		[326874] = Priority(), -- Ankle Bites
-		[340446] = Priority(), -- Mark of Envy
-		-- Mists of Tirna Scithe
-		[325027] = Priority(), -- Bramble Burst
-		[323043] = Priority(), -- Bloodletting
-		[322557] = Priority(), -- Soul Split
-		[331172] = Priority(), -- Mind Link
-		[322563] = Priority(), -- Marked Prey
-		[322487] = Priority(), -- Overgrowth 1
-		[322486] = Priority(), -- Overgrowth 2
-		[328756] = Priority(), -- Repulsive Visage
-		[325021] = Priority(), -- Mistveil Tear
-		[321891] = Priority(), -- Freeze Tag Fixation
-		[325224] = Priority(), -- Anima Injection
-		[326092] = Priority(), -- Debilitating Poison
-		[325418] = Priority(), -- Volatile Acid
-		-- Plaguefall
-		[336258] = Priority(), -- Solitary Prey
-		[331818] = Priority(), -- Shadow Ambush
-		[329110] = Priority(), -- Slime Injection
-		[325552] = Priority(), -- Cytotoxic Slash
-		[336301] = Priority(), -- Web Wrap
-		[322358] = Priority(), -- Burning Strain
-		[322410] = Priority(), -- Withering Filth
-		[328180] = Priority(), -- Gripping Infection
-		[320542] = Priority(), -- Wasting Blight
-		[340355] = Priority(), -- Rapid Infection
-		[328395] = Priority(), -- Venompiercer
-		[320512] = Priority(), -- Corroded Claws
-		[333406] = Priority(), -- Assassinate
-		[332397] = Priority(), -- Shroudweb
-		[330069] = Priority(), -- Concentrated Plague
-		-- The Necrotic Wake
-		[321821] = Priority(), -- Disgusting Guts
-		[323365] = Priority(), -- Clinging Darkness
-		[338353] = Priority(), -- Goresplatter
-		[333485] = Priority(), -- Disease Cloud
-		[338357] = Priority(), -- Tenderize
-		[328181] = Priority(), -- Frigid Cold
-		[320170] = Priority(), -- Necrotic Bolt
-		[323464] = Priority(), -- Dark Ichor
-		[323198] = Priority(), -- Dark Exile
-		[343504] = Priority(), -- Dark Grasp
-		[343556] = Priority(), -- Morbid Fixation 1
-		[338606] = Priority(), -- Morbid Fixation 2
-		[324381] = Priority(), -- Chill Scythe
-		[320573] = Priority(), -- Shadow Well
-		[333492] = Priority(), -- Necrotic Ichor
-		[334748] = Priority(), -- Drain FLuids
-		[333489] = Priority(), -- Necrotic Breath
-		[320717] = Priority(), -- Blood Hunger
-		-- Theater of Pain
-		[333299] = Priority(), -- Curse of Desolation 1
-		[333301] = Priority(), -- Curse of Desolation 2
-		[319539] = Priority(), -- Soulless
-		[326892] = Priority(), -- Fixate
-		[321768] = Priority(), -- On the Hook
-		[323825] = Priority(), -- Grasping Rift
-		[342675] = Priority(), -- Bone Spear
-		[323831] = Priority(), -- Death Grasp
-		[330608] = Priority(), -- Vile Eruption
-		[330868] = Priority(), -- Necrotic Bolt Volley
-		[323750] = Priority(), -- Vile Gas
-		[323406] = Priority(), -- Jagged Gash
-		[330700] = Priority(), -- Decaying Blight
-		[319626] = Priority(), -- Phantasmal Parasite
-		[324449] = Priority(), -- Manifest Death
-		[341949] = Priority(), -- Withering Blight
-		-- Sanguine Depths
-		[326827] = Priority(), -- Dread Bindings
-		[326836] = Priority(), -- Curse of Suppression
-		[322554] = Priority(), -- Castigate
-		[321038] = Priority(), -- Burden Soul
-		[328593] = Priority(), -- Agonize
-		[325254] = Priority(), -- Iron Spikes
-		[335306] = Priority(), -- Barbed Shackles
-		[322429] = Priority(), -- Severing Slice
-		[334653] = Priority(), -- Engorge
-		-- Spires of Ascension
-		[338729] = Priority(), -- Charged Stomp
-		[338747] = Priority(), -- Purifying Blast
-		[327481] = Priority(), -- Dark Lance
-		[322818] = Priority(), -- Lost Confidence
-		[322817] = Priority(), -- Lingering Doubt
-		[324205] = Priority(), -- Blinding Flash
-		[331251] = Priority(), -- Deep Connection
-		[328331] = Priority(), -- Forced Confession
-		[341215] = Priority(), -- Volatile Anima
-		[323792] = Priority(), -- Anima Field
-		[317661] = Priority(), -- Insidious Venom
-		[330683] = Priority(), -- Raw Anima
-		[328434] = Priority(), -- Intimidated
-		-- De Other Side
-		[320786] = Priority(), -- Power Overwhelming
-		[334913] = Priority(), -- Master of Death
-		[325725] = Priority(), -- Cosmic Artifice
-		[328987] = Priority(), -- Zealous
-		[334496] = Priority(), -- Soporific Shimmerdust
-		[339978] = Priority(), -- Pacifying Mists
-		[323692] = Priority(), -- Arcane Vulnerability
-		[333250] = Priority(), -- Reaver
-		[330434] = Priority(), -- Buzz-Saw 1
-		[320144] = Priority(), -- Buzz-Saw 2
-		[331847] = Priority(), -- W-00F
-		[327649] = Priority(), -- Crushed Soul
-		[331379] = Priority(), -- Lubricate
-		[332678] = Priority(), -- Gushing Wound
-		[322746] = Priority(), -- Corrupted Blood
-		[323687] = Priority(), -- Arcane Lightning
-		[323877] = Priority(), -- Echo Finger Laser X-treme
-		[334535] = Priority(), -- Beak Slice
+	if Name and IconPath then
+		Text:SetText(Name)
+		Icon:SetTexture(IconPath)
+		
+		Button.SpellID = SpellID
+	else
+		Button.ID = Texture == C.Medias.ArrowDown and Button.ID - 1 or Button.ID + 1
+	end
+	
+	if Button.ID == 0 then
+		Icon:SetTexture([[Interface\Icons\Inv_misc_questionmark]])
+		Text:SetText("|cffff8800This list is currently empty!|r")
+	end
+end
 
-	-- Castle Nathria
-		-- Shriekwing
-		[328897] = Priority(), -- Exsanguinated
-		[330713] = Priority(), -- Reverberating Pain
-		[329370] = Priority(), -- Deadly Descent
-		[336494] = Priority(), -- Echo Screech
-		-- Huntsman Altimor
-		[335304] = Priority(), -- Sinseeker
-		[334971] = Priority(), -- Jagged Claws
-		[335111] = Priority(), -- Huntsman's Mark 1
-		[335112] = Priority(), -- Huntsman's Mark 2
-		[335113] = Priority(), -- Huntsman's Mark 3
-		[334945] = Priority(), -- Bloody Thrash
-		-- Hungering Destroyer
-		[334228] = Priority(), -- Volatile Ejection
-		[329298] = Priority(), -- Gluttonous Miasma
-		-- Lady Inerva Darkvein
-		[325936] = Priority(), -- Shared Cognition
-		[335396] = Priority(), -- Hidden Desire
-		[324983] = Priority(), -- Shared Suffering
-		[324982] = Priority(), -- Shared Suffering (Partner)
-		[332664] = Priority(), -- Concentrate Anima
-		[325382] = Priority(), -- Warped Desires
-		-- Sun King's Salvation
-		[333002] = Priority(), -- Vulgar Brand
-		[326078] = Priority(), -- Infuser's Boon
-		[325251] = Priority(), -- Sin of Pride
-		-- Artificer Xy'mox
-		[327902] = Priority(), -- Fixate
-		[326302] = Priority(), -- Stasis Trap
-		[325236] = Priority(), -- Glyph of Destruction
-		[327414] = Priority(), -- Possession
-		-- The Council of Blood
-		[327052] = Priority(), -- Drain Essence 1
-		[327773] = Priority(), -- Drain Essence 2
-		[346651] = Priority(), -- Drain Essence Mythic
-		[328334] = Priority(), -- Tactical Advance
-		[330848] = Priority(), -- Wrong Moves
-		[331706] = Priority(), -- Scarlet Letter
-		[331636] = Priority(), -- Dark Recital 1
-		[331637] = Priority(), -- Dark Recital 2
-		-- Sludgefist
-		[335470] = Priority(), -- Chain Slam
-		[339181] = Priority(), -- Chain Slam (Root)
-		[331209] = Priority(), -- Hateful Gaze
-		[335293] = Priority(), -- Chain Link
-		[335270] = Priority(), -- Chain This One!
-		[335295] = Priority(), -- Shattering Chain
-		-- Stone Legion Generals
-		[334498] = Priority(), -- Seismic Upheaval
-		[337643] = Priority(), -- Unstable Footing
-		[334765] = Priority(), -- Heart Rend
-		[333377] = Priority(), -- Wicked Mark
-		[334616] = Priority(), -- Petrified
-		[334541] = Priority(), -- Curse of Petrification
-		[339690] = Priority(), -- Crystalize
-		[342655] = Priority(), -- Volatile Anima Infusion
-		[342698] = Priority(), -- Volatile Anima Infection
-		-- Sire Denathrius
-		[326851] = Priority(), -- Blood Price
-		[327796] = Priority(), -- Night Hunter
-		[327992] = Priority(), -- Desolation
-		[328276] = Priority(), -- March of the Penitent
-		[326699] = Priority(), -- Burden of Sin
-		[329181] = Priority(), -- Wracking Pain
-		[335873] = Priority(), -- Rancor
-		[329951] = Priority(), -- Impale
-	},
-}
+function Tracking:Toggle()
+	if self:IsShown() then
+		self:Hide()
+	else
+		self:Show()
+	end
+end
 
-------------------------------------------------------------------------------------
--- PVP DEBUFFS (TRACKING LIST)
-------------------------------------------------------------------------------------
+function Tracking:Enable()
+	self:SetSize(460, 280)
+	self:SetPoint("CENTER", UIParent, "CENTER", 0, 64)
+	self:CreateBackdrop("Transparent")
+	self:CreateShadow()
+	
+	self.Logo = self:CreateTexture(nil, "OVERLAY")
+	self.Logo:SetSize(128, 128)
+	self.Logo:SetTexture(C.Medias.Logo)
+	self.Logo:SetPoint("TOP", self, "TOP", 0, 60)
+	
+	self.TitlePVE = self:CreateFontString(nil, "OVERLAY")
+	self.TitlePVE:SetFont(C.Medias.Font, 16, "THINOUTLINE")
+	self.TitlePVE:SetPoint("TOP", self, "TOP", 0, -86)
+	self.TitlePVE:SetText("PvE Debuffs to track")
+	
+	self.PVE = CreateFrame("Button", nil, self)
+	self.PVE:SetSize(300, 32)
+	self.PVE:SetPoint("TOP", self.TitlePVE, "BOTTOM", 18, -10)
+	self.PVE:SkinButton()
+	self.PVE:CreateShadow()
+	self.PVE:SetScript("OnClick", self.RemoveSpell)
+	self.PVE.ID = 0
+	self.PVE.Cat = "PvE"
+	
+	self.PVE.Text = self.PVE:CreateFontString(nil, "OVERLAY")
+	self.PVE.Text:SetFont(C.Medias.Font, 14, "THINOUTLINE")
+	self.PVE.Text:SetPoint("LEFT", 10, 0)
+	
+	self.PVE.Icon = CreateFrame("Frame", nil, self.PVE)
+	self.PVE.Icon:SetSize(32, 32)
+	self.PVE.Icon:SetPoint("RIGHT", self.PVE, "LEFT", -4, 0)
+	self.PVE.Icon:CreateBackdrop()
+	self.PVE.Icon:CreateShadow()
+	
+	self.PVE.Icon.Texture = self.PVE.Icon:CreateTexture(nil, "OVERLAY")
+	self.PVE.Icon.Texture:SetAllPoints()
+	self.PVE.Icon.Texture:SetTexCoord(unpack(T.IconCoord))
+	
+	self.PVE.Previous = CreateFrame("Button", nil, self.PVE)
+	self.PVE.Previous:SetSize(32, 32)
+	self.PVE.Previous:SetPoint("RIGHT", self.PVE, "LEFT", -40, 0)
+	self.PVE.Previous:SkinButton()
+	self.PVE.Previous:CreateShadow()
+	self.PVE.Previous:SetScript("OnClick", self.Update)
+	
+	self.PVE.Previous.Texture = self.PVE.Previous:CreateTexture(nil, "OVERLAY")
+	self.PVE.Previous.Texture:SetSize(16, 16)
+	self.PVE.Previous.Texture:SetPoint("CENTER")
+	self.PVE.Previous.Texture:SetTexture(C.Medias.ArrowUp)
+	SetClampedTextureRotation(self.PVE.Previous.Texture, 270)
+	
+	self.PVE.Next = CreateFrame("Button", nil, self.PVE)
+	self.PVE.Next:SetSize(32, 32)
+	self.PVE.Next:SetPoint("LEFT", self.PVE, "RIGHT", 4, 0)
+	self.PVE.Next:SkinButton()
+	self.PVE.Next:CreateShadow()
+	self.PVE.Next:SetScript("OnClick", self.Update)
+	
+	self.PVE.Next.Texture = self.PVE.Next:CreateTexture(nil, "OVERLAY")
+	self.PVE.Next.Texture:SetSize(16, 16)
+	self.PVE.Next.Texture:SetPoint("CENTER")
+	self.PVE.Next.Texture:SetTexture(C.Medias.ArrowDown)
+	SetClampedTextureRotation(self.PVE.Next.Texture, 270)
+	
+	self.PVE.Add = CreateFrame("Button", nil, self)
+	self.PVE.Add:SetSize(self:GetWidth() / 2 - 4, 24)
+	self.PVE.Add:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
+	self.PVE.Add:SkinButton()
+	self.PVE.Add:CreateShadow()
+	self.PVE.Add:SetScript("OnClick", function() Popups.ShowPopup("TRACKING_ADD_PVE") end)
+	
+	self.PVE.Add.Text = self.PVE.Add:CreateFontString(nil, "OVERLAY")
+	self.PVE.Add.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	self.PVE.Add.Text:SetPoint("CENTER")
+	self.PVE.Add.Text:SetText("Add a pve debuff to track")
+	
+	self.TitlePVP = self:CreateFontString(nil, "OVERLAY")
+	self.TitlePVP:SetFont(C.Medias.Font, 16, "THINOUTLINE")
+	self.TitlePVP:SetPoint("TOP", self.TitlePVE, "TOP", 0, -86)
+	self.TitlePVP:SetText("PvP Debuffs to track")
+	
+	self.PVP = CreateFrame("Button", nil, self)
+	self.PVP:SetSize(300, 32)
+	self.PVP:SetPoint("TOP", self.TitlePVP, "BOTTOM", 18, -10)
+	self.PVP:SkinButton()
+	self.PVP:CreateShadow()
+	self.PVP:SetScript("OnClick", self.RemoveSpell)
+	self.PVP.ID = 0
+	self.PVP.Cat = "PvP"
+	
+	self.PVP.Text = self.PVP:CreateFontString(nil, "OVERLAY")
+	self.PVP.Text:SetFont(C.Medias.Font, 14, "THINOUTLINE")
+	self.PVP.Text:SetPoint("LEFT", 10, 0)
+	
+	self.PVP.Icon = CreateFrame("Frame", nil, self.PVP)
+	self.PVP.Icon:SetSize(32, 32)
+	self.PVP.Icon:SetPoint("RIGHT", self.PVP, "LEFT", -4, 0)
+	self.PVP.Icon:CreateBackdrop()
+	self.PVP.Icon:CreateShadow()
+	
+	self.PVP.Icon.Texture = self.PVP.Icon:CreateTexture(nil, "OVERLAY")
+	self.PVP.Icon.Texture:SetAllPoints()
+	self.PVP.Icon.Texture:SetTexCoord(unpack(T.IconCoord))
+	self.PVP.Icon.Texture:SetTexture([[Interface\Icons\Inv_misc_questionmark]])
+	
+	self.PVP.Previous = CreateFrame("Button", nil, self.PVP)
+	self.PVP.Previous:SetSize(32, 32)
+	self.PVP.Previous:SetPoint("RIGHT", self.PVP, "LEFT", -40, 0)
+	self.PVP.Previous:SkinButton()
+	self.PVP.Previous:CreateShadow()
+	self.PVP.Previous:SetScript("OnClick", self.Update)
+	
+	self.PVP.Previous.Texture = self.PVP.Previous:CreateTexture(nil, "OVERLAY")
+	self.PVP.Previous.Texture:SetSize(16, 16)
+	self.PVP.Previous.Texture:SetPoint("CENTER")
+	self.PVP.Previous.Texture:SetTexture(C.Medias.ArrowUp)
+	SetClampedTextureRotation(self.PVP.Previous.Texture, 270)
+	
+	self.PVP.Next = CreateFrame("Button", nil, self.PVP)
+	self.PVP.Next:SetSize(32, 32)
+	self.PVP.Next:SetPoint("LEFT", self.PVP, "RIGHT", 4, 0)
+	self.PVP.Next:SkinButton()
+	self.PVP.Next:CreateShadow()
+	self.PVP.Next:SetScript("OnClick", self.Update)
+	
+	self.PVP.Next.Texture = self.PVP.Next:CreateTexture(nil, "OVERLAY")
+	self.PVP.Next.Texture:SetSize(16, 16)
+	self.PVP.Next.Texture:SetPoint("CENTER")
+	self.PVP.Next.Texture:SetTexture(C.Medias.ArrowDown)
+	SetClampedTextureRotation(self.PVP.Next.Texture, 270)
+	
+	self.PVP.Add = CreateFrame("Button", nil, self)
+	self.PVP.Add:SetSize(self:GetWidth() / 2 - 4, 24)
+	self.PVP.Add:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -4)
+	self.PVP.Add:SkinButton()
+	self.PVP.Add:CreateShadow()
+	self.PVP.Add:SetScript("OnClick", function() Popups.ShowPopup("TRACKING_ADD_PVP") end)
+	
+	self.PVP.Add.Text = self.PVP.Add:CreateFontString(nil, "OVERLAY")
+	self.PVP.Add.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	self.PVP.Add.Text:SetPoint("CENTER")
+	self.PVP.Add.Text:SetText("Add a pvp debuff to track")
 
-UnitFrames.DebuffsTracking["PvP"] = {
-	["type"] = "Whitelist",
-	["spells"] = {
-	-- Death Knight
-		[47476]  = Priority(2), -- Strangulate
-		[108194] = Priority(4), -- Asphyxiate UH
-		[221562] = Priority(4), -- Asphyxiate Blood
-		[207171] = Priority(4), -- Winter is Coming
-		[206961] = Priority(3), -- Tremble Before Me
-		[207167] = Priority(4), -- Blinding Sleet
-		[212540] = Priority(1), -- Flesh Hook (Pet)
-		[91807]  = Priority(1), -- Shambling Rush (Pet)
-		[204085] = Priority(1), -- Deathchill
-		[233395] = Priority(1), -- Frozen Center
-		[212332] = Priority(4), -- Smash (Pet)
-		[212337] = Priority(4), -- Powerful Smash (Pet)
-		[91800]  = Priority(4), -- Gnaw (Pet)
-		[91797]  = Priority(4), -- Monstrous Blow (Pet)
-		[210141] = Priority(3), -- Zombie Explosion
-	-- Demon Hunter
-		[207685] = Priority(4), -- Sigil of Misery
-		[217832] = Priority(3), -- Imprison
-		[221527] = Priority(5), -- Imprison (Banished version)
-		[204490] = Priority(2), -- Sigil of Silence
-		[179057] = Priority(3), -- Chaos Nova
-		[211881] = Priority(4), -- Fel Eruption
-		[205630] = Priority(3), -- Illidan's Grasp
-		[208618] = Priority(3), -- Illidan's Grasp (Afterward)
-		[213491] = Priority(4), -- Demonic Trample (it's this one or the other)
-		[208645] = Priority(4), -- Demonic Trample
-	-- Druid
-		[81261]  = Priority(2), -- Solar Beam
-		[5211]   = Priority(4), -- Mighty Bash
-		[163505] = Priority(4), -- Rake
-		[203123] = Priority(4), -- Maim
-		[202244] = Priority(4), -- Overrun
-		[99]     = Priority(4), -- Incapacitating Roar
-		[33786]  = Priority(5), -- Cyclone
-		[209753] = Priority(5), -- Cyclone Balance
-		[45334]  = Priority(1), -- Immobilized
-		[102359] = Priority(1), -- Mass Entanglement
-		[339]    = Priority(1), -- Entangling Roots
-		[2637]   = Priority(1), -- Hibernate
-		[102793] = Priority(1), -- Ursol's Vortex
-	-- Hunter
-		[202933] = Priority(2), -- Spider Sting (it's this one or the other)
-		[233022] = Priority(2), -- Spider Sting
-		[213691] = Priority(4), -- Scatter Shot
-		[19386]  = Priority(3), -- Wyvern Sting
-		[3355]   = Priority(3), -- Freezing Trap
-		[203337] = Priority(5), -- Freezing Trap (Survival PvPT)
-		[209790] = Priority(3), -- Freezing Arrow
-		[24394]  = Priority(4), -- Intimidation
-		[117526] = Priority(4), -- Binding Shot
-		[190927] = Priority(1), -- Harpoon
-		[201158] = Priority(1), -- Super Sticky Tar
-		[162480] = Priority(1), -- Steel Trap
-		[212638] = Priority(1), -- Tracker's Net
-		[200108] = Priority(1), -- Ranger's Net
-	-- Mage
-		[61721]  = Priority(3), -- Rabbit (Poly)
-		[61305]  = Priority(3), -- Black Cat (Poly)
-		[28272]  = Priority(3), -- Pig (Poly)
-		[28271]  = Priority(3), -- Turtle (Poly)
-		[126819] = Priority(3), -- Porcupine (Poly)
-		[161354] = Priority(3), -- Monkey (Poly)
-		[161353] = Priority(3), -- Polar bear (Poly)
-		[61780] = Priority(3),  -- Turkey (Poly)
-		[161355] = Priority(3), -- Penguin (Poly)
-		[161372] = Priority(3), -- Peacock (Poly)
-		[277787] = Priority(3), -- Direhorn (Poly)
-		[277792] = Priority(3), -- Bumblebee (Poly)
-		[118]    = Priority(3), -- Polymorph
-		[82691]  = Priority(3), -- Ring of Frost
-		[31661]  = Priority(3), -- Dragon's Breath
-		[122]    = Priority(1), -- Frost Nova
-		[33395]  = Priority(1), -- Freeze
-		[157997] = Priority(1), -- Ice Nova
-		[228600] = Priority(1), -- Glacial Spike
-		[198121] = Priority(1), -- Forstbite
-	-- Monk
-		[119381] = Priority(4), -- Leg Sweep
-		[202346] = Priority(4), -- Double Barrel
-		[115078] = Priority(4), -- Paralysis
-		[198909] = Priority(3), -- Song of Chi-Ji
-		[202274] = Priority(3), -- Incendiary Brew
-		[233759] = Priority(2), -- Grapple Weapon
-		[123407] = Priority(1), -- Spinning Fire Blossom
-		[116706] = Priority(1), -- Disable
-		[232055] = Priority(4), -- Fists of Fury (it's this one or the other)
-	-- Paladin
-		[853]    = Priority(3), -- Hammer of Justice
-		[20066]  = Priority(3), -- Repentance
-		[105421] = Priority(3), -- Blinding Light
-		[31935]  = Priority(2), -- Avenger's Shield
-		[217824] = Priority(2), -- Shield of Virtue
-		[205290] = Priority(3), -- Wake of Ashes
-	-- Priest
-		[9484]   = Priority(3), -- Shackle Undead
-		[200196] = Priority(4), -- Holy Word: Chastise
-		[200200] = Priority(4), -- Holy Word: Chastise
-		[226943] = Priority(3), -- Mind Bomb
-		[605]    = Priority(5), -- Mind Control
-		[8122]   = Priority(3), -- Psychic Scream
-		[15487]  = Priority(2), -- Silence
-		[64044]  = Priority(1), -- Psychic Horror
-	-- Rogue
-		[2094]   = Priority(4), -- Blind
-		[6770]   = Priority(4), -- Sap
-		[1776]   = Priority(4), -- Gouge
-		[1330]   = Priority(2), -- Garrote - Silence
-		[207777] = Priority(2), -- Dismantle
-		[199804] = Priority(4), -- Between the Eyes
-		[408]    = Priority(4), -- Kidney Shot
-		[1833]   = Priority(4), -- Cheap Shot
-		[207736] = Priority(5), -- Shadowy Duel (Smoke effect)
-		[212182] = Priority(5), -- Smoke Bomb
-	-- Shaman
-		[51514]  = Priority(3), -- Hex
-		[211015] = Priority(3), -- Hex (Cockroach)
-		[211010] = Priority(3), -- Hex (Snake)
-		[211004] = Priority(3), -- Hex (Spider)
-		[210873] = Priority(3), -- Hex (Compy)
-		[196942] = Priority(3), -- Hex (Voodoo Totem)
-		[269352] = Priority(3), -- Hex (Skeletal Hatchling)
-		[277778] = Priority(3), -- Hex (Zandalari Tendonripper)
-		[277784] = Priority(3), -- Hex (Wicker Mongrel)
-		[118905] = Priority(3), -- Static Charge
-		[77505]  = Priority(4), -- Earthquake (Knocking down)
-		[118345] = Priority(4), -- Pulverize (Pet)
-		[204399] = Priority(3), -- Earthfury
-		[204437] = Priority(3), -- Lightning Lasso
-		[157375] = Priority(4), -- Gale Force
-		[64695]  = Priority(1), -- Earthgrab
-	-- Warlock
-		[710]    = Priority(5), -- Banish
-		[6789]   = Priority(3), -- Mortal Coil
-		[118699] = Priority(3), -- Fear
-		[6358]   = Priority(3), -- Seduction (Succub)
-		[171017] = Priority(4), -- Meteor Strike (Infernal)
-		[22703]  = Priority(4), -- Infernal Awakening (Infernal CD)
-		[30283]  = Priority(3), -- Shadowfury
-		[89766]  = Priority(4), -- Axe Toss
-		[233582] = Priority(1), -- Entrenched in Flame
-	-- Warrior
-		[5246]   = Priority(4), -- Intimidating Shout
-		[132169] = Priority(4), -- Storm Bolt
-		[132168] = Priority(4), -- Shockwave
-		[199085] = Priority(4), -- Warpath
-		[105771] = Priority(1), -- Charge
-		[199042] = Priority(1), -- Thunderstruck
-		[236077] = Priority(2), -- Disarm
-	-- Racial
-		[20549]  = Priority(4), -- War Stomp
-		[107079] = Priority(4), -- Quaking Palm
-	},
-}
+	self.Close = CreateFrame("Button", nil, self)
+	self.Close:SetSize(24, 24)
+	self.Close:SetPoint("TOPRIGHT", self, "TOPRIGHT", -20, -20)
+	self.Close:SkinCloseButton()
+	self.Close:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	
+	self.Footer = self:CreateFontString(nil, "OVERLAY")
+	self.Footer:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	self.Footer:SetPoint("BOTTOM", 0, 18)
+	self.Footer:SetText("To remove a debuff from the list, select with arrow and click on name")
+	
+	-- Init
+	self.PVE.Next:Click()
+	self.PVP.Next:Click()
+	self:Hide()
+end
 
+T["UnitFrames"]["Tracking"] = Tracking

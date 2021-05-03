@@ -35,7 +35,7 @@ function Chat:UpdateEditBoxColor()
 end
 
 function Chat:LockChat()
-	T.Print(L.Help.ChatMove)
+	T.Print(L.Others.ChatMove)
 end
 
 function Chat:MoveAudioButtons()

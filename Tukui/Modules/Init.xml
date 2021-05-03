@@ -96,6 +96,7 @@
 
 	<!-- UnitFrames -->
 	<Script file="UnitFrames\Core.lua"/>
+	<Script file="UnitFrames\Debuffs.lua"/>
 	<Script file="UnitFrames\Tracking.lua"/>
 	<Script file="UnitFrames\Tags.lua"/>
 	<Script file="UnitFrames\Classes\Warrior.lua"/>

@@ -254,7 +254,6 @@ local Raid = function(self)
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("Raid", "Enable", "Enable raid module")
 	Window:CreateSwitch("Raid", "ShowPets", "Enable raid module for pets")
-	Window:CreateSwitch("Raid", "DebuffWatch", "Enable debuffs tracking (filtered auto by current gameplay (pvp or pve)")
 	Window:CreateSwitch("Raid", "VerticalHealth", "Enable vertical health")
 	
 	Window:CreateSection("|cffffff00[RAID 1->20]|r Settings")
@@ -272,6 +271,10 @@ local Raid = function(self)
 	Window:CreateSection("Buffs")
 	Window:CreateDropdown("Raid", "RaidBuffs", "Enable buffs display & filtering (Aura Track must be off to use buffs)")
 	Window:CreateSwitch("Raid", "DesaturateNonPlayerBuffs", "Enable display of other players buffs grayscaled")
+	
+	Window:CreateSection("Debuffs")
+	Window:CreateSwitch("Raid", "DebuffWatch", "Enable debuffs tracking (filtered auto by current gameplay (pvp or pve)")
+	Window:CreateSwitch("Raid", "DebuffWatchDefault", "We have already a debuff tracking list for pve and pvp, use it?")
 	
 	Window:CreateSection("Auras Tracking")
 	Window:CreateSwitch("Raid", "AuraTrack", "Enable auras tracking module for healer (replace buffs)")

@@ -13,5 +13,6 @@
 	<Script file="Modules.lua"/>
 	<Script file="Gui.lua"/>
 	<Script file="Profiles.lua"/>
+	<Script file="Help.lua"/>
 	<Script file="Tukz.lua"/>
 </Ui>

@@ -123,25 +123,23 @@ L.Auras.MoveDebuffs = "Move Debuffs"
 L.Help = {} -- /tukui help
 ------------------------------------------------
 
-L.Help.Title = "Tukui Commands:"
-L.Help.Config = "'|cff00ff00c|r' or '|cff00ff00config|r' : Display in-game configuration window."
-L.Help.Chat = "'|cff00ff00chat reset|r' : Reset chat windows to default."
-L.Help.ChatMove = "Please use |cff00ff00/tukui move|r and move datatexts to move chatframes"
-L.Help.Datatexts = "'|cff00ff00dt|r' or '|cff00ff00datatext|r' : Enable or disable datatext configuration."
-L.Help.Events = "'|cff00ff00events|r' or '|cff00ff00trace|r' : For devs, toggle events printing in chat."
-L.Help.Gold = "'|cff00ff00gold reset|r' : Reset all characters gold data stored on current server."
-L.Help.Grid = "'|cff00ff00grid|r' or '|cff00ff00grid 128|r' : Display a grid which allow you to better align frames. (Change 128 to any number for custom grid)"
-L.Help.Install = "'|cff00ff00install|r' or '|cff00ff00reset|r' : Install or reset Tukui to default settings."
-L.Help.Keybinds = "'|cff00ff00kb|r' or '|cff00ff00keybinds|r' : Set Keybinds on action bars. (character specific) For account-wide, please add 'account' parameter (/tukui kb account)"
-L.Help.Load = "'|cff00ff00load X|r' or '|cff00ff00unload X|r' : Load or unload an addon. X = addon name."
-L.Help.MicroMenu = "'|cff00ff00mm|r' or '|cff00ff00micromenu|r' : Toggle Micro Menu."
-L.Help.Move = "'|cff00ff00move|r' or '|cff00ff00moveui|r' : Move Frames."
-L.Help.ObjectiveTracker = "'|cff00ff00ot|r' or '|cff00ff00quests|r' : Toggle objective tracker."
-L.Help.Profile = "'|cff00ff00profile|r' or '|cff00ff00p|r' : Use Tukui settings (existing profile) from another character."
-L.Help.RaidUtilities = "'|cff00ff00ru|r' or '|cff00ff00markers|r' : Show raid utilities for raid leader/assistant"
-L.Help.Status = "'|cff00ff00status|r' or '|cff00ff00debug|r' : Show a debug window with information needed to investigate a bug in the UI"
-L.Help.Test = "'|cff00ff00test|r' or '|cff00ff00testui|r' : Test Unit Frames."
-
+L.Help.Config = "|cff00ff00/tukui c|r or |cff00ff00/tukui config|r : Display in-game configuration window."
+L.Help.Chat = "|cff00ff00/tukui chat reset|r : Reset chat windows to default."
+L.Help.Datatexts = "|cff00ff00/tukui dt|r or |cff00ff00/tukui datatext|r : Enable or disable datatext configuration."
+L.Help.Events = "|cff00ff00/tukui events|r or |cff00ff00/tukui trace|r : For devs, toggle events printing in chat."
+L.Help.Gold = "|cff00ff00/tukui gold reset|r : Reset all characters gold data stored on current server."
+L.Help.Grid = "|cff00ff00/tukui grid|r or |cff00ff00/tukui grid 128|r : Display a grid which allow you to better align frames. (Change 128 to any number for custom grid)"
+L.Help.Install = "|cff00ff00/tukui install|r or |cff00ff00/tukui reset|r : Install or reset Tukui to default settings."
+L.Help.Keybinds = "|cff00ff00/tukui kb|r or |cff00ff00/tukui keybinds|r : Set Keybinds on action bars."
+L.Help.Load = "|cff00ff00/tukui load X|r or |cff00ff00/tukui unload X|r : Load or unload an addon. X = addon name."
+L.Help.MicroMenu = "|cff00ff00/tukui mm|r or |cff00ff00/tukui micromenu|r : Toggle Micro Menu."
+L.Help.Move = "|cff00ff00/tukui move|r or |cff00ff00/tukui moveui|r : Move Frames."
+L.Help.ObjectiveTracker = "|cff00ff00/tukui ot|r or |cff00ff00/tukui quests|r : Toggle objective tracker."
+L.Help.Profiles = "|cff00ff00/tukui profile|r or |cff00ff00/tukui p|r : Share your profile code with someone or apply a new profile code."
+L.Help.RaidUtilities = "|cff00ff00/tukui ru|r or |cff00ff00/tukui markers|r : Show raid utilities for raid leader/assistant"
+L.Help.Status = "|cff00ff00/tukui status|r or |cff00ff00/tukui debug|r : Show a debug window with information needed to investigate a bug in the UI"
+L.Help.Test = "|cff00ff00/tukui test|r or |cff00ff00/tukui testui|r : Test Unit Frames."
+L.Help.Tracking = "|cff00ff00/tukui t|r or |cff00ff00/tukui tracking|r : Add a debuff to track on raid frames"
 
 ------------------------------------------------
 L.Merchant = {} -- Merchant
@@ -162,6 +160,7 @@ L.Others = {} -- Miscellaneous
 ------------------------------------------------
 
 L.Others.ProfileNotFound = "Profile not found"
+L.Others.ChatMove = "Please use |cff00ff00/tukui move|r and move datatexts to move chatframes"
 
 ------------------------------------------------
 L.UnitFrames = {} -- Miscellaneous

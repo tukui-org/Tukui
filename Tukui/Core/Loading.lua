@@ -159,6 +159,12 @@ function Loading:VerifyDatabase()
 		TukuiDatabase.Variables[T.MyRealm][T.MyName].ActionBars = {}
 	end
 	
+	if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking = {}
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvP = {}
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvE = {}
+	end
+	
 	if (not TukuiDatabase.Variables[T.MyRealm][T.MyName].DataTexts) then
 		local DataTexts = T.DataTexts
 		
@@ -284,6 +290,7 @@ function Loading:OnEvent(event)
 		T["Loading"]:Enable()
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
+		T["Help"]:Enable()
 		
 		-- welcome message
 		local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))

@@ -24,26 +24,20 @@ EventTrace:SetScript("OnEvent", function(self, event)
 end)
 
 T.SlashHandler = function(cmd)
-	local arg1, arg2, arg3 = Split(cmd)
+	local arg1, arg2, arg3, arg4 = Split(cmd)
 
 	if (arg1 == "" or arg1 == "help") then
-		print("|cffff8000".. L.Help.Title .."|r")
-		print(L.Help.Chat)
-		print(L.Help.Config)
-		print(L.Help.Datatexts)
-		print(L.Help.Events)
-		print(L.Help.Gold)
-		print(L.Help.Grid)
-		print(L.Help.Install)
-		print(L.Help.Keybinds)
-		print(L.Help.Load)
-		print(L.Help.MicroMenu)
-		print(L.Help.Move)
-		print(L.Help.ObjectiveTracker)
-		print(L.Help.Profiles)
-		print(L.Help.RaidUtilities)
-		print(L.Help.Status)
-		print(L.Help.Test)
+		T.Help:Show()
+	else
+		T.Help:Hide()
+	end
+	
+	if (arg1 == "t") or (arg1 == "tracking") then
+		if (C.UnitFrames.Enable) and (C.Raid.Enable) then
+			T.UnitFrames.Tracking:Toggle()
+		else
+			T.Print("Sorry, our raid module is currently disabled")
+		end
 	elseif (arg1 == "p") or (arg1 == "profile") then
 		local Profiles = T.Profiles
 		
@@ -217,7 +211,7 @@ T.SlashHandler = function(cmd)
 		local Movers = T["Movers"]
 
 		Movers:StartOrStopMoving()
-	elseif (arg1 == "c" or arg1 == "config") then
+	elseif (arg1 == "c" or arg1 == "config" or arg1 == "gui") then
 		T.GUI:Toggle()
 	elseif (arg1 == "gold") and (arg2 == "reset") then
 		local DataText = T["DataTexts"]

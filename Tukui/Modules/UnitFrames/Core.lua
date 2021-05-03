@@ -985,12 +985,21 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 
 	if (ORD) then
 		local _, InstanceType = IsInInstance()
+		
 		ORD:ResetDebuffData()
 
 		if (InstanceType == "party" or InstanceType == "raid") then
-			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvE.spells)
+			if C.Raid.DebuffWatchDefault then
+				ORD:RegisterDebuffs(UnitFrames.Debuffs.PvE.spells)
+			end
+			
+			ORD:RegisterDebuffs(TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvE)
 		else
-			ORD:RegisterDebuffs(UnitFrames.DebuffsTracking.PvP.spells)
+			if C.Raid.DebuffWatchDefault then
+				ORD:RegisterDebuffs(UnitFrames.Debuffs.PvP.spells)
+			end
+			
+			ORD:RegisterDebuffs(TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvP)
 		end
 	end
 end
@@ -1036,6 +1045,8 @@ function UnitFrames:Enable()
 			ORD.FilterDispellableDebuff = true
 			ORD.MatchBySpellName = false
 		end
+		
+		self.Tracking:Enable()
 	end
 	
 	-- Overwrite oUF Pet Battle frame visibility

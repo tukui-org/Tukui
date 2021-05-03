@@ -17,7 +17,7 @@ function Bind:OnEvent(event, addon)
 	local Tooltip = QuickKeybindTooltip
 	local Buttons = {"okayButton", "defaultsButton", "cancelButton"}
 	local CheckBox = Frame.characterSpecificButton
-	local Extra = Frame.phantomExtraActionButton
+	--local Extra = Frame.phantomExtraActionButton
 	
 	Frame:StripTextures()
 	Frame:CreateBackdrop("Transparent")
@@ -41,7 +41,7 @@ function Bind:OnEvent(event, addon)
 		Frame[Button]:SkinButton()
 	end
 	
-	Extra:SetParent(T.Hider)
+	--Extra:SetParent(T.Hider)
 end
 
 function Bind:Enable()
