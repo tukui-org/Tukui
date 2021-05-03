@@ -5,6 +5,7 @@ local UIWidgets = CreateFrame("Frame")
 
 function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	local Bar = self.Bar
+	local Torghast = IsInJailersTower()
 	
 	if Bar and not Bar.IsSkinned then
 		Bar.BGLeft:SetAlpha(0)
@@ -13,11 +14,18 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 		Bar.BorderLeft:SetAlpha(0)
 		Bar.BorderRight:SetAlpha(0)
 		Bar.BorderCenter:SetAlpha(0)
-		Bar:CreateBackdrop()
+		Bar:CreateBackdrop(Torghast and "Transparent" or "")
 		
 		Bar.Backdrop:CreateShadow()
 		Bar.Backdrop:SetFrameLevel(Bar:GetFrameLevel())
 		Bar.Backdrop:SetOutside(Bar)
+		
+		if Torghast then
+			Bar.Indicator = Bar:CreateTexture(nil, "OVERLAY")
+			Bar.Indicator:SetSize(16, 16)
+			Bar.Indicator:SetPoint("TOP", 23, 10)
+			Bar.Indicator:SetTexture(C.Medias.ArrowDown)
+		end
 		
 		Bar.IsSkinned = true
 	end
@@ -25,6 +33,15 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	if self:GetParent() == UIWidgetPowerBarContainerFrame then
 		Bar:ClearAllPoints()
 		Bar:SetPoint("CENTER", UIWidgets.Holder, "CENTER", 0, 0)
+	end
+	
+	-- Just hate that thing to be in objective tracker
+	if Torghast then
+		local Container = self:GetParent()
+		
+		Container:SetParent(UIWidgets.Holder)
+		Container:ClearAllPoints()
+		Container:SetPoint("TOP", UIWidgets.Holder, "TOP", 0, 0)
 	end
 end
 
