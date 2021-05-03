@@ -983,6 +983,15 @@ function UnitFrames:CreateUnits()
 		-- No need for this bar, already included with oUF
 		PersonalResource:SetAlpha(0)
 		
+		oUF.colors.threat = {
+			[1] = C.NamePlates.AggroColor1,
+			[2] = C.NamePlates.AggroColor2,
+			[3] = C.NamePlates.AggroColor3,
+			[4] = C.NamePlates.AggroColor4,
+		}
+
+		oUF.colors.health = oUF.colors.threat[1]
+		
 		oUF:SpawnNamePlates("Tukui", nil, UnitFrames.NameplatesVariables)
 	end
 end
