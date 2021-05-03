@@ -330,6 +330,7 @@ C["UnitFrames"] = {
 	["TargetBuffs"] = true,
 	["TargetDebuffs"] = true,
 	["DesaturateDebuffs"] = true,
+	["FlashRemovableBuffs"] = true,
 	["FocusAuras"] = true,
 	["BossAuras"] = true,
 	["ArenaAuras"] = true,

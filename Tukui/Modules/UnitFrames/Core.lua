@@ -374,7 +374,7 @@ end
 function UnitFrames:PostCreateAura(button, unit)
 	-- Set "self.Buffs.isCancellable" to true to a buffs frame to be able to cancel click
 	local isCancellable = button:GetParent().isCancellable
-	local isAnimated = button:GetParent().isAnimated
+	local isAnimated = C.UnitFrames.FlashRemovableBuffs and button:GetParent().isAnimated
 
 	-- Right-click-cancel script
 	if isCancellable then
@@ -419,8 +419,8 @@ function UnitFrames:PostCreateAura(button, unit)
 
 		button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
 		button.Animation.FadeOut:SetFromAlpha(1)
-		button.Animation.FadeOut:SetToAlpha(.3)
-		button.Animation.FadeOut:SetDuration(.3)
+		button.Animation.FadeOut:SetToAlpha(.5)
+		button.Animation.FadeOut:SetDuration(.08)
 		button.Animation.FadeOut:SetSmoothing("IN_OUT")
 	end
 end
@@ -439,15 +439,18 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 				button.Backdrop:SetBorderColor(color.r * 0.8, color.g * 0.8, color.b * 0.8)
 			end
 		else
-			-- These classes can purge, show them
 			if button.Animation then
 				if (IsStealable or DType == "Magic") and UnitIsEnemy("player", unit) then
 					if not button.Animation:IsPlaying() then
 						button.Animation:Play()
+						
+						button.Backdrop:SetBorderColor(0.2, 0.6, 1)
 					end
 				else
 					if button.Animation:IsPlaying() then
 						button.Animation:Stop()
+						
+						button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 					end
 				end
 			end
