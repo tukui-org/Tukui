@@ -329,6 +329,7 @@ C["UnitFrames"] = {
 	["PlayerDebuffs"] = true,
 	["TargetBuffs"] = true,
 	["TargetDebuffs"] = true,
+	["DesaturateDebuffs"] = true,
 	["FocusAuras"] = true,
 	["BossAuras"] = true,
 	["ArenaAuras"] = true,

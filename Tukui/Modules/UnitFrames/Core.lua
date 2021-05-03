@@ -430,7 +430,7 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 
 	if button then
 		if(button.filter == "HARMFUL") then
-			if (not UnitIsFriend("player", unit) and not button.isPlayer) then
+			if C.UnitFrames.DesaturateDebuffs and (not UnitIsFriend("player", unit) and not button.isPlayer) then
 				button.icon:SetDesaturated(true)
 				button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 			else

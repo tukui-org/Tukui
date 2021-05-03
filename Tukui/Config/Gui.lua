@@ -370,6 +370,7 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("UnitFrames", "ArenaAuras", "Enable arena auras")
 	Window:CreateSwitch("UnitFrames", "BossAuras", "Enable boss auras")
 	Window:CreateSwitch("UnitFrames", "AurasBelow", "Move auras below unitframes")
+	Window:CreateSwitch("UnitFrames", "DesaturateDebuffs", "Desaturate debuffs that are not by me")
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("UnitFrames", "Smoothing", "Animate health and power bars |cff00ff00[NEW/BETA/WIP]|r")
