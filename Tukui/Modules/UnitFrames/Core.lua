@@ -1005,6 +1005,12 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 end
 
 function UnitFrames:Enable()
+	-- Security for Nameplates
+	if IsAddOnLoaded("Plater") then
+		-- Force Tukui nameplates OFF if running plater, because causing issues
+		C.NamePlates.Enable = false
+	end
+
 	self.Backdrop = {
 		bgFile = C.Medias.Blank, 
 		insets = {top = -1, left = -1, bottom = -1, right = -1}
