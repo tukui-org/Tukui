@@ -31,8 +31,9 @@ function Profiles:Import()
 	local Code = EditBox:GetText()
 	local LibCode = string.gsub(Code, Prefix, "")
 	local Decoded = LibDeflate:DecodeForPrint(LibCode)
+	local CurrentCode = self:GetParent():Export()
 	
-	if Code == EditBox.Code then
+	if Code == CurrentCode then
 		Status:SetText("|cffff0000SORRY, YOU ARE CURRENTLY USING THIS PROFILE|r")
 	elseif Decoded then
 		local Decompressed = LibDeflate:DecompressDeflate(Decoded)
@@ -56,15 +57,16 @@ function Profiles:Toggle()
 		self:Hide()
 	else
 		self:Show()
-		self.EditBox:SetText(self.EditBox.Code)
+		self.EditBox:SetText(self:Export())
 	end
 end
 
 function Profiles:OnTextChanged()
 	local Code = self:GetText()
 	local Status = self:GetParent().Status
+	local CurrentCode = self:GetParent():Export()
 	
-	if Code ~= self.Code then
+	if Code ~= CurrentCode then
 		Status:SetText("YOU ARE CURRENTLY TRYING TO APPLY A NEW CODE")
 	else
 		Status:SetText("EXPORT CODE FOR "..T.RGBToHex(unpack(T.Colors.class[T.MyClass]))..string.upper(T.MyName).."|r")
@@ -74,7 +76,7 @@ end
 function Profiles:RestoreCode()
 	local EditBox = self:GetParent().EditBox
 	
-	EditBox:SetText(EditBox.Code)
+	EditBox:SetText(self:GetParent():Export())
 end
 
 function Profiles:Enable()
@@ -84,9 +86,9 @@ function Profiles:Enable()
 	self:CreateShadow()
 	
 	self.Logo = self:CreateTexture(nil, "OVERLAY")
-	self.Logo:SetSize(192, 192)
+	self.Logo:SetSize(128, 128)
 	self.Logo:SetTexture(C.Medias.Logo)
-	self.Logo:SetPoint("TOP", self, "TOP", 0, 116)
+	self.Logo:SetPoint("TOP", self, "TOP", 0, 60)
 	
 	self.Title = self:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C.Medias.Font, 16, "THINOUTLINE")
@@ -109,9 +111,9 @@ function Profiles:Enable()
 	self.EditBox:EnableMouse(true)
 	self.EditBox:SetAutoFocus(false)
 	self.EditBox:SetFontObject(ChatFontNormal)
-	self.EditBox:SetWidth(self:GetWidth() - 8)
+	self.EditBox:SetWidth(self:GetWidth() - 28)
 	self.EditBox:SetHeight(250)
-	self.EditBox:SetPoint("TOP", self, "BOTTOM", 0, -8)
+	self.EditBox:SetPoint("TOP", self, "BOTTOM", 0, 0)
 	self.EditBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
 	self.EditBox:SetScript("OnTextChanged", Profiles.OnTextChanged)
 	self.EditBox:CreateBackdrop()
@@ -120,12 +122,22 @@ function Profiles:Enable()
 	self.EditBox.Backdrop:SetBorderColor(1, 0.5, 0)
 	self.EditBox:SetTextInsets(4, 4, 4, 4)
 	self.EditBox.Backdrop:CreateShadow()
-	self.EditBox.Code = self:Export()
+	
+	self.Reset = CreateFrame("Button", nil, self)
+	self.Reset:SetSize(self:GetWidth() / 3 - 14, 30)
+	self.Reset:SkinButton()
+	self.Reset:SetPoint("TOPLEFT", self.EditBox, "BOTTOMLEFT", -4, -28)
+	self.Reset.Text = self.Reset:CreateFontString(nil, "OVERLAY")
+	self.Reset.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+	self.Reset.Text:SetPoint("CENTER")
+	self.Reset.Text:SetText("Display my code")
+	self.Reset:SetScript("OnClick", Profiles.RestoreCode)
+	self.Reset:CreateShadow()
 	
 	self.Close = CreateFrame("Button", nil, self)
-	self.Close:SetSize(self:GetWidth() / 3 - 4, 30)
+	self.Close:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Close:SkinButton()
-	self.Close:SetPoint("TOPLEFT", self.EditBox, "BOTTOMLEFT", -4, -8)
+	self.Close:SetPoint("TOP", self.EditBox, "BOTTOM", 0, -28)
 	self.Close.Text = self.Close:CreateFontString(nil, "OVERLAY")
 	self.Close.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Close.Text:SetPoint("CENTER")
@@ -134,27 +146,17 @@ function Profiles:Enable()
 	self.Close:CreateShadow()
 	
 	self.Apply = CreateFrame("Button", nil, self)
-	self.Apply:SetSize(self:GetWidth() / 3 - 4, 30)
+	self.Apply:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Apply:SkinButton()
-	self.Apply:SetPoint("TOPRIGHT", self.EditBox, "BOTTOMRIGHT", 4, -8)
+	self.Apply:SetPoint("TOPRIGHT", self.EditBox, "BOTTOMRIGHT", 4, -28)
 	self.Apply.Text = self.Apply:CreateFontString(nil, "OVERLAY")
 	self.Apply.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Apply.Text:SetPoint("CENTER")
-	self.Apply.Text:SetText(APPLY)
+	self.Apply.Text:SetText("Apply new code")
 	self.Apply:SetScript("OnClick", Profiles.Import)
 	self.Apply:CreateShadow()
 	
-	self.Reset = CreateFrame("Button", nil, self)
-	self.Reset:SetSize(self:GetWidth() / 3 - 4, 30)
-	self.Reset:SkinButton()
-	self.Reset:SetPoint("TOP", self.EditBox, "BOTTOM", 0, -8)
-	self.Reset.Text = self.Reset:CreateFontString(nil, "OVERLAY")
-	self.Reset.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-	self.Reset.Text:SetPoint("CENTER")
-	self.Reset.Text:SetText(RESET)
-	self.Reset:SetScript("OnClick", Profiles.RestoreCode)
-	self.Reset:CreateShadow()
-	
+	self.Backdrop:SetPoint("BOTTOM", self.Reset, "BOTTOM", 0, -10)
 	self:Hide()
 end
 
