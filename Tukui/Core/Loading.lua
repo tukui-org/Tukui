@@ -1,6 +1,8 @@
 local T, C, L = select(2, ...):unpack()
 
 local Loading = CreateFrame("Frame")
+local LibDeflate = LibStub:GetLibrary("LibDeflate")
+local LibSerialize = LibStub("LibSerialize")
 
 function Loading:StoreDefaults()
 	T.Defaults = {}
@@ -162,7 +164,7 @@ function Loading:VerifyDatabase()
 		TukuiDatabase.Variables[T.MyRealm][T.MyName].ActionBars = {}
 	end
 	
-	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].DataTexts) then
+	if (not TukuiDatabase.Variables[T.MyRealm][T.MyName].DataTexts) then
 		local DataTexts = T.DataTexts
 		
 		DataTexts:AddDefaults()
@@ -189,12 +191,12 @@ function Loading:VerifyDatabase()
 		}
 	end
 	
-	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Misc) then
-		TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Misc = {}
+	if (not TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc) then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc = {}
 	end
 	
-	if (not TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Installation) then
-		TukuiDatabase.Variables[GetRealmName()][UnitName("player")].Installation = {}
+	if (not TukuiDatabase.Variables[T.MyRealm][T.MyName].Installation) then
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Installation = {}
 	end
 	
 	-- SETTINGS
@@ -276,6 +278,7 @@ function Loading:OnEvent(event)
 	elseif (event == "VARIABLES_LOADED") then
 		T["Loading"]:Enable()
 		T["GUI"]:Enable()
+		T["Profiles"]:Enable()
 		
 		-- welcome message
 		local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))

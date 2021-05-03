@@ -1,5 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="LibAnim\LibAnim.lua"/>
+	<Script file="LibStub\LibStub.lua"/>
+	<Script file="LibDeflate\LibDeflate.lua"/>
+	<Script file="LibSerialize\LibSerialize.lua"/>
 	<Include file="oUF\oUF.xml"/>
 	<Script file="oUF_ComboPointsBar\oUF_ComboPointsBar.lua"/>
 	<Script file="oUF_CombatFeedback\oUF_CombatFeedback.lua"/>

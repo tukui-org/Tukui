@@ -1661,7 +1661,7 @@ GUI.Enable = function(self)
 	self.Footer:SetSize(HeaderWidth, 1)
 	self.Footer:SetPoint("BOTTOM", self, 0, Spacing)
 
-	local FooterButtonWidth = ((HeaderWidth / 5) - Spacing) + 1
+	local FooterButtonWidth = ((HeaderWidth / 6) - Spacing) + 1
 
 	-- Apply button
 	local Apply = CreateFrame("Frame", nil, self.Footer)
@@ -1785,11 +1785,41 @@ GUI.Enable = function(self)
 	StyleFont(Keybinds.Middle, Font, 14)
 	Keybinds.Middle:SetJustifyH("CENTER")
 	Keybinds.Middle:SetText("Keybinds")
+				
+	-- Profiles button
+	local Profiles = CreateFrame("Frame", nil, self.Footer)
+	Profiles:SetSize(FooterButtonWidth + 1, HeaderHeight)
+	Profiles:SetPoint("LEFT", Keybinds, "RIGHT", (Spacing - 1), 0)
+	Profiles:CreateBackdrop(nil, Texture)
+	Profiles:CreateShadow()
+	Profiles.Backdrop:SetBackdropColor(unpack(BrightColor))
+	Profiles:SetScript("OnMouseDown", ButtonOnMouseDown)
+	Profiles:SetScript("OnMouseUp", ButtonOnMouseUp)
+	Profiles:SetScript("OnEnter", ButtonOnEnter)
+	Profiles:SetScript("OnLeave", ButtonOnLeave)
+	Profiles:SetScript("OnMouseUp", function()
+		T.Profiles:Toggle()
+						
+		T.GUI:Toggle()
+	end)
+
+	Profiles.Highlight = Profiles:CreateTexture(nil, "OVERLAY")
+	Profiles.Highlight:SetAllPoints()
+	Profiles.Highlight:SetTexture(Texture)
+	Profiles.Highlight:SetVertexColor(0.5, 0.5, 0.5)
+	Profiles.Highlight:SetAlpha(0)
+
+	Profiles.Middle = Profiles:CreateFontString(nil, "OVERLAY")
+	Profiles.Middle:SetPoint("CENTER", Profiles, 0, 0)
+	Profiles.Middle:SetWidth(FooterButtonWidth - (Spacing * 2))
+	StyleFont(Profiles.Middle, Font, 14)
+	Profiles.Middle:SetJustifyH("CENTER")
+	Profiles.Middle:SetText("Profiles")
 
 	-- Credits button
 	local Credits = CreateFrame("Frame", nil, self.Footer)
 	Credits:SetHeight(HeaderHeight)
-	Credits:SetPoint("LEFT", Keybinds, "RIGHT", (Spacing - 1), 0)
+	Credits:SetPoint("LEFT", Profiles, "RIGHT", (Spacing - 1), 0)
 	Credits:SetPoint("RIGHT")
 	Credits:CreateBackdrop(nil, Texture)
 	Credits:CreateShadow()

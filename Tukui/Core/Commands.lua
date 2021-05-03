@@ -40,9 +40,14 @@ T.SlashHandler = function(cmd)
 		print(L.Help.MicroMenu)
 		print(L.Help.Move)
 		print(L.Help.ObjectiveTracker)
+		print(L.Help.Profiles)
 		print(L.Help.RaidUtilities)
 		print(L.Help.Status)
 		print(L.Help.Test)
+	elseif (arg1 == "p") or (arg1 == "profile") then
+		local Profiles = T.Profiles
+		
+		Profiles:Toggle()
 	elseif (arg1 == "mm") or (arg1 == "micromenu") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
 
