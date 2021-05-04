@@ -49,6 +49,7 @@ function UnitFrames:Target()
 	Health.colorClass = true
 	Health.colorReaction = true
 	Health.colorTapping = true
+	Health.colorThreat = C.NamePlates.ColorThreat
 
 	Health.PreUpdate = UnitFrames.PreUpdateHealth
 

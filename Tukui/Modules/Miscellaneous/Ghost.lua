@@ -4,7 +4,7 @@ local Miscellaneous = T["Miscellaneous"]
 local Ghost = CreateFrame("Frame")
 local GhostFrame = GhostFrame
 
-Ghost.Color = {0.87, 0.37, 0.37}
+Ghost.Color = T.Colors.reaction[2]
 
 function Ghost:OnShow()
 	local Button = Ghost.Button

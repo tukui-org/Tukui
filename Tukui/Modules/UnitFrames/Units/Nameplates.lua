@@ -45,12 +45,7 @@ function UnitFrames:Nameplates()
 	Health.colorClass = true
 	Health.colorHealth = true
 	Health.colorThreat = C.NamePlates.ColorThreat
-	
-	if C.NamePlates.ColorThreat then
-		Health.colorReaction = false
-	else
-		Health.colorReaction = true
-	end
+	Health.colorReaction = true
 
 	local Name = Health:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("BOTTOMLEFT", Health, "TOPLEFT", -2, 4)
