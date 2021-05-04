@@ -23,8 +23,9 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 		if Torghast then
 			Bar.Indicator = Bar:CreateTexture(nil, "OVERLAY")
 			Bar.Indicator:SetSize(16, 16)
-			Bar.Indicator:SetPoint("TOP", 23, 10)
+			Bar.Indicator:SetPoint("TOP", 23, 9)
 			Bar.Indicator:SetTexture(C.Medias.ArrowDown)
+			Bar.Indicator:SetVertexColor(1, 0, 0)
 		end
 		
 		Bar.IsSkinned = true
