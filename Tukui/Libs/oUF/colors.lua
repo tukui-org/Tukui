@@ -122,7 +122,7 @@ colors.power.ALTERNATE = {0.7, 0.7, 0.6}
 colors.power[10] = colors.power.ALTERNATE
 
 for i = 0, 3 do
-	colors.threat[i] = {GetThreatStatusColor(i)}
+	--colors.threat[i] = {GetThreatStatusColor(i)}
 end
 
 local function colorsAndPercent(a, b, ...)

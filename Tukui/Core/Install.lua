@@ -70,10 +70,13 @@ function Install:SetDefaultsCVars()
 	SetCVar("profanityFilter", 0)
 	SetCVar("nameplateMaxDistance", 60)
 	SetCVar("showLootSpam", 1)
-	SetCVar("lossOfControl", 1)
 	SetCVar("showArenaEnemyFrames", 0)
-	SetCVar("nameplateShowSelf", 0)
-	SetCVar("nameplateResourceOnTarget", 0)
+	
+	if T.Retail then
+		SetCVar("lossOfControl", 1)
+		SetCVar("nameplateShowSelf", 0)
+		SetCVar("nameplateResourceOnTarget", 0)
+	end
 end
 
 Install:RegisterEvent("PLAYER_ENTERING_WORLD")

@@ -11,4 +11,7 @@ T["Maps"] = CreateFrame("Frame")
 T["Miscellaneous"] = CreateFrame("Frame")
 T["Tooltips"] = CreateFrame("Frame")
 T["UnitFrames"] = CreateFrame("Frame")
-T["PetBattles"] = CreateFrame("Frame")
+
+if T.Retail then
+	T["PetBattles"] = CreateFrame("Frame")
+end

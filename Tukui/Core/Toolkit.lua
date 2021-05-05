@@ -618,8 +618,13 @@ Toolkit.Functions.OnEvent = function(self, event, ...)
 end
 
 Toolkit.Functions.HideBlizzard = function(self)
-	Display_UseUIScale:Hide()
-	Display_UIScaleSlider:Hide()
+	if T.Retail then
+		Display_UseUIScale:Hide()
+		Display_UIScaleSlider:Hide()
+	else
+		Advanced_UseUIScale:Hide()
+		Advanced_UIScaleSlider:Hide()
+	end
 end
 
 Toolkit.Functions.RegisterDefaultSettings = function(self)

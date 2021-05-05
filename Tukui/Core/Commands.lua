@@ -71,10 +71,18 @@ T.SlashHandler = function(cmd)
 			UpdateMicroButtonsParent(T.PetHider)
 		end
 	elseif (arg1 == "ot") or (arg1 == "quests") then
-		if (ObjectiveTrackerFrame:IsVisible()) then
-			ObjectiveTrackerFrame:Hide()
+		if T.Retail then
+			if (ObjectiveTrackerFrame:IsVisible()) then
+				ObjectiveTrackerFrame:Hide()
+			else
+				ObjectiveTrackerFrame:Show()
+			end
 		else
-			ObjectiveTrackerFrame:Show()
+			if (QuestWatchFrame:IsVisible()) then
+				QuestWatchFrame:Hide()
+			else
+				QuestWatchFrame:Show()
+			end
 		end
 	elseif (arg1 == "ru") or (arg1 == "markers") then
 		local Utilities = T.Miscellaneous.RaidUtilities
@@ -88,34 +96,46 @@ T.SlashHandler = function(cmd)
 		else
 			T.Print("Global name not found for this frame")
 		end
-	elseif (arg1 == "feedback" or arg1 == "fb") then
-		-- TEMP FOR BETA
-		if arg2 == "disable" then
-			DisableAddOn("Blizzard_PTRFeedback")
-			
-			ReloadUI()
-		elseif arg2== "enable" then
-			EnableAddOn("Blizzard_PTRFeedback")
-			
-			ReloadUI()
-		end
 	elseif (arg1 == "kb" or arg1 == "keybinds") then
 		if InCombatLockdown() then
 			return
 		end
 		
-		if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
+		if T.Retail then
+			if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
+				return
+			end
+
+			GameMenuButtonKeybindings:Click()
+
+			KeyBindingFrame.quickKeybindButton:Click()
+		else
+			T.Miscellaneous.Keybinds:Toggle()
+		end
+	elseif (arg1 == "ph" or arg1 == "happiness") then
+		if T.Retail then
 			return
 		end
 		
-		GameMenuButtonKeybindings:Click()
+		if T.MyClass ~= "HUNTER" then
+			return T.Print("Sorry, you are not an "..T.RGBToHex(unpack(T.Colors.class["HUNTER"])).."hunter|r, this command is useless for you. :P")
+		end
 		
-		KeyBindingFrame.quickKeybindButton:Click()
-	elseif (arg1 == "mh") then
-		local SlashCommand = _G.SlashCmdList["LIBCLASSICMOBHEALTHONE"]
-		local Command = (arg3 and arg2.." "..arg3) or (arg2) or ""
-
-		SlashCommand(Command)
+		local Red, Yellow, Green = T.RGBToHex(unpack(T.Colors.happiness[1])), T.RGBToHex(unpack(T.Colors.happiness[2])), T.RGBToHex(unpack(T.Colors.happiness[3]))
+		local Happiness, DamagePercentage, LoyaltyRate = GetPetHappiness()
+		
+		if not Happiness then
+			T.Print("You don't have any pet summoned at the moment")
+		else
+			local Happy = ({"Unhappy", "Content", "Happy"})[Happiness]
+			local Loyalty = LoyaltyRate > 0 and "gaining" or "losing"
+			
+			T.Print("Pet is " .. Happy)
+			T.Print("Pet is doing " .. DamagePercentage .. "% damage")
+			T.Print("Pet is " .. Loyalty .. " loyalty")
+		end
+		
+		T.Print("You can also track your current pet happiness according to the pet frame health bar color. "..Red.."Red|r mean unhappy, "..Yellow.."yellow|r mean content, "..Green.."green|r mean happy.")
 	elseif (arg1 == "chat") then
 		if (arg2 == "reset") then
 			local Chat = T.Chat

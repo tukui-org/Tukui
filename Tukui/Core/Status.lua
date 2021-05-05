@@ -20,14 +20,10 @@ function Status:ShowWindow()
 	self:CreateBackdrop("Transparent")
 	self:CreateShadow()
 
-	self.FrameLogo = CreateFrame("Frame", nil, self)
-	self.FrameLogo:SetAllPoints()
-	self.FrameLogo:SetFrameLevel(self:GetFrameLevel() + 1)
-
-	self.Logo = self.FrameLogo:CreateTexture(nil, "OVERLAY")
-	self.Logo:SetSize(192, 192)
+	self.Logo = self:CreateTexture(nil, "OVERLAY")
+	self.Logo:SetSize(128, 128)
 	self.Logo:SetTexture(C.Medias.Logo)
-	self.Logo:SetPoint("TOP", self, "TOP", 0, 116)
+	self.Logo:SetPoint("TOP", self, "TOP", 0, 60)
 
 	self.Title = self:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C.Medias.Font, 16, "THINOUTLINE")

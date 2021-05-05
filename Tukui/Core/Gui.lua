@@ -97,10 +97,6 @@ local SetValue = function(group, option, value)
 
 	local Settings
 
-	if (not TukuiDatabase.Settings) then
-		TukuiDatabase.Settings = {}
-	end
-
 	if (not TukuiDatabase.Settings[T.MyRealm]) then
 		TukuiDatabase.Settings[T.MyRealm] = {}
 	end
@@ -1762,15 +1758,20 @@ GUI.Enable = function(self)
 	Keybinds:SetScript("OnEnter", ButtonOnEnter)
 	Keybinds:SetScript("OnLeave", ButtonOnLeave)
 	Keybinds:SetScript("OnMouseUp", function()
-		if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
-			return
+		if T.Retail then
+			if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
+				return
+			end
+
+			GameMenuButtonKeybindings:Click()
+
+			KeyBindingFrame.quickKeybindButton:Click()
+
+			T.GUI:Toggle()
+		else
+			T.GUI:Toggle()
+			T.Miscellaneous.Keybinds:Toggle()
 		end
-		
-		GameMenuButtonKeybindings:Click()
-		
-		KeyBindingFrame.quickKeybindButton:Click()
-						
-		T.GUI:Toggle()
 	end)
 
 	Keybinds.Highlight = Keybinds:CreateTexture(nil, "OVERLAY")

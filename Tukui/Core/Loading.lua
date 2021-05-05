@@ -257,44 +257,44 @@ function Loading:OnEvent(event)
 		T["Miscellaneous"]["Keybinds"]:Enable()
 		T["Miscellaneous"]["TimeManager"]:Enable()
 		T["Miscellaneous"]["ThreatBar"]:Enable()
-		T["Miscellaneous"]["TalkingHead"]:Enable()
-		T["Miscellaneous"]["LossControl"]:Enable()
-		T["Miscellaneous"]["DeathRecap"]:Enable()
-		T["Miscellaneous"]["Ghost"]:Enable()
-		T["Miscellaneous"]["TimerTracker"]:Enable()
-		T["Miscellaneous"]["AltPowerBar"]:Enable()
-		T["Miscellaneous"]["OrderHall"]:Enable()
-		T["Miscellaneous"]["Tutorials"]:Enable()
-		T["Miscellaneous"]["VehicleIndicator"]:Enable()
 		T["Miscellaneous"]["ItemLevel"]:Enable()
-		T["Miscellaneous"]["RaidUtilities"]:Enable()
 		T["Miscellaneous"]["Alerts"]:Enable()
 		T["UnitFrames"]:Enable()
 		T["Tooltips"]:Enable()
-		T["PetBattles"]:Enable()
+		
+		if T.Retail then
+			T["Miscellaneous"]["TalkingHead"]:Enable()
+			T["Miscellaneous"]["LossControl"]:Enable()
+			T["Miscellaneous"]["DeathRecap"]:Enable()
+			T["Miscellaneous"]["Ghost"]:Enable()
+			T["Miscellaneous"]["TimerTracker"]:Enable()
+			T["Miscellaneous"]["AltPowerBar"]:Enable()
+			T["Miscellaneous"]["OrderHall"]:Enable()
+			T["Miscellaneous"]["Tutorials"]:Enable()
+			T["Miscellaneous"]["VehicleIndicator"]:Enable()
+			T["Miscellaneous"]["RaidUtilities"]:Enable()
+			T["PetBattles"]:Enable()
+		end
 
 		-- restore original stopwatch commands
 		SlashCmdList["STOPWATCH"] = Stopwatch_Toggle
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		T["Miscellaneous"]["ObjectiveTracker"]:Enable()
 		
-		-- Temp Fix for Action MultiBarBottomRight buttons 1 to 6 on low monitor resolution
-		for i = 1, 6 do
-			local Button = _G["MultiBarBottomRightButton"..i]
+		if T.Retail then
+			-- Temp Fix for Action MultiBarBottomRight buttons 1 to 6 on low monitor resolution
+			for i = 1, 6 do
+				local Button = _G["MultiBarBottomRightButton"..i]
 
-			Button:SetAttribute("showgrid", 1)
-			Button:Show()
+				Button:SetAttribute("showgrid", 1)
+				Button:Show()
+			end
 		end
 	elseif (event == "VARIABLES_LOADED") then
 		T["Loading"]:Enable()
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
 		T["Help"]:Enable()
-		
-		-- welcome message
-		local HexClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
-
-		T.Print("Welcome "..HexClassColor..T.MyName.."|r! For a commands list, type /tukui")
 	end
 end
 

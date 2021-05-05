@@ -71,4 +71,10 @@ oUF.colors.totems = {
 	[4] = {0.99, 0.99, 0.99},
 }
 
+oUF.colors.happiness = {
+	[1] = {.69,.31,.31},
+	[2] = {.65,.63,.35},
+	[3] = {.33,.59,.33},
+}
+
 T["Colors"] = oUF.colors
