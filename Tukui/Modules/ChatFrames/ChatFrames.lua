@@ -7,6 +7,28 @@ local Noop = function() end
 -- Set name for right chat
 Chat.RightChatName = OTHER
 
+-- Chat default positions
+Chat.Positions = {
+	["Frame1"] = {
+		["Anchor1"] = "BOTTOMLEFT",
+		["Anchor2"] = "BOTTOMLEFT",
+		["X"] = 34,
+		["Y"] = 50,
+		["Width"] = 370,
+		["Height"] = 108,
+		["IsUndocked"] = false,
+	},
+	["Frame4"] = {
+		["Anchor1"] = "BOTTOMRIGHT",
+		["Anchor2"] = "BOTTOMRIGHT",
+		["X"] = -34,
+		["Y"] = 50,
+		["Width"] = 370,
+		["Height"] = 108,
+		["IsUndocked"] = true,
+	},
+}
+
 -- Update editbox border color
 function Chat:UpdateEditBoxColor()
 	local EditBox = ChatEdit_ChooseBoxForSend()
@@ -193,11 +215,20 @@ function Chat:StyleTempFrame()
 end
 
 function Chat:SaveChatFramePositionAndDimensions()
-	local Anchor1, _, Anchor2, X, Y = self:GetPoint()
+	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
-
-	TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID] = {Anchor1, Anchor2, X, Y, Width, Height}
+	local IsUndocked = self.isDocked and false or true
+	
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions["Frame" .. ID] = {
+		["Anchor1"] = Anchor1,
+		["Anchor2"] = Anchor2,
+		["X"] = X,
+		["Y"] = Y,
+		["Width"] = Width,
+		["Height"] = Height,
+		["IsUndocked"] = IsUndocked,
+	}
 end
 
 function Chat:Dock(frame)
@@ -213,14 +244,10 @@ function Chat:SetChatFramePosition()
 	local Frame = self
 	local ID = Frame:GetID()
 	local Tab = _G["ChatFrame"..ID.."Tab"]
-
+	local IsMovable = Frame:IsMovable()
+	local Settings = TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions["Frame" .. ID]
+	
 	if Tab:IsShown() then
-		local Name = _G["ChatFrame"..ID.."TabText"]:GetText()
-		
-		if not Frame.isDocked and Name ~= Chat.RightChatName then
-			Chat:Dock(Frame)
-		end
-
 		if C.General.Themes.Value == "Tukui" then
 			if ID == 1 then
 				Frame:SetParent(T.DataTexts.Panels.Left)
@@ -230,36 +257,24 @@ function Chat:SetChatFramePosition()
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 2)
 			end
 
-			if Name == Chat.RightChatName then
-				if Frame.isDocked then
-					Chat:Undock(Frame)
-				end
-
+			if Settings and Settings.IsUndocked and IsMovable then
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
 				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 2)
-
-				if C.Chat.RightChatAlignRight then
-					Frame:SetJustifyH("RIGHT")
-				end
 			end
 		else
-			local Settings = TukuiDatabase.Variables[GetRealmName()][UnitName("Player")].Chat["Frame" .. ID]
-			
-			if Settings and Frame:IsMovable() then
-				local Anchor1, Anchor2, X, Y, Width, Height = unpack(Settings)
-
+			if Settings and IsMovable then
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetPoint(Anchor1, UIParent, Anchor2, X, Y)
-				Frame:SetSize(Width, Height)
+				Frame:SetPoint(Settings.Anchor1, UIParent, Settings.Anchor2, Settings.X, Settings.Y)
+				Frame:SetSize(Settings.Width, Settings.Height)
 			end
+		end
 
-			if (Name == Chat.RightChatName) and (C.Chat.RightChatAlignRight) then
-				Frame:SetJustifyH("RIGHT")
-			end
+		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked then
+			Frame:SetJustifyH("RIGHT")
 		end
 	end
 end

@@ -273,6 +273,8 @@ C["Tooltips"] = {
 	["AlwaysCompareItems"] = false,
 	["UnitHealthText"] = true,
 	["MouseOver"] = false,
+	["ItemBorderColor"] = true,
+	["UnitBorderColor"] = true,
 	["HealthFont"] = "Tukui Outline",
 }
 

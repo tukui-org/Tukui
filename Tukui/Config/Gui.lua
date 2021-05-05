@@ -304,6 +304,8 @@ local Tooltips = function(self)
 	Window:CreateSwitch("Tooltips", "AlwaysCompareItems", "Always compare items")
 
 	Window:CreateSection("Styling")
+	Window:CreateSwitch("Tooltips", "ItemBorderColor", "Set border color according to item quality?")
+	Window:CreateSwitch("Tooltips", "UnitBorderColor", "Set border color according to unit class/reaction?")
 	Window:CreateSwitch("Tooltips", "HideInCombat", "Hide tooltip while in combat")
 	Window:CreateSwitch("Tooltips", "MouseOver", "Display tooltips on the cursor")
 

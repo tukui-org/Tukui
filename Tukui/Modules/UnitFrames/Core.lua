@@ -551,7 +551,7 @@ function UnitFrames:RunesPostUpdate(runemap)
 end
 
 function UnitFrames:UpdateTotemTimer(elapsed)
-	self.Elapsed = (self.Elapsed) - elapsed
+	self.Elapsed = (self.Elapsed and self.Elapsed or 0) - elapsed
 
 	if self.Elapsed < 0 then
 		local TimeLeft = math.ceil(self.Duration - (GetTime() - self.Start))
@@ -581,6 +581,8 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 	if (HaveTotem) then
 		Totem.Slot = slot
+		Totem.Duration = Duration
+		Totem.Start = Start
 		Totem:Show()
 
 		if Totem.Icon then
@@ -597,18 +599,20 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 			local Cooldown = _G["TotemFrameTotem"..i.."IconCooldown"]
 
 			if BlizzardTotem:IsShown() then
-				local CancelButtonSlot = BlizzardTotem.slot
-				local CancelButton = _G["TotemFrameTotem"..CancelButtonSlot]
-
-				CancelButton:ClearAllPoints()
-				CancelButton:SetAllPoints(Bar[i])
-				CancelButton:SetAlpha(0)
+				local Where = BlizzardTotem.slot
+				
+				BlizzardTotem:ClearAllPoints()
+				BlizzardTotem:SetAllPoints(Bar[Where])
+				BlizzardTotem:SetAlpha(0)
 
 				Cooldown:SetAlpha(0)
 			end
 		end
+		
+		Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 	else
 		Totem:Hide()
+		Totem:SetScript("OnUpdate", nil)
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)

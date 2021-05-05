@@ -172,24 +172,23 @@ function Loading:VerifyDatabase()
 	end
 	
 	if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat then
-		TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat = {
-			["Frame1"] = {
-				"BOTTOMLEFT",
-				"BOTTOMLEFT",
-				34,
-				50,
-				370,
-				108,
-			},
-			["Frame4"] = {
-				"BOTTOMRIGHT",
-				"BOTTOMRIGHT",
-				-34,
-				50,
-				370,
-				108,
-			},
-		}
+		TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat = {}
+		
+		if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions then
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions = T.Chat.Positions
+		end
+	else
+		-- We recently changed this table, make sure it work with our new layout
+		if not TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions then
+			-- Reset Chat Database
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat = {}
+			
+			-- Set frames position default
+			TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions = T.Chat.Positions
+			
+			-- Warn user
+			T.Print("|CFFFF0000WARNING:|r Your chat position have been reset to default")
+		end
 	end
 	
 	if (not TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc) then

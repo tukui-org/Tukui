@@ -274,7 +274,9 @@ function Tooltip:OnTooltipSetItem()
 		end
 	end
 	
-	Tooltip:SetItemBorderColor(self)
+	if C.Tooltips.ItemBorderColor then
+		Tooltip:SetItemBorderColor(self)
+	end
 end
 
 function Tooltip:SetHealthValue(unit)
@@ -373,9 +375,15 @@ end
 function Tooltip:AddHooks()
 	hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
-	hooksecurefunc("GameTooltip_ShowCompareItem", self.SetCompareItemBorderColor)
-	hooksecurefunc("GameTooltip_UnitColor", self.SetUnitBorderColor)
-	hooksecurefunc("GameTooltip_ClearMoney", self.ResetBorderColor)
+	
+	if C.Tooltips.UnitBorderColor then
+		hooksecurefunc("GameTooltip_UnitColor", self.SetUnitBorderColor)
+		hooksecurefunc("GameTooltip_ShowCompareItem", self.SetCompareItemBorderColor)
+	end
+	
+	if C.Tooltips.UnitBorderColor or C.Tooltips.ItemBorderColor then
+		hooksecurefunc("GameTooltip_ClearMoney", self.ResetBorderColor)
+	end
 
 	GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
 	GameTooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
@@ -410,6 +418,7 @@ function Tooltip:Enable()
 	Tooltip.Skin(ShoppingTooltip1)
 	Tooltip.Skin(ShoppingTooltip2)
 	
+	HealthBar:SetStatusBarColor(unpack(T.Colors.reaction[8]))
 	HealthBar:Hide()
 	
 	ItemRefTooltip.CloseButton:SkinCloseButton()

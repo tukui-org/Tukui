@@ -461,12 +461,10 @@ function UnitFrames:Player()
 	
 	if (C.UnitFrames.TotemBar) then
 		local Bar = CreateFrame("Frame", "TukuiTotemBar", self)
-		
-		Bar:SetFrameStrata(self:GetFrameStrata())
-		Bar:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -1, -42)
-		Bar:SetSize(Minimap:GetWidth(), 16)
 
-		Bar.Override = UnitFrames.UpdateTotemOverride
+		Bar:SetFrameStrata(self:GetFrameStrata())
+		Bar:SetPoint("CENTER", UIParent, "CENTER", 0, -250)
+		Bar:SetSize(140, 32)
 
 		-- Totem Bar
 		for i = 1, MAX_TOTEMS do
@@ -474,20 +472,27 @@ function UnitFrames:Player()
 			Bar[i]:CreateBackdrop()
 			Bar[i]:SetHeight(32)
 			Bar[i]:SetWidth(32)
-			Bar[i]:SetFrameLevel(Health:GetFrameLevel())
-			Bar[i]:CreateShadow()
-			
+
+			Bar[i].Backdrop:SetParent(Bar)
+			Bar[i].Backdrop:SetFrameLevel(Bar[i]:GetFrameLevel() - 1)
+			Bar[i].Backdrop:CreateShadow()
+
+			Bar[i].Backdrop.BackgroundTexture = Bar[i].Backdrop:CreateTexture(nil, "OVERLAY", 1)
+			Bar[i].Backdrop.BackgroundTexture:SetAllPoints(Bar[i].Backdrop)
+			Bar[i].Backdrop.BackgroundTexture:SetTexture(C.Medias.Blank)
+			Bar[i].Backdrop.BackgroundTexture:SetVertexColor(unpack(T.Colors.totems[i]))
+
 			Bar[i].Text = Bar[i]:CreateFontString(nil, "OVERLAY")
 			Bar[i].Text:SetPoint("CENTER", 1, 0)
 			Bar[i].Text:SetFontTemplate(C.Medias.Font, 16)
 
 			if i == 1 then
-				Bar[i]:SetPoint("BOTTOMRIGHT", Bar, "BOTTOMRIGHT", 0, 0)
+				Bar[i]:SetPoint("TOPLEFT", Bar, "TOPLEFT", 0, 0)
 			else
-				Bar[i]:SetPoint("BOTTOMRIGHT", Bar[i-1], "BOTTOMRIGHT", -36, 0)
+				Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 4, 0)
 			end
 
-			Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER")
+			Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER", 7)
 			Bar[i].Icon:SetInside()
 			Bar[i].Icon:SetAlpha(1)
 			Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -503,6 +508,7 @@ function UnitFrames:Player()
 		TotemFrame:SetParent(UIParent)
 
 		self.Totems = Bar
+		self.Totems.Override = UnitFrames.UpdateTotemOverride
 	end
 
 	local Status = Health:CreateTexture(nil, "OVERLAY", nil, 7)
