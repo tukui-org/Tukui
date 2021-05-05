@@ -37,7 +37,9 @@ local ActionBars = function(self)
 	Window:CreateSwitch("ActionBars", "ShapeShift", "Enable shapeshift")
 	Window:CreateSwitch("ActionBars", "HotKey", "Enable hotkeys text")
 	Window:CreateSwitch("ActionBars", "Macro", "Enable macro text")
-	Window:CreateSwitch("ActionBars", "AutoAddNewSpell", "Auto add new spell to actionbars?")
+	if T.Retail then
+		Window:CreateSwitch("ActionBars", "AutoAddNewSpell", "Auto add new spell to actionbars?")
+	end
 
 	Window:CreateSection("Styling")
 	Window:CreateSwitch("ActionBars", "ProcAnim", "Our own spell flashing proc animation?")
@@ -184,11 +186,14 @@ local Misc = function(self)
 	Window:CreateSection("Inventory")
 	Window:CreateSwitch("Misc", "AutoSellJunk", "Sell junk automatically when visiting a vendor?")
 	Window:CreateSwitch("Misc", "AutoRepair", "Auto repair your equipment when visiting a vendor?")
-	Window:CreateSection("Talking Head")
-	Window:CreateSwitch("Misc", "TalkingHeadEnable", "Enable Talking Head?")
 	Window:CreateSection("UI Error Frame")
 	Window:CreateSlider("Misc", "UIErrorSize", "Set ui error text font size", 12, 24, 1)
 	Window:CreateDropdown("Misc", "UIErrorFont", "Set ui error font", "Font")
+	
+	if T.Retail then
+		Window:CreateSection("Talking Head")
+		Window:CreateSwitch("Misc", "TalkingHeadEnable", "Enable Talking Head?")
+	end
 end
 
 local NamePlates = function(self)
@@ -198,7 +203,9 @@ local NamePlates = function(self)
 	Window:CreateSwitch("NamePlates", "Enable", "Enable nameplate module")
 	Window:CreateSwitch("NamePlates", "NameplateCastBar", "Enable nameplate cast")
 	Window:CreateSwitch("NamePlates", "QuestIcon", "Enable nameplate quest icon indicator")
-	Window:CreateSwitch("NamePlates", "ClassIcon", "Enable nameplate class icon indicator (PvP recommended)")
+	if T.Retail then
+		Window:CreateSwitch("NamePlates", "ClassIcon", "Enable nameplate class icon indicator (PvP recommended)")
+	end
 
 	Window:CreateSection("Styling")
 	Window:CreateSlider("NamePlates", "NotSelectedAlpha", "Set not selected nameplate alpha (%)", 0, 100, 1)
@@ -344,7 +351,9 @@ local UnitFrames = function(self)
 
 	Window:CreateSection("Enable")
 	Window:CreateSwitch("UnitFrames", "Enable", "Enable unitframe module")
-	Window:CreateSwitch("UnitFrames", "ClassBar", "Enable class bar (example: holy power)")
+	if T.Retail then
+		Window:CreateSwitch("UnitFrames", "ClassBar", "Enable class bar (example: holy power)")
+	end
 	Window:CreateSwitch("UnitFrames", "OOCNameLevel", "Display my name/level while out of combat")
 	Window:CreateSwitch("UnitFrames", "OOCPetNameLevel", "Display my pet name/level while out of combat")
 	Window:CreateSwitch("UnitFrames", "Portrait", "Enable unit portraits")
@@ -394,7 +403,9 @@ local UnitFrames = function(self)
 	Window:CreateDropdown("UnitFrames", "Font", "Set unitframe font", "Font")
 	Window:CreateColorSelection("UnitFrames", "HealCommSelfColor", "HealComm - my heals")
 	Window:CreateColorSelection("UnitFrames", "HealCommOtherColor", "HealComm - others heals")
-	Window:CreateColorSelection("UnitFrames", "HealCommAbsorbColor", "HealComm - absorbs")
+	if T.Retail then
+		Window:CreateColorSelection("UnitFrames", "HealCommAbsorbColor", "HealComm - absorbs")
+	end
 	Window:CreateColorSelection("UnitFrames", "CastingColor", "Cast bar casting color")
 	Window:CreateColorSelection("UnitFrames", "ChannelingColor", "Cast bar channeling color")
 	Window:CreateColorSelection("UnitFrames", "NotInterruptibleColor", "Cast bar not interruptible color")
