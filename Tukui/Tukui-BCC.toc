@@ -1,0 +1,207 @@
+## Interface: 20501
+## Author: Tukz
+## X-Maintainer: Tukz
+## Version: 2.0005
+## Title: |cffff8000Tukui|r
+## Notes: UI of awesomeness!
+## SavedVariables: TukuiDatabase
+## OptionalDeps: Clique
+## X-Website: http://www.tukui.org
+## X-Tukui-ProjectID: 1
+## X-Tukui-ProjectFolders: Tukui
+
+## Init
+Core\Init.lua
+
+## Default Settings
+Config\Settings.lua
+
+## Libs
+Libs\LibAnim\LibAnim.lua
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDeflate\LibDeflate.lua
+Libs\LibSerialize\LibSerialize.lua
+Libs\LibHealComm-4.0\ChatThrottleLib.lua
+Libs\LibHealComm-4.0\LibHealComm-4.0.lua
+Libs\oUF\init.lua
+Libs\oUF\private.lua
+Libs\oUF\ouf.lua
+Libs\oUF\events.lua
+Libs\oUF\factory.lua
+Libs\oUF\blizzard.lua
+Libs\oUF\units.lua
+Libs\oUF\colors.lua
+Libs\oUF\elements\assistantindicator.lua
+Libs\oUF\elements\auras.lua
+Libs\oUF\elements\castbar.lua
+Libs\oUF\elements\classpower.lua
+Libs\oUF\elements\combatindicator.lua
+Libs\oUF\elements\grouproleindicator.lua
+Libs\oUF\elements\health.lua
+Libs\oUF\elements\leaderindicator.lua
+Libs\oUF\elements\phaseindicator.lua
+Libs\oUF\elements\portrait.lua
+Libs\oUF\elements\power.lua
+Libs\oUF\elements\pvpindicator.lua
+Libs\oUF\elements\questindicator.lua
+Libs\oUF\elements\raidroleindicator.lua
+Libs\oUF\elements\raidtargetindicator.lua
+Libs\oUF\elements\range.lua
+Libs\oUF\elements\readycheckindicator.lua
+Libs\oUF\elements\restingindicator.lua
+Libs\oUF\elements\resurrectindicator.lua
+Libs\oUF\elements\stagger.lua
+Libs\oUF\elements\tags.lua
+Libs\oUF\elements\threatindicator.lua
+Libs\oUF\elements\totems.lua
+Libs\oUF\finalize.lua
+Libs\oUF_ComboPointsBar\oUF_ComboPointsBar.lua
+Libs\oUF_CombatFeedback\oUF_CombatFeedback.lua
+Libs\oUF_RaidDebuffs\oUF_RaidDebuffs.lua
+Libs\oUF_FloatingCombatFeedback\oUF_FloatingCombatFeedback.lua
+Libs\oUF_AuraBars\oUF_AuraBars.lua
+Libs\oUF_AuraTrack\oUF_AuraTrack.lua
+Libs\oUF_EnergyManaRegen\oUF_EnergyManaRegen.lua
+Libs\oUF_DruidMana\oUF_DruidMana.lua
+Libs\oUF_Trinkets\oUF_Trinkets.lua
+Libs\SortBags\SortBags.lua
+
+## Medias
+Medias\Medias.lua
+
+## Locales
+Locales\enUS.lua
+Locales\frFR.lua
+
+## Core
+Core\Media.lua
+Core\Colors.lua
+Core\Toolkit.lua
+Core\Popup.lua
+Core\Core.lua
+Core\Commands.lua
+Core\Install.lua
+Core\MoveUI.lua
+Core\Loading.lua
+Core\TestUI.lua
+Core\Status.lua
+Core\Modules.lua
+Core\Gui.lua
+Core\Profiles.lua
+Core\Help.lua
+
+## Custom Settings
+Config\Gui.lua
+
+## Modules
+Modules\Fonts\Fonts.lua
+
+Modules\DataTexts\Core.lua
+Modules\DataTexts\Anchors.lua
+Modules\DataTexts\Elements\Armor.lua
+Modules\DataTexts\Elements\Bags.lua
+Modules\DataTexts\Elements\Character.lua
+Modules\DataTexts\Elements\Coords.lua
+Modules\DataTexts\Elements\Crit.lua
+Modules\DataTexts\Elements\DPS.lua
+Modules\DataTexts\Elements\Friends.lua
+Modules\DataTexts\Elements\Gold.lua
+Modules\DataTexts\Elements\Guild.lua
+Modules\DataTexts\Elements\HPS.lua
+Modules\DataTexts\Elements\MicroMenu.lua
+Modules\DataTexts\Elements\Power.lua
+Modules\DataTexts\Elements\Regen.lua
+Modules\DataTexts\Elements\System.lua
+Modules\DataTexts\Elements\Talents.lua
+Modules\DataTexts\Elements\Time.lua
+Modules\DataTexts\Elements\Battleground.lua
+Modules\DataTexts\Elements\Zone.lua
+Modules\DataTexts\Elements\Voice.lua
+
+Modules\ChatFrames\ChatFrames.lua
+Modules\ChatFrames\CopyURL.lua
+Modules\ChatFrames\CopyText.lua
+Modules\ChatFrames\Bubbles.lua
+Modules\ChatFrames\ChatHistory.lua
+
+Modules\Inventory\Bags.lua
+Modules\Inventory\Loot.lua
+Modules\Inventory\GroupLoot.lua
+Modules\Inventory\Merchant.lua
+
+Modules\ActionBars\Core.lua
+Modules\ActionBars\Skin.lua
+Modules\ActionBars\Bar1.lua
+Modules\ActionBars\Bar2.lua
+Modules\ActionBars\Bar3.lua
+Modules\ActionBars\Bar4.lua
+Modules\ActionBars\Bar5.lua
+Modules\ActionBars\BarPet.lua
+Modules\ActionBars\BarStance.lua
+
+Modules\Cooldowns\Cooldowns.lua
+
+Modules\Miscellaneous\Alerts.lua
+Modules\Miscellaneous\AFK.lua
+Modules\Miscellaneous\DropDown.lua
+Modules\Miscellaneous\Durability.lua
+Modules\Miscellaneous\Errors.lua
+Modules\Miscellaneous\ExperienceBar.lua
+Modules\Miscellaneous\GameMenu.lua
+Modules\Miscellaneous\GarbageCollection.lua
+Modules\Miscellaneous\Grid.lua
+Modules\Miscellaneous\GuildNamesByClassColor.lua
+Modules\Miscellaneous\ItemLevel.lua
+Modules\Miscellaneous\Keybinds.lua
+Modules\Miscellaneous\MicroMenu.lua
+Modules\Miscellaneous\MirrorTimers.lua
+Modules\Miscellaneous\ObjectiveTracker.lua
+Modules\Miscellaneous\RaidUtilities.lua
+Modules\Miscellaneous\StaticPopups.lua
+Modules\Miscellaneous\TimeManager.lua
+Modules\Miscellaneous\ThreatBar.lua
+Modules\Miscellaneous\UIErrorFilter.lua
+Modules\Miscellaneous\UIWidgets.lua
+Modules\Miscellaneous\WhoNamesByClassColor.lua
+
+Modules\Auras\Templates.xml
+Modules\Auras\Auras.lua
+Modules\Auras\Headers.lua
+
+Modules\Maps\Minimap.lua
+Modules\Maps\Zonemap.lua
+Modules\Maps\Worldmap.lua
+
+Modules\UnitFrames\Core.lua
+Modules\UnitFrames\Debuffs.lua
+Modules\UnitFrames\Tracking.lua
+Modules\UnitFrames\Tags.lua
+Modules\UnitFrames\Classes\Warrior.lua
+Modules\UnitFrames\Classes\Paladin.lua
+Modules\UnitFrames\Classes\Hunter.lua
+Modules\UnitFrames\Classes\Rogue.lua
+Modules\UnitFrames\Classes\Priest.lua
+Modules\UnitFrames\Classes\Shaman.lua
+Modules\UnitFrames\Classes\Mage.lua
+Modules\UnitFrames\Classes\Warlock.lua
+Modules\UnitFrames\Classes\Druid.lua
+Modules\UnitFrames\Units\Player.lua
+Modules\UnitFrames\Units\Target.lua
+Modules\UnitFrames\Units\TargetOfTarget.lua
+Modules\UnitFrames\Units\Pet.lua
+Modules\UnitFrames\Units\Focus.lua
+Modules\UnitFrames\Units\FocusTarget.lua
+Modules\UnitFrames\Units\Nameplates.lua
+Modules\UnitFrames\Units\Arena.lua
+Modules\UnitFrames\Units\Boss.lua
+Modules\UnitFrames\Groups\Party.lua
+Modules\UnitFrames\Groups\Raid.lua
+
+Modules\Tooltips\Tooltips.lua
+
+## Themes
+Themes\T17\Load.lua
+
+## Others
+Core\Temp.lua
