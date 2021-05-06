@@ -3,6 +3,9 @@ local oUF = ns.oUF
 
 local GetComboPoints = GetComboPoints
 local MaxComboPts = 6
+local Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+local BCC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+local Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 
 local SetMaxCombo = function(self)
 	local cpb = self.ComboPointsBar
@@ -35,7 +38,7 @@ local Update = function(self, event, unit, powerType)
 	local points
 	local max = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 	local currentmax = cpb.MaxCombo
-	local UnitChargedPowerPoints = GetUnitChargedPowerPoints("player")
+	local UnitChargedPowerPoints = GetUnitChargedPowerPoints and GetUnitChargedPowerPoints("player")
 	local ChargedPoint = UnitChargedPowerPoints and UnitChargedPowerPoints[1]
 
 	if cpb.PreUpdate then
@@ -46,7 +49,7 @@ local Update = function(self, event, unit, powerType)
 		SetMaxCombo(self)
 	end
 	
-	if UnitHasVehicleUI("player") then
+	if UnitHasVehicleUI and UnitHasVehicleUI("player") then
 		points = GetComboPoints("vehicle", "target")
 	else
 		points = GetComboPoints("player", "target")
@@ -106,8 +109,12 @@ local Enable = function(self, unit)
 
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
-		self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
-		self:RegisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+		
+		
+		if Retail then
+			self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
+			self:RegisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+		end
 
 		for i = 1, MaxComboPts do
 			local Point = cpb[i]
@@ -136,8 +143,11 @@ local Disable = function(self)
 	if(cpb) then
 		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent('PLAYER_TARGET_CHANGED', Path)
-		self:UnregisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo)
-		self:UnregisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+		
+		if Retail then
+			self:UnregisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo)
+			self:UnregisterEvent('UNIT_POWER_POINT_CHARGE', Path)
+		end
 	end
 end
 
