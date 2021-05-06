@@ -82,6 +82,8 @@ local OnEnter = function(self)
 				GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
 			end
 		end
+		
+		GameTooltip:AddLine(" ")
 	end
 	
 	if T.BCC then
