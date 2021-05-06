@@ -148,7 +148,9 @@ function MicroMenu:Enable()
 	
 	UpdateMicroButtonsParent(T.Hider)
 	
-	StoreMicroButton:StripTextures()
+	if StoreMicroButton then
+		StoreMicroButton:StripTextures()
+	end
 	
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	
