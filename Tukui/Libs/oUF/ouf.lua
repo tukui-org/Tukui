@@ -814,7 +814,7 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 			local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
 			if(not nameplate) then return end
 				
-			local widgets = UnitWidgetSet(unit)
+			local widgets = UnitWidgetSet and UnitWidgetSet(unit)
 
 			if(not nameplate.unitFrame) then
 				nameplate.style = style
@@ -823,7 +823,9 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 				nameplate.unitFrame:EnableMouse(false)
 				nameplate.unitFrame.isNamePlate = true
 					
-				nameplate.UnitFrame.WidgetContainer:SetParent(WorldFrame)
+				if nameplate.UnitFrame.WidgetContainer then
+					nameplate.UnitFrame.WidgetContainer:SetParent(WorldFrame)
+				end
 
 				Private.UpdateUnits(nameplate.unitFrame, unit)
 
