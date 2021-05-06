@@ -184,9 +184,11 @@ function Chat:StyleFrame(frame)
 	_G[format("ChatFrame%sEditBoxMid", ID)]:Kill()
 	_G[format("ChatFrame%sEditBoxRight", ID)]:Kill()
 	
-	_G[format("ChatFrame%sEditBoxFocusLeft", ID)]:Kill()
-	_G[format("ChatFrame%sEditBoxFocusMid", ID)]:Kill()
-	_G[format("ChatFrame%sEditBoxFocusRight", ID)]:Kill()
+	if T.Retail then
+		_G[format("ChatFrame%sEditBoxFocusLeft", ID)]:Kill()
+		_G[format("ChatFrame%sEditBoxFocusMid", ID)]:Kill()
+		_G[format("ChatFrame%sEditBoxFocusRight", ID)]:Kill()
+	end
 
 	-- Mouse Wheel
 	Frame:SetScript("OnMouseWheel", Chat.OnMouseWheel)
@@ -296,14 +298,23 @@ function Chat:Reset()
 	FCF_SetLocked(ChatFrame2, 1)
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
+	
+	if T.BCC then
+		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
+	end
+	
 	FCF_OpenNewWindow(Chat.RightChatName)
 	FCF_UnDockFrame(ChatFrame4)
 	FCF_OpenNewWindow(NPC_NAMES_DROPDOWN_ALL)
 	FCF_SetLocked(ChatFrame5, 1)
 	FCF_DockFrame(ChatFrame5)
-	FCF_OpenNewWindow(GLOBAL_CHANNELS)
-	FCF_SetLocked(ChatFrame6, 1)
-	FCF_DockFrame(ChatFrame6)
+	
+	if T.Retail then
+		FCF_OpenNewWindow(GLOBAL_CHANNELS)
+		FCF_SetLocked(ChatFrame6, 1)
+		FCF_DockFrame(ChatFrame6)
+	end
+	
 	FCF_SetChatWindowFontSize(nil, ChatFrame1, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame2, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame3, 12)
@@ -323,7 +334,7 @@ function Chat:Reset()
 	
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
-		if i ~= 2 and i ~= 3 then
+		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2) then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
@@ -351,6 +362,25 @@ function Chat:Reset()
 	end
 	
 	FCF_SelectDockFrame(ChatFrame1)
+	
+	-----------------------
+	-- ChatFrame 3 Setup --
+	-----------------------
+	
+	if T.BCC then
+		for i = 1, #Channels do
+			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
+			ChatFrame_AddChannel(ChatFrame3, Channels[i])
+		end
+
+		-- Adjust Chat Colors
+		ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
+		ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
+		ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
+	end
 	
 	-----------------------
 	-- ChatFrame 4 Setup --
@@ -385,18 +415,20 @@ function Chat:Reset()
 	-- ChatFrame 6 Setup --
 	-----------------------
 
-	for i = 1, #Channels do
-		ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
-		ChatFrame_AddChannel(ChatFrame6, Channels[i])
+	if T.Retail then
+		for i = 1, #Channels do
+			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
+			ChatFrame_AddChannel(ChatFrame6, Channels[i])
+		end
+
+		-- Adjust Chat Colors
+		ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
+		ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
+		ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
+		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 	end
-	
-	-- Adjust Chat Colors
-	ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
-	ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
-	ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
-	ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 end
 
 function Chat:OnMouseWheel(delta)
@@ -602,7 +634,9 @@ function Chat:Setup()
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
 	
-	QuickJoinToastButton:Kill()
+	if T.Retail then
+		QuickJoinToastButton:Kill()
+	end
 
 	ChatMenu:ClearAllPoints()
 	ChatMenu:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)

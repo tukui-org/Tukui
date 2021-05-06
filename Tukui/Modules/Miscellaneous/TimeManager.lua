@@ -9,6 +9,10 @@ function TimeManager:OnEvent(event, addon)
 		return
 	end
 	
+	if T.Retail then
+		TimeManagerFrame.NineSlice:SetAlpha(0)
+	end
+	
 	TimeManagerFrame:ClearAllPoints()
 	TimeManagerFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", -8, -40)
 	
@@ -20,8 +24,6 @@ function TimeManager:OnEvent(event, addon)
 	
 	TimeManagerFrameTicker:ClearAllPoints()
 	TimeManagerFrameTicker:SetPoint("TOPLEFT", 0, -6)
-	
-	TimeManagerFrame.NineSlice:SetAlpha(0)
 	
 	TimeManagerFrame.Backdrop:SetOutside(TimeManagerFrame, 10, 10)
 	TimeManagerFrame.Backdrop:CreateShadow()
@@ -82,8 +84,6 @@ function TimeManager:OnEvent(event, addon)
 	TimeManagerAlarmMessageEditBox.Middle:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox.Right:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
-	
-	--T.Movers:RegisterFrame(TimeManagerFrame, "Time Manager Frame")
 	
 	self:UnregisterAllEvents()
 end

@@ -3,6 +3,11 @@ local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
 local Noop = function() end
 local UnitFrames = T["UnitFrames"]
+local HealComm
+
+if T.BCC then
+	--HealComm = LibStub("LibHealComm-4.0")
+end
 
 -- Lib globals
 local strfind = strfind
@@ -95,8 +100,9 @@ end
 function UnitFrames:ShowWarMode()
 	local Status = self.Status
 	local MouseOver = GetMouseFocus()
+	local IsPvP = C_PvP.IsWarModeDesired and C_PvP.IsWarModeDesired or UnitIsPVP("player")
 
-	if (C_PvP.IsWarModeDesired()) and (MouseOver == self) and (not InCombatLockdown()) then
+	if (IsPvP) and (MouseOver == self) and (not InCombatLockdown()) then
 		Status:Show()
 		
 		if self.RestingIndicator then
@@ -966,10 +972,12 @@ function UnitFrames:CreateUnits()
 	end
 
 	if C.NamePlates.Enable then
-		local PersonalResource = ClassNameplateManaBarFrame
-		
-		-- No need for this bar, already included with oUF
-		PersonalResource:SetAlpha(0)
+		if T.Retail then
+			local PersonalResource = ClassNameplateManaBarFrame
+
+			-- No need for this bar, already included with oUF
+			PersonalResource:SetAlpha(0)
+		end
 		
 		-- Add threat colors
 		oUF.colors.threat = {
@@ -1007,7 +1015,78 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 	end
 end
 
+function UnitFrames:HealthPredictionUpdate(unit)
+	if(self.unit ~= unit) then return end
+
+	local element = self.HealthPrediction
+
+	local guid = UnitGUID(unit)
+
+	local allIncomingHeal = HealComm:GetHealAmount(guid, element.healType) or 0
+	local myIncomingHeal = (HealComm:GetHealAmount(guid, element.healType, nil, myGUID) or 0) * (HealComm:GetHealModifier(myGUID) or 1)
+	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
+	local otherIncomingHeal = 0
+
+	if(health + allIncomingHeal > maxHealth * element.maxOverflow) then
+		allIncomingHeal = maxHealth * element.maxOverflow - health
+	end
+
+	if(allIncomingHeal < myIncomingHeal) then
+		myIncomingHeal = allIncomingHeal
+	else
+		otherIncomingHeal = HealComm:GetOthersHealAmount(guid, HealComm.ALL_HEALS) or 0
+	end
+
+	if(element.myBar) then
+		element.myBar:SetMinMaxValues(0, maxHealth)
+		element.myBar:SetValue(myIncomingHeal)
+		element.myBar:Show()
+	end
+
+	if(element.otherBar) then
+		element.otherBar:SetMinMaxValues(0, maxHealth)
+		element.otherBar:SetValue(otherIncomingHeal)
+		element.otherBar:Show()
+	end
+end
+
+function UnitFrames:RegisterHealComm(frame)
+	if not frame and not frame.HealthPrediction then
+		return
+	end
+
+	frame.HealthPrediction.healType = HealComm.ALL_HEALS
+	
+	local function HealCommUpdate(...)
+		if frame.HealthPrediction and frame:IsVisible() then
+			for i = 1, select('#', ...) do
+				if frame.unit and UnitGUID(frame.unit) == select(i, ...) then
+					UnitFrames.HealthPredictionUpdate(frame, frame.unit)
+				end
+			end
+		end
+	end
+
+	local function HealComm_Heal_Update(event, casterGUID, spellID, healType, _, ...)
+		HealCommUpdate(...)
+	end
+
+	local function HealComm_Modified(event, guid)
+		HealCommUpdate(guid)
+	end
+
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStarted", HealComm_Heal_Update)
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealUpdated", HealComm_Heal_Update)
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealDelayed", HealComm_Heal_Update)
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStopped", HealComm_Heal_Update)
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_ModifierChanged", HealComm_Modified)
+	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_GUIDDisappeared", HealComm_Modified)
+end
+
 function UnitFrames:Enable()
+	-- WORKLATER (LibHealComm-4.0 not yet updated for tbc)
+	if T.BCC then C.UnitFrames.HealComm = false end
+	
 	-- Security for Nameplates
 	if IsAddOnLoaded("Plater") then
 		-- Force Tukui nameplates OFF if running plater, because causing issues

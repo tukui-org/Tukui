@@ -39,7 +39,7 @@ function UnitFrames:Player()
 	
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
-    Health.Background:SetAllPoints(Health)
+	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
@@ -70,31 +70,38 @@ function UnitFrames:Player()
 	Power.frequentUpdates = true
 	Power.colorPower = true
 
-	Power.Prediction = CreateFrame("StatusBar", nil, Power)
-	Power.Prediction:SetReverseFill(true)
-	Power.Prediction:SetPoint("TOP")
-	Power.Prediction:SetPoint("BOTTOM")
-	Power.Prediction:SetPoint("RIGHT", Power:GetStatusBarTexture(), "RIGHT")
-	Power.Prediction:SetWidth(250)
-	Power.Prediction:SetStatusBarTexture(PowerTexture)
-	Power.Prediction:SetStatusBarColor(1, 1, 1, .3)
+	if T.Retail then
+		local Prediction = CreateFrame("StatusBar", nil, Power)
+		Prediction:SetReverseFill(true)
+		Prediction:SetPoint("TOP")
+		Prediction:SetPoint("BOTTOM")
+		Prediction:SetPoint("RIGHT", Power:GetStatusBarTexture(), "RIGHT")
+		Prediction:SetWidth(250)
+		Prediction:SetStatusBarTexture(PowerTexture)
+		Prediction:SetStatusBarColor(1, 1, 1, .3)
+		
+		self.PowerPrediction = {}
+		self.PowerPrediction.mainBar = Prediction
 
-	Power.PostUpdate = UnitFrames.PostUpdatePower
+		local AdditionalPower = CreateFrame("StatusBar", self:GetName().."AdditionalPower", Health)
+		AdditionalPower:SetHeight(6)
+		AdditionalPower:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+		AdditionalPower:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+		AdditionalPower:SetStatusBarTexture(HealthTexture)
+		AdditionalPower:SetFrameLevel(Health:GetFrameLevel() + 1)
+		AdditionalPower:CreateBackdrop()
+		AdditionalPower:SetStatusBarColor(unpack(T.Colors.power.MANA))
+		AdditionalPower.Backdrop:SetOutside()
+
+		AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "BORDER")
+		AdditionalPower.Background:SetAllPoints(AdditionalPower)
+		AdditionalPower.Background:SetTexture(HealthTexture)
+		AdditionalPower.Background:SetColorTexture(T.Colors.power.MANA[1], T.Colors.power.MANA[2], T.Colors.power.MANA[3], C.UnitFrames.StatusBarBackgroundMultiplier / 100)
+		
+		self.AdditionalPower = AdditionalPower
+	end
 	
-	local AdditionalPower = CreateFrame("StatusBar", self:GetName().."AdditionalPower", Health)
-	AdditionalPower:SetHeight(6)
-	AdditionalPower:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
-	AdditionalPower:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
-	AdditionalPower:SetStatusBarTexture(HealthTexture)
-	AdditionalPower:SetFrameLevel(Health:GetFrameLevel() + 1)
-	AdditionalPower:CreateBackdrop()
-	AdditionalPower:SetStatusBarColor(unpack(T.Colors.power.MANA))
-	AdditionalPower.Backdrop:SetOutside()
-
-	AdditionalPower.Background = AdditionalPower:CreateTexture(nil, "BORDER")
-	AdditionalPower.Background:SetAllPoints(AdditionalPower)
-	AdditionalPower.Background:SetTexture(HealthTexture)
-	AdditionalPower.Background:SetColorTexture(T.Colors.power.MANA[1], T.Colors.power.MANA[2], T.Colors.power.MANA[3], C.UnitFrames.StatusBarBackgroundMultiplier / 100)
+	Power.PostUpdate = UnitFrames.PostUpdatePower
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", Panel, "LEFT", 4, 0)
@@ -189,6 +196,12 @@ function UnitFrames:Player()
 	Combat:SetSize(19, 19)
 	Combat:SetPoint("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
+	
+	local Status = Panel:CreateFontString(nil, "OVERLAY", nil, 1)
+	Status:SetFontObject(Font)
+	Status:SetPoint("CENTER", Panel, "CENTER", 0, 0)
+	Status:SetTextColor(0.69, 0.31, 0.31)
+	Status:Hide()
 
 	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	Leader:SetSize(14, 14)
@@ -419,6 +432,19 @@ function UnitFrames:Player()
 
 		T.Movers:RegisterFrame(ScrollingCombatText, "Player SCT")
 	end
+	
+	if T.BCC and C.UnitFrames.PowerTick then
+		local EnergyManaRegen = CreateFrame("StatusBar", nil, Power)
+
+		EnergyManaRegen:SetFrameLevel(Power:GetFrameLevel() + 3)
+		EnergyManaRegen:SetAllPoints()
+		EnergyManaRegen.Spark = EnergyManaRegen:CreateTexture(nil, "OVERLAY")
+
+		self.EnergyManaRegen = EnergyManaRegen
+	end
+
+	self:HookScript("OnEnter", UnitFrames.ShowWarMode)
+	self:HookScript("OnLeave", UnitFrames.ShowWarMode)
 
 	if C.UnitFrames.HealComm then
 		local myBar = CreateFrame("StatusBar", nil, Health)
@@ -430,24 +456,28 @@ function UnitFrames:Player()
 		myBar:SetPoint("TOP")
 		myBar:SetPoint("BOTTOM")
 		myBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		myBar:SetWidth(129)
+		myBar:SetWidth(250)
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
+		myBar:SetMinMaxValues(0, 1)
+		myBar:SetValue(0)
 
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
 		otherBar:SetPoint("TOP")
 		otherBar:SetPoint("BOTTOM")
-		otherBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		otherBar:SetWidth(129)
+		otherBar:SetPoint("LEFT", myBar:GetStatusBarTexture(), "RIGHT")
+		otherBar:SetWidth(250)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
-		absorbBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		absorbBar:SetWidth(129)
+		absorbBar:SetPoint("LEFT", otherBar:GetStatusBarTexture(), "RIGHT")
+		absorbBar:SetWidth(250)
 		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
+		absorbBar:SetMinMaxValues(0, 1)
+		absorbBar:SetValue(0)
 
 		local HealthPrediction = {
 			myBar = myBar,
@@ -457,6 +487,15 @@ function UnitFrames:Player()
 		}
 
 		self.HealthPrediction = HealthPrediction
+		
+		if T.BCC then
+			-- use libhealcomm lib instead, health prediction not available in bcc
+			
+			UnitFrames:RegisterHealComm(self)
+			
+			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+		end
 	end
 	
 	if (C.UnitFrames.TotemBar) then
@@ -527,7 +566,7 @@ function UnitFrames:Player()
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
-	self.AdditionalPower = AdditionalPower
+	
 	self.Name = Name
 	self.Power.bg = Power.Background
 	self.CombatIndicator = Combat
@@ -535,8 +574,6 @@ function UnitFrames:Player()
 	self.LeaderIndicator = Leader
 	self.MasterLooterIndicator = MasterLooter
 	self.RaidTargetIndicator = RaidIcon
-	self.PowerPrediction = {}
-	self.PowerPrediction.mainBar = Power.Prediction
 	self.RestingIndicator = RestingIndicator
 	
 	-- Enable smoothing bars animation?

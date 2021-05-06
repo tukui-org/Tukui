@@ -68,6 +68,9 @@ local Update = function(self, event)
 	end
 
 	local NewMoney = GetMoney()
+	
+	TukuiDatabase.Gold[MyRealm] = TukuiDatabase.Gold[MyRealm] or {}
+	TukuiDatabase.Gold[MyRealm][MyName] = TukuiDatabase.Gold[MyRealm][MyName] or NewMoney
 
 	local OldMoney = TukuiDatabase.Gold[MyRealm][MyName] or NewMoney
 

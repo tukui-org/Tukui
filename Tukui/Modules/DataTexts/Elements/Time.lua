@@ -42,6 +42,10 @@ local Update = function(self, Elapsed)
 end
 
 local OnEnter = function(self)
+	if not T.Retail then
+		return
+	end
+	
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
@@ -102,7 +106,11 @@ local OnMouseUp = function(button, click)
 			return
 		end
 		
-		GameTimeFrame_OnClick()
+		if T.Retail then
+			GameTimeFrame_OnClick()
+		else
+			Stopwatch_Toggle()
+		end
 	end
 end
 

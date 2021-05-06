@@ -29,7 +29,7 @@ function UnitFrames:Party()
 
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
-    Health.Background:SetAllPoints(Health)
+	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 	if C.Party.ShowHealthText then
@@ -126,24 +126,30 @@ function UnitFrames:Party()
 		myBar:SetPoint("TOP")
 		myBar:SetPoint("BOTTOM")
 		myBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		myBar:SetWidth(129)
+		myBar:SetWidth(180)
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
+		myBar:SetMinMaxValues(0, 1)
+		myBar:SetValue(0)
 
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
 		otherBar:SetPoint("TOP")
 		otherBar:SetPoint("BOTTOM")
-		otherBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		otherBar:SetWidth(129)
+		otherBar:SetPoint("LEFT", myBar:GetStatusBarTexture(), "RIGHT")
+		otherBar:SetWidth(180)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
+		otherBar:SetMinMaxValues(0, 1)
+		otherBar:SetValue(0)
 		
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
-		absorbBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		absorbBar:SetWidth(129)
+		absorbBar:SetPoint("LEFT", otherBar:GetStatusBarTexture(), "RIGHT")
+		absorbBar:SetWidth(180)
 		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
+		absorbBar:SetMinMaxValues(0, 1)
+		absorbBar:SetValue(0)
 
 		local HealthPrediction = {
 			myBar = myBar,
@@ -153,6 +159,15 @@ function UnitFrames:Party()
 		}
 
 		self.HealthPrediction = HealthPrediction
+		
+		if T.BCC then
+			-- use libhealcomm lib instead, health prediction not available in bcc
+			
+			UnitFrames:RegisterHealComm(self)
+			
+			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+		end
 	end
 
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
@@ -180,8 +195,13 @@ function UnitFrames:Party()
 	self.ReadyCheckIndicator = ReadyCheck
 	self.RaidTargetIndicator = RaidIcon
 	self.Range = Range
-	self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
 	self.Highlight = Highlight
+	
+	if T.Retail then
+		self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
+	else
+		self:Tag(Name, "[level] [Tukui:NameLong]")
+	end
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)

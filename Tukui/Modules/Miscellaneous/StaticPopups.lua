@@ -12,9 +12,12 @@ StaticPopups.Popups = {
 
 function StaticPopups:Skin()
 	local Name = self:GetName()
+	
+	if T.Retail then
+		_G[Name].Border:SetAlpha(0)
+	end
 
 	_G[Name]:StripTextures()
-	_G[Name].Border:SetAlpha(0)
 	_G[Name]:CreateBackdrop("Transparent")
 	_G[Name]:CreateShadow()
 	_G[Name.."Button1"]:SkinButton()

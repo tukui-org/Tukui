@@ -33,7 +33,7 @@ function UnitFrames:Raid()
 
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
-    Health.Background:SetAllPoints(Health)
+	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
@@ -164,24 +164,28 @@ function UnitFrames:Raid()
 		myBar:SetPoint("TOP")
 		myBar:SetPoint("BOTTOM")
 		myBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		myBar:SetWidth(129)
+		myBar:SetWidth(C.Raid.WidthSize)
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
+		myBar:SetMinMaxValues(0, 1)
+		myBar:SetValue(0)
 
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
 		otherBar:SetPoint("TOP")
 		otherBar:SetPoint("BOTTOM")
-		otherBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		otherBar:SetWidth(129)
+		otherBar:SetPoint("LEFT", myBar:GetStatusBarTexture(), "RIGHT")
+		otherBar:SetWidth(C.Raid.WidthSize)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
-		absorbBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		absorbBar:SetWidth(129)
+		absorbBar:SetPoint("LEFT", otherBar:GetStatusBarTexture(), "RIGHT")
+		absorbBar:SetWidth(C.Raid.WidthSize)
 		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
+		absorbBar:SetMinMaxValues(0, 1)
+		absorbBar:SetValue(0)
 
 		local HealthPrediction = {
 			myBar = myBar,
@@ -191,18 +195,31 @@ function UnitFrames:Raid()
 		}
 
 		self.HealthPrediction = HealthPrediction
+		
+		if T.BCC then
+			UnitFrames:RegisterHealComm(self)
+			
+			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+		end
 	end
 	
-    local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
-    ResurrectIndicator:SetSize(24, 24)
-    ResurrectIndicator:SetPoint("CENTER", Health)
+	if T.Retail then
+		local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
+		ResurrectIndicator:SetSize(24, 24)
+		ResurrectIndicator:SetPoint("CENTER", Health)
+		
+		self.Highlight = Highlight
 
-	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
-	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
-	Highlight:SetOutside(self, C.Raid.HighlightSize, C.Raid.HighlightSize)
-	Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
-	Highlight:SetFrameLevel(0)
-	Highlight:Hide()
+		local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
+		Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
+		Highlight:SetOutside(self, C.Raid.HighlightSize, C.Raid.HighlightSize)
+		Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
+		Highlight:SetFrameLevel(0)
+		Highlight:Hide()
+		
+		self.ResurrectIndicator = ResurrectIndicator
+	end
 	
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
@@ -210,7 +227,6 @@ function UnitFrames:Raid()
 		Power.smoothing = true
 	end
 
-	self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
 	self:Tag(Health.Value, C.Raid.HealthTag.Value)
 	self.Health = Health
 	self.Health.bg = Health.Background
@@ -221,8 +237,12 @@ function UnitFrames:Raid()
 	self.ReadyCheckIndicator = ReadyCheck
 	self.Range = Range
 	self.RaidTargetIndicator = RaidIcon
-	self.Highlight = Highlight
-	self.ResurrectIndicator = ResurrectIndicator
+	
+	if T.Retail then
+		self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
+	else
+		self:Tag(Name, "[Tukui:NameShort]")
+	end
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)

@@ -37,7 +37,11 @@ local OnMouseDown = function(self, button)
 			return
 		end
 		
-		ToggleGuildFrame()
+		if T.Retail then
+			ToggleGuildFrame()
+		else
+			ToggleFriendsFrame(3)
+		end
 	end
 	
 	if button == "RightButton" and IsInGuild() then

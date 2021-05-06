@@ -91,11 +91,11 @@ local DisplayBattleNetFriendsOnTooltip = function()
 		local Friend = BattleNetTable[i]
 		
 		if Friend then
-			local Account = Friend.gameAccountInfo
-			local IsOnline = Account.isOnline
+			local Account = T.Retail and Friend.gameAccountInfo
+			local IsOnline = T.Retail and Account.isOnline or Friend.isOnline
 			
 			if IsOnline then
-				local Game = Games[Account.clientProgram]
+				local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client]
 				
 				if Game ~= "Battle.net Desktop App" and Game ~= "Battle.net Mobile App" then
 					local BattleTag = RemoveTagNumber(Friend.battleTag)
@@ -103,15 +103,15 @@ local DisplayBattleNetFriendsOnTooltip = function()
 					local Right = "|cffffffff"..Game.."|r"
 					
 					if Game == "World of Warcraft" then
-						local LevelColor = Account.characterLevel and GetQuestDifficultyColor(Account.characterLevel) or {1, 1, 1}
-						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
+						local LevelColor = T.Retail and Account.characterLevel and GetQuestDifficultyColor(Account.characterLevel) or Friend.characterLevel and GetQuestDifficultyColor(Friend.characterLevel) or {1, 1, 1}
+						local LevelHexColor = T.Retail and T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b) or LevelHexColor..Friend.characterLevel.."|r"
 						local Level = LevelHexColor..Account.characterLevel.."|r"
-						local Class = EnglishClass(Account.className)
+						local Class = T.Retail and EnglishClass(Account.className) or EnglishClass(Friend.className)
 						local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
-						local Name = ClassHexColor..Account.characterName.."|r"
+						local Name = T.Retail and ClassHexColor..Account.characterName.."|r" or ClassHexColor..Friend.characterName.."|r"
 						
 						-- WoW Classic Detected
-						if Account.wowProjectID == 2 then
+						if T.Retail and Account.wowProjectID == 2 or Friend.wowProjectID then
 							Right = "|cffffffff"..Game.." Classic|r"
 						end
 						
@@ -129,51 +129,123 @@ local UpdateBattleNetFriendsCache = function(total)
 	-- Reset battle.net cache
 	wipe(BattleNetTable)
 	
-	for i = 1, total do
-		local Infos = C_BattleNet.GetFriendAccountInfo(i)
-		
-		--[[
-			bnetAccountID, number, Unique numeric identifier for the friend's Battle.net account during this session
-			accountName, string, A protected string representing the friend's full name or BattleTag name
-			battleTag, string, The friend's BattleTag (e.g., "Nickname#0001")
-			isFriend, boolean	
-			isBattleTagFriend, boolean, Whether or not the friend is known by their BattleTag
-			lastOnlineTime, number, The number of seconds elapsed since this friend was last online (from the epoch date of January 1, 1970). Returns nil if currently online.
-			isAFK, boolean, Whether or not the friend is flagged as Away
-			isDND, boolean, Whether or not the friend is flagged as Busy
-			isFavorite, boolean, Whether or not the friend is marked as a favorite by you
-			appearOffline, boolean	
-			customMessage, string, The Battle.net broadcast message
-			customMessageTime, number, The number of seconds elapsed since the current broadcast message was sent
-			note, string, The contents of the player's note about this friend
-			rafLinkType, Enum.RafLinkType, Enum.RafLinkType
-			gameAccountInfo, BNetGameAccountInfo
-		]]
-		
-		--[[
-			gameAccountID, number, Unique numeric identifier for the friend's Battle.net game account
-			clientProgram, string, BNET_CLIENT
-			isOnline, boolean
-			isGameBusy, boolean
-			isGameAFK, boolean
-			wowProjectID, number
-			characterName, string, The name of the logged in toon/character
-			realmName, string, The name of the logged in realm
-			realmDisplayName, string	
-			realmID	number, The ID for the logged in realm
-			factionName, string, The englishFaction name (i.e., "Alliance" or "Horde")
-			raceName, string, The localized race name (e.g., "Blood Elf")
-			className, string, The localized class name (e.g., "Death Knight")
-			areaName, string, The localized zone name (e.g., "The Undercity")
-			characterLevel, number, The current level (e.g., "90")
-			richPresence, string, For WoW, returns "zoneName - realmName". For StarCraft 2 and Diablo 3, returns the location or activity the player is currently engaged in.
-			playerGuid, string, A unique numeric identifier for the friend's character during this session.
-			isWowMobile, boolean	
-			canSummon, boolean	
-			hasFocus, boolean, Whether or not this toon is the one currently being displayed in Blizzard's FriendFrame
-		]]
-		
-		BattleNetTable[i] = Infos
+	if T.Retail then
+		for i = 1, total do
+			local Infos = C_BattleNet.GetFriendAccountInfo(i)
+
+			--[[
+				bnetAccountID, number, Unique numeric identifier for the friend's Battle.net account during this session
+				accountName, string, A protected string representing the friend's full name or BattleTag name
+				battleTag, string, The friend's BattleTag (e.g., "Nickname#0001")
+				isFriend, boolean	
+				isBattleTagFriend, boolean, Whether or not the friend is known by their BattleTag
+				lastOnlineTime, number, The number of seconds elapsed since this friend was last online (from the epoch date of January 1, 1970). Returns nil if currently online.
+				isAFK, boolean, Whether or not the friend is flagged as Away
+				isDND, boolean, Whether or not the friend is flagged as Busy
+				isFavorite, boolean, Whether or not the friend is marked as a favorite by you
+				appearOffline, boolean	
+				customMessage, string, The Battle.net broadcast message
+				customMessageTime, number, The number of seconds elapsed since the current broadcast message was sent
+				note, string, The contents of the player's note about this friend
+				rafLinkType, Enum.RafLinkType, Enum.RafLinkType
+				gameAccountInfo, BNetGameAccountInfo
+			]]
+
+			--[[
+				gameAccountID, number, Unique numeric identifier for the friend's Battle.net game account
+				clientProgram, string, BNET_CLIENT
+				isOnline, boolean
+				isGameBusy, boolean
+				isGameAFK, boolean
+				wowProjectID, number
+				characterName, string, The name of the logged in toon/character
+				realmName, string, The name of the logged in realm
+				realmDisplayName, string	
+				realmID	number, The ID for the logged in realm
+				factionName, string, The englishFaction name (i.e., "Alliance" or "Horde")
+				raceName, string, The localized race name (e.g., "Blood Elf")
+				className, string, The localized class name (e.g., "Death Knight")
+				areaName, string, The localized zone name (e.g., "The Undercity")
+				characterLevel, number, The current level (e.g., "90")
+				richPresence, string, For WoW, returns "zoneName - realmName". For StarCraft 2 and Diablo 3, returns the location or activity the player is currently engaged in.
+				playerGuid, string, A unique numeric identifier for the friend's character during this session.
+				isWowMobile, boolean	
+				canSummon, boolean	
+				hasFocus, boolean, Whether or not this toon is the one currently being displayed in Blizzard's FriendFrame
+			]]
+
+			BattleNetTable[i] = Infos
+		end
+	end
+	
+	if T.BCC then
+		for i = 1, total do
+			local bnetIDAccount, accountName, battleTag, isBattleTag, characterName, bnetIDGameAccount, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR, isReferAFriend, canSummonFriend = BNGetFriendInfo(i)
+			local realmName, realmID, faction, zoneName, gameText, isGameAFK, isGameBusy, guid, wowProjectID
+
+			if isOnline then
+				_, _, _, realmName, realmID, factionName, _, className, _, zoneName, characterLevel, gameText, _, _, _, _, _, isGameAFK, isGameBusy, guid, wowProjectID = BNGetGameAccountInfo(bnetIDGameAccount)
+			end
+
+			--[[
+				[1]=true,
+				[2]="Luckyone",
+				[3]="WoW",
+				[4]="ClassicBetaPvE",
+				[5]=4618,
+				[6]="Horde",
+				[7]="Troll",	
+				[8]="Hunter",
+				[9]="",
+				[10]="Hellfire Peninsula",
+				[11]="70",
+				[12]="WoW Classic - Classic Beta PvE",
+				[13]="",
+				[14]=0,
+				[15]=true,
+				[16]=19,
+				[17]=17,
+				[18]=true,
+				[19]=false,
+				[20]="Player-4618-000E2B02",
+				[21]=2,
+				[22]="Classic Beta PvE"
+			]]
+
+			BattleNetTable[i] = {
+				-- BNET --
+				["bnetIDAccount"] = bnetIDAccount,
+				["accountName"] = accountName,
+				["battleTag"] = battleTag,
+				["isBattleTag"] = isBattleTag,
+				["characterName"] = characterName,
+				["bnetIDGameAccount"] = bnetIDGameAccount,
+				["client"] = client,
+				["isOnline"] = isOnline,
+				["lastOnline"] = lastOnline,
+				["isAFK"] = isAFK,
+				["isDND"] = isDND,
+				["messageText"] = messageText,
+				["noteText"] = noteText,
+				["isRIDFriend"] = isRIDFriend,
+				["messageTime"] = messageTime,
+				["canSoR"] = canSoR,
+				["isReferAFriend"] = isReferAFriend,
+				["canSummonFriend"] = canSummonFriend,
+				-- WoW --
+				["realmName"] = realmName,
+				["realmID"] = realmID,
+				["factionName"] = factionName,
+				["characterLevel"] = characterLevel,
+				["className"] = className,
+				["zoneName"] = zoneName,
+				["gameText"] = gameText,
+				["isGameAFK"] = isGameAFK,
+				["isGameBusy"] = isGameBusy,
+				["guid"] = guid,
+				["wowProjectID"] = wowProjectID,
+			}
+		end
 	end
 end
 
@@ -207,20 +279,6 @@ local UpdateFriendsCache = function(total)
 	
 	for i = 1, total do
 		local Infos = C_FriendList.GetFriendInfoByIndex(i)
-		
-		--[[
-			connected, boolean, If the friend is online
-			name, string, Friend's name
-			className, string, Friend's class, or "Unknown" (if offline)
-			area, string, Friend's current location, or "Unknown" (if offline)
-			notes, string, Friend's note
-			guid, string, Friend's GUID, example: "Player-1096-085DE703"
-			level, number, Friend's level, or 0 (if offline)
-			dnd, boolean, If the friend's current status flag is DND
-			afk, boolean, If the friend's current status flag is AFK
-			rafLinkType, Enum.RafLinkType	
-			mobile, boolean	
-		]]
 		
 		FriendsTable[i] = Infos
 	end
@@ -311,14 +369,14 @@ local OnMouseDown = function(self, button)
 			local Friend = BattleNetTable[i]
 			
 			if Friend then
-				local Account = Friend.gameAccountInfo
-				local IsOnline = Account.isOnline
-				local Faction = Account.factionName
+				local Account = T.Retail and Friend.gameAccountInfo
+				local IsOnline = T.Retail and Account.isOnline or Friend.isOnline
+				local Faction = T.Retail and Account.factionName or Friend.factionName
 				
 				if IsOnline then
 					WhisperID = WhisperID + 1
 					
-					local Game = Games[Account.clientProgram]
+					local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client]
 					local BattleTag = RemoveTagNumber(Friend.battleTag)
 					
 					-- Adding Battle.net Whisper
@@ -332,15 +390,15 @@ local OnMouseDown = function(self, button)
 					
 					-- Adding Battle.net Invites
 					if Game == "World of Warcraft" and UnitFactionGroup("player") == Faction then
-						local ProjectID = Account.wowProjectID
+						local ProjectID = T.Retail and Account.wowProjectID or Friend.wowProjectID
 						
 						if ProjectID == WOW_PROJECT_ID then
-							local AccountID = Account.gameAccountID
-							local Name = Account.characterName
-							local Level = Account.characterLevel
+							local AccountID = T.Retail and Account.gameAccountID or Friend.bnetIDAccount
+							local Name = T.Retail and Account.characterName or Friend.characterName
+							local Level = T.Retail and Account.characterLevel or Friend.characterLevel
 							local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
-							local Class = EnglishClass(Account.className)
+							local Class = T.Retail and EnglishClass(Account.className) or EnglishClass(Friend.className)
 							local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 							
 							InviteID = InviteID + 1

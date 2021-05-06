@@ -53,15 +53,17 @@ function ActionBars:DisableBlizzard()
 		ActionButton_UpdateRangeIndicator = Noop
 	end
 	
-	if not C.ActionBars.AutoAddNewSpell then
-		IconIntroTracker:UnregisterAllEvents()
-		
-		RegisterStateDriver(IconIntroTracker, "visibility", "hide")
+	if T.Retail then
+		if not C.ActionBars.AutoAddNewSpell then
+			IconIntroTracker:UnregisterAllEvents()
+
+			RegisterStateDriver(IconIntroTracker, "visibility", "hide")
+		end
+
+		-- Micro Menu
+		MicroButtonAndBagsBar:ClearAllPoints()
+		MicroButtonAndBagsBar:SetPoint("TOP", UIParent, "TOP", 0, 200)
 	end
-	
-	-- Micro Menu
-	MicroButtonAndBagsBar:ClearAllPoints()
-	MicroButtonAndBagsBar:SetPoint("TOP", UIParent, "TOP", 0, 200)
 end
 
 function ActionBars:MovePetBar()
@@ -370,11 +372,11 @@ function ActionBars:SetHotKeyText()
 	Text = Replace(Text, "(s%-)", "|cffff8000s|r")
 	Text = Replace(Text, "(a%-)", "|cffff8000a|r")
 	Text = Replace(Text, "(c%-)", "|cffff8000c|r")
-	Text = Replace(Text, KEY_BUTTON3, "M3")
-	Text = Replace(Text, KEY_BUTTON4, "M4")
-	Text = Replace(Text, KEY_BUTTON5, "M5")
-	Text = Replace(Text, KEY_MOUSEWHEELUP, "MU")
-	Text = Replace(Text, KEY_MOUSEWHEELDOWN, "MD")
+	Text = Replace(Text, KEY_BUTTON3, "m3")
+	Text = Replace(Text, KEY_BUTTON4, "m4")
+	Text = Replace(Text, KEY_BUTTON5, "m5")
+	Text = Replace(Text, KEY_MOUSEWHEELUP, "mU")
+	Text = Replace(Text, KEY_MOUSEWHEELDOWN, "mD")
 	Text = Replace(Text, KEY_NUMPAD0, "N0")
 	Text = Replace(Text, KEY_NUMPAD1, "N1")
 	Text = Replace(Text, KEY_NUMPAD2, "N2")
@@ -408,18 +410,48 @@ function ActionBars:SetHotKeyText()
 	HotKey:SetVertexColor(1, 1, 1)
 end
 
+function ActionBars:UpdateButton()
+	local HotKey = self.HotKey
+	local Action = self.action
+	
+	if HotKey then
+		HotKey:SetVertexColor(1, 1, 1)
+	end
+	
+	if C.ActionBars.EquipBorder then
+		if (IsEquippedAction(Action)) then
+			if self.Backdrop then
+				self.Backdrop:SetBorderColor(.08, .70, 0)
+			end
+		else
+			if self.Backdrop then
+				self.Backdrop:SetBorderColor(unpack(C.General.BorderColor))
+			end
+		end
+	end
+end
+
 function ActionBars:AddHooks()
-	hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
-	hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
-	hooksecurefunc("ActionButton_UpdateRangeIndicator", ActionBars.RangeUpdate)
+	if T.Retail then
+		hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
+		hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
+	else
+		hooksecurefunc("ActionButton_Update", self.UpdateButton)
+	end
+	
+	hooksecurefunc("ActionButton_UpdateRangeIndicator", self.RangeUpdate)
 	
 	if C.ActionBars.HotKey then
+		if T.BCC then
+			hooksecurefunc("ActionButton_UpdateHotkeys", self.SetHotKeyText)
+		end
+		
 		hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
 	end
 	
 	if C.ActionBars.ProcAnim then
-		hooksecurefunc("ActionButton_ShowOverlayGlow", ActionBars.StartHighlight)
-		hooksecurefunc("ActionButton_HideOverlayGlow", ActionBars.StopHightlight)
+		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
+		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
 	end
 end
 
@@ -438,6 +470,9 @@ function ActionBars:Enable()
 	self:CreateBar5()
 	self:CreatePetBar()
 	self:CreateStanceBar()
-	self:SetupExtraButton()
 	self:AddHooks()
+	
+	if T.Retail then
+		self:SetupExtraButton()
+	end
 end

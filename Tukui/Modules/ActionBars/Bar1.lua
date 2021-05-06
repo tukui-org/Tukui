@@ -79,8 +79,12 @@ function ActionBars:CreateBar1()
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-	ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
-	ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+	
+	if T.Retail then
+		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+		ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
+	end
+	
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
 			local NumPerRows = ButtonsPerRow
@@ -94,7 +98,12 @@ function ActionBars:CreateBar1()
 				Button:ClearAllPoints()
 				Button:SetParent(self)
 				Button:SetAttribute("showgrid", 1)
-				Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+					
+				if T.Retail then
+					Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+				else
+					ActionButton_ShowGrid(Button)
+				end
 					
 				ActionBars:SkinButton(Button)
 

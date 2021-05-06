@@ -362,7 +362,7 @@ function Tooltip:ResetBorderColor()
 		HealthBar.Backdrop:SetBorderColor(0, 1, 0)
 		HealthBar.Text:Hide()
 		
-		HealthBar:SetStatusBarColor(0, 1, 0)
+		HealthBar:SetStatusBarColor(unpack(T.Colors.reaction[8]))
 	end
 end
 
@@ -421,7 +421,9 @@ function Tooltip:Enable()
 	HealthBar:SetStatusBarColor(unpack(T.Colors.reaction[8]))
 	HealthBar:Hide()
 	
-	ItemRefTooltip.CloseButton:SkinCloseButton()
+	if T.Retail then
+		ItemRefTooltip.CloseButton:SkinCloseButton()
+	end
 	
 	T.Movers:RegisterFrame(self.Anchor, "Tooltip")
 end

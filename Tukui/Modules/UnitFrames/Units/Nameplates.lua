@@ -32,7 +32,7 @@ function UnitFrames:Nameplates()
 
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
-    Health.Background:SetAllPoints(Health)
+	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
@@ -156,7 +156,7 @@ function UnitFrames:Nameplates()
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
 	
-	if C.NamePlates.QuestIcon then
+	if T.Retail and C.NamePlates.QuestIcon then
 		local QuestIcon = self:CreateTexture(nil, "OVERLAY")
 		QuestIcon:SetSize(C.NamePlates.Height, C.NamePlates.Height)
 		QuestIcon:SetPoint("LEFT", self, "RIGHT", 4, 0)

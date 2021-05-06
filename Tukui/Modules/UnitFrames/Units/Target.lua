@@ -71,21 +71,26 @@ function UnitFrames:Target()
 	Power.frequentUpdates = true
 	Power.colorPower = true
 	
-	local AltPowerBar = CreateFrame("StatusBar", self:GetName().."AltPowerBar", Health)
-	AltPowerBar:SetHeight(6)
-	AltPowerBar:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
-	AltPowerBar:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
-	AltPowerBar:SetStatusBarTexture(HealthTexture)
-	AltPowerBar:SetFrameLevel(Health:GetFrameLevel() + 1)
-	AltPowerBar:CreateBackdrop()
-	AltPowerBar.Backdrop:SetOutside()
+	if T.Retail then
+		local AltPowerBar = CreateFrame("StatusBar", self:GetName().."AltPowerBar", Health)
+		AltPowerBar:SetHeight(6)
+		AltPowerBar:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+		AltPowerBar:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+		AltPowerBar:SetStatusBarTexture(HealthTexture)
+		AltPowerBar:SetFrameLevel(Health:GetFrameLevel() + 1)
+		AltPowerBar:CreateBackdrop()
+		AltPowerBar.Backdrop:SetOutside()
 
-	AltPowerBar.Background = AltPowerBar:CreateTexture(nil, "BORDER")
-	AltPowerBar.Background:SetAllPoints(AltPowerBar)
-	AltPowerBar.Background:SetTexture(HealthTexture)
-	AltPowerBar.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
-	
-	AltPowerBar.colorSmooth = true
+		AltPowerBar.Background = AltPowerBar:CreateTexture(nil, "BORDER")
+		AltPowerBar.Background:SetAllPoints(AltPowerBar)
+		AltPowerBar.Background:SetTexture(HealthTexture)
+		AltPowerBar.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+
+		AltPowerBar.colorSmooth = true
+		
+		self.AlternativePower = AltPowerBar
+		self.AlternativePower.bg = AltPowerBar.Background
+	end
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("LEFT", Panel, "LEFT", 4, 0)
@@ -304,24 +309,30 @@ function UnitFrames:Target()
 		myBar:SetPoint("TOP")
 		myBar:SetPoint("BOTTOM")
 		myBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		myBar:SetWidth(129)
+		myBar:SetWidth(250)
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
+		myBar:SetMinMaxValues(0, 1)
+		myBar:SetValue(0)
 
 		otherBar:SetFrameLevel(Health:GetFrameLevel())
 		otherBar:SetPoint("TOP")
 		otherBar:SetPoint("BOTTOM")
-		otherBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		otherBar:SetWidth(129)
+		otherBar:SetPoint("LEFT", myBar:GetStatusBarTexture(), "RIGHT")
+		otherBar:SetWidth(250)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
+		otherBar:SetMinMaxValues(0, 1)
+		otherBar:SetValue(0)
 		
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
-		absorbBar:SetPoint("LEFT", Health:GetStatusBarTexture(), "RIGHT")
-		absorbBar:SetWidth(129)
+		absorbBar:SetPoint("LEFT", otherBar:GetStatusBarTexture(), "RIGHT")
+		absorbBar:SetWidth(250)
 		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
+		absorbBar:SetMinMaxValues(0, 1)
+		absorbBar:SetValue(0)
 
 		local HealthPrediction = {
 			myBar = myBar,
@@ -331,6 +342,15 @@ function UnitFrames:Target()
 		}
 
 		self.HealthPrediction = HealthPrediction
+		
+		if T.BCC then
+			-- use libhealcomm lib instead, health prediction not available in bcc
+			
+			UnitFrames:RegisterHealComm(self)
+			
+			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+		end
 	end
 	
 	-- Enable smoothing bars animation?
@@ -347,7 +367,5 @@ function UnitFrames:Target()
 	self.Health.bg = Health.Background
 	self.Power = Power
 	self.Power.bg = Power.Background
-	self.AlternativePower = AltPowerBar
-	self.AlternativePower.bg = AltPowerBar.Background
 	self.RaidTargetIndicator = RaidIcon
 end

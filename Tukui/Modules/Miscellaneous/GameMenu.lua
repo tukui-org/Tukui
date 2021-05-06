@@ -49,14 +49,19 @@ function GameMenu:Enable()
 	self:CreateTukuiMenuButton()
 
 	if not AddOnSkins then
-		Header:StripTextures()
-		
-		Header:ClearAllPoints()
-		Header:SetPoint("TOP", Menu, 0, 7)
+		if T.Retail then
+			Header:StripTextures()
+
+			Header:ClearAllPoints()
+			Header:SetPoint("TOP", Menu, 0, 7)
+			
+			Menu.Border:StripTextures()
+		else
+			Menu:StripTextures()
+		end
 
 		Menu:CreateBackdrop("Transparent")
 		Menu:CreateShadow()
-		Menu.Border:StripTextures()
 
 		for _, Button in pairs({Menu:GetChildren()}) do
 			if Button.IsObjectType and Button:IsObjectType("Button") then

@@ -5,7 +5,7 @@ local UIWidgets = CreateFrame("Frame")
 
 function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	local Bar = self.Bar
-	local Torghast = IsInJailersTower()
+	local Torghast = IsInJailersTower and IsInJailersTower() or false
 	
 	if Bar and not Bar.IsSkinned then
 		Bar.BGLeft:SetAlpha(0)

@@ -27,7 +27,7 @@ function UnitFrames:Arena()
 
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
-    Health.Background:SetAllPoints(Health)
+	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 	Health.colorDisconnected = true
@@ -162,7 +162,6 @@ function UnitFrames:Arena()
 	
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 
-	self:Tag(Name, "[raidcolor][Tukui:NameLong] [arenaspec]")
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
@@ -170,4 +169,10 @@ function UnitFrames:Arena()
 	self.Name = Name
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
+	
+	if T.Retail then
+		self:Tag(Name, "[raidcolor][Tukui:NameLong] [arenaspec]")
+	else
+		self:Tag(Name, "[raidcolor][Tukui:NameLong]")
+	end
 end

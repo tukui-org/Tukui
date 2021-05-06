@@ -8,7 +8,7 @@ if (Class ~= "PRIEST") then
 end
 
 UnitFrames.AddClassFeatures["PRIEST"] = function(self)
-	if not C.UnitFrames.ClassBar then
+	if not T.Retail or not C.UnitFrames.ClassBar then
 		return
 	end
 	

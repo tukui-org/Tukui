@@ -4,6 +4,23 @@ local DataText = T["DataTexts"]
 local format = format
 local ClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
 
+local LeftTexts = {
+	"PlayerStatFrameLeft1",
+	"PlayerStatFrameLeft2",
+	"PlayerStatFrameLeft3",
+	"PlayerStatFrameLeft4",
+	"PlayerStatFrameLeft5",
+	"PlayerStatFrameLeft6",
+}
+local RightTexts = {
+	"PlayerStatFrameRight1",
+	"PlayerStatFrameRight2",
+	"PlayerStatFrameRight3",
+	"PlayerStatFrameRight4",
+	"PlayerStatFrameRight5",
+	"PlayerStatFrameRight6",
+}
+
 local Update = function(self)
 	local Total = 0
 	local Current, Max
@@ -28,46 +45,106 @@ local OnEnter = function(self)
 
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
+	
+	if T.Retail then
+		local Objects = CharacterStatsPane.statsFramePool.activeObjects
 
-	local Objects = CharacterStatsPane.statsFramePool.activeObjects
+		-- Sort attributes
+		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r", T.MyRealm)
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine("|CFFFFFFFF"..PET_BATTLE_STATS_LABEL.."|r")
+		GameTooltip:AddDoubleLine("|CF00FFF00"..LEVEL.."|r", UnitLevel("player"))
+		GameTooltip:AddDoubleLine("|CF00FFF00"..ITEM_UPGRADE_STAT_AVERAGE_ITEM_LEVEL.."|r", GetAverageItemLevel())
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ATTRIBUTES.."|r")
 
-	-- Sort attributes
-	GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r", T.MyRealm)
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("|CFFFFFFFF"..PET_BATTLE_STATS_LABEL.."|r")
-	GameTooltip:AddDoubleLine("|CF00FFF00"..LEVEL.."|r", UnitLevel("player"))
-	GameTooltip:AddDoubleLine("|CF00FFF00"..ITEM_UPGRADE_STAT_AVERAGE_ITEM_LEVEL.."|r", GetAverageItemLevel())
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ATTRIBUTES.."|r")
-
-	for Table in pairs(Objects) do
-		local Label = Table.Label:GetText()
-		local Value = Table.Value:GetText()
-		local Percent = string.find(Value, "%%")
+		for Table in pairs(Objects) do
+			local Label = Table.Label:GetText()
+			local Value = Table.Value:GetText()
+			local Percent = string.find(Value, "%%")
 
 
-		if not Percent then
-			GameTooltip:AddDoubleLine("|CF00FFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+			if not Percent then
+				GameTooltip:AddDoubleLine("|CF00FFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+			end
+		end
+
+		-- Sort enhancements
+		GameTooltip:AddLine(" ")
+		GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ENHANCEMENTS.."|r")
+
+		for Table in pairs(Objects) do
+			local Label = Table.Label:GetText()
+			local Value = Table.Value:GetText()
+			local Percent = string.find(Value, "%%")
+
+			if Percent then
+				GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+			end
 		end
 	end
+	
+	if T.BCC then
+		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
+		GameTooltip:AddLine(" ")
 
-	-- Sort enhancements
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("|CFFFFFFFF"..STAT_CATEGORY_ENHANCEMENTS.."|r")
+		-- Display left stats
+		for Table, Frame in pairs(LeftTexts) do
+			local Name = _G[Frame.."Label"]
+			local Value = _G[Frame.."StatText"]
+			local Tooltip = _G[Frame].tooltip2
+			local StatName = "|cffff8000"..Name:GetText().."|r"
+			local StatValue = "|cffffffff"..Value:GetText().."|r"
 
-	for Table in pairs(Objects) do
-		local Label = Table.Label:GetText()
-		local Value = Table.Value:GetText()
-		local Percent = string.find(Value, "%%")
+			if StatName and StatValue then
+				if IsShiftKeyDown() then
+					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+				else
+					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+				end
 
-		if Percent then
-			GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
+				if Tooltip and IsShiftKeyDown() then
+					-- Remove double enter, for gaining tooltip space
+					Tooltip = string.gsub(Tooltip, "\n\n", " ")
+
+					GameTooltip:AddLine(Tooltip, .75, .75, .75)
+					GameTooltip:AddLine(" ")
+				end
+			end
+		end
+
+		-- Display right stats
+		for Table, Frame in pairs(RightTexts) do
+			local Name = _G[Frame.."Label"]
+			local Value = _G[Frame.."StatText"]
+			local Tooltip = _G[Frame].tooltip2
+			local StatName = "|cffff8000"..Name:GetText().."|r"
+			local StatValue = "|cffffffff"..Value:GetText().."|r"
+
+			if StatName and StatValue then
+				if IsShiftKeyDown() then
+					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+				else
+					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+				end
+
+				if Tooltip and IsShiftKeyDown() then
+					-- Remove double enter, for gaining tooltip space
+					Tooltip = string.gsub(Tooltip, "\n\n", "\n")
+
+					GameTooltip:AddLine(Tooltip, .75, .75, .75)
+					GameTooltip:AddLine(" ")
+				end
+			end
+		end
+
+		if not IsShiftKeyDown() then
+			GameTooltip:AddLine(" ")
 		end
 	end
-
+	
 	-- Display durability
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("|CFFFFFFFF"..DURABILITY.."|r ("..floor(L.DataText.Slots[1][3] * 100).."%)")
+	GameTooltip:AddDoubleLine("|CFFFF8000"..DURABILITY..":|r", floor(L.DataText.Slots[1][3] * 100).."%")
 
 	for i = 1, 11 do
 		if (L.DataText.Slots[i][3] ~= 1000) then
@@ -76,7 +153,7 @@ local OnEnter = function(self)
 			Green = L.DataText.Slots[i][3] * 2
 			Red = 1 - Green
 
-			GameTooltip:AddDoubleLine(L.DataText.Slots[i][2]..":", floor(L.DataText.Slots[i][3] * 100).."%", Red + 1, Green, 0, Red + 1, Green, 0)
+			GameTooltip:AddDoubleLine(L.DataText.Slots[i][2]..":", floor(L.DataText.Slots[i][3] * 100).."%", .75, .75, .75, Red + 1, Green, 0)
 		end
 	end
 

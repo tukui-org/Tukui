@@ -37,7 +37,10 @@ function ActionBars:CreateBar5()
 
 	MultiBarLeft:SetShown(true)
 	MultiBarLeft:SetParent(ActionBar5)
-	MultiBarLeft.QuickKeybindGlow:SetParent(T.Hider)
+	
+	if T.Retail then
+		MultiBarLeft.QuickKeybindGlow:SetParent(T.Hider)
+	end
 	
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["MultiBarLeftButton1"]

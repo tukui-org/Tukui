@@ -96,9 +96,12 @@ function Loot:SkinStandardLootFrame()
 	LootFrameCloseButton:StripTextures()
 
 	LootFrame:StripTexts()
-	LootFrameInset.NineSlice:SetAlpha(0)
-	LootFrame.NineSlice:SetAlpha(0)
 	LootFrame.TitleBg:SetAlpha(0)
+	
+	if T.Retail then
+		LootFrameInset.NineSlice:SetAlpha(0)
+		LootFrame.NineSlice:SetAlpha(0)
+	end
 end
 
 function Loot:SkinStandardLootFrameButtons(i)
@@ -123,15 +126,19 @@ function Loot:SkinStandardLootFrameButtons(i)
 				Icon:SetTexCoord(unpack(T.IconCoord))
 				Icon:SetInside()
 				
-				Quest:SetAlpha(0)
+				if T.Retail then
+					Quest:SetAlpha(0)
+				end
 
 				Button.IsSkinned = true
 			end
 			
-			if Quest:IsShown() then
-				Button.Backdrop:SetBorderColor(1, 1, 0)
-			else
-				Button.Backdrop:SetBorderColor(Color.r, Color.g, Color.b)
+			if T.Retail then
+				if Quest:IsShown() then
+					Button.Backdrop:SetBorderColor(1, 1, 0)
+				else
+					Button.Backdrop:SetBorderColor(Color.r, Color.g, Color.b)
+				end
 			end
 		end
 	end

@@ -18,8 +18,8 @@ function Engine:unpack()
 end
 
 Engine[1].Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-Engine[1].BCC = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-Engine[1].Classic = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+Engine[1].BCC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+Engine[1].Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 Engine[1].WindowedMode = Windowed
 Engine[1].FullscreenMode = Fullscreen
 Engine[1].Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")

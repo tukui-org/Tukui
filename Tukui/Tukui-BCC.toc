@@ -142,8 +142,8 @@ Modules\ActionBars\BarStance.lua
 
 Modules\Cooldowns\Cooldowns.lua
 
-Modules\Miscellaneous\Alerts.lua
 Modules\Miscellaneous\AFK.lua
+Modules\Miscellaneous\Alerts.lua
 Modules\Miscellaneous\DropDown.lua
 Modules\Miscellaneous\Durability.lua
 Modules\Miscellaneous\Errors.lua

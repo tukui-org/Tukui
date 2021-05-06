@@ -128,25 +128,12 @@ function Bags:SkinBagButton()
 end
 
 function Bags:HideBlizzard()
-	local TokenFrame = _G["BackpackTokenFrame"]
-	local Inset = _G["BankFrameMoneyFrameInset"]
-	local Border = _G["BankFrameMoneyFrameBorder"]
-	local BankClose = _G["BankFrameCloseButton"]
 	local BankPortraitTexture = _G["BankPortraitTexture"]
 	local BankSlotsFrame = _G["BankSlotsFrame"]
-	local BankItemSearchBox = _G["BankItemSearchBox"]
-	local BankItemAutoSortButton = _G["BankItemAutoSortButton"]
 
-	TokenFrame:GetRegions():SetAlpha(0)
-	Inset:Hide()
-	Border:Hide()
-	BankClose:Hide()
 	BankPortraitTexture:Hide()
-	BankItemAutoSortButton:Hide()
-	BankItemSearchBox:Hide()
 
 	BankFrame:EnableMouse(false)
-	BankFrame.NineSlice:SetAlpha(0)
 
 	for i = 1, 12 do
 		local CloseButton = _G["ContainerFrame"..i.."CloseButton"]
@@ -171,11 +158,30 @@ function Bags:HideBlizzard()
 
 		Region:SetAlpha(0)
 	end
-
-	-- Hide Tabs, we will create our tabs
-	for i = 1, 2 do
-		local Tab = _G["BankFrameTab"..i]
-		Tab:Hide()
+	
+	if T.Retail then
+		local TokenFrame = _G["BackpackTokenFrame"]
+		local Inset = _G["BankFrameMoneyFrameInset"]
+		local Border = _G["BankFrameMoneyFrameBorder"]
+		local BankClose = _G["BankFrameCloseButton"]
+		local BankItemSearchBox = _G["BankItemSearchBox"]
+		local BankItemAutoSortButton = _G["BankItemAutoSortButton"]
+		
+		TokenFrame:GetRegions():SetAlpha(0)	
+		Inset:Hide()	
+		Border:Hide()	
+		BankClose:Hide()
+		
+		BankItemAutoSortButton:Hide()
+		BankItemSearchBox:Hide()
+		
+		BankFrame.NineSlice:SetAlpha(0)
+		
+		-- Hide Tabs, we will create our tabs
+		for i = 1, 2 do
+			local Tab = _G["BankFrameTab"..i]
+			Tab:Hide()
+		end
 	end
 end
 
@@ -351,15 +357,17 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
-			--Button:SetFrameStrata("HIGH")
-			--Button:SetFrameLevel(2)
 			Button:SetNormalTexture("")
 			Button:SetPushedTexture("")
 			Button:CreateBackdrop()
 			Button.IconBorder:SetAlpha(0)
 			Button:SkinButton()
 			
-			Button.SlotHighlightTexture:SetAlpha(0)
+			if T.Retail then
+				Button.SlotHighlightTexture:SetAlpha(0)
+			else
+				Button:SetCheckedTexture("")
+			end
 
 			if LastButtonBag then
 				Button:SetPoint("LEFT", LastButtonBag, "RIGHT", ButtonSpacing, 0)
@@ -410,9 +418,7 @@ function Bags:CreateContainer(storagetype, ...)
 		ToggleBags.Texture:SetTexture(C.Medias.ArrowUp)
 		ToggleBags:SetScript("OnEnter", GameTooltip_Hide)
 		ToggleBags:SetScript("OnClick", function(self)
-			local Purchase = BankFramePurchaseInfo
 			local BanksContainer = Bags.Bank.BagsContainer
-			local Purchase = BankFramePurchaseInfo
 
 			if (ReplaceBags == 0) then
 				ReplaceBags = 1
@@ -466,13 +472,24 @@ function Bags:CreateContainer(storagetype, ...)
 		PurchaseButton:ClearAllPoints()
 		PurchaseButton:SetPoint("BOTTOMRIGHT", -10, 10)
 		PurchaseButton:SkinButton()
-		--CloseButton:Hide()
+		
+		local SortButton = CreateFrame("Button", nil, Container)
+		SortButton:SetSize((Container:GetWidth() / 2) - 1, 23)
+		SortButton:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
+		SortButton:SkinButton()
+		SortButton:CreateShadow()
+		SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
+		SortButton.Text:SetFont(C.Medias.Font, 12)
+		SortButton.Text:SetJustifyH("LEFT")
+		SortButton.Text:SetPoint("CENTER")
+		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
+		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
 		
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
 		SwitchReagentButton:SetSize((Container:GetWidth() / 2) - 1, 23)
 		SwitchReagentButton:SkinButton()
 		SwitchReagentButton:CreateShadow()
-		SwitchReagentButton:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
+		SwitchReagentButton:SetPoint("LEFT", SortButton, "RIGHT", 2, 0)
 		SwitchReagentButton:SetScript("OnClick", function()
 			BankFrame_ShowPanel(BANK_PANELS[2].name)
 
@@ -488,18 +505,6 @@ function Bags:CreateContainer(storagetype, ...)
 			end
 		end)
 		
-		local SortButton = CreateFrame("Button", nil, Container)
-		SortButton:SetSize((Container:GetWidth() / 2) - 1, 23)
-		SortButton:SetPoint("LEFT", SwitchReagentButton, "RIGHT", 2, 0)
-		SortButton:SkinButton()
-		SortButton:CreateShadow()
-		SortButton.Text = SortButton:CreateFontString(nil, "OVERLAY")
-		SortButton.Text:SetFont(C.Medias.Font, 12)
-		SortButton.Text:SetJustifyH("LEFT")
-		SortButton.Text:SetPoint("CENTER")
-		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
-		
 		SwitchReagentButton.Text = SwitchReagentButton:CreateFontString(nil, "OVERLAY")
 		SwitchReagentButton.Text:SetFont(C.Medias.Font, 12)
 		SwitchReagentButton.Text:SetJustifyH("LEFT")
@@ -509,7 +514,7 @@ function Bags:CreateContainer(storagetype, ...)
 		Purchase:ClearAllPoints()
 		Purchase:SetWidth(Container:GetWidth() + 50)
 		Purchase:SetHeight(70)
-		Purchase:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", -50, 2)
+		Purchase:SetPoint("TOP", UIParent, "TOP", 0, -8)
 		Purchase:CreateBackdrop()
 		Purchase.Backdrop:SetPoint("TOPLEFT", 50, 0)
 		Purchase.Backdrop:SetPoint("BOTTOMRIGHT", 0, 0)
@@ -518,7 +523,7 @@ function Bags:CreateContainer(storagetype, ...)
 		BankBagsContainer:SetSize(Container:GetWidth(), BankSlotsFrame.Bag1:GetHeight() + ButtonSpacing + ButtonSpacing)
 		BankBagsContainer:CreateBackdrop()
 		BankBagsContainer:CreateShadow()
-		BankBagsContainer:SetPoint("BOTTOMLEFT", SwitchReagentButton, "TOPLEFT", 0, 3)
+		BankBagsContainer:SetPoint("BOTTOMLEFT", SortButton, "TOPLEFT", 0, 3)
 		BankBagsContainer:SetFrameLevel(Container:GetFrameLevel())
 		BankBagsContainer:SetFrameStrata(Container:GetFrameStrata())
 
@@ -536,7 +541,9 @@ function Bags:CreateContainer(storagetype, ...)
 			Bag:SkinButton()
 			Bag:ClearAllPoints()
 			
-			Bag.SlotHighlightTexture:SetAlpha(0)
+			if T.Retail then
+				Bag.SlotHighlightTexture:SetAlpha(0)
+			end
 
 			if i == 1 then
 				Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing)
@@ -552,8 +559,16 @@ function Bags:CreateContainer(storagetype, ...)
 		BankFrame:EnableMouse(false)
 
 		Container.BagsContainer = BankBagsContainer
-		Container.ReagentButton = SwitchReagentButton
 		Container.SortButton = SortButton
+		Container.ReagentButton = SwitchReagentButton
+		
+		if T.BCC then
+			SwitchReagentButton:Hide()
+			
+			SortButton:SetWidth(Container:GetWidth())
+			
+			CloseButton:Hide()
+		end
 	end
 
 	self[storagetype] = Container
@@ -587,10 +602,12 @@ function Bags:SlotUpdate(id, button)
 			end
 		end
 		
-		if IsCosmeticItem(ItemLink) and not IsBound then
-			button.IconOverlay:SetAlpha(1)
-		else
-			button.IconOverlay:SetAlpha(0)
+		if T.Retail then
+			if IsCosmeticItem(ItemLink) and not IsBound then
+				button.IconOverlay:SetAlpha(1)
+			else
+				button.IconOverlay:SetAlpha(0)
+			end
 		end
 	end
 
@@ -820,8 +837,6 @@ function Bags:UpdateAllBags()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
 			Button:SetScale(1)
-			--Button:SetFrameStrata("HIGH")
-			--Button:SetFrameLevel(2)
 			
 			Button.newitemglowAnim:Stop()
 			Button.newitemglowAnim.Play = Noop
@@ -855,8 +870,6 @@ function Bags:UpdateAllBags()
 				Money:ClearAllPoints()
 				Money:Show()
 				Money:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 8, -10)
-				--Money:SetFrameStrata("HIGH")
-				--Money:SetFrameLevel(2)
 				Money:SetScale(1)
 				Money.IsMoved = true
 			end
@@ -896,8 +909,6 @@ function Bags:UpdateAllBankBags()
 		Button:ClearAllPoints()
 		Button:SetWidth(ButtonSize)
 		Button:SetHeight(ButtonSize)
-		--Button:SetFrameStrata("HIGH")
-		--Button:SetFrameLevel(2)
 		Button:SetScale(1)
 		Button.IconBorder:SetAlpha(0)
 
@@ -937,8 +948,6 @@ function Bags:UpdateAllBankBags()
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
-			--Button:SetFrameStrata("HIGH")
-			--Button:SetFrameLevel(2)
 			Button:SetScale(1)
 			Button.IconBorder:SetAlpha(0)
 
@@ -1070,7 +1079,11 @@ function Bags:CloseAllBankBags()
 end
 
 function Bags:ToggleBags(openonly)
-	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) and (not ReagentBankFrame:IsShown()) then
+	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) then
+		if T.Retail and ReagentBankFrame:IsShown() then
+			return
+		end
+		
 		self:OpenAllBankBags()
 
 		return
@@ -1190,7 +1203,6 @@ function Bags:Enable()
 	self:CreateContainer("Bag", "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 50)
 	self:CreateContainer("Bank", "BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 50)
 	self:HideBlizzard()
-	self:SetTokensPosition()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()
@@ -1198,12 +1210,6 @@ function Bags:Enable()
 
 	Bag:HookScript("OnShow", function() -- Cinematic Bug with Bags open.
 		self.Bag:Show()
-	end)
-	
-	BankFrame:HookScript("OnHide", function()
-		if self.Reagent and self.Reagent:IsShown() then
-			self.Reagent:Hide()
-		end
 	end)
 
 	BankItem1:SetScript("OnHide", function()
@@ -1228,10 +1234,6 @@ function Bags:Enable()
 	end
 	
 	OpenAllBagsMatchingContext = function() return 4 end
-	
-	-- Add Text Cooldowns Timer
-	-- hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-	-- hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
 
 	-- Register Events for Updates
 	self:RegisterEvent("BAG_UPDATE")
@@ -1241,14 +1243,29 @@ function Bags:Enable()
 	self:RegisterEvent("BANKFRAME_OPENED")
 	self:RegisterEvent("MERCHANT_CLOSED")
 	self:RegisterEvent("MAIL_CLOSED")
-	self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
-	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-	self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
-	self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	self:SetScript("OnEvent", self.OnEvent)
 
 	for i = 1, 13 do
 		_G["ContainerFrame"..i]:EnableMouse(false)
+	end
+	
+	if T.Retail then
+		self:SetTokensPosition()
+		
+		BankFrame:HookScript("OnHide", function()
+			if self.Reagent and self.Reagent:IsShown() then
+				self.Reagent:Hide()
+			end
+		end)
+		
+		-- Add Text Cooldowns Timer
+		hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
+		hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
+		
+		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
+		self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
+		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
+		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	end
 
 	ToggleAllBags()

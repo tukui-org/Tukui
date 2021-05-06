@@ -37,7 +37,10 @@ function ActionBars:CreateBar2()
 
 	MultiBarBottomLeft:SetShown(true)
 	MultiBarBottomLeft:SetParent(ActionBar2)
-	MultiBarBottomLeft.QuickKeybindGlow:SetParent(T.Hider)
+	
+	if T.Retail then
+		MultiBarBottomLeft.QuickKeybindGlow:SetParent(T.Hider)
+	end
 	
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["MultiBarBottomLeftButton1"]
@@ -49,7 +52,10 @@ function ActionBars:CreateBar2()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-		Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+		
+		if T.Retail then
+			Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+		end
 
 		ActionBars:SkinButton(Button)
 		
