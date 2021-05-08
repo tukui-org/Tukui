@@ -615,10 +615,10 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 			end
 		end
 		
-		Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
+		--Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 	else
 		Totem:Hide()
-		Totem:SetScript("OnUpdate", nil)
+		--Totem:SetScript("OnUpdate", nil)
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)

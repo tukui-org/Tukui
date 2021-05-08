@@ -52,7 +52,10 @@ function ActionBars:CreateBar5()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-		Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+
+		if T.Retail then
+			Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+		end
 
 		ActionBars:SkinButton(Button)
 		

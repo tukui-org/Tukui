@@ -110,6 +110,11 @@ local function CastStart(self, event, unit)
 		name, _, texture, startTime, endTime, isTradeSkill, notInterruptible, spellID = UnitChannelInfo(unit)
 		event = 'UNIT_SPELLCAST_CHANNEL_START'
 	end
+	
+	if not oUF.Retail then
+		spellID = notInterruptible
+		notInterruptible = nil
+	end
 
 	if(not name or (isTradeSkill and element.hideTradeSkills)) then
 		resetAttributes(element)

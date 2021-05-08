@@ -83,12 +83,6 @@ function Minimap:StyleMinimap()
 	self.Backdrop:SetFrameStrata("BACKGROUND")
 	self.Backdrop:SetFrameLevel(2)
 	self.Backdrop:CreateShadow()
-	
-	self.Backdrop.Shadow:ClearAllPoints()
-	self.Backdrop.Shadow:SetPoint("TOP", 0, 4)
-	self.Backdrop.Shadow:SetPoint("BOTTOM", 0, -23)
-	self.Backdrop.Shadow:SetPoint("LEFT", -4, 0)
-	self.Backdrop.Shadow:SetPoint("RIGHT", 4, 0)
 
 	Mail:ClearAllPoints()
 	MailBorder:Hide()
@@ -158,6 +152,7 @@ end
 
 function Minimap:AddMinimapDataTexts()
 	local Backdrop = self.Backdrop
+	local Shadow = self.Backdrop.Shadow
 
 	local MinimapDataText = CreateFrame("Frame", nil, self)
 	MinimapDataText:SetSize(Backdrop:GetWidth(), 19)
@@ -166,6 +161,8 @@ function Minimap:AddMinimapDataTexts()
 	
 	MinimapDataText.Backdrop:SetFrameStrata(Minimap.Backdrop:GetFrameStrata())
 	MinimapDataText.Backdrop:SetFrameLevel(Minimap.Backdrop:GetFrameLevel())
+	
+	Shadow:SetPoint("BOTTOM", MinimapDataText, "BOTTOM", 0, -3)
 
 	T.DataTexts.Panels.Minimap = MinimapDataText
 end
