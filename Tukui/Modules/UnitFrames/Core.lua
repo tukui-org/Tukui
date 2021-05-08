@@ -6,7 +6,7 @@ local UnitFrames = T["UnitFrames"]
 local HealComm
 
 if T.BCC then
-	--HealComm = LibStub("LibHealComm-4.0")
+	HealComm = LibStub("LibHealComm-4.0")
 end
 
 -- Lib globals
@@ -1084,8 +1084,10 @@ function UnitFrames:RegisterHealComm(frame)
 end
 
 function UnitFrames:Enable()
-	-- WORKLATER (LibHealComm-4.0 not yet updated for tbc)
-	if T.BCC then C.UnitFrames.HealComm = false end
+	-- Enable HealComm lib
+	if T.BCC and C.UnitFrames.HealComm then
+		HealComm:PLAYER_LOGIN()
+	end
 	
 	-- Security for Nameplates
 	if IsAddOnLoaded("Plater") then
