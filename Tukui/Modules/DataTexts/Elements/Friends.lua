@@ -109,10 +109,13 @@ local DisplayBattleNetFriendsOnTooltip = function()
 						local Class = T.Retail and EnglishClass(Account.className) or EnglishClass(Friend.className)
 						local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 						local Name = T.Retail and ClassHexColor..Account.characterName.."|r" or ClassHexColor..Friend.characterName.."|r"
+						local ProjectID = T.Retail and Account.wowProjectID or Friend.wowProjectID
 						
 						-- WoW Classic Detected
-						if T.Retail and Account.wowProjectID == 2 or Friend.wowProjectID then
+						if ProjectID == WOW_PROJECT_CLASSIC then
 							Right = "|cffffffff"..Game.." Classic|r"
+						elseif ProjectID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+							Right = "|cffffffff"..Game.." Classic (TBC)|r"
 						end
 						
 						Left = Left.." ("..Level.." "..Name..")"
