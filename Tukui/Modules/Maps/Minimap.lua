@@ -50,7 +50,7 @@ function Minimap:OnMouseClick(button)
 		if T.Retail then
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
 		else
-			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, -Minimap:GetHeight() + 23)
+			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", -Minimap:GetWidth() + 4, -Minimap:GetHeight() / 2 - 20)
 		end
 	elseif (button == "MiddleButton") then
 		if T.Retail and GarrisonLandingPageMinimapButton:IsShown() then
