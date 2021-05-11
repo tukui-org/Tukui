@@ -87,6 +87,8 @@ local OnEnter = function(self)
 	end
 	
 	if T.BCC then
+		local IsAlternativeTooltip = IsShiftKeyDown() or IsAltKeyDown()
+		
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
 		GameTooltip:AddLine(" ")
 
@@ -106,13 +108,13 @@ local OnEnter = function(self)
 			end
 
 			if StatName and StatValue then
-				if IsShiftKeyDown() then
+				if IsAlternativeTooltip then
 					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
 				else
 					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
 				end
 
-				if Tooltip and IsShiftKeyDown() then
+				if Tooltip and IsAlternativeTooltip then
 					-- Remove double enter, for gaining tooltip space
 					Tooltip = string.gsub(Tooltip, "\n\n", " ")
 
@@ -138,13 +140,13 @@ local OnEnter = function(self)
 			end
 
 			if StatName and StatValue then
-				if IsShiftKeyDown() then
+				if IsAlternativeTooltip then
 					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
 				else
 					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
 				end
 
-				if Tooltip and IsShiftKeyDown() then
+				if Tooltip and IsAlternativeTooltip then
 					-- Remove double enter, for gaining tooltip space
 					Tooltip = string.gsub(Tooltip, "\n\n", "\n")
 
