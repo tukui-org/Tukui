@@ -255,16 +255,16 @@ function Chat:SetChatFramePosition()
 				Frame:SetParent(T.DataTexts.Panels.Left)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
-				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 2)
+				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 68)
+				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 10)
 			end
 
 			if Settings and Settings.IsUndocked and IsMovable then
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
-				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 2)
+				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 68)
+				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 10)
 			end
 		else
 			if Settings and IsMovable then
@@ -611,6 +611,7 @@ function Chat:Setup()
 		Tab.noMouseAlpha = 0
 		Tab:SetAlpha(0)
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
+		Tab:SetFrameLevel(6)
 
 		self:StyleFrame(Frame)
 
@@ -744,7 +745,7 @@ function Chat:AddHooks()
 end
 
 function Chat:AddPanels()
-	local LeftChatBG = CreateFrame("Frame", "ChatLeftBackground", T.DataTexts.Panels.Left)
+	local LeftChatBG = CreateFrame("Frame", "TukuiChatLeftBackground", T.DataTexts.Panels.Left)
 	LeftChatBG:SetSize(T.DataTexts.Panels.Left:GetWidth() + 12, C.General.Themes.Value == "Tukui" and C.Chat.LeftHeight or 177)
 	LeftChatBG:SetPoint("BOTTOM", T.DataTexts.Panels.Left, "BOTTOM", 0, -6)
 	LeftChatBG:SetFrameLevel(1)
@@ -752,7 +753,7 @@ function Chat:AddPanels()
 	LeftChatBG:CreateBackdrop("Transparent")
 	LeftChatBG.Backdrop:CreateShadow()
 
-	local RightChatBG = CreateFrame("Frame", "ChatRightBackground", T.DataTexts.Panels.Right)
+	local RightChatBG = CreateFrame("Frame", "TukuiChatRightBackground", T.DataTexts.Panels.Right)
 	RightChatBG:SetSize(T.DataTexts.Panels.Right:GetWidth() + 12, C.General.Themes.Value == "Tukui" and C.Chat.RightHeight or 177)
 	RightChatBG:SetPoint("BOTTOM", T.DataTexts.Panels.Right, "BOTTOM", 0, -6)
 	RightChatBG:SetFrameLevel(1)
@@ -762,15 +763,15 @@ function Chat:AddPanels()
 
 	local TabsBGLeft = CreateFrame("Frame", nil, LeftChatBG)
 	TabsBGLeft:CreateBackdrop()
-	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 23)
+	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 20)
 	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -6)
-	TabsBGLeft:SetFrameLevel(2)
+	TabsBGLeft:SetFrameLevel(5)
 
 	local TabsBGRight = CreateFrame("Frame", nil, RightChatBG)
 	TabsBGRight:CreateBackdrop()
-	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 23)
+	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 20)
 	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -6)
-	TabsBGRight:SetFrameLevel(2)
+	TabsBGRight:SetFrameLevel(5)
 	
 	self.Panels = {}
 	self.Panels.LeftChat = LeftChatBG
