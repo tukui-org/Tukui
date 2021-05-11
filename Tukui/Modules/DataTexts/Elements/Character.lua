@@ -95,8 +95,15 @@ local OnEnter = function(self)
 			local Name = _G[Frame.."Label"]
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
-			local StatName = "|cffff8000"..Name:GetText().."|r"
-			local StatValue = "|cffffffff"..Value:GetText().."|r"
+			local StatName, StatValue
+			
+			if Name:GetText() then
+				StatName = "|cffff8000"..Name:GetText().."|r"
+			end
+			
+			if Value:GetText() then
+				StatValue = "|cffffffff"..Value:GetText().."|r"
+			end
 
 			if StatName and StatValue then
 				if IsShiftKeyDown() then
@@ -120,8 +127,15 @@ local OnEnter = function(self)
 			local Name = _G[Frame.."Label"]
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
-			local StatName = "|cffff8000"..Name:GetText().."|r"
-			local StatValue = "|cffffffff"..Value:GetText().."|r"
+			local StatName, StatValue
+			
+			if Name:GetText() then
+				StatName = "|cffff8000"..Name:GetText().."|r"
+			end
+			
+			if Value:GetText() then
+				StatValue = "|cffffffff"..Value:GetText().."|r"
+			end
 
 			if StatName and StatValue then
 				if IsShiftKeyDown() then
