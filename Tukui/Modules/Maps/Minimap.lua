@@ -44,24 +44,24 @@ function Minimap:DisableMinimapElements()
 end
 
 function Minimap:OnMouseClick(button)
+	local MicroMenu = T.Miscellaneous.MicroMenu
+	
 	if (button == "RightButton") then
-		local MicroMenu = T.Miscellaneous.MicroMenu
-		
-		if MicroMenu then
-			MicroMenu:Toggle()
+		if T.Retail then
+			MiniMapTracking_OnMouseDown(MiniMapTracking)
 		else
-			if T.Retail then
-				MiniMapTracking_OnMouseDown(MiniMapTracking)
-			else
-				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, -Minimap:GetHeight() + 23)
-			end
+			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, -Minimap:GetHeight() + 23)
 		end
 	elseif (button == "MiddleButton") then
-		if GarrisonLandingPageMinimapButton:IsShown() then
+		if T.Retail and GarrisonLandingPageMinimapButton:IsShown() then
 			if InCombatLockdown() then
 				T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
 			else
 				GarrisonLandingPage_Toggle()
+			end
+		else
+			if MicroMenu then
+				MicroMenu:Toggle()
 			end
 		end
 	else
