@@ -763,13 +763,13 @@ function Chat:AddPanels()
 
 	local TabsBGLeft = CreateFrame("Frame", nil, LeftChatBG)
 	TabsBGLeft:CreateBackdrop()
-	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 20)
+	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 21)
 	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -7)
 	TabsBGLeft:SetFrameLevel(5)
 
 	local TabsBGRight = CreateFrame("Frame", nil, RightChatBG)
 	TabsBGRight:CreateBackdrop()
-	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 20)
+	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 21)
 	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -7)
 	TabsBGRight:SetFrameLevel(5)
 	
