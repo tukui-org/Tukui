@@ -168,6 +168,8 @@ local function CastStart(self, event, unit)
 		local ratio = (select(4, GetNetStats()) / 1000) / element.max
 		if(ratio > 1) then
 			ratio = 1
+		elseif(ratio == 0) then
+			ratio = 0.001
 		end
 
 		safeZone[isHoriz and 'SetWidth' or 'SetHeight'](safeZone, element[isHoriz and 'GetWidth' or 'GetHeight'](element) * ratio)
