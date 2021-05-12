@@ -461,6 +461,7 @@ function ActionBars:Enable()
 	end
 	
 	SetCVar("alwaysShowActionBars", 1)
+	SetActionBarToggles(1, 1, 1, 1, 1)
 
 	self:DisableBlizzard()
 	self:CreateBar1()
