@@ -1115,6 +1115,7 @@ function UnitFrames:Enable()
 		nameplateMaxScale = 1,
 		nameplateMinScale = 1,
 		nameplateSelectedScale = C.NamePlates.SelectedScale / 100,
+		nameplateMaxDistance = T.Retail and 61 or 41
 	}
 
 	oUF:RegisterStyle("Tukui", UnitFrames.Style)

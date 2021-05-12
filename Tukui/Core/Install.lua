@@ -68,7 +68,6 @@ function Install:SetDefaultsCVars()
 	SetCVar("nameplateShowFriendlyMinions", 0)
 	SetCVar("cameraSmoothStyle", 0)
 	SetCVar("profanityFilter", 0)
-	SetCVar("nameplateMaxDistance", 60)
 	SetCVar("showLootSpam", 1)
 	SetCVar("showArenaEnemyFrames", 0)
 	
