@@ -255,7 +255,7 @@ function Chat:SetChatFramePosition()
 				Frame:SetParent(T.DataTexts.Panels.Left)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 68)
+				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 70)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 10)
 			end
 
@@ -263,7 +263,7 @@ function Chat:SetChatFramePosition()
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 68)
+				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 70)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 10)
 			end
 		else
@@ -764,13 +764,13 @@ function Chat:AddPanels()
 	local TabsBGLeft = CreateFrame("Frame", nil, LeftChatBG)
 	TabsBGLeft:CreateBackdrop()
 	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 20)
-	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -6)
+	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -7)
 	TabsBGLeft:SetFrameLevel(5)
 
 	local TabsBGRight = CreateFrame("Frame", nil, RightChatBG)
 	TabsBGRight:CreateBackdrop()
 	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 20)
-	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -6)
+	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -7)
 	TabsBGRight:SetFrameLevel(5)
 	
 	self.Panels = {}
