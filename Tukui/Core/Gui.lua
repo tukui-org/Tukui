@@ -84,6 +84,22 @@ T.Popups.Popup["TUKUI_SWITCH_PROFILE"] = {
 	end,
 }
 
+local CheckClient = function(self)
+	local Client = string.upper(self)
+	
+	if Client == "RETAIL" and WOW_PROJECT_ID == 1 then
+		return true
+	elseif Client == "BCC" and WOW_PROJECT_ID == 5 then
+		return true
+	elseif Client == "CLASSIC" and WOW_PROJECT_ID == 2 then
+		return true
+	elseif Client == "ALL" then
+		return true
+	else
+		return false
+	end
+end
+
 local SetValue = function(group, option, value)
 	if (type(C[group][option]) == "table") then
 		if C[group][option].Value then
@@ -170,7 +186,13 @@ local Reverse = function(value)
 end
 
 -- Sections
-local CreateSection = function(self, text)
+local CreateSection = function(self, client, text)
+	local IsEnabled = CheckClient(client)
+	
+	if not IsEnabled then
+		return
+	end
+	
 	local Anchor = CreateFrame("Frame", nil, self)
 	Anchor:SetSize(WidgetListWidth - (Spacing * 2), WidgetHeight)
 	Anchor.IsSection = true
@@ -292,9 +314,14 @@ local SwitchOnLeave = function(self)
 	self.Highlight:SetAlpha(0)
 end
 
-local CreateSwitch = function(self, group, option, text)
+local CreateSwitch = function(self, client, group, option, text)
 	local Font = C.Medias.Font
 	local Value = C[group][option]
+	local IsEnabled = CheckClient(client)
+	
+	if not IsEnabled then
+		return
+	end
 
 	local Anchor = CreateFrame("Frame", nil, self)
 	Anchor:SetSize(WidgetListWidth - (Spacing * 2), WidgetHeight)
@@ -493,9 +520,14 @@ local EditBoxOnMouseWheel = function(self, delta)
 	self.Slider:SetValue(self.Value)
 end
 
-local CreateSlider = function(self, group, option, text, minvalue, maxvalue, stepvalue)
+local CreateSlider = function(self, client, group, option, text, minvalue, maxvalue, stepvalue)
 	local Font = C.Medias.Font
 	local Value = C[group][option]
+	local IsEnabled = CheckClient(client)
+	
+	if not IsEnabled then
+		return
+	end
 
 	local Anchor = CreateFrame("Frame", nil, self)
 	Anchor:SetSize(WidgetListWidth - (Spacing * 2), WidgetHeight)
@@ -866,10 +898,15 @@ local AddDropdownScrollBar = function(self)
 	self:SetHeight(((WidgetHeight - 1) * ListItemsToShow) + 1)
 end
 
-local CreateDropdown = function(self, group, option, text, custom)
+local CreateDropdown = function(self, client, group, option, text, custom)
 	local Font = C.Medias.Font
 	local Value
 	local Selections
+	local IsEnabled = CheckClient(client)
+	
+	if not IsEnabled then
+		return
+	end
 
 	if custom then
 		Value = C[group][option]
@@ -1183,10 +1220,15 @@ local ColorOnLeave = function(self)
 	self.Highlight:SetAlpha(0)
 end
 
-local CreateColorSelection = function(self, group, option, text)
+local CreateColorSelection = function(self, client, group, option, text)
 	local Font = C.Medias.Font
 	local Value = C[group][option]
 	local Selections
+	local IsEnabled = CheckClient(client)
+	
+	if not IsEnabled then
+		return
+	end
 
 	local CurrentR, CurrentG, CurrentB = unpack(Value)
 
