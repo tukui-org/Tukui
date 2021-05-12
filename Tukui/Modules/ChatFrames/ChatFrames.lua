@@ -255,16 +255,16 @@ function Chat:SetChatFramePosition()
 				Frame:SetParent(T.DataTexts.Panels.Left)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 70)
-				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 10)
+				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
+				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
 			end
 
 			if Settings and Settings.IsUndocked and IsMovable then
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
-				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 70)
-				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 10)
+				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
+				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 4)
 			end
 		else
 			if Settings and IsMovable then
@@ -764,13 +764,13 @@ function Chat:AddPanels()
 	local TabsBGLeft = CreateFrame("Frame", nil, LeftChatBG)
 	TabsBGLeft:CreateBackdrop()
 	TabsBGLeft:SetSize(T.DataTexts.Panels.Left:GetWidth(), 21)
-	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -7)
+	TabsBGLeft:SetPoint("TOP", LeftChatBG, "TOP", 0, -5)
 	TabsBGLeft:SetFrameLevel(5)
 
 	local TabsBGRight = CreateFrame("Frame", nil, RightChatBG)
 	TabsBGRight:CreateBackdrop()
 	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 21)
-	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -7)
+	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -5)
 	TabsBGRight:SetFrameLevel(5)
 	
 	self.Panels = {}
