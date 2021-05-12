@@ -3,10 +3,11 @@ local AddOn, Plugin = ...
 local oUF = Plugin.oUF or oUF
 local Noop = function() end
 local UnitFrames = T["UnitFrames"]
-local HealComm
+local HealComm, CheckRange
 
 if T.BCC then
 	HealComm = LibStub("LibHealComm-4.0")
+	CheckRange = LibStub("LibRangeCheck-2.0")
 end
 
 -- Lib globals
@@ -627,6 +628,23 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 	if Bar.PostUpdate then
 		return Bar:PostUpdate(slot, HaveTotem, Name, Start, Duration, Icon)
+	end
+end
+
+function UnitFrames:UpdateRange()
+	local Range = self.Range
+	local Unit = self.unit
+
+	if (Unit) then
+		local Distance = select(2, CheckRange:GetRange(Unit))
+
+		if not (Distance) then
+			self:SetAlpha(Range.outsideAlpha)
+		elseif (Distance) then
+			self:SetAlpha(Range.insideAlpha)
+		end
+	else
+		self:SetAlpha(Range.insideAlpha)
 	end
 end
 

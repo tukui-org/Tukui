@@ -201,6 +201,7 @@ function UnitFrames:Party()
 		self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
 	else
 		self:Tag(Name, "[level] [Tukui:NameLong]")
+		self.Range.Override = UnitFrames.UpdateRange
 	end
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
