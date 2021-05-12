@@ -107,6 +107,7 @@ function MicroMenu:Enable()
 		local Button = _G[MICRO_BUTTONS[i]]
 		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
 
+		Button:StripTextures()
 		Button:SetAlpha(0)
 		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
@@ -147,10 +148,6 @@ function MicroMenu:Enable()
 	end
 	
 	UpdateMicroButtonsParent(T.Hider)
-	
-	if StoreMicroButton then
-		StoreMicroButton:StripTextures()
-	end
 	
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	
