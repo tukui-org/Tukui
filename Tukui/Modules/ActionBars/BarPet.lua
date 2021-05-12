@@ -18,7 +18,7 @@ function ActionBars:CreatePetBar()
 	local NumRow = ceil(10 / ButtonsPerRow)
 	
 	local Bar = CreateFrame("Frame", "TukuiPetActionBar", T.PetHider, "SecureHandlerStateTemplate")
-	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 229)
+	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
 	Bar:SetFrameStrata("LOW")
 	Bar:SetFrameLevel(10)
 	Bar:SetWidth((PetSize * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))

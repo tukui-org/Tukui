@@ -13,7 +13,7 @@ function ActionBars:CreateStanceBar()
 	
 	local StanceBar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
 	StanceBar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-	StanceBar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 229)
+	StanceBar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
 	StanceBar:SetFrameStrata("LOW")
 	StanceBar:SetFrameLevel(10)
 	
