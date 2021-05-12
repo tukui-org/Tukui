@@ -24,6 +24,7 @@ Libs\LibDeflate\LibDeflate.lua
 Libs\LibSerialize\LibSerialize.lua
 Libs\LibHealComm-4.0\ChatThrottleLib.lua
 Libs\LibHealComm-4.0\LibHealComm-4.0.lua
+Libs\LibRangeCheck-2.0\LibRangeCheck-2.0.lua
 Libs\oUF\init.lua
 Libs\oUF\private.lua
 Libs\oUF\ouf.lua
