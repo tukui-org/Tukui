@@ -114,6 +114,7 @@ FriendSpells["DRUID"] = {
     774,  -- Rejuvenation (40 yards, level 10)
     2782, -- Remove Corruption (40 yards, level 19)
     8936, -- Regrowth (40 yards, level 5)
+    5185, -- Healing Touch (40 yards)
 }
 HarmSpells["DRUID"] = {
     5176,  -- Wrath (40 yards)
@@ -125,6 +126,7 @@ HarmSpells["DRUID"] = {
 }
 ResSpells["DRUID"] = {
     50769, -- Revive (40 yards, level 14)
+    20484, -- Rebirth (30 yards)
 }
 PetSpells["DRUID"] = {}
 
@@ -135,12 +137,13 @@ HarmSpells["HUNTER"] = {
 }
 ResSpells["HUNTER"] = {}
 PetSpells["HUNTER"] = {
-    136, -- Mend Pet (45 yards)
+    136, -- Mend Pet (45 yards, 68 yards)
 }
 
 -- Mages
 FriendSpells["MAGE"] = {
     130, -- Slow Fall (40 yards)
+    1459, -- Arcane Intellect (30 yards)
 }
 HarmSpells["MAGE"] = {
     44614, -- Flurry (40 yards)
@@ -173,6 +176,8 @@ PetSpells["MONK"] = {}
 -- Paladins
 FriendSpells["PALADIN"] = {
     19750, -- Flash of Light (40 yards)
+    4987, -- Cleanse (40 yards)
+    635, -- Holy Light (40 yards)
 }
 HarmSpells["PALADIN"] = {
     853,    -- Hammer of Justice (10 yards)
@@ -192,11 +197,13 @@ FriendSpells["PRIEST"] = {
     527,  -- Purify (40 yards)
     2061, -- Flash Heal (40 yards)
     17,   -- Power Word: Shield (40 yards)
+    1706, -- Levitate (40 yards)
 }
 HarmSpells["PRIEST"] = {
     589,  -- Shadow Word: Pain (40 yards)
     585,  -- Smite (40 yards)
     5019, -- Shoot (30 yards)
+    8092, -- Mindblast (30 yards)
 }
 ResSpells["PRIEST"] = {
     2006, -- Resurrection (40 yards)
@@ -211,8 +218,8 @@ HarmSpells["ROGUE"] = {
     185565, -- Poisoned Knife (Assassination) (30 yards)
     185763, -- Pistol Shot (Outlaw) (20 yards)
     114014, -- Shuriken Toss (Sublety) (30 yards)
-    1725,   -- Distract (30 yards)
     2764,   -- Throw (30 yards)
+    3018,   -- Shoot (30 yards)
     2094,   -- Blind (15 yards)
 }
 ResSpells["ROGUE"] = {}
@@ -223,11 +230,18 @@ FriendSpells["SHAMAN"] = {
     8004,   -- Healing Surge (Resto/Elemental) (40 yards)
     188070, -- Healing Surge (Enhancement) (40 yards)
     546,    -- Water Walking (30 yards)
+    526,    -- Cure Poison (40 yards)
+    2860,   -- Cure Disease (40 yards)
+    331,    -- Healing Wave (40 yards)
+    8004,   -- Lesser Healing Wave (40 yards)
 }
 HarmSpells["SHAMAN"] = {
     370,    -- Purge (30 yards)
     188196, -- Lightning Bolt (40 yards)
     73899,  -- Primal Strike (Melee Range)
+    403,    -- Lightning Bolt (30 yards)
+    421,    -- Chain Lightning (30 yards)
+    8042,   -- Earth Shock (20 yards)
 }
 ResSpells["SHAMAN"] = {
     2008, -- Ancestral Spirit (40 yards)
@@ -240,6 +254,8 @@ HarmSpells["WARRIOR"] = {
     355,  -- Taunt (30 yards)
     5246, -- Intimidating Shout (Arms/Fury) (8 yards)
     100,  -- Charge (Arms/Fury) (8-25 yards)
+    3018, -- Shoot (5-30 yards)
+    2764, -- Throw (5-30 yards)
 }
 ResSpells["WARRIOR"] = {}
 PetSpells["WARRIOR"] = {}
@@ -248,6 +264,7 @@ PetSpells["WARRIOR"] = {}
 FriendSpells["WARLOCK"] = {
     5697,  -- Unending Breath (30 yards)
     20707, -- Soulstone (40 yards) ~ this can be precasted so leave it in friendly aswell as res
+    132,   -- Detect Invisibility (30 yards)
 }
 HarmSpells["WARLOCK"] = {
     5019,   -- Shoot (30 yards)
@@ -256,6 +273,8 @@ HarmSpells["WARLOCK"] = {
     686,    -- Shadow Bolt (Demonology / Affliction) (40 yards)
     232670, -- Shadow Bolt (40 yards)
     5782,   -- Fear (30 yards)
+    172,    -- Corruption (30 yards)
+    348,    -- Immolate (30 yards)
 }
 ResSpells["WARLOCK"] = {
     20707, -- Soulstone (40 yards)
