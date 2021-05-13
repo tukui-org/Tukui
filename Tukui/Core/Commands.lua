@@ -112,30 +112,6 @@ T.SlashHandler = function(cmd)
 		else
 			T.Miscellaneous.Keybinds:Toggle()
 		end
-	elseif (arg1 == "ph" or arg1 == "happiness") then
-		if T.Retail then
-			return
-		end
-		
-		if T.MyClass ~= "HUNTER" then
-			return T.Print("Sorry, you are not an "..T.RGBToHex(unpack(T.Colors.class["HUNTER"])).."hunter|r, this command is useless for you. :P")
-		end
-		
-		local Red, Yellow, Green = T.RGBToHex(unpack(T.Colors.happiness[1])), T.RGBToHex(unpack(T.Colors.happiness[2])), T.RGBToHex(unpack(T.Colors.happiness[3]))
-		local Happiness, DamagePercentage, LoyaltyRate = GetPetHappiness()
-		
-		if not Happiness then
-			T.Print("You don't have any pet summoned at the moment")
-		else
-			local Happy = ({"Unhappy", "Content", "Happy"})[Happiness]
-			local Loyalty = LoyaltyRate > 0 and "gaining" or "losing"
-			
-			T.Print("Pet is " .. Happy)
-			T.Print("Pet is doing " .. DamagePercentage .. "% damage")
-			T.Print("Pet is " .. Loyalty .. " loyalty")
-		end
-		
-		T.Print("You can also track your current pet happiness according to the pet frame health bar color. "..Red.."Red|r mean unhappy, "..Yellow.."yellow|r mean content, "..Green.."green|r mean happy.")
 	elseif (arg1 == "chat") then
 		if (arg2 == "reset") then
 			local Chat = T.Chat

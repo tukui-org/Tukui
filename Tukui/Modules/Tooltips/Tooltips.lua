@@ -174,6 +174,21 @@ function Tooltip:OnTooltipSetUnit()
 	if (C["Tooltips"].UnitHealthText) then
 		Tooltip.SetHealthValue(HealthBar, Unit)
 	end
+
+	if T.BCC and T.MyClass == "HUNTER" and Unit == "pet" then
+		local Happiness, DamagePercentage, LoyaltyRate = GetPetHappiness()
+
+		if Happiness then
+			local Hex = T.RGBToHex(unpack(T.Colors.happiness[Happiness]))
+			local Happy = ({"Unhappy", "Content", "Happy"})[Happiness]
+			local Loyalty = LoyaltyRate > 0 and "gaining" or "losing"
+
+			GameTooltip:AddLine(" ")
+			GameTooltip:AddLine("Pet is " .. Hex .. Happy .. "|r", 1, 1, 1)
+			GameTooltip:AddLine("Pet is doing " .. Hex .. DamagePercentage .. "%|r damage", 1, 1, 1)
+			GameTooltip:AddLine("Pet is " .. Hex .. Loyalty .. "|r loyalty", 1, 1, 1)
+		end
+	end
 end
 
 function Tooltip:SetUnitBorderColor()
