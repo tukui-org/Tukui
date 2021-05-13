@@ -56,7 +56,6 @@ function Fonts:ChangeWoWFonts()
 	SetFont(SystemFont_Tiny, NORMAL, 12)
 	SetFont(Tooltip_Med, NORMAL, 12)
 	SetFont(Tooltip_Small, NORMAL, 12)
-	SetFont(CombatTextFont, COMBAT, 200, "OUTLINE")
 	SetFont(SystemFont_Shadow_Huge1, NORMAL, 20, "THINOUTLINE")
 	SetFont(ZoneTextString, NORMAL, 32, "OUTLINE")
 	SetFont(SubZoneTextString, NORMAL, 25, "OUTLINE")
@@ -66,6 +65,9 @@ function Fonts:ChangeWoWFonts()
 	SetFont(FriendsFont_Small, NORMAL, 11)
 	SetFont(FriendsFont_Large, NORMAL, 14)
 	SetFont(FriendsFont_UserText, NORMAL, 11)
+	
+	-- Combat Text
+	SetFont(CombatTextFont, NORMAL, 25, "OUTLINE")
 end
 
 -- New Fonts Need to be set as soon as possible ...
