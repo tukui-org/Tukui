@@ -398,7 +398,7 @@ function UnitFrames:Player()
 
 		local ScrollingCombatText = CreateFrame("Frame", "TukuiPlayerFrameScrollingCombatText", UIParent)
 		ScrollingCombatText:SetSize(32, 32)
-		ScrollingCombatText:SetPoint("CENTER", 0, -100)
+		ScrollingCombatText:SetPoint("CENTER", 0, -200)
 		ScrollingCombatText.scrollTime = C.UnitFrames.ScrollingCombatTextDisplayTime
 		ScrollingCombatText.font = DamageFontPath
 		ScrollingCombatText.fontHeight = C.UnitFrames.ScrollingCombatTextFontSize
