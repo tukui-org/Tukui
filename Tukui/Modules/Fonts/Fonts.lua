@@ -48,7 +48,7 @@ function Fonts:ChangeWoWFonts()
 	SetFont(SystemFont_Med3, NORMAL, 13)
 	SetFont(SystemFont_OutlineThick_Huge2, NORMAL, 20, "THICKOUTLINE")
 	SetFont(SystemFont_Outline_Small, NUMBER, 12, "OUTLINE")
-	--SetFont(SystemFont_Shadow_Large, NORMAL, 15) -- CRASHING WOW ON 35789
+	SetFont(SystemFont_Shadow_Large, NORMAL, 15)
 	SetFont(SystemFont_Shadow_Med1, NORMAL, 12)
 	SetFont(SystemFont_Shadow_Med3, NORMAL, 13)
 	SetFont(SystemFont_Shadow_Small, NORMAL, 11)
