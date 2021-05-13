@@ -430,7 +430,7 @@ function UnitFrames:Player()
 
 		self.FloatingCombatFeedback = ScrollingCombatText
 
-		T.Movers:RegisterFrame(ScrollingCombatText, "Player SCT")
+		T.Movers:RegisterFrame(ScrollingCombatText, "Scrolling Combat Text")
 	end
 	
 	if T.BCC and C.UnitFrames.PowerTick then
