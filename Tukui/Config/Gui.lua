@@ -79,7 +79,7 @@ local Auras = function(self)
 	Window:CreateSwitch("All", "Auras", "HideBuffs", "Hide buffs")
 	Window:CreateSwitch("All", "Auras", "HideDebuffs", "Hide debuffs")
 	Window:CreateSwitch("All", "Auras", "Animation", "Animate new auras")
-	Window:CreateSlider("All", "Auras", "BuffsPerRow", "Buffs per row", 6, 20, 1)
+	Window:CreateSlider("All", "Auras", "BuffsPerRow", "Buffs per row", 1, 40, 1)
 
 	Window:CreateSection("All", "Font")
 	Window:CreateDropdown("All", "Auras", "Font", "Set aura font", "Font")
