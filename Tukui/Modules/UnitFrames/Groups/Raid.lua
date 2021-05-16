@@ -210,18 +210,16 @@ function UnitFrames:Raid()
 		local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
 		ResurrectIndicator:SetSize(24, 24)
 		ResurrectIndicator:SetPoint("CENTER", Health)
-		
-		self.Highlight = Highlight
 
-		local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
-		Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
-		Highlight:SetOutside(self, C.Raid.HighlightSize, C.Raid.HighlightSize)
-		Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
-		Highlight:SetFrameLevel(0)
-		Highlight:Hide()
-		
 		self.ResurrectIndicator = ResurrectIndicator
 	end
+	
+	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
+	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
+	Highlight:SetOutside(self, C.Raid.HighlightSize, C.Raid.HighlightSize)
+	Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
+	Highlight:SetFrameLevel(0)
+	Highlight:Hide()
 	
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
@@ -239,6 +237,7 @@ function UnitFrames:Raid()
 	self.ReadyCheckIndicator = ReadyCheck
 	self.Range = Range
 	self.RaidTargetIndicator = RaidIcon
+	self.Highlight = Highlight
 	
 	if T.Retail then
 		self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")

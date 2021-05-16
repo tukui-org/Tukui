@@ -85,7 +85,7 @@ do
 		},
 		['PALADIN'] = {
 			['Poison'] = true,
-			['Magic'] = false,
+			['Magic'] = true,
 			['Disease'] = true,
 		},
 		['DRUID'] = {
@@ -296,8 +296,11 @@ end
 
 local function Enable(self)
 	if self.RaidDebuffs then
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
-		self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+		if oUF.Retail then
+			self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
+			self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+		end
+		
 		self:RegisterEvent('UNIT_AURA', Update)
 		
 		self.RaidDebuffs.BlackList = self.RaidDebuffs.BlackList or {
@@ -313,8 +316,11 @@ end
 
 local function Disable(self)
 	if self.RaidDebuffs then
-		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
-		self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+		if oUF.Retail then
+			self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
+			self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
+		end
+		
 		self:UnregisterEvent('UNIT_AURA', Update)
 
 		self.RaidDebuffs:Hide()

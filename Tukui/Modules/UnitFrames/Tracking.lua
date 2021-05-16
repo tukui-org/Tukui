@@ -28,6 +28,8 @@ Popups.Popup["TRACKING_ADD_PVE"] = {
 				Tracking.PVE.Text:SetText(Name)
 				Tracking.PVE.Icon.Texture:SetTexture(Icon)
 				Tracking.PVE.SpellID = SpellID
+				
+				UnitFrames:UpdateRaidDebuffIndicator()
 			end
 		else
 			T.Print(TrackingTitle..PVETitle.."Sorry, this spell id doesn't exist")
@@ -60,6 +62,8 @@ Popups.Popup["TRACKING_ADD_PVP"] = {
 				Tracking.PVP.Text:SetText(Name)
 				Tracking.PVP.Icon.Texture:SetTexture(Icon)
 				Tracking.PVP.SpellID = SpellID
+				
+				UnitFrames:UpdateRaidDebuffIndicator()
 			end
 		else
 			T.Print(TrackingTitle..PVPTitle.."Sorry, this spell id doesn't exist")
@@ -91,6 +95,8 @@ function Tracking:RemoveSpell()
 	
 	if SpellID and Table[SpellID] then
 		Table[SpellID] = nil
+		
+		UnitFrames:UpdateRaidDebuffIndicator()
 		
 		self.ID = 0
 		self.Next:Click()
