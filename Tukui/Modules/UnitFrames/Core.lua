@@ -407,8 +407,8 @@ function UnitFrames:PostCreateAura(button, unit)
 
 		button.Animation.FadeOut = button.Animation:CreateAnimation("Alpha")
 		button.Animation.FadeOut:SetFromAlpha(1)
-		button.Animation.FadeOut:SetToAlpha(.5)
-		button.Animation.FadeOut:SetDuration(.08)
+		button.Animation.FadeOut:SetToAlpha(.7)
+		button.Animation.FadeOut:SetDuration(.15)
 		button.Animation.FadeOut:SetSmoothing("IN_OUT")
 	end
 end

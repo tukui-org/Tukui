@@ -158,7 +158,7 @@ C["Misc"] = {
 
 C["NamePlates"] = {
 	["Enable"] = true,
-	["Width"] = 129,
+	["Width"] = 128,
 	["Height"] = 14,
 	["NotSelectedAlpha"] = 100,
 	["SelectedScale"] = 100,
