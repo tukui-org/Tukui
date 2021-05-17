@@ -72,7 +72,7 @@ function ActionBars:SkinButton(button)
 			Normal:SetPoint("TOPLEFT")
 			Normal:SetPoint("BOTTOMRIGHT")
 
-			if (Button:GetChecked()) then
+			if (Button:GetChecked() and Button.UpdateState) then
 				Button:UpdateState(Button)
 			end
 		end
