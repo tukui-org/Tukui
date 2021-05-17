@@ -91,4 +91,6 @@ local Disable = function(self)
 	self.Text:SetText("")
 end
 
-DataText:Register("Talents", Enable, Disable, Update)
+if T.Retail then
+	DataText:Register("Talents", Enable, Disable, Update)
+end
