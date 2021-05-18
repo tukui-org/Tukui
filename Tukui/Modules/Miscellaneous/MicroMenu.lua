@@ -62,10 +62,6 @@ function MicroMenu:Toggle()
 end
 
 function MicroMenu:Enable()
-	if not C.Misc.MicroMenu then
-		return
-	end
-	
 	local PreviousButton
 	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 	
