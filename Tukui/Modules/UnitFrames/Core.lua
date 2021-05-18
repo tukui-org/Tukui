@@ -953,7 +953,9 @@ function UnitFrames:CreateUnits()
 				end
 				Arena[i]:SetSize(164, 20)
 
-				Movers:RegisterFrame(Arena[i], "Arena #"..i)
+				if i == 1 then
+					Movers:RegisterFrame(Arena[i], "Arena Frames")
+				end
 			end
 
 			self.Units.Arena = Arena
@@ -974,8 +976,10 @@ function UnitFrames:CreateUnits()
 					Boss[i]:SetPoint("BOTTOM", Boss[i - 1], "TOP", 0, 62)
 				end
 				Boss[i]:SetSize(164, 20)
-
-				Movers:RegisterFrame(Boss[i], "Boss #"..i)
+				
+				if i == 1 then
+					Movers:RegisterFrame(Boss[i], "Boss Frames")
+				end
 			end
 
 			self.Units.Boss = Boss
