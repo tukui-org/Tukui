@@ -6,7 +6,7 @@ local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance()
 	
 	if instanceType ~= 'arena' then
-		self.Trinket.Icon:SetTexture("Interface\\Icons\\Ability_pvp_gladiatormedallion")
+		self.Trinket.Icon:SetTexture(select(2, UnitFactionGroup("player")) == "Horde" and "Interface\\Icons\\inv_jewelry_trinketpvp_01" or "Interface\\Icons\\inv_jewelry_trinketpvp_02")
 		self.Trinket:Hide()
 		
 		return
@@ -59,7 +59,7 @@ local Enable = function(self)
 			self.Trinket.Icon = self.Trinket:CreateTexture(nil, "BORDER")
 			self.Trinket.Icon:SetAllPoints(self.Trinket)
 			self.Trinket.Icon:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-			self.Trinket.Icon:SetTexture("Interface\\Icons\\Ability_pvp_gladiatormedallion")
+			self.Trinket.Icon:SetTexture(select(2, UnitFactionGroup("player")) == "Horde" and "Interface\\Icons\\inv_jewelry_trinketpvp_01" or "Interface\\Icons\\inv_jewelry_trinketpvp_02")
 		end
 
 		return true

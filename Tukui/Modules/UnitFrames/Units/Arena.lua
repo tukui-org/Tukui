@@ -147,6 +147,21 @@ function UnitFrames:Arena()
 		self.Debuffs = Debuffs
 	end
 	
+	if T.BCC then
+		local Trinket = CreateFrame("Frame", nil, self)
+		Trinket:SetSize(35, 35)
+		Trinket:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)
+		Trinket:CreateBackdrop()
+		Trinket:CreateShadow()
+		
+		Trinket.Icon = Trinket:CreateTexture(nil, "ARTWORK")
+		Trinket.Icon:SetInside(Trinket)
+		Trinket.Icon:SetTexture(T.MyFaction == "Horde" and "Interface\\Icons\\inv_jewelry_trinketpvp_01" or "Interface\\Icons\\inv_jewelry_trinketpvp_02")
+		Trinket.Icon:SetTexCoord(unpack(T.IconCoord))
+		
+		self.Trinket = Trinket
+	end
+	
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.UnitFrames.HighlightSize})
 	Highlight:SetOutside(self, C.UnitFrames.HighlightSize, C.UnitFrames.HighlightSize)
