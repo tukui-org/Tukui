@@ -296,12 +296,13 @@ function Chat:Reset()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
-	FCF_SetLocked(ChatFrame3, 1)
-	FCF_DockFrame(ChatFrame3)
 	
 	if T.BCC then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 	end
+	
+	FCF_SetLocked(ChatFrame3, 1)
+	FCF_DockFrame(ChatFrame3)
 	
 	FCF_OpenNewWindow(Chat.RightChatName)
 	FCF_UnDockFrame(ChatFrame4)
