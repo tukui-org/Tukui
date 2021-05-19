@@ -352,6 +352,7 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("All", "UnitFrames", "Boss", "Enable boss unit frames")
 	Window:CreateSwitch("All", "UnitFrames", "Arena", "Enable arena unit frames")
 	Window:CreateSwitch("All", "UnitFrames", "TotemBar", "Enable totem bar")
+	Window:CreateSwitch("BCC", "UnitFrames", "PowerTick", "Enable power ticks")
 
 	Window:CreateSection("All", "Scrolling combat text for yourself")
 	Window:CreateSwitch("All", "UnitFrames", "ScrollingCombatText", "Enable scrolling combat text")
