@@ -141,7 +141,7 @@ function UnitFrames:Raid()
 		RaidDebuffs.cd:SetHideCountdownNumbers(true)
 		RaidDebuffs.cd:SetAlpha(.7)
 		RaidDebuffs.onlyMatchSpellID = true
-		RaidDebuffs.showDispellableDebuff = false
+		RaidDebuffs.showDispellableDebuff = true
 		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.time:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.time:SetPoint("CENTER", RaidDebuffs, 1, 0)
