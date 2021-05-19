@@ -2605,8 +2605,11 @@ function HealComm:OnInitialize()
 	do
 		local FirstAid = GetSpellInfo(746)
 
-		spellData[FirstAid] = { ticks = {6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 8, 10}, interval = 1, averages = {
-			66, 114, 161, 301, 400, 640, 800, 1104, 1360, 2000} }
+		spellData[FirstAid] = {
+			ticks = {6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8},
+			interval = 1,
+			averages = {66, 114, 161, 301, 400, 640, 800, 1104, 1360, 2000, 2800, 3400}
+		}
 
 		local _GetHealTargets = GetHealTargets
 
