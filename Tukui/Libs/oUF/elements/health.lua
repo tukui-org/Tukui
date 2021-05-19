@@ -318,8 +318,13 @@ local function Enable(self, unit)
 			element.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
 			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
 		end
-
-		self:RegisterEvent('UNIT_HEALTH', Path)
+		
+		if oUF.Retail then
+			self:RegisterEvent('UNIT_HEALTH', Path)
+		else
+			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
+		end
+		
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 
 		if(element:IsObjectType('StatusBar') and not (element:GetStatusBarTexture() or element:GetStatusBarAtlas())) then
