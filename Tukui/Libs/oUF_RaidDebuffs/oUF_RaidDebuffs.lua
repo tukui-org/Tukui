@@ -81,7 +81,9 @@ do
 		},
 		['SHAMAN'] = {
 			['Magic'] = false,
-			['Curse'] = true,
+			['Curse'] = oUF.Retail and true or false,
+			['Poison'] = true,
+			['Disease'] = true,
 		},
 		['PALADIN'] = {
 			['Poison'] = true,
