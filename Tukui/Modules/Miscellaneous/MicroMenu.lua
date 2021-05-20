@@ -66,6 +66,9 @@ function MicroMenu:Enable()
 		return
 	end
 	
+	MicroMenu:SetFrameStrata("HIGH")
+	MicroMenu:SetFrameLevel(600)
+	
 	if C.Misc.BlizzardMicroMenu then
 		MicroMenu:SetSize(210, 29)
 		MicroMenu:ClearAllPoints()
@@ -92,8 +95,6 @@ function MicroMenu:Enable()
 		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 		MicroMenu:AddHooks()
-		MicroMenu:SetFrameStrata("LOW")
-		MicroMenu:SetFrameLevel(0)
 		MicroMenu:SetSize(250, T.BCC and 298 or 439)
 		MicroMenu:Hide()
 		MicroMenu:SetScript("OnHide", self.Update)
