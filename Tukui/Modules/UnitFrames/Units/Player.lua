@@ -138,8 +138,8 @@ function UnitFrames:Player()
 			Buffs:SetHeight(28)
 			Buffs:SetWidth(252)
 			Buffs.size = 28
-			Buffs.num = 32
-			Buffs.numRow = 4
+			Buffs.num = 40
+			Buffs.numRow = 5
 
 			Buffs.spacing = 4
 			Buffs.initialAnchor = "TOPLEFT"
@@ -170,8 +170,8 @@ function UnitFrames:Player()
 			end
 				
 			Debuffs.size = 28
-			Debuffs.num = 16
-			Debuffs.numRow = 2
+			Debuffs.num = 40
+			Debuffs.numRow = 5
 
 			Debuffs.spacing = 4
 			Debuffs.initialAnchor = "TOPRIGHT"
