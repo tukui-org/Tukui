@@ -375,7 +375,10 @@ function Tooltip:ResetBorderColor()
 	
 	if HealthBar then
 		HealthBar.Backdrop:SetBorderColor(0, 1, 0)
-		HealthBar.Text:Hide()
+		
+		if HealthBar.Text then
+			HealthBar.Text:Hide()
+		end
 		
 		HealthBar:SetStatusBarColor(unpack(T.Colors.reaction[8]))
 	end
