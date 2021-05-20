@@ -8,7 +8,6 @@ local myGUID = UnitGUID("player")
 
 if T.BCC then
 	HealComm = LibStub("LibHealComm-4.0")
-	CheckRange = LibStub("LibRangeCheck-2.0")
 end
 
 -- Lib globals
@@ -632,23 +631,6 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 	end
 end
 
-function UnitFrames:UpdateRange()
-	local Range = self.Range
-	local Unit = self.unit
-
-	if (Unit) then
-		local Distance = select(2, CheckRange:GetRange(Unit))
-
-		if not (Distance) then
-			self:SetAlpha(Range.outsideAlpha)
-		elseif (Distance) then
-			self:SetAlpha(Range.insideAlpha)
-		end
-	else
-		self:SetAlpha(Range.insideAlpha)
-	end
-end
-
 function UnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",
@@ -694,7 +676,7 @@ function UnitFrames:GetPetPartyFramesAttributes()
 end
 
 function UnitFrames:GetRaidFramesAttributes()
-	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show; hide"
+	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "solo" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show; hide"
 
 	return
 		"TukuiRaid",

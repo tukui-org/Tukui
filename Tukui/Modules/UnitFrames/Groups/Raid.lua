@@ -243,7 +243,6 @@ function UnitFrames:Raid()
 		self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
 	else
 		self:Tag(Name, "[Tukui:NameShort]")
-		self.Range.Override = UnitFrames.UpdateRange
 	end
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)

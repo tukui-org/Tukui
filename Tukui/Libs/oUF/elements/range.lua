@@ -49,7 +49,13 @@ local function Update(self, event)
 	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
-		inRange, checkedRange = UnitInRange(unit)
+		if oUF.Retail then
+			inRange, checkedRange = UnitInRange(unit)
+		else
+			inRange = CheckInteractDistance(unit, 4)
+			checkedRange = true
+		end
+		
 		if(checkedRange and not inRange) then
 			self:SetAlpha(element.outsideAlpha)
 		else
