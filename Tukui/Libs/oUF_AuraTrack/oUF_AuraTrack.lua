@@ -200,6 +200,10 @@ else
 		[10278]   = {0.17, 1.00, 0.75}, -- Blessing of Protection(Rank 3)
 		[19746]   = {0.83, 1.00, 0.07}, -- Concentration Aura
 		[32223]   = {0.83, 1.00, 0.07}, -- Crusader Aura
+		[28790]   = {1.00, 1.00, 0.07}, -- Holy Power (armor)
+		[28791]   = {1.00, 1.00, 0.07}, -- Holy Power (attack power)
+		[28793]   = {1.00, 1.00, 0.07}, -- Holy Power (spell damage)
+		[28795]   = {1.00, 1.00, 0.07}, -- Holy Power (mana regeneration)
 	-- Druid
 		[1126]    = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 1)
 		[5232]    = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 2)
