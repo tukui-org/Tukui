@@ -131,6 +131,8 @@ C["Loot"] = {
 }
 
 C["Misc"] = {
+	["MicroMenu"] = true,
+	["BlizzardMicroMenu"] = false,
 	["ItemLevel"] = true,
 	["ThreatBar"] = true,
 	["WorldMapEnable"] = true,

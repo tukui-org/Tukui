@@ -168,6 +168,8 @@ local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
 	
 	Window:CreateSection("All", "Micro Menu")
+	Window:CreateSwitch("ALL", "Misc", "MicroMenu", "Enable our micro menu (if using another micro menu addon, you may need to turn this off)")
+	Window:CreateSwitch("ALL", "Misc", "BlizzardMicroMenu", "Use original micro menu instead of Tukui Micro Menu")
 	Window:CreateDropdown("All", "Misc", "MicroToggle", "Select a keybind for toggling micro menu")
 	Window:CreateSection("All", "Items Level")
 	Window:CreateSwitch("All", "Misc", "ItemLevel", "Display items level on character and inspect frames")

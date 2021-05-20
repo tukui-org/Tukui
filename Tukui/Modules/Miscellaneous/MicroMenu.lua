@@ -62,88 +62,115 @@ function MicroMenu:Toggle()
 end
 
 function MicroMenu:Enable()
-	local PreviousButton
-	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
+	if not C.Misc.MicroMenu then
+		return
+	end
 	
-	MicroMenu:AddHooks()
-	MicroMenu:SetFrameStrata("LOW")
-	MicroMenu:SetFrameLevel(0)
-	MicroMenu:SetSize(250, T.BCC and 298 or 439)
-	MicroMenu:Hide()
-	MicroMenu:SetScript("OnHide", self.Update)
-	MicroMenu:SetScript("OnShow", self.Update)
-	MicroMenu:CreateBackdrop("Transparent")
-	MicroMenu:CreateShadow()
-	MicroMenu:EnableMouse(true)
-	MicroMenu:SetMovable(true)
-	MicroMenu:SetUserPlaced(true)
-	MicroMenu:RegisterForDrag("LeftButton")
-	
-	if Data.MicroMenuPosition then
-		MicroMenu:SetPoint(unpack(Data.MicroMenuPosition))
-	else
+	if C.Misc.BlizzardMicroMenu then
+		MicroMenu:SetSize(210, 29)
+		MicroMenu:ClearAllPoints()
 		MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
-	end
-	
-	MicroMenu:SetScript("OnDragStart", function(self)
-		MicroMenu:StartMoving()
-	end)
-
-	MicroMenu:SetScript("OnDragStop", function(self)
-		MicroMenu:StopMovingOrSizing()
-
-		local A1, P, A2, X, Y = MicroMenu:GetPoint()
-
-		Data.MicroMenuPosition = {A1, "UIParent", A2, X, Y}
-	end)
-
-	MainMenuBarBackpackButton:SetParent(T.Hider)
-	
-	for i = 1, #MICRO_BUTTONS do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-
-		Button:StripTextures()
-		Button:SetAlpha(0)
-		Button:SetParent(MicroMenu)
-		Button:ClearAllPoints()
-		Button:SetSize(230, 49)
-		Button:CreateBackdrop()
 		
-		Button.Backdrop:SetParent(MicroMenu)
-		Button.Backdrop:ClearAllPoints()
-		Button.Backdrop:SetPoint("LEFT", Button, "LEFT", 0, 0)
-		Button.Backdrop:SetPoint("TOP", Button, "TOP", 0, -18)
-		Button.Backdrop:SetPoint("RIGHT", Button, "RIGHT", 0, 0)
-		Button.Backdrop:SetPoint("BOTTOM", Button, "BOTTOM", 0, 0)
-		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
-		Button.Backdrop:CreateShadow()
-		Button.Backdrop:Hide()
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+
+			UpdateMicroButtonsParent(MicroMenu)
+			
+			Button:ClearAllPoints()
+
+			-- Reposition them
+			if i == 1 then
+				Button:SetPoint("LEFT", MicroMenu, "LEFT", 0, 10)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", -3, 0)
+			end
+		end
 		
-		Button.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
-		Button.Text:SetFontTemplate(C.Medias.Font, 12)
-		Button.Text:SetText(Button.tooltipText)
-		Button.Text:SetPoint("BOTTOM", 2, 11)
-		Button.Text:SetTextColor(1, 1, 1)
-		
-		-- Reposition them
-		if i == 1 then
-			Button:SetPoint("TOP", MicroMenu, "TOP", 0, 6)
+		T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
+	else
+		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
+
+		MicroMenu:AddHooks()
+		MicroMenu:SetFrameStrata("LOW")
+		MicroMenu:SetFrameLevel(0)
+		MicroMenu:SetSize(250, T.BCC and 298 or 439)
+		MicroMenu:Hide()
+		MicroMenu:SetScript("OnHide", self.Update)
+		MicroMenu:SetScript("OnShow", self.Update)
+		MicroMenu:CreateBackdrop("Transparent")
+		MicroMenu:CreateShadow()
+		MicroMenu:EnableMouse(true)
+		MicroMenu:SetMovable(true)
+		MicroMenu:SetUserPlaced(true)
+		MicroMenu:RegisterForDrag("LeftButton")
+
+		if Data.MicroMenuPosition then
+			MicroMenu:SetPoint(unpack(Data.MicroMenuPosition))
 		else
-			Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 14)
+			MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 		end
 
-		-- Hide on a click
-		if Button.newbieText ~= NEWBIE_TOOLTIP_MAINMENU then
-			Button:HookScript("OnClick", MicroMenu.Toggle)
+		MicroMenu:SetScript("OnDragStart", function(self)
+			MicroMenu:StartMoving()
+		end)
+
+		MicroMenu:SetScript("OnDragStop", function(self)
+			MicroMenu:StopMovingOrSizing()
+
+			local A1, P, A2, X, Y = MicroMenu:GetPoint()
+
+			Data.MicroMenuPosition = {A1, "UIParent", A2, X, Y}
+		end)
+
+		MainMenuBarBackpackButton:SetParent(T.Hider)
+
+		for i = 1, #MICRO_BUTTONS do
+			local Button = _G[MICRO_BUTTONS[i]]
+			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+
+			Button:StripTextures()
+			Button:SetAlpha(0)
+			Button:SetParent(MicroMenu)
+			Button:ClearAllPoints()
+			Button:SetSize(230, 49)
+			Button:CreateBackdrop()
+
+			Button.Backdrop:SetParent(MicroMenu)
+			Button.Backdrop:ClearAllPoints()
+			Button.Backdrop:SetPoint("LEFT", Button, "LEFT", 0, 0)
+			Button.Backdrop:SetPoint("TOP", Button, "TOP", 0, -18)
+			Button.Backdrop:SetPoint("RIGHT", Button, "RIGHT", 0, 0)
+			Button.Backdrop:SetPoint("BOTTOM", Button, "BOTTOM", 0, 0)
+			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
+			Button.Backdrop:CreateShadow()
+			Button.Backdrop:Hide()
+
+			Button.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
+			Button.Text:SetFontTemplate(C.Medias.Font, 12)
+			Button.Text:SetText(Button.tooltipText)
+			Button.Text:SetPoint("BOTTOM", 2, 11)
+			Button.Text:SetTextColor(1, 1, 1)
+
+			-- Reposition them
+			if i == 1 then
+				Button:SetPoint("TOP", MicroMenu, "TOP", 0, 6)
+			else
+				Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 14)
+			end
+
+			-- Hide on a click
+			if Button.newbieText ~= NEWBIE_TOOLTIP_MAINMENU then
+				Button:HookScript("OnClick", MicroMenu.Toggle)
+			end
+
+			Button.ClearAllPoints = Noop
+			Button.SetPoint = Noop
+			Button.SetSize = Noop
 		end
-		
-		Button.ClearAllPoints = Noop
-		Button.SetPoint = Noop
-		Button.SetSize = Noop
+
+		UpdateMicroButtonsParent(T.Hider)
 	end
-	
-	UpdateMicroButtonsParent(T.Hider)
 	
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	
