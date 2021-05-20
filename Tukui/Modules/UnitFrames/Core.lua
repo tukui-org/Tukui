@@ -4,6 +4,7 @@ local oUF = Plugin.oUF or oUF
 local Noop = function() end
 local UnitFrames = T["UnitFrames"]
 local HealComm, CheckRange
+local myGUID = UnitGUID("player")
 
 if T.BCC then
 	HealComm = LibStub("LibHealComm-4.0")
