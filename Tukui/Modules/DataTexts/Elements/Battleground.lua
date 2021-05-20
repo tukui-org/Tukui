@@ -12,7 +12,6 @@ function BGFrame:OnEnter()
 
 	for i = 1, GetNumBattlefieldScores() do
 		local Name, KillingBlows, HonorableKills, Deaths, HonorGained = GetBattlefieldScore(i)
-		local Columns = C_PvP.GetMatchPVPStatColumns()
 		
 		if Name and Name == T.MyName then
 			GameTooltip:SetOwner(T.Chat.Panels.LeftChat, "ANCHOR_TOPLEFT", 0, 16)
@@ -24,12 +23,16 @@ function BGFrame:OnEnter()
 			GameTooltip:AddDoubleLine(DEATHS, Deaths, 1, 1, 1)
 			GameTooltip:AddDoubleLine(HONOR, format("%d", HonorGained), 1, 1, 1)
 			
-			if Columns then
-				for index, stat in ipairs(Columns) do
-					local Name = stat.name
-					
-					if Name and strlen(Name) > 0 then
-						GameTooltip:AddDoubleLine(Name, GetBattlefieldStatData(i, index), 1, 1, 1)
+			if C_PvP.GetMatchPVPStatColumns then
+				local Columns = C_PvP.GetMatchPVPStatColumns()
+				
+				if Columns then
+					for index, stat in ipairs(Columns) do
+						local Name = stat.name
+
+						if Name and strlen(Name) > 0 then
+							GameTooltip:AddDoubleLine(Name, GetBattlefieldStatData(i, index), 1, 1, 1)
+						end
 					end
 				end
 			end
