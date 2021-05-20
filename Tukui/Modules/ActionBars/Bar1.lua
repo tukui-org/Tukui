@@ -10,7 +10,13 @@ function ActionBars:CreateBar1()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local Druid, Rogue, Warrior, Priest = "", "", "", ""
 	local ButtonsPerRow = C.ActionBars.Bar1ButtonsPerRow
-	local NumRow = ceil(12 / ButtonsPerRow)
+	local NumButtons = C.ActionBars.Bar1NumButtons
+
+	if NumButtons <= ButtonsPerRow then
+		ButtonsPerRow = NumButtons
+	end
+
+	local NumRow = ceil(NumButtons / ButtonsPerRow)
 	
 	local ActionBar1 = CreateFrame("Frame", "TukuiActionBar1", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
@@ -107,15 +113,19 @@ function ActionBars:CreateBar1()
 					
 				ActionBars:SkinButton(Button)
 
-				if (i == 1) then
-					Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
-				elseif (i == NumPerRows + 1) then
-					Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
-						
-					NumPerRows = NumPerRows + ButtonsPerRow
-					NextRowButtonAnchor = _G["ActionButton"..i]
+				if i <= NumButtons then
+					if (i == 1) then
+						Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
+					elseif (i == NumPerRows + 1) then
+						Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+						NumPerRows = NumPerRows + ButtonsPerRow
+						NextRowButtonAnchor = _G["ActionButton"..i]
+					else
+						Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+					end
 				else
-					Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+					Button:SetPoint("TOP", UIParent, "TOP", 0, 200)
 				end
 			end
 		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then

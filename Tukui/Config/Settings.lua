@@ -44,6 +44,7 @@ C["ActionBars"] = {
 	["Bar3ButtonsPerRow"] = 6,
 	["Bar4ButtonsPerRow"] = 1,
 	["Bar5ButtonsPerRow"] = 1,
+	["Bar1NumButtons"] = 12,
 	["Bar2NumButtons"] = 12,
 	["Bar3NumButtons"] = 12,
 	["Bar4NumButtons"] = 12,

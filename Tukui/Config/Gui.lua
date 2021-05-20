@@ -52,6 +52,7 @@ local ActionBars = function(self)
 	Window:CreateSlider("All", "ActionBars", "BarPetButtonsPerRow", "Bar Pet, number of buttons per row", 1, 10, 1)
 	
 	Window:CreateSection("All", "Amount of buttons per bars")
+	Window:CreateSlider("All", "ActionBars", "Bar1NumButtons", "Bar #1, number of buttons needed?", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "Bar2NumButtons", "Bar #2, number of buttons needed?", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "Bar3NumButtons", "Bar #3, number of buttons needed?", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "Bar4NumButtons", "Bar #4, number of buttons needed?", 1, 12, 1)
