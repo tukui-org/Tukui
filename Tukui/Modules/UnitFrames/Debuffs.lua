@@ -375,6 +375,65 @@ elseif T.BCC then
 	Debuffs["PvE"] = {
 		["type"] = "Whitelist",
 		["spells"] = {
+			
+		---------------
+		-- Pre-Patch --
+		---------------
+			
+			-- Onyxia's Lair
+				[18431] = Priority(2), --Bellowing Roar
+			-- Molten Core
+				[19703] = Priority(2), --Lucifron's Curse
+				[19408] = Priority(2), --Panic
+				[19716] = Priority(2), --Gehennas' Curse
+				[20277] = Priority(2), --Fist of Ragnaros
+				[20475] = Priority(6), --Living Bomb
+				[19695] = Priority(6), --Inferno
+				[19659] = Priority(2), --Ignite Mana
+				[19714] = Priority(2), --Deaden Magic
+				[19713] = Priority(2), --Shazzrah's Curse
+			-- Blackwing's Lair
+				[23023] = Priority(2), --Conflagration
+				[18173] = Priority(2), --Burning Adrenaline
+				[24573] = Priority(2), --Mortal Strike
+				[23340] = Priority(2), --Shadow of Ebonroc
+				[23170] = Priority(2), --Brood Affliction: Bronze
+				[22687] = Priority(2), --Veil of Shadow
+			-- Zul'Gurub
+				[23860] = Priority(2), --Holy Fire
+				[22884] = Priority(2), --Psychic Scream
+				[23918] = Priority(2), --Sonic Burst
+				[24111] = Priority(2), --Corrosive Poison
+				[21060] = Priority(2), --Blind
+				[24328] = Priority(2), --Corrupted Blood
+				[16856] = Priority(2), --Mortal Strike
+				[24664] = Priority(2), --Sleep
+				[17172] = Priority(2), --Hex
+				[24306] = Priority(2), --Delusions of Jin'do
+				[24099] = Priority(2), --Poison Bolt Volley
+			-- Ahn'Qiraj Ruins
+				[25646] = Priority(2), --Mortal Wound
+				[25471] = Priority(2), --Attack Order
+				[96] = Priority(2), --Dismember
+				[25725] = Priority(2), --Paralyze
+				[25189] = Priority(2), --Enveloping Winds
+			-- Ahn'Qiraj Temple
+				[785] = Priority(2), --True Fulfillment
+				[26580] = Priority(2), --Fear
+				[26050] = Priority(2), --Acid Spit
+				[26180] = Priority(2), --Wyvern Sting
+				[26053] = Priority(2), --Noxious Poison
+				[26613] = Priority(2), --Unbalancing Strike
+				[26029] = Priority(2), --Dark Glare
+			-- Naxxramas
+				[28732] = Priority(2), --Widow's Embrace
+				[28622] = Priority(2), --Web Wrap
+				[28169] = Priority(2), --Mutating Injection
+				[29213] = Priority(2), --Curse of the Plaguebringer
+				[28835] = Priority(2), --Mark of Zeliek
+				[27808] = Priority(2), --Frost Blast
+				[28410] = Priority(2), --Chains of Kel'Thuzad
+				[27819] = Priority(2), --Detonate Mana
 
 		-------------
 		-- Phase 1 --
