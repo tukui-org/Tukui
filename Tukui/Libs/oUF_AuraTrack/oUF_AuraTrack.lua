@@ -285,12 +285,15 @@ else
 		[10405]   = {0.00, 0.00, 0.26}, -- Stoneskin Totem(Rank 6)
 		[25506]   = {0.00, 0.00, 0.26}, -- Stoneskin Totem(Rank 7)
 		[25507]   = {0.00, 0.00, 0.26}, -- Stoneskin Totem(Rank 8)
-		[8076]    = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 1)
-		[8162]    = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 2)
-		[8163]    = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 3)
-		[10441]   = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 4)
-		[25362]   = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 5)
-		[25527]   = {0.78, 0.61, 0.43}, -- Strength of Earth(Rank 6)
+		[8076]    = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 1)
+		[8162]    = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 2)
+		[8163]    = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 3)
+		[10441]   = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 4)
+		[25362]   = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 5)
+		[25527]   = {0.78, 0.61, 0.43}, -- Strength of Earth Totem(Rank 6)
+		[8836]    = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 1)
+		[10626]   = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 2)
+		[25360]   = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 3)
 	-- Warlock
 		[5597]    = {0.89, 0.09, 0.05}, -- Unending Breath
 		[6512]    = {0.2, 0.8, 0.2}, -- Detect Lesser Invisibility
@@ -460,7 +463,6 @@ local Update = function(self, event, unit)
 	
 	for i = ID + 1, self.AuraTrack.MaxAuras do
 		if self.AuraTrack.Auras[i] and self.AuraTrack.Auras[i]:IsShown() then
-			self.AuraTrack.Auras[i]:SetScript("OnUpdate", nil)
 			self.AuraTrack.Auras[i]:Hide()
 		end
 	end
