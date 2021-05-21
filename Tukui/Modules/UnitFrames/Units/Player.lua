@@ -69,20 +69,17 @@ function UnitFrames:Player()
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
+	
+	local Prediction = CreateFrame("StatusBar", nil, Power)
+	Prediction:SetReverseFill(true)
+	Prediction:SetPoint("TOP")
+	Prediction:SetPoint("BOTTOM")
+	Prediction:SetPoint("RIGHT", Power:GetStatusBarTexture(), "RIGHT")
+	Prediction:SetWidth(250)
+	Prediction:SetStatusBarTexture(PowerTexture)
+	Prediction:SetStatusBarColor(1, 1, 1, .3)
 
 	if T.Retail then
-		local Prediction = CreateFrame("StatusBar", nil, Power)
-		Prediction:SetReverseFill(true)
-		Prediction:SetPoint("TOP")
-		Prediction:SetPoint("BOTTOM")
-		Prediction:SetPoint("RIGHT", Power:GetStatusBarTexture(), "RIGHT")
-		Prediction:SetWidth(250)
-		Prediction:SetStatusBarTexture(PowerTexture)
-		Prediction:SetStatusBarColor(1, 1, 1, .3)
-		
-		self.PowerPrediction = {}
-		self.PowerPrediction.mainBar = Prediction
-
 		local AdditionalPower = CreateFrame("StatusBar", self:GetName().."AdditionalPower", Health)
 		AdditionalPower:SetHeight(6)
 		AdditionalPower:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
@@ -568,7 +565,8 @@ function UnitFrames:Player()
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power
-	
+	self.PowerPrediction = {}
+	self.PowerPrediction.mainBar = Prediction
 	self.Name = Name
 	self.Power.bg = Power.Background
 	self.CombatIndicator = Combat

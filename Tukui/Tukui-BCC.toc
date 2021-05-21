@@ -43,6 +43,7 @@ Libs\oUF\elements\leaderindicator.lua
 Libs\oUF\elements\phaseindicator.lua
 Libs\oUF\elements\portrait.lua
 Libs\oUF\elements\power.lua
+Libs\oUF\elements\powerprediction.lua
 Libs\oUF\elements\pvpindicator.lua
 Libs\oUF\elements\questindicator.lua
 Libs\oUF\elements\raidroleindicator.lua

@@ -64,14 +64,18 @@ local function Update(self, event, unit)
 		element:PreUpdate(unit)
 	end
 
-	local _, _, _, startTime, endTime, _, _, _, spellID = UnitCastingInfo(unit)
+	local _, _, _, startTime, endTime, _, _, notInterruptible, spellID = UnitCastingInfo(unit)
 	local mainPowerType = UnitPowerType(unit)
-	local hasAltManaBar = ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass]
-		and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType]
+	local hasAltManaBar = oUF.Retail and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass] and ALT_MANA_BAR_PAIR_DISPLAY_INFO[playerClass][mainPowerType]
 	local mainCost, altCost = 0, 0
+	
+	if oUF.BCC then
+		spellID = notInterruptible
+	end
 
 	if(event == 'UNIT_SPELLCAST_START' and startTime ~= endTime) then
 		local costTable = GetSpellPowerCost(spellID)
+		
 		-- hasRequiredAura is always false if there's only 1 subtable
 		local checkRequiredAura = #costTable > 1
 
