@@ -294,6 +294,7 @@ else
 		[8836]    = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 1)
 		[10626]   = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 2)
 		[25360]   = {1.00, 1.00, 1.00}, -- Grace of Air Totem(Rank 3)
+		[2895]    = {1.00, 1.00, 1.00}, -- Wrath of Air Totem(Rank 1)
 	-- Warlock
 		[5597]    = {0.89, 0.09, 0.05}, -- Unending Breath
 		[6512]    = {0.2, 0.8, 0.2}, -- Detect Lesser Invisibility
