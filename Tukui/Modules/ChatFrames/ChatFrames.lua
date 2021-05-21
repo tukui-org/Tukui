@@ -314,6 +314,7 @@ function Chat:Reset()
 		FCF_OpenNewWindow(GLOBAL_CHANNELS)
 		FCF_SetLocked(ChatFrame6, 1)
 		FCF_DockFrame(ChatFrame6)
+		FCF_SetChatWindowFontSize(nil, ChatFrame6, 12)
 	end
 	
 	FCF_SetChatWindowFontSize(nil, ChatFrame1, 12)
@@ -335,7 +336,7 @@ function Chat:Reset()
 	
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
-		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2) then
+		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
