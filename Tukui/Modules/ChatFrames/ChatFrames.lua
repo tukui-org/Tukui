@@ -291,6 +291,9 @@ function Chat:Reset()
 		return
 	end
 	
+	-- Reset chat database
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions = Chat.Positions
+	
 	-- Create our custom chatframes
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
