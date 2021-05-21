@@ -564,7 +564,8 @@ function UnitFrames:UpdateTotemTimer(elapsed)
 		local TimeLeft = math.ceil(self.Duration - (GetTime() - self.Start))
 
 		if TimeLeft > -.5 then
-			self.Text:SetText(TimeLeft)
+			self:SetMinMaxValues(0, self.Duration)
+			self:SetValue(TimeLeft)
 		end
 		
 		self.Elapsed = 0.5
@@ -592,12 +593,16 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		Totem.Start = Start
 		Totem:Show()
 
-		if Totem.Icon then
+		if (Totem.Icon) then
 			Totem.Icon:SetTexture(Icon)
 		end
 
 		if (Totem.Cooldown) then
 			Totem.Cooldown:SetCooldown(Start, Duration)
+		end
+		
+		if Totem.SetValue then
+			Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 		end
 
 		-- Workaround to allow right-click destroy totem
@@ -619,10 +624,13 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		--Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 	else
 		Totem:Hide()
-		--Totem:SetScript("OnUpdate", nil)
 
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
+		end
+		
+		if Totem.SetValue then
+			Totem:SetScript("OnUpdate", nil)
 		end
 	end
 

@@ -107,12 +107,11 @@ function UnitFrames:Player()
 	Name:SetAlpha(0)
 
 	if C.UnitFrames.PlayerAuraBars then
-		local Gap = (T.MyClass == "ROGUE" or T.MyClass == "DRUID") and 8 or 0
 		local AuraBars = CreateFrame("Frame", self:GetName().."AuraBars", self)
 
 		AuraBars:SetHeight(10)
 		AuraBars:SetWidth(250)
-		AuraBars:SetPoint("TOPLEFT", 0, 12 + Gap)
+		AuraBars:SetPoint("TOPLEFT", 0, 12)
 		AuraBars.auraBarTexture = HealthTexture
 		AuraBars.PostCreateBar = UnitFrames.PostCreateAuraBar
 		AuraBars.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
@@ -500,47 +499,90 @@ function UnitFrames:Player()
 	if (C.UnitFrames.TotemBar) then
 		local Bar = CreateFrame("Frame", "TukuiTotemBar", self)
 
-		Bar:SetFrameStrata(self:GetFrameStrata())
-		Bar:SetPoint("CENTER", UIParent, "CENTER", 0, -250)
-		Bar:SetSize(140, 32)
+		if C.UnitFrames.TotemBarStyle.Value == "On Screen" then
+			Bar:SetFrameStrata(self:GetFrameStrata())
+			Bar:SetPoint("CENTER", UIParent, "CENTER", 0, -250)
+			Bar:SetSize(140, 32)
 
-		-- Totem Bar
-		for i = 1, MAX_TOTEMS do
-			Bar[i] = CreateFrame("Button", "TukuiTotemBarSlot"..i, Bar)
-			Bar[i]:CreateBackdrop()
-			Bar[i]:SetHeight(32)
-			Bar[i]:SetWidth(32)
+			-- Totem Bar
+			for i = 1, MAX_TOTEMS do
+				Bar[i] = CreateFrame("Button", "TukuiTotemBarSlot"..i, Bar)
+				Bar[i]:CreateBackdrop()
+				Bar[i]:SetHeight(32)
+				Bar[i]:SetWidth(32)
 
-			Bar[i].Backdrop:SetParent(Bar)
-			Bar[i].Backdrop:SetFrameLevel(Bar[i]:GetFrameLevel() - 1)
-			Bar[i].Backdrop:CreateShadow()
+				Bar[i].Backdrop:SetParent(Bar)
+				Bar[i].Backdrop:SetFrameLevel(Bar[i]:GetFrameLevel() - 1)
+				Bar[i].Backdrop:CreateShadow()
 
-			Bar[i].Backdrop.BackgroundTexture = Bar[i].Backdrop:CreateTexture(nil, "OVERLAY", 1)
-			Bar[i].Backdrop.BackgroundTexture:SetAllPoints(Bar[i].Backdrop)
-			Bar[i].Backdrop.BackgroundTexture:SetTexture(C.Medias.Blank)
-			Bar[i].Backdrop.BackgroundTexture:SetVertexColor(unpack(T.Colors.totems[i]))
+				Bar[i].Backdrop.BackgroundTexture = Bar[i].Backdrop:CreateTexture(nil, "OVERLAY", 1)
+				Bar[i].Backdrop.BackgroundTexture:SetAllPoints(Bar[i].Backdrop)
+				Bar[i].Backdrop.BackgroundTexture:SetTexture(C.Medias.Blank)
+				Bar[i].Backdrop.BackgroundTexture:SetVertexColor(unpack(T.Colors.totems[i]))
 
-			Bar[i].Text = Bar[i]:CreateFontString(nil, "OVERLAY")
-			Bar[i].Text:SetPoint("CENTER", 1, 0)
-			Bar[i].Text:SetFontTemplate(C.Medias.Font, 16)
+				Bar[i].Text = Bar[i]:CreateFontString(nil, "OVERLAY")
+				Bar[i].Text:SetPoint("CENTER", 1, 0)
+				Bar[i].Text:SetFontTemplate(C.Medias.Font, 16)
 
-			if i == 1 then
-				Bar[i]:SetPoint("TOPLEFT", Bar, "TOPLEFT", 0, 0)
-			else
-				Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 4, 0)
+				if i == 1 then
+					Bar[i]:SetPoint("TOPLEFT", Bar, "TOPLEFT", 0, 0)
+				else
+					Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 4, 0)
+				end
+
+				Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER", 7)
+				Bar[i].Icon:SetInside()
+				Bar[i].Icon:SetAlpha(1)
+				Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+
+				Bar[i].Cooldown = CreateFrame("Cooldown", nil, Bar[i], "CooldownFrameTemplate")
+				Bar[i].Cooldown:SetInside()
+				Bar[i].Cooldown:SetFrameLevel(Bar[i]:GetFrameLevel())
 			end
+			
+			Movers:RegisterFrame(Bar, "Totem Bar")
+		elseif C.UnitFrames.TotemBarStyle.Value == "On Player" then
+			Bar:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 10)
+			Bar:SetFrameStrata(Health:GetFrameStrata())
+			Bar:SetFrameLevel(Health:GetFrameLevel() + 3)
+			Bar:SetSize(252, 10)
+			Bar:CreateBackdrop()
 
-			Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER", 7)
-			Bar[i].Icon:SetInside()
-			Bar[i].Icon:SetAlpha(1)
-			Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+			for i = 1, 4 do
+				local r, g, b = unpack(T.Colors.totems[i])
 
-			Bar[i].Cooldown = CreateFrame("Cooldown", nil, Bar[i], "CooldownFrameTemplate")
-			Bar[i].Cooldown:SetInside()
-			Bar[i].Cooldown:SetFrameLevel(Bar[i]:GetFrameLevel())
+				Bar[i] = CreateFrame("StatusBar", self:GetName().."Totem"..i, Bar)
+				Bar[i]:SetStatusBarTexture(HealthTexture)
+				Bar[i]:SetStatusBarColor(r, g, b)
+				Bar[i]:SetMinMaxValues(0, 1)
+				Bar[i]:SetValue(0)
+
+				if i == 1 then
+					Bar[i]:SetPoint("TOPLEFT", Bar, "TOPLEFT", 1, -1)
+					Bar[i]:SetSize(61, 8)
+				else
+					Bar[i]:SetPoint("TOPLEFT", Bar[i-1], "TOPRIGHT", 1, 0)
+					Bar[i]:SetSize(62, 8)
+				end
+				
+				Bar[i].Background = Bar[i]:CreateTexture(nil, "BORDER")
+				Bar[i].Background:SetParent(Bar)
+				Bar[i].Background:SetAllPoints(Bar[i])
+				Bar[i].Background:SetTexture(HealthTexture)
+				Bar[i].Background:SetVertexColor(r, g, b)
+				Bar[i].Background:SetAlpha(.15)
+			end
+			
+			self.Shadow:SetPoint("TOPLEFT", -4, 12)
+			
+			if self.AuraBars then
+				self.AuraBars:ClearAllPoints()
+				self.AuraBars:SetPoint("TOPLEFT", 0, 22)
+			elseif self.Buffs then
+				self.Buffs:ClearAllPoints()
+				self.Buffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 13)
+			end
 		end
-
-		Movers:RegisterFrame(Bar, "Totem Bar")
 
 		-- To allow right-click destroy totem.
 		TotemFrame:SetParent(UIParent)

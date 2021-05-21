@@ -297,6 +297,14 @@ C["Textures"] = {
 C["UnitFrames"] = {
 	["Enable"] = true,
 	["TotemBar"] = T.MyClass == "SHAMAN" and true or false,
+	["TotemBarStyle"] = {
+		["Options"] = {
+			["On Screen"] = "On Screen",
+			["On Player"] = "On Player",
+		},
+
+		["Value"] = "On Screen",
+	},
 	["ClassBar"] = true,
 	["HealComm"] = true,
 	["PlayerAuraBars"] = false,
