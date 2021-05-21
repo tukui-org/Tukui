@@ -73,7 +73,6 @@ function Minimap:StyleMinimap()
 	local Mail = MiniMapMailFrame
 	local MailBorder = MiniMapMailBorder
 	local MailIcon = MiniMapMailIcon
-	local Tracking = MiniMapTrackingButton
 
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
@@ -88,6 +87,12 @@ function Minimap:StyleMinimap()
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
 	
+	MiniMapTracking:SetParent(Minimap.MinimapZone)
+	MiniMapTracking:ClearAllPoints()
+	MiniMapTracking:SetAllPoints()
+	MiniMapTracking:StripTextures()
+	MiniMapTrackingIcon:SetParent(T.Hider)
+	
 	if T.Retail then
 		local QueueStatusMinimapButton = QueueStatusMinimapButton
 		local QueueStatusFrame = QueueStatusFrame
@@ -97,6 +102,12 @@ function Minimap:StyleMinimap()
 		
 		self:SetArchBlobRingScalar(0)
 		self:SetQuestBlobRingScalar(0)
+		
+		MiniMapTrackingButtonBorder:Kill()
+		MiniMapTrackingButton:SetParent(Minimap.MinimapZone)
+		MiniMapTrackingButton:ClearAllPoints()
+		MiniMapTrackingButton:SetAllPoints()
+		MiniMapTrackingButton:StripTextures()
 		
 		QueueStatusMinimapButton:SetParent(Minimap)
 		QueueStatusMinimapButton:ClearAllPoints()
@@ -133,10 +144,6 @@ function Minimap:StyleMinimap()
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
 		
 		MiniMapTrackingBorder:Kill()
-		MiniMapTracking:SetParent(MinimapZone)
-		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetAllPoints()
-		MiniMapTracking:StripTextures()
 	end
 end
 
@@ -220,22 +227,6 @@ function Minimap:AddZoneAndCoords()
 
 	-- Update coordinates
 	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
-	
-	-- Put tracking button over zone
-	if T.Retail then
-		MiniMapTracking:Kill()
-		MiniMapTrackingButtonBorder:Kill()
-		MiniMapTrackingButton:SetParent(MinimapZone)
-		MiniMapTrackingButton:ClearAllPoints()
-		MiniMapTrackingButton:SetAllPoints()
-		MiniMapTrackingButton:StripTextures()
-	else
-		MiniMapTrackingBorder:Kill()
-		MiniMapTracking:SetParent(MinimapZone)
-		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetAllPoints()
-		MiniMapTracking:StripTextures()
-	end
 
 	-- Register
 	Minimap.MinimapZone = MinimapZone
@@ -496,10 +487,10 @@ end
 
 function Minimap:Enable()
 	self:DisableMinimapElements()
+	self:AddZoneAndCoords()
 	self:StyleMinimap()
 	self:PositionMinimap()
 	self:AddMinimapDataTexts()
-	self:AddZoneAndCoords()
 	self:EnableMouseOver()
 	self:EnableMouseWheelZoom()
 	self:AddTaxiEarlyExit()
