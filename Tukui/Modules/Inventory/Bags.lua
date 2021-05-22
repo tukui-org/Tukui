@@ -20,6 +20,7 @@ local Bag_Normal = 1
 local Bag_SoulShard = 2
 local Bag_Profession = 3
 local Bag_Quiver = 4
+local KEYRING_CONTAINER = KEYRING_CONTAINER
 local BAGTYPE_QUIVER = 0x0001 + 0x0002
 local BAGTYPE_SOUL = 0x004
 local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 + 0x0400
@@ -325,6 +326,7 @@ function Bags:CreateContainer(storagetype, ...)
 		local Sort = CreateFrame("Button", nil, Container)
 		local SearchBox = CreateFrame("EditBox", nil, Container)
 		local ToggleBags = CreateFrame("Button", nil, Container)
+		local Keys = CreateFrame("Button", nil, Container)
 
 		BagsContainer:SetParent(Container)
 		BagsContainer:SetWidth(10)
@@ -451,6 +453,22 @@ function Bags:CreateContainer(storagetype, ...)
 
 			SortBags()
 		end)
+		
+		Keys:SetSize(16, 16)
+		Keys:SetPoint("RIGHT", Sort, "LEFT", -2, 0)
+		Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
+		Keys.Texture:SetSize(14, 14)
+		Keys.Texture:SetPoint("CENTER")
+		Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon.PNG")
+		Keys:SetScript("OnEnter", GameTooltip_Hide)
+		Keys:SetScript("OnClick", function()
+			if not IsBagOpen(KEYRING_CONTAINER) then
+				ToggleBag(KEYRING_CONTAINER)
+			else
+				ToggleAllBags()
+				ToggleAllBags()
+			end
+		end)		
 
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
@@ -746,9 +764,10 @@ end
 
 function Bags:BagUpdate(id)
 	local Size = GetContainerNumSlots(id)
-	
+	local ContainerNumber = IsBagOpen(KEYRING_CONTAINER) and 1 or id + 1
+
 	for Slot = 1, Size do
-		local Button = _G["ContainerFrame"..(id + 1).."Item"..Slot]
+		local Button = _G["ContainerFrame"..ContainerNumber.."Item"..Slot]
 
 		if Button then
 			if not Button:IsShown() then
@@ -794,7 +813,7 @@ function Bags:BagUpdate(id)
 				-- Hunter Quiver Slots
 				Button.TypeStatus:SetStatusBarColor(unpack(T.Colors.class["HUNTER"]))
 			end
-
+			
 			self:SlotUpdate(id, Button)
 		end
 	end
@@ -802,18 +821,20 @@ end
 
 function Bags:UpdateAllBags()
 	-- check if containers changed
-	for i = 1, 5 do
-		local ContainerSize = _G["ContainerFrame"..i].size
+	if not NeedBagRefresh then
+		for i = 1, 5 do
+			local ContainerSize = _G["ContainerFrame"..i].size
 
-		if ContainerSize ~= BagSize[i] then
-			NeedBagRefresh = true
+			if ContainerSize ~= BagSize[i] then
+				NeedBagRefresh = true
 
-			BagSize[i] = ContainerSize
+				BagSize[i] = ContainerSize
+			end
 		end
-	end
-
-	if (not NeedBagRefresh) then
-		return
+		
+		if (not NeedBagRefresh) then
+			return
+		end
 	end
 
 	-- Refresh layout if a refresh if found
@@ -822,6 +843,10 @@ function Bags:UpdateAllBags()
 
 	for Bag = 1, 5 do
 		local ID = Bag - 1
+		
+		if IsBagOpen(KEYRING_CONTAINER) then
+			ID = -2
+		end
 		
 		local Slots = GetContainerNumSlots(ID)
 
@@ -876,6 +901,10 @@ function Bags:UpdateAllBags()
 		end
 
 		Bags:BagUpdate(ID)
+		
+		if IsBagOpen(KEYRING_CONTAINER) then
+			break
+		end
 	end
 
 	NeedBagRefresh = false
@@ -987,12 +1016,18 @@ function Bags:OpenBag(id)
 	local Size = GetContainerNumSlots(id)
 	local OpenFrame = ContainerFrame_GetOpenFrame()
 
-	for i = 1, Size, 1 do
+	for i = 1, 40 do
 		local Index = Size - i + 1
 		local Button = _G[OpenFrame:GetName().."Item"..i]
-
-		Button:SetID(Index)
-		Button:Show()
+		
+		if Button then
+			if (i > Size) then
+				Button:Hide()
+			else
+				Button:SetID(Index)
+				Button:Show()
+			end
+		end
 	end
 
 	OpenFrame.size = Size
@@ -1065,6 +1100,10 @@ function Bags:CloseAllBags()
 	end
 
 	CloseAllBags()
+	
+	if IsBagOpen(KEYRING_CONTAINER) then
+		CloseBag(KEYRING_CONTAINER)
+	end
 
 	PlaySound(SOUNDKIT.IG_BACKPACK_CLOSE)
 end
@@ -1078,40 +1117,61 @@ function Bags:CloseAllBankBags()
 	end
 end
 
-function Bags:ToggleBags(openonly)
-	if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) then
-		if T.Retail and ReagentBankFrame:IsShown() then
+function Bags:ToggleBags(id, openonly)
+	if id == KEYRING_CONTAINER then
+		if not IsBagOpen(KEYRING_CONTAINER) then
+			CloseAllBags()
+			CloseBankBagFrames()
+			CloseBankFrame()
+			
+			NeedBagRefresh = true
+			
+			Bags:OpenBag(id)
+			Bags:UpdateAllBags()
+			
+			NeedBagRefresh = true
+		else
+			CloseBag(id)
+		end
+	else
+		if (self.Bag:IsShown() and BankFrame:IsShown()) and (not self.Bank:IsShown()) then
+			if T.Retail and ReagentBankFrame:IsShown() then
+				return
+			end
+
+			self:OpenAllBankBags()
+
 			return
 		end
-		
-		self:OpenAllBankBags()
 
-		return
-	end
+		if (not openonly) and (self.Bag:IsShown() or self.Bank:IsShown()) then
+			if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then
+				return
+			end
 
-	if (not openonly) and (self.Bag:IsShown() or self.Bank:IsShown()) then
-		if MerchantFrame:IsVisible() or InboxFrame:IsVisible() then
+			self:CloseAllBags()
+			self:CloseAllBankBags()
+
 			return
 		end
 
-		self:CloseAllBags()
-		self:CloseAllBankBags()
+		if not self.Bag:IsShown() then
+			self:OpenAllBags()
+		end
 
-		return
-	end
-
-	if not self.Bag:IsShown() then
-		self:OpenAllBags()
-	end
-
-	if not self.Bank:IsShown() and BankFrame:IsShown() then
-		self:OpenAllBankBags()
+		if not self.Bank:IsShown() and BankFrame:IsShown() then
+			self:OpenAllBankBags()
+		end
 	end
 end
 
 function Bags:OnEvent(event, ...)
 	if (event == "BAG_UPDATE") then
-		self:BagUpdate(...)
+		if not IsBagOpen(KEYRING_CONTAINER) then
+			self:BagUpdate(...)
+		else
+			self:BagUpdate(-2)
+		end
 	elseif (event == "MERCHANT_CLOSED" or event ==  "MAIL_CLOSED") then
 		CloseAllBags()
 	elseif (event == "CURRENCY_DISPLAY_UPDATE") then
@@ -1218,11 +1278,11 @@ function Bags:Enable()
 
 	-- Rewrite Blizzard Bags Functions
 	function UpdateContainerFrameAnchors() end
-	function ToggleBag() ToggleAllBags() end
+	function ToggleBag(id) ToggleAllBags(id) end
 	function ToggleBackpack() ToggleAllBags() end
-	function OpenAllBags() ToggleAllBags(true) end
-	function OpenBackpack() ToggleAllBags(true) end
-	function ToggleAllBags(openonly) self:ToggleBags(openonly) end
+	function OpenAllBags() ToggleAllBags(1, true) end
+	function OpenBackpack() ToggleAllBags(1, true) end
+	function ToggleAllBags(id, openonly) self:ToggleBags(id, openonly) end
 
 	-- Destroy bubbles help boxes
 	for i = 1, 13 do

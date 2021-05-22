@@ -17,13 +17,7 @@ local Update = function(self)
 end
 
 local OnMouseUp = function(self)
-	local Bank = BankFrame
-
-	if Bank:IsShown() then
-		CloseBankFrame()
-	else
-		ToggleAllBags()
-	end
+	ToggleAllBags()
 end
 
 local Enable = function(self)

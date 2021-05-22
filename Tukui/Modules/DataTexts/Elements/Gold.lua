@@ -88,18 +88,7 @@ local Update = function(self, event)
 end
 
 local OnMouseDown = function(self)
-	if BankFrame:IsShown() then
-		CloseBankBagFrames()
-		CloseBankFrame()
-		CloseAllBags()
-		CloseBag(-2)
-	else
-		if ContainerFrame1:IsShown() then
-			CloseAllBags()
-		else
-			ToggleAllBags()
-		end
-	end
+	ToggleAllBags()
 end
 
 local Enable = function(self)
