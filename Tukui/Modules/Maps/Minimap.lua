@@ -87,12 +87,6 @@ function Minimap:StyleMinimap()
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
 	
-	MiniMapTracking:SetParent(Minimap.MinimapZone)
-	MiniMapTracking:ClearAllPoints()
-	MiniMapTracking:SetAllPoints()
-	MiniMapTracking:StripTextures()
-	MiniMapTrackingIcon:SetParent(T.Hider)
-	
 	if T.Retail then
 		local QueueStatusMinimapButton = QueueStatusMinimapButton
 		local QueueStatusFrame = QueueStatusFrame
@@ -103,6 +97,11 @@ function Minimap:StyleMinimap()
 		self:SetArchBlobRingScalar(0)
 		self:SetQuestBlobRingScalar(0)
 		
+		MiniMapTracking:SetParent(Minimap.MinimapZone)
+		MiniMapTracking:ClearAllPoints()
+		MiniMapTracking:SetAllPoints()
+		MiniMapTracking:StripTextures()
+		MiniMapTrackingIcon:SetParent(T.Hider)
 		MiniMapTrackingButtonBorder:Kill()
 		MiniMapTrackingButton:SetParent(Minimap.MinimapZone)
 		MiniMapTrackingButton:ClearAllPoints()
@@ -144,6 +143,25 @@ function Minimap:StyleMinimap()
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
 		
 		MiniMapTrackingBorder:Kill()
+		
+		MiniMapTracking:ClearAllPoints()
+		MiniMapTracking:SetPoint("TOPRIGHT", Minimap, 0, 2)
+
+		if (MiniMapTrackingBorder) then
+			MiniMapTrackingBorder:Hide()
+		end
+
+		if (MiniMapTrackingIcon) then
+			MiniMapTrackingIcon:SetDrawLayer("ARTWORK")
+			MiniMapTrackingIcon:SetTexCoord(unpack(T.IconCoord))
+			MiniMapTrackingIcon:SetSize(16, 16)
+		end
+
+		MiniMapTracking:CreateBackdrop()
+		MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
+		MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
+		MiniMapTracking.Backdrop:SetTemplate()
+		MiniMapTracking.Backdrop:CreateShadow()
 	end
 end
 
