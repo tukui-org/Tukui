@@ -454,27 +454,31 @@ function Bags:CreateContainer(storagetype, ...)
 			SortBags()
 		end)
 		
-		Keys:SetSize(16, 16)
-		Keys:SetPoint("RIGHT", Sort, "LEFT", -2, 0)
-		Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
-		Keys.Texture:SetSize(14, 14)
-		Keys.Texture:SetPoint("CENTER")
-		Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon.PNG")
-		Keys:SetScript("OnEnter", GameTooltip_Hide)
-		Keys:SetScript("OnClick", function()
-			if not IsBagOpen(KEYRING_CONTAINER) then
-				ToggleBag(KEYRING_CONTAINER)
-			else
-				ToggleAllBags()
-				ToggleAllBags()
-			end
-		end)		
+		if T.BCC then
+			Keys:SetSize(16, 16)
+			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
+			Keys:CreateShadow()
+			Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
+			Keys.Texture:SetSize(16, 16)
+			Keys.Texture:SetPoint("CENTER")
+			Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon")
+			Keys:SetScript("OnEnter", GameTooltip_Hide)
+			Keys:SetScript("OnClick", function()
+				if not IsBagOpen(KEYRING_CONTAINER) then
+					ToggleBag(KEYRING_CONTAINER)
+				else
+					ToggleAllBags()
+					ToggleAllBags()
+				end
+			end)
+		end
 
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
 		Container.SortButton = Sort
 		Container.SearchBox = SearchBox
 		Container.ToggleBags = ToggleBags
+		Container.Keys = Keys
 	else
 		local PurchaseButton = BankFramePurchaseButton
 		local CostText = BankFrameSlotCost
