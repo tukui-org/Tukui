@@ -258,8 +258,12 @@ function Chat:SetChatFramePosition()
 				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
 			end
-
-			if Settings and Settings.IsUndocked and IsMovable then
+			
+			if Settings and Settings.IsUndocked then
+				if Frame.isDocked then
+					Chat:Undock(Frame)
+				end
+				
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
@@ -275,7 +279,7 @@ function Chat:SetChatFramePosition()
 			end
 		end
 
-		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked then
+		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked and Frame:GetParent() == T.DataTexts.Panels.Right then
 			Frame:SetJustifyH("RIGHT")
 		end
 	end
