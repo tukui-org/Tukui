@@ -138,7 +138,7 @@ function Tooltip:OnTooltipSetUnit()
 		
 		if (UnitIsPlayer(Unit) and Guild) then
 			if Line:GetText():find(Guild) then
-				Line:SetText("|cffff8000"..Guild.."|r")
+				Line:SetText("|cff00ff00"..Guild.."|r")
 			end
 		end
 		

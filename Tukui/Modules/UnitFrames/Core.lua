@@ -1094,6 +1094,10 @@ function UnitFrames:RegisterHealComm(frame)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStopped", HealComm_Heal_Update)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_ModifierChanged", HealComm_Modified)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_GUIDDisappeared", HealComm_Modified)
+	
+	frame:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+	frame:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+	frame:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.HealthPredictionUpdate, true)
 end
 
 function UnitFrames:Enable()
