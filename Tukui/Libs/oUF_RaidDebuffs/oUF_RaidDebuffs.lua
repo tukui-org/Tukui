@@ -192,7 +192,7 @@ local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTi
 		end
 
 		if f.time then
-			if duration and (duration > 0) then
+			if duration and (duration > 0) and f:GetSize() > 20 then
 				f.endTime = endTime
 				f.nextUpdate = 0
 				f:SetScript('OnUpdate', OnUpdate)
