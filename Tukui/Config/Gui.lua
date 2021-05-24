@@ -20,6 +20,9 @@ local General = function(self)
 	Window:CreateColorSelection("All", "General", "BorderColor", "Border color")
 	Window:CreateSwitch("All", "General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
+	
+	Window:CreateSection("All", "Fonts")
+	Window:CreateDropdown("All", "General", "GlobalFont", "Set UI global font")
 end
 
 local ActionBars = function(self)

@@ -25,6 +25,15 @@ C["General"] = {
 
 		["Value"] = "Tukui",
 	},
+	
+	["GlobalFont"] = {
+		["Options"] = {
+			["Express Way"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
+			["PT Sans Narrow"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\PtSansNarrow.ttf",
+		},
+
+		["Value"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
+	},
 }
 
 C["ActionBars"] = {
