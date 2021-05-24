@@ -1315,6 +1315,10 @@ function Bags:Enable()
 		_G["ContainerFrame"..i]:EnableMouse(false)
 	end
 	
+	-- Add Text Cooldowns Timer
+	hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
+	hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
+	
 	if T.Retail then
 		self:SetTokensPosition()
 		
@@ -1323,10 +1327,6 @@ function Bags:Enable()
 				self.Reagent:Hide()
 			end
 		end)
-		
-		-- Add Text Cooldowns Timer
-		hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-		hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
 		
 		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 		self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
