@@ -96,6 +96,9 @@ do
 			['Poison'] = true,
 			['Disease'] = false,
 		},
+		['MAGE'] = {
+			['Curse'] = true,
+		},
 		['MONK'] = {
 			['Magic'] = false,
 			['Disease'] = true,
