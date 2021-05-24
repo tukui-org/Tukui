@@ -306,7 +306,7 @@ C["UnitFrames"] = {
 		["Value"] = "On Screen",
 	},
 	["ClassBar"] = true,
-	["HealComm"] = T.BCC and false or true,
+	["HealComm"] = true,
 	["PlayerAuraBars"] = false,
 	["ScrollingCombatText"] = false,
 	["ScrollingCombatTextIcon"] = true,

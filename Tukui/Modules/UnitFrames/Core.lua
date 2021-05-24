@@ -1103,7 +1103,8 @@ end
 function UnitFrames:Enable()
 	-- Enable HealComm lib
 	if T.BCC and C.UnitFrames.HealComm then
-		HealComm:PLAYER_LOGIN()
+		C.UnitFrames.HealComm = false -- [WORKLATER] Broken
+		--HealComm:PLAYER_LOGIN()
 	end
 	
 	-- Security for Nameplates
