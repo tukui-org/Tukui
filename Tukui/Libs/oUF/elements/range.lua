@@ -60,9 +60,10 @@ local function Update(self, event)
 			inRange, checkedRange = UnitInRange(unit)
 		else
 			local Spell = RangeSpellID[select(2, UnitClass("player"))]
+			local IsFriend = UnitIsFriend(unit, "player")
 			
-			if Spell and IsSpellKnown(Spell) then
-				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(RangeSpellID[select(2, UnitClass("player"))])
+			if IsFriend and Spell and IsSpellKnown(Spell) then
+				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
 				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
 				
 				if IsSpellInRangeFromPlayer == 1 then
