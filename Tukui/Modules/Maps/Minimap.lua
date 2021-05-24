@@ -116,7 +116,7 @@ function Minimap:StyleMinimap()
 		MiniMapInstanceDifficulty:SetParent(Minimap)	
 		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
 		
-		GuildInstanceDifficulty:ClearAllPoints()	
+		GuildInstanceDifficulty:ClearAllPoints()
 		GuildInstanceDifficulty:SetParent(Minimap)	
 		GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
 	else
@@ -133,25 +133,29 @@ function Minimap:StyleMinimap()
 		
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
 		
-		MiniMapTrackingBorder:Kill()
-		
-		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+		if C.Maps.MinimapTracking then
+			MiniMapTrackingBorder:Kill()
 
-		if (MiniMapTrackingBorder) then
-			MiniMapTrackingBorder:Hide()
+			MiniMapTracking:ClearAllPoints()
+			MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+
+			if (MiniMapTrackingBorder) then
+				MiniMapTrackingBorder:Hide()
+			end
+
+			if (MiniMapTrackingIcon) then
+				MiniMapTrackingIcon:SetDrawLayer("ARTWORK")
+				MiniMapTrackingIcon:SetTexCoord(unpack(T.IconCoord))
+				MiniMapTrackingIcon:SetSize(16, 16)
+			end
+
+			MiniMapTracking:CreateBackdrop()
+			MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
+			MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
+			MiniMapTracking.Backdrop:CreateShadow()
+		else
+			MiniMapTracking:SetParent(T.Hider)
 		end
-
-		if (MiniMapTrackingIcon) then
-			MiniMapTrackingIcon:SetDrawLayer("ARTWORK")
-			MiniMapTrackingIcon:SetTexCoord(unpack(T.IconCoord))
-			MiniMapTrackingIcon:SetSize(16, 16)
-		end
-
-		MiniMapTracking:CreateBackdrop()
-		MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
-		MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
-		MiniMapTracking.Backdrop:CreateShadow()
 	end
 end
 

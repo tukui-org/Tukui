@@ -158,6 +158,10 @@ C["Misc"] = {
 	},
 }
 
+C["Maps"] = {
+	["MinimapTracking"] = false,
+}
+
 C["NamePlates"] = {
 	["Enable"] = true,
 	["Width"] = 128,
