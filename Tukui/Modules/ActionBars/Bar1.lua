@@ -80,8 +80,6 @@ function ActionBars:CreateBar1()
 		for i, Button in ipairs(Button) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end
-		
-		print(newstate)
 	]])
 
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
