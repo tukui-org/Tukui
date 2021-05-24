@@ -99,6 +99,9 @@ local Bags = function(self)
 	Window:CreateSlider("All", "Bags", "ButtonSize", "Set bag slot size", 20, 36, 1)
 	Window:CreateSlider("All", "Bags", "Spacing", "Set bag slot spacing", 0, 8, 1)
 	Window:CreateSlider("All", "Bags", "ItemsPerRow", "Set items per row", 8, 16, 1)
+	
+	Window:CreateSection("All", "Sorting")
+	Window:CreateSwitch("All", "Bags", "SortToBottom", "Sort bag to bottom")
 end
 
 local Chat = function(self)

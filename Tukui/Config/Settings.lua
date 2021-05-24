@@ -75,6 +75,7 @@ C["Bags"] = {
 	["IdentifyQuestItems"] = true,
 	["FlashNewItems"] = true,
 	["ItemLevel"] = true,
+	["SortToBottom"] = true,
 	["ButtonSize"] = 32,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 12,
