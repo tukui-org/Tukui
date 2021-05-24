@@ -22,7 +22,7 @@ local General = function(self)
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
 	
 	Window:CreateSection("All", "Fonts")
-	Window:CreateDropdown("All", "General", "GlobalFont", "Set UI global font")
+	Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
 end
 
 local ActionBars = function(self)
