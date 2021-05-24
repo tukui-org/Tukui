@@ -32,7 +32,7 @@ function ActionBars:CreateBar1()
 
 	if (C.ActionBars.SwitchBarOnStance) then
 		Rogue = "[bonusbar:1] 7;"
-		Druid = "[bonusbar:1,nostealth] 7; [bonusbar:1,stealth] 8; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
+		Druid = "[bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10; [bonusbar:1,stealth] 11;"
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
 	end
@@ -80,6 +80,8 @@ function ActionBars:CreateBar1()
 		for i, Button in ipairs(Button) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end
+		
+		print(newstate)
 	]])
 
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
