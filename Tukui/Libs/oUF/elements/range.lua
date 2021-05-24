@@ -63,9 +63,15 @@ local function Update(self, event)
 			
 			if Spell and IsSpellKnown(Spell) then
 				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(RangeSpellID[select(2, UnitClass("player"))])
+				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
 				
-				inRange = IsSpellInRange(name, unit)
-				checkedRange = true
+				if IsSpellInRangeFromPlayer == 1 then
+					inRange = true
+					checkedRange = true
+				else
+					inRange = false
+					checkedRange = true
+				end
 			else
 				inRange = CheckInteractDistance(unit, 4)
 				checkedRange = true
