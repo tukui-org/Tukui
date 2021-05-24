@@ -50,7 +50,7 @@ function Minimap:OnMouseClick(button)
 		if T.Retail then
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
 		else
-			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", -Minimap:GetWidth() + 4, -Minimap:GetHeight() / 2 - 20)
+			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
 		end
 	elseif (button == "MiddleButton") then
 		if T.Retail and GarrisonLandingPageMinimapButton:IsShown() then
@@ -145,7 +145,7 @@ function Minimap:StyleMinimap()
 		MiniMapTrackingBorder:Kill()
 		
 		MiniMapTracking:ClearAllPoints()
-		MiniMapTracking:SetPoint("TOPRIGHT", Minimap, 0, 2)
+		MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
 
 		if (MiniMapTrackingBorder) then
 			MiniMapTrackingBorder:Hide()
@@ -160,7 +160,6 @@ function Minimap:StyleMinimap()
 		MiniMapTracking:CreateBackdrop()
 		MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
 		MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
-		MiniMapTracking.Backdrop:SetTemplate()
 		MiniMapTracking.Backdrop:CreateShadow()
 	end
 end
@@ -201,10 +200,9 @@ function Minimap:AddZoneAndCoords()
 	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 
 	MinimapZone:CreateBackdrop()
-	MinimapZone:SetSize(self:GetWidth() + 2, 19)
-	MinimapZone:SetPoint("TOP", self, 0, 2)
-	MinimapZone:SetFrameStrata(self:GetFrameStrata())
-	MinimapZone:SetFrameLevel(self:GetFrameLevel() + 10)
+	MinimapZone:SetFrameStrata(T.DataTexts.Panels.Minimap:GetFrameStrata())
+	MinimapZone:SetFrameLevel(T.DataTexts.Panels.Minimap:GetFrameLevel() + 2)
+	MinimapZone:SetAllPoints(T.DataTexts.Panels.Minimap)
 	MinimapZone:SetAlpha(0)
 	MinimapZone:EnableMouse()
 
@@ -317,8 +315,9 @@ end
 
 function Minimap:EnableMouseOver()
 	local Tracking = T.Retail and MiniMapTrackingButton or MiniMapTracking
+	local TrackingIcon = MiniMapTrackingIcon
 	
-	self:SetScript("OnEnter", function()
+	self:SetScript("OnEnter", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
@@ -330,9 +329,11 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapCoords.Anim:Stop()
 		Minimap.MinimapCoords.Anim:SetChange(1)	
 		Minimap.MinimapCoords.Anim:Play()
+			
+		Tracking:SetAlpha(1)
 	end)
 
-	self:SetScript("OnLeave", function()
+	self:SetScript("OnLeave", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
@@ -346,7 +347,7 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapCoords.Anim:Play()
 	end)
 	
-	Tracking:SetScript("OnEnter", function()
+	Tracking:SetScript("OnEnter", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
@@ -358,9 +359,11 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapCoords.Anim:Stop()
 		Minimap.MinimapCoords.Anim:SetChange(1)
 		Minimap.MinimapCoords.Anim:Play()
+			
+		Tracking:SetAlpha(1)
 	end)
 
-	Tracking:SetScript("OnLeave", function()
+	Tracking:SetScript("OnLeave", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
@@ -505,10 +508,10 @@ end
 
 function Minimap:Enable()
 	self:DisableMinimapElements()
-	self:AddZoneAndCoords()
 	self:StyleMinimap()
-	self:PositionMinimap()
 	self:AddMinimapDataTexts()
+	self:AddZoneAndCoords()
+	self:PositionMinimap()
 	self:EnableMouseOver()
 	self:EnableMouseWheelZoom()
 	self:AddTaxiEarlyExit()
