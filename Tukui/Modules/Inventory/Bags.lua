@@ -785,6 +785,8 @@ function Bags:BagUpdate(id)
 				Button.TypeStatus:SetPoint("BOTTOMLEFT", 1, 1)
 				Button.TypeStatus:SetPoint("BOTTOMRIGHT", -1, 1)
 				Button.TypeStatus:SetHeight(3)
+				Button.TypeStatus:SetFrameStrata(Button:GetFrameStrata())
+				Button.TypeStatus:SetFrameLevel(Button:GetFrameLevel())
 				Button.TypeStatus:SetStatusBarTexture(C.Medias.Blank)
 
 				Button.IsTypeStatusCreated = true
