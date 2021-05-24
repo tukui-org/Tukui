@@ -485,15 +485,6 @@ function UnitFrames:Player()
 		}
 
 		self.HealthPrediction = HealthPrediction
-		
-		if T.BCC then
-			-- use libhealcomm lib instead, health prediction not available in bcc
-			
-			UnitFrames:RegisterHealComm(self)
-			
-			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
-			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
-		end
 	end
 	
 	if (C.UnitFrames.TotemBar) then
@@ -622,6 +613,10 @@ function UnitFrames:Player()
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
 		Power.smoothing = true
+
+		if self.HealthPrediction then
+			self.HealthPrediction.smoothing = true
+		end
 	end
 	
 	-- Classes
