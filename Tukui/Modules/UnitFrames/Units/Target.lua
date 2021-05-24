@@ -350,6 +350,14 @@ function UnitFrames:Target()
 		end
 	end
 	
+	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
+	Leader:SetSize(14, 14)
+	Leader:SetPoint("TOPLEFT", 2, 8)
+
+	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", nil, 2)
+	MasterLooter:SetSize(14, 14)
+	MasterLooter:SetPoint("TOPRIGHT", -2, 8)
+	
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -365,4 +373,6 @@ function UnitFrames:Target()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.RaidTargetIndicator = RaidIcon
+	self.LeaderIndicator = Leader
+	self.MasterLooterIndicator = MasterLooter
 end
