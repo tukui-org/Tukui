@@ -17,7 +17,7 @@ local Tukz = CreateFrame("Frame")
 function Tukz:MoveXPBars()
 	local Experience = Misc.Experience
 
-	if Experience and Experience.NumBars then
+	if C.Misc.ExperienceEnable then
 		for i = 1, Experience.NumBars do
 			local Bar = Experience["XPBar"..i]
 			local RestedBar = Experience["RestedBar"..i]
