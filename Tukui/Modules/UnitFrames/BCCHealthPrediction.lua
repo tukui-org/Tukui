@@ -8,22 +8,22 @@ local ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
 local ALL_OVERTIME_HEALS = bit.bor(HealComm.CHANNEL_HEALS, HealComm.HOT_HEALS)
 local HEAL_TICK_INTERVAL = 3
 
-local function GetCasterHealAmount(targetGUID, currentTime)
+--local function GetCasterHealAmount(targetGUID, currentTime)
+--    local nextTickTime = currentTime + HEAL_TICK_INTERVAL
+--
+--    local pendingHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_PENDING_HEALS, nil) or 0
+--    local overtimeHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime) or 0
+--
+--    return (pendingHeal + overtimeHeal) * HealComm:GetHealModifier(myGUID)
+--end
+
+local function GetHealAmount(targetGUID, currentTime, casterGUID)
     local nextTickTime = currentTime + HEAL_TICK_INTERVAL
 
-    local pendingHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_PENDING_HEALS, nil) or 0
-    local overtimeHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime) or 0
+    local pendingHeal = HealComm:GetHealAmount(targetGUID, ALL_PENDING_HEALS, nil, casterGUID) or 0
+    local overtimeHeal = HealComm:GetHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime, casterGUID) or 0
 
-    return (pendingHeal + overtimeHeal) * HealComm:GetHealModifier(myGUID)
-end
-
-local function GetOthersHealAmount(targetGUID, currentTime)
-    local nextTickTime = currentTime + HEAL_TICK_INTERVAL
-
-    local pendingHeal = HealComm:GetOthersHealAmount(targetGUID, ALL_PENDING_HEALS, nil) or 0
-    local overtimeHeal = HealComm:GetOthersHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime) or 0
-
-    return pendingHeal + overtimeHeal
+    return (pendingHeal + overtimeHeal) * HealComm:GetHealModifier(casterGUID)
 end
 
 local function Update(self, event, unit)
@@ -39,13 +39,20 @@ local function Update(self, event, unit)
     local currentTime = GetTime()
     local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
 
-    local myIncomingHeal = GetCasterHealAmount(guid, currentTime) or 0
-    local otherIncomingHeal = GetOthersHealAmount(guid, currentTime) or 0
+    local myIncomingHeal = GetHealAmount(guid, currentTime, myGUID) or 0
+    local allIncomingHeal = GetHealAmount(guid, currentTime, nil) or 0
     local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
+    local otherIncomingHeal = 0
 
-    local missedHealth = maxHealth * element.maxOverflow - health
-    myIncomingHeal = math.min(myIncomingHeal, missedHealth)
-    otherIncomingHeal = math.min(otherIncomingHeal, missedHealth - myIncomingHeal)
+    if(health + allIncomingHeal > maxHealth * element.maxOverflow) then
+        allIncomingHeal = maxHealth * element.maxOverflow - health
+    end
+
+    if(allIncomingHeal < myIncomingHeal) then
+        myIncomingHeal = allIncomingHeal
+    else
+        otherIncomingHeal = allIncomingHeal - myIncomingHeal
+    end
 
     if (element.myBar) then
         if element.smoothing then
