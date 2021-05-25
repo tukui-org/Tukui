@@ -55,13 +55,20 @@ function MicroMenu:Enable()
 		return
 	end
 	
+	local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
+	
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
 	
 	if C.Misc.BlizzardMicroMenu then
 		MicroMenu:SetSize(210, 29)
 		MicroMenu:ClearAllPoints()
-		MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+		
+		if Data.MicroMenuPosition then
+			MicroMenu:SetPoint(unpack(Data.MicroMenuPosition))
+		else
+			MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+		end
 		
 		UpdateMicroButtonsParent(MicroMenu)
 		
@@ -81,34 +88,16 @@ function MicroMenu:Enable()
 		
 		T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	else
-		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
-
 		MicroMenu:SetSize(250, T.BCC and 298 or 439)
 		MicroMenu:Hide()
 		MicroMenu:CreateBackdrop("Transparent")
 		MicroMenu:CreateShadow()
-		MicroMenu:EnableMouse(true)
-		MicroMenu:SetMovable(true)
-		MicroMenu:SetUserPlaced(true)
-		MicroMenu:RegisterForDrag("LeftButton")
 
 		if Data.MicroMenuPosition then
 			MicroMenu:SetPoint(unpack(Data.MicroMenuPosition))
 		else
 			MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 		end
-
-		MicroMenu:SetScript("OnDragStart", function(self)
-			MicroMenu:StartMoving()
-		end)
-
-		MicroMenu:SetScript("OnDragStop", function(self)
-			MicroMenu:StopMovingOrSizing()
-
-			local A1, P, A2, X, Y = MicroMenu:GetPoint()
-
-			Data.MicroMenuPosition = {A1, "UIParent", A2, X, Y}
-		end)
 
 		MainMenuBarBackpackButton:SetParent(T.Hider)
 		
