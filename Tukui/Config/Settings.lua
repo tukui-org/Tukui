@@ -320,7 +320,6 @@ C["UnitFrames"] = {
 		["Value"] = "On Screen",
 	},
 	["ClassBar"] = true,
-	["HealComm"] = true,
 	["PlayerAuraBars"] = false,
 	["ScrollingCombatText"] = false,
 	["ScrollingCombatTextIcon"] = true,

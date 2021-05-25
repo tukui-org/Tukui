@@ -473,6 +473,12 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 	end
 end
 
+function UnitFrames:DesaturateBuffs(unit, button)
+	if button.icon then
+		button.icon:SetDesaturated(not button.isPlayer)
+	end
+end
+
 function UnitFrames:Update()
 	for _, element in ipairs(self.__elements) do
 		element(self, "UpdateElement", self.unit)

@@ -115,12 +115,7 @@ function UnitFrames:Raid()
 		Buffs.filter = filter
 		Buffs.IsRaid = true
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-
-		if (C.Raid.DesaturateBuffs) then
-			Buffs.PostUpdateIcon = function(self, _, button, ...)
-				if button.icon then button.icon:SetDesaturated(not button.isPlayer) end
-			end
-		end
+		Buffs.PostUpdateIcon = UnitFrames.DesaturateBuffs
 
 		self.Buffs = Buffs
 	end
