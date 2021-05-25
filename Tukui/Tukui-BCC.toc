@@ -39,6 +39,7 @@ Libs\oUF\elements\classpower.lua
 Libs\oUF\elements\combatindicator.lua
 Libs\oUF\elements\grouproleindicator.lua
 Libs\oUF\elements\health.lua
+Libs\oUF\elements\healthprediction.lua
 Libs\oUF\elements\leaderindicator.lua
 Libs\oUF\elements\phaseindicator.lua
 Libs\oUF\elements\portrait.lua
@@ -175,7 +176,6 @@ Modules\Maps\Zonemap.lua
 Modules\Maps\Worldmap.lua
 
 Modules\UnitFrames\Core.lua
-Modules\UnitFrames\BCCHealthPrediction.lua
 Modules\UnitFrames\Debuffs.lua
 Modules\UnitFrames\Tracking.lua
 Modules\UnitFrames\Tags.lua

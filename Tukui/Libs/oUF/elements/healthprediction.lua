@@ -80,6 +80,25 @@ A default texture will be applied to the Texture widgets if they don't have a te
 
 local _, ns = ...
 local oUF = ns.oUF
+local myGUID = UnitGUID('player')
+local HealComm, ALL_PENDING_HEALS, ALL_OVERTIME_HEALS, HEAL_TICK_INTERVAL
+
+if oUF.BCC then
+	HealComm = LibStub("LibHealComm-4.0")
+	
+	ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
+	ALL_OVERTIME_HEALS = bit.bor(HealComm.CHANNEL_HEALS, HealComm.HOT_HEALS)
+	HEAL_TICK_INTERVAL = 3
+end
+
+local function GetHealAmount(targetGUID, currentTime, casterGUID)
+    local nextTickTime = currentTime + HEAL_TICK_INTERVAL
+
+    local pendingHeal = HealComm:GetHealAmount(targetGUID, ALL_PENDING_HEALS, nil, casterGUID) or 0
+    local overtimeHeal = HealComm:GetHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime, casterGUID) or 0
+
+    return (pendingHeal + overtimeHeal) * HealComm:GetHealModifier(casterGUID)
+end
 
 local function Update(self, event, unit)
 	if(self.unit ~= unit) then return end
@@ -96,10 +115,14 @@ local function Update(self, event, unit)
 		element:PreUpdate(unit)
 	end
 
-	local myIncomingHeal = UnitGetIncomingHeals(unit, 'player') or 0
-	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
-	local absorb = UnitGetTotalAbsorbs(unit) or 0
-	local healAbsorb = UnitGetTotalHealAbsorbs(unit) or 0
+	local guid = UnitGUID(unit)
+	local currentTime = GetTime()
+	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
+	
+	local myIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
+	local allIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
+	local absorb = oUF.Retail and UnitGetTotalAbsorbs(unit) or 0
+	local healAbsorb = oUF.Retail and UnitGetTotalHealAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 	local otherIncomingHeal = 0
 	local hasOverHealAbsorb = false
@@ -138,15 +161,31 @@ local function Update(self, event, unit)
 	end
 
 	if(element.myBar) then
-		element.myBar:SetMinMaxValues(0, maxHealth)
-		element.myBar:SetValue(myIncomingHeal)
-		element.myBar:Show()
+        if element.smoothing then
+            element.myBar:SetMinMaxSmoothedValue(0, maxHealth)
+            element.myBar:SetSmoothedValue(myIncomingHeal)
+        end
+
+        if not element.smoothing or not isSmoothedEvent then
+            element.myBar:SetMinMaxValues(0, maxHealth)
+            element.myBar:SetValue(myIncomingHeal)
+        end
+
+        element.myBar:Show()
 	end
 
 	if(element.otherBar) then
-		element.otherBar:SetMinMaxValues(0, maxHealth)
-		element.otherBar:SetValue(otherIncomingHeal)
-		element.otherBar:Show()
+        if element.smoothing then
+            element.otherBar:SetMinMaxSmoothedValue(0, maxHealth)
+            element.otherBar:SetSmoothedValue(otherIncomingHeal)
+        end
+
+        if not element.smoothing or not isSmoothedEvent then
+            element.otherBar:SetMinMaxValues(0, maxHealth)
+            element.otherBar:SetValue(otherIncomingHeal)
+        end
+
+        element.otherBar:Show()
 	end
 
 	if(element.absorbBar) then
@@ -194,7 +233,7 @@ local function Update(self, event, unit)
 	end
 end
 
-local function Path(self, ...)
+local function Path(self, event, ...)
 	--[[ Override: HealthPrediction.Override(self, event, unit)
 	Used to completely override the internal update function.
 
@@ -202,7 +241,16 @@ local function Path(self, ...)
 	* event - the event triggering the update (string)
 	* unit  - the unit accompanying the event
 	--]]
-	return (self.HealthPrediction.Override or Update) (self, ...)
+	
+    if not oUF.Retail and self:IsVisible() then
+        for i = 1, select('#', ...) do
+            if self.unit and UnitGUID(self.unit) == select(i, ...) then
+                return (self.HealthPrediction.Override or Update) (self, event, self.unit)
+            end
+        end
+	else
+		return (self.HealthPrediction.Override or Update) (self, ...)
+    end
 end
 
 local function ForceUpdate(element)
@@ -214,24 +262,54 @@ local function Enable(self)
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
+		
+		if oUF.Retail then
+			self:RegisterEvent('UNIT_HEALTH', Path)
+			self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
+			self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
+			self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
+		else
+			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
+			
+			local function UpdateHeal(event, casterGUID, spellID, healType, _, ...)
+				Path(self, event, ...)
+			end
 
-		self:RegisterEvent('UNIT_HEALTH', Path)
+			local function UpdateModifier(event, guid)
+				Path(self, event, guid)
+			end
+			
+			HealComm.RegisterCallback(self, "HealComm_HealStarted", UpdateHeal)
+			HealComm.RegisterCallback(self, "HealComm_HealUpdated", UpdateHeal)
+			HealComm.RegisterCallback(self, "HealComm_HealDelayed", UpdateHeal)
+			HealComm.RegisterCallback(self, "HealComm_HealStopped", UpdateHeal)
+			HealComm.RegisterCallback(self, "HealComm_ModifierChanged", UpdateModifier)
+			HealComm.RegisterCallback(self, "HealComm_GUIDDisappeared", UpdateModifier)
+		end
+		
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
-		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
-		self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-		self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 
 		if(not element.maxOverflow) then
 			element.maxOverflow = 1.05
 		end
 
 		if(element.myBar) then
+			if(element.smoothing) then
+                element.myBar.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
+                element.myBar.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
+            end
+			
 			if(element.myBar:IsObjectType('StatusBar') and not element.myBar:GetStatusBarTexture()) then
 				element.myBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 			end
 		end
 
 		if(element.otherBar) then
+			if(element.smoothing) then
+                element.otherBar.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
+                element.otherBar.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
+            end
+			
 			if(element.otherBar:IsObjectType('StatusBar') and not element.otherBar:GetStatusBarTexture()) then
 				element.otherBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 			end
