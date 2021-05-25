@@ -112,10 +112,15 @@ function UnitFrames:Raid()
 		Buffs.disableCooldown = true
 		Buffs.disableMouse = true
 		Buffs.onlyShowPlayer = onlyShowPlayer
-		Buffs.desaturateNonPlayerBuffs = C.Raid.DesaturateNonPlayerBuffs
 		Buffs.filter = filter
 		Buffs.IsRaid = true
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
+
+		if (C.Raid.DesaturateBuffs) then
+			Buffs.PostUpdateIcon = function(self, _, button, ...)
+				if button.icon then button.icon:SetDesaturated(not button.isPlayer) end
+			end
+		end
 
 		self.Buffs = Buffs
 	end
