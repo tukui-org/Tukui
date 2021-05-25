@@ -118,7 +118,6 @@ local function Update(self, event, unit)
 	local guid = UnitGUID(unit)
 	local currentTime = GetTime()
 	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
-	
 	local myIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
 	local allIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
 	local absorb = oUF.Retail and UnitGetTotalAbsorbs(unit) or 0

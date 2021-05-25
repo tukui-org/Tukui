@@ -22,7 +22,7 @@ local General = function(self)
 	Window:CreateSwitch("All", "General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
 	
-	if (Locale ~= "ruRU" or Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+	if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
 		Window:CreateSection("All", "Fonts")
 		Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
 	end
