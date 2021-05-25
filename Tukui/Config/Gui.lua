@@ -272,7 +272,7 @@ local Raid = function(self)
 	
 	Window:CreateSection("All", "Buffs")
 	Window:CreateDropdown("All", "Raid", "RaidBuffs", "Enable buffs display & filtering (Aura Track must be off to use buffs)")
-	Window:CreateSwitch("All", "Raid", "DesaturateNonPlayerBuffs", "Enable display of other players buffs grayscaled")
+	Window:CreateSwitch("All", "Raid", "DesaturateBuffs", "Desaturate buffs that are not by me")
 	
 	Window:CreateSection("All", "Debuffs")
 	Window:CreateSwitch("All", "Raid", "DebuffWatch", "Enable debuffs tracking (filtered auto by current gameplay (pvp or pve)")
