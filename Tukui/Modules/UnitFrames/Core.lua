@@ -40,7 +40,7 @@ function UnitFrames:DisableBlizzard()
 		CompactRaidFrameManager:SetParent(T.Hider)
 		CompactRaidFrameManager:UnregisterAllEvents()
 		CompactRaidFrameManager:Hide()
-		
+
 		CompactRaidFrameContainer:SetParent(T.Hider)
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()
@@ -105,13 +105,13 @@ function UnitFrames:ShowWarMode()
 
 	if (IsPvP) and (MouseOver == self) and (not InCombatLockdown()) then
 		Status:Show()
-		
+
 		if self.RestingIndicator then
 			self.RestingIndicator:SetAlpha(0)
 		end
 	else
 		Status:Hide()
-		
+
 		if self.RestingIndicator then
 			self.RestingIndicator:SetAlpha(1)
 		end
@@ -143,7 +143,7 @@ end
 function UnitFrames:UpdateNameplateClassIcon()
 	if UnitIsPlayer(self.unit) then
 		local Class = select(2, UnitClass(self.unit))
-		
+
 		if Class then
 			local Left, Right, Top, Bottom = unpack(CLASS_ICON_TCOORDS[Class])
 
@@ -234,7 +234,7 @@ function UnitFrames:SetStatusCastBarColor(unit)
 	else
 		self:SetStatusBarColor(1, 1, 1)
 	end
-	
+
 	if C.NamePlates.ClassIcon and unit:find("nameplate") and self.Button and self.Button.Shadow then
 		self.Button.Shadow:SetBackdropBorderColor(self:GetStatusBarColor())
 	end
@@ -294,7 +294,7 @@ function UnitFrames:PostUpdateHealth(unit, min, max)
 		end
 	else
 		local IsRaid = string.match(self:GetParent():GetName(), "Button") or false
-		
+
 		if (IsRaid) and (min == max) then
 			self.Value:SetText("")
 		else
@@ -387,7 +387,7 @@ function UnitFrames:PostCreateAura(button, unit)
 	button.cd:ClearAllPoints()
 	button.cd:SetInside()
 	button.cd:SetHideCountdownNumbers(true)
-	
+
 	button.Remaining = button.cd:CreateFontString(nil, "OVERLAY")
 	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	button.Remaining:SetPoint("CENTER", 1, 0)
@@ -431,13 +431,13 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 				if (IsStealable or DType == "Magic") and UnitIsEnemy("player", unit) then
 					if not button.Animation:IsPlaying() then
 						button.Animation:Play()
-						
+
 						button.Backdrop:SetBorderColor(0.2, 0.6, 1)
 					end
 				else
 					if button.Animation:IsPlaying() then
 						button.Animation:Stop()
-						
+
 						button.Backdrop:SetBorderColor(unpack(C["General"].BorderColor))
 					end
 				end
@@ -446,14 +446,14 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 
 		if button.Remaining then
 			local Size = button:GetSize()
-			
+
 			if (Duration and Duration > 0 and Size > 20) then
 				button.Remaining:Show()
-				
+
 				button:SetScript("OnUpdate", UnitFrames.SetAuraTimer)
 			else
 				button.Remaining:Hide()
-				
+
 				button:SetScript("OnUpdate", nil)
 			end
 		end
@@ -517,7 +517,7 @@ function UnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 
 			PowerBar:SetAlpha(0)
 			PowerBar.IsHidden = true
-			
+
 			if CastBar then
 				CastBar:ClearAllPoints()
 				CastBar:SetSize(Health:GetWidth(), PowerBar:GetHeight())
@@ -530,7 +530,7 @@ function UnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 			Health:SetPoint("TOPLEFT")
 			Health:SetPoint("TOPRIGHT")
 			Health:SetHeight(Nameplate:GetHeight() - PowerBar:GetHeight() - 1)
-			
+
 			if CastBar then
 				CastBar:ClearAllPoints()
 				CastBar:SetAllPoints(PowerBar)
@@ -567,7 +567,7 @@ function UnitFrames:UpdateTotemTimer(elapsed)
 			self:SetMinMaxValues(0, self.Duration)
 			self:SetValue(TimeLeft)
 		end
-		
+
 		self.Elapsed = 0.5
 	end
 end
@@ -600,7 +600,7 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		if (Totem.Cooldown) then
 			Totem.Cooldown:SetCooldown(Start, Duration)
 		end
-		
+
 		if Totem.SetValue then
 			Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 		end
@@ -612,7 +612,7 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 			if BlizzardTotem:IsShown() then
 				local Where = BlizzardTotem.slot
-				
+
 				BlizzardTotem:ClearAllPoints()
 				BlizzardTotem:SetAllPoints(Bar[Where])
 				BlizzardTotem:SetAlpha(0)
@@ -620,7 +620,7 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 				Cooldown:SetAlpha(0)
 			end
 		end
-		
+
 		--Totem:SetScript("OnUpdate", UnitFrames.UpdateTotemTimer)
 	else
 		Totem:Hide()
@@ -628,7 +628,7 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		if Totem.Icon then
 			Totem.Icon:SetTexture(nil)
 		end
-		
+
 		if Totem.SetValue then
 			Totem:SetScript("OnUpdate", nil)
 		end
@@ -856,12 +856,12 @@ function UnitFrames:CreateUnits()
 		Pet:SetParent(T.PetHider)
 		Pet:SetPoint("BOTTOM", T.PetHider, "BOTTOM", 0, 176)
 		Pet:SetSize(130, 36)
-		
+
 		local Focus = oUF:Spawn("focus", "TukuiFocusFrame")
 		Focus:SetPoint("BOTTOM", T.PetHider, "BOTTOM", -279, 316)
 		Focus:SetParent(T.PetHider)
 		Focus:SetSize(164, 20)
-		
+
 		local FocusTarget = oUF:Spawn("focustarget", "TukuiFocusTargetFrame")
 		FocusTarget:SetPoint("BOTTOM", Focus, "TOP", 0, 62)
 		FocusTarget:SetParent(T.PetHider)
@@ -876,7 +876,7 @@ function UnitFrames:CreateUnits()
 
 		if C.Party.Enable then
 			local Party = oUF:SpawnHeader(UnitFrames:GetPartyFramesAttributes())
-		
+
 			Party:SetParent(T.PetHider)
 			Party:SetPoint("LEFT", T.PetHider, "LEFT", 28, 0)
 
@@ -909,7 +909,7 @@ function UnitFrames:CreateUnits()
 
 				Movers:RegisterFrame(Pet, "Raid Pets")
 			end
-			
+
 			local Raid40 = oUF:SpawnHeader(UnitFrames:GetBigRaidFramesAttributes())
 			Raid40:SetParent(T.PetHider)
 			Raid40:SetPoint("TOPLEFT", T.PetHider, "TOPLEFT", 30, -30)
@@ -930,7 +930,7 @@ function UnitFrames:CreateUnits()
 			Movers:RegisterFrame(Raid, "Raid")
 			Movers:RegisterFrame(Raid40, "Raid 26/40")
 		end
-		
+
 		if (C.UnitFrames.Arena) then
 			local Arena = {}
 
@@ -950,11 +950,11 @@ function UnitFrames:CreateUnits()
 			end
 
 			self.Units.Arena = Arena
-			
+
 			SetCVar("showArenaEnemyFrames", 0)
 		end
 
-		
+
 		if (C.UnitFrames.Boss) then
 			local Boss = {}
 
@@ -967,7 +967,7 @@ function UnitFrames:CreateUnits()
 					Boss[i]:SetPoint("BOTTOM", Boss[i - 1], "TOP", 0, 62)
 				end
 				Boss[i]:SetSize(164, 20)
-				
+
 				if i == 1 then
 					Movers:RegisterFrame(Boss[i], "Boss Frames")
 				end
@@ -991,7 +991,7 @@ function UnitFrames:CreateUnits()
 			-- No need for this bar, already included with oUF
 			PersonalResource:SetAlpha(0)
 		end
-		
+
 		-- Add threat colors
 		oUF.colors.threat = {
 			[1] = C.NamePlates.AggroColor1,
@@ -999,7 +999,7 @@ function UnitFrames:CreateUnits()
 			[3] = C.NamePlates.AggroColor3,
 			[4] = C.NamePlates.AggroColor4,
 		}
-		
+
 		oUF:SpawnNamePlates("Tukui", nil, UnitFrames.NameplatesVariables)
 	end
 end
@@ -1009,102 +1009,29 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 
 	if (ORD) then
 		local _, InstanceType = IsInInstance()
-		
+
 		ORD:ResetDebuffData()
 
 		if (InstanceType == "party" or InstanceType == "raid") then
 			if C.Raid.DebuffWatchDefault then
 				ORD:RegisterDebuffs(UnitFrames.Debuffs.PvE.spells)
 			end
-			
+
 			ORD:RegisterDebuffs(TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvE)
 		else
 			if C.Raid.DebuffWatchDefault then
 				ORD:RegisterDebuffs(UnitFrames.Debuffs.PvP.spells)
 			end
-			
+
 			ORD:RegisterDebuffs(TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvP)
 		end
 	end
 end
 
-function UnitFrames:HealthPredictionUpdate(unit)
-	if(self.unit ~= unit) then return end
-
-	local element = self.HealthPrediction
-
-	local guid = UnitGUID(unit)
-
-	local allIncomingHeal = HealComm:GetHealAmount(guid, element.healType) or 0
-	local myIncomingHeal = (HealComm:GetHealAmount(guid, element.healType, nil, myGUID) or 0) * (HealComm:GetHealModifier(myGUID) or 1)
-	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
-	local otherIncomingHeal = 0
-
-	if(health + allIncomingHeal > maxHealth * element.maxOverflow) then
-		allIncomingHeal = maxHealth * element.maxOverflow - health
-	end
-
-	if(allIncomingHeal < myIncomingHeal) then
-		myIncomingHeal = allIncomingHeal
-	else
-		otherIncomingHeal = HealComm:GetOthersHealAmount(guid, HealComm.ALL_HEALS) or 0
-	end
-
-	if(element.myBar) then
-		element.myBar:SetMinMaxValues(0, maxHealth)
-		element.myBar:SetValue(myIncomingHeal)
-		element.myBar:Show()
-	end
-
-	if(element.otherBar) then
-		element.otherBar:SetMinMaxValues(0, maxHealth)
-		element.otherBar:SetValue(otherIncomingHeal)
-		element.otherBar:Show()
-	end
-end
-
-function UnitFrames:RegisterHealComm(frame)
-	if not frame and not frame.HealthPrediction then
-		return
-	end
-
-	frame.HealthPrediction.healType = HealComm.ALL_HEALS
-	
-	local function HealCommUpdate(...)
-		if frame.HealthPrediction and frame:IsVisible() then
-			for i = 1, select('#', ...) do
-				if frame.unit and UnitGUID(frame.unit) == select(i, ...) then
-					UnitFrames.HealthPredictionUpdate(frame, frame.unit)
-				end
-			end
-		end
-	end
-
-	local function HealComm_Heal_Update(event, casterGUID, spellID, healType, _, ...)
-		HealCommUpdate(...)
-	end
-
-	local function HealComm_Modified(event, guid)
-		HealCommUpdate(guid)
-	end
-
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStarted", HealComm_Heal_Update)
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealUpdated", HealComm_Heal_Update)
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealDelayed", HealComm_Heal_Update)
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStopped", HealComm_Heal_Update)
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_ModifierChanged", HealComm_Modified)
-	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_GUIDDisappeared", HealComm_Modified)
-	
-	frame:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
-	frame:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
-	frame:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.HealthPredictionUpdate, true)
-end
-
 function UnitFrames:Enable()
 	-- Enable HealComm lib
 	if T.BCC and C.UnitFrames.HealComm then
-		C.UnitFrames.HealComm = false -- [WORKLATER] Broken
-		--HealComm:PLAYER_LOGIN()
+		HealComm:PLAYER_LOGIN()
 	end
 	
 	-- Security for Nameplates

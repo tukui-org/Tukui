@@ -202,10 +202,6 @@ function UnitFrames:Raid()
 		}
 
 		self.HealthPrediction = HealthPrediction
-		
-		if T.BCC then
-			UnitFrames:RegisterHealComm(self)
-		end
 	end
 	
 	if T.Retail then
@@ -227,6 +223,10 @@ function UnitFrames:Raid()
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
 		Power.smoothing = true
+
+		if self.HealthPrediction then
+			self.HealthPrediction.smoothing = true
+		end
 	end
 
 	self:Tag(Health.Value, C.Raid.HealthTag.Value)

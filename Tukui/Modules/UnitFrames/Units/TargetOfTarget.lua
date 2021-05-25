@@ -140,17 +140,15 @@ function UnitFrames:TargetOfTarget()
 		}
 
 		self.HealthPrediction = HealthPrediction
-		
-		if T.BCC then
-			-- use libhealcomm lib instead, health prediction not available in bcc
-			
-			UnitFrames:RegisterHealComm(self)
-		end
 	end
 	
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
+
+		if self.HealthPrediction then
+			self.HealthPrediction.smoothing = true
+		end
 	end
 
 	self:Tag(Name, "[Tukui:GetNameColor][Tukui:NameMedium]")
