@@ -33,6 +33,13 @@ local OnRangeFrame
 
 local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
 
+local RangeSpellID = {
+	["PALADIN"] = 19750,
+	["SHAMAN"] = 25357,
+	["DRUID"] = 774,
+	["PRIEST"] = 2050,
+}
+
 local function Update(self, event)
 	local element = self.Range
 	local unit = self.unit
@@ -52,8 +59,24 @@ local function Update(self, event)
 		if oUF.Retail then
 			inRange, checkedRange = UnitInRange(unit)
 		else
-			inRange = CheckInteractDistance(unit, 4)
-			checkedRange = true
+			local Spell = RangeSpellID[select(2, UnitClass("player"))]
+			local IsFriend = UnitIsFriend(unit, "player")
+			
+			if IsFriend and Spell and IsSpellKnown(Spell) then
+				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
+				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
+				
+				if IsSpellInRangeFromPlayer == 1 then
+					inRange = true
+					checkedRange = true
+				else
+					inRange = false
+					checkedRange = true
+				end
+			else
+				inRange = CheckInteractDistance(unit, 4)
+				checkedRange = true
+			end
 		end
 		
 		if(checkedRange and not inRange) then

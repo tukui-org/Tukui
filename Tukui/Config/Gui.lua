@@ -14,14 +14,15 @@ local General = function(self)
 
 	Window:CreateSection("All", "Scaling")
 	Window:CreateSlider("All", "General", "UIScale", "Set UI scale", 0.35, 1, 0.01)
-	Window:CreateSlider("All", "General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
-	Window:CreateSlider("All", "General", "WorldMapScale", "Set world map scale (%)", 40, 100, 1)
 
 	Window:CreateSection("All", "Border & Backdrop")
 	Window:CreateColorSelection("All", "General", "BackdropColor", "Backdrop color")
 	Window:CreateColorSelection("All", "General", "BorderColor", "Border color")
 	Window:CreateSwitch("All", "General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
+	
+	Window:CreateSection("All", "Fonts")
+	Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
 end
 
 local ActionBars = function(self)
@@ -101,6 +102,9 @@ local Bags = function(self)
 	Window:CreateSlider("All", "Bags", "ButtonSize", "Set bag slot size", 20, 36, 1)
 	Window:CreateSlider("All", "Bags", "Spacing", "Set bag slot spacing", 0, 8, 1)
 	Window:CreateSlider("All", "Bags", "ItemsPerRow", "Set items per row", 8, 16, 1)
+	
+	Window:CreateSection("All", "Sorting")
+	Window:CreateSwitch("All", "Bags", "SortToBottom", "Sort bag to bottom")
 end
 
 local Chat = function(self)
@@ -176,9 +180,6 @@ local Misc = function(self)
 	Window:CreateSwitch("All", "Misc", "ItemLevel", "Display items level on character and inspect frames")
 	Window:CreateSection("All", "Threat")
 	Window:CreateSwitch("All", "Misc", "ThreatBar", "Enable Threat Bar")
-	Window:CreateSection("All", "World Map")
-	Window:CreateSwitch("All", "Misc", "WorldMapEnable", "Enable our custom world map")
-	Window:CreateSlider("All", "Misc", "FadeWorldMapAlpha", "Worldmap opacity while moving", 0, 100, 1)
 	Window:CreateSection("All", "Experience and reputation")
 	Window:CreateSwitch("All", "Misc", "ExperienceEnable", "Enable experience and reputation bars")
 	Window:CreateSection("All", "Screensaver")
@@ -191,6 +192,19 @@ local Misc = function(self)
 	Window:CreateDropdown("All", "Misc", "UIErrorFont", "Set ui error font", "Font")
 	Window:CreateSection("Retail", "Talking Head")
 	Window:CreateSwitch("Retail", "Misc", "TalkingHeadEnable", "Enable Talking Head?")
+end
+
+local Maps = function(self)
+	local Window = self:CreateWindow("Maps")
+	
+	Window:CreateSection("All", "Minimap")
+	Window:CreateSwitch("BCC", "Maps", "MinimapTracking", "Enable minimap tracking icon")
+	Window:CreateSlider("All", "General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
+	
+	Window:CreateSection("All", "World Map")
+	Window:CreateSwitch("All", "Misc", "WorldMapEnable", "Enable our custom world map")
+	Window:CreateSlider("All", "Misc", "FadeWorldMapAlpha", "Worldmap opacity while moving", 0, 100, 1)
+	Window:CreateSlider("All", "General", "WorldMapScale", "Set world map scale (%)", 40, 100, 1)
 end
 
 local NamePlates = function(self)
@@ -421,6 +435,7 @@ GUI:AddWidgets(Bags)
 GUI:AddWidgets(Chat)
 GUI:AddWidgets(DataTexts)
 GUI:AddWidgets(Loot)
+GUI:AddWidgets(Maps)
 GUI:AddWidgets(Misc)
 GUI:AddWidgets(NamePlates)
 GUI:AddWidgets(Party)

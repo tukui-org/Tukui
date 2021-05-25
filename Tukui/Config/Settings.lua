@@ -25,6 +25,15 @@ C["General"] = {
 
 		["Value"] = "Tukui",
 	},
+	
+	["GlobalFont"] = {
+		["Options"] = {
+			["Express Way"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
+			["PT Sans Narrow"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\PtSansNarrow.ttf",
+		},
+
+		["Value"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
+	},
 }
 
 C["ActionBars"] = {
@@ -75,6 +84,7 @@ C["Bags"] = {
 	["IdentifyQuestItems"] = true,
 	["FlashNewItems"] = true,
 	["ItemLevel"] = true,
+	["SortToBottom"] = true,
 	["ButtonSize"] = 32,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 12,
@@ -156,6 +166,10 @@ C["Misc"] = {
 
 		["Value"] = "ALT-M",
 	},
+}
+
+C["Maps"] = {
+	["MinimapTracking"] = false,
 }
 
 C["NamePlates"] = {
@@ -306,7 +320,7 @@ C["UnitFrames"] = {
 		["Value"] = "On Screen",
 	},
 	["ClassBar"] = true,
-	["HealComm"] = true,
+	["HealComm"] = T.BCC and false or true,
 	["PlayerAuraBars"] = false,
 	["ScrollingCombatText"] = false,
 	["ScrollingCombatTextIcon"] = true,

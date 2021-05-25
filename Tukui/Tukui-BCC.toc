@@ -1,7 +1,7 @@
 ## Interface: 20501
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.20
+## Version: 20.21
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase
@@ -175,6 +175,7 @@ Modules\Maps\Zonemap.lua
 Modules\Maps\Worldmap.lua
 
 Modules\UnitFrames\Core.lua
+Modules\UnitFrames\BCCHealthPrediction.lua
 Modules\UnitFrames\Debuffs.lua
 Modules\UnitFrames\Tracking.lua
 Modules\UnitFrames\Tags.lua
