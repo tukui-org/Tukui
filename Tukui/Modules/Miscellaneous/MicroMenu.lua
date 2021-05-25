@@ -8,40 +8,29 @@ function MicroMenu:HideAlerts()
 	HelpTip:HideAllSystem("MicroButtons")
 end
 
-function MicroMenu:AddHooks()
-	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
-end
-
-function MicroMenu:Update()
-	if self:IsShown() then
-		for i = 1, #MICRO_BUTTONS do
-			local Button = _G[MICRO_BUTTONS[i]]
-			
-			if Button.Backdrop then
-				Button.Backdrop:Show()
-			end
-			
-			if Button.Text then
-				if (not Button:IsEnabled()) or (not Button:IsShown()) then
-					Button.Text:SetAlpha(0.5)
-				else
-					Button.Text:SetAlpha(1)
-				end
-			end
-		end
+function MicroMenu:MoveMicroButtons()
+	for i = 1, #MICRO_BUTTONS do
+		local Button = _G[MICRO_BUTTONS[i]]
+		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
 		
-		UpdateMicroButtonsParent(MicroMenu)
-	else
-		UpdateMicroButtonsParent(T.Hider)
-		
-		for i = 1, #MICRO_BUTTONS do
-			local Button = _G[MICRO_BUTTONS[i]]
-			
-			if Button.Backdrop then
-				Button.Backdrop:Hide()
+		if C.Misc.BlizzardMicroMenu then
+			if i == 1 then
+				Button:SetPoint("LEFT", MicroMenu, "LEFT", 0, 10)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", -3, 0)
+			end
+		else
+			if i == 1 then
+				Button:SetPoint("TOP", MicroMenu, "TOP", 0, 6)
+			else
+				Button:SetPoint("TOP", PreviousButton, "BOTTOM", 0, 14)
 			end
 		end
 	end
+end
+
+function MicroMenu:AddHooks()
+	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
 end
 
 function MicroMenu:Toggle()
@@ -74,11 +63,11 @@ function MicroMenu:Enable()
 		MicroMenu:ClearAllPoints()
 		MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 		
+		UpdateMicroButtonsParent(MicroMenu)
+		
 		for i = 1, #MICRO_BUTTONS do
 			local Button = _G[MICRO_BUTTONS[i]]
 			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-
-			UpdateMicroButtonsParent(MicroMenu)
 			
 			Button:ClearAllPoints()
 
@@ -94,11 +83,8 @@ function MicroMenu:Enable()
 	else
 		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
-		MicroMenu:AddHooks()
 		MicroMenu:SetSize(250, T.BCC and 298 or 439)
 		MicroMenu:Hide()
-		MicroMenu:SetScript("OnHide", self.Update)
-		MicroMenu:SetScript("OnShow", self.Update)
 		MicroMenu:CreateBackdrop("Transparent")
 		MicroMenu:CreateShadow()
 		MicroMenu:EnableMouse(true)
@@ -125,6 +111,8 @@ function MicroMenu:Enable()
 		end)
 
 		MainMenuBarBackpackButton:SetParent(T.Hider)
+		
+		UpdateMicroButtonsParent(MicroMenu)
 
 		for i = 1, #MICRO_BUTTONS do
 			local Button = _G[MICRO_BUTTONS[i]]
@@ -132,7 +120,6 @@ function MicroMenu:Enable()
 
 			Button:StripTextures()
 			Button:SetAlpha(0)
-			Button:SetParent(MicroMenu)
 			Button:ClearAllPoints()
 			Button:SetSize(230, 49)
 			Button:CreateBackdrop()
@@ -145,7 +132,6 @@ function MicroMenu:Enable()
 			Button.Backdrop:SetPoint("BOTTOM", Button, "BOTTOM", 0, 0)
 			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
 			Button.Backdrop:CreateShadow()
-			Button.Backdrop:Hide()
 
 			Button.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
 			Button.Text:SetFontTemplate(C.Medias.Font, 12)
@@ -164,14 +150,14 @@ function MicroMenu:Enable()
 			if Button.newbieText ~= NEWBIE_TOOLTIP_MAINMENU then
 				Button:HookScript("OnClick", MicroMenu.Toggle)
 			end
-
-			Button.ClearAllPoints = Noop
-			Button.SetPoint = Noop
-			Button.SetSize = Noop
+			
+			if T.BCC then
+				Button.SetPoint = Noop
+			end
 		end
-
-		UpdateMicroButtonsParent(T.Hider)
 	end
+	
+	MicroMenu:AddHooks()
 	
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 	
