@@ -1,6 +1,7 @@
 local T, C, L = select(2, ...):unpack()
 
 local Fonts = T["Fonts"]
+local Locale = GetLocale()
 
 function Fonts:SetFont(self, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	self:SetFont(font, size, style)
@@ -64,4 +65,17 @@ CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
 UNIT_NAME_FONT = C.Medias.Font
 STANDARD_TEXT_FONT = C.Medias.Font
 DAMAGE_TEXT_FONT = C.Medias.Font
+
+if (Locale == "ruRU") then
+	CYRILLIC_TEXT_FONT = [[Interface\AddOns\Tukui\Medias\Fonts\PtSansNarrow.ttf]]
+	
+	C["Medias"].Font =  CYRILLIC_TEXT_FONT
+	C["Medias"].DamageFont = CYRILLIC_TEXT_FONT
+end
+
+if (Locale == "koKR" or Locale == "zhTW" or Locale == "zhCN") then
+	C["Medias"].Font = STANDARD_TEXT_FONT
+	C["Medias"].UnitFrameFont = UNIT_NAME_FONT
+	C["Medias"].DamageFont = DAMAGE_TEXT_FONT
+end
 

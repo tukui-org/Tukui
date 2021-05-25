@@ -295,7 +295,7 @@ function Loading:OnEvent(event)
 		
 		T["Loading"]:Enable()
 		
-		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN" or Locale ~= "ruRU") then
 			C.Medias.Font = C.General.GlobalFont.Value
 
 			TukuiFont:SetFont(C.Medias.Font, 12)

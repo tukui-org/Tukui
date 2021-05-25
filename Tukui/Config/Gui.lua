@@ -1,6 +1,7 @@
 local T, C, L = select(2, ...):unpack()
 
 local GUI = T["GUI"]
+local Locale = GetLocale()
 
 local General = function(self)
 	local Window = self:CreateWindow("General", true)
@@ -21,8 +22,10 @@ local General = function(self)
 	Window:CreateSwitch("All", "General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
 	
-	Window:CreateSection("All", "Fonts")
-	Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
+	if (Locale ~= "ruRU" or Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+		Window:CreateSection("All", "Fonts")
+		Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
+	end
 end
 
 local ActionBars = function(self)
