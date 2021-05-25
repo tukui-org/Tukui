@@ -1033,7 +1033,7 @@ function UnitFrames:Enable()
 	if T.BCC and C.UnitFrames.HealComm then
 		HealComm:PLAYER_LOGIN()
 	end
-
+	
 	-- Security for Nameplates
 	if IsAddOnLoaded("Plater") then
 		-- Force Tukui nameplates OFF if running plater, because causing issues
@@ -1041,15 +1041,15 @@ function UnitFrames:Enable()
 	end
 
 	self.Backdrop = {
-		bgFile = C.Medias.Blank,
+		bgFile = C.Medias.Blank, 
 		insets = {top = -1, left = -1, bottom = -1, right = -1}
 	}
-
+	
 	self.HighlightBorder = {
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		insets = {top = -2, left = -2, bottom = -2, right = -2}
 	}
-
+	
 	self.NameplatesVariables = {
 		nameplateMaxAlpha = 1,
 		nameplateMinAlpha = C.NamePlates.NotSelectedAlpha / 100,
@@ -1081,10 +1081,10 @@ function UnitFrames:Enable()
 			ORD.FilterDispellableDebuff = true
 			ORD.MatchBySpellName = false
 		end
-
+		
 		self.Tracking:Enable()
 	end
-
+	
 	-- Overwrite oUF Pet Battle frame visibility
 	RegisterStateDriver(Tukui_PetBattleFrameHider, "visibility", "hide")
 end

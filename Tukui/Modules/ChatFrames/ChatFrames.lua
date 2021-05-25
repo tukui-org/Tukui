@@ -3,6 +3,7 @@ local T, C, L = select(2, ...):unpack()
 local Chat = T["Chat"]
 local Toast = BNToastFrame
 local Noop = function() end
+local IsRightChatFound = false
 
 -- Set name for right chat
 Chat.RightChatName = OTHER
@@ -258,13 +259,19 @@ function Chat:SetChatFramePosition()
 				Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
 			end
-
-			if Settings and Settings.IsUndocked and IsMovable then
+			
+			if Settings and Settings.IsUndocked and not IsRightChatFound then
+				if Frame.isDocked then
+					Chat:Undock(Frame)
+				end
+				
 				Frame:SetParent(T.DataTexts.Panels.Right)
 				Frame:SetUserPlaced(true)
 				Frame:ClearAllPoints()
 				Frame:SetSize(C.Chat.RightWidth, C.Chat.RightHeight - 62)
 				Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Right, "TOPLEFT", 0, 4)
+				
+				IsRightChatFound = true
 			end
 		else
 			if Settings and IsMovable then
@@ -275,7 +282,7 @@ function Chat:SetChatFramePosition()
 			end
 		end
 
-		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked then
+		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked and Frame:GetParent() == T.DataTexts.Panels.Right then
 			Frame:SetJustifyH("RIGHT")
 		end
 	end
@@ -293,6 +300,9 @@ function Chat:Reset()
 	
 	-- Reset chat database
 	TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions = Chat.Positions
+	
+	-- Reset right chat frame detection
+	IsRightChatFound = false
 	
 	-- Create our custom chatframes
 	FCF_ResetChatWindows()
