@@ -342,14 +342,8 @@ function UnitFrames:Target()
 		}
 
 		self.HealthPrediction = HealthPrediction
-		
-		if T.BCC then
-			-- use libhealcomm lib instead, health prediction not available in bcc
-			
-			UnitFrames:RegisterHealComm(self)
-		end
 	end
-	
+
 	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	Leader:SetSize(14, 14)
 	Leader:SetPoint("TOPLEFT", 2, 8)
@@ -357,11 +351,15 @@ function UnitFrames:Target()
 	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	MasterLooter:SetSize(14, 14)
 	MasterLooter:SetPoint("TOPRIGHT", -2, 8)
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
 		Power.smoothing = true
+
+		if self.HealthPrediction then
+			self.HealthPrediction.smoothing = true
+		end
 	end
 
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")

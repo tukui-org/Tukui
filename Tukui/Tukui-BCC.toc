@@ -175,6 +175,7 @@ Modules\Maps\Zonemap.lua
 Modules\Maps\Worldmap.lua
 
 Modules\UnitFrames\Core.lua
+Modules\UnitFrames\BCCHealthPrediction.lua
 Modules\UnitFrames\Debuffs.lua
 Modules\UnitFrames\Tracking.lua
 Modules\UnitFrames\Tags.lua
