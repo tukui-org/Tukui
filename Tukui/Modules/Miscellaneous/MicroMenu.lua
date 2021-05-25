@@ -30,7 +30,7 @@ function MicroMenu:Update()
 			end
 		end
 		
-		UpdateMicroButtonsParent(T.PetHider)
+		UpdateMicroButtonsParent(MicroMenu)
 	else
 		UpdateMicroButtonsParent(T.Hider)
 		
