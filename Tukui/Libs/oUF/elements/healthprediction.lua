@@ -160,12 +160,12 @@ local function Update(self, event, unit)
 	end
 
 	if(element.myBar) then
-        if element.smoothing then
+		if element.smoothing then
             element.myBar:SetMinMaxSmoothedValue(0, maxHealth)
             element.myBar:SetSmoothedValue(myIncomingHeal)
         end
 
-        if not element.smoothing or not isSmoothedEvent then
+		if not element.smoothing or not isSmoothedEvent then
             element.myBar:SetMinMaxValues(0, maxHealth)
             element.myBar:SetValue(myIncomingHeal)
         end
@@ -174,12 +174,12 @@ local function Update(self, event, unit)
 	end
 
 	if(element.otherBar) then
-        if element.smoothing then
+		if element.smoothing then
             element.otherBar:SetMinMaxSmoothedValue(0, maxHealth)
             element.otherBar:SetSmoothedValue(otherIncomingHeal)
         end
 
-        if not element.smoothing or not isSmoothedEvent then
+		if not element.smoothing or not isSmoothedEvent then
             element.otherBar:SetMinMaxValues(0, maxHealth)
             element.otherBar:SetValue(otherIncomingHeal)
         end

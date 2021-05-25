@@ -38,6 +38,8 @@ local RangeSpellID = {
 	["SHAMAN"] = 25357,
 	["DRUID"] = 774,
 	["PRIEST"] = 2050,
+	["WARLOCK"] = 5697,
+	["MAGE"] = 475,
 }
 
 local function Update(self, event)
