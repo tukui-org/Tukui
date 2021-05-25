@@ -240,10 +240,10 @@ local function Path(self, event, ...)
 	* event - the event triggering the update (string)
 	* unit  - the unit accompanying the event
 	--]]
-	
+
     if not oUF.Retail and self:IsVisible() then
         for i = 1, select('#', ...) do
-            if self.unit and UnitGUID(self.unit) == select(i, ...) then
+            if self.unit and UnitGUID(self.unit) == (UnitGUID(select(i, ...)) or select(i, ...)) then
                 return (self.HealthPrediction.Override or Update) (self, event, self.unit)
             end
         end
