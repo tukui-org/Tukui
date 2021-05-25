@@ -200,9 +200,6 @@ function UnitFrames:Raid()
 		
 		if T.BCC then
 			UnitFrames:RegisterHealComm(self)
-			
-			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
-			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
 		end
 	end
 	

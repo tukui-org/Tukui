@@ -5,6 +5,7 @@ local Locale = GetLocale()
 C["Medias"] = {
 	-- Fonts
 	["Font"] = [[Interface\AddOns\Tukui\Medias\Fonts\Expressway.ttf]],
+	["AltFont1"] = [[Interface\AddOns\Tukui\Medias\Fonts\PtSansNarrow.ttf]],
 	["UnitFrameFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\BigNoodleTitling.ttf]],
 	["DamageFont"] = [[Interface\AddOns\Tukui\Medias\Fonts\DieDieDie.ttf]],
 	["PixelFont"] = [=[Interface\AddOns\Tukui\Medias\Fonts\Visitor.ttf]=],
@@ -35,6 +36,4 @@ if (Locale == "koKR" or Locale == "zhTW" or Locale == "zhCN") then
 	C["Medias"].Font = STANDARD_TEXT_FONT
 	C["Medias"].UnitFrameFont = UNIT_NAME_FONT
 	C["Medias"].DamageFont = DAMAGE_TEXT_FONT
-elseif (Locale ~= "enUS" and Locale ~= "frFR" and Locale ~= "enGB") then
-	C["Medias"].DamageFont = C["Medias"].Font
 end

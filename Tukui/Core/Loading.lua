@@ -291,7 +291,18 @@ function Loading:OnEvent(event)
 			end
 		end
 	elseif (event == "VARIABLES_LOADED") then
+		local Locale = GetLocale()
+		
 		T["Loading"]:Enable()
+		
+		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+			C.Medias.Font = C.General.GlobalFont.Value
+
+			TukuiFont:SetFont(C.Medias.Font, 12)
+			TukuiFontOutline:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+		end
+		
+		T["Fonts"]:Enable()
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
 		T["Help"]:Enable()
