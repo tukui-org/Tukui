@@ -248,7 +248,7 @@ local function Path(self, event, ...)
             end
         end
 	else
-		return (self.HealthPrediction.Override or Update) (self, ...)
+		return (self.HealthPrediction.Override or Update) (self, event, ...)
     end
 end
 
