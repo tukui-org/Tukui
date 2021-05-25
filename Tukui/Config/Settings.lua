@@ -238,9 +238,16 @@ C["Raid"] = {
 	["Font"] = "Tukui",
 	["HealthFont"] = "Tukui Outline",
 	["DesaturateBuffs"] = false,
+	["RaidBuffsStyle"] = {
+		["Options"] = {
+			["Aura Track"] = "Aura Track",
+			["Standard"] = "Standard",
+			["None"] = "None",
+		},
+		["Value"] = "Aura Track",
+	},
 	["RaidBuffs"] = {
 		["Options"] = {
-			["Hide"] = "Hide",
 			["Only my buffs"] = "Self",
 			["Only castable buffs"] = "Castable",
 			["All buffs"] = "All",
@@ -255,7 +262,6 @@ C["Raid"] = {
 	["Padding40"] = 10,
 	["HighlightColor"] = {0, 1, 0},
 	["HighlightSize"] = 10,
-	["AuraTrack"] = true,
 	["AuraTrackIcons"] = true,
 	["AuraTrackSpellTextures"] = true,
 	["AuraTrackThickness"] = 5,

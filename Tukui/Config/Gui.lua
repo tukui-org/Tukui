@@ -288,18 +288,21 @@ local Raid = function(self)
 	Window:CreateSlider("All", "Raid", "Padding40", "Spacing in pixels between units", 0, 20, 1)
 	
 	Window:CreateSection("All", "Buffs")
-	Window:CreateDropdown("All", "Raid", "RaidBuffs", "Enable buffs display & filtering (Aura Track must be off to use buffs)")
-	Window:CreateSwitch("All", "Raid", "DesaturateBuffs", "Desaturate buffs that are not by me")
+	Window:CreateDropdown("All", "Raid", "RaidBuffsStyle", "Select the buff style you want to use")
+	
+	if C.Raid.RaidBuffsStyle.Value == "Standard" then
+		Window:CreateDropdown("All", "Raid", "RaidBuffs", "Enable buffs display & filtering")
+		Window:CreateSwitch("All", "Raid", "DesaturateBuffs", "Desaturate buffs that are not by me")
+	elseif C.Raid.RaidBuffsStyle.Value == "Aura Track" then
+		Window:CreateSwitch("All", "Raid", "AuraTrack", "Enable auras tracking module for healer (replace buffs)")
+		Window:CreateSwitch("All", "Raid", "AuraTrackIcons", "Use squared icons instead of status bars")
+		Window:CreateSwitch("All", "Raid", "AuraTrackSpellTextures", "Display icons texture on aura squares instead of colored squares")
+		Window:CreateSlider("All", "Raid", "AuraTrackThickness", "Thickness size of status bars in pixel", 2, 10, 1)
+	end
 	
 	Window:CreateSection("All", "Debuffs")
 	Window:CreateSwitch("All", "Raid", "DebuffWatch", "Enable debuffs tracking (filtered auto by current gameplay (pvp or pve)")
 	Window:CreateSwitch("All", "Raid", "DebuffWatchDefault", "We have already a debuff tracking list for pve and pvp, use it?")
-	
-	Window:CreateSection("All", "Auras Tracking")
-	Window:CreateSwitch("All", "Raid", "AuraTrack", "Enable auras tracking module for healer (replace buffs)")
-	Window:CreateSwitch("All", "Raid", "AuraTrackIcons", "Use squared icons instead of status bars")
-	Window:CreateSwitch("All", "Raid", "AuraTrackSpellTextures", "Display icons texture on aura squares instead of colored squares")
-	Window:CreateSlider("All", "Raid", "AuraTrackThickness", "Thickness size of status bars in pixel", 2, 10, 1)
 	
 	Window:CreateSection("All", "Tags")
 	Window:CreateDropdown("All", "Raid", "HealthTag", "Health tag raid unit")

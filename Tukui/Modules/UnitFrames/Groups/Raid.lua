@@ -87,7 +87,7 @@ function UnitFrames:Raid()
 		outsideAlpha = C["Raid"].RangeAlpha,
 	}
 	
-	if C.Raid.AuraTrack then
+	if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
 		local AuraTrack = CreateFrame("Frame", nil, Health)
 		AuraTrack:SetAllPoints()
 		AuraTrack.Texture = C.Medias.Normal
@@ -96,7 +96,7 @@ function UnitFrames:Raid()
 		AuraTrack.Thickness = C.Raid.AuraTrackThickness
 
 		self.AuraTrack = AuraTrack
-	elseif C.Raid.RaidBuffs.Value ~= "Hide" then
+	elseif C.Raid.RaidBuffsStyle.Value == "Standard" then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", Health)
 		local onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self"
 		local filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID"
