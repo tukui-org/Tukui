@@ -8,15 +8,6 @@ local ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
 local ALL_OVERTIME_HEALS = bit.bor(HealComm.CHANNEL_HEALS, HealComm.HOT_HEALS)
 local HEAL_TICK_INTERVAL = 3
 
---local function GetCasterHealAmount(targetGUID, currentTime)
---    local nextTickTime = currentTime + HEAL_TICK_INTERVAL
---
---    local pendingHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_PENDING_HEALS, nil) or 0
---    local overtimeHeal = HealComm:GetCasterHealAmount(targetGUID, ALL_OVERTIME_HEALS, nextTickTime) or 0
---
---    return (pendingHeal + overtimeHeal) * HealComm:GetHealModifier(myGUID)
---end
-
 local function GetHealAmount(targetGUID, currentTime, casterGUID)
     local nextTickTime = currentTime + HEAL_TICK_INTERVAL
 
