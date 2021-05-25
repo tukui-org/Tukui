@@ -250,7 +250,9 @@ else
 	-- Rogue
 		-- No buffs to track
 	-- Shaman
-		[974]     = {0.2, 0.2, 1}, -- Earth Shield
+		[974]     = {0.2, 0.2, 1}, -- Earth Shield(Rank 1)
+		[32593]   = {0.2, 0.2, 1}, -- Earth Shield(Rank 2)
+		[32594]   = {0.2, 0.2, 1}, -- Earth Shield(Rank 3)
 		[29203]   = {0.7, 0.3, 0.7}, -- Healing Way
 		[16237]   = {0.2, 0.2, 1}, -- Ancestral Fortitude
 		[25909]   = {0.00, 0.00, 0.50}, -- Tranquil Air

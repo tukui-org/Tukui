@@ -347,11 +347,16 @@ function UnitFrames:Target()
 			-- use libhealcomm lib instead, health prediction not available in bcc
 			
 			UnitFrames:RegisterHealComm(self)
-			
-			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
-			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
 		end
 	end
+	
+	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
+	Leader:SetSize(14, 14)
+	Leader:SetPoint("TOPLEFT", 2, 8)
+
+	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", nil, 2)
+	MasterLooter:SetSize(14, 14)
+	MasterLooter:SetPoint("TOPRIGHT", -2, 8)
 	
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
@@ -368,4 +373,6 @@ function UnitFrames:Target()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.RaidTargetIndicator = RaidIcon
+	self.LeaderIndicator = Leader
+	self.MasterLooterIndicator = MasterLooter
 end

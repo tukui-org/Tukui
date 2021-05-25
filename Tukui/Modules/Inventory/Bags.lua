@@ -454,27 +454,31 @@ function Bags:CreateContainer(storagetype, ...)
 			SortBags()
 		end)
 		
-		Keys:SetSize(16, 16)
-		Keys:SetPoint("RIGHT", Sort, "LEFT", -2, 0)
-		Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
-		Keys.Texture:SetSize(14, 14)
-		Keys.Texture:SetPoint("CENTER")
-		Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon.PNG")
-		Keys:SetScript("OnEnter", GameTooltip_Hide)
-		Keys:SetScript("OnClick", function()
-			if not IsBagOpen(KEYRING_CONTAINER) then
-				ToggleBag(KEYRING_CONTAINER)
-			else
-				ToggleAllBags()
-				ToggleAllBags()
-			end
-		end)		
+		if T.BCC then
+			Keys:SetSize(16, 16)
+			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
+			Keys:CreateShadow()
+			Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
+			Keys.Texture:SetSize(16, 16)
+			Keys.Texture:SetPoint("CENTER")
+			Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon")
+			Keys:SetScript("OnEnter", GameTooltip_Hide)
+			Keys:SetScript("OnClick", function()
+				if not IsBagOpen(KEYRING_CONTAINER) then
+					ToggleBag(KEYRING_CONTAINER)
+				else
+					ToggleAllBags()
+					ToggleAllBags()
+				end
+			end)
+		end
 
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
 		Container.SortButton = Sort
 		Container.SearchBox = SearchBox
 		Container.ToggleBags = ToggleBags
+		Container.Keys = Keys
 	else
 		local PurchaseButton = BankFramePurchaseButton
 		local CostText = BankFrameSlotCost
@@ -781,6 +785,8 @@ function Bags:BagUpdate(id)
 				Button.TypeStatus:SetPoint("BOTTOMLEFT", 1, 1)
 				Button.TypeStatus:SetPoint("BOTTOMRIGHT", -1, 1)
 				Button.TypeStatus:SetHeight(3)
+				Button.TypeStatus:SetFrameStrata(Button:GetFrameStrata())
+				Button.TypeStatus:SetFrameLevel(Button:GetFrameLevel())
 				Button.TypeStatus:SetStatusBarTexture(C.Medias.Blank)
 
 				Button.IsTypeStatusCreated = true
@@ -1243,7 +1249,11 @@ function Bags:Enable()
 		return
 	end
 	
-	SetSortBagsRightToLeft(true)
+	if C.Bags.SortToBottom then
+		SetSortBagsRightToLeft(false)
+	else
+		SetSortBagsRightToLeft(true)
+	end
 	SetInsertItemsLeftToRight(false)
 
 	-- Bug with mouse click
@@ -1309,6 +1319,10 @@ function Bags:Enable()
 		_G["ContainerFrame"..i]:EnableMouse(false)
 	end
 	
+	-- Add Text Cooldowns Timer
+	hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
+	hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
+	
 	if T.Retail then
 		self:SetTokensPosition()
 		
@@ -1317,10 +1331,6 @@ function Bags:Enable()
 				self.Reagent:Hide()
 			end
 		end)
-		
-		-- Add Text Cooldowns Timer
-		hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-		hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
 		
 		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 		self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")

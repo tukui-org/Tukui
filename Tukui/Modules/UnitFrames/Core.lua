@@ -1094,12 +1094,17 @@ function UnitFrames:RegisterHealComm(frame)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_HealStopped", HealComm_Heal_Update)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_ModifierChanged", HealComm_Modified)
 	HealComm.RegisterCallback(frame.HealthPrediction, "HealComm_GUIDDisappeared", HealComm_Modified)
+	
+	frame:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
+	frame:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
+	frame:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.HealthPredictionUpdate, true)
 end
 
 function UnitFrames:Enable()
 	-- Enable HealComm lib
 	if T.BCC and C.UnitFrames.HealComm then
-		HealComm:PLAYER_LOGIN()
+		C.UnitFrames.HealComm = false -- [WORKLATER] Broken
+		--HealComm:PLAYER_LOGIN()
 	end
 	
 	-- Security for Nameplates

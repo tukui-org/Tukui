@@ -164,9 +164,6 @@ function UnitFrames:Party()
 			-- use libhealcomm lib instead, health prediction not available in bcc
 			
 			UnitFrames:RegisterHealComm(self)
-			
-			self:RegisterEvent("UNIT_HEALTH_FREQUENT", UnitFrames.HealthPredictionUpdate)
-			self:RegisterEvent("UNIT_MAXHEALTH", UnitFrames.HealthPredictionUpdate)
 		end
 	end
 
