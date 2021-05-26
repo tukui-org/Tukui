@@ -75,7 +75,11 @@ function MicroMenu:Enable()
 		for i = 1, #MICRO_BUTTONS do
 			local Button = _G[MICRO_BUTTONS[i]]
 			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+			local Pushed = Button:GetPushedTexture()
+			local Normal = Button:GetNormalTexture()
+			local Disabled = Button:GetDisabledTexture()
 			
+			Button:SetParent(MicroMenu)
 			Button:ClearAllPoints()
 
 			-- Reposition them
