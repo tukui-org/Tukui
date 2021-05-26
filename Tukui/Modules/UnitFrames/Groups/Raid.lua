@@ -122,9 +122,11 @@ function UnitFrames:Raid()
 
 	if C.Raid.DebuffWatch then
 		local RaidDebuffs = CreateFrame("Frame", nil, Health)
-		
-		RaidDebuffs:SetHeight(Health:GetHeight() - 16)
-		RaidDebuffs:SetWidth(Health:GetHeight() - 16)
+		local Height = Health:GetHeight()
+		local DebuffSize = Height >= 32 and Height - 16 or Height
+
+		RaidDebuffs:SetHeight(DebuffSize)
+		RaidDebuffs:SetWidth(DebuffSize)
 		RaidDebuffs:SetPoint("CENTER", Health)
 		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 10)
 		RaidDebuffs:CreateBackdrop()
