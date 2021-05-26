@@ -102,7 +102,7 @@ local DisplayBattleNetFriendsOnTooltip = function()
 					local Left = "|cff00ccff"..BattleTag.."|r"
 					local Right = "|cffffffff"..Game.."|r"
 					
-					if Game == "World of Warcraft" then
+					if Game == "World of Warcraft" and ((T.Retail and Account.characterName) or (Friend.characterName)) then
 						local LevelColor = T.Retail and Account.characterLevel and GetQuestDifficultyColor(Account.characterLevel) or Friend.characterLevel and GetQuestDifficultyColor(Friend.characterLevel) or {r = 1, g = 1, b = 1}
 						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 						local Level = T.Retail and LevelHexColor..Account.characterLevel.."|r" or LevelHexColor..Friend.characterLevel.."|r"
