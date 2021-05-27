@@ -269,14 +269,14 @@ end
 
 function DataTexts:Enable()
 	local DataTextLeft = CreateFrame("Frame", "TukuiLeftDataTextBox", UIParent)
-	DataTextLeft:SetSize(C.General.Themes.Value == "Tukui" and C.Chat.LeftWidth or 370, 23)
+	DataTextLeft:SetSize(C.Chat.LeftWidth, 23)
 	DataTextLeft:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 20)
 	DataTextLeft:CreateBackdrop()
 	DataTextLeft:SetFrameStrata("BACKGROUND")
 	DataTextLeft:SetFrameLevel(2)
 
 	local DataTextRight = CreateFrame("Frame", "TukuiRightDataTextBox", UIParent)
-	DataTextRight:SetSize(C.General.Themes.Value == "Tukui" and C.Chat.RightWidth or 370, 23)
+	DataTextRight:SetSize(C.Chat.RightWidth, 23)
 	DataTextRight:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 20)
 	DataTextRight:CreateBackdrop()
 	DataTextRight:SetFrameStrata("BACKGROUND")

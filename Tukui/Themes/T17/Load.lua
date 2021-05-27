@@ -202,6 +202,19 @@ function Tukz:MoveDataTextTooltip()
 	end
 end
 
+function Tukz:SetDataTextSize()
+	TukuiLeftDataTextBox:SetWidth(370)
+	TukuiRightDataTextBox:SetWidth(370)
+	
+	for i = 1, 6 do
+		local DataText = T.DataTexts.Anchors[i]
+		local LeftWidth = (TukuiLeftDataTextBox:GetWidth() / 3) - 1
+		local RightWidth = (TukuiRightDataTextBox:GetWidth() / 3) - 1
+		
+		DataText:SetWidth(i <= 3 and LeftWidth or RightWidth)
+	end
+end
+
 function Tukz:OnEvent(event)
 	if (C.General.Themes.Value == "Tukz") then
 		self:SetupChat()
@@ -209,6 +222,7 @@ function Tukz:OnEvent(event)
 		self:MoveXPBars()
 		self:MoveTooltip()
 		self:MoveDataTextTooltip()
+		self:SetDataTextSize()
 	end
 end
 
