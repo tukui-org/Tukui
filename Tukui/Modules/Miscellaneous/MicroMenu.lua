@@ -144,7 +144,7 @@ function MicroMenu:GameMenu()
 		if T.BCC then
 			Button.SetPoint = Noop
 		end
-		
+
 		tinsert(UISpecialFrames, "TukuiMicroMenu")
 	end
 end
@@ -179,12 +179,12 @@ function MicroMenu:Toggle()
 	if self ~= MicroMenu then
 		self = MicroMenu
 	end
-	
+
 	-- Hide Game Menu if visible
 	if GameMenuFrame:IsShown() then
 		HideUIPanel(GameMenuFrame)
 	end
-	
+
 	if self:IsShown() then
 		self:Hide()
 	else
@@ -196,7 +196,7 @@ function MicroMenu:Enable()
 	if not C.Misc.MicroStyle.Value == "None" then
 		return
 	end
-	
+
 	if C.Misc.MicroStyle.Value == "Minimalist" then
 		self:Minimalist()
 	elseif C.Misc.MicroStyle.Value == "Blizzard" then
@@ -204,24 +204,18 @@ function MicroMenu:Enable()
 	elseif C.Misc.MicroStyle.Value == "Game Menu" then
 		self:GameMenu()
 	end
-	
+
 	MicroMenu:Hide()
 	MicroMenu:AddHooks()
-	
+
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
-	
+
 	-- Toggle micro menu keybind
 	if C.Misc.MicroToggle.Value ~= "" then
 		self.Captor = CreateFrame("Button", "TukuiMicroMenuCaptor", UIParent, "SecureActionButtonTemplate")
 		self.Captor:SetScript("OnClick", MicroMenu.Toggle)
-		
+
 		SetOverrideBindingClick(self.Captor, true, C.Misc.MicroToggle.Value, "TukuiMicroMenuCaptor")
-	end
-	
-	if T.Retail then
-		-- 9.1, menu it at top (wtf?!), move it back to original position
-		GameMenuFrame:ClearAllPoints()
-		GameMenuFrame:SetPoint("CENTER", UIParent)
 	end
 end
 
