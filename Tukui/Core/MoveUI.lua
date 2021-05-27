@@ -131,8 +131,8 @@ function Movers:CreateDragInfo()
 	self.DragInfo.Text:SetText(self.MoverName or self:GetName() or UNKNOWN)
 	self.DragInfo.Text:SetPoint("CENTER")
 	self.DragInfo.Text:SetTextColor(1, 0, 0)
-	self.DragInfo:SetFrameLevel(100)
-	self.DragInfo:SetFrameStrata("HIGH")
+	self.DragInfo:SetFrameLevel(1000)
+	self.DragInfo:SetFrameStrata("TOOLTIP")
 	self.DragInfo:SetMovable(true)
 	self.DragInfo:RegisterForDrag("LeftButton")
 	self.DragInfo:SetClampedToScreen(true)
@@ -174,12 +174,12 @@ function Movers:StartOrStopMoving()
 			Frame.DragInfo:SetParent(UIParent)
 			Frame.DragInfo:Show()
 
-			if Frame.DragInfo:GetFrameLevel() ~= 100 then
-				Frame.DragInfo:SetFrameLevel(100)
+			if Frame.DragInfo:GetFrameLevel() ~= 1000 then
+				Frame.DragInfo:SetFrameLevel(1000)
 			end
 
-			if Frame.DragInfo:GetFrameStrata() ~= "HIGH" then
-				Frame.DragInfo:SetFrameStrata("HIGH")
+			if Frame.DragInfo:GetFrameStrata() ~= "TOOLTIP" then
+				Frame.DragInfo:SetFrameStrata("TOOLTIP")
 			end
 		else
 			if Frame.unit then

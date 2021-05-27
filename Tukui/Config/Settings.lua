@@ -142,7 +142,6 @@ C["Loot"] = {
 }
 
 C["Misc"] = {
-	["MicroMenu"] = true,
 	["BlizzardMicroMenu"] = false,
 	["ItemLevel"] = true,
 	["ThreatBar"] = true,
@@ -165,6 +164,16 @@ C["Misc"] = {
 		},
 
 		["Value"] = "ALT-M",
+	},
+	["MicroStyle"] = {
+		["Options"] = {
+			["Minimalist"] = "Minimalist",
+			["Game Menu"] = "Game Menu",
+			["Blizzard"] = "Blizzard",
+			["None"] = "None",
+		},
+
+		["Value"] = "Minimalist",
 	},
 }
 
