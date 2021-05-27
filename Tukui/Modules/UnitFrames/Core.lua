@@ -998,12 +998,12 @@ function UnitFrames:CreateUnits()
 			PersonalResource:SetAlpha(0)
 		end
 
-		-- Add threat colors
+		-- Add threat colors (https://wowpedia.fandom.com/wiki/API_UnitThreatSituation)
 		oUF.colors.threat = {
-			[1] = C.NamePlates.AggroColor1,
-			[2] = C.NamePlates.AggroColor2,
-			[3] = C.NamePlates.AggroColor3,
-			[4] = C.NamePlates.AggroColor4,
+			[0] = C.NamePlates.AggroColor1,
+			[1] = C.NamePlates.AggroColor2,
+			[2] = C.NamePlates.AggroColor3,
+			[3] = C.NamePlates.AggroColor4,
 		}
 
 		oUF:SpawnNamePlates("Tukui", nil, UnitFrames.NameplatesVariables)
