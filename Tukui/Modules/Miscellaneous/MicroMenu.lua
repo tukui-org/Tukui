@@ -96,7 +96,6 @@ function MicroMenu:GameMenu()
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
 	MicroMenu:SetSize(250, T.BCC and 298 or 439)
-	MicroMenu:Hide()
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -145,6 +144,8 @@ function MicroMenu:GameMenu()
 		if T.BCC then
 			Button.SetPoint = Noop
 		end
+		
+		tinsert(UISpecialFrames, "TukuiMicroMenu")
 	end
 end
 
@@ -204,11 +205,10 @@ function MicroMenu:Enable()
 		self:GameMenu()
 	end
 	
+	MicroMenu:Hide()
 	MicroMenu:AddHooks()
 	
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
-	
-	tinsert(UISpecialFrames, "TukuiMicroMenu")
 	
 	-- Toggle micro menu keybind
 	if C.Misc.MicroToggle.Value ~= "" then
