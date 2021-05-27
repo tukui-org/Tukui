@@ -173,7 +173,7 @@ C["Misc"] = {
 			["None"] = "None",
 		},
 
-		["Value"] = "Minimalist",
+		["Value"] = "Game Menu",
 	},
 }
 
