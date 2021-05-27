@@ -38,6 +38,8 @@ local Update = function(self)
 	end
 
 	table.sort(L.DataText.Slots, function(a, b) return a[3] < b[3] end)
+	
+	self.Text:SetText(ClassColor..T.MyName.."|r".." ("..floor(L.DataText.Slots[1][3] * 100).."%)")
 end
 
 local OnEnter = function(self)
