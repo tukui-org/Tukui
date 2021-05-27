@@ -69,28 +69,10 @@ end
 
 oUF.Tags.Events["Tukui:DiffColor"] = "UNIT_LEVEL PLAYER_LEVEL_UP"
 oUF.Tags.Methods["Tukui:DiffColor"] = function(unit)
-	local r, g, b
 	local Level = UnitLevel(unit)
+	local Color = Level and GetQuestDifficultyColor(Level) or {r = 1, g = 1, b = 1}
 
-	if (Level < 1) then
-		r, g, b = 0.69, 0.31, 0.31
-	else
-		local DiffColor = UnitLevel(unit) - UnitLevel("player")
-
-		if (DiffColor >= 5) then
-			r, g, b = 0.69, 0.31, 0.31
-		elseif (DiffColor >= 3) then
-			r, g, b = 0.71, 0.43, 0.27
-		elseif (DiffColor >= -2) then
-			r, g, b = 0.84, 0.75, 0.65
-		--elseif (-DiffColor <= GetQuestGreenRange()) then
-			--r, g, b = 0.33, 0.59, 0.33
-		else
-			r, g, b = 0.55, 0.57, 0.61
-		end
-	end
-
-	return string.format("|cff%02x%02x%02x", r * 255, g * 255, b * 255)
+	return string.format("|cff%02x%02x%02x", Color.r * 255, Color.g * 255, Color.b * 255)
 end
 
 oUF.Tags.Events["Tukui:NameShort"] = "UNIT_NAME_UPDATE PARTY_LEADER_CHANGED GROUP_ROSTER_UPDATE"
