@@ -179,6 +179,7 @@ C["Misc"] = {
 
 C["Maps"] = {
 	["MinimapTracking"] = false,
+	["MinimapCoords"] = false,
 }
 
 C["NamePlates"] = {

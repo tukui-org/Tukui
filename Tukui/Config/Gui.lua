@@ -201,6 +201,7 @@ local Maps = function(self)
 	
 	Window:CreateSection("All", "Minimap")
 	Window:CreateSwitch("BCC", "Maps", "MinimapTracking", "Enable minimap tracking icon")
+	Window:CreateSwitch("All", "Maps", "MinimapCoords", "Enable minimap coordinate on mouseover")
 	Window:CreateSlider("All", "General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
 	
 	Window:CreateSection("All", "World Map")

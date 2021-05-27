@@ -192,7 +192,6 @@ end
 
 function Minimap:AddZoneAndCoords()
 	local MinimapZone = CreateFrame("Button", "TukuiMinimapZone", self)
-	local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
 
 	MinimapZone:CreateBackdrop()
 	MinimapZone:SetFrameStrata(T.DataTexts.Panels.Minimap:GetFrameStrata())
@@ -212,36 +211,39 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone.Anim:SetDuration(0.3)
 	MinimapZone.Anim:SetEasing("inout")
 	MinimapZone.Anim:SetChange(1)
-
-	MinimapCoords:CreateBackdrop()
-	MinimapCoords:SetSize(40, 19)
-	MinimapCoords:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 2, 2)
-	MinimapCoords:SetFrameStrata(self:GetFrameStrata())
-	MinimapCoords:SetAlpha(0)
-
-	MinimapCoords.Text = MinimapCoords:CreateFontString("TukuiMinimapCoordText", "OVERLAY")
-	MinimapCoords.Text:SetFont(C["Medias"].Font, 10)
-	MinimapCoords.Text:SetPoint("Center", 0, -1)
-	MinimapCoords.Text:SetText("0, 0")
-
-	MinimapCoords.Anim = CreateAnimationGroup(MinimapCoords):CreateAnimation("Fade")
-	MinimapCoords.Anim:SetDuration(0.3)
-	MinimapCoords.Anim:SetEasing("inout")
-	MinimapCoords.Anim:SetChange(1)
-
+	
 	-- Update zone text
 	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
 	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	MinimapZone:RegisterEvent("ZONE_CHANGED")
 	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
 	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
-
-	-- Update coordinates
-	MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
-
-	-- Register
+	
 	Minimap.MinimapZone = MinimapZone
-	Minimap.MinimapCoords = MinimapCoords
+
+	if C.Maps.MinimapCoords then
+		local MinimapCoords = CreateFrame("Frame", "TukuiMinimapCoord", self)
+		MinimapCoords:CreateBackdrop()
+		MinimapCoords:SetSize(40, 19)
+		MinimapCoords:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 2, 2)
+		MinimapCoords:SetFrameStrata(self:GetFrameStrata())
+		MinimapCoords:SetAlpha(0)
+
+		MinimapCoords.Text = MinimapCoords:CreateFontString("TukuiMinimapCoordText", "OVERLAY")
+		MinimapCoords.Text:SetFont(C["Medias"].Font, 10)
+		MinimapCoords.Text:SetPoint("Center", 0, -1)
+		MinimapCoords.Text:SetText("0, 0")
+
+		MinimapCoords.Anim = CreateAnimationGroup(MinimapCoords):CreateAnimation("Fade")
+		MinimapCoords.Anim:SetDuration(0.3)
+		MinimapCoords.Anim:SetEasing("inout")
+		MinimapCoords.Anim:SetChange(1)
+
+		-- Update coordinates
+		MinimapCoords:SetScript("OnUpdate", Minimap.UpdateCoords)
+
+		Minimap.MinimapCoords = MinimapCoords
+	end
 end
 
 function Minimap:UpdateCoords(t)
@@ -321,9 +323,11 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapZone.Anim:SetChange(1)
 		Minimap.MinimapZone.Anim:Play()
 		
-		Minimap.MinimapCoords.Anim:Stop()
-		Minimap.MinimapCoords.Anim:SetChange(1)	
-		Minimap.MinimapCoords.Anim:Play()
+		if C.Maps.MinimapCoords then
+			Minimap.MinimapCoords.Anim:Stop()
+			Minimap.MinimapCoords.Anim:SetChange(1)	
+			Minimap.MinimapCoords.Anim:Play()
+		end
 			
 		Tracking:SetAlpha(1)
 	end)
@@ -337,9 +341,11 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapZone.Anim:SetChange(0)
 		Minimap.MinimapZone.Anim:Play()
 		
-		Minimap.MinimapCoords.Anim:Stop()
-		Minimap.MinimapCoords.Anim:SetChange(0)
-		Minimap.MinimapCoords.Anim:Play()
+		if C.Maps.MinimapCoords then
+			Minimap.MinimapCoords.Anim:Stop()
+			Minimap.MinimapCoords.Anim:SetChange(0)
+			Minimap.MinimapCoords.Anim:Play()
+		end
 	end)
 	
 	Tracking:SetScript("OnEnter", function(self)
@@ -351,9 +357,11 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapZone.Anim:SetChange(1)
 		Minimap.MinimapZone.Anim:Play()
 		
-		Minimap.MinimapCoords.Anim:Stop()
-		Minimap.MinimapCoords.Anim:SetChange(1)
-		Minimap.MinimapCoords.Anim:Play()
+		if C.Maps.MinimapCoords then
+			Minimap.MinimapCoords.Anim:Stop()
+			Minimap.MinimapCoords.Anim:SetChange(1)
+			Minimap.MinimapCoords.Anim:Play()
+		end
 			
 		Tracking:SetAlpha(1)
 	end)
@@ -366,10 +374,12 @@ function Minimap:EnableMouseOver()
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(0)
 		Minimap.MinimapZone.Anim:Play()
-			
-		Minimap.MinimapCoords.Anim:Stop()
-		Minimap.MinimapCoords.Anim:SetChange(0)
-		Minimap.MinimapCoords.Anim:Play()
+		
+		if C.Maps.MinimapCoords then
+			Minimap.MinimapCoords.Anim:Stop()
+			Minimap.MinimapCoords.Anim:SetChange(0)
+			Minimap.MinimapCoords.Anim:Play()
+		end
 	end)
 end
 
