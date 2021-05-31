@@ -160,6 +160,10 @@ function UnitFrames:Party()
 
 		self.HealthPrediction = HealthPrediction
 	end
+	
+	local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
+	ResurrectIndicator:SetSize(24, 24)
+	ResurrectIndicator:SetPoint("CENTER", Health)
 
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Party.HighlightSize})
@@ -191,6 +195,7 @@ function UnitFrames:Party()
 	self.RaidTargetIndicator = RaidIcon
 	self.Range = Range
 	self.Highlight = Highlight
+	self.ResurrectIndicator = ResurrectIndicator
 	
 	if T.Retail then
 		self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
