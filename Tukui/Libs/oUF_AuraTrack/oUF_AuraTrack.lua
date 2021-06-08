@@ -339,7 +339,7 @@ local OnUpdate = function(self)
 	end
 end
 
-local UpdateIcon = function(self, unit, spellID, texture, id, expiration, duration)
+local UpdateIcon = function(self, unit, spellID, texture, id, expiration, duration, count)
 	local AuraTrack = self.AuraTrack
 	
 	if id > AuraTrack.MaxAuras then
@@ -370,6 +370,10 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 		AuraTrack.Auras[id].Cooldown:SetAllPoints()
 		AuraTrack.Auras[id].Cooldown:SetReverse(true)
 		AuraTrack.Auras[id].Cooldown:SetHideCountdownNumbers(true)
+		
+		AuraTrack.Auras[id].Count = AuraTrack.Auras[id]:CreateFontString(nil, "OVERLAY")
+		AuraTrack.Auras[id].Count:SetFont(AuraTrack.Font, 12, "THINOUTLINE")
+		AuraTrack.Auras[id].Count:SetPoint("CENTER", 1, 0)
 	end
 	
 	AuraTrack.Auras[id].Expiration = expiration
@@ -377,6 +381,10 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 	AuraTrack.Auras[id].Backdrop:SetColorTexture(r * 0.2, g * 0.2, b * 0.2)
 	AuraTrack.Auras[id].Cooldown:SetCooldown(expiration - duration, duration)
 	AuraTrack.Auras[id]:Show()
+	
+	if count and count > 1 then
+		AuraTrack.Auras[id].Count:SetText(count)
+	end
 	
 	if AuraTrack.SpellTextures then
 		AuraTrack.Auras[id].Texture:SetTexture(texture)
@@ -458,9 +466,9 @@ local Update = function(self, event, unit)
 			ID = ID + 1
 			
 			if self.AuraTrack.Icons then
-				UpdateIcon(self, unit, spellID, texture, ID, expiration, duration)
+				UpdateIcon(self, unit, spellID, texture, ID, expiration, duration, count)
 			else
-				UpdateBar(self, unit, spellID, texture, ID, expiration, duration)
+				UpdateBar(self, unit, spellID, texture, ID, expiration, duration, count)
 			end
 		end
 	end

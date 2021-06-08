@@ -94,6 +94,7 @@ function UnitFrames:Raid()
 		AuraTrack.Icons = C.Raid.AuraTrackIcons
 		AuraTrack.SpellTextures = C.Raid.AuraTrackSpellTextures
 		AuraTrack.Thickness = C.Raid.AuraTrackThickness
+		AuraTrack.Font = C.Medias.Font
 
 		self.AuraTrack = AuraTrack
 	elseif C.Raid.RaidBuffsStyle.Value == "Standard" then
