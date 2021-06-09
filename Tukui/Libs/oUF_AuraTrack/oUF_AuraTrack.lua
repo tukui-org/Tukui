@@ -384,6 +384,8 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 	
 	if count and count > 1 then
 		AuraTrack.Auras[id].Count:SetText(count)
+	else
+		AuraTrack.Auras[id].Count:SetText("")
 	end
 	
 	if AuraTrack.SpellTextures then
