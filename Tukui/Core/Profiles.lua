@@ -16,12 +16,12 @@ function Profiles:Export()
 
 	Settings.Variables = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 	Settings.Settings = TukuiDatabase.Settings[T.MyRealm][T.MyName]
-	
+
 	local Serialized = LibSerialize:Serialize(Settings)
 	local Compressed = LibDeflate:CompressDeflate(Serialized)
 	local Encoded = LibDeflate:EncodeForPrint(Compressed)
 	local Result = Prefix..Encoded
-	
+
 	return Result
 end
 
@@ -32,7 +32,7 @@ function Profiles:Import()
 	local LibCode = string.gsub(Code, Prefix, "")
 	local Decoded = LibDeflate:DecodeForPrint(LibCode)
 	local CurrentCode = self:GetParent():Export()
-	
+
 	if Code == CurrentCode then
 		Status:SetText("|cffff0000SORRY, YOU ARE CURRENTLY USING THIS PROFILE|r")
 	elseif Decoded then
@@ -65,7 +65,7 @@ function Profiles:OnTextChanged()
 	local Code = self:GetText()
 	local Status = self:GetParent().Status
 	local CurrentCode = self:GetParent():Export()
-	
+
 	if Code ~= CurrentCode then
 		Status:SetText("YOU ARE CURRENTLY TRYING TO APPLY A NEW CODE")
 	else
@@ -75,7 +75,7 @@ end
 
 function Profiles:RestoreCode()
 	local EditBox = self:GetParent().EditBox
-	
+
 	EditBox:SetText(self:GetParent():Export())
 end
 
@@ -84,27 +84,37 @@ function Profiles:Enable()
 	self:SetPoint("CENTER", UIParent, "CENTER", 0, 100)
 	self:CreateBackdrop("Transparent")
 	self:CreateShadow()
-	
+	self:EnableMouse(true)
+	self:RegisterForDrag("LeftButton")
+	self:SetMovable(true)
+	self:SetUserPlaced(true)
+	self:SetScript("OnDragStart", function()
+		self:StartMoving()
+	end)
+	self:SetScript("OnDragStop", function()
+		self:StopMovingOrSizing()
+	end)
+
 	self.Logo = self:CreateTexture(nil, "OVERLAY")
 	self.Logo:SetSize(128, 128)
 	self.Logo:SetTexture(C.Medias.Logo)
 	self.Logo:SetPoint("TOP", self, "TOP", 0, 60)
-	
+
 	self.Title = self:CreateFontString(nil, "OVERLAY")
 	self.Title:SetFont(C.Medias.Font, 16, "THINOUTLINE")
 	self.Title:SetPoint("TOP", self, "TOP", 0, -86)
 	self.Title:SetText("In this window, you will be able to export, import or share your profile.")
-	
+
 	self.Description = self:CreateFontString(nil, "OVERLAY")
 	self.Description:SetFont(C.Medias.Font, 16, "THINOUTLINE")
 	self.Description:SetPoint("TOP", self.Title, "TOP", 0, -18)
 	self.Description:SetText("If you wish to use another profile, just replace the code below and hit apply.")
-	
+
 	self.Status = self:CreateFontString(nil, "OVERLAY")
 	self.Status:SetFont(C.Medias.Font, 16, "THINOUTLINE")
 	self.Status:SetPoint("TOP", self.Title, "TOP", 0, -60)
 	self.Status:SetTextColor(1, .5, 0)
-	
+
 	self.EditBox = CreateFrame("EditBox", nil, self)
 	self.EditBox:SetMultiLine(true)
 	self.EditBox:SetCursorPosition(0)
@@ -122,7 +132,7 @@ function Profiles:Enable()
 	self.EditBox.Backdrop:SetBorderColor(1, 0.5, 0)
 	self.EditBox:SetTextInsets(4, 4, 4, 4)
 	self.EditBox.Backdrop:CreateShadow()
-	
+
 	self.Reset = CreateFrame("Button", nil, self)
 	self.Reset:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Reset:SkinButton()
@@ -133,7 +143,7 @@ function Profiles:Enable()
 	self.Reset.Text:SetText("Display my code")
 	self.Reset:SetScript("OnClick", Profiles.RestoreCode)
 	self.Reset:CreateShadow()
-	
+
 	self.Close = CreateFrame("Button", nil, self)
 	self.Close:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Close:SkinButton()
@@ -144,7 +154,7 @@ function Profiles:Enable()
 	self.Close.Text:SetText(CLOSE)
 	self.Close:SetScript("OnClick", function(self) self:GetParent():Hide() end)
 	self.Close:CreateShadow()
-	
+
 	self.Apply = CreateFrame("Button", nil, self)
 	self.Apply:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Apply:SkinButton()
@@ -155,7 +165,7 @@ function Profiles:Enable()
 	self.Apply.Text:SetText("Apply new code")
 	self.Apply:SetScript("OnClick", Profiles.Import)
 	self.Apply:CreateShadow()
-	
+
 	self.Backdrop:SetPoint("BOTTOM", self.Reset, "BOTTOM", 0, -10)
 	self:Hide()
 end
