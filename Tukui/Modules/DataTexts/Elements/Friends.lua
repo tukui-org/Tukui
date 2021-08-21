@@ -7,6 +7,7 @@ local FriendsTable = {}
 local Games = {
 	["WoW"] = "World of Warcraft",
 	["S2"] = "StarCraft 2",
+	["OSI"] = "Diablo II: Resurrected",
 	["D3"] = "Diablo 3",
 	["WTCG"] = "Hearthstone",
 	["App"] = "Battle.net Desktop App",
@@ -89,19 +90,19 @@ end
 local DisplayBattleNetFriendsOnTooltip = function()
 	for i = 1, #BattleNetTable do
 		local Friend = BattleNetTable[i]
-		
+
 		if Friend then
 			local Account = T.Retail and Friend.gameAccountInfo
 			local IsOnline = T.Retail and Account.isOnline or Friend.isOnline
-			
+
 			if IsOnline then
-				local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client]
-				
+				local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client] or UNKNOWN
+
 				if Game ~= "Battle.net Desktop App" and Game ~= "Battle.net Mobile App" then
 					local BattleTag = RemoveTagNumber(Friend.battleTag)
 					local Left = "|cff00ccff"..BattleTag.."|r"
 					local Right = "|cffffffff"..Game.."|r"
-					
+
 					if Game == "World of Warcraft" and ((T.Retail and Account.characterName) or (Friend.characterName)) then
 						local LevelColor = T.Retail and Account.characterLevel and GetQuestDifficultyColor(Account.characterLevel) or Friend.characterLevel and GetQuestDifficultyColor(Friend.characterLevel) or {r = 1, g = 1, b = 1}
 						local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
@@ -110,17 +111,17 @@ local DisplayBattleNetFriendsOnTooltip = function()
 						local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
 						local Name = T.Retail and ClassHexColor..Account.characterName.."|r" or ClassHexColor..Friend.characterName.."|r"
 						local ProjectID = T.Retail and Account.wowProjectID or Friend.wowProjectID
-						
+
 						-- WoW Classic Detected
 						if ProjectID == WOW_PROJECT_CLASSIC then
 							Right = "|cffffffff"..Game.." Classic|r"
 						elseif ProjectID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
 							Right = "|cffffffff"..Game.." Classic (TBC)|r"
 						end
-						
+
 						Left = Left.." ("..Level.." "..Name..")"
 					end
-					
+
 					GameTooltip:AddDoubleLine(Left, Right)
 				end
 			end
@@ -131,7 +132,7 @@ end
 local UpdateBattleNetFriendsCache = function(total)
 	-- Reset battle.net cache
 	wipe(BattleNetTable)
-	
+
 	if T.Retail then
 		for i = 1, total do
 			local Infos = C_BattleNet.GetFriendAccountInfo(i)
@@ -140,13 +141,13 @@ local UpdateBattleNetFriendsCache = function(total)
 				bnetAccountID, number, Unique numeric identifier for the friend's Battle.net account during this session
 				accountName, string, A protected string representing the friend's full name or BattleTag name
 				battleTag, string, The friend's BattleTag (e.g., "Nickname#0001")
-				isFriend, boolean	
+				isFriend, boolean
 				isBattleTagFriend, boolean, Whether or not the friend is known by their BattleTag
 				lastOnlineTime, number, The number of seconds elapsed since this friend was last online (from the epoch date of January 1, 1970). Returns nil if currently online.
 				isAFK, boolean, Whether or not the friend is flagged as Away
 				isDND, boolean, Whether or not the friend is flagged as Busy
 				isFavorite, boolean, Whether or not the friend is marked as a favorite by you
-				appearOffline, boolean	
+				appearOffline, boolean
 				customMessage, string, The Battle.net broadcast message
 				customMessageTime, number, The number of seconds elapsed since the current broadcast message was sent
 				note, string, The contents of the player's note about this friend
@@ -163,7 +164,7 @@ local UpdateBattleNetFriendsCache = function(total)
 				wowProjectID, number
 				characterName, string, The name of the logged in toon/character
 				realmName, string, The name of the logged in realm
-				realmDisplayName, string	
+				realmDisplayName, string
 				realmID	number, The ID for the logged in realm
 				factionName, string, The englishFaction name (i.e., "Alliance" or "Horde")
 				raceName, string, The localized race name (e.g., "Blood Elf")
@@ -172,19 +173,19 @@ local UpdateBattleNetFriendsCache = function(total)
 				characterLevel, number, The current level (e.g., "90")
 				richPresence, string, For WoW, returns "zoneName - realmName". For StarCraft 2 and Diablo 3, returns the location or activity the player is currently engaged in.
 				playerGuid, string, A unique numeric identifier for the friend's character during this session.
-				isWowMobile, boolean	
-				canSummon, boolean	
+				isWowMobile, boolean
+				canSummon, boolean
 				hasFocus, boolean, Whether or not this toon is the one currently being displayed in Blizzard's FriendFrame
 			]]
 
 			BattleNetTable[i] = Infos
 		end
 	end
-	
+
 	if T.BCC then
 		for i = 1, total do
 			local bnetIDAccount, accountName, battleTag, isBattleTag, characterName, bnetIDGameAccount, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR, isReferAFriend, canSummonFriend = BNGetFriendInfo(i)
-			local realmName, realmID, faction, zoneName, gameText, isGameAFK, isGameBusy, guid, wowProjectID
+			local realmName, realmID, factionName, className, zoneName, characterLevel, gameText, isGameAFK, isGameBusy, guid, wowProjectID, _
 
 			if isOnline then
 				_, _, _, realmName, realmID, factionName, _, className, _, zoneName, characterLevel, gameText, _, _, _, _, _, isGameAFK, isGameBusy, guid, wowProjectID = BNGetGameAccountInfo(bnetIDGameAccount)
@@ -197,7 +198,7 @@ local UpdateBattleNetFriendsCache = function(total)
 				[4]="ClassicBetaPvE",
 				[5]=4618,
 				[6]="Horde",
-				[7]="Troll",	
+				[7]="Troll",
 				[8]="Hunter",
 				[9]="",
 				[10]="Hellfire Peninsula",
@@ -255,10 +256,10 @@ end
 local DisplayFriendsOnTooltip = function()
 	for i = 1, #FriendsTable do
 		local Friend = FriendsTable[i]
-		
+
 		if Friend then
 			local IsConnected = Friend.connected
-			
+
 			if IsConnected then
 				local Name = Friend.name
 				local Level = Friend.level
@@ -269,7 +270,7 @@ local DisplayFriendsOnTooltip = function()
 				local Area = Friend.area or UNKNOWN
 				local Left = ClassHexColor..Name.."|r ("..LevelHexColor..Level.."|r)"
 				local Right = GetSubZoneText() == Area and "|cff00ff00"..Area.."|r" or "|cffffffff"..Area.."|r"
-				
+
 				GameTooltip:AddDoubleLine(Left, Right)
 			end
 		end
@@ -279,10 +280,10 @@ end
 local UpdateFriendsCache = function(total)
 	-- Reset WoW friends cache
 	wipe(FriendsTable)
-	
+
 	for i = 1, total do
 		local Infos = C_FriendList.GetFriendInfoByIndex(i)
-		
+
 		FriendsTable[i] = Infos
 	end
 end
@@ -290,15 +291,15 @@ end
 local OnEnter = function(self)
 	GameTooltip:ClearLines()
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
-	
+
 	local OnlineFriends = C_FriendList.GetNumOnlineFriends()
 	local FriendsNumber = C_FriendList.GetNumFriends()
 	local BNetNumber, OnlineBNet = BNGetNumFriends()
 	local TotalOnline = OnlineFriends + OnlineBNet
-	
+
 	if TotalOnline > 0 then
 		local ShiftDown = IsShiftKeyDown()
-		
+
 		UpdateBattleNetFriendsCache(BNetNumber)
 		UpdateFriendsCache(FriendsNumber)
 
@@ -351,50 +352,50 @@ local OnMouseDown = function(self, button)
 
 			return
 		end
-		
+
 		ToggleFriendsFrame()
 	end
-	
+
 	if button == "RightButton" then
 		local InviteID = 0
 		local WhisperID = 0
 		local InviteList = Options[2].menuList
 		local WhisperList = Options[3].menuList
-		
+
 		-- Reset whisper menu
 		wipe(WhisperList)
 
 		-- Reset invite menu
 		wipe(InviteList)
-		
+
 		-- Update battle.net menu listing for invites and whispers
 		for i = 1, #BattleNetTable do
 			local Friend = BattleNetTable[i]
-			
+
 			if Friend then
 				local Account = T.Retail and Friend.gameAccountInfo
 				local IsOnline = T.Retail and Account.isOnline or Friend.isOnline
 				local Faction = T.Retail and Account.factionName or Friend.factionName
-				
+
 				if IsOnline then
 					WhisperID = WhisperID + 1
-					
+
 					local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client]
 					local BattleTag = RemoveTagNumber(Friend.battleTag)
-					
+
 					-- Adding Battle.net Whisper
 					WhisperList[WhisperID] = {
-						text = "|cff00ccff"..BattleTag.."|r", 
-						arg1 = BattleTag, 
+						text = "|cff00ccff"..BattleTag.."|r",
+						arg1 = BattleTag,
 						arg2 = true,
-						notCheckable = true, 
+						notCheckable = true,
 						func = WhisperFriend,
 					}
-					
+
 					-- Adding Battle.net Invites
 					if Game == "World of Warcraft" and UnitFactionGroup("player") == Faction then
 						local ProjectID = T.Retail and Account.wowProjectID or Friend.wowProjectID
-						
+
 						if ProjectID == WOW_PROJECT_ID then
 							local AccountID = T.Retail and Account.gameAccountID or Friend.bnetIDAccount
 							local Name = T.Retail and Account.characterName or Friend.characterName
@@ -403,13 +404,13 @@ local OnMouseDown = function(self, button)
 							local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 							local Class = T.Retail and EnglishClass(Account.className) or EnglishClass(Friend.className)
 							local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
-							
+
 							InviteID = InviteID + 1
 
 							InviteList[InviteID] = {
 								text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r (|cff00ccff"..BattleTag.."|r)",
 								arg1 = AccountID,
-								notCheckable = true, 
+								notCheckable = true,
 								func = InviteFriend,
 							}
 						end
@@ -417,42 +418,42 @@ local OnMouseDown = function(self, button)
 				end
 			end
 		end
-		
+
 		-- Update friends menu listing for invites and whispers
 		for i = 1, #FriendsTable do
 			local Friend = FriendsTable[i]
-			
+
 			if Friend then
 				if Friend.connected then
 					WhisperID = WhisperID + 1
 					InviteID = InviteID + 1
-					
+
 					local Name = Friend.name
 					local Level = Friend.level
 					local LevelColor = Level and GetQuestDifficultyColor(Level) or {1, 1, 1}
 					local LevelHexColor = T.RGBToHex(LevelColor.r, LevelColor.g, LevelColor.b)
 					local Class = EnglishClass(Friend.className)
 					local ClassHexColor = Class and T.RGBToHex(unpack(T.Colors.class[Class])) or "|cffffffff"
-					
+
 					-- Adding Battle.net Whisper
 					WhisperList[WhisperID] = {
-						text = ClassHexColor..Name.."|r", 
-						arg1 = Name, 
+						text = ClassHexColor..Name.."|r",
+						arg1 = Name,
 						arg2 = false,
-						notCheckable = true, 
+						notCheckable = true,
 						func = WhisperFriend,
 					}
-					
+
 					InviteList[InviteID] = {
 						text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r",
 						arg1 = Name,
-						notCheckable = true, 
+						notCheckable = true,
 						func = InviteFriend,
 					}
 				end
 			end
 		end
-		
+
 		T.Miscellaneous.DropDown.Open(Options, Menu, "cursor", 0, 0, "MENU", 2)
 	end
 end
@@ -473,20 +474,20 @@ local Enable = function(self)
 	self:RegisterEvent("BN_CONNECTED")
 	self:RegisterEvent("BN_DISCONNECTED")
 	self:RegisterEvent("FRIENDLIST_UPDATE")
-	
+
 	self:SetScript("OnMouseDown", OnMouseDown)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", GameTooltip_Hide)
 	self:SetScript("OnEvent", Update)
-	
+
 	self:Update()
 end
 
 local Disable = function(self)
 	self.Text:SetText("")
-	
+
 	self:UnregisterAllEvents()
-	
+
 	self:SetScript("OnMouseDown", nil)
 	self:SetScript("OnEnter", nil)
 	self:SetScript("OnLeave", nil)
