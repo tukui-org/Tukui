@@ -13,8 +13,6 @@ function Battle:SkinTooltips()
 	}
 
 	for i, Tooltip in pairs(Tooltips) do
-		Tooltip.Background:SetTexture(nil)
-
 		if Tooltip.Delimiter1 then
 			Tooltip.Delimiter1:SetTexture(nil)
 			Tooltip.Delimiter2:SetTexture(nil)
@@ -22,15 +20,7 @@ function Battle:SkinTooltips()
 			Tooltip.Delimiter:SetTexture(nil)
 		end
 
-		Tooltip.BorderTop:SetTexture(nil)
-		Tooltip.BorderTopLeft:SetTexture(nil)
-		Tooltip.BorderTopRight:SetTexture(nil)
-		Tooltip.BorderLeft:SetTexture(nil)
-		Tooltip.BorderRight:SetTexture(nil)
-		Tooltip.BorderBottom:SetTexture(nil)
-		Tooltip.BorderBottomRight:SetTexture(nil)
-		Tooltip.BorderBottomLeft:SetTexture(nil)
-		Tooltip:CreateBackdrop()
+		Tooltip.NineSlice:SetTemplate()
 
 		if Tooltip.CloseButton then
 			Tooltip.CloseButton:SkinCloseButton()
