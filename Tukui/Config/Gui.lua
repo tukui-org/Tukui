@@ -345,7 +345,7 @@ local Textures = function(self)
 
 	Window:CreateSection("All", "Party")
 	Window:CreateDropdown("All", "Textures", "UFPartyHealthTexture", "Party health texture", "Texture")
-	Window:CreateDropdown("All", "Textures", "UFPartyPowerTexture", "Party party texture", "Texture")
+	Window:CreateDropdown("All", "Textures", "UFPartyPowerTexture", "Party power texture", "Texture")
 
 	Window:CreateSection("All", "Raid")
 	Window:CreateDropdown("All", "Textures", "UFRaidHealthTexture", "Raid health texture", "Texture")
