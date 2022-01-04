@@ -232,6 +232,10 @@ function Tooltip:Skin()
 		self:CreateBackdrop()
 		self:CreateShadow()
 		
+		if self.NineSlice then
+			self.NineSlice:SetAlpha(0)
+		end
+		
 		self.IsSkinned = true
 	end
 end
@@ -391,7 +395,10 @@ function Tooltip:SetBackdropStyle()
 end
 
 function Tooltip:AddHooks()
-	hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
+	if T.BCC then
+		hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
+	end
+
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 	
 	if C.Tooltips.UnitBorderColor then

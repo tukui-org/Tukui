@@ -13,14 +13,17 @@ function Battle:SkinTooltips()
 	}
 
 	for i, Tooltip in pairs(Tooltips) do
+		if Tooltip.NineSlice then
+			Tooltip.NineSlice:StripTextures()
+			Tooltip.NineSlice:SetTemplate("Transparent")
+		end
+
 		if Tooltip.Delimiter1 then
 			Tooltip.Delimiter1:SetTexture(nil)
 			Tooltip.Delimiter2:SetTexture(nil)
 		elseif Tooltip.Delimiter then
 			Tooltip.Delimiter:SetTexture(nil)
 		end
-
-		Tooltip.NineSlice:SetTemplate()
 
 		if Tooltip.CloseButton then
 			Tooltip.CloseButton:SkinCloseButton()

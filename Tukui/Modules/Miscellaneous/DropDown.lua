@@ -18,6 +18,10 @@ function DropDown:Skin()
 
 		Backdrop = _G["DropDownList"..i.."MenuBackdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
+			if Backdrop.NineSlice then
+				Backdrop.NineSlice:SetAlpha(0)
+			end
+
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -26,6 +30,10 @@ function DropDown:Skin()
 
 		Backdrop = _G["DropDownList"..i.."Backdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
+			if Backdrop.NineSlice then
+				Backdrop.NineSlice:SetAlpha(0)
+			end
+
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -34,6 +42,10 @@ function DropDown:Skin()
 
 		Backdrop = _G["Lib_DropDownList"..i.."MenuBackdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
+			if Backdrop.NineSlice then
+				Backdrop.NineSlice:SetAlpha(0)
+			end
+
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -42,6 +54,10 @@ function DropDown:Skin()
 
 		Backdrop = _G["Lib_DropDownList"..i.."Backdrop"]
 		if Backdrop and not Backdrop.IsSkinned then
+			if Backdrop.NineSlice then
+				Backdrop.NineSlice:SetAlpha(0)
+			end
+
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()

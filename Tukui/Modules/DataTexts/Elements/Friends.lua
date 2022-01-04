@@ -353,7 +353,7 @@ local OnMouseDown = function(self, button)
 			return
 		end
 
-		ToggleFriendsFrame()
+		ToggleFriendsFrame(1)
 	end
 
 	if button == "RightButton" then
