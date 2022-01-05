@@ -220,7 +220,7 @@ function Bags:CreateReagentContainer()
 		self.Bank:Show()
 		BankFrame_ShowPanel(BANK_PANELS[1].name)
 
-		for i = 5, 11 do
+		for i = 5, T.Classic and 10 or 11 do
 			if (not IsBagOpen(i)) then
 
 				self:OpenBag(i, 1)
@@ -522,7 +522,7 @@ function Bags:CreateContainer(storagetype, ...)
 				self.Reagent:Show()
 			end
 
-			for i = 5, 11 do
+			for i = 5, T.Classic and 10 or 11 do
 				self:CloseBag(i)
 			end
 		end)
@@ -938,7 +938,7 @@ function Bags:UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local BankFrameMoneyFrame = BankFrameMoneyFrame
 
-	for Bank = 1, 28 do
+	for Bank = 1, T.Classic and 24 or 28 do
 		local Button = _G["BankFrameItem"..Bank]
 		local Money = ContainerFrame2MoneyFrame
 
@@ -1092,7 +1092,7 @@ function Bags:OpenAllBankBags()
 			self.Bank.MoverApplied = true
 		end
 
-		for i = 5, 11 do
+		for i = 5, T.Classic and 10 or 11 do
 			if (not IsBagOpen(i)) then
 
 				self:OpenBag(i, 1)
