@@ -551,26 +551,27 @@ function Bags:CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame["Bag"..i]
+			if Bag then
+				Bag:SetParent(BankBagsContainer)
+				Bag:SetWidth(ButtonSize)
+				Bag:SetHeight(ButtonSize)
 
-			Bag:SetParent(BankBagsContainer)
-			Bag:SetWidth(ButtonSize)
-			Bag:SetHeight(ButtonSize)
+				Bag.IconBorder:SetAlpha(0)
+				Bag.icon:SetTexCoord(unpack(T.IconCoord))
+				Bag.icon:SetInside()
 
-			Bag.IconBorder:SetAlpha(0)
-			Bag.icon:SetTexCoord(unpack(T.IconCoord))
-			Bag.icon:SetInside()
+				Bag:SkinButton()
+				Bag:ClearAllPoints()
 
-			Bag:SkinButton()
-			Bag:ClearAllPoints()
-			
-			if T.Retail then
-				Bag.SlotHighlightTexture:SetAlpha(0)
-			end
+				if T.Retail then
+					Bag.SlotHighlightTexture:SetAlpha(0)
+				end
 
-			if i == 1 then
-				Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing)
-			else
-				Bag:SetPoint("LEFT", BankSlotsFrame["Bag"..i-1], "RIGHT", ButtonSpacing, 0)
+				if i == 1 then
+					Bag:SetPoint("TOPLEFT", BankBagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing)
+				else
+					Bag:SetPoint("LEFT", BankSlotsFrame["Bag"..i-1], "RIGHT", ButtonSpacing, 0)
+				end
 			end
 		end
 
@@ -583,12 +584,12 @@ function Bags:CreateContainer(storagetype, ...)
 		Container.BagsContainer = BankBagsContainer
 		Container.SortButton = SortButton
 		Container.ReagentButton = SwitchReagentButton
-		
-		if T.BCC then
+
+		if not T.Retail then
 			SwitchReagentButton:Hide()
-			
+
 			SortButton:SetWidth(Container:GetWidth())
-			
+
 			CloseButton:Hide()
 		end
 	end

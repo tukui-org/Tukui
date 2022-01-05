@@ -21,7 +21,7 @@ function DropDown:Skin()
 			if Backdrop.NineSlice then
 				Backdrop.NineSlice:SetAlpha(0)
 			end
-
+			
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -33,7 +33,7 @@ function DropDown:Skin()
 			if Backdrop.NineSlice then
 				Backdrop.NineSlice:SetAlpha(0)
 			end
-
+			
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -45,7 +45,7 @@ function DropDown:Skin()
 			if Backdrop.NineSlice then
 				Backdrop.NineSlice:SetAlpha(0)
 			end
-
+			
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()
@@ -57,7 +57,7 @@ function DropDown:Skin()
 			if Backdrop.NineSlice then
 				Backdrop.NineSlice:SetAlpha(0)
 			end
-
+			
 			Backdrop:StripTextures()
 			Backdrop:CreateBackdrop("Default")
 			Backdrop:CreateShadow()

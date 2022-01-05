@@ -371,15 +371,15 @@ if T.Retail then
 			[107079] = Priority(4), -- Quaking Palm
 		},
 	}
-elseif T.BCC then
+else
 	Debuffs["PvE"] = {
 		["type"] = "Whitelist",
 		["spells"] = {
-			
+
 		---------------
 		-- Pre-Patch --
 		---------------
-			
+
 			-- Onyxia's Lair
 				[18431] = Priority(2), --Bellowing Roar
 			-- Molten Core
@@ -514,8 +514,6 @@ elseif T.BCC then
 				[30210] = Priority(3), -- Smoldering Breath
 				[25653] = Priority(3), -- Tail Sweep
 		-- Gruul's Lair
-			-- Trash
-				[22884] = Priority(4), -- Psychic Scream
 			-- High King Maulgar
 			-- Blindeye the Seer
 			-- Kiggler the Crazed
@@ -577,7 +575,6 @@ elseif T.BCC then
 				[37122] = Priority(5), -- Domination
 				[37135] = Priority(5), -- Domination
 				[37120] = Priority(4), -- Fragmentation Bomb
-				[13005] = Priority(3), -- Hammer of Justice
 				[39077] = Priority(3), -- Hammer of Justice
 				[37279] = Priority(3), -- Rain of Fire
 				[37123] = Priority(4), -- Saw Blade
@@ -664,7 +661,6 @@ elseif T.BCC then
 			[19306] = Priority(2), -- Counterattack
 			[19185] = Priority(2), -- Entrapment
 			[3355] = Priority(3), -- Freezing Trap
-			[2637] = Priority(3), -- Hibernate
 			[19410] = Priority(3), -- Improved Concussive Shot
 			[19229] = Priority(2), -- Improved Wing Clip
 			[24394] = Priority(3), -- Intimidation

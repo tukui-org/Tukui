@@ -269,7 +269,7 @@ if T.Retail then
 			WorldMap:SetLargeWorldMap()
 		end
 	end
-elseif T.BCC then
+else
 	function WorldMap:OnUpdate(elapsed)
 		if not WorldMapFrame:IsShown() then
 			return

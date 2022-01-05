@@ -25,7 +25,7 @@ C["General"] = {
 
 		["Value"] = "Tukui",
 	},
-	
+
 	["GlobalFont"] = {
 		["Options"] = {
 			["Express Way"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
@@ -199,7 +199,7 @@ C["NamePlates"] = {
 	["AggroColor3"] = {1.00, 0.50, 0.00},
 	["AggroColor4"] = {1, 0.2, 0.2},
 	["HighlightSize"] = 10,
-	["ColorThreat"] = false, 
+	["ColorThreat"] = false,
 	["HealthTag"] = {
 		["Options"] = {
 			["None"] = "",

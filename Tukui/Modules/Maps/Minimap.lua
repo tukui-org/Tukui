@@ -45,7 +45,7 @@ end
 
 function Minimap:OnMouseClick(button)
 	local MicroMenu = T.Miscellaneous.MicroMenu
-	
+
 	if (button == "RightButton") then
 		if T.Retail then
 			MiniMapTracking_OnMouseDown(MiniMapTracking)
@@ -86,36 +86,36 @@ function Minimap:StyleMinimap()
 	Mail:ClearAllPoints()
 	MailBorder:Hide()
 	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
-	
+
 	if T.Retail then
 		local QueueStatusMinimapButton = QueueStatusMinimapButton
 		local QueueStatusFrame = QueueStatusFrame
 		local MiniMapInstanceDifficulty = MiniMapInstanceDifficulty
 		local GuildInstanceDifficulty = GuildInstanceDifficulty
 		local HelpOpenTicketButton = HelpOpenTicketButton
-		
+
 		self:SetArchBlobRingScalar(0)
 		self:SetQuestBlobRingScalar(0)
-		
+
 		MiniMapTracking:SetParent(T.Hider)
-		
+
 		QueueStatusMinimapButton:SetParent(Minimap)
 		QueueStatusMinimapButton:ClearAllPoints()
 		QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 2, -2)
 		QueueStatusMinimapButton:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() + 2)
 		QueueStatusMinimapButtonBorder:Kill()
-		
+
 		QueueStatusFrame:StripTextures()
 		QueueStatusFrame:CreateBackdrop()
 		QueueStatusFrame:CreateShadow()
-		
+
 		Mail:SetPoint("BOTTOMRIGHT", 3, -4)	
 		Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
-		
+
 		MiniMapInstanceDifficulty:ClearAllPoints()	
 		MiniMapInstanceDifficulty:SetParent(Minimap)	
 		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
-		
+
 		GuildInstanceDifficulty:ClearAllPoints()
 		GuildInstanceDifficulty:SetParent(Minimap)	
 		GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
@@ -123,38 +123,40 @@ function Minimap:StyleMinimap()
 		local BGFrame = MiniMapBattlefieldFrame
 		local BGFrameBorder = MiniMapBattlefieldBorder
 		local BGFrameIcon = MiniMapBattlefieldIcon
-		
+
 		BGFrame:ClearAllPoints()
 		BGFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 3, -1)
 		BGFrame:SetFrameStrata(Mail:GetFrameStrata())
 		BGFrame:SetFrameLevel(Mail:GetFrameLevel() + 2)
-		
+
 		BGFrameBorder:Hide()
-		
+
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
-		
-		if C.Maps.MinimapTracking then
-			MiniMapTrackingBorder:Kill()
 
-			MiniMapTracking:ClearAllPoints()
-			MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+		if T.BCC then
+			if C.Maps.MinimapTracking and T.BCC then
+				MiniMapTrackingBorder:Kill()
 
-			if (MiniMapTrackingBorder) then
-				MiniMapTrackingBorder:Hide()
+				MiniMapTracking:ClearAllPoints()
+				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+
+				if (MiniMapTrackingBorder) then
+					MiniMapTrackingBorder:Hide()
+				end
+
+				if (MiniMapTrackingIcon) then
+					MiniMapTrackingIcon:SetDrawLayer("ARTWORK")
+					MiniMapTrackingIcon:SetTexCoord(unpack(T.IconCoord))
+					MiniMapTrackingIcon:SetSize(16, 16)
+				end
+
+				MiniMapTracking:CreateBackdrop()
+				MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
+				MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
+				MiniMapTracking.Backdrop:CreateShadow()
+			else
+				MiniMapTracking:SetParent(T.Hider)
 			end
-
-			if (MiniMapTrackingIcon) then
-				MiniMapTrackingIcon:SetDrawLayer("ARTWORK")
-				MiniMapTrackingIcon:SetTexCoord(unpack(T.IconCoord))
-				MiniMapTrackingIcon:SetSize(16, 16)
-			end
-
-			MiniMapTracking:CreateBackdrop()
-			MiniMapTracking.Backdrop:SetFrameLevel(MiniMapTracking:GetFrameLevel())
-			MiniMapTracking.Backdrop:SetOutside(MiniMapTrackingIcon)
-			MiniMapTracking.Backdrop:CreateShadow()
-		else
-			MiniMapTracking:SetParent(T.Hider)
 		end
 	end
 end
@@ -177,10 +179,10 @@ function Minimap:AddMinimapDataTexts()
 	MinimapDataText:SetSize(Backdrop:GetWidth(), 19)
 	MinimapDataText:SetPoint("TOPLEFT", Backdrop, "BOTTOMLEFT", 0, 0)
 	MinimapDataText:CreateBackdrop()
-	
+
 	MinimapDataText.Backdrop:SetFrameStrata(Minimap.Backdrop:GetFrameStrata())
 	MinimapDataText.Backdrop:SetFrameLevel(Minimap.Backdrop:GetFrameLevel())
-	
+
 	Shadow:SetPoint("BOTTOM", MinimapDataText, "BOTTOM", 0, -3)
 
 	T.DataTexts.Panels.Minimap = MinimapDataText
@@ -211,14 +213,14 @@ function Minimap:AddZoneAndCoords()
 	MinimapZone.Anim:SetDuration(0.3)
 	MinimapZone.Anim:SetEasing("inout")
 	MinimapZone.Anim:SetChange(1)
-	
+
 	-- Update zone text
 	MinimapZone:RegisterEvent("PLAYER_ENTERING_WORLD")
 	MinimapZone:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	MinimapZone:RegisterEvent("ZONE_CHANGED")
 	MinimapZone:RegisterEvent("ZONE_CHANGED_INDOORS")
 	MinimapZone:SetScript("OnEvent", Minimap.UpdateZone)
-	
+
 	Minimap.MinimapZone = MinimapZone
 
 	if C.Maps.MinimapCoords then
@@ -313,74 +315,78 @@ end
 function Minimap:EnableMouseOver()
 	local Tracking = T.Retail and MiniMapTrackingButton or MiniMapTracking
 	local TrackingIcon = MiniMapTrackingIcon
-	
+
 	self:SetScript("OnEnter", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
-		
+
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(1)
 		Minimap.MinimapZone.Anim:Play()
-		
+
 		if C.Maps.MinimapCoords then
 			Minimap.MinimapCoords.Anim:Stop()
-			Minimap.MinimapCoords.Anim:SetChange(1)	
+			Minimap.MinimapCoords.Anim:SetChange(1)
 			Minimap.MinimapCoords.Anim:Play()
 		end
-			
-		Tracking:SetAlpha(1)
+
+		if T.Retail or T.BCC then
+			Tracking:SetAlpha(1)
+		end
 	end)
 
 	self:SetScript("OnLeave", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
-		
+
 		Minimap.MinimapZone.Anim:Stop()
 		Minimap.MinimapZone.Anim:SetChange(0)
 		Minimap.MinimapZone.Anim:Play()
-		
+
 		if C.Maps.MinimapCoords then
 			Minimap.MinimapCoords.Anim:Stop()
 			Minimap.MinimapCoords.Anim:SetChange(0)
 			Minimap.MinimapCoords.Anim:Play()
 		end
-	end)
-	
-	Tracking:SetScript("OnEnter", function(self)
-		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
-			return
-		end
-		
-		Minimap.MinimapZone.Anim:Stop()
-		Minimap.MinimapZone.Anim:SetChange(1)
-		Minimap.MinimapZone.Anim:Play()
-		
-		if C.Maps.MinimapCoords then
-			Minimap.MinimapCoords.Anim:Stop()
-			Minimap.MinimapCoords.Anim:SetChange(1)
-			Minimap.MinimapCoords.Anim:Play()
-		end
-			
-		Tracking:SetAlpha(1)
 	end)
 
-	Tracking:SetScript("OnLeave", function(self)
-		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
-			return
-		end
-		
-		Minimap.MinimapZone.Anim:Stop()
-		Minimap.MinimapZone.Anim:SetChange(0)
-		Minimap.MinimapZone.Anim:Play()
-		
-		if C.Maps.MinimapCoords then
-			Minimap.MinimapCoords.Anim:Stop()
-			Minimap.MinimapCoords.Anim:SetChange(0)
-			Minimap.MinimapCoords.Anim:Play()
-		end
-	end)
+	if T.Retail or T.BCC then
+		Tracking:SetScript("OnEnter", function(self)
+			if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+				return
+			end
+
+			Minimap.MinimapZone.Anim:Stop()
+			Minimap.MinimapZone.Anim:SetChange(1)
+			Minimap.MinimapZone.Anim:Play()
+
+			if C.Maps.MinimapCoords then
+				Minimap.MinimapCoords.Anim:Stop()
+				Minimap.MinimapCoords.Anim:SetChange(1)
+				Minimap.MinimapCoords.Anim:Play()
+			end
+
+			Tracking:SetAlpha(1)
+		end)
+
+		Tracking:SetScript("OnLeave", function(self)
+			if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
+				return
+			end
+
+			Minimap.MinimapZone.Anim:Stop()
+			Minimap.MinimapZone.Anim:SetChange(0)
+			Minimap.MinimapZone.Anim:Play()
+
+			if C.Maps.MinimapCoords then
+				Minimap.MinimapCoords.Anim:Stop()
+				Minimap.MinimapCoords.Anim:SetChange(0)
+				Minimap.MinimapCoords.Anim:Play()
+			end
+		end)
+	end
 end
 
 function Minimap:SizeMinimap()
@@ -473,21 +479,21 @@ function Minimap:StartHighlight()
 		Minimap.Highlight:SetPoint("LEFT", -10, 0)
 		Minimap.Highlight:SetPoint("RIGHT", 10, 0)
 		Minimap.Highlight:SetBackdropBorderColor(1, 1, 0)
-		
+
 		Minimap.Highlight.Animation = Minimap.Highlight:CreateAnimationGroup()
 		Minimap.Highlight.Animation:SetLooping("BOUNCE")
-		
+
 		Minimap.Highlight.Animation.Bounce = Minimap.Highlight.Animation:CreateAnimation("Alpha")
 		Minimap.Highlight.Animation.Bounce:SetFromAlpha(1)
 		Minimap.Highlight.Animation.Bounce:SetToAlpha(.6)
 		Minimap.Highlight.Animation.Bounce:SetDuration(.3)
 		Minimap.Highlight.Animation.Bounce:SetSmoothing("IN_OUT")
 	end
-	
+
 	if not Minimap.Highlight.Animation:IsPlaying() then
 		Minimap.Highlight:Show()
 		Minimap.Highlight.Animation:Play()
-		
+
 		T.Print("[|cffffff00"..MINIMAP_LABEL.."|r] "..MINIMAP_GARRISON_LANDING_PAGE_TOOLTIP.." (|cffff0000"..KEY_BUTTON3.."|r)")
 	end
 end
@@ -498,10 +504,10 @@ function Minimap:MoveGarrisonButton()
 end
 
 function Minimap:AddHooks()
-	if T.BCC then
+	if not T.Retail then
 		return
 	end
-	
+
 	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Play", self.StartHighlight)
 	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Stop", self.StopHighlight)

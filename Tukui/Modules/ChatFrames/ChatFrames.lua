@@ -313,7 +313,7 @@ function Chat:Reset()
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
 	
-	if T.BCC then
+	if T.BCC or T.Classic then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 	end
 	
@@ -352,7 +352,7 @@ function Chat:Reset()
 	
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
-		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) then
+		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) or (T.Classic and i ~= 2 and i ~= 6) then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
@@ -385,7 +385,7 @@ function Chat:Reset()
 	-- ChatFrame 3 Setup --
 	-----------------------
 	
-	if T.BCC then
+	if T.BCC or T.Classic then
 		for i = 1, #Channels do
 			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
 			ChatFrame_AddChannel(ChatFrame3, Channels[i])

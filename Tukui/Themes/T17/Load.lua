@@ -114,7 +114,7 @@ function Tukz:SetChatFramePosition()
 			Frame:SetHeight(124)
 		end
 	end
-	
+
 	FCF_SavePositionAndDimensions(Frame)
 end
 
@@ -128,13 +128,13 @@ function Tukz:SetupChat()
 	RC:SetAlpha(0)
 	DTL:CreateShadow()
 	DTR:CreateShadow()
-	
+
 	hooksecurefunc("FCFTab_UpdateAlpha", Tukz.NoMouseAlphaOnTab)
 	hooksecurefunc(T.Chat, "SetChatFramePosition", Tukz.SetChatFramePosition)
 	hooksecurefunc(T.Chat, "Reset", function()
 		for i = 1, NUM_CHAT_WINDOWS do
 			local ChatFrame = _G["ChatFrame"..i]
-				
+
 			Tukz.SetChatFramePosition(ChatFrame)
 		end
 	end)
@@ -145,16 +145,16 @@ function Tukz:SetupChat()
 
 		Tab.SetAlpha = Frame.SetAlpha
 		Tab:SetAlpha(0)
-		
+
 		Tukz.SetChatFramePosition(Frame)
 	end
-	
+
 	T.Chat.Panels.LeftChatToggle:SetParent(T.Hider)
 	T.Chat.Panels.RightChatToggle:SetParent(T.Hider)
-	
+
 	FCF_ToggleLock = ToggleLock
 	FCF_ToggleLockOnDockedFrame = ToggleLockOnDockedFrame
-	
+
 	T.Chat.DisplayChat = function() return end
 end
 
@@ -205,12 +205,12 @@ end
 function Tukz:SetDataTextSize()
 	TukuiLeftDataTextBox:SetWidth(370)
 	TukuiRightDataTextBox:SetWidth(370)
-	
+
 	for i = 1, 6 do
 		local DataText = T.DataTexts.Anchors[i]
 		local LeftWidth = (TukuiLeftDataTextBox:GetWidth() / 3) - 1
 		local RightWidth = (TukuiRightDataTextBox:GetWidth() / 3) - 1
-		
+
 		DataText:SetWidth(i <= 3 and LeftWidth or RightWidth)
 	end
 end

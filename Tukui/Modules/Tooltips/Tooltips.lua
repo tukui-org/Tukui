@@ -398,7 +398,7 @@ function Tooltip:AddHooks()
 	if T.BCC then
 		hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
 	end
-
+	
 	hooksecurefunc("GameTooltip_SetDefaultAnchor", self.SetTooltipDefaultAnchor)
 	
 	if C.Tooltips.UnitBorderColor then

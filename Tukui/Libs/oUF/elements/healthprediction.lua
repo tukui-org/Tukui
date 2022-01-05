@@ -83,9 +83,9 @@ local oUF = ns.oUF
 local myGUID = UnitGUID('player')
 local HealComm, ALL_PENDING_HEALS, ALL_OVERTIME_HEALS, HEAL_TICK_INTERVAL
 
-if oUF.BCC then
+if not oUF.isRetail then
 	HealComm = LibStub("LibHealComm-4.0")
-	
+
 	ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
 	ALL_OVERTIME_HEALS = bit.bor(HealComm.CHANNEL_HEALS, HealComm.HOT_HEALS)
 	HEAL_TICK_INTERVAL = 3
@@ -118,8 +118,8 @@ local function Update(self, event, unit)
 	local guid = UnitGUID(unit)
 	local currentTime = GetTime()
 	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
-	local myIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
-	local allIncomingHeal = oUF.BCC and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
+	local myIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
+	local allIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
 	local absorb = oUF.Retail and UnitGetTotalAbsorbs(unit) or 0
 	local healAbsorb = oUF.Retail and UnitGetTotalHealAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
@@ -261,15 +261,15 @@ local function Enable(self)
 	if(element) then
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
-		
-		if oUF.Retail then
+
+		if oUF.isRetail then
 			self:RegisterEvent('UNIT_HEALTH', Path)
 			self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
 			self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
 			self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 		else
 			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
-			
+
 			local function UpdateHeal(event, casterGUID, spellID, healType, _, ...)
 				Path(self, event, ...)
 			end
@@ -277,7 +277,7 @@ local function Enable(self)
 			local function UpdateModifier(event, guid)
 				Path(self, event, guid)
 			end
-			
+
 			HealComm.RegisterCallback(self, "HealComm_HealStarted", UpdateHeal)
 			HealComm.RegisterCallback(self, "HealComm_HealUpdated", UpdateHeal)
 			HealComm.RegisterCallback(self, "HealComm_HealDelayed", UpdateHeal)
@@ -285,7 +285,7 @@ local function Enable(self)
 			HealComm.RegisterCallback(self, "HealComm_ModifierChanged", UpdateModifier)
 			HealComm.RegisterCallback(self, "HealComm_GUIDDisappeared", UpdateModifier)
 		end
-		
+
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 
 		if(not element.maxOverflow) then
@@ -297,7 +297,7 @@ local function Enable(self)
                 element.myBar.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
                 element.myBar.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
             end
-			
+
 			if(element.myBar:IsObjectType('StatusBar') and not element.myBar:GetStatusBarTexture()) then
 				element.myBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 			end
@@ -308,7 +308,7 @@ local function Enable(self)
                 element.otherBar.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
                 element.otherBar.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
             end
-			
+
 			if(element.otherBar:IsObjectType('StatusBar') and not element.otherBar:GetStatusBarTexture()) then
 				element.otherBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 			end

@@ -9,7 +9,7 @@ local General = function(self)
 	Window:CreateSection("All", "Profiles")
 	local Profile = Window:CreateDropdown("All", "General", "Profiles", "Import a profile from another character")
 	Profile.Menu:HookScript("OnHide", GUI.SetProfile)
-	
+
 	Window:CreateSection("All", "Theme")
 	Window:CreateDropdown("All", "General", "Themes", "Set UI theme")
 
@@ -21,7 +21,7 @@ local General = function(self)
 	Window:CreateColorSelection("All", "General", "BorderColor", "Border color")
 	Window:CreateSwitch("All", "General", "ClassColorBorder", "Overwrite border color with class color")
 	Window:CreateSwitch("All", "General", "HideShadows", "Hide frame shadows")
-	
+
 	if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
 		Window:CreateSection("All", "Fonts")
 		Window:CreateDropdown("All", "General", "GlobalFont", "Set Tukui global font")
@@ -54,7 +54,7 @@ local ActionBars = function(self)
 	Window:CreateSlider("All", "ActionBars", "Bar4ButtonsPerRow", "Bar #4, number of buttons per row", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "Bar5ButtonsPerRow", "Bar #5, number of buttons per row", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "BarPetButtonsPerRow", "Bar Pet, number of buttons per row", 1, 10, 1)
-	
+
 	Window:CreateSection("All", "Amount of buttons per bars")
 	Window:CreateSlider("All", "ActionBars", "Bar1NumButtons", "Bar #1, number of buttons needed?", 1, 12, 1)
 	Window:CreateSlider("All", "ActionBars", "Bar2NumButtons", "Bar #2, number of buttons needed?", 1, 12, 1)
@@ -96,7 +96,7 @@ local Bags = function(self)
 	Window:CreateSection("All", "Enable")
 	Window:CreateSwitch("All", "Bags", "Enable", "Enable bag module")
 	Window:CreateSwitch("All", "Bags", "ItemLevel", "Display ILevel on bags armors and weapons items")
-	
+
 	Window:CreateSection("All", "Styling")
 	Window:CreateSwitch("All", "Bags", "IdentifyQuestItems", "Identify quest items in bags with an exclamation mark?")
 	Window:CreateSwitch("All", "Bags", "FlashNewItems", "Flash new items in bags?")
@@ -105,7 +105,7 @@ local Bags = function(self)
 	Window:CreateSlider("All", "Bags", "ButtonSize", "Set bag slot size", 20, 36, 1)
 	Window:CreateSlider("All", "Bags", "Spacing", "Set bag slot spacing", 0, 8, 1)
 	Window:CreateSlider("All", "Bags", "ItemsPerRow", "Set items per row", 8, 16, 1)
-	
+
 	Window:CreateSection("All", "Sorting")
 	Window:CreateSwitch("All", "Bags", "SortToBottom", "Sort bag to bottom")
 end
@@ -120,7 +120,7 @@ local Chat = function(self)
 	Window:CreateDropdown("All", "Chat", "Bubbles", "Chat bubbles")
 	Window:CreateSlider("All", "Chat", "BubblesTextSize", "Set bubbles text size", 6, 16, 1)
 	Window:CreateSwitch("All", "Chat", "BubblesNames", "Display name in bubbles?")
-	
+
 	Window:CreateSection("All", "Log History")
 	Window:CreateSlider("All", "Chat", "LogMax", "Amount of chat line you wish to save into log history", 0, 500, 10)
 
@@ -174,7 +174,7 @@ end
 
 local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
-	
+
 	Window:CreateSection("All", "Micro Menu")
 	Window:CreateDropdown("All", "Misc", "MicroStyle", "Select the micromenu style you want to use")
 	Window:CreateDropdown("All", "Misc", "MicroToggle", "Select a keybind for toggling micro menu")
@@ -198,12 +198,12 @@ end
 
 local Maps = function(self)
 	local Window = self:CreateWindow("Maps")
-	
+
 	Window:CreateSection("All", "Minimap")
 	Window:CreateSwitch("BCC", "Maps", "MinimapTracking", "Enable minimap tracking icon")
 	Window:CreateSwitch("All", "Maps", "MinimapCoords", "Enable minimap coordinate on mouseover")
 	Window:CreateSlider("All", "General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
-	
+
 	Window:CreateSection("All", "World Map")
 	Window:CreateSwitch("All", "Misc", "WorldMapEnable", "Enable our custom world map")
 	Window:CreateSlider("All", "Misc", "FadeWorldMapAlpha", "Worldmap opacity while moving", 0, 100, 1)
@@ -224,19 +224,19 @@ local NamePlates = function(self)
 	Window:CreateSlider("All", "NamePlates", "SelectedScale", "Set scaling of selected plate (%)", 100, 200, 1)
 	Window:CreateSwitch("All", "NamePlates", "OnlySelfDebuffs", "Display only our debuffs")
 	Window:CreateColorSelection("All", "NamePlates", "HighlightColor", "Highlight texture color")
-	
+
 	Window:CreateSection("All", "Threat indicator")
 	Window:CreateSwitch("All", "NamePlates", "ColorThreat", "Enable nameplate coloring by threat")
 	Window:CreateColorSelection("All", "NamePlates", "AggroColor1", "Health Color: low on threat")
 	Window:CreateColorSelection("All", "NamePlates", "AggroColor2", "Health Color: overaggroing")
 	Window:CreateColorSelection("All", "NamePlates", "AggroColor3", "Health Color: insecurely tanking, tanking but not on top of threat")
 	Window:CreateColorSelection("All", "NamePlates", "AggroColor4", "Health Color: securely tanking and highest on threat")
-	
+
 	Window:CreateSection("All", "Sizing")
 	Window:CreateSlider("All", "NamePlates", "Width", "Set nameplate width", 60, 200, 10)
 	Window:CreateSlider("All", "NamePlates", "Height", "Set nameplate height", 12, 24, 1)
 	Window:CreateSlider("All", "NamePlates", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
-	
+
 	Window:CreateSection("All", "Tags")
 	Window:CreateDropdown("All", "NamePlates", "HealthTag", "Health tag on nameplates")
 
@@ -258,7 +258,7 @@ local Party = function(self)
 	Window:CreateSwitch("All", "Party", "ShowManaText", "Display mana text values")
 	Window:CreateColorSelection("All", "Party", "HighlightColor", "Highlight texture color")
 	Window:CreateSlider("All", "Party", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
-	
+
 	Window:CreateSection("All", "Tags")
 	Window:CreateDropdown("All", "Party", "HealthTag", "Health tag party unit")
 
@@ -274,22 +274,22 @@ local Raid = function(self)
 	Window:CreateSwitch("All", "Raid", "Enable", "Enable raid module")
 	Window:CreateSwitch("All", "Raid", "ShowPets", "Enable raid module for pets")
 	Window:CreateSwitch("All", "Raid", "VerticalHealth", "Enable vertical health")
-	
+
 	Window:CreateSection("All", "|cffffff00[RAID 1->20]|r Settings")
 	Window:CreateSlider("All", "Raid", "MaxUnitPerColumn", "Set max units per column", 1, 15, 1)
 	Window:CreateSlider("All", "Raid", "WidthSize", "Set unit width", 79, 150, 1)
 	Window:CreateSlider("All", "Raid", "HeightSize", "Set unit height", 45, 150, 1)
 	Window:CreateSlider("All", "Raid", "Padding", "Spacing in pixels between units", 0, 20, 1)
-	
+
 	Window:CreateSection("All", "|cf00fff00[RAID 20->40]|r Settings")
 	Window:CreateSlider("All", "Raid", "Raid40MaxUnitPerColumn", "Set max units per column", 1, 15, 1)
 	Window:CreateSlider("All", "Raid", "Raid40WidthSize", "Set unit width", 79, 150, 1)
 	Window:CreateSlider("All", "Raid", "Raid40HeightSize", "Set unit height", 45, 150, 1)
 	Window:CreateSlider("All", "Raid", "Padding40", "Spacing in pixels between units", 0, 20, 1)
-	
+
 	Window:CreateSection("All", "Buffs")
 	Window:CreateDropdown("All", "Raid", "RaidBuffsStyle", "Select the buff style you want to use")
-	
+
 	if C.Raid.RaidBuffsStyle.Value == "Standard" then
 		Window:CreateDropdown("All", "Raid", "RaidBuffs", "Enable buffs display & filtering")
 		Window:CreateSwitch("All", "Raid", "DesaturateBuffs", "Desaturate buffs that are not by me")
@@ -299,11 +299,11 @@ local Raid = function(self)
 		Window:CreateSwitch("All", "Raid", "AuraTrackSpellTextures", "Display icons texture on aura squares instead of colored squares")
 		Window:CreateSlider("All", "Raid", "AuraTrackThickness", "Thickness size of status bars in pixel", 2, 10, 1)
 	end
-	
+
 	Window:CreateSection("All", "Debuffs")
 	Window:CreateSwitch("All", "Raid", "DebuffWatch", "Enable debuffs tracking (filtered auto by current gameplay (pvp or pve)")
 	Window:CreateSwitch("All", "Raid", "DebuffWatchDefault", "We have already a debuff tracking list for pve and pvp, use it?")
-	
+
 	Window:CreateSection("All", "Tags")
 	Window:CreateDropdown("All", "Raid", "HealthTag", "Health tag raid unit")
 
@@ -345,7 +345,7 @@ local Textures = function(self)
 
 	Window:CreateSection("All", "Party")
 	Window:CreateDropdown("All", "Textures", "UFPartyHealthTexture", "Party health texture", "Texture")
-	Window:CreateDropdown("All", "Textures", "UFPartyPowerTexture", "Party power texture", "Texture")
+	Window:CreateDropdown("All", "Textures", "UFPartyPowerTexture", "Party party texture", "Texture")
 
 	Window:CreateSection("All", "Raid")
 	Window:CreateDropdown("All", "Textures", "UFRaidHealthTexture", "Raid health texture", "Texture")
@@ -425,7 +425,7 @@ local UnitFrames = function(self)
 	Window:CreateSlider("All", "UnitFrames", "RaidIconSize", "Size of raid icons", 16, 32, 1)
 	Window:CreateSlider("All", "UnitFrames", "HighlightSize", "Set nameplate highlight size", 5, 15, 1)
 	Window:CreateSlider("All", "UnitFrames", "RangeAlpha", "Set out of range alpha (focus/arena/boss)", 0, 1, 0.1)
-	
+
 	Window:CreateSection("All", "Tags")
 	Window:CreateDropdown("All", "UnitFrames", "PlayerHealthTag", "Health tag on player frame")
 	Window:CreateDropdown("All", "UnitFrames", "TargetHealthTag", "Health tag on target frame")
