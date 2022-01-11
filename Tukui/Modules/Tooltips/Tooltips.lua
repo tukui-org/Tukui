@@ -395,7 +395,7 @@ function Tooltip:SetBackdropStyle()
 end
 
 function Tooltip:AddHooks()
-	if T.BCC then
+	if T.BCC and T.TocVersion < 20503 then
 		hooksecurefunc("SharedTooltip_SetBackdropStyle", self.SetBackdropStyle)
 	end
 	
