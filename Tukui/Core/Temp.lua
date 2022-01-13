@@ -8,7 +8,7 @@ local Temp = CreateFrame("Frame", nil, UIParent)
 
 -- TEMP for bg popup taint bug
 function Temp:Enable()
-	if T.Retail then
+	if T.Retail or T.BCC or T.Classic then
 		return
 	end
 	
