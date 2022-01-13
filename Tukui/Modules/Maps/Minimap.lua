@@ -29,6 +29,7 @@ function Minimap:DisableMinimapElements()
 
 	for i, FrameName in pairs(HiddenFrames) do
 		local Frame = _G[FrameName]
+		Frame:SetParent(T.Hider)
 		Frame:Hide()
 
 		if Frame.UnregisterAllEvents then
