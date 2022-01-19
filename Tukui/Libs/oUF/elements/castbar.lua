@@ -110,11 +110,6 @@ local function CastStart(self, event, unit)
 		name, _, texture, startTime, endTime, isTradeSkill, notInterruptible, spellID = UnitChannelInfo(unit)
 		event = 'UNIT_SPELLCAST_CHANNEL_START'
 	end
-	
-	if not oUF.Retail then
-		spellID = notInterruptible
-		notInterruptible = nil
-	end
 
 	if(not name or (isTradeSkill and element.hideTradeSkills)) then
 		resetAttributes(element)
@@ -395,7 +390,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', CastUpdate)
 		self:RegisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 		self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-		
+
 		if oUF.Retail then
 			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 			self:RegisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
@@ -448,7 +443,7 @@ local function Disable(self)
 		self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', CastStop)
 		self:UnregisterEvent('UNIT_SPELLCAST_FAILED', CastFail)
 		self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTED', CastFail)
-		
+
 		if oUF.Retail then
 			self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTIBLE', CastInterruptible)
 			self:UnregisterEvent('UNIT_SPELLCAST_NOT_INTERRUPTIBLE', CastInterruptible)
