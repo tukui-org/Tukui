@@ -1,7 +1,7 @@
 ## Interface: 90105
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.24
+## Version: 20.25
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase, TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory
