@@ -14,7 +14,7 @@ function UnitFrames:Player()
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:CreateShadow()
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -36,7 +36,7 @@ function UnitFrames:Player()
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(HealthTexture)
-	
+
 	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
 	Health.Background:SetTexture(HealthTexture)
 	Health.Background:SetAllPoints(Health)
@@ -69,7 +69,7 @@ function UnitFrames:Player()
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
-	
+
 	local Prediction = CreateFrame("StatusBar", nil, Power)
 	Prediction:SetReverseFill(true)
 	Prediction:SetPoint("TOP")
@@ -94,10 +94,10 @@ function UnitFrames:Player()
 		AdditionalPower.Background:SetAllPoints(AdditionalPower)
 		AdditionalPower.Background:SetTexture(HealthTexture)
 		AdditionalPower.Background:SetColorTexture(T.Colors.power.MANA[1], T.Colors.power.MANA[2], T.Colors.power.MANA[3], C.UnitFrames.StatusBarBackgroundMultiplier / 100)
-		
+
 		self.AdditionalPower = AdditionalPower
 	end
-	
+
 	Power.PostUpdate = UnitFrames.PostUpdatePower
 
 	local Name = Panel:CreateFontString(nil, "OVERLAY")
@@ -158,13 +158,13 @@ function UnitFrames:Player()
 			Debuffs:SetFrameStrata(self:GetFrameStrata())
 			Debuffs:SetHeight(28)
 			Debuffs:SetWidth(252)
-			
+
 			if self.Buffs then
 				Debuffs:SetPoint("BOTTOMLEFT", Buffs, "TOPLEFT", 0, 18)
 			else
 				Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 1, 4)
 			end
-				
+
 			Debuffs.size = 28
 			Debuffs.num = 40
 			Debuffs.numRow = 5
@@ -180,7 +180,7 @@ function UnitFrames:Player()
 				if not C.UnitFrames.PlayerBuffs then
 					Debuffs:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 0, -32)
 				end
-				
+
 				Debuffs["growth-y"] = "DOWN"
 			end
 
@@ -192,7 +192,7 @@ function UnitFrames:Player()
 	Combat:SetSize(19, 19)
 	Combat:SetPoint("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
-	
+
 	local Status = Panel:CreateFontString(nil, "OVERLAY", nil, 1)
 	Status:SetFontObject(Font)
 	Status:SetPoint("CENTER", Panel, "CENTER", 0, 0)
@@ -231,7 +231,7 @@ function UnitFrames:Player()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(166)
 		CastBar.Text:SetJustifyH("LEFT")
-		
+
 		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
 		CastBar.Spark:SetSize(8, CastBar:GetHeight())
 		CastBar.Spark:SetBlendMode("ADD")
@@ -287,26 +287,26 @@ function UnitFrames:Player()
 
 		self.Castbar = CastBar
 	end
-	
+
 	if C.UnitFrames.Portrait then
 		local Portrait = CreateFrame("Frame", nil, self)
-		
+
 		if C.UnitFrames.Portrait2D then
 			Portrait.Texture = Portrait:CreateTexture(nil, "OVERLAY")
 			Portrait.Texture:SetTexCoord(0.1,0.9,0.1,0.9)
 		else
 			Portrait.Texture = CreateFrame("PlayerModel", nil, Portrait)
 		end
-		
+
 		Portrait:SetSize(57, 57)
 		Portrait:SetPoint("RIGHT", self, "LEFT", -10, 0)
 		Portrait:CreateBackdrop()
 		Portrait:CreateShadow()
-		
+
 		Portrait.Backdrop:SetOutside()
-		
+
 		Portrait.Texture:SetAllPoints(Portrait)
-		
+
 		if (C.UnitFrames.CastBar and C.UnitFrames.CastBarIcon) and not (C.UnitFrames.UnlinkCastBar) then
 			self.Castbar.Icon:ClearAllPoints()
 			self.Castbar.Icon:SetAllPoints(Portrait)
@@ -343,19 +343,19 @@ function UnitFrames:Player()
 
 	if (C.UnitFrames.ComboBar) and (Class == "ROGUE" or Class == "DRUID") then
 		local ComboPoints = CreateFrame("Frame", self:GetName().."ComboPointsBar", self)
-		
+
 		ComboPoints:SetHeight(6)
 		ComboPoints:SetPoint("TOPLEFT", Health)
 		ComboPoints:SetPoint("TOPRIGHT", Health)
 		ComboPoints:SetFrameLevel(Health:GetFrameLevel() + 1)
-		
+
 		ComboPoints:CreateBackdrop()
 		ComboPoints.Backdrop:SetOutside()
 
 		for i = 1, 6 do
 			local SizeFor5 = ceil(250 / 5)
 			local SizeFor6 = ceil(250 / 6)
-			
+
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 			ComboPoints[i]:SetHeight(8)
 			ComboPoints[i]:SetStatusBarTexture(PowerTexture)
@@ -428,8 +428,8 @@ function UnitFrames:Player()
 
 		T.Movers:RegisterFrame(ScrollingCombatText, "Scrolling Combat Text")
 	end
-	
-	if T.BCC and C.UnitFrames.PowerTick then
+
+	if (T.Classic or T.BCC) and C.UnitFrames.PowerTick then
 		local EnergyManaRegen = CreateFrame("StatusBar", nil, Power)
 
 		EnergyManaRegen:SetFrameLevel(Power:GetFrameLevel() + 3)
@@ -466,7 +466,7 @@ function UnitFrames:Player()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
@@ -486,7 +486,7 @@ function UnitFrames:Player()
 
 		self.HealthPrediction = HealthPrediction
 	end
-	
+
 	if (C.UnitFrames.TotemBar) then
 		local Bar = CreateFrame("Frame", "TukuiTotemBar", self)
 
@@ -530,7 +530,7 @@ function UnitFrames:Player()
 				Bar[i].Cooldown:SetInside()
 				Bar[i].Cooldown:SetFrameLevel(Bar[i]:GetFrameLevel())
 			end
-			
+
 			Movers:RegisterFrame(Bar, "Totem Bar")
 		elseif C.UnitFrames.TotemBarStyle.Value == "On Player" then
 			Bar:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 10)
@@ -555,7 +555,7 @@ function UnitFrames:Player()
 					Bar[i]:SetPoint("TOPLEFT", Bar[i-1], "TOPRIGHT", 1, 0)
 					Bar[i]:SetSize(62, 8)
 				end
-				
+
 				Bar[i].Background = Bar[i]:CreateTexture(nil, "BORDER")
 				Bar[i].Background:SetParent(Bar)
 				Bar[i].Background:SetAllPoints(Bar[i])
@@ -563,9 +563,9 @@ function UnitFrames:Player()
 				Bar[i].Background:SetVertexColor(r, g, b)
 				Bar[i].Background:SetAlpha(.15)
 			end
-			
+
 			self.Shadow:SetPoint("TOPLEFT", -4, 12)
-			
+
 			if self.AuraBars then
 				self.AuraBars:ClearAllPoints()
 				self.AuraBars:SetPoint("TOPLEFT", 0, 22)
@@ -575,8 +575,10 @@ function UnitFrames:Player()
 			end
 		end
 
-		-- To allow right-click destroy totem.
-		TotemFrame:SetParent(UIParent)
+		if not T.Classic then
+			-- To allow right-click destroy totem.
+			TotemFrame:SetParent(UIParent)
+		end
 
 		self.Totems = Bar
 		self.Totems.Override = UnitFrames.UpdateTotemOverride
@@ -608,7 +610,7 @@ function UnitFrames:Player()
 	self.MasterLooterIndicator = MasterLooter
 	self.RaidTargetIndicator = RaidIcon
 	self.RestingIndicator = RestingIndicator
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -618,7 +620,7 @@ function UnitFrames:Player()
 			self.HealthPrediction.smoothing = true
 		end
 	end
-	
+
 	-- Classes
 	UnitFrames.AddClassFeatures[Class](self)
 

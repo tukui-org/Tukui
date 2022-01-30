@@ -95,7 +95,7 @@ end
 function MicroMenu:GameMenu()
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, T.BCC and 298 or 439)
+	MicroMenu:SetSize(250, not T.Retail and 298 or 439)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -141,7 +141,7 @@ function MicroMenu:GameMenu()
 			Button:HookScript("OnClick", MicroMenu.Toggle)
 		end
 
-		if T.BCC then
+		if not T.Retail then
 			Button.SetPoint = Noop
 		end
 

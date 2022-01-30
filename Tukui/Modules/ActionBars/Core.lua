@@ -12,17 +12,17 @@ local Noop = function() return end
 
 local Frames = {
 	MainMenuBar,
-	MainMenuBarArtFrame, 
+	MainMenuBarArtFrame,
 	OverrideActionBar,
-	PossessBarFrame, 
-	ShapeshiftBarLeft, 
-	ShapeshiftBarMiddle, 
+	PossessBarFrame,
+	ShapeshiftBarLeft,
+	ShapeshiftBarMiddle,
 	ShapeshiftBarRight,
 }
 
 function ActionBars:DisableBlizzard()
 	local Hider = T.Hider
-	
+
 	for _, frame in pairs(Frames) do
 		frame:UnregisterAllEvents()
 		frame:SetParent(Hider)
@@ -36,7 +36,7 @@ function ActionBars:DisableBlizzard()
 		InterfaceOptionsActionBarsPanelStackRightBars,
 		InterfaceOptionsActionBarsPanelAlwaysShowActionBars,
 	}
-	
+
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_SHOWGRID")
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
 
@@ -45,14 +45,14 @@ function ActionBars:DisableBlizzard()
 		j:Disable()
 		j:SetScale(0.001)
 	end
-	
+
 	MultiActionBar_Update = Noop
 	BeginActionBarTransition = Noop
-	
+
 	if C.ActionBars.HotKey then
 		ActionButton_UpdateRangeIndicator = Noop
 	end
-	
+
 	if T.Retail then
 		if not C.ActionBars.AutoAddNewSpell then
 			IconIntroTracker:UnregisterAllEvents()
@@ -86,17 +86,17 @@ end
 
 function ActionBars:UpdatePetBar()
 	local Button, Icon, CastTexture, ShineTexture
-	
+
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local PetActionButton = "PetActionButton" .. i
-		
+
 		Button = _G[PetActionButton]
 		Icon = _G[PetActionButton.."Icon"]
 		CastTexture = _G[PetActionButton.."AutoCastable"]
 		ShineTexture = _G[PetActionButton.."Shine"]
-		
+
 		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled, SpellID = GetPetActionInfo(i)
-		
+
 		if not IsToken then
 			Icon:SetTexture(Texture)
 			Button.tooltipName = Name
@@ -104,41 +104,41 @@ function ActionBars:UpdatePetBar()
 			Icon:SetTexture(_G[Texture])
 			Button.tooltipName = _G[Name]
 		end
-		
+
 		Button.isToken = IsToken
-		
+
 		if SpellID then
 			local spell = Spell:CreateFromSpellID(SpellID)
-			
+
 			Button.spellDataLoadedCancelFunc = spell:ContinueWithCancelOnSpellLoad(function()
 				Button.tooltipSubtext = spell:GetSpellSubtext();
 			end)
 		end
-		
+
 		if IsActive then
 			if IsPetAttackAction(i) then
 				PetActionButton_StartFlash(Button)
-				
+
 				Button:GetCheckedTexture():SetAlpha(0.5)
 			else
 				PetActionButton_StopFlash(Button)
-				
+
 				Button:GetCheckedTexture():SetAlpha(1.0)
 			end
-			
+
 			Button:SetChecked(true)
 		else
 			PetActionButton_StopFlash(Button)
-			
+
 			Button:SetChecked(false)
 		end
-		
+
 		if AutoCastAllowed then
 			CastTexture:Show()
 		else
 			CastTexture:Hide()
 		end
-		
+
 		if AutoCastEnabled then
 			AutoCastShine_AutoCastStart(ShineTexture)
 		else
@@ -151,25 +151,25 @@ function ActionBars:UpdatePetBar()
 			else
 				Icon:SetVertexColor(0.4, 0.4, 0.4)
 			end
-			
+
 			Icon:Show()
-			
+
 			Button:SetNormalTexture("")
 		else
 			Icon:Hide()
-			
+
 			Button:SetNormalTexture("")
 		end
-		
+
 		SharedActionButton_RefreshSpellHighlight(Button, HasPetActionHighlightMark(i))
 	end
-	
+
 	PetActionBar_UpdateCooldowns()
-	
+
 	if not PetHasActionBar() then
 		HidePetActionBar()
 	end
-	
+
 	PetActionBarFrame.rangeTimer = -1
 end
 
@@ -177,7 +177,7 @@ function ActionBars:OnUpdatePetBarCooldownText(elapsed)
 	local Now = GetTime()
 	local Timer = Now - self.StartTimer
 	local Cooldown = self.DurationTimer - Timer
-	
+
 	self.Elapsed = self.Elapsed - elapsed
 
 	if self.Elapsed < 0 then
@@ -189,7 +189,7 @@ function ActionBars:OnUpdatePetBarCooldownText(elapsed)
 			self.Text:SetTextColor(1, 0, 0)
 			self.Text:SetText(T.FormatTime(Cooldown))
 		end
-		
+
 		self.Elapsed = .1
 	end
 end
@@ -198,18 +198,18 @@ function ActionBars.UpdatePetBarCooldownText()
 	for i = 1, NUM_PET_ACTION_SLOTS, 1 do
 		local Cooldown = _G["PetActionButton"..i.."Cooldown"]
 		local Start, Duration, Enable = GetPetActionCooldown(i)
-		
+
 		if Enable and Enable ~= 0 and Start > 0 and Duration > 0 then
 			if not Cooldown.Text then
 				local Font = T.GetFont(C["Cooldowns"].Font)
-				
+
 				Font = _G[Font]:GetFont()
 
 				Cooldown.Text = Cooldown:CreateFontString(nil, "OVERLAY")
 				Cooldown.Text:SetPoint("CENTER", 1, 0)
 				Cooldown.Text:SetFont(Font, 14, "THINOUTLINE")
 			end
-			
+
 			Cooldown.StartTimer = Start
 			Cooldown.DurationTimer = Duration
 			Cooldown.Elapsed = .1
@@ -222,7 +222,7 @@ function ActionBars:UpdateStanceBar()
 	if InCombatLockdown() then
 		return
 	end
-	
+
 	local NumForms = GetNumShapeshiftForms()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
 	local PetSize = C.ActionBars.PetButtonSize
@@ -233,7 +233,7 @@ function ActionBars:UpdateStanceBar()
 	else
 		self.Bars.Stance:SetAlpha(1)
 		self.Bars.Stance:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
-		
+
 		if self.Bars.Stance.Backdrop then
 			self.Bars.Stance.Backdrop:SetPoint("TOPLEFT", 0, 0)
 		end
@@ -298,7 +298,7 @@ function ActionBars:RangeUpdate(hasrange, inrange)
 	if not ID then
 		return
 	end
-	
+
 	local IsUsable, NotEnoughPower = IsUsableAction(ID)
 	local HasRange = hasrange
 	local InRange = inrange
@@ -335,15 +335,15 @@ function ActionBars:StartHighlight()
 		self.Animation.FadeOut:SetDuration(.3)
 		self.Animation.FadeOut:SetSmoothing("IN_OUT")
 	end
-	
+
 	-- Hide Blizard Proc
 	if self.overlay and self.overlay:GetParent() ~= T.Hider then
 		self.overlay:SetParent(T.Hider)
 	end
-	
+
 	if not self.Animation:IsPlaying() then
 		self.Animation:Play()
-		
+
 		if self.Backdrop then
 			self.Backdrop:SetBorderColor(1, 1, 0)
 		end
@@ -353,7 +353,7 @@ end
 function ActionBars:StopHightlight()
 	if self.Animation and self.Animation:IsPlaying() then
 		self.Animation:Stop()
-		
+
 		if self.Backdrop then
 			self.Backdrop:SetBorderColor(unpack(C.General.BorderColor))
 		end
@@ -406,18 +406,18 @@ function ActionBars:SetHotKeyText()
 	else
 		HotKey:SetText(Text)
 	end
-	
+
 	HotKey:SetVertexColor(1, 1, 1)
 end
 
 function ActionBars:UpdateButton()
 	local HotKey = self.HotKey
 	local Action = self.action
-	
+
 	if HotKey then
 		HotKey:SetVertexColor(1, 1, 1)
 	end
-	
+
 	if C.ActionBars.EquipBorder then
 		if (IsEquippedAction(Action)) then
 			if self.Backdrop then
@@ -438,17 +438,17 @@ function ActionBars:AddHooks()
 	else
 		hooksecurefunc("ActionButton_Update", self.UpdateButton)
 	end
-	
+
 	hooksecurefunc("ActionButton_UpdateRangeIndicator", self.RangeUpdate)
-	
+
 	if C.ActionBars.HotKey then
-		if T.BCC then
+		if not T.Retail then
 			hooksecurefunc("ActionButton_UpdateHotkeys", self.SetHotKeyText)
 		end
-		
+
 		hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
 	end
-	
+
 	if C.ActionBars.ProcAnim then
 		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
 		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
@@ -459,7 +459,7 @@ function ActionBars:Enable()
 	if not C.ActionBars.Enable then
 		return
 	end
-	
+
 	SetCVar("alwaysShowActionBars", 1)
 	SetActionBarToggles(1, 1, 1, 1, 1)
 
@@ -472,7 +472,7 @@ function ActionBars:Enable()
 	self:CreatePetBar()
 	self:CreateStanceBar()
 	self:AddHooks()
-	
+
 	if T.Retail then
 		self:SetupExtraButton()
 	end
