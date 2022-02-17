@@ -403,6 +403,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["HP / Max HP and Percent"] = "|cff549654[Tukui:CurrentHP] / [Tukui:MaxHP] - [perhp]%|r",
 		},
 
 		["Value"] = "|cff549654[Tukui:CurrentHP]|r",
@@ -412,6 +413,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["HP / Max HP and Percent"] = "|cff549654[Tukui:CurrentHP] / [Tukui:MaxHP] - [perhp]%|r",
 		},
 
 		["Value"] = "|cff549654[Tukui:CurrentHP]|r",
@@ -422,6 +424,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["HP / Max HP and Percent"] = "|cff549654[Tukui:CurrentHP] / [Tukui:MaxHP] - [perhp]%|r",
 			["Missing HP"] = "|cffFF0000[missinghp]|r",
 		},
 
@@ -433,6 +436,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["HP / Max HP and Percent"] = "|cff549654[Tukui:CurrentHP] / [Tukui:MaxHP] - [perhp]%|r",
 			["Missing HP"] = "|cffFF0000[missinghp]|r",
 		},
 
@@ -444,6 +448,7 @@ C["UnitFrames"] = {
 			["Current HP"] = "|cff549654[Tukui:CurrentHP]|r",
 			["Percent"] = "|cff549654[perhp]%|r",
 			["HP and Percent"] = "|cff549654[Tukui:CurrentHP] - [perhp]%|r",
+			["HP / Max HP and Percent"] = "|cff549654[Tukui:CurrentHP] / [Tukui:MaxHP] - [perhp]%|r",
 			["Missing HP"] = "|cffFF0000[missinghp]|r",
 		},
 
