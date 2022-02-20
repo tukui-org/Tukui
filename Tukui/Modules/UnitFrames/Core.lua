@@ -46,8 +46,8 @@ function UnitFrames:DisableBlizzard()
 		CompactRaidFrameContainer:Hide()
 
 		-- Hide Raid Interface Options.
-		InterfaceOptionsFrameCategoriesButton10:SetHeight(0.00001)
-		InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)
+		InterfaceOptionsFrameCategoriesButton11:SetHeight(0.00001)
+		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 	end
 end
 

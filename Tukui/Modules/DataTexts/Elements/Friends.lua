@@ -182,7 +182,7 @@ local UpdateBattleNetFriendsCache = function(total)
 		end
 	end
 
-	if T.BCC then
+	if not T.Retail then
 		for i = 1, total do
 			local bnetIDAccount, accountName, battleTag, isBattleTag, characterName, bnetIDGameAccount, client, isOnline, lastOnline, isAFK, isDND, messageText, noteText, isRIDFriend, messageTime, canSoR, isReferAFriend, canSummonFriend = BNGetFriendInfo(i)
 			local realmName, realmID, factionName, className, zoneName, characterLevel, gameText, isGameAFK, isGameBusy, guid, wowProjectID, _
@@ -352,7 +352,7 @@ local OnMouseDown = function(self, button)
 
 			return
 		end
-		
+
 		ToggleFriendsFrame(1)
 	end
 

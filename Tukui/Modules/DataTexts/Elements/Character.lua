@@ -31,14 +31,14 @@ local Update = function(self)
 
 			if Current then
 				L.DataText.Slots[i][3] = Current / Max
-				
+
 				Total = Total + 1
 			end
 		end
 	end
 
 	table.sort(L.DataText.Slots, function(a, b) return a[3] < b[3] end)
-	
+
 	self.Text:SetText(ClassColor..T.MyName.."|r".." ("..floor(L.DataText.Slots[1][3] * 100).."%)")
 end
 
@@ -47,7 +47,7 @@ local OnEnter = function(self)
 
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
-	
+
 	if T.Retail then
 		local Objects = CharacterStatsPane.statsFramePool.activeObjects
 
@@ -84,13 +84,13 @@ local OnEnter = function(self)
 				GameTooltip:AddDoubleLine("|CFFFFFF00"..Label.."|r", "|CFFFFFFFF"..Value.."|r")
 			end
 		end
-		
+
 		GameTooltip:AddLine(" ")
 	end
-	
-	if T.BCC then
+
+	if not T.Retail then
 		local IsAlternativeTooltip = IsShiftKeyDown() or IsAltKeyDown()
-		
+
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
 		GameTooltip:AddLine(" ")
 
@@ -100,11 +100,11 @@ local OnEnter = function(self)
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
 			local StatName, StatValue
-			
+
 			if Name:GetText() then
 				StatName = "|cffff8000"..Name:GetText().."|r"
 			end
-			
+
 			if Value:GetText() then
 				StatValue = "|cffffffff"..Value:GetText().."|r"
 			end
@@ -132,11 +132,11 @@ local OnEnter = function(self)
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
 			local StatName, StatValue
-			
+
 			if Name:GetText() then
 				StatName = "|cffff8000"..Name:GetText().."|r"
 			end
-			
+
 			if Value:GetText() then
 				StatValue = "|cffffffff"..Value:GetText().."|r"
 			end
@@ -162,7 +162,7 @@ local OnEnter = function(self)
 			GameTooltip:AddLine(" ")
 		end
 	end
-	
+
 	-- Display durability
 	GameTooltip:AddDoubleLine("|CFFFF8000"..DURABILITY..":|r", floor(L.DataText.Slots[1][3] * 100).."%")
 
@@ -183,10 +183,10 @@ end
 local ToggleCharacter = function(self)
 	if InCombatLockdown() then
 		T.Print(ERR_NOT_IN_COMBAT)
-		
+
 		return
 	end
-	
+
 	ToggleCharacter("PaperDollFrame")
 end
 

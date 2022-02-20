@@ -8,13 +8,12 @@ if (Class ~= "DRUID") then
 end
 
 UnitFrames.AddClassFeatures["DRUID"] = function(self)
-	if not T.BCC then
+	if T.Retail then
 		return
 	end
-	
+
 	local Texture = T.GetTexture(C["Textures"].UFPowerTexture)
 	local DruidMana = CreateFrame("StatusBar", nil, self.Health)
-	
 	DruidMana:SetFrameStrata(self.Health:GetFrameStrata())
 	DruidMana:SetHeight(self.Power:GetHeight())
 	DruidMana:SetPoint("LEFT")

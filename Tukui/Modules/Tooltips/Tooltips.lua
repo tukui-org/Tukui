@@ -175,7 +175,7 @@ function Tooltip:OnTooltipSetUnit()
 		Tooltip.SetHealthValue(HealthBar, Unit)
 	end
 
-	if T.BCC and T.MyClass == "HUNTER" and Unit == "pet" then
+	if not T.Retail and T.MyClass == "HUNTER" and Unit == "pet" then
 		local Happiness, DamagePercentage, LoyaltyRate = GetPetHappiness()
 
 		if Happiness then
