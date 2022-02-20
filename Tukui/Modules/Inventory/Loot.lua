@@ -174,16 +174,16 @@ function Loot:OnLeave()
 end
 
 function Loot:OnClick()
-	LootFrame.selectedQuality = self.quality
-	LootFrame.selectedItemName = self.name:GetText()
-	LootFrame.selectedSlot = self:GetID()
-	LootFrame.selectedLootButton = self:GetName()
-	LootFrame.selectedTexture = self.icon:GetTexture()
-
 	if IsModifiedClick() then
 		HandleModifiedItemClick(GetLootSlotLink(self:GetID()))
 	else
 		StaticPopup_Hide("CONFIRM_LOOT_DISTRIBUTION")
+
+		LootFrame.selectedLootButton = self
+		LootFrame.selectedSlot = self:GetID()
+		LootFrame.selectedQuality = self.quality
+		LootFrame.selectedItemName = self.name:GetText()
+
 		LootSlot(self:GetID())
 	end
 end
@@ -388,7 +388,7 @@ function Loot:LOOT_OPENED(_, autoloot)
 end
 
 function Loot:OPEN_MASTER_LOOT_LIST()
-	ToggleDropDownMenu(1, nil, GroupLootDropDown, TukuiLootFrame.LootSlots[LootFrame.selectedSlot], -33, -6)
+	ToggleDropDownMenu(nil, nil, GroupLootDropDown, LootFrame.selectedLootButton, 0, 0)
 end
 
 function Loot:UPDATE_MASTER_LOOT_LIST()
