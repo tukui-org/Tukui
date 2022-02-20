@@ -27,7 +27,6 @@ if T.Retail then
 
 		Title:Hide()
 
-		Tooltip:ClearBackdrop()
 		Tooltip:CreateBackdrop()
 
 		Tooltip.Backdrop:CreateShadow()
