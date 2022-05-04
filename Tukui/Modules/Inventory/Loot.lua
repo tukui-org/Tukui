@@ -174,15 +174,15 @@ function Loot:OnLeave()
 end
 
 function Loot:OnClick()
+	LootFrame.selectedLootButton = self
+	LootFrame.selectedSlot = self:GetID()
+	LootFrame.selectedQuality = self.quality
+	LootFrame.selectedItemName = self.name:GetText()
+
 	if IsModifiedClick() then
 		HandleModifiedItemClick(GetLootSlotLink(self:GetID()))
 	else
 		StaticPopup_Hide("CONFIRM_LOOT_DISTRIBUTION")
-
-		LootFrame.selectedLootButton = self
-		LootFrame.selectedSlot = self:GetID()
-		LootFrame.selectedQuality = self.quality
-		LootFrame.selectedItemName = self.name:GetText()
 
 		LootSlot(self:GetID())
 	end
