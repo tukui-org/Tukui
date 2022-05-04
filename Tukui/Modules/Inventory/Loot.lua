@@ -388,11 +388,11 @@ function Loot:LOOT_OPENED(_, autoloot)
 end
 
 function Loot:OPEN_MASTER_LOOT_LIST()
-	ToggleDropDownMenu(nil, nil, GroupLootDropDown, LootFrame.selectedLootButton, 0, 0)
+	MasterLooterFrame_Show(_G.LootFrame.selectedLootButton)
 end
 
 function Loot:UPDATE_MASTER_LOOT_LIST()
-	UIDropDownMenu_Refresh(GroupLootDropDown)
+	if _G.LootFrame.selectedLootButton then MasterLooterFrame_UpdatePlayers() end
 end
 
 function Loot:Enable()
