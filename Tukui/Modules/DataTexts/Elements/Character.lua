@@ -21,6 +21,14 @@ local RightTexts = {
 	"PlayerStatFrameRight6",
 }
 
+local CharacterStatFrame ={
+	"CharacterStatFrame1",
+	"CharacterStatFrame2",
+	"CharacterStatFrame3",
+	"CharacterStatFrame4",
+	"CharacterStatFrame5",
+}
+
 local Update = function(self)
 	local Total = 0
 	local Current, Max
@@ -95,7 +103,7 @@ local OnEnter = function(self)
 		GameTooltip:AddLine(" ")
 
 		-- Display left stats
-		for Table, Frame in pairs(LeftTexts) do
+		for _, Frame in pairs(LeftTexts) do
 			local Name = _G[Frame.."Label"]
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
@@ -127,7 +135,7 @@ local OnEnter = function(self)
 		end
 
 		-- Display right stats
-		for Table, Frame in pairs(RightTexts) do
+		for _, Frame in pairs(RightTexts) do
 			local Name = _G[Frame.."Label"]
 			local Value = _G[Frame.."StatText"]
 			local Tooltip = _G[Frame].tooltip2
@@ -151,6 +159,46 @@ local OnEnter = function(self)
 				if Tooltip and IsAlternativeTooltip then
 					-- Remove double enter, for gaining tooltip space
 					Tooltip = string.gsub(Tooltip, "\n\n", "\n")
+
+					GameTooltip:AddLine(Tooltip, .75, .75, .75)
+					GameTooltip:AddLine(" ")
+				end
+			end
+		end
+
+		if not IsShiftKeyDown() then
+			GameTooltip:AddLine(" ")
+		end
+	end
+
+	if T.Classic then
+		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
+		GameTooltip:AddLine(" ")
+
+		for _, Frame in pairs(CharacterStatFrame) do
+			local Name = _G[Frame.."Label"]
+			local Value = _G[Frame.."StatText"]
+			local Tooltip = _G[Frame].tooltip2
+			local StatName, StatValue
+
+			if Name:GetText() then
+				StatName = "|cffff8000"..Name:GetText().."|r"
+			end
+
+			if Value:GetText() then
+				StatValue = "|cffffffff"..Value:GetText().."|r"
+			end
+
+			if StatName and StatValue then
+				if IsAlternativeTooltip then
+					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+				else
+					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+				end
+
+				if Tooltip and IsAlternativeTooltip then
+					-- Remove double enter, for gaining tooltip space
+					Tooltip = string.gsub(Tooltip, "\n\n", " ")
 
 					GameTooltip:AddLine(Tooltip, .75, .75, .75)
 					GameTooltip:AddLine(" ")
