@@ -26,12 +26,12 @@ function Profiles:Export()
 end
 
 function Profiles:Import()
-	local EditBox = Profiles.EditBox
-	local Status = Profiles.Status
+	local EditBox = self:GetParent().EditBox
+	local Status = self:GetParent().Status
 	local Code = EditBox:GetText()
 	local LibCode = string.gsub(Code, Prefix, "")
 	local Decoded = LibDeflate:DecodeForPrint(LibCode)
-	local CurrentCode = Profiles:Export()
+	local CurrentCode = self:GetParent():Export()
 
 	if Code == CurrentCode then
 		Status:SetText("|cffff0000SORRY, YOU ARE CURRENTLY USING THIS PROFILE|r")
@@ -57,14 +57,14 @@ function Profiles:Toggle()
 		self:Hide()
 	else
 		self:Show()
-		self.EditBox:SetText(Profiles:Export())
+		self.EditBox:SetText(self:Export())
 	end
 end
 
 function Profiles:OnTextChanged()
-	local Code = Profiles.EditBox:GetText()
+	local Code = self:GetText()
 	local Status = Profiles.Status
-	local CurrentCode = Profiles:Export()
+	local CurrentCode = self:GetParent():GetParent():Export()
 
 	if Code ~= CurrentCode then
 		Status:SetText("YOU ARE CURRENTLY TRYING TO APPLY A NEW CODE")
@@ -74,9 +74,9 @@ function Profiles:OnTextChanged()
 end
 
 function Profiles:RestoreCode()
-	local EditBox = Profiles.EditBox
+	local EditBox = self:GetParent().EditBox
 
-	EditBox:SetText(Profiles:Export())
+	EditBox:SetText(self:GetParent():Export())
 end
 
 function Profiles:Enable()
@@ -123,7 +123,7 @@ function Profiles:Enable()
 	self.Reset.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Reset.Text:SetPoint("CENTER")
 	self.Reset.Text:SetText("Display my code")
-	self.Reset:SetScript("OnClick", Profiles.RestoreCode)
+	self.Reset:SetScript("OnClick", self.RestoreCode)
 	self.Reset:CreateShadow()
 
 	self.Close = CreateFrame("Button", nil, self)
