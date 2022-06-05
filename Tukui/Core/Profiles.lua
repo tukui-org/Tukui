@@ -26,12 +26,12 @@ function Profiles:Export()
 end
 
 function Profiles:Import()
-	local EditBox = self:GetParent().EditBox
-	local Status = self:GetParent().Status
+	local EditBox = Profiles.EditBox
+	local Status = Profiles.Status
 	local Code = EditBox:GetText()
 	local LibCode = string.gsub(Code, Prefix, "")
 	local Decoded = LibDeflate:DecodeForPrint(LibCode)
-	local CurrentCode = self:GetParent():Export()
+	local CurrentCode = Profiles:Export()
 
 	if Code == CurrentCode then
 		Status:SetText("|cffff0000SORRY, YOU ARE CURRENTLY USING THIS PROFILE|r")
@@ -57,14 +57,14 @@ function Profiles:Toggle()
 		self:Hide()
 	else
 		self:Show()
-		self.EditBox:SetText(self:Export())
+		self.EditBox:SetText(Profiles:Export())
 	end
 end
 
 function Profiles:OnTextChanged()
-	local Code = self:GetText()
-	local Status = self:GetParent().Status
-	local CurrentCode = self:GetParent():Export()
+	local Code = Profiles.EditBox:GetText()
+	local Status = Profiles.Status
+	local CurrentCode = Profiles:Export()
 
 	if Code ~= CurrentCode then
 		Status:SetText("YOU ARE CURRENTLY TRYING TO APPLY A NEW CODE")
@@ -74,13 +74,13 @@ function Profiles:OnTextChanged()
 end
 
 function Profiles:RestoreCode()
-	local EditBox = self:GetParent().EditBox
+	local EditBox = Profiles.EditBox
 
-	EditBox:SetText(self:GetParent():Export())
+	EditBox:SetText(Profiles:Export())
 end
 
 function Profiles:Enable()
-	self:SetSize(600, 170)
+	self:SetSize(600, 400)
 	self:SetPoint("CENTER", UIParent, "CENTER", 0, 100)
 	self:CreateBackdrop("Transparent")
 	self:CreateShadow()
@@ -115,28 +115,10 @@ function Profiles:Enable()
 	self.Status:SetPoint("TOP", self.Title, "TOP", 0, -60)
 	self.Status:SetTextColor(1, .5, 0)
 
-	self.EditBox = CreateFrame("EditBox", nil, self)
-	self.EditBox:SetMultiLine(true)
-	self.EditBox:SetCursorPosition(0)
-	self.EditBox:EnableMouse(true)
-	self.EditBox:SetAutoFocus(false)
-	self.EditBox:SetFontObject(ChatFontNormal)
-	self.EditBox:SetWidth(self:GetWidth() - 28)
-	self.EditBox:SetHeight(250)
-	self.EditBox:SetPoint("TOP", self, "BOTTOM", 0, 0)
-	self.EditBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
-	self.EditBox:SetScript("OnTextChanged", Profiles.OnTextChanged)
-	self.EditBox:CreateBackdrop()
-	self.EditBox.Backdrop:SetPoint("TOPLEFT", -4, 4)
-	self.EditBox.Backdrop:SetPoint("BOTTOMRIGHT", 4, -4)
-	self.EditBox.Backdrop:SetBorderColor(1, 0.5, 0)
-	self.EditBox:SetTextInsets(4, 4, 4, 4)
-	self.EditBox.Backdrop:CreateShadow()
-
 	self.Reset = CreateFrame("Button", nil, self)
 	self.Reset:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Reset:SkinButton()
-	self.Reset:SetPoint("TOPLEFT", self.EditBox, "BOTTOMLEFT", -4, -28)
+	self.Reset:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 8, 8)
 	self.Reset.Text = self.Reset:CreateFontString(nil, "OVERLAY")
 	self.Reset.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Reset.Text:SetPoint("CENTER")
@@ -147,18 +129,18 @@ function Profiles:Enable()
 	self.Close = CreateFrame("Button", nil, self)
 	self.Close:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Close:SkinButton()
-	self.Close:SetPoint("TOP", self.EditBox, "BOTTOM", 0, -28)
+	self.Close:SetPoint("BOTTOM", self, "BOTTOM", 0, 8)
 	self.Close.Text = self.Close:CreateFontString(nil, "OVERLAY")
 	self.Close.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Close.Text:SetPoint("CENTER")
 	self.Close.Text:SetText(CLOSE)
-	self.Close:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	self.Close:SetScript("OnClick", function() Profiles:Hide() end)
 	self.Close:CreateShadow()
 
 	self.Apply = CreateFrame("Button", nil, self)
 	self.Apply:SetSize(self:GetWidth() / 3 - 14, 30)
 	self.Apply:SkinButton()
-	self.Apply:SetPoint("TOPRIGHT", self.EditBox, "BOTTOMRIGHT", 4, -28)
+	self.Apply:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -8, 8)
 	self.Apply.Text = self.Apply:CreateFontString(nil, "OVERLAY")
 	self.Apply.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.Apply.Text:SetPoint("CENTER")
@@ -166,7 +148,32 @@ function Profiles:Enable()
 	self.Apply:SetScript("OnClick", Profiles.Import)
 	self.Apply:CreateShadow()
 
-	self.Backdrop:SetPoint("BOTTOM", self.Reset, "BOTTOM", 0, -10)
+	self.ScrollArea = CreateFrame("ScrollFrame", nil, self, "UIPanelScrollFrameTemplate")
+	self.ScrollArea:SetPoint('TOPLEFT', self, 'TOPLEFT', 12, -175)
+	self.ScrollArea:SetPoint('BOTTOMRIGHT', self.Apply, 'TOPRIGHT', -27, 8)
+	self.ScrollArea:CreateBackdrop()
+	self.ScrollArea.Backdrop:SetPoint("TOPLEFT", -4, 4)
+	self.ScrollArea.Backdrop:SetPoint("BOTTOMRIGHT", 27, -4)
+	self.ScrollArea.Backdrop:SetBorderColor(1, 0.5, 0)
+	self.ScrollArea.Backdrop:CreateShadow()
+	self.ScrollArea:HookScript('OnVerticalScroll', function(scroll, offset)
+		self.EditBox:SetHitRectInsets(0, 0, offset, (self.EditBox:GetHeight() - offset - scroll:GetHeight()))
+	end)
+	TukuiProfilesScrollBar:SkinScrollBar()
+
+	self.EditBox = CreateFrame("EditBox", nil, self)
+	self.EditBox:SetMultiLine(true)
+	self.EditBox:SetCursorPosition(0)
+	self.EditBox:EnableMouse(true)
+	self.EditBox:SetAutoFocus(false)
+	self.EditBox:SetFontObject(ChatFontNormal)
+	self.EditBox:SetWidth(self.ScrollArea:GetWidth())
+	self.EditBox:SetHeight(self.ScrollArea:GetHeight())
+	self.EditBox:SetScript("OnEscapePressed", function() self.EditBox:ClearFocus() end)
+	self.EditBox:SetScript("OnTextChanged", Profiles.OnTextChanged)
+	self.EditBox:SetTextInsets(4, 4, 4, 4)
+	self.ScrollArea:SetScrollChild(self.EditBox)
+
 	self:Hide()
 end
 
