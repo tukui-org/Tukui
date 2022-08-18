@@ -28,16 +28,24 @@ function MicroMenu:Minimalist()
 		[6] = {221/255, 215/255, 173/255},
 		[7] = {16/255, 238/255, 213/255},
 		[8] = {160/255, 215/255, 241/255},
+		[9] = {250/255, 22/255, 22/255},
+		[10] = {171/255, 9/255, 182/255},
+		[11] = {203/255, 236/255, 79/255},
+		[12] = {203/255, 236/255, 79/255},
 	}
 	local Texts = {
-		[1] = "C",
-		[2] = "S",
-		[3] = "T",
-		[4] = "Q",
-		[5] = "S",
-		[6] = "M",
-		[7] = "O",
-		[8] = "H",
+		[1] = "C", -- Character
+		[2] = "S", -- Spellbook & Abilities
+		[3] = "T", -- Spec & Talents
+		[4] = "A", -- Achievements
+		[5] = "Q", -- Questlog
+		[6] = "C", -- Guild & Communities
+		[7] = "G", -- Group Finder
+		[8] = "A", -- Adventure Guide
+		[9] = "C", -- Collections
+		[10] = "M", -- Game Menu
+		[11] = "11", -- nada?
+		[12] = "S", -- Shop
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
@@ -52,41 +60,49 @@ function MicroMenu:Minimalist()
 
 	for i = 1, NumButtons do
 		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-		local Pushed = Button:GetPushedTexture()
-		local Normal = Button:GetNormalTexture()
-		local Disabled = Button:GetDisabledTexture()
+		if i == 11 then
+			Button:ClearAllPoints()
+		elseif i ~= 11 then
+			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+			local Pushed = Button:GetPushedTexture()
+			local Normal = Button:GetNormalTexture()
+			local Disabled = Button:GetDisabledTexture()
 
-		Button:StripTextures()
-		Button:SetAlpha(0)
-		Button:SetParent(MicroMenu)
-		Button:SetWidth(math.floor(Width / NumButtons))
-		Button:SetHeight(Height - 2)
-		Button:SetHitRectInsets(0, 0, 0, 0)
-		Button:CreateBackdrop()
-		Button.Backdrop:SetParent(MicroMenu)
-		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
-		Button:ClearAllPoints()
+			Button:StripTextures()
+			Button:SetAlpha(0)
+			Button:SetParent(MicroMenu)
+			Button:SetWidth(math.floor(Width / (NumButtons - 1)))
+			Button:SetHeight(Height - 2)
+			Button:SetHitRectInsets(0, 0, 0, 0)
+			Button:CreateBackdrop()
+			Button.Backdrop:SetParent(MicroMenu)
+			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
+			Button:ClearAllPoints()
 
-		Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
-		Button.Backdrop.Texture:SetInside()
-		Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
-		Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
+			Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
+			Button.Backdrop.Texture:SetInside()
+			Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
+			Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
 
-		Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
-		Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
-		Button.Backdrop.Text:SetText(Texts[i])
-		Button.Backdrop.Text:SetPoint("TOP", 0, 7)
-		Button.Backdrop.Text:SetTextColor(1, 1, 1)
+			Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
+			Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
+			Button.Backdrop.Text:SetText(Texts[i])
+			Button.Backdrop.Text:SetPoint("TOP", 0, 7)
+			Button.Backdrop.Text:SetTextColor(1, 1, 1)
 
-		-- Reposition them
-		if i == 1 then
-			Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
-		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
+			-- Reposition them
+			if i == 1 then
+				Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
+			else
+				if i == 12 then
+					Button:SetPoint("LEFT", _G[MICRO_BUTTONS[i - 2]], "RIGHT", 0, 0)
+				else
+					Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
+				end
 
-			if i == NumButtons then
-				Button:SetPoint("RIGHT", MicroMenu)
+				if i == NumButtons then
+					Button:SetPoint("RIGHT", MicroMenu)
+				end
 			end
 		end
 	end
