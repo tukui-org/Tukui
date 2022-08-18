@@ -14,10 +14,27 @@ function MicroMenu:AddHooks()
 	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
 end
 
+do
+	local buttons = {}
+	function MicroMenu:ShownMicroButtons()
+		wipe(buttons)
+
+		for _, name in next, _G.MICRO_BUTTONS do
+			local button = _G[name]
+			if button and button:IsShown() then
+				tinsert(buttons, name)
+			end
+		end
+
+		return buttons
+	end
+end
+
 function MicroMenu:Minimalist()
 	local Width = C.Chat.Enable and T.Chat.Panels.RightChat:GetWidth() or 462
 	local Height = 10
-	local NumButtons = #MICRO_BUTTONS
+	local Buttons = MicroMenu:ShownMicroButtons()
+	local NumButtons = #Buttons
 	local Y = C.Chat.Enable and T.Chat.Panels.RightChat:GetHeight() + 28 or 232
 	local Colors = {
 		[1] = {250/255, 22/255, 22/255},
@@ -31,7 +48,7 @@ function MicroMenu:Minimalist()
 		[9] = {250/255, 22/255, 22/255},
 		[10] = {171/255, 9/255, 182/255},
 		[11] = {203/255, 236/255, 79/255},
-		[12] = {203/255, 236/255, 79/255},
+		-- [12] = {203/255, 236/255, 79/255},
 	}
 	local Texts = {
 		[1] = "C", -- Character
@@ -44,8 +61,8 @@ function MicroMenu:Minimalist()
 		[8] = "A", -- Adventure Guide
 		[9] = "C", -- Collections
 		[10] = "M", -- Game Menu
-		[11] = "11", -- nada?
-		[12] = "S", -- Shop
+		-- [11] = "11", -- nada?
+		[11] = "S", -- Shop
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
@@ -59,52 +76,45 @@ function MicroMenu:Minimalist()
 	UpdateMicroButtonsParent(MicroMenu)
 
 	for i = 1, NumButtons do
-		local Button = _G[MICRO_BUTTONS[i]]
-		if i == 11 then
-			Button:ClearAllPoints()
-		elseif i ~= 11 then
-			local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-			local Pushed = Button:GetPushedTexture()
-			local Normal = Button:GetNormalTexture()
-			local Disabled = Button:GetDisabledTexture()
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
+		local Pushed = Button:GetPushedTexture()
+		local Normal = Button:GetNormalTexture()
+		local Disabled = Button:GetDisabledTexture()
 
-			Button:StripTextures()
-			Button:SetAlpha(0)
-			Button:SetParent(MicroMenu)
-			Button:SetWidth(math.floor(Width / (NumButtons - 1)))
-			Button:SetHeight(Height - 2)
-			Button:SetHitRectInsets(0, 0, 0, 0)
-			Button:CreateBackdrop()
-			Button.Backdrop:SetParent(MicroMenu)
-			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
-			Button:ClearAllPoints()
+		Button:StripTextures()
+		Button:SetAlpha(0)
+		Button:SetParent(MicroMenu)
+		Button:SetWidth(math.floor(Width / NumButtons))
+		Button:SetHeight(Height - 2)
+		Button:SetHitRectInsets(0, 0, 0, 0)
+		Button:CreateBackdrop()
+		Button.Backdrop:SetParent(MicroMenu)
+		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
+		Button:ClearAllPoints()
 
-			Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
-			Button.Backdrop.Texture:SetInside()
-			Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
-			Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
+		Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
+		Button.Backdrop.Texture:SetInside()
+		Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
+		Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
 
-			Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
-			Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
-			Button.Backdrop.Text:SetText(Texts[i])
-			Button.Backdrop.Text:SetPoint("TOP", 0, 7)
-			Button.Backdrop.Text:SetTextColor(1, 1, 1)
+		Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
+		Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
+		Button.Backdrop.Text:SetText(Texts[i])
+		Button.Backdrop.Text:SetPoint("TOP", 0, 7)
+		Button.Backdrop.Text:SetTextColor(1, 1, 1)
 
-			-- Reposition them
-			if i == 1 then
-				Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
-			else
-				if i == 12 then
-					Button:SetPoint("LEFT", _G[MICRO_BUTTONS[i - 2]], "RIGHT", 0, 0)
-				else
-					Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
-				end
+		-- Reposition them
+		if i == 1 then
+			Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
+		else
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
 
-				if i == NumButtons then
-					Button:SetPoint("RIGHT", MicroMenu)
-				end
+			if i == NumButtons then
+				Button:SetPoint("RIGHT", MicroMenu)
 			end
 		end
+
 	end
 end
 
