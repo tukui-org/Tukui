@@ -119,9 +119,11 @@ function MicroMenu:Minimalist()
 end
 
 function MicroMenu:GameMenu()
+	local Buttons = MicroMenu:ShownMicroButtons()
+
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, not T.Retail and 298 or 439)
+	MicroMenu:SetSize(250, not T.Retail and 298 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -130,9 +132,9 @@ function MicroMenu:GameMenu()
 
 	UpdateMicroButtonsParent(MicroMenu)
 
-	for i = 1, #MICRO_BUTTONS do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+	for i = 1, #Buttons do
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
 
 		Button:StripTextures()
 		Button:SetAlpha(0)
@@ -176,15 +178,17 @@ function MicroMenu:GameMenu()
 end
 
 function MicroMenu:Blizzard()
+	local Buttons = MicroMenu:ShownMicroButtons()
+
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 
 	UpdateMicroButtonsParent(MicroMenu)
 
-	for i = 1, #MICRO_BUTTONS do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+	for i = 1, #Buttons do
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
 		local Pushed = Button:GetPushedTexture()
 		local Normal = Button:GetNormalTexture()
 		local Disabled = Button:GetDisabledTexture()
