@@ -55,20 +55,18 @@ function MicroMenu:Minimalist()
 		[9] = {250/255, 22/255, 22/255},
 		[10] = {171/255, 9/255, 182/255},
 		[11] = {203/255, 236/255, 79/255},
-		-- [12] = {203/255, 236/255, 79/255},
 	}
 	local Texts = {
 		[1] = "C", -- Character
 		[2] = "S", -- Spellbook & Abilities
 		[3] = "T", -- Spec & Talents
-		[4] = "A", -- Achievements
-		[5] = "Q", -- Questlog
-		[6] = "C", -- Guild & Communities
-		[7] = "G", -- Group Finder
-		[8] = "A", -- Adventure Guide
+		[4] = T.Retail and "A" or "Q", -- Achievements / QuestLog (nonretail)
+		[5] = T.Retail and "Q" or "S", -- Questlog / Social (nonretail)
+		[6] = T.Retail and "C" or "G", -- Guild & Communities / Group Finder (nonretail)
+		[7] = T.Retail and "G" or "M", -- Group Finder / Game Menu (nonretail)
+		[8] = T.Retail and "A" or "H", -- Adventure Guide / Help (nonretail)
 		[9] = "C", -- Collections
 		[10] = "M", -- Game Menu
-		-- [11] = "11", -- nada?
 		[11] = "S", -- Shop
 	}
 
