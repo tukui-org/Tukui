@@ -21,8 +21,15 @@ do
 
 		for _, name in next, _G.MICRO_BUTTONS do
 			local button = _G[name]
-			if button and button:IsShown() then
-				tinsert(buttons, name)
+			if T.Retail then
+				if button and button:IsShown() then
+					tinsert(buttons, name)
+				end
+			else
+				-- button:IsShown() for the lfg for some reason fails to show true and for some reason worldmapmicrobutton is there but dont see it in game...
+				if button and button:GetName() ~= 'WorldMapMicroButton' then
+					tinsert(buttons, name)
+				end
 			end
 		end
 
