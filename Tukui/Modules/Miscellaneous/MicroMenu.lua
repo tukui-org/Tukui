@@ -78,9 +78,6 @@ function MicroMenu:Minimalist()
 	for i = 1, NumButtons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
-		local Pushed = Button:GetPushedTexture()
-		local Normal = Button:GetNormalTexture()
-		local Disabled = Button:GetDisabledTexture()
 
 		Button:StripTextures()
 		Button:SetAlpha(0)
@@ -189,9 +186,6 @@ function MicroMenu:Blizzard()
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
-		local Pushed = Button:GetPushedTexture()
-		local Normal = Button:GetNormalTexture()
-		local Disabled = Button:GetDisabledTexture()
 
 		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
