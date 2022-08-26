@@ -130,7 +130,9 @@ function Bubbles:Enable()
 	local Setting = C.Chat.Bubbles.Value
 	local Dropdown = InterfaceOptionsDisplayPanelChatBubblesDropDown
 	
-	Dropdown:Hide()
+	if Dropdown then
+		Dropdown:Hide()
+	end
 	
 	if (Setting == "None") then
         SetCVar("chatBubbles", 0)
