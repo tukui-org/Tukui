@@ -279,7 +279,9 @@ function Loading:OnEvent(event)
 		-- restore original stopwatch commands
 		SlashCmdList["STOPWATCH"] = Stopwatch_Toggle
 	elseif (event == "PLAYER_ENTERING_WORLD") then
-		T["Miscellaneous"]["ObjectiveTracker"]:Enable()
+		if not T.WotLK then
+			T["Miscellaneous"]["ObjectiveTracker"]:Enable()
+		end
 
 		if T.Retail then
 			-- Temp Fix for Action MultiBarBottomRight buttons 1 to 6 on low monitor resolution

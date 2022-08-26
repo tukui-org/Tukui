@@ -1338,6 +1338,11 @@ function Bags:Enable()
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	end
+	
+	--TEMP FIX for WotLK
+	if T.WotLK then
+		ContainerFrame1.SetHeight = function() return end
+	end
 
 	ToggleAllBags()
 	ToggleAllBags()
