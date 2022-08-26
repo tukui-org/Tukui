@@ -14,10 +14,34 @@ function MicroMenu:AddHooks()
 	hooksecurefunc("MainMenuMicroButton_ShowAlert", MicroMenu.HideAlerts)
 end
 
+do
+	local buttons = {}
+	function MicroMenu:ShownMicroButtons()
+		wipe(buttons)
+
+		for _, name in next, _G.MICRO_BUTTONS do
+			local button = _G[name]
+			if T.Retail then
+				if button and button:IsShown() then
+					tinsert(buttons, name)
+				end
+			else
+				-- button:IsShown() for the lfg for some reason fails to show true and for some reason worldmapmicrobutton is there but dont see it in game...
+				if button and button:GetName() ~= 'WorldMapMicroButton' then
+					tinsert(buttons, name)
+				end
+			end
+		end
+
+		return buttons
+	end
+end
+
 function MicroMenu:Minimalist()
 	local Width = C.Chat.Enable and T.Chat.Panels.RightChat:GetWidth() or 462
 	local Height = 10
-	local NumButtons = #MICRO_BUTTONS
+	local Buttons = MicroMenu:ShownMicroButtons()
+	local NumButtons = #Buttons
 	local Y = C.Chat.Enable and T.Chat.Panels.RightChat:GetHeight() + 28 or 232
 	local Colors = {
 		[1] = {250/255, 22/255, 22/255},
@@ -28,16 +52,22 @@ function MicroMenu:Minimalist()
 		[6] = {221/255, 215/255, 173/255},
 		[7] = {16/255, 238/255, 213/255},
 		[8] = {160/255, 215/255, 241/255},
+		[9] = {250/255, 22/255, 22/255},
+		[10] = {171/255, 9/255, 182/255},
+		[11] = {203/255, 236/255, 79/255},
 	}
 	local Texts = {
-		[1] = "C",
-		[2] = "S",
-		[3] = "T",
-		[4] = "Q",
-		[5] = "S",
-		[6] = "M",
-		[7] = "O",
-		[8] = "H",
+		[1] = "C", -- Character
+		[2] = "S", -- Spellbook & Abilities
+		[3] = "T", -- Spec & Talents
+		[4] = T.Retail and "A" or "Q", -- Achievements / QuestLog (nonretail)
+		[5] = T.Retail and "Q" or "S", -- Questlog / Social (nonretail)
+		[6] = T.Retail and "C" or "G", -- Guild & Communities / Group Finder (nonretail)
+		[7] = T.Retail and "G" or "M", -- Group Finder / Game Menu (nonretail)
+		[8] = T.Retail and "A" or "H", -- Adventure Guide / Help (nonretail)
+		[9] = "C", -- Collections
+		[10] = "M", -- Game Menu
+		[11] = "S", -- Shop
 	}
 
 	MicroMenu:SetFrameStrata("BACKGROUND")
@@ -51,11 +81,8 @@ function MicroMenu:Minimalist()
 	UpdateMicroButtonsParent(MicroMenu)
 
 	for i = 1, NumButtons do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-		local Pushed = Button:GetPushedTexture()
-		local Normal = Button:GetNormalTexture()
-		local Disabled = Button:GetDisabledTexture()
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
 
 		Button:StripTextures()
 		Button:SetAlpha(0)
@@ -89,13 +116,16 @@ function MicroMenu:Minimalist()
 				Button:SetPoint("RIGHT", MicroMenu)
 			end
 		end
+
 	end
 end
 
 function MicroMenu:GameMenu()
+	local Buttons = MicroMenu:ShownMicroButtons()
+
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, not T.Retail and 298 or 439)
+	MicroMenu:SetSize(250, not T.Retail and 298 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -104,9 +134,9 @@ function MicroMenu:GameMenu()
 
 	UpdateMicroButtonsParent(MicroMenu)
 
-	for i = 1, #MICRO_BUTTONS do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
+	for i = 1, #Buttons do
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
 
 		Button:StripTextures()
 		Button:SetAlpha(0)
@@ -150,18 +180,17 @@ function MicroMenu:GameMenu()
 end
 
 function MicroMenu:Blizzard()
+	local Buttons = MicroMenu:ShownMicroButtons()
+
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 
 	UpdateMicroButtonsParent(MicroMenu)
 
-	for i = 1, #MICRO_BUTTONS do
-		local Button = _G[MICRO_BUTTONS[i]]
-		local PreviousButton = _G[MICRO_BUTTONS[i - 1]]
-		local Pushed = Button:GetPushedTexture()
-		local Normal = Button:GetNormalTexture()
-		local Disabled = Button:GetDisabledTexture()
+	for i = 1, #Buttons do
+		local Button = _G[Buttons[i]]
+		local PreviousButton = _G[Buttons[i - 1]]
 
 		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
