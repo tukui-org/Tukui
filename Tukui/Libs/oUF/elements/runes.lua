@@ -80,27 +80,49 @@ local function descSort(runeAID, runeBID)
 	end
 end
 
-local function UpdateColor(self, event)
-	local element = self.Runes
+local function ColorRune(self, bar, runeType)
+	local color = runeType and self.colors.runes[runeType] or self.colors.power.RUNES
+	local r, g, b = color[1], color[2], color[3]
+	bar:SetStatusBarColor(r, g, b)
 
-	local spec = GetSpecialization() or 0
-
-	local color
-	if(spec > 0 and spec < 4 and element.colorSpec) then
-		color = self.colors.runes[spec]
-	else
-		color = self.colors.power.RUNES
+	local bg = bar.bg
+	if bg then
+		local mu = bg.multiplier or 1
+		bg:SetVertexColor(r * mu, g * mu, b * mu)
 	end
 
-	local r, g, b = color[1], color[2], color[3]
+	return color, r, g, b
+end
 
-	for index = 1, #element do
-		element[index]:SetStatusBarColor(r, g, b)
+local function UpdateColor(self, event)
+	local element = self.Runes
+	
+	if oUF.isWotLK then -- runeID, alt
+		if runeID and event == 'RUNE_TYPE_UPDATE' then
+			rune = UpdateRuneType(element[runemap[runeID]], runeID, alt)
+		end
+	else
+		local spec = element.colorSpec and GetSpecialization() or 0
+		if spec > 0 and spec < 4 then
+			specType = spec
+		end
+	end
 
-		local bg = element[index].bg
-		if(bg) then
-			local mu = bg.multiplier or 1
-			bg:SetVertexColor(r * mu, g * mu, b * mu)
+	local color, r, g, b
+	if rune then
+		color, r, g, b = ColorRune(self, rune, specType or rune.runeType)
+	else
+		for i = 1, #element do
+			local bar = element[i]
+			if oUF.isWotLK then
+				if not bar.runeType then
+					bar.runeType = GetRuneType(runemap[i])
+				end
+			else
+				bar.runeType = specType
+			end
+
+			color, r, g, b = ColorRune(self, bar, specType or bar.runeType)
 		end
 	end
 
@@ -211,7 +233,12 @@ local function Enable(self, unit)
 			end
 		end
 
-		self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+		if oUF.isRetail then
+			self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+		else
+			self:RegisterEvent('RUNE_TYPE_UPDATE', ColorPath, true)
+		end
+		
 		self:RegisterEvent('RUNE_POWER_UPDATE', Path, true)
 
 		return true
@@ -225,7 +252,12 @@ local function Disable(self)
 			element[i]:Hide()
 		end
 
-		self:UnregisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+		if oUF.isRetail then
+			self:UnregisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+		else
+			self:UnregisterEvent('RUNE_TYPE_UPDATE', ColorPath)
+		end
+		
 		self:UnregisterEvent('RUNE_POWER_UPDATE', Path)
 	end
 end

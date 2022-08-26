@@ -53,6 +53,7 @@ Libs\oUF\elements\range.lua
 Libs\oUF\elements\readycheckindicator.lua
 Libs\oUF\elements\restingindicator.lua
 Libs\oUF\elements\resurrectindicator.lua
+Libs\oUF\elements\runes.lua
 Libs\oUF\elements\stagger.lua
 Libs\oUF\elements\tags.lua
 Libs\oUF\elements\threatindicator.lua
@@ -188,6 +189,7 @@ Modules\UnitFrames\Classes\Shaman.lua
 Modules\UnitFrames\Classes\Mage.lua
 Modules\UnitFrames\Classes\Warlock.lua
 Modules\UnitFrames\Classes\Druid.lua
+Modules\UnitFrames\Classes\DeathKnight.lua
 Modules\UnitFrames\Units\Player.lua
 Modules\UnitFrames\Units\Target.lua
 Modules\UnitFrames\Units\TargetOfTarget.lua
