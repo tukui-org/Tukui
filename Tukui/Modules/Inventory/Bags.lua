@@ -454,7 +454,7 @@ function Bags:CreateContainer(storagetype, ...)
 			SortBags()
 		end)
 		
-		if T.BCC then
+		if T.BCC or T.WotLK then
 			Keys:SetSize(16, 16)
 			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
 			Keys:CreateShadow()

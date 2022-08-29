@@ -25,8 +25,6 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
-		"MiniMapTrackingButton",
-		"MiniMapTracking",
 	}
 
 	for i, FrameName in pairs(HiddenFrames) do
@@ -139,15 +137,21 @@ function Minimap:StyleMinimap()
 
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
 
-		if T.BCC then
-			if C.Maps.MinimapTracking and T.BCC then
-				MiniMapTrackingBorder:Kill()
+		if T.BCC or T.WotLK then
+			if C.Maps.MinimapTracking then
+				if T.BCC then
+					MiniMapTrackingBorder:Kill()
+				end
 
 				MiniMapTracking:ClearAllPoints()
 				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
 
 				if (MiniMapTrackingBorder) then
 					MiniMapTrackingBorder:Hide()
+				end
+				
+				if (MiniMapTrackingButtonBorder) then
+					MiniMapTrackingButtonBorder:Hide()
 				end
 
 				if (MiniMapTrackingIcon) then
@@ -319,7 +323,7 @@ function Minimap:UpdateZone()
 end
 
 function Minimap:EnableMouseOver()
-	local Tracking = T.Retail and MiniMapTrackingButton or MiniMapTracking
+	local Tracking = (T.Retail or T.WotLK) and MiniMapTrackingButton or MiniMapTracking
 	local TrackingIcon = MiniMapTrackingIcon
 
 	self:SetScript("OnEnter", function(self)
@@ -337,7 +341,7 @@ function Minimap:EnableMouseOver()
 			Minimap.MinimapCoords.Anim:Play()
 		end
 
-		if T.Retail or T.BCC then
+		if T.Retail or T.BCC or T.WotLK then
 			Tracking:SetAlpha(1)
 		end
 	end)
@@ -358,7 +362,7 @@ function Minimap:EnableMouseOver()
 		end
 	end)
 
-	if T.Retail or T.BCC then
+	if T.Retail or T.BCC or T.WotLK then
 		Tracking:SetScript("OnEnter", function(self)
 			if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 				return

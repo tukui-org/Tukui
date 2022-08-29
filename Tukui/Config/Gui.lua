@@ -200,7 +200,7 @@ local Maps = function(self)
 	local Window = self:CreateWindow("Maps")
 
 	Window:CreateSection("All", "Minimap")
-	Window:CreateSwitch("BCC", "Maps", "MinimapTracking", "Enable minimap tracking icon")
+	Window:CreateSwitch("WOTLK", "Maps", "MinimapTracking", "Enable minimap tracking icon")
 	Window:CreateSwitch("All", "Maps", "MinimapCoords", "Enable minimap coordinate on mouseover")
 	Window:CreateSlider("All", "General", "MinimapScale", "Set minimap scale (%)", 50, 200, 1)
 
@@ -375,7 +375,7 @@ local UnitFrames = function(self)
 	Window:CreateSwitch("All", "UnitFrames", "Boss", "Enable boss unit frames")
 	Window:CreateSwitch("All", "UnitFrames", "Arena", "Enable arena unit frames")
 	Window:CreateSwitch("All", "UnitFrames", "TotemBar", "Enable totem bar")
-	Window:CreateSwitch("BCC", "UnitFrames", "PowerTick", "Enable power ticks")
+	Window:CreateSwitch("WotLK", "UnitFrames", "PowerTick", "Enable power ticks")
 
 	Window:CreateSection("All", "Scrolling combat text for yourself")
 	Window:CreateSwitch("All", "UnitFrames", "ScrollingCombatText", "Enable scrolling combat text")
