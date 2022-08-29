@@ -87,7 +87,7 @@ T.Popups.Popup["TUKUI_SWITCH_PROFILE"] = {
 local CheckClient = function(self)
 	local Client = string.upper(self)
 	local Toc = select(4, GetBuildInfo())
-	print(Client, T.WotLK)
+
 	if Client == "RETAIL" and T.Retail then
 		return true
 	elseif Client == "WOTLK" and T.WotLK then
