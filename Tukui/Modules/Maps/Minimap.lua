@@ -25,15 +25,20 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
+		"MiniMapTrackingButton",
+		"MiniMapTracking",
 	}
 
 	for i, FrameName in pairs(HiddenFrames) do
 		local Frame = _G[FrameName]
-		Frame:SetParent(T.Hider)
-		Frame:Hide()
+		
+		if Frame then
+			Frame:SetParent(T.Hider)
+			Frame:Hide()
 
-		if Frame.UnregisterAllEvents then
-			Frame:UnregisterAllEvents()
+			if Frame.UnregisterAllEvents then
+				Frame:UnregisterAllEvents()
+			end
 		end
 	end
 
