@@ -83,7 +83,7 @@ local oUF = ns.oUF
 local myGUID = UnitGUID('player')
 local HealComm, ALL_PENDING_HEALS, ALL_OVERTIME_HEALS, HEAL_TICK_INTERVAL
 
-if oUF.Classic or oUF.BCC then
+if not oUF.isRetail then
 	HealComm = LibStub("LibHealComm-4.0")
 
 	ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
@@ -118,10 +118,10 @@ local function Update(self, event, unit)
 	local guid = UnitGUID(unit)
 	local currentTime = GetTime()
 	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
-	local myIncomingHeal = (oUF.Classic or oUF.BCC) and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
-	local allIncomingHeal = (oUF.Classic or oUF.BCC) and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
-	local absorb = (oUF.Retail) and UnitGetTotalAbsorbs(unit) or 0
-	local healAbsorb = (oUF.Retail) and UnitGetTotalHealAbsorbs(unit) or 0
+	local myIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
+	local allIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
+	local absorb = oUF.Retail and UnitGetTotalAbsorbs(unit) or 0
+	local healAbsorb = oUF.Retail and UnitGetTotalHealAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 	local otherIncomingHeal = 0
 	local hasOverHealAbsorb = false
