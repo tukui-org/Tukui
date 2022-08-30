@@ -17,14 +17,14 @@ function ActionBars:CreateBar1()
 	end
 
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
-	
+
 	local ActionBar1 = CreateFrame("Frame", "TukuiActionBar1", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 12)
 	ActionBar1:SetFrameStrata("LOW")
 	ActionBar1:SetFrameLevel(10)
 	ActionBar1:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
-	
+
 	if C.ActionBars.ShowBackdrop then
 		ActionBar1:CreateBackdrop()
 		ActionBar1:CreateShadow()
@@ -69,7 +69,7 @@ function ActionBars:CreateBar1()
 
 	for i = 1, Num do
 		local Button = _G["ActionButton"..i]
-		
+
 		ActionBar1:SetFrameRef("ActionButton"..i, Button)
 	end
 
@@ -93,32 +93,32 @@ function ActionBars:CreateBar1()
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-	
+
 	if T.Retail then
 		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 		ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	end
-	
+
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
 			local NumPerRows = ButtonsPerRow
 			local NextRowButtonAnchor = _G["ActionButton1"]
-			
+
 			for i = 1, Num do
 				local Button = _G["ActionButton"..i]
 				local PreviousButton = _G["ActionButton"..i-1]
-					
+
 				Button:SetSize(Size, Size)
 				Button:ClearAllPoints()
 				Button:SetParent(self)
 				Button:SetAttribute("showgrid", 1)
-					
+
 				if T.Retail then
 					Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
 				else
 					ActionButton_ShowGrid(Button)
 				end
-					
+
 				ActionBars:SkinButton(Button)
 
 				if i <= NumButtons then
@@ -160,12 +160,12 @@ function ActionBars:CreateBar1()
 
 	for i = 1, Num do
 		local Button = _G["ActionButton"..i]
-		
+
 		ActionBar1["Button"..i] = Button
 	end
 
 	Movers:RegisterFrame(ActionBar1, "Action Bar #1")
-	
+
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1
 end
