@@ -31,8 +31,16 @@ function ActionBars:CreateBar1()
 	end
 
 	if (C.ActionBars.SwitchBarOnStance) then
-		Rogue = "[bonusbar:1] 7;"
-		Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
+		if T.WotLK then
+			Rogue = "[bonusbar:1] 7; [bonusbar:2] 8;"
+		else
+			Rogue = "[bonusbar:1] 7;"
+		end
+		if T.Retail then
+			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
+		else
+			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10; [bonusbar:5] 10;"
+		end
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
 	end
