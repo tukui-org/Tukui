@@ -572,6 +572,8 @@ function UnitFrames:UpdateTotemTimer(elapsed)
 		if TimeLeft > -.5 then
 			self:SetMinMaxValues(0, self.Duration)
 			self:SetValue(TimeLeft)
+		else
+			self:SetValue(0, 1)
 		end
 
 		self.Elapsed = 0.5
