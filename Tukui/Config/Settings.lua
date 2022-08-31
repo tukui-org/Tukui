@@ -66,6 +66,7 @@ C["ActionBars"] = {
 	["AutoAddNewSpell"] = false,
 	["ProcAnim"] = true,
 	["Font"] = "Tukui Outline",
+	["MultiCastBar"] = true,
 }
 
 C["Auras"] = {

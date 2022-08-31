@@ -41,6 +41,7 @@ local ActionBars = function(self)
 	Window:CreateSwitch("All", "ActionBars", "ShapeShift", "Enable shapeshift")
 	Window:CreateSwitch("All", "ActionBars", "HotKey", "Enable hotkeys text")
 	Window:CreateSwitch("All", "ActionBars", "Macro", "Enable macro text")
+	Window:CreateSwitch("WOTLK", "ActionBars", "MultiCastBar", "Display Blizzard MultiCast Totem Bar")
 	Window:CreateSwitch("Retail", "ActionBars", "AutoAddNewSpell", "Auto add new spell to actionbars?")
 
 	Window:CreateSection("All", "Styling")

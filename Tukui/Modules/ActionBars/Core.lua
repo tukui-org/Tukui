@@ -453,6 +453,27 @@ function ActionBars:AddHooks()
 		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
 		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
 	end
+	
+	if T.WotLK and C.ActionBars.MultiCastBar then
+		hooksecurefunc("ShowMultiCastActionBar", self.UpdateMultiCastBar)
+	end
+end
+
+function ActionBars:UpdateMultiCastBar()
+	local Bar = MultiCastActionBarFrame
+	local Movers = T["Movers"]
+	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.MultiCastActionBarFrame
+
+	Movers:RegisterFrame(Bar, "MultiCastBar")
+
+	Bar:ClearAllPoints()
+	Bar:SetParent(TukuiPetHider)
+	Bar:SetPoint("BOTTOM", 0, 300)
+
+	if CustomPosition then
+		Bar:ClearAllPoints()
+		Bar:SetPoint(unpack(CustomPosition))
+	end
 end
 
 function ActionBars:Enable()
