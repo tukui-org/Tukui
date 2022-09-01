@@ -32,9 +32,9 @@ local Update = function(self, Elapsed)
 		local MilitaryTime = GetCVar("timeMgrUseMilitaryTime") == "0" and true or false
 		local Hour = LocalTime == true and tonumber(date("%H")) or select(1, GetGameTime())
 		local Min = LocalTime == true and tonumber(date("%M")) or select(2, GetGameTime())
-		
+
 		local CurrentTime = GameTime_GetFormattedTime(Hour, Min, true)
-		
+
 		self.Text:SetText(DataText.ValueColor .. CurrentTime)
 
 		Timer = Interval
@@ -45,7 +45,7 @@ local OnEnter = function(self)
 	if not T.Retail then
 		return
 	end
-	
+
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
@@ -105,8 +105,8 @@ local OnMouseUp = function(button, click)
 
 			return
 		end
-		
-		if T.Retail then
+
+		if T.Retail or T.WotLK then
 			GameTimeFrame_OnClick()
 		else
 			Stopwatch_Toggle()
