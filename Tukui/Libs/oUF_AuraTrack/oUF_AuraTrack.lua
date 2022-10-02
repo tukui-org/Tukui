@@ -213,8 +213,11 @@ else
 		[9884]    = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 6)
 		[9885]    = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 7)
 		[26990]   = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 8)
+		[48469]   = {0.2, 0.8, 0.8}, -- Mark of the Wild(Rank 9)
 		[21849]   = {0.2, 0.8, 0.8}, -- Gift of the Wild(Rank 1)
 		[21850]   = {0.2, 0.8, 0.8}, -- Gift of the Wild(Rank 2)
+		[26991]   = {0.2, 0.8, 0.8}, -- Gift of the Wild(Rank 3)
+		[48470]   = {0.2, 0.8, 0.8}, -- Gift of the Wild(Rank 4)
 		[467]     = {0.4, 0.2, 0.8}, -- Thorns(Rank 1)
 		[782]     = {0.4, 0.2, 0.8}, -- Thorns(Rank 2)
 		[1075]    = {0.4, 0.2, 0.8}, -- Thorns(Rank 3)
@@ -222,6 +225,7 @@ else
 		[9756]    = {0.4, 0.2, 0.8}, -- Thorns(Rank 5)
 		[9910]    = {0.4, 0.2, 0.8}, -- Thorns(Rank 6)
 		[26992]   = {0.4, 0.2, 0.8}, -- Thorns(Rank 7)
+		[53307]   = {0.4, 0.2, 0.8}, -- Thorns(Rank 8)
 		[774]     = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 1)
 		[1058]    = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 2)
 		[1430]    = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 3)
@@ -235,6 +239,8 @@ else
 		[25299]   = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 11)
 		[26981]   = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 12)
 		[26982]   = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 13)
+		[48440]   = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 14)
+		[48441]   = {0.83, 1.00, 0.25}, -- Rejuvenation(Rank 15)
 		[8936]    = {0.33, 0.73, 0.75}, -- Regrowth(Rank 1)
 		[8938]    = {0.33, 0.73, 0.75}, -- Regrowth(Rank 2)
 		[8939]    = {0.33, 0.73, 0.75}, -- Regrowth(Rank 3)
@@ -245,8 +251,12 @@ else
 		[9857]    = {0.33, 0.73, 0.75}, -- Regrowth(Rank 8)
 		[9858]    = {0.33, 0.73, 0.75}, -- Regrowth(Rank 9)
 		[26980]   = {0.33, 0.73, 0.75}, -- Regrowth(Rank 10)
+		[48442]   = {0.33, 0.73, 0.75}, -- Regrowth(Rank 11)
+		[48443]   = {0.33, 0.73, 0.75}, -- Regrowth(Rank 12)
 		[29166]   = {0.49, 0.60, 0.55}, -- Innervate
-		[33763]   = {0.33, 0.37, 0.47}, -- Lifebloom
+		[33763]   = {0.33, 0.37, 0.47}, -- Lifebloom(Rank 1)
+		[48450]   = {0.33, 0.37, 0.47}, -- Lifebloom(Rank 2)
+		[48451]   = {0.33, 0.37, 0.47}, -- Lifebloom(Rank 3)
 	-- Rogue
 		-- No buffs to track
 	-- Shaman
