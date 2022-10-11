@@ -21,7 +21,7 @@ local Events = {
 	"CHAT_MSG_WHISPER",
 	"CHAT_MSG_WHISPER_INFORM",
 	"CHAT_MSG_YELL",
-	
+
 	-- Not sure if I should add this one, it's pretty much always just spam
 	-- "CHAT_MSG_CHANNEL",
 }
@@ -70,7 +70,7 @@ function History:Enable()
 	if C.Chat.LogMax == 0 then
 		return
 	end
-	
+
 	-- Max number of entries logged
 	LogMax = C.Chat.LogMax
 
@@ -83,7 +83,7 @@ function History:Enable()
 	else
 		History:RegisterEvent("PLAYER_LOGIN")
 	end
-	
+
 	self:SetScript("OnEvent", self.OnEvent)
 end
 
