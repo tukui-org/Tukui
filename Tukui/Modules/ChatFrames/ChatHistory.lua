@@ -33,6 +33,7 @@ function History:Print()
 
 	for i = #TukuiDatabase.ChatHistory, 1, -1 do
 		Temp = TukuiDatabase.ChatHistory[i]
+		if not Temp then break end
 
 		ChatFrame_MessageEventHandler(ChatFrame1, Temp[EntryEvent], unpack(Temp))
 	end
