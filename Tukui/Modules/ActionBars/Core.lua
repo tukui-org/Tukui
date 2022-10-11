@@ -453,7 +453,7 @@ function ActionBars:AddHooks()
 		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
 		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
 	end
-	
+
 	if T.WotLK and C.ActionBars.MultiCastBar then
 		hooksecurefunc("ShowMultiCastActionBar", self.UpdateMultiCastBar)
 	end

@@ -149,7 +149,7 @@ local function OnEnter(self)
 	end
 
 	GameTooltip:AddLine(" ")
-	
+
 	if IsShiftKeyDown() or not cpuProfiling then
 		for i = 1, #memoryTable do
 			local ele = memoryTable[i]
@@ -171,11 +171,11 @@ local function OnEnter(self)
 		GameTooltip:AddLine(" ")
 		GameTooltip:AddLine("(Hold Shift) Memory Usage")
 	end
-	
+
 	if IsShiftKeyDown() or not cpuProfiling then
 		GameTooltip:AddLine(" ")
 	end
-	
+
 	GameTooltip:AddLine("(Modifer Click) Collect Garbage")
 	GameTooltip:Show()
 end
@@ -188,7 +188,7 @@ local function Update(self, t)
 		RebuildAddonList()
 		int = 10
 	end
-	
+
 	if int2 < 0 then
 		local framerate = floor(GetFramerate())
 		local latency = select(4, GetNetStats())
@@ -196,13 +196,13 @@ local function Update(self, t)
 		local MS = DataText.NameColor.."MS|r"
 
 		self.Text:SetFormattedText(
-			FPS.." %s%d|r "..MS.." %s%d|r", DataText.StatusColors[framerate >= 30 and 1 or (framerate >= 20 and framerate < 30) and 2 or (framerate >= 10 and framerate < 20) and 3 or 4], 
-			framerate, DataText.StatusColors[latency < 150 and 1 or (latency >= 150 and latency < 300) and 2 or (latency >= 300 and latency < 500) and 3 or 4], 
+			FPS.." %s%d|r "..MS.." %s%d|r", DataText.StatusColors[framerate >= 30 and 1 or (framerate >= 20 and framerate < 30) and 2 or (framerate >= 10 and framerate < 20) and 3 or 4],
+			framerate, DataText.StatusColors[latency < 150 and 1 or (latency >= 150 and latency < 300) and 2 or (latency >= 300 and latency < 500) and 3 or 4],
 			latency
 		)
-		
+
 		int2 = 1
-		
+
 		if enteredFrame then
 			OnEnter(self)
 		end

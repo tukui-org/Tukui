@@ -122,7 +122,7 @@ end
 Toolkit.API.SetOutside = function(self, Anchor, OffsetX, OffsetY)
 	OffsetX = OffsetX and Toolkit.Functions.Scale(OffsetX) or Toolkit.Functions.Scale(1)
 	OffsetY = OffsetY and Toolkit.Functions.Scale(OffsetY) or Toolkit.Functions.Scale(1)
-	
+
 	Anchor = Anchor or self:GetParent()
 
 	if self:GetPoint() then
@@ -177,7 +177,7 @@ Toolkit.API.CreateBackdrop = function(self, BackgroundTemplate, BackgroundTextur
 	if (self.Backdrop) then
 		return
 	end
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -246,7 +246,7 @@ Toolkit.API.CreateGlow = function(self, Scale, EdgeSize, R, G, B, Alpha)
 
 	local Level = (self:GetFrameLevel() - 1 >= 0 and self:GetFrameLevel() - 1) or (0)
 	local Glow = CreateFrame("Frame", nil, self, "BackdropTemplate")
-	
+
 	Glow:SetFrameStrata("BACKGROUND")
 	Glow:SetFrameLevel(Level)
 	Glow:SetOutside(self, 4, 4)
@@ -334,7 +334,7 @@ Toolkit.API.SkinButton = function(self, BackdropStyle, Shadows, Strip)
 		if not self.Backdrop then
 			return
 		end
-			
+
 		local Class = select(2, UnitClass("player"))
 		local Color = RAID_CLASS_COLORS[Class]
 
@@ -598,7 +598,7 @@ Toolkit.Functions.OnEvent = function(self, event, ...)
 		local SavedScale = math.floor((GetCVar("uiScale") * 100) + .5)
 
 		SetCVar("useUiScale", 1)
-		
+
 		-- Only change ui scale if cvar was changed
 		if SavedScale ~= CurrentScale then
 			SetCVar("uiScale", self.Settings.UIScale)
@@ -610,7 +610,7 @@ Toolkit.Functions.OnEvent = function(self, event, ...)
 		end
 	elseif event == "ADDON_LOADED" then
 		local Addon = ...
-		
+
 		if Addon == "Tukui" then
 			self:Enable()
 		end

@@ -219,7 +219,7 @@ local function Update(self, event, unit)
 	end
 
 	local cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
-	
+
 	if element.smoothing then
 		element:SetMinMaxSmoothedValue(min or 0, max)
 
@@ -399,7 +399,7 @@ local function Enable(self)
 		else
 			self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		end
-		
+
 		if(element.smoothing) then
 			element.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
 			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue

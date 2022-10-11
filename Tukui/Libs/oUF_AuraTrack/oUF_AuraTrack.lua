@@ -354,7 +354,7 @@ local OnUpdate = function(self)
 	local Time = GetTime()
 	local Timeleft = self.Expiration - Time
 	local Duration = self.Duration
-	
+
 	if self.SetMinMaxValues then
 		self:SetMinMaxValues(0, Duration)
 		self:SetValue(Timeleft)
@@ -363,53 +363,53 @@ end
 
 local UpdateIcon = function(self, unit, spellID, texture, id, expiration, duration, count)
 	local AuraTrack = self.AuraTrack
-	
+
 	if id > AuraTrack.MaxAuras then
 		return
 	end
-	
+
 	local PositionX = (id * AuraTrack.IconSize) - (AuraTrack.IconSize) + (AuraTrack.Spacing * id)
 	local r, g, b = unpack(Tracker[spellID])
-	
+
 	if not AuraTrack.Auras[id] then
 		AuraTrack.Auras[id] = CreateFrame("Frame", nil, AuraTrack)
 		AuraTrack.Auras[id]:SetSize(AuraTrack.IconSize, AuraTrack.IconSize)
 		AuraTrack.Auras[id]:SetPoint("TOPLEFT", PositionX, AuraTrack.IconSize / 3)
-		
+
 		AuraTrack.Auras[id].Backdrop = AuraTrack.Auras[id]:CreateTexture(nil, "BACKGROUND")
 		AuraTrack.Auras[id].Backdrop:SetPoint("TOPLEFT", AuraTrack.Auras[id], -1, 1)
 		AuraTrack.Auras[id].Backdrop:SetPoint("BOTTOMRIGHT", AuraTrack.Auras[id], 1, -1)
-		
+
 		if AuraTrack.Auras[id].Backdrop.CreateShadow then
 			AuraTrack.Auras[id]:CreateShadow()
 		end
-		
+
 		AuraTrack.Auras[id].Texture = AuraTrack.Auras[id]:CreateTexture(nil, "ARTWORK")
 		AuraTrack.Auras[id].Texture:SetAllPoints()
 		AuraTrack.Auras[id].Texture:SetTexCoord(.1, .9, .1, .9)
-		
+
 		AuraTrack.Auras[id].Cooldown = CreateFrame("Cooldown", nil, AuraTrack.Auras[id], "CooldownFrameTemplate")
 		AuraTrack.Auras[id].Cooldown:SetAllPoints()
 		AuraTrack.Auras[id].Cooldown:SetReverse(true)
 		AuraTrack.Auras[id].Cooldown:SetHideCountdownNumbers(true)
-		
+
 		AuraTrack.Auras[id].Count = AuraTrack.Auras[id]:CreateFontString(nil, "OVERLAY")
 		AuraTrack.Auras[id].Count:SetFont(AuraTrack.Font, 12, "THINOUTLINE")
 		AuraTrack.Auras[id].Count:SetPoint("CENTER", 1, 0)
 	end
-	
+
 	AuraTrack.Auras[id].Expiration = expiration
 	AuraTrack.Auras[id].Duration = duration
 	AuraTrack.Auras[id].Backdrop:SetColorTexture(r * 0.2, g * 0.2, b * 0.2)
 	AuraTrack.Auras[id].Cooldown:SetCooldown(expiration - duration, duration)
 	AuraTrack.Auras[id]:Show()
-	
+
 	if count and count > 1 then
 		AuraTrack.Auras[id].Count:SetText(count)
 	else
 		AuraTrack.Auras[id].Count:SetText("")
 	end
-	
+
 	if AuraTrack.SpellTextures then
 		AuraTrack.Auras[id].Texture:SetTexture(texture)
 	else
@@ -421,13 +421,13 @@ local UpdateBar = function(self, unit, spellID, texture, id, expiration, duratio
 	local AuraTrack = self.AuraTrack
 	local Orientation = self.Health:GetOrientation()
 	local Size = Orientation == "HORIZONTAL" and AuraTrack:GetHeight() or AuraTrack:GetWidth()
-	
+
 	AuraTrack.MaxAuras = AuraTrack.MaxAuras or floor(Size / (AuraTrack.Thickness))
-	
+
 	if id > AuraTrack.MaxAuras then
 		return
 	end
-	
+
 	local r, g, b = unpack(Tracker[spellID])
 	local Position = (id * AuraTrack.Thickness) - AuraTrack.Thickness
 	local X = Orientation == "VERTICAL" and -Position or 0
@@ -437,24 +437,24 @@ local UpdateBar = function(self, unit, spellID, texture, id, expiration, duratio
 
 	if not AuraTrack.Auras[id] then
 		AuraTrack.Auras[id] = CreateFrame("StatusBar", nil, AuraTrack)
-		
+
 		AuraTrack.Auras[id]:SetSize(SizeX, SizeY)
 		AuraTrack.Auras[id]:SetPoint("TOPRIGHT", X, Y)
-		
+
 		if Orientation == "VERTICAL" then
 			AuraTrack.Auras[id]:SetOrientation("VERTICAL")
 		end
-		
+
 		AuraTrack.Auras[id].Backdrop = AuraTrack.Auras[id]:CreateTexture(nil, "BACKGROUND")
 		AuraTrack.Auras[id].Backdrop:SetAllPoints()
 	end
-	
+
 	AuraTrack.Auras[id].Expiration = expiration
 	AuraTrack.Auras[id].Duration = duration
 	AuraTrack.Auras[id]:SetStatusBarTexture(AuraTrack.Texture)
 	AuraTrack.Auras[id]:SetStatusBarColor(r, g, b)
 	AuraTrack.Auras[id].Backdrop:SetColorTexture(r * 0.2, g * 0.2, b * 0.2)
-	
+
 	if expiration > 0 and duration > 0 then
 		AuraTrack.Auras[id]:SetScript("OnUpdate", OnUpdate)
 	else
@@ -462,7 +462,7 @@ local UpdateBar = function(self, unit, spellID, texture, id, expiration, duratio
 		AuraTrack.Auras[id]:SetMinMaxValues(0, 1)
 		AuraTrack.Auras[id]:SetValue(1)
 	end
-	
+
 	AuraTrack.Auras[id]:Show()
 end
 
@@ -470,25 +470,25 @@ local Update = function(self, event, unit)
 	if self.unit ~= unit then
 		return
 	end
-	
+
 	local ID = 0
-	
+
 	if self.AuraTrack:GetWidth() == 0 then
 		return
 	end
-	
+
 	self.AuraTrack.MaxAuras = self.AuraTrack.MaxAuras or 4
 	self.AuraTrack.Spacing = self.AuraTrack.Spacing or 6
 	self.AuraTrack.IconSize = (self.AuraTrack:GetWidth() / self.AuraTrack.MaxAuras) - (self.AuraTrack.Spacing) - (self.AuraTrack.Spacing / (self.AuraTrack.MaxAuras))
-	
+
 	for i = 1, 40 do
 		local name, texture, count, debuffType, duration, expiration, caster, isStealable,
 			nameplateShowSelf, spellID, canApply, isBossDebuff, casterIsPlayer, nameplateShowAll,
 			timeMod, effect1, effect2, effect3 = UnitAura(unit, i, "HELPFUL")
-		
+
 		if (self.AuraTrack.Tracker[spellID]) and (caster == "player" or caster == "pet") then
 			ID = ID + 1
-			
+
 			if self.AuraTrack.Icons then
 				UpdateIcon(self, unit, spellID, texture, ID, expiration, duration, count)
 			else
@@ -496,7 +496,7 @@ local Update = function(self, event, unit)
 			end
 		end
 	end
-	
+
 	for i = ID + 1, self.AuraTrack.MaxAuras do
 		if self.AuraTrack.Auras[i] and self.AuraTrack.Auras[i]:IsShown() then
 			self.AuraTrack.Auras[i]:Hide()
@@ -514,18 +514,18 @@ end
 
 local function Enable(self)
 	local AuraTrack = self.AuraTrack
-	
+
 	if (AuraTrack) then
 		AuraTrack.__owner = self
 		AuraTrack.ForceUpdate = ForceUpdate
-		
+
 		AuraTrack.Tracker = AuraTrack.Tracker or Tracker
 		AuraTrack.Thickness = AuraTrack.Thickness or 5
 		AuraTrack.Texture = AuraTrack.Texture or [[Interface\\TargetingFrame\\UI-StatusBar]]
 		AuraTrack.SpellTextures = AuraTrack.SpellTextures or AuraTrack.Icons == nil and true
 		AuraTrack.Icons = AuraTrack.Icons or AuraTrack.Icons == nil and true
 		AuraTrack.Auras = {}
-			
+
 		self:RegisterEvent("UNIT_AURA", Path)
 
 		return true
@@ -534,7 +534,7 @@ end
 
 local function Disable(self)
 	local AuraTrack = self.AuraTrack
-	
+
 	if (AuraTrack) then
 		self:UnregisterEvent("UNIT_AURA", Path)
 	end

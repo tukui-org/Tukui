@@ -19,13 +19,13 @@ end
 
 local function InviteFriend(self, name)
 	Menu:Hide()
-	
+
 	C_PartyInfo.InviteUnit(name)
 end
 
 local function WhisperFriend(self, name)
 	Menu:Hide()
-	
+
 	SetItemRef("player:"..name, ("|Hplayer:%1$s|h[%1$s]|h"):format(name), "LeftButton" )
 end
 
@@ -36,14 +36,14 @@ local OnMouseDown = function(self, button)
 
 			return
 		end
-		
+
 		if T.Retail then
 			ToggleGuildFrame()
 		else
 			ToggleFriendsFrame(3)
 		end
 	end
-	
+
 	if button == "RightButton" and IsInGuild() then
 		T.Miscellaneous.DropDown.Open(Options, Menu, "cursor", 0, 0, "MENU", 2)
 	end
@@ -51,37 +51,37 @@ end
 
 local OnEnter = function(self)
 	local NumTotalMembers, NumOnlineMaxLevelMembers, NumOnlineMembers = GetNumGuildMembers()
-	
+
 	if not IsInGuild() or NumOnlineMembers <= 0 then
 		return
 	end
-	
+
 	GameTooltip:SetOwner(self:GetTooltipAnchor())
 	GameTooltip:ClearLines()
 
 	local GuildName, GuildRank, GuildLevel = GetGuildInfo("player")
 	local InviteList = Options[2].menuList
 	local WhisperList = Options[3].menuList
-	
+
 	-- Reset whisper menu
 	wipe(WhisperList)
-	
+
 	-- Reset invite menu
 	wipe(InviteList)
 
 	GameTooltip:AddDoubleLine(GuildName, "|cff00ff00"..FRIENDS_LIST_ONLINE.."|r |cffffffff("..NumOnlineMembers..")|r")
 	GameTooltip:AddLine(" ")
-	
+
 	local InviteID = 0
 	local WhisperID = 0
-	
+
 	-- List the character
 	for i = 1, NumTotalMembers do
 		local Name, Rank, RankIndex, Level, Class, Zone, Note, OfficerNote, Online, Status, ClassFileName, AchievementPoints, AchievementRank, IsMobile, IsSoReligible, StandingID = GetGuildRosterInfo(i)
-		
+
 		-- Remove server from string
 		Name = string.gsub(Name, "-"..T.MyRealm, "")
-		
+
 		if Online then
 			if Name ~= T.MyName then
 				local Area = Zone or UNKNOWN
@@ -93,30 +93,30 @@ local OnEnter = function(self)
 				local Right = GetSubZoneText() == Area and "|cff00ff00"..Area.."|r" or "|cffffffff"..Area.."|r"
 
 				GameTooltip:AddDoubleLine(Left, Right)
-				
+
 				-- Add click invites
 				InviteID = InviteID + 1
-				
+
 				InviteList[InviteID] = {
 					text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r",
 					arg1 = Name,
-					notCheckable = true, 
+					notCheckable = true,
 					func = InviteFriend,
 				}
-				
+
 				-- Add click whispers
 				WhisperID = WhisperID + 1
-				
+
 				WhisperList[WhisperID] = {
-					text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r", 
-					arg1 = Name, 
-					notCheckable = true, 
+					text = LevelHexColor..Level.."|r "..ClassHexColor..Name.."|r",
+					arg1 = Name,
+					notCheckable = true,
 					func = WhisperFriend,
 				}
 			end
 		end
 	end
-	
+
 	GameTooltip:Show()
 end
 
@@ -138,15 +138,15 @@ local Enable = function(self)
 	self:SetScript("OnLeave", GameTooltip_Hide)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnEvent", Update)
-	
+
 	self:Update()
 end
 
 local Disable = function(self)
 	self.Text:SetText("")
-	
+
 	self:UnregisterAllEvents()
-	
+
 	self:SetScript("OnMouseDown", nil)
 	self:SetScript("OnLeave", nil)
 	self:SetScript("OnEnter", nil)

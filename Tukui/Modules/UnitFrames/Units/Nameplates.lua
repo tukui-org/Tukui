@@ -38,7 +38,7 @@ function UnitFrames:Nameplates()
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 4)
-	
+
 	Health.colorTapping = true
 	Health.colorReaction = true
 	Health.colorDisconnected = true
@@ -67,7 +67,7 @@ function UnitFrames:Nameplates()
 	Power.IsHidden = false
 	Power.colorPower = true
 	Power.PostUpdate = UnitFrames.DisplayNameplatePowerAndCastBar
-	
+
 	local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 	Buffs:SetHeight(self:GetHeight(), self:GetHeight())
 	Buffs:SetWidth((self:GetHeight() * 3) + 4)
@@ -132,7 +132,7 @@ function UnitFrames:Nameplates()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(C.NamePlates.Width)
 		CastBar.Text:SetJustifyH("CENTER")
-		
+
 		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
 		CastBar.Spark:SetSize(8, CastBar:GetHeight())
 		CastBar.Spark:SetBlendMode("ADD")
@@ -155,15 +155,15 @@ function UnitFrames:Nameplates()
 	Highlight:SetBackdropBorderColor(unpack(C.NamePlates.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	if T.Retail and C.NamePlates.QuestIcon then
 		local QuestIcon = self:CreateTexture(nil, "OVERLAY")
 		QuestIcon:SetSize(C.NamePlates.Height, C.NamePlates.Height)
 		QuestIcon:SetPoint("LEFT", self, "RIGHT", 4, 0)
-		
+
 		self.QuestIcon = QuestIcon
 	end
-	
+
 	if C.NamePlates.ClassIcon then
 		local ClassIcon = CreateFrame("Frame", self:GetName().."Class", self)
 		ClassIcon:SetSize(self:GetHeight() + 14, self:GetHeight() + 14)
@@ -171,11 +171,11 @@ function UnitFrames:Nameplates()
 		ClassIcon:CreateBackdrop()
 		ClassIcon:SetAlpha(0)
 		ClassIcon.Backdrop:CreateShadow()
-		
+
 		ClassIcon.Texture = ClassIcon:CreateTexture(nil, "OVERLAY")
 		ClassIcon.Texture:SetAllPoints(ClassIcon)
 		ClassIcon.Texture:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
-		
+
 		-- Reposition castbar icon to cover class icon
 		if self.Castbar then
 			self.Castbar.Button:ClearAllPoints()
@@ -186,12 +186,12 @@ function UnitFrames:Nameplates()
 			self.Castbar.Button.Shadow:SetFrameLevel(ClassIcon:GetFrameLevel() + 1)
 			self.Castbar.Button.Shadow:SetFrameStrata(ClassIcon:GetFrameStrata())
 		end
-		
+
 		self.ClassIcon = ClassIcon
-		
+
 		self:RegisterEvent("NAME_PLATE_UNIT_ADDED", UnitFrames.UpdateNameplateClassIcon, true)
 	end
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true

@@ -45,7 +45,7 @@ function Battle:SkinUnitFrames()
 		Pet.PetTypeFrame = CreateFrame("Frame", nil, Pet)
 		Pet.PetTypeFrame:SetSize(100, 23)
 		Pet.PetTypeFrame.Text = Pet.PetTypeFrame:CreateFontString(nil, "OVERLAY")
-		Pet.PetTypeFrame.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE") 
+		Pet.PetTypeFrame.Text:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		Pet.PetTypeFrame.Text:SetText("")
 
 		Pet.SpeedIcon:SetAlpha(0)

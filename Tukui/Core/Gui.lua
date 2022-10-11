@@ -79,7 +79,7 @@ T.Popups.Popup["TUKUI_SWITCH_PROFILE"] = {
 
 		TukuiDatabase.Variables[T.MyRealm][T.MyName] = TukuiDatabase.Variables[SelectedServer][SelectedNickname]
 		TukuiDatabase.Settings[T.MyRealm][T.MyName] = TukuiDatabase.Settings[SelectedServer][SelectedNickname]
-		
+
 		ReloadUI()
 	end,
 }
@@ -191,11 +191,11 @@ end
 -- Sections
 local CreateSection = function(self, client, text)
 	local IsEnabled = CheckClient(client)
-	
+
 	if not IsEnabled then
 		return
 	end
-	
+
 	local Anchor = CreateFrame("Frame", nil, self)
 	Anchor:SetSize(WidgetListWidth - (Spacing * 2), WidgetHeight)
 	Anchor.IsSection = true
@@ -321,7 +321,7 @@ local CreateSwitch = function(self, client, group, option, text)
 	local Font = C.Medias.Font
 	local Value = C[group][option]
 	local IsEnabled = CheckClient(client)
-	
+
 	if not IsEnabled then
 		return
 	end
@@ -527,7 +527,7 @@ local CreateSlider = function(self, client, group, option, text, minvalue, maxva
 	local Font = C.Medias.Font
 	local Value = C[group][option]
 	local IsEnabled = CheckClient(client)
-	
+
 	if not IsEnabled then
 		return
 	end
@@ -906,7 +906,7 @@ local CreateDropdown = function(self, client, group, option, text, custom)
 	local Value
 	local Selections
 	local IsEnabled = CheckClient(client)
-	
+
 	if not IsEnabled then
 		return
 	end
@@ -1228,7 +1228,7 @@ local CreateColorSelection = function(self, client, group, option, text)
 	local Value = C[group][option]
 	local Selections
 	local IsEnabled = CheckClient(client)
-	
+
 	if not IsEnabled then
 		return
 	end
@@ -1532,7 +1532,7 @@ GUI.CreateWindow = function(self, name, default)
 	Button.Selected:SetTexture(Texture)
 	Button.Selected:SetVertexColor(0.7, 0.7, 0.7, 0.5)
 	Button.Selected:Hide()
-				
+
 	Button.Text = Button:CreateFontString(nil, "OVERLAY")
 	Button.Text:SetFontTemplate(C.Medias.Font, 12, 0, 0)
 	Button.Text:SetPoint("CENTER")
@@ -1646,7 +1646,7 @@ GUI.Enable = function(self)
 	if self.Created then
 		return
 	end
-				
+
 	local Font = C.Medias.Font
 
 	-- Main Window
@@ -1716,9 +1716,9 @@ GUI.Enable = function(self)
 	Apply:SetScript("OnEnter", ButtonOnEnter)
 	Apply:SetScript("OnLeave", ButtonOnLeave)
 	Apply:SetScript("OnMouseUp", function()
-		SetCVar("useUiScale", 1)	
+		SetCVar("useUiScale", 1)
 		SetCVar("uiScale", C.General.UIScale)
-		
+
 		ReloadUI()
 	end)
 
@@ -1790,7 +1790,7 @@ GUI.Enable = function(self)
 	StyleFont(Move.Middle, Font, 14)
 	Move.Middle:SetJustifyH("CENTER")
 	Move.Middle:SetText("Move UI")
-				
+
 	-- Keybinds button
 	local Keybinds = CreateFrame("Frame", nil, self.Footer)
 	Keybinds:SetSize(FooterButtonWidth + 1, HeaderHeight)
@@ -1831,7 +1831,7 @@ GUI.Enable = function(self)
 	StyleFont(Keybinds.Middle, Font, 14)
 	Keybinds.Middle:SetJustifyH("CENTER")
 	Keybinds.Middle:SetText("Keybinds")
-				
+
 	-- Profiles button
 	local Profiles = CreateFrame("Frame", nil, self.Footer)
 	Profiles:SetSize(FooterButtonWidth + 1, HeaderHeight)
@@ -1845,7 +1845,7 @@ GUI.Enable = function(self)
 	Profiles:SetScript("OnLeave", ButtonOnLeave)
 	Profiles:SetScript("OnMouseUp", function()
 		T.Profiles:Toggle()
-						
+
 		T.GUI:Toggle()
 	end)
 
@@ -2010,9 +2010,9 @@ GUI.SetProfile = function(self)
 
 	if Profile and Profile ~= T.MyRealm.."-"..T.MyName then
 		MySelectedProfile = Profile
-		
+
 		GUI:Toggle()
-					
+
 		T.Popups.ShowPopup("TUKUI_SWITCH_PROFILE")
 	end
 end

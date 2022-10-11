@@ -63,11 +63,11 @@ local function Update(self, event)
 		else
 			local Spell = RangeSpellID[select(2, UnitClass("player"))]
 			local IsFriend = UnitIsFriend(unit, "player")
-			
+
 			if IsFriend and Spell and IsSpellKnown(Spell) then
 				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
 				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
-				
+
 				if IsSpellInRangeFromPlayer == 1 then
 					inRange = true
 					checkedRange = true
@@ -80,7 +80,7 @@ local function Update(self, event)
 				checkedRange = true
 			end
 		end
-		
+
 		if(checkedRange and not inRange) then
 			self:SetAlpha(element.outsideAlpha)
 		else

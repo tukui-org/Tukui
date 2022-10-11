@@ -47,7 +47,7 @@ function Status:ShowWindow()
 	self.UIScale:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 	self.UIScale:SetPoint("TOP", self.Addons, 0, -20)
 	self.UIScale:SetText("Scaling: "..T.Round(self.UIScale.Value, 2))
-	
+
 	self.RecommendedUIScale = self:CreateFontString(nil, "OVERLAY")
 	self.RecommendedUIScale.Value = T.PerfectScale
 	self.RecommendedUIScale:SetFont(C.Medias.Font, 12, "THINOUTLINE")

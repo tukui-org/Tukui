@@ -12,8 +12,8 @@ local Update = function(self, event, unit, powerType)
 	local hp = self.HolyPower
 	local num = UnitPower(unit, Enum.PowerType.HolyPower)
 	local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
-	
-	if(hp.PreUpdate) then 
+
+	if(hp.PreUpdate) then
 		hp:PreUpdate()
 	end
 

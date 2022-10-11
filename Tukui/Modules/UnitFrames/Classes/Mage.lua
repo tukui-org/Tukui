@@ -11,7 +11,7 @@ UnitFrames.AddClassFeatures["MAGE"] = function(self)
 	if not T.Retail or not C.UnitFrames.ClassBar then
 		return
 	end
-	
+
 	local ArcaneChargeBar = CreateFrame("Frame", self:GetName().."ArcaneChargeBar", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
@@ -20,7 +20,7 @@ UnitFrames.AddClassFeatures["MAGE"] = function(self)
 	ArcaneChargeBar:SetHeight(6)
 	ArcaneChargeBar:SetPoint("BOTTOMLEFT", self.Health)
 	ArcaneChargeBar:SetPoint("BOTTOMRIGHT", self.Health)
-	
+
 	ArcaneChargeBar:CreateBackdrop()
 	ArcaneChargeBar.Backdrop:SetOutside()
 

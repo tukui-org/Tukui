@@ -264,9 +264,9 @@ local function Update(self, event, unit, category, flag, amount, school, texture
 		unit = "player"
 		category = "COMBAT"
 	end
-	
+
 	if self.unit ~= unit then return end
-	
+
 	local element = self.FloatingCombatFeedback
 
 	local unitGUID = UnitGUID(unit)
@@ -582,7 +582,7 @@ local function Enable(self)
 		element:SetScript("OnHide", flush)
 		element:SetScript("OnShow", flush)
 		element:EnableCLEU(element.useCLEU, true)
-		
+
 		self:RegisterEvent("PLAYER_REGEN_ENABLED", Path, true)
 		self:RegisterEvent("PLAYER_REGEN_DISABLED", Path, true)
 

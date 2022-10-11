@@ -205,7 +205,7 @@ function Auras:Skin()
 
 	self:CreateBackdrop()
 	self:CreateShadow()
-	
+
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel() - 2)
 
 	local Icon = self:CreateTexture(nil, "BORDER")

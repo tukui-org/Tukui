@@ -12,13 +12,13 @@ local UnitBuff = UnitBuff
 local function OnUpdate(self, elapsed)
 	local CurrentTime = GetTime()
 	local Timer = self.ExpirationTime - CurrentTime
-	
+
 	self:SetValue(Timer)
 end
 
 local function Update(self, event, ...)
 	local Unit = self.unit
-	
+
 	if Unit and Unit ~= self.unit then
 		return
 	end
@@ -56,7 +56,7 @@ local function CheckSpec(self, event)
 		self.Atonement:SetScript("OnUpdate", nil)
 		self.Atonement:SetValue(0)
 		self.Atonement:Hide()
-		
+
 		self:UnregisterEvent("UNIT_AURA", Update)
 	else
 		self:RegisterEvent("UNIT_AURA", Update)
@@ -65,16 +65,16 @@ end
 
 local function Enable(self)
 	local Bar = self.Atonement
-	
+
 	if Bar then
 		self:RegisterEvent("UNIT_AURA", Update)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec, true)
-		
+
 		Bar:SetMinMaxValues(0, 15)
 		Bar:SetValue(0)
 		Bar:SetStatusBarColor(207/255, 181/255, 59/255)
-		
+
 		if not Bar.Backdrop then
 			Bar.Backdrop = self.Atonement:CreateTexture(nil, "BACKGROUND")
 			Bar.Backdrop:SetAllPoints()
@@ -89,7 +89,7 @@ end
 
 local function Disable(self)
 	local Bar = self.Atonement
-	
+
 	if Bar then
 		self:UnregisterEvent("UNIT_AURA", Update)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)

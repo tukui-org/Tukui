@@ -54,7 +54,7 @@ local OnMouseUp = function(self, btn)
 
 			return
 		end
-		
+
 		ToggleChannelFrame()
 	end
 end

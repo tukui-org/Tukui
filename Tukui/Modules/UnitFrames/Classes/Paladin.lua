@@ -11,7 +11,7 @@ UnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	if not T.Retail or not C.UnitFrames.ClassBar then
 		return
 	end
-	
+
 	local Bar = CreateFrame("Frame", self:GetName().."HolyPower", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
@@ -20,7 +20,7 @@ UnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	Bar:SetHeight(6)
 	Bar:SetPoint("BOTTOMLEFT", self.Health)
 	Bar:SetPoint("BOTTOMRIGHT", self.Health)
-	
+
 	Bar:CreateBackdrop()
 	Bar.Backdrop:SetOutside()
 
@@ -38,7 +38,7 @@ UnitFrames.AddClassFeatures["PALADIN"] = function(self)
 			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
 		end
 	end
-	
+
 	-- Register
 	self.HolyPower = Bar
 end

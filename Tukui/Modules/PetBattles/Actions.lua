@@ -22,7 +22,7 @@ end
 
 function Battle:SkinActionBar()
 	Bottom:StripTextures()
-	
+
 	Bottom.TurnTimer.SkipButton:SetParent(self.ActionBar)
 	Bottom.TurnTimer.SkipButton:SkinButton()
 	Bottom.TurnTimer.SkipButton:CreateShadow()
@@ -32,7 +32,7 @@ function Battle:SkinActionBar()
 	Bottom.TurnTimer.SkipButton:SetPoint("BOTTOM", self.ActionBar, "TOP", 0, 2)
 	Bottom.TurnTimer.SkipButton.ClearAllPoints = Noop
 	Bottom.TurnTimer.SkipButton.SetPoint = Noop
-	
+
 	Bottom.TurnTimer:StripTextures()
 	Bottom.TurnTimer:SetParent(self.ActionBar)
 	Bottom.TurnTimer:CreateBackdrop()
@@ -44,11 +44,11 @@ function Battle:SkinActionBar()
 
 	Bottom.MicroButtonFrame:StripTextures()
 	Bottom.MicroButtonFrame:Hide()
-	
+
 	Bottom.Delimiter:StripTextures()
-	
+
 	Bottom.FlowFrame:Kill()
-	
+
 	Bottom.xpBar:SetParent(self.ActionBar)
 	Bottom.xpBar:SetWidth(self.ActionBar:GetWidth())
 	Bottom.xpBar:StripTextures()
@@ -67,9 +67,9 @@ function Battle:SkinPetButton()
 	if self.IsSkinned then
 		return
 	end
-	
+
 	local Switch = Bottom.SwitchPetButton
-	
+
 	self:CreateBackdrop()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel() - 1)
 	self:SetNormalTexture("")
@@ -81,7 +81,7 @@ function Battle:SkinPetButton()
 		self.BetterIcon:ClearAllPoints()
 		self.BetterIcon:SetPoint("BOTTOM", self)
 	end
-	
+
 	Switch:SetScript("OnClick", function(self)
 		if Bottom.PetSelectionFrame:IsShown() then
 			PetBattlePetSelectionFrame_Hide(Bottom.PetSelectionFrame)

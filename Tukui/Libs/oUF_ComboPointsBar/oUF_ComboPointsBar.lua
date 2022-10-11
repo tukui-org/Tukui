@@ -19,7 +19,7 @@ local SetMaxCombo = function(self)
 	else
 		for i = 1, MaxComboPts do
 			cpb[i]:SetWidth(cpb[i].Size5Points)
-			
+
 			if i > 5 then
 				cpb[i]:Hide()
 			else
@@ -27,7 +27,7 @@ local SetMaxCombo = function(self)
 			end
 		end
 	end
-	
+
 	cpb.MaxCombo = MaxCombo
 end
 
@@ -44,11 +44,11 @@ local Update = function(self, event, unit, powerType)
 	if cpb.PreUpdate then
 		cpb:PreUpdate(points)
 	end
-	
+
 	if max ~= currentmax then
 		SetMaxCombo(self)
 	end
-	
+
 	if UnitHasVehicleUI and UnitHasVehicleUI("player") then
 		points = GetComboPoints("vehicle", "target")
 	else
@@ -63,11 +63,11 @@ local Update = function(self, event, unit, powerType)
 			else
 				cpb[i]:SetAlpha(.3)
 			end
-			
+
 			cpb[i]:SetStatusBarColor(unpack(cpb.Colors[i]))
 		end
 	end
-	
+
 	if ChargedPoint then
 		cpb[ChargedPoint]:SetStatusBarColor(unpack(cpb.Colors[7]))
 	end
@@ -93,7 +93,7 @@ end
 
 local Enable = function(self, unit)
 	local cpb = self.ComboPointsBar
-	
+
 	if(cpb) then
 		cpb.__owner = self
 		cpb.ForceUpdate = ForceUpdate
@@ -109,7 +109,7 @@ local Enable = function(self, unit)
 
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', Path, true)
-				
+
 		if Retail then
 			self:RegisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo, true)
 			self:RegisterEvent('UNIT_POWER_POINT_CHARGE', Path)
@@ -117,7 +117,7 @@ local Enable = function(self, unit)
 
 		for i = 1, MaxComboPts do
 			local Point = cpb[i]
-			
+
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
@@ -125,12 +125,12 @@ local Enable = function(self, unit)
 			Point:SetStatusBarColor(unpack(cpb.Colors[i]))
 			Point:SetFrameLevel(cpb:GetFrameLevel() + 1)
 			Point:GetStatusBarTexture():SetHorizTile(false)
-			
+
 			Point.Width = Point:GetWidth()
 		end
-		
+
 		cpb:Hide()
-		
+
 		SetMaxCombo(self)
 
 		return true
@@ -142,7 +142,7 @@ local Disable = function(self)
 	if(cpb) then
 		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent('PLAYER_TARGET_CHANGED', Path)
-		
+
 		if Retail then
 			self:UnregisterEvent('PLAYER_TALENT_UPDATE', SetMaxCombo)
 			self:UnregisterEvent('UNIT_POWER_POINT_CHARGE', Path)

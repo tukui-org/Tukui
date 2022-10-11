@@ -11,7 +11,7 @@ UnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	if not T.Retail or not C.UnitFrames.ClassBar then
 		return
 	end
-	
+
 	local Bar = CreateFrame("Frame", self:GetName().."SoulShardsBar", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
@@ -20,7 +20,7 @@ UnitFrames.AddClassFeatures["WARLOCK"] = function(self)
 	Bar:SetPoint("BOTTOMLEFT", self.Health)
 	Bar:SetPoint("BOTTOMRIGHT", self.Health)
 	Bar:SetFrameLevel(self.Health:GetFrameLevel() + 1)
-	
+
 	Bar:CreateBackdrop()
 	Bar.Backdrop:SetOutside()
 

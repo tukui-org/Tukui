@@ -11,7 +11,7 @@ function UnitFrames:FocusTarget()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -29,7 +29,7 @@ function UnitFrames:FocusTarget()
 	Health.Background:SetTexture(HealthTexture)
 	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
-	
+
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 4)
@@ -63,7 +63,7 @@ function UnitFrames:FocusTarget()
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
-	
+
 	if (C.UnitFrames.FocusAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
@@ -101,7 +101,7 @@ function UnitFrames:FocusTarget()
 		self.Buffs = Buffs
 		self.Debuffs = Debuffs
 	end
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -111,7 +111,7 @@ function UnitFrames:FocusTarget()
 			self.HealthPrediction.smoothing = true
 		end
 	end
-	
+
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameMedium]")
 	self:Tag(Health.Value, C.UnitFrames.FocusTargetHealthTag.Value)
 	self.Health = Health

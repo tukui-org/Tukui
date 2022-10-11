@@ -22,7 +22,7 @@ end
 function Alerts:Enable()
 	self:AddHolder()
 	self:AddHooks()
-	
+
 	Movers:RegisterFrame(self.Holder, "Alerts holder")
 end
 

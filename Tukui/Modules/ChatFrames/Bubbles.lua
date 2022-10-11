@@ -8,7 +8,7 @@ local Messages = {}
 
 function Bubbles:Update()
 	local Message = self.String:GetText()
-	
+
 	-- No need to update
 	if not Message or Message == "" or Message == self.Message then
 		return
@@ -88,10 +88,10 @@ function Bubbles:Skin(bubble)
 			Frame.Name:SetScale(Scaling)
 			Frame.Name:SetFont(C.Medias.Font, 14, "OUTLINE")
 			Frame.Name:SetPoint("BOTTOMLEFT", Frame.Backdrop, "TOPLEFT", 0, 4)
-			
+
 			if C.Chat.BubblesNames then
 				Frame:HookScript("OnShow", Bubbles.Update)
-				
+
 				Bubbles.Update(Frame)
 			end
 
@@ -108,10 +108,10 @@ end
 
 function Bubbles:OnUpdate(elapsed)
 	self.Elapsed = self.Elapsed + elapsed
-	
+
 	if (self.Elapsed > 0.1) then
 		self:Scan()
-		
+
 		self.Elapsed = 0
 	end
 end
@@ -129,15 +129,15 @@ end
 function Bubbles:Enable()
 	local Setting = C.Chat.Bubbles.Value
 	local Dropdown = InterfaceOptionsDisplayPanelChatBubblesDropDown
-	
+
 	if Dropdown then
 		Dropdown:Hide()
 	end
-	
+
 	if (Setting == "None") then
         SetCVar("chatBubbles", 0)
         SetCVar("chatBubblesParty", 0)
-		
+
 		return
     elseif (Setting == "Exclude Party") then
         SetCVar("chatBubbles", 1)
@@ -146,12 +146,12 @@ function Bubbles:Enable()
         SetCVar("chatBubbles", 1)
         SetCVar("chatBubblesParty", 1)
     end
-	
+
 	if C.Chat.SkinBubbles then
 		self.Elapsed = 0
 		self:SetScript("OnUpdate", self.OnUpdate)
 	end
-	
+
 	if C.Chat.BubblesNames then
 		Bubbles:RegisterEvent("CHAT_MSG_SAY")
 		Bubbles:RegisterEvent("CHAT_MSG_YELL")

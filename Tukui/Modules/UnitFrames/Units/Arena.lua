@@ -11,7 +11,7 @@ function UnitFrames:Arena()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -61,14 +61,14 @@ function UnitFrames:Arena()
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
-	
+
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 
 		CastBar:SetAllPoints(Power)
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
-		
+
 		CastBar.Backdrop = CreateFrame("Frame", nil, CastBar, "BackdropTemplate")
 		CastBar.Backdrop:SetAllPoints()
 		CastBar.Backdrop:SetFrameLevel(CastBar:GetFrameLevel() - 1)
@@ -81,7 +81,7 @@ function UnitFrames:Arena()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(CastBar:GetWidth())
 		CastBar.Text:SetJustifyH("CENTER")
-		
+
 		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
 		CastBar.Spark:SetSize(8, CastBar:GetHeight())
 		CastBar.Spark:SetBlendMode("ADD")
@@ -91,7 +91,7 @@ function UnitFrames:Arena()
 		CastBar.Button:SetSize(16, 16)
 		CastBar.Button:SetPoint("RIGHT", self, "LEFT", -6, 0)
 		CastBar.Button:CreateBackdrop()
-		
+
 		CastBar.Button.Backdrop:SetOutside()
 		CastBar.Button.Backdrop:SetBackdropBorderColor(unpack(C.General.BackdropColor))
 		CastBar.Button.Backdrop:CreateShadow()
@@ -108,7 +108,7 @@ function UnitFrames:Arena()
 		self.Castbar = CastBar
 		self.Castbar.Icon = CastBar.Icon
 	end
-	
+
 	if (C.UnitFrames.ArenaAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
@@ -142,33 +142,33 @@ function UnitFrames:Arena()
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
-		
+
 		self.Buffs = Buffs
 		self.Debuffs = Debuffs
 	end
-	
+
 	if T.BCC or T.WotLK then
 		local Trinket = CreateFrame("Frame", nil, self)
 		Trinket:SetSize(35, 35)
 		Trinket:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)
 		Trinket:CreateBackdrop()
 		Trinket:CreateShadow()
-		
+
 		Trinket.Icon = Trinket:CreateTexture(nil, "ARTWORK")
 		Trinket.Icon:SetInside(Trinket)
 		Trinket.Icon:SetTexture(T.MyFaction == "Horde" and "Interface\\Icons\\inv_jewelry_trinketpvp_01" or "Interface\\Icons\\inv_jewelry_trinketpvp_02")
 		Trinket.Icon:SetTexCoord(unpack(T.IconCoord))
-		
+
 		self.Trinket = Trinket
 	end
-	
+
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.UnitFrames.HighlightSize})
 	Highlight:SetOutside(self, C.UnitFrames.HighlightSize, C.UnitFrames.HighlightSize)
 	Highlight:SetBackdropBorderColor(unpack(C.UnitFrames.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -178,7 +178,7 @@ function UnitFrames:Arena()
 			self.HealthPrediction.smoothing = true
 		end
 	end
-	
+
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 
 	self.Health = Health
@@ -188,7 +188,7 @@ function UnitFrames:Arena()
 	self.Name = Name
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
-	
+
 	if T.Retail then
 		self:Tag(Name, "[raidcolor][Tukui:NameLong] [arenaspec]")
 	else

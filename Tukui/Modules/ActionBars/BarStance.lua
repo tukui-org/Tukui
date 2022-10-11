@@ -6,17 +6,17 @@ function ActionBars:CreateStanceBar()
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
 	local Movers = T["Movers"]
-	
+
 	if (not C.ActionBars.ShapeShift) then
 		return
 	end
-	
+
 	local StanceBar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
 	StanceBar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
 	StanceBar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
 	StanceBar:SetFrameStrata("LOW")
 	StanceBar:SetFrameLevel(10)
-	
+
 	if C.ActionBars.ShowBackdrop then
 		StanceBar:CreateBackdrop()
 		StanceBar:CreateShadow()
@@ -64,6 +64,6 @@ function ActionBars:CreateStanceBar()
 	end)
 
 	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
-	
+
 	self.Bars.Stance = StanceBar
 end

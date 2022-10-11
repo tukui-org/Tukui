@@ -813,7 +813,7 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 		elseif(event == 'NAME_PLATE_UNIT_ADDED' and unit) then
 			local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
 			if(not nameplate) then return end
-				
+
 			local widgets = UnitWidgetSet and UnitWidgetSet(unit)
 
 			if(not nameplate.unitFrame) then
@@ -822,7 +822,7 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 				nameplate.unitFrame = CreateFrame('Button', prefix..nameplate:GetName(), nameplate)
 				nameplate.unitFrame:EnableMouse(false)
 				nameplate.unitFrame.isNamePlate = true
-					
+
 				if nameplate.UnitFrame.WidgetContainer then
 					nameplate.UnitFrame.WidgetContainer:SetParent(WorldFrame)
 				end
@@ -833,7 +833,7 @@ function oUF:SpawnNamePlates(namePrefix, nameplateCallback, nameplateCVars)
 			else
 				Private.UpdateUnits(nameplate.unitFrame, unit)
 			end
-				
+
 			if widgets then
 				nameplate.unitFrame:SetAlpha(0)
 			else

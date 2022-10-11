@@ -164,7 +164,7 @@ local function Update(self, event, unit)
 	end
 
 	local cur, max = UnitHealth(unit), UnitHealthMax(unit)
-	
+
 	if element.smoothing then
 		element:SetMinMaxSmoothedValue(0, max)
 
@@ -313,18 +313,18 @@ local function Enable(self, unit)
 		if(element.colorThreat) then
 			self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', ColorPath)
 		end
-		
+
 		if(element.smoothing) then
 			element.SetSmoothedValue = SmoothStatusBarMixin.SetSmoothedValue
 			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
 		end
-		
+
 		if oUF.Retail then
 			self:RegisterEvent('UNIT_HEALTH', Path)
 		else
 			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
 		end
-		
+
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 
 		if(element:IsObjectType('StatusBar') and not (element:GetStatusBarTexture() or element:GetStatusBarAtlas())) then

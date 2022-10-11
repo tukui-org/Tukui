@@ -76,7 +76,7 @@ function GroupLoot:SkinGroupLoot(Frame)
 	Frame.Timer:ClearAllPoints()
 	Frame.Timer:SetSize(Frame.OverlayContrainerFrame:GetWidth() + 1, 8)
 	Frame.Timer:SetPoint("BOTTOMLEFT", Frame.OverlayContrainerFrame, 0, -12)
-	
+
 	Frame.Timer.Backdrop:SetFrameStrata("BACKGROUND")
 	Frame.Timer.Backdrop:SetFrameLevel(0)
 
@@ -103,7 +103,7 @@ function GroupLoot:SkinGroupLoot(Frame)
 	Frame.NeedButton:SetSize(24, 24)
 	Frame.NeedButton:ClearAllPoints()
 	Frame.NeedButton:SetPoint("LEFT", Frame.GreedButton, -24, 1)
-	
+
 	if not T.Retail then
 		hooksecurefunc(Frame, "SetBackdrop", Frame.ClearBackdrop)
 	end
@@ -132,7 +132,7 @@ end
 function GroupLoot:SkinFrames()
 	for i = 1, NUM_GROUP_LOOT_FRAMES do
 		local Frame = _G["GroupLootFrame" .. i]
-		
+
 		self:SkinGroupLoot(Frame)
 	end
 end
@@ -148,7 +148,7 @@ end
 function GroupLoot:AddHooks()
 	-- So we can move the Group Loot Container.
 	UIPARENT_MANAGED_FRAME_POSITIONS.GroupLootContainer = nil
-	
+
 	hooksecurefunc("GroupLootContainer_Update", self.UpdateGroupLootContainer)
 end
 

@@ -46,7 +46,7 @@ local OnEnter = function(self)
 	local Text = GetRealZoneText()
 	local PVPType, IsSubZonePvP, FactionName = GetZonePVPInfo()
 	local X, Y, XText, YText, Label, Color
-	
+
 	if GetPlayerMapPosition then
 		X, Y = C_Map.GetPlayerMapPosition(UnitMap, "player"):GetXY()
 	end
@@ -88,7 +88,7 @@ local Enable = function(self)
 	self:RegisterEvent("ZONE_CHANGED_INDOORS")
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	
+
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
 	self:SetScript("OnLeave", GameTooltip_Hide)
@@ -97,9 +97,9 @@ end
 
 local Disable = function(self)
 	self.Text:SetText("")
-	
+
 	self:UnregisterAllEvents()
-	
+
 	self:SetScript("OnUpdate", nil)
 	self:SetScript("OnEnter", nil)
 	self:SetScript("OnLeave", nil)

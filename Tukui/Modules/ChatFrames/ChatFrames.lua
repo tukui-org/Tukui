@@ -184,7 +184,7 @@ function Chat:StyleFrame(frame)
 	_G[format("ChatFrame%sEditBoxLeft", ID)]:Kill()
 	_G[format("ChatFrame%sEditBoxMid", ID)]:Kill()
 	_G[format("ChatFrame%sEditBoxRight", ID)]:Kill()
-	
+
 	if T.Retail then
 		_G[format("ChatFrame%sEditBoxFocusLeft", ID)]:Kill()
 		_G[format("ChatFrame%sEditBoxFocusMid", ID)]:Kill()
@@ -222,13 +222,13 @@ function Chat:SaveChatFramePositionAndDimensions()
 	local Width, Height = self:GetSize()
 	local ID = self:GetID()
 	local IsUndocked
-	
+
 	if self.isDocked then
 		IsUndocked = false
 	else
 		IsUndocked = true
 	end
-	
+
 	TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions["Frame" .. ID] = {
 		["Anchor1"] = Anchor1,
 		["Anchor2"] = Anchor2,
@@ -255,7 +255,7 @@ function Chat:SetChatFramePosition()
 	local Tab = _G["ChatFrame"..ID.."Tab"]
 	local IsMovable = Frame:IsMovable()
 	local Settings = TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions["Frame" .. ID]
-	
+
 	if Tab:IsShown() then
 		if IsRightChatFound and not Frame.isDocked then
 			Chat:Dock(Frame)
@@ -286,53 +286,53 @@ function Chat:SetChatFramePosition()
 		if C.Chat.RightChatAlignRight and Settings and Settings.IsUndocked then
 			Frame:SetJustifyH("RIGHT")
 		end
-		
+
 		FCF_SavePositionAndDimensions(Frame)
 	end
 end
 
 function Chat:Reset()
 	local IsPublicChannelFound = EnumerateServerChannels()
-	
+
 	if not IsPublicChannelFound then
 		-- Restart this function until we are able to query public channels
 		C_Timer.After(1, Chat.Reset)
-		
+
 		return
 	end
-	
+
 	-- Reset chat database
 	TukuiDatabase.Variables[T.MyRealm][T.MyName].Chat.Positions = Chat.Positions
-	
+
 	-- Reset right chat frame detection
 	IsRightChatFound = false
-	
+
 	-- Create our custom chatframes
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
-	
+
 	if T.Classic then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 	end
-	
+
 	FCF_SetLocked(ChatFrame3, 1)
 	FCF_DockFrame(ChatFrame3)
-	
+
 	FCF_OpenNewWindow(Chat.RightChatName)
 	FCF_UnDockFrame(ChatFrame4)
 	FCF_OpenNewWindow(NPC_NAMES_DROPDOWN_ALL)
 	FCF_SetLocked(ChatFrame5, 1)
 	FCF_DockFrame(ChatFrame5)
-	
+
 	if T.Retail or T.WotLK then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 		FCF_SetLocked(ChatFrame6, 1)
 		FCF_DockFrame(ChatFrame6)
 		FCF_SetChatWindowFontSize(nil, ChatFrame6, 12)
 	end
-	
+
 	FCF_SetChatWindowFontSize(nil, ChatFrame1, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame2, 12)
 	FCF_SetChatWindowFontSize(nil, ChatFrame3, 12)
@@ -345,11 +345,11 @@ function Chat:Reset()
 
 	local ChatGroup = {}
 	local Channels = {}
-	
+
 	for i=1, select("#", EnumerateServerChannels()), 1 do
 		Channels[i] = select(i, EnumerateServerChannels())
 	end
-	
+
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
 		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) or (T.Classic and i ~= 2 and i ~= 6) or (T.WotLK and i ~= 2 and i ~= 3) then
@@ -359,12 +359,12 @@ function Chat:Reset()
 			ChatFrame_RemoveAllChannels(ChatFrame)
 		end
 	end
-	
+
 	-- Join public channels
 	for i = 1, #Channels do
 		SlashCmdList["JOIN"](Channels[i])
 	end
-	
+
 	-- Fix a editbox texture
 	ChatEdit_ActivateChat(ChatFrame1EditBox)
 	ChatEdit_DeactivateChat(ChatFrame1EditBox)
@@ -372,19 +372,19 @@ function Chat:Reset()
 	-----------------------
 	-- ChatFrame 1 Setup --
 	-----------------------
-	
+
 	ChatGroup = {"SAY", "EMOTE", "YELL", "GUILD","OFFICER", "GUILD_ACHIEVEMENT", "WHISPER", "PARTY", "PARTY_LEADER", "RAID", "RAID_LEADER", "RAID_WARNING", "INSTANCE_CHAT", "INSTANCE_CHAT_LEADER", "BG_HORDE", "BG_ALLIANCE", "BG_NEUTRAL", "AFK", "DND", "ACHIEVEMENT", "BN_WHISPER", "BN_CONVERSATION"}
-	
+
 	for _, v in ipairs(ChatGroup) do
 		ChatFrame_AddMessageGroup(_G.ChatFrame1, v)
 	end
-	
+
 	FCF_SelectDockFrame(ChatFrame1)
-	
+
 	-----------------------
 	-- ChatFrame 3 Setup --
 	-----------------------
-	
+
 	if T.Classic then
 		for i = 1, #Channels do
 			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
@@ -399,36 +399,36 @@ function Chat:Reset()
 		ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
 		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 	end
-	
+
 	-----------------------
 	-- ChatFrame 4 Setup --
 	-----------------------
-	
+
 	local Tab4 = ChatFrame4Tab
 	local Chat4 = ChatFrame4
 
 	ChatGroup = {"COMBAT_XP_GAIN", "COMBAT_HONOR_GAIN", "COMBAT_FACTION_CHANGE", "LOOT","MONEY", "SYSTEM", "ERRORS", "IGNORED", "SKILL", "CURRENCY"}
-	
+
 	for _, v in ipairs(ChatGroup) do
 		ChatFrame_AddMessageGroup(_G.ChatFrame4, v)
 	end
-	
+
 	-- Set ChatFrame 4 to right
 	Tab4:ClearAllPoints()
-	
+
 	FCF_RestorePositionAndDimensions(Chat4)
 	FCF_SetTabPosition(Chat4, 0)
-	
+
 	-----------------------
 	-- ChatFrame 5 Setup --
 	-----------------------
-	
+
 	ChatGroup = {"MONSTER_SAY", "MONSTER_EMOTE", "MONSTER_YELL", "MONSTER_WHISPER", "MONSTER_BOSS_EMOTE", "MONSTER_BOSS_WHISPER"}
-	
+
 	for _, v in ipairs(ChatGroup) do
 		ChatFrame_AddMessageGroup(_G.ChatFrame5, v)
 	end
-	
+
 	-----------------------
 	-- ChatFrame 6 Setup --
 	-----------------------
@@ -499,7 +499,7 @@ function Chat:HideChatFrame(button, id)
 			XP:Hide()
 		end
 	end
-	
+
 	if BG then
 		BG:SetParent(T.Hider)
 	end
@@ -540,12 +540,12 @@ function Chat:ShowChatFrame(button, id)
 
 	if C.Misc.ExperienceEnable then
 		local XP = T.Miscellaneous.Experience["XPBar"..id]
-		
+
 		if XP then
 			XP:Show()
 		end
 	end
-	
+
 	if BG then
 		BG:SetParent(UIParent)
 	end
@@ -648,7 +648,7 @@ function Chat:Setup()
 
 	ChatConfigFrameDefaultButton:Kill()
 	ChatFrameMenuButton:Kill()
-	
+
 	if T.Retail then
 		QuickJoinToastButton:Kill()
 	end
@@ -689,7 +689,7 @@ function Chat:Setup()
 		CHAT_PARTY_GET = "|Hchannel:PARTY|hP|h %s "
 		CHAT_PARTY_LEADER_GET ="|Hchannel:PARTY|hPL|h %s "
 		CHAT_PARTY_GUIDE_GET ="|Hchannel:PARTY|hPG|h %s "
-		
+
 		--raids, bgs, dungeons
 		CHAT_INSTANCE_CHAT_GET = "|Hchannel:INSTANCE_CHAT|hR|h %s: ";
 		CHAT_INSTANCE_CHAT_LEADER_GET = "|Hchannel:INSTANCE_CHAT|hRL|h %s: ";
@@ -729,17 +729,17 @@ end
 
 function Chat:AddToast()
 	-- TESTING CMD : /run BNToastFrame:AddToast(BN_TOAST_TYPE_ONLINE, 1)
-	
+
 	if not self.IsSkinned then
 		local Glow = BNToastFrameGlowFrame
-		
+
 		self:CreateBackdrop()
 		self:CreateShadow()
 		self:ClearBackdrop()
 		self.CloseButton:SkinCloseButton()
-		
+
 		Glow:SetParent(T.Hider)
-		
+
 		self.IsSkinned = true
 	end
 
@@ -784,7 +784,7 @@ function Chat:AddPanels()
 	TabsBGRight:SetSize(T.DataTexts.Panels.Right:GetWidth(), 21)
 	TabsBGRight:SetPoint("TOP", RightChatBG, "TOP", 0, -5)
 	TabsBGRight:SetFrameLevel(5)
-	
+
 	self.Panels = {}
 	self.Panels.LeftChat = LeftChatBG
 	self.Panels.RightChat = RightChatBG
@@ -797,10 +797,10 @@ function Chat:Enable()
 		self:AddPanels()
 		self:AddToggles()
 		self:DisplayChat()
-		
+
 		return
 	end
-	
+
 	-- Set default position for Voice Activation Alert
 	self.VoiceAlertPosition = {"BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 12}
 
@@ -808,7 +808,7 @@ function Chat:Enable()
 	self:Setup()
 	self:MoveAudioButtons()
 	self:AddHooks()
-	
+
 	self.Copy:Enable()
 	self.Link:Enable()
 	self.Bubbles:Enable()

@@ -48,10 +48,10 @@ end
 local OnMouseDown = function()
 	if InCombatLockdown() then
 		T.Print(ERR_NOT_IN_COMBAT)
-		
+
 		return
 	end
-	
+
 	if not PlayerTalentFrame then
 		LoadAddOn("Blizzard_TalentUI")
 	end
@@ -67,7 +67,7 @@ local Enable = function(self)
 	if T.Retail then
 		self:RegisterEvent("PLAYER_TALENT_UPDATE")
 	end
-	
+
 	self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("CONFIRM_TALENT_WIPE")

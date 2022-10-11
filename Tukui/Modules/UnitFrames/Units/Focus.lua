@@ -11,7 +11,7 @@ function UnitFrames:Focus()
 	self:RegisterForClicks("AnyUp")
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -29,7 +29,7 @@ function UnitFrames:Focus()
 	Health.Background:SetTexture(HealthTexture)
 	Health.Background:SetAllPoints(Health)
 	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
-	
+
 	Health.Value = Health:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
 	Health.Value:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 2, 4)
@@ -63,14 +63,14 @@ function UnitFrames:Focus()
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
-	
+
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiFocusCastBar", self)
 
 		CastBar:SetAllPoints(Power)
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
-		
+
 		CastBar.Backdrop = CreateFrame("Frame", nil, CastBar, "BackdropTemplate")
 		CastBar.Backdrop:SetAllPoints()
 		CastBar.Backdrop:SetFrameLevel(CastBar:GetFrameLevel() - 1)
@@ -83,7 +83,7 @@ function UnitFrames:Focus()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(CastBar:GetWidth())
 		CastBar.Text:SetJustifyH("CENTER")
-		
+
 		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
 		CastBar.Spark:SetSize(8, CastBar:GetHeight())
 		CastBar.Spark:SetBlendMode("ADD")
@@ -93,7 +93,7 @@ function UnitFrames:Focus()
 		CastBar.Button:SetSize(16, 16)
 		CastBar.Button:SetPoint("RIGHT", self, "LEFT", -6, 0)
 		CastBar.Button:CreateBackdrop()
-		
+
 		CastBar.Button.Backdrop:SetOutside()
 		CastBar.Button.Backdrop:SetBackdropBorderColor(unpack(C.General.BackdropColor))
 		CastBar.Button.Backdrop:CreateShadow()
@@ -110,7 +110,7 @@ function UnitFrames:Focus()
 		self.Castbar = CastBar
 		self.Castbar.Icon = CastBar.Icon
 	end
-	
+
 	if (C.UnitFrames.FocusAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
@@ -144,7 +144,7 @@ function UnitFrames:Focus()
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
-		
+
 		self.Buffs = Buffs
 		self.Debuffs = Debuffs
 	end
@@ -173,7 +173,7 @@ function UnitFrames:Focus()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
@@ -193,19 +193,19 @@ function UnitFrames:Focus()
 
 		self.HealthPrediction = HealthPrediction
 	end
-	
+
 	local Range = {
 		insideAlpha = 1,
 		outsideAlpha = C["Party"].RangeAlpha,
 	}
-	
+
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.UnitFrames.HighlightSize})
 	Highlight:SetOutside(self, C.UnitFrames.HighlightSize, C.UnitFrames.HighlightSize)
 	Highlight:SetBackdropBorderColor(unpack(C.UnitFrames.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -226,6 +226,6 @@ function UnitFrames:Focus()
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
 	self.Range = Range
-	
+
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 end

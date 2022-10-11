@@ -8,31 +8,31 @@ function TimeManager:OnEvent(event, addon)
 	if addon ~= "Blizzard_TimeManager" then
 		return
 	end
-	
+
 	if T.Retail then
 		TimeManagerFrame.NineSlice:SetAlpha(0)
 	end
-	
+
 	TimeManagerFrame:ClearAllPoints()
 	TimeManagerFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", -8, -40)
-	
+
 	TimeManagerFrame.TitleBg:SetAlpha(0)
-	
+
 	TimeManagerFrame:StripTextures()
 	TimeManagerFrame:StripTexts()
 	TimeManagerFrame:CreateBackdrop()
-	
+
 	TimeManagerFrameTicker:ClearAllPoints()
 	TimeManagerFrameTicker:SetPoint("TOPLEFT", 0, -6)
-	
+
 	TimeManagerFrame.Backdrop:SetOutside(TimeManagerFrame, 10, 10)
 	TimeManagerFrame.Backdrop:CreateShadow()
-	
+
 	TimeManagerFrameBg:SetAlpha(0)
 	TimeManagerFrameInset:SetAlpha(0)
-	
+
 	TimeManagerFrameCloseButton:SkinCloseButton()
-	
+
 	StopwatchFrame:StripTextures()
 	StopwatchFrame:CreateBackdrop()
 	StopwatchFrame.Backdrop:ClearAllPoints()
@@ -41,11 +41,11 @@ function TimeManager:OnEvent(event, addon)
 	StopwatchFrame.Backdrop:SetPoint("RIGHT", 0, 0)
 	StopwatchFrame.Backdrop:SetPoint("BOTTOM", 0, 0)
 	StopwatchFrame.Backdrop:CreateShadow()
-	
+
 	StopwatchTabFrame:StripTextures()
-	
+
 	StopwatchCloseButton:SkinCloseButton()
-	
+
 	StopwatchPlayPauseButton:StripTextures()
 	StopwatchPlayPauseButton.Text = StopwatchPlayPauseButton:CreateFontString(nil, "OVERLAY")
 	StopwatchPlayPauseButton.Text:SetAllPoints()
@@ -53,7 +53,7 @@ function TimeManager:OnEvent(event, addon)
 	StopwatchPlayPauseButton.Text:SetFont(C.Medias.Font, 32, "OUTLINE")
 	StopwatchPlayPauseButton.Text:SetText("+")
 	StopwatchPlayPauseButton.SetNormalTexture = function() return end
-	
+
 	StopwatchResetButton:StripTextures()
 	StopwatchResetButton.Text = StopwatchResetButton:CreateFontString(nil, "OVERLAY")
 	StopwatchResetButton.Text:SetAllPoints()
@@ -61,30 +61,30 @@ function TimeManager:OnEvent(event, addon)
 	StopwatchResetButton.Text:SetFont(C.Medias.Font, 32, "OUTLINE")
 	StopwatchResetButton.Text:SetText("-")
 	StopwatchResetButton.SetNormalTexture = function() return end
-	
+
 	TimeManagerAlarmHourDropDown:SkinDropDown()
 	TimeManagerAlarmHourDropDown:SetWidth(80)
 	TimeManagerAlarmMinuteDropDown:SkinDropDown()
 	TimeManagerAlarmMinuteDropDown:SetWidth(80)
 	TimeManagerAlarmAMPMDropDown:SkinDropDown()
 	TimeManagerAlarmAMPMDropDown:SetWidth(80)
-	
+
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
-	
+
 	TimeManagerStopwatchFrame:StripTextures()
 	TimeManagerStopwatchCheck:CreateBackdrop()
 	TimeManagerStopwatchCheck:GetNormalTexture():SetTexCoord(unpack(T.IconCoord))
 	TimeManagerStopwatchCheck:GetNormalTexture():SetInside()
-	
+
 	TimeManagerAlarmEnabledButton:SkinCheckBox()
 	TimeManagerMilitaryTimeCheck:SkinCheckBox()
 	TimeManagerLocalTimeCheck:SkinCheckBox()
-	
+
 	TimeManagerAlarmMessageEditBox.Left:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox.Middle:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox.Right:SetAlpha(0)
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
-	
+
 	self:UnregisterAllEvents()
 end
 

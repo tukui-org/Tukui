@@ -70,7 +70,7 @@ function Install:SetDefaultsCVars()
 	SetCVar("profanityFilter", 0)
 	SetCVar("showLootSpam", 1)
 	SetCVar("showArenaEnemyFrames", 0)
-	
+
 	if T.Retail then
 		SetCVar("lossOfControl", 1)
 		SetCVar("nameplateShowSelf", 0)
@@ -85,12 +85,12 @@ Install:SetScript("OnEvent", function(self, event)
 
 	if (event == "PLAYER_ENTERING_WORLD") then
 		local IsInstall = TukuiDatabase.Variables[Realm][Name].Installation.Done
-			
+
 		if (not IsInstall) then
 			local Chat = T["Chat"]
-			
+
 			self:SetDefaultsCVars()
-				
+
 			Chat:Reset()
 
 			TukuiDatabase.Variables[T.MyRealm][T.MyName].Installation.Done = true

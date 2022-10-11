@@ -281,10 +281,10 @@ function DataTexts:Enable()
 	DataTextRight:CreateBackdrop()
 	DataTextRight:SetFrameStrata("BACKGROUND")
 	DataTextRight:SetFrameLevel(2)
-	
+
 	self.Panels.Left = DataTextLeft
 	self.Panels.Right = DataTextRight
-	
+
 	self.Font = T.GetFont(C["DataTexts"].Font)
 	self.NameColor = (C.DataTexts.ClassColor == true and T.RGBToHex(unpack(T.Colors.class[T.MyClass]))) or (T.RGBToHex(unpack(C["DataTexts"].NameColor)))
 	self.ValueColor = (C.DataTexts.ClassColor == true and T.RGBToHex(unpack(T.Colors.class[T.MyClass]))) or (T.RGBToHex(unpack(C["DataTexts"].ValueColor)))
@@ -295,7 +295,7 @@ function DataTexts:Enable()
 	if self.BGFrame then
 		self.BGFrame:Enable()
 	end
-	
+
 	T.Movers:RegisterFrame(DataTextLeft, "Left Data Text & Chat")
 	T.Movers:RegisterFrame(DataTextRight, "Right Data Text & Chat")
 end

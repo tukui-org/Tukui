@@ -91,10 +91,10 @@ function AFK:OnEvent(event, ...)
 
 		return
 	end
-	
+
 	if (event == "ZONE_CHANGED") then
 		self:SetAFK(false)
-		
+
 		return
 	end
 

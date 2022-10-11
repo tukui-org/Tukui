@@ -27,7 +27,7 @@ function Tukz:SkinOmniBarButton()
 
 				self.active[i].IsSkinned = true
 			end
-			
+
 			self.active[i].icon:SetTexCoord(.1, .9, .1, .9)
 		end
 	end

@@ -24,7 +24,7 @@ function Ghost:CreateButton()
 	Button:CreateBackdrop()
 	Button:SetAllPoints(T.DataTexts.Panels.Minimap or T.DataTexts.Panels.Right)
 	Button:Hide()
-	
+
 	Button.Text = Button:CreateFontString(nil, "OVERLAY")
 	Button.Text:SetFontTemplate(C.Medias.Font, 12)
 	Button.Text:SetPoint("CENTER")

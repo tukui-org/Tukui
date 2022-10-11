@@ -60,7 +60,7 @@ end
 
 function Loot:SkinStandardLootFrame()
 	local ItemText = select(19, LootFrame:GetRegions())
-	
+
 	LootFrame:StripTextures()
 	LootFrameInset:StripTextures()
 	LootFrameInset:CreateBackdrop("Transparent")
@@ -97,7 +97,7 @@ function Loot:SkinStandardLootFrame()
 
 	LootFrame:StripTexts()
 	LootFrame.TitleBg:SetAlpha(0)
-	
+
 	if T.Retail then
 		LootFrameInset.NineSlice:SetAlpha(0)
 		LootFrame.NineSlice:SetAlpha(0)
@@ -125,14 +125,14 @@ function Loot:SkinStandardLootFrameButtons(i)
 				Icon:SetTexture(IconTexture)
 				Icon:SetTexCoord(unpack(T.IconCoord))
 				Icon:SetInside()
-				
+
 				if T.Retail then
 					Quest:SetAlpha(0)
 				end
 
 				Button.IsSkinned = true
 			end
-			
+
 			if T.Retail then
 				if Quest:IsShown() then
 					Button.Backdrop:SetBorderColor(1, 1, 0)

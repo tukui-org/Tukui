@@ -24,7 +24,7 @@ end
 
 function Grid:Create()
 	local Frame = CreateFrame("Frame", nil, UIParent)
-	
+
 	Frame.boxSize = Grid.BoxSize
 	Frame:SetAllPoints(UIParent)
 

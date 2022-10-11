@@ -15,7 +15,7 @@ function Cooldowns:UpdateCooldown(start, duration, enable, charges, maxcharges, 
 
 					if Region.GetText then
 						local Font = T.GetFont(C["Cooldowns"].Font)
-						
+
 						Font = _G[Font]:GetFont()
 
 						Region:SetFont(Font, 14, "OUTLINE")

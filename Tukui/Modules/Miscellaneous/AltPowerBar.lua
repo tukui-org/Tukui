@@ -14,11 +14,11 @@ function AltPowerBar:Update()
 	Status:SetMinMaxValues(0, MaxPower)
 	Status:SetValue(Power)
 	Status:SetStatusBarColor(R, G, B)
-	
+
 	Status.Text:SetText(PowerName)
-	
+
 	Status.Percent:SetText(Percent .. "%")
-	
+
 	self.Backdrop:SetBackdropColor(R * .2, G * .2, B * .2)
 end
 
@@ -33,7 +33,7 @@ function AltPowerBar:OnEvent(event, unit, power)
 		if not self:IsShown() then
 			self:Show()
 		end
-		
+
 		self:Update()
 	end
 end
@@ -65,11 +65,11 @@ function AltPowerBar:Create()
 	self.Status.Text = self.Status:CreateFontString(nil, "OVERLAY")
 	self.Status.Text:SetFont(C.Medias.Font, 12, "OUTLINE")
 	self.Status.Text:SetPoint("CENTER", self, "CENTER", 0, -23)
-	
+
 	self.Status.Percent = self.Status:CreateFontString(nil, "OVERLAY")
 	self.Status.Percent:SetFont(C.Medias.Font, 12, "OUTLINE")
 	self.Status.Percent:SetPoint("CENTER", self, "CENTER", 0, 0)
-	
+
 	T.Movers:RegisterFrame(self, "Alternative Power Bar")
 end
 

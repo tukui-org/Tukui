@@ -178,7 +178,7 @@ end
 
 local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTime, spellId, stackThreshold)
 	local f = self.RaidDebuffs
-	
+
 	if name and (count >= stackThreshold) then
 		f.icon:SetTexture(icon)
 		f.icon:Show()
@@ -216,7 +216,7 @@ local function UpdateDebuff(self, name, icon, count, debuffType, duration, endTi
 		end
 
 		local c = DispellColor[debuffType] or DispellColor.none
-		
+
 		if f.Backdrop then
 			f.Backdrop:SetBorderColor(c[1], c[2], c[3])
 		else
@@ -305,9 +305,9 @@ local function Enable(self)
 			self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 			self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 		end
-		
+
 		self:RegisterEvent('UNIT_AURA', Update)
-		
+
 		self.RaidDebuffs.BlackList = self.RaidDebuffs.BlackList or {
 			[105171] = true, -- Deep Corruption
 			[108220] = true, -- Deep Corruption
@@ -325,7 +325,7 @@ local function Disable(self)
 			self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 			self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 		end
-		
+
 		self:UnregisterEvent('UNIT_AURA', Update)
 
 		self.RaidDebuffs:Hide()

@@ -14,7 +14,7 @@ function UnitFrames:Target()
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:CreateShadow()
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -49,7 +49,7 @@ function UnitFrames:Target()
 	Health.colorClass = true
 	Health.colorReaction = true
 	Health.colorTapping = true
-	
+
 	if C.NamePlates.Enable and C.NamePlates.ColorThreat then
 		Health.colorThreat = C.NamePlates.ColorThreat
 	end
@@ -70,7 +70,7 @@ function UnitFrames:Target()
 
 	Power.frequentUpdates = true
 	Power.colorPower = true
-	
+
 	if T.Retail then
 		local AltPowerBar = CreateFrame("StatusBar", self:GetName().."AltPowerBar", Health)
 		AltPowerBar:SetHeight(6)
@@ -87,7 +87,7 @@ function UnitFrames:Target()
 		AltPowerBar.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
 
 		AltPowerBar.colorSmooth = true
-		
+
 		self.AlternativePower = AltPowerBar
 		self.AlternativePower.bg = AltPowerBar.Background
 	end
@@ -121,7 +121,7 @@ function UnitFrames:Target()
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(166)
 		CastBar.Text:SetJustifyH("LEFT")
-		
+
 		CastBar.Spark = CastBar:CreateTexture(nil, "OVERLAY")
 		CastBar.Spark:SetSize(8, CastBar:GetHeight())
 		CastBar.Spark:SetBlendMode("ADD")
@@ -177,26 +177,26 @@ function UnitFrames:Target()
 
 		self.Castbar = CastBar
 	end
-	
+
 	if C.UnitFrames.Portrait then
 		local Portrait = CreateFrame("Frame", nil, self)
-		
+
 		if C.UnitFrames.Portrait2D then
 			Portrait.Texture = Portrait:CreateTexture(nil, "OVERLAY")
 			Portrait.Texture:SetTexCoord(0.1,0.9,0.1,0.9)
 		else
 			Portrait.Texture = CreateFrame("PlayerModel", nil, Portrait)
 		end
-		
+
 		Portrait:SetSize(57, 57)
 		Portrait:SetPoint("LEFT", self, "RIGHT", 10, 0)
 		Portrait:CreateBackdrop()
 		Portrait:CreateShadow()
-		
+
 		Portrait.Backdrop:SetOutside()
-		
+
 		Portrait.Texture:SetAllPoints(Portrait)
-		
+
 		if (C.UnitFrames.CastBar and C.UnitFrames.CastBarIcon) and not (C.UnitFrames.UnlinkCastBar) then
 			self.Castbar.Icon:ClearAllPoints()
 			self.Castbar.Icon:SetAllPoints(Portrait)
@@ -323,7 +323,7 @@ function UnitFrames:Target()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")

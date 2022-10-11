@@ -54,7 +54,7 @@ function Fonts:Enable()
 	Fonts:SetFont(NumberFont_Outline_Med, C.Medias.Font, 13, "OUTLINE")
 	Fonts:SetFont(NumberFont_Shadow_Med, C.Medias.Font, 12)
 	Fonts:SetFont(NumberFont_Shadow_Small, C.Medias.Font, 12)
-	
+
 	-- Combat Text
 	Fonts:SetFont(CombatTextFont, C.Medias.Font, 25, "OUTLINE")
 end

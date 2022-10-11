@@ -127,7 +127,7 @@ function Loading:MergeDatabase()
 	end
 
 	if TukuiChatHistory then
-		TukuiDatabase["ChatHistory"] = TukuiChatHistory 
+		TukuiDatabase["ChatHistory"] = TukuiChatHistory
 
 		TukuiChatHistory = nil
 	end

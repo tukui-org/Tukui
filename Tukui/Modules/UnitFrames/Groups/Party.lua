@@ -14,7 +14,7 @@ function UnitFrames:Party()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:CreateShadow()
 	self.Shadow:SetFrameLevel(2)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -36,7 +36,7 @@ function UnitFrames:Party()
 		Health.Value = Health:CreateFontString(nil, "OVERLAY")
 		Health.Value:SetFontObject(Font)
 		Health.Value:SetPoint("TOPRIGHT", -4, 6)
-		
+
 		self:Tag(Health.Value, C.Party.HealthTag.Value)
 	end
 
@@ -140,7 +140,7 @@ function UnitFrames:Party()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
@@ -160,7 +160,7 @@ function UnitFrames:Party()
 
 		self.HealthPrediction = HealthPrediction
 	end
-	
+
 	local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
 	ResurrectIndicator:SetSize(24, 24)
 	ResurrectIndicator:SetPoint("CENTER", Health)
@@ -171,7 +171,7 @@ function UnitFrames:Party()
 	Highlight:SetBackdropBorderColor(unpack(C.Party.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -196,7 +196,7 @@ function UnitFrames:Party()
 	self.Range = Range
 	self.Highlight = Highlight
 	self.ResurrectIndicator = ResurrectIndicator
-	
+
 	if T.Retail then
 		self:Tag(Name, "[level] [Tukui:NameLong] [Tukui:Role]")
 	else

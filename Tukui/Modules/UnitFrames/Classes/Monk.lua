@@ -11,7 +11,7 @@ UnitFrames.AddClassFeatures["MONK"] = function(self)
 	if not C.UnitFrames.ClassBar then
 		return
 	end
-	
+
 	local Harmony = CreateFrame("Frame", self:GetName().."Harmony", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
@@ -20,7 +20,7 @@ UnitFrames.AddClassFeatures["MONK"] = function(self)
 	Harmony:SetHeight(6)
 	Harmony:SetPoint("BOTTOMLEFT", self.Health)
 	Harmony:SetPoint("BOTTOMRIGHT", self.Health)
-	
+
 	Harmony:CreateBackdrop()
 	Harmony.Backdrop:SetOutside()
 

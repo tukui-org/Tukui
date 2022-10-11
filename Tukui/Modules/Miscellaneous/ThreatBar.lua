@@ -28,7 +28,7 @@ end
 
 function ThreatBar:OnUpdate(elapsed)
 	Timer = Timer - elapsed
-	
+
 	if Timer > 0 then
 		return
 	end
@@ -43,9 +43,9 @@ function ThreatBar:OnUpdate(elapsed)
 		local Dead = UnitIsDead("player")
 
 		self:SetValue(ThreatValue)
-		
+
 		Text:SetText(floor(ThreatValue) .. "%")
-		
+
 		Title:SetText((UnitName("target") and UnitName("target") .. ":") or "")
 
 		local R, G, B = GetColor(ThreatValue, 100, 0,.8,0,.8,.8,0,.8,0,0)
@@ -59,7 +59,7 @@ function ThreatBar:OnUpdate(elapsed)
 			self:SetAlpha(0)
 		end
 	end
-	
+
 	Timer = 1
 end
 
@@ -71,7 +71,7 @@ function ThreatBar:Create()
 	self:SetStatusBarTexture(C.Medias.Normal)
 	self:SetMinMaxValues(0, 100)
 	self:SetAlpha(0)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self)
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel() - 1)
 	self.Backdrop:SetOutside()
@@ -108,7 +108,7 @@ function ThreatBar:Create()
 	self:RegisterEvent("PLAYER_REGEN_ENABLED")
 	self:RegisterEvent("PLAYER_REGEN_DISABLED")
 	self:SetScript("OnEvent", self.OnEvent)
-	
+
 	-- Register for moving
 	Movers:RegisterFrame(self, "Talking Head")
 end
@@ -117,7 +117,7 @@ function ThreatBar:Enable()
 	if not C.Misc.ThreatBar then
 		return
 	end
-	
+
 	self:Create()
 end
 

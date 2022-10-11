@@ -10,26 +10,26 @@ function ActionBars:CreateBar5()
 	local Spacing = C.ActionBars.ButtonSpacing
 	local ButtonsPerRow = C.ActionBars.Bar5ButtonsPerRow
 	local NumButtons = C.ActionBars.Bar5NumButtons
-	
+
 	if NumButtons <= ButtonsPerRow then
 		ButtonsPerRow = NumButtons
 	end
-	
+
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
-	
+
 	if not C.ActionBars.LeftBar then
 		MultiBarLeft:SetShown(false)
 
 		return
 	end
-	
+
 	local ActionBar5 = CreateFrame("Frame", "TukuiActionBar5", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar5:SetFrameStrata("LOW")
 	ActionBar5:SetFrameLevel(10)
 	ActionBar5:SetPoint("RIGHT", UIParent, "RIGHT", -72, 8)
 	ActionBar5:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	ActionBar5:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
-	
+
 	if C.ActionBars.ShowBackdrop then
 		ActionBar5:CreateBackdrop()
 		ActionBar5:CreateShadow()
@@ -37,18 +37,18 @@ function ActionBars:CreateBar5()
 
 	MultiBarLeft:SetShown(true)
 	MultiBarLeft:SetParent(ActionBar5)
-	
+
 	if T.Retail then
 		MultiBarLeft.QuickKeybindGlow:SetParent(T.Hider)
 	end
-	
+
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["MultiBarLeftButton1"]
 
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		local Button = _G["MultiBarLeftButton"..i]
 		local PreviousButton = _G["MultiBarLeftButton"..i-1]
-		
+
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
@@ -58,7 +58,7 @@ function ActionBars:CreateBar5()
 		end
 
 		ActionBars:SkinButton(Button)
-		
+
 		if i <= NumButtons then
 			if (i == 1) then
 				Button:SetPoint("TOPLEFT", ActionBar5, "TOPLEFT", Spacing, -Spacing)
@@ -78,8 +78,8 @@ function ActionBars:CreateBar5()
 	end
 
 	RegisterStateDriver(ActionBar5, "visibility", "[vehicleui] hide; show")
-	
+
 	Movers:RegisterFrame(ActionBar5, "Action Bar #5")
-	
+
 	self.Bars.Bar5 = ActionBar5
 end

@@ -46,7 +46,7 @@ function Movers:RestoreDefaults(button)
 
 		Frame.DragInfo:ClearAllPoints()
 		Frame.DragInfo:SetAllPoints(Frame)
-		
+
 		Frame.DragInfo.Text:SetText(Name)
 
 		-- Delete Saved Variable
@@ -58,7 +58,7 @@ function Movers:RegisterFrame(frame, name)
 	local Anchor1, Parent, Anchor2, X, Y = frame:GetPoint()
 
 	tinsert(self.Frames, frame)
-	
+
 	if name then
 		frame.MoverName = name
 	end
@@ -73,9 +73,9 @@ function Movers:OnDragFollowMe()
 	if not Parent then
 		Parent = UIParent
 	end
-	
+
 	self.Text:SetText(Name.."\n|cffff9300X: "..T.Round(X).."|r ".."|cff79bde9Y: "..T.Round(Y).."|r")
-	
+
 	self.Parent:ClearAllPoints()
 	self.Parent:SetPoint(Anchor1, Parent, Anchor2, X, Y)
 end
@@ -95,7 +95,7 @@ function Movers:OnDragStop()
 	local Anchor1, Parent, Anchor2, X, Y = self:GetPoint()
 	local FrameName = self.Parent:GetName()
 	local Frame = self.Parent
-	
+
 	if not Parent then
 		Parent = UIParent
 	end

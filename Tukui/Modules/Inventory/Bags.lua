@@ -47,7 +47,7 @@ local BagSize = {}
 
 function Bags:SetTokensPosition()
 	local Money = ContainerFrame1MoneyFrame
-	
+
 	MAX_WATCHED_TOKENS = 2
 
 	-- Set Position
@@ -56,7 +56,7 @@ function Bags:SetTokensPosition()
 	Token2:ClearAllPoints()
 	Token2:SetPoint("LEFT", Token1, "RIGHT", 0, 0)
 	Token3:SetParent(T.Hider)
-	
+
 	-- Skin Icons
 	Token1.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	Token2.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
@@ -95,14 +95,14 @@ function Bags:SkinBagButton()
 	local JunkIcon = self.JunkIcon
 	local Border = self.IconBorder
 	local BattlePay = self.BattlepayItemTexture
-	
+
 	self:SetFrameLevel(0)
 
 	Border:SetAlpha(0)
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
-	
+
 	Count:ClearAllPoints()
 	Count:SetPoint("BOTTOMRIGHT", 1, 1)
 	Count:SetFont(C.Medias.Font, 12, "OUTLINE")
@@ -159,7 +159,7 @@ function Bags:HideBlizzard()
 
 		Region:SetAlpha(0)
 	end
-	
+
 	if T.Retail then
 		local TokenFrame = _G["BackpackTokenFrame"]
 		local Inset = _G["BankFrameMoneyFrameInset"]
@@ -167,17 +167,17 @@ function Bags:HideBlizzard()
 		local BankClose = _G["BankFrameCloseButton"]
 		local BankItemSearchBox = _G["BankItemSearchBox"]
 		local BankItemAutoSortButton = _G["BankItemAutoSortButton"]
-		
-		TokenFrame:GetRegions():SetAlpha(0)	
-		Inset:Hide()	
-		Border:Hide()	
+
+		TokenFrame:GetRegions():SetAlpha(0)
+		Inset:Hide()
+		Border:Hide()
 		BankClose:Hide()
-		
+
 		BankItemAutoSortButton:Hide()
 		BankItemSearchBox:Hide()
-		
+
 		BankFrame.NineSlice:SetAlpha(0)
-		
+
 		-- Hide Tabs, we will create our tabs
 		for i = 1, 2 do
 			local Tab = _G["BankFrameTab"..i]
@@ -364,7 +364,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Button:CreateBackdrop()
 			Button.IconBorder:SetAlpha(0)
 			Button:SkinButton()
-			
+
 			if T.Retail then
 				Button.SlotHighlightTexture:SetAlpha(0)
 			else
@@ -453,7 +453,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 			SortBags()
 		end)
-		
+
 		if T.BCC or T.WotLK then
 			Keys:SetSize(16, 16)
 			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
@@ -494,7 +494,7 @@ function Bags:CreateContainer(storagetype, ...)
 		PurchaseButton:ClearAllPoints()
 		PurchaseButton:SetPoint("BOTTOMRIGHT", -10, 10)
 		PurchaseButton:SkinButton()
-		
+
 		local SortButton = CreateFrame("Button", nil, Container)
 		SortButton:SetSize((Container:GetWidth() / 2) - 1, 23)
 		SortButton:SetPoint("BOTTOMLEFT", Container, "TOPLEFT", 0, 2)
@@ -506,7 +506,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
 		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
-		
+
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
 		SwitchReagentButton:SetSize((Container:GetWidth() / 2) - 1, 23)
 		SwitchReagentButton:SkinButton()
@@ -526,7 +526,7 @@ function Bags:CreateContainer(storagetype, ...)
 				self:CloseBag(i)
 			end
 		end)
-		
+
 		SwitchReagentButton.Text = SwitchReagentButton:CreateFontString(nil, "OVERLAY")
 		SwitchReagentButton.Text:SetFont(C.Medias.Font, 12)
 		SwitchReagentButton.Text:SetJustifyH("LEFT")
@@ -624,7 +624,7 @@ function Bags:SlotUpdate(id, button)
 				QuestItem = true
 			end
 		end
-		
+
 		if T.Retail then
 			if IsCosmeticItem(ItemLink) and not IsBound then
 				button.IconOverlay:SetAlpha(1)
@@ -640,17 +640,17 @@ function Bags:SlotUpdate(id, button)
 			button.Quest:SetFrameLevel(button:GetFrameLevel())
 			button.Quest:SetSize(8, button:GetHeight() - 2)
 			button.Quest:SetPoint("TOPLEFT", 1, -1)
-			
+
 			button.Quest.Backdrop = button.Quest:CreateTexture(nil, "ARTWORK", 0)
 			button.Quest.Backdrop:SetAllPoints()
 			button.Quest.Backdrop:SetColorTexture(unpack(C.General.BackdropColor))
-			
+
 			button.Quest.BorderRight = button.Quest:CreateTexture(nil, "ARTWORK", nil, 1)
 			button.Quest.BorderRight:SetSize(1, 1)
 			button.Quest.BorderRight:SetPoint("TOPRIGHT", button.Quest, "TOPRIGHT", 1, 0)
 			button.Quest.BorderRight:SetPoint("BOTTOMRIGHT", button.Quest, "BOTTOMRIGHT", 1, 0)
 			button.Quest.BorderRight:SetColorTexture(1, 1, 0)
-			
+
 			button.Quest.Texture = button.Quest:CreateTexture(nil, "OVERLAY", -1)
 			button.Quest.Texture:SetTexture("Interface\\QuestFrame\\AutoQuest-Parts")
 			button.Quest.Texture:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
@@ -681,7 +681,7 @@ function Bags:SlotUpdate(id, button)
 			button:HookScript("OnEnter", function(self)
 				local ItemID = self.ItemID
 				local BagID = self:GetID()
-					
+
 				if ItemID and BagID then
 					local IsNewItem = C_NewItems.IsNewItem(self.ItemID, self:GetID())
 
@@ -691,12 +691,12 @@ function Bags:SlotUpdate(id, button)
 				end
 			end)
 		end
-		
+
 		if not button.Animation:IsPlaying() then
 			button.Animation:Play()
 		end
 	end
-	
+
 	if C.Bags.ItemLevel then
 		if ItemLink then
 			local Level = GetDetailedItemLevelInfo(ItemLink)
@@ -711,7 +711,7 @@ function Bags:SlotUpdate(id, button)
 				end
 
 				button.ItemLevel:SetText(Level)
-				
+
 				if Rarity then
 					button.ItemLevel:SetTextColor(GetItemQualityColor(Rarity))
 				else
@@ -734,7 +734,7 @@ function Bags:CooldownOnUpdate(elapsed)
 	local Now = GetTime()
 	local Timer = Now - self.StartTimer
 	local Cooldown = self.DurationTimer - Timer
-	
+
 	self.Elapsed = self.Elapsed - elapsed
 
 	if self.Elapsed < 0 then
@@ -747,7 +747,7 @@ function Bags:CooldownOnUpdate(elapsed)
 			self.Text:SetTextColor(1, 0, 0)
 			self.Text:SetText(T.FormatTime(Cooldown))
 		end
-		
+
 		self.Elapsed = .1
 	end
 end
@@ -755,12 +755,12 @@ end
 function Bags:UpdateCooldown(button)
 	local Cooldown = button.Cooldown or _G[button:GetName().."Cooldown"]
 	local Start, Duration, Enable = GetContainerItemCooldown(self, button:GetID())
-	
+
 	if not Cooldown.Text then
 		Cooldown.Text = Cooldown:CreateFontString(nil, "OVERLAY")
 		Cooldown.Text:SetPoint("CENTER", 1, 0)
 	end
-	
+
 	Cooldown.StartTimer = Start
 	Cooldown.DurationTimer = Duration
 	Cooldown.Elapsed = .1
@@ -820,7 +820,7 @@ function Bags:BagUpdate(id)
 				-- Hunter Quiver Slots
 				Button.TypeStatus:SetStatusBarColor(unpack(T.Colors.class["HUNTER"]))
 			end
-			
+
 			self:SlotUpdate(id, Button)
 		end
 	end
@@ -838,7 +838,7 @@ function Bags:UpdateAllBags()
 				BagSize[i] = ContainerSize
 			end
 		end
-		
+
 		if (not NeedBagRefresh) then
 			return
 		end
@@ -850,11 +850,11 @@ function Bags:UpdateAllBags()
 
 	for Bag = 1, 5 do
 		local ID = Bag - 1
-		
+
 		if IsBagOpen(KEYRING_CONTAINER) then
 			ID = -2
 		end
-		
+
 		local Slots = GetContainerNumSlots(ID)
 
 		for Item = Slots, 1, -1 do
@@ -869,7 +869,7 @@ function Bags:UpdateAllBags()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
 			Button:SetScale(1)
-			
+
 			Button.newitemglowAnim:Stop()
 			Button.newitemglowAnim.Play = Noop
 
@@ -908,7 +908,7 @@ function Bags:UpdateAllBags()
 		end
 
 		Bags:BagUpdate(ID)
-		
+
 		if IsBagOpen(KEYRING_CONTAINER) then
 			break
 		end
@@ -1026,7 +1026,7 @@ function Bags:OpenBag(id)
 	for i = 1, 40 do
 		local Index = Size - i + 1
 		local Button = _G[OpenFrame:GetName().."Item"..i]
-		
+
 		if Button then
 			if (i > Size) then
 				Button:Hide()
@@ -1107,7 +1107,7 @@ function Bags:CloseAllBags()
 	end
 
 	CloseAllBags()
-	
+
 	if IsBagOpen(KEYRING_CONTAINER) then
 		CloseBag(KEYRING_CONTAINER)
 	end
@@ -1130,12 +1130,12 @@ function Bags:ToggleBags(id, openonly)
 			CloseAllBags()
 			CloseBankBagFrames()
 			CloseBankFrame()
-			
+
 			NeedBagRefresh = true
-			
+
 			Bags:OpenBag(id)
 			Bags:UpdateAllBags()
-			
+
 			NeedBagRefresh = true
 		else
 			CloseBag(id)
@@ -1238,7 +1238,7 @@ function Bags:OnEvent(event, ...)
 		self:UpdateAllBankBags()
 	elseif (event == "SOULBIND_FORGE_INTERACTION_STARTED") then
 		self:OpenAllBags()
-		
+
 		ItemButtonUtil.OpenAndFilterBags(SoulbindViewer)
 	elseif (event == "SOULBIND_FORGE_INTERACTION_ENDED") then
 		self:CloseAllBags()
@@ -1249,7 +1249,7 @@ function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
 	end
-	
+
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
 	else
@@ -1303,7 +1303,7 @@ function Bags:Enable()
 			HelpBox:Kill()
 		end
 	end
-	
+
 	OpenAllBagsMatchingContext = function() return 4 end
 
 	-- Register Events for Updates
@@ -1319,26 +1319,26 @@ function Bags:Enable()
 	for i = 1, 13 do
 		_G["ContainerFrame"..i]:EnableMouse(false)
 	end
-	
+
 	-- Add Text Cooldowns Timer
 	hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
 	hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
-	
+
 	if T.Retail then
 		self:SetTokensPosition()
-		
+
 		BankFrame:HookScript("OnHide", function()
 			if self.Reagent and self.Reagent:IsShown() then
 				self.Reagent:Hide()
 			end
 		end)
-		
+
 		self:RegisterEvent("PLAYERREAGENTBANKSLOTS_CHANGED")
 		self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	end
-	
+
 	--TEMP FIX for WotLK
 	if T.WotLK then
 		ContainerFrame1.SetHeight = function() return end

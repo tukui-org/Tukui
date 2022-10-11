@@ -13,7 +13,7 @@ local Update = function(self, event, unit, powerType)
 
 	local bar = self.ArcaneChargeBar
 	local power = UnitPower("player", Enum.PowerType.ArcaneCharges, true)
-	
+
 
 	if(bar.PreUpdate) then bar:PreUpdate(power) end
 
@@ -41,7 +41,7 @@ local function Visibility(self, event, unit)
 	else
 		bar:Hide()
 	end
-	
+
 	Update(self, nil, "player", "ARCANE_CHARGES")
 end
 

@@ -361,7 +361,7 @@ else
 				QuestieToggle:Click()
 			end)
 
-			self.QuestButton:SetScript("OnEnter", function(self) 
+			self.QuestButton:SetScript("OnEnter", function(self)
 				GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -1, 5)
 				GameTooltip:AddLine("Toggle Questie")
 				GameTooltip:Show()
@@ -437,7 +437,7 @@ else
 		self.MoveButton:EnableMouse(true)
 		self.MoveButton:RegisterForDrag("LeftButton")
 		self.MoveButton:SetScript("OnLeave", GameTooltip_Hide)
-		self.MoveButton:SetScript("OnEnter", function(self) 
+		self.MoveButton:SetScript("OnEnter", function(self)
 			GameTooltip:SetOwner(self, "ANCHOR_TOPLEFT", -1, 5)
 			GameTooltip:AddLine(CLICK_TO_MOVE)
 			GameTooltip:Show()

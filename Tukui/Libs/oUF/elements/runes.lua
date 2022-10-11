@@ -96,7 +96,7 @@ end
 
 local function UpdateColor(self, event)
 	local element = self.Runes
-	
+
 	if oUF.isWotLK then -- runeID, alt
 		if runeID and event == 'RUNE_TYPE_UPDATE' then
 			rune = UpdateRuneType(element[runemap[runeID]], runeID, alt)
@@ -238,7 +238,7 @@ local function Enable(self, unit)
 		else
 			self:RegisterEvent('RUNE_TYPE_UPDATE', ColorPath, true)
 		end
-		
+
 		self:RegisterEvent('RUNE_POWER_UPDATE', Path, true)
 
 		return true
@@ -257,7 +257,7 @@ local function Disable(self)
 		else
 			self:UnregisterEvent('RUNE_TYPE_UPDATE', ColorPath)
 		end
-		
+
 		self:UnregisterEvent('RUNE_POWER_UPDATE', Path)
 	end
 end

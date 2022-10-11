@@ -26,7 +26,7 @@ local function UpdateMaxChi(self, chi, maxchi)
 			Bar[i]:SetWidth(Bar[i].NoTalent)
 		end
 	end
-	
+
 	if Max == 6 then
 		Bar[6]:Show()
 	else
@@ -53,11 +53,11 @@ local function Update(self, event, unit, powerType)
 	else
 		Bar:Hide()
 	end
-	
+
 	-- Update Max Power
 	if Bar.MaxChi ~= Max then
 		UpdateMaxChi(self, Current, Max)
-		
+
 		Bar.MaxChi = Max
 	end
 

@@ -8,7 +8,7 @@ local function updateArenaPreparationElements(self, event, elementName, specID)
 	if not oUF.Retail then
 		return
 	end
-	
+
 	local element = self[elementName]
 	if(element and self:IsElementEnabled(elementName)) then
 		if(element.OverrideArenaPreparation) then
@@ -180,7 +180,7 @@ function oUF:HandleUnit(object, unit)
 		object:RegisterEvent('UNIT_TARGETABLE_CHANGED', object.UpdateAllElements)
 	elseif(unit:match('arena%d?$')) then
 		object:RegisterEvent('ARENA_OPPONENT_UPDATE', object.UpdateAllElements, true)
-		
+
 		if oUF.Retail then
 			object:RegisterEvent('ARENA_PREP_OPPONENT_SPECIALIZATIONS', updateArenaPreparation, true)
 			object:SetAttribute('oUF-enableArenaPrep', true)

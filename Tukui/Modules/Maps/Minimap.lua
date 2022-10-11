@@ -29,7 +29,7 @@ function Minimap:DisableMinimapElements()
 
 	for i, FrameName in pairs(HiddenFrames) do
 		local Frame = _G[FrameName]
-		
+
 		if Frame then
 			Frame:SetParent(T.Hider)
 			Frame:Hide()
@@ -113,15 +113,15 @@ function Minimap:StyleMinimap()
 		QueueStatusFrame:CreateBackdrop()
 		QueueStatusFrame:CreateShadow()
 
-		Mail:SetPoint("BOTTOMRIGHT", 3, -4)	
+		Mail:SetPoint("BOTTOMRIGHT", 3, -4)
 		Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
 
-		MiniMapInstanceDifficulty:ClearAllPoints()	
-		MiniMapInstanceDifficulty:SetParent(Minimap)	
+		MiniMapInstanceDifficulty:ClearAllPoints()
+		MiniMapInstanceDifficulty:SetParent(Minimap)
 		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
 
 		GuildInstanceDifficulty:ClearAllPoints()
-		GuildInstanceDifficulty:SetParent(Minimap)	
+		GuildInstanceDifficulty:SetParent(Minimap)
 		GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
 	else
 		local BGFrame = MiniMapBattlefieldFrame
@@ -149,7 +149,7 @@ function Minimap:StyleMinimap()
 				if (MiniMapTrackingBorder) then
 					MiniMapTrackingBorder:Hide()
 				end
-				
+
 				if (MiniMapTrackingButtonBorder) then
 					MiniMapTrackingButtonBorder:Hide()
 				end
@@ -428,7 +428,7 @@ function Minimap:TaxiExitOnEvent(event)
 		self:Show()
 	elseif UnitOnTaxi("player") then
 		self.Text:SetText("|cffFF0000" .. TAXI_CANCEL .. "|r")
-		
+
 		self:Show()
 	else
 		self:Hide()
@@ -443,7 +443,7 @@ function Minimap:TaxiExitOnClick()
 			VehicleExit()
 		end
 	end
-	
+
 	Minimap.EarlyExitButton:Hide()
 end
 

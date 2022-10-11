@@ -14,7 +14,7 @@ function UnitFrames:Raid()
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:CreateShadow()
 	self.Shadow:SetFrameLevel(2)
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -86,7 +86,7 @@ function UnitFrames:Raid()
 		insideAlpha = 1,
 		outsideAlpha = C["Raid"].RangeAlpha,
 	}
-	
+
 	if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
 		local AuraTrack = CreateFrame("Frame", nil, Health)
 		AuraTrack:SetAllPoints()
@@ -184,7 +184,7 @@ function UnitFrames:Raid()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetOrientation(Vertical and "VERTICAL" or "HORIZONTAL")
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint(Vertical and "LEFT" or "TOP")
@@ -205,18 +205,18 @@ function UnitFrames:Raid()
 
 		self.HealthPrediction = HealthPrediction
 	end
-	
+
 	local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
 	ResurrectIndicator:SetSize(24, 24)
 	ResurrectIndicator:SetPoint("CENTER", Health)
-	
+
 	local Highlight = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
 	Highlight:SetOutside(self, C.Raid.HighlightSize, C.Raid.HighlightSize)
 	Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
 	Highlight:SetFrameLevel(0)
 	Highlight:Hide()
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
@@ -239,7 +239,7 @@ function UnitFrames:Raid()
 	self.RaidTargetIndicator = RaidIcon
 	self.Highlight = Highlight
 	self.ResurrectIndicator = ResurrectIndicator
-	
+
 	if T.Retail then
 		self:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
 	else

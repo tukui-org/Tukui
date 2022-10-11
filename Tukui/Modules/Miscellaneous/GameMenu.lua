@@ -10,13 +10,13 @@ local Addons = GameMenuButtonAddons
 
 function GameMenu:AddHooks()
 	Menu:SetHeight(Menu:GetHeight() + Logout:GetHeight() - 4)
-	
+
 	local _, RelativeTo, _, _, OffY = Logout:GetPoint()
-	
+
 	if RelativeTo ~= GameMenu.Tukui then
 		GameMenu.Tukui:ClearAllPoints()
 		GameMenu.Tukui:SetPoint("TOPLEFT", RelativeTo, "BOTTOMLEFT", 0, -1)
-		
+
 		Logout:ClearAllPoints()
 		Logout:SetPoint("TOPLEFT", GameMenu.Tukui, "BOTTOMLEFT", 0, OffY)
 	end
@@ -27,11 +27,11 @@ function GameMenu:CreateTukuiMenuButton()
 	Tukui:SetSize(Logout:GetWidth(), Logout:GetHeight())
 	Tukui:SetPoint("TOPLEFT", Addons, "BOTTOMLEFT", 0, -1)
 	Tukui:SetText("Tukui")
-	
+
 	Tukui:SetScript("OnClick", function(self)
 		if InCombatLockdown() then
 			T.Print(ERR_NOT_IN_COMBAT)
-			
+
 			return
 		end
 
@@ -41,7 +41,7 @@ function GameMenu:CreateTukuiMenuButton()
 	end)
 
 	hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", self.AddHooks)
-	
+
 	self.Tukui = Tukui
 end
 
@@ -54,7 +54,7 @@ function GameMenu:Enable()
 
 			Header:ClearAllPoints()
 			Header:SetPoint("TOP", Menu, 0, 7)
-			
+
 			Menu.Border:StripTextures()
 		else
 			Menu:StripTextures()

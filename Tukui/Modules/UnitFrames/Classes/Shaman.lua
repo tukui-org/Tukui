@@ -16,5 +16,5 @@ UnitFrames.TotemColors = {
 }
 
 UnitFrames.AddClassFeatures["SHAMAN"] = function(self)
-	
+
 end

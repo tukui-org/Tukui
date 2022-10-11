@@ -80,11 +80,11 @@ function ActionBars:SkinButton(button)
 		if (Border) then
 			Border:SetTexture("")
 		end
-		
+
 		if KeybindTex then
 			KeybindTex:SetTexture("")
 		end
-		
+
 		if C.ActionBars.HotKey then
 			if T.Retail and Button.UpdateHotkeys then
 				hooksecurefunc(Button, "UpdateHotkeys", ActionBars.SetHotKeyText)
@@ -92,12 +92,12 @@ function ActionBars:SkinButton(button)
 
 			ActionBars.SetHotKeyText(Button)
 		end
-		
+
 		Button:StyleButton()
 		Button.isSkinned = true
 	end
-	
-	
+
+
 	-- WORKLATER (note: Need to be moved into another hook)
 	--[[
 	if (Border and C.ActionBars.EquipBorder) then
@@ -166,7 +166,7 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		Shine:SetSize(PetSize, PetSize)
 		Shine:ClearAllPoints()
 		Shine:SetPoint("CENTER", Button, 0, 0)
-		
+
 		Button.Backdrop:SetParent(Button:GetParent())
 	end
 
@@ -177,11 +177,11 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
 	end
-	
+
 	if Button.QuickKeybindHighlightTexture then
 		Button.QuickKeybindHighlightTexture:SetTexture("")
 	end
-	
+
 	if C.ActionBars.HotKey then
 		ActionBars.SetHotKeyText(Button)
 	end
@@ -218,7 +218,7 @@ function ActionBars:SkinFlyoutButtons()
 
 		if Button and not Button.IsSkinned then
 			ActionBars:SkinButton(Button)
-			
+
 
 			if Button:GetChecked() then
 				Button:SetChecked(nil)
@@ -250,10 +250,10 @@ function ActionBars:StyleFlyout()
 	for i = 1, GetNumFlyouts() do
 		local ID = GetFlyoutID(i)
 		local _, _, NumSlots, IsKnown = GetFlyoutInfo(ID)
-		
+
 		if IsKnown then
 			FlyoutButtons = NumSlots
-			
+
 			break
 		end
 	end

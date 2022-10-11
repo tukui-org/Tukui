@@ -4,11 +4,11 @@ assert(oUF, 'oUF not loaded')
 
 local Update = function(self, event, ...)
 	local _, instanceType = IsInInstance()
-	
+
 	if instanceType ~= 'arena' then
 		self.Trinket.Icon:SetTexture(select(2, UnitFactionGroup("player")) == "Horde" and "Interface\\Icons\\inv_jewelry_trinketpvp_01" or "Interface\\Icons\\inv_jewelry_trinketpvp_02")
 		self.Trinket:Hide()
-		
+
 		return
 	else
 		self.Trinket:Show()
@@ -19,7 +19,7 @@ local Update = function(self, event, ...)
 	if event == "ARENA_COOLDOWNS_UPDATE" then
 		local unit = ...
 		local tunit = self.unit
-		
+
 		if self.unit == unit then
 			C_PvP.RequestCrowdControlSpell(unit)
 
@@ -31,7 +31,7 @@ local Update = function(self, event, ...)
 		end
 	elseif event == "ARENA_CROWD_CONTROL_SPELL_UPDATE" then
 		local unit, spellID = ...
-		
+
 		if self.unit == unit then
 			local _, _, spellTexture = GetSpellInfo(spellID)
 
@@ -49,7 +49,7 @@ local Enable = function(self)
 		self:RegisterEvent("ARENA_COOLDOWNS_UPDATE", Update, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Update, true)
 		self:RegisterEvent("ARENA_CROWD_CONTROL_SPELL_UPDATE", Update, true)
-		
+
 		if not self.Trinket.cooldownFrame then
 			self.Trinket.cooldownFrame = CreateFrame("Cooldown", nil, self.Trinket)
 			self.Trinket.cooldownFrame:SetAllPoints(self.Trinket)

@@ -12,7 +12,7 @@ StaticPopups.Popups = {
 
 function StaticPopups:Skin()
 	local Name = self:GetName()
-	
+
 	if T.Retail then
 		_G[Name].Border:SetAlpha(0)
 	end

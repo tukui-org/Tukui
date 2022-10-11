@@ -23,7 +23,7 @@ if T.Retail then
 
 		return string.format("|cff%02x%02x%02x", R * 255, G * 255, B * 255)
 	end
-	
+
 	oUF.Tags.Events["Tukui:Role"] = "PLAYER_ROLES_ASSIGNED GROUP_ROSTER_UPDATE"
 	oUF.Tags.Methods["Tukui:Role"] = function(unit)
 		local Role = UnitGroupRolesAssigned(unit)
@@ -107,14 +107,14 @@ end
 oUF.Tags.Events["Tukui:CurrentHP"] = "UNIT_HEALTH"
 oUF.Tags.Methods["Tukui:CurrentHP"] = function(unit)
 	local HP = UnitFrames.ShortValue(UnitHealth(unit))
-	
+
 	return HP
 end
 
 oUF.Tags.Events["Tukui:MaxHP"] = "UNIT_HEALTH"
 oUF.Tags.Methods["Tukui:MaxHP"] = function(unit)
 	local HP = UnitFrames.ShortValue(UnitHealthMax(unit))
-	
+
 	return HP
 end
 

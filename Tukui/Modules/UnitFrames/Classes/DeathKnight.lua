@@ -11,7 +11,7 @@ UnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	if not C.UnitFrames.ClassBar then
 		return
 	end
-	
+
 	local RunesBar = CreateFrame("Frame", self:GetName().."RuneBar", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
 
@@ -20,7 +20,7 @@ UnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 	RunesBar:SetHeight(6)
 	RunesBar:SetPoint("BOTTOMLEFT", self.Health)
 	RunesBar:SetPoint("BOTTOMRIGHT", self.Health)
-	
+
 	RunesBar:CreateBackdrop()
 	RunesBar.Backdrop:SetOutside()
 

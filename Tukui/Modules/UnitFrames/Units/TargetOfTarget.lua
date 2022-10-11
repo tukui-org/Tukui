@@ -10,7 +10,7 @@ function UnitFrames:TargetOfTarget()
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:CreateShadow()
-	
+
 	self.Backdrop = CreateFrame("Frame", nil, self, "BackdropTemplate")
 	self.Backdrop:SetAllPoints()
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
@@ -50,7 +50,7 @@ function UnitFrames:TargetOfTarget()
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
 	RaidIcon:SetPoint("TOP", self, 0, C.UnitFrames.RaidIconSize / 2)
 	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
-    
+
 	if (C.UnitFrames.TOTAuras) then
 		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
 		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
@@ -88,7 +88,7 @@ function UnitFrames:TargetOfTarget()
 		if C.UnitFrames.AurasBelow then
 			Buffs:ClearAllPoints()
 			Buffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
-			
+
 			Debuffs:ClearAllPoints()
 			Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -4)
 		end
@@ -121,7 +121,7 @@ function UnitFrames:TargetOfTarget()
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
 		otherBar:SetValue(0)
-		
+
 		absorbBar:SetFrameLevel(Health:GetFrameLevel())
 		absorbBar:SetPoint("TOP")
 		absorbBar:SetPoint("BOTTOM")
@@ -141,7 +141,7 @@ function UnitFrames:TargetOfTarget()
 
 		self.HealthPrediction = HealthPrediction
 	end
-	
+
 	-- Enable smoothing bars animation?
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true

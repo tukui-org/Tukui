@@ -11,7 +11,7 @@ function Temp:Enable()
 	if T.Retail or T.BCC or T.Classic then
 		return
 	end
-	
+
 	local Battleground = CreateFrame("Frame", nil, UIParent)
 	Battleground:SetFrameStrata("HIGH")
 	Battleground:SetSize(400, 60)

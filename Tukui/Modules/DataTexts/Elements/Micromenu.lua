@@ -6,13 +6,13 @@ local Miscellaneous = T.Miscellaneous
 
 local OnMouseDown = function()
 	local MicroMenu = Miscellaneous.MicroMenu
-	
+
 	MicroMenu:Toggle()
 end
 
 local Enable = function(self)
 	self:SetScript("OnMouseDown", OnMouseDown)
-	
+
 	self.Text:SetFormattedText("%s", DataText.NameColor .. "Micro Menu|r")
 end
 

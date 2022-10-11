@@ -31,7 +31,7 @@ T.SlashHandler = function(cmd)
 	else
 		T.Help:Hide()
 	end
-	
+
 	if (arg1 == "t") or (arg1 == "tracking") then
 		if (C.UnitFrames.Enable) and (C.Raid.Enable) then
 			T.UnitFrames.Tracking:Toggle()
@@ -40,7 +40,7 @@ T.SlashHandler = function(cmd)
 		end
 	elseif (arg1 == "p") or (arg1 == "profile") then
 		local Profiles = T.Profiles
-		
+
 		Profiles:Toggle()
 	elseif (arg1 == "mm") or (arg1 == "micromenu") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
@@ -86,11 +86,11 @@ T.SlashHandler = function(cmd)
 		end
 	elseif (arg1 == "ru") or (arg1 == "markers") then
 		local Utilities = T.Miscellaneous.RaidUtilities
-		
+
 		Utilities:Toggle()
 	elseif (arg1 == "fn") then
 		local Name = GetMouseFocus():GetName()
-		
+
 		if Name then
 			T.Print("Global name for this frame is: |CFF00FF00"..GetMouseFocus():GetName().."|r")
 		else
@@ -100,7 +100,7 @@ T.SlashHandler = function(cmd)
 		if InCombatLockdown() then
 			return
 		end
-		
+
 		if T.Retail then
 			if QuickKeybindFrame and QuickKeybindFrame:IsShown() then
 				return
@@ -122,24 +122,24 @@ T.SlashHandler = function(cmd)
 			if Chat then
 				-- Reset chat windows
 				Chat:Reset()
-				
+
 				-- Move back to default position
 				DataLeft:ClearAllPoints()
 				DataLeft:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 20)
-				
+
 				DataRight:ClearAllPoints()
 				DataRight:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 20)
-				
+
 				if DataLeft.DragInfo then
 					DataLeft.DragInfo:ClearAllPoints()
 					DataLeft.DragInfo:SetAllPoints(DataLeft)
 				end
-				
+
 				if DataRight.DragInfo then
 					DataRight.DragInfo:ClearAllPoints()
 					DataRight.DragInfo:SetAllPoints(DataRight)
 				end
-				
+
 				-- Remove saved position settings
 				TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiLeftDataTextBox = nil
 				TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiRightDataTextBox = nil
