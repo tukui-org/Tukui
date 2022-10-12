@@ -127,6 +127,7 @@ Modules\ChatFrames\CopyText.lua
 Modules\ChatFrames\Bubbles.lua
 Modules\ChatFrames\ChatHistory.lua
 
+Modules\Inventory\Core.lua
 Modules\Inventory\Bags.lua
 Modules\Inventory\Loot.lua
 Modules\Inventory\GroupLoot.lua
@@ -144,6 +145,7 @@ Modules\ActionBars\BarStance.lua
 
 Modules\Cooldowns\Cooldowns.lua
 
+Modules\Miscellaneous\Core.lua
 Modules\Miscellaneous\AFK.lua
 Modules\Miscellaneous\Alerts.lua
 Modules\Miscellaneous\DropDown.lua
@@ -171,6 +173,7 @@ Modules\Auras\Templates.xml
 Modules\Auras\Auras.lua
 Modules\Auras\Headers.lua
 
+Modules\Maps\Core.lua
 Modules\Maps\Minimap.lua
 Modules\Maps\Zonemap.lua
 Modules\Maps\Worldmap.lua
