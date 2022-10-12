@@ -10,7 +10,7 @@ local Events = {
 	"CHAT_MSG_INSTANCE_CHAT_LEADER",
 	"CHAT_MSG_EMOTE",
 	"CHAT_MSG_GUILD",
-	"CHAT_MSG_GUILD_ACHIEVEMENT",
+	-- "CHAT_MSG_GUILD_ACHIEVEMENT",
 	"CHAT_MSG_OFFICER",
 	"CHAT_MSG_PARTY",
 	"CHAT_MSG_PARTY_LEADER",
@@ -34,7 +34,7 @@ function History:Print()
 	for i = #TukuiDatabase.ChatHistory, 1, -1 do
 		Temp = TukuiDatabase.ChatHistory[i]
 
-		ChatFrame_MessageEventHandler(ChatFrame1, Temp[EntryEvent], unpack(Temp))
+		pcall(ChatFrame_MessageEventHandler, ChatFrame1, Temp[EntryEvent], unpack(Temp))
 	end
 
 	History.IsPrinting = false
