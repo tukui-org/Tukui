@@ -46,8 +46,10 @@ function UnitFrames:DisableBlizzard()
 		CompactRaidFrameContainer:Hide()
 
 		-- Hide Raid Interface Options.
-		InterfaceOptionsFrameCategoriesButton11:SetHeight(0.00001)
-		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+		if not T.Retail then
+			InterfaceOptionsFrameCategoriesButton11:SetHeight(0.00001)
+			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+		end
 	end
 end
 
@@ -185,7 +187,7 @@ function UnitFrames:UpdateBuffsHeaderPosition(height)
 end
 
 function UnitFrames:UpdateDebuffsHeaderPosition()
-	local NumBuffs = self.visibleBuffs
+	local NumBuffs = self.sorted and #self.sorted or self.visibleBuffs or 0
 	local PerRow = self.numRow
 	local Size = self.size
 	local Row = math.ceil((NumBuffs / 8))
@@ -375,31 +377,44 @@ function UnitFrames:PostCreateAura(button, unit)
 	end
 
 	-- Skin aura button
-	button:CreateBackdrop("Default")
+	if not button.Backdrop then
+		button:CreateBackdrop("Default")
+	end
 
 	if not button:GetParent().IsRaid then
 		button:CreateShadow()
 	end
+	
+	local Cooldown = button.Cooldown or button.cd
+	local Icon = button.Icon or button.icon
+	local Count = button.Count or button.count
 
-	button.cd.noOCC = true
-	button.cd.noCooldownCount = true
-	button.cd:SetReverse(true)
-	button.cd:ClearAllPoints()
-	button.cd:SetInside()
-	button.cd:SetHideCountdownNumbers(true)
+	-- FIX ME, For Dragon Flight, Number on Auras need to be fix
+	if Cooldown then
+		Cooldown.noOCC = true
+		Cooldown.noCooldownCount = true
+		Cooldown:SetReverse(true)
+		Cooldown:ClearAllPoints()
+		Cooldown:SetInside()
+		Cooldown:SetHideCountdownNumbers(true)
+		
+		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY")
+		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
+		button.Remaining:SetPoint("CENTER", 1, 0)
+	end
 
-	button.Remaining = button.cd:CreateFontString(nil, "OVERLAY")
-	button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
-	button.Remaining:SetPoint("CENTER", 1, 0)
+	if Icon then
+		Icon:SetInside()
+		Icon:SetTexCoord(unpack(T.IconCoord))
+		Icon:SetDrawLayer("ARTWORK")
+	end
 
-	button.icon:SetInside()
-	button.icon:SetTexCoord(unpack(T.IconCoord))
-	button.icon:SetDrawLayer("ARTWORK")
-
-	button.count:SetPoint("BOTTOMRIGHT", 3, -3)
-	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
-	button.count:SetTextColor(0.84, 0.75, 0.65)
+	if Count then
+		Count:SetPoint("BOTTOMRIGHT", 3, -3)
+		Count:SetJustifyH("RIGHT")
+		Count:SetFont(C.Medias.Font, 9, "THICKOUTLINE")
+		Count:SetTextColor(0.84, 0.75, 0.65)
+	end
 
 	if isAnimated then
 		button.Animation = button:CreateAnimationGroup()
@@ -414,8 +429,13 @@ function UnitFrames:PostCreateAura(button, unit)
 end
 
 function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
-	local Name, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable, _, SpellID = UnitAura(unit, index, button.filter)
-
+	if T.Retail then
+		-- Need huge update for DragonFlight, so use default for now
+		return
+	end
+	
+	local Name, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable, _, SpellID = UnitAura(unit, index)
+	
 	if button then
 		if(button.filter == "HARMFUL") then
 			if C.UnitFrames.DesaturateDebuffs and (not UnitIsFriend("player", unit) and not button.isPlayer) then

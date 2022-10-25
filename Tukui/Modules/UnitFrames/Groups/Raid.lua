@@ -68,7 +68,7 @@ function UnitFrames:Raid()
 	Panel:CreateBackdrop()
 	Panel.Backdrop:SetBorderColor(0, 0, 0, 0)
 
-	local Name = Panel:CreateFontString(nil, "OVERLAY", 1)
+	local Name = Panel:CreateFontString(nil, "OVERLAY")
 	Name:SetPoint("CENTER")
 	Name:SetFontObject(Font)
 

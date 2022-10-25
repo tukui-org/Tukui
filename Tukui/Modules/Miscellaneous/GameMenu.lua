@@ -65,7 +65,7 @@ function GameMenu:Enable()
 
 		for _, Button in pairs({Menu:GetChildren()}) do
 			if Button.IsObjectType and Button:IsObjectType("Button") then
-				Button:SkinButton()
+				Button:SkinButton(nil, nil, true)
 			end
 		end
 	end

@@ -96,7 +96,7 @@ function Chat:StyleFrame(frame)
 	local ID = frame:GetID()
 	local FrameName = frame:GetName()
 	local Tab = _G[FrameName.."Tab"]
-	local TabText = _G[FrameName.."TabText"]
+	local TabText = _G[FrameName.."Tab"].Text or _G[FrameName.."TabText"]
 	local Scroll = frame.ScrollBar
 	local ScrollBottom = frame.ScrollToBottomButton
 	local ScrollTex = _G[FrameName.."ThumbTexture"]
@@ -149,6 +149,7 @@ function Chat:StyleFrame(frame)
 	end)
 
 	-- Create our own texture for edit box
+	EditBox:StripTextures()
 	EditBox:CreateBackdrop()
 	EditBox.Backdrop:ClearAllPoints()
 	EditBox.Backdrop:SetAllPoints(DataTextLeft)
@@ -162,28 +163,32 @@ function Chat:StyleFrame(frame)
 	end
 
 	-- Remove default chatframe tab textures
-	_G[format("ChatFrame%sTabLeft", ID)]:Kill()
-	_G[format("ChatFrame%sTabMiddle", ID)]:Kill()
-	_G[format("ChatFrame%sTabRight", ID)]:Kill()
+	if not T.Retail then
+		_G[format("ChatFrame%sTabLeft", ID)]:Kill()
+		_G[format("ChatFrame%sTabMiddle", ID)]:Kill()
+		_G[format("ChatFrame%sTabRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sTabSelectedLeft", ID)]:Kill()
-	_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
-	_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedLeft", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sTabHighlightLeft", ID)]:Kill()
-	_G[format("ChatFrame%sTabHighlightMiddle", ID)]:Kill()
-	_G[format("ChatFrame%sTabHighlightRight", ID)]:Kill()
+		_G[format("ChatFrame%sTabHighlightLeft", ID)]:Kill()
+		_G[format("ChatFrame%sTabHighlightMiddle", ID)]:Kill()
+		_G[format("ChatFrame%sTabHighlightRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sTabSelectedLeft", ID)]:Kill()
-	_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
-	_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedLeft", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
+		_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-	_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
-	_G[format("ChatFrame%sButtonFrame", ID)]:Kill()
+		_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
+		_G[format("ChatFrame%sButtonFrame", ID)]:Kill()
 
-	_G[format("ChatFrame%sEditBoxLeft", ID)]:Kill()
-	_G[format("ChatFrame%sEditBoxMid", ID)]:Kill()
-	_G[format("ChatFrame%sEditBoxRight", ID)]:Kill()
+		_G[format("ChatFrame%sEditBoxLeft", ID)]:Kill()
+		_G[format("ChatFrame%sEditBoxMid", ID)]:Kill()
+		_G[format("ChatFrame%sEditBoxRight", ID)]:Kill()
+	else
+		Tab:StripTextures()
+	end
 
 	if T.Retail then
 		_G[format("ChatFrame%sEditBoxFocusLeft", ID)]:Kill()
@@ -604,7 +609,7 @@ function Chat:AddToggles()
 		Button:CreateBackdrop()
 		Button:CreateShadow()
 		Button:SetAlpha(0)
-		Button.Texture = Button:CreateTexture(nil, "OVERLAY", 8)
+		Button.Texture = Button:CreateTexture(nil, "OVERLAY")
 		Button.Texture:SetSize(14, 14)
 		Button.Texture:SetPoint("CENTER")
 		Button.Texture:SetTexture(C.Medias.ArrowDown)
@@ -621,11 +626,16 @@ function Chat:Setup()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local Frame = _G["ChatFrame"..i]
 		local Tab = _G["ChatFrame"..i.."Tab"]
+		local Minimize = _G["ChatFrame"..i.."ButtonFrameMinimizeButton"]
 
 		Tab.noMouseAlpha = 0
 		Tab:SetAlpha(0)
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 		Tab:SetFrameLevel(6)
+		
+		if Minimize then
+			Minimize:Kill()
+		end
 
 		self:StyleFrame(Frame)
 

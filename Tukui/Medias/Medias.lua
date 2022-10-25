@@ -15,6 +15,7 @@ C["Medias"] = {
 	["Bubble"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Bubble]],
 	["Copy"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Copy]],
 	["Blank"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Blank]],
+	["Invisible"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Invisible]],
 	["Logo"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Logo]],
 	["Sort"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\Sort]],
 	["ArrowUp"] = [[Interface\AddOns\Tukui\Medias\Textures\Others\ArrowUp]],

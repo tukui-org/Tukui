@@ -68,7 +68,7 @@ function Bubbles:Skin(bubble)
 			local Scaling = UIParent:GetEffectiveScale()
 			local Gap = (Scaling <= 0.60 and 20) or 10
 
-			Text:SetFont(C.Medias.Font, C.Chat.BubblesTextSize)
+			Text:SetFont(C.Medias.Font, C.Chat.BubblesTextSize, "")
 
 			if not Frame.ClearBackdrop then
 				Frame:StripTextures()

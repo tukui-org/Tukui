@@ -36,6 +36,7 @@ function ActionBars:CreateBar4()
 	end
 
 	MultiBarRight:SetShown(true)
+	MultiBarRight:EnableMouse(false)
 	MultiBarRight:SetParent(ActionBar4)
 
 	if T.Retail then
@@ -52,10 +53,6 @@ function ActionBars:CreateBar4()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-
-		if T.Retail then
-			Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
-		end
 
 		ActionBars:SkinButton(Button)
 

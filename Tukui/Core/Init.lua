@@ -5,8 +5,8 @@
 -- [[ Build the engine ]] --
 local AddOn, Engine = ...
 local Resolution = select(1, GetPhysicalScreenSize()).."x"..select(2, GetPhysicalScreenSize())
-local Windowed = Display_DisplayModeDropDown:windowedmode()
-local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
+local Windowed = Display_DisplayModeDropDown and Display_DisplayModeDropDown:windowedmode()
+local Fullscreen = Display_DisplayModeDropDown and Display_DisplayModeDropDown:fullscreenmode()
 local Toc = select(4, GetBuildInfo())
 
 Engine[1] = CreateFrame("Frame")
@@ -22,6 +22,7 @@ Engine[1].Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 Engine[1].BCC = Toc >= 20000 and Toc < 30000
 Engine[1].Classic = Toc >= 10000 and Toc < 20000
 Engine[1].WotLK = Toc >= 30000 and Toc < 40000
+Engine[1].DF = Toc >= 100000 and Toc < 110000
 Engine[1].WindowedMode = Windowed
 Engine[1].FullscreenMode = Fullscreen
 Engine[1].Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")

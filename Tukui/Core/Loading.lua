@@ -272,7 +272,7 @@ function Loading:OnEvent(event)
 		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN" or Locale ~= "ruRU") then
 			C.Medias.Font = C.General.GlobalFont.Value
 
-			TukuiFont:SetFont(C.Medias.Font, 12)
+			TukuiFont:SetFont(C.Medias.Font, 12, "")
 			TukuiFontOutline:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		end
 

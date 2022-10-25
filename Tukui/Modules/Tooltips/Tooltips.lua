@@ -406,8 +406,13 @@ function Tooltip:AddHooks()
 		hooksecurefunc("GameTooltip_ClearMoney", self.ResetBorderColor)
 	end
 
-	GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
-	GameTooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
+	if T.DF and select(4, GetBuildInfo()) > 100000 then -- Need to be after prepatch.
+		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, self.OnTooltipSetItem)
+		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, self.OnTooltipSetUnit)
+	else
+		GameTooltip:HookScript("OnTooltipSetUnit", self.OnTooltipSetUnit)
+		GameTooltip:HookScript("OnTooltipSetItem", self.OnTooltipSetItem)
+	end
 end
 
 function Tooltip:Enable()

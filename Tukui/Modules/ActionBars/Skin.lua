@@ -10,6 +10,10 @@ function ActionBars:SkinButton(button)
 	local Name = button:GetName()
 	local Action = button.action
 	local Button = button
+	local Highlight = Button.Highlight
+	local IconMask = Button.IconMask
+	local SlotArt = Button.SlotArt
+	local RightDivider = Button.RightDivider
 	local KeybindTex = Button.QuickKeybindHighlightTexture
 	local Icon = _G[Name.."Icon"]
 	local Count = _G[Name.."Count"]
@@ -68,6 +72,10 @@ function ActionBars:SkinButton(button)
 		Icon:SetDrawLayer("BACKGROUND", 7)
 
 		if (Normal) then
+			if T.Retail then
+				Normal:SetAlpha(0)
+			end
+			
 			Normal:ClearAllPoints()
 			Normal:SetPoint("TOPLEFT")
 			Normal:SetPoint("BOTTOMRIGHT")
@@ -91,6 +99,13 @@ function ActionBars:SkinButton(button)
 			end
 
 			ActionBars.SetHotKeyText(Button)
+		end
+		
+		if T.Retail then
+			--Highlight:SetAlpha(0)
+			IconMask:SetAlpha(0)
+			SlotArt:SetAlpha(0)
+			RightDivider:SetAlpha(0)
 		end
 
 		Button:StyleButton()
@@ -173,6 +188,10 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Flash:SetTexture("")
 
 	if Normal then
+		if T.Retail then
+			Normal:SetAlpha(0)
+		end
+		
 		Normal:ClearAllPoints()
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
@@ -202,7 +221,7 @@ function ActionBars:SkinPetButtons()
 end
 
 function ActionBars:SkinStanceButtons()
-	for i=1, NUM_STANCE_SLOTS do
+	for i = 1, 10 do
 		local Name = "StanceButton"..i
 		local Button = _G[Name]
 		local Icon = _G[Name.."Icon"]

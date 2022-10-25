@@ -428,7 +428,7 @@ function Loot:Enable()
 	TukuiLootFrame.Overlay:CreateShadow()
 	TukuiLootFrame.Overlay:EnableMouse()
 
-	TukuiLootFrame.Title = TukuiLootFrame.Overlay:CreateFontString(nil, "OVERLAY", 7)
+	TukuiLootFrame.Title = TukuiLootFrame.Overlay:CreateFontString(nil, "OVERLAY")
 	TukuiLootFrame.Title:SetFontObject(Font)
 	TukuiLootFrame.Title:SetPoint("CENTER", TukuiLootFrame.Overlay, 0, 1)
 	TukuiLootFrame.Title:SetTextColor(1, 0.82, 0)

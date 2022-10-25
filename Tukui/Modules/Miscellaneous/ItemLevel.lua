@@ -41,7 +41,8 @@ function ItemLevel:Update()
 			self.ItemLevel:SetText(Level)
 
 			if Rarity then
-				self.ItemLevel:SetTextColor(GetItemQualityColor(Rarity))
+				local R, G, B = GetItemQualityColor(Rarity)
+				self.ItemLevel:SetTextColor(R, G, B)
 			else
 				self.ItemLevel:SetTextColor(1, 1, 1)
 			end

@@ -13,9 +13,15 @@ Auras.FlashTimer = 30
 
 function Auras:DisableBlizzardAuras()
 	BuffFrame:Kill()
-	TemporaryEnchantFrame:Kill()
-	InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
-	InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)
+	
+	if TemporaryEnchantFrame then
+		TemporaryEnchantFrame:Kill()
+	end
+	
+	if InterfaceOptionsFrameCategoriesButton12 then
+		InterfaceOptionsFrameCategoriesButton12:SetScale(0.00001)
+		InterfaceOptionsFrameCategoriesButton12:SetAlpha(0)
+	end
 end
 
 function Auras:StartOrStopFlash(timeleft)

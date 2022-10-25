@@ -4,6 +4,10 @@ local Fonts = T["Fonts"]
 local Locale = GetLocale()
 
 function Fonts:SetFont(self, font, size, style, r, g, b, sr, sg, sb, sox, soy)
+	if not style then
+		style = ""
+	end
+	
 	self:SetFont(font, size, style)
 
 	if sr and sg and sb then
@@ -17,6 +21,7 @@ function Fonts:SetFont(self, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	if r and g and b then
 		self:SetTextColor(r, g, b)
 	elseif r then
+		print(r)
 		self:SetAlpha(r)
 	end
 end
@@ -49,7 +54,7 @@ function Fonts:Enable()
 	Fonts:SetFont(FriendsFont_Large, C.Medias.Font, 14)
 	Fonts:SetFont(FriendsFont_UserText, C.Medias.Font, 11)
 	Fonts:SetFont(NumberFont_OutlineThick_Mono_Small, C.Medias.Font, 12, "OUTLINE")
-	Fonts:SetFont(NumberFont_Outline_Huge, C.Medias.Font, 28, "THICKOUTLINE", 28)
+	Fonts:SetFont(NumberFont_Outline_Huge, C.Medias.Font, 28, "THICKOUTLINE")
 	Fonts:SetFont(NumberFont_Outline_Large, C.Medias.Font, 15, "OUTLINE")
 	Fonts:SetFont(NumberFont_Outline_Med, C.Medias.Font, 13, "OUTLINE")
 	Fonts:SetFont(NumberFont_Shadow_Med, C.Medias.Font, 12)

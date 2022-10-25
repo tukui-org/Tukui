@@ -62,7 +62,10 @@ function ActionBars:DisableBlizzard()
 
 		-- Micro Menu
 		MicroButtonAndBagsBar:ClearAllPoints()
-		MicroButtonAndBagsBar:SetPoint("TOP", UIParent, "TOP", 0, 200)
+		MicroButtonAndBagsBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -200)
+		
+		-- Tracking Bar Manager
+		StatusTrackingBarManager:SetParent(T.Hider)
 	end
 end
 
@@ -238,7 +241,7 @@ function ActionBars:UpdateStanceBar()
 			self.Bars.Stance.Backdrop:SetPoint("TOPLEFT", 0, 0)
 		end
 
-		for i = 1, NUM_STANCE_SLOTS do
+		for i = 1, 10 do
 			local ButtonName = "StanceButton"..i
 
 			Button = _G[ButtonName]
@@ -433,8 +436,9 @@ end
 
 function ActionBars:AddHooks()
 	if T.Retail then
-		hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
-		hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
+		-- FIX ME
+		-- hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
+		-- hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
 	else
 		hooksecurefunc("ActionButton_Update", self.UpdateButton)
 	end
@@ -482,7 +486,7 @@ function ActionBars:Enable()
 	end
 
 	SetCVar("alwaysShowActionBars", 1)
-	SetActionBarToggles(1, 1, 1, 1, 1)
+	SetActionBarToggles(1, 1, 1, 1, 1, 1, 1)
 
 	self:DisableBlizzard()
 	self:CreateBar1()
@@ -490,6 +494,13 @@ function ActionBars:Enable()
 	self:CreateBar3()
 	self:CreateBar4()
 	self:CreateBar5()
+	
+	if T.Retail then
+		self:CreateBar6()
+		self:CreateBar7()
+		self:CreateBar8()
+	end
+	
 	self:CreatePetBar()
 	self:CreateStanceBar()
 	self:AddHooks()

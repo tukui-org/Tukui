@@ -147,7 +147,9 @@ end
 
 function GroupLoot:AddHooks()
 	-- So we can move the Group Loot Container.
-	UIPARENT_MANAGED_FRAME_POSITIONS.GroupLootContainer = nil
+	if not T.Retail then
+		UIPARENT_MANAGED_FRAME_POSITIONS.GroupLootContainer = nil
+	end
 
 	hooksecurefunc("GroupLootContainer_Update", self.UpdateGroupLootContainer)
 end

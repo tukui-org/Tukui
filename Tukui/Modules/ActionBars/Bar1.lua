@@ -30,6 +30,10 @@ function ActionBars:CreateBar1()
 		ActionBar1:CreateShadow()
 	end
 
+	-- Fix for flyout direction
+	ActionBar1.GetSpellFlyoutDirection = MainMenuBar.GetSpellFlyoutDirection
+	ActionBar1.flyoutDirection = MainMenuBar.flyoutDirection
+
 	if (C.ActionBars.SwitchBarOnStance) then
 		if T.WotLK then
 			Rogue = "[bonusbar:1] 7; [bonusbar:2] 8;"
@@ -114,7 +118,8 @@ function ActionBars:CreateBar1()
 				Button:SetAttribute("showgrid", 1)
 
 				if T.Retail then
-					Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+					-- FIX ME
+					-- Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
 				else
 					ActionButton_ShowGrid(Button)
 				end

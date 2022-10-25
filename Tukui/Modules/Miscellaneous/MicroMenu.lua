@@ -5,6 +5,20 @@ local T, C, L = select(2, ...):unpack()
 local Miscellaneous = T["Miscellaneous"]
 local MicroMenu = CreateFrame("Frame", "TukuiMicroMenu", UIParent)
 local Noop = function() return end
+local RetailMicroButtons = {
+	"CharacterMicroButton",
+	"SpellbookMicroButton",
+	"TalentMicroButton",
+	"AchievementMicroButton",
+	"QuestLogMicroButton",
+	"GuildMicroButton",
+	"LFDMicroButton",
+	"EJMicroButton",
+	"CollectionsMicroButton",
+	"MainMenuMicroButton",
+	"HelpMicroButton",
+	"StoreMicroButton",
+}
 
 function MicroMenu:HideAlerts()
 	HelpTip:HideAllSystem("MicroButtons")
@@ -18,8 +32,10 @@ do
 	local buttons = {}
 	function MicroMenu:ShownMicroButtons()
 		wipe(buttons)
+		
+		local Buttons = RetailMicroButtons or MICRO_BUTTONS
 
-		for _, name in next, _G.MICRO_BUTTONS do
+		for _, name in next, Buttons do
 			local button = _G[name]
 			if T.Retail then
 				if button and button:IsShown() then

@@ -16,7 +16,9 @@ function TimeManager:OnEvent(event, addon)
 	TimeManagerFrame:ClearAllPoints()
 	TimeManagerFrame:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", -8, -40)
 
-	TimeManagerFrame.TitleBg:SetAlpha(0)
+	if TimeManagerFrame.TitleBg then
+		TimeManagerFrame.TitleBg:SetAlpha(0)
+	end
 
 	TimeManagerFrame:StripTextures()
 	TimeManagerFrame:StripTexts()

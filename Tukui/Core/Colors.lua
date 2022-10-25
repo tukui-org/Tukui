@@ -62,6 +62,7 @@ oUF.colors.class = {
 	["DEATHKNIGHT"] = { 0.77, 0.12, 0.24 },
 	["MONK"]        = { 0.00, 1.00, 0.59 },
 	["DEMONHUNTER"] = { 0.64, 0.19, 0.79 },
+	["EVOKER"]      = { 0.20, 0.58, 0.50 },
 }
 
 oUF.colors.totems = {

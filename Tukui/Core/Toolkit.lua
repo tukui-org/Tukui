@@ -23,6 +23,22 @@ local Noop = function() return end
 local Toolkit = CreateFrame("Frame", "T00LKIT", UIParent)
 local Tabs = {"LeftDisabled", "MiddleDisabled", "RightDisabled", "Left", "Middle", "Right"}
 local Hider = CreateFrame("Frame", nil, UIParent) Hider:Hide()
+local InvisibleTex = [[Interface\AddOns\Tukui\Medias\Textures\Others\Invisible]]
+
+-- Revert to old texture func before DragonFlight
+local function GetTextureOrFallback(t) return (not t or (type(t) == "string" and strmatch(t, "^%s+$"))) and InvisibleTex or t end
+local function SetNormalTexture(frame, texture) frame:_SetNormalTexture(GetTextureOrFallback(texture)) end
+local function SetDisabledTexture(frame, texture) frame:_SetDisabledTexture(GetTextureOrFallback(texture)) end
+local function SetCheckedTexture(frame, texture) frame:_SetCheckedTexture(GetTextureOrFallback(texture)) end
+local function SetPushedTexture(frame, texture) frame:_SetPushedTexture(GetTextureOrFallback(texture)) end
+local function SetHighlightTexture(frame, texture) frame:_SetHighlightTexture(GetTextureOrFallback(texture)) end
+local function CheckTextureAPI(meta, api, key)
+	local orig, func = '_'..key, meta[key]
+	if meta[orig] ~= func then
+		meta[orig] = func -- keep a copy of the original
+		meta[key] = api -- use our neew one
+	end
+end
 
 -- Tables
 Toolkit.Settings = {}
@@ -321,7 +337,7 @@ Toolkit.API.SkinButton = function(self, BackdropStyle, Shadows, Strip)
 	if self.SetHighlightTexture then self:SetHighlightTexture("") end
 	if self.SetPushedTexture then self:SetPushedTexture("") end
 	if self.SetDisabledTexture then self:SetDisabledTexture("") end
-	if Strip then self:StripTexture() end
+	if Strip then self:StripTextures() end
 
 	-- Push our style
 	self:CreateBackdrop(BackdropStyle)
@@ -578,6 +594,11 @@ end
 ---------------------------------------------------
 
 Toolkit.Functions.Scale = function(size)
+	-- Little protection just in case
+	if size == "" then
+		size = 1 
+	end
+	
 	local Mult = PixelPerfectScale / GetCVar("uiScale")
 	local Value = Mult * math.floor(size / Mult + .5)
 
@@ -586,6 +607,15 @@ end
 
 Toolkit.Functions.AddAPI = function(object)
 	local mt = getmetatable(object).__index
+	
+	-- For DragonFlight
+	if not object._SetNormalTexture then
+		CheckTextureAPI(mt, SetNormalTexture, "SetNormalTexture")
+		CheckTextureAPI(mt, SetPushedTexture, "SetPushedTexture")
+		CheckTextureAPI(mt, SetCheckedTexture, "SetCheckedTexture")
+		CheckTextureAPI(mt, SetDisabledTexture, 'SetDisabledTexture')
+		CheckTextureAPI(mt, SetHighlightTexture, "SetHighlightTexture")
+	end
 
 	for API, FUNCTIONS in pairs(Toolkit.API) do
 		if not object[API] then mt[API] = Toolkit.API[API] end
@@ -619,8 +649,8 @@ end
 
 Toolkit.Functions.HideBlizzard = function(self)
 	if T.Retail then
-		Display_UseUIScale:Hide()
-		Display_UIScaleSlider:Hide()
+		--Display_UseUIScale:Hide()
+		--Display_UIScaleSlider:Hide()
 	else
 		Advanced_UseUIScale:Hide()
 		Advanced_UIScaleSlider:Hide()

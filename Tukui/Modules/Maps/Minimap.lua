@@ -25,6 +25,8 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
+		"ExpansionLandingPageMinimapButton",
+		"MinimapBackdrop",
 	}
 
 	for i, FrameName in pairs(HiddenFrames) do
@@ -40,7 +42,9 @@ function Minimap:DisableMinimapElements()
 		end
 	end
 
-	North:SetTexture(nil)
+	if North then
+		North:SetTexture(nil)
+	end
 
 	if Time then
 		Time:Kill()
@@ -52,12 +56,12 @@ function Minimap:OnMouseClick(button)
 
 	if (button == "RightButton") then
 		if T.Retail then
-			MiniMapTracking_OnMouseDown(MiniMapTracking)
+			ToggleDropDownMenu(1, nil, MinimapCluster.Tracking.DropDown, MinimapCluster.Tracking, 8, 5)
 		else
 			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
 		end
 	elseif (button == "MiddleButton") then
-		if T.Retail and GarrisonLandingPageMinimapButton:IsShown() then
+		if T.Retail and GarrisonLandingPageMinimapButton and GarrisonLandingPageMinimapButton:IsShown() then
 			if InCombatLockdown() then
 				T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
 			else
@@ -69,7 +73,11 @@ function Minimap:OnMouseClick(button)
 			end
 		end
 	else
-		Minimap_OnClick(self)
+		if T.Retail then
+			Minimap:OnClick()
+		else
+			Minimap_OnClick(self)
+		end
 	end
 end
 
@@ -87,9 +95,11 @@ function Minimap:StyleMinimap()
 	self.Backdrop:SetFrameLevel(2)
 	self.Backdrop:CreateShadow()
 
-	Mail:ClearAllPoints()
-	MailBorder:Hide()
-	MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
+	if Mail then
+		Mail:ClearAllPoints()
+		MailBorder:Hide()
+		MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
+	end
 
 	if T.Retail then
 		local QueueStatusMinimapButton = QueueStatusMinimapButton
@@ -101,28 +111,38 @@ function Minimap:StyleMinimap()
 		self:SetArchBlobRingScalar(0)
 		self:SetQuestBlobRingScalar(0)
 
-		MiniMapTracking:SetParent(T.Hider)
+		if MiniMapTracking then
+			MiniMapTracking:SetParent(T.Hider)
+		end
 
-		QueueStatusMinimapButton:SetParent(Minimap)
-		QueueStatusMinimapButton:ClearAllPoints()
-		QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 2, -2)
-		QueueStatusMinimapButton:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() + 2)
-		QueueStatusMinimapButtonBorder:Kill()
+		if QueueStatusMinimapButton then
+			QueueStatusMinimapButton:SetParent(Minimap)
+			QueueStatusMinimapButton:ClearAllPoints()
+			QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", 2, -2)
+			QueueStatusMinimapButton:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() + 2)
+			QueueStatusMinimapButtonBorder:Kill()
+		end
 
 		QueueStatusFrame:StripTextures()
 		QueueStatusFrame:CreateBackdrop()
 		QueueStatusFrame:CreateShadow()
 
-		Mail:SetPoint("BOTTOMRIGHT", 3, -4)
-		Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
+		if Mail then
+			Mail:SetPoint("BOTTOMRIGHT", 3, -4)
+			Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
+		end
 
-		MiniMapInstanceDifficulty:ClearAllPoints()
-		MiniMapInstanceDifficulty:SetParent(Minimap)
-		MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+		if MiniMapInstanceDifficulty then
+			MiniMapInstanceDifficulty:ClearAllPoints()
+			MiniMapInstanceDifficulty:SetParent(Minimap)
+			MiniMapInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+		end
 
-		GuildInstanceDifficulty:ClearAllPoints()
-		GuildInstanceDifficulty:SetParent(Minimap)
-		GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+		if GuildInstanceDifficulty then
+			GuildInstanceDifficulty:ClearAllPoints()
+			GuildInstanceDifficulty:SetParent(Minimap)
+			GuildInstanceDifficulty:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 0, 0)
+		end
 	else
 		local BGFrame = MiniMapBattlefieldFrame
 		local BGFrameBorder = MiniMapBattlefieldBorder
@@ -341,7 +361,7 @@ function Minimap:EnableMouseOver()
 			Minimap.MinimapCoords.Anim:Play()
 		end
 
-		if T.Retail or T.BCC or T.WotLK then
+		if T.BCC or T.WotLK then
 			Tracking:SetAlpha(1)
 		end
 	end)
@@ -362,7 +382,7 @@ function Minimap:EnableMouseOver()
 		end
 	end)
 
-	if T.Retail or T.BCC or T.WotLK then
+	if T.BCC or T.WotLK then
 		Tracking:SetScript("OnEnter", function(self)
 			if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 				return
@@ -404,17 +424,6 @@ function Minimap:SizeMinimap()
 	local Scale = C.General.MinimapScale / 100
 
 	self:SetSize(X * Scale, Y * Scale)
-end
-
-function Minimap:EnableMouseWheelZoom()
-	self:EnableMouseWheel(true)
-	self:SetScript("OnMouseWheel", function(self, delta)
-		if (delta > 0) then
-			MinimapZoomIn:Click()
-		elseif (delta < 0) then
-			MinimapZoomOut:Click()
-		end
-	end)
 end
 
 function Minimap:TaxiExitOnEvent(event)
@@ -517,14 +526,6 @@ function Minimap:AddHooks()
 	if not T.Retail then
 		return
 	end
-
-	hooksecurefunc("GarrisonLandingPageMinimapButton_UpdateIcon", self.MoveGarrisonButton)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Play", self.StartHighlight)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapLoopPulseAnim, "Stop", self.StopHighlight)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapPulseAnim, "Play", self.StartHighlight)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapPulseAnim, "Stop", self.StopHighlight)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapAlertAnim, "Play", self.StartHighlight)
-	hooksecurefunc(GarrisonLandingPageMinimapButton.MinimapAlertAnim, "Stop", self.StopHighlight)
 end
 
 function Minimap:Enable()
@@ -534,7 +535,6 @@ function Minimap:Enable()
 	self:AddZoneAndCoords()
 	self:PositionMinimap()
 	self:EnableMouseOver()
-	self:EnableMouseWheelZoom()
 	self:AddTaxiEarlyExit()
 	self:AddHooks()
 end

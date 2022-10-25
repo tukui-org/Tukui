@@ -1,7 +1,7 @@
-## Interface: 90207
+## Interface: 100000
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.29
+## Version: 20.30
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase, TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory
@@ -21,45 +21,45 @@ Libs\LibAnim\LibAnim.lua
 Libs\LibStub\LibStub.lua
 Libs\LibDeflate\LibDeflate.lua
 Libs\LibSerialize\LibSerialize.lua
-Libs\oUF\init.lua
-Libs\oUF\private.lua
-Libs\oUF\ouf.lua
-Libs\oUF\events.lua
-Libs\oUF\factory.lua
-Libs\oUF\blizzard.lua
-Libs\oUF\units.lua
-Libs\oUF\colors.lua
-Libs\oUF\elements\additionalpower.lua
-Libs\oUF\elements\alternativepower.lua
-Libs\oUF\elements\assistantindicator.lua
-Libs\oUF\elements\auras.lua
-Libs\oUF\elements\castbar.lua
-Libs\oUF\elements\classpower.lua
-Libs\oUF\elements\combatindicator.lua
-Libs\oUF\elements\grouproleindicator.lua
-Libs\oUF\elements\health.lua
-Libs\oUF\elements\healthprediction.lua
-Libs\oUF\elements\leaderindicator.lua
-Libs\oUF\elements\phaseindicator.lua
-Libs\oUF\elements\portrait.lua
-Libs\oUF\elements\power.lua
-Libs\oUF\elements\powerprediction.lua
-Libs\oUF\elements\pvpclassificationindicator.lua
-Libs\oUF\elements\pvpindicator.lua
-Libs\oUF\elements\questindicator.lua
-Libs\oUF\elements\raidroleindicator.lua
-Libs\oUF\elements\raidtargetindicator.lua
-Libs\oUF\elements\range.lua
-Libs\oUF\elements\readycheckindicator.lua
-Libs\oUF\elements\restingindicator.lua
-Libs\oUF\elements\resurrectindicator.lua
-Libs\oUF\elements\runes.lua
-Libs\oUF\elements\stagger.lua
-Libs\oUF\elements\summonindicator.lua
-Libs\oUF\elements\tags.lua
-Libs\oUF\elements\threatindicator.lua
-Libs\oUF\elements\totems.lua
-Libs\oUF\finalize.lua
+Libs\oUF_Retail\init.lua
+Libs\oUF_Retail\private.lua
+Libs\oUF_Retail\ouf.lua
+Libs\oUF_Retail\events.lua
+Libs\oUF_Retail\factory.lua
+Libs\oUF_Retail\blizzard.lua
+Libs\oUF_Retail\units.lua
+Libs\oUF_Retail\colors.lua
+Libs\oUF_Retail\elements\additionalpower.lua
+Libs\oUF_Retail\elements\alternativepower.lua
+Libs\oUF_Retail\elements\assistantindicator.lua
+Libs\oUF_Retail\elements\auras.lua
+Libs\oUF_Retail\elements\castbar.lua
+Libs\oUF_Retail\elements\classpower.lua
+Libs\oUF_Retail\elements\combatindicator.lua
+Libs\oUF_Retail\elements\grouproleindicator.lua
+Libs\oUF_Retail\elements\health.lua
+Libs\oUF_Retail\elements\healthprediction.lua
+Libs\oUF_Retail\elements\leaderindicator.lua
+Libs\oUF_Retail\elements\phaseindicator.lua
+Libs\oUF_Retail\elements\portrait.lua
+Libs\oUF_Retail\elements\power.lua
+Libs\oUF_Retail\elements\powerprediction.lua
+Libs\oUF_Retail\elements\pvpclassificationindicator.lua
+Libs\oUF_Retail\elements\pvpindicator.lua
+Libs\oUF_Retail\elements\questindicator.lua
+Libs\oUF_Retail\elements\raidroleindicator.lua
+Libs\oUF_Retail\elements\raidtargetindicator.lua
+Libs\oUF_Retail\elements\range.lua
+Libs\oUF_Retail\elements\readycheckindicator.lua
+Libs\oUF_Retail\elements\restingindicator.lua
+Libs\oUF_Retail\elements\resurrectindicator.lua
+Libs\oUF_Retail\elements\runes.lua
+Libs\oUF_Retail\elements\stagger.lua
+Libs\oUF_Retail\elements\summonindicator.lua
+Libs\oUF_Retail\elements\tags.lua
+Libs\oUF_Retail\elements\threatindicator.lua
+Libs\oUF_Retail\elements\totems.lua
+Libs\oUF_Retail\finalize.lua
 Libs\oUF_ComboPointsBar\oUF_ComboPointsBar.lua
 Libs\oUF_CombatFeedback\oUF_CombatFeedback.lua
 Libs\oUF_RaidDebuffs\oUF_RaidDebuffs.lua
@@ -145,6 +145,9 @@ Modules\ActionBars\Bar2.lua
 Modules\ActionBars\Bar3.lua
 Modules\ActionBars\Bar4.lua
 Modules\ActionBars\Bar5.lua
+Modules\ActionBars\Bar6.lua
+Modules\ActionBars\Bar7.lua
+Modules\ActionBars\Bar8.lua
 Modules\ActionBars\BarPet.lua
 Modules\ActionBars\BarStance.lua
 Modules\ActionBars\Extra.lua
@@ -207,6 +210,7 @@ Modules\UnitFrames\Classes\Druid.lua
 Modules\UnitFrames\Classes\DeathKnight.lua
 Modules\UnitFrames\Classes\DemonHunter.lua
 Modules\UnitFrames\Classes\Monk.lua
+Modules\UnitFrames\Classes\Evoker.lua
 Modules\UnitFrames\Units\Player.lua
 Modules\UnitFrames\Units\Target.lua
 Modules\UnitFrames\Units\TargetOfTarget.lua

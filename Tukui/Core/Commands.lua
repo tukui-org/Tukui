@@ -106,9 +106,7 @@ T.SlashHandler = function(cmd)
 				return
 			end
 
-			GameMenuButtonKeybindings:Click()
-
-			KeyBindingFrame.quickKeybindButton:Click()
+			QuickKeybindFrame:Show()
 		else
 			T.Miscellaneous.Keybinds:Toggle()
 		end

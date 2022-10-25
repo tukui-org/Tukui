@@ -12,7 +12,7 @@ function ActionBars:CreatePetBar()
 
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local PetActionBarFrame = PetActionBarFrame
+	local PetActionBarFrame = PetActionBar or PetActionBarFrame
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 	local ButtonsPerRow = C.ActionBars.BarPetButtonsPerRow
 	local NumRow = ceil(10 / ButtonsPerRow)
@@ -64,7 +64,9 @@ function ActionBars:CreatePetBar()
 		Bar["Button"..i] = Button
 	end
 
-	hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
+	if not T.Retail then
+		hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
+	end
 
 	ActionBars:SkinPetButtons()
 

@@ -44,6 +44,7 @@ if T.Retail then
 	function ObjectiveTracker:SetDefaultPosition()
 		local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -68, -240
 		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
+		local ObjectiveTrackerFrame = ObjectiveTrackerFrame
 
 		local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
 		ObjectiveFrameHolder:SetSize(130, 22)
@@ -52,7 +53,13 @@ if T.Retail then
 		ObjectiveTrackerFrame:ClearAllPoints()
 		ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
 		ObjectiveTrackerFrame:SetHeight(T.ScreenHeight - 520)
+		ObjectiveTrackerFrame:SetClampedToScreen(false)
 		ObjectiveTrackerFrame.IsUserPlaced = function() return true end
+		
+		if T.Retail then
+			ObjectiveTrackerFrame.ClearAllPoints = function() return end
+			ObjectiveTrackerFrame.SetPoint = function() return end
+		end
 
 		Movers:RegisterFrame(ObjectiveFrameHolder, "Objectives Tracker")
 

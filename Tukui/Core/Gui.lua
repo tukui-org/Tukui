@@ -16,7 +16,7 @@ local pairs = pairs
 local type = type
 
 local StyleFont = function(fs, font, size)
-	fs:SetFont(font, size)
+	fs:SetFont(font, size, "")
 	fs:SetShadowColor(0, 0, 0)
 	fs:SetShadowOffset(1, -1)
 end
