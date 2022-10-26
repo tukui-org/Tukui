@@ -1364,13 +1364,16 @@ function Bags:Enable()
 		return
 	end
 
-	if C.Bags.SortToBottom then
-		SetSortBagsRightToLeft(false)
-	else
-		SetSortBagsRightToLeft(true)
+	if T.TocVersion < 100002 then
+		if C.Bags.SortToBottom then
+			SetSortBagsRightToLeft(false)
+		else
+			SetSortBagsRightToLeft(true)
+		end
+		
+		SetInsertItemsLeftToRight(false)
 	end
-	SetInsertItemsLeftToRight(false)
-
+	
 	-- Bug with mouse click
 	GroupLootContainer:EnableMouse(false)
 
