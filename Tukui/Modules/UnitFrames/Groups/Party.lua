@@ -75,7 +75,6 @@ function UnitFrames:Party()
 	Buffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
 	Buffs:SetHeight(24)
 	Buffs:SetWidth(190)
-	Buffs:CreateBackdrop()
 	Buffs.size = 24
 	Buffs.num = 7
 	Buffs.numRow = 1
