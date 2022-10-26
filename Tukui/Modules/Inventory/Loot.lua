@@ -397,8 +397,12 @@ end
 
 function Loot:Enable()
 	if not C.Loot.Enable then
-		self:SkinStandardLootFrame()
-		self:AddStandardLootHooks()
+		
+		-- FIX ME on DF
+		if not T.Retail then
+			self:SkinStandardLootFrame()
+			self:AddStandardLootHooks()
+		end
 
 		return
 	end
