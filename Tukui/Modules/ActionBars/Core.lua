@@ -449,9 +449,8 @@ function ActionBars:AddHooks()
 	if C.ActionBars.HotKey then
 		if not T.Retail then
 			hooksecurefunc("ActionButton_UpdateHotkeys", self.SetHotKeyText)
+			hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
 		end
-
-		hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
 	end
 
 	if C.ActionBars.ProcAnim then
