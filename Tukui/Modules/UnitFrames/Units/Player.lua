@@ -506,7 +506,7 @@ function UnitFrames:Player()
 				Bar[i].Backdrop:SetFrameLevel(Bar[i]:GetFrameLevel() - 1)
 				Bar[i].Backdrop:CreateShadow()
 
-				Bar[i].Backdrop.BackgroundTexture = Bar[i].Backdrop:CreateTexture(nil, "OVERLAY", 1)
+				Bar[i].Backdrop.BackgroundTexture = Bar[i].Backdrop:CreateTexture(nil, "OVERLAY")
 				Bar[i].Backdrop.BackgroundTexture:SetAllPoints(Bar[i].Backdrop)
 				Bar[i].Backdrop.BackgroundTexture:SetTexture(C.Medias.Blank)
 				Bar[i].Backdrop.BackgroundTexture:SetVertexColor(unpack(T.Colors.totems[i]))
@@ -521,7 +521,7 @@ function UnitFrames:Player()
 					Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 4, 0)
 				end
 
-				Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER", 7)
+				Bar[i].Icon = Bar[i]:CreateTexture(nil, "BORDER")
 				Bar[i].Icon:SetInside()
 				Bar[i].Icon:SetAlpha(1)
 				Bar[i].Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
