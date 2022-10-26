@@ -59,6 +59,11 @@ function ActionBars:CreatePetBar()
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
 		end
+		
+		if T.Retail then
+			-- Hope it doesn't taint
+			Button.SetPoint = function() return end
+		end
 
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button

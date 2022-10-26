@@ -150,6 +150,7 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	local Cooldown = _G[Button:GetName().."Cooldown"]
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
+	local NormalTexture = _G[Button:GetName().."NormalTexture"]
 
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
@@ -195,6 +196,10 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		Normal:ClearAllPoints()
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
+	end
+	
+	if NormalTexture then
+		NormalTexture:SetAlpha(0)
 	end
 
 	if Button.QuickKeybindHighlightTexture then
