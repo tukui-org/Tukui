@@ -8,6 +8,7 @@ local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS
 local MainMenuBar, MainMenuBarArtFrame = MainMenuBar, MainMenuBarArtFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
+local StanceBarFrame = StanceBar or StanceBarFrame
 local Noop = function() return end
 
 local Frames = {
