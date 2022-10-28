@@ -38,7 +38,7 @@ function ActionBars:CreateBar8()
 	MultiBar7:SetShown(true)
 	MultiBar7:EnableMouse(false)
 	MultiBar7:SetParent(ActionBar8)
-	MultiBar7.flyoutDirection = "LEFT"
+	--MultiBar7.flyoutDirection = "LEFT"
 
 	MultiBar7.QuickKeybindGlow:SetParent(T.Hider)
 
