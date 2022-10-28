@@ -5,6 +5,7 @@ local unpack = unpack
 local GetTime = GetTime
 local DebuffTypeColor = DebuffTypeColor
 local BuffFrame = BuffFrame
+local DebuffFrame = DebuffFrame
 local TemporaryEnchantFrame = TemporaryEnchantFrame
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
 
@@ -12,10 +13,14 @@ Auras.Headers = {}
 Auras.FlashTimer = 30
 
 function Auras:DisableBlizzardAuras()
-	BuffFrame:Kill()
+	BuffFrame:SetParent(T.Hider)
+	
+	if DebuffFrame then
+		DebuffFrame:SetParent(T.Hider)
+	end
 	
 	if TemporaryEnchantFrame then
-		TemporaryEnchantFrame:Kill()
+		TemporaryEnchantFrame:SetParent(T.Hider)
 	end
 	
 	if InterfaceOptionsFrameCategoriesButton12 then
