@@ -44,6 +44,11 @@ function UnitFrames:DisableBlizzard()
 		CompactRaidFrameContainer:SetParent(T.Hider)
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()
+		
+		if T.Retail then
+			UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE")
+			CompactRaidFrameManager_SetSetting("IsShown", "0")
+		end
 
 		-- Hide Raid Interface Options.
 		if not T.Retail then
