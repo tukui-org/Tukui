@@ -401,7 +401,10 @@ function UnitFrames:PostCreateAura(button, unit)
 		Cooldown:SetReverse(true)
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
-		Cooldown:SetHideCountdownNumbers(true)
+		
+		if not T.Retail then
+			Cooldown:SetHideCountdownNumbers(true)
+		end
 		
 		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY")
 		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
