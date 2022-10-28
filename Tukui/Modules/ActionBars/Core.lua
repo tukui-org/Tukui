@@ -486,6 +486,7 @@ function ActionBars:Enable()
 	end
 
 	SetCVar("alwaysShowActionBars", 1)
+	SetCVar("ActionButtonUseKeyDown", 0)
 	SetActionBarToggles(1, 1, 1, 1, 1, 1, 1)
 
 	self:DisableBlizzard()
