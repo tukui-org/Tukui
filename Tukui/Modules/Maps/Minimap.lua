@@ -83,7 +83,7 @@ function Minimap:OnMouseClick(button)
 end
 
 function Minimap:StyleMinimap()
-	local Mail = MiniMapMailFrame
+	local Mail = MinimapCluster and MinimapCluster.MailFrame or MiniMapMailFrame
 	local MailBorder = MiniMapMailBorder
 	local MailIcon = MiniMapMailIcon
 
@@ -97,9 +97,20 @@ function Minimap:StyleMinimap()
 	self.Backdrop:CreateShadow()
 
 	if Mail then
+		if T.Retail then
+			Mail:SetParent(Minimap)
+		end
+		
 		Mail:ClearAllPoints()
-		MailBorder:Hide()
+		
+		if MailBorder then
+			MailBorder:Hide()
+		end
+		
 		MailIcon:SetTexture("Interface\\AddOns\\Tukui\\Medias\\Textures\\Others\\Mail")
+		Mail:SetPoint("BOTTOMRIGHT", T.Retail and -4 or 3, -4)
+		
+		Mail:SetFrameLevel(QueueStatusMinimapButton and QueueStatusMinimapButton:GetFrameLevel() - 2 or Minimap and Minimap:GetFrameLevel() + 2)
 	end
 
 	if T.Retail then
@@ -141,11 +152,6 @@ function Minimap:StyleMinimap()
 		
 		if QueueStatusFrame.NineSlice then
 			QueueStatusFrame.NineSlice:SetAlpha(0)
-		end
-
-		if Mail then
-			Mail:SetPoint("BOTTOMRIGHT", 3, -4)
-			Mail:SetFrameLevel(QueueStatusMinimapButton:GetFrameLevel() - 2)
 		end
 
 		if MiniMapInstanceDifficulty then
