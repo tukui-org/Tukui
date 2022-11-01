@@ -899,33 +899,6 @@ function Bags:BagUpdate(id)
 end
 
 function Bags:UpdateAllBags()
-	-- check if containers changed
-	if not NeedBagRefresh then
-		for i = 1, 5 do
-			local ContainerSize
-			
-			if _G["ContainerFrame"..i].size then
-				ContainerSize = _G["ContainerFrame"..i].size
-			else
-				local ID = _G["ContainerFrame"..i]:GetID()
-				local Size = GetContainerNumSlots(ID)
-				
-				ContainerSize = Size
-			end
-
-			if ContainerSize ~= BagSize[i] then
-				NeedBagRefresh = true
-
-				BagSize[i] = ContainerSize
-			end
-		end
-
-		if (not NeedBagRefresh) then
-			return
-		end
-	end
-
-	-- Refresh layout if a refresh if found
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local FirstButton
 
@@ -993,30 +966,6 @@ function Bags:UpdateAllBags()
 end
 
 function Bags:UpdateAllBankBags()
-	-- check if containers changed
-	for i = 6, 13 do
-		local ContainerSize
-
-		if _G["ContainerFrame"..i].size then
-			ContainerSize = _G["ContainerFrame"..i].size
-		else
-			local ID = _G["ContainerFrame"..i]:GetID()
-			local Size = GetContainerNumSlots(ID)
-
-			ContainerSize = Size
-		end
-
-		if ContainerSize ~= BagSize[i] then
-			NeedBankRefresh = true
-
-			BagSize[i] = ContainerSize
-		end
-	end
-
-	if not NeedBankRefresh then
-		return
-	end
-
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local BankFrameMoneyFrame = BankFrameMoneyFrame
 
