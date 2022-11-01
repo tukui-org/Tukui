@@ -9,6 +9,7 @@ local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS
 local MainMenuBar, MainMenuBarArtFrame = MainMenuBar, MainMenuBarArtFrame
 local ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight = ShapeshiftBarLeft, ShapeshiftBarMiddle, ShapeshiftBarRight
 local StanceBarFrame = StanceBar or StanceBarFrame
+local Movers = T["Movers"]
 local Noop = function() return end
 
 local Frames = {
@@ -61,9 +62,16 @@ function ActionBars:DisableBlizzard()
 			RegisterStateDriver(IconIntroTracker, "visibility", "hide")
 		end
 
-		-- Micro Menu
+		-- Move Micro Menu
 		MicroButtonAndBagsBar:ClearAllPoints()
 		MicroButtonAndBagsBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -200)
+		
+		-- Move QueueStatusButton and register for drag
+		QueueStatusButton:SetParent(UIParent)
+		QueueStatusButton:ClearAllPoints()
+		QueueStatusButton:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
+		
+		Movers:RegisterFrame(QueueStatusButton, "QueueStatusButton")
 		
 		-- Tracking Bar Manager
 		StatusTrackingBarManager:SetParent(T.Hider)
@@ -465,7 +473,6 @@ end
 
 function ActionBars:UpdateMultiCastBar()
 	local Bar = MultiCastActionBarFrame
-	local Movers = T["Movers"]
 	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.MultiCastActionBarFrame
 
 	Movers:RegisterFrame(Bar, "MultiCastBar")
