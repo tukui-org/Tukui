@@ -376,6 +376,7 @@ function UnitFrames:PostCreateAura(button, unit)
 	-- Set "self.Buffs.isCancellable" to true to a buffs frame to be able to cancel click
 	local isCancellable = button:GetParent().isCancellable
 	local isAnimated = C.UnitFrames.FlashRemovableBuffs and button:GetParent().isAnimated
+	local isNamePlate = button:GetParent().isNameplate
 
 	-- Right-click-cancel script
 	if isCancellable then
@@ -408,7 +409,7 @@ function UnitFrames:PostCreateAura(button, unit)
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
 		
-		if not T.Retail then
+		if not T.Retail or isNamePlate then
 			Cooldown:SetHideCountdownNumbers(true)
 		end
 		
