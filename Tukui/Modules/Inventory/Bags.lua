@@ -1445,6 +1445,9 @@ function Bags:Enable()
 	end
 
 	if T.Retail then
+		-- Always set this to true
+		SetCVar("expandBagBar", true)
+		
 		self:SetTokensPosition()
 
 		BankFrame:HookScript("OnHide", function()
