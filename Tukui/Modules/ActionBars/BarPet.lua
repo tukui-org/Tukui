@@ -35,6 +35,9 @@ function ActionBars:CreatePetBar()
 
 	-- overwrite PetActionBar_Update, causing a lot of taint with original
 	PetActionBar_Update = ActionBars.UpdatePetBar
+	
+	-- This is the function in DF that move the pet bar to original position
+	PetActionBarFrame.UpdateGridLayout = function() return false end
 
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["PetActionButton1"]
