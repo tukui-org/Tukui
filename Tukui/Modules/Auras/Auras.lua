@@ -102,6 +102,8 @@ function Auras:UpdateAura(index)
 	local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 
 	if (Name) then
+		self.Name = Name
+		
 		if (C.Auras.ClassicTimer) then
 			self.Holder:Hide()
 		else
