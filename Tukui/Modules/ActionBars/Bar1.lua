@@ -112,6 +112,7 @@ function ActionBars:CreateBar1()
 				local PreviousButton = _G["ActionButton"..i-1]
 
 				Button:SetSize(Size, Size)
+				Button:SetParent(self)
 				Button:ClearAllPoints()
 				Button:SetAttribute("showgrid", 1)
 
@@ -119,8 +120,6 @@ function ActionBars:CreateBar1()
 					-- FIX ME
 					-- Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
 				else
-					Button:SetParent(self)
-					
 					ActionButton_ShowGrid(Button)
 				end
 
