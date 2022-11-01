@@ -13,6 +13,7 @@ function ActionBars:CreateBar1()
 	local NumButtons = C.ActionBars.Bar1NumButtons
 	local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex and GetVehicleBarIndex()) or ""
 	local OverrideBar = format("[overridebar] %d;", GetOverrideBarIndex and GetOverrideBarIndex()) or ""
+	local ShapeshiftBar = format("[shapeshift] %d;", GetTempShapeshiftBarIndex and GetTempShapeshiftBarIndex()) or ""
 
 	if NumButtons <= ButtonsPerRow then
 		ButtonsPerRow = NumButtons
@@ -56,7 +57,7 @@ function ActionBars:CreateBar1()
 		["ROGUE"] = Rogue,
 		["WARRIOR"] = Warrior,
 		["PRIEST"] = Priest,
-		["DEFAULT"] = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;"..VehicleBar..OverrideBar,
+		["DEFAULT"] = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;"..ShapeshiftBar..VehicleBar..OverrideBar,
 	}
 
 	function ActionBar1:GetBar()
