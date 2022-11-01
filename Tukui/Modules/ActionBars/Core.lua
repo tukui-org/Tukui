@@ -32,6 +32,7 @@ function ActionBars:DisableBlizzard()
 		MainMenuBar.EndCaps:SetAlpha(0)
 		MainMenuBar.BorderArt:SetAlpha(0)
 		MainMenuBar.ActionBarPageNumber:SetParent(T.Hider)
+		MainMenuBar.Background:SetParent(T.Hider)
 	else
 		MainMenuBar:SetParent(T.Hider)
 	end
