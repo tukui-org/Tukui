@@ -13,7 +13,7 @@ local Movers = T["Movers"]
 local Noop = function() return end
 
 local Frames = {
-	MainMenuBar,
+	--MainMenuBar,
 	MainMenuBarArtFrame,
 	OverrideActionBar,
 	PossessBarFrame,
@@ -24,6 +24,17 @@ local Frames = {
 
 function ActionBars:DisableBlizzard()
 	local Hider = T.Hider
+	
+	MainMenuBar:UnregisterAllEvents()
+	
+	if T.Retail then
+		MainMenuBar:EnableMouse(false)
+		MainMenuBar.EndCaps:SetAlpha(0)
+		MainMenuBar.BorderArt:SetAlpha(0)
+		MainMenuBar.ActionBarPageNumber:SetParent(T.Hider)
+	else
+		MainMenuBar:SetParent(T.Hider)
+	end
 
 	for _, frame in pairs(Frames) do
 		frame:UnregisterAllEvents()
