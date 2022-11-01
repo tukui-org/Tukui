@@ -34,6 +34,12 @@ function UnitFrames:DisableBlizzard()
 	if not C.UnitFrames.Enable then
 		return
 	end
+	
+	local PartyFrame = PartyFrame
+	
+	if PartyFrame and (C["Raid"].Enable or C["Party"].Enable) then
+		PartyFrame:SetParent(T.Hider)
+	end
 
 	if C["Raid"].Enable and CompactRaidFrameManager then
 		-- Disable Blizzard Raid Frames.
