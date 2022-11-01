@@ -2,6 +2,7 @@ local T, C, L = select(2, ...):unpack()
 
 local Miscellaneous = T["Miscellaneous"]
 local Maps = T["Maps"]
+local Movers = T["Movers"]
 local Interval = 2
 
 Minimap.ZoneColors = {
@@ -126,6 +127,21 @@ function Minimap:StyleMinimap()
 		QueueStatusFrame:StripTextures()
 		QueueStatusFrame:CreateBackdrop()
 		QueueStatusFrame:CreateShadow()
+		
+		if T.Retail then
+			-- Move QueueStatusButton and register for drag
+			QueueStatusButton:SetParent(UIParent)
+			QueueStatusButton:ClearAllPoints()
+			QueueStatusButton:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
+			
+			QueueStatusFrame.NineSlice:SetAlpha(0)
+			
+			Movers:RegisterFrame(QueueStatusButton, "QueueStatusButton")
+		end
+		
+		if QueueStatusFrame.NineSlice then
+			QueueStatusFrame.NineSlice:SetAlpha(0)
+		end
 
 		if Mail then
 			Mail:SetPoint("BOTTOMRIGHT", 3, -4)
@@ -192,8 +208,6 @@ function Minimap:StyleMinimap()
 end
 
 function Minimap:PositionMinimap()
-	local Movers = T["Movers"]
-
 	self:SetParent(T.PetHider)
 	self:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -28, -28)
 	self:SetMovable(true)

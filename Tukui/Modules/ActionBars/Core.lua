@@ -66,13 +66,6 @@ function ActionBars:DisableBlizzard()
 		MicroButtonAndBagsBar:ClearAllPoints()
 		MicroButtonAndBagsBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -200)
 		
-		-- Move QueueStatusButton and register for drag
-		QueueStatusButton:SetParent(UIParent)
-		QueueStatusButton:ClearAllPoints()
-		QueueStatusButton:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
-		
-		Movers:RegisterFrame(QueueStatusButton, "QueueStatusButton")
-		
 		-- Tracking Bar Manager
 		StatusTrackingBarManager:SetParent(T.Hider)
 	end
