@@ -39,8 +39,10 @@ Engine[1].Version = GetAddOnMetadata(AddOn, "Version")
 Engine[1].VersionNumber = tonumber(Engine[1].Version)
 Engine[1].WoWPatch, Engine[1].WoWBuild, Engine[1].WoWPatchReleaseDate, Engine[1].TocVersion = GetBuildInfo()
 Engine[1].WoWBuild = tonumber(Engine[1].WoWBuild)
-Engine[1].Hider = CreateFrame("Frame", nil, UIParent)
+Engine[1].Hider = CreateFrame("Frame", "TukuiHider", UIParent)
 Engine[1].PetHider = CreateFrame("Frame", "TukuiPetHider", UIParent, "SecureHandlerStateTemplate")
+Engine[1].OffScreen = CreateFrame("Frame", "TukuiOffScreen", UIParent)
+
 
 SLASH_RELOADUI1 = "/rl"
 SlashCmdList.RELOADUI = ReloadUI

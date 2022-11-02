@@ -79,6 +79,11 @@ T.IconCoord = {0.08, 0.92, 0.08, 0.92}
 -- Our hider frame
 T.Hider:Hide()
 
+-- Our Hider frame offscreen
+T.OffScreen:SetSize(500, 500)
+T.OffScreen:ClearAllPoints()
+T.OffScreen:SetPoint("BOTTOM", 0, -2000)
+
 -- Our pet hider frame
 T.PetHider:SetAllPoints()
 T.PetHider:SetFrameStrata("LOW")
