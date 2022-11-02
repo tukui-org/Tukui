@@ -13,7 +13,7 @@ local Movers = T["Movers"]
 local Noop = function() return end
 
 local Frames = {
-	MainMenuBar,
+	--MainMenuBar,
 	MainMenuBarArtFrame,
 	OverrideActionBar,
 	PossessBarFrame,
@@ -28,13 +28,16 @@ function ActionBars:DisableBlizzard()
 	MainMenuBar:UnregisterAllEvents()
 	
 	if T.Retail then
-		-- FIX ME
-		--MainMenuBar:EnableMouse(false)
-		--MainMenuBar.EndCaps:SetAlpha(0)
-		--MainMenuBar.BorderArt:SetAlpha(0)
-		--MainMenuBar.ActionBarPageNumber:SetParent(T.Hider)
-		--MainMenuBar.Background:SetParent(T.Hider)
-		--MainMenuBarVehicleLeaveButton:SetParent(T.Hider)
+		-- Hack to stop transitions
+		ActionBarBusy = function() return true end
+		
+		-- Hide MainMenuBar but keep action buttons parented to it
+		MainMenuBar:EnableMouse(false)
+		MainMenuBar.EndCaps:SetAlpha(0)
+		MainMenuBar.BorderArt:SetAlpha(0)
+		MainMenuBar.ActionBarPageNumber:SetParent(T.Hider)
+		MainMenuBar.Background:SetParent(T.Hider)
+		MainMenuBarVehicleLeaveButton:SetParent(T.Hider)
 	else
 		MainMenuBar:SetParent(T.Hider)
 	end

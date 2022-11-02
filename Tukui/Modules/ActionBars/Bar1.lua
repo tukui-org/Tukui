@@ -84,8 +84,14 @@ function ActionBars:CreateBar1()
 	]])
 
 	ActionBar1:SetAttribute("_onstate-page", [[
-		if HasTempShapeshiftActionBar() then
+		if HasVehicleActionBar() then
+			newstate = GetVehicleBarIndex() or newstate
+		elseif HasOverrideActionBar() then
+			newstate = GetOverrideBarIndex() or newstate
+		elseif HasTempShapeshiftActionBar() then
 			newstate = GetTempShapeshiftBarIndex() or newstate
+		elseif HasBonusActionBar() then
+			newstate = GetBonusBarIndex() or newstate
 		end
 
 		for i, Button in ipairs(Button) do
@@ -112,13 +118,11 @@ function ActionBars:CreateBar1()
 				local PreviousButton = _G["ActionButton"..i-1]
 
 				Button:SetSize(Size, Size)
-				Button:SetParent(self)
 				Button:ClearAllPoints()
 				Button:SetAttribute("showgrid", 1)
 
 				if T.Retail then
-					-- FIX ME
-					-- Button:ShowGrid(ACTION_BUTTON_SHOW_GRID_REASON_EVENT)
+					Button:SetParent(self)
 				else
 					ActionButton_ShowGrid(Button)
 				end
