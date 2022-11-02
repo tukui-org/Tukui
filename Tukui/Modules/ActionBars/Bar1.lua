@@ -122,8 +122,10 @@ function ActionBars:CreateBar1()
 				Button:SetAttribute("showgrid", 1)
 
 				if T.Retail then
-					Button:SetParent(self)
+					
 				else
+					Button:SetParent(self)
+					
 					ActionButton_ShowGrid(Button)
 				end
 

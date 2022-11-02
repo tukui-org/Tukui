@@ -28,6 +28,7 @@ function ActionBars:DisableBlizzard()
 	MainMenuBar:UnregisterAllEvents()
 	
 	if T.Retail then
+		-- Need to do this because of the shitty broken flyout bugs with new blizz ui
 		-- Hack to stop transitions
 		ActionBarBusy = function() return true end
 		
