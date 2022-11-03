@@ -30,9 +30,6 @@ function ActionBars:CreateStanceBar()
 	StanceBarFrame:SetPoint("TOPLEFT", StanceBar, "TOPLEFT", -7, 0)
 	StanceBarFrame:EnableMouse(false)
 
-	-- This is the function in DF that move the stancebar bar to original position
-	StanceBarFrame.UpdateGridLayout = function() return false end
-
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
 
