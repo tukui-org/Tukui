@@ -377,7 +377,8 @@ function UnitFrames:PostCreateAura(button, unit)
 	local isCancellable = button:GetParent().isCancellable
 	local isAnimated = C.UnitFrames.FlashRemovableBuffs and button:GetParent().isAnimated
 	local isNamePlate = button:GetParent().isNameplate
-
+	local isCooldownSize = button:GetParent().size and button:GetParent().size >= 20
+	
 	-- Right-click-cancel script
 	if isCancellable then
 		-- Add a button.index to allow CancelUnitAura to work with player
@@ -409,7 +410,27 @@ function UnitFrames:PostCreateAura(button, unit)
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
 		
-		if not T.Retail or isNamePlate then
+		if T.Retail and not Cooldown.IsFontEdited then
+			local NumRegions = Cooldown:GetNumRegions()
+
+			for i = 1, NumRegions do
+				local Region = select(i, Cooldown:GetRegions())
+
+				if Region.GetText then
+					local Font = T.GetFont(C["Cooldowns"].Font)
+
+					Font = _G[Font]:GetFont()
+
+					Region:SetFont(Font, 14, "OUTLINE")
+					Region:SetPoint("CENTER", 1, 0)
+					Region:SetTextColor(1, 0, 0)
+				end
+			end
+			
+			Cooldown.IsFontEdited = true
+		end
+		
+		if not isCooldownSize then
 			Cooldown:SetHideCountdownNumbers(true)
 		end
 		
