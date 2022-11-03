@@ -233,7 +233,6 @@ function Loading:RemoveEditFrame(frame)
 		local Name = Frame:GetName()
 		
 		if frame == Name then
-			print(Name.. " is removed")
 			table.remove(EditModeManagerFrame.registeredSystemFrames, i)
 		end
 	end
