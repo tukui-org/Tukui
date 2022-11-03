@@ -451,6 +451,9 @@ function Loot:Enable()
 	Movers:RegisterFrame(TukuiLootFrame, "Loot Frame")
 
 	tinsert(UISpecialFrames, "TukuiLootFrame")
+	
+	-- Remove some editable frames
+	T.Loading:RemoveEditFrame("LootFrame")
 end
 
 Inventory.Loot = Loot

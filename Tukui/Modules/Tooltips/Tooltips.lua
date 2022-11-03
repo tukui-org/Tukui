@@ -452,4 +452,7 @@ function Tooltip:Enable()
 	end
 
 	T.Movers:RegisterFrame(self.Anchor, "Tooltip")
+	
+	-- Remove some editable frames
+	T.Loading:RemoveEditFrame("GameTooltipDefaultContainer")
 end

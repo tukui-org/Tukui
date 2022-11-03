@@ -489,6 +489,9 @@ if T.Retail then
 		self.ToggleButton:SetScript("OnClick", self.Toggle)
 
 		SetOverrideBindingClick(self.ToggleButton, true, "SHIFT-O", "TukuiObjectiveTrackerToggleButton")
+		
+		-- Remove some editable frames
+		T.Loading:RemoveEditFrame("ObjectiveTrackerFrame")
 	end
 
 	Misc.ObjectiveTracker = ObjectiveTracker

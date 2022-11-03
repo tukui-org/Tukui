@@ -155,8 +155,14 @@ if T.Retail then
 					else
 						-- it's a dropdown, and we don't need them
 						Button:StripTextures()
-						Button.Text:Hide()
-						Button.Button:Hide()
+						
+						if Button.Button then
+							Button.Button:Hide()
+						end
+						
+						if Button.Text then
+							Button.Text:Hide()
+						end
 					end
 				end
 			end

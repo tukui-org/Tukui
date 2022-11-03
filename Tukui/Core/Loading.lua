@@ -223,6 +223,22 @@ function Loading:VerifyDatabase()
 	end
 end
 
+function Loading:RemoveEditFrame(frame)
+	if not T.Retail then
+		return
+	end
+	
+	for i, f in pairs(EditModeManagerFrame.registeredSystemFrames) do
+		local Frame = f
+		local Name = Frame:GetName()
+		
+		if frame == Name then
+			print(Name.. " is removed")
+			table.remove(EditModeManagerFrame.registeredSystemFrames, i)
+		end
+	end
+end
+
 function Loading:OnEvent(event)
 	-- We verify everything is ok with our savedvariables
 	self:VerifyDatabase()

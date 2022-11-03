@@ -1130,4 +1130,14 @@ function UnitFrames:Enable()
 
 	-- Overwrite oUF Pet Battle frame visibility
 	RegisterStateDriver(Tukui_PetBattleFrameHider, "visibility", "hide")
+	
+	-- Remove some editable frames
+	T.Loading:RemoveEditFrame("PlayerFrame")
+	T.Loading:RemoveEditFrame("PartyFrame")
+	T.Loading:RemoveEditFrame("TargetFrame")
+	T.Loading:RemoveEditFrame("FocusFrame")
+	T.Loading:RemoveEditFrame("BossTargetFrameContainer")
+	T.Loading:RemoveEditFrame("ArenaEnemyFramesContainer")
+	T.Loading:RemoveEditFrame("CompactRaidFrameContainer")
+	T.Loading:RemoveEditFrame("PlayerCastingBarFrame")
 end
