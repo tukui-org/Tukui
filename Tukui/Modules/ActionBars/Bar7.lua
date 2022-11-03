@@ -38,7 +38,7 @@ function ActionBars:CreateBar7()
 	MultiBar6:SetShown(true)
 	MultiBar6:EnableMouse(false)
 	MultiBar6:SetParent(ActionBar7)
-	--MultiBar6.flyoutDirection = "LEFT"
+	MultiBar6:SetScale(1)
 
 	if T.Retail then
 		MultiBar6.QuickKeybindGlow:SetParent(T.Hider)

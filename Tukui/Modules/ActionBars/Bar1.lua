@@ -175,6 +175,9 @@ function ActionBars:CreateBar1()
 	end
 
 	Movers:RegisterFrame(ActionBar1, "Action Bar #1")
+	
+	-- Be sure the scaling of MainMenuBar is always at 100%
+	MainMenuBar:SetScale(1)
 
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1

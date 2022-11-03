@@ -39,7 +39,7 @@ function ActionBars:CreateBar3()
 	MultiBarBottomRight:SetShown(true)
 	MultiBarBottomRight:EnableMouse(false)
 	MultiBarBottomRight:SetParent(ActionBar3)
-	--MultiBarBottomRight.flyoutDirection = "UP"
+	MultiBarBottomRight:SetScale(1)
 
 	if T.Retail then
 		MultiBarBottomRight.QuickKeybindGlow:SetParent(T.Hider)

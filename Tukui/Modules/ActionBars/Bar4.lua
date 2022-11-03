@@ -38,6 +38,7 @@ function ActionBars:CreateBar4()
 	MultiBarRight:SetShown(true)
 	MultiBarRight:EnableMouse(false)
 	MultiBarRight:SetParent(ActionBar4)
+	MultiBarRight:SetScale(1)
 
 	if T.Retail then
 		MultiBarRight.QuickKeybindGlow:SetParent(T.Hider)
