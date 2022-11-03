@@ -10,6 +10,7 @@ TukuiPopups.Total = 4
 
 function TukuiPopups:HidePopup()
 	local Popup = self:GetParent()
+	
 	Popup:Hide()
 end
 
