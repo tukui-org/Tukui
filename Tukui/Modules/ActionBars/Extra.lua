@@ -43,6 +43,7 @@ function ActionBars:SetupExtraButton()
 	local Icon = ExtraActionButton1Icon
 
 	Bar:EnableMouse(false)
+	Bar:SetParent(UIParent)
 
 	Holder:SetSize(160, 80)
 	Holder:SetPoint("BOTTOM", 0, 250)

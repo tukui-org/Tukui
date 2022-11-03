@@ -27,6 +27,7 @@ function ActionBars:CreateBar1()
 	ActionBar1:SetFrameLevel(10)
 	ActionBar1:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
+	ActionBar1.GetSpellFlyoutDirection = function() return "UP" end -- FIX ME : Tainting
 
 	if C.ActionBars.ShowBackdrop then
 		ActionBar1:CreateBackdrop()
@@ -117,16 +118,13 @@ function ActionBars:CreateBar1()
 				local Button = _G["ActionButton"..i]
 				local PreviousButton = _G["ActionButton"..i-1]
 
+				Button:SetParent(self)
 				Button:SetSize(Size, Size)
 				Button:ClearAllPoints()
 				Button:SetAttribute("showgrid", 1)
 
-				if T.Retail then
-					
-				else
-					Button:SetParent(self)
-					
-					ActionButton_ShowGrid(Button)
+				if not T.Retail then
+					ActionButton_ShowGrid(Button)	
 				end
 
 				ActionBars:SkinButton(Button)

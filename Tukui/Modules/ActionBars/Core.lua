@@ -13,7 +13,7 @@ local Movers = T["Movers"]
 local Noop = function() return end
 
 local Frames = {
-	--MainMenuBar,
+	MainMenuBar,
 	MainMenuBarArtFrame,
 	OverrideActionBar,
 	PossessBarFrame,
@@ -24,24 +24,6 @@ local Frames = {
 
 function ActionBars:DisableBlizzard()
 	local Hider = T.Hider
-	
-	MainMenuBar:UnregisterAllEvents()
-	
-	if T.Retail then
-		-- Need to do this because of the shitty broken flyout bugs with new blizz ui
-		-- Hack to stop transitions
-		ActionBarBusy = function() return true end
-		
-		-- Hide MainMenuBar but keep action buttons parented to it
-		MainMenuBar:EnableMouse(false)
-		MainMenuBar.EndCaps:SetAlpha(0)
-		MainMenuBar.BorderArt:SetAlpha(0)
-		MainMenuBar.ActionBarPageNumber:SetParent(T.Hider)
-		MainMenuBar.Background:SetParent(T.Hider)
-		MainMenuBarVehicleLeaveButton:SetParent(T.Hider)
-	else
-		MainMenuBar:SetParent(T.Hider)
-	end
 
 	for _, frame in pairs(Frames) do
 		frame:UnregisterAllEvents()
