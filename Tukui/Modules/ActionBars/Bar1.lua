@@ -27,7 +27,6 @@ function ActionBars:CreateBar1()
 	ActionBar1:SetFrameLevel(10)
 	ActionBar1:SetWidth((Size * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	ActionBar1:SetHeight((Size * NumRow) + (Spacing * (NumRow + 1)))
-	ActionBar1.GetSpellFlyoutDirection = function() return "UP" end -- FIX ME : Tainting
 
 	if C.ActionBars.ShowBackdrop then
 		ActionBar1:CreateBackdrop()
