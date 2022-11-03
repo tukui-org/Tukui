@@ -47,6 +47,8 @@ end
 function TalkingHead:Enable()
 	if not C.Misc.TalkingHeadEnable then
 		UIParent:UnregisterEvent("TALKINGHEAD_REQUESTED")
+		
+		TalkingHeadFrame:UnregisterAllEvents()
 
 		return
 	end
