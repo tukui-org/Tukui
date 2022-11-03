@@ -128,7 +128,7 @@ if T.Retail then
 				QuestItemButton:CreateBackdrop()
 				QuestItemButton:CreateShadow()
 				QuestItemButton:StyleButton()
-				QuestItemButton:SetNormalTexture(nil)
+				QuestItemButton:SetNormalTexture("")
 
 				if (Icon) then
 					Icon:SetInside()
