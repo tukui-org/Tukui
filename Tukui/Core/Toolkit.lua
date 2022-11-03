@@ -25,21 +25,6 @@ local Tabs = {"LeftDisabled", "MiddleDisabled", "RightDisabled", "Left", "Middle
 local Hider = CreateFrame("Frame", nil, UIParent) Hider:Hide()
 local InvisibleTex = [[Interface\AddOns\Tukui\Medias\Textures\Others\Invisible]]
 
--- Revert to old texture func before DragonFlight
-local function GetTextureOrFallback(t) return (not t or (type(t) == "string" and strmatch(t, "^%s+$"))) and InvisibleTex or t end
-local function SetNormalTexture(frame, texture) frame:_SetNormalTexture(GetTextureOrFallback(texture)) end
-local function SetDisabledTexture(frame, texture) frame:_SetDisabledTexture(GetTextureOrFallback(texture)) end
-local function SetCheckedTexture(frame, texture) frame:_SetCheckedTexture(GetTextureOrFallback(texture)) end
-local function SetPushedTexture(frame, texture) frame:_SetPushedTexture(GetTextureOrFallback(texture)) end
-local function SetHighlightTexture(frame, texture) frame:_SetHighlightTexture(GetTextureOrFallback(texture)) end
-local function CheckTextureAPI(meta, api, key)
-	local orig, func = '_'..key, meta[key]
-	if meta[orig] ~= func then
-		meta[orig] = func -- keep a copy of the original
-		meta[key] = api -- use our neew one
-	end
-end
-
 -- Tables
 Toolkit.Settings = {}
 Toolkit.API = {}
@@ -607,15 +592,6 @@ end
 
 Toolkit.Functions.AddAPI = function(object)
 	local mt = getmetatable(object).__index
-	
-	-- For DragonFlight
-	if not object._SetNormalTexture then
-		CheckTextureAPI(mt, SetNormalTexture, "SetNormalTexture")
-		CheckTextureAPI(mt, SetPushedTexture, "SetPushedTexture")
-		CheckTextureAPI(mt, SetCheckedTexture, "SetCheckedTexture")
-		CheckTextureAPI(mt, SetDisabledTexture, 'SetDisabledTexture')
-		CheckTextureAPI(mt, SetHighlightTexture, "SetHighlightTexture")
-	end
 
 	for API, FUNCTIONS in pairs(Toolkit.API) do
 		if not object[API] then mt[API] = Toolkit.API[API] end
