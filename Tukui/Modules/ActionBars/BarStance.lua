@@ -33,6 +33,7 @@ function ActionBars:CreateStanceBar()
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
 
+		Button:SetScale(1)
 		Button:Show()
 
 		if (i ~= 1) then

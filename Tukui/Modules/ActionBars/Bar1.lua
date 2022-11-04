@@ -121,6 +121,7 @@ function ActionBars:CreateBar1()
 				Button:SetSize(Size, Size)
 				Button:ClearAllPoints()
 				Button:SetAttribute("showgrid", 1)
+				Button:SetScale(1)
 
 				if not T.Retail then
 					ActionButton_ShowGrid(Button)	

@@ -54,6 +54,7 @@ function ActionBars:CreateBar2()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
+		Button:SetScale(1)
 
 		ActionBars:SkinButton(Button)
 
