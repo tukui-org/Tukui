@@ -604,6 +604,16 @@ function UnitFrames:DisplayNameplatePowerAndCastBar(unit, cur, min, max)
 	end
 end
 
+function UnitFrames:RunesUpdateColor(event, runeid)
+	local Bar = self.Runes
+	
+	for i = 1, 6 do
+		local RuneType = GetRuneType(i)
+		
+		Bar[i]:SetStatusBarColor(unpack(T.Colors.runes[RuneType]))
+	end
+end
+
 function UnitFrames:RunesPostUpdate(runemap)
 	local Bar = self
 	local RuneMap = runemap

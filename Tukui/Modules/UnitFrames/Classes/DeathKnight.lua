@@ -46,6 +46,10 @@ UnitFrames.AddClassFeatures["DEATHKNIGHT"] = function(self)
 
 	RunesBar.PostUpdate = UnitFrames.RunesPostUpdate
 	RunesBar.colorSpec = true
+	
+	if T.WotLK then
+		RunesBar.UpdateColor = UnitFrames.RunesUpdateColor
+	end
 
 	-- Register
 	self.Runes = RunesBar
