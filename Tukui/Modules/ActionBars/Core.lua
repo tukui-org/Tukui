@@ -178,8 +178,6 @@ function ActionBars:UpdatePetBar()
 	if not PetHasActionBar() then
 		HidePetActionBar()
 	end
-	
-	ActionBars:UpdatePetBarButtons()
 
 	PetActionBarFrame.rangeTimer = -1
 end
