@@ -253,7 +253,11 @@ function Loading:OnEvent(event)
 		T["Maps"]["Worldmap"]:Enable()
 		T["DataTexts"]:Enable()
 		T["Chat"]:Enable()
-		--T["ActionBars"]:Enable()
+		
+		if not T.Retail then
+			T["ActionBars"]:Enable()
+		end
+		
 		T["Cooldowns"]:Enable()
 		T["Miscellaneous"]:Enable()
 		T["UnitFrames"]:Enable()

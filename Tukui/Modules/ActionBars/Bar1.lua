@@ -110,7 +110,7 @@ function ActionBars:CreateBar1()
 
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
-			self:UpdateMainBarButtons()
+			ActionBars:UpdateMainBarButtons()
 		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then
 			for i = 1, 12 do
 				local Button = _G["ActionButton"..i]
@@ -144,5 +144,7 @@ function ActionBars:CreateBar1()
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1
 	
-	self:UpdateMainBarButtons()
+	if T.Retail then
+		self:UpdateMainBarButtons()
+	end
 end
