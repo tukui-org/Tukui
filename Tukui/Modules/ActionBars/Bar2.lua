@@ -38,7 +38,6 @@ function ActionBars:CreateBar2()
 	MultiBarBottomLeft:SetShown(true)
 	MultiBarBottomLeft:EnableMouse(false)
 	MultiBarBottomLeft:SetParent(ActionBar2)
-	MultiBarBottomLeft:SetScale(1)
 
 	if T.Retail then
 		MultiBarBottomLeft.QuickKeybindGlow:SetParent(T.Hider)
@@ -54,7 +53,6 @@ function ActionBars:CreateBar2()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-		Button:SetScale(1)
 
 		ActionBars:SkinButton(Button)
 

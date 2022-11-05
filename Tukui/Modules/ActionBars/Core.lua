@@ -508,19 +508,4 @@ function ActionBars:Enable()
 	if T.Retail then
 		self:SetupExtraButton()
 	end
-	
-	-- Remove some editable frames
-	T.Loading:RemoveEditFrame("MainMenuBar")
-	T.Loading:RemoveEditFrame("MainMenuBarVehicleLeaveButton")
-	T.Loading:RemoveEditFrame("MultiBarBottomLeft")
-	T.Loading:RemoveEditFrame("MultiBarBottomRight")
-	T.Loading:RemoveEditFrame("PetActionBar")
-	T.Loading:RemoveEditFrame("MultiBarLeft")
-	T.Loading:RemoveEditFrame("MultiBarRight")
-	T.Loading:RemoveEditFrame("MultiBar5")
-	T.Loading:RemoveEditFrame("MultiBar6")
-	T.Loading:RemoveEditFrame("MultiBar7")
-	T.Loading:RemoveEditFrame("StanceBar")
-	T.Loading:RemoveEditFrame("PossessActionBar")
-	T.Loading:RemoveEditFrame("ExtraAbilityContainer")
 end

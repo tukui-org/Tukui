@@ -322,8 +322,4 @@ function Auras:Enable()
 	EnterWorld:SetScript("OnEvent", function(self, event)
 		Auras:OnEnterWorld()
 	end)
-	
-	-- Remove some editable frames
-	T.Loading:RemoveEditFrame("BuffFrame")
-	T.Loading:RemoveEditFrame("DebuffFrame")
 end

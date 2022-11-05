@@ -38,7 +38,6 @@ function ActionBars:CreateBar8()
 	MultiBar7:SetShown(true)
 	MultiBar7:EnableMouse(false)
 	MultiBar7:SetParent(ActionBar8)
-	MultiBar7:SetScale(1)
 
 	MultiBar7.QuickKeybindGlow:SetParent(T.Hider)
 
@@ -52,7 +51,6 @@ function ActionBars:CreateBar8()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-		Button:SetScale(1)
 
 		ActionBars:SkinButton(Button)
 

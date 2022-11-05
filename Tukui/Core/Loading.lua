@@ -295,12 +295,20 @@ function Loading:OnEvent(event)
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
 		T["Help"]:Enable()
+	elseif (event == "EDIT_MODE_LAYOUTS_UPDATED") then
+		-- Tukui is base on Modern Layout, so always set that layout
+		--C_EditMode.SetActiveLayout(1)
 	end
 end
 
 Loading:RegisterEvent("PLAYER_LOGIN")
 Loading:RegisterEvent("VARIABLES_LOADED")
 Loading:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+if T.Retail then
+	Loading:RegisterEvent("EDIT_MODE_LAYOUTS_UPDATED")
+end
+
 Loading:SetScript("OnEvent", Loading.OnEvent)
 
 T["Loading"] = Loading

@@ -47,8 +47,6 @@ function ActionBars:CreatePetBar()
 		Button:ClearAllPoints()
 		Button:SetSize(PetSize, PetSize)
 		Button:SetNormalTexture("")
-		Button:SetScale(1)
-		Button:Show()
 
 		if (i == 1) then
 			Button:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)

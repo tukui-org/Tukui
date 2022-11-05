@@ -55,9 +55,6 @@ function TalkingHead:Enable()
 
 	self:RegisterEvent("ADDON_LOADED")
 	self:SetScript("OnEvent", self.OnEvent)
-	
-	-- Remove some editable frames
-	T.Loading:RemoveEditFrame("TalkingHeadFrame")
 end
 
 Miscellaneous.TalkingHead = TalkingHead

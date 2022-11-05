@@ -846,7 +846,4 @@ function Chat:Enable()
 	Whisper:SetScript("OnEvent", function(self, event)
 		Chat:PlayWhisperSound()
 	end)
-	
-	-- Remove some editable frames
-	T.Loading:RemoveEditFrame("ChatFrame1")
 end

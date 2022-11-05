@@ -121,7 +121,6 @@ function ActionBars:CreateBar1()
 				Button:SetSize(Size, Size)
 				Button:ClearAllPoints()
 				Button:SetAttribute("showgrid", 1)
-				Button:SetScale(1)
 
 				if not T.Retail then
 					ActionButton_ShowGrid(Button)	
@@ -173,9 +172,6 @@ function ActionBars:CreateBar1()
 	end
 
 	Movers:RegisterFrame(ActionBar1, "Action Bar #1")
-	
-	-- Be sure the scaling of MainMenuBar is always at 100%
-	MainMenuBar:SetScale(1)
 
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1

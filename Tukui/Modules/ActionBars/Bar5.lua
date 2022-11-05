@@ -38,7 +38,6 @@ function ActionBars:CreateBar5()
 	MultiBarLeft:SetShown(true)
 	MultiBarLeft:EnableMouse(false)
 	MultiBarLeft:SetParent(ActionBar5)
-	MultiBarLeft:SetScale(1)
 
 	if T.Retail then
 		MultiBarLeft.QuickKeybindGlow:SetParent(T.Hider)
