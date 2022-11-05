@@ -587,9 +587,15 @@ function ActionBars:Enable()
 		
 		T.Print("Currently having a lot of issue with the pet bar on dragon flight, so we use the default blizzard bar for now until fixes are found. You can move it anywhere on screen with /tukui move. Sorry!")
 		
-		-- TEMP
+		-- FIX ME - TEMP
 		PetActionBar:SetParent(UIParent)
 		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
+		PetActionBar:CreateBackdrop()
+		PetActionBar.Backdrop:ClearAllPoints()
+		PetActionBar.Backdrop:SetPoint("LEFT", -4, 0)
+		PetActionBar.Backdrop:SetPoint("RIGHT", 0, 0)
+		PetActionBar.Backdrop:SetPoint("TOP", 0, 0)
+		PetActionBar.Backdrop:SetPoint("BOTTOM", 0, -4)
 		
 		self:SkinPetButtons()
 		
