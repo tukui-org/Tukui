@@ -537,7 +537,7 @@ function ActionBars:UpdatePetBarButtons()
 		local Button = _G["PetActionButton"..i]
 		local PreviousButton = _G["PetActionButton"..i-1]
 
-		--Button:SetParent(Bar)
+		Button:SetParent(Bar)
 		Button:ClearAllPoints()
 		Button:SetSize(PetSize, PetSize)
 		Button:SetNormalTexture("")
@@ -578,8 +578,7 @@ function ActionBars:Enable()
 		self:CreateBar7()
 		self:CreateBar8()
 	end
-	
-	--self:CreatePetBar()
+
 	self:CreateStanceBar()
 	self:AddHooks()
 
@@ -593,5 +592,7 @@ function ActionBars:Enable()
 		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
 		
 		Movers:RegisterFrame(PetActionBar, "Pet Action Bar")
+	else
+		self:CreatePetBar()
 	end
 end

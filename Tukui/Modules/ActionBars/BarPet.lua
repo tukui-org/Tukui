@@ -33,7 +33,7 @@ function ActionBars:CreatePetBar()
 
 	PetActionBarFrame:EnableMouse(false)
 	PetActionBarFrame:ClearAllPoints()
-	--PetActionBarFrame:SetParent(Bar)
+	PetActionBarFrame:SetParent(Bar)
 	
 	if not T.Retail then
 		ActionBars:UpdatePetBarButtons()
