@@ -178,6 +178,8 @@ function ActionBars:UpdatePetBar()
 	if not PetHasActionBar() then
 		HidePetActionBar()
 	end
+	
+	ActionBars:UpdatePetBarButtons()
 
 	PetActionBarFrame.rangeTimer = -1
 end
@@ -526,6 +528,38 @@ function ActionBars:UpdateMainBarButtons()
 	end
 end
 
+function ActionBars:UpdatePetBarButtons()
+	local NumPerRows = C.ActionBars.BarPetButtonsPerRow
+	local NextRowButtonAnchor = _G["PetActionButton1"]
+	local PetSize = C.ActionBars.PetButtonSize
+	local Spacing = C.ActionBars.ButtonSpacing
+	local Bar = ActionBars.Bars.Pet
+
+	for i = 1, NUM_PET_ACTION_SLOTS do
+		local Button = _G["PetActionButton"..i]
+		local PreviousButton = _G["PetActionButton"..i-1]
+
+		--Button:SetParent(Bar)
+		Button:ClearAllPoints()
+		Button:SetSize(PetSize, PetSize)
+		Button:SetNormalTexture("")
+
+		if (i == 1) then
+			Button:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
+		elseif (i == NumPerRows + 1) then
+			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+			NumPerRows = NumPerRows + ButtonsPerRow
+			NextRowButtonAnchor = _G["PetActionButton"..i]
+		else
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+		end
+
+		Bar:SetAttribute("addchild", Button)
+		Bar["Button"..i] = Button
+	end
+end
+
 function ActionBars:Enable()
 	if not C.ActionBars.Enable then
 		return
@@ -553,20 +587,13 @@ function ActionBars:Enable()
 
 	if T.Retail then
 		self:SetupExtraButton()
+		
+		T.Print("Currently having a lot of issue with the pet bar on dragon flight, so we use the default blizzard bar for now until fixes are found. You can move it anywhere on screen with /tukui move. Sorry!")
+		
+		-- TEMP
+		PetActionBar:SetParent(UIParent)
+		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
+		
+		Movers:RegisterFrame(PetActionBar, "Pet Action Bar")
 	end
-	
-	-- Remove some editable frames
-	--T.Loading:RemoveEditFrame("MainMenuBar")
-	--T.Loading:RemoveEditFrame("MainMenuBarVehicleLeaveButton")
-	--T.Loading:RemoveEditFrame("MultiBarBottomLeft")
-	--T.Loading:RemoveEditFrame("MultiBarBottomRight")
-	--T.Loading:RemoveEditFrame("PetActionBar")
-	--T.Loading:RemoveEditFrame("MultiBarLeft")
-	--T.Loading:RemoveEditFrame("MultiBarRight")
-	--T.Loading:RemoveEditFrame("MultiBar5")
-	--T.Loading:RemoveEditFrame("MultiBar6")
-	--T.Loading:RemoveEditFrame("MultiBar7")
-	--T.Loading:RemoveEditFrame("StanceBar")
-	--T.Loading:RemoveEditFrame("PossessActionBar")
-	--T.Loading:RemoveEditFrame("ExtraAbilityContainer")
 end

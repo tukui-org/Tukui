@@ -23,45 +23,24 @@ function ActionBars:CreatePetBar()
 	Bar:SetFrameLevel(10)
 	Bar:SetWidth((PetSize * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	Bar:SetHeight((PetSize * NumRow) + (Spacing * (NumRow + 1)))
+	
+	self.Bars.Pet = Bar
 
-	if C.ActionBars.ShowBackdrop then
+	if not T.Retail and C.ActionBars.ShowBackdrop then
 		Bar:CreateBackdrop()
 		Bar:CreateShadow()
 	end
 
-	--PetActionBarFrame:EnableMouse(0)
-	--PetActionBarFrame:ClearAllPoints()
-	--PetActionBarFrame:SetParent(T.Hider)
+	PetActionBarFrame:EnableMouse(false)
+	PetActionBarFrame:ClearAllPoints()
+	--PetActionBarFrame:SetParent(Bar)
+	
+	if not T.Retail then
+		ActionBars:UpdatePetBarButtons()
+	end
 
 	-- overwrite PetActionBar_Update, causing a lot of taint with original
 	PetActionBar_Update = ActionBars.UpdatePetBar
-
-	local NumPerRows = ButtonsPerRow
-	local NextRowButtonAnchor = _G["PetActionButton1"]
-
-	for i = 1, NUM_PET_ACTION_SLOTS do
-		local Button = _G["PetActionButton"..i]
-		local PreviousButton = _G["PetActionButton"..i-1]
-
-		--Button:SetParent(Bar)
-		Button:ClearAllPoints()
-		Button:SetSize(PetSize, PetSize)
-		Button:SetNormalTexture("")
-
-		if (i == 1) then
-			Button:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
-		elseif (i == NumPerRows + 1) then
-			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
-
-			NumPerRows = NumPerRows + ButtonsPerRow
-			NextRowButtonAnchor = _G["PetActionButton"..i]
-		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
-		end
-
-		Bar:SetAttribute("addchild", Button)
-		Bar["Button"..i] = Button
-	end
 
 	if not T.Retail then
 		hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
@@ -72,6 +51,4 @@ function ActionBars:CreatePetBar()
 	RegisterStateDriver(Bar, "visibility", "[@pet,exists,nopossessbar] show; hide")
 
 	Movers:RegisterFrame(Bar, "Pet Action Bar")
-
-	self.Bars.Pet = Bar
 end
