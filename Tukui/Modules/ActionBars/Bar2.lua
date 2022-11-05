@@ -35,7 +35,10 @@ function ActionBars:CreateBar2()
 		ActionBar2:CreateShadow()
 	end
 
-	MultiBarBottomLeft:SetShown(true)
+	if not T.Retail then -- Tainting in DF
+		MultiBarBottomLeft:SetShown(true)
+	end
+	
 	MultiBarBottomLeft:EnableMouse(false)
 	MultiBarBottomLeft:SetParent(ActionBar2)
 

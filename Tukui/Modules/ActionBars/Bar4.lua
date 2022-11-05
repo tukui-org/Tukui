@@ -35,10 +35,12 @@ function ActionBars:CreateBar4()
 		ActionBar4:CreateShadow()
 	end
 
-	MultiBarRight:SetShown(true)
+	if not T.Retail then -- Tainting in DF
+		MultiBarRight:SetShown(true)
+	end
+	
 	MultiBarRight:EnableMouse(false)
 	MultiBarRight:SetParent(ActionBar4)
-	MultiBarRight:SetScale(1)
 
 	if T.Retail then
 		MultiBarRight.QuickKeybindGlow:SetParent(T.Hider)

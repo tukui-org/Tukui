@@ -65,4 +65,7 @@ function ActionBars:CreateStanceBar()
 	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
 
 	self.Bars.Stance = StanceBar
+	
+	ActionBars:UpdateStanceBar(StanceBar)
+	ActionBars:SkinStanceButtons(StanceBar)
 end

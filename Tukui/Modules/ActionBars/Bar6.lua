@@ -35,7 +35,6 @@ function ActionBars:CreateBar6()
 		ActionBar6:CreateShadow()
 	end
 
-	MultiBar5:SetShown(true)
 	MultiBar5:EnableMouse(false)
 	MultiBar5:SetParent(ActionBar6)
 

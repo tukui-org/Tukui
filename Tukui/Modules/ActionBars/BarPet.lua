@@ -29,9 +29,9 @@ function ActionBars:CreatePetBar()
 		Bar:CreateShadow()
 	end
 
-	PetActionBarFrame:EnableMouse(0)
-	PetActionBarFrame:ClearAllPoints()
-	PetActionBarFrame:SetParent(T.Hider)
+	--PetActionBarFrame:EnableMouse(0)
+	--PetActionBarFrame:ClearAllPoints()
+	--PetActionBarFrame:SetParent(T.Hider)
 
 	-- overwrite PetActionBar_Update, causing a lot of taint with original
 	PetActionBar_Update = ActionBars.UpdatePetBar
@@ -43,7 +43,7 @@ function ActionBars:CreatePetBar()
 		local Button = _G["PetActionButton"..i]
 		local PreviousButton = _G["PetActionButton"..i-1]
 
-		Button:SetParent(Bar)
+		--Button:SetParent(Bar)
 		Button:ClearAllPoints()
 		Button:SetSize(PetSize, PetSize)
 		Button:SetNormalTexture("")
@@ -57,11 +57,6 @@ function ActionBars:CreatePetBar()
 			NextRowButtonAnchor = _G["PetActionButton"..i]
 		else
 			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
-		end
-		
-		if T.Retail then
-			-- Hope it doesn't taint
-			Button.SetPoint = function() return end
 		end
 
 		Bar:SetAttribute("addchild", Button)

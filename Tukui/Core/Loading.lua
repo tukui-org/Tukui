@@ -253,7 +253,7 @@ function Loading:OnEvent(event)
 		T["Maps"]["Worldmap"]:Enable()
 		T["DataTexts"]:Enable()
 		T["Chat"]:Enable()
-		T["ActionBars"]:Enable()
+		--T["ActionBars"]:Enable()
 		T["Cooldowns"]:Enable()
 		T["Miscellaneous"]:Enable()
 		T["UnitFrames"]:Enable()
@@ -295,7 +295,9 @@ function Loading:OnEvent(event)
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
 		T["Help"]:Enable()
-	elseif (event == "EDIT_MODE_LAYOUTS_UPDATED") then
+	elseif (event == "SETTINGS_LOADED") then
+		T["ActionBars"]:Enable()
+		
 		-- Tukui is base on Modern Layout, so always set that layout
 		--C_EditMode.SetActiveLayout(1)
 	end
@@ -306,7 +308,7 @@ Loading:RegisterEvent("VARIABLES_LOADED")
 Loading:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 if T.Retail then
-	Loading:RegisterEvent("EDIT_MODE_LAYOUTS_UPDATED")
+	Loading:RegisterEvent("SETTINGS_LOADED")
 end
 
 Loading:SetScript("OnEvent", Loading.OnEvent)

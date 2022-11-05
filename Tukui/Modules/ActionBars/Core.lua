@@ -68,6 +68,10 @@ function ActionBars:DisableBlizzard()
 		
 		-- Tracking Bar Manager
 		StatusTrackingBarManager:SetParent(T.Hider)
+		
+		-- Edit Mode
+		--EditModeUtil.IsBottomAnchoredActionBar = function(self, system) return false end
+		--EditModeUtil.IsRightAnchoredActionBar = function(self, system) return false end
 	end
 end
 
@@ -480,6 +484,48 @@ function ActionBars:UpdateMultiCastBar()
 	end
 end
 
+function ActionBars:UpdateMainBarButtons()
+	local NumPerRows = C.ActionBars.Bar1ButtonsPerRow
+	local Num = NUM_ACTIONBAR_BUTTONS
+	local NextRowButtonAnchor = _G["ActionButton1"]
+	local ActionBar1 = self.Bars.Bar1
+	local Size = C.ActionBars.NormalButtonSize
+	local NumButtons = C.ActionBars.Bar1NumButtons
+	local Spacing = C.ActionBars.ButtonSpacing
+	local ButtonsPerRow = C.ActionBars.Bar1ButtonsPerRow
+
+	for i = 1, Num do
+		local Button = _G["ActionButton"..i]
+		local PreviousButton = _G["ActionButton"..i-1]
+
+		Button:SetParent(ActionBar1)
+		Button:SetSize(Size, Size)
+		Button:ClearAllPoints()
+		Button:SetAttribute("showgrid", 1)
+
+		if not T.Retail then
+			ActionButton_ShowGrid(Button)	
+		end
+
+		ActionBars:SkinButton(Button)
+
+		if i <= NumButtons then
+			if (i == 1) then
+				Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
+			elseif (i == NumPerRows + 1) then
+				Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+				NumPerRows = NumPerRows + ButtonsPerRow
+				NextRowButtonAnchor = _G["ActionButton"..i]
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			end
+		else
+			Button:SetPoint("TOP", UIParent, "TOP", 0, 200)
+		end
+	end
+end
+
 function ActionBars:Enable()
 	if not C.ActionBars.Enable then
 		return
@@ -501,11 +547,26 @@ function ActionBars:Enable()
 		self:CreateBar8()
 	end
 	
-	self:CreatePetBar()
+	--self:CreatePetBar()
 	self:CreateStanceBar()
 	self:AddHooks()
 
 	if T.Retail then
 		self:SetupExtraButton()
 	end
+	
+	-- Remove some editable frames
+	--T.Loading:RemoveEditFrame("MainMenuBar")
+	--T.Loading:RemoveEditFrame("MainMenuBarVehicleLeaveButton")
+	--T.Loading:RemoveEditFrame("MultiBarBottomLeft")
+	--T.Loading:RemoveEditFrame("MultiBarBottomRight")
+	--T.Loading:RemoveEditFrame("PetActionBar")
+	--T.Loading:RemoveEditFrame("MultiBarLeft")
+	--T.Loading:RemoveEditFrame("MultiBarRight")
+	--T.Loading:RemoveEditFrame("MultiBar5")
+	--T.Loading:RemoveEditFrame("MultiBar6")
+	--T.Loading:RemoveEditFrame("MultiBar7")
+	--T.Loading:RemoveEditFrame("StanceBar")
+	--T.Loading:RemoveEditFrame("PossessActionBar")
+	--T.Loading:RemoveEditFrame("ExtraAbilityContainer")
 end

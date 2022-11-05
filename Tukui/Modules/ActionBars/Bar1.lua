@@ -110,39 +110,7 @@ function ActionBars:CreateBar1()
 
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
 		if (event == "PLAYER_ENTERING_WORLD") then
-			local NumPerRows = ButtonsPerRow
-			local NextRowButtonAnchor = _G["ActionButton1"]
-
-			for i = 1, Num do
-				local Button = _G["ActionButton"..i]
-				local PreviousButton = _G["ActionButton"..i-1]
-
-				Button:SetParent(self)
-				Button:SetSize(Size, Size)
-				Button:ClearAllPoints()
-				Button:SetAttribute("showgrid", 1)
-
-				if not T.Retail then
-					ActionButton_ShowGrid(Button)	
-				end
-
-				ActionBars:SkinButton(Button)
-
-				if i <= NumButtons then
-					if (i == 1) then
-						Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
-					elseif (i == NumPerRows + 1) then
-						Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
-
-						NumPerRows = NumPerRows + ButtonsPerRow
-						NextRowButtonAnchor = _G["ActionButton"..i]
-					else
-						Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
-					end
-				else
-					Button:SetPoint("TOP", UIParent, "TOP", 0, 200)
-				end
-			end
+			self:UpdateMainBarButtons()
 		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then
 			for i = 1, 12 do
 				local Button = _G["ActionButton"..i]
@@ -175,4 +143,6 @@ function ActionBars:CreateBar1()
 
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1
+	
+	self:UpdateMainBarButtons()
 end

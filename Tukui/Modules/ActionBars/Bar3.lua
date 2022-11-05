@@ -36,7 +36,10 @@ function ActionBars:CreateBar3()
 		ActionBar3:CreateShadow()
 	end
 
-	MultiBarBottomRight:SetShown(true)
+	if not T.Retail then -- Tainting in DF
+		MultiBarBottomRight:SetShown(true)
+	end
+	
 	MultiBarBottomRight:EnableMouse(false)
 	MultiBarBottomRight:SetParent(ActionBar3)
 
