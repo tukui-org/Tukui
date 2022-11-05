@@ -183,7 +183,9 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		Shine:ClearAllPoints()
 		Shine:SetPoint("CENTER", Button, 0, 0)
 
-		Button.Backdrop:SetParent(Button:GetParent())
+		if not T.Retail then
+			Button.Backdrop:SetParent(Button:GetParent())
+		end
 	end
 
 	Flash:SetTexture("")

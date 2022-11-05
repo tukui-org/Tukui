@@ -591,6 +591,8 @@ function ActionBars:Enable()
 		PetActionBar:SetParent(UIParent)
 		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
 		
+		self:SkinPetButtons()
+		
 		Movers:RegisterFrame(PetActionBar, "Pet Action Bar")
 	else
 		self:CreatePetBar()
