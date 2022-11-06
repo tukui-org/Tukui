@@ -33,7 +33,7 @@ do
 	function MicroMenu:ShownMicroButtons()
 		wipe(buttons)
 		
-		local Buttons = RetailMicroButtons or MICRO_BUTTONS
+		local Buttons = T.Retail and RetailMicroButtons or MICRO_BUTTONS
 
 		for _, name in next, Buttons do
 			local button = _G[name]
