@@ -464,7 +464,10 @@ function ActionBars:AddHooks()
 	end
 
 	if T.WotLK and C.ActionBars.MultiCastBar then
-		hooksecurefunc("ShowMultiCastActionBar", self.UpdateMultiCastBar)
+		-- MultiCastActionBarFrame is clearly coded poorly by Blizzard, it taint like crazy
+		-- Disabled for now until a fix is found
+		
+		Movers:RegisterFrame(MultiCastActionBarFrame, "MultiCastBar")
 	end
 end
 
@@ -472,15 +475,12 @@ function ActionBars:UpdateMultiCastBar()
 	local Bar = MultiCastActionBarFrame
 	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.MultiCastActionBarFrame
 
-	Movers:RegisterFrame(Bar, "MultiCastBar")
-
-	Bar:ClearAllPoints()
-	Bar:SetParent(TukuiPetHider)
-	Bar:SetPoint("BOTTOM", 0, 300)
-
 	if CustomPosition then
 		Bar:ClearAllPoints()
-		Bar:SetPoint(unpack(CustomPosition))
+		Bar:SetPointDuplicate(unpack(CustomPosition))
+	else
+		Bar:ClearAllPoints()
+		Bar:SetPointDuplicate("BOTTOM", 0, 300)
 	end
 end
 
