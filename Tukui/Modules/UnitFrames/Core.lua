@@ -430,7 +430,7 @@ function UnitFrames:PostCreateAura(button, unit)
 			Cooldown.IsFontEdited = true
 		end
 		
-		if not isCooldownSize then
+		if not isCooldownSize or not T.Retail then
 			Cooldown:SetHideCountdownNumbers(true)
 		end
 		
