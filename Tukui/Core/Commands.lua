@@ -156,7 +156,11 @@ T.SlashHandler = function(cmd)
 			DataText:ToggleDataPositions()
 		end
 	elseif (arg1 == "install" or arg1 == "reset") then
-		T.Popups.ShowPopup("RESETUI")
+		if arg2 == "blizzard" then
+			C_EditMode.SetActiveLayout(1)
+		else
+			T.Popups.ShowPopup("RESETUI")
+		end
 	elseif (arg1 == "load" or arg1 == "unload") then
 		local Loaded, Reason = LoadAddOn(arg2)
 
