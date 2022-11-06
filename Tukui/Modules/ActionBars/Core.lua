@@ -95,22 +95,25 @@ end
 
 function ActionBars:UpdatePetBar()
 	local Button, Icon, CastTexture, ShineTexture
+	local PetActionBarFrame = T.Retail and PetActionBar or PetActionBarFrame
 
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local PetActionButton = "PetActionButton" .. i
 
 		Button = _G[PetActionButton]
 		Icon = _G[PetActionButton.."Icon"]
-		CastTexture = _G[PetActionButton.."AutoCastable"]
-		ShineTexture = _G[PetActionButton.."Shine"]
+		CastTexture = T.Retail and Button.AutoCastable or _G[PetActionButton.."AutoCastable"]
+		ShineTexture = T.Retail and Button.AutoCastShine or _G[PetActionButton.."Shine"]
 
 		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled, SpellID = GetPetActionInfo(i)
-
+		
 		if not IsToken then
 			Icon:SetTexture(Texture)
+			
 			Button.tooltipName = Name
 		else
 			Icon:SetTexture(_G[Texture])
+			
 			Button.tooltipName = _G[Name]
 		end
 
@@ -126,26 +129,42 @@ function ActionBars:UpdatePetBar()
 
 		if IsActive then
 			if IsPetAttackAction(i) then
-				PetActionButton_StartFlash(Button)
+				if PetActionButton_StartFlash then
+					PetActionButton_StartFlash(Button)
+				else
+					Button:StartFlash()
+				end
 
 				Button:GetCheckedTexture():SetAlpha(0.5)
 			else
-				PetActionButton_StopFlash(Button)
+				if PetActionButton_StopFlash then
+					PetActionButton_StopFlash(Button)
+				else
+					Button:StopFlash()
+				end
 
 				Button:GetCheckedTexture():SetAlpha(1.0)
 			end
 
 			Button:SetChecked(true)
 		else
-			PetActionButton_StopFlash(Button)
+			if PetActionButton_StopFlash then
+				PetActionButton_StopFlash(Button)
+			else
+				Button:StopFlash()
+			end
 
 			Button:SetChecked(false)
 		end
 
 		if AutoCastAllowed then
-			CastTexture:Show()
+			if CastTexture then
+				CastTexture:Show()
+			end
 		else
-			CastTexture:Hide()
+			if CastTexture then
+				CastTexture:Hide()
+			end
 		end
 
 		if AutoCastEnabled then
@@ -170,13 +189,15 @@ function ActionBars:UpdatePetBar()
 			Button:SetNormalTexture("")
 		end
 
-		SharedActionButton_RefreshSpellHighlight(Button, HasPetActionHighlightMark(i))
+		if HasPetActionHighlightMark then
+			SharedActionButton_RefreshSpellHighlight(Button, HasPetActionHighlightMark(i))
+		end
 	end
 
-	PetActionBar_UpdateCooldowns()
-
-	if not PetHasActionBar() then
-		HidePetActionBar()
+	if PetActionBar_UpdateCooldowns then
+		PetActionBar_UpdateCooldowns()
+	else
+		PetActionBarFrame:UpdateCooldowns()
 	end
 
 	PetActionBarFrame.rangeTimer = -1

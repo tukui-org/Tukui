@@ -41,6 +41,7 @@ function ActionBars:CreatePetBar()
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local Button = _G["PetActionButton"..i]
+		local Icon = _G["PetActionButton"..i.."Icon"]
 		local PreviousButton = _G["PetActionButton"..i-1]
 
 		Button:SetParent(Bar)
@@ -65,16 +66,26 @@ function ActionBars:CreatePetBar()
 	end
 	
 	ActionBars:SkinPetButtons()
-	
-	ActionBars:RegisterEvent("PET_BAR_UPDATE", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("PLAYER_CONTROL_GAINED", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("PLAYER_CONTROL_LOST", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("PLAYER_ENTERING_WORLD", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("SPELLS_CHANGED", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("UNIT_FLAGS", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("UNIT_PET", ActionBars.UpdatePetBar)
-	ActionBars:RegisterEvent("PET_BAR_UPDATE_COOLDOWN", ActionBars.UpdatePetBarCooldownText)
+
+	self:RegisterEvent("PLAYER_CONTROL_LOST")
+	self:RegisterEvent("PLAYER_CONTROL_GAINED")
+	self:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED")
+	self:RegisterEvent("UNIT_PET")
+	self:RegisterEvent("UNIT_FLAGS")
+	self:RegisterEvent("PET_BAR_UPDATE")
+	self:RegisterEvent("PET_BAR_UPDATE_COOLDOWN")
+	self:RegisterEvent("PET_BAR_UPDATE_USABLE")
+	self:RegisterEvent("PET_UI_UPDATE")
+	self:RegisterEvent("PLAYER_TARGET_CHANGED")
+	self:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	self:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
+	self:SetScript("OnEvent", function(self, event, ...)
+		if event == "PET_BAR_UPDATE_COOLDOWN" then
+			self:UpdatePetBarCooldownText()
+		end
+			
+		self:UpdatePetBar()
+	end)
 	
 	RegisterStateDriver(Bar, "visibility", "[@pet,exists,nopossessbar] show; hide")
 
