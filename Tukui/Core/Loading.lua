@@ -301,9 +301,6 @@ function Loading:OnEvent(event)
 		T["Help"]:Enable()
 	elseif (event == "SETTINGS_LOADED") then
 		T["ActionBars"]:Enable()
-		
-		-- Tukui is base on Modern Layout, so always set that layout
-		--C_EditMode.SetActiveLayout(1)
 	end
 end
 
