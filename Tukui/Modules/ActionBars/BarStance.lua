@@ -5,7 +5,6 @@ local ActionBars = T["ActionBars"]
 function ActionBars:CreateStanceBar()
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local StanceBarFrame = StanceBar or StanceBarFrame
 	local Movers = T["Movers"]
 
 	if (not C.ActionBars.ShapeShift) then
@@ -30,8 +29,10 @@ function ActionBars:CreateStanceBar()
 	StanceBarFrame:SetPoint("TOPLEFT", StanceBar, "TOPLEFT", -7, 0)
 	StanceBarFrame:EnableMouse(false)
 
-	for i = 1, 10 do
+	for i = 1, NUM_STANCE_SLOTS do
 		local Button = _G["StanceButton"..i]
+
+		Button:Show()
 
 		if (i ~= 1) then
 			local Previous = _G["StanceButton"..i-1]
@@ -65,7 +66,4 @@ function ActionBars:CreateStanceBar()
 	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
 
 	self.Bars.Stance = StanceBar
-	
-	ActionBars:UpdateStanceBar(StanceBar)
-	ActionBars:SkinStanceButtons(StanceBar)
 end
