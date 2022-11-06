@@ -51,9 +51,9 @@ function ActionBars:CreateBar1()
 	local DefaultPaging
 	
 	if T.Retail then
-		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar,
+		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar
 	else
-		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;",
+		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;"
 	end
 
 	ActionBar1.Page = {
@@ -61,7 +61,7 @@ function ActionBars:CreateBar1()
 		["ROGUE"] = Rogue,
 		["WARRIOR"] = Warrior,
 		["PRIEST"] = Priest,
-		["DEFAULT"] = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;"..ShapeshiftBar..VehicleBar..OverrideBar,
+		["DEFAULT"] = DefaultPaging,
 	}
 
 	function ActionBar1:GetBar()
