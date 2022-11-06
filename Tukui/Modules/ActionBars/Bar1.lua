@@ -47,6 +47,14 @@ function ActionBars:CreateBar1()
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
 	end
+	
+	local DefaultPaging
+	
+	if T.Retail then
+		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar,
+	else
+		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;",
+	end
 
 	ActionBar1.Page = {
 		["DRUID"] = Druid,
