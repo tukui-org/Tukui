@@ -158,6 +158,7 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "install" or arg1 == "reset") then
 		if arg2 == "blizzard" then
 			C_EditMode.SetActiveLayout(1)
+			ReloadUI()
 		else
 			T.Popups.ShowPopup("RESETUI")
 		end
