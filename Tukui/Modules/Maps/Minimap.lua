@@ -242,6 +242,17 @@ function GetMinimapShape()
 	return "SQUARE"
 end
 
+function Minimap:EnableMouseWheelZoom()
+	self:EnableMouseWheel(true)
+	self:SetScript("OnMouseWheel", function(self, delta)
+		if (delta > 0) then
+			MinimapZoomIn:Click()
+		elseif (delta < 0) then
+			MinimapZoomOut:Click()
+		end
+	end)
+end
+
 function Minimap:AddZoneAndCoords()
 	local MinimapZone = CreateFrame("Button", "TukuiMinimapZone", self)
 
@@ -557,6 +568,10 @@ function Minimap:Enable()
 	self:EnableMouseOver()
 	self:AddTaxiEarlyExit()
 	self:AddHooks()
+	
+	if not T.Retail then
+		self:EnableMouseWheelZoom()
+	end
 	
 	-- Remove some editable frames
 	T.Loading:RemoveEditFrame("MinimapCluster")
