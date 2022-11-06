@@ -25,6 +25,10 @@ function ActionBars:CreateStanceBar()
 		StanceBar:CreateBackdrop()
 		StanceBar:CreateShadow()
 	end
+	
+	if T.Retail then
+		StanceBarFrame:ResetToDefaultPosition()
+	end
 
 	StanceBarFrame.ignoreFramePositionManager = true
 	StanceBarFrame:StripTextures()
