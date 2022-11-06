@@ -158,6 +158,7 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "install" or arg1 == "reset") then
 		if arg2 == "blizzard" then
 			C_EditMode.SetActiveLayout(1)
+			
 			ReloadUI()
 		else
 			T.Popups.ShowPopup("RESETUI")
@@ -255,6 +256,10 @@ T.Popups.Popup["RESETUI"] = {
 	Answer2 = CANCEL,
 	Function1 = function(self)
 		local Install = T["Install"]
+		
+		if T.Retail then
+			C_EditMode.SetActiveLayout(1)
+		end
 
 		Install:ResetSettings()
 		Install:ResetData()
