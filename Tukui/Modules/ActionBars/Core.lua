@@ -601,7 +601,7 @@ function ActionBars:Enable()
 		self:SkinPetButtons()
 		
 		-- Stance Bar
-		StanceBar:ClearAllPointsBase()
+		-- StanceBar:ClearAllPointsBase()
 		StanceBar:ClearFrameSnap()
 		StanceBar:SetParent(UIParent)
 		StanceBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (StanceBar:GetWidth() / 2), (-T.ScreenHeight / 4) + StanceBar:GetHeight() + StanceBar:GetHeight())
