@@ -169,6 +169,8 @@ function Minimap:StyleMinimap()
 		local BGFrame = MiniMapBattlefieldFrame
 		local BGFrameBorder = MiniMapBattlefieldBorder
 		local BGFrameIcon = MiniMapBattlefieldIcon
+		local LFGFrame = MiniMapLFGFrame
+		local LFGFrameBorder = MiniMapLFGFrameBorder
 
 		BGFrame:ClearAllPoints()
 		BGFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 3, -1)
@@ -178,6 +180,14 @@ function Minimap:StyleMinimap()
 		BGFrameBorder:Hide()
 
 		Mail:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -3)
+		
+		if LFGFrame then
+			LFGFrame:SetParent(Minimap)
+			LFGFrame:ClearAllPoints()
+			LFGFrame:SetPoint("TOPLEFT", 0, 2)
+			
+			LFGFrameBorder:SetAlpha(0)
+		end
 
 		if T.BCC or T.WotLK then
 			if C.Maps.MinimapTracking then
