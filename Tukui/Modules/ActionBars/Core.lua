@@ -467,7 +467,8 @@ function ActionBars:AddHooks()
 		-- MultiCastActionBarFrame is clearly coded poorly by Blizzard, it taint like crazy
 		-- Disabled for now until a fix is found
 		
-		Movers:RegisterFrame(MultiCastActionBarFrame, "MultiCastBar")
+		--hooksecurefunc("ShowMultiCastActionBar", self.UpdateMultiCastBar)
+		--Movers:RegisterFrame(Bar, "MultiCastBar")
 	end
 end
 
@@ -477,10 +478,11 @@ function ActionBars:UpdateMultiCastBar()
 
 	if CustomPosition then
 		Bar:ClearAllPoints()
-		Bar:SetPointDuplicate(unpack(CustomPosition))
+		Bar:SetPoint(unpack(CustomPosition))
 	else
 		Bar:ClearAllPoints()
-		Bar:SetPointDuplicate("BOTTOM", 0, 300)
+		Bar:SetParent(TukuiPetHider)
+		Bar:SetPoint("BOTTOM", 0, 300)
 	end
 end
 
