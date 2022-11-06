@@ -10,12 +10,16 @@ function ActionBars:CreateStanceBar()
 	if (not C.ActionBars.ShapeShift) then
 		return
 	end
+	
+	local StanceBarFrame = T.Retail and StanceBar or StanceBarFrame
 
 	local StanceBar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
 	StanceBar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
 	StanceBar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
 	StanceBar:SetFrameStrata("LOW")
 	StanceBar:SetFrameLevel(10)
+	
+	self.Bars.Stance = StanceBar
 
 	if C.ActionBars.ShowBackdrop then
 		StanceBar:CreateBackdrop()
@@ -29,9 +33,10 @@ function ActionBars:CreateStanceBar()
 	StanceBarFrame:SetPoint("TOPLEFT", StanceBar, "TOPLEFT", -7, 0)
 	StanceBarFrame:EnableMouse(false)
 
-	for i = 1, NUM_STANCE_SLOTS do
+	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
-
+		
+		Button:SetParent(StanceBarFrame)
 		Button:Show()
 
 		if (i ~= 1) then
@@ -44,26 +49,9 @@ function ActionBars:CreateStanceBar()
 			Button:SetPoint("BOTTOMLEFT", StanceBar, "BOTTOMLEFT", Spacing, Spacing)
 		end
 	end
-
-	StanceBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-	StanceBar:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
-	StanceBar:RegisterEvent("UPDATE_SHAPESHIFT_USABLE")
-	StanceBar:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
-	StanceBar:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
-	StanceBar:RegisterEvent("ACTIONBAR_PAGE_CHANGED")
-	StanceBar:RegisterEvent("SPELLS_CHANGED")
-	StanceBar:SetScript("OnEvent", function(self, event, ...)
-		if (event == "UPDATE_SHAPESHIFT_FORMS") then
-
-		elseif (event == "PLAYER_ENTERING_WORLD") then
-			ActionBars:UpdateStanceBar()
-			ActionBars:SkinStanceButtons()
-		else
-			ActionBars:UpdateStanceBar()
-		end
-	end)
+	
+	ActionBars:UpdateStanceBar()
+	ActionBars:SkinStanceButtons()
 
 	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
-
-	self.Bars.Stance = StanceBar
 end

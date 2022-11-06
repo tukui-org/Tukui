@@ -12,10 +12,15 @@ function ActionBars:CreatePetBar()
 
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local PetActionBarFrame = PetActionBarFrame
+	local PetActionBarFrame = T.Retail and PetActionBar or PetActionBarFrame
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 	local ButtonsPerRow = C.ActionBars.BarPetButtonsPerRow
 	local NumRow = ceil(10 / ButtonsPerRow)
+	
+	PetActionBarFrame:EnableMouse(false)
+	PetActionBarFrame:ClearAllPoints()
+	PetActionBarFrame:SetParent(T.Hider)
+	PetActionBarFrame:UnregisterAllEvents()
 
 	local Bar = CreateFrame("Frame", "TukuiPetActionBar", T.PetHider, "SecureHandlerStateTemplate")
 	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
@@ -23,19 +28,14 @@ function ActionBars:CreatePetBar()
 	Bar:SetFrameLevel(10)
 	Bar:SetWidth((PetSize * ButtonsPerRow) + (Spacing * (ButtonsPerRow + 1)))
 	Bar:SetHeight((PetSize * NumRow) + (Spacing * (NumRow + 1)))
+	
+	self.Bars.Pet = Bar
 
 	if C.ActionBars.ShowBackdrop then
 		Bar:CreateBackdrop()
 		Bar:CreateShadow()
 	end
-
-	PetActionBarFrame:EnableMouse(false)
-	PetActionBarFrame:ClearAllPoints()
-	PetActionBarFrame:SetParent(T.Hider)
-
-	-- overwrite PetActionBar_Update, causing a lot of taint with original
-	PetActionBar_Update = ActionBars.UpdatePetBar
-
+	
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["PetActionButton1"]
 
@@ -63,14 +63,20 @@ function ActionBars:CreatePetBar()
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button
 	end
-
-	hooksecurefunc("PetActionBar_UpdateCooldowns", ActionBars.UpdatePetBarCooldownText)
-
+	
 	ActionBars:SkinPetButtons()
-
+	
+	ActionBars:RegisterEvent("PET_BAR_UPDATE", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("PLAYER_CONTROL_GAINED", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("PLAYER_CONTROL_LOST", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("PLAYER_ENTERING_WORLD", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("PLAYER_FARSIGHT_FOCUS_CHANGED", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("SPELLS_CHANGED", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("UNIT_FLAGS", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("UNIT_PET", ActionBars.UpdatePetBar)
+	ActionBars:RegisterEvent("PET_BAR_UPDATE_COOLDOWN", ActionBars.UpdatePetBarCooldownText)
+	
 	RegisterStateDriver(Bar, "visibility", "[@pet,exists,nopossessbar] show; hide")
 
 	Movers:RegisterFrame(Bar, "Pet Action Bar")
-
-	self.Bars.Pet = Bar
 end

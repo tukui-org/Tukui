@@ -582,45 +582,8 @@ function ActionBars:Enable()
 		
 		self:SetupExtraButton()
 	end
-
-	-- Pet and Stance Bar
-	if T.Retail then
-		-- Pet Bar
-		PetActionBar:ClearAllPointsBase()
-		PetActionBar:ClearFrameSnap()
-		PetActionBar:SetParent(UIParent)
-		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
-		PetActionBar:CreateBackdrop()
-		PetActionBar.Backdrop:ClearAllPoints()
-		PetActionBar.Backdrop:SetPoint("LEFT", -4, 0)
-		PetActionBar.Backdrop:SetPoint("RIGHT", 0, 0)
-		PetActionBar.Backdrop:SetPoint("TOP", 0, 0)
-		PetActionBar.Backdrop:SetPoint("BOTTOM", 0, -4)
-		PetActionBar.Backdrop:CreateShadow()
-		
-		self:SkinPetButtons()
-		
-		-- Stance Bar
-		-- StanceBar:ClearAllPointsBase()
-		StanceBar:ClearFrameSnap()
-		StanceBar:SetParent(UIParent)
-		StanceBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (StanceBar:GetWidth() / 2), (-T.ScreenHeight / 4) + StanceBar:GetHeight() + StanceBar:GetHeight())
-		StanceBar:CreateBackdrop()
-		StanceBar.Backdrop:ClearAllPoints()
-		StanceBar.Backdrop:SetPoint("LEFT", -4, 0)
-		StanceBar.Backdrop:SetPoint("RIGHT", 6, 0)
-		StanceBar.Backdrop:SetPoint("TOP", 0, 6)
-		StanceBar.Backdrop:SetPoint("BOTTOM", 0, -4)
-		StanceBar.Backdrop:CreateShadow()
-		
-		self:SkinStanceButtons()
-		
-		Movers:RegisterFrame(PetActionBar, "Pet Action Bar")
-		Movers:RegisterFrame(StanceBar, "Stance Action Bar")
-	else
-		self:CreatePetBar()
-		self:CreateStanceBar()
-	end
-
+	
+	self:CreatePetBar()
+	self:CreateStanceBar()
 	self:AddHooks()
 end
