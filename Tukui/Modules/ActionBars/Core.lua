@@ -577,17 +577,15 @@ function ActionBars:Enable()
 		self:CreateBar6()
 		self:CreateBar7()
 		self:CreateBar8()
+		
+		self:SetupExtraButton()
 	end
 
-	self:CreateStanceBar()
-	self:AddHooks()
-
+	-- Pet and Stance Bar
 	if T.Retail then
-		self:SetupExtraButton()
-		
-		T.Print("Currently having a lot of issue with the pet bar on dragon flight, so we use the default blizzard bar for now until fixes are found. You can move it anywhere on screen with /tukui move. Sorry!")
-		
-		-- FIX ME - TEMP
+		-- Pet Bar
+		PetActionBar:ClearAllPointsBase()
+		PetActionBar:ClearFrameSnap()
 		PetActionBar:SetParent(UIParent)
 		PetActionBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (PetActionBar:GetWidth() / 2), -T.ScreenHeight / 4)
 		PetActionBar:CreateBackdrop()
@@ -596,11 +594,31 @@ function ActionBars:Enable()
 		PetActionBar.Backdrop:SetPoint("RIGHT", 0, 0)
 		PetActionBar.Backdrop:SetPoint("TOP", 0, 0)
 		PetActionBar.Backdrop:SetPoint("BOTTOM", 0, -4)
+		PetActionBar.Backdrop:CreateShadow()
 		
 		self:SkinPetButtons()
 		
+		-- Stance Bar
+		StanceBar:ClearAllPointsBase()
+		StanceBar:ClearFrameSnap()
+		StanceBar:SetParent(UIParent)
+		StanceBar:SetPoint("LEFT", UIParent, "LEFT", (T.ScreenWidth / 2) - (StanceBar:GetWidth() / 2), (-T.ScreenHeight / 4) + StanceBar:GetHeight() + StanceBar:GetHeight())
+		StanceBar:CreateBackdrop()
+		StanceBar.Backdrop:ClearAllPoints()
+		StanceBar.Backdrop:SetPoint("LEFT", -4, 0)
+		StanceBar.Backdrop:SetPoint("RIGHT", 6, 0)
+		StanceBar.Backdrop:SetPoint("TOP", 0, 6)
+		StanceBar.Backdrop:SetPoint("BOTTOM", 0, -4)
+		StanceBar.Backdrop:CreateShadow()
+		
+		self:SkinStanceButtons()
+		
 		Movers:RegisterFrame(PetActionBar, "Pet Action Bar")
+		Movers:RegisterFrame(StanceBar, "Stance Action Bar")
 	else
 		self:CreatePetBar()
+		self:CreateStanceBar()
 	end
+
+	self:AddHooks()
 end
