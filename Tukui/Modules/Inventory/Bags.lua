@@ -28,6 +28,8 @@ local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 +
 local GetContainerNumSlots = ContainerFrame_GetContainerNumSlots or GetContainerNumSlots
 local GetContainerNumFreeSlots = C_Container and C_Container.GetContainerNumFreeSlots or GetContainerNumFreeSlots
 
+BACKPACK_HEIGHT = 256
+
 local BlizzardBags = {
 	CharacterBag0Slot,
 	CharacterBag1Slot,
