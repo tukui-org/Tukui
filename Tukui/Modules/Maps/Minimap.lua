@@ -186,7 +186,9 @@ function Minimap:StyleMinimap()
 			LFGFrame:ClearAllPoints()
 			LFGFrame:SetPoint("TOPLEFT", 0, 2)
 			
-			LFGFrameBorder:SetAlpha(0)
+			if LFGFrameBorder then
+				LFGFrameBorder:SetAlpha(0)
+			end
 		end
 
 		if T.BCC or T.WotLK then

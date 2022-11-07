@@ -92,13 +92,13 @@ function ActionBars:CreateBar1()
 	]])
 
 	ActionBar1:SetAttribute("_onstate-page", [[
-		if HasVehicleActionBar() then
+		if HasVehicleActionBar and HasVehicleActionBar() then
 			newstate = GetVehicleBarIndex() or newstate
-		elseif HasOverrideActionBar() then
+		elseif HasOverrideActionBar and HasOverrideActionBar() then
 			newstate = GetOverrideBarIndex() or newstate
-		elseif HasTempShapeshiftActionBar() then
+		elseif HasTempShapeshiftActionBar and HasTempShapeshiftActionBar() then
 			newstate = GetTempShapeshiftBarIndex() or newstate
-		elseif HasBonusActionBar() then
+		elseif HasBonusActionBar and HasBonusActionBar() then
 			newstate = GetBonusBarIndex() or newstate
 		end
 

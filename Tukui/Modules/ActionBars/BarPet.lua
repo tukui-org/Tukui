@@ -66,6 +66,10 @@ function ActionBars:CreatePetBar()
 	end
 	
 	ActionBars:SkinPetButtons()
+	
+	if T.Retail then
+		self:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
+	end
 
 	self:RegisterEvent("PLAYER_CONTROL_LOST")
 	self:RegisterEvent("PLAYER_CONTROL_GAINED")
@@ -77,7 +81,6 @@ function ActionBars:CreatePetBar()
 	self:RegisterEvent("PET_BAR_UPDATE_USABLE")
 	self:RegisterEvent("PET_UI_UPDATE")
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
-	self:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 	self:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 	self:SetScript("OnEvent", function(self, event, ...)
 		if event == "PET_BAR_UPDATE_COOLDOWN" then
