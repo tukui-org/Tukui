@@ -157,7 +157,9 @@ T.SlashHandler = function(cmd)
 		end
 	elseif (arg1 == "install" or arg1 == "reset") then
 		if arg2 == "blizzard" then
-			C_EditMode.SetActiveLayout(1)
+			if T.Retail then
+				C_EditMode.SetActiveLayout(1)
+			end
 			
 			ReloadUI()
 		else
@@ -210,7 +212,11 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "move" or arg1 == "moveui") then
 		local Movers = T["Movers"]
 
-		Movers:StartOrStopMoving()
+		if not Movers.IsEnabled then
+			Movers:OpenEditMode()
+		else
+			Movers:CloseEditMode()
+		end
 	elseif (arg1 == "c" or arg1 == "config" or arg1 == "gui") then
 		T.GUI:Toggle()
 	elseif (arg1 == "gold") and (arg2 == "reset") then

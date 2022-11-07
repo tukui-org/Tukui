@@ -4,12 +4,30 @@ local T, C, L = select(2, ...):unpack()
 -- Note 1: Registered Frames need a Global name
 -- Note 2: Drag values is saved in Tukui Saved Variables.
 
+-- Taint note, fix EditModeManagerFrame ESC key when pressed in combat and when EditModeManagerFrame is open
+
 local Movers = CreateFrame("Frame")
 Movers:RegisterEvent("PLAYER_ENTERING_WORLD")
 Movers:RegisterEvent("PLAYER_REGEN_DISABLED")
 
 Movers.Frames = {}
 Movers.Defaults = {}
+Movers.IsEnabled = false
+
+function Movers:CloseEditMode()
+	Movers.IsEnabled = false
+	
+	Movers:StartOrStopMoving()
+end
+
+function Movers:OpenEditMode()
+	if InCombatLockdown() then
+		return T.Print(ERR_NOT_IN_COMBAT)
+	end
+
+	Movers.IsEnabled = true
+	Movers:StartOrStopMoving()
+end
 
 function Movers:SaveDefaults(frame, a1, p, a2, x, y)
 	if not a1 then
@@ -145,16 +163,6 @@ function Movers:CreateDragInfo()
 end
 
 function Movers:StartOrStopMoving()
-	if InCombatLockdown() then
-		return T.Print(ERR_NOT_IN_COMBAT)
-	end
-
-	if not self.IsEnabled then
-		self.IsEnabled = true
-	else
-		self.IsEnabled = false
-	end
-
 	for i = 1, #self.Frames do
 		local Frame = Movers.Frames[i]
 
@@ -228,9 +236,17 @@ Movers:SetScript("OnEvent", function(self, event)
 				Frame:SetPoint(Anchor1, _G[Parent], Anchor2, X, Y)
 			end
 		end
+			
+		if T.Retail then
+			EditModeManagerFrame.EnterEditMode = Movers.OpenEditMode
+			EditModeManagerFrame.ExitEditMode = Movers.CloseEditMode
+			EditModeManagerFrame:SetScale(0.0001)
+				
+			EditModeManagerFrame:UnregisterAllEvents()
+		end
 	elseif (event == "PLAYER_REGEN_DISABLED") then
 		if self.IsEnabled then
-			self:StartOrStopMoving()
+			self:CloseEditMode()
 		end
 	end
 end)
