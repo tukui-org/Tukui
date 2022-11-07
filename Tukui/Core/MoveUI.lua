@@ -4,8 +4,6 @@ local T, C, L = select(2, ...):unpack()
 -- Note 1: Registered Frames need a Global name
 -- Note 2: Drag values is saved in Tukui Saved Variables.
 
--- Taint note, fix EditModeManagerFrame ESC key when pressed in combat and when EditModeManagerFrame is open
-
 local Movers = CreateFrame("Frame")
 Movers:RegisterEvent("PLAYER_ENTERING_WORLD")
 Movers:RegisterEvent("PLAYER_REGEN_DISABLED")
@@ -163,6 +161,10 @@ function Movers:CreateDragInfo()
 end
 
 function Movers:StartOrStopMoving()
+	if InCombatLockdown() then
+		return
+	end
+	
 	for i = 1, #self.Frames do
 		local Frame = Movers.Frames[i]
 
