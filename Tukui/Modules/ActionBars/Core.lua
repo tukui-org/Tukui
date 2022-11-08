@@ -257,16 +257,13 @@ function ActionBars:UpdateStanceBar()
 	local Texture, Name, IsActive, IsCastable, Button, Icon, Cooldown, Start, Duration, Enable
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
+	local Bar = ActionBars.Bars.Stance
 
 	if NumForms == 0 then
-		self.Bars.Stance:SetAlpha(0)
+		Bar:SetAlpha(0)
 	else
-		self.Bars.Stance:SetAlpha(1)
-		self.Bars.Stance:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
-
-		if self.Bars.Stance.Backdrop then
-			self.Bars.Stance.Backdrop:SetPoint("TOPLEFT", 0, 0)
-		end
+		Bar:SetAlpha(1)
+		Bar:SetSize((PetSize * NumForms) + (Spacing * (NumForms + 1)), PetSize + (Spacing * 2))
 
 		for i = 1, 10 do
 			local ButtonName = "StanceButton"..i
@@ -284,6 +281,7 @@ function ActionBars:UpdateStanceBar()
 				end
 
 				Icon:SetTexture(Texture)
+				
 				Cooldown = _G[ButtonName.."Cooldown"]
 
 				if Texture then
@@ -300,6 +298,7 @@ function ActionBars:UpdateStanceBar()
 					Button:SetChecked(true)
 
 					if Button.Backdrop then
+						
 						Button.Backdrop:SetBorderColor(0, 1, 0)
 					end
 				else

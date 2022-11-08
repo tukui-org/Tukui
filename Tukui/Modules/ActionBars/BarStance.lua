@@ -13,31 +13,30 @@ function ActionBars:CreateStanceBar()
 	
 	local StanceBarFrame = T.Retail and StanceBar or StanceBarFrame
 
-	local StanceBar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
-	StanceBar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
-	StanceBar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
-	StanceBar:SetFrameStrata("LOW")
-	StanceBar:SetFrameLevel(10)
-	
-	self.Bars.Stance = StanceBar
+	local Bar = CreateFrame("Frame", "TukuiStanceBar", T.PetHider, "SecureHandlerStateTemplate")
+	Bar:SetSize((PetSize * 10) + (Spacing * 11), PetSize + (Spacing * 2))
+	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)
+	Bar:SetFrameStrata("LOW")
+	Bar:SetFrameLevel(10)
+	Bar:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
+	Bar:SetScript("OnEvent", ActionBars.UpdateStanceBar)
 
 	if C.ActionBars.ShowBackdrop then
-		StanceBar:CreateBackdrop()
-		StanceBar:CreateShadow()
+		Bar:CreateBackdrop()
+		Bar:CreateShadow()
 	end
+	
+	self.Bars.Stance = Bar
 
 	StanceBarFrame.ignoreFramePositionManager = true
 	StanceBarFrame:StripTextures()
-	StanceBarFrame:SetParent(StanceBar)
-	StanceBarFrame:ClearAllPoints()
-	StanceBarFrame:SetPoint("TOPLEFT", StanceBar, "TOPLEFT", -7, 0)
 	StanceBarFrame:EnableMouse(false)
+	StanceBarFrame:UnregisterAllEvents()
 
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
 		
-		Button:SetParent(StanceBarFrame)
-		Button:Show()
+		Button:SetParent(Bar)
 
 		if (i ~= 1) then
 			local Previous = _G["StanceButton"..i-1]
@@ -46,12 +45,12 @@ function ActionBars:CreateStanceBar()
 			Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
 		else
 			Button:ClearAllPoints()
-			Button:SetPoint("BOTTOMLEFT", StanceBar, "BOTTOMLEFT", Spacing, Spacing)
+			Button:SetPoint("BOTTOMLEFT", Bar, "BOTTOMLEFT", Spacing, Spacing)
 		end
 	end
 	
 	ActionBars:UpdateStanceBar()
 	ActionBars:SkinStanceButtons()
 
-	Movers:RegisterFrame(StanceBar, "Stance Action Bar")
+	Movers:RegisterFrame(Bar, "Stance Action Bar")
 end
