@@ -1775,7 +1775,13 @@ GUI.Enable = function(self)
 	Move:SetScript("OnEnter", ButtonOnEnter)
 	Move:SetScript("OnLeave", ButtonOnLeave)
 	Move:SetScript("OnMouseUp", function()
-		T.Movers:StartOrStopMoving()
+		local Movers = T.Movers
+						
+		if not Movers.IsEnabled then
+			Movers:OpenEditMode()
+		else
+			Movers:CloseEditMode()
+		end
 	end)
 
 	Move.Highlight = Move:CreateTexture(nil, "OVERLAY")
