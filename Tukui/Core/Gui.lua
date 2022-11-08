@@ -1808,9 +1808,7 @@ GUI.Enable = function(self)
 				return
 			end
 
-			GameMenuButtonKeybindings:Click()
-
-			KeyBindingFrame.quickKeybindButton:Click()
+			QuickKeybindFrame:Show()
 
 			T.GUI:Toggle()
 		else
