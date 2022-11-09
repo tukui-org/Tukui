@@ -7,8 +7,8 @@ function ItemLevel:Update()
 	if not self then
 		return
 	end
-
-	local Name = self:GetName()
+	
+	local Name = self.GetName and self:GetName() or ""
 	local IsTarget = string.find(Name, "Inspect") and true or false
 
 	if not self.ItemLevel then
