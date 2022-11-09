@@ -402,7 +402,6 @@ function UnitFrames:PostCreateAura(button, unit)
 	local Icon = button.Icon or button.icon
 	local Count = button.Count or button.count
 
-	-- FIX ME, For Dragon Flight, Number on Auras need to be fix
 	if Cooldown then
 		Cooldown.noOCC = true
 		Cooldown.noCooldownCount = true
@@ -434,7 +433,7 @@ function UnitFrames:PostCreateAura(button, unit)
 			Cooldown:SetHideCountdownNumbers(true)
 		end
 		
-		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY")
+		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY", nil, 7)
 		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		button.Remaining:SetPoint("CENTER", 1, 0)
 	end
@@ -470,7 +469,7 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 		return
 	end
 	
-	local Name, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable, _, SpellID = UnitAura(unit, index)
+	local Name, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable, _, SpellID = UnitAura(unit, index, button.filter)
 	
 	if button then
 		if(button.filter == "HARMFUL") then
