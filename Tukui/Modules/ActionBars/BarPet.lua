@@ -63,6 +63,11 @@ function ActionBars:CreatePetBar()
 
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button
+
+		-- stop randomly moving these buttons, WTF
+		if T.Retail then
+			Button.SetPoint = function() return end
+		end
 	end
 	
 	ActionBars:SkinPetButtons()
