@@ -1314,6 +1314,11 @@ function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
 	end
+	
+	if T.Retail then
+		-- Make sure we always use not combined bags
+		SetCVar("combinedBags", 0)
+	end
 
 	if T.TocVersion < 100002 then
 		if C.Bags.SortToBottom then
