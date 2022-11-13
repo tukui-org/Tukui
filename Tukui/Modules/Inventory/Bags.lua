@@ -27,6 +27,10 @@ local BAGTYPE_SOUL = 0x004
 local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 + 0x0400
 local GetContainerNumSlots = ContainerFrame_GetContainerNumSlots or GetContainerNumSlots
 local GetContainerNumFreeSlots = C_Container and C_Container.GetContainerNumFreeSlots or GetContainerNumFreeSlots
+local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
+local SetItemSearch = C_Container and C_Container.SetItemSearch or SetItemSearch
+local SetSortBagsRightToLeft = C_Container and C_Container.SetSortBagsRightToLeft or SetSortBagsRightToLeft
+local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeftToRight or SetSortBagsRightToLeft
 
 BACKPACK_HEIGHT = 256
 
@@ -114,7 +118,6 @@ function Bags:SkinBagButton()
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
-	--Icon:SetTexture(4701874)
 
 	Count:ClearAllPoints()
 	Count:SetPoint("BOTTOMRIGHT", 1, 1)
@@ -655,7 +658,21 @@ function Bags:SlotUpdate(id, button)
 		return
 	end
 
-	local _, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
+	local _, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound
+	
+	if T.Retail and T.TocVersion >= 100002 then
+		local Table = GetContainerItemInfo(id, button:GetID())
+
+		if Table then
+			Rarity = Table.quality
+			ItemLink = Table.hyperlink
+			ItemID = Table.itemID
+			IsBound = Table.isBound
+		end
+	else
+		_, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
+	end
+
 	local QuestItem = false
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IconTexture = _G[button:GetName().."IconTexture"]
@@ -685,7 +702,7 @@ function Bags:SlotUpdate(id, button)
 			else
 				button.IconOverlay:SetAlpha(0)
 			end
-			
+
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(itemTexture)
 		end
@@ -1315,20 +1332,15 @@ function Bags:Enable()
 		return
 	end
 	
-	if T.Retail then
-		-- Make sure we always use not combined bags
-		SetCVar("combinedBags", 0)
+	SetCVar("combinedBags", 0)
+
+	if C.Bags.SortToBottom then
+		SetSortBagsRightToLeft(false)
+	else
+		SetSortBagsRightToLeft(true)
 	end
 
-	if T.TocVersion < 100002 then
-		if C.Bags.SortToBottom then
-			SetSortBagsRightToLeft(false)
-		else
-			SetSortBagsRightToLeft(true)
-		end
-		
-		SetInsertItemsLeftToRight(false)
-	end
+	SetInsertItemsLeftToRight(false)
 	
 	-- Bug with mouse click
 	GroupLootContainer:EnableMouse(false)
