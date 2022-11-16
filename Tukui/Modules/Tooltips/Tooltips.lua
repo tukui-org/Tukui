@@ -340,7 +340,7 @@ function Tooltip:HideInCombat(event)
 	end
 end
 
-function Tooltip:SetCompareItemBorderColor(anchorFrame)
+function Tooltip:SetCompareItemBorderColor()
 	for i = 1, 2 do
 		local TT = _G["ShoppingTooltip"..i]
 
