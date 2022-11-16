@@ -281,7 +281,7 @@ end
 
 function Tooltip:OnTooltipSetItem()
 	if IsShiftKeyDown() then
-		local Item, Link = self:GetItem()
+		local _, Link = self:GetItem()
 
 		if Link then
 			local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
