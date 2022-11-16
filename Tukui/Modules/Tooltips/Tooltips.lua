@@ -257,10 +257,9 @@ function Tooltip:SkinHealthBar()
 end
 
 function Tooltip:SetItemBorderColor(tooltip)
-	local Tooltip = tooltip
-	local Link = select(2, Tooltip:GetItem())
+	local Link = tooltip.GetItem and select(2, tooltip:GetItem())
 	local R, G, B
-	local Backdrop = Tooltip.Backdrop
+	local Backdrop = tooltip.Backdrop
 
 	if Backdrop then
 		if Link then
@@ -347,7 +346,7 @@ function Tooltip:SetCompareItemBorderColor(anchorFrame)
 
 		if TT:IsShown() then
 			local FrameLevel = GameTooltip:GetFrameLevel()
-			local Item = TT:GetItem()
+			local Item = TT.GetItem and select(2, TT:GetItem())
 
 			if FrameLevel == TT:GetFrameLevel() then
 				TT:SetFrameLevel(i + 1)
