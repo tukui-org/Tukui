@@ -137,7 +137,7 @@ function Tooltip:OnTooltipSetUnit()
 		local Line = _G["GameTooltipTextLeft"..i]
 
 		if (UnitIsPlayer(Unit) and Guild) then
-			if Line:GetText():find(Guild) then
+			if (Line and Line:GetText() and Line:GetText():find(Guild)) then
 				Line:SetText("|cff00ff00"..Guild.."|r")
 			end
 		end
