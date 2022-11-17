@@ -453,7 +453,7 @@ function Chat:Reset()
 		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 	end
 	
-	self.SetChatFramePosition(ChatFrame1)
+	Chat.SetChatFramePosition(ChatFrame1)
 end
 
 function Chat:OnMouseWheel(delta)

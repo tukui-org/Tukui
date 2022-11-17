@@ -714,6 +714,18 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 	end
 end
 
+function UnitFrames:UpdateMaxEssence(cur, max, hasmaxchanged, powertype, ...)
+	if hasmaxchanged then
+		for i = 1, max do
+			if max == 5 then
+				self[i]:SetWidth(i == 1 and 50 or 49)
+			elseif max == 6 then
+				self[i]:SetWidth(i == 1 and 40 or 41)
+			end
+		end
+	end
+end
+
 function UnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",

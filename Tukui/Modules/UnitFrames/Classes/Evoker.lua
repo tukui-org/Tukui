@@ -21,9 +21,9 @@ UnitFrames.AddClassFeatures["EVOKER"] = function(self)
 	Essence:CreateBackdrop()
 	Essence.Backdrop:SetOutside()
 
-    for i = 1, 6 do
-        local Bar = CreateFrame("StatusBar", nil, Essence)
-		
+	for i = 1, 6 do
+		local Bar = CreateFrame("StatusBar", nil, Essence)
+
 		Bar:SetFrameStrata(Essence:GetFrameStrata())
 		Bar:SetFrameLevel(Essence:GetFrameLevel() + 1)
 		Bar:SetHeight(8)
@@ -35,10 +35,11 @@ UnitFrames.AddClassFeatures["EVOKER"] = function(self)
 			Bar:SetWidth(41)
 			Bar:SetPoint("LEFT", ClassPower[i - 1], "RIGHT", 1, 0)
 		end
-		
-        ClassPower[i] = Bar
-    end
+
+		ClassPower[i] = Bar
+	end
 	
-    -- Register with oUF
-    self.ClassPower = ClassPower
+	-- Register with oUF
+	self.ClassPower = ClassPower
+	self.ClassPower.PostUpdate = UnitFrames.UpdateMaxEssence
 end
