@@ -48,6 +48,7 @@ oUF.colors.power = {
 	["POWER_TYPE_PYRITE"] = {0.60, 0.09, 0.17},
 	["ALTPOWER"]          = {0.00, 1.00, 1.00},
 	["ANIMA"]             = {0.83, 0.83, 0.83},
+	["ESSENCE"]           = {0.00, 0.82, 1.00},
 }
 
 oUF.colors.class = {
