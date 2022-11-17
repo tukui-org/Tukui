@@ -505,8 +505,10 @@ function Bags:CreateContainer(storagetype, ...)
 
 				return
 			end
+				
+			local Sort = C_Container and C_Container.SortBags or SortBags
 
-			SortBags()
+			Sort()
 		end)
 
 		if T.BCC or T.WotLK then
