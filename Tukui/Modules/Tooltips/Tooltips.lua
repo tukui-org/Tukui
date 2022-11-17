@@ -258,7 +258,7 @@ end
 
 function Tooltip:SetItemBorderColor(tooltip)
 	local Tooltip = tooltip
-	local Link = select(2, Tooltip:GetItem())
+	local Link = Tooltip.GetItem and select(2, Tooltip:GetItem())
 	local R, G, B
 	local Backdrop = Tooltip.Backdrop
 
@@ -281,7 +281,7 @@ end
 
 function Tooltip:OnTooltipSetItem()
 	if IsShiftKeyDown() then
-		local Item, Link = self:GetItem()
+		local Item, Link = self.GetItem and self:GetItem()
 
 		if Link then
 			local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
@@ -347,7 +347,7 @@ function Tooltip:SetCompareItemBorderColor(anchorFrame)
 
 		if TT:IsShown() then
 			local FrameLevel = GameTooltip:GetFrameLevel()
-			local Item = TT:GetItem()
+			local Item = TT.GetItem and TT:GetItem()
 
 			if FrameLevel == TT:GetFrameLevel() then
 				TT:SetFrameLevel(i + 1)
