@@ -336,20 +336,28 @@ function ActionBars:RangeUpdate(hasrange, inrange)
 		if (HasRange and InRange == false) then
 			Icon:SetVertexColor(0.8, 0.1, 0.1)
 
-			NormalTexture:SetVertexColor(0.8, 0.1, 0.1)
+			if NormalTexture then
+				NormalTexture:SetVertexColor(0.8, 0.1, 0.1)
+			end
 		else
 			Icon:SetVertexColor(1.0, 1.0, 1.0)
 
-			NormalTexture:SetVertexColor(1.0, 1.0, 1.0)
+			if NormalTexture then
+				NormalTexture:SetVertexColor(1.0, 1.0, 1.0)
+			end
 		end
 	elseif NotEnoughPower then
 		Icon:SetVertexColor(0.1, 0.3, 1.0)
 
-		NormalTexture:SetVertexColor(0.1, 0.3, 1.0)
+		if NormalTexture then
+			NormalTexture:SetVertexColor(0.1, 0.3, 1.0)
+		end
 	else
 		Icon:SetVertexColor(0.3, 0.3, 0.3)
 
-		NormalTexture:SetVertexColor(0.3, 0.3, 0.3)
+		if NormalTexture then
+			NormalTexture:SetVertexColor(0.3, 0.3, 0.3)
+		end
 	end
 end
 
