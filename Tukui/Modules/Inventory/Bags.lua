@@ -660,7 +660,7 @@ function Bags:SlotUpdate(id, button)
 		return
 	end
 
-	local _, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound
+	local _, Rarity, ItemLink, ItemID, IsBound, StackCount
 	
 	if T.Retail and T.TocVersion >= 100002 then
 		local Table = GetContainerItemInfo(id, button:GetID())
@@ -670,7 +670,10 @@ function Bags:SlotUpdate(id, button)
 			ItemLink = Table.hyperlink
 			ItemID = Table.itemID
 			IsBound = Table.isBound
+			StackCount = Table.stackCount
 		end
+		
+		if Count then print(Count) end
 	else
 		_, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
 	end
@@ -711,7 +714,7 @@ function Bags:SlotUpdate(id, button)
 			
 			if itemStackCount and itemStackCount > 1 then
 				Count:Show()
-				Count:SetText(itemStackCount)
+				Count:SetText(StackCount)
 			else
 				Count:Hide()
 			end
