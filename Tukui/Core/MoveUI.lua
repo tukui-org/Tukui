@@ -4,21 +4,27 @@ local T, C, L = select(2, ...):unpack()
 -- Note 1: Registered Frames need a Global name
 -- Note 2: Drag values is saved in Tukui Saved Variables.
 
-local Movers = CreateFrame("Frame")
+local Movers = CreateFrame("Frame", "TukuiMovers", UIParent)
 Movers:RegisterEvent("PLAYER_ENTERING_WORLD")
 Movers:RegisterEvent("PLAYER_REGEN_DISABLED")
+
+tinsert(UISpecialFrames, "TukuiMovers")
 
 Movers.Frames = {}
 Movers.Defaults = {}
 Movers.IsEnabled = false
 
 function Movers:CloseEditMode()
+	Movers:Hide()
+	
 	Movers.IsEnabled = false
 	
 	Movers:StartOrStopMoving()
 end
 
 function Movers:OpenEditMode()
+	Movers:Show()
+	
 	if InCombatLockdown() then
 		return T.Print(ERR_NOT_IN_COMBAT)
 	end
@@ -240,12 +246,15 @@ Movers:SetScript("OnEvent", function(self, event)
 		end
 			
 		if T.Retail then
-			EditModeManagerFrame.EnterEditMode = Movers.OpenEditMode
-			EditModeManagerFrame.ExitEditMode = Movers.CloseEditMode
-			EditModeManagerFrame:SetScale(0.0001)
+			hooksecurefunc(EditModeManagerFrame, "EnterEditMode", function()
+				Movers:OpenEditMode()
 				
-			EditModeManagerFrame:UnregisterAllEvents()
+				HideUIPanel(EditModeManagerFrame)
+			end)
 		end
+
+		Movers:Hide()
+		Movers:SetScript("OnHide", self.CloseEditMode)
 	elseif (event == "PLAYER_REGEN_DISABLED") then
 		if self.IsEnabled then
 			self:CloseEditMode()
