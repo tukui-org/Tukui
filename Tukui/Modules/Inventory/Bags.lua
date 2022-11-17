@@ -678,6 +678,7 @@ function Bags:SlotUpdate(id, button)
 	local QuestItem = false
 	local IsNewItem = C_NewItems.IsNewItem(id, button:GetID())
 	local IconTexture = _G[button:GetName().."IconTexture"]
+	local Count = _G[button:GetName().."Count"]
 
 	if (button.ItemID and button.ItemID == ItemID) then
 		return
@@ -707,6 +708,13 @@ function Bags:SlotUpdate(id, button)
 
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(itemTexture)
+			
+			if itemStackCount and itemStackCount > 1 then
+				Count:Show()
+				Count:SetText(itemStackCount)
+			else
+				Count:Hide()
+			end
 		end
 	else
 		if T.Retail then
