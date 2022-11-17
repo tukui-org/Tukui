@@ -3,6 +3,8 @@ local T, C, L = select(2, ...):unpack()
 local DataText = T["DataTexts"]
 local format = format
 local ToggleAllBags = ToggleAllBags
+local GetContainerNumSlots = ContainerFrame_GetContainerNumSlots or GetContainerNumSlots
+local GetContainerNumFreeSlots = C_Container and C_Container.GetContainerNumFreeSlots or GetContainerNumFreeSlots
 
 local Update = function(self)
 	local Free, Total, Used = 0, 0, 0
