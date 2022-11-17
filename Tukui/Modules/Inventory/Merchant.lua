@@ -9,17 +9,29 @@ local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or
 local GetContainerItemLink = C_Container and C_Container.GetContainerItemLink or GetContainerItemLink
 local GetContainerItemID = C_Container and C_Container.GetContainerItemID or GetContainerItemID
 local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
+local UseContainerItem = C_Container and C_Container.UseContainerItem or UseContainerItem
 
 function Merchant:SellJunk()
 	local Cost = 0
-
+	
 	for Bag = 0, 4 do
 		for Slot = 1, GetContainerNumSlots(Bag) do
 			local Link, ID = GetContainerItemLink(Bag, Slot), GetContainerItemID(Bag, Slot)
 
 			if (Link and ID and type(Link) == "string") then
 				local Price = 0
-				local Mult1, Mult2 = select(11, GetItemInfo(Link)), select(2, GetContainerItemInfo(Bag, Slot))
+				local Mult1 = select(11, GetItemInfo(Link))
+				local Mult2
+				
+				if T.Retail then
+					local Table = GetContainerItemInfo(Bag, Slot)
+					
+					if Table and Table.stackCount then
+						Mult2 = Table.stackCount
+					end
+				else
+					select(2, GetContainerItemInfo(Bag, Slot))
+				end
 
 				if (Mult1 and Mult2) then
 					Price = Mult1 * Mult2
