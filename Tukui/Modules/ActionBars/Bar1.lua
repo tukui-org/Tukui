@@ -39,11 +39,13 @@ function ActionBars:CreateBar1()
 		else
 			Rogue = "[bonusbar:1] 7;"
 		end
+		
 		if T.Retail then
 			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
 		else
 			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10; [bonusbar:5] 10;"
 		end
+		
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
 	end
@@ -51,7 +53,7 @@ function ActionBars:CreateBar1()
 	local DefaultPaging
 	
 	if T.Retail then
-		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar
+		DefaultPaging = "[bonusbar:5] 11;[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar
 	else
 		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;"
 	end
