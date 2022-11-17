@@ -1366,9 +1366,21 @@ function Bags:Enable()
 	local BankFrame = BankFrame
 	local DataTextLeft = T.DataTexts.Panels.Left
 	local DataTextRight = T.DataTexts.Panels.Right
+	local B1, B2, B3, B4, B5 = "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 48
+	local BB1, BB2, BB3, BB4, BB5 = "BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 48
+	local Data1 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBag
+	local Data2 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBank
+	
+	if Data1 then
+		B1, B2, B3, B4, B5 = unpack(Data1)
+	end
+	
+	if Data2 then
+		BB1, BB2, BB3, BB4, BB5 = unpack(Data2)
+	end
 
-	self:CreateContainer("Bag", "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -34, 48)
-	self:CreateContainer("Bank", "BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 48)
+	self:CreateContainer("Bag", B1, B2, B3, B4, B5)
+	self:CreateContainer("Bank", BB1, BB2, BB3, BB4, BB5)
 	self:HideBlizzard()
 	self:MoveElements()
 
