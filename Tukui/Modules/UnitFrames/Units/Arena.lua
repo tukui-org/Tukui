@@ -134,6 +134,8 @@ function UnitFrames:Arena()
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Buffs.PostCreateButton = UnitFrames.PostCreateAura
+		Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
 
 		Debuffs.spacing = 4
@@ -141,6 +143,8 @@ function UnitFrames:Arena()
 		Debuffs["growth-x"] = "LEFT"
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Debuffs.PostCreateButton = UnitFrames.PostCreateAura
+		Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 
 		self.Buffs = Buffs

@@ -83,6 +83,8 @@ function UnitFrames:Nameplates()
 	Buffs.isNameplate = true
 	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 	Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Buffs.PostCreateButton = UnitFrames.PostCreateAura
+	Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 	Buffs.CustomFilter = UnitFrames.BuffIsStealable
 
 	local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
@@ -100,6 +102,8 @@ function UnitFrames:Nameplates()
 	Debuffs.isNameplate = true
 	Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 	Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Debuffs.PostCreateButton = UnitFrames.PostCreateAura
+	Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 	Debuffs.onlyShowPlayer = C.NamePlates.OnlySelfDebuffs
 
 	if C.NamePlates.NameplateCastBar then

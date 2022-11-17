@@ -82,6 +82,8 @@ function UnitFrames:Party()
 	Buffs.initialAnchor = "TOPLEFT"
 	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 	Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Buffs.PostCreateButton = UnitFrames.PostCreateAura
+	Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 
 	local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
 	Debuffs:SetPoint("LEFT", self, "RIGHT", 6, 0)
@@ -93,6 +95,8 @@ function UnitFrames:Party()
 	Debuffs.initialAnchor = "TOPLEFT"
 	Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 	Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+	Debuffs.PostCreateButton = UnitFrames.PostCreateAura
+	Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 
 	local Leader = self:CreateTexture(nil, "OVERLAY")
 	Leader:SetSize(16, 16)

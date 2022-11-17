@@ -117,6 +117,8 @@ function UnitFrames:Raid()
 		Buffs.IsRaid = true
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = UnitFrames.DesaturateBuffs
+		Buffs.PostCreateButton = UnitFrames.PostCreateAura
+		Buffs.PostUpdateButton = UnitFrames.DesaturateBuffs
 
 		self.Buffs = Buffs
 	end

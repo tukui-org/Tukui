@@ -223,6 +223,8 @@ function UnitFrames:Target()
 		Buffs.initialAnchor = "TOPLEFT"
 		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Buffs.PostCreateButton = UnitFrames.PostCreateAura
+		Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Buffs.PostUpdate = C.UnitFrames.TargetDebuffs and UnitFrames.UpdateDebuffsHeaderPosition
 		Buffs.onlyShowPlayer = C.UnitFrames.OnlySelfBuffs
 
@@ -256,6 +258,8 @@ function UnitFrames:Target()
 		Debuffs["growth-x"] = "LEFT"
 		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
 		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Debuffs.PostCreateButton = UnitFrames.PostCreateAura
+		Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
 		Debuffs.onlyShowPlayer = C.UnitFrames.OnlySelfDebuffs
 
 		if C.UnitFrames.AurasBelow then
