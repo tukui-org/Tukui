@@ -5,6 +5,10 @@ local Merchant = CreateFrame("Frame")
 local strmatch = string.match
 local BlizzardMerchantClick = MerchantItemButton_OnModifiedClick
 local Popups = T.Popups
+local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+local GetContainerItemLink = C_Container and C_Container.GetContainerItemLink or GetContainerItemLink
+local GetContainerItemID = C_Container and C_Container.GetContainerItemID or GetContainerItemID
+local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
 
 function Merchant:SellJunk()
 	local Cost = 0
