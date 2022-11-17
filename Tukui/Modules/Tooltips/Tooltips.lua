@@ -137,7 +137,7 @@ function Tooltip:OnTooltipSetUnit()
 		local Line = _G["GameTooltipTextLeft"..i]
 
 		if (UnitIsPlayer(Unit) and Guild) then
-			if Line:GetText():find(Guild) then
+			if (Line and Line:GetText() and Line:GetText():find(Guild)) then
 				Line:SetText("|cff00ff00"..Guild.."|r")
 			end
 		end
@@ -257,10 +257,14 @@ function Tooltip:SkinHealthBar()
 end
 
 function Tooltip:SetItemBorderColor(tooltip)
+<<<<<<< HEAD
 	local Tooltip = tooltip
 	local Link = Tooltip.GetItem and select(2, Tooltip:GetItem())
+=======
+	local Link = tooltip.GetItem and select(2, tooltip:GetItem())
+>>>>>>> 334c52f3677f63b9dce19d50e89ce443e4c972f6
 	local R, G, B
-	local Backdrop = Tooltip.Backdrop
+	local Backdrop = tooltip.Backdrop
 
 	if Backdrop then
 		if Link then
@@ -281,7 +285,11 @@ end
 
 function Tooltip:OnTooltipSetItem()
 	if IsShiftKeyDown() then
+<<<<<<< HEAD
 		local Item, Link = self.GetItem and self:GetItem()
+=======
+		local Link = self.GetItem and select(2, self:GetItem())
+>>>>>>> 334c52f3677f63b9dce19d50e89ce443e4c972f6
 
 		if Link then
 			local ID = "|cFFCA3C3CID|r "..Link:match(":(%w+)")
@@ -341,13 +349,17 @@ function Tooltip:HideInCombat(event)
 	end
 end
 
-function Tooltip:SetCompareItemBorderColor(anchorFrame)
+function Tooltip:SetCompareItemBorderColor()
 	for i = 1, 2 do
 		local TT = _G["ShoppingTooltip"..i]
 
 		if TT:IsShown() then
 			local FrameLevel = GameTooltip:GetFrameLevel()
+<<<<<<< HEAD
 			local Item = TT.GetItem and TT:GetItem()
+=======
+			local Item = TT.GetItem and select(2, TT:GetItem())
+>>>>>>> 334c52f3677f63b9dce19d50e89ce443e4c972f6
 
 			if FrameLevel == TT:GetFrameLevel() then
 				TT:SetFrameLevel(i + 1)
