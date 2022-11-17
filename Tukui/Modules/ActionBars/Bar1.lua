@@ -111,7 +111,7 @@ function ActionBars:CreateBar1()
 
 	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
 
-	if T.Retail then
+	if T.Retail or T.WotLK then
 		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 		ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	end
