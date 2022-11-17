@@ -672,8 +672,6 @@ function Bags:SlotUpdate(id, button)
 			IsBound = Table.isBound
 			StackCount = Table.stackCount
 		end
-		
-		if Count then print(Count) end
 	else
 		_, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
 	end
@@ -712,7 +710,7 @@ function Bags:SlotUpdate(id, button)
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(itemTexture)
 			
-			if itemStackCount and itemStackCount > 1 then
+			if StackCount and StackCount > 1 then
 				Count:Show()
 				Count:SetText(StackCount)
 			else
