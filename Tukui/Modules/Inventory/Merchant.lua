@@ -30,7 +30,7 @@ function Merchant:SellJunk()
 						Mult2 = Table.stackCount
 					end
 				else
-					select(2, GetContainerItemInfo(Bag, Slot))
+					Mult2 = select(2, GetContainerItemInfo(Bag, Slot))
 				end
 
 				if (Mult1 and Mult2) then
