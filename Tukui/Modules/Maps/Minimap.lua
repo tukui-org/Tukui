@@ -267,11 +267,15 @@ end
 
 function Minimap:EnableMouseWheelZoom()
 	self:EnableMouseWheel(true)
+	
 	self:SetScript("OnMouseWheel", function(self, delta)
+		local ZoomIn = Minimap.ZoomIn or MinimapZoomIn
+		local ZoomOut = Minimap.ZoomOut or MinimapZoomOut
+			
 		if (delta > 0) then
-			MinimapZoomIn:Click()
+			ZoomIn:Click()
 		elseif (delta < 0) then
-			MinimapZoomOut:Click()
+			ZoomOut:Click()
 		end
 	end)
 end
