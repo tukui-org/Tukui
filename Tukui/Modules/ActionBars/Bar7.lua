@@ -19,9 +19,15 @@ function ActionBars:CreateBar7()
 
 	if not C.ActionBars.Bar7 then
 		MultiBar6:SetParent(T.Hider)
+		
+		if T.Retail then
+			Settings.SetValue("PROXY_SHOW_ACTIONBAR_7", false)
+		end
 
 		return
 	end
+	
+	Settings.SetValue("PROXY_SHOW_ACTIONBAR_7", true)
 
 	local ActionBar7 = CreateFrame("Frame", "TukuiActionBar7", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar7:SetFrameStrata("LOW")
@@ -38,9 +44,7 @@ function ActionBars:CreateBar7()
 	MultiBar6:EnableMouse(false)
 	MultiBar6:SetParent(ActionBar7)
 
-	if T.Retail then
-		MultiBar6.QuickKeybindGlow:SetParent(T.Hider)
-	end
+	MultiBar6.QuickKeybindGlow:SetParent(T.Hider)
 
 	local NumPerRows = ButtonsPerRow
 	local NextRowButtonAnchor = _G["MultiBar6Button1"]

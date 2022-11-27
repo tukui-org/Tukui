@@ -19,6 +19,10 @@ function ActionBars:CreateBar4()
 
 	if not C.ActionBars.RightBar then
 		MultiBarRight:SetParent(T.Hider)
+		
+		if T.Retail then
+			Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", false)
+		end
 
 		return
 	end
@@ -35,8 +39,10 @@ function ActionBars:CreateBar4()
 		ActionBar4:CreateShadow()
 	end
 
-	if not T.Retail then -- Tainting in DF
+	if not T.Retail then
 		MultiBarRight:SetShown(true)
+	else
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", true)
 	end
 	
 	MultiBarRight:EnableMouse(false)

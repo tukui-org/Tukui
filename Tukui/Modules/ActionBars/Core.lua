@@ -595,8 +595,18 @@ function ActionBars:Enable()
 		return
 	end
 
-	SetCVar("alwaysShowActionBars", 1)
-	SetActionBarToggles(1, 1, 1, 1, 1, 1, 1)
+	if T.Retail then
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_2", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_3", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_5", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_6", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_7", true)
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_8", true)
+	else
+		SetCVar("alwaysShowActionBars", 1)
+		SetActionBarToggles(1, 1, 1, 1, 1, 1, 1)
+	end
 
 	self:DisableBlizzard()
 	self:CreateBar1()

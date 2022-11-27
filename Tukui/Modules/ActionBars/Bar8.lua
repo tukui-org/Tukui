@@ -19,9 +19,15 @@ function ActionBars:CreateBar8()
 
 	if not C.ActionBars.Bar8 then
 		MultiBar7:SetParent(T.Hider)
+		
+		if T.Retail then
+			Settings.SetValue("PROXY_SHOW_ACTIONBAR_8", false)
+		end
 
 		return
 	end
+	
+	Settings.SetValue("PROXY_SHOW_ACTIONBAR_8", true)
 
 	local ActionBar8 = CreateFrame("Frame", "TukuiActionBar8", T.PetHider, "SecureHandlerStateTemplate")
 	ActionBar8:SetFrameStrata("LOW")

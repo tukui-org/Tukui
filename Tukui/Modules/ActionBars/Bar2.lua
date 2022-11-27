@@ -19,6 +19,10 @@ function ActionBars:CreateBar2()
 
 	if not C.ActionBars.BottomLeftBar then
 		MultiBarBottomLeft:SetParent(T.Hider)
+		
+		if T.Retail then
+			Settings.SetValue("PROXY_SHOW_ACTIONBAR_2", false)
+		end
 
 		return
 	end
@@ -35,8 +39,10 @@ function ActionBars:CreateBar2()
 		ActionBar2:CreateShadow()
 	end
 
-	if not T.Retail then -- Tainting in DF
+	if not T.Retail then
 		MultiBarBottomLeft:SetShown(true)
+	else
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_2", true)
 	end
 	
 	MultiBarBottomLeft:EnableMouse(false)
