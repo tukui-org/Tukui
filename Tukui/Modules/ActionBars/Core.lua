@@ -48,8 +48,10 @@ function ActionBars:DisableBlizzard()
 		j:SetScale(0.001)
 	end
 
-	MultiActionBar_Update = Noop
-	BeginActionBarTransition = Noop
+	if not T.Retail then
+		MultiActionBar_Update = Noop
+		BeginActionBarTransition = Noop
+	end
 
 	if C.ActionBars.HotKey then
 		ActionButton_UpdateRangeIndicator = Noop

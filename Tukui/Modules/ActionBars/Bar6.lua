@@ -18,7 +18,7 @@ function ActionBars:CreateBar6()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.Bar6 then
-		MultiBar5:SetShown(false)
+		MultiBar5:SetParent(T.Hider)
 
 		return
 	end

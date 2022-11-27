@@ -273,16 +273,6 @@ function Loading:OnEvent(event)
 		if not T.WotLK then
 			T["Miscellaneous"]["ObjectiveTracker"]:Enable()
 		end
-
-		if T.Retail then
-			-- Temp Fix for Action MultiBarBottomRight buttons 1 to 6 on low monitor resolution
-			for i = 1, 6 do
-				local Button = _G["MultiBarBottomRightButton"..i]
-
-				Button:SetAttribute("showgrid", 1)
-				Button:Show()
-			end
-		end
 	elseif (event == "VARIABLES_LOADED") then
 		local Locale = GetLocale()
 
@@ -301,6 +291,11 @@ function Loading:OnEvent(event)
 		T["Help"]:Enable()
 	elseif (event == "SETTINGS_LOADED") then
 		T["ActionBars"]:Enable()
+	end
+	
+	if T.Retail and EditModeManagerFrame then
+		EditModeManagerFrame:UnregisterAllEvents()
+		EditModeManagerFrame:RegisterEvent("EDIT_MODE_LAYOUTS_UPDATED");
 	end
 end
 

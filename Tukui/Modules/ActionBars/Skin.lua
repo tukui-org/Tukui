@@ -63,6 +63,16 @@ function ActionBars:SkinButton(button)
 		end
 
 		Button:CreateBackdrop()
+		
+		if T.Retail then
+			Button.Backdrop:SetParent(T.PetHider)
+			Button.Backdrop:SetBackdropColor(0,0,0,0)
+			Button.Backdrop:EnableMouse(false)
+			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
+			
+			Button:HookScript("OnShow", function(self) self.Backdrop:Show() end)
+			Button:HookScript("OnHide", function(self) self.Backdrop:Hide() end)
+		end
 
 		if C.ActionBars.HideBackdrop then
 			Button:CreateShadow()

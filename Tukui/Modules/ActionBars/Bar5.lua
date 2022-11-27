@@ -18,7 +18,7 @@ function ActionBars:CreateBar5()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.LeftBar then
-		MultiBarLeft:SetShown(false)
+		MultiBarLeft:SetParent(T.Hider)
 
 		return
 	end
@@ -56,7 +56,6 @@ function ActionBars:CreateBar5()
 		Button:SetSize(Size, Size)
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
-		Button:SetScale(1)
 
 		ActionBars:SkinButton(Button)
 

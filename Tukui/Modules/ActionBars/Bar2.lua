@@ -18,7 +18,7 @@ function ActionBars:CreateBar2()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.BottomLeftBar then
-		MultiBarBottomLeft:SetShown(false)
+		MultiBarBottomLeft:SetParent(T.Hider)
 
 		return
 	end

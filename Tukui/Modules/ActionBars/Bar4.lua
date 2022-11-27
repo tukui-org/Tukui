@@ -18,7 +18,7 @@ function ActionBars:CreateBar4()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.RightBar then
-		MultiBarRight:SetShown(false)
+		MultiBarRight:SetParent(T.Hider)
 
 		return
 	end
