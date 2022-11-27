@@ -17,6 +17,7 @@ function ActionBars:CreatePetBar()
 	local ButtonsPerRow = C.ActionBars.BarPetButtonsPerRow
 	local NumRow = ceil(10 / ButtonsPerRow)
 	
+	PetActionBarFrame.ignoreFramePositionManager = true
 	PetActionBarFrame:EnableMouse(false)
 	PetActionBarFrame:ClearAllPoints()
 	PetActionBarFrame:SetParent(T.Hider)
