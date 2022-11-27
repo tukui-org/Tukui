@@ -389,7 +389,7 @@ function Minimap:EnableMouseOver()
 	local Tracking = (T.Retail or T.WotLK) and MiniMapTrackingButton or MiniMapTracking
 	local TrackingIcon = MiniMapTrackingIcon
 
-	self:SetScript("OnEnter", function(self)
+	self:HookScript("OnEnter", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
@@ -409,7 +409,7 @@ function Minimap:EnableMouseOver()
 		end
 	end)
 
-	self:SetScript("OnLeave", function(self)
+	self:HookScript("OnLeave", function(self)
 		if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 			return
 		end
