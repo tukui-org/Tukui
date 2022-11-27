@@ -101,9 +101,9 @@ function ActionBars:CreateBar1()
 		elseif HasTempShapeshiftActionBar and HasTempShapeshiftActionBar() then
 			newstate = GetTempShapeshiftBarIndex() or newstate
 		elseif HasBonusActionBar and HasBonusActionBar() then
-			newstate = GetBonusBarIndex() or newstate
+			local page = GetActionBarPage() or 0
+			newstate = (page > 1 and page) or GetBonusBarIndex() or newstate
 		end
-
 		for i, Button in ipairs(Button) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end
