@@ -47,6 +47,11 @@ function ActionBars:CreateStanceBar()
 			Button:ClearAllPoints()
 			Button:SetPoint("BOTTOMLEFT", Bar, "BOTTOMLEFT", Spacing, Spacing)
 		end
+		
+		-- stop randomly moving these buttons, WTF
+		if T.Retail then
+			Button.SetPoint = function() return end
+		end
 	end
 	
 	ActionBars:UpdateStanceBar()
