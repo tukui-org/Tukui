@@ -254,6 +254,10 @@ function Chat:Undock(frame)
 	FCF_SetTabPosition(frame, 0)
 end
 
+function Chat:SetChatFrame1Position()
+	self:SetPointBase("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
+end
+
 function Chat:SetChatFramePosition()
 	local Frame = self
 	local ID = Frame:GetID()
@@ -272,6 +276,10 @@ function Chat:SetChatFramePosition()
 			Frame:ClearAllPoints()
 			Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
 			Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
+			
+			if T.Retail then
+				hooksecurefunc(Frame, "SetPoint", Chat.SetChatFrame1Position)
+			end
 		end
 
 		if ID > 1 and Settings and Settings.IsUndocked and not IsRightChatFound then
