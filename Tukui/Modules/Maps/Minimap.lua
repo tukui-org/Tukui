@@ -16,6 +16,9 @@ Minimap.ZoneColors = {
 function Minimap:DisableMinimapElements()
 	local Time = _G["TimeManagerClockButton"]
 	local North = _G["MinimapNorthTag"]
+	local ZoomIn = Minimap.ZoomIn
+	local ZoomOut = Minimap.ZoomOut
+	
 	local HiddenFrames = {
 		"MinimapCluster",
 		"MinimapBorder",
@@ -49,6 +52,14 @@ function Minimap:DisableMinimapElements()
 
 	if Time then
 		Time:Kill()
+	end
+	
+	if ZoomIn then
+		ZoomIn:Kill()
+	end
+	
+	if ZoomOut then
+		ZoomOut:Kill()
 	end
 end
 
