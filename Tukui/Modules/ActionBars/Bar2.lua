@@ -18,10 +18,10 @@ function ActionBars:CreateBar2()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.BottomLeftBar then
-		MultiBarBottomLeft:SetParent(T.Hider)
-		
 		if T.Retail then
 			Settings.SetValue("PROXY_SHOW_ACTIONBAR_2", false)
+		else
+			MultiBarBottomLeft:SetParent(T.Hider)
 		end
 
 		return

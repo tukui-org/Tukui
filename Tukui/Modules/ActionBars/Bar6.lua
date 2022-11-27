@@ -18,11 +18,7 @@ function ActionBars:CreateBar6()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.Bar6 then
-		MultiBar5:SetParent(T.Hider)
-		
-		if T.Retail then
-			Settings.SetValue("PROXY_SHOW_ACTIONBAR_6", false)
-		end
+		Settings.SetValue("PROXY_SHOW_ACTIONBAR_6", false)
 
 		return
 	end

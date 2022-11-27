@@ -18,10 +18,10 @@ function ActionBars:CreateBar3()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.BottomRightBar then
-		MultiBarBottomRight:SetParent(T.Hider)
-		
 		if T.Retail then
 			Settings.SetValue("PROXY_SHOW_ACTIONBAR_3", false)
+		else
+			MultiBarBottomRight:SetParent(T.Hider)
 		end
 
 		return

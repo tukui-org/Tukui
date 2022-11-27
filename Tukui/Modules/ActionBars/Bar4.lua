@@ -18,10 +18,10 @@ function ActionBars:CreateBar4()
 	local NumRow = ceil(NumButtons / ButtonsPerRow)
 
 	if not C.ActionBars.RightBar then
-		MultiBarRight:SetParent(T.Hider)
-		
 		if T.Retail then
 			Settings.SetValue("PROXY_SHOW_ACTIONBAR_4", false)
+		else
+			MultiBarRight:SetParent(T.Hider)
 		end
 
 		return
