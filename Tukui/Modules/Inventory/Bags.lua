@@ -386,8 +386,8 @@ function Bags:CreateContainer(storagetype, ...)
 		BagsContainer:SetHeight(10)
 		BagsContainer:SetPoint("BOTTOMRIGHT", Container, "TOPRIGHT", 0, 1)
 		BagsContainer:Hide()
-		BagsContainer:CreateBackdrop()
-		BagsContainer:CreateShadow()
+		--BagsContainer:CreateBackdrop()
+		--BagsContainer:CreateShadow()
 
 		ToggleBagsContainer:SetHeight(20)
 		ToggleBagsContainer:SetWidth(20)
@@ -415,9 +415,9 @@ function Bags:CreateContainer(storagetype, ...)
 				Button:SetHeight(ButtonSize)
 				Button:SetNormalTexture("")
 				Button:SetPushedTexture("")
-				Button:CreateBackdrop()
+				--Button:CreateBackdrop()
 				Button.IconBorder:SetAlpha(0)
-				Button:SkinButton()
+				--Button:SkinButton()
 
 				if T.Retail then
 					Button.SlotHighlightTexture:SetAlpha(0)
@@ -426,9 +426,9 @@ function Bags:CreateContainer(storagetype, ...)
 				end
 
 				if LastButtonBag then
-					Button:SetPoint("LEFT", LastButtonBag, "RIGHT", ButtonSpacing, 0)
+					Button:SetPoint("RIGHT", LastButtonBag, "LEFT", ButtonSpacing, 0)
 				else
-					Button:SetPoint("TOPLEFT", BagsContainer, "TOPLEFT", ButtonSpacing, -ButtonSpacing)
+					Button:SetPoint("TOPRIGHT", BagsContainer, "TOPRIGHT", ButtonSpacing, -ButtonSpacing)
 				end
 
 				Count.Show = Noop
@@ -438,6 +438,7 @@ function Bags:CreateContainer(storagetype, ...)
 				Icon:SetInside()
 
 				LastButtonBag = Button
+				
 				BagsContainer:SetWidth((ButtonSize * getn(BlizzardBags)) + (ButtonSpacing * (getn(BlizzardBags) + 1)))
 				BagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
 			end
