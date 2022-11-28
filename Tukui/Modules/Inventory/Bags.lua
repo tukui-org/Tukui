@@ -797,9 +797,9 @@ function Bags:SlotUpdate(id, button)
 	if C.Bags.ItemLevel then
 		if ItemLink then
 			local Level = GetDetailedItemLevelInfo(ItemLink)
-			local _, _, Rarity, _, _, _, _, _, _, _, _, ClassID = GetItemInfo(ItemLink)
-
-			if (ClassID and ClassID == LE_ITEM_CLASS_ARMOR or ClassID == LE_ITEM_CLASS_WEAPON) and Level > 1 then
+			local _, _, Rarity, _, _, ItemType, _, _, _, _, _, ClassID = GetItemInfo(ItemLink)
+			
+			if (ItemType and (ItemType == "Armor" or ItemType == "Weapon")) and Level and Level > 1 then
 				if not button.ItemLevel then
 					button.ItemLevel = button:CreateFontString(nil, "ARTWORK")
 					button.ItemLevel:SetPoint("TOPRIGHT", 1, -1)
