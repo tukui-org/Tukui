@@ -65,8 +65,7 @@ function ActionBars:CreatePetBar()
 			FakeButton:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
 		elseif (i == NumPerRows + 1) then
 			FakeButton:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
-			FakeButton:CreateBackdrop()
-			FakeButton.Backdrop:SetBackdropColor(1, 0, 0)
+
 			NumPerRows = NumPerRows + ButtonsPerRow
 			NextRowButtonAnchor = _G["TukuiPetActionBarButton"..i]
 		else
