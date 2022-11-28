@@ -239,6 +239,7 @@ if T.Retail then
 		end
 	end
 
+	-- FIX ME : Tainting Action Bars!?
 	function ObjectiveTracker:UpdatePopup()
 		for i = 1, GetNumAutoQuestPopUps() do
 			local ID, type = GetAutoQuestPopUp(i)
@@ -461,7 +462,7 @@ if T.Retail then
 		hooksecurefunc("ScenarioTrackerProgressBar_SetValue", self.UpdateProgressBarColors)
 		hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 		hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
-		hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)
+		--hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)
 		hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
 	end
 

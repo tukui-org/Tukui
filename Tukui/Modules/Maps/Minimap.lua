@@ -599,9 +599,6 @@ function Minimap:Enable()
 	if not T.Retail then
 		self:EnableMouseWheelZoom()
 	end
-	
-	-- Remove some editable frames
-	T.Loading:RemoveEditFrame("MinimapCluster")
 end
 
 -- Need to be sized as soon as possible, because of LibDBIcon10
