@@ -932,8 +932,13 @@ end
 function Bags:UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local FirstButton
+	local MaxBags = 5
+	
+	if T.Retail then
+		MaxBags = MaxBags + 1
+	end
 
-	for Bag = 1, 5 do
+	for Bag = 1, MaxBags do
 		local ID = Bag - 1
 
 		if IsBagOpen(KEYRING_CONTAINER) then
