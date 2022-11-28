@@ -45,14 +45,13 @@ function ActionBars:CreatePetBar()
 		Bar:CreateShadow()
 	end
 	
-	local NumPerRows = ButtonsPerRow
-	local NextRowButtonAnchor = _G["TukuiPetActionBarButton1"]
-
 	for i = 1, NUM_PET_ACTION_SLOTS do
 		local FakeButton = CreateFrame("Frame", "TukuiPetActionBarButton"..i, TukuiPetActionBar)
 		local Button = _G["PetActionButton"..i]
 		local Icon = _G["PetActionButton"..i.."Icon"]
 		local PreviousButton = _G["TukuiPetActionBarButton"..i-1]
+		local NextRowButtonAnchor = _G["TukuiPetActionBarButton1"]
+		local NumPerRows = ButtonsPerRow
 		
 		Button:SetParent(Bar)
 		Button:ClearAllPoints()
@@ -66,7 +65,8 @@ function ActionBars:CreatePetBar()
 			FakeButton:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
 		elseif (i == NumPerRows + 1) then
 			FakeButton:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
-
+			FakeButton:CreateBackdrop()
+			FakeButton.Backdrop:SetBackdropColor(1, 0, 0)
 			NumPerRows = NumPerRows + ButtonsPerRow
 			NextRowButtonAnchor = _G["TukuiPetActionBarButton"..i]
 		else
