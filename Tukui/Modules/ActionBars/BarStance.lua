@@ -2,6 +2,14 @@ local T, C, L = select(2, ...):unpack()
 
 local ActionBars = T["ActionBars"]
 
+function ActionBars:MoveStanceButtons(button, i)
+	local FakeButton = _G["TukuiStanceActionBarButton"..i]
+	local Button = button
+	
+	Button:ClearAllPoints()
+	Button:SetAllPoints(FakeButton)
+end
+
 function ActionBars:CreateStanceBar()
 	local PetSize = C.ActionBars.PetButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
@@ -35,24 +43,35 @@ function ActionBars:CreateStanceBar()
 
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
+		local FakeButton = CreateFrame("Frame", "TukuiStanceActionBarButton"..i, TukuiStanceBar)
 		
 		Button:SetParent(Bar)
+		
+		FakeButton:SetSize(PetSize, PetSize)
 
 		if (i ~= 1) then
-			local Previous = _G["StanceButton"..i-1]
+			local Previous = _G["TukuiStanceActionBarButton"..i-1]
 
-			Button:ClearAllPoints()
-			Button:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
+			FakeButton:ClearAllPoints()
+			FakeButton:SetPoint("LEFT", Previous, "RIGHT", Spacing, 0)
 		else
-			Button:ClearAllPoints()
-			Button:SetPoint("BOTTOMLEFT", Bar, "BOTTOMLEFT", Spacing, Spacing)
+			FakeButton:ClearAllPoints()
+			FakeButton:SetPoint("BOTTOMLEFT", Bar, "BOTTOMLEFT", Spacing, Spacing)
 		end
 		
-		-- stop randomly moving these buttons, WTF
+		ActionBars:MoveStanceButtons(Button, i)
+		
 		if T.Retail then
-			Button.SetPoint = function() return end
+			hooksecurefunc(Button, "SetPoint", function(self)
+				local ID = Button:GetID()
+
+				if ID then
+					ActionBars:MoveStanceButtons(Button, ID)
+				end
+			end)
 		end
 	end
+	
 	
 	ActionBars:UpdateStanceBar()
 	ActionBars:SkinStanceButtons()

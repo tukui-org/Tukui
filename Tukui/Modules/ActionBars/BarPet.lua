@@ -3,6 +3,14 @@ local T, C, L = select(2, ...):unpack()
 local ActionBars = T["ActionBars"]
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS
 
+function ActionBars:MovePetButtons(button, i)
+	local FakeButton = _G["TukuiPetActionBarButton"..i]
+	local Button = button
+	
+	Button:ClearAllPoints()
+	Button:SetAllPoints(FakeButton)
+end
+
 function ActionBars:CreatePetBar()
 	local Movers = T["Movers"]
 
@@ -38,37 +46,47 @@ function ActionBars:CreatePetBar()
 	end
 	
 	local NumPerRows = ButtonsPerRow
-	local NextRowButtonAnchor = _G["PetActionButton1"]
+	local NextRowButtonAnchor = _G["TukuiPetActionBarButton1"]
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
+		local FakeButton = CreateFrame("Frame", "TukuiPetActionBarButton"..i, TukuiPetActionBar)
 		local Button = _G["PetActionButton"..i]
 		local Icon = _G["PetActionButton"..i.."Icon"]
-		local PreviousButton = _G["PetActionButton"..i-1]
-
+		local PreviousButton = _G["TukuiPetActionBarButton"..i-1]
+		
 		Button:SetParent(Bar)
 		Button:ClearAllPoints()
 		Button:SetSize(PetSize, PetSize)
 		Button:SetNormalTexture("")
 		Button:Show()
-
+		
+		FakeButton:SetSize(PetSize, PetSize)
+		
 		if (i == 1) then
-			Button:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
+			FakeButton:SetPoint("TOPLEFT", Bar, "TOPLEFT", Spacing, -Spacing)
 		elseif (i == NumPerRows + 1) then
-			Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+			FakeButton:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
 
 			NumPerRows = NumPerRows + ButtonsPerRow
-			NextRowButtonAnchor = _G["PetActionButton"..i]
+			NextRowButtonAnchor = _G["TukuiPetActionBarButton"..i]
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			FakeButton:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+		end
+		
+		ActionBars:MovePetButtons(Button, i)
+
+		if T.Retail then
+			hooksecurefunc(Button, "SetPoint", function(self)
+				local ID = Button:GetID()
+
+				if ID then
+					ActionBars:MovePetButtons(Button, ID)
+				end
+			end)
 		end
 
 		Bar:SetAttribute("addchild", Button)
 		Bar["Button"..i] = Button
-
-		-- stop randomly moving these buttons, WTF
-		if T.Retail then
-			Button.SetPoint = function() return end
-		end
 	end
 	
 	ActionBars:SkinPetButtons()

@@ -77,24 +77,6 @@ function ActionBars:DisableBlizzard()
 	end
 end
 
-function ActionBars:MovePetBar()
-	local PetBar = TukuiPetActionBar
-	local RightBar = TukuiActionBar5
-	local Data1 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiActionBar5
-	local Data2 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiPetActionBar
-
-	-- Don't run if player moved bar 5 or pet bar
-	if Data1 or Data2 then
-		return
-	end
-
-	if RightBar:IsShown() then
-		PetBar:SetPoint("RIGHT", RightBar, "LEFT", -6, 0)
-	else
-		PetBar:SetPoint("RIGHT", UIParent, "RIGHT", -28, 8)
-	end
-end
-
 function ActionBars:UpdatePetBar()
 	local Button, Icon, CastTexture, ShineTexture
 	local PetActionBarFrame = T.Retail and PetActionBar or PetActionBarFrame
