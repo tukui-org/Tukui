@@ -45,7 +45,7 @@ local Scan = function(self, unit)
 					local Line = _G[ScanTooltip:GetName().."TextLeft"..i]
 					local r, g, b = Line:GetTextColor()
 
-					if (r > 0.99 and r <= 1) and (g > 0.82 and g < 0.83) and (b >= 0 and b < 0.01) then
+					if (r > 0.99 and r <= 1) and (g > 0.81 and g < 0.83) and (b >= 0 and b < 0.01) then
 						Cache[ID] = "QUEST"
 
 						break
