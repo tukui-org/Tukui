@@ -29,7 +29,6 @@ function Minimap:DisableMinimapElements()
 		"MinimapZoneTextButton",
 		"GameTimeFrame",
 		"MiniMapWorldMapButton",
-		"ExpansionLandingPageMinimapButton",
 		"MinimapBackdrop",
 	}
 
@@ -61,6 +60,11 @@ function Minimap:DisableMinimapElements()
 	if ZoomOut then
 		ZoomOut:Kill()
 	end
+	
+	-- Expansion panel
+	ExpansionLandingPageMinimapButton:SetParent(T.OffScreen)
+	ExpansionLandingPageMinimapButton:ClearAllPoints()
+	ExpansionLandingPageMinimapButton:SetPoint("CENTER")
 end
 
 function Minimap:OnMouseClick(button)
@@ -73,11 +77,11 @@ function Minimap:OnMouseClick(button)
 			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
 		end
 	elseif (button == "MiddleButton") then
-		if T.Retail and GarrisonLandingPageMinimapButton and GarrisonLandingPageMinimapButton:IsShown() then
+		if T.Retail and ExpansionLandingPageMinimapButton and ExpansionLandingPageMinimapButton:IsShown() then
 			if InCombatLockdown() then
 				T.Print("["..GARRISON_MISSIONS_TITLE.."] "..ERR_NOT_IN_COMBAT)
 			else
-				GarrisonLandingPage_Toggle()
+				ExpansionLandingPageMinimapButton:ToggleLandingPage()
 			end
 		else
 			if MicroMenu then
@@ -271,11 +275,17 @@ function Minimap:EnableMouseWheelZoom()
 	self:SetScript("OnMouseWheel", function(self, delta)
 		local ZoomIn = Minimap.ZoomIn or MinimapZoomIn
 		local ZoomOut = Minimap.ZoomOut or MinimapZoomOut
-			
+
 		if (delta > 0) then
 			ZoomIn:Click()
 		elseif (delta < 0) then
-			ZoomOut:Click()
+			if T.Retail then
+				if Minimap:GetZoom() ~= 0 then
+					ZoomOut:Click()
+				end
+			else
+				ZoomOut:Click()
+			end
 		end
 	end)
 end
@@ -595,10 +605,7 @@ function Minimap:Enable()
 	self:EnableMouseOver()
 	self:AddTaxiEarlyExit()
 	self:AddHooks()
-	
-	if not T.Retail then
-		self:EnableMouseWheelZoom()
-	end
+	self:EnableMouseWheelZoom()
 end
 
 -- Need to be sized as soon as possible, because of LibDBIcon10
