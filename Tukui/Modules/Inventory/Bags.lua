@@ -722,6 +722,11 @@ function Bags:SlotUpdate(id, button)
 		if T.Retail then
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(4701874)
+			
+			-- DragonFlight, identify reagent slots in green
+			if id == 5 then
+				IconTexture:SetVertexColor(unpack(C.Bags.ReagentBagColor))
+			end
 		end
 	end
 
@@ -831,6 +836,11 @@ function Bags:SlotUpdate(id, button)
 			end
 		end
 	end
+	
+	-- DragonFlight, identify reagent button with a custom border color
+	if id == 5 and button.Backdrop then
+		button.Backdrop:SetBorderColor(unpack(C.Bags.ReagentBagColor))
+	end
 end
 
 function Bags:CooldownOnUpdate(elapsed)
@@ -932,8 +942,10 @@ end
 function Bags:UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local FirstButton
+	
+	local TotalBags = T.Retail and 6 or 5
 
-	for Bag = 1, 5 do
+	for Bag = 1, TotalBags do
 		local ID = Bag - 1
 
 		if IsBagOpen(KEYRING_CONTAINER) then
@@ -1084,6 +1096,7 @@ function Bags:OpenBag(id)
 
 	local Size = GetContainerNumSlots(id)
 	local OpenFrame
+	local TotalBags = T.Retail and 5 or 4
 	
 	if not T.Retail then
 		OpenFrame = ContainerFrame_GetOpenFrame()
@@ -1121,7 +1134,7 @@ function Bags:OpenBag(id)
 		Container:Show()
 	end
 
-	if (id == 4) then
+	if (id == TotalBags) then
 		Bags:UpdateAllBags()
 	end
 end
@@ -1132,8 +1145,10 @@ end
 
 function Bags:OpenAllBags()
 	self:OpenBag(0)
+	
+	local TotalBags = T.Retail and 5 or 4
 
-	for i = 1, 4 do
+	for i = 1, TotalBags do
 		self:OpenBag(i)
 	end
 

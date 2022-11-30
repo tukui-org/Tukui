@@ -92,6 +92,7 @@ C["Bags"] = {
 	["ButtonSize"] = 32,
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 12,
+	["ReagentBagColor"] = {0.68, 0.83, 0.51},
 }
 
 C["Chat"] = {
