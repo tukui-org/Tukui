@@ -94,16 +94,26 @@ function ActionBars:CreateBar1()
 	]])
 
 	ActionBar1:SetAttribute("_onstate-page", [[
-		if HasVehicleActionBar and HasVehicleActionBar() then
-			newstate = GetVehicleBarIndex() or newstate
-		elseif HasOverrideActionBar and HasOverrideActionBar() then
-			newstate = GetOverrideBarIndex() or newstate
-		elseif HasTempShapeshiftActionBar and HasTempShapeshiftActionBar() then
-			newstate = GetTempShapeshiftBarIndex() or newstate
-		elseif HasBonusActionBar and HasBonusActionBar() then
-			local page = GetActionBarPage() or 0
-			newstate = (page > 1 and page) or GetBonusBarIndex() or newstate
+		if newstate == "possess" or newstate == "11" then
+			if HasVehicleActionBar and HasVehicleActionBar() then
+				newstate = GetVehicleBarIndex()
+			elseif HasOverrideActionBar and HasOverrideActionBar() then
+				newstate = GetOverrideBarIndex()
+			elseif HasTempShapeshiftActionBar and HasTempShapeshiftActionBar() then
+				newstate = GetTempShapeshiftBarIndex()
+			elseif HasBonusActionBar and HasBonusActionBar() then
+				newstate = GetBonusBarIndex()
+			else
+				newstate = nil
+			end
+		
+			if not newstate then
+				print("|cffff8000Tukui|r: Cannot determine possess/vehicle action bar page, please report this!")
+
+				newstate = 12
+			end
 		end
+		
 		for i, Button in ipairs(Button) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end

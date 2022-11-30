@@ -61,6 +61,11 @@ function UIWidgets:Enable()
 	MinimapWidget:SetParent(self.Holder)
 	MinimapWidget:ClearAllPoints()
 	MinimapWidget:SetPoint("CENTER")
+	
+	-- This is power bar
+	UIWidgetPowerBarContainerFrame:SetParent(self.Holder)
+	UIWidgetPowerBarContainerFrame:ClearAllPoints()
+	UIWidgetPowerBarContainerFrame:SetPoint("CENTER")
 
 	-- Skin status bars
 	hooksecurefunc(UIWidgetTemplateStatusBarMixin, "Setup", self.SkinUIWidgetStatusBar)
