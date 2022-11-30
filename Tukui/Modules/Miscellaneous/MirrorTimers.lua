@@ -18,7 +18,7 @@ function MirrorTimers:Update()
 			Bar.Backdrop:CreateShadow()
 
 			Status:ClearAllPoints()
-			Status:SetInside(Bar, 1, 1)
+			Status:SetInside(Bar, 2, 2)
 			Status:SetStatusBarTexture(C.Medias.Normal)
 			Status.SetStatusBarTexture = function() return end
 				
