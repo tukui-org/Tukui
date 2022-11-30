@@ -61,10 +61,12 @@ function Minimap:DisableMinimapElements()
 		ZoomOut:Kill()
 	end
 	
-	-- Expansion panel
-	ExpansionLandingPageMinimapButton:SetParent(T.OffScreen)
-	ExpansionLandingPageMinimapButton:ClearAllPoints()
-	ExpansionLandingPageMinimapButton:SetPoint("CENTER")
+	if T.Retail then
+		-- Expansion panel
+		ExpansionLandingPageMinimapButton:SetParent(T.OffScreen)
+		ExpansionLandingPageMinimapButton:ClearAllPoints()
+		ExpansionLandingPageMinimapButton:SetPoint("CENTER")
+	end
 end
 
 function Minimap:OnMouseClick(button)
