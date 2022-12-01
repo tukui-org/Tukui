@@ -9,16 +9,23 @@ function TalkingHead:OnEvent(event, addon)
 		return
 	end
 
+	local Holder = CreateFrame("Frame", "TukuiTalkingHead", UIParent)
 	local Frame = TalkingHeadFrame
-	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move["TalkingHeadFrame"]
+	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move["TukuiTalkingHead"]
 	local A1, Parent, A2, X, Y = "TOP", UIParent, "TOP", 0, -10
 
 	if CustomPosition then
 		A1, Parent, A2, X, Y = unpack(CustomPosition)
 	end
 
+	Holder:SetWidth(Frame:GetWidth())
+	Holder:SetHeight(Frame:GetHeight())
+	Holder:ClearAllPoints()
+	Holder:SetPoint(A1, Parent, A2, X, Y)
+	
+	Frame:SetParent(Holder)
 	Frame:ClearAllPoints()
-	Frame:SetPoint(A1, Parent, A2, X, Y)
+	Frame:SetPoint("CENTER", Holder)
 	Frame.ignoreFramePositionManager = true
 
 	if not Frame.IsSkinned then
@@ -41,7 +48,7 @@ function TalkingHead:OnEvent(event, addon)
 		Frame.IsSkinned = true
 	end
 
-	Movers:RegisterFrame(Frame, "Talking Head")
+	Movers:RegisterFrame(Holder, "Talking Head")
 end
 
 function TalkingHead:Enable()
@@ -52,9 +59,13 @@ function TalkingHead:Enable()
 
 		return
 	end
-
-	self:RegisterEvent("ADDON_LOADED")
-	self:SetScript("OnEvent", self.OnEvent)
+	
+	if TalkingHeadFrame then
+		self:OnEvent("ADDON_LOADED", "Blizzard_TalkingHeadUI")
+	else
+		self:RegisterEvent("ADDON_LOADED")
+		self:SetScript("OnEvent", self.OnEvent)
+	end
 end
 
 Miscellaneous.TalkingHead = TalkingHead
