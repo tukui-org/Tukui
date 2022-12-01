@@ -358,6 +358,8 @@ Toolkit.API.SkinCloseButton = function(self, OffsetX, OffsetY, CloseSize)
 	self:SetPushedTexture("")
 	self:SetHighlightTexture("")
 	self:SetDisabledTexture("")
+	
+	self:StripTextures()
 
 	self.Texture = self:CreateTexture(nil, "OVERLAY")
 	self.Texture:SetPoint("CENTER", OffsetX or 0, OffsetY or 0)
