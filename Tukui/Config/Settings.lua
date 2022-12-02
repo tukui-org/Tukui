@@ -147,6 +147,7 @@ C["Loot"] = {
 }
 
 C["Misc"] = {
+	["DisplayWidgetPowerBar"] = true,
 	["BlizzardMicroMenu"] = false,
 	["ItemLevel"] = true,
 	["ThreatBar"] = true,

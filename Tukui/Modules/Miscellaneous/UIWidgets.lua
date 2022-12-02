@@ -63,10 +63,14 @@ function UIWidgets:Enable()
 	MinimapWidget:SetPoint("CENTER")
 	
 	if UIWidgetPowerBarContainerFrame then
-		-- This is power bar
-		UIWidgetPowerBarContainerFrame:SetParent(self.Holder)
-		UIWidgetPowerBarContainerFrame:ClearAllPoints()
-		UIWidgetPowerBarContainerFrame:SetPoint("CENTER")
+		if C.Misc.DisplayWidgetPowerBar then
+			-- This is power bar
+			UIWidgetPowerBarContainerFrame:SetParent(self.Holder)
+			UIWidgetPowerBarContainerFrame:ClearAllPoints()
+			UIWidgetPowerBarContainerFrame:SetPoint("CENTER")
+		else
+			UIWidgetPowerBarContainerFrame:SetParent(T.Hider)
+		end
 	end
 
 	-- Skin status bars
