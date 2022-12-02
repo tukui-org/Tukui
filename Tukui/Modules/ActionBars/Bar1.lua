@@ -14,6 +14,8 @@ function ActionBars:CreateBar1()
 	local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex and GetVehicleBarIndex()) or ""
 	local OverrideBar = format("[overridebar] %d;", GetOverrideBarIndex and GetOverrideBarIndex()) or ""
 	local ShapeshiftBar = format("[shapeshift] %d;", GetTempShapeshiftBarIndex and GetTempShapeshiftBarIndex()) or ""
+	local NumPerRows = C.ActionBars.Bar1ButtonsPerRow
+	local NextRowButtonAnchor = _G["ActionButton1"]
 
 	if NumButtons <= ButtonsPerRow then
 		ButtonsPerRow = NumButtons
@@ -121,32 +123,26 @@ function ActionBars:CreateBar1()
 
 	RegisterStateDriver(ActionBar1, "page", ActionBar1.GetBar())
 
-	ActionBar1:RegisterEvent("PLAYER_ENTERING_WORLD")
-
 	if T.Retail or T.WotLK then
 		ActionBar1:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR")
 		ActionBar1:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR")
 	end
 
 	ActionBar1:SetScript("OnEvent", function(self, event, unit, ...)
-		if (event == "PLAYER_ENTERING_WORLD") then
-			ActionBars:UpdateMainBarButtons()
-		elseif (event == "UPDATE_VEHICLE_ACTIONBAR") or (event == "UPDATE_OVERRIDE_ACTIONBAR") then
-			for i = 1, 12 do
-				local Button = _G["ActionButton"..i]
-				local Action = Button.action
-				local Icon = Button.icon
+		for i = 1, 12 do
+			local Button = _G["ActionButton"..i]
+			local Action = Button.action
+			local Icon = Button.icon
 
-				if Action >= 120 then
-					local Texture = GetActionTexture(Action)
+			if Action >= 120 then
+				local Texture = GetActionTexture(Action)
 
-					if (Texture) then
-						Icon:SetTexture(Texture)
-						Icon:Show()
-					else
-						if Icon:IsShown() then
-							Icon:Hide()
-						end
+				if (Texture) then
+					Icon:SetTexture(Texture)
+					Icon:Show()
+				else
+					if Icon:IsShown() then
+						Icon:Hide()
 					end
 				end
 			end
@@ -158,13 +154,41 @@ function ActionBars:CreateBar1()
 
 		ActionBar1["Button"..i] = Button
 	end
+	
+	-- Move main buttons inside our action bar #1
+	for i = 1, Num do
+		local Button = _G["ActionButton"..i]
+		local PreviousButton = _G["ActionButton"..i-1]
+
+		Button:SetParent(ActionBar1)
+		Button:SetSize(Size, Size)
+		Button:ClearAllPoints()
+		Button:SetAttribute("showgrid", 1)
+
+		if not T.Retail then
+			ActionButton_ShowGrid(Button)	
+		end
+
+		ActionBars:SkinButton(Button)
+
+		if i <= NumButtons then
+			if (i == 1) then
+				Button:SetPoint("TOPLEFT", ActionBar1, "TOPLEFT", Spacing, -Spacing)
+			elseif (i == NumPerRows + 1) then
+				Button:SetPoint("TOPLEFT", NextRowButtonAnchor, "BOTTOMLEFT", 0, -Spacing)
+
+				NumPerRows = NumPerRows + ButtonsPerRow
+				NextRowButtonAnchor = _G["ActionButton"..i]
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", Spacing, 0)
+			end
+		else
+			Button:SetPoint("TOP", UIParent, "TOP", 0, 200)
+		end
+	end
 
 	Movers:RegisterFrame(ActionBar1, "Action Bar #1")
 
 	self.Bars = {}
 	self.Bars.Bar1 = ActionBar1
-	
-	if T.Retail then
-		self:UpdateMainBarButtons()
-	end
 end
