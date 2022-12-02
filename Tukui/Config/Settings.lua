@@ -180,6 +180,7 @@ C["Misc"] = {
 
 		["Value"] = "Game Menu",
 	},
+	["ObjectiveTracker"] = true,
 }
 
 C["Maps"] = {

@@ -475,6 +475,10 @@ if T.Retail then
 	end
 
 	function ObjectiveTracker:Enable()
+		if not C.Misc.ObjectiveTracker then
+			return
+		end
+		
 		self:AddHooks()
 		self:SetDefaultPosition()
 		self:SkinScenario()
@@ -671,7 +675,7 @@ else
 	end
 
 	function ObjectiveTracker:Enable()
-		if self.IsEnabled then
+		if not C.Misc.ObjectiveTracker then
 			return
 		end
 

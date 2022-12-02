@@ -199,6 +199,8 @@ local Misc = function(self)
 	Window:CreateDropdown("All", "Misc", "UIErrorFont", "Set ui error font", "Font")
 	Window:CreateSection("Retail", "Talking Head")
 	Window:CreateSwitch("Retail", "Misc", "TalkingHeadEnable", "Enable Talking Head?")
+	Window:CreateSection("All", "Objective Tracker")
+	Window:CreateSwitch("All", "Misc", "ObjectiveTracker", "Enable our Objective Tracker?")
 end
 
 local Maps = function(self)
