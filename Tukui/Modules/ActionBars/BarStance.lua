@@ -27,6 +27,10 @@ function ActionBars:CreateStanceBar()
 	Bar:SetFrameStrata("LOW")
 	Bar:SetFrameLevel(10)
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
+	Bar:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+	Bar:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
+	Bar:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
+	Bar:RegisterEvent("UPDATE_SHAPESHIFT_USABLE")
 	Bar:SetScript("OnEvent", ActionBars.UpdateStanceBar)
 
 	if C.ActionBars.ShowBackdrop then
@@ -39,13 +43,10 @@ function ActionBars:CreateStanceBar()
 	StanceBarFrame.ignoreFramePositionManager = true
 	StanceBarFrame:StripTextures()
 	StanceBarFrame:EnableMouse(false)
-	StanceBarFrame:UnregisterAllEvents()
 
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
 		local FakeButton = CreateFrame("Frame", "TukuiStanceActionBarButton"..i, TukuiStanceBar)
-		
-		Button:SetParent(Bar)
 		
 		FakeButton:SetSize(PetSize, PetSize)
 
@@ -71,7 +72,6 @@ function ActionBars:CreateStanceBar()
 			end)
 		end
 	end
-	
 	
 	ActionBars:UpdateStanceBar()
 	ActionBars:SkinStanceButtons()
