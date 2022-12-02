@@ -2,8 +2,6 @@ local T, C, L = select(2, ...):unpack()
 
 local Noop = function() end
 local ReplaceBags = 0
-local NeedBagRefresh = true
-local NeedBankRefresh = true
 local LastButtonBag, LastButtonBank
 local Token1, Token2, Token3 = BackpackTokenFrameToken1, BackpackTokenFrameToken2, BackpackTokenFrameToken3
 local NUM_CONTAINER_FRAMES = NUM_CONTAINER_FRAMES
@@ -1003,8 +1001,6 @@ function Bags:UpdateAllBags()
 		end
 	end
 
-	NeedBagRefresh = false
-
 	self.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 64 + (ButtonSpacing * 4)) - ButtonSpacing)
 end
 
@@ -1079,8 +1075,6 @@ function Bags:UpdateAllBankBags()
 			LastButton = Button
 		end
 	end
-
-	NeedBankRefresh = false
 
 	Bags.Bank:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 20) - ButtonSpacing)
 end
@@ -1226,12 +1220,8 @@ function Bags:ToggleBags(id, openonly)
 			CloseBankBagFrames()
 			CloseBankFrame()
 
-			NeedBagRefresh = true
-
 			Bags:OpenBag(id)
 			Bags:UpdateAllBags()
-
-			NeedBagRefresh = true
 		else
 			CloseBag(id)
 		end
