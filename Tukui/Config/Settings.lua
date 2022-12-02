@@ -220,6 +220,8 @@ C["NamePlates"] = {
 
 C["Party"] = {
 	["Enable"] = false,
+	["Buffs"] = true,
+	["Debuffs"] = true,
 	["ShowPets"] = false,
 	["ShowPlayer"] = true,
 	["ShowHealthText"] = true,

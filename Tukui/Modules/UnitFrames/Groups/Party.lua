@@ -71,33 +71,41 @@ function UnitFrames:Party()
 	Name:SetPoint("TOPLEFT", 4, 7)
 	Name:SetFontObject(Font)
 
-	local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
-	Buffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
-	Buffs:SetHeight(24)
-	Buffs:SetWidth(190)
-	Buffs.size = 24
-	Buffs.num = 7
-	Buffs.numRow = 1
-	Buffs.spacing = 2
-	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
-	Buffs.PostCreateButton = UnitFrames.PostCreateAura
-	Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
+	if C.Party.Buffs then
+		local Buffs = CreateFrame("Frame", self:GetName().."Buffs", self)
+		Buffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
+		Buffs:SetHeight(24)
+		Buffs:SetWidth(190)
+		Buffs.size = 24
+		Buffs.num = 7
+		Buffs.numRow = 1
+		Buffs.spacing = 2
+		Buffs.initialAnchor = "TOPLEFT"
+		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
+		Buffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Buffs.PostCreateButton = UnitFrames.PostCreateAura
+		Buffs.PostUpdateButton = UnitFrames.PostUpdateAura
+		
+		self.Buffs = Buffs
+	end
 
-	local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
-	Debuffs:SetPoint("LEFT", self, "RIGHT", 6, 0)
-	Debuffs:SetHeight(self:GetHeight())
-	Debuffs:SetWidth(250)
-	Debuffs.size = self:GetHeight()
-	Debuffs.num = 6
-	Debuffs.spacing = 2
-	Debuffs.initialAnchor = "TOPLEFT"
-	Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
-	Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
-	Debuffs.PostCreateButton = UnitFrames.PostCreateAura
-	Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
-
+	if C.Party.Debuffs then
+		local Debuffs = CreateFrame("Frame", self:GetName().."Debuffs", self)
+		Debuffs:SetPoint("LEFT", self, "RIGHT", 6, 0)
+		Debuffs:SetHeight(self:GetHeight())
+		Debuffs:SetWidth(250)
+		Debuffs.size = self:GetHeight()
+		Debuffs.num = 6
+		Debuffs.spacing = 2
+		Debuffs.initialAnchor = "TOPLEFT"
+		Debuffs.PostCreateIcon = UnitFrames.PostCreateAura
+		Debuffs.PostUpdateIcon = UnitFrames.PostUpdateAura
+		Debuffs.PostCreateButton = UnitFrames.PostCreateAura
+		Debuffs.PostUpdateButton = UnitFrames.PostUpdateAura
+		
+		self.Debuffs = Debuffs
+	end
+	
 	local Leader = self:CreateTexture(nil, "OVERLAY")
 	Leader:SetSize(16, 16)
 	Leader:SetPoint("TOPRIGHT", self, "TOPLEFT", -4, 0)
@@ -191,8 +199,6 @@ function UnitFrames:Party()
 	self.Power = Power
 	self.Power.bg = Power.Background
 	self.Name = Name
-	self.Buffs = Buffs
-	self.Debuffs = Debuffs
 	self.LeaderIndicator = Leader
 	self.MasterLooterIndicator = MasterLooter
 	self.ReadyCheckIndicator = ReadyCheck

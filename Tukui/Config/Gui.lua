@@ -259,6 +259,8 @@ local Party = function(self)
 	Window:CreateSwitch("All", "Party", "ShowPets", "Display Pets")
 
 	Window:CreateSection("All", "Styling")
+	Window:CreateSwitch("All", "Party", "Buffs", "Display buffs on party members")
+	Window:CreateSwitch("All", "Party", "Debuffs", "Display debuffs on party members")
 	Window:CreateSwitch("All", "Party", "ShowPlayer", "Display self in party")
 	Window:CreateSlider("All", "Party", "RangeAlpha", "Set out of range alpha", 0, 1, 0.1)
 	Window:CreateSwitch("All", "Party", "ShowHealthText", "Display health text values")
