@@ -27,7 +27,6 @@ function ActionBars:CreateStanceBar()
 	Bar:SetFrameStrata("LOW")
 	Bar:SetFrameLevel(10)
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_COOLDOWN")
-	Bar:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
 	Bar:RegisterEvent("UPDATE_SHAPESHIFT_USABLE")
@@ -47,6 +46,10 @@ function ActionBars:CreateStanceBar()
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]
 		local FakeButton = CreateFrame("Frame", "TukuiStanceActionBarButton"..i, TukuiStanceBar)
+		
+		if not T.Retail then
+			Button:SetParent(Bar)
+		end
 		
 		FakeButton:SetSize(PetSize, PetSize)
 
