@@ -29,6 +29,7 @@ local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or
 local SetItemSearch = C_Container and C_Container.SetItemSearch or SetItemSearch
 local SetSortBagsRightToLeft = C_Container and C_Container.SetSortBagsRightToLeft or SetSortBagsRightToLeft
 local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeftToRight or SetSortBagsRightToLeft
+local GetContainerItemCooldown = C_Container and C_Container.GetContainerItemCooldown or GetContainerItemCooldown
 
 BACKPACK_HEIGHT = 256
 

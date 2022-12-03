@@ -82,16 +82,16 @@ function ActionBars:SkinButton(button)
 		Icon:SetDrawLayer("BACKGROUND", 7)
 
 		if (Normal) then
-			if T.Retail then
-				Normal:SetAlpha(0)
-			end
-			
 			Normal:ClearAllPoints()
 			Normal:SetPoint("TOPLEFT")
 			Normal:SetPoint("BOTTOMRIGHT")
 
 			if (Button:GetChecked() and Button.UpdateState) then
 				Button:UpdateState(Button)
+			end
+			
+			if (T.Retail) or (T.WotLK and T.WoWBuild >= 46917) then
+				Normal:SetParent(T.Hider)
 			end
 		end
 
@@ -161,6 +161,7 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
 	local NormalTexture = _G[Button:GetName().."NormalTexture"]
+	local NormalTexture2 = _G[Button:GetName().."NormalTexture2"]
 
 	Button:SetWidth(PetSize)
 	Button:SetHeight(PetSize)
@@ -201,13 +202,17 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Flash:SetTexture("")
 
 	if Normal then
-		if T.Retail then
-			Normal:SetAlpha(0)
+		if (T.Retail) or (T.WotLK and T.WoWBuild >= 46917) then
+			Normal:SetParent(T.Hider)
 		end
 		
 		Normal:ClearAllPoints()
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
+		
+		if NormalTexture2 then
+			NormalTexture2:SetAlpha(0)
+		end
 	end
 	
 	if NormalTexture then
