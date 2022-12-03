@@ -2,7 +2,7 @@ local parent, ns = ...
 local oUF = ns.oUF
 
 local GetComboPoints = GetComboPoints
-local MaxComboPts = 6
+local MaxComboPts = 7
 local Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local BCC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
 local Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
@@ -13,14 +13,18 @@ local SetMaxCombo = function(self)
 
 	if MaxCombo == MaxComboPts then
 		for i = 1, MaxComboPts do
-			cpb[i]:SetWidth(cpb[i].Size6Points)
+			cpb[i]:SetWidth(cpb[i].Size7Points)
 			cpb[i]:Show()
 		end
 	else
 		for i = 1, MaxComboPts do
-			cpb[i]:SetWidth(cpb[i].Size5Points)
-
-			if i > 5 then
+			if MaxCombo == 6 then
+				cpb[i]:SetWidth(cpb[i].Size6Points)
+			else
+				cpb[i]:SetWidth(cpb[i].Size5Points)
+			end
+			
+			if i > MaxCombo then
 				cpb[i]:Hide()
 			else
 				cpb[i]:Show()
@@ -61,7 +65,7 @@ local Update = function(self, event, unit, powerType)
 			if i <= points then
 				cpb[i]:SetAlpha(1)
 			else
-				cpb[i]:SetAlpha(.3)
+				cpb[i]:SetAlpha(.2)
 			end
 
 			cpb[i]:SetStatusBarColor(unpack(cpb.Colors[i]))
@@ -69,7 +73,7 @@ local Update = function(self, event, unit, powerType)
 	end
 
 	if ChargedPoint then
-		cpb[ChargedPoint]:SetStatusBarColor(unpack(cpb.Colors[7]))
+		cpb[ChargedPoint]:SetStatusBarColor(unpack(cpb.Colors[8]))
 	end
 
 	if points > 0 then
@@ -98,13 +102,14 @@ local Enable = function(self, unit)
 		cpb.__owner = self
 		cpb.ForceUpdate = ForceUpdate
 		cpb.Colors = {
-			[1] = {1, 0, 0, 1}, -- Combo 1
-			[2] = {1, 0, 0, 1}, -- Combo 2
-			[3] = {1, 0, 0, 1}, -- Combo 3
-			[4] = {1, 0, 0, 1}, -- Combo 4
-			[5] = {1, 0, 0, 1}, -- Combo 5
-			[6] = {1, 0, 0, 1}, -- Combo 6
-			[7] = {.33, .73, 1, 1}, -- Echoing Reprimand Highlight
+			[1] = {0.29, 0.68, 0.30, 1}, -- Combo 1
+			[2] = {0.29, 0.68, 0.30, 1}, -- Combo 2
+			[3] = {0.29, 0.68, 0.30, 1}, -- Combo 3
+			[4] = {0.29, 0.68, 0.30, 1}, -- Combo 4
+			[5] = {0.29, 0.68, 0.30, 1}, -- Combo 5
+			[6] = {0.29, 0.68, 0.30, 1}, -- Combo 6
+			[7] = {0.29, 0.68, 0.30, 1}, -- Combo 7
+			[8] = {.33, .73, 1, 1}, -- Echoing Reprimand Highlight
 		}
 
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)

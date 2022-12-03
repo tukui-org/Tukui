@@ -356,9 +356,10 @@ function UnitFrames:Player()
 		ComboPoints:CreateBackdrop()
 		ComboPoints.Backdrop:SetOutside()
 
-		for i = 1, 6 do
+		for i = 1, 7 do
 			local SizeFor5 = ceil(250 / 5)
 			local SizeFor6 = ceil(250 / 6)
+			local SizeFor7 = ceil(250 / 7)
 
 			ComboPoints[i] = CreateFrame("StatusBar", nil, ComboPoints)
 			ComboPoints[i]:SetHeight(8)
@@ -366,14 +367,16 @@ function UnitFrames:Player()
 
 			if i == 1 then
 				ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
-				ComboPoints[i]:SetWidth(SizeFor6 - 2)
-
+				ComboPoints[i]:SetWidth(SizeFor7 - 2)
+				
+				ComboPoints[i].Size7Points = SizeFor7 - 2
 				ComboPoints[i].Size6Points = SizeFor6 - 2
 				ComboPoints[i].Size5Points = SizeFor5
 			else
-				ComboPoints[i]:SetWidth(SizeFor6 - 1)
+				ComboPoints[i]:SetWidth(SizeFor7 - 1)
 				ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-
+				
+				ComboPoints[i].Size7Points = SizeFor7 - 1
 				ComboPoints[i].Size6Points = SizeFor6 - 1
 				ComboPoints[i].Size5Points = SizeFor5 - 1
 			end

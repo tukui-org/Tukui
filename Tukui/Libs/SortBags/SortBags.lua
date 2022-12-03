@@ -7,6 +7,8 @@ BAG_CONTAINERS = {0, 1, 2, 3, 4}
 BANK_BAG_CONTAINERS = {-1, 5, 6, 7, 8, 9, 10, 11}
 
 local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+local GetBagSlotFlag = C_Container and C_Container.GetBagSlotFlag or GetBagSlotFlag
+local GetBankBagSlotFlag = C_Container and C_Container.GetBankBagSlotFlag or GetBankBagSlotFlag
 
 function _G.SortBags()
 	CONTAINERS = {unpack(BAG_CONTAINERS)}
