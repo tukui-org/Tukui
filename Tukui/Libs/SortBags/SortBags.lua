@@ -6,6 +6,8 @@ CreateFrame('GameTooltip', 'SortBagsTooltip', nil, 'GameTooltipTemplate')
 BAG_CONTAINERS = {0, 1, 2, 3, 4}
 BANK_BAG_CONTAINERS = {-1, 5, 6, 7, 8, 9, 10, 11}
 
+local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+
 function _G.SortBags()
 	CONTAINERS = {unpack(BAG_CONTAINERS)}
 	for i = #CONTAINERS, 1, -1 do
