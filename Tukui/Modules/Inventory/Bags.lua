@@ -686,7 +686,7 @@ function Bags:SlotUpdate(id, button)
 	local IconTexture = _G[button:GetName().."IconTexture"]
 	local Count = _G[button:GetName().."Count"]
 
-	if (button.ItemID and button.ItemID == ItemID) then
+	if (button.ItemID and button.ItemID == ItemID) and (IconTexture and IconTexture:GetTexture()) then
 		return
 	end
 
