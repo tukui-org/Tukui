@@ -93,6 +93,7 @@ C["Bags"] = {
 	["Spacing"] = 4,
 	["ItemsPerRow"] = 12,
 	["ReagentBagColor"] = {0.68, 0.83, 0.51},
+	["ReagentInsideBag"] = false,
 }
 
 C["Chat"] = {

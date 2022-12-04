@@ -99,12 +99,13 @@ local Bags = function(self)
 
 	Window:CreateSection("All", "Enable")
 	Window:CreateSwitch("All", "Bags", "Enable", "Enable bag module")
+	Window:CreateSwitch("Retail", "Bags", "ReagentInsideBag", "Put reagent bag item inside the main bag")
 	Window:CreateSwitch("All", "Bags", "ItemLevel", "Display ILevel on bags armors and weapons items")
 
 	Window:CreateSection("All", "Styling")
 	Window:CreateSwitch("All", "Bags", "IdentifyQuestItems", "Identify quest items in bags with an exclamation mark?")
 	Window:CreateSwitch("All", "Bags", "FlashNewItems", "Flash new items in bags?")
-	Window:CreateColorSelection("Retail", "Bags", "ReagentBagColor", "Color of the reagent bag slots?")
+	Window:CreateColorSelection("Retail", "Bags", "ReagentBagColor", "Color of the reagent bag slots in the main bag?")
 
 	Window:CreateSection("All", "Sizing")
 	Window:CreateSlider("All", "Bags", "ButtonSize", "Set bag slot size", 20, 36, 1)

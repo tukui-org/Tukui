@@ -536,6 +536,11 @@ function Bags:CreateContainer(storagetype, ...)
 		Container.SearchBox = SearchBox
 		Container.ToggleBags = ToggleBags
 		Container.Keys = Keys
+	elseif (storagetype == "BagReagent") then
+		Container.Title = Container:CreateFontString(nil, "OVERLAY")
+		Container.Title:SetFont(C.Medias.Font, 18)
+		Container.Title:SetPoint("TOP", 0, 12)
+		Container.Title:SetText(MINIMAP_TRACKING_VENDOR_REAGENT)
 	else
 		local PurchaseButton = BankFramePurchaseButton
 		local CostText = BankFrameSlotCost
@@ -723,7 +728,7 @@ function Bags:SlotUpdate(id, button)
 			IconTexture:SetTexture(4701874)
 			
 			-- DragonFlight, identify reagent slots in green
-			if id == 5 then
+			if C.Bags.ReagentInsideBag and id == 5 then
 				IconTexture:SetVertexColor(unpack(C.Bags.ReagentBagColor))
 			end
 		end
@@ -837,7 +842,7 @@ function Bags:SlotUpdate(id, button)
 	end
 	
 	-- DragonFlight, identify reagent button with a custom border color
-	if id == 5 and button.Backdrop then
+	if C.Bags.ReagentInsideBag and id == 5 and button.Backdrop then
 		button.Backdrop:SetBorderColor(unpack(C.Bags.ReagentBagColor))
 	end
 end
@@ -939,8 +944,8 @@ function Bags:BagUpdate(id)
 end
 
 function Bags:UpdateAllBags()
-	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
-	local FirstButton
+	local NumRows, LastRowButton, NumButtons, LastButton, NumRowReagent = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1, 0
+	local FirstButton, FirstReagentButton
 	
 	local TotalBags = T.Retail and 6 or 5
 
@@ -956,11 +961,7 @@ function Bags:UpdateAllBags()
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"..Bag.."Item"..Item]
 			local IconTexture = _G["ContainerFrame"..Bag.."Item"..Item.."IconTexture"]
-
-			if not FirstButton then
-				FirstButton = Button
-			end
-
+			
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
@@ -971,24 +972,56 @@ function Bags:UpdateAllBags()
 
 			Button.flashAnim:Stop()
 			Button.flashAnim.Play = Noop
-
-			if (Button == FirstButton) then
-				Button:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 10, -40)
-				LastRowButton = Button
+			
+			if not C.Bags.ReagentInsideBag and Bag == 6 then
+				if not FirstReagentButton then
+					FirstReagentButton = Button
+				end
+				
+				if (Button == FirstReagentButton) then
+					NumButtons = 1
+					
+					Button:SetPoint("TOPLEFT", Bags.BagReagent, "TOPLEFT", 10, -10)
+					
+					LastRowButton = Button
+					LastButton = Button
+				elseif (NumButtons == ItemsPerRow) then
+					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(ButtonSpacing + ButtonSize))
+					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(ButtonSpacing + ButtonSize))
+					LastRowButton = Button
+					NumRowReagent = NumRowReagent + 1
+					NumButtons = 1
+				else
+					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (ButtonSpacing + ButtonSize), 0)
+					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
+					
+					NumButtons = NumButtons + 1
+				end
+				
 				LastButton = Button
-			elseif (NumButtons == ItemsPerRow) then
-				Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(ButtonSpacing + ButtonSize))
-				Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(ButtonSpacing + ButtonSize))
-				LastRowButton = Button
-				NumRows = NumRows + 1
-				NumButtons = 1
 			else
-				Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (ButtonSpacing + ButtonSize), 0)
-				Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
-				NumButtons = NumButtons + 1
-			end
+				if not FirstButton then
+					FirstButton = Button
+				end
 
-			LastButton = Button
+				if (Button == FirstButton) then
+					Button:SetPoint("TOPLEFT", Bags.Bag, "TOPLEFT", 10, -40)
+					LastRowButton = Button
+					LastButton = Button
+				elseif (NumButtons == ItemsPerRow) then
+					Button:SetPoint("TOPRIGHT", LastRowButton, "TOPRIGHT", 0, -(ButtonSpacing + ButtonSize))
+					Button:SetPoint("BOTTOMLEFT", LastRowButton, "BOTTOMLEFT", 0, -(ButtonSpacing + ButtonSize))
+					LastRowButton = Button
+					NumRows = NumRows + 1
+					NumButtons = 1
+				else
+					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (ButtonSpacing + ButtonSize), 0)
+					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
+					NumButtons = NumButtons + 1
+				end
+
+				LastButton = Button
+			end
 
 			if not Button.IsSkinned then
 				Bags.SkinBagButton(Button)
@@ -1001,8 +1034,9 @@ function Bags:UpdateAllBags()
 			break
 		end
 	end
-
+	
 	self.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 64 + (ButtonSpacing * 4)) - ButtonSpacing)
+	self.BagReagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRowReagent + 1) + ButtonSpacing + (ButtonSpacing * 4)) - ButtonSpacing)
 end
 
 function Bags:UpdateAllBankBags()
@@ -1345,6 +1379,23 @@ function Bags:OnEvent(event, ...)
 	end
 end
 
+function Bags:ToggleReagents()
+	local ReagentID = 5
+	local Bag = self.BagReagent
+	
+	if not Bag:IsShown() then
+		local Size = GetContainerNumSlots(ReagentID)
+
+		if Size > 0 then
+			Bag:Show()
+		else
+			Bag:Hide()
+		end
+	else
+		Bag:Hide()
+	end
+end
+
 function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
@@ -1387,16 +1438,26 @@ function Bags:Enable()
 	end
 
 	self:CreateContainer("Bag", B1, B2, B3, B4, B5)
+	self:CreateContainer("BagReagent", "BOTTOMRIGHT", TukuiBag, "TOPRIGHT", 0, 10)
 	self:CreateContainer("Bank", BB1, BB2, BB3, BB4, BB5)
+	
 	self:HideBlizzard()
 	self:MoveElements()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()
+		
+		if T.Retail and not C.Bags.ReagentInsideBag then
+			Bags:ToggleReagents()
+		end
 	end)
 
 	Bag:HookScript("OnShow", function() -- Cinematic Bug with Bags open.
 		self.Bag:Show()
+		
+		if T.Retail and not C.Bags.ReagentInsideBag then
+			Bags:ToggleReagents()
+		end
 	end)
 
 	BankItem1:SetScript("OnHide", function()
