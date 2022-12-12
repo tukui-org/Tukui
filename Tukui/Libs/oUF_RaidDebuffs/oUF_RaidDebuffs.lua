@@ -104,6 +104,12 @@ do
 			['Disease'] = true,
 			['Poison'] = true,
 		},
+		['EVOKER'] = {
+			['Magic'] = true,
+			['Curse'] = true,
+			['Poison'] = true,
+			['Disease'] = true,
+		},
 	}
 
 	DispellFilter = dispellClasses[select(2, UnitClass('player'))] or {}
@@ -145,6 +151,18 @@ local function CheckSpec(self, event, levels)
 			DispellFilter.Magic = true
 		else
 			DispellFilter.Magic = false
+		end
+	elseif playerClass == "EVOKER" then
+		if CheckTalentTree(2) then
+			DispellFilter.Magic = true
+			DispellFilter.Curse = true
+			DispellFilter.Poison = true
+			DispellFilter.Disease = true
+		else
+			DispellFilter.Magic = false
+			DispellFilter.Curse = false
+			DispellFilter.Poison = false
+			DispellFilter.Disease = false
 		end
 	end
 end
