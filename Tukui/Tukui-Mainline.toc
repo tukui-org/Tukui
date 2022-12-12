@@ -72,6 +72,7 @@ Libs\oUF_SoulShards\oUF_SoulShards.lua
 Libs\oUF_HolyPowerBar\oUF_HolyPowerBar.lua
 Libs\oUF_QuestIcon\oUF_QuestIcon.lua
 Libs\oUF_AuraTrack\oUF_AuraTrack.lua
+Libs\TaintLess\TaintLess.xml
 
 ## Medias
 Medias\Medias.lua
