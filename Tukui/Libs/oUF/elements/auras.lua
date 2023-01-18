@@ -227,9 +227,9 @@ local function updateIcon(element, unit, index, offset, filter, isDebuff, visibl
 					button.stealable:Hide()
 				end
 			end
-
+			
 			if(button.icon) then button.icon:SetTexture(texture) end
-			if(button.count) then button.count:SetText(count > 1 and count) end
+			if(count and count > 1 and button.count) then button.count:SetText(count) end
 
 			local size = element.size or 16
 			button:SetSize(size, size)
