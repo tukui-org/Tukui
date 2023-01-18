@@ -104,6 +104,7 @@ function Bags:SkinBagButton()
 		return
 	end
 
+	local NormalTexture = _G[self:GetName().."NormalTexture"]
 	local Icon = _G[self:GetName().."IconTexture"]
 	local Quest = _G[self:GetName().."IconQuestTexture"]
 	local Count = _G[self:GetName().."Count"]
@@ -114,6 +115,10 @@ function Bags:SkinBagButton()
 	self:SetFrameLevel(0)
 
 	Border:SetAlpha(0)
+	
+	if NormalTexture then
+		NormalTexture:SetAlpha(0)
+	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
@@ -667,7 +672,7 @@ function Bags:SlotUpdate(id, button)
 
 	local _, Rarity, ItemLink, ItemID, IsBound, StackCount
 	
-	if T.Retail and T.TocVersion >= 100002 then
+	if (T.Retail and T.TocVersion >= 100002) or (T.WotLK) then
 		local Table = GetContainerItemInfo(id, button:GetID())
 
 		if Table then
