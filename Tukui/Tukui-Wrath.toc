@@ -1,7 +1,7 @@
-## Interface: 30400
+## Interface: 30401
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.36
+## Version: 20.37
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase
