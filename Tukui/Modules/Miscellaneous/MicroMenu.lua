@@ -148,7 +148,9 @@ function MicroMenu:GameMenu()
 
 	MainMenuBarBackpackButton:SetParent(T.Hider)
 
-	UpdateMicroButtonsParent(MicroMenu)
+	if UpdateMicroButtonsParent then
+		UpdateMicroButtonsParent(MicroMenu)
+	end
 
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
