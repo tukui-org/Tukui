@@ -521,7 +521,7 @@ function Minimap:TaxiExitOnClick()
 	if (UnitOnTaxi("player")) then
 		TaxiRequestEarlyLanding()
 	else
-		if T.Retail then
+		if T.Retail or T.WotLK then
 			VehicleExit()
 		end
 	end
