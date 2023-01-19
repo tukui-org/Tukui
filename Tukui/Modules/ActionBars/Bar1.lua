@@ -54,7 +54,7 @@ function ActionBars:CreateBar1()
 	
 	local DefaultPaging
 	
-	if T.Retail then
+	if T.Retail or T.WotLK then
 		DefaultPaging = "[bonusbar:5] 11;[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;"..ShapeshiftBar..VehicleBar..OverrideBar
 	else
 		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;"
