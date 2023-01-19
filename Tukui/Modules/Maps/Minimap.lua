@@ -213,9 +213,12 @@ function Minimap:StyleMinimap()
 				if T.BCC then
 					MiniMapTrackingBorder:Kill()
 				end
-
+				
+				MiniMapTracking:SetParent(Minimap)
 				MiniMapTracking:ClearAllPoints()
-				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, -2)
+
+				MiniMapTrackingButton:StripTextures()
 
 				if (MiniMapTrackingBorder) then
 					MiniMapTrackingBorder:Hide()
