@@ -497,7 +497,7 @@ function Minimap:SizeMinimap()
 end
 
 function Minimap:TaxiExitOnEvent(event)
-	if T.Retail and CanExitVehicle() then
+	if (T.Retail or T.WotLK) and CanExitVehicle() then
 		if (UnitOnTaxi("player")) then
 			self.Text:SetText("|cffFF0000" .. TAXI_CANCEL .. "|r")
 		else
