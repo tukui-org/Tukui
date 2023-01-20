@@ -1533,7 +1533,7 @@ function Bags:Enable()
 		ContainerFrame1.SetHeight = function() return end
 	end
 
-	if not T.Retail then
+	if (not T.Retail) or (not T.WotLK) then
 		ToggleAllBags()
 		ToggleAllBags()
 	end
