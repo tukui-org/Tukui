@@ -408,30 +408,7 @@ function UnitFrames:PostCreateAura(button, unit)
 		Cooldown:SetReverse(true)
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
-		
-		if T.Retail and not Cooldown.IsFontEdited then
-			local NumRegions = Cooldown:GetNumRegions()
-
-			for i = 1, NumRegions do
-				local Region = select(i, Cooldown:GetRegions())
-
-				if Region.GetText then
-					local Font = T.GetFont(C["Cooldowns"].Font)
-
-					Font = _G[Font]:GetFont()
-
-					Region:SetFont(Font, 14, "OUTLINE")
-					Region:SetPoint("CENTER", 1, 0)
-					Region:SetTextColor(1, 0, 0)
-				end
-			end
-			
-			Cooldown.IsFontEdited = true
-		end
-		
-		if (T.WotLK) or ((not isCooldownSize) and (T.Retail)) then
-			Cooldown:SetHideCountdownNumbers(true)
-		end
+		Cooldown:SetHideCountdownNumbers(true)
 		
 		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY", nil, 7)
 		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
@@ -464,12 +441,24 @@ function UnitFrames:PostCreateAura(button, unit)
 end
 
 function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
+	local data
+	
+	-- Because on oUF Retail args are different, adjust them
 	if T.Retail then
-		-- Need huge update for DragonFlight, so use default for now
-		return
+		local arg1, arg2, arg3, arg4 = unit, button, index, offset
+		
+		button = arg1
+		unit = arg2
+		data = arg3
+		index = arg4
+		
+		button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
+		button.icon = button.Icon
 	end
 	
-	local Name, _, _, DType, Duration, ExpirationTime, UnitCaster, IsStealable, _, SpellID = UnitAura(unit, index, button.filter)
+	local Name, Texture, Count, DType, Duration, ExpirationTime, UnitCaster, IsStealable,
+		NameplateShowSelf, SpellID, CanApply, IsBossDebuff, CasterIsPlayer, NameplateShowAll,
+		TimeMod, Effect1, Effect2, Effect3 = UnitAura(unit, index, button.filter)
 	
 	if button then
 		if(button.filter == "HARMFUL") then
