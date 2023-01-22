@@ -188,7 +188,7 @@ local Misc = function(self)
 	local Window = self:CreateWindow("Misc")
 
 	Window:CreateSection("Retail", "Widgets")
-	Window:CreateSwitch("All", "Misc", "DisplayWidgetPowerBar", "Display dragon riding power bar widget")
+	Window:CreateSwitch("Retail", "Misc", "DisplayWidgetPowerBar", "Display dragon riding power bar widget")
 	Window:CreateSection("All", "Micro Menu")
 	Window:CreateDropdown("All", "Misc", "MicroStyle", "Select the micromenu style you want to use")
 	Window:CreateDropdown("All", "Misc", "MicroToggle", "Select a keybind for toggling micro menu")
