@@ -910,6 +910,34 @@ function UnitFrames:Style(unit)
 	return self
 end
 
+-- Function below is based on https://github.com/trincasidra/trincaui/blob/main/unitframes/nameplate.lua
+local function NamePlateCallback(nameplate, event, unit)
+	if event == 'NAME_PLATE_UNIT_ADDED' then
+		nameplate.blizzPlate = nameplate:GetParent().UnitFrame
+		nameplate.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
+		nameplate.widgetSet = UnitWidgetSet(unit)
+		if nameplate.widgetsOnly then
+			nameplate.Health:SetAlpha(0)
+			nameplate.Backdrop:SetAlpha(0)
+			nameplate.Shadow:SetAlpha(0)
+			nameplate.widgetContainer = nameplate.blizzPlate.WidgetContainer
+			if nameplate.widgetContainer then
+				nameplate.widgetContainer:SetScale(2.0)
+				nameplate.widgetContainer:SetParent(nameplate)
+				nameplate.widgetContainer:ClearAllPoints()
+				nameplate.widgetContainer:SetPoint('BOTTOM', nameplate, 'BOTTOM')
+			end
+		end
+	elseif event == 'NAME_PLATE_UNIT_REMOVED' then
+		if nameplate.widgetsOnly and nameplate.widgetContainer then
+			nameplate.Health:SetAlpha(1)
+			nameplate.widgetContainer:SetParent(nameplate.blizzPlate)
+			nameplate.widgetContainer:ClearAllPoints()
+			nameplate.widgetContainer:SetPoint('TOP', nameplate.blizzPlate.castBar, 'BOTTOM')
+		end
+	end
+end
+
 function UnitFrames:CreateUnits()
 	local Movers = T["Movers"]
 
@@ -1077,7 +1105,7 @@ function UnitFrames:CreateUnits()
 			[3] = C.NamePlates.AggroColor4,
 		}
 
-		oUF:SpawnNamePlates("Tukui", nil, UnitFrames.NameplatesVariables)
+		oUF:SpawnNamePlates("Tukui", NamePlateCallback, UnitFrames.NameplatesVariables)
 	end
 end
 
