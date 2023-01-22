@@ -912,6 +912,10 @@ end
 
 -- Function below is based on https://github.com/trincasidra/trincaui/blob/main/unitframes/nameplate.lua
 function UnitFrames:NameplateCallBack(event, unit)
+	if not T.Retail then
+		return
+	end
+	
 	if event == "NAME_PLATE_UNIT_ADDED" then
 		self.blizzPlate = self:GetParent().UnitFrame
 		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
