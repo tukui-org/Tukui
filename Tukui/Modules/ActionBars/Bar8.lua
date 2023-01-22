@@ -8,8 +8,8 @@ function ActionBars:CreateBar8()
 	local Movers = T["Movers"]
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local ButtonsPerRow = C.ActionBars.Bar5ButtonsPerRow
-	local NumButtons = C.ActionBars.Bar5NumButtons
+	local ButtonsPerRow = C.ActionBars.Bar8ButtonsPerRow
+	local NumButtons = C.ActionBars.Bar8NumButtons
 
 	if NumButtons <= ButtonsPerRow then
 		ButtonsPerRow = NumButtons

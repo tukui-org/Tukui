@@ -8,8 +8,8 @@ function ActionBars:CreateBar6()
 	local Movers = T["Movers"]
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local ButtonsPerRow = C.ActionBars.Bar5ButtonsPerRow
-	local NumButtons = C.ActionBars.Bar5NumButtons
+	local ButtonsPerRow = C.ActionBars.Bar6ButtonsPerRow
+	local NumButtons = C.ActionBars.Bar6NumButtons
 
 	if NumButtons <= ButtonsPerRow then
 		ButtonsPerRow = NumButtons
