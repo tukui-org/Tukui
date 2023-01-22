@@ -213,10 +213,16 @@ end
 
 function Experience:GetReputation()
 	local Name, Standing, Min, Max, Value, Faction = GetWatchedFactionInfo()
-
-    local BarMax = Max - Min
+	
+	local BarMax = Max - Min
     local BarValue = Value - Min
     local BarStanding = Experience.Standing[Standing]
+	
+	if T.Retail and C_Reputation and C_Reputation.IsMajorFaction and C_Reputation.IsMajorFaction(Faction) then
+		local MajorFactionData = C_MajorFactions.GetMajorFactionData(Faction)
+
+		BarValue, BarMax = MajorFactionData.renownReputationEarned, MajorFactionData.renownLevelThreshold
+	end
 
 	return BarValue, BarMax, BarStanding
 end
