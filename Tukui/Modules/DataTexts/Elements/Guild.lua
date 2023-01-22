@@ -10,7 +10,15 @@ local Options = {
 }
 
 local EnglishClass = function(class)
+	-- Males
 	for i, j in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+		if class == j then
+			return i
+		end
+	end
+	
+	-- Females
+	for i, j in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
 		if class == j then
 			return i
 		end
