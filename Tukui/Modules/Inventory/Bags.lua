@@ -1412,10 +1412,10 @@ function Bags:Enable()
 
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
-                SetInsertItemsLeftToRight(false)
+		SetInsertItemsLeftToRight(false)
 	else
 		SetSortBagsRightToLeft(true)
-                SetInsertItemsLeftToRight(true)
+		SetInsertItemsLeftToRight(true)
 	end
 	
 	-- Bug with mouse click
