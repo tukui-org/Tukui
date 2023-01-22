@@ -454,6 +454,7 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 		
 		button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
 		button.icon = button.Icon
+		button.isPlayer = data.isPlayerAura
 	end
 	
 	local Name, Texture, Count, DType, Duration, ExpirationTime, UnitCaster, IsStealable,
