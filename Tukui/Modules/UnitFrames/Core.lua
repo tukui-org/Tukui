@@ -911,29 +911,29 @@ function UnitFrames:Style(unit)
 end
 
 -- Function below is based on https://github.com/trincasidra/trincaui/blob/main/unitframes/nameplate.lua
-local function NamePlateCallback(nameplate, event, unit)
-	if event == 'NAME_PLATE_UNIT_ADDED' then
-		nameplate.blizzPlate = nameplate:GetParent().UnitFrame
-		nameplate.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
-		nameplate.widgetSet = UnitWidgetSet(unit)
-		if nameplate.widgetsOnly then
-			nameplate.Health:SetAlpha(0)
-			nameplate.Backdrop:SetAlpha(0)
-			nameplate.Shadow:SetAlpha(0)
-			nameplate.widgetContainer = nameplate.blizzPlate.WidgetContainer
-			if nameplate.widgetContainer then
-				nameplate.widgetContainer:SetScale(2.0)
-				nameplate.widgetContainer:SetParent(nameplate)
-				nameplate.widgetContainer:ClearAllPoints()
-				nameplate.widgetContainer:SetPoint('BOTTOM', nameplate, 'BOTTOM')
+function UnitFrames:NameplateCallBack(event, unit)
+	if event == "NAME_PLATE_UNIT_ADDED" then
+		self.blizzPlate = self:GetParent().UnitFrame
+		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
+		self.widgetSet = UnitWidgetSet(unit)
+		if self.widgetsOnly then
+			self.Health:SetAlpha(0)
+			self.Backdrop:SetAlpha(0)
+			self.Shadow:SetAlpha(0)
+			self.widgetContainer = self.blizzPlate.WidgetContainer
+			if self.widgetContainer then
+				self.widgetContainer:SetScale(2.0)
+				self.widgetContainer:SetParent(self)
+				self.widgetContainer:ClearAllPoints()
+				self.widgetContainer:SetPoint("BOTTOM", self, "BOTTOM")
 			end
 		end
-	elseif event == 'NAME_PLATE_UNIT_REMOVED' then
-		if nameplate.widgetsOnly and nameplate.widgetContainer then
-			nameplate.Health:SetAlpha(1)
-			nameplate.widgetContainer:SetParent(nameplate.blizzPlate)
-			nameplate.widgetContainer:ClearAllPoints()
-			nameplate.widgetContainer:SetPoint('TOP', nameplate.blizzPlate.castBar, 'BOTTOM')
+	elseif event == "NAME_PLATE_UNIT_REMOVED" then
+		if self.widgetsOnly and self.widgetContainer then
+			self.Health:SetAlpha(1)
+			self.widgetContainer:SetParent(self.blizzPlate)
+			self.widgetContainer:ClearAllPoints()
+			self.widgetContainer:SetPoint("TOP", self.blizzPlate.castBar, "BOTTOM")
 		end
 	end
 end
@@ -1105,7 +1105,7 @@ function UnitFrames:CreateUnits()
 			[3] = C.NamePlates.AggroColor4,
 		}
 
-		oUF:SpawnNamePlates("Tukui", NamePlateCallback, UnitFrames.NameplatesVariables)
+		oUF:SpawnNamePlates("Tukui", UnitFrames.NameplateCallBack, UnitFrames.NameplatesVariables)
 	end
 end
 
