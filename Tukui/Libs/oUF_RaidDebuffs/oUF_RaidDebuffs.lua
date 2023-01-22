@@ -81,7 +81,7 @@ do
 		},
 		['SHAMAN'] = {
 			['Magic'] = false,
-			['Curse'] = oUF.Retail and true or oUF.WotLK and true or false,
+			['Curse'] = (oUF.Retail and true) or (oUF.Classic and true) or false,
 			['Poison'] = true,
 			['Disease'] = true,
 		},
