@@ -6,10 +6,18 @@ CreateFrame('GameTooltip', 'SortBagsTooltip', nil, 'GameTooltipTemplate')
 BAG_CONTAINERS = {0, 1, 2, 3, 4}
 BANK_BAG_CONTAINERS = {-1, 5, 6, 7, 8, 9, 10, 11}
 
+local GetBagSlotFlag = C_Container and C_Container.GetBagSlotFlag or GetBagSlotFlag
+local GetBankBagSlotFlag = C_Container and C_Container.GetBankBagSlotFlag or GetBankBagSlotFlag
+local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
+local PickupContainerItem = C_Container and C_Container.PickupContainerItem or PickupContainerItem
+local GetBagName = C_Container and C_Container.GetBagName or GetBagName
+local GetContainerItemLink = C_Container and C_Container.GetContainerItemLink or GetContainerItemLink
+
 function _G.SortBags()
 	CONTAINERS = {unpack(BAG_CONTAINERS)}
 	for i = #CONTAINERS, 1, -1 do
-		if C_Container.GetBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
+		if GetBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
 			tremove(CONTAINERS, i)
 		end
 	end
@@ -19,7 +27,7 @@ end
 function _G.SortBankBags()
 	CONTAINERS = {unpack(BANK_BAG_CONTAINERS)}
 	for i = #CONTAINERS, 1, -1 do
-		if C_Container and C_Container.GetBankBagSlotFlag and C_Container.GetBankBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
+		if GetBankBagSlotFlag and GetBankBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
 			tremove(CONTAINERS, i)
 		end
 	end
@@ -127,12 +135,12 @@ do
 	local function updateHandler()
 		if GetTime() - lastUpdate > 1 then
 			for _, container in pairs(BAG_CONTAINERS) do
-				for position = 1, C_Container.GetContainerNumSlots(container) do
+				for position = 1, GetContainerNumSlots(container) do
 					SetScanTooltip(container, position)
 				end
 			end
 			for _, container in pairs(BANK_BAG_CONTAINERS) do
-				for position = 1, C_Container.GetContainerNumSlots(container) do
+				for position = 1, GetContainerNumSlots(container) do
 					SetScanTooltip(container, position)
 				end
 			end
@@ -205,13 +213,13 @@ function LT(a, b)
 end
 
 function Move(src, dst)
-	local srcContainerInfo = C_Container.GetContainerItemInfo(src.container, src.position)
-	local dstContainerInfo = C_Container.GetContainerItemInfo(dst.container, dst.position)
+	local srcContainerInfo = GetContainerItemInfo(src.container, src.position)
+	local dstContainerInfo = GetContainerItemInfo(dst.container, dst.position)
 
 	if srcContainerInfo and not srcContainerInfo.isLocked and (not dstContainerInfo or not dstContainerInfo.isLocked) then
 		ClearCursor()
-		C_Container.PickupContainerItem(src.container, src.position)
-		C_Container.PickupContainerItem(dst.container, dst.position)
+		PickupContainerItem(src.container, src.position)
+		PickupContainerItem(dst.container, dst.position)
 
 		if src.item == dst.item then
 			local count = min(src.count, itemStacks[dst.item] - dst.count)
@@ -371,11 +379,11 @@ do
 
 		for _, container in ipairs(CONTAINERS) do
 			local class = ContainerClass(container)
-			for position = 1, C_Container.GetContainerNumSlots(container) do
+			for position = 1, GetContainerNumSlots(container) do
 				local slot = {container=container, position=position, class=class}
 				local item = Item(container, position)
 				if item then
-					local containerInfo = C_Container.GetContainerItemInfo(container, position)
+					local containerInfo = GetContainerItemInfo(container, position)
 					if containerInfo and containerInfo.isLocked then
 						return false
 					end
@@ -431,7 +439,7 @@ end
 
 function ContainerClass(container)
 	if container ~= 0 and container ~= BANK_CONTAINER then
-		local name = C_Container.GetBagName(container)
+		local name = GetBagName(container)
 		if name then
 			for class, info in pairs(CLASSES) do
 				for _, itemID in pairs(info.containers) do
@@ -445,7 +453,7 @@ function ContainerClass(container)
 end
 
 function Item(container, position)
-	local link = C_Container.GetContainerItemLink(container, position)
+	local link = GetContainerItemLink(container, position)
 	if link then
 		local _, _, itemID, enchantID, suffixID, uniqueID = strfind(link, 'item:(%d+):(%d*):%d*:%d*:%d*:%d*:(%-?%d*):(%-?%d*)')
 		itemID = tonumber(itemID)
