@@ -35,7 +35,7 @@ local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
 
 local RangeSpellID = {
 	["PALADIN"] = 19750,
-	["SHAMAN"] = 331,
+	["SHAMAN"] = 8004,
 	["DRUID"] = 774,
 	["PRIEST"] = 2050,
 	["WARLOCK"] = 5697,
