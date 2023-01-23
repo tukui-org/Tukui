@@ -19,7 +19,7 @@ end
 function _G.SortBankBags()
 	CONTAINERS = {unpack(BANK_BAG_CONTAINERS)}
 	for i = #CONTAINERS, 1, -1 do
-		if C_Container.GetBankBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
+		if C_Container and C_Container.GetBankBagSlotFlag and C_Container.GetBankBagSlotFlag(i - 1, LE_BAG_FILTER_FLAG_IGNORE_CLEANUP) then
 			tremove(CONTAINERS, i)
 		end
 	end

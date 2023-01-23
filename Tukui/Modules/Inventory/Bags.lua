@@ -574,7 +574,7 @@ function Bags:CreateContainer(storagetype, ...)
 		SortButton.Text:SetJustifyH("LEFT")
 		SortButton.Text:SetPoint("CENTER")
 		SortButton.Text:SetText(BAG_FILTER_CLEANUP)
-		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick)
+		SortButton:SetScript("OnClick", BankFrame_AutoSortButtonOnClick or SortBankBags)
 
 		local SwitchReagentButton = CreateFrame("Button", nil, Container)
 		SwitchReagentButton:SetSize((Container:GetWidth() / 2) - 1, 23)
