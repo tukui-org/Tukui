@@ -67,7 +67,7 @@ Libs\oUF_AuraTrack\oUF_AuraTrack.lua
 Libs\oUF_EnergyManaRegen\oUF_EnergyManaRegen.lua
 Libs\oUF_DruidMana\oUF_DruidMana.lua
 Libs\oUF_Trinkets\oUF_Trinkets.lua
-Libs\SortBags\SortBags.lua
+Libs\SortBags\SortBags_Vanilla.lua
 
 ## Medias
 Medias\Medias.lua
