@@ -284,7 +284,7 @@ function Minimap:EnableMouseWheelZoom()
 		if (delta > 0) then
 			ZoomIn:Click()
 		elseif (delta < 0) then
-			if T.Retail then
+			if T.Retail or T.WotLK then
 				if Minimap:GetZoom() ~= 0 then
 					ZoomOut:Click()
 				end
