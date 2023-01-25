@@ -199,6 +199,12 @@ end
 
 function MicroMenu:Blizzard()
 	local Buttons = MicroMenu:ShownMicroButtons()
+	
+	if T.Retail then
+		local Bags = BagsBar
+		
+		Bags:SetParent(T.Hider)
+	end
 
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
