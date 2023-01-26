@@ -202,8 +202,10 @@ function MicroMenu:Blizzard()
 	
 	if T.Retail then
 		local Bags = BagsBar
+		local Toggle = BagBarExpandToggle
 		
 		Bags:SetParent(T.Hider)
+		Toggle:SetParent(T.Hider)
 	end
 
 	MicroMenu:SetSize(210, 29)
