@@ -205,14 +205,6 @@ end
 
 function MicroMenu:Blizzard()
 	local Buttons = MicroMenu:ShownMicroButtons()
-	
-	if T.Retail then
-		local Bags = BagsBar
-		local Toggle = BagBarExpandToggle
-		
-		Bags:SetParent(T.Hider)
-		Toggle:SetParent(T.Hider)
-	end
 
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
@@ -274,6 +266,14 @@ function MicroMenu:Enable()
 
 	MicroMenu:Hide()
 	MicroMenu:AddHooks()
+	
+	if T.Retail then
+		local Bags = BagsBar
+		local Toggle = BagBarExpandToggle
+		
+		Bags:SetParent(T.Hider)
+		Toggle:SetParent(T.Hider)
+	end
 
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 
