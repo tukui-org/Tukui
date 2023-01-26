@@ -156,6 +156,10 @@ function MicroMenu:GameMenu()
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
 
+		if T.Retail then
+			Button:SetParent(MicroMenu)
+		end
+		
 		Button:StripTextures()
 		Button:SetAlpha(0)
 		Button:ClearAllPoints()
