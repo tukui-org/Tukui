@@ -63,9 +63,8 @@ function Minimap:DisableMinimapElements()
 	
 	if T.Retail then
 		-- Expansion panel
-		ExpansionLandingPageMinimapButton:SetParent(T.OffScreen)
-		ExpansionLandingPageMinimapButton:ClearAllPoints()
-		ExpansionLandingPageMinimapButton:SetPoint("CENTER")
+		ExpansionLandingPageMinimapButton:EnableMouse(false)
+		ExpansionLandingPageMinimapButton:SetAlpha(0)
 	end
 end
 
