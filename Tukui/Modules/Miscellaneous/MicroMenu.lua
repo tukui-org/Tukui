@@ -94,7 +94,9 @@ function MicroMenu:Minimalist()
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, Y)
 
-	UpdateMicroButtonsParent(MicroMenu)
+	if UpdateMicroButtonsParent then
+		UpdateMicroButtonsParent(MicroMenu)
+	end
 
 	for i = 1, NumButtons do
 		local Button = _G[Buttons[i]]
