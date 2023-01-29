@@ -361,7 +361,7 @@ else
 
 		hooksecurefunc("LoadAddOn", function(addon)
 			if addon=="Blizzard_MacroUI" then
-				registermacro()
+				--registermacro()
 			end
 		end)
 	end
