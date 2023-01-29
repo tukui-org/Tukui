@@ -168,6 +168,7 @@ Modules\Miscellaneous\ThreatBar.lua
 Modules\Miscellaneous\UIErrorFilter.lua
 Modules\Miscellaneous\UIWidgets.lua
 Modules\Miscellaneous\WhoNamesByClassColor.lua
+Modules\Miscellaneous\VehicleIndicator.lua
 
 Modules\Auras\Templates.xml
 Modules\Auras\Auras.lua

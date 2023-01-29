@@ -19,6 +19,10 @@ function Miscellaneous:Enable()
 	Miscellaneous["ThreatBar"]:Enable()
 	Miscellaneous["ItemLevel"]:Enable()
 	Miscellaneous["Alerts"]:Enable()
+	
+	if T.Retail or T.WotLK then
+		Miscellaneous["VehicleIndicator"]:Enable()
+	end
 
 	if T.Retail then
 		Miscellaneous["TalkingHead"]:Enable()
@@ -29,7 +33,6 @@ function Miscellaneous:Enable()
 		Miscellaneous["AltPowerBar"]:Enable()
 		Miscellaneous["OrderHall"]:Enable()
 		Miscellaneous["Tutorials"]:Enable()
-		Miscellaneous["VehicleIndicator"]:Enable()
 		Miscellaneous["RaidUtilities"]:Enable()
 	end
 end
