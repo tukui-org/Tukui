@@ -31,6 +31,9 @@ local SetSortBagsRightToLeft = C_Container and C_Container.SetSortBagsRightToLef
 local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeftToRight or SetInsertItemsLeftToRight
 local GetContainerItemCooldown = C_Container and C_Container.GetContainerItemCooldown or GetContainerItemCooldown
 
+local BANK_INITIAL_CONTAINER_INDEX = T.Retail and 6 or 5
+local BANK_FINAL_CONTAINER_INDEX = T.Classic and 10 or T.Retail and 12 or 11
+
 BACKPACK_HEIGHT = 256
 
 local BlizzardBags = {
@@ -274,9 +277,8 @@ function Bags:CreateReagentContainer()
 		self.Bank:Show()
 		BankFrame_ShowPanel(BANK_PANELS[1].name)
 
-		for i = 5, T.Classic and 10 or T.Retail and 12 or 11 do
+		for i = BANK_INITIAL_CONTAINER_INDEX, BANK_FINAL_CONTAINER_INDEX do
 			if (not IsBagOpen(i)) then
-
 				self:OpenBag(i, 1)
 			end
 		end
@@ -591,7 +593,7 @@ function Bags:CreateContainer(storagetype, ...)
 				self.Reagent:Show()
 			end
 
-			for i = 5, T.Classic and 10 or T.Retail and 12 or 11 do
+			for i = BANK_INITIAL_CONTAINER_INDEX, BANK_FINAL_CONTAINER_INDEX do
 				self:CloseBag(i)
 			end
 		end)
