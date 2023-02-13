@@ -13,7 +13,7 @@
 
 				Auras.Skin(self)
 
-				self:RegisterForClicks("RightButtonUp")
+				self:RegisterForClicks("RightButtonUp", "RightButtonDown")
 			</OnLoad>
 
 			<OnEnter>
