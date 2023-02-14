@@ -20,7 +20,7 @@ local Tracker
 		self.AuraTrack = AuraTrack
 ]]
 
-if oUF.Retail then
+if oUF.isRetail then
 	Tracker = {
 		-- Priest
 		[194384]  = {1, 1, 0.66}, -- Atonement
@@ -369,7 +369,7 @@ local UpdateIcon = function(self, unit, spellID, texture, id, expiration, durati
 	end
 
 	local PositionX = (id * AuraTrack.IconSize) - (AuraTrack.IconSize) + (AuraTrack.Spacing * id)
-	local r, g, b = unpack(Tracker[spellID])
+	local r, g, b = unpack(AuraTrack.Tracker[spellID])
 
 	if not AuraTrack.Auras[id] then
 		AuraTrack.Auras[id] = CreateFrame("Frame", nil, AuraTrack)
@@ -428,7 +428,7 @@ local UpdateBar = function(self, unit, spellID, texture, id, expiration, duratio
 		return
 	end
 
-	local r, g, b = unpack(Tracker[spellID])
+	local r, g, b = unpack(AuraTrack.Tracker[spellID])
 	local Position = (id * AuraTrack.Thickness) - AuraTrack.Thickness
 	local X = Orientation == "VERTICAL" and -Position or 0
 	local Y = Orientation == "HORIZONTAL" and -Position or 0
