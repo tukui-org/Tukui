@@ -45,30 +45,34 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "mm") or (arg1 == "micromenu") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
 
+		local Buttons = MicroMenu:ShownMicroButtons()
+
 		if MicroMenu:IsShown() then
 			MicroMenu:Hide()
 
-			UpdateMicroButtonsParent(T.Hider)
+			if (UpdateMicroButtonsParent) then
+				UpdateMicroButtonsParent(T.Hider)
+			end
 
-			for i = 1, #MICRO_BUTTONS do
-				local Button = _G[MICRO_BUTTONS[i]]
-
-				if Button.Backdrop then
+			for i = 1, #Buttons do
+				local Button = _G[Buttons[i]]
+				if Button and Button.Backdrop then
 					Button.Backdrop:Hide()
 				end
 			end
 		else
 			MicroMenu:Show()
 
-			for i = 1, #MICRO_BUTTONS do
-				local Button = _G[MICRO_BUTTONS[i]]
-
-				if Button.Backdrop then
+			for i = 1, #Buttons do
+				local Button = _G[Buttons[i]]
+				if Button and Button.Backdrop then
 					Button.Backdrop:Show()
 				end
 			end
 
-			UpdateMicroButtonsParent(T.PetHider)
+			if (UpdateMicroButtonsParent) then
+				UpdateMicroButtonsParent(T.PetHider)
+			end
 		end
 	elseif (arg1 == "ot") or (arg1 == "quests") then
 		if T.Retail then
