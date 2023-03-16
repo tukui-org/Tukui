@@ -3,7 +3,7 @@
 	** Build for Tukui by Aftermathh **
 --]]
 
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 local Inventory = T["Inventory"]
 local Loot = CreateFrame("Frame")
 local Movers = T["Movers"]

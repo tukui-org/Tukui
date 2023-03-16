@@ -1,4 +1,4 @@
-local T, C = select(2, ...):unpack()
+local T, C = unpack((select(2, ...)))
 
 local TukuiMedia = CreateFrame("Frame")
 local Locale = GetLocale()
