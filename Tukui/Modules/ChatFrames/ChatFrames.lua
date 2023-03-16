@@ -118,7 +118,8 @@ function Chat:StyleFrame(frame)
 	if Scroll then
 		Scroll:Kill()
 		ScrollBottom:Kill()
-		ScrollTex:Kill()
+		-- PTR: 10.0.7 / 10.1
+		-- ScrollTex:Kill()
 	end
 
 	-- Style the tab font
