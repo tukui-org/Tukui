@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 
 -- This is my personal skins and settings for others addons, sorry guys, just for me! :)
 

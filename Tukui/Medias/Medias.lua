@@ -1,4 +1,4 @@
-local T, C = unpack(select(2, ...))
+local T, C = unpack((select(2, ...)))
 
 C["Medias"] = {
 	-- Fonts

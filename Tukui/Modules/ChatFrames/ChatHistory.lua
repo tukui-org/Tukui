@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 
 local Chat = T["Chat"]
 local History = CreateFrame("Frame")

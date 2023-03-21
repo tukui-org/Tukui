@@ -1,6 +1,6 @@
 -- Collect garbage while player is AFK. (hooray for free memory!)
 
-local T = select(2, ...):unpack()
+local T = unpack((select(2, ...)))
 local GarbageCollection = CreateFrame("Frame")
 local Miscellaneous = T["Miscellaneous"]
 
