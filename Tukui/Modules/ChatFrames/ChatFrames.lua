@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 
 local Chat = T["Chat"]
 local Toast = BNToastFrame
@@ -118,7 +118,8 @@ function Chat:StyleFrame(frame)
 	if Scroll then
 		Scroll:Kill()
 		ScrollBottom:Kill()
-		ScrollTex:Kill()
+		-- PTR: 10.0.7 / 10.1
+		-- ScrollTex:Kill()
 	end
 
 	-- Style the tab font

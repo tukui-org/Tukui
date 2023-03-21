@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 local Bind = CreateFrame("Frame")
 local Miscellaneous = T["Miscellaneous"]
 

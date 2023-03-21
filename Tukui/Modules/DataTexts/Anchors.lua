@@ -1,4 +1,4 @@
-local T, C = select(2, ...):unpack()
+local T, C = unpack((select(2, ...)))
 
 -- Local values
 local MenuFrame = CreateFrame("Frame", "TukuiDataTextToggleDropDown", UIParent, "UIDropDownMenuTemplate")
