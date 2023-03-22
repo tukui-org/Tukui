@@ -1420,7 +1420,7 @@ function Bags:Enable()
 
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
-		SetInsertItemsLeftToRight(true)
+		SetInsertItemsLeftToRight(T.WotLK and false or true)
 	else
 		SetSortBagsRightToLeft(true)
 		SetInsertItemsLeftToRight(false)
