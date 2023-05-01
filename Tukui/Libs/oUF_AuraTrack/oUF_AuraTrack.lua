@@ -25,6 +25,7 @@ if oUF.isRetail then
 		-- PRIEST
 		[194384]  = {1, 1, 0.66}, -- Atonement
 		[214206]  = {1, 1, 0.66}, -- Atonement (PvP)
+		[193065]  = {0.54, 0.21, 0.78}, -- Protective Light
 		[41635]   = {0.2, 0.7, 0.2}, -- Prayer of Mending
 		[139]     = {0.4, 0.7, 0.2}, -- Renew
 		[17]      = {0.89, 0.1, 0.1}, -- Power Word: Shield
