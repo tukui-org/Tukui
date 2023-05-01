@@ -155,7 +155,7 @@ local function UpdateDispellFilter(self, event, ...)
 		-- watch if player change spec
 		if (unit ~= "player") then return end
 		-- 200749 = 'Activating Specialization'
-    	-- 384255 = 'Changing Talents'
+		-- 384255 = 'Changing Talents'
 		if (spellID ~= 200749 and spellID ~= 384255) then return end
 	end
 
