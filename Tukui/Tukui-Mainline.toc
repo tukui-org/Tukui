@@ -1,4 +1,4 @@
-## Interface: 100005
+## Interface: 100100
 ## Author: Tukz
 ## X-Maintainer: Tukz
 ## Version: 20.37
@@ -6,6 +6,7 @@
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase, TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory
 ## OptionalDeps: Clique
+## IconTexture: Interface\Icons\Spell_priest_pontifex
 ## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: -1
 ## X-Tukui-ProjectFolders: Tukui
