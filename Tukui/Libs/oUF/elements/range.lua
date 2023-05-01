@@ -58,7 +58,7 @@ local function Update(self, event)
 	local inRange, checkedRange
 	local connected = UnitIsConnected(unit)
 	if(connected) then
-		if oUF.Retail then
+		if oUF.isRetail then
 			inRange, checkedRange = UnitInRange(unit)
 		else
 			local Spell = RangeSpellID[select(2, UnitClass("player"))]

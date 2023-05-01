@@ -120,8 +120,8 @@ local function Update(self, event, unit)
 	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
 	local myIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
 	local allIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
-	local absorb = oUF.Retail and UnitGetTotalAbsorbs(unit) or 0
-	local healAbsorb = oUF.Retail and UnitGetTotalHealAbsorbs(unit) or 0
+	local absorb = oUF.isRetail and UnitGetTotalAbsorbs(unit) or 0
+	local healAbsorb = oUF.isRetail and UnitGetTotalHealAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
 	local otherIncomingHeal = 0
 	local hasOverHealAbsorb = false
@@ -241,7 +241,7 @@ local function Path(self, event, ...)
 	* unit  - the unit accompanying the event
 	--]]
 
-    if not oUF.Retail and self:IsVisible() then
+    if not oUF.isRetail and self:IsVisible() then
         for i = 1, select('#', ...) do
             if self.unit and UnitGUID(self.unit) == (UnitGUID(select(i, ...)) or select(i, ...)) then
                 return (self.HealthPrediction.Override or Update) (self, event, self.unit)

@@ -319,7 +319,7 @@ local function Enable(self, unit)
 			element.SetMinMaxSmoothedValue = SmoothStatusBarMixin.SetMinMaxSmoothedValue
 		end
 
-		if oUF.Retail then
+		if oUF.isRetail then
 			self:RegisterEvent('UNIT_HEALTH', Path)
 		else
 			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
