@@ -8,6 +8,7 @@ local Resolution = select(1, GetPhysicalScreenSize()).."x"..select(2, GetPhysica
 local Windowed = Display_DisplayModeDropDown and Display_DisplayModeDropDown:windowedmode()
 local Fullscreen = Display_DisplayModeDropDown and Display_DisplayModeDropDown:fullscreenmode()
 local Toc = select(4, GetBuildInfo())
+local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
 
 Engine[1] = CreateFrame("Frame")
 Engine[2] = {}
