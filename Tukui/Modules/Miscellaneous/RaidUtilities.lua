@@ -103,7 +103,7 @@ function RaidUtilities:Enable()
 		local Name = Icons[i].Name
 
 		local Button = RaidUtilities:CreateBasicButton(self:GetName().."Button"..i, Icon, "Put a "..Icon.." on the ground")
-		Button:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
+
 		Button:SetAttribute("type", "macro")
 		Button:SetAttribute("macrotext", format("/wm %d", i))
 
@@ -116,7 +116,6 @@ function RaidUtilities:Enable()
 		PreviousButton = Button
 
 		local CancelButton = RaidUtilities:CreateBasicButton(self:GetName().."ButtonCancel"..i, PassIcon, "Clear ground marker "..Icon)
-		CancelButton:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 		CancelButton:SetAttribute("type", "macro")
 		CancelButton:SetAttribute("macrotext", format("/cwm %d", i))
 		CancelButton:SetPoint("TOP", Button, "BOTTOM", 0, -4)
@@ -128,94 +127,80 @@ function RaidUtilities:Enable()
 
 		if i == #Icons then
 			local CancelAll = RaidUtilities:CreateBasicButton(self:GetName().."ButtonCancelAll", PassIcon, "Clear all ground markers")
-			CancelAll:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			CancelAll:SetAttribute("type", "macro")
 			CancelAll:SetAttribute("macrotext", "/cwm all")
 			CancelAll:SetSize(ButtonSize, ButtonSize + ButtonSize + 4)
 			CancelAll:SetPoint("TOPLEFT", PreviousButton, "TOPRIGHT", 4, 0)
 
 			local RoleCheck = RaidUtilities:CreateBasicButton(self:GetName().."ButtonRoleCheck", "|TInterface\\LFGFrame\\LFGRole:14:14:0:0:64:16:32:48:0:16|t", "Let's do a Role check!")
-			RoleCheck:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			RoleCheck:SetScript("OnClick", InitiateRolePoll)
 			RoleCheck:SetSize(ButtonSize, ButtonSize)
 			RoleCheck:SetPoint("TOPLEFT", CancelAll, "TOPRIGHT", 13, 0)
 
 			local Countdown = RaidUtilities:CreateBasicButton(self:GetName().."ButtonCountdown", "|TInterface\\Buttons\\JumpUpArrow:14:14:0:0|t", "Start a 10 second countdown")
-			Countdown:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Countdown:SetScript("OnClick", RaidUtilities.SetCountdown)
 			Countdown:SetSize(ButtonSize, ButtonSize)
 			Countdown:SetPoint("TOPLEFT", RoleCheck, "TOPRIGHT", 4, 0)
 
 			local ReadyCheck = RaidUtilities:CreateBasicButton(self:GetName().."ButtonReadyCheck", "|TInterface\\RaidFrame\\ReadyCheck-Ready:14:14:0:0|t", "Let's do a Ready Check!")
-			ReadyCheck:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			ReadyCheck:SetScript("OnClick", DoReadyCheck)
 			ReadyCheck:SetSize(ButtonSize, ButtonSize)
 			ReadyCheck:SetPoint("BOTTOMLEFT", CancelAll, "BOTTOMRIGHT", 13, 0)
 
 			local Disband = RaidUtilities:CreateBasicButton(self:GetName().."ButtonDisband", "|TInterface\\RaidFrame\\ReadyCheck-NotReady:14:14:0:0|t", "Disband the entire raid")
-			Disband:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Disband:SetScript("OnClick", RaidUtilities.Disband)
 			Disband:SetSize(ButtonSize, ButtonSize)
 			Disband:SetPoint("TOPLEFT", ReadyCheck, "TOPRIGHT", 4, 0)
 
 			local Remove = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetRemove", PassIcon, "Remove marker on current target (if any)")
-			Remove:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Remove:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Remove:SetSize(ButtonSize, ButtonSize + ButtonSize + 4)
 			Remove:SetPoint("TOPLEFT", Countdown, "TOPRIGHT", 13, 0)
 			Remove.ID = 0
 
 			local Star = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetStar", Icons[5].Icon, "Set "..Icons[5].Icon.." on current target")
-			Star:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Star:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Star:SetSize(ButtonSize, ButtonSize)
 			Star:SetPoint("TOPLEFT", Remove, "TOPRIGHT", 4, 0)
 			Star.ID = 1
 
 			local Circle = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetCircle", Icons[6].Icon, "Set "..Icons[6].Icon.." on current target")
-			Circle:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Circle:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Circle:SetSize(ButtonSize, ButtonSize)
 			Circle:SetPoint("TOPLEFT", Star, "TOPRIGHT", 4, 0)
 			Circle.ID = 2
 
 			local Diamond = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetDiamond", Icons[3].Icon, "Set "..Icons[3].Icon.." on current target")
-			Diamond:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Diamond:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Diamond:SetSize(ButtonSize, ButtonSize)
 			Diamond:SetPoint("TOPLEFT", Circle, "TOPRIGHT", 4, 0)
 			Diamond.ID = 3
 
 			local Triangle = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetTriangle", Icons[2].Icon, "Set "..Icons[2].Icon.." on current target")
-			Triangle:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Triangle:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Triangle:SetSize(ButtonSize, ButtonSize)
 			Triangle:SetPoint("TOPLEFT", Diamond, "TOPRIGHT", 4, 0)
 			Triangle.ID = 4
 
 			local Moon = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetMoon", Icons[7].Icon, "Set "..Icons[7].Icon.." on current target")
-			Moon:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Moon:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Moon:SetSize(ButtonSize, ButtonSize)
 			Moon:SetPoint("BOTTOMLEFT", Remove, "BOTTOMRIGHT", 4, 0)
 			Moon.ID = 5
 
 			local Square = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetSquare", Icons[1].Icon, "Set "..Icons[1].Icon.." on current target")
-			Square:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Square:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Square:SetSize(ButtonSize, ButtonSize)
 			Square:SetPoint("TOPLEFT", Moon, "TOPRIGHT", 4, 0)
 			Square.ID = 6
 
 			local Cross = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetCross", Icons[4].Icon, "Set "..Icons[4].Icon.." on current target")
-			Cross:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Cross:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Cross:SetSize(ButtonSize, ButtonSize)
 			Cross:SetPoint("TOPLEFT", Square, "TOPRIGHT", 4, 0)
 			Cross.ID = 7
 
 			local Skull = RaidUtilities:CreateBasicButton(self:GetName().."ButtonTargetSkull", Icons[8].Icon, "Set "..Icons[8].Icon.." on current target")
-			Skull:RegisterForClicks("LeftButtonUp", "LeftButtonDown")
 			Skull:SetScript("OnClick", RaidUtilities.SetRaidTarget)
 			Skull:SetSize(ButtonSize, ButtonSize)
 			Skull:SetPoint("TOPLEFT", Cross, "TOPRIGHT", 4, 0)
