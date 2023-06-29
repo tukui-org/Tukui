@@ -368,14 +368,14 @@ function UnitFrames:Player()
 			if i == 1 then
 				ComboPoints[i]:SetPoint("LEFT", ComboPoints, "LEFT", 0, 0)
 				ComboPoints[i]:SetWidth(SizeFor7 - 2)
-				
+
 				ComboPoints[i].Size7Points = SizeFor7 - 2
 				ComboPoints[i].Size6Points = SizeFor6 - 2
 				ComboPoints[i].Size5Points = SizeFor5
 			else
 				ComboPoints[i]:SetWidth(SizeFor7 - 1)
 				ComboPoints[i]:SetPoint("LEFT", ComboPoints[i - 1], "RIGHT", 1, 0)
-				
+
 				ComboPoints[i].Size7Points = SizeFor7 - 1
 				ComboPoints[i].Size6Points = SizeFor6 - 1
 				ComboPoints[i].Size5Points = SizeFor5 - 1
