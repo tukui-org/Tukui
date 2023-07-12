@@ -314,6 +314,8 @@ end
 
 local function Enable(self)
 	if self.RaidDebuffs then
+		self:RegisterEvent("PLAYER_LOGIN", UpdateDispellFilter, true)
+
 		if oUF.isRetail then
 			self:RegisterEvent("PLAYER_TALENT_UPDATE", UpdateDispellFilter, true)
 			self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", UpdateDispellFilter, true)
@@ -322,8 +324,6 @@ local function Enable(self)
 		if oUF.isClassic then
 			self:RegisterEvent("CHARACTER_POINTS_CHANGED", UpdateDispellFilter, true)
 		end
-
-		CheckSpecialization()
 
 		self:RegisterEvent("UNIT_AURA", Update)
 
