@@ -8,8 +8,7 @@ local unpack = unpack
 local pairs = pairs
 
 -- WoW Globals
-local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
-local NUM_GROUP_LOOT_FRAMES = NUM_GROUP_LOOT_FRAMES
+local NUM_GROUP_LOOT_FRAMES = NUM_GROUP_LOOT_FRAMES or 4
 
 -- Locals
 GroupLoot.PreviousFrame = {}
