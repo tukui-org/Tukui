@@ -19,17 +19,11 @@ function Engine:unpack()
 	return self[1], self[2], self[3], self[4]
 end
 
-Engine[1].Retail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
-Engine[1].Classic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+Engine[1].Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+Engine[1].Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 Engine[1].BCC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC) or (Toc >= 20000 and Toc < 30000)
 Engine[1].WotLK = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC) or (Toc >= 30000 and Toc < 40000)
-Engine[1].Cataclysm = (Toc >= 40000 and Toc < 50000)
-Engine[1].MoP = (Toc >= 50000 and Toc < 60000)
-Engine[1].WoD = (Toc >= 60000 and Toc < 70000)
-Engine[1].Legion = (Toc >= 70000 and Toc < 80000)
-Engine[1].BFA = (Toc >= 80000 and Toc < 90000)
-Engine[1].Shadowlands = (Toc >= 90000 and Toc < 100000)
-Engine[1].DF = (Toc >= 100000 and Toc < 110000)
+Engine[1].DF = Toc >= 100000 and Toc < 110000
 
 Engine[1].WindowedMode = Windowed
 Engine[1].FullscreenMode = Fullscreen
