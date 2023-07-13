@@ -40,7 +40,7 @@ if T.Retail then
 			ObjectiveTrackerFrame:Show()
 		end
 	end
-	
+
 	function ObjectiveTracker:OnMove()
 		ObjectiveTrackerFrame:ClearAllPoints()
 		ObjectiveTrackerFrame:SetPointBase("TOP", TukuiObjectiveTracker)
@@ -59,7 +59,7 @@ if T.Retail then
 		ObjectiveTrackerFrame:SetPoint("TOP", ObjectiveFrameHolder)
 		ObjectiveTrackerFrame:SetHeight(T.ScreenHeight - 520)
 		ObjectiveTrackerFrame:SetClampedToScreen(false)
-		
+
 		if T.Retail then
 			hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", ObjectiveTracker.OnMove)
 		end
@@ -463,7 +463,7 @@ if T.Retail then
 		hooksecurefunc("QuestObjectiveSetupBlockButton_FindGroup", SkinGroupFindButton)
 		hooksecurefunc("QuestObjectiveSetupBlockButton_AddRightButton", UpdatePositions)
 		--hooksecurefunc("AutoQuestPopupTracker_Update", self.UpdatePopup)
-		hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
+		-- hooksecurefunc("BonusObjectiveTracker_AnimateReward", self.SkinRewards)
 	end
 
 	function ObjectiveTracker:Toggle()
@@ -478,7 +478,7 @@ if T.Retail then
 		if not C.Misc.ObjectiveTracker then
 			return
 		end
-		
+
 		self:AddHooks()
 		self:SetDefaultPosition()
 		self:SkinScenario()

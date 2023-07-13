@@ -358,7 +358,7 @@ Toolkit.API.SkinCloseButton = function(self, OffsetX, OffsetY, CloseSize)
 	self:SetPushedTexture("")
 	self:SetHighlightTexture("")
 	self:SetDisabledTexture("")
-	
+
 	self:StripTextures()
 
 	self.Texture = self:CreateTexture(nil, "OVERLAY")
@@ -583,9 +583,9 @@ end
 Toolkit.Functions.Scale = function(size)
 	-- Little protection just in case
 	if size == "" then
-		size = 1 
+		size = 1
 	end
-	
+
 	local Mult = PixelPerfectScale / GetCVar("uiScale")
 	local Value = Mult * math.floor(size / Mult + .5)
 
