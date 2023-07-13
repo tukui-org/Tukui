@@ -25,10 +25,6 @@ PetBattleFrameHider:SetAllPoints()
 PetBattleFrameHider:SetFrameStrata('LOW')
 RegisterStateDriver(PetBattleFrameHider, 'visibility', '[petbattle] hide; show')
 
-oUF.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-oUF.BCC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-oUF.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-
 -- updating of "invalid" units.
 local function enableTargetUpdate(object)
 	object.onUpdateFrequency = object.onUpdateFrequency or .5

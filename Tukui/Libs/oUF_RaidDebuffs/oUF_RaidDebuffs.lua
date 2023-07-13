@@ -81,7 +81,7 @@ do
 		},
 		['SHAMAN'] = {
 			['Magic'] = false,
-			['Curse'] = (oUF.Retail and true) or (oUF.Classic and true) or false,
+			['Curse'] = (oUF.isRetail and true) or (oUF.isClassic and true) or false,
 			['Poison'] = true,
 			['Disease'] = true,
 		},
@@ -319,7 +319,7 @@ end
 
 local function Enable(self)
 	if self.RaidDebuffs then
-		if oUF.Retail then
+		if oUF.isRetail then
 			self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 			self:RegisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 		end
@@ -339,7 +339,7 @@ end
 
 local function Disable(self)
 	if self.RaidDebuffs then
-		if oUF.Retail then
+		if oUF.isRetail then
 			self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
 			self:UnregisterEvent("CHARACTER_POINTS_CHANGED", CheckSpec, true)
 		end

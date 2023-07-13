@@ -20,7 +20,7 @@ local Tracker
 		self.AuraTrack = AuraTrack
 ]]
 
-if oUF.Retail then
+if oUF.isRetail then
 	Tracker = {
 		-- Priest
 		[194384]  = {1, 1, 0.66}, -- Atonement
