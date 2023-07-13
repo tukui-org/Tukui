@@ -32,6 +32,16 @@ if T.Retail then
 				[396369] = Priority(), -- Mark of Lightning
 				[396364] = Priority(), -- Mark of Wind
 			----------------------------------------------------------
+			---------------- Dragonflight (World Boss) ---------------
+			----------------------------------------------------------
+			-- Strunraan, The Sky's Misery
+			-- Basrikron, The Scale Wind
+			-- Liskanoth, The Futurebane
+			-- Bazual, THe Dreaded Flame
+			-- The Zaqali Elders (Vakan & Gholna)
+				[402824] = Priority(1), -- Searing Touch
+				[403779] = Priority(), -- Burning Shadows
+			----------------------------------------------------------
 			---------------- Dragonflight (Season 1) -----------------
 			----------------------------------------------------------
 			-- Court of Stars
@@ -86,7 +96,7 @@ if T.Retail then
 				[106823] = Priority(), -- Serpent Strike
 				[396152] = Priority(), -- Feeling of Inferiority
 				[110125] = Priority(), -- Shattered Resolve
-			-- Ruby Life Pools
+			-- [2521] Ruby Life Pools
 				[392406] = Priority(), -- Thunderclap
 				[372820] = Priority(), -- Scorched Earth
 				[384823] = Priority(), -- Inferno 1
@@ -108,7 +118,7 @@ if T.Retail then
 				[372697] = Priority(), -- Jagged Earth
 				[372047] = Priority(), -- Flurry
 				[372963] = Priority(), -- Chillstorm
-			-- The Nokhud Offensive
+			-- [2516] The Nokhud Offensive
 				[382628] = Priority(), -- Surge of Power
 				[386025] = Priority(), -- Tempest
 				[381692] = Priority(), -- Swift Stab
@@ -129,7 +139,7 @@ if T.Retail then
 				[376864] = Priority(), -- Static Spear
 				[375937] = Priority(), -- Rending Strike
 				[376634] = Priority(), -- Iron Spear
-			-- The Azure Vault
+			-- [2515] The Azure Vault
 				[388777] = Priority(), -- Oppressive Miasma
 				[386881] = Priority(), -- Frost Bomb
 				[387150] = Priority(), -- Frozen Ground
@@ -149,7 +159,7 @@ if T.Retail then
 				[371007] = Priority(), -- Splintering Shards
 				[375591] = Priority(), -- Sappy Burst
 				[385409] = Priority(), -- Ouch, ouch, ouch!
-			-- Algeth'ar Academy
+			-- [2526] Algeth'ar Academy
 				[389033] = Priority(), -- Lasher Toxin
 				[391977] = Priority(), -- Oversurge
 				[386201] = Priority(), -- Corrupted Mana
@@ -167,10 +177,172 @@ if T.Retail then
 			----------------------------------------------------------
 			---------------- Dragonflight (Season 2) -----------------
 			----------------------------------------------------------
-			-- Brackenhide Hollow
-			-- Halls of Infusion
-			-- Neltharus
-			-- Uldaman: Legacy of Tyr
+			-- [2520] Brackenhide Hollow
+				[367481] = Priority(5), -- Bloody Bite
+				[367521] = Priority(), -- Bone Bolt
+				[368081] = Priority(), -- Withering
+				[368091] = Priority(), -- Infected Bite
+				[368299] = Priority(), -- Toxic Trap
+				[373872] = Priority(), -- Gushing Ooze
+				[373896] = Priority(), -- Withering Rot
+				[373899] = Priority(), -- Decaying Roots
+				[373912] = Priority(), -- Decaystrike
+				[373917] = Priority(), -- Decaystrike
+				[375416] = Priority(), -- Bleeding
+				[376149] = Priority(), -- Choking Rotcloud
+				[377222] = Priority(), -- Consume
+				[377844] = Priority(), -- Bladestorm
+				[378020] = Priority(), -- Gash Frenzy
+				[378229] = Priority(), -- Marked for Butchery
+				[381379] = Priority(10), -- Decayed Senses
+				[381461] = Priority(), -- Savage Charge
+				[381835] = Priority(), -- Bladestorm
+				[382723] = Priority(), -- Crushing Smash
+				[382787] = Priority(), -- Decay Claws
+				[382808] = Priority(), -- Withering Contagion
+				[383087] = Priority(), -- Withering Contagion
+				[383875] = Priority(), -- Partially Digested
+				[384425] = Priority(), -- Smell Like Meat
+				[384575] = Priority(), -- Crippling Bite
+				[384725] = Priority(), -- Feeding Frenzy
+				[384970] = Priority(), -- Scented Meat
+				[384974] = Priority(), -- Scented Meat
+				[385185] = Priority(), -- Disoriented
+				[385356] = Priority(), -- Ensnaring Trap
+			--  [2527] Halls of Infusion
+				[374339] = Priority(), -- Demoralizing Shout
+				[374389] = Priority(10), -- Gulp Swog Toxin
+				[374610] = Priority(), -- Fixate
+				[374615] = Priority(), -- Cheap Shot
+				[374706] = Priority(), -- Pyretic Burst
+				[374724] = Priority(), -- Molten Subduction
+				[375384] = Priority(), -- Rumbling Earth
+				[383935] = Priority(), -- Spark Volley
+				[384524] = Priority(), -- Titanic Fist
+				[385168] = Priority(), -- Thunderstorm
+				[385555] = Priority(5), -- Gulp
+				[385963] = Priority(), -- Frost Shock
+				-- [386743] = Priority(), -- Polar Winds
+				[387571] = Priority(), -- Focused Deluge
+				[389179] = Priority(), -- Power Overload
+				[389181] = Priority(), -- Power Field
+				[389443] = Priority(), -- Purifying Blast
+				[389446] = Priority(), -- Nullifying Pulse
+				[391634] = Priority(), -- Deep Chill
+			-- [2519] Neltharus
+				[372224] = Priority(), -- Dragonbone Axe
+				[372461] = Priority(), -- Imbued Magma
+				[372570] = Priority(), -- Bold Ambush
+				[372570] = Priority(), -- Bold Ambush
+				[372971] = Priority(), -- Reverberating Slam
+				[373089] = Priority(), -- Scorching Fusillade
+				[373540] = Priority(), -- Binding Spear
+				[373735] = Priority(), -- Dragon Strike
+				[374451] = Priority(), -- Burning Chain
+				[374482] = Priority(), -- Grounding Chain
+				[374534] = Priority(), -- Heated Swings
+				[374842] = Priority(), -- Blazing Aegis
+				[374854] = Priority(), -- Erupted Ground
+				[375204] = Priority(), -- Liquid Hot Magma
+				[375890] = Priority(), -- Magma Eruption
+				[376784] = Priority(), -- Flame Vulnerability
+				[377018] = Priority(), -- Molten Gold
+				[377522] = Priority(), -- Burning Pursuit
+				[378221] = Priority(), -- Molten Vulnerability
+				[378818] = Priority(), -- Magma Conflagration
+				[381482] = Priority(), -- Forgefire
+				[384161] = Priority(), -- Mote of Combustion
+				[387059] = Priority(), -- Burning Chain
+				[389059] = Priority(), -- Slag Eruption
+				[396332] = Priority(), -- Fiery Focus
+			-- [2451] Uldaman: Legacy of Tyr
+				[369006] = Priority(), -- Burning Heat
+				[369110] = Priority(), -- Unstable Embers
+				[369337] = Priority(), -- Difficult Terrain
+				[369365] = Priority(3), -- Curse of Stone
+				[369366] = Priority(5), -- Trapped in Stone
+				[369411] = Priority(), -- Sonic Burst
+				[369419] = Priority(), -- Venomous Fangs
+				[369811] = Priority(), -- Brutal Slam
+				[369818] = Priority(), -- Diseased Bite
+				[369828] = Priority(), -- Chomp
+				[372718] = Priority(), -- Earthen Shards
+				[375286] = Priority(), -- Searing Cannonfire
+				[376325] = Priority(), -- Eternity Zone
+				[377405] = Priority(), -- Time Sink
+				[377486] = Priority(), -- Time Blade
+				[377510] = Priority(), -- Stolen Time
+				[377732] = Priority(), -- Jagged Bite
+				[377825] = Priority(), -- Burning Pitch
+				[382071] = Priority(), -- Resonating Orb
+				[382576] = Priority(), -- Scorn of Tyr
+			-- Neltharion's Lair
+				[183465] = Priority(), -- Viscid Bile
+				[188494] = Priority(), -- Rancid Maw
+				[193585] = Priority(), -- Bound
+				[193639] = Priority(), -- Bone Chomp
+				[193941] = Priority(), -- Impaling Shard
+				[199178] = Priority(), -- Spiked Tongue
+				[199705] = Priority(), -- Devouring
+				[200154] = Priority(), -- Burning Hatred
+				[202181] = Priority(), -- Stone Gaze
+				[210166] = Priority(), -- Toxic Retch
+				[217851] = Priority(), -- Toxic Retch
+				[226296] = Priority(), -- Piercing Shards
+			-- [1841] The Underrot
+				[259718] = Priority(), -- Upheaval
+				[260455] = Priority(), -- Serrated Fangs
+				[260455] = Priority(), -- Serrated Fangs
+				[260685] = Priority(), -- Taint of G'huun
+				[265019] = Priority(), -- Savage Cleave
+				[265377] = Priority(), -- Hooked Snare
+				[265468] = Priority(), -- Withering Curse
+				[265533] = Priority(), -- Blood Maw
+				[265568] = Priority(), -- Dark Omen
+				[266107] = Priority(), -- Thirst For Blood
+				[266265] = Priority(), -- Wicked Embrace
+				-- [269301] = Priority(), -- Putrid Blood
+				[272609] = Priority(), -- Maddening Gaze
+			-- [1754] Freehold
+				[256106] = Priority(), -- Azerite Powder Shot
+				[256363] = Priority(), -- Ripper Punch
+				[257305] = Priority(), -- Cannon Barrage
+				[257314] = Priority(), -- Black Powder Bomb
+				[257460] = Priority(), -- Fiery Debris
+				[257478] = Priority(), -- Crippling Bite
+				[257739] = Priority(), -- Blind Rage
+				[257784] = Priority(), -- Frost Blast
+				[257908] = Priority(5), -- Oiled Blade
+				[258323] = Priority(), -- Infected Wound
+				[258352] = Priority(), -- Grapeshot
+				[258875] = Priority(), -- Blackout Barrel
+				[265056] = Priority(), -- Invigorating Freehold Brew
+				[265085] = Priority(), -- Confidence-Boosting Freehold Brew
+				[274400] = Priority(), -- Duelist Dash
+				[274507] = Priority(), -- Slippery Suds
+				[274555] = Priority(), -- Scabrous Bite
+				[276061] = Priority(), -- Boulder Throw
+				[413131] = Priority(), -- Whirling Dagger
+				[413136] = Priority(), -- Whirling Dagger
+			-- [657] The Vortex Pinnacle
+				[410870] = Priority(), -- Cyclone
+				[410997] = Priority(), -- Rushing Wind
+				[411003] = Priority(), -- Turbulence
+				[411770] = Priority(), -- Charge
+				[411911] = Priority(), -- Healing Well
+				[413296] = Priority(), -- Downburst
+				[86292] = Priority(), -- Cyclone Shield
+				[87474] = Priority(), -- Grounding Field
+				[87618] = Priority(), -- Static Cling
+				[87726] = Priority(), -- Grounding Field
+				[87762] = Priority(), -- Lightning Lash
+				[88194] = Priority(), -- Icy Buffet
+				-- [88282] = Priority(), -- Upwind of Altairus
+				-- [88286] = Priority(), -- Downwind of Altairus
+				[88314] = Priority(), -- Twisting Winds
+
+				-- Season 2
+				[408801] = Priority(), -- Incorporeal
 			----------------------------------------------------------
 			---------------- Shadowlands (Season 4) ------------------
 			----------------------------------------------------------
@@ -691,7 +863,7 @@ if T.Retail then
 				[373048] = Priority(3), -- Suffocating Webs
 			-- Dathea, Ascended
 				[391686] = Priority(5), -- Conductive Mark
-				[378277] = Priority(2), -- Elemental Equilbrium
+				-- [378277] = Priority(2), -- Elemental Equilbrium
 				[388290] = Priority(4), -- Cyclone
 			-- Kurog Grimtotem
 				[377780] = Priority(5), -- Skeletal Fractures
@@ -710,6 +882,129 @@ if T.Retail then
 				[375578] = Priority(4), -- Flame Sentry
 			-- Raszageth the Storm-Eater
 				-- TODO: DF
+			----------------------------------------------------------
+			------------ Aberrus, the Shadowed Crucible --------------
+			----------------------------------------------------------
+				-- Trash
+				[406183] = Priority(), -- Time Slash
+				[406288] = Priority(1), -- Dream Burst
+				[220540] = Priority(), -- Fear
+				[411437] = Priority(), -- Brutal Lacerations
+				[411439] = Priority(), -- Sundering Strike
+				-- Kazzara, the Hellforged
+				-- [403655] = Priority(), -- Wings of Extinction
+				[402253] = Priority(), -- Ray of Anguish
+				[402299] = Priority(), -- Ray of Anguish
+				[402420] = Priority(), -- Molten Scar
+				[404743] = Priority(), -- Terror Claws
+				[406288] = Priority(), -- Dream Burst
+				[406525] = Priority(), -- Dread Rift
+				[406530] = Priority(), -- Riftburn
+				[406728] = Priority(), -- Blazing Heat
+				[406729] = Priority(), -- Corrupting Shadow
+				[412625] = Priority(), -- Shadowflame Spill
+				-- The Amalgamation Chamber
+				-- [401809] = Priority(), -- Corrupting Shadow
+				-- [401854] = Priority(), -- Corrupting Shadow
+				-- [401862] = Priority(), -- Blazing Heat
+				-- [402617] = Priority(), -- Blazing Heat
+				-- [405394] = Priority(), -- Shadowflame Contamination
+				-- [406780] = Priority(), -- Shadowflame Contamination
+				[405036] = Priority(), -- Umbral Detonation
+				[405084] = Priority(), -- Lingering Umbra
+				[405642] = Priority(), -- Blistering Twilight
+				[405645] = Priority(), -- Engulfing Heat
+				[409018] = Priority(), -- Infected Slop
+				[409041] = Priority(), -- Congealed Mass
+				[411799] = Priority(), -- Creeping Ooze
+				[411808] = Priority(), -- Slime Ejection
+				[411862] = Priority(), -- Acidic Bile
+				[411892] = Priority(), -- Viscous Bile
+				[412488] = Priority(), -- Arcane Burst
+				[412498] = Priority(), -- Stagnating Pool
+				[413597] = Priority(), -- Withering Vulnerability
+				-- The Forgotten Experiments
+				[405392] = Priority(), -- Disintegrate
+				[405423] = Priority(), -- Disintegrate
+				[405850] = Priority(), -- Devastation
+				[406233] = Priority(), -- Deep Breath
+				[406313] = Priority(), -- Infused Strikes
+				[406365] = Priority(), -- Rending Charge
+				[406898] = Priority(), -- Molten Rain
+				[407212] = Priority(), -- Talon's Grip
+				-- [407302] = Priority(), -- Infused Explosion
+				[407327] = Priority(), -- Unstable Essence
+				[409307] = Priority(), -- Blazing Beak
+				[409757] = Priority(), -- Shattering Attack
+				[409921] = Priority(), -- Stunning Attack
+				[410981] = Priority(), -- Iron Jaws
+				[411223] = Priority(), -- Molten Cinders
+				[411730] = Priority(), -- Searing Fangs
+				-- Assault of the Zaqali
+				[401407] = Priority(), -- Blazing Spear
+				[401452] = Priority(), -- Blazing Spear
+				[404616] = Priority(), -- Weakened Vitality
+				[408873] = Priority(), -- Heavy Cudgel
+				[409275] = Priority(), -- Magma Flow
+				[410353] = Priority(), -- Flaming Cudgel
+				-- Rashok, the Elder
+				[403543] = Priority(), -- Lava Wave
+				[405819] = Priority(), -- Searing Slam
+				-- [405827] = Priority(), -- Overcharged
+				[406321] = Priority(), -- Lava Vortex
+				[407547] = Priority(), -- Flaming Slash
+				[407597] = Priority(), -- Earthen Crush
+				[408204] = Priority(), -- Scorched Flesh
+				[408857] = Priority(), -- Doom Flames
+				-- The Vigilant Steward, Zskarn
+				[371313] = Priority(), -- Fireball
+				[403978] = Priority(), -- Blast Wave
+				[404010] = Priority(), -- Unstable Embers
+				[404942] = Priority(), -- Searing Claws
+				[404955] = Priority(), -- Shrapnel Bomb
+				[404959] = Priority(), -- Shrapnel Bomb
+				[405462] = Priority(), -- Dragonfire Traps
+				[405592] = Priority(), -- Salvage Parts
+				[409437] = Priority(), -- Searing Ichor
+				[417229] = Priority(), -- Dragonfire Traps
+				-- Magmorax
+				-- [403747] = Priority(), -- Igniting Roar
+				[402994] = Priority(), -- Molten Spittle
+				[405850] = Priority(), -- Devastation
+				[406183] = Priority(), -- Time Slash
+				[406288] = Priority(), -- Dream Burst
+				[408839] = Priority(), -- Searing Heat
+				[408955] = Priority(5), -- Incinerating Maws
+				[409724] = Priority(), -- Earthen Grasp
+				[413367] = Priority(), -- Lava Ejection
+				-- Echo of Neltharion
+				[132951] = Priority(), -- Flare
+				[401998] = Priority(5), -- Calamitous Strike
+				[402120] = Priority(), -- Collapsed Earth
+				[405484] = Priority(), -- Surrendering to Corruption
+				[407220] = Priority(), -- Rushing Darkness
+				[407329] = Priority(), -- Shatter
+				[407728] = Priority(5), -- Sundered Shadow
+				[407917] = Priority(), -- Ebon Destruction
+				[407919] = Priority(), -- Sundered Reality
+				[408160] = Priority(), -- Shadow Strike
+				[409058] = Priority(), -- Seeping Lava
+				[410972] = Priority(1), -- Corruption
+				-- Scalecommander Sarkareth
+				[401330] = Priority(), -- Burning Claws
+				[401383] = Priority(), -- Oppressing Howl
+				[401525] = Priority(), -- Scorching Detonation
+				[401905] = Priority(), -- Dazzled
+				[401951] = Priority(), -- Oblivion
+				[402051] = Priority(), -- Searing Breath
+				[403520] = Priority(), -- Embrace of Nothingness
+				[404154] = Priority(), -- Void Surge
+				[404499] = Priority(), -- Abyssal Breath
+				[406989] = Priority(), -- Burning Ground
+				[407496] = Priority(), -- Infinite Duress
+				[408429] = Priority(), -- Void Slash
+				[410642] = Priority(), -- Void Fracture
+				[411241] = Priority(), -- Void Claws
 		},
 	}
 
