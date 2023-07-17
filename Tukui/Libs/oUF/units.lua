@@ -5,7 +5,7 @@ local Private = oUF.Private
 local enableTargetUpdate = Private.enableTargetUpdate
 
 local function updateArenaPreparationElements(self, event, elementName, specID)
-	if not oUF.Retail then
+	if not oUF.isRetail then
 		return
 	end
 
@@ -181,7 +181,7 @@ function oUF:HandleUnit(object, unit)
 	elseif(unit:match('arena%d?$')) then
 		object:RegisterEvent('ARENA_OPPONENT_UPDATE', object.UpdateAllElements, true)
 
-		if oUF.Retail then
+		if oUF.isRetail then
 			object:RegisterEvent('ARENA_PREP_OPPONENT_SPECIALIZATIONS', updateArenaPreparation, true)
 			object:SetAttribute('oUF-enableArenaPrep', true)
 			-- the event handler only fires for visible frames, so we have to hook it for arena prep
