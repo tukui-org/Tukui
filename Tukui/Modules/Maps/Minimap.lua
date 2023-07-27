@@ -160,7 +160,6 @@ function Minimap:StyleMinimap()
 		-- Move QueueStatusButton and register for drag
 		local Holder = CreateFrame("Frame", "TukuiQueueStatusHolder", UIParent)
 		Holder:SetSize(QueueStatusButton:GetWidth(), QueueStatusButton:GetHeight())
-		Holder:SetTemplate()
 		Holder:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
 
 		QueueStatusButton:SetParent(Holder)
