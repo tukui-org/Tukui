@@ -1,7 +1,7 @@
-## Interface: 30401
+## Interface: 30402
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.37
+## Version: 20.38
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase
@@ -9,7 +9,7 @@
 ## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: 1
 ## X-Tukui-ProjectFolders: Tukui
-
+ 
 ## Init
 Core\Init.lua
 

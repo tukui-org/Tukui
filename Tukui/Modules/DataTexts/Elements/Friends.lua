@@ -9,6 +9,7 @@ local Games = {
 	["S2"] = "StarCraft 2",
 	["OSI"] = "Diablo II: Resurrected",
 	["D3"] = "Diablo 3",
+	["Fen"] = "Diablo 4",
 	["WTCG"] = "Hearthstone",
 	["App"] = "Battle.net Desktop App",
 	["BSAp"] = "Battle.net Mobile App",
@@ -97,7 +98,7 @@ local DisplayBattleNetFriendsOnTooltip = function()
 
 			if IsOnline then
 				local Game = T.Retail and Games[Account.clientProgram] or Games[Friend.client] or UNKNOWN
-
+				
 				if Game ~= "Battle.net Desktop App" and Game ~= "Battle.net Mobile App" then
 					local BattleTag = RemoveTagNumber(Friend.battleTag)
 					local Left = "|cff00ccff"..BattleTag.."|r"

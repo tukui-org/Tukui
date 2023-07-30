@@ -157,16 +157,18 @@ function Minimap:StyleMinimap()
 		QueueStatusFrame:CreateBackdrop()
 		QueueStatusFrame:CreateShadow()
 		
-		if T.Retail then
-			-- Move QueueStatusButton and register for drag
-			QueueStatusButton:SetParent(UIParent)
-			QueueStatusButton:ClearAllPoints()
-			QueueStatusButton:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
-			
-			QueueStatusFrame.NineSlice:SetAlpha(0)
-			
-			Movers:RegisterFrame(QueueStatusButton, "QueueStatusButton")
-		end
+		-- Move QueueStatusButton and register for drag
+		local Holder = CreateFrame("Frame", "TukuiQueueStatusHolder", UIParent)
+		Holder:SetSize(QueueStatusButton:GetWidth(), QueueStatusButton:GetHeight())
+		Holder:SetPoint("BOTTOM", 0, T.ScreenHeight / 4)
+
+		QueueStatusButton:SetParent(Holder)
+		QueueStatusButton:ClearAllPoints()
+		QueueStatusButton:SetPoint("CENTER", Holder)
+
+		QueueStatusFrame.NineSlice:SetAlpha(0)
+
+		Movers:RegisterFrame(Holder, "TukuiQueueStatusHolder")
 		
 		if QueueStatusFrame.NineSlice then
 			QueueStatusFrame.NineSlice:SetAlpha(0)

@@ -1,3 +1,7 @@
+July 27 2023 : Version 20.38
+
+*   Fixes.
+
 January 22 2023 : Version 20.37  
 
 *   Lots of fixes for WotLK classic patch.

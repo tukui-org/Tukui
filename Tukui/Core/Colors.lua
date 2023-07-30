@@ -80,4 +80,11 @@ oUF.colors.happiness = {
 	[3] = {.33,.59,.33},
 }
 
+oUF.colors.mirror = {
+	EXHAUSTION = { 1.0, 0.90, 0.0 },
+	BREATH = { 0.0, 0.50, 1.0 },
+	DEATH = { 1.0, 0.70, 0.0 },
+	FEIGNDEATH = { 1.0, 0.70, 0.0 }
+}
+
 T["Colors"] = oUF.colors
