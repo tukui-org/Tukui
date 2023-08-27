@@ -1,6 +1,7 @@
 local _G, _M = getfenv(0), {}
 setfenv(1, setmetatable(_M, {__index=_G}))
 local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+local GetBagSlotFlag = C_Container and C_Container.GetBagSlotFlag or GetBagSlotFlag
 
 CreateFrame('GameTooltip', 'SortBagsTooltip', nil, 'GameTooltipTemplate')
 
