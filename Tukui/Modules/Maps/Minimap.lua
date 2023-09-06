@@ -75,7 +75,9 @@ function Minimap:OnMouseClick(button)
 		if T.Retail then
 			ToggleDropDownMenu(1, nil, MinimapCluster.Tracking.DropDown, MinimapCluster.Tracking, 8, 5)
 		else
-			ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
+			if MiniMapTrackingDropDown then
+				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
+			end
 		end
 	elseif (button == "MiddleButton") then
 		if T.Retail and ExpansionLandingPageMinimapButton and ExpansionLandingPageMinimapButton:IsShown() then
