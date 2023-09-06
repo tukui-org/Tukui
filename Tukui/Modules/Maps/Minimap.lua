@@ -169,6 +169,8 @@ function Minimap:StyleMinimap()
 		QueueStatusButton:SetPoint("CENTER", Holder)
 
 		QueueStatusFrame.NineSlice:SetAlpha(0)
+		
+		hooksecurefunc(QueueStatusButton, "SetPoint", function(self) self:SetAllPoints(Holder) end)
 
 		Movers:RegisterFrame(Holder, "TukuiQueueStatusHolder")
 		
