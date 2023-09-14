@@ -23,7 +23,7 @@ local KEYRING_CONTAINER = KEYRING_CONTAINER
 local BAGTYPE_QUIVER = 0x0001 + 0x0002
 local BAGTYPE_SOUL = 0x004
 local BAGTYPE_PROFESSION = 0x0008 + 0x0010 + 0x0020 + 0x0040 + 0x0080 + 0x0200 + 0x0400
-local GetContainerNumSlots = ContainerFrame_GetContainerNumSlots or GetContainerNumSlots
+local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
 local GetContainerNumFreeSlots = C_Container and C_Container.GetContainerNumFreeSlots or GetContainerNumFreeSlots
 local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
 local SetItemSearch = C_Container and C_Container.SetItemSearch or SetItemSearch
@@ -63,7 +63,7 @@ function Bags:SetTokensPosition()
 	if T.Retail then
 		return
 	end
-	
+
 	local Money = ContainerFrame1MoneyFrame
 
 	MAX_WATCHED_TOKENS = 2
@@ -118,7 +118,7 @@ function Bags:SkinBagButton()
 	self:SetFrameLevel(0)
 
 	Border:SetAlpha(0)
-	
+
 	if NormalTexture then
 		NormalTexture:SetAlpha(0)
 	end
@@ -147,10 +147,10 @@ function Bags:SkinBagButton()
 	self:CreateBackdrop()
 	self:StyleButton()
 	self.IconOverlay:SetAlpha(0)
-	
+
 	if T.Retail then
 		local NormalTex = _G[self:GetName().."NormalTexture"]
-		
+
 		if NormalTex then
 			NormalTex:SetAlpha(0)
 		end
@@ -171,14 +171,14 @@ function Bags:HideBlizzard()
 
 	for i = 1, 12 do
 		local CloseButton = _G["ContainerFrame"..i.."CloseButton"]
-		
+
 		if CloseButton then
 			CloseButton:Hide()
 		end
 
 		for k = 1, 7 do
 			local Container = _G["ContainerFrame"..i]
-			
+
 			--Container:SetAlpha(0)
 		end
 	end
@@ -307,7 +307,7 @@ function Bags:CreateReagentContainer()
 		local Count = _G[Button:GetName().."Count"]
 		local Icon = _G[Button:GetName().."IconTexture"]
 		local NormalTexture = _G[Button:GetName().."NormalTexture"]
-		
+
 		if NormalTexture then
 			NormalTexture:SetAlpha(0)
 		end
@@ -446,7 +446,7 @@ function Bags:CreateContainer(storagetype, ...)
 				Icon:SetInside()
 
 				LastButtonBag = Button
-				
+
 				BagsContainer:SetWidth((ButtonSize * getn(BlizzardBags)) + (ButtonSpacing * (getn(BlizzardBags) + 1)))
 				BagsContainer:SetHeight(ButtonSize + (ButtonSpacing * 2))
 			end
@@ -514,7 +514,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 				return
 			end
-				
+
 			local Sort = C_Container and C_Container.SortBags or SortBags
 
 			Sort()
@@ -622,7 +622,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 		for i = 1, 7 do
 			local Bag = BankSlotsFrame["Bag"..i]
-			
+
 			if Bag then
 				Bag:SetParent(BankBagsContainer)
 				Bag:SetWidth(ButtonSize)
@@ -675,7 +675,7 @@ function Bags:SlotUpdate(id, button)
 	end
 
 	local _, Rarity, ItemLink, ItemID, IsBound, StackCount
-	
+
 	if (T.Retail and T.TocVersion >= 100002) or (T.WotLK) then
 		local Table = GetContainerItemInfo(id, button:GetID())
 
@@ -723,7 +723,7 @@ function Bags:SlotUpdate(id, button)
 
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(itemTexture)
-			
+
 			if StackCount and StackCount > 1 then
 				Count:Show()
 				Count:SetText(StackCount)
@@ -735,7 +735,7 @@ function Bags:SlotUpdate(id, button)
 		if T.Retail then
 			-- Icon Texture bug in retail sometime being blank
 			IconTexture:SetTexture(4701874)
-			
+
 			-- DragonFlight, identify reagent slots in green
 			if C.Bags.ReagentInsideBag and id == 5 then
 				IconTexture:SetVertexColor(unpack(C.Bags.ReagentBagColor))
@@ -772,7 +772,7 @@ function Bags:SlotUpdate(id, button)
 	else
 		if Rarity then
 			local R, G, B = GetItemQualityColor(Rarity)
-			
+
 			if button.Backdrop then
 				button.Backdrop:SetBorderColor(R, G, B)
 			end
@@ -816,7 +816,7 @@ function Bags:SlotUpdate(id, button)
 		if ItemLink then
 			local Level = GetDetailedItemLevelInfo(ItemLink)
 			local _, _, Rarity, _, _, ItemType, _, _, _, _, _, ClassID = GetItemInfo(ItemLink)
-			
+
 			if (ItemType and (ItemType == "Armor" or ItemType == "Weapon")) and Level and Level > 1 then
 				if not button.ItemLevel then
 					button.ItemLevel = button:CreateFontString(nil, "ARTWORK")
@@ -829,7 +829,7 @@ function Bags:SlotUpdate(id, button)
 
 				if Rarity then
 					local R, G, B = GetItemQualityColor(Rarity)
-					
+
 					if button.ItemLevel then
 						button.ItemLevel:SetTextColor(R, G, B)
 					end
@@ -849,7 +849,7 @@ function Bags:SlotUpdate(id, button)
 			end
 		end
 	end
-	
+
 	-- DragonFlight, identify reagent button with a custom border color
 	if C.Bags.ReagentInsideBag and id == 5 and button.Backdrop then
 		button.Backdrop:SetBorderColor(unpack(C.Bags.ReagentBagColor))
@@ -955,7 +955,7 @@ end
 function Bags:UpdateAllBags()
 	local NumRows, LastRowButton, NumButtons, LastButton, NumRowReagent = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1, 0
 	local FirstButton, FirstReagentButton
-	
+
 	local TotalBags = T.Retail and 6 or 5
 
 	for Bag = 1, TotalBags do
@@ -970,7 +970,7 @@ function Bags:UpdateAllBags()
 		for Item = Slots, 1, -1 do
 			local Button = _G["ContainerFrame"..Bag.."Item"..Item]
 			local IconTexture = _G["ContainerFrame"..Bag.."Item"..Item.."IconTexture"]
-			
+
 			Button:ClearAllPoints()
 			Button:SetWidth(ButtonSize)
 			Button:SetHeight(ButtonSize)
@@ -981,17 +981,17 @@ function Bags:UpdateAllBags()
 
 			Button.flashAnim:Stop()
 			Button.flashAnim.Play = Noop
-			
+
 			if not C.Bags.ReagentInsideBag and Bag == 6 then
 				if not FirstReagentButton then
 					FirstReagentButton = Button
 				end
-				
+
 				if (Button == FirstReagentButton) then
 					NumButtons = 1
-					
+
 					Button:SetPoint("TOPLEFT", Bags.BagReagent, "TOPLEFT", 10, -10)
-					
+
 					LastRowButton = Button
 					LastButton = Button
 				elseif (NumButtons == ItemsPerRow) then
@@ -1003,10 +1003,10 @@ function Bags:UpdateAllBags()
 				else
 					Button:SetPoint("TOPRIGHT", LastButton, "TOPRIGHT", (ButtonSpacing + ButtonSize), 0)
 					Button:SetPoint("BOTTOMLEFT", LastButton, "BOTTOMLEFT", (ButtonSpacing + ButtonSize), 0)
-					
+
 					NumButtons = NumButtons + 1
 				end
-				
+
 				LastButton = Button
 			else
 				if not FirstButton then
@@ -1043,7 +1043,7 @@ function Bags:UpdateAllBags()
 			break
 		end
 	end
-	
+
 	self.Bag:SetHeight(((ButtonSize + ButtonSpacing) * (NumRows + 1) + 64 + (ButtonSpacing * 4)) - ButtonSpacing)
 	self.BagReagent:SetHeight(((ButtonSize + ButtonSpacing) * (NumRowReagent + 1) + ButtonSpacing + (ButtonSpacing * 4)) - ButtonSpacing)
 end
@@ -1135,7 +1135,7 @@ function Bags:OpenBag(id)
 	local Size = GetContainerNumSlots(id)
 	local OpenFrame
 	local TotalBags = T.Retail and 5 or 4
-	
+
 	if not T.Retail then
 		OpenFrame = ContainerFrame_GetOpenFrame()
 	end
@@ -1143,7 +1143,7 @@ function Bags:OpenBag(id)
 	for i = 1, 40 do
 		local Index = Size - i + 1
 		local Button
-		
+
 		if T.Retail then
 			Button = _G["ContainerFrame".. id + 1 .."Item"..i]
 		else
@@ -1166,7 +1166,7 @@ function Bags:OpenBag(id)
 		OpenFrame:Show()
 	else
 		local Container = _G["ContainerFrame".. id + 1]
-		
+
 		Container.size = Size
 		Container:SetID(id)
 		Container:Show()
@@ -1183,7 +1183,7 @@ end
 
 function Bags:OpenAllBags()
 	self:OpenBag(0)
-	
+
 	local TotalBags = T.Retail and 5 or 4
 
 	for i = 1, TotalBags do
@@ -1206,13 +1206,13 @@ end
 function Bags:OpenAllBankBags()
 	local Bank = BankFrame
 	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBank
-	
+
 	local BankStartingBag = 5
-	
+
 	if T.Retail then
 		BankStartingBag = 6
 	end
-	
+
 	if Bank:IsShown() then
 		self.Bank:Show()
 
@@ -1364,7 +1364,7 @@ function Bags:OnEvent(event, ...)
 		local Bank = self.Bank
 
 		self:CloseAllBags()
-		
+
 		if not T.Retail then
 			self:CloseAllBankBags()
 		end
@@ -1375,7 +1375,7 @@ function Bags:OnEvent(event, ...)
 		local Bank = self.Bank
 
 		Bank:Show()
-		
+
 		if T.Retail then
 			for i = 6, 13 do
 				if not IsBagOpen(i) then
@@ -1383,7 +1383,7 @@ function Bags:OnEvent(event, ...)
 				end
 			end
 		end
-		
+
 		self:UpdateAllBankBags()
 	elseif (event == "SOULBIND_FORGE_INTERACTION_STARTED") then
 		self:OpenAllBags()
@@ -1397,7 +1397,7 @@ end
 function Bags:ToggleReagents()
 	local ReagentID = 5
 	local Bag = self.BagReagent
-	
+
 	if not Bag:IsShown() then
 		local Size = GetContainerNumSlots(ReagentID)
 
@@ -1415,7 +1415,7 @@ function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
 	end
-	
+
 	SetCVar("combinedBags", 0)
 
 	if C.Bags.SortToBottom then
@@ -1425,7 +1425,7 @@ function Bags:Enable()
 		SetSortBagsRightToLeft(true)
 		SetInsertItemsLeftToRight(false)
 	end
-	
+
 	-- Bug with mouse click
 	GroupLootContainer:EnableMouse(false)
 
@@ -1443,11 +1443,11 @@ function Bags:Enable()
 	local BB1, BB2, BB3, BB4, BB5 = "BOTTOMLEFT", UIParent, "BOTTOMLEFT", 34, 48
 	local Data1 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBag
 	local Data2 = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBank
-	
+
 	if Data1 then
 		B1, B2, B3, B4, B5 = unpack(Data1)
 	end
-	
+
 	if Data2 then
 		BB1, BB2, BB3, BB4, BB5 = unpack(Data2)
 	end
@@ -1455,13 +1455,13 @@ function Bags:Enable()
 	self:CreateContainer("Bag", B1, B2, B3, B4, B5)
 	self:CreateContainer("BagReagent", "BOTTOMRIGHT", TukuiBag, "TOPRIGHT", 0, 10)
 	self:CreateContainer("Bank", BB1, BB2, BB3, BB4, BB5)
-	
+
 	self:HideBlizzard()
 	self:MoveElements()
 
 	Bag:SetScript("OnHide", function()
 		self.Bag:Hide()
-		
+
 		if T.Retail and not C.Bags.ReagentInsideBag then
 			Bags:ToggleReagents()
 		end
@@ -1469,7 +1469,7 @@ function Bags:Enable()
 
 	Bag:HookScript("OnShow", function() -- Cinematic Bug with Bags open.
 		self.Bag:Show()
-		
+
 		if T.Retail and not C.Bags.ReagentInsideBag then
 			Bags:ToggleReagents()
 		end
@@ -1521,7 +1521,7 @@ function Bags:Enable()
 	if T.Retail then
 		-- Always set this to true
 		SetCVar("expandBagBar", true)
-		
+
 		self:SetTokensPosition()
 
 		BankFrame:HookScript("OnHide", function()

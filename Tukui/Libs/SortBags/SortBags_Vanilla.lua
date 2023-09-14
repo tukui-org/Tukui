@@ -1,5 +1,7 @@
 local _G, _M = getfenv(0), {}
 setfenv(1, setmetatable(_M, {__index=_G}))
+local GetContainerNumSlots = C_Container and C_Container.GetContainerNumSlots or GetContainerNumSlots
+local GetBagSlotFlag = C_Container and C_Container.GetBagSlotFlag or GetBagSlotFlag
 
 CreateFrame('GameTooltip', 'SortBagsTooltip', nil, 'GameTooltipTemplate')
 
@@ -215,7 +217,7 @@ end
 function Move(src, dst)
     local texture, _, srcLocked = GetContainerItemInfo(src.container, src.position)
     local _, _, dstLocked = GetContainerItemInfo(dst.container, dst.position)
-    
+
 	if texture and not srcLocked and not dstLocked then
 		ClearCursor()
        	PickupContainerItem(src.container, src.position)
@@ -442,13 +444,13 @@ end
 function ContainerClass(container)
 	if container ~= 0 and container ~= BANK_CONTAINER then
 		local name = GetBagName(container)
-		if name then		
+		if name then
 			for class, info in pairs(CLASSES) do
 				for _, itemID in pairs(info.containers) do
 					if name == GetItemInfo(itemID) then
 						return class
 					end
-				end	
+				end
 			end
 		end
 	end
@@ -530,7 +532,7 @@ function Item(container, position)
 			tinsert(sortKey, 14)
 			tinsert(sortKey, sellPrice)
 		end
-		
+
 		tinsert(sortKey, classId)
 		tinsert(sortKey, slot)
 		tinsert(sortKey, subClassId)
