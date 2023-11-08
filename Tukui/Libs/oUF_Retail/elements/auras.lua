@@ -358,6 +358,28 @@ local function UpdateAuras(self, event, unit, updateInfo)
 				end
 			end
 		else
+			if(updateInfo.addedAuras) then
+				for _, data in next, updateInfo.addedAuras do
+					if(data.isHelpful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, buffFilter)) then
+						data = processData(auras, unit, data)
+						auras.allBuffs[data.auraInstanceID] = data
+
+						if((auras.FilterAura or FilterAura) (auras, unit, data)) then
+							auras.activeBuffs[data.auraInstanceID] = true
+							buffsChanged = true
+						end
+					elseif(data.isHarmful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, debuffFilter)) then
+						data = processData(auras, unit, data)
+						auras.allDebuffs[data.auraInstanceID] = data
+
+						if((auras.FilterAura or FilterAura) (auras, unit, data)) then
+							auras.activeDebuffs[data.auraInstanceID] = true
+							debuffsChanged = true
+						end
+					end
+				end
+			end
+
 			if(updateInfo.updatedAuraInstanceIDs) then
 				for _, auraInstanceID in next, updateInfo.updatedAuraInstanceIDs do
 					if(auras.allBuffs[auraInstanceID]) then
@@ -395,29 +417,6 @@ local function UpdateAuras(self, event, unit, updateInfo)
 							auras.activeDebuffs[auraInstanceID] = nil
 							debuffsChanged = true
 						end
-					end
-				end
-			end
-
-			if(updateInfo.addedAuras) then
-				for _, data in next, updateInfo.addedAuras do
-					if(data.isHelpful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, buffFilter)) then
-						data = processData(auras, unit, data)
-						auras.allBuffs[data.auraInstanceID] = data
-
-						if((auras.FilterAura or FilterAura) (auras, unit, data)) then
-							auras.activeBuffs[data.auraInstanceID] = true
-							buffsChanged = true
-						end
-					elseif(data.isHarmful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, debuffFilter)) then
-						data = processData(auras, unit, data)
-						auras.allDebuffs[data.auraInstanceID] = data
-
-						if((auras.FilterAura or FilterAura) (auras, unit, data)) then
-							auras.activeDebuffs[data.auraInstanceID] = true
-							debuffsChanged = true
-						end
-
 					end
 				end
 			end
@@ -489,35 +488,43 @@ local function UpdateAuras(self, event, unit, updateInfo)
 			numDebuffs = math.min(numDebuffs, numTotal - numVisible, #auras.sortedDebuffs)
 
 			if(auras.gap and numVisible > 0 and numDebuffs > 0) then
-				numVisible = numVisible + 1
-
-				local button = auras[numVisible]
-				if(not button) then
-					button = (auras.CreateButton or CreateButton) (auras, numVisible)
-					table.insert(auras, button)
-					auras.createdButtons = auras.createdButtons + 1
+				-- adjust the number of visible debuffs if there's an overflow
+				if(numVisible + numDebuffs == numTotal) then
+					numDebuffs = numDebuffs - 1
 				end
 
-				-- prevent the button from displaying anything
-				if(button.Cooldown) then button.Cooldown:Hide() end
-				if(button.Icon) then button.Icon:SetTexture() end
-				if(button.Overlay) then button.Overlay:Hide() end
-				if(button.Stealable) then button.Stealable:Hide() end
-				if(button.Count) then button.Count:SetText() end
+				-- double check and skip it if we end up with 0 after the adjustment
+				if(numDebuffs > 0) then
+					numVisible = numVisible + 1
 
-				button:EnableMouse(false)
-				button:Show()
+					local button = auras[numVisible]
+					if(not button) then
+						button = (auras.CreateButton or CreateButton) (auras, numVisible)
+						table.insert(auras, button)
+						auras.createdButtons = auras.createdButtons + 1
+					end
 
-				--[[ Callback: Auras:PostUpdateGapButton(unit, gapButton, position)
-				Called after an invisible aura button has been created. Only used by Auras when the `gap` option is enabled.
+					-- prevent the button from displaying anything
+					if(button.Cooldown) then button.Cooldown:Hide() end
+					if(button.Icon) then button.Icon:SetTexture() end
+					if(button.Overlay) then button.Overlay:Hide() end
+					if(button.Stealable) then button.Stealable:Hide() end
+					if(button.Count) then button.Count:SetText() end
 
-				* self      - the widget holding the aura buttons
-				* unit      - the unit that has the invisible aura button (string)
-				* gapButton - the invisible aura button (Button)
-				* position  - the position of the invisible aura button (number)
-				--]]
-				if(auras.PostUpdateGapButton) then
-					auras:PostUpdateGapButton(unit, button, numVisible)
+					button:EnableMouse(false)
+					button:Show()
+
+					--[[ Callback: Auras:PostUpdateGapButton(unit, gapButton, position)
+					Called after an invisible aura button has been created. Only used by Auras when the `gap` option is enabled.
+
+					* self      - the widget holding the aura buttons
+					* unit      - the unit that has the invisible aura button (string)
+					* gapButton - the invisible aura button (Button)
+					* position  - the position of the invisible aura button (number)
+					--]]
+					if(auras.PostUpdateGapButton) then
+						auras:PostUpdateGapButton(unit, button, numVisible)
+					end
 				end
 			end
 
@@ -593,6 +600,19 @@ local function UpdateAuras(self, event, unit, updateInfo)
 				end
 			end
 		else
+			if(updateInfo.addedAuras) then
+				for _, data in next, updateInfo.addedAuras do
+					if(data.isHelpful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, buffFilter)) then
+						buffs.all[data.auraInstanceID] = processData(buffs, unit, data)
+
+						if((buffs.FilterAura or FilterAura) (buffs, unit, data)) then
+							buffs.active[data.auraInstanceID] = true
+							buffsChanged = true
+						end
+					end
+				end
+			end
+
 			if(updateInfo.updatedAuraInstanceIDs) then
 				for _, auraInstanceID in next, updateInfo.updatedAuraInstanceIDs do
 					if(buffs.all[auraInstanceID]) then
@@ -613,19 +633,6 @@ local function UpdateAuras(self, event, unit, updateInfo)
 
 						if(buffs.active[auraInstanceID]) then
 							buffs.active[auraInstanceID] = nil
-							buffsChanged = true
-						end
-					end
-				end
-			end
-
-			if(updateInfo.addedAuras) then
-				for _, data in next, updateInfo.addedAuras do
-					if(data.isHelpful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, buffFilter)) then
-						buffs.all[data.auraInstanceID] = processData(buffs, unit, data)
-
-						if((buffs.FilterAura or FilterAura) (buffs, unit, data)) then
-							buffs.active[data.auraInstanceID] = true
 							buffsChanged = true
 						end
 					end
@@ -702,6 +709,19 @@ local function UpdateAuras(self, event, unit, updateInfo)
 				end
 			end
 		else
+			if(updateInfo.addedAuras) then
+				for _, data in next, updateInfo.addedAuras do
+					if(data.isHarmful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, debuffFilter)) then
+						debuffs.all[data.auraInstanceID] = processData(debuffs, unit, data)
+
+						if((debuffs.FilterAura or FilterAura) (debuffs, unit, data)) then
+							debuffs.active[data.auraInstanceID] = true
+							debuffsChanged = true
+						end
+					end
+				end
+			end
+
 			if(updateInfo.updatedAuraInstanceIDs) then
 				for _, auraInstanceID in next, updateInfo.updatedAuraInstanceIDs do
 					if(debuffs.all[auraInstanceID]) then
@@ -722,19 +742,6 @@ local function UpdateAuras(self, event, unit, updateInfo)
 
 						if(debuffs.active[auraInstanceID]) then
 							debuffs.active[auraInstanceID] = nil
-							debuffsChanged = true
-						end
-					end
-				end
-			end
-
-			if(updateInfo.addedAuras) then
-				for _, data in next, updateInfo.addedAuras do
-					if(data.isHarmful and not C_UnitAuras.IsAuraFilteredOutByInstanceID(unit, data.auraInstanceID, debuffFilter)) then
-						debuffs.all[data.auraInstanceID] = processData(debuffs, unit, data)
-
-						if((debuffs.FilterAura or FilterAura) (debuffs, unit, data)) then
-							debuffs.active[data.auraInstanceID] = true
 							debuffsChanged = true
 						end
 					end
