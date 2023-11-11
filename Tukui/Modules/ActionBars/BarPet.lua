@@ -110,10 +110,6 @@ function ActionBars:CreatePetBar()
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
 	self:RegisterEvent("PLAYER_MOUNT_DISPLAY_CHANGED")
 	self:SetScript("OnEvent", function(self, event, ...)
-		if event == "PET_BAR_UPDATE_COOLDOWN" then
-			self:UpdatePetBarCooldownText()
-		end
-			
 		self:UpdatePetBar()
 	end)
 	
