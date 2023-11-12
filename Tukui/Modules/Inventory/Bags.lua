@@ -1512,12 +1512,6 @@ function Bags:Enable()
 		_G["ContainerFrame"..i]:EnableMouse(false)
 	end
 
-	-- Add Text Cooldowns Timer
-	if not T.Retail then
-		hooksecurefunc("ContainerFrame_UpdateCooldown", Bags.UpdateCooldown)
-		hooksecurefunc("BankFrame_UpdateCooldown", Bags.UpdateCooldown)
-	end
-
 	if T.Retail then
 		-- Always set this to true
 		SetCVar("expandBagBar", true)
