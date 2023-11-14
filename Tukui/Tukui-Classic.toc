@@ -1,7 +1,7 @@
 ## Interface: 11404
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.40
+## Version: 20.41
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase
