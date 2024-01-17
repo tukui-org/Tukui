@@ -13,7 +13,6 @@ function ActionBars:SkinButton(button)
 	local Highlight = Button.Highlight
 	local IconMask = Button.IconMask
 	local SlotArt = Button.SlotArt
-	local RightDivider = Button.RightDivider
 	local KeybindTex = Button.QuickKeybindHighlightTexture
 	local Icon = _G[Name.."Icon"]
 	local Count = _G[Name.."Count"]
@@ -115,7 +114,6 @@ function ActionBars:SkinButton(button)
 			--Highlight:SetAlpha(0)
 			IconMask:SetAlpha(0)
 			SlotArt:SetAlpha(0)
-			RightDivider:SetAlpha(0)
 		end
 
 		Button:StyleButton()
