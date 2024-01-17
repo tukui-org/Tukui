@@ -78,9 +78,12 @@ local MAX_RAID_MEMBERS = MAX_RAID_MEMBERS
 local MAX_PARTY_MEMBERS = MAX_PARTY_MEMBERS
 local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
 
-local build = floor(select(4,GetBuildInfo())/10000)
-local isTBC = build == 2
-local isWrath = build == 3
+-- local build = floor(select(4,GetBuildInfo())/10000)
+-- local isTBC = build == 2
+-- local isWrath = build == 3
+local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+local isTBC = (WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
+local isWrath = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 
 local spellRankTableData = {
 	[1] = { 774, 8936, 5185, 740, 635, 19750, 139, 2060, 596, 2061, 2054, 2050, 1064, 331, 8004, 136, 755, 689, 746, 33763, 32546, 37563, 48438, 61295, 51945, 50464, 47757 },
@@ -99,6 +102,11 @@ local spellRankTableData = {
 	[14] = { 49273, 48377, 48440, 48068, 45544 },
 	[15] = { 48378, 48441 },
 }
+
+-- Season of Disvocery
+if isClassic then
+	table.insert(spellRankTableData[1], 408124)
+end
 
 local SpellIDToRank = {}
 for rankIndex, spellIDTable in pairs(spellRankTableData) do
@@ -838,6 +846,10 @@ if( playerClass == "DRUID" ) then
 		local TreeofLife = GetSpellInfo(33891) or "Tree of Life"
 
 		hotData[Regrowth] = { interval = 3, ticks = 7, coeff = (isTBC or isWrath) and 0.7 or 0.5, levels = { 12, 18, 24, 30, 36, 42, 48, 54, 60, 65, 71, 77 }, averages = { 98, 175, 259, 343, 427, 546, 686, 861, 1064, 1274, 1792, 2345 }}
+		if isClassic then
+			-- Season Of Discovery Runes
+			hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.52, dhCoeff = 0.34335, levels = {1}, averages = {29}, bomb = {59}}
+		end
 		if isWrath then
 			hotData[Rejuvenation] = { interval = 3, levels = { 4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 60, 63, 69, 75, 80 }, averages = { 40, 70, 145, 225, 305, 380, 485, 610, 760, 945, 1110, 1165, 1325, 1490, 1690 }}
 			hotData[Lifebloom] = {interval = 1, ticks = 7, coeff = 0.66626, dhCoeff = 0.517928287, levels = {64, 72, 80}, averages = {224, 287, 371}, bomb = {480, 616, 776}}
