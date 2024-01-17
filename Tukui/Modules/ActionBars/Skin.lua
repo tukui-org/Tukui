@@ -113,9 +113,9 @@ function ActionBars:SkinButton(button)
 		
 		if T.Retail then
 			--Highlight:SetAlpha(0)
-			IconMask:SetAlpha(0)
-			SlotArt:SetAlpha(0)
-			RightDivider:SetAlpha(0)
+			if (IconMask) then IconMask:SetAlpha(0) end
+			if (SlotArt) then SlotArt:SetAlpha(0) end
+			if (RightDivider) then RightDivider:SetAlpha(0) end
 		end
 
 		Button:StyleButton()
