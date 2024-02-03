@@ -669,7 +669,7 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 		end
 
 		-- Workaround to allow right-click destroy totem
-		if not T.Retail then -- FIX ME ON RETAIL
+		if not (T.Retail or T.Classic) then -- FIX ME ON RETAIL
 			for i = 1, 4 do
 				local BlizzardTotem = _G["TotemFrameTotem"..i]
 				local Cooldown = _G["TotemFrameTotem"..i.."IconCooldown"]
