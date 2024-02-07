@@ -1171,6 +1171,7 @@ local ColorOnMouseUp = function(self, button)
 				CPF.swatchFunc = function() end
 			else
 				CPF:SetColorRGB(CurrentR, CurrentG, CurrentB)
+				CPF.swatchFunc = function() end
 			end
 
 			CPF.Group = self.Group
