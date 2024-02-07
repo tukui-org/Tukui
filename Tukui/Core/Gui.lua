@@ -6,6 +6,8 @@ local T, C, L = unpack((select(2, ...)))
 
 --[[ TODO after classic release in this file ]]
 
+local Noop = function() end
+
 local sort = table.sort
 local tinsert = table.insert
 local tremove = table.remove
@@ -1164,11 +1166,12 @@ local ColorOnMouseUp = function(self, button)
 	if (button == "LeftButton") then
 		local ShowColorPickerFrame = function(r, g, b, func, cancel)
 			HideUIPanel(CPF)
+
 			CPF.Button = self
+			CPF.swatchFunc = Noop
 
 			if T.Retail then
 				CPF.Content.ColorPicker:SetColorRGB(CurrentR, CurrentG, CurrentB)
-				CPF.swatchFunc = function() end
 			else
 				CPF:SetColorRGB(CurrentR, CurrentG, CurrentB)
 			end
