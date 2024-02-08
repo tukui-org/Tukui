@@ -674,20 +674,15 @@ function Bags:SlotUpdate(id, button)
 		return
 	end
 
-	local _, Rarity, ItemLink, ItemID, IsBound, StackCount
+	local Rarity, ItemLink, ItemID, IsBound, StackCount
+	local Table = GetContainerItemInfo(id, button:GetID())
 
-	if (T.Retail and T.TocVersion >= 100002) or (T.WotLK) then
-		local Table = GetContainerItemInfo(id, button:GetID())
-
-		if Table then
-			Rarity = Table.quality
-			ItemLink = Table.hyperlink
-			ItemID = Table.itemID
-			IsBound = Table.isBound
-			StackCount = Table.stackCount
-		end
-	else
-		_, _, _, Rarity, _, _, ItemLink, _, _, ItemID, IsBound = GetContainerItemInfo(id, button:GetID())
+	if Table then
+		Rarity = Table.quality
+		ItemLink = Table.hyperlink
+		ItemID = Table.itemID
+		IsBound = Table.isBound
+		StackCount = Table.stackCount
 	end
 
 	local QuestItem = false
@@ -706,7 +701,7 @@ function Bags:SlotUpdate(id, button)
 	button.ItemID = ItemID
 
 	if ItemLink then
-		local itemName, itemString, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture = GetItemInfo(ItemLink)
+		local _, itemString, _, _, _, itemType, _, _, _, itemTexture = GetItemInfo(ItemLink)
 
 		if itemString then
 			if (itemType == TRANSMOG_SOURCE_2) then
