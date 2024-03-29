@@ -3,7 +3,7 @@ name: Release pipeline
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -14,12 +14,9 @@ jobs:
     steps:
       - name: Clone project
         uses: actions/checkout@v4
-      - name: Prepare environment
-        run: |
-          echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
       - name: Prepare package
         run: |
           zip -9 -r tukui-$VERSION.zip Tukui
       - name: Publish package
         run: |
-          curl https://api.tukui.org/v1/upload/tukui-$VERSION.zip --upload-file tukui-$VERSION.zip -H "X-Tukui-Key: $DEPLOY_KEY" -H "Content-Type: application/zip"
+          curl https://api.tukui.org/v1/upload/tukui-$GITHUB_REF_NAME.zip --upload-file tukui-$GITHUB_REF_NAME.zip -H "X-Tukui-Key: $DEPLOY_KEY" -H "Content-Type: application/zip"
