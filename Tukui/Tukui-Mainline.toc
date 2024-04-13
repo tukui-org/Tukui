@@ -1,7 +1,7 @@
 ## Interface: 100205
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: 20.41 
+## Version: @project-version@ 
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase, TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory
@@ -18,8 +18,10 @@ Core\Init.lua
 Config\Settings.lua
 
 ## Libs
-Libs\LibAnim\LibAnim.lua
+Libs\TaintLess\TaintLess.xml
 Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibAnim\LibAnim.lua
 Libs\LibDeflate\LibDeflate.lua
 Libs\LibSerialize\LibSerialize.lua
 Libs\oUF_Retail\init.lua
@@ -73,7 +75,6 @@ Libs\oUF_SoulShards\oUF_SoulShards.lua
 Libs\oUF_HolyPowerBar\oUF_HolyPowerBar.lua
 Libs\oUF_QuestIcon\oUF_QuestIcon.lua
 Libs\oUF_AuraTrack\oUF_AuraTrack.lua
-Libs\TaintLess\TaintLess.xml
 
 ## Medias
 Medias\Medias.lua

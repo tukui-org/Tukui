@@ -1,9 +1,6 @@
 local parent, ns = ...
 local global = C_AddOns.GetAddOnMetadata(parent, 'X-oUF')
-local _VERSION = '@project-version@'
-if(_VERSION:find('project%-version')) then
-	_VERSION = 'devel'
-end
+_VERSION = 'devel'
 
 local oUF = ns.oUF
 local Private = oUF.Private

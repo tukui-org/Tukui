@@ -1,0 +1,31 @@
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode
+
+# Libraries
+Tukui/Libs/*
+!Tukui/Libs/LibAnim
+!Tukui/Libs/LibDeflate
+!Tukui/Libs/LibHealComm-4.0
+!Tukui/Libs/LibSerialize
+!Tukui/Libs/oUF
+!Tukui/Libs/oUF_ArcaneCharge
+!Tukui/Libs/oUF_Atonement
+!Tukui/Libs/oUF_AuraBars
+!Tukui/Libs/oUF_AuraTrack
+!Tukui/Libs/oUF_CombatFeedback
+!Tukui/Libs/oUF_ComboPointsBar
+!Tukui/Libs/oUF_DruidMana
+!Tukui/Libs/oUF_EnergyManaRegen
+!Tukui/Libs/oUF_FloatingCombatFeedback
+!Tukui/Libs/oUF_HarmonyBar
+!Tukui/Libs/oUF_HolyPowerBar
+!Tukui/Libs/oUF_QuestIcon
+!Tukui/Libs/oUF_RaidDebuffs
+!Tukui/Libs/oUF_Retail
+!Tukui/Libs/oUF_SoulShards
+!Tukui/Libs/oUF_Trinkets
+
+# Pipelines
+.release

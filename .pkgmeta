@@ -1,0 +1,31 @@
+package-as: Tukui
+
+externals:
+  Tukui/Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+  Tukui/Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
+  Tukui/Libs/SortBags: https://github.com/shirsig/SortBags
+  Tukui/Libs/SortBags_Vanilla: https://github.com/shirsig/SortBags-vanilla
+  Tukui/Libs/TaintLess:
+    url: https://www.townlong-yak.com/addons.git/taintless
+    commit: default
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - "*.md"
+  - "*.textile"
+  - Tukui/Libs/LibStub/tests
+
+plain-copy:
+  - Tukui/Config
+  - Tukui/Core
+  - Tukui/Licenses
+  - Tukui/Locales
+  - Tukui/Medias
+  - Tukui/Modules
+  - Tukui/Themes
+
+move-folders:
+  Tukui/Tukui: Tukui
