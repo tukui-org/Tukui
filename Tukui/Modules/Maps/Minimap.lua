@@ -73,7 +73,7 @@ function Minimap:OnMouseClick(button)
 
 	if (button == "RightButton") then
 		if T.Retail then
-			ToggleDropDownMenu(1, nil, MinimapCluster.Tracking.DropDown, MinimapCluster.Tracking, 8, 5)
+			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, MinimapCluster.TrackingFrame, 8, 5)
 		else
 			if MiniMapTrackingDropDown then
 				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
