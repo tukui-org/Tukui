@@ -148,7 +148,7 @@ function MicroMenu:GameMenu()
 
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, T.Classic and 298 or T.WotLK and 372 or 408)
+	MicroMenu:SetSize(250, T.Classic and 298 or T.WotLK and 372 or T.Cata and 438 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)

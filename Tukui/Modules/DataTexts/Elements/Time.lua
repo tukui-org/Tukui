@@ -106,7 +106,7 @@ local OnMouseUp = function(button, click)
 			return
 		end
 
-		if T.Retail or T.WotLK then
+		if T.Retail or T.WotLK or T.Cata then
 			GameTimeFrame_OnClick()
 		else
 			Stopwatch_Toggle()

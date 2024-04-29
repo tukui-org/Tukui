@@ -181,7 +181,11 @@ function Chat:StyleFrame(frame)
 		_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 		_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-		_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
+		if T.Cata then
+			_G[format("ChatFrame%sMinimizeButton", ID)]:Kill()
+		else
+			_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
+		end
 		_G[format("ChatFrame%sButtonFrame", ID)]:Kill()
 
 		_G[format("ChatFrame%sEditBoxLeft", ID)]:Kill()
@@ -340,7 +344,7 @@ function Chat:Reset()
 	FCF_SetLocked(ChatFrame5, 1)
 	FCF_DockFrame(ChatFrame5)
 
-	if T.Retail or T.WotLK then
+	if T.Retail or T.WotLK or T.Cata then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 		FCF_SetLocked(ChatFrame6, 1)
 		FCF_DockFrame(ChatFrame6)
@@ -366,7 +370,7 @@ function Chat:Reset()
 
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
-		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) or (T.Classic and i ~= 2 and i ~= 6) or (T.WotLK and i ~= 2 and i ~= 3) then
+		if (T.Retail and i ~= 2 and i ~= 3) or (T.BCC and i ~= 2 and i ~= 6) or (T.Classic and i ~= 2 and i ~= 6) or (T.WotLK and i ~= 2 and i ~= 3) or (T.Cata and i ~= 2 and i ~= 3) then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
@@ -447,7 +451,7 @@ function Chat:Reset()
 	-- ChatFrame 6 Setup --
 	-----------------------
 
-	if T.Retail or T.WotLK then
+	if T.Retail or T.WotLK or T.Cata then
 		for i = 1, #Channels do
 			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
 			ChatFrame_AddChannel(ChatFrame6, Channels[i])

@@ -89,7 +89,7 @@ function ActionBars:SkinButton(button)
 				Button:UpdateState(Button)
 			end
 			
-			if (T.Retail) or (T.Classic and T.WoWBuild >= 51146) or (T.WotLK and T.WoWBuild >= 46917) then
+			if (T.Retail) or (T.Classic and T.WoWBuild >= 51146) or (T.WotLK and T.WoWBuild >= 46917) or (T.Cata) then
 				Normal:SetParent(T.Hider)
 			end
 		end
@@ -200,7 +200,7 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	Flash:SetTexture("")
 
 	if Normal then
-		if (T.Retail) or (T.WotLK and T.WoWBuild >= 46917) then
+		if (T.Retail) or (T.WotLK and T.WoWBuild >= 46917) or (T.Cata) then
 			Normal:SetParent(T.Hider)
 		end
 		

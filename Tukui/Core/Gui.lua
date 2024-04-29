@@ -92,6 +92,8 @@ local CheckClient = function(self)
 
 	if Client == "RETAIL" and T.Retail then
 		return true
+	elseif Client == "CATA" and T.Cata then
+		return true
 	elseif Client == "WOTLK" and T.WotLK then
 		return true
 	elseif Client == "BCC" and T.BCC then

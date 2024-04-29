@@ -151,7 +151,7 @@ function UnitFrames:Arena()
 		self.Debuffs = Debuffs
 	end
 
-	if T.BCC or T.WotLK then
+	if T.BCC or T.WotLK or T.Cata then
 		local Trinket = CreateFrame("Frame", nil, self)
 		Trinket:SetSize(35, 35)
 		Trinket:SetPoint("BOTTOMRIGHT", self, "BOTTOMLEFT", -6, 0)

@@ -4,7 +4,9 @@ externals:
   Tukui/Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
   Tukui/Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
   Tukui/Libs/SortBags: https://github.com/shirsig/SortBags
-  Tukui/Libs/SortBags_Vanilla: https://github.com/shirsig/SortBags-vanilla
+  Tukui/Libs/SortBags_Vanilla:
+    url: https://github.com/shirsig/SortBags
+    branch: classic-era
   Tukui/Libs/TaintLess:
     url: https://www.townlong-yak.com/addons.git/taintless
     commit: default

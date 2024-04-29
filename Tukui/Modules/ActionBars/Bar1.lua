@@ -8,7 +8,7 @@ function ActionBars:CreateBar1()
 	local Movers = T["Movers"]
 	local Size = C.ActionBars.NormalButtonSize
 	local Spacing = C.ActionBars.ButtonSpacing
-	local Druid, Rogue, Warrior, Priest = "", "", "", ""
+	local Druid, Rogue, Warrior, Priest, Warlock = "", "", "", "", ""
 	local ButtonsPerRow = C.ActionBars.Bar1ButtonsPerRow
 	local NumButtons = C.ActionBars.Bar1NumButtons
 	local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex and GetVehicleBarIndex()) or ""
@@ -36,7 +36,7 @@ function ActionBars:CreateBar1()
 	end
 
 	if (C.ActionBars.SwitchBarOnStance) then
-		if T.WotLK then
+		if T.WotLK or T.Cata then
 			Rogue = "[bonusbar:1] 7; [bonusbar:2] 8;"
 		else
 			Rogue = "[bonusbar:1] 7;"
@@ -50,6 +50,9 @@ function ActionBars:CreateBar1()
 		
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
+		if T.Cata then
+			Warlock = "[form:1] 7;"
+		end
 	end
 	
 	local DefaultPaging
@@ -65,6 +68,7 @@ function ActionBars:CreateBar1()
 		["ROGUE"] = Rogue,
 		["WARRIOR"] = Warrior,
 		["PRIEST"] = Priest,
+		["WARLOCK"] = Warlock,
 		["DEFAULT"] = DefaultPaging,
 	}
 
