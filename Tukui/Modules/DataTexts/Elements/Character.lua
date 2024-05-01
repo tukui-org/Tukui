@@ -96,7 +96,7 @@ local OnEnter = function(self)
 		GameTooltip:AddLine(" ")
 	end
 
-	if T.BCC or T.WotLK then
+	if T.Cata then
 		local IsAlternativeTooltip = IsShiftKeyDown() or IsAltKeyDown()
 
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)

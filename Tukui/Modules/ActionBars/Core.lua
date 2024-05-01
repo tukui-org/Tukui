@@ -475,7 +475,7 @@ function ActionBars:AddHooks()
 		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
 	end
 
-	if T.WotLK and C.ActionBars.MultiCastBar then
+	if T.Cata and C.ActionBars.MultiCastBar then
 		-- MultiCastActionBarFrame is clearly coded poorly by Blizzard, it taint like crazy
 		-- Disabled for now until a fix is found
 		

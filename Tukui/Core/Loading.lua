@@ -270,7 +270,7 @@ function Loading:OnEvent(event)
 		-- restore original stopwatch commands
 		SlashCmdList["STOPWATCH"] = Stopwatch_Toggle
 	elseif (event == "PLAYER_ENTERING_WORLD") then
-		if not T.WotLK and not T.Cata then
+		if not T.Cata then
 			T["Miscellaneous"]["ObjectiveTracker"]:Enable()
 		end
 	elseif (event == "VARIABLES_LOADED") then
