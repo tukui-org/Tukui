@@ -23,7 +23,7 @@ function Merchant:SellJunk()
 				local Mult1 = select(11, GetItemInfo(Link))
 				local Mult2
 				
-				if T.Retail or T.WotLK then
+				if T.Retail or T.Cata then
 					local Table = GetContainerItemInfo(Bag, Slot)
 					
 					if Table and Table.stackCount then

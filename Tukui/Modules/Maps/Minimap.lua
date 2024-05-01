@@ -215,11 +215,8 @@ function Minimap:StyleMinimap()
 			end
 		end
 
-		if T.BCC or T.WotLK then
+		if T.Cata then
 			if C.Maps.MinimapTracking then
-				if T.BCC then
-					MiniMapTrackingBorder:Kill()
-				end
 				
 				MiniMapTracking:SetParent(Minimap)
 				MiniMapTracking:ClearAllPoints()
@@ -291,7 +288,7 @@ function Minimap:EnableMouseWheelZoom()
 		if (delta > 0) then
 			ZoomIn:Click()
 		elseif (delta < 0) then
-			if T.Retail or T.WotLK or T.Cata then
+			if T.Retail or T.Cata then
 				if Minimap:GetZoom() ~= 0 then
 					ZoomOut:Click()
 				end
@@ -423,7 +420,7 @@ function Minimap:UpdateZone()
 end
 
 function Minimap:EnableMouseOver()
-	local Tracking = (T.Retail or T.WotLK or T.Cata) and MiniMapTrackingButton or MiniMapTracking
+	local Tracking = (T.Retail or T.Cata) and MiniMapTrackingButton or MiniMapTracking
 	local TrackingIcon = MiniMapTrackingIcon
 
 	self:HookScript("OnEnter", function(self)
@@ -441,7 +438,7 @@ function Minimap:EnableMouseOver()
 			Minimap.MinimapCoords.Anim:Play()
 		end
 
-		if T.BCC or T.WotLK then
+		if T.Cata then
 			Tracking:SetAlpha(1)
 		end
 	end)
@@ -462,7 +459,7 @@ function Minimap:EnableMouseOver()
 		end
 	end)
 
-	if T.BCC or T.WotLK then
+	if T.Cata then
 		Tracking:SetScript("OnEnter", function(self)
 			if Minimap.Highlight and Minimap.Highlight.Animation:IsPlaying() then
 				return
@@ -507,7 +504,7 @@ function Minimap:SizeMinimap()
 end
 
 function Minimap:TaxiExitOnEvent(event)
-	if (T.Retail or T.WotLK or T.Cata) and CanExitVehicle() then
+	if (T.Retail or T.Cata) and CanExitVehicle() then
 		if (UnitOnTaxi("player")) then
 			self.Text:SetText("|cffFF0000" .. TAXI_CANCEL .. "|r")
 		else
@@ -528,7 +525,7 @@ function Minimap:TaxiExitOnClick()
 	if (UnitOnTaxi("player")) then
 		TaxiRequestEarlyLanding()
 	else
-		if T.Retail or T.WotLK or T.Cata then
+		if T.Retail or T.Cata then
 			VehicleExit()
 		end
 	end

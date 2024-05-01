@@ -437,7 +437,7 @@ function UnitFrames:Player()
 		T.Movers:RegisterFrame(ScrollingCombatText, "Scrolling Combat Text")
 	end
 
-	if (T.Classic or T.BCC) and C.UnitFrames.PowerTick then
+	if T.Classic and C.UnitFrames.PowerTick then
 		local EnergyManaRegen = CreateFrame("StatusBar", nil, Power)
 
 		EnergyManaRegen:SetFrameLevel(Power:GetFrameLevel() + 3)

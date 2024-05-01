@@ -520,25 +520,6 @@ function Bags:CreateContainer(storagetype, ...)
 			Sort()
 		end)
 
-		if T.BCC or T.WotLK then
-			Keys:SetSize(16, 16)
-			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
-			Keys:CreateShadow()
-			Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
-			Keys.Texture:SetSize(16, 16)
-			Keys.Texture:SetPoint("CENTER")
-			Keys.Texture:SetTexture("Interface\\ContainerFrame\\KeyRing-Bag-Icon")
-			Keys:SetScript("OnEnter", GameTooltip_Hide)
-			Keys:SetScript("OnClick", function()
-				if not IsBagOpen(KEYRING_CONTAINER) then
-					ToggleBag(KEYRING_CONTAINER)
-				else
-					ToggleAllBags()
-					ToggleAllBags()
-				end
-			end)
-		end
-
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
 		Container.SortButton = Sort
@@ -1415,7 +1396,7 @@ function Bags:Enable()
 
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
-		SetInsertItemsLeftToRight(T.WotLK and false or true)
+		SetInsertItemsLeftToRight(T.Cata and false or true)
 	else
 		SetSortBagsRightToLeft(true)
 		SetInsertItemsLeftToRight(false)
@@ -1523,11 +1504,6 @@ function Bags:Enable()
 		self:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_STARTED")
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
-	end
-
-	--TEMP FIX for WotLK
-	if T.WotLK then
-		ContainerFrame1.SetHeight = function() return end
 	end
 
 	if T.Classic then

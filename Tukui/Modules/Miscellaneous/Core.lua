@@ -20,7 +20,7 @@ function Miscellaneous:Enable()
 	Miscellaneous["ItemLevel"]:Enable()
 	Miscellaneous["Alerts"]:Enable()
 	
-	if T.Retail or T.WotLK or T.Cata then
+	if T.Retail or T.Cata then
 		Miscellaneous["VehicleIndicator"]:Enable()
 	end
 
