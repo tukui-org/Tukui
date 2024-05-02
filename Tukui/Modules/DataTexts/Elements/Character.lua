@@ -99,76 +99,101 @@ local OnEnter = function(self)
 	if T.Cata then
 		local IsAlternativeTooltip = IsShiftKeyDown() or IsAltKeyDown()
 
-		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
-		GameTooltip:AddLine(" ")
+		-- GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
+		-- GameTooltip:AddLine(" ")
+		-- for i = 1, 7 do
+		-- 	local hasStat = true
+		-- 	local j = 1
+
+		-- 	while hasStat do
+		-- 		local Name = _G["CharacterStatsPaneCategory" .. i .. "Stat" .. j .. "Label"]
+		-- 		local Value = _G["CharacterStatsPaneCategory" .. i .. "Stat" .. j .. "StatText"]
+		-- 		local StatName, StatValue
+
+		-- 		if Name and Name:GetText() then
+		-- 			StatName = "|cffff8000" .. Name:GetText() .. "|r"
+		-- 		end
+
+		-- 		if Value and Value:GetText() then
+		-- 			StatValue = "|cffffffff" .. Value:GetText() .. "|r"
+		-- 		end
+		-- 		if StatName and StatValue then
+		-- 			GameTooltip:AddDoubleLine("|CF00FFF00" .. StatName .. "|r", "|CFFFFFFFF" .. StatValue .. "|r")
+		-- 		else
+		-- 			hasStat = false
+		-- 		end
+		-- 		j = j + 1
+		-- 	end
+		-- 	GameTooltip:AddLine(" ")
+		-- end
 
 		-- Display left stats
-		for _, Frame in pairs(LeftTexts) do
-			local Name = _G[Frame.."Label"]
-			local Value = _G[Frame.."StatText"]
-			local Tooltip = _G[Frame].tooltip2
-			local StatName, StatValue
+		-- for _, Frame in pairs(LeftTexts) do
+		-- 	local Name = _G[Frame.."Label"]
+		-- 	local Value = _G[Frame.."StatText"]
+		-- 	local Tooltip = _G[Frame].tooltip2
+		-- 	local StatName, StatValue
 
-			if Name:GetText() then
-				StatName = "|cffff8000"..Name:GetText().."|r"
-			end
+		-- 	if Name:GetText() then
+		-- 		StatName = "|cffff8000"..Name:GetText().."|r"
+		-- 	end
 
-			if Value:GetText() then
-				StatValue = "|cffffffff"..Value:GetText().."|r"
-			end
+		-- 	if Value:GetText() then
+		-- 		StatValue = "|cffffffff"..Value:GetText().."|r"
+		-- 	end
 
-			if StatName and StatValue then
-				if IsAlternativeTooltip then
-					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
-				else
-					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
-				end
+		-- 	if StatName and StatValue then
+		-- 		if IsAlternativeTooltip then
+		-- 			GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+		-- 		else
+		-- 			GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+		-- 		end
 
-				if Tooltip and IsAlternativeTooltip then
-					-- Remove double enter, for gaining tooltip space
-					Tooltip = string.gsub(Tooltip, "\n\n", " ")
+		-- 		if Tooltip and IsAlternativeTooltip then
+		-- 			-- Remove double enter, for gaining tooltip space
+		-- 			Tooltip = string.gsub(Tooltip, "\n\n", " ")
 
-					GameTooltip:AddLine(Tooltip, .75, .75, .75)
-					GameTooltip:AddLine(" ")
-				end
-			end
-		end
+		-- 			GameTooltip:AddLine(Tooltip, .75, .75, .75)
+		-- 			GameTooltip:AddLine(" ")
+		-- 		end
+		-- 	end
+		-- end
 
-		-- Display right stats
-		for _, Frame in pairs(RightTexts) do
-			local Name = _G[Frame.."Label"]
-			local Value = _G[Frame.."StatText"]
-			local Tooltip = _G[Frame].tooltip2
-			local StatName, StatValue
+		-- -- Display right stats
+		-- for _, Frame in pairs(RightTexts) do
+		-- 	local Name = _G[Frame.."Label"]
+		-- 	local Value = _G[Frame.."StatText"]
+		-- 	local Tooltip = _G[Frame].tooltip2
+		-- 	local StatName, StatValue
 
-			if Name:GetText() then
-				StatName = "|cffff8000"..Name:GetText().."|r"
-			end
+		-- 	if Name:GetText() then
+		-- 		StatName = "|cffff8000"..Name:GetText().."|r"
+		-- 	end
 
-			if Value:GetText() then
-				StatValue = "|cffffffff"..Value:GetText().."|r"
-			end
+		-- 	if Value:GetText() then
+		-- 		StatValue = "|cffffffff"..Value:GetText().."|r"
+		-- 	end
 
-			if StatName and StatValue then
-				if IsAlternativeTooltip then
-					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
-				else
-					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
-				end
+		-- 	if StatName and StatValue then
+		-- 		if IsAlternativeTooltip then
+		-- 			GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+		-- 		else
+		-- 			GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+		-- 		end
 
-				if Tooltip and IsAlternativeTooltip then
-					-- Remove double enter, for gaining tooltip space
-					Tooltip = string.gsub(Tooltip, "\n\n", "\n")
+		-- 		if Tooltip and IsAlternativeTooltip then
+		-- 			-- Remove double enter, for gaining tooltip space
+		-- 			Tooltip = string.gsub(Tooltip, "\n\n", "\n")
 
-					GameTooltip:AddLine(Tooltip, .75, .75, .75)
-					GameTooltip:AddLine(" ")
-				end
-			end
-		end
+		-- 			GameTooltip:AddLine(Tooltip, .75, .75, .75)
+		-- 			GameTooltip:AddLine(" ")
+		-- 		end
+		-- 	end
+		-- end
 
-		if not IsShiftKeyDown() then
-			GameTooltip:AddLine(" ")
-		end
+		-- if not IsShiftKeyDown() then
+		-- 	GameTooltip:AddLine(" ")
+		-- end
 	end
 
 	if T.Classic then

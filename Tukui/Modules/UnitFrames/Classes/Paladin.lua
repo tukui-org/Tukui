@@ -8,12 +8,14 @@ if (Class ~= "PALADIN") then
 end
 
 UnitFrames.AddClassFeatures["PALADIN"] = function(self)
-	if not T.Retail or not C.UnitFrames.ClassBar then
+	if T.Classic or not C.UnitFrames.ClassBar then
 		return
 	end
 
 	local Bar = CreateFrame("Frame", self:GetName().."HolyPower", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+	local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
+	local barWidth = 250 / numMax
 
 	-- Holy Power
 	Bar:SetFrameLevel(self.Health:GetFrameLevel() + 1)
@@ -24,17 +26,17 @@ UnitFrames.AddClassFeatures["PALADIN"] = function(self)
 	Bar:CreateBackdrop()
 	Bar.Backdrop:SetOutside()
 
-	for i = 1, 5 do
+	for i = 1, numMax do
 		Bar[i] = CreateFrame("StatusBar", self:GetName().."HolyPower"..i, Bar)
 		Bar[i]:SetHeight(6)
 		Bar[i]:SetStatusBarTexture(PowerTexture)
 		Bar[i]:SetStatusBarColor(0.89, 0.88, 0.06)
 
 		if i == 1 then
-			Bar[i]:SetWidth(50)
+			Bar[i]:SetWidth(barWidth)
 			Bar[i]:SetPoint("LEFT", Bar, "LEFT", 0, 0)
 		else
-			Bar[i]:SetWidth(49)
+			Bar[i]:SetWidth(barWidth - 1)
 			Bar[i]:SetPoint("LEFT", Bar[i-1], "RIGHT", 1, 0)
 		end
 	end
