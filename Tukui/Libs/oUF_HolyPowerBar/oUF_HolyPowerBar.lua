@@ -40,13 +40,14 @@ end
 
 local function Enable(self)
 	local hp = self.HolyPower
+	local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
 	if(hp) then
 		hp.__owner = self
 		hp.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 
-		for i = 1, 5 do
+		for i = 1, numMax do
 			if not hp[i]:GetStatusBarTexture() then
 				hp[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
