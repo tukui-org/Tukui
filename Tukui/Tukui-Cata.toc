@@ -68,6 +68,7 @@ Libs\oUF_AuraBars\oUF_AuraBars.lua
 Libs\oUF_AuraTrack\oUF_AuraTrack.lua
 Libs\oUF_DruidMana\oUF_DruidMana.lua
 Libs\oUF_HolyPowerBar\oUF_HolyPowerBar.lua
+Libs\oUF_SoulShards\oUF_SoulShards.lua
 Libs\oUF_Trinkets\oUF_Trinkets.lua
 Libs\SortBags\SortBags.lua
 

@@ -40,6 +40,8 @@ end
 
 local function Enable(self)
 	local wsb = self.SoulShards
+	local maxShards = UnitPowerMax("player", Enum.PowerType.SoulShards)
+
 	if(wsb) then
 		wsb.__owner = self
 		wsb.ForceUpdate = ForceUpdate
@@ -47,7 +49,7 @@ local function Enable(self)
 		self:RegisterEvent("UNIT_POWER_UPDATE", Path)
 		self:RegisterEvent("UNIT_DISPLAYPOWER", Path)
 
-		for i = 1, 5 do
+		for i = 1, maxShards do
 			local Point = wsb[i]
 			if not Point:GetStatusBarTexture() then
 				Point:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
