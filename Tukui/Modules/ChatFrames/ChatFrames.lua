@@ -181,7 +181,7 @@ function Chat:StyleFrame(frame)
 		_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 		_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-		if T.Cata then
+		if T.Cata or T.Classic then
 			_G[format("ChatFrame%sMinimizeButton", ID)]:Kill()
 		else
 			_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
@@ -281,7 +281,7 @@ function Chat:SetChatFramePosition()
 			Frame:ClearAllPoints()
 			Frame:SetSize(C.Chat.LeftWidth, C.Chat.LeftHeight - 62)
 			Frame:SetPoint("BOTTOMLEFT", T.DataTexts.Panels.Left, "TOPLEFT", 0, 4)
-			
+
 			if T.Retail then
 				hooksecurefunc(Frame, "SetPoint", Chat.SetChatFrame1Position)
 			end
@@ -465,7 +465,7 @@ function Chat:Reset()
 		ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
 		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
 	end
-	
+
 	Chat.SetChatFramePosition(ChatFrame1)
 end
 
@@ -647,7 +647,7 @@ function Chat:Setup()
 		Tab:SetAlpha(0)
 		Tab:HookScript("OnClick", self.SwitchSpokenDialect)
 		Tab:SetFrameLevel(6)
-		
+
 		if Minimize then
 			Minimize:Kill()
 		end
