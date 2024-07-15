@@ -80,10 +80,10 @@ function MicroMenu:Minimalist()
 		[2] = "SA", -- Spellbook & Abilities
 		[3] = "T", -- Spec & Talents
 		[4] = T.Retail and "A" or T.Cata and "A" or "Q", -- Achievements / QuestLog (nonretail)
-		[5] = T.Retail and "QL" or T.Cata and "QL" or "S", -- Questlog / Social (nonretail)
+		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", -- Questlog / Social (nonretail)
 		[6] = T.Retail and "C" or T.Cata and "GC" or "G", -- Guild & Communities / Group Finder (nonretail)
-		[7] = T.Retail and "G" or T.Cata and "C" or "M", -- Group Finder / Game Menu (nonretail)
-		[8] = T.Retail and "A" or T.Cata and "P" or "H", -- Adventure Guide / Help (nonretail)
+		[7] = T.Retail and "G" or T.Cata and "C" or "MM", -- Group Finder / Game Menu (nonretail)
+		[8] = T.Retail and "A" or T.Cata and "P" or "HR", -- Adventure Guide / Help (nonretail)
 		[9] = T.Cata and "GF" or "C", -- Collections
 		[10] = T.Cata and "DJ" or "M", -- Game Menu
 		[11] = T.Cata and "GM" or "S", -- Shop
@@ -148,6 +148,7 @@ function MicroMenu:GameMenu()
 	if T.Classic then
 		WorldMapMicroButton:SetParent(T.Hider)
 		WorldMapMicroButton:ClearAllPoints()
+		WorldMapMicroButton:SetPoint("BOTTOM", T.Hider, "BOTTOM, 0, -200")
 	end
 
 	MicroMenu:SetFrameStrata("HIGH")
@@ -258,6 +259,10 @@ function MicroMenu:Toggle()
 		self:SetAlpha(1)
 		self:ClearAllPoints()
 		self:SetPoint(A1, A2, A3, A4, A5)
+	end
+	
+	if T.Classic and WorldMapMicroButton then
+		WorldMapMicroButton:Hide()
 	end
 end
 
