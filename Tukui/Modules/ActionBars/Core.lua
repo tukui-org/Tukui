@@ -162,11 +162,10 @@ function ActionBars:UpdatePetBar()
 			end
 		end
 
-		if AutoCastEnabled then
-            -- FIX ME 11
-			--AutoCastShine_AutoCastStart(ShineTexture)
-		else
-			--AutoCastShine_AutoCastStop(ShineTexture)
+		if AutoCastEnabled and AutoCastShine_AutoCastStart then
+			AutoCastShine_AutoCastStart(ShineTexture)
+		elseif AutoCastShine_AutoCastStop then
+			AutoCastShine_AutoCastStop(ShineTexture)
 		end
 
 		if Texture then
