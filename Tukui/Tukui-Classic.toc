@@ -17,6 +17,7 @@ Core\Init.lua
 Config\Settings.lua
 
 ## Libs
+Libs\TaintLess\TaintLess.xml
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\LibAnim\LibAnim.lua
@@ -65,7 +66,7 @@ Libs\oUF_AuraTrack\oUF_AuraTrack.lua
 Libs\oUF_EnergyManaRegen\oUF_EnergyManaRegen.lua
 Libs\oUF_DruidMana\oUF_DruidMana.lua
 Libs\oUF_Trinkets\oUF_Trinkets.lua
-Libs\SortBags\SortBags_Vanilla.lua
+Libs\SortBags_Vanilla\SortBags.lua
 
 ## Medias
 Medias\Medias.lua

@@ -17,6 +17,7 @@ Core\Init.lua
 Config\Settings.lua
 
 ## Libs
+Libs\TaintLess\TaintLess.xml
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\LibAnim\LibAnim.lua
