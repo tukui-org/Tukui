@@ -24,7 +24,7 @@ end
 
 function GameMenu:CreateTukuiMenuButton()
 	local Tukui = CreateFrame("Button", nil, Menu, "GameMenuButtonTemplate")
-	Tukui:SetSize(Logout:GetWidth(), Logout:GetHeight())
+	Tukui:SetSize(144, 21)
 	Tukui:SetPoint("TOPLEFT", Addons, "BOTTOMLEFT", 0, -1)
 	Tukui:SetText("Tukui")
 
@@ -40,7 +40,9 @@ function GameMenu:CreateTukuiMenuButton()
 		HideUIPanel(Menu)
 	end)
 
-	hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", self.AddHooks)
+	if not T.Retail then
+		hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", self.AddHooks)
+	end
 
 	self.Tukui = Tukui
 end

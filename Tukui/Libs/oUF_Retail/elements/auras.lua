@@ -72,6 +72,7 @@ button.auraInstanceID - unique ID for the current aura being tracked by the butt
 
 local _, ns = ...
 local oUF = ns.oUF
+local UnitAuraSlots = (C_UnitAuras and C_UnitAuras.GetAuraSlots) or UnitAuraSlots
 
 local function UpdateTooltip(self)
 	if(GameTooltip:IsForbidden()) then return end

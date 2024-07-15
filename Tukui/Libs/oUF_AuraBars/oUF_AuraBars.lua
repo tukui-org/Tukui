@@ -16,6 +16,20 @@ local UnitAura = UnitAura
 local CreateFrame = CreateFrame
 local UnitIsFriend = UnitIsFriend
 
+local UnitAura = UnitAura
+
+if not UnitAura then
+	UnitAura = function(unitToken, index, filter)
+		local auraData = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter);
+
+		if not auraData then
+			return nil
+		end
+
+		return AuraUtil.UnpackAuraData(auraData)
+	end
+end
+
 local DAY, HOUR, MINUTE = 86400, 3600, 60
 local function FormatTime(s)
 	if s == infinity then s = 0 end

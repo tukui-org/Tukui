@@ -360,6 +360,20 @@ else
 	}
 end
 
+local UnitAura = UnitAura
+
+if not UnitAura then
+	UnitAura = function(unitToken, index, filter)
+		local auraData = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter);
+
+		if not auraData then
+			return nil
+		end
+
+		return AuraUtil.UnpackAuraData(auraData)
+	end
+end
+
 local OnUpdate = function(self)
 	local Time = GetTime()
 	local Timeleft = self.Expiration - Time

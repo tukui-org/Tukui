@@ -2,6 +2,7 @@ local T, C, L = unpack((select(2, ...)))
 
 local Miscellaneous = T["Miscellaneous"]
 local ItemLevel = CreateFrame("Frame")
+local GetItemQualityColor = (C_Item and C_Item.GetItemQualityColor) or GetItemQualityColor
 
 function ItemLevel:Update()
 	if not self then

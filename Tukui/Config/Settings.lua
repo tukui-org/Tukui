@@ -181,12 +181,11 @@ C["Misc"] = {
 	["MicroStyle"] = {
 		["Options"] = {
 			["Minimalist"] = "Minimalist",
-			["Game Menu"] = "Game Menu",
 			["Blizzard"] = "Blizzard",
 			["None"] = "None",
 		},
 
-		["Value"] = "Game Menu",
+		["Value"] = "Minimalist",
 	},
 	["ObjectiveTracker"] = true,
 }

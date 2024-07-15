@@ -188,9 +188,11 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		end
 
 		local Shine = _G[Name.."Shine"]
-		Shine:SetSize(PetSize, PetSize)
-		Shine:ClearAllPoints()
-		Shine:SetPoint("CENTER", Button, 0, 0)
+		if Shine then
+			Shine:SetSize(PetSize, PetSize)
+			Shine:ClearAllPoints()
+			Shine:SetPoint("CENTER", Button, 0, 0)
+		end
 
 		if not T.Retail then
 			Button.Backdrop:SetParent(Button:GetParent())

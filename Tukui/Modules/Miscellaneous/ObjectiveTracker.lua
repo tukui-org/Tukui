@@ -13,7 +13,7 @@ if T.Retail then
 
 	-- WoW Globals
 	local ObjectiveTrackerFrame = ObjectiveTrackerFrame
-	local ObjectiveTrackerFrameHeaderMenuMinimizeButton = ObjectiveTrackerFrame.HeaderMenu.MinimizeButton
+	local ObjectiveTrackerFrameHeaderMenuMinimizeButton = ObjectiveTrackerFrame.HeaderMenu and ObjectiveTrackerFrame.HeaderMenu.MinimizeButton or ObjectiveTrackerFrame.Header.MinimizeButton
 	local SCENARIO_CONTENT_TRACKER_MODULE = SCENARIO_CONTENT_TRACKER_MODULE
 	local QUEST_TRACKER_MODULE = QUEST_TRACKER_MODULE
 	local WORLD_QUEST_TRACKER_MODULE = WORLD_QUEST_TRACKER_MODULE
@@ -479,9 +479,11 @@ if T.Retail then
 			return
 		end
 
-		self:AddHooks()
+		if not T.TWW then self:AddHooks() end
+		
 		self:SetDefaultPosition()
-		self:SkinScenario()
+		
+		if not T.TWW then self:SkinScenario() end
 
 		-- Skin Minimize Button
 		ObjectiveTrackerFrameHeaderMenuMinimizeButton:CreateBackdrop()
@@ -506,9 +508,10 @@ else
 	local Movers = T["Movers"]
 	local Class = select(2, UnitClass("player"))
 	local CustomClassColor = T.Colors.class[Class]
-	local QuestWatchFrame = QuestWatchFrame
+	local QuestWatchFrame = QuestWatchFrame or WatchFrame
 	local Anchor1, Parent, Anchor2, X, Y = "TOPRIGHT", UIParent, "TOPRIGHT", -280, -400
 	local ClickFrames = {}
+	
 
 	function ObjectiveTracker:CreateHolder()
 		local ObjectiveFrameHolder = CreateFrame("Frame", "TukuiObjectiveTracker", UIParent)
@@ -551,10 +554,12 @@ else
 		HeaderText:SetText(CURRENT_QUESTS)
 
 		-- Change font of watched quests
-		for i = 1, 30 do
-			local Line = _G["QuestWatchLine"..i]
+		if not T.Cata then
+			for i = 1, 30 do
+				local Line = _G["QuestWatchLine"..i]
 
-			Line:SetFontObject(Font)
+				Line:SetFontObject(Font)
+			end
 		end
 
 		self.HeaderBar = HeaderBar
@@ -671,7 +676,9 @@ else
 	end
 
 	function ObjectiveTracker:AddHooks()
-		hooksecurefunc("QuestWatch_Update", self.AddQuestClick)
+		if not T.Cata then
+			hooksecurefunc("QuestWatch_Update", self.AddQuestClick)
+		end
 	end
 
 	function ObjectiveTracker:Enable()
@@ -685,6 +692,11 @@ else
 		self:SkinQuestTimer()
 		self:AddToggle()
 		self:AddHooks()
+		
+		-- Maybe it will taint, lets me know
+		if T.Cata then 
+			WatchFrame.ClearAllPoints = function() return end
+		end
 
 		self.IsEnabled = true
 	end

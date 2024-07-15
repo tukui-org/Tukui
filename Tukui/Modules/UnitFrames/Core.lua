@@ -5,10 +5,9 @@ local Noop = function() end
 local UnitFrames = T["UnitFrames"]
 local HealComm, CheckRange
 local myGUID = UnitGUID("player")
-
-if not T.Retail then
-	HealComm = LibStub("LibHealComm-4.0")
-end
+local IsAddOnLoaded = (C_AddOns and C_AddOns.IsAddOnLoaded) or IsAddOnLoaded
+local UnitAura = UnitAura or T.UnitAura
+local GetMouseFocus = GetMouseFocus or GetMouseFoci
 
 -- Lib globals
 local strfind = strfind
@@ -1138,11 +1137,6 @@ function UnitFrames:UpdateRaidDebuffIndicator()
 end
 
 function UnitFrames:Enable()
-	-- Enable HealComm lib
-	if not T.Retail and C.UnitFrames.HealComm then
-		HealComm:PLAYER_LOGIN()
-	end
-
 	-- Security for Nameplates
 	if IsAddOnLoaded("Plater") then
 		-- Force Tukui nameplates OFF if running plater, because causing issues

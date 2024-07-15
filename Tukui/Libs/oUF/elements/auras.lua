@@ -73,6 +73,20 @@ local oUF = ns.oUF
 local VISIBLE = 1
 local HIDDEN = 0
 
+local UnitAura = UnitAura
+
+if not UnitAura then
+	UnitAura = function(unitToken, index, filter)
+		local auraData = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter);
+
+		if not auraData then
+			return nil
+		end
+
+		return AuraUtil.UnpackAuraData(auraData)
+	end
+end
+
 local function UpdateTooltip(self)
 	if(GameTooltip:IsForbidden()) then return end
 

@@ -270,9 +270,7 @@ function Loading:OnEvent(event)
 		-- restore original stopwatch commands
 		SlashCmdList["STOPWATCH"] = Stopwatch_Toggle
 	elseif (event == "PLAYER_ENTERING_WORLD") then
-		if not T.Cata then
-			T["Miscellaneous"]["ObjectiveTracker"]:Enable()
-		end
+		T["Miscellaneous"]["ObjectiveTracker"]:Enable()
 	elseif (event == "VARIABLES_LOADED") then
 		local Locale = GetLocale()
 

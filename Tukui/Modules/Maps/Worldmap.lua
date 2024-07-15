@@ -268,7 +268,9 @@ if T.Retail then
 		-- Always use bigger map on Tukui
 		SetCVar("miniWorldMap", 0)
 
-		WorldMapFrameButton:Kill()
+		if WorldMapFrameButton then
+			WorldMapFrameButton:Kill()
+		end
 
 		if WorldMapFrame:IsMaximized() then
 			WorldMapFrame:UpdateMaximizedSize()

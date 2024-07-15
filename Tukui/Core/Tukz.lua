@@ -1,4 +1,5 @@
 local T, C, L = unpack((select(2, ...)))
+local IsAddOnLoaded = (C_AddOns and C_AddOns.IsAddOnLoaded) or IsAddOnLoaded
 
 -- This is my personal skins and settings for others addons, sorry guys, just for me! :)
 

@@ -15,7 +15,6 @@ function Miscellaneous:Enable()
 	Miscellaneous["AFK"]:Enable()
 	Miscellaneous["MicroMenu"]:Enable()
 	Miscellaneous["Keybinds"]:Enable()
-	Miscellaneous["TimeManager"]:Enable()
 	Miscellaneous["ThreatBar"]:Enable()
 	Miscellaneous["ItemLevel"]:Enable()
 	Miscellaneous["Alerts"]:Enable()
@@ -34,5 +33,10 @@ function Miscellaneous:Enable()
 		Miscellaneous["OrderHall"]:Enable()
 		Miscellaneous["Tutorials"]:Enable()
 		Miscellaneous["RaidUtilities"]:Enable()
+	end
+	
+	-- TWW (UNLOAD)
+	if not T.TWW then
+		Miscellaneous["TimeManager"]:Enable()
 	end
 end

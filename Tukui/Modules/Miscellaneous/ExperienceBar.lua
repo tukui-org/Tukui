@@ -6,6 +6,7 @@ local Menu = CreateFrame("Frame", "TukuiExperienceMenu", UIParent, "UIDropDownMe
 local HideTooltip = GameTooltip_Hide
 local BarSelected
 local Bars = 20
+local GetWatchedFactionInfo = (C_Reputation and C_Reputation.GetWatchedFactionData) or GetWatchedFactionInfo
 
 Experience.NumBars = 2
 Experience.RestedColor = {75 / 255, 175 / 255, 76 / 255}

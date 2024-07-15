@@ -63,10 +63,21 @@ function ActionBars:DisableBlizzard()
 
 			RegisterStateDriver(IconIntroTracker, "visibility", "hide")
 		end
-
+		
 		-- Move Micro Menu
+		if MicroMenuContainer then
+			MicroMenuContainer:SetClampedToScreen(false)
+		end
+		
+		if BagsBar then
+			BagsBar:SetClampedToScreen(false)
+		end
+
 		MicroButtonAndBagsBar:ClearAllPoints()
 		MicroButtonAndBagsBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -200)
+		
+		
+		BagsBar:SetAlpha(0)
 		
 		-- Tracking Bar Manager
 		StatusTrackingBarManager:SetParent(T.Hider)
@@ -152,9 +163,10 @@ function ActionBars:UpdatePetBar()
 		end
 
 		if AutoCastEnabled then
-			AutoCastShine_AutoCastStart(ShineTexture)
+            -- FIX ME 11
+			--AutoCastShine_AutoCastStart(ShineTexture)
 		else
-			AutoCastShine_AutoCastStop(ShineTexture)
+			--AutoCastShine_AutoCastStop(ShineTexture)
 		end
 
 		if Texture then

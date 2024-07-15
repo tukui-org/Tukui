@@ -4,6 +4,7 @@ local Miscellaneous = T["Miscellaneous"]
 local Maps = T["Maps"]
 local Movers = T["Movers"]
 local Interval = 2
+local GetZonePVPInfo = (C_PvP and C_PvP.GetZonePVPInfo) or GetZonePVPInfo
 
 Minimap.ZoneColors = {
 	["friendly"] = {0.1, 1.0, 0.1},
@@ -72,9 +73,7 @@ function Minimap:OnMouseClick(button)
 	local MicroMenu = T.Miscellaneous.MicroMenu
 
 	if (button == "RightButton") then
-		if T.Retail then
-			ToggleDropDownMenu(1, nil, MinimapCluster.TrackingFrame.DropDown, MinimapCluster.TrackingFrame, 8, 5)
-		else
+		if not T.Retail then
 			if MiniMapTrackingDropDown then
 				ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, "MiniMapTracking", 0, 0)
 			end
@@ -605,6 +604,16 @@ function Minimap:AddHooks()
 	end
 end
 
+function Minimap:MoveTracking()
+	if not T.TWW then
+		return
+	end
+	
+	MinimapCluster.Tracking.Button:SetParent(Minimap)
+	MinimapCluster.Tracking.Button:ClearAllPoints()
+	MinimapCluster.Tracking.Button:SetPoint("TOPLEFT", 4, -6)
+end
+
 function Minimap:Enable()
 	self:DisableMinimapElements()
 	self:StyleMinimap()
@@ -615,6 +624,7 @@ function Minimap:Enable()
 	self:AddTaxiEarlyExit()
 	self:AddHooks()
 	self:EnableMouseWheelZoom()
+	self:MoveTracking()
 end
 
 -- Need to be sized as soon as possible, because of LibDBIcon10

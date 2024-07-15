@@ -2,6 +2,10 @@ local T, C, L = unpack((select(2, ...)))
 
 local AddOnCommands = {} -- Let people use /tukui for their mods
 local SelectedProfile = 0
+local IsAddOnLoaded = (C_AddOns and C_AddOns.IsAddOnLoaded) or IsAddOnLoaded
+local GetMouseFocus = GetMouseFocus or GetMouseFoci
+local EnableAddOn = C_AddOns and C_AddOns.EnableAddOn or EnableAddOn
+local DisableAddOn = C_AddOns and C_AddOns.DisableAddOn or DisableAddOn
 
 local Split = function(cmd)
 	if cmd:find("%s") then

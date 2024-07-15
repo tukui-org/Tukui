@@ -9,6 +9,17 @@ assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedd
 
 local UnitBuff = UnitBuff
 
+if not UnitBuff then
+	UnitBuff = function(unitToken, index, filter)
+		local auraData = C_UnitAuras.GetBuffDataByIndex(unitToken, index, filter)
+		if not auraData then
+			return nil
+		end
+
+		return AuraUtil.UnpackAuraData(auraData)
+	end
+end
+
 local function OnUpdate(self, elapsed)
 	local CurrentTime = GetTime()
 	local Timer = self.ExpirationTime - CurrentTime

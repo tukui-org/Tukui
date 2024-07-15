@@ -81,15 +81,6 @@ A default texture will be applied to the Texture widgets if they don't have a te
 local _, ns = ...
 local oUF = ns.oUF
 local myGUID = UnitGUID('player')
-local HealComm, ALL_PENDING_HEALS, ALL_OVERTIME_HEALS, HEAL_TICK_INTERVAL
-
-if not oUF.isRetail then
-	HealComm = LibStub("LibHealComm-4.0")
-
-	ALL_PENDING_HEALS = bit.bor(HealComm.DIRECT_HEALS, HealComm.BOMB_HEALS)
-	ALL_OVERTIME_HEALS = bit.bor(HealComm.CHANNEL_HEALS, HealComm.HOT_HEALS)
-	HEAL_TICK_INTERVAL = 3
-end
 
 local function GetHealAmount(targetGUID, currentTime, casterGUID)
     local nextTickTime = currentTime + HEAL_TICK_INTERVAL
@@ -118,8 +109,8 @@ local function Update(self, event, unit)
 	local guid = UnitGUID(unit)
 	local currentTime = GetTime()
 	local isSmoothedEvent = event == "UNIT_MAXHEALTH" or event == "UNIT_HEALTH_FREQUENT" or event == "UNIT_HEALTH"
-	local myIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, myGUID) or UnitGetIncomingHeals(unit, 'player') or 0
-	local allIncomingHeal = not oUF.isRetail and GetHealAmount(guid, currentTime, nil) or UnitGetIncomingHeals(unit) or 0
+	local myIncomingHeal = UnitGetIncomingHeals(unit, 'player') or 0
+	local allIncomingHeal = UnitGetIncomingHeals(unit) or 0
 	local absorb = oUF.isRetail and UnitGetTotalAbsorbs(unit) or 0
 	local healAbsorb = oUF.isRetail and UnitGetTotalHealAbsorbs(unit) or 0
 	local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
@@ -262,29 +253,10 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		if oUF.isRetail then
-			self:RegisterEvent('UNIT_HEALTH', Path)
-			self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
-			self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
-			self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
-		else
-			self:RegisterEvent('UNIT_HEALTH_FREQUENT', Path)
-
-			local function UpdateHeal(event, casterGUID, spellID, healType, _, ...)
-				Path(self, event, ...)
-			end
-
-			local function UpdateModifier(event, guid)
-				Path(self, event, guid)
-			end
-
-			HealComm.RegisterCallback(self, "HealComm_HealStarted", UpdateHeal)
-			HealComm.RegisterCallback(self, "HealComm_HealUpdated", UpdateHeal)
-			HealComm.RegisterCallback(self, "HealComm_HealDelayed", UpdateHeal)
-			HealComm.RegisterCallback(self, "HealComm_HealStopped", UpdateHeal)
-			HealComm.RegisterCallback(self, "HealComm_ModifierChanged", UpdateModifier)
-			HealComm.RegisterCallback(self, "HealComm_GUIDDisappeared", UpdateModifier)
-		end
+		self:RegisterEvent('UNIT_HEALTH', Path)
+		self:RegisterEvent('UNIT_HEAL_PREDICTION', Path)
+		--self:RegisterEvent('UNIT_ABSORB_AMOUNT_CHANGED', Path)
+		--self:RegisterEvent('UNIT_HEAL_ABSORB_AMOUNT_CHANGED', Path)
 
 		self:RegisterEvent('UNIT_MAXHEALTH', Path)
 

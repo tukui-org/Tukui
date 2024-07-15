@@ -28,6 +28,20 @@ addon.FilterDispellableDebuff = true
 addon.MatchBySpellName = false
 addon.priority = 10
 
+local UnitAura = UnitAura
+
+if not UnitAura then
+	UnitAura = function(unitToken, index, filter)
+		local auraData = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter);
+
+		if not auraData then
+			return nil
+		end
+
+		return AuraUtil.UnpackAuraData(auraData)
+	end
+end
+
 local function add(spell, priority, stackThreshold)
 	if addon.MatchBySpellName and type(spell) == "number" then
 		spell = GetSpellInfo(spell)

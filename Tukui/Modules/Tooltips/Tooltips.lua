@@ -2,6 +2,9 @@ local T, C, L = unpack((select(2, ...)))
 
 local Tooltip = T["Tooltips"]
 local HealthBar = GameTooltipStatusBar
+local GetMouseFocus = GetMouseFocus or GetMouseFoci
+local GetItemInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+local GetItemQualityColor = (C_Item and C_Item.GetItemQualityColor) or GetItemQualityColor
 
 local Classification = {
 	worldboss = "|cffAF5050B |r",
@@ -406,7 +409,7 @@ function Tooltip:AddHooks()
 		hooksecurefunc("GameTooltip_ClearMoney", self.ResetBorderColor)
 	end
 
-	if T.DF and select(4, GetBuildInfo()) > 100000 then -- Need to be after prepatch.
+	if T.Retail and select(4, GetBuildInfo()) > 100000 then -- Need to be after prepatch.
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, self.OnTooltipSetItem)
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, self.OnTooltipSetUnit)
 	else

@@ -134,3 +134,13 @@ T.NewTimer = function()
 
 	return Timer
 end
+
+T.UnitAura = function(unitToken, index, filter)
+	local auraData = C_UnitAuras.GetAuraDataByIndex(unitToken, index, filter);
+	
+	if not auraData then
+		return nil
+	end
+
+	return AuraUtil.UnpackAuraData(auraData)
+end

@@ -1391,15 +1391,22 @@ function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
 	end
-
-	SetCVar("combinedBags", 0)
-
-	if C.Bags.SortToBottom then
-		SetSortBagsRightToLeft(false)
-		SetInsertItemsLeftToRight(T.Cata and false or true)
-	else
-		SetSortBagsRightToLeft(true)
-		SetInsertItemsLeftToRight(false)
+	
+	-- TWW (disable for now)
+	if (T.TWW) then
+		SetCVar("combinedBags", 1)
+		
+		return
+	end
+	
+	if SetSortBagsRightToLeft and SetInsertItemsLeftToRight then
+		if C.Bags.SortToBottom then
+			SetSortBagsRightToLeft(false)
+			SetInsertItemsLeftToRight(T.Cata and false or true)
+		else
+			SetSortBagsRightToLeft(true)
+			SetInsertItemsLeftToRight(false)
+		end
 	end
 
 	-- Bug with mouse click

@@ -8,6 +8,7 @@ local BuffFrame = BuffFrame
 local DebuffFrame = DebuffFrame
 local TemporaryEnchantFrame = TemporaryEnchantFrame
 local InterfaceOptionsFrameCategoriesButton12 = InterfaceOptionsFrameCategoriesButton12
+local UnitAura = UnitAura or T.UnitAura
 
 Auras.Headers = {}
 Auras.FlashTimer = 30
@@ -99,8 +100,45 @@ function Auras:OnUpdate(elapsed)
 end
 
 function Auras:UpdateAura(index)
-	local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
+	--local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff
+	
+	--if T.Retail then
+		--local AuraTable = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
 
+		--Name = AuraTable.name
+		--Duration = AuraTable.duration
+		--ExpirationTime = AuraTable.expirationTime
+		--Caster = AuraTable.sourceUnit
+		--Texture = AuraTable.icon
+	--else
+		local Name, Texture, Count, DType, Duration, ExpirationTime, Caster, IsStealable, ShouldConsolidate, SpellID, CanApplyAura, IsBossDebuff = UnitAura(self:GetParent():GetAttribute("unit"), index, self.Filter)
+	--end
+
+  --[[    
+ spellId=108366,
+  isBossAura=false,
+  duration=0,
+  expirationTime=0,
+  isFromPlayerOrPlayerPet=true,
+  points={
+    [1]=603832
+  },
+  icon=571320,
+  nameplateShowPersonal=false,
+  nameplateShowAll=false,      
+ auraInstanceID=272343,
+  timeMod=1,
+  isRaid=false,
+  isHarmful=false,
+  canApplyAura=false,
+  name="Soul Leech",
+  isHelpful=true,
+  applications=0,
+  isNameplateOnly=false,
+  sourceUnit="player",
+  isStealable=false
+}        
+   --]]     
 	if (Name) then
 		if (C.Auras.ClassicTimer) then
 			self.Holder:Hide()
@@ -108,7 +146,7 @@ function Auras:UpdateAura(index)
 			self.Duration:Hide()
 		end
 
-		if (Duration > 0 and ExpirationTime) then
+		if (Duration and Duration > 0 and ExpirationTime) then
 			local TimeLeft = ExpirationTime - GetTime()
 
 			if (not self.TimeLeft) then
@@ -153,7 +191,7 @@ function Auras:UpdateAura(index)
 			end
 		end
 
-		if (Count > 1) then
+		if (Count and Count > 1) then
 			self.Count:SetText(Count)
 		else
 			self.Count:SetText("")

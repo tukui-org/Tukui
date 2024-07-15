@@ -36,6 +36,7 @@ Engine[1].Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 Engine[1].WotLK = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC) or (Toc >= 30000 and Toc < 40000)
 Engine[1].Cata = (WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC) or (Toc >= 40000 and Toc < 50000)
 Engine[1].DF = Toc >= 100000 and Toc < 110000
+Engine[1].TWW = Toc >= 110000 and Toc < 120000
 Engine[1].WindowedMode = Windowed
 Engine[1].FullscreenMode = Fullscreen
 Engine[1].Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")

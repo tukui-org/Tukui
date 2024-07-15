@@ -2,8 +2,10 @@ local T, C, L = unpack((select(2, ...)))
 
 -- [WORKLATER] Note, adjust micromenu file for retail later
 
+local Menu = MicroMenu
 local Miscellaneous = T["Miscellaneous"]
 local MicroMenu = CreateFrame("Frame", "TukuiMicroMenu", UIParent)
+local A1, A2, A3, A4, A5
 local Noop = function() return end
 local RetailMicroButtons = {
 	"CharacterMicroButton",
@@ -33,7 +35,7 @@ do
 	function MicroMenu:ShownMicroButtons()
 		wipe(buttons)
 		
-		local Buttons = T.Retail and RetailMicroButtons or MICRO_BUTTONS
+		local Buttons = MICRO_BUTTONS
 
 		for _, name in next, Buttons do
 			local button = _G[name]
@@ -152,6 +154,9 @@ function MicroMenu:GameMenu()
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	MicroMenu:Hide()
+	
+	MicroMenu.Backdrop:SetFrameLevel(0)
 
 	MainMenuBarBackpackButton:SetParent(T.Hider)
 
@@ -162,10 +167,6 @@ function MicroMenu:GameMenu()
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
-
-		if T.Retail then
-			Button:SetParent(MicroMenu)
-		end
 		
 		Button:StripTextures()
 		Button:SetAlpha(0)
@@ -225,10 +226,6 @@ function MicroMenu:Blizzard()
 
 		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
-		
-		if T.Retail then
-			Button:SetScale(1.5)
-		end
 
 		-- Reposition them
 		if i == 1 then
@@ -249,10 +246,16 @@ function MicroMenu:Toggle()
 		HideUIPanel(GameMenuFrame)
 	end
 
-	if self:IsShown() then
-		self:Hide()
+	if self:GetAlpha() == 1 then
+		A1, A2, A3, A4, A5 = self:GetPoint()
+
+		self:SetAlpha(0)
+		self:ClearAllPoints()
+		self:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -1000)
 	else
-		self:Show()
+		self:SetAlpha(1)
+		self:ClearAllPoints()
+		self:SetPoint(A1, A2, A3, A4, A5)
 	end
 end
 
@@ -263,13 +266,14 @@ function MicroMenu:Enable()
 
 	if C.Misc.MicroStyle.Value == "Minimalist" then
 		self:Minimalist()
+		
+		MicroMenu:Toggle()
 	elseif C.Misc.MicroStyle.Value == "Blizzard" then
 		self:Blizzard()
-	elseif C.Misc.MicroStyle.Value == "Game Menu" then
-		self:GameMenu()
+		
+		MicroMenu:Toggle()
 	end
 
-	MicroMenu:Hide()
 	MicroMenu:AddHooks()
 	
 	if T.Retail then
