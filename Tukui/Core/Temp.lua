@@ -71,3 +71,6 @@ end
 Temp:RegisterEvent("PLAYER_LOGIN")
 Temp:SetScript("OnEvent", Temp.Enable)
 
+
+--hooksecurefunc("SetCVar", function(a, b, c) print(a,b,c) end)
+

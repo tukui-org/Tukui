@@ -388,6 +388,7 @@ else
 		local Borders = Frame.BorderFrame
 		local Map = Frame.ScrollContainer.Child
 		local CloseButton = WorldMapFrameCloseButton
+		local MinimizeButton = WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton
 		local ContinentButton = WorldMapContinentDropDown
 		local ZoneButton = WorldMapZoneDropDown
 		local ZoneMinimapButton = WorldMapZoneMinimapDropDown
@@ -395,6 +396,7 @@ else
 		local MagnifyButton = WorldMapMagnifyingGlassButton
 		local QuestieToggleQuest = Questie_Toggle
 
+		Frame:SetParent(UIParent)
 		Frame:CreateBackdrop()
 		Frame.Backdrop:ClearAllPoints()
 		Frame.Backdrop:SetAllPoints(Map)
@@ -415,13 +417,18 @@ else
 		WorldMapZoomOutButton:SetParent(T.Hider)
 
 		MagnifyButton:SetParent(T.Hider)
-
-		CloseButton:StripTextures()
-		CloseButton:ClearAllPoints()
-		CloseButton:SetPoint("TOPRIGHT", -10, -72)
-		CloseButton:SetFrameStrata("FULLSCREEN")
-		CloseButton:SetFrameLevel(Map:GetFrameLevel() + 1)
-		CloseButton:SkinCloseButton()
+		
+		CloseButton:SetParent(T.Hider)
+		
+		MinimizeButton:SetParent(T.Hider)
+		
+		self.CloseButton = CreateFrame("Button", nil, WorldMapFrame)
+		self.CloseButton:SetSize(18, 18)
+		self.CloseButton:SetPoint("TOPRIGHT", -20, -78)
+		self.CloseButton:SetFrameLevel(CloseButton:GetFrameLevel())
+		self.CloseButton:SetFrameStrata("FULLSCREEN")
+		self.CloseButton:SetScript("OnClick", function() WorldMapFrame:Hide() end)
+		self.CloseButton:SkinCloseButton()
 	end
 
 	function WorldMap:SizeMap()
@@ -442,6 +449,7 @@ else
 		self.MoveButton:SetSize(18, 18)
 		self.MoveButton:SetPoint("TOPRIGHT", -40, -80)
 		self.MoveButton:SetFrameLevel(WorldMapFrameCloseButton:GetFrameLevel())
+		self.MoveButton:SetFrameStrata("FULLSCREEN")
 		self.MoveButton:EnableMouse(true)
 		self.MoveButton:RegisterForDrag("LeftButton")
 		self.MoveButton:SetScript("OnLeave", GameTooltip_Hide)
@@ -484,11 +492,14 @@ else
 		if not C.Misc.WorldMapEnable then
 			return
 		end
+		
+		SetCVar("miniWorldMap", 0)
 
 		local Data = TukuiDatabase.Variables[T.MyRealm][T.MyName]
 
 		if Data.WorldMapPosition then
-			WorldMapFrame:SetPoint(unpack(Data.WorldMapPosition))
+			-- FIX ME : Error on RL when custom position
+			--WorldMapFrame:SetPoint(unpack(Data.WorldMapPosition))
 		end
 
 		self.Interval = 0.1
