@@ -522,7 +522,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 		if T.Classic then
 			Keys:SetSize(16, 16)
-			Keys:SetPoint("RIGHT", Sort, "LEFT", -5, 0)
+			Keys:SetPoint("RIGHT", SortButton, "LEFT", -5, 0)
 			Keys:CreateShadow()
 			Keys.Texture = Keys:CreateTexture(nil, "OVERLAY")
 			Keys.Texture:SetSize(16, 16)
