@@ -384,7 +384,7 @@ function Bags:CreateContainer(storagetype, ...)
 	if (storagetype == "Bag") then
 		local BagsContainer = CreateFrame("Frame", nil, UIParent)
 		local ToggleBagsContainer = CreateFrame("Button")
-		local Sort = CreateFrame("Button", nil, Container)
+		local SortButton = CreateFrame("Button", nil, Container)
 		local SearchBox = CreateFrame("EditBox", nil, Container)
 		local ToggleBags = CreateFrame("Button", nil, Container)
 		local Keys = CreateFrame("Button", nil, Container)
@@ -501,14 +501,14 @@ function Bags:CreateContainer(storagetype, ...)
 			end
 		end)
 
-		Sort:SetSize(16, 16)
-		Sort:SetPoint("RIGHT", ToggleBags, "LEFT", -2, 0)
-		Sort.Texture = Sort:CreateTexture(nil, "OVERLAY")
-		Sort.Texture:SetSize(14, 14)
-		Sort.Texture:SetPoint("CENTER")
-		Sort.Texture:SetTexture(C.Medias.Sort)
-		Sort:SetScript("OnEnter", GameTooltip_Hide)
-		Sort:SetScript("OnClick", function()
+		SortButton:SetSize(16, 16)
+		SortButton:SetPoint("RIGHT", ToggleBags, "LEFT", -2, 0)
+		SortButton.Texture = SortButton:CreateTexture(nil, "OVERLAY")
+		SortButton.Texture:SetSize(14, 14)
+		SortButton.Texture:SetPoint("CENTER")
+		SortButton.Texture:SetTexture(C.Medias.Sort)
+		SortButton:SetScript("OnEnter", GameTooltip_Hide)
+		SortButton:SetScript("OnClick", function()
 			if InCombatLockdown() then
 				T.Print("You cannot sort your bag in combat")
 
@@ -522,7 +522,7 @@ function Bags:CreateContainer(storagetype, ...)
 
 		Container.BagsContainer = BagsContainer
 		Container.CloseButton = ToggleBagsContainer
-		Container.SortButton = Sort
+		Container.SortButton = SortButton
 		Container.SearchBox = SearchBox
 		Container.ToggleBags = ToggleBags
 		Container.Keys = Keys
