@@ -1410,14 +1410,14 @@ function Bags:Enable()
 	if (not C.Bags.Enable) then
 		return
 	end
-	
+
 	-- TWW (disable for now)
 	if (T.TWW) then
 		SetCVar("combinedBags", 1)
-		
+
 		return
 	end
-	
+
 	if SetSortBagsRightToLeft and SetInsertItemsLeftToRight then
 		if C.Bags.SortToBottom then
 			SetSortBagsRightToLeft(false)
