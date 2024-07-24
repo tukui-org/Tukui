@@ -271,19 +271,19 @@ function MicroMenu:Enable()
 		return
 	end
 
-	if C.Misc.MicroStyle.Value == "Minimalist" then
-		self:Minimalist()
+	if C.Misc.MicroStyle.Value == "Blizzard" then
+		self:Blizzard()
 		
 		MicroMenu:Toggle()
-	elseif C.Misc.MicroStyle.Value == "Blizzard" then
-		self:Blizzard()
+	else
+		self:Minimalist()
 		
 		MicroMenu:Toggle()
 	end
 
 	MicroMenu:AddHooks()
 	
-	if T.Retail then
+	if not T.Retail then
 		local Bags = BagsBar
 		local Toggle = BagBarExpandToggle
 		
