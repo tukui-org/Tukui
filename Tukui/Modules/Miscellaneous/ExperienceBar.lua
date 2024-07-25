@@ -120,11 +120,26 @@ end
 function Experience:MakeDropdownMenu(Dropdown)
 	-- WIP : Skin them
     Dropdown:CreateButton(XP, Experience.SelectXP)
-    Dropdown:CreateButton(REPUTATION, Experience.SelectReputation)
-    Dropdown:CreateButton(PET.." "..XP, Experience.SelectPetXP)
-    Dropdown:CreateButton(HONOR, Experience.SelectHonor)
-    Dropdown:CreateButton("Azerite", Experience.SelectAzerite)
-    Dropdown:CreateButton("Anima", Experience.SelectAnima)
+	
+	if GetWatchedFactionInfo() then
+    	Dropdown:CreateButton(REPUTATION, Experience.SelectReputation)
+	end
+	
+	if GetPetExperience() > 0 then
+    	Dropdown:CreateButton(PET.." "..XP, Experience.SelectPetXP)
+	end
+	
+	if UnitHonor("player") > 0 then
+    	Dropdown:CreateButton(HONOR, Experience.SelectHonor)
+	end
+	
+	if C_AzeriteItem.FindActiveAzeriteItem() then
+    	Dropdown:CreateButton("Azerite", Experience.SelectAzerite)
+	end
+	
+	if C_CovenantSanctumUI.GetAnimaInfo() then
+    	Dropdown:CreateButton("Anima", Experience.SelectAnima)
+	end
 end
 
 function Experience:SetTooltip()
