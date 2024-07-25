@@ -7,6 +7,7 @@ local HideTooltip = GameTooltip_Hide
 local BarSelected
 local Bars = 20
 local GetWatchedFactionInfo = (C_Reputation and C_Reputation.GetWatchedFactionData) or GetWatchedFactionInfo
+local ExperienceMenu
 
 Experience.NumBars = 2
 Experience.RestedColor = {75 / 255, 175 / 255, 76 / 255}
@@ -19,36 +20,18 @@ Experience.AnimaColor = {153 / 255, 204 / 255, 255 / 255}
 Experience.Menu = {
 	{
 		text = XP,
-		func = function()
-			BarSelected.BarType = "XP"
-
-			Experience:Update()
-
-			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectXP,
 		notCheckable = true
 	},
 	{
 		text = REPUTATION,
-		func = function()
-			BarSelected.BarType = "REP"
-
-			Experience:Update()
-
-			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectReputation,
 		notCheckable = true,
 		disabled = true,
 	},
 	{
 		text = PET.." "..XP,
-		func = function()
-			BarSelected.BarType = "PETXP"
-
-			Experience:Update()
-
-			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectPetXP,
 		notCheckable = true,
 		disabled = true,
 	},
@@ -57,36 +40,18 @@ Experience.Menu = {
 Experience.MenuRetail = {
 	{
 		text = HONOR,
-		func = function()
-			BarSelected.BarType = "HONOR"
-
-			Experience:Update()
-
-			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectHonor,
 		notCheckable = true
 	},
 	{
 		text = "Azerite",
-		func = function()
-			BarSelected.BarType = "AZERITE"
-
-			Experience:Update()
-
-            TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectAzerite,
 		notCheckable = true,
 		disabled = true,
 	},
 	{
 		text = "Anima",
-		func = function()
-			BarSelected.BarType = "ANIMA"
-
-			Experience:Update()
-
-			TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
-		end,
+		func = Experience.SelectAnima,
 		notCheckable = true,
 		disabled = true,
 	},
@@ -103,6 +68,64 @@ Experience.Standing = {
     [7] = FACTION_STANDING_LABEL7,
     [8] = FACTION_STANDING_LABEL8,
 }
+
+function Experience:SelectXP()
+	BarSelected.BarType = "XP"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:SelectReputation()
+	BarSelected.BarType = "REP"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:SelectPetXP()
+	BarSelected.BarType = "PETXP"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:SelectHonor()
+	BarSelected.BarType = "HONOR"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:SelectAzerite()
+	BarSelected.BarType = "AZERITE"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:SelectAnima()
+	BarSelected.BarType = "ANIMA"
+
+	Experience:Update()
+
+	TukuiDatabase.Variables[T.MyRealm][T.MyName].Misc[BarSelected:GetName()] = BarSelected.BarType
+end
+
+function Experience:MakeDropdownMenu(Dropdown)
+	-- WIP : Skin them
+    Dropdown:CreateButton(XP, Experience.SelectXP)
+    Dropdown:CreateButton(REPUTATION, Experience.SelectReputation)
+    Dropdown:CreateButton(PET.." "..XP, Experience.SelectPetXP)
+    Dropdown:CreateButton(HONOR, Experience.SelectHonor)
+    Dropdown:CreateButton("Azerite", Experience.SelectAzerite)
+    Dropdown:CreateButton("Anima", Experience.SelectAnima)
+end
 
 function Experience:SetTooltip()
 	local BarType = self.BarType
@@ -164,7 +187,8 @@ function Experience:SetTooltip()
 		GameTooltip:AddLine(AZERITE_POWER_TOOLTIP_BODY:format(ItemName))
 	elseif BarType == "REP" then
 		local Current, Max, Standing = Experience:GetReputation()
-		local Name, ID = GetWatchedFactionInfo()
+		local Name = (T.Retail and GetWatchedFactionInfo().name) or select(1, GetWatchedFactionInfo())
+		local ID = (T.Retail and GetWatchedFactionInfo().reaction) or select(2, GetWatchedFactionInfo())
 		local Colors = FACTION_BAR_COLORS
 		local Hex = T.RGBToHex(Colors[ID].r, Colors[ID].g, Colors[ID].b)
 
@@ -215,15 +239,17 @@ end
 function Experience:GetReputation()
 	local Name, Standing, Min, Max, Value, Faction = GetWatchedFactionInfo()
 	
+	if Name.currentReactionThreshold then
+		Min = Name.currentReactionThreshold
+		Max = Name.nextReactionThreshold
+		Value = Name.currentStanding
+		Faction = Name.name
+		Standing = Name.reaction
+	end
+	
 	local BarMax = Max - Min
     local BarValue = Value - Min
     local BarStanding = Experience.Standing[Standing]
-	
-	if T.Retail and C_Reputation and C_Reputation.IsMajorFaction and C_Reputation.IsMajorFaction(Faction) then
-		local MajorFactionData = C_MajorFactions.GetMajorFactionData(Faction)
-
-		BarValue, BarMax = MajorFactionData.renownReputationEarned, MajorFactionData.renownLevelThreshold
-	end
 
 	return BarValue, BarMax, BarStanding
 end
@@ -317,7 +343,7 @@ function Experience:Update()
 			Current, Max = self:GetReputation()
 
 			local Colors = FACTION_BAR_COLORS
-			local ID = select(2, GetWatchedFactionInfo())
+			local ID = (T.Retail and GetWatchedFactionInfo().reaction) or select(2, GetWatchedFactionInfo())
 
 			R, G, B = Colors[ID].r, Colors[ID].g, Colors[ID].b
 		else
@@ -343,10 +369,14 @@ end
 
 function Experience:DisplayMenu()
 	BarSelected = self
-
-	Experience:VerifyMenu()
-
-	EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
+	
+	if EasyMenu then
+		Experience:VerifyMenu()
+		
+		EasyMenu(Experience.Menu, Menu, "cursor", 0, 0, "MENU")
+	else
+		MenuUtil.CreateContextMenu(self, Experience.MakeDropdownMenu)
+	end
 end
 
 function Experience:Create()
