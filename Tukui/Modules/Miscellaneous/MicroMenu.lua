@@ -77,14 +77,14 @@ function MicroMenu:Minimalist()
 	}
 	local Texts = {
 		[1] = "CI", -- Character
-		[2] = "SA", -- Spellbook & Abilities
-		[3] = "T", -- Spec & Talents
+		[2] = T.Retail and "P" or "SA", -- Spellbook & Abilities
+		[3] = "T&S", -- Spec & Talents
 		[4] = T.Retail and "A" or T.Cata and "A" or "Q", -- Achievements / QuestLog (nonretail)
 		[5] = T.Retail and "QL" or T.Cata and "QL" or T.Classic and "GC" or "S", -- Questlog / Social (nonretail)
-		[6] = T.Retail and "C" or T.Cata and "GC" or "G", -- Guild & Communities / Group Finder (nonretail)
+		[6] = T.Retail and "G&C" or T.Cata and "GC" or "G", -- Guild & Communities / Group Finder (nonretail)
 		[7] = T.Retail and "G" or T.Cata and "C" or "MM", -- Group Finder / Game Menu (nonretail)
 		[8] = T.Retail and "A" or T.Cata and "P" or "HR", -- Adventure Guide / Help (nonretail)
-		[9] = T.Cata and "GF" or "C", -- Collections
+		[9] = T.Retail and "WC" or T.Cata and "GF" or "C", -- Collections
 		[10] = T.Cata and "DJ" or "M", -- Game Menu
 		[11] = T.Cata and "GM" or "S", -- Shop
 		[12] = "CS", -- Customer Support
