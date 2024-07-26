@@ -95,6 +95,7 @@ if T.Retail then
 		CloseButton:ClearAllPoints()
 		CloseButton:SetPoint("TOPLEFT", 4, -68)
 		CloseButton.Backdrop:Show()
+		CloseButton:SkinCloseButton()
 	end
 
 	function WorldMap:SetSmallWorldMap()
@@ -119,6 +120,7 @@ if T.Retail then
 			CloseButton:ClearAllPoints()
 			CloseButton:SetPoint("TOPRIGHT", 5, 5)
 			CloseButton.Backdrop:Hide()
+			CloseButton:SkinCloseButton()
 		end
 	end
 
@@ -196,7 +198,7 @@ if T.Retail then
 	function WorldMap:AddMoving()
 		WorldMap.MoveButton = CreateFrame("Frame", nil, WorldMapFrame)
 		WorldMap.MoveButton:SetSize(16, 16)
-		WorldMap.MoveButton:SetPoint("TOPRIGHT", -78, -77)
+		WorldMap.MoveButton:SetPoint("TOPRIGHT", -108, -77)
 		WorldMap.MoveButton:SetFrameLevel(WorldMapFrameCloseButton:GetFrameLevel())
 		WorldMap.MoveButton:EnableMouse(true)
 		WorldMap.MoveButton:RegisterForDrag("LeftButton")
