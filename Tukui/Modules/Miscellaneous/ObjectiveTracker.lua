@@ -479,12 +479,13 @@ if T.Retail then
 			return
 		end
 		
+		self:SetDefaultPosition()
 		
 		--[[
 			TWW O.T. need a complete rewrite
 		
 			self:AddHooks()
-			self:SetDefaultPosition()
+			
 			self:SkinScenario()
 
 			-- Skin Minimize Button
