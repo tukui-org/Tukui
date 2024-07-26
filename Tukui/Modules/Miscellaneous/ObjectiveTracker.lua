@@ -478,21 +478,24 @@ if T.Retail then
 		if not C.Misc.ObjectiveTracker then
 			return
 		end
-
-		if not T.TWW then self:AddHooks() end
 		
-		self:SetDefaultPosition()
 		
-		if not T.TWW then self:SkinScenario() end
+		--[[
+			TWW O.T. need a complete rewrite
+		
+			self:AddHooks()
+			self:SetDefaultPosition()
+			self:SkinScenario()
 
-		-- Skin Minimize Button
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton:CreateBackdrop()
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:CreateShadow()
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:SetFrameLevel(ObjectiveTrackerFrameHeaderMenuMinimizeButton:GetFrameLevel() + 1)
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture = ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:CreateTexture(nil, "OVERLAY")
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetSize(10, 10)
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetPoint("CENTER")
-		ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetTexture(C.Medias.ArrowUp)
+			-- Skin Minimize Button
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton:CreateBackdrop()
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:CreateShadow()
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:SetFrameLevel(ObjectiveTrackerFrameHeaderMenuMinimizeButton:GetFrameLevel() + 1)
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture = ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop:CreateTexture(nil, "OVERLAY")
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetSize(10, 10)
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetPoint("CENTER")
+			ObjectiveTrackerFrameHeaderMenuMinimizeButton.Backdrop.Texture:SetTexture(C.Medias.ArrowUp)
+		]]
 
 		-- Add a keybind for toggling (SHIFT-O)
 		self.ToggleButton = CreateFrame("Button", "TukuiObjectiveTrackerToggleButton", UIParent, "SecureActionButtonTemplate")
