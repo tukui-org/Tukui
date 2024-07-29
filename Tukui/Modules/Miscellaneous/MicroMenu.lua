@@ -225,7 +225,6 @@ function MicroMenu:Blizzard()
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
 
-		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
 
 		-- Reposition them
