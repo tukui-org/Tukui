@@ -108,7 +108,6 @@ function MicroMenu:Minimalist()
 
 		Button:StripTextures()
 		Button:SetAlpha(0)
-		Button:SetParent(MicroMenu)
 		Button:SetWidth(math.floor(Width / NumButtons))
 		Button:SetHeight(Height - 2)
 		Button:SetHitRectInsets(0, 0, 0, 0)
@@ -138,7 +137,6 @@ function MicroMenu:Minimalist()
 				Button:SetPoint("RIGHT", MicroMenu)
 			end
 		end
-
 	end
 end
 
