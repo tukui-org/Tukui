@@ -276,14 +276,14 @@ function Loading:OnEvent(event)
 
 		T["Loading"]:Enable()
 
-		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN" or Locale ~= "ruRU") then
+		if (Locale ~= "koKR" and Locale and "zhTW" and Locale ~= "zhCN" and Locale ~= "ruRU") then
 			C.Medias.Font = C.General.GlobalFont.Value
 
 			TukuiFont:SetFont(C.Medias.Font, 12, "")
 			TukuiFontOutline:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		end
 		
-		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+		if (Locale ~= "koKR" and Locale ~= "zhTW" and Locale ~= "zhCN") then
 			T["Fonts"]:Enable()
 		end
 		

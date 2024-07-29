@@ -64,7 +64,7 @@ function Fonts:Enable()
 	Fonts:SetFont(CombatTextFont, C.Medias.Font, 25, "OUTLINE")
 end
 
-if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+if (Locale ~= "koKR" and Locale ~= "zhTW" and Locale ~= "zhCN") then
 	-- This need to be set asap
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
 	CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
