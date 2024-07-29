@@ -1,3 +1,10 @@
+July 29 2024 : Version 20.44
+
+*   TWW compatibility and lots of fixes.
+*   Bags are brokens for TWW, currently working on a new bag file and using blizzard AIO for now.
+*   Should be totally playable, don't hesitate to send bugs for review.
+*   Not totally 100% complete for TWW, but it's WIP.
+
 July 27 2023 : Version 20.38
 
 *   Fixes.
