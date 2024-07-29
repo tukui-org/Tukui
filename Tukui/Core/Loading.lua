@@ -282,8 +282,11 @@ function Loading:OnEvent(event)
 			TukuiFont:SetFont(C.Medias.Font, 12, "")
 			TukuiFontOutline:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		end
-
-		T["Fonts"]:Enable()
+		
+		if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+			T["Fonts"]:Enable()
+		end
+		
 		T["GUI"]:Enable()
 		T["Profiles"]:Enable()
 		T["Help"]:Enable()

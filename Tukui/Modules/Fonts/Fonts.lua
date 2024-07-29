@@ -64,16 +64,12 @@ function Fonts:Enable()
 	Fonts:SetFont(CombatTextFont, C.Medias.Font, 25, "OUTLINE")
 end
 
--- This need to be set asap
-UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
-CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
-UNIT_NAME_FONT = C.Medias.Font
-STANDARD_TEXT_FONT = C.Medias.Font
-DAMAGE_TEXT_FONT = C.Medias.Font
-
-if (Locale == "koKR" or Locale == "zhTW" or Locale == "zhCN") then
-	C["Medias"].Font = STANDARD_TEXT_FONT
-	C["Medias"].UnitFrameFont = UNIT_NAME_FONT
-	C["Medias"].DamageFont = DAMAGE_TEXT_FONT
+if (Locale ~= "koKR" or Locale ~= "zhTW" or Locale ~= "zhCN") then
+	-- This need to be set asap
+	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
+	CHAT_FONT_HEIGHTS = {12, 13, 14, 15, 16, 17, 18, 19, 20}
+	UNIT_NAME_FONT = C.Medias.Font
+	STANDARD_TEXT_FONT = C.Medias.Font
+	DAMAGE_TEXT_FONT = C.Medias.Font
 end
 
