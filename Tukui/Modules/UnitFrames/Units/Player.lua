@@ -198,12 +198,6 @@ function UnitFrames:Player()
 	Combat:SetPoint("LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 
-	local Status = Panel:CreateFontString(nil, "OVERLAY", nil, 1)
-	Status:SetFontObject(Font)
-	Status:SetPoint("CENTER", Panel, "CENTER", 0, 0)
-	Status:SetTextColor(0.69, 0.31, 0.31)
-	Status:Hide()
-
 	local Leader = Health:CreateTexture(nil, "OVERLAY", nil, 2)
 	Leader:SetSize(14, 14)
 	Leader:SetPoint("TOPLEFT", 2, 8)
