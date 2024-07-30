@@ -279,14 +279,6 @@ function MicroMenu:Enable()
 	end
 
 	MicroMenu:AddHooks()
-	
-	if not T.Retail then
-		local Bags = BagsBar
-		local Toggle = BagBarExpandToggle
-		
-		Bags:SetParent(T.Hider)
-		Toggle:SetParent(T.Hider)
-	end
 
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 
