@@ -90,18 +90,7 @@ Toolkit.API.StripTextures = function(self, Kill)
 	end
 end
 
-
-Toolkit.API.StripTexts = function(self, Kill)
-	for i = 1, self:GetNumRegions() do
-		local Region = select(i, self:GetRegions())
-		if (Region and Region:GetObjectType() == "FontString") then
-			Region:SetText("")
-		end
-	end
-end
-
 -- Fading --
-
 Toolkit.API.SetFadeInTemplate = function(self, FadeTime, Alpha)
 	securecall(UIFrameFadeIn, self, FadeTime, self:GetAlpha(), Alpha)
 end
