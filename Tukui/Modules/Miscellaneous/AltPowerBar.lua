@@ -2,6 +2,7 @@ local T, C, L = unpack((select(2, ...)))
 
 local Miscellaneous = T["Miscellaneous"]
 local AltPowerBar = CreateFrame("Button", "TukuiAltPowerBar", T.PetHider)
+local DataTextLeft = T.DataTexts.Panels.Left
 
 function AltPowerBar:Update()
 	local Status = self.Status
@@ -48,8 +49,8 @@ function AltPowerBar:Create()
 	self:SetPoint("TOP", 0, -28)
 	self:CreateBackdrop()
 	self:CreateShadow()
-	self:SetFrameStrata(T.DataTexts.Panels.Left:GetFrameStrata())
-	self:SetFrameLevel(T.DataTexts.Panels.Left:GetFrameLevel() + 10)
+	self:SetFrameStrata(DataTextLeft:GetFrameStrata())
+	self:SetFrameLevel(DataTextLeft:GetFrameLevel() + 10)
 	self:RegisterEvent("UNIT_POWER_BAR_SHOW")
 	self:RegisterEvent("UNIT_POWER_BAR_HIDE")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
