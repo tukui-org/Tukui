@@ -115,7 +115,7 @@ function UnitFrames:ShowWarMode()
 	local MouseOver = GetMouseFocus()
 	local IsPvP = C_PvP.IsWarModeDesired and C_PvP.IsWarModeDesired or UnitIsPVP("player")
 
-	if (IsPvP) and (MouseOver == self) and (not InCombatLockdown()) then
+	if IsPvP() and (MouseOver == self) and (not InCombatLockdown()) then
 		Status:Show()
 
 		if self.RestingIndicator then
