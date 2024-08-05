@@ -37,7 +37,7 @@ function MirrorTimers:SetupContainer()
 	Container.bottomPadding = 0
 	Container.leftPadding = 0
 	Container.rightPadding = 0
-	Container.spacing = padding
+	Container.spacing = 0
 	Container.respectChildScale = true
 
 	hooksecurefunc(Container, "SetupTimer", self.SetupTimer)
