@@ -163,7 +163,7 @@ Toolkit.API.EnableBackdrop = function(self)
 	end
 end
 
-Toolkit.API.CreateBackdrop = function(self, BackgroundTemplate, BackgroundTexture, BorderTemplate)
+Toolkit.API.CreateBackdrop = function(self, BackgroundTemplate, BackgroundTexture)
 	if (self.Backdrop) then
 		return
 	end
