@@ -208,7 +208,7 @@ Toolkit.API.CreateBackdrop = function(self, BackgroundTemplate, BackgroundTextur
 	self.Backdrop.BorderRight:SetSnapToPixelGrid(false)
 	self.Backdrop.BorderRight:SetTexelSnappingBias(0)
 
-	self.Backdrop:SetBorderColor(BorderR, BorderG, BorderB, BorderA)
+	self.Backdrop:SetBorderColor(BorderR, BorderG, BorderB)
 end
 
 Toolkit.API.CreateShadow = function(self, ShadowScale)
