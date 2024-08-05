@@ -33,9 +33,9 @@ function UnitFrames:DisableBlizzard()
 	if not C.UnitFrames.Enable then
 		return
 	end
-	
+
 	local PartyFrame = PartyFrame
-	
+
 	if PartyFrame and (C["Raid"].Enable or C["Party"].Enable) then
 		PartyFrame:SetParent(T.Hider)
 	end
@@ -49,7 +49,7 @@ function UnitFrames:DisableBlizzard()
 		CompactRaidFrameContainer:SetParent(T.Hider)
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()
-		
+
 		if T.Retail then
 			UIParent:UnregisterEvent("GROUP_ROSTER_UPDATE")
 			CompactRaidFrameManager_SetSetting("IsShown", "0")
@@ -377,7 +377,7 @@ function UnitFrames:PostCreateAura(button, unit)
 	local isAnimated = C.UnitFrames.FlashRemovableBuffs and button:GetParent().isAnimated
 	local isNamePlate = button:GetParent().isNameplate
 	local isCooldownSize = button:GetParent().size and button:GetParent().size >= 20
-	
+
 	-- Right-click-cancel script
 	if isCancellable then
 		-- Add a button.index to allow CancelUnitAura to work with player
@@ -396,7 +396,7 @@ function UnitFrames:PostCreateAura(button, unit)
 	if not button:GetParent().IsRaid then
 		button:CreateShadow()
 	end
-	
+
 	local Cooldown = button.Cooldown or button.cd
 	local Icon = button.Icon or button.icon
 	local Count = button.Count or button.count
@@ -408,7 +408,7 @@ function UnitFrames:PostCreateAura(button, unit)
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
 		Cooldown:SetHideCountdownNumbers(true)
-		
+
 		button.Remaining = Cooldown:CreateFontString(nil, "OVERLAY", nil, 7)
 		button.Remaining:SetFont(C.Medias.Font, 12, "THINOUTLINE")
 		button.Remaining:SetPoint("CENTER", 1, 0)
@@ -441,25 +441,25 @@ end
 
 function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff, duration, timeLeft)
 	local data
-	
+
 	-- Because on oUF Retail args are different, adjust them
 	if T.Retail then
 		local arg1, arg2, arg3, arg4 = unit, button, index, offset
-		
+
 		button = arg1
 		unit = arg2
 		data = arg3
 		index = arg4
-		
+
 		button.filter = (data.isHelpful and "HELPFUL") or (data.isHarmful and "HARMFUL")
 		button.icon = button.Icon
 		button.isPlayer = data.isPlayerAura
 	end
-	
+
 	local Name, Texture, Count, DType, Duration, ExpirationTime, UnitCaster, IsStealable,
 		NameplateShowSelf, SpellID, CanApply, IsBossDebuff, CasterIsPlayer, NameplateShowAll,
 		TimeMod, Effect1, Effect2, Effect3 = UnitAura(unit, index, button.filter)
-	
+
 	if button then
 		if(button.filter == "HARMFUL") then
 			if C.UnitFrames.DesaturateDebuffs and (not UnitIsFriend("player", unit) and not button.isPlayer) then
@@ -594,10 +594,10 @@ end
 
 function UnitFrames:RunesUpdateColor(event, runeid)
 	local Bar = self.Runes
-	
+
 	for i = 1, 6 do
 		local RuneType = GetRuneType(i)
-		
+
 		Bar[i]:SetStatusBarColor(unpack(T.Colors.runes[RuneType]))
 	end
 end
@@ -914,7 +914,7 @@ function UnitFrames:NameplateCallBack(event, unit)
 	if not T.Retail then
 		return
 	end
-	
+
 	if event == "NAME_PLATE_UNIT_ADDED" then
 		self.blizzPlate = self:GetParent().UnitFrame
 		self.widgetsOnly = UnitNameplateShowsWidgetsOnly(unit)
