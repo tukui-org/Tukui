@@ -15,13 +15,14 @@ local format = format
 local floor = floor
 
 -- WoW globals (I don't really wanna import all the funcs we use here, so localize the ones called a LOT, like in Health/Power functions)
-local UnitIsEnemy = UnitIsEnemy
-local UnitIsPlayer = UnitIsPlayer
-local UnitIsFriend = UnitIsFriend
 local UnitIsConnected = UnitIsConnected
-local UnitPlayerControlled = UnitPlayerControlled
-local UnitIsGhost = UnitIsGhost
 local UnitIsDead = UnitIsDead
+local UnitIsEnemy = UnitIsEnemy
+local UnitIsFriend = UnitIsFriend
+local UnitIsGhost = UnitIsGhost
+local UnitIsPlayer = UnitIsPlayer
+local UnitIsPVP = UnitIsPVP
+local UnitPlayerControlled = UnitPlayerControlled
 local UnitPowerType = UnitPowerType
 
 UnitFrames.oUF = oUF
@@ -113,9 +114,8 @@ end
 function UnitFrames:ShowWarMode()
 	local Status = self.Status
 	local MouseOver = GetMouseFocus()
-	local IsPvP = C_PvP.IsWarModeDesired and C_PvP.IsWarModeDesired or UnitIsPVP("player")
 
-	if IsPvP() and (MouseOver == self) and (not InCombatLockdown()) then
+	if UnitIsPVP("player") and (MouseOver == self) and (not InCombatLockdown()) then
 		Status:Show()
 
 		if self.RestingIndicator then
