@@ -2,7 +2,6 @@ local T, C, L = unpack((select(2, ...)))
 
 local Miscellaneous = T["Miscellaneous"]
 local AltPowerBar = CreateFrame("Button", "TukuiAltPowerBar", T.PetHider)
-local DataTextLeft = T.DataTexts.Panels.Left
 
 function AltPowerBar:Update()
 	local Status = self.Status
@@ -44,6 +43,8 @@ function AltPowerBar:DisableBlizzardBar()
 end
 
 function AltPowerBar:Create()
+	local DataTextLeft = T.DataTexts.Panels.Left
+
 	self:DisableBlizzardBar()
 	self:SetSize(180, 17)
 	self:SetPoint("TOP", 0, -28)
