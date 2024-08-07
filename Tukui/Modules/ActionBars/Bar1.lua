@@ -93,9 +93,9 @@ function ActionBars:CreateBar1()
 	end
 
 	ActionBar1:Execute([[
-		Button = table.new()
+		Buttons = table.new()
 		for i = 1, 12 do
-			table.insert(Button, self:GetFrameRef("ActionButton"..i))
+			table.insert(Buttons, self:GetFrameRef("ActionButton"..i))
 		end
 	]])
 
@@ -120,7 +120,7 @@ function ActionBars:CreateBar1()
 			end
 		end
 
-		for i, Button in ipairs(Button) do
+		for i, Button in ipairs(Buttons) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end
 	]])
