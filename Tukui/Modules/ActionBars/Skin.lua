@@ -155,7 +155,6 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 
 	local PetSize = C.ActionBars.PetButtonSize
 	local HotKey = _G[Button:GetName().."HotKey"]
-	local Cooldown = _G[Button:GetName().."Cooldown"]
 	local Flash = _G[Name.."Flash"]
 	local Font = T.GetFont(C["ActionBars"].Font)
 	local NormalTexture = _G[Button:GetName().."NormalTexture"]
