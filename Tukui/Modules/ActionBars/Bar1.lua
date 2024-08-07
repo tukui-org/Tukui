@@ -11,9 +11,6 @@ function ActionBars:CreateBar1()
 	local Druid, Rogue, Warrior, Priest, Warlock = "", "", "", "", ""
 	local ButtonsPerRow = C.ActionBars.Bar1ButtonsPerRow
 	local NumButtons = C.ActionBars.Bar1NumButtons
-	local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex and GetVehicleBarIndex()) or ""
-	local OverrideBar = format("[overridebar] %d;", GetOverrideBarIndex and GetOverrideBarIndex()) or ""
-	local ShapeshiftBar = format("[shapeshift] %d;", GetTempShapeshiftBarIndex and GetTempShapeshiftBarIndex()) or ""
 	local NumPerRows = C.ActionBars.Bar1ButtonsPerRow
 	local NextRowButtonAnchor = _G["ActionButton1"]
 
@@ -57,6 +54,10 @@ function ActionBars:CreateBar1()
 
 	local DefaultPaging
 	if T.Retail or T.Cata then
+		local VehicleBar = format("[vehicleui][possessbar] %d;", GetVehicleBarIndex()) or ""
+		local OverrideBar = format("[overridebar] %d;", GetOverrideBarIndex()) or ""
+		local ShapeshiftBar = format("[shapeshift] %d;", GetTempShapeshiftBarIndex()) or ""
+
 		DefaultPaging = ShapeshiftBar..VehicleBar..OverrideBar.."[bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6; [bonusbar:5] 11;"
 	else
 		DefaultPaging = "[bar:6] 6;[bar:5] 5;[bar:4] 4;[bar:3] 3;[bar:2] 2;[overridebar] 14;[shapeshift] 13;[vehicleui] 12;[possessbar] 12;"
