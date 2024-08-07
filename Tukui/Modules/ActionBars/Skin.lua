@@ -62,13 +62,13 @@ function ActionBars:SkinButton(button)
 		end
 
 		Button:CreateBackdrop()
-		
+
 		if T.Retail then
 			Button.Backdrop:SetParent(T.PetHider)
 			Button.Backdrop:SetBackdropColor(0,0,0,0)
 			Button.Backdrop:EnableMouse(false)
 			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
-			
+
 			Button:HookScript("OnShow", function(self) self.Backdrop:Show() end)
 			Button:HookScript("OnHide", function(self) self.Backdrop:Hide() end)
 		end
@@ -88,7 +88,7 @@ function ActionBars:SkinButton(button)
 			if (Button:GetChecked() and Button.UpdateState) then
 				Button:UpdateState(Button)
 			end
-			
+
 			if (T.Retail) or (T.Classic and T.WoWBuild >= 51146) or (T.Cata) then
 				Normal:SetParent(T.Hider)
 			end
@@ -109,7 +109,7 @@ function ActionBars:SkinButton(button)
 
 			ActionBars.SetHotKeyText(Button)
 		end
-		
+
 		if T.Retail then
 			--Highlight:SetAlpha(0)
 			IconMask:SetAlpha(0)
@@ -205,16 +205,16 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 		if (T.Retail) or (T.Cata) then
 			Normal:SetParent(T.Hider)
 		end
-		
+
 		Normal:ClearAllPoints()
 		Normal:SetPoint("TOPLEFT")
 		Normal:SetPoint("BOTTOMRIGHT")
-		
+
 		if NormalTexture2 then
 			NormalTexture2:SetAlpha(0)
 		end
 	end
-	
+
 	if NormalTexture then
 		NormalTexture:SetAlpha(0)
 	end

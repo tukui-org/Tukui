@@ -63,25 +63,25 @@ function ActionBars:DisableBlizzard()
 
 			RegisterStateDriver(IconIntroTracker, "visibility", "hide")
 		end
-		
+
 		-- Move Micro Menu
 		if MicroMenuContainer then
 			MicroMenuContainer:SetClampedToScreen(false)
 		end
-		
+
 		if BagsBar then
 			BagsBar:SetClampedToScreen(false)
 		end
 
 		MicroButtonAndBagsBar:ClearAllPoints()
 		MicroButtonAndBagsBar:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -200)
-		
-		
+
+
 		BagsBar:SetAlpha(0)
-		
+
 		-- Tracking Bar Manager
 		StatusTrackingBarManager:SetParent(T.Hider)
-		
+
 		-- Edit Mode
 		--EditModeUtil.IsBottomAnchoredActionBar = function(self, system) return false end
 		--EditModeUtil.IsRightAnchoredActionBar = function(self, system) return false end
@@ -101,14 +101,14 @@ function ActionBars:UpdatePetBar()
 		ShineTexture = T.Retail and Button.AutoCastShine or _G[PetActionButton.."Shine"]
 
 		local Name, Texture, IsToken, IsActive, AutoCastAllowed, AutoCastEnabled, SpellID = GetPetActionInfo(i)
-		
+
 		if not IsToken then
 			Icon:SetTexture(Texture)
-			
+
 			Button.tooltipName = Name
 		else
 			Icon:SetTexture(_G[Texture])
-			
+
 			Button.tooltipName = _G[Name]
 		end
 
@@ -276,7 +276,7 @@ function ActionBars:UpdateStanceBar()
 				end
 
 				Icon:SetTexture(Texture)
-				
+
 				Cooldown = _G[ButtonName.."Cooldown"]
 
 				if Texture then
@@ -293,7 +293,7 @@ function ActionBars:UpdateStanceBar()
 					Button:SetChecked(true)
 
 					if Button.Backdrop then
-						
+
 						Button.Backdrop:SetBorderColor(0, 1, 0)
 					end
 				else
@@ -489,7 +489,7 @@ function ActionBars:AddHooks()
 	if T.Cata and C.ActionBars.MultiCastBar then
 		-- MultiCastActionBarFrame is clearly coded poorly by Blizzard, it taint like crazy
 		-- Disabled for now until a fix is found
-		
+
 		--hooksecurefunc("ShowMultiCastActionBar", self.UpdateMultiCastBar)
 		--Movers:RegisterFrame(Bar, "MultiCastBar")
 	end
@@ -525,15 +525,15 @@ function ActionBars:Enable()
 	self:CreateBar3()
 	self:CreateBar4()
 	self:CreateBar5()
-	
+
 	if T.Retail then
 		self:CreateBar6()
 		self:CreateBar7()
 		self:CreateBar8()
-		
+
 		self:SetupExtraButton()
 	end
-	
+
 	self:CreatePetBar()
 	self:CreateStanceBar()
 	self:AddHooks()

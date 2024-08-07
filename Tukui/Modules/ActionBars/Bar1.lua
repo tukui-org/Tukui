@@ -41,22 +41,21 @@ function ActionBars:CreateBar1()
 		else
 			Rogue = "[bonusbar:1] 7;"
 		end
-		
+
 		if T.Retail then
 			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10;"
 		else
 			Druid = "[bonusbar:1,stealth] 2; [bonusbar:1,nostealth] 7; [bonusbar:2] 8; [bonusbar:3] 9; [bonusbar:4] 10; [bonusbar:5] 10;"
 		end
-		
+
 		Warrior = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;"
 		Priest = "[bonusbar:1] 7;"
 		if T.Cata then
 			Warlock = "[form:1] 7;"
 		end
 	end
-	
+
 	local DefaultPaging
-	
 	if T.Retail or T.Cata then
 		DefaultPaging = ShapeshiftBar..VehicleBar..OverrideBar.."[bar:2] 2; [bar:3] 3; [bar:4] 4; [bar:5] 5; [bar:6] 6; [bonusbar:5] 11;"
 	else
@@ -112,14 +111,14 @@ function ActionBars:CreateBar1()
 			else
 				newstate = nil
 			end
-		
+
 			if not newstate then
 				print("|cffff8000Tukui|r: Cannot determine possess/vehicle action bar page, please report this!")
 
 				newstate = 12
 			end
 		end
-		
+
 		for i, Button in ipairs(Button) do
 			Button:SetAttribute("actionpage", tonumber(newstate))
 		end
@@ -158,7 +157,7 @@ function ActionBars:CreateBar1()
 
 		ActionBar1["Button"..i] = Button
 	end
-	
+
 	-- Move main buttons inside our action bar #1
 	for i = 1, Num do
 		local Button = _G["ActionButton"..i]
@@ -170,7 +169,7 @@ function ActionBars:CreateBar1()
 		Button:SetAttribute("showgrid", 1)
 
 		if not T.Retail then
-			ActionButton_ShowGrid(Button)	
+			ActionButton_ShowGrid(Button)
 		end
 
 		ActionBars:SkinButton(Button)
