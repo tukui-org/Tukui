@@ -183,7 +183,9 @@ function ActionBars:SkinPetAndShiftButton(Normal, Button, Icon, Name, Pet)
 	if (Pet) then
 		if (PetSize < 30) then
 			local AutoCast = _G[Name.."AutoCastable"]
-			AutoCast:SetAlpha(0)
+			if AutoCast then
+				AutoCast:SetAlpha(0)
+			end
 		end
 
 		local Shine = _G[Name.."Shine"]
