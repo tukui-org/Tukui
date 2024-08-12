@@ -592,9 +592,6 @@ function UnitFrames:Player()
 	Status:SetPoint("LEFT", Health, "LEFT", 4, 0)
 	Status:Hide()
 
-	self:HookScript("OnEnter", UnitFrames.ShowWarMode)
-	self:HookScript("OnLeave", UnitFrames.ShowWarMode)
-
 	-- Register with oUF
 	self:Tag(Name, "[Tukui:Classification][Tukui:DiffColor][level] [Tukui:GetNameColor][Tukui:NameLong]")
 	self:Tag(Health.Value, C.UnitFrames.PlayerHealthTag.Value)
