@@ -672,10 +672,19 @@ function Chat:Setup()
 	RightBG.Backdrop:SetBackdropColor(BGR, BGG, BGB, C.Chat.BackgroundAlpha / 100)
 
 	ChatConfigFrameDefaultButton:Kill()
-	ChatFrameMenuButton:Kill()
 
 	if T.Retail then
 		QuickJoinToastButton:Kill()
+	end
+
+	-- TODO: You should probably double-check this
+	if T.Retail then
+		ChatFrameMenuButton:ClearAllPoints()
+		ChatFrameMenuButton:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
+	else
+		ChatFrameMenuButton:Kill()
+		ChatMenu:ClearAllPoints()
+		ChatMenu:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
 	end
 
 	ChatFrameMenuButton:ClearAllPoints()
