@@ -1,7 +1,7 @@
-## Interface: 100207
+## Interface: 110002
 ## Author: Tukz
 ## X-Maintainer: Tukz
-## Version: @project-version@ 
+## Version: @project-version@
 ## Title: |cffff8000Tukui|r
 ## Notes: UI of awesomeness!
 ## SavedVariables: TukuiDatabase, TukuiData, TukuiSettings, TukuiGold, TukuiSettingsPerCharacter, TukuiChatHistory

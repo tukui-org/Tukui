@@ -678,8 +678,8 @@ function Chat:Setup()
 		QuickJoinToastButton:Kill()
 	end
 
-	ChatMenu:ClearAllPoints()
-	ChatMenu:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
+	ChatFrameMenuButton:ClearAllPoints()
+	ChatFrameMenuButton:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
 
 	VoiceChatPromptActivateChannel:CreateBackdrop()
 	VoiceChatPromptActivateChannel:CreateShadow()
