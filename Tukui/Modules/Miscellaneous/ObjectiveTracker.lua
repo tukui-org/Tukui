@@ -574,20 +574,23 @@ else
 
 	function ObjectiveTracker:SkinQuestTimer()
 		local Timer = QuestTimerFrame
-		local HeaderBar = self.HeaderBar
-		local HeaderTimerBar = CreateFrame("StatusBar", nil, QuestTimerFrame)
 
-		HeaderTimerBar:SetSize(QuestWatchFrame:GetWidth(), 2)
-		HeaderTimerBar:SetPoint("TOPLEFT", QuestWatchFrame, 0, 56)
-		HeaderTimerBar:SetStatusBarTexture(C.Medias.Blank)
-		HeaderTimerBar:SetStatusBarColor(unpack(CustomClassColor))
-		HeaderTimerBar:CreateBackdrop()
-		HeaderTimerBar:CreateShadow()
-
-		Timer:StripTextures()
-		Timer:SetParent(UIParent)
-		Timer:ClearAllPoints()
-		Timer:SetPoint("TOPLEFT", HeaderBar, "TOPLEFT", -205, 80)
+		if Timer then
+			local HeaderBar = self.HeaderBar
+			local HeaderTimerBar = CreateFrame("StatusBar", nil, QuestTimerFrame)
+			
+			HeaderTimerBar:SetSize(QuestWatchFrame:GetWidth(), 2)
+			HeaderTimerBar:SetPoint("TOPLEFT", QuestWatchFrame, 0, 56)
+			HeaderTimerBar:SetStatusBarTexture(C.Medias.Blank)
+			HeaderTimerBar:SetStatusBarColor(unpack(CustomClassColor))
+			HeaderTimerBar:CreateBackdrop()
+			HeaderTimerBar:CreateShadow()
+			
+			Timer:StripTextures()
+			Timer:SetParent(UIParent)
+			Timer:ClearAllPoints()
+			Timer:SetPoint("TOPLEFT", HeaderBar, "TOPLEFT", -205, 80)
+		end
 	end
 
 	function ObjectiveTracker:OnQuestClick()
