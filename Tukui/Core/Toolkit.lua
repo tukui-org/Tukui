@@ -115,7 +115,7 @@ Toolkit.API.SetOutside = function(self, Anchor, OffsetX, OffsetY)
 
 	Anchor = Anchor or self:GetParent()
 
-	if self:GetPoint() then
+	if self.ClearAllPoints then
 		self:ClearAllPoints()
 	end
 
