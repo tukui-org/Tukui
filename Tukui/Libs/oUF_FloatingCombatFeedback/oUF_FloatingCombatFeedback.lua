@@ -15,12 +15,12 @@ local t_insert = _G.table.insert
 local t_remove = _G.table.remove
 local t_wipe = _G.table.wipe
 local type = _G.type
-
 local AbbreviateNumbers = _G.AbbreviateNumbers
 local BreakUpLargeNumbers = _G.BreakUpLargeNumbers
 local CombatLogGetCurrentEventInfo = _G.CombatLogGetCurrentEventInfo
 local GetSpellTexture = _G.GetSpellTexture
 local UnitGUID = _G.UnitGUID
+local GetSpellTexture = C_Spell and C_Spell.GetSpellTexture or GetSpellTexture
 
 local function copyTable(src, dst)
 	if type(dst) ~= "table" then
