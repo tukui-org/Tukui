@@ -561,8 +561,10 @@ else
 		if not T.Cata then
 			for i = 1, 30 do
 				local Line = _G["QuestWatchLine"..i]
-
-				Line:SetFontObject(Font)
+				
+				if Line then
+					Line:SetFontObject(Font)
+				end
 			end
 		end
 
