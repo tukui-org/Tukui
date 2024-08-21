@@ -2,6 +2,9 @@ local T, C, L = unpack((select(2, ...)))
 
 local Status = CreateFrame("Frame", "TukuiStatus", UIParent)
 local IsAddOnLoaded = (C_AddOns and C_AddOns.IsAddOnLoaded) or IsAddOnLoaded
+local GetNumAddOns = GetNumAddOns or (C_AddOns and C_AddOns.GetNumAddOns)
+local GetAddOnInfo = GetAddOnInfo or (C_AddOns and C_AddOns.GetAddOnInfo)
+local IsAddOnLoaded = (C_AddOns and C_AddOns.IsAddOnLoaded) or IsAddOnLoaded
 
 function Status:AddonsCheck()
 	for i = 1, GetNumAddOns() do
