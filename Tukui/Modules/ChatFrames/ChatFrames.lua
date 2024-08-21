@@ -677,12 +677,9 @@ function Chat:Setup()
 		QuickJoinToastButton:Kill()
 	end
 
-	-- TODO: You should probably double-check this
-	if T.Retail then
-		ChatFrameMenuButton:ClearAllPoints()
-		ChatFrameMenuButton:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
-	else
-		ChatFrameMenuButton:Kill()
+	ChatFrameMenuButton:Kill()
+	
+	if ChatMenu then
 		ChatMenu:ClearAllPoints()
 		ChatMenu:SetPoint("BOTTOMLEFT", LeftBG, "TOPLEFT", -1, 16)
 	end
