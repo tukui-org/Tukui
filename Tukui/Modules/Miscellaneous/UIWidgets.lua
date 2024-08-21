@@ -14,8 +14,9 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 		if Bar.BorderLeft then Bar.BorderLeft:SetAlpha(0) end
 		if Bar.BorderRight then Bar.BorderRight:SetAlpha(0) end
 		if Bar.BorderCenter then Bar.BorderCenter:SetAlpha(0) end
+		
 		Bar:CreateBackdrop(Torghast and "Transparent" or "")
-
+		
 		Bar.Backdrop:CreateShadow()
 		Bar.Backdrop:SetFrameLevel(Bar:GetFrameLevel())
 		Bar.Backdrop:SetOutside(Bar)
