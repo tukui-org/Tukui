@@ -6,15 +6,28 @@ local Bags = CreateFrame("Frame")
 local Inventory = T["Inventory"]
 local Movers = T["Movers"]
 
+function Bags:SkinButton(Button)
+	if not Button then
+		return
+	end
+	
+	Button:StripTextures()
+	Button:CreateBackdrop()
+	Button.IconBorder:SetAlpha(0)
+	Button.icon:SetTexCoord(.08, .92, .08, .92)
+	Button.IconQuestTexture:SetAlpha(0)
+end
+
 function Bags:SkinButtons()
 	local Bag = ContainerFrameCombinedBags
+	local Reagent = ContainerFrame6
 	
 	for i, Button in Bag:EnumerateValidItems() do
-		Button:StripTextures()
-		Button:CreateBackdrop()
-		Button.IconBorder:SetAlpha(0)
-		Button.icon:SetTexCoord(.08, .92, .08, .92)
-		Button.IconQuestTexture:SetAlpha(0)
+		Bags:SkinButton(Button)
+	end
+	
+	for i, Button in Reagent:EnumerateValidItems() do
+		Bags:SkinButton(Button)
 	end
 end
 
@@ -115,6 +128,23 @@ function Bags:SkinContainer()
 	
 	SearchBox:StripTextures()
 	SearchBox:SkinEditBox()
+	
+	-- Reagent Bag
+	if ContainerFrame6 then
+		local ReagentContainer = ContainerFrame6
+		local ReagentNineSlice = ReagentContainer.NineSlice
+		local ReagentCloseButton = ReagentContainer.CloseButton
+		local ReagentPortrait = ContainerFrame6Portrait
+		
+		ReagentNineSlice:StripTextures()
+		ReagentNineSlice:SetTemplate()
+		ReagentNineSlice:SetFrameLevel(0)
+		ReagentNineSlice:CreateShadow()
+		
+		ReagentCloseButton:SkinCloseButton()
+		
+		ReagentPortrait:Kill()
+	end
 end
 
 function Bags:UpdatePosition()
@@ -130,6 +160,7 @@ end
 function Bags:AddHooks()
 	hooksecurefunc("UpdateContainerFrameAnchors", Bags.UpdatePosition)
 	hooksecurefunc(ContainerFrameCombinedBags, "UpdateItems", Bags.UpdateItems)
+	hooksecurefunc(ContainerFrame6, "UpdateItems", Bags.UpdateItems)
 end
 
 function Bags:Enable()
