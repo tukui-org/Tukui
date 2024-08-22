@@ -82,7 +82,7 @@ function Bags:UpdateItems()
 				end
 			else
 				if Button.ItemLevel then
-					button.ItemLevel:SetText("")
+					Button.ItemLevel:SetText("")
 				end
 			end
 		end
