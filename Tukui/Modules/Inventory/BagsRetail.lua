@@ -9,11 +9,12 @@ local Movers = T["Movers"]
 function Bags:SkinButtons()
 	local Bag = ContainerFrameCombinedBags
 	
-	for i, itemButton in Bag:EnumerateValidItems() do
-		itemButton:StripTextures()
-		itemButton:CreateBackdrop()
-		itemButton.IconBorder:SetAlpha(0)
-		itemButton.icon:SetTexCoord(.08, .92, .08, .92)
+	for i, Button in Bag:EnumerateValidItems() do
+		Button:StripTextures()
+		Button:CreateBackdrop()
+		Button.IconBorder:SetAlpha(0)
+		Button.icon:SetTexCoord(.08, .92, .08, .92)
+		Button.IconQuestTexture:SetAlpha(0)
 	end
 end
 
