@@ -136,7 +136,7 @@ Modules\ChatFrames\Bubbles.lua
 Modules\ChatFrames\ChatHistory.lua
 
 Modules\Inventory\Core.lua
-Modules\Inventory\Bags.lua
+Modules\Inventory\BagsRetail.lua
 Modules\Inventory\Loot.lua
 Modules\Inventory\GroupLoot.lua
 Modules\Inventory\Merchant.lua
