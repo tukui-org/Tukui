@@ -41,6 +41,11 @@ function ActionBars:SetupExtraButton()
 	local Holder = CreateFrame("Frame", "TukuiExtraActionButton", UIParent)
 	local Bar = ExtraActionBarFrame
 	local Icon = ExtraActionButton1Icon
+	local Button = ExtraActionButton1
+	
+	if Button.SpellActivationAlert then
+		Button.SpellActivationAlert:SetAlpha(0)
+	end
 
 	Bar:EnableMouse(false)
 	Bar:SetParent(UIParent)
