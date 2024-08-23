@@ -59,10 +59,40 @@ function Bags:UpdateItems()
 			Button.Backdrop:SetBorderColor(unpack(C.General.BorderColor))
 		end
 		
-		if IsQuestItem then
+		-- Quest Items
+		if C.Bags.IdentifyQuestItems and IsQuestItem then
+			if not Button.Quest then
+				Button.Quest = CreateFrame("Frame", nil, Button)
+				Button.Quest:SetFrameLevel(Button:GetFrameLevel())
+				Button.Quest:SetSize(8, Button:GetHeight() - 2)
+				Button.Quest:SetPoint("TOPLEFT", 1, -1)
+
+				Button.Quest.Backdrop = Button.Quest:CreateTexture(nil, "ARTWORK")
+				Button.Quest.Backdrop:SetAllPoints()
+				Button.Quest.Backdrop:SetColorTexture(unpack(C.General.BackdropColor))
+
+				Button.Quest.BorderRight = Button.Quest:CreateTexture(nil, "ARTWORK")
+				Button.Quest.BorderRight:SetSize(1, 1)
+				Button.Quest.BorderRight:SetPoint("TOPRIGHT", Button.Quest, "TOPRIGHT", 1, 0)
+				Button.Quest.BorderRight:SetPoint("BOTTOMRIGHT", Button.Quest, "BOTTOMRIGHT", 1, 0)
+				Button.Quest.BorderRight:SetColorTexture(1, 1, 0)
+
+				Button.Quest.Texture = Button.Quest:CreateTexture(nil, "OVERLAY")
+				Button.Quest.Texture:SetTexture("Interface\\QuestFrame\\AutoQuest-Parts")
+				Button.Quest.Texture:SetTexCoord(0.13476563, 0.17187500, 0.01562500, 0.53125000)
+				Button.Quest.Texture:SetSize(8, 16)
+				Button.Quest.Texture:SetPoint("CENTER")
+			end
+
+			Button.Quest:Show()
 			Button.Backdrop:SetBorderColor(1, 1, 0)
+		else
+			if Button.Quest and Button.Quest:IsShown() then
+				Button.Quest:Hide()
+			end
 		end
 		
+		-- Items Level
 		if C.Bags.ItemLevel then
 			if ItemLink then
 				local Level = C_Item.GetDetailedItemLevelInfo(ItemLink)
@@ -79,7 +109,7 @@ function Bags:UpdateItems()
 					Button.ItemLevel:SetText(Level)
 
 					if Rarity then
-						local R, G, B = C_Item.GetItemQualityColor(Rarity)
+						R, G, B = C_Item.GetItemQualityColor(Rarity)
 
 						if Button.ItemLevel then
 							Button.ItemLevel:SetTextColor(R, G, B)
@@ -188,6 +218,8 @@ function Bags:Enable()
 	self:SkinButtons()
 	
 	Movers:RegisterFrame(ContainerFrameCombinedBags, "Bags")
+	
+	T.Print("The bags module is currently under development, please be patient")
 end
 
 Inventory.Bags = Bags
