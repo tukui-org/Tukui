@@ -41,6 +41,21 @@ function ActionBars:DisableBlizzard()
 
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_SHOWGRID")
 	ActionBarButtonEventsFrame:UnregisterEvent("ACTIONBAR_HIDEGRID")
+	
+	if T.TWW then
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_INTERRUPTED")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_START")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_STOP")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_START")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_STOP")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_RETICLE_TARGET")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_RETICLE_CLEAR")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_EMPOWER_START")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_EMPOWER_STOP")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_SENT")
+		ActionBarActionEventsFrame:UnregisterEvent("UNIT_SPELLCAST_FAILED")
+	end
 
 	for i, j in pairs(Options) do
 		j:Hide()

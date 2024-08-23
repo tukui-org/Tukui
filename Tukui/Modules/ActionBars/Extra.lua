@@ -42,18 +42,6 @@ function ActionBars:SetupExtraButton()
 	local Bar = ExtraActionBarFrame
 	local Icon = ExtraActionButton1Icon
 	local Button = ExtraActionButton1
-	
-	if Button.SpellActivationAlert then
-		Button.SpellActivationAlert:SetAlpha(0)
-	end
-	
-	if Button.SpellCastAnimFrame then
-		Button.SpellCastAnimFrame:SetAlpha(0)
-	end
-	
-	if Button.InterruptDisplay then
-		Button.InterruptDisplay:SetAlpha(0)
-	end
 
 	Bar:EnableMouse(false)
 	Bar:SetParent(UIParent)
