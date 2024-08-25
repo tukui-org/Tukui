@@ -41,6 +41,7 @@ end
 local function Enable(self)
 	local hp = self.HolyPower
 	local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
+	
 	if(hp) then
 		hp.__owner = self
 		hp.ForceUpdate = ForceUpdate

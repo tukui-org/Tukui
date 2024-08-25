@@ -14,7 +14,7 @@ UnitFrames.AddClassFeatures["PALADIN"] = function(self)
 
 	local Bar = CreateFrame("Frame", self:GetName().."HolyPower", self.Health)
 	local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
-	local numMax = UnitPowerMax('player', Enum.PowerType.HolyPower)
+	local numMax = 5
 	local barWidth = 250 / numMax
 
 	-- Holy Power
