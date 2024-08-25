@@ -8,12 +8,12 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 	local Torghast = IsInJailersTower and IsInJailersTower() or false
 
 	if Bar and not Bar.IsSkinned then
-		if Bar.BGLeft then Bar.BGLeft:SetAlpha(0) end
-		if Bar.BGRight then Bar.BGRight:SetAlpha(0) end
-		if Bar.BGCenter then Bar.BGCenter:SetAlpha(0) end
-		if Bar.BorderLeft then Bar.BorderLeft:SetAlpha(0) end
-		if Bar.BorderRight then Bar.BorderRight:SetAlpha(0) end
-		if Bar.BorderCenter then Bar.BorderCenter:SetAlpha(0) end
+		if Bar.BGLeft and Bar.BGLeft.SetAlpha then Bar.BGLeft:SetAlpha(0) end
+		if Bar.BGRight and Bar.BGRight.SetAlpha then Bar.BGRight:SetAlpha(0) end
+		if Bar.BGCenter and Bar.BGCenter.SetAlpha then Bar.BGCenter:SetAlpha(0) end
+		if Bar.BorderLeft and Bar.BorderLeft.SetAlpha then Bar.BorderLeft:SetAlpha(0) end
+		if Bar.BorderRight and Bar.BorderRight.SetAlpha then Bar.BorderRight:SetAlpha(0) end
+		if Bar.BorderCenter and Bar.BorderCenter.SetAlpha then Bar.BorderCenter:SetAlpha(0) end
 		
 		Bar:CreateBackdrop(Torghast and "Transparent" or "")
 		
