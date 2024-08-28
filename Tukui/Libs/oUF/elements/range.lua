@@ -65,7 +65,7 @@ local function Update(self, event)
 			local IsFriend = UnitIsFriend(unit, "player")
 
 			if IsFriend and Spell and IsSpellKnown(Spell) then
-				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
+				local name, rank, icon, castTime, minRange, maxRange, spellId = Toolkit.Functions.GetSpellInfo(Spell)
 				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
 
 				if IsSpellInRangeFromPlayer == 1 then

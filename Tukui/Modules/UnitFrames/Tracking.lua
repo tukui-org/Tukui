@@ -12,7 +12,7 @@ Popups.Popup["TRACKING_ADD_PVE"] = {
 		local Parent = self:GetParent()
 		local SpellID = tonumber(Parent.EditBox:GetText())
 		local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvE
-		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = Toolkit.Functions.GetSpellInfo(SpellID)
 		local Values = {["enable"] = true, ["priority"] = 1, ["stackThreshold"] = 0}
 		local TrackingTitle = "|CFF00FF00[DEBUFF TRACKING] |r"
 		local PVETitle = "|CFF567AFF[PVE] |r"
@@ -46,7 +46,7 @@ Popups.Popup["TRACKING_ADD_PVP"] = {
 		local Parent = self:GetParent()
 		local SpellID = tonumber(Parent.EditBox:GetText())
 		local Table = TukuiDatabase.Variables[T.MyRealm][T.MyName].Tracking.PvP
-		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+		local Name, Rank, Icon, CastTime, MinRange, MaxRange, ID = Toolkit.Functions.GetSpellInfo(SpellID)
 		local Values = {["enable"] = true, ["priority"] = 1, ["stackThreshold"] = 0}
 		local TrackingTitle = "|CFF00FF00[DEBUFF TRACKING] |r"
 		local PVPTitle = "|CFFFF5252[PVP] |r"
@@ -81,7 +81,7 @@ function Tracking:GetSpell(button, cat)
 		Count = Count + 1
 
 		if Count == ID then
-			local Name, Rank, IconPath, CastTime, MinRange, MaxRange, ID = GetSpellInfo(SpellID)
+			local Name, Rank, IconPath, CastTime, MinRange, MaxRange, ID = Toolkit.Functions.GetSpellInfo(SpellID)
 
 			return SpellID, Name, IconPath
 		end

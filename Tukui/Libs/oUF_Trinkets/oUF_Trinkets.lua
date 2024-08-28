@@ -33,7 +33,7 @@ local Update = function(self, event, ...)
 		local unit, spellID = ...
 
 		if self.unit == unit then
-			local _, _, spellTexture = GetSpellInfo(spellID)
+			local _, _, spellTexture = Toolkit.Functions.GetSpellInfo(spellID)
 
 			self.Trinket.Icon:SetTexture(spellTexture)
 		end
