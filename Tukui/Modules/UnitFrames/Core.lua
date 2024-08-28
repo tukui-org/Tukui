@@ -456,9 +456,7 @@ function UnitFrames:PostUpdateAura(unit, button, index, offset, filter, isDebuff
 		button.isPlayer = data.isPlayerAura
 	end
 
-	local Name, Texture, Count, DType, Duration, ExpirationTime, UnitCaster, IsStealable,
-		NameplateShowSelf, SpellID, CanApply, IsBossDebuff, CasterIsPlayer, NameplateShowAll,
-		TimeMod, Effect1, Effect2, Effect3 = UnitAura(unit, index, button.filter)
+	local _, _, _, DType, Duration, ExpirationTime, _, IsStealable = UnitAura(unit, index, button.filter)
 
 	if button then
 		if(button.filter == "HARMFUL") then
