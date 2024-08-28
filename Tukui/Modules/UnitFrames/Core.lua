@@ -645,7 +645,6 @@ function UnitFrames:UpdateTotemOverride(event, slot)
 
 	local Totem = Bar[slot]
 	local HaveTotem, Name, Start, Duration, Icon = GetTotemInfo(slot)
-	local SpellID = select(7, GetSpellInfo(Name))
 
 	local Colors = T["Colors"]
 
