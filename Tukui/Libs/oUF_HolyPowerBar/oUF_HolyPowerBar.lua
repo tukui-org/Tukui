@@ -3,6 +3,8 @@ if(select(2, UnitClass('player')) ~= 'PALADIN') then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
+local T, C, L = unpack((select(2, ...)))
+
 local SPELL_POWER_HOLY_POWER = SPELL_POWER_HOLY_POWER
 local COLORS = {228/255,225/255,16/255}
 
@@ -15,6 +17,29 @@ local Update = function(self, event, unit, powerType)
 
 	if(hp.PreUpdate) then
 		hp:PreUpdate()
+	end
+
+	if (numMax > getn(hp)) then
+		local barWidth = 250 / numMax
+		local PowerTexture = T.GetTexture(C["Textures"].UFPowerTexture)
+		for i = getn(hp) + 1, numMax do
+			-- create the missing frames
+			hp[i] = CreateFrame("StatusBar", self:GetName().."HolyPower"..i, hp)
+			hp[i]:SetHeight(6)
+			hp[i]:SetStatusBarTexture(PowerTexture)
+			hp[i]:SetStatusBarColor(0.89, 0.88, 0.06)
+		end
+
+		-- ensure all frames (existing & new) have the correct width
+		for i = 1, numMax do
+			if i == 1 then
+				hp[i]:SetWidth(barWidth)
+				hp[i]:SetPoint("LEFT", hp, "LEFT", 0, 0)
+			else
+				hp[i]:SetWidth(barWidth - 1)
+				hp[i]:SetPoint("LEFT", hp[i-1], "RIGHT", 1, 0)
+			end
+		end
 	end
 
 	for i = 1, numMax do
