@@ -15,6 +15,7 @@ local type, pairs, wipe = type, pairs, wipe
 local GetActiveSpecGroup = _G.GetActiveSpecGroup
 local GetSpecialization = _G.GetSpecialization
 local IsSpellKnown = _G.IsSpellKnown
+local GetSpellInfo = C_Spell.GetSpellInfo or GetSpellInfo
 local GetTime = _G.GetTime
 local UnitAura = _G.UnitAura
 local UnitCanAttack = _G.UnitCanAttack
@@ -43,7 +44,7 @@ end
 
 local function add(spell, priority, stackThreshold)
 	if addon.MatchBySpellName and type(spell) == "number" then
-		spell = Toolkit.Functions.GetSpellInfo(spell)
+		spell = GetSpellInfo(spell)
 	end
 
 	if(spell) then
@@ -308,7 +309,7 @@ local function Update(self, event, unit)
 
 	if self.RaidDebuffs.forceShow then
 		_spellId = 47540
-		_name, _, _icon = Toolkit.Functions.GetSpellInfo(_spellId)
+		_name, _, _icon = GetSpellInfo(_spellId)
 		_count, _dtype, _duration, _endTime, _stackThreshold = 5, "Magic", 0, 60, 0
 	end
 

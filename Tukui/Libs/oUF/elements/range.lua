@@ -32,6 +32,7 @@ local _FRAMES = {}
 local OnRangeFrame
 
 local UnitInRange, UnitIsConnected = UnitInRange, UnitIsConnected
+local GetSpellInfo = C_Spell.GetSpellInfo or GetSpellInfo
 
 local RangeSpellID = {
 	["PALADIN"] = 19750,
@@ -65,7 +66,7 @@ local function Update(self, event)
 			local IsFriend = UnitIsFriend(unit, "player")
 
 			if IsFriend and Spell and IsSpellKnown(Spell) then
-				local name, rank, icon, castTime, minRange, maxRange, spellId = Toolkit.Functions.GetSpellInfo(Spell)
+				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
 				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
 
 				if IsSpellInRangeFromPlayer == 1 then
