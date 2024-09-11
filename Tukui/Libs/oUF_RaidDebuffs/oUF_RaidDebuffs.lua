@@ -369,4 +369,6 @@ local function Disable(self)
 	end
 end
 
-oUF:AddElement("RaidDebuffs", Update, Enable, Disable)
+if not oUF.isRetail then
+	oUF:AddElement("RaidDebuffs", Update, Enable, Disable)
+end

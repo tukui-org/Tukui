@@ -66,6 +66,7 @@ Libs\oUF_Retail\finalize.lua
 Libs\oUF_ComboPointsBar\oUF_ComboPointsBar.lua
 Libs\oUF_CombatFeedback\oUF_CombatFeedback.lua
 Libs\oUF_RaidDebuffs\oUF_RaidDebuffs.lua
+Libs\oUF_RaidDebuffs\oUF_RaidDebuffs_Retail.lua
 Libs\oUF_FloatingCombatFeedback\oUF_FloatingCombatFeedback.lua
 Libs\oUF_AuraBars\oUF_AuraBars.lua
 Libs\oUF_ArcaneCharge\oUF_ArcaneCharge.lua
