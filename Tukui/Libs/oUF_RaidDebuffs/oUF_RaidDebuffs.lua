@@ -18,13 +18,21 @@
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
-local IsPlayerSpell = _G.IsPlayerSpell
-local UnitCanAssist = _G.UnitCanAssist
-local GetTime = _G.GetTime
-local playerClass = _G.UnitClassBase("player")
-local GetAuraDataByAuraInstanceID = _G.C_UnitAuras.GetAuraDataByAuraInstanceID
-local NewTicker = _G.C_Timer.NewTicker
-local debuffColor = DebuffTypeColor
+local IsPlayerSpell					= _G.IsPlayerSpell
+local UnitCanAssist					= _G.UnitCanAssist
+local GetTime						= _G.GetTime
+local playerClass					= _G.UnitClassBase("player")
+local GetAuraDataByAuraInstanceID	= _G.C_UnitAuras.GetAuraDataByAuraInstanceID
+local GetAuraDataByIndex			= _G.C_UnitAuras.GetAuraDataByIndex
+local ForEachAura					= _G.AuraUtil.ForEachAura
+local NewTicker						= _G.C_Timer.NewTicker
+local debuffColor					= _G.DebuffTypeColor
+
+--[[ Cache for active debuffs
+
+	.priority	- See priorityList
+	.AuraData	- See UNIT_AURA event payload
+--]]
 local debuffCache = {}
 
 --[[ Holds the dispel priority list ]]--
@@ -316,7 +324,25 @@ end
 * unit				- Tracked unit
 --]]
 local function FullUpdate(self, unit)
-
+	if ForEachAura then
+		-- Mainline iteration-style.
+		ForEachAura(unit, "HARMFUL", nil,
+			function(AuraData)
+				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
+			end,
+		true)
+	else
+		-- Classic iteration-style.
+		local AuraData
+		local i = 1
+		repeat
+			AuraData = GetAuraDataByIndex(unit, i, "HARMFUL")
+			if AuraData then
+				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
+			end
+			i = i + 1
+		until not AuraData
+	end
 end
 
 --[[ Event handler for UNIT_AURA.
