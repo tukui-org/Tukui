@@ -3,27 +3,39 @@
 
 	Sub-Widgets will be created if not provided.
 
+	Member Variables
+	.font			Font details used for timer and stacks
+	.fontheight 	| used if Sub-Widgets aren't provided
+	.fontFlags		| not needed otherwise
+
 	Sub-Widgets
 	.icon			The Icon/Texture of the debuff
-	.cd 			A Cooldown frame showing the duration
+	.cd 			A Cooldown frame
+	.timer			A Text showing the remaining duration
 	.count			A Text showing the number of stacks
-	.Backdrop		Backdrop
+	.Backdrop		Backdrops border is used to indicate the debuff type
 --]=]
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
 local IsPlayerSpell = _G.IsPlayerSpell
 local UnitCanAssist = _G.UnitCanAssist
-local playerClass = UnitClassBase("player")
+local GetTime = _G.GetTime
+local playerClass = _G.UnitClassBase("player")
+local GetAuraDataByAuraInstanceID = _G.C_UnitAuras.GetAuraDataByAuraInstanceID
+local NewTicker = _G.C_Timer.NewTicker
 local debuffColor = DebuffTypeColor
 local debuffCache = {}
 
--- dispel priority? magic <- curse <- poison <- disease
+--[[ Holds the dispel priority list ]]--
+local priorityList = {
+	Magic = 4,
+	Curse = 3,
+	Poison = 2,
+	Disease = 1,
+}
 
---[[ Holds which dispel types can currently be handled
-
-Initialized to false for all types
---]]
+--[[ Holds which dispel types can currently be handled. Initialized to false for all. ]]--
 local dispelList = {
 	Magic = false,
 	Poison = false,
@@ -31,7 +43,7 @@ local dispelList = {
 	Curse = false,
 }
 
---[[ Class functions to update the dispel types which can be handled ]]--
+--[[ Class functions to update the dispel types which can be handled. ]]--
 local canDispel = {
 	DRUID = {
 		retail = function()
@@ -177,8 +189,8 @@ local canDispel = {
 
 --[[ Event handler for SPELLS_CHANGED
 
-* self	- Parent UnitFrame
-* event	- SPELLS_CHANGED
+* self		- oUF UnitFrame
+* event		- SPELLS_CHANGED
 --]]
 local function UpdateDispelList(self, event)
 	if event == "SPELLS_CHANGED" then
@@ -187,14 +199,32 @@ local function UpdateDispelList(self, event)
 	end
 end
 
---[[ Show the debuff
+--[[ Returns a format string for timers.
 
-* element	- RaidDebuff Frame
-* AuraData	- AuraData object provided by UNIT_AURA event
+* time	- Time in seconds
 --]]
-local function ShowElement(element, AuraData)
+local function timeFormat(time)
+	if time < 3 then
+		return "%.1f"
+	elseif time < 60 then
+		return "%d"
+	else
+		return "++"
+	end
+end
+
+--[[ Show the debuff element.
+
+* self				- oUF UnitFrame
+* unit				- Tracked unit
+* auraInstanceID	- auraInstanceID of the debuff to be displayed
+--]]
+local function ShowElement(self, unit, auraInstanceID)
+	local element = self.RaidDebuffs
+	local AuraData = debuffCache[auraInstanceID].AuraData
 	local count = AuraData.applications
 	local duration = AuraData.duration
+	local expirationTime = AuraData.expirationTime
 	local color = debuffColor[AuraData.dispelName]
 
 	element.icon:SetTexture(AuraData.icon)
@@ -202,7 +232,14 @@ local function ShowElement(element, AuraData)
 	element:Show()
 
 	if duration and duration > 0 then
-		element.cd:SetCooldown(AuraData.expirationTime - duration, duration)
+		local start = expirationTime - duration
+		element.cd:SetCooldown(start, duration)
+
+		if element.ticker then element.ticker:Cancel() end
+		element.ticker = NewTicker(.1, function()
+			local remaining = expirationTime - GetTime()
+			element.timer:SetFormattedText(timeFormat(remaining), remaining)
+		end)
 	end
 
 	if count and count > 1 then
@@ -210,65 +247,114 @@ local function ShowElement(element, AuraData)
 	end
 end
 
---[[ Hide the debuff
+--[[ Hide the debuff element.
 
-* element	- RaidDebuff Frame
+* self	- oUF UnitFrame
+* unit	- Tracked unit
 --]]
-local function HideElement(element)
+local function HideElement(self, unit)
+	local element = self.RaidDebuffs
 	local color = debuffColor["none"]
+
+	if element.ticker then element.ticker:Cancel() end
 
 	element.Backdrop:SetBorderColor(color.r, color.g, color.b)
 	element.cd:SetCooldown(0, 0)
+	element.timer:SetText("")
 	element.count:SetText("")
 
 	element:Hide()
 end
 
---[[ Filter for dispellable debuffs
+--[[ Select the Debuff with highest priority to display, hide element when none left.
 
-* element	- RaidDebuff Frame
-* AuraData	- UNIT_AURA event payload
+* self	- oUF UnitFrame
+* unit	- Tracked unit
 --]]
-local function FilterAura(element, AuraData)
-	if AuraData.dispelName and dispelList[AuraData.dispelName] then
-		debuffCache[AuraData.auraInstanceID] = true
-		ShowElement(element, AuraData)
+local function SelectPrioDebuff(self, unit)
+	local auraInstanceID = nil
+	local priority = 0
+
+	-- find debuff with highest priority
+	for id, debuff in pairs(debuffCache) do
+		if priority < debuff.priority then
+			auraInstanceID = id
+			priority = debuff.priority
+		end
+	end
+
+	if auraInstanceID then
+		ShowElement(self, unit, auraInstanceID)
+	else
+		HideElement(self, unit)
 	end
 end
 
---[[ Event handler for UNIT_AURA
+--[[ Filter for dispellable debuffs.
 
-* self			- Parent UnitFrame
+* self				- oUF UnitFrame
+* unit				- Tracked unit
+* auraInstanceID	- auraInstanceID
+* AuraData			- (optional) UNIT_AURA event payload
+--]]
+local function FilterAura(self, unit, auraInstanceID, AuraData)
+	AuraData = AuraData or GetAuraDataByAuraInstanceID(unit, auraInstanceID)
+	local dispelName = AuraData.dispelName
+
+	if dispelName and dispelList[dispelName] then
+		debuffCache[auraInstanceID] = {
+			priority = priorityList[dispelName],
+			AuraData = AuraData
+		}
+		SelectPrioDebuff(self, unit)
+	end
+end
+
+--[[ Aura scan when isFullUpdate
+
+* self				- oUF UnitFrame
+* unit				- Tracked unit
+--]]
+local function FullUpdate(self, unit)
+
+end
+
+--[[ Event handler for UNIT_AURA.
+
+* self			- oUF UnitFrame
 * event			- UNIT_AURA
-* unit			- payload of event: unitTarget
-* updateInfo	- payload of event: UnitAuraUpdateInfo
+* unit			- Payload of event: unitTarget
+* updateInfo	- Payload of event: UnitAuraUpdateInfo
 --]]
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or no updateInfo provided or target can't be assisted
 	if event ~= "UNIT_AURA" or self.unit ~= unit or not updateInfo or not UnitCanAssist("player", unit) then return end
-	local element = self.RaidDebuffs
+
+	if updateInfo.isFullUpdate then
+		FullUpdate(self, unit)
+		return
+	end
 
 	if updateInfo.removedAuraInstanceIDs then
 		for _, auraInstanceID in pairs(updateInfo.removedAuraInstanceIDs) do
 			if debuffCache[auraInstanceID] then
 				debuffCache[auraInstanceID] = nil
-				HideElement(element)
+				SelectPrioDebuff(self, unit)
 			end
 		end
 	end
 
 	if updateInfo.updatedAuraInstanceIDs then
 		for _, auraInstanceID in pairs(updateInfo.updatedAuraInstanceIDs) do
-			local AuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, auraInstanceID)
-			if AuraData then
-				FilterAura(element, AuraData)
+			if auraInstanceID then
+				FilterAura(self, unit, auraInstanceID)
 			end
 		end
 	end
 
 	if updateInfo.addedAuras then
 		for _, AuraData in pairs(updateInfo.addedAuras) do
-			FilterAura(element, AuraData)
+			FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
 		end
 	end
 end
@@ -288,13 +374,19 @@ local function Enable(self)
 			element.cd = CreateFrame("Cooldown", nil, element, "CooldownFrameTemplate")
 			element.cd:SetInside(element, 1, 0)
 			element.cd:SetReverse(true)
-			element.cd:SetHideCountdownNumbers(false)
+			element.cd:SetHideCountdownNumbers(true)
 			element.cd:SetAlpha(.7)
+		end
+
+		if not element.timer then
+			element.timer = element:CreateFontString(nil, "OVERLAY")
+			element.timer:SetFont(element.font, element.fontHeight, element.fontFlags)
+			element.timer:SetPoint("CENTER", element, 1, 0)
 		end
 
 		if not element.count then
 			element.count = element:CreateFontString(nil, "OVERLAY")
-			element.count:SetFont(C.Medias.Font, 12, "OUTLINE")
+			element.count:SetFont(element.font, element.fontHeight, element.fontFlags)
 			element.count:SetPoint("BOTTOMRIGHT", element, "BOTTOMRIGHT", 2, 0)
 			element.count:SetTextColor(1, .9, 0)
 		end
@@ -307,7 +399,7 @@ local function Enable(self)
 		self:RegisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
 		self:RegisterEvent("UNIT_AURA", Update)
 
-		HideElement(element)
+		HideElement(self, self.unit)
 
 		return true
 	end
