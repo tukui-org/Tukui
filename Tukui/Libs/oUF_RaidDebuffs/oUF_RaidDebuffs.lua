@@ -388,7 +388,7 @@ end
 local function Enable(self)
 	local element = self.RaidDebuffs
 
-	if element then
+	if element and canDispel[playerClass] then
 		-- Create missing Sub-Widgets
 		if not element.icon then
 			element.icon = element:CreateTexture(nil, "ARTWORK")
