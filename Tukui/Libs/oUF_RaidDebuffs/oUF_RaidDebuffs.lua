@@ -296,20 +296,20 @@ end
 
 * self				- oUF UnitFrame
 * unit				- Tracked unit
-* auraInstanceID	- auraInstanceID
 * AuraData			- (optional) UNIT_AURA event payload
 ]]
-local function FilterAura(self, unit, auraInstanceID, AuraData)
-	AuraData = AuraData or GetAuraDataByAuraInstanceID(unit, auraInstanceID)
-	local debuffCache = self.RaidDebuffs.debuffCache
-	local dispelName = AuraData.dispelName
+local function FilterAura(self, unit, AuraData)
+	if AuraData then
+		local debuffCache = self.RaidDebuffs.debuffCache
+		local dispelName = AuraData.dispelName
 
-	if dispelName and dispelList[dispelName] then
-		debuffCache[auraInstanceID] = {
-			priority = priorityList[dispelName],
-			AuraData = AuraData
-		}
-		SelectPrioDebuff(self, unit)
+		if dispelName and dispelList[dispelName] then
+			debuffCache[AuraData.auraInstanceID] = {
+				priority = priorityList[dispelName],
+				AuraData = AuraData
+			}
+			SelectPrioDebuff(self, unit)
+		end
 	end
 end
 
@@ -323,7 +323,7 @@ local function FullUpdate(self, unit)
 		-- Mainline iteration-style.
 		ForEachAura(unit, "HARMFUL", nil,
 			function(AuraData)
-				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
+				FilterAura(self, unit, AuraData)
 			end,
 		true)
 	else
@@ -333,7 +333,7 @@ local function FullUpdate(self, unit)
 		repeat
 			AuraData = GetAuraDataByIndex(unit, i, "HARMFUL")
 			if AuraData then
-				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
+				FilterAura(self, unit, AuraData)
 			end
 			i = i + 1
 		until not AuraData
@@ -369,14 +369,14 @@ local function Update(self, event, unit, updateInfo)
 	if updateInfo.updatedAuraInstanceIDs then
 		for _, auraInstanceID in pairs(updateInfo.updatedAuraInstanceIDs) do
 			if auraInstanceID then
-				FilterAura(self, unit, auraInstanceID)
+				FilterAura(self, unit, GetAuraDataByAuraInstanceID(unit, auraInstanceID))
 			end
 		end
 	end
 
 	if updateInfo.addedAuras then
 		for _, AuraData in pairs(updateInfo.addedAuras) do
-			FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
+			FilterAura(self, unit, AuraData)
 		end
 	end
 end
