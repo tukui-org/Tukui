@@ -28,14 +28,7 @@ local ForEachAura					= _G.AuraUtil.ForEachAura
 local NewTicker						= _G.C_Timer.NewTicker
 local debuffColor					= _G.DebuffTypeColor
 
---[[ Cache for active debuffs
-
-	.priority	- See priorityList
-	.AuraData	- See UNIT_AURA event payload
---]]
-local debuffCache = {}
-
---[[ Holds the dispel priority list ]]--
+--[[ Holds the dispel priority list. ]]
 local priorityList = {
 	Magic = 4,
 	Curse = 3,
@@ -43,7 +36,7 @@ local priorityList = {
 	Disease = 1,
 }
 
---[[ Holds which dispel types can currently be handled. Initialized to false for all. ]]--
+--[[ Holds which dispel types can currently be handled. Initialized to false for all. ]]
 local dispelList = {
 	Magic = false,
 	Poison = false,
@@ -51,7 +44,7 @@ local dispelList = {
 	Curse = false,
 }
 
---[[ Class functions to update the dispel types which can be handled. ]]--
+--[[ Class functions to update the dispel types which can be handled. ]]
 local canDispel = {
 	DRUID = {
 		retail = function()
@@ -195,11 +188,11 @@ local canDispel = {
 	}
 }
 
---[[ Event handler for SPELLS_CHANGED
+--[[ Event handler for SPELLS_CHANGED.
 
 * self		- oUF UnitFrame
 * event		- SPELLS_CHANGED
---]]
+]]
 local function UpdateDispelList(self, event)
 	if event == "SPELLS_CHANGED" then
 		local project = (oUF.isRetail and "retail") or (oUF.isClassic and "classic") or "other"
@@ -210,7 +203,7 @@ end
 --[[ Returns a format string for timers.
 
 * time	- Time in seconds
---]]
+]]
 local function timeFormat(time)
 	if time < 3 then
 		return "%.1f"
@@ -226,10 +219,10 @@ end
 * self				- oUF UnitFrame
 * unit				- Tracked unit
 * auraInstanceID	- auraInstanceID of the debuff to be displayed
---]]
+]]
 local function ShowElement(self, unit, auraInstanceID)
 	local element = self.RaidDebuffs
-	local AuraData = debuffCache[auraInstanceID].AuraData
+	local AuraData = element.debuffCache[auraInstanceID].AuraData
 	local count = AuraData.applications
 	local duration = AuraData.duration
 	local expirationTime = AuraData.expirationTime
@@ -259,7 +252,7 @@ end
 
 * self	- oUF UnitFrame
 * unit	- Tracked unit
---]]
+]]
 local function HideElement(self, unit)
 	local element = self.RaidDebuffs
 	local color = debuffColor["none"]
@@ -278,8 +271,9 @@ end
 
 * self	- oUF UnitFrame
 * unit	- Tracked unit
---]]
+]]
 local function SelectPrioDebuff(self, unit)
+	local debuffCache = self.RaidDebuffs.debuffCache
 	local auraInstanceID = nil
 	local priority = 0
 
@@ -304,9 +298,10 @@ end
 * unit				- Tracked unit
 * auraInstanceID	- auraInstanceID
 * AuraData			- (optional) UNIT_AURA event payload
---]]
+]]
 local function FilterAura(self, unit, auraInstanceID, AuraData)
 	AuraData = AuraData or GetAuraDataByAuraInstanceID(unit, auraInstanceID)
+	local debuffCache = self.RaidDebuffs.debuffCache
 	local dispelName = AuraData.dispelName
 
 	if dispelName and dispelList[dispelName] then
@@ -318,11 +313,11 @@ local function FilterAura(self, unit, auraInstanceID, AuraData)
 	end
 end
 
---[[ Aura scan when isFullUpdate
+--[[ Aura scan when isFullUpdate.
 
 * self				- oUF UnitFrame
 * unit				- Tracked unit
---]]
+]]
 local function FullUpdate(self, unit)
 	if ForEachAura then
 		-- Mainline iteration-style.
@@ -351,7 +346,7 @@ end
 * event			- UNIT_AURA
 * unit			- Payload of event: unitTarget
 * updateInfo	- Payload of event: UnitAuraUpdateInfo
---]]
+]]
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or no updateInfo provided or target can't be assisted
 	if event ~= "UNIT_AURA" or self.unit ~= unit or not updateInfo or not UnitCanAssist("player", unit) then return end
@@ -362,6 +357,7 @@ local function Update(self, event, unit, updateInfo)
 	end
 
 	if updateInfo.removedAuraInstanceIDs then
+		local debuffCache = self.RaidDebuffs.debuffCache
 		for _, auraInstanceID in pairs(updateInfo.removedAuraInstanceIDs) do
 			if debuffCache[auraInstanceID] then
 				debuffCache[auraInstanceID] = nil
@@ -389,6 +385,15 @@ local function Enable(self)
 	local element = self.RaidDebuffs
 
 	if element and canDispel[playerClass] then
+		--[[ Cache for active debuffs.
+
+		table<auraInstanceID, aura>
+		aura = {
+			.priority	- See priorityList
+			.AuraData	- See UNIT_AURA event payload
+		}]]
+		element.debuffCache = {}
+
 		-- Create missing Sub-Widgets
 		if not element.icon then
 			element.icon = element:CreateTexture(nil, "ARTWORK")
@@ -435,6 +440,7 @@ local function Disable(self)
 	local element = self.RaidDebuffs
 
 	if element then
+		element.debuffCache = nil
 		self:UnregisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
 		self:UnregisterEvent("UNIT_AURA", Update)
 	end
