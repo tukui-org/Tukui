@@ -132,29 +132,21 @@ function UnitFrames:Raid()
 		RaidDebuffs:SetWidth(DebuffSize)
 		RaidDebuffs:SetPoint("CENTER", Health)
 		RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 10)
-		RaidDebuffs:CreateBackdrop()
-		RaidDebuffs:CreateShadow()
-		RaidDebuffs.Shadow:SetFrameLevel(RaidDebuffs:GetFrameLevel() + 1)
 		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "ARTWORK")
 		RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
 		RaidDebuffs.icon:SetInside(RaidDebuffs)
 		RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs, "CooldownFrameTemplate")
 		RaidDebuffs.cd:SetInside(RaidDebuffs, 1, 0)
 		RaidDebuffs.cd:SetReverse(true)
-		RaidDebuffs.cd.noOCC = true
-		RaidDebuffs.cd.noCooldownCount = true
 		RaidDebuffs.cd:SetHideCountdownNumbers(true)
 		RaidDebuffs.cd:SetAlpha(.7)
-		RaidDebuffs.onlyMatchSpellID = true
-		RaidDebuffs.showDispellableDebuff = true
-		RaidDebuffs.time = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-		RaidDebuffs.time:SetFont(C.Medias.Font, 12, "OUTLINE")
-		RaidDebuffs.time:SetPoint("CENTER", RaidDebuffs, 1, 0)
+		RaidDebuffs.timer = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.timer:SetFont(C.Medias.Font, 12, "OUTLINE")
+		RaidDebuffs.timer:SetPoint("CENTER", RaidDebuffs, 1, 0)
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
 		RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
 		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
-		--RaidDebuffs.forceShow = true
 
 		self.RaidDebuffs = RaidDebuffs
 	end
