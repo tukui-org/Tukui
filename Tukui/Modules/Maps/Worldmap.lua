@@ -410,11 +410,17 @@ else
 
 		Borders:SetAlpha(0)
 
-		ContinentButton:SetParent(T.Hider)
+		if ContinentButton then
+			ContinentButton:SetParent(T.Hider)
+		end
 
-		ZoneButton:SetParent(T.Hider)
+		if ZoneButton then
+			ZoneButton:SetParent(T.Hider)
+		end
 
-		ZoneMinimapButton:SetParent(T.Hider)
+		if ZoneMinimapButton then
+			ZoneMinimapButton:SetParent(T.Hider)
+		end
 
 		WorldMapZoomOutButton:SetParent(T.Hider)
 

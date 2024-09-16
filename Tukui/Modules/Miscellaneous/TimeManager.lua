@@ -64,12 +64,14 @@ function TimeManager:OnEvent(event, addon)
 	StopwatchResetButton.Text:SetText("-")
 	StopwatchResetButton.SetNormalTexture = function() return end
 
-	TimeManagerAlarmHourDropDown:SkinDropDown()
-	TimeManagerAlarmHourDropDown:SetWidth(80)
-	TimeManagerAlarmMinuteDropDown:SkinDropDown()
-	TimeManagerAlarmMinuteDropDown:SetWidth(80)
-	TimeManagerAlarmAMPMDropDown:SkinDropDown()
-	TimeManagerAlarmAMPMDropDown:SetWidth(80)
+	if TimeManagerAlarmHourDropDown then
+		TimeManagerAlarmHourDropDown:SkinDropDown()
+		TimeManagerAlarmHourDropDown:SetWidth(80)
+		TimeManagerAlarmMinuteDropDown:SkinDropDown()
+		TimeManagerAlarmMinuteDropDown:SetWidth(80)
+		TimeManagerAlarmAMPMDropDown:SkinDropDown()
+		TimeManagerAlarmAMPMDropDown:SetWidth(80)
+	end
 
 	TimeManagerAlarmMessageEditBox:SkinEditBox()
 

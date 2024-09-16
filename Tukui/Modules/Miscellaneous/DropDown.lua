@@ -76,7 +76,7 @@ function DropDown:Skin()
 end
 
 function DropDown:Enable()
-	if T.Retail then
+	if (T.Retail) or (T.Cata and T.WoWBuild >= 56574) then
 		local Manager = Menu.GetManager()
 		
 		hooksecurefunc(Manager, "OpenMenu", self.Skin)

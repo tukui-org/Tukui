@@ -618,7 +618,7 @@ Toolkit.Functions.HideBlizzard = function(self)
 	if T.Retail then
 		--Display_UseUIScale:Hide()
 		--Display_UIScaleSlider:Hide()
-	else
+	elseif Advanced_UseUIScale and Advanced_UIScaleSlider then
 		Advanced_UseUIScale:Hide()
 		Advanced_UIScaleSlider:Hide()
 	end

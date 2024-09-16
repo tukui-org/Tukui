@@ -58,8 +58,10 @@ function UnitFrames:DisableBlizzard()
 
 		-- Hide Raid Interface Options.
 		if not T.Retail then
-			InterfaceOptionsFrameCategoriesButton11:SetHeight(0.00001)
-			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+			if InterfaceOptionsFrameCategoriesButton11 then
+				InterfaceOptionsFrameCategoriesButton11:SetHeight(0.00001)
+				InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
+			end
 		end
 	end
 end
