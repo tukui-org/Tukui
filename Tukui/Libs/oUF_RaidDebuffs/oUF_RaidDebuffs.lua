@@ -321,12 +321,14 @@ local function FilterAura(self, unit, AuraData)
 	end
 end
 
---[[ Aura scan when isFullUpdate.
+--[[ Reset cache and full scan when isFullUpdate.
 
 * self				- oUF UnitFrame
 * unit				- Tracked unit
 ]]
 local function FullUpdate(self, unit)
+	table.wipe(self.element.debuffCache)
+
 	if ForEachAura then
 		-- Mainline iteration-style.
 		ForEachAura(unit, "HARMFUL", nil,
@@ -357,9 +359,9 @@ end
 ]]
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or no updateInfo provided or target can't be assisted
-	if event ~= "UNIT_AURA" or self.unit ~= unit or not updateInfo or not UnitCanAssist("player", unit) then return end
+	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
 
-	if updateInfo.isFullUpdate then
+	if not updateInfo or updateInfo.isFullUpdate then
 		FullUpdate(self, unit)
 		return
 	end
