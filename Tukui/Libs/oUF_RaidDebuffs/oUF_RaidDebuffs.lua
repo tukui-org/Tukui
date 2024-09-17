@@ -188,6 +188,20 @@ local canDispel = {
 	}
 }
 
+--[[ Event handler for PLAYER_LOGIN.
+
+* self		- oUF UnitFrame
+* event		- PLAYER_LOGIN
+]]
+local function ResetDispelList(self, event)
+	if event == "PLAYER_LOGIN" then
+		dispelList["Magic"]		= false
+		dispelList["Poison"]	= false
+		dispelList["Disease"]	= false
+		dispelList["Curse"]		= false
+	end
+end
+
 --[[ Event handler for SPELLS_CHANGED.
 
 * self		- oUF UnitFrame
@@ -222,7 +236,8 @@ end
 ]]
 local function ShowElement(self, unit, auraInstanceID)
 	local element = self.RaidDebuffs
-	local AuraData = element.debuffCache[auraInstanceID].AuraData
+	local debuffCache = element.debuffCache
+	local AuraData = debuffCache[auraInstanceID].AuraData
 	local count = AuraData.applications
 	local duration = AuraData.duration
 	local expirationTime = AuraData.expirationTime
@@ -237,9 +252,16 @@ local function ShowElement(self, unit, auraInstanceID)
 		element.cd:SetCooldown(start, duration)
 
 		if element.ticker then element.ticker:Cancel() end
-		element.ticker = NewTicker(.1, function()
+		element.ticker = NewTicker(.1, function(ticker)
 			local remaining = expirationTime - GetTime()
-			element.timer:SetFormattedText(timeFormat(remaining), remaining)
+			if remaining > 0 then
+				element.timer:SetFormattedText(timeFormat(remaining), remaining)
+			else
+				-- aura expired but we got no event for it
+				ticker:Cancel()
+				debuffCache[auraInstanceID] = nil
+				element.SelectPrioDebuff(self, unit)
+			end
 		end)
 	end
 
@@ -299,7 +321,7 @@ end
 * AuraData			- (optional) UNIT_AURA event payload
 ]]
 local function FilterAura(self, unit, AuraData)
-	if AuraData then
+	if AuraData and AuraData.isHarmful then
 		local debuffCache = self.RaidDebuffs.debuffCache
 		local dispelName = AuraData.dispelName
 
@@ -313,12 +335,14 @@ local function FilterAura(self, unit, AuraData)
 	end
 end
 
---[[ Aura scan when isFullUpdate.
+--[[ Reset cache and full scan when isFullUpdate.
 
 * self				- oUF UnitFrame
 * unit				- Tracked unit
 ]]
 local function FullUpdate(self, unit)
+	table.wipe(self.element.debuffCache)
+
 	if ForEachAura then
 		-- Mainline iteration-style.
 		ForEachAura(unit, "HARMFUL", nil,
@@ -349,9 +373,9 @@ end
 ]]
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or no updateInfo provided or target can't be assisted
-	if event ~= "UNIT_AURA" or self.unit ~= unit or not updateInfo or not UnitCanAssist("player", unit) then return end
+	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
 
-	if updateInfo.isFullUpdate then
+	if not updateInfo or updateInfo.isFullUpdate then
 		FullUpdate(self, unit)
 		return
 	end
@@ -393,6 +417,7 @@ local function Enable(self)
 			.AuraData	- See UNIT_AURA event payload
 		}]]
 		element.debuffCache = {}
+		element.SelectPrioDebuff = SelectPrioDebuff
 
 		-- Create missing Sub-Widgets
 		if not element.icon then
@@ -427,6 +452,7 @@ local function Enable(self)
 		end
 
 		-- Update the dispelList at login and whenever spells change (talent or spec change)
+		self:RegisterEvent("PLAYER_LOGIN", ResetDispelList, true)
 		self:RegisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
 		self:RegisterEvent("UNIT_AURA", Update)
 
@@ -441,6 +467,7 @@ local function Disable(self)
 
 	if element then
 		element.debuffCache = nil
+		self:UnregisterEvent("PLAYER_LOGIN", ResetDispelList, true)
 		self:UnregisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
 		self:UnregisterEvent("UNIT_AURA", Update)
 	end
