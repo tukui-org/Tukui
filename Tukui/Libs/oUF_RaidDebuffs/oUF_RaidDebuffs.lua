@@ -222,7 +222,8 @@ end
 ]]
 local function ShowElement(self, unit, auraInstanceID)
 	local element = self.RaidDebuffs
-	local AuraData = element.debuffCache[auraInstanceID].AuraData
+	local debuffCache = element.debuffCache
+	local AuraData = debuffCache[auraInstanceID].AuraData
 	local count = AuraData.applications
 	local duration = AuraData.duration
 	local expirationTime = AuraData.expirationTime
@@ -237,9 +238,16 @@ local function ShowElement(self, unit, auraInstanceID)
 		element.cd:SetCooldown(start, duration)
 
 		if element.ticker then element.ticker:Cancel() end
-		element.ticker = NewTicker(.1, function()
+		element.ticker = NewTicker(.1, function(ticker)
 			local remaining = expirationTime - GetTime()
-			element.timer:SetFormattedText(timeFormat(remaining), remaining)
+			if remaining > 0 then
+				element.timer:SetFormattedText(timeFormat(remaining), remaining)
+			else
+				-- aura expired but we got no event for it
+				ticker:Cancel()
+				debuffCache[auraInstanceID] = nil
+				element.SelectPrioDebuff(self, unit)
+			end
 		end)
 	end
 
@@ -299,7 +307,7 @@ end
 * AuraData			- (optional) UNIT_AURA event payload
 ]]
 local function FilterAura(self, unit, AuraData)
-	if AuraData then
+	if AuraData and AuraData.isHarmful then
 		local debuffCache = self.RaidDebuffs.debuffCache
 		local dispelName = AuraData.dispelName
 
@@ -393,6 +401,7 @@ local function Enable(self)
 			.AuraData	- See UNIT_AURA event payload
 		}]]
 		element.debuffCache = {}
+		element.SelectPrioDebuff = SelectPrioDebuff
 
 		-- Create missing Sub-Widgets
 		if not element.icon then
