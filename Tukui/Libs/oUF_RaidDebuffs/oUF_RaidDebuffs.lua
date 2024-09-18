@@ -188,21 +188,9 @@ local canDispel = {
 	}
 }
 
---[[ Event handler for PLAYER_LOGIN.
-
-* self		- oUF UnitFrame
-* event		- PLAYER_LOGIN
-]]
-local function ResetDispelList(self, event)
-	if event == "PLAYER_LOGIN" then
-		dispelList["Magic"]		= false
-		dispelList["Poison"]	= false
-		dispelList["Disease"]	= false
-		dispelList["Curse"]		= false
-	end
-end
-
 --[[ Event handler for SPELLS_CHANGED.
+
+Only fires for a player frame.
 
 * self		- oUF UnitFrame
 * event		- SPELLS_CHANGED
@@ -451,8 +439,7 @@ local function Enable(self)
 			element:CreateBackdrop()
 		end
 
-		-- Update the dispelList at login and whenever spells change (talent or spec change)
-		self:RegisterEvent("PLAYER_LOGIN", ResetDispelList, true)
+		-- Update the dispelList at login and whenever spells change (only fires for a player frame)
 		self:RegisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
 		self:RegisterEvent("UNIT_AURA", Update)
 
@@ -467,8 +454,7 @@ local function Disable(self)
 
 	if element then
 		element.debuffCache = nil
-		self:UnregisterEvent("PLAYER_LOGIN", ResetDispelList, true)
-		self:UnregisterEvent("SPELLS_CHANGED", UpdateDispelList, true)
+		self:UnregisterEvent("SPELLS_CHANGED", UpdateDispelList)
 		self:UnregisterEvent("UNIT_AURA", Update)
 	end
 end
