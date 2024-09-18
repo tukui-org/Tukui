@@ -329,7 +329,7 @@ end
 * unit				- Tracked unit
 ]]
 local function FullUpdate(self, unit)
-	table.wipe(self.element.debuffCache)
+	table.wipe(self.RaidDebuffs.debuffCache)
 
 	if ForEachAura then
 		-- Mainline iteration-style.
