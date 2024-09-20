@@ -1,109 +1,143 @@
 local _, ns = ...
-local oUF = ns.oUF or oUF
-
-if not oUF then return end
-
-local _, ns = ...
 local oUF = ns.oUF or _G.oUF
 assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
 
-local UnitBuff = UnitBuff
+local UnitCanAssist					= _G.UnitCanAssist
+local GetSpecialization				= _G.GetSpecialization
+local AuraUtil						= _G.AuraUtil
+local GetAuraDataByIndex			= _G.C_UnitAuras.GetAuraDataByIndex
+local GetAuraDataByAuraInstanceID	= _G.C_UnitAuras.GetAuraDataByAuraInstanceID
+local NewTicker						= _G.C_Timer.NewTicker
+local GetTime						= _G.GetTime
 
-if not UnitBuff then
-	UnitBuff = function(unitToken, index, filter)
-		local auraData = C_UnitAuras.GetBuffDataByIndex(unitToken, index, filter)
-		if not auraData then
-			return nil
-		end
+local AtonementID = 194384
+local AtonementIDPvP = 214206
 
-		return AuraUtil.UnpackAuraData(auraData)
+--[[ Find the Atonement buffs.
+
+* self				- oUF UnitFrame
+* unit				- Tracked unit
+* AuraData			- (optional) UNIT_AURA event payload
+
+* returns			true, if no further scanning needed (found or no more data)
+]]
+local function FindAtonement(self, unit, AuraData)
+	local element = self.Atonement
+
+	if not AuraData then
+		-- no more auras to check
+		return true
+	elseif AuraData.spellId == AtonementID or AuraData.spellId == AtonementIDPvP then
+		element:SetMinMaxValues(0, AuraData.duration)
+		element:Show()
+
+		if element.ticker then element.ticker:Cancel() end
+		element.ticker = NewTicker(.1, function(ticker)
+			local remaining = AuraData.expirationTime - GetTime()
+			if remaining > 0 then
+				element:SetValue(remaining)
+			else
+				ticker:Cancel()
+				element:SetValue(0)
+				element:Hide()
+			end
+		end)
+
+		-- found, no further scanning needed
+		return true
 	end
 end
 
-local function OnUpdate(self, elapsed)
-	local CurrentTime = GetTime()
-	local Timer = self.ExpirationTime - CurrentTime
+--[[ Full scan when isFullUpdate.
 
-	self:SetValue(Timer)
+* self				- oUF UnitFrame
+* unit				- Tracked unit
+]]
+local function FullUpdate(self, unit)
+	if AuraUtil then
+		AuraUtil.ForEachAura(unit, "HELPFUL|PLAYER", nil,
+			function(AuraData)
+				return FindAtonement(self, unit, AuraData)
+			end,
+		true)
+	else
+		local i = 1
+		while not FindAtonement(self, unit, GetAuraDataByIndex(unit, i, "HELPFUL|PLAYER")) do
+			i = i + 1
+		end
+	end
 end
 
-local function Update(self, event, ...)
-	local Unit = self.unit
+local function Update(self, event, unit, updateInfo)
+	-- Exit when unit doesn't match or target can't be assisted
+	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
 
-	if Unit and Unit ~= self.unit then
+	if not updateInfo or updateInfo.isFullUpdate then
+		FullUpdate(self, unit)
 		return
 	end
 
-	local AtonementID = 194384
-	local AtonementIDPvP = 214206
+	-- not needed: if updateInfo.removedAuraInstanceIDs then ___ end
 
-	for i = 1, 40 do
-		local Buff, Icon, Count, DebuffType, Duration, ExpirationTime, UnitCaster, IsStealable, ShouldConsolidate, SpellID = UnitBuff(Unit, i)
-
-		if not Buff then
-			break
-		end
-
-		if (SpellID == AtonementID) or (SpellID == AtonementIDPvP) then
-			self.Atonement.Duration = Duration
-			self.Atonement.ExpirationTime = ExpirationTime
-			self.Atonement:SetMinMaxValues(0, Duration)
-			self.Atonement:SetScript("OnUpdate", OnUpdate)
-			self.Atonement:Show()
-
-			return
+	if updateInfo.updatedAuraInstanceIDs then
+		for _, auraInstanceID in pairs(updateInfo.updatedAuraInstanceIDs) do
+			if auraInstanceID then
+				FindAtonement(self, unit, GetAuraDataByAuraInstanceID(unit, auraInstanceID))
+			end
 		end
 	end
 
-	self.Atonement:SetScript("OnUpdate", nil)
-	self.Atonement:SetValue(0)
-	self.Atonement:Hide()
+	if updateInfo.addedAuras then
+		for _, AuraData in pairs(updateInfo.addedAuras) do
+			FindAtonement(self, unit, AuraData)
+		end
+	end
 end
 
+--[[ Activate updates when Discipline. ]]
 local function CheckSpec(self, event)
-	local DiscSpec = 1
+	local element = self.Atonement
+	local SpecIndexDiscipline = 1
 
-	if (GetSpecialization() ~= DiscSpec) then
-		self.Atonement:SetScript("OnUpdate", nil)
-		self.Atonement:SetValue(0)
-		self.Atonement:Hide()
+	if GetSpecialization() == SpecIndexDiscipline then
+		self:RegisterEvent("UNIT_AURA", Update)
+	else
+		if element.ticker then element.ticker:Cancel() end
+		element:SetValue(0)
+		element:Hide()
 
 		self:UnregisterEvent("UNIT_AURA", Update)
-	else
-		self:RegisterEvent("UNIT_AURA", Update)
 	end
 end
 
 local function Enable(self)
-	local Bar = self.Atonement
+	local element = self.Atonement
 
-	if Bar then
+	if element then
 		self:RegisterEvent("UNIT_AURA", Update)
-		self:RegisterEvent("PLAYER_TALENT_UPDATE", CheckSpec, true)
+		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", CheckSpec, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec, true)
 
-		Bar:SetMinMaxValues(0, 15)
-		Bar:SetValue(0)
-		Bar:SetStatusBarColor(207/255, 181/255, 59/255)
+		element:SetMinMaxValues(0, 15)
+		element:SetValue(0)
+		element:SetStatusBarColor(207/255, 181/255, 59/255)
 
-		if not Bar.Backdrop then
-			Bar.Backdrop = self.Atonement:CreateTexture(nil, "BACKGROUND")
-			Bar.Backdrop:SetAllPoints()
-			Bar.Backdrop:SetColorTexture(207/255 * 0.2, 181/255 * 0.2, 59/255 * 0.2)
+		if not element.Backdrop then
+			element.Backdrop = self.Atonement:CreateTexture(nil, "BACKGROUND")
+			element.Backdrop:SetAllPoints()
+			element.Backdrop:SetColorTexture(207/255 * 0.2, 181/255 * 0.2, 59/255 * 0.2)
 		end
 
 		return true
-	else
-		return false
 	end
 end
 
 local function Disable(self)
-	local Bar = self.Atonement
+	local element = self.Atonement
 
-	if Bar then
+	if element then
 		self:UnregisterEvent("UNIT_AURA", Update)
-		self:UnregisterEvent("PLAYER_TALENT_UPDATE", CheckSpec)
+		self:UnregisterEvent("PLAYER_SPECIALIZATION_CHANGED", CheckSpec)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", CheckSpec)
 	end
 end
