@@ -212,7 +212,7 @@ local function timeFormat(time)
 	elseif time < 60 then
 		return "%d"
 	else
-		return "++"
+		return ""
 	end
 end
 
