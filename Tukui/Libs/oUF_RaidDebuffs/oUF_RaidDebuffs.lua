@@ -212,7 +212,7 @@ local function timeFormat(time)
 	elseif time < 60 then
 		return "%d"
 	else
-		return "++"
+		return ""
 	end
 end
 
@@ -360,7 +360,7 @@ end
 * updateInfo	- Payload of event: UnitAuraUpdateInfo
 ]]
 local function Update(self, event, unit, updateInfo)
-	-- Exit when unit doesn't match or no updateInfo provided or target can't be assisted
+	-- Exit when unit doesn't match or target can't be assisted
 	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
 
 	if not updateInfo or updateInfo.isFullUpdate then
