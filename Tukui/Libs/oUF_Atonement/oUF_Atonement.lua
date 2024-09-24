@@ -9,6 +9,7 @@ local GetAuraDataByIndex			= _G.C_UnitAuras.GetAuraDataByIndex
 local GetAuraDataByAuraInstanceID	= _G.C_UnitAuras.GetAuraDataByAuraInstanceID
 local NewTicker						= _G.C_Timer.NewTicker
 local GetTime						= _G.GetTime
+local playerClass					= _G.UnitClassBase("player")
 
 local AtonementID = 194384
 local AtonementIDPvP = 214206
@@ -113,8 +114,8 @@ end
 local function Enable(self)
 	local element = self.Atonement
 
-	if element then
-		self:RegisterEvent("UNIT_AURA", Update)
+	-- need for Atonement buff to transfer healing was only introduced after MoP
+	if element and oUF.isRetail and playerClass == "PRIEST" then
 		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", CheckSpec, true)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec, true)
 
