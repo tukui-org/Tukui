@@ -81,6 +81,9 @@ function DropDown:Enable()
 		
 		hooksecurefunc(Manager, "OpenMenu", self.Skin)
 		hooksecurefunc(Manager, "OpenContextMenu", self.Skin)
+		
+		-- TWW need rework
+		self.Open = function() T.Print("Not available for Retail yet, work in progress") return end
 	else
 		local Menu
 		
