@@ -76,29 +76,13 @@ function DropDown:Skin()
 end
 
 function DropDown:Enable()
-	if (T.Retail) or (T.Cata and T.WoWBuild >= 56714) or T.Classic then
-		local Manager = Menu.GetManager()
-		
-		hooksecurefunc(Manager, "OpenMenu", self.Skin)
-		hooksecurefunc(Manager, "OpenContextMenu", self.Skin)
-		
-		-- TWW need rework
-		self.Open = function() T.Print("Not available for Retail yet, work in progress") return end
-	else
-		local Menu
-		
-		for i = 1, getn(self.ChatMenus) do
-			Menu = _G[self.ChatMenus[i]]
-			Menu:StripTextures()
-			Menu:CreateBackdrop()
-			Menu:CreateShadow()
-		end
+	local Manager = Menu.GetManager()
 
-		hooksecurefunc("UIDropDownMenu_CreateFrames", self.Skin)
+	hooksecurefunc(Manager, "OpenMenu", self.Skin)
+	hooksecurefunc(Manager, "OpenContextMenu", self.Skin)
 
-		-- use dropdown lib
-		self.Open = Lib_EasyMenu or EasyMenu
-	end
+	-- TWW need rework
+	self.Open = function() T.Print("Not available for Retail yet, work in progress") return end
 end
 
 Miscellaneous.DropDown = DropDown

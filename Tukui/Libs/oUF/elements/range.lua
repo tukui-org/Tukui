@@ -66,15 +66,18 @@ local function Update(self, event)
 			local IsFriend = UnitIsFriend(unit, "player")
 
 			if IsFriend and Spell and IsSpellKnown(Spell) then
-				local name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(Spell)
-				local IsSpellInRangeFromPlayer = IsSpellInRange(name, unit)
+				local Data = GetSpellInfo(Spell)
+				
+				if Data then
+					local IsSpellInRangeFromPlayer = IsSpellInRange(Data.name or Data, unit)
 
-				if IsSpellInRangeFromPlayer == 1 then
-					inRange = true
-					checkedRange = true
-				else
-					inRange = false
-					checkedRange = true
+					if IsSpellInRangeFromPlayer == 1 then
+						inRange = true
+						checkedRange = true
+					else
+						inRange = false
+						checkedRange = true
+					end
 				end
 			else
 				inRange = CheckInteractDistance(unit, 4)
