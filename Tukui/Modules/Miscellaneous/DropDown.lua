@@ -13,65 +13,11 @@ DropDown.ChatMenus = {
 }
 
 function DropDown:Skin()
-	if T.Retail then
-		local Dropdown = Menu.GetManager():GetOpenMenu()
-		
-		if Dropdown then
-			Dropdown:StripTextures()
-			Dropdown:SetTemplate()
-		end
-	else
-		for i = 1, Levels do
-			local Backdrop
+	local Dropdown = Menu.GetManager():GetOpenMenu()
 
-			Backdrop = _G["DropDownList"..i.."MenuBackdrop"]
-			if Backdrop and not Backdrop.IsSkinned then
-				if Backdrop.NineSlice then
-					Backdrop.NineSlice:SetAlpha(0)
-				end
-
-				Backdrop:StripTextures()
-				Backdrop:CreateBackdrop("Default")
-				Backdrop:CreateShadow()
-				Backdrop.IsSkinned = true
-			end
-
-			Backdrop = _G["DropDownList"..i.."Backdrop"]
-			if Backdrop and not Backdrop.IsSkinned then
-				if Backdrop.NineSlice then
-					Backdrop.NineSlice:SetAlpha(0)
-				end
-
-				Backdrop:StripTextures()
-				Backdrop:CreateBackdrop("Default")
-				Backdrop:CreateShadow()
-				Backdrop.IsSkinned = true
-			end
-
-			Backdrop = _G["Lib_DropDownList"..i.."MenuBackdrop"]
-			if Backdrop and not Backdrop.IsSkinned then
-				if Backdrop.NineSlice then
-					Backdrop.NineSlice:SetAlpha(0)
-				end
-
-				Backdrop:StripTextures()
-				Backdrop:CreateBackdrop("Default")
-				Backdrop:CreateShadow()
-				Backdrop.IsSkinned = true
-			end
-
-			Backdrop = _G["Lib_DropDownList"..i.."Backdrop"]
-			if Backdrop and not Backdrop.IsSkinned then
-				if Backdrop.NineSlice then
-					Backdrop.NineSlice:SetAlpha(0)
-				end
-
-				Backdrop:StripTextures()
-				Backdrop:CreateBackdrop("Default")
-				Backdrop:CreateShadow()
-				Backdrop.IsSkinned = true
-			end
-		end
+	if Dropdown then
+		Dropdown:StripTextures()
+		Dropdown:SetTemplate()
 	end
 end
 
