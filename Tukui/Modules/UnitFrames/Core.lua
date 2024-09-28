@@ -714,6 +714,13 @@ function UnitFrames:UpdateMaxEssence(cur, max, hasmaxchanged, powertype, ...)
 	end
 end
 
+local groupingOrder = {
+	["ROLE"] = "MAINTANK, MAINASSIST",
+	["CLASS"] = unpack(CLASS_SORT_ORDER),
+	["GROUP"] = "1,2,3,4,5,6,7,8",
+	["ASSIGNEDROLE"] = "TANK, HEALER, DAMAGER, NONE"
+}
+
 function UnitFrames:GetPartyFramesAttributes()
 	return
 		"TukuiParty",
@@ -731,8 +738,8 @@ function UnitFrames:GetPartyFramesAttributes()
 		"showPlayer", C["Party"].ShowPlayer,
 		"showRaid", true,
 		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", "GROUP",
+		"groupingOrder", "TANK, HEALER, DAMAGER, NONE",
+		"groupBy", "ASSIGNEDROLE",
 		"yOffset", -50
 end
 
@@ -752,14 +759,12 @@ function UnitFrames:GetPetPartyFramesAttributes()
 		"showParty", true,
 		"showPlayer", C["Party"].ShowPlayer,
 		"showRaid", true,
-		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", "GROUP",
 		"yOffset", -50
 end
 
 function UnitFrames:GetRaidFramesAttributes()
 	local Properties = C.Party.Enable and "custom [@raid21,exists] hide; [@raid6,exists] show; hide" or "custom [@raid21,exists] hide; [@raid6,exists] show; [@party1,exists] show; hide"
+	local groupBy = C["Raid"].GroupBy.Value
 
 	return
 		"TukuiRaid",
@@ -780,8 +785,8 @@ function UnitFrames:GetRaidFramesAttributes()
 		"yOffset", -C.Raid.Padding,
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", C["Raid"].GroupBy.Value,
+		"groupingOrder",groupingOrder[groupBy],
+		"groupBy", groupBy,
 		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].MaxUnitPerColumn,
 		"columnSpacing", C.Raid.Padding,
@@ -790,6 +795,7 @@ end
 
 function UnitFrames:GetBigRaidFramesAttributes()
 	local Properties = "custom [@raid21,exists] show; hide"
+	local groupBy = C["Raid"].GroupBy.Value
 
 	return
 		"TukuiRaid40",
@@ -810,8 +816,8 @@ function UnitFrames:GetBigRaidFramesAttributes()
 		"yOffset", -C.Raid.Padding40,
 		"point", "TOP",
 		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
-		"groupBy", C["Raid"].GroupBy.Value,
+		"groupingOrder", groupingOrder[groupBy],
+		"groupBy", groupBy,
 		"maxColumns", math.ceil(40 / 5),
 		"unitsPerColumn", C["Raid"].Raid40MaxUnitPerColumn,
 		"columnSpacing", C.Raid.Padding40,
