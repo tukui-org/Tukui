@@ -342,16 +342,19 @@ end
 * AuraData          - UNIT_AURA event payload
 ]]
 local function FilterAura(self, unit, auraInstanceID, AuraData)
+	local debuffCache = self.RaidDebuffs.debuffCache
+
 	if AuraData then -- added aura or valid update
 		if AuraData.isHarmful then
 			local dispelName = AuraData.dispelName
+
 			if dispelName and dispelList[dispelName] then
 				cacheWrite(self, unit, auraInstanceID, priorityList[dispelName], AuraData)
 			end
 		end
-	else -- removed aura or invalid update
+	elseif debuffCache[auraInstanceID] then -- removed aura or invalid update
 		cacheWrite(self, unit, auraInstanceID, nil, nil)
-	end
+	end -- aura we dont care about
 end
 
 --[[ Reset cache and full scan when isFullUpdate.
