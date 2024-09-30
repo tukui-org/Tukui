@@ -1,19 +1,19 @@
 --[=[
-	Shows Debuffs on Unit Frames.
+    Shows Debuffs on Unit Frames.
 
-	Sub-Widgets will be created if not provided.
+    Sub-Widgets will be created if not provided.
 
-	Member Variables
-	.font			Font details used for timer and stacks
-	.fontheight 	| used if Sub-Widgets aren't provided
-	.fontFlags		| not needed otherwise
+    Member Variables
+    .font          Font details used for timer and stacks
+    .fontheight    | used if Sub-Widgets aren't provided
+    .fontFlags     | not needed otherwise
 
-	Sub-Widgets
-	.icon			The Icon/Texture of the debuff
-	.cd 			A Cooldown frame
-	.timer			A Text showing the remaining duration
-	.count			A Text showing the number of stacks
-	.Backdrop		Backdrops border is used to indicate the debuff type
+    Sub-Widgets
+    .icon          The Icon/Texture of the debuff
+    .cd            A Cooldown frame
+    .timer         A Text showing the remaining duration
+    .count         A Text showing the number of stacks
+    .Backdrop      Backdrops border is used to indicate the debuff type
 --]=]
 local _, ns = ...
 local oUF = ns.oUF or oUF
@@ -194,8 +194,8 @@ local canDispel = {
 
 Only fires for a player frame.
 
-* self		- oUF UnitFrame
-* event		- SPELLS_CHANGED
+* self     - oUF UnitFrame
+* event    - SPELLS_CHANGED
 ]]
 local function UpdateDispelList(self, event)
 	if event == "SPELLS_CHANGED" then
@@ -206,7 +206,7 @@ end
 
 --[[ Returns a format string for timers.
 
-* time	- Time in seconds
+* time    - Time in seconds
 ]]
 local function timeFormat(time)
 	if time < 3 then
@@ -220,9 +220,9 @@ end
 
 --[[ Show the debuff element.
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
-* auraInstanceID	- auraInstanceID of the debuff to be displayed
+* self              - oUF UnitFrame
+* unit              - Tracked unit
+* auraInstanceID    - auraInstanceID of the debuff to be displayed
 ]]
 local function ShowElement(self, unit, auraInstanceID)
 	local element = self.RaidDebuffs
@@ -261,8 +261,8 @@ end
 
 --[[ Hide the debuff element.
 
-* self	- oUF UnitFrame
-* unit	- Tracked unit
+* self    - oUF UnitFrame
+* unit    - Tracked unit
 ]]
 local function HideElement(self, unit)
 	local element = self.RaidDebuffs
@@ -280,8 +280,8 @@ end
 
 --[[ Select the Debuff with highest priority to display, hide element when none left.
 
-* self	- oUF UnitFrame
-* unit	- Tracked unit
+* self    - oUF UnitFrame
+* unit    - Tracked unit
 ]]
 local function SelectPrioDebuff(self, unit)
 	local debuffCache = self.RaidDebuffs.debuffCache
@@ -307,17 +307,17 @@ end
 
 Cache writes need to call SelectPrioDebuff after update to ensure the display is also updated.
 
-	table<auraInstanceID, aura>
-	aura = {
-		.priority	- See priorityList
-		.AuraData	- See UNIT_AURA event payload
-	}
+    table<auraInstanceID, aura>
+    aura = {
+        .priority    - See priorityList
+        .AuraData    - See UNIT_AURA event payload
+    }
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit				-
-* auraInstanceID	- UNIT_AURA event payload
-* priority			- See priorityList
-* AuraData			- UNIT_AURA event payload
+* self              - oUF UnitFrame
+* unit              - Tracked unit
+* auraInstanceID    - UNIT_AURA event payload
+* priority          - See priorityList
+* AuraData          - UNIT_AURA event payload
 ]]
 cacheWrite = function(self, unit, auraInstanceID, priority, AuraData)
 	local debuffCache = self.RaidDebuffs.debuffCache
@@ -336,10 +336,10 @@ end
 
 --[[ Filter for dispellable debuffs.
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
-* auraInstanceID	- UNIT_AURA event payload
-* AuraData			- UNIT_AURA event payload
+* self              - oUF UnitFrame
+* unit              - Tracked unit
+* auraInstanceID    - UNIT_AURA event payload
+* AuraData          - UNIT_AURA event payload
 ]]
 local function FilterAura(self, unit, auraInstanceID, AuraData)
 	if AuraData then -- added aura or valid update
@@ -356,8 +356,8 @@ end
 
 --[[ Reset cache and full scan when isFullUpdate.
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
+* self    - oUF UnitFrame
+* unit    - Tracked unit
 ]]
 local function FullUpdate(self, unit)
 	table.wipe(self.RaidDebuffs.debuffCache)
@@ -386,10 +386,10 @@ end
 
 --[[ Event handler for UNIT_AURA.
 
-* self			- oUF UnitFrame
-* event			- UNIT_AURA
-* unit			- Payload of event: unitTarget
-* updateInfo	- Payload of event: UnitAuraUpdateInfo
+* self          - oUF UnitFrame
+* event         - UNIT_AURA
+* unit          - Payload of event: unitTarget
+* updateInfo    - Payload of event: UnitAuraUpdateInfo
 ]]
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or target can't be assisted

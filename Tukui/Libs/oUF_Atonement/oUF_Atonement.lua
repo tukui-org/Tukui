@@ -18,11 +18,11 @@ local Active = false
 
 --[[ Find the Atonement buffs.
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
-* AuraData			- (optional) UNIT_AURA event payload
+* self        - oUF UnitFrame
+* unit        - Tracked unit
+* AuraData    - (optional) UNIT_AURA event payload
 
-* returns			true, if no further scanning needed (found or no more data)
+* returns     true, if no further scanning needed (found or no more data)
 ]]
 local function FindAtonement(self, unit, AuraData)
 	local element = self.Atonement
@@ -53,8 +53,8 @@ end
 
 --[[ Full scan when isFullUpdate.
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
+* self    - oUF UnitFrame
+* unit    - Tracked unit
 ]]
 local function FullUpdate(self, unit)
 	if AuraUtil then
@@ -68,6 +68,26 @@ local function FullUpdate(self, unit)
 		while not FindAtonement(self, unit, GetAuraDataByIndex(unit, i, "HELPFUL|PLAYER")) do
 			i = i + 1
 		end
+	end
+end
+
+--[[ Activate element for Discipline.
+
+* self     - oUF UnitFrame
+* event    - SPELLS_CHANGED
+]]
+local function CheckSpec(self, event)
+	local element = self.Atonement
+	local SpecIndexDiscipline = 1
+
+	if GetSpecialization() == SpecIndexDiscipline then
+		Active = true
+	else
+		if element.ticker then element.ticker:Cancel() end
+		element:SetValue(0)
+		element:Hide()
+
+		Active = false
 	end
 end
 
@@ -92,22 +112,6 @@ local function Update(self, event, unit, updateInfo)
 		for _, AuraData in pairs(updateInfo.addedAuras) do
 			FindAtonement(self, unit, AuraData)
 		end
-	end
-end
-
---[[ Activate element for Discipline. ]]
-local function CheckSpec(self, event)
-	local element = self.Atonement
-	local SpecIndexDiscipline = 1
-
-	if GetSpecialization() == SpecIndexDiscipline then
-		Active = true
-	else
-		if element.ticker then element.ticker:Cancel() end
-		element:SetValue(0)
-		element:Hide()
-
-		Active = false
 	end
 end
 
