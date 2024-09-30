@@ -28,6 +28,8 @@ local ForEachAura					= _G.AuraUtil.ForEachAura
 local NewTicker						= _G.C_Timer.NewTicker
 local debuffColor					= _G.DebuffTypeColor
 
+local cacheWrite
+
 --[[ Holds the dispel priority list. ]]
 local priorityList = {
 	Magic = 4,
@@ -247,8 +249,7 @@ local function ShowElement(self, unit, auraInstanceID)
 			else
 				-- aura expired but we got no event for it
 				ticker:Cancel()
-				debuffCache[auraInstanceID] = nil
-				element.SelectPrioDebuff(self, unit)
+				cacheWrite(self, unit, auraInstanceID, nil, nil)
 			end
 		end)
 	end
@@ -302,24 +303,54 @@ local function SelectPrioDebuff(self, unit)
 	end
 end
 
+--[[ Use this when writing updates to the cache.
+
+Cache writes need to call SelectPrioDebuff after update to ensure the display is also updated.
+
+	table<auraInstanceID, aura>
+	aura = {
+		.priority	- See priorityList
+		.AuraData	- See UNIT_AURA event payload
+	}
+
+* self				- oUF UnitFrame
+* unit				- Tracked unit				-
+* auraInstanceID	- UNIT_AURA event payload
+* priority			- See priorityList
+* AuraData			- UNIT_AURA event payload
+]]
+cacheWrite = function(self, unit, auraInstanceID, priority, AuraData)
+	local debuffCache = self.RaidDebuffs.debuffCache
+
+	if not priority or not AuraData then
+		debuffCache[auraInstanceID] = nil
+	else
+		debuffCache[auraInstanceID] = {
+			priority = priority,
+			AuraData = AuraData
+		}
+	end
+
+	SelectPrioDebuff(self, unit)
+end
+
 --[[ Filter for dispellable debuffs.
 
 * self				- oUF UnitFrame
 * unit				- Tracked unit
-* AuraData			- (optional) UNIT_AURA event payload
+* auraInstanceID	- UNIT_AURA event payload
+* AuraData			- UNIT_AURA event payload
 ]]
-local function FilterAura(self, unit, AuraData)
-	if AuraData and AuraData.isHarmful then
-		local debuffCache = self.RaidDebuffs.debuffCache
-		local dispelName = AuraData.dispelName
-
-		if dispelName and dispelList[dispelName] then
-			debuffCache[AuraData.auraInstanceID] = {
-				priority = priorityList[dispelName],
-				AuraData = AuraData
-			}
-			SelectPrioDebuff(self, unit)
+local function FilterAura(self, unit, auraInstanceID, AuraData)
+	if AuraData then -- added aura or valid update
+		if AuraData.isHarmful then
+			local dispelName = AuraData.dispelName
+			if dispelName and dispelList[dispelName] then
+				cacheWrite(self, unit, auraInstanceID, priorityList[dispelName], AuraData)
+			end
 		end
+	else -- removed aura or invalid update
+		cacheWrite(self, unit, auraInstanceID, nil, nil)
 	end
 end
 
@@ -330,12 +361,13 @@ end
 ]]
 local function FullUpdate(self, unit)
 	table.wipe(self.RaidDebuffs.debuffCache)
+	HideElement(self, unit)
 
 	if ForEachAura then
 		-- Mainline iteration-style.
 		ForEachAura(unit, "HARMFUL", nil,
 			function(AuraData)
-				FilterAura(self, unit, AuraData)
+				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
 			end,
 		true)
 	else
@@ -345,7 +377,7 @@ local function FullUpdate(self, unit)
 		repeat
 			AuraData = GetAuraDataByIndex(unit, i, "HARMFUL")
 			if AuraData then
-				FilterAura(self, unit, AuraData)
+				FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
 			end
 			i = i + 1
 		until not AuraData
@@ -369,26 +401,20 @@ local function Update(self, event, unit, updateInfo)
 	end
 
 	if updateInfo.removedAuraInstanceIDs then
-		local debuffCache = self.RaidDebuffs.debuffCache
 		for _, auraInstanceID in pairs(updateInfo.removedAuraInstanceIDs) do
-			if debuffCache[auraInstanceID] then
-				debuffCache[auraInstanceID] = nil
-				SelectPrioDebuff(self, unit)
-			end
+			FilterAura(self, unit, auraInstanceID, nil)
 		end
 	end
 
 	if updateInfo.updatedAuraInstanceIDs then
 		for _, auraInstanceID in pairs(updateInfo.updatedAuraInstanceIDs) do
-			if auraInstanceID then
-				FilterAura(self, unit, GetAuraDataByAuraInstanceID(unit, auraInstanceID))
-			end
+			FilterAura(self, unit, auraInstanceID, GetAuraDataByAuraInstanceID(unit, auraInstanceID))
 		end
 	end
 
 	if updateInfo.addedAuras then
 		for _, AuraData in pairs(updateInfo.addedAuras) do
-			FilterAura(self, unit, AuraData)
+			FilterAura(self, unit, AuraData.auraInstanceID, AuraData)
 		end
 	end
 end
@@ -397,15 +423,7 @@ local function Enable(self)
 	local element = self.RaidDebuffs
 
 	if element and canDispel[playerClass] then
-		--[[ Cache for active debuffs.
-
-		table<auraInstanceID, aura>
-		aura = {
-			.priority	- See priorityList
-			.AuraData	- See UNIT_AURA event payload
-		}]]
 		element.debuffCache = {}
-		element.SelectPrioDebuff = SelectPrioDebuff
 
 		-- Create missing Sub-Widgets
 		if not element.icon then
