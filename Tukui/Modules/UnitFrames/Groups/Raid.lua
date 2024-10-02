@@ -3,43 +3,14 @@ local T, C, L = unpack((select(2, ...)))
 local UnitFrames = T["UnitFrames"]
 local CreateFrame = _G.CreateFrame
 
-local subWidgets = {}
 local HealthTexture
 local PowerTexture
 local Font
 local HealthFont
 
---[[ Add a widget to the Raid style.
-
-Default widgets are already registered, Health and Power will be created first and are available to other widgets. After that all other widgets in random order.
-
-Add or replace a widget: AddRaidWidget(widgetName, yourCreateFunction, true)\
-Remove a widget: AddRaidWidget(widgetName, nil, true)
-
-* name				- Name of the widget
-* createFunction	- Function to be called to setup the widget
-* replace			- true to replace an already existing entry
-]]
-UnitFrames.AddRaidWidget = function(name, createFunction, replace)
-	if replace or not subWidgets[name] then
-		subWidgets[name] = createFunction
-	end
-end
-local addWidget = UnitFrames.AddRaidWidget
-
---[[ Calls the create function of all registered widgets. ]]
-local function createWidgets(unitFrame)
-	-- process Health and Power first as other widgets depend on them
-	subWidgets["Health"](unitFrame)
-	subWidgets["Power"](unitFrame)
-
-	for name, func in pairs(subWidgets) do
-		if name ~= "Health" and name ~= "Power" then
-			func(unitFrame)
-		end
-	end
-end
-
+--[[ Make raid widgets available for external edits. ]]
+UnitFrames.RaidWidgets = UnitFrames.newWidgetManager()
+local RaidWidgets = UnitFrames.RaidWidgets
 
 -- oUF base elements
 --[[ Configures oUF element Health. ]]
@@ -75,7 +46,7 @@ local function createHealth(unitFrame)
 	unitFrame.Health.bg = Health.Background
 	unitFrame:Tag(Health.Value, C.Raid.HealthTag.Value)
 end
-addWidget("Health", createHealth)
+RaidWidgets:addOrReplace("Health", createHealth)
 
 --[[ Configures oUF element Power. ]]
 local function createPower(unitFrame)
@@ -100,7 +71,7 @@ local function createPower(unitFrame)
 	unitFrame.Power = Power
 	unitFrame.Power.bg = Power.Background
 end
-addWidget("Power", createPower)
+RaidWidgets:addOrReplace("Power", createPower)
 
 --[[ Configures oUF element RaidTargetIndicator. ]]
 local function createRaidTargetIndicator(unitFrame)
@@ -111,7 +82,7 @@ local function createRaidTargetIndicator(unitFrame)
 
 	unitFrame.RaidTargetIndicator = RaidIcon
 end
-addWidget("RaidTargetIndicator", createRaidTargetIndicator)
+RaidWidgets:addOrReplace("RaidTargetIndicator", createRaidTargetIndicator)
 
 --[[ Configures oUF element ReadyCheckIndicator. ]]
 local function createReadyCheckIndicator(unitFrame)
@@ -121,7 +92,7 @@ local function createReadyCheckIndicator(unitFrame)
 
 	unitFrame.ReadyCheckIndicator = ReadyCheck
 end
-addWidget("ReadyCheckIndicator", createReadyCheckIndicator)
+RaidWidgets:addOrReplace("ReadyCheckIndicator", createReadyCheckIndicator)
 
 --[[ Configures oUF element ResurrectIndicator. ]]
 local function createResurrectIndicator(unitFrame)
@@ -132,7 +103,7 @@ local function createResurrectIndicator(unitFrame)
 
 	unitFrame.ResurrectIndicator = ResurrectIndicator
 end
-addWidget("ResurrectIndicator", createResurrectIndicator)
+RaidWidgets:addOrReplace("ResurrectIndicator", createResurrectIndicator)
 
 --[[ Configures oUF element Range. ]]
 local function createRange(unitFrame)
@@ -143,7 +114,7 @@ local function createRange(unitFrame)
 
 	unitFrame.Range = Range
 end
-addWidget("Range", createRange)
+RaidWidgets:addOrReplace("Range", createRange)
 
 --[[ Configures oUF element Buffs (part of Auras). ]]
 local function createBuffs(unitFrame)
@@ -172,7 +143,7 @@ local function createBuffs(unitFrame)
 	unitFrame.Buffs = Buffs
 end
 if C.Raid.RaidBuffsStyle.Value == "Standard" then
-	addWidget("Buffs", createBuffs)
+	RaidWidgets:addOrReplace("Buffs", createBuffs)
 end
 
 --[[ Configures oUF element HealthPrediction. ]]
@@ -237,7 +208,7 @@ local function createHealComm(unitframe)
 		end
 	end
 end
-addWidget("HealComm", createHealComm)
+RaidWidgets:addOrReplace("HealComm", createHealComm)
 
 
 -- oUF Plugins
@@ -254,7 +225,7 @@ local function createAuraTrack(unitFrame)
 	unitFrame.AuraTrack = AuraTrack
 end
 if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
-	addWidget("AuraTrack", createAuraTrack)
+	RaidWidgets:addOrReplace("AuraTrack", createAuraTrack)
 end
 
 --[[ Configures oUF_RaidDebuffs. ]]
@@ -286,7 +257,7 @@ local function createRaidDebuffs(unitFrame)
 	unitFrame.RaidDebuffs = RaidDebuffs
 end
 if C.Raid.DebuffWatch then
-	addWidget("RaidDebuffs", createRaidDebuffs)
+	RaidWidgets:addOrReplace("RaidDebuffs", createRaidDebuffs)
 end
 
 
@@ -313,7 +284,7 @@ local function createNamePanel(unitFrame)
 		unitFrame:Tag(Name, "[Tukui:NameShort]")
 	end
 end
-addWidget("NamePanel", createNamePanel)
+RaidWidgets:addOrReplace("NamePanel", createNamePanel)
 
 --[[ Highlights the currently selected unit. ]]
 local function createHighlight(unitFrame)
@@ -326,7 +297,7 @@ local function createHighlight(unitFrame)
 
 	unitFrame.Highlight = Highlight
 end
-addWidget("Highlight", createHighlight)
+RaidWidgets:addOrReplace("Highlight", createHighlight)
 
 
 --[[ Raid style function. ]]
@@ -348,7 +319,7 @@ function UnitFrames:Raid()
 	self.Backdrop:SetBackdrop(UnitFrames.Backdrop)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
 
-	createWidgets(self)
+	RaidWidgets:createWidgets(self)
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)
