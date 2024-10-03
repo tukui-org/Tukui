@@ -1,20 +1,43 @@
---[=[
-    Shows Debuffs on Unit Frames.
+--[[
+# Element: Debuff Indicator
 
-    Sub-Widgets will be created if not provided.
+	Shows a Debuff icon, duration and debuff type indication for debuffs the player can dispel.
 
-    Member Variables
-    .font          Font details used for timer and stacks
-    .fontheight    | used if Sub-Widgets aren't provided
-    .fontFlags     | not needed otherwise
+## Widget
 
-    Sub-Widgets
-    .icon          The Icon/Texture of the debuff
-    .cd            A Cooldown frame
-    .timer         A Text showing the remaining duration
-    .count         A Text showing the number of stacks
-    .Backdrop      Backdrops border is used to indicate the debuff type
---]=]
+	RaidDebuffs    - A 'Frame' used to display the debuff.
+
+## Sub-Widgets
+
+	.icon          - The 'Texture' of the debuff
+	.cd            - A 'Frame' with 'CooldownFrameTemplate'
+	.timer         - A 'FontString' showing the remaining duration
+	.count         - A 'FontString' showing the number of stacks
+	.Backdrop      - Backdrops border is used to indicate the debuff type
+
+## Notes
+
+	Sub-Widgets will be created if not provided. The font options are only used in that case.
+	Font defaults to (NumberFontNormal, 12, nil)
+
+## Options
+
+	.font          - Font used for timer and stacks (Font?)
+	.fontheight    - Font height (number?)
+	.fontFlags     - Font flags (string?)
+
+## Examples
+
+	-- position and size
+	local RaidDebuffs = CreateFrame("Frame", nil, Health)
+	RaidDebuffs:SetHeight(DebuffSize)
+	RaidDebuffs:SetWidth(DebuffSize)
+	RaidDebuffs:SetPoint("CENTER", Health)
+	RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 10)
+
+	-- Register it with oUF
+	self.RaidDebuffs = RaidDebuffs
+--]]
 local _, ns = ...
 local oUF = ns.oUF or oUF
 
@@ -30,7 +53,7 @@ local debuffColor					= _G.DebuffTypeColor
 
 local cacheWrite
 
---[[ Holds the dispel priority list. ]]
+-- Holds the dispel priority list.
 local priorityList = {
 	Magic = 4,
 	Curse = 3,
@@ -38,7 +61,7 @@ local priorityList = {
 	Disease = 1,
 }
 
---[[ Holds which dispel types can currently be handled. Initialized to false for all. ]]
+-- Holds which dispel types can currently be handled. Initialized to false for all.
 local dispelList = {
 	Magic = false,
 	Poison = false,
@@ -46,7 +69,7 @@ local dispelList = {
 	Curse = false,
 }
 
---[[ Class functions to update the dispel types which can be handled. ]]
+-- Class functions to update the dispel types which can be handled.
 local canDispel = {
 	DRUID = {
 		retail = function()
@@ -190,13 +213,8 @@ local canDispel = {
 	}
 }
 
---[[ Event handler for SPELLS_CHANGED.
-
-Only fires for a player frame.
-
-* self     - oUF UnitFrame
-* event    - SPELLS_CHANGED
-]]
+-- Event handler for SPELLS_CHANGED.
+-- Only fires for a player frame.
 local function UpdateDispelList(self, event)
 	if event == "SPELLS_CHANGED" then
 		local project = (oUF.isRetail and "retail") or (oUF.isClassic and "classic") or "other"
@@ -204,10 +222,7 @@ local function UpdateDispelList(self, event)
 	end
 end
 
---[[ Returns a format string for timers.
-
-* time    - Time in seconds
-]]
+-- Returns a format string for timers.
 local function timeFormat(time)
 	if time < 3 then
 		return "%.1f"
@@ -218,12 +233,7 @@ local function timeFormat(time)
 	end
 end
 
---[[ Show the debuff element.
-
-* self              - oUF UnitFrame
-* unit              - Tracked unit
-* auraInstanceID    - auraInstanceID of the debuff to be displayed
-]]
+-- Show the debuff element for auraInstanceID.
 local function ShowElement(self, unit, auraInstanceID)
 	local element = self.RaidDebuffs
 	local debuffCache = element.debuffCache
@@ -259,11 +269,7 @@ local function ShowElement(self, unit, auraInstanceID)
 	end
 end
 
---[[ Hide the debuff element.
-
-* self    - oUF UnitFrame
-* unit    - Tracked unit
-]]
+-- Hide the debuff element.
 local function HideElement(self, unit)
 	local element = self.RaidDebuffs
 	local color = debuffColor["none"]
@@ -278,11 +284,7 @@ local function HideElement(self, unit)
 	element:Hide()
 end
 
---[[ Select the Debuff with highest priority to display, hide element when none left.
-
-* self    - oUF UnitFrame
-* unit    - Tracked unit
-]]
+-- Select the Debuff with highest priority to display, hide element when none left.
 local function SelectPrioDebuff(self, unit)
 	local debuffCache = self.RaidDebuffs.debuffCache
 	local auraInstanceID = nil
@@ -303,22 +305,8 @@ local function SelectPrioDebuff(self, unit)
 	end
 end
 
---[[ Use this when writing updates to the cache.
-
-Cache writes need to call SelectPrioDebuff after update to ensure the display is also updated.
-
-    table<auraInstanceID, aura>
-    aura = {
-        .priority    - See priorityList
-        .AuraData    - See UNIT_AURA event payload
-    }
-
-* self              - oUF UnitFrame
-* unit              - Tracked unit
-* auraInstanceID    - UNIT_AURA event payload
-* priority          - See priorityList
-* AuraData          - UNIT_AURA event payload
-]]
+-- After each write to the cache the display also needs to be updated.
+-- Struncture of the cache is: table<auraInstanceID, aura<priority, AuraData>>
 cacheWrite = function(self, unit, auraInstanceID, priority, AuraData)
 	local debuffCache = self.RaidDebuffs.debuffCache
 
@@ -334,13 +322,7 @@ cacheWrite = function(self, unit, auraInstanceID, priority, AuraData)
 	SelectPrioDebuff(self, unit)
 end
 
---[[ Filter for dispellable debuffs.
-
-* self              - oUF UnitFrame
-* unit              - Tracked unit
-* auraInstanceID    - UNIT_AURA event payload
-* AuraData          - UNIT_AURA event payload
-]]
+-- Filter for dispellable debuffs and update the cache.
 local function FilterAura(self, unit, auraInstanceID, AuraData)
 	local debuffCache = self.RaidDebuffs.debuffCache
 
@@ -357,11 +339,7 @@ local function FilterAura(self, unit, auraInstanceID, AuraData)
 	end -- aura we dont care about
 end
 
---[[ Reset cache and full scan when isFullUpdate.
-
-* self    - oUF UnitFrame
-* unit    - Tracked unit
-]]
+-- Reset cache and full scan when isFullUpdate.
 local function FullUpdate(self, unit)
 	table.wipe(self.RaidDebuffs.debuffCache)
 	HideElement(self, unit)
@@ -387,13 +365,7 @@ local function FullUpdate(self, unit)
 	end
 end
 
---[[ Event handler for UNIT_AURA.
-
-* self          - oUF UnitFrame
-* event         - UNIT_AURA
-* unit          - Payload of event: unitTarget
-* updateInfo    - Payload of event: UnitAuraUpdateInfo
-]]
+-- Event handler for UNIT_AURA.
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or target can't be assisted
 	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
@@ -427,6 +399,10 @@ local function Enable(self)
 
 	if element and canDispel[playerClass] then
 		element.debuffCache = {}
+
+		element.font = element.font or NumberFontNormal
+		element.fontHeight = element.fontHeight or 12
+		element.fontFlags = element.fontFlags or ""
 
 		-- Create missing Sub-Widgets
 		if not element.icon then
