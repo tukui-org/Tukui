@@ -8,12 +8,12 @@ local PowerTexture
 local Font
 local HealthFont
 
---[[ Make raid widgets available for external edits. ]]
+-- Make raid widgets available for external edits.
 UnitFrames.RaidWidgets = UnitFrames.newWidgetManager()
 local RaidWidgets = UnitFrames.RaidWidgets
 
 -- oUF base elements
---[[ Configures oUF element Health. ]]
+-- Configures oUF element Health.
 local function createHealth(unitFrame)
 	local Health = CreateFrame("StatusBar", nil, unitFrame)
 	Health:SetPoint("TOPLEFT")
@@ -48,7 +48,7 @@ local function createHealth(unitFrame)
 end
 RaidWidgets:addOrReplace("Health", createHealth)
 
---[[ Configures oUF element Power. ]]
+-- Configures oUF element Power.
 local function createPower(unitFrame)
 	local Power = CreateFrame("StatusBar", nil, unitFrame)
 	Power:SetHeight(3)
@@ -73,7 +73,7 @@ local function createPower(unitFrame)
 end
 RaidWidgets:addOrReplace("Power", createPower)
 
---[[ Configures oUF element RaidTargetIndicator. ]]
+-- Configures oUF element RaidTargetIndicator.
 local function createRaidTargetIndicator(unitFrame)
 	local RaidIcon = unitFrame.Health:CreateTexture(nil, "OVERLAY")
 	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
@@ -84,7 +84,7 @@ local function createRaidTargetIndicator(unitFrame)
 end
 RaidWidgets:addOrReplace("RaidTargetIndicator", createRaidTargetIndicator)
 
---[[ Configures oUF element ReadyCheckIndicator. ]]
+-- Configures oUF element ReadyCheckIndicator.
 local function createReadyCheckIndicator(unitFrame)
 	local ReadyCheck = unitFrame.Power:CreateTexture(nil, "OVERLAY", nil, 2)
 	ReadyCheck:SetSize(12, 12)
@@ -94,7 +94,7 @@ local function createReadyCheckIndicator(unitFrame)
 end
 RaidWidgets:addOrReplace("ReadyCheckIndicator", createReadyCheckIndicator)
 
---[[ Configures oUF element ResurrectIndicator. ]]
+-- Configures oUF element ResurrectIndicator.
 local function createResurrectIndicator(unitFrame)
 	local Health = unitFrame.Health
 	local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
@@ -105,7 +105,7 @@ local function createResurrectIndicator(unitFrame)
 end
 RaidWidgets:addOrReplace("ResurrectIndicator", createResurrectIndicator)
 
---[[ Configures oUF element Range. ]]
+-- Configures oUF element Range.
 local function createRange(unitFrame)
 	local Range = {
 		insideAlpha = 1,
@@ -116,7 +116,7 @@ local function createRange(unitFrame)
 end
 RaidWidgets:addOrReplace("Range", createRange)
 
---[[ Configures oUF element Buffs (part of Auras). ]]
+-- Configures oUF element Buffs (part of Auras).
 local function createBuffs(unitFrame)
 	local Buffs = CreateFrame("Frame", unitFrame:GetName().."Buffs", unitFrame.Health)
 	local onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self"
@@ -146,7 +146,7 @@ if C.Raid.RaidBuffsStyle.Value == "Standard" then
 	RaidWidgets:addOrReplace("Buffs", createBuffs)
 end
 
---[[ Configures oUF element HealthPrediction. ]]
+-- Configures oUF element HealthPrediction.
 local function createHealComm(unitframe)
 	if C.UnitFrames.HealComm then
 		local Health = unitframe.Health
@@ -212,7 +212,7 @@ RaidWidgets:addOrReplace("HealComm", createHealComm)
 
 
 -- oUF Plugins
---[[ Configures oUF_AuraTrack. ]]
+-- Configures oUF_AuraTrack.
 local function createAuraTrack(unitFrame)
 	local AuraTrack = CreateFrame("Frame", nil, unitFrame.Health)
 	AuraTrack:SetAllPoints()
@@ -228,7 +228,7 @@ if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
 	RaidWidgets:addOrReplace("AuraTrack", createAuraTrack)
 end
 
---[[ Configures oUF_RaidDebuffs. ]]
+-- Configures oUF_RaidDebuffs.
 local function createRaidDebuffs(unitFrame)
 	local Health = unitFrame.Health
 	local RaidDebuffs = CreateFrame("Frame", nil, Health)
@@ -262,7 +262,7 @@ end
 
 
 -- additional plugins
---[[ Creates a panel for the unit name. ]]
+-- Creates a panel for the unit name.
 local function createNamePanel(unitFrame)
 	local Panel = CreateFrame("Frame", nil, unitFrame)
 	Panel:SetPoint("TOPLEFT", unitFrame.Power, "BOTTOMLEFT", 0, -1)
@@ -286,7 +286,7 @@ local function createNamePanel(unitFrame)
 end
 RaidWidgets:addOrReplace("NamePanel", createNamePanel)
 
---[[ Highlights the currently selected unit. ]]
+-- Highlights the currently selected unit.
 local function createHighlight(unitFrame)
 	local Highlight = CreateFrame("Frame", nil, unitFrame, "BackdropTemplate")
 	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
@@ -301,7 +301,7 @@ RaidWidgets:addOrReplace("Highlight", createHighlight)
 
 
 --[[ Raid style function. ]]
-function UnitFrames:Raid()
+function UnitFrames.Raid(self)
 	HealthTexture = T.GetTexture(C["Textures"].UFRaidHealthTexture)
 	PowerTexture = T.GetTexture(C["Textures"].UFRaidPowerTexture)
 	Font = T.GetFont(C["Raid"].Font)
