@@ -1,3 +1,33 @@
+--[[
+# Element: Atonement Indicator
+
+	Provides an indication of active Atonement buffs on units.
+
+## Widget
+
+	Atonement - A 'StatusBar' indicating the presence of an Atonement buff.
+
+## Sub-Widgets
+
+	.Backdrop - A 'Texture' used as background.
+
+## Notes
+
+	A background will be created if not provided.
+
+## Examples
+
+	-- position and size
+	local Atonement = CreateFrame("StatusBar", nil, Health)
+	Atonement:SetHeight(6)
+	Atonement:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+	Atonement:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+	Atonement:SetStatusBarTexture(healthTexture)
+	Atonement:SetFrameLevel(Health:GetFrameLevel() + 1)
+
+	-- Register it with oUF
+	self.Atonement = Atonement
+]]
 local _, ns = ...
 local oUF = ns.oUF or _G.oUF
 assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
@@ -16,14 +46,8 @@ local ATONEMENT_PVP_ID = 214206
 
 local Active = false
 
---[[ Find the Atonement buffs.
-
-* self        - oUF UnitFrame
-* unit        - Tracked unit
-* AuraData    - (optional) UNIT_AURA event payload
-
-* returns     true, if no further scanning needed (found or no more data)
-]]
+-- Filter function to find the Atonement buffs.
+-- Returns true, if no further scanning needed (found or no more data) to shorten a full update.
 local function FindAtonement(self, unit, AuraData)
 	local element = self.Atonement
 
@@ -51,11 +75,7 @@ local function FindAtonement(self, unit, AuraData)
 	end
 end
 
---[[ Full scan when isFullUpdate.
-
-* self    - oUF UnitFrame
-* unit    - Tracked unit
-]]
+-- Full scan when isFullUpdate.
 local function FullUpdate(self, unit)
 	if AuraUtil then
 		AuraUtil.ForEachAura(unit, "HELPFUL|PLAYER", nil,
@@ -71,11 +91,7 @@ local function FullUpdate(self, unit)
 	end
 end
 
---[[ Activate element for Discipline.
-
-* self     - oUF UnitFrame
-* event    - SPELLS_CHANGED
-]]
+-- Activate element for Discipline.
 local function CheckSpec(self, event)
 	local element = self.Atonement
 	local SpecIndexDiscipline = 1
