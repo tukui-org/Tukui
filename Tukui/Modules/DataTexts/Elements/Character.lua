@@ -49,34 +49,36 @@ local OnEnter = function(self)
 	if T.Classic then
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
 		GameTooltip:AddLine(" ")
+		
+		if CharacterStatFrame then
+			for _, Frame in pairs(CharacterStatFrame) do
+				local Name = _G[Frame.."Label"]
+				local Value = _G[Frame.."StatText"]
+				local Tooltip = _G[Frame].tooltip2
+				local StatName, StatValue
 
-		for _, Frame in pairs(CharacterStatFrame) do
-			local Name = _G[Frame.."Label"]
-			local Value = _G[Frame.."StatText"]
-			local Tooltip = _G[Frame].tooltip2
-			local StatName, StatValue
-
-			if Name:GetText() then
-				StatName = "|cffff8000"..Name:GetText().."|r"
-			end
-
-			if Value:GetText() then
-				StatValue = "|cffffffff"..Value:GetText().."|r"
-			end
-
-			if StatName and StatValue then
-				if IsAlternativeTooltip then
-					GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
-				else
-					GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+				if Name:GetText() then
+					StatName = "|cffff8000"..Name:GetText().."|r"
 				end
 
-				if Tooltip and IsAlternativeTooltip then
-					-- Remove double enter, for gaining tooltip space
-					Tooltip = string.gsub(Tooltip, "\n\n", " ")
+				if Value:GetText() then
+					StatValue = "|cffffffff"..Value:GetText().."|r"
+				end
 
-					GameTooltip:AddLine(Tooltip, .75, .75, .75)
-					GameTooltip:AddLine(" ")
+				if StatName and StatValue then
+					if IsAlternativeTooltip then
+						GameTooltip:AddLine("|CF00FFF00"..StatName.."|r |CFFFFFFFF"..StatValue.."|r")
+					else
+						GameTooltip:AddDoubleLine("|CF00FFF00"..StatName.."|r", "|CFFFFFFFF"..StatValue.."|r")
+					end
+
+					if Tooltip and IsAlternativeTooltip then
+						-- Remove double enter, for gaining tooltip space
+						Tooltip = string.gsub(Tooltip, "\n\n", " ")
+
+						GameTooltip:AddLine(Tooltip, .75, .75, .75)
+						GameTooltip:AddLine(" ")
+					end
 				end
 			end
 		end
