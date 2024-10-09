@@ -357,7 +357,8 @@ local OnMouseDown = function(self, button)
 		ToggleFriendsFrame(1)
 	end
 
-	if button == "RightButton" then
+	-- To be updated for new dropdown system
+	if not Menu and button == "RightButton" then
 		local InviteID = 0
 		local WhisperID = 0
 		local InviteList = Options[2].menuList

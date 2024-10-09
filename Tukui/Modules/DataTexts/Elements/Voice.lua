@@ -46,7 +46,8 @@ local menuList = {
 }
 
 local OnMouseUp = function(self, btn)
-	if btn == "RightButton" then
+	-- To be updated for new dropdown system
+	if not Menu and btn == "RightButton" then
 		T.Miscellaneous.DropDown.Open(menuList, menuFrame, "cursor", 0, 0, "MENU", 2)
 	else
 		if InCombatLockdown() then

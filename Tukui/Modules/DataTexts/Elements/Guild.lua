@@ -52,7 +52,8 @@ local OnMouseDown = function(self, button)
 		end
 	end
 
-	if button == "RightButton" and IsInGuild() then
+	-- To be updated for new dropdown system
+	if not Menu and button == "RightButton" and IsInGuild() then
 		T.Miscellaneous.DropDown.Open(Options, Menu, "cursor", 0, 0, "MENU", 2)
 	end
 end
