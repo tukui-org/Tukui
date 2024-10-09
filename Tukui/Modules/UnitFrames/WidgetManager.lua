@@ -31,12 +31,18 @@ end
 
 -- Add a new or replace an existing widget create function.
 function WidgetManager:addOrReplace(name, widget)
-	if self.widgets[name] then
+	if self.widgets and self.widgets[name] then
 		self.widgets[name] = widget
 	else
-		self.addToIndex(self, widget)
-		self.widgets[name] = widget
+		if self.addToIndex then
+			self.addToIndex(self, widget)
+		end
+		
+		if self.widgets then
+			self.widgets[name] = widget
+		end
 	end
+	
 	return true
 end
 
