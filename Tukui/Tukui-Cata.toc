@@ -9,7 +9,7 @@
 ## X-Website: http://www.tukui.org
 ## X-Tukui-ProjectID: 1
 ## X-Tukui-ProjectFolders: Tukui
- 
+
 ## Init
 Core\Init.lua
 
@@ -184,6 +184,7 @@ Modules\UnitFrames\Core.lua
 Modules\UnitFrames\Debuffs.lua
 Modules\UnitFrames\Tracking.lua
 Modules\UnitFrames\Tags.lua
+Modules\UnitFrames\WidgetManager.lua
 Modules\UnitFrames\Classes\Warrior.lua
 Modules\UnitFrames\Classes\Paladin.lua
 Modules\UnitFrames\Classes\Hunter.lua
