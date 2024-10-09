@@ -6,20 +6,6 @@ local UIDropDownMenu_CreateFrames = UIDropDownMenu_CreateFrames
 local DropDown = CreateFrame("Frame")
 local DataTexts = T["DataTexts"]
 
--- WIP
-function DropDown:Warning()
-	T.Print("Dropdown are currently being rewrote from scratch and will be available soon!")
-end
-
-function DropDown:DisplayDataTexts()
-	MenuUtil.CreateContextMenu(self, function(Region, Description)
-		for Number, DataText in pairs(DataTexts.Menu) do
-			Description:CreateButton(DataText.text, DropDown.Warning)
-		end
-	end)
-end
--- WIP
-
 function DropDown:Skin()
 	if Menu then
 		local Dropdown = Menu.GetManager():GetOpenMenu()

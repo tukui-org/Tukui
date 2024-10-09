@@ -18,11 +18,35 @@ DataTexts.Remove = function()
 end
 
 local OnMouseDown = function(self)
+	CurrentFrame = self
+
 	if Menu then
-		T.Miscellaneous.DropDown.DisplayDataTexts(self)
+		DataTexts.DisplayDataTextsDropDown(CurrentFrame)
 	else
 		T.Miscellaneous.DropDown.Open(DataMenu, MenuFrame, "cursor", 0 , 0, "MENU", 2)
 	end
+end
+
+function DataTexts:SwitchDataText()
+	local Object = DataTexts:GetDataText(self)
+	
+	if Object then
+		DataTexts:Toggle(Object)
+	else
+		DataTexts:Remove()
+	end
+end
+
+function DataTexts:DisplayDataTextsDropDown()
+	MenuUtil.CreateContextMenu(self, function(Region, Description)
+		for Number, DataText in pairs(DataTexts.Menu) do
+			local Name = DataText.text
+
+			Description:CreateButton(DataText.text, function()
+				DataTexts.SwitchDataText(Name)
+			end)
+		end
+	end)
 end
 
 function DataTexts:ToggleDataPositions()
