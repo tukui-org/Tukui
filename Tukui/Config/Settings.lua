@@ -295,6 +295,7 @@ C["Raid"] = {
 			["Group"] = "GROUP",
 			["Class"] = "CLASS",
 			["Role"] = "ROLE",
+			["LFG Role"] = "ASSIGNEDROLE",
 		},
 
 		["Value"] = "GROUP",
