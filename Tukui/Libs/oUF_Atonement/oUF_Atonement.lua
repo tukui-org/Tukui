@@ -1,3 +1,33 @@
+--[[
+# Element: Atonement Indicator
+
+	Provides an indication of active Atonement buffs on units.
+
+## Widget
+
+	Atonement - A 'StatusBar' indicating the presence of an Atonement buff.
+
+## Sub-Widgets
+
+	.Backdrop - A 'Texture' used as background.
+
+## Notes
+
+	A background will be created if not provided.
+
+## Examples
+
+	-- position and size
+	local Atonement = CreateFrame("StatusBar", nil, Health)
+	Atonement:SetHeight(6)
+	Atonement:SetPoint("BOTTOMLEFT", Health, "BOTTOMLEFT")
+	Atonement:SetPoint("BOTTOMRIGHT", Health, "BOTTOMRIGHT")
+	Atonement:SetStatusBarTexture(healthTexture)
+	Atonement:SetFrameLevel(Health:GetFrameLevel() + 1)
+
+	-- Register it with oUF
+	self.Atonement = Atonement
+]]
 local _, ns = ...
 local oUF = ns.oUF or _G.oUF
 assert(oUF, "oUF_Atonement cannot find an instance of oUF. If your oUF is embedded into a layout, it may not be embedded properly.")
@@ -11,24 +41,20 @@ local NewTicker						= _G.C_Timer.NewTicker
 local GetTime						= _G.GetTime
 local playerClass					= _G.UnitClassBase("player")
 
-local AtonementID = 194384
-local AtonementIDPvP = 214206
+local ATONEMENT_ID = 194384
+local ATONEMENT_PVP_ID = 214206
 
---[[ Find the Atonement buffs.
+local Active = false
 
-* self				- oUF UnitFrame
-* unit				- Tracked unit
-* AuraData			- (optional) UNIT_AURA event payload
-
-* returns			true, if no further scanning needed (found or no more data)
-]]
+-- Filter function to find the Atonement buffs.
+-- Returns true, if no further scanning needed (found or no more data) to shorten a full update.
 local function FindAtonement(self, unit, AuraData)
 	local element = self.Atonement
 
 	if not AuraData then
 		-- no more auras to check
 		return true
-	elseif AuraData.spellId == AtonementID or AuraData.spellId == AtonementIDPvP then
+	elseif AuraData.spellId == ATONEMENT_ID or AuraData.spellId == ATONEMENT_PVP_ID then
 		element:SetMinMaxValues(0, AuraData.duration)
 		element:Show()
 
@@ -49,11 +75,7 @@ local function FindAtonement(self, unit, AuraData)
 	end
 end
 
---[[ Full scan when isFullUpdate.
-
-* self				- oUF UnitFrame
-* unit				- Tracked unit
-]]
+-- Full scan when isFullUpdate.
 local function FullUpdate(self, unit)
 	if AuraUtil then
 		AuraUtil.ForEachAura(unit, "HELPFUL|PLAYER", nil,
@@ -69,9 +91,25 @@ local function FullUpdate(self, unit)
 	end
 end
 
+-- Activate element for Discipline.
+local function CheckSpec(self, event)
+	local element = self.Atonement
+	local SpecIndexDiscipline = 1
+
+	if GetSpecialization() == SpecIndexDiscipline then
+		Active = true
+	else
+		if element.ticker then element.ticker:Cancel() end
+		element:SetValue(0)
+		element:Hide()
+
+		Active = false
+	end
+end
+
 local function Update(self, event, unit, updateInfo)
 	-- Exit when unit doesn't match or target can't be assisted
-	if event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
+	if not Active or event ~= "UNIT_AURA" or self.unit ~= unit or not UnitCanAssist("player", unit) then return end
 
 	if not updateInfo or updateInfo.isFullUpdate then
 		FullUpdate(self, unit)
@@ -82,9 +120,7 @@ local function Update(self, event, unit, updateInfo)
 
 	if updateInfo.updatedAuraInstanceIDs then
 		for _, auraInstanceID in pairs(updateInfo.updatedAuraInstanceIDs) do
-			if auraInstanceID then
 				FindAtonement(self, unit, GetAuraDataByAuraInstanceID(unit, auraInstanceID))
-			end
 		end
 	end
 
@@ -95,29 +131,13 @@ local function Update(self, event, unit, updateInfo)
 	end
 end
 
---[[ Activate updates when Discipline. ]]
-local function CheckSpec(self, event)
-	local element = self.Atonement
-	local SpecIndexDiscipline = 1
-
-	if GetSpecialization() == SpecIndexDiscipline then
-		self:RegisterEvent("UNIT_AURA", Update)
-	else
-		if element.ticker then element.ticker:Cancel() end
-		element:SetValue(0)
-		element:Hide()
-
-		self:UnregisterEvent("UNIT_AURA", Update)
-	end
-end
-
 local function Enable(self)
 	local element = self.Atonement
 
 	-- need for Atonement buff to transfer healing was only introduced after MoP
 	if element and oUF.isRetail and playerClass == "PRIEST" then
-		self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", CheckSpec, true)
-		self:RegisterEvent("PLAYER_ENTERING_WORLD", CheckSpec, true)
+		self:RegisterEvent("SPELLS_CHANGED", CheckSpec, true)
+		self:RegisterEvent("UNIT_AURA", Update)
 
 		element:SetMinMaxValues(0, 15)
 		element:SetValue(0)
@@ -129,6 +149,8 @@ local function Enable(self)
 			element.Backdrop:SetColorTexture(207/255 * 0.2, 181/255 * 0.2, 59/255 * 0.2)
 		end
 
+		element:Hide()
+
 		return true
 	end
 end
@@ -137,9 +159,8 @@ local function Disable(self)
 	local element = self.Atonement
 
 	if element then
+		self:UnregisterEvent("SPELLS_CHANGED", CheckSpec)
 		self:UnregisterEvent("UNIT_AURA", Update)
-		self:UnregisterEvent("PLAYER_SPECIALIZATION_CHANGED", CheckSpec)
-		self:UnregisterEvent("PLAYER_ENTERING_WORLD", CheckSpec)
 	end
 end
 
