@@ -5,13 +5,13 @@ local UnitFrames = T["UnitFrames"]
 local WidgetManager = {}
 
 -- Add a widget to the index.
-function WidgetManager:addToIndex(widget)
+local function addToIndex(self, widget)
 	self.count = self.count + 1
 	self.index[self.count] = widget
 end
 
 -- Rebuild the index for insert or remove.
-function WidgetManager:rebuildIndex(widget, atIndex)
+local function rebuildIndex(self, widget, atIndex)
 	local oldIndex = self.index
 
 	self.index = {}
@@ -19,12 +19,12 @@ function WidgetManager:rebuildIndex(widget, atIndex)
 
 	for i, _widget in ipairs(oldIndex) do
 		if i == atIndex then
-			self.addToIndex(self, widget)
-			self.addToIndex(self, _widget)
+			addToIndex(self, widget)
+			addToIndex(self, _widget)
 		elseif _widget == widget then
 			-- deleted
 		else
-			self.addToIndex(self, _widget)
+			addToIndex(self, _widget)
 		end
 	end
 end
@@ -34,7 +34,7 @@ function WidgetManager:addOrReplace(name, widget)
 	if self.widgets[name] then
 		self.widgets[name] = widget
 	else
-		self.addToIndex(self, widget)
+		addToIndex(self, widget)
 		self.widgets[name] = widget
 	end
 	return true
@@ -59,7 +59,7 @@ end
 function WidgetManager:insert(atIndex, name, widget)
 	if not self.widgets[name] and atIndex <= self.count then
 		self.widgets[name] = widget
-		self.rebuildIndex(self, widget, atIndex)
+		rebuildIndex(self, widget, atIndex)
 		return true
 	else
 		return false
@@ -71,7 +71,7 @@ function WidgetManager:remove(name)
 	local widget = self:get(name)
 	if widget then
 		self.widgets[name] = nil
-		self.rebuildIndex(self, widget)
+		rebuildIndex(self, widget)
 		return true
 	else
 		return false
