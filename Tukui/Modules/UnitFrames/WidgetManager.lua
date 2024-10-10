@@ -2,102 +2,113 @@ local T, C, L = unpack((select(2, ...)))
 
 local UnitFrames = T["UnitFrames"]
 
-local WidgetManager = {}
+local Count = 0
+local Widgets = {}
 
--- Add a widget to the index.
-local function addToIndex(self, widget)
-	self.count = self.count + 1
-	self.index[self.count] = widget
-end
 
 -- Rebuild the index for insert or remove.
-local function rebuildIndex(self, widget, atIndex)
-	local oldIndex = self.index
-
-	self.index = {}
-	self.count = 0
-
-	for i, _widget in ipairs(oldIndex) do
-		if i == atIndex then
-			addToIndex(self, widget)
-			addToIndex(self, _widget)
-		elseif _widget == widget then
-			-- deleted
-		else
-			addToIndex(self, _widget)
+local function rebuildIndex(changedWidget)
+	if Widgets[changedWidget.index] then
+		-- insert case: start at end, shift right
+		for index = Count, changedWidget.index, -1 do
+			local newIndex = index + 1
+			Widgets[newIndex] = Widgets[index]
+			Widgets[newIndex].index = newIndex
 		end
+		Widgets[changedWidget.index] = changedWidget
+		Count = Count + 1
+	else
+		-- remove case: start at index, shift left
+		for index = changedWidget.index, Count do
+			local nextIndex = index + 1
+			Widgets[index] = Widgets[nextIndex]
+			Widgets[index].index = index
+		end
+		Count = Count - 1
 	end
 end
 
--- Add a new or replace an existing widget create function.
-function WidgetManager:addOrReplace(name, widget)
-	if self.widgets[name] then
-		self.widgets[name] = widget
-	else
-		addToIndex(self, widget)
-		self.widgets[name] = widget
-	end
-	return true
+-- Creates a new Widget storing the parameters as key value pairs.
+local function Widget(index, name, widget, config)
+	return {
+		index = index,
+		name = name,
+		func = widget,
+		config = config
+	}
 end
+
+local WidgetManager = {}
 
 -- Returns the number of registered widgets.
 function WidgetManager:getCount()
-	return self.count
+	return Count
 end
 
--- Returns the registered widget by its name or index.
-function WidgetManager:get(nameOrIndex)
-	if type(nameOrIndex) == "string" then
-		return self.widgets[nameOrIndex]
-	elseif type(nameOrIndex) == "number" then
-		return self.index[nameOrIndex]
+-- Add a new widget.
+-- Returs the index it was added at or false if already existing.
+function WidgetManager:add(name, func, config)
+	-- name must not be a number, to not interfere with the index
+	if type(name) == "string" and not Widgets[name] then
+		Count = Count + 1
+		local widget = Widget(Count, name, func, config)
+		Widgets[Count] = widget
+		Widgets[name] = widget
+		return widget.index
 	end
+	return false
 end
 
--- Insert a new widget at position "atIndex".
--- Other widgets will be shifted if needed.
-function WidgetManager:insert(atIndex, name, widget)
-	if not self.widgets[name] and atIndex <= self.count then
-		self.widgets[name] = widget
-		rebuildIndex(self, widget, atIndex)
-		return true
-	else
-		return false
+-- Returns the registered widget or nil.
+-- Supports name or index to retrieve the widget.
+function WidgetManager:get(nameOrIndex)
+	local widget = Widgets[nameOrIndex]
+	return widget.index, widget.name, widget.func, widget.config
+end
+
+-- Update an already registered widget.
+-- Returns the index and name of the updated widget or nil if not found.
+function WidgetManager:update(nameOrIndex, func, config)
+	local widget = Widgets[nameOrIndex]
+	if widget then
+		widget.func = func
+		widget.config = config
+		return widget.index, widget.name
 	end
 end
 
 -- Remove a registered widget.
-function WidgetManager:remove(name)
-	local widget = self:get(name)
+-- Returns the removed widget or nil if not found.
+function WidgetManager:remove(nameOrIndex)
+	local widget = Widgets[nameOrIndex]
 	if widget then
-		self.widgets[name] = nil
-		rebuildIndex(self, widget)
-		return true
-	else
-		return false
+		Widgets[widget.index] = nil
+		Widgets[widget.name] = nil
+
+		rebuildIndex(widget)
+		return widget.index, widget.name, widget.func, widget.config
+	end
+end
+
+-- Insert a new widget at position "atIndex".
+-- Returns the number of registered widgets or nil if failed.
+function WidgetManager:insert(atIndex, name, func, config)
+	-- fails if a widget of that name already exists or the index is outside the current range
+	if not Widgets[name] and atIndex <= Count then
+		local widget = Widget(atIndex, name, func, config)
+		Widgets[name] = widget
+
+		rebuildIndex(widget)
+		return Count
 	end
 end
 
 --Calls all registered widgets in order.
 function WidgetManager:createWidgets(unitFrame)
-	for _, widget in ipairs(self.index) do
-		widget(unitFrame)
+	for i = 1, Count do
+		local widget = Widgets[i]
+		widget.func(unitFrame, widget.config)
 	end
 end
 
--- Creates a new widget manager.
-WidgetManager.new = function()
-	return {
-		index = {},
-		count = 0,
-		widgets = {},
-		addOrReplace = WidgetManager.addOrReplace,
-		get = WidgetManager.get,
-		insert = WidgetManager.insert,
-		remove = WidgetManager.remove,
-		getCount = WidgetManager.getCount,
-		createWidgets = WidgetManager.createWidgets,
-	}
-end
-
-UnitFrames.newWidgetManager = WidgetManager.new
+UnitFrames.WidgetManager = WidgetManager

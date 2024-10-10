@@ -9,8 +9,7 @@ local Font
 local HealthFont
 
 -- Make raid widgets available for external edits.
-UnitFrames.RaidWidgets = UnitFrames.newWidgetManager()
-local RaidWidgets = UnitFrames.RaidWidgets
+local RaidWidgets = UnitFrames.WidgetManager
 
 -- oUF base elements
 -- Configures oUF element Health.
@@ -46,7 +45,6 @@ local function createHealth(unitFrame)
 	unitFrame.Health.bg = Health.Background
 	unitFrame:Tag(Health.Value, C.Raid.HealthTag.Value)
 end
-RaidWidgets:addOrReplace("Health", createHealth)
 
 -- Configures oUF element Power.
 local function createPower(unitFrame)
@@ -71,7 +69,6 @@ local function createPower(unitFrame)
 	unitFrame.Power = Power
 	unitFrame.Power.bg = Power.Background
 end
-RaidWidgets:addOrReplace("Power", createPower)
 
 -- Configures oUF element RaidTargetIndicator.
 local function createRaidTargetIndicator(unitFrame)
@@ -82,7 +79,6 @@ local function createRaidTargetIndicator(unitFrame)
 
 	unitFrame.RaidTargetIndicator = RaidIcon
 end
-RaidWidgets:addOrReplace("RaidTargetIndicator", createRaidTargetIndicator)
 
 -- Configures oUF element ReadyCheckIndicator.
 local function createReadyCheckIndicator(unitFrame)
@@ -92,7 +88,6 @@ local function createReadyCheckIndicator(unitFrame)
 
 	unitFrame.ReadyCheckIndicator = ReadyCheck
 end
-RaidWidgets:addOrReplace("ReadyCheckIndicator", createReadyCheckIndicator)
 
 -- Configures oUF element ResurrectIndicator.
 local function createResurrectIndicator(unitFrame)
@@ -103,7 +98,6 @@ local function createResurrectIndicator(unitFrame)
 
 	unitFrame.ResurrectIndicator = ResurrectIndicator
 end
-RaidWidgets:addOrReplace("ResurrectIndicator", createResurrectIndicator)
 
 -- Configures oUF element Range.
 local function createRange(unitFrame)
@@ -114,7 +108,6 @@ local function createRange(unitFrame)
 
 	unitFrame.Range = Range
 end
-RaidWidgets:addOrReplace("Range", createRange)
 
 -- Configures oUF element Buffs (part of Auras).
 local function createBuffs(unitFrame)
@@ -141,9 +134,6 @@ local function createBuffs(unitFrame)
 	Buffs.PostUpdateButton = UnitFrames.DesaturateBuffs
 
 	unitFrame.Buffs = Buffs
-end
-if C.Raid.RaidBuffsStyle.Value == "Standard" then
-	RaidWidgets:addOrReplace("Buffs", createBuffs)
 end
 
 -- Configures oUF element HealthPrediction.
@@ -208,7 +198,6 @@ local function createHealComm(unitframe)
 		end
 	end
 end
-RaidWidgets:addOrReplace("HealComm", createHealComm)
 
 
 -- oUF Plugins
@@ -223,9 +212,6 @@ local function createAuraTrack(unitFrame)
 	AuraTrack.Font = C.Medias.Font
 
 	unitFrame.AuraTrack = AuraTrack
-end
-if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
-	RaidWidgets:addOrReplace("AuraTrack", createAuraTrack)
 end
 
 -- Configures oUF_RaidDebuffs.
@@ -256,9 +242,6 @@ local function createRaidDebuffs(unitFrame)
 
 	unitFrame.RaidDebuffs = RaidDebuffs
 end
-if C.Raid.DebuffWatch then
-	RaidWidgets:addOrReplace("RaidDebuffs", createRaidDebuffs)
-end
 
 
 -- additional plugins
@@ -284,7 +267,6 @@ local function createNamePanel(unitFrame)
 		unitFrame:Tag(Name, "[Tukui:NameShort]")
 	end
 end
-RaidWidgets:addOrReplace("NamePanel", createNamePanel)
 
 -- Highlights the currently selected unit.
 local function createHighlight(unitFrame)
@@ -297,7 +279,6 @@ local function createHighlight(unitFrame)
 
 	unitFrame.Highlight = Highlight
 end
-RaidWidgets:addOrReplace("Highlight", createHighlight)
 
 
 --[[ Raid style function. ]]
@@ -318,6 +299,30 @@ function UnitFrames.Raid(self)
 	self.Backdrop:SetFrameLevel(self:GetFrameLevel())
 	self.Backdrop:SetBackdrop(UnitFrames.Backdrop)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
+
+	-- oUF base elements
+	RaidWidgets:add("Health", createHealth)
+	RaidWidgets:add("Power", createPower)
+	RaidWidgets:add("RaidTargetIndicator", createRaidTargetIndicator)
+	RaidWidgets:add("ReadyCheckIndicator", createReadyCheckIndicator)
+	RaidWidgets:add("ResurrectIndicator", createResurrectIndicator)
+	RaidWidgets:add("Range", createRange)
+	if C.Raid.RaidBuffsStyle.Value == "Standard" then
+		RaidWidgets:add("Buffs", createBuffs)
+	end
+	RaidWidgets:add("HealComm", createHealComm)
+
+	-- oUF plugins
+	if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
+		RaidWidgets:add("AuraTrack", createAuraTrack)
+	end
+	if C.Raid.DebuffWatch then
+		RaidWidgets:add("RaidDebuffs", createRaidDebuffs)
+	end
+
+	-- additional plugins
+	RaidWidgets:add("NamePanel", createNamePanel)
+	RaidWidgets:add("Highlight", createHighlight)
 
 	RaidWidgets:createWidgets(self)
 
