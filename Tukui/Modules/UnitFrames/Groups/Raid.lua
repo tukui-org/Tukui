@@ -8,8 +8,7 @@ local PowerTexture
 local Font
 local HealthFont
 
--- Make raid widgets available for external edits.
-local RaidWidgets = UnitFrames.WidgetManager
+
 
 -- oUF base elements
 -- Configures oUF element Health.
@@ -280,6 +279,8 @@ local function createHighlight(unitFrame)
 	unitFrame.Highlight = Highlight
 end
 
+-- Create new WidgetManager for Raid
+local RaidWidgets = UnitFrames.WidgetManager.new()
 
 --[[ Raid style function. ]]
 function UnitFrames.Raid(self)
