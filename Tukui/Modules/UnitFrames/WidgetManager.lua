@@ -110,22 +110,34 @@ function WidgetManager:insert(atIndex, name, func, config)
 	end
 end
 
---Calls all registered widgets in order.
+-- Calls all registered widgets in order.
 function WidgetManager:createWidgets(unitFrame)
 	local manager = Widgets[self]
+
+	if self.PreCreate then
+		self.PreCreate(unitFrame)
+	end
 
 	for i = 1, manager.Count do
 		local widget = manager[i]
 		widget.func(unitFrame, widget.config)
 	end
+
+	if self.PostCreate then
+		self.PostCreate(unitFrame)
+	end
 end
 
+-- Create a new WidgetManager.
 function WidgetManager:new()
-	local manager = {}
+	local manager = {
+		-- PreCreate,
+		-- PostCreate,
+	}
 	Widgets[manager] = {
-		Count = 0
+		Count = 0,
 	}
 	return setmetatable(manager, { __index = WidgetManager })
 end
 
-UnitFrames.WidgetManager = WidgetManager
+UnitFrames.newWidgetManager = WidgetManager.new
