@@ -41,13 +41,15 @@ local function rebuildIndex(self, changedWidget)
 end
 
 
--- Returns the number of registered widgets.
+--[[ Returns the number of registered widgets. ]]
 function WidgetManager:getCount()
 	return Widgets[self].Count
 end
 
--- Add a new widget.
--- Returs the index it was added at or false if already existing.
+--[[ Add a new widget.
+
+	Returs the index it was added at or false if already existing.
+]]
 function WidgetManager:add(name, func, config)
 	-- name must not be a number, to not interfere with the index
 	if type(name) == "string" and not Widgets[self][name] then
@@ -63,15 +65,19 @@ function WidgetManager:add(name, func, config)
 	return false
 end
 
--- Returns the registered widget or nil.
--- Supports name or index to retrieve the widget.
+--[[ Returns the registered widget or nil.
+
+	Supports name or index to retrieve the widget.
+]]
 function WidgetManager:get(nameOrIndex)
 	local widget = Widgets[self][nameOrIndex]
 	return widget.index, widget.name, widget.func, widget.config
 end
 
--- Update an already registered widget.
--- Returns the index and name of the updated widget or nil if not found.
+--[[ Update an already registered widget.
+
+	Returns the index and name of the updated widget or nil if not found.
+]]
 function WidgetManager:update(nameOrIndex, func, config)
 	local widget = Widgets[self][nameOrIndex]
 	if widget then
@@ -81,8 +87,10 @@ function WidgetManager:update(nameOrIndex, func, config)
 	end
 end
 
--- Remove a registered widget.
--- Returns the removed widget or nil if not found.
+--[[ Remove a registered widget.
+
+	Returns the removed widget or nil if not found.
+]]
 function WidgetManager:remove(nameOrIndex)
 	local manager = Widgets[self]
 	local widget = manager[nameOrIndex]
@@ -95,8 +103,10 @@ function WidgetManager:remove(nameOrIndex)
 	end
 end
 
--- Insert a new widget at position "atIndex".
--- Returns the number of registered widgets or nil if failed.
+--[[ Insert a new widget at position "atIndex".
+
+	Returns the number of registered widgets or nil if failed.
+]]
 function WidgetManager:insert(atIndex, name, func, config)
 	local manager = Widgets[self]
 
@@ -110,7 +120,14 @@ function WidgetManager:insert(atIndex, name, func, config)
 	end
 end
 
--- Calls all registered widgets in order.
+--[[ Calls all registered widgets in order.
+
+	PreCreate:    Will be called before creating any widgets.
+	              This is the right time to add, insert, update and remove widgets/their config.
+
+	PostCreate:   Will be called after creating the widgets.
+	              Here the widgets are available and you can also edit properties that are not available in the config.
+]]
 function WidgetManager:createWidgets(unitFrame)
 	local manager = Widgets[self]
 
@@ -128,12 +145,9 @@ function WidgetManager:createWidgets(unitFrame)
 	end
 end
 
--- Create a new WidgetManager.
+--[[ Create a new WidgetManager. ]]
 function WidgetManager:new()
-	local manager = {
-		-- PreCreate,
-		-- PostCreate,
-	}
+	local manager = {}
 	Widgets[manager] = {
 		Count = 0,
 	}
