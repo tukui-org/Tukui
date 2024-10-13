@@ -290,35 +290,33 @@ function UnitFrames.Raid(self)
 	self.Backdrop:SetBackdrop(UnitFrames.Backdrop)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
 
-	-- oUF base elements
 	RaidWidgets:add("Health", createHealth, { height = C.Raid.HeightSize - 1 - 3 - 1 -18,  -- border, power, border, namepanel
 		valueFont = HealthFont, valueAnchor = {"CENTER", 0, -6}, Tag = C.Raid.HealthTag.Value })
 	RaidWidgets:add("Power", createPower, {})
+	RaidWidgets:add("NamePanel", createNamePanel, { nameAnchor = "CENTER" })
+
 	RaidWidgets:add("RaidTargetIndicator", createRaidTargetIndicator, { size = C.UnitFrames.RaidIconSize, anchor = {"TOP", 0, C.UnitFrames.RaidIconSize / 2} })
 	RaidWidgets:add("ReadyCheckIndicator", createReadyCheckIndicator, { size = 12, anchor = {"CENTER"} })
 	RaidWidgets:add("ResurrectIndicator", createResurrectIndicator, { size = 24, anchor = {"CENTER"} })
 	RaidWidgets:add("Range", createRange, { outsideAlpha = C["Raid"].RangeAlpha })
-	if C.Raid.RaidBuffsStyle.Value == "Standard" then
-		RaidWidgets:add("Buffs", createBuffs, { filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
-			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self", height = 16, width = 79, anchor = {"TOPLEFT"},
-			buffSize = 16, buffNum = 5 })
-	end
+	RaidWidgets:add("Highlight", createHighlight, { size = C.Raid.HighlightSize, color = C.Raid.HighlightColor })
+
 	if C.UnitFrames.HealComm then
 		RaidWidgets:add("HealComm", createHealComm, { width = C.Raid.WidthSize })
 	end
 
-	-- oUF plugins
-	if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
+	if C.Raid.RaidBuffsStyle.Value == "Standard" then
+		RaidWidgets:add("Buffs", createBuffs, { filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
+			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self", height = 16, width = 79, anchor = {"TOPLEFT"},
+			buffSize = 16, buffNum = 5 })
+	elseif C.Raid.RaidBuffsStyle.Value == "Aura Track" then
 		RaidWidgets:add("AuraTrack", createAuraTrack, { icons = C.Raid.AuraTrackIcons, texture = C.Raid.AuraTrackSpellTextures, thickness = C.Raid.AuraTrackThickness })
 	end
+
 	if C.Raid.DebuffWatch then
 		local height = C.Raid.HeightSize - 1 - 3 - 1 -18  -- border, power, border, namepanel
 		RaidWidgets:add("RaidDebuffs", createRaidDebuffs, { size = height >= 32 and height - 16 or height, anchor = {"CENTER"} })
 	end
-
-	-- additional plugins
-	RaidWidgets:add("NamePanel", createNamePanel, { nameAnchor = "CENTER" })
-	RaidWidgets:add("Highlight", createHighlight, { size = C.Raid.HighlightSize, color = C.Raid.HighlightColor })
 
 	RaidWidgets:createWidgets(self)
 
