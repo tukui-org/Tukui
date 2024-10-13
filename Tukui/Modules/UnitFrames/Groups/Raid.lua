@@ -35,7 +35,6 @@ local function createHealth(unitFrame, config)
 	Health.colorDisconnected = true
 	Health.colorClass = true
 	Health.colorReaction = true
-	Health.isRaid = config.isRaid or false
 	if C.UnitFrames.Smoothing then
 		Health.smoothing = true
 	end
@@ -60,7 +59,6 @@ local function createPower(unitFrame, config)
 	Power:SetStatusBarTexture(PowerTexture)
 
 	Power.colorPower = true
-	Power.isRaid = config.isRaid or false
 	if C.UnitFrames.Smoothing then
 		Power.smoothing = true
 	end
@@ -126,7 +124,6 @@ local function createBuffs(unitFrame, config)
 	Buffs.disableMouse = true
 	Buffs.onlyShowPlayer = config.onlyShowPlayer
 	Buffs.filter = config.filter
-	Buffs.IsRaid = config.isRaid
 	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
 	Buffs.PostUpdateIcon = UnitFrames.DesaturateBuffs
 	Buffs.PostCreateButton = UnitFrames.PostCreateAura
@@ -295,8 +292,8 @@ function UnitFrames.Raid(self)
 
 	-- oUF base elements
 	RaidWidgets:add("Health", createHealth, { height = C.Raid.HeightSize - 1 - 3 - 1 -18,  -- border, power, border, namepanel
-		valueFont = HealthFont, valueAnchor = {"CENTER", 0, -6}, isRaid = true, Tag = C.Raid.HealthTag.Value })
-	RaidWidgets:add("Power", createPower, { isRaid = true})
+		valueFont = HealthFont, valueAnchor = {"CENTER", 0, -6}, Tag = C.Raid.HealthTag.Value })
+	RaidWidgets:add("Power", createPower, {})
 	RaidWidgets:add("RaidTargetIndicator", createRaidTargetIndicator, { size = C.UnitFrames.RaidIconSize, anchor = {"TOP", 0, C.UnitFrames.RaidIconSize / 2} })
 	RaidWidgets:add("ReadyCheckIndicator", createReadyCheckIndicator, { size = 12, anchor = {"CENTER"} })
 	RaidWidgets:add("ResurrectIndicator", createResurrectIndicator, { size = 24, anchor = {"CENTER"} })
@@ -304,7 +301,7 @@ function UnitFrames.Raid(self)
 	if C.Raid.RaidBuffsStyle.Value == "Standard" then
 		RaidWidgets:add("Buffs", createBuffs, { filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
 			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self", height = 16, width = 79, anchor = {"TOPLEFT"},
-			buffSize = 16, buffNum = 5, isRaid = true })
+			buffSize = 16, buffNum = 5 })
 	end
 	if C.UnitFrames.HealComm then
 		RaidWidgets:add("HealComm", createHealComm, { width = C.Raid.WidthSize })
