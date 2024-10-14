@@ -47,10 +47,11 @@ end
 
 -- Configures oUF element Power.
 local function Power(unitFrame, config)
+	local health = unitFrame.Health
 	local power = CreateFrame("StatusBar", nil, unitFrame)
 	power:SetHeight(config.height or 3)
-	power:SetPoint("TOPLEFT", unitFrame.Health, "BOTTOMLEFT", 0, -1)
-	power:SetPoint("TOPRIGHT", unitFrame.Health, "BOTTOMRIGHT", 0, -1)
+	power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
+	power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 	power:SetStatusBarTexture(PowerTexture)
 
 	power.Background = power:CreateTexture(nil, "BORDER")
@@ -111,8 +112,9 @@ end
 
 -- Configures oUF element Buffs (part of Auras).
 local function Buffs(unitFrame, config)
-	local buffs = CreateFrame("Frame", unitFrame:GetName().."Buffs", unitFrame.Health)
-	buffs:SetPoint(config.anchor[1], unitFrame.Health, config.anchor[2], config.anchor[3], config.anchor[4])
+	local health = unitFrame.Health
+	local buffs = CreateFrame("Frame", unitFrame:GetName().."Buffs", health)
+	buffs:SetPoint(config.anchor[1], health, config.anchor[2], config.anchor[3], config.anchor[4])
 	buffs:SetHeight(config.height)
 	buffs:SetWidth(config.width)
 
@@ -193,7 +195,8 @@ end
 -- oUF Plugins
 -- Configures oUF_AuraTrack.
 local function AuraTrack(unitFrame, config)
-	local auraTrack = CreateFrame("Frame", nil, unitFrame.Health)
+	local health = unitFrame.Health
+	local auraTrack = CreateFrame("Frame", nil, health)
 	auraTrack:SetAllPoints()
 	auraTrack.Texture = C.Medias.Normal
 	auraTrack.Font = C.Medias.Font
@@ -210,7 +213,7 @@ local function RaidDebuffs(unitFrame, config)
 	local raidDebuffs = CreateFrame("Frame", nil, health)
 
 	raidDebuffs:SetSize(config.size, config.size)
-	raidDebuffs:SetPoint(config.anchor[1], config.anchor[2], config.anchor[3], config.anchor[4])
+	raidDebuffs:SetPoint(config.anchor[1], health, config.anchor[2], config.anchor[3], config.anchor[4])
 	raidDebuffs:SetFrameLevel(health:GetFrameLevel() + 10)
 	raidDebuffs.icon = raidDebuffs:CreateTexture(nil, "ARTWORK")
 	raidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
@@ -235,15 +238,16 @@ end
 -- additional plugins
 -- Creates a panel for the unit name.
 local function NamePanel(unitFrame, config)
+	local power = unitFrame.Power
 	local panel = CreateFrame("Frame", nil, unitFrame)
-	panel:SetPoint("TOPLEFT", unitFrame.Power, "BOTTOMLEFT", 0, -1)
-	panel:SetPoint("TOPRIGHT", unitFrame.Power, "BOTTOMRIGHT", 0, -1)
+	panel:SetPoint("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
+	panel:SetPoint("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
 	panel:SetPoint("BOTTOM", 0, 0)
 	panel:CreateBackdrop()
 	panel.Backdrop:SetBorderColor(0, 0, 0, 0)
 
 	local name = panel:CreateFontString(nil, "OVERLAY")
-	name:SetPoint(config.nameAnchor)
+	name:SetPoint(config.nameAnchor[1], panel, config.nameAnchor[2], config.nameAnchor[3], config.nameAnchor[4])
 	name:SetFontObject(Font)
 
 	unitFrame.Panel = panel
