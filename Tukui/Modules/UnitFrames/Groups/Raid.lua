@@ -5,151 +5,232 @@ local CreateFrame = _G.CreateFrame
 
 local HealthTexture
 local PowerTexture
-local Font
+local NameFont
 local HealthFont
 
--- Make raid widgets available for external edits.
-UnitFrames.RaidWidgets = UnitFrames.newWidgetManager()
-local RaidWidgets = UnitFrames.RaidWidgets
 
 -- oUF base elements
 -- Configures oUF element Health.
-local function createHealth(unitFrame)
-	local Health = CreateFrame("StatusBar", nil, unitFrame)
-	Health:SetPoint("TOPLEFT")
-	Health:SetPoint("TOPRIGHT")
-	Health:SetHeight(unitFrame:GetHeight() - 3 - 19)
-	Health:SetStatusBarTexture(HealthTexture)
-
-	if C.Raid.VerticalHealth then
-		Health:SetOrientation("VERTICAL")
+local HealthBar
+do
+	local defaults = function(unitFrame)
+		return {
+			height = C.Raid.HeightSize - 1 - 3 - 1 - 18,  -- border, power, border, namepanel
+			orientation = C.Raid.VerticalHealth and "VERTICAL" or "HORIZONTAL",
+			valueFont = HealthFont,
+			valueAnchor = {"CENTER", 0, -6},
+			Tag = C.Raid.HealthTag.Value,
+		}
 	end
 
-	Health.Background = Health:CreateTexture(nil, "BACKGROUND")
-	Health.Background:SetTexture(HealthTexture)
-	Health.Background:SetAllPoints(Health)
-	Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+	HealthBar = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Health = CreateFrame("StatusBar", nil, unitFrame)
 
-	Health.Value = Health:CreateFontString(nil, "OVERLAY")
-	Health.Value:SetFontObject(HealthFont)
-	Health.Value:SetPoint("CENTER", Health, "CENTER", 0, -6)
+		Health:SetPoint("TOPLEFT")
+		Health:SetPoint("TOPRIGHT")
+		Health:SetHeight(config.height)
+		Health:SetStatusBarTexture(HealthTexture)
+		Health:SetOrientation(config.orientation)
 
-	Health.colorDisconnected = true
-	Health.colorClass = true
-	Health.colorReaction = true
-	Health.isRaid = true
-	if C.UnitFrames.Smoothing then
-		Health.smoothing = true
+		Health.Background = Health:CreateTexture(nil, "BACKGROUND")
+		Health.Background:SetTexture(HealthTexture)
+		Health.Background:SetAllPoints(Health)
+		Health.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+
+		Health.Value = Health:CreateFontString(nil, "OVERLAY")
+		Health.Value:SetFontObject(config.valueFont)
+		Health.Value:SetPoint(config.valueAnchor[1], Health, config.valueAnchor[2], config.valueAnchor[3], config.valueAnchor[4])
+
+		Health.colorDisconnected = true
+		Health.colorClass = true
+		Health.colorReaction = true
+		if C.UnitFrames.Smoothing then
+			Health.smoothing = true
+		end
+
+		unitFrame.Health = Health
+		unitFrame.Health.bg = Health.Background
+		unitFrame:Tag(Health.Value, config.Tag)
 	end
-
-	unitFrame.Health = Health
-	unitFrame.Health.bg = Health.Background
-	unitFrame:Tag(Health.Value, C.Raid.HealthTag.Value)
 end
-RaidWidgets:addOrReplace("Health", createHealth)
 
 -- Configures oUF element Power.
-local function createPower(unitFrame)
-	local Power = CreateFrame("StatusBar", nil, unitFrame)
-	Power:SetHeight(3)
-	Power:SetPoint("TOPLEFT", unitFrame.Health, "BOTTOMLEFT", 0, -1)
-	Power:SetPoint("TOPRIGHT", unitFrame.Health, "BOTTOMRIGHT", 0, -1)
-
-	Power.Background = Power:CreateTexture(nil, "BORDER")
-	Power.Background:SetTexture(PowerTexture)
-	Power.Background:SetAllPoints(Power)
-	Power.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
-
-	Power:SetStatusBarTexture(PowerTexture)
-
-	Power.colorPower = true
-	Power.isRaid = true
-	if C.UnitFrames.Smoothing then
-		Power.smoothing = true
+local PowerBar
+do
+	local defaults = function(unitFrame)
+		return {
+			height = 3,
+		}
 	end
 
-	unitFrame.Power = Power
-	unitFrame.Power.bg = Power.Background
+	PowerBar = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Health = unitFrame.Health
+		local Power = CreateFrame("StatusBar", nil, unitFrame)
+
+		Power:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
+		Power:SetPoint("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
+		Power:SetHeight(config.height)
+		Power:SetStatusBarTexture(PowerTexture)
+
+		Power.Background = Power:CreateTexture(nil, "BORDER")
+		Power.Background:SetTexture(PowerTexture)
+		Power.Background:SetAllPoints(Power)
+		Power.Background.multiplier = C.UnitFrames.StatusBarBackgroundMultiplier / 100
+
+		Power.colorPower = true
+		if C.UnitFrames.Smoothing then
+			Power.smoothing = true
+		end
+
+		unitFrame.Power = Power
+		unitFrame.Power.bg = Power.Background
+	end
 end
-RaidWidgets:addOrReplace("Power", createPower)
 
 -- Configures oUF element RaidTargetIndicator.
-local function createRaidTargetIndicator(unitFrame)
-	local RaidIcon = unitFrame.Health:CreateTexture(nil, "OVERLAY")
-	RaidIcon:SetSize(C.UnitFrames.RaidIconSize, C.UnitFrames.RaidIconSize)
-	RaidIcon:SetPoint("TOP", unitFrame, 0, C.UnitFrames.RaidIconSize / 2)
-	RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
+local RaidTargetIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Health,
+			size = C.UnitFrames.RaidIconSize,
+			anchor = {"TOP", 0, C.UnitFrames.RaidIconSize / 2},
+		}
+	end
 
-	unitFrame.RaidTargetIndicator = RaidIcon
+	RaidTargetIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local RaidIcon = config.parent:CreateTexture(nil, "OVERLAY")
+
+		RaidIcon:SetSize(config.size, config.size)
+		RaidIcon:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
+		RaidIcon:SetTexture([[Interface\AddOns\Tukui\Medias\Textures\Others\RaidIcons]])
+
+		unitFrame.RaidTargetIndicator = RaidIcon
+	end
 end
-RaidWidgets:addOrReplace("RaidTargetIndicator", createRaidTargetIndicator)
 
 -- Configures oUF element ReadyCheckIndicator.
-local function createReadyCheckIndicator(unitFrame)
-	local ReadyCheck = unitFrame.Power:CreateTexture(nil, "OVERLAY", nil, 2)
-	ReadyCheck:SetSize(12, 12)
-	ReadyCheck:SetPoint("CENTER")
+local ReadyCheckIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Power,
+			size = 12,
+			anchor = {"CENTER"},
+		}
+	end
 
-	unitFrame.ReadyCheckIndicator = ReadyCheck
+	ReadyCheckIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local ReadyCheck = config.parent:CreateTexture(nil, "OVERLAY", nil, 2)
+
+		ReadyCheck:SetSize(config.size, config.size)
+		ReadyCheck:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
+
+		unitFrame.ReadyCheckIndicator = ReadyCheck
+	end
 end
-RaidWidgets:addOrReplace("ReadyCheckIndicator", createReadyCheckIndicator)
+
 
 -- Configures oUF element ResurrectIndicator.
-local function createResurrectIndicator(unitFrame)
-	local Health = unitFrame.Health
-	local ResurrectIndicator = Health:CreateTexture(nil, "OVERLAY")
-	ResurrectIndicator:SetSize(24, 24)
-	ResurrectIndicator:SetPoint("CENTER", Health)
+local ResurrectIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Health,
+			size = 24,
+			anchor = {"CENTER"},
+		}
+	end
 
-	unitFrame.ResurrectIndicator = ResurrectIndicator
+	ResurrectIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Resurrect = config.parent:CreateTexture(nil, "OVERLAY")
+
+		Resurrect:SetSize(config.size, config.size)
+		Resurrect:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
+
+		unitFrame.ResurrectIndicator = Resurrect
+	end
 end
-RaidWidgets:addOrReplace("ResurrectIndicator", createResurrectIndicator)
 
 -- Configures oUF element Range.
-local function createRange(unitFrame)
-	local Range = {
-		insideAlpha = 1,
-		outsideAlpha = C["Raid"].RangeAlpha,
-	}
+local RangeIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			outsideAlpha = C["Raid"].RangeAlpha,
+		}
+	end
 
-	unitFrame.Range = Range
+	RangeIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Range = {
+			insideAlpha = 1,
+			outsideAlpha = config.outsideAlpha,
+		}
+
+		unitFrame.Range = Range
+	end
 end
-RaidWidgets:addOrReplace("Range", createRange)
 
 -- Configures oUF element Buffs (part of Auras).
-local function createBuffs(unitFrame)
-	local Buffs = CreateFrame("Frame", unitFrame:GetName().."Buffs", unitFrame.Health)
-	local onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self"
-	local filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID"
+local BuffsIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Health,
+			height = 16,
+			width = 79,
+			anchor = {"TOPLEFT"},
+			buffSize = 16,
+			buffNum = 5,
+			filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
+			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self",
+		}
+	end
 
-	Buffs:SetPoint("TOPLEFT", unitFrame.Health, "TOPLEFT", 0, 0)
-	Buffs:SetHeight(16)
-	Buffs:SetWidth(79)
-	Buffs.size = 16
-	Buffs.num = 5
-	Buffs.numRow = 1
-	Buffs.spacing = 0
-	Buffs.initialAnchor = "TOPLEFT"
-	Buffs.disableCooldown = true
-	Buffs.disableMouse = true
-	Buffs.onlyShowPlayer = onlyShowPlayer
-	Buffs.filter = filter
-	Buffs.IsRaid = true
-	Buffs.PostCreateIcon = UnitFrames.PostCreateAura
-	Buffs.PostUpdateIcon = UnitFrames.DesaturateBuffs
-	Buffs.PostCreateButton = UnitFrames.PostCreateAura
-	Buffs.PostUpdateButton = UnitFrames.DesaturateBuffs
+	BuffsIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Buffs = CreateFrame("Frame", unitFrame:GetName().."Buffs", config.parent)
 
-	unitFrame.Buffs = Buffs
-end
-if C.Raid.RaidBuffsStyle.Value == "Standard" then
-	RaidWidgets:addOrReplace("Buffs", createBuffs)
+		Buffs:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
+		Buffs:SetHeight(config.height)
+		Buffs:SetWidth(config.width)
+
+		Buffs.size = config.buffSize
+		Buffs.num = config.buffNum
+		Buffs.numRow = 1
+		Buffs.spacing = 0
+		Buffs.initialAnchor = "TOPLEFT"
+		Buffs.disableCooldown = true
+		Buffs.disableMouse = true
+		Buffs.onlyShowPlayer = config.onlyShowPlayer
+		Buffs.filter = config.filter
+		Buffs.PostCreateIcon = UnitFrames.PostCreateAura
+		Buffs.PostUpdateIcon = UnitFrames.DesaturateBuffs
+		Buffs.PostCreateButton = UnitFrames.PostCreateAura
+		Buffs.PostUpdateButton = UnitFrames.DesaturateBuffs
+
+		unitFrame.Buffs = Buffs
+	end
 end
 
 -- Configures oUF element HealthPrediction.
-local function createHealComm(unitframe)
-	if C.UnitFrames.HealComm then
-		local Health = unitframe.Health
+local HealComm
+do
+	local defaults = function(unitFrame)
+		return {
+			width = C.Raid.WidthSize,
+		}
+	end
+
+	HealComm = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Health = unitFrame.Health
 		local myBar = CreateFrame("StatusBar", nil, Health)
 		local otherBar = CreateFrame("StatusBar", nil, Health)
 		local absorbBar = CreateFrame("StatusBar", nil, Health)
@@ -161,7 +242,7 @@ local function createHealComm(unitframe)
 		myBar:SetPoint(Vertical and "LEFT" or "TOP")
 		myBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		myBar:SetPoint(Vertical and "BOTTOM" or "LEFT", Health:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
-		myBar:SetWidth(C.Raid.WidthSize)
+		myBar:SetWidth(config.width)
 		myBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommSelfColor))
 		myBar:SetMinMaxValues(0, 1)
 		myBar:SetValue(0)
@@ -171,7 +252,7 @@ local function createHealComm(unitframe)
 		otherBar:SetPoint(Vertical and "LEFT" or "TOP")
 		otherBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		otherBar:SetPoint(Vertical and "BOTTOM" or "LEFT", myBar:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
-		otherBar:SetWidth(C.Raid.WidthSize)
+		otherBar:SetWidth(config.width)
 		otherBar:SetStatusBarTexture(HealthTexture)
 		otherBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommOtherColor))
 		otherBar:SetMinMaxValues(0, 1)
@@ -182,7 +263,7 @@ local function createHealComm(unitframe)
 		absorbBar:SetPoint(Vertical and "LEFT" or "TOP")
 		absorbBar:SetPoint(Vertical and "RIGHT" or "BOTTOM")
 		absorbBar:SetPoint(Vertical and "BOTTOM" or "LEFT", otherBar:GetStatusBarTexture(), Vertical and "TOP" or "RIGHT")
-		absorbBar:SetWidth(C.Raid.WidthSize)
+		absorbBar:SetWidth(config.width)
 		absorbBar:SetStatusBarTexture(HealthTexture)
 		absorbBar:SetStatusBarColor(unpack(C.UnitFrames.HealCommAbsorbColor))
 		absorbBar:SetMinMaxValues(0, 1)
@@ -195,116 +276,179 @@ local function createHealComm(unitframe)
 			maxOverflow = 1,
 		}
 
-		unitframe.HealthPrediction = HealthPrediction
-	end
-
-	-- Enable smoothing bars animation?
-	if C.UnitFrames.Smoothing then
-		unitframe.Health.smoothing = true
-		unitframe.Power.smoothing = true
-
-		if unitframe.HealthPrediction then
-			unitframe.HealthPrediction.smoothing = true
+		-- Enable smoothing bars animation?
+		if C.UnitFrames.Smoothing then
+				HealthPrediction.smoothing = true
 		end
+
+		unitFrame.HealthPrediction = HealthPrediction
 	end
 end
-RaidWidgets:addOrReplace("HealComm", createHealComm)
 
 
 -- oUF Plugins
 -- Configures oUF_AuraTrack.
-local function createAuraTrack(unitFrame)
-	local AuraTrack = CreateFrame("Frame", nil, unitFrame.Health)
-	AuraTrack:SetAllPoints()
-	AuraTrack.Texture = C.Medias.Normal
-	AuraTrack.Icons = C.Raid.AuraTrackIcons
-	AuraTrack.SpellTextures = C.Raid.AuraTrackSpellTextures
-	AuraTrack.Thickness = C.Raid.AuraTrackThickness
-	AuraTrack.Font = C.Medias.Font
+local AuraTrackIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Health,
+			icons = C.Raid.AuraTrackIcons,
+			texture = C.Raid.AuraTrackSpellTextures,
+			thickness = C.Raid.AuraTrackThickness,
+		}
+	end
 
-	unitFrame.AuraTrack = AuraTrack
-end
-if C.Raid.RaidBuffsStyle.Value == "Aura Track" then
-	RaidWidgets:addOrReplace("AuraTrack", createAuraTrack)
+	AuraTrackIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local AuraTrack = CreateFrame("Frame", nil, config.parent)
+
+		AuraTrack:SetAllPoints()
+		AuraTrack.Texture = C.Medias.Normal
+		AuraTrack.Font = C.Medias.Font
+		AuraTrack.Icons = config.icons
+		AuraTrack.SpellTextures = config.texture
+		AuraTrack.Thickness = config.thickness
+
+		unitFrame.AuraTrack = AuraTrack
+	end
 end
 
 -- Configures oUF_RaidDebuffs.
-local function createRaidDebuffs(unitFrame)
-	local Health = unitFrame.Health
-	local RaidDebuffs = CreateFrame("Frame", nil, Health)
-	local Height = Health:GetHeight()
-	local DebuffSize = Height >= 32 and Height - 16 or Height
+local DebuffIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			parent = unitFrame.Health,
+			size = 24,
+			anchor = {"CENTER"},
+		}
+	end
 
-	RaidDebuffs:SetSize(DebuffSize, DebuffSize)
-	RaidDebuffs:SetPoint("CENTER", Health)
-	RaidDebuffs:SetFrameLevel(Health:GetFrameLevel() + 10)
-	RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "ARTWORK")
-	RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
-	RaidDebuffs.icon:SetInside(RaidDebuffs)
-	RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs, "CooldownFrameTemplate")
-	RaidDebuffs.cd:SetInside(RaidDebuffs, 1, 0)
-	RaidDebuffs.cd:SetReverse(true)
-	RaidDebuffs.cd:SetHideCountdownNumbers(true)
-	RaidDebuffs.cd:SetAlpha(.7)
-	RaidDebuffs.timer = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-	RaidDebuffs.timer:SetFont(C.Medias.Font, 12, "OUTLINE")
-	RaidDebuffs.timer:SetPoint("CENTER", RaidDebuffs, 1, 0)
-	RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
-	RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
-	RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
-	RaidDebuffs.count:SetTextColor(1, .9, 0)
+	DebuffIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local RaidDebuffs = CreateFrame("Frame", nil, config.parent)
 
-	unitFrame.RaidDebuffs = RaidDebuffs
-end
-if C.Raid.DebuffWatch then
-	RaidWidgets:addOrReplace("RaidDebuffs", createRaidDebuffs)
+		RaidDebuffs:SetSize(config.size, config.size)
+		RaidDebuffs:SetPoint(config.anchor[1], config.parent, config.anchor[2], config.anchor[3], config.anchor[4])
+		RaidDebuffs:SetFrameLevel(config.parent:GetFrameLevel() + 10)
+		RaidDebuffs.icon = RaidDebuffs:CreateTexture(nil, "ARTWORK")
+		RaidDebuffs.icon:SetTexCoord(.1, .9, .1, .9)
+		RaidDebuffs.icon:SetInside(RaidDebuffs)
+		RaidDebuffs.cd = CreateFrame("Cooldown", nil, RaidDebuffs, "CooldownFrameTemplate")
+		RaidDebuffs.cd:SetInside(RaidDebuffs, 1, 0)
+		RaidDebuffs.cd:SetReverse(true)
+		RaidDebuffs.cd:SetHideCountdownNumbers(true)
+		RaidDebuffs.cd:SetAlpha(.7)
+		RaidDebuffs.timer = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.timer:SetFont(C.Medias.Font, 12, "OUTLINE")
+		RaidDebuffs.timer:SetPoint("CENTER", RaidDebuffs, 1, 0)
+		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, "OVERLAY")
+		RaidDebuffs.count:SetFont(C.Medias.Font, 12, "OUTLINE")
+		RaidDebuffs.count:SetPoint("BOTTOMRIGHT", RaidDebuffs, "BOTTOMRIGHT", 2, 0)
+		RaidDebuffs.count:SetTextColor(1, .9, 0)
+
+		unitFrame.RaidDebuffs = RaidDebuffs
+	end
 end
 
 
 -- additional plugins
 -- Creates a panel for the unit name.
-local function createNamePanel(unitFrame)
-	local Panel = CreateFrame("Frame", nil, unitFrame)
-	Panel:SetPoint("TOPLEFT", unitFrame.Power, "BOTTOMLEFT", 0, -1)
-	Panel:SetPoint("TOPRIGHT", unitFrame.Power, "BOTTOMRIGHT", 0, -1)
-	Panel:SetPoint("BOTTOM", 0, 0)
-	Panel:CreateBackdrop()
-	Panel.Backdrop:SetBorderColor(0, 0, 0, 0)
+local NamePanel
+do
+	local defaults = function()
+		return {
+			nameFont = NameFont,
+			nameAnchor = {"CENTER"},
+			Tag = "[Tukui:GetRaidNameColor][Tukui:NameShort]",
+		}
+	end
+	NamePanel = function(unitFrame, config)
+		setmetatable(config, { __index = defaults() })
+		local Power = unitFrame.Power
+		local Panel = CreateFrame("Frame", nil, unitFrame)
 
-	local Name = Panel:CreateFontString(nil, "OVERLAY")
-	Name:SetPoint("CENTER")
-	Name:SetFontObject(Font)
+		Panel:SetPoint("TOPLEFT", Power, "BOTTOMLEFT", 0, -1)
+		Panel:SetPoint("TOPRIGHT", Power, "BOTTOMRIGHT", 0, -1)
+		Panel:SetPoint("BOTTOM", 0, 0)
+		Panel:CreateBackdrop()
+		Panel.Backdrop:SetBorderColor(0, 0, 0, 0)
 
-	unitFrame.Panel = Panel
-	unitFrame.Name = Name
+		local Name = Panel:CreateFontString(nil, "OVERLAY")
+		Name:SetPoint(config.nameAnchor[1], Panel, config.nameAnchor[2], config.nameAnchor[3], config.nameAnchor[4])
+		Name:SetFontObject(config.nameFont)
 
-	if T.Retail then
-		unitFrame:Tag(Name, "[Tukui:GetRaidNameColor][Tukui:NameShort]")
-	else
-		unitFrame:Tag(Name, "[Tukui:NameShort]")
+		unitFrame.Panel = Panel
+		unitFrame.Name = Name
+
+		if T.Retail then
+			unitFrame:Tag(Name, config.Tag)
+		else
+			unitFrame:Tag(Name, "[Tukui:NameShort]") --FIXME: really needed?
+		end
 	end
 end
-RaidWidgets:addOrReplace("NamePanel", createNamePanel)
 
 -- Highlights the currently selected unit.
-local function createHighlight(unitFrame)
-	local Highlight = CreateFrame("Frame", nil, unitFrame, "BackdropTemplate")
-	Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = C.Raid.HighlightSize})
-	Highlight:SetOutside(unitFrame, C.Raid.HighlightSize, C.Raid.HighlightSize)
-	Highlight:SetBackdropBorderColor(unpack(C.Raid.HighlightColor))
-	Highlight:SetFrameLevel(0)
-	Highlight:Hide()
+local HighlightIndicator
+do
+	local defaults = function(unitFrame)
+		return {
+			size = C.Raid.HighlightSize,
+			color = C.Raid.HighlightColor,
+		}
+	end
 
-	unitFrame.Highlight = Highlight
+	HighlightIndicator = function(unitFrame, config)
+		setmetatable(config, { __index = defaults(unitFrame) })
+		local Highlight = CreateFrame("Frame", nil, unitFrame, "BackdropTemplate")
+
+		Highlight:SetBackdrop({edgeFile = C.Medias.Glow, edgeSize = config.size})
+		Highlight:SetOutside(unitFrame, config.size, config.size)
+		Highlight:SetBackdropBorderColor(unpack(config.color))
+		Highlight:SetFrameLevel(0)
+		Highlight:Hide()
+
+		unitFrame.Highlight = Highlight
+	end
 end
-RaidWidgets:addOrReplace("Highlight", createHighlight)
 
+
+local function addDefaultWidgets(self)
+	self:add("Health", HealthBar)
+	self:add("Power", PowerBar)
+	self:add("NamePanel", NamePanel)
+
+	if C.UnitFrames.HealComm then
+		self:add("HealComm", HealComm)
+	end
+
+	self:add("RaidTargetIndicator", RaidTargetIndicator)
+	self:add("ReadyCheckIndicator", ReadyCheckIndicator)
+	self:add("ResurrectIndicator", ResurrectIndicator)
+	self:add("Range", RangeIndicator)
+	self:add("Highlight", HighlightIndicator)
+
+	if C.Raid.RaidBuffsStyle.Value == "Standard" then
+		self:add("Buffs", BuffsIndicator)
+	elseif C.Raid.RaidBuffsStyle.Value == "Aura Track" then
+		self:add("AuraTrack", AuraTrackIndicator)
+	end
+
+	if C.Raid.DebuffWatch then
+		self:add("RaidDebuffs", DebuffIndicator)
+	end
+end
+
+-- Create new WidgetManager for Raid and expose for external edits.
+UnitFrames.RaidWidgets = UnitFrames.newWidgetManager("Raid", addDefaultWidgets)
 
 --[[ Raid style function. ]]
 function UnitFrames.Raid(self)
 	HealthTexture = T.GetTexture(C["Textures"].UFRaidHealthTexture)
 	PowerTexture = T.GetTexture(C["Textures"].UFRaidPowerTexture)
-	Font = T.GetFont(C["Raid"].Font)
+	NameFont = T.GetFont(C["Raid"].Font)
 	HealthFont = T.GetFont(C["Raid"].HealthFont)
 
 	self:RegisterForClicks("AnyUp")
@@ -319,7 +463,7 @@ function UnitFrames.Raid(self)
 	self.Backdrop:SetBackdrop(UnitFrames.Backdrop)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
 
-	RaidWidgets:createWidgets(self)
+	UnitFrames.RaidWidgets:createWidgets(self)
 
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
 	self:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)
