@@ -295,32 +295,71 @@ function UnitFrames.Raid(self)
 	self.Backdrop:SetBackdrop(UnitFrames.Backdrop)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
 
-	RaidWidgets:add("Health", Health, { height = C.Raid.HeightSize - 1 - 3 - 1 -18,  -- border, power, border, namepanel
-		valueFont = HealthFont, valueAnchor = {"CENTER", 0, -6}, Tag = C.Raid.HealthTag.Value })
-	RaidWidgets:add("Power", Power, {})
-	RaidWidgets:add("NamePanel", NamePanel, { nameAnchor = "CENTER" })
+	local config = {
+		Health = {
+			height = C.Raid.HeightSize - 1 - 3 - 1 -18,  -- border, power, border, namepanel
+			valueFont = HealthFont,
+			valueAnchor = {"CENTER", 0, -6},
+			Tag = C.Raid.HealthTag.Value, },
+		Power = {
+			},
+		NamePanel = {
+			nameAnchor = "CENTER", },
+		RaidTargetIndicator = {
+			size = C.UnitFrames.RaidIconSize,
+			anchor = {"TOP", 0, C.UnitFrames.RaidIconSize / 2}, },
+		ReadyCheckIndicator = {
+			size = 12,
+			anchor = {"CENTER"}, },
+		ResurrectIndicator = {
+			size = 24,
+			anchor = {"CENTER"}, },
+		Range = {
+			outsideAlpha = C["Raid"].RangeAlpha, },
+		Highlight = {
+			size = C.Raid.HighlightSize,
+			color = C.Raid.HighlightColor, },
+		HealComm = {
+			width = C.Raid.WidthSize, },
+		Buffs = {
+			height = 16,
+			width = 79,
+			anchor = {"TOPLEFT"},
+			buffSize = 16,
+			buffNum = 5,
+			filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
+			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self", },
+		AuraTrack = {
+			icons = C.Raid.AuraTrackIcons,
+			texture = C.Raid.AuraTrackSpellTextures,
+			thickness = C.Raid.AuraTrackThickness, },
+		RaidDebuffs = {
+			size = 24,
+			anchor = {"CENTER"}, },
+	}
 
-	RaidWidgets:add("RaidTargetIndicator", RaidTargetIndicator, { size = C.UnitFrames.RaidIconSize, anchor = {"TOP", 0, C.UnitFrames.RaidIconSize / 2} })
-	RaidWidgets:add("ReadyCheckIndicator", ReadyCheckIndicator, { size = 12, anchor = {"CENTER"} })
-	RaidWidgets:add("ResurrectIndicator", ResurrectIndicator, { size = 24, anchor = {"CENTER"} })
-	RaidWidgets:add("Range", Range, { outsideAlpha = C["Raid"].RangeAlpha })
-	RaidWidgets:add("Highlight", Highlight, { size = C.Raid.HighlightSize, color = C.Raid.HighlightColor })
+	RaidWidgets:add("Health", Health, config.Health)
+	RaidWidgets:add("Power", Power, config.Power)
+	RaidWidgets:add("NamePanel", NamePanel, config.NamePanel)
+
+	RaidWidgets:add("RaidTargetIndicator", RaidTargetIndicator, config.RaidTargetIndicator)
+	RaidWidgets:add("ReadyCheckIndicator", ReadyCheckIndicator, config.ReadyCheckIndicator)
+	RaidWidgets:add("ResurrectIndicator", ResurrectIndicator, config.ResurrectIndicator)
+	RaidWidgets:add("Range", Range, config.Range)
+	RaidWidgets:add("Highlight", Highlight, config.Highlight)
 
 	if C.UnitFrames.HealComm then
-		RaidWidgets:add("HealComm", HealComm, { width = C.Raid.WidthSize })
+		RaidWidgets:add("HealComm", HealComm, config.HealComm)
 	end
 
 	if C.Raid.RaidBuffsStyle.Value == "Standard" then
-		RaidWidgets:add("Buffs", Buffs, { filter = C.Raid.RaidBuffs.Value == "All" and "HELPFUL" or "HELPFUL|RAID",
-			onlyShowPlayer = C.Raid.RaidBuffs.Value == "Self", height = 16, width = 79, anchor = {"TOPLEFT"},
-			buffSize = 16, buffNum = 5 })
+		RaidWidgets:add("Buffs", Buffs, config.Buffs)
 	elseif C.Raid.RaidBuffsStyle.Value == "Aura Track" then
-		RaidWidgets:add("AuraTrack", AuraTrack, { icons = C.Raid.AuraTrackIcons, texture = C.Raid.AuraTrackSpellTextures, thickness = C.Raid.AuraTrackThickness })
+		RaidWidgets:add("AuraTrack", AuraTrack, config.AuraTrack)
 	end
 
 	if C.Raid.DebuffWatch then
-		local height = C.Raid.HeightSize - 1 - 3 - 1 -18  -- border, power, border, namepanel
-		RaidWidgets:add("RaidDebuffs", RaidDebuffs, { size = height >= 32 and height - 16 or height, anchor = {"CENTER"} })
+		RaidWidgets:add("RaidDebuffs", RaidDebuffs, config.RaidDebuffs)
 	end
 
 	RaidWidgets:createWidgets(self)
