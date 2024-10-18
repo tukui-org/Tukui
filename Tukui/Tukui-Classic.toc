@@ -181,6 +181,7 @@ Modules\UnitFrames\Core.lua
 Modules\UnitFrames\Debuffs.lua
 Modules\UnitFrames\Tracking.lua
 Modules\UnitFrames\Tags.lua
+Modules\unitFrames\Widgets.lua
 Modules\UnitFrames\WidgetManager.lua
 Modules\UnitFrames\Classes\Warrior.lua
 Modules\UnitFrames\Classes\Paladin.lua
