@@ -143,12 +143,14 @@ function WidgetManager:insert(atIndex, name, func, config)
 end
 
 --[[ Calls all registered widgets in order.
+	._UpdateWidgetList: Called once before creating any widgets.
+	                    Here you can add, insert, update and remove widgets/their config.
 
-	.PreCreate:  Will be called before creating any widgets.
-	             This is the right time to add, insert, update and remove widgets/their config.
+	._PreCreate:  Will be called before creating any widgets.
+	              Here the unitFrame is available but none of the widgets yet.
 
-	.PostCreate: Will be called after creating the widgets.
-	             Here the widgets are available and you can also edit properties that are not available in the config.
+	._PostCreate: Will be called after creating the widgets.
+	              Here the widgets are available and you can also edit properties that are not available in their config.
 ]]
 function WidgetManager:createWidgets(unitFrame)
 	local manager = Widgets[self]
@@ -156,11 +158,12 @@ function WidgetManager:createWidgets(unitFrame)
 	-- Execute only once as changes are stored in the manager
 	if not manager._Initialized then
 		manager._AddDefaultWidgets(self)
+		manager._UpdateWidgetList(self)
+		manager._Initialized = true
+	end
 
-		if self.PreCreate then
-			self.PreCreate(unitFrame)
-		end
-		manager._Initialized = false
+	if self._PreCreate then
+		self.PreCreate(unitFrame)
 	end
 
 	for i = 1, manager._Count do
@@ -168,8 +171,7 @@ function WidgetManager:createWidgets(unitFrame)
 		widget.func(unitFrame, widget.config)
 	end
 
-	if self.PostCreate then
-		-- Execute for each created frame as changes are stored only in that frame
+	if self._PostCreate then
 		self.PostCreate(unitFrame)
 	end
 end
