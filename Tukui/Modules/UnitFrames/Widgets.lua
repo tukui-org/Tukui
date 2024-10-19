@@ -408,6 +408,9 @@ do
 		Highlight:Hide()
 
 		unitFrame.Highlight = Highlight
+
+		unitFrame:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
+		unitFrame:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)
 	end
 end
 

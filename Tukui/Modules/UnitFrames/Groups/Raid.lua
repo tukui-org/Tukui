@@ -50,7 +50,4 @@ function UnitFrames.Raid(self)
 	self.Backdrop:SetBackdropColor(0, 0, 0)
 
 	UnitFrames.RaidWidgets:createWidgets(self)
-
-	self:RegisterEvent("PLAYER_TARGET_CHANGED", UnitFrames.Highlight, true)
-	self:RegisterEvent("RAID_ROSTER_UPDATE", UnitFrames.Highlight, true)
 end
