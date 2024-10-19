@@ -8,7 +8,7 @@ local function addDefaultWidgets(self)
 			texture = C.Raid.UFRaidHealthTexture, font = C.Raid.HealthFont,	tag = C.Raid.HealthTag.Value,
 			orientation = C.Raid.VerticalHealth and "VERTICAL" or "HORIZONTAL", })
 	self:add("Power", Widgets.PowerBar, { texture = C.Textures.UFRaidPowerTexture, })
-	self:add("NamePanel", Widgets.NamePanel, { font = C.Raid.Font, tag = C.Raid.HealthTag.Value, })
+	self:add("NamePanel", Widgets.NamePanel, { font = C.Raid.Font, })
 
 	if C.UnitFrames.HealComm then
 		self:add("HealComm", Widgets.HealComm, { texture = C.Raid.UFRaidHealthTexture, })
