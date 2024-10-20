@@ -40,9 +40,21 @@ end
 
 -- Creates a new Widget storing the parameters as key value pairs.
 local function Widget(index, name, createFunction, config)
+	local function merge(t1, t2)
+		if t2 then
+			for k, v in pairs(t2) do
+				t1[k] = v
+			end
+		end
+		return t1
+	end
+
+	-- function gets replaced if provided
+	-- config is merged with existing
+	-- to replace config instead use: get("name").config = { k = v, }
 	local function update(self, conf, func)
 		self.func = func or self.func
-		self.config = conf or self.config
+		self.config = merge(self.config, conf)
 		return self
 	end
 
