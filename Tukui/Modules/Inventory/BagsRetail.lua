@@ -51,12 +51,14 @@ function Bags:UpdateItems()
 		local IsActive = QuestInfo.isActive
 		local R, G, B
 		
-		if Quality then
-			R, G, B = C_Item.GetItemQualityColor(Quality)
+		if Button.Backdrop then
+			if Quality then
+				R, G, B = C_Item.GetItemQualityColor(Quality)
 
-			Button.Backdrop:SetBorderColor(R, G, B)
-		else
-			Button.Backdrop:SetBorderColor(unpack(C.General.BorderColor))
+				Button.Backdrop:SetBorderColor(R, G, B)
+			else
+				Button.Backdrop:SetBorderColor(unpack(C.General.BorderColor))
+			end
 		end
 		
 		-- Quest Items
