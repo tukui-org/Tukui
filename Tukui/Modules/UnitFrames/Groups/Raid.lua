@@ -4,7 +4,7 @@ local UnitFrames = T["UnitFrames"]
 local Widgets = UnitFrames.Widgets
 
 local function addDefaultWidgets(self)
-	self:add("Health", Widgets.HealthBar, { C.Raid.HeightSize - 1 - 3 - 1 - 18,  -- border, power, border, namepanel
+	self:add("Health", Widgets.HealthBar, { height = C.Raid.HeightSize - 1 - 3 - 1 - 18,  -- border, power, border, namepanel
 			texture = C.Raid.UFRaidHealthTexture, font = C.Raid.HealthFont,	tag = C.Raid.HealthTag.Value,
 			orientation = C.Raid.VerticalHealth and "VERTICAL" or "HORIZONTAL", })
 	self:add("Power", Widgets.PowerBar, { texture = C.Textures.UFRaidPowerTexture, })
