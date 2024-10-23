@@ -16,7 +16,7 @@ local EnglishClass = function(class)
 			return i
 		end
 	end
-	
+
 	-- Females
 	for i, j in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
 		if class == j then
@@ -59,7 +59,7 @@ local OnMouseDown = function(self, button)
 end
 
 local OnEnter = function(self)
-	local NumTotalMembers, NumOnlineMaxLevelMembers, NumOnlineMembers = GetNumGuildMembers()
+	local NumTotalMembers, NumOnlineMembers, NumOnlineAndMobileMembers = GetNumGuildMembers()
 
 	if not IsInGuild() or NumOnlineMembers <= 0 then
 		return
@@ -135,8 +135,9 @@ local Update = function(self)
 
 		return
 	end
+	local NumTotalMembers, NumOnlineMembers, NumOnlineAndMobileMembers = GetNumGuildMembers()
 
-	self.Text:SetFormattedText("%s %s", DataText.NameColor .. GUILD .. "|r", DataText.ValueColor .. select(3, GetNumGuildMembers()) .. "|r")
+	self.Text:SetFormattedText("%s %s", DataText.NameColor .. GUILD .. "|r", DataText.ValueColor .. NumOnlineMembers .. "|r")
 end
 
 local Enable = function(self)
