@@ -1,6 +1,7 @@
 local T, C, L = unpack((select(2, ...)))
 
 --[[ This datatext is from: SanUI, by Pyrates ]] --
+local GameTooltip = _G.GameTooltip
 
 local DataText = T["DataTexts"]
 
@@ -8,30 +9,26 @@ local CurrentLootSpecName
 local CurrentCharSpecName
 
 local Update = function(self)
-	local CurrentLootSpec = GetLootSpecialization()
 	local CurrentSpec = GetSpecialization()
+	local CurrentLootSpec = GetLootSpecialization()
 
-	CurrentLootSpecName = CurrentLootSpec and select(2, GetSpecializationInfoByID(CurrentLootSpec))
+	if CurrentSpec then
+		CurrentCharSpecName = select(2, GetSpecializationInfo(CurrentSpec))
+		CurrentLootSpecName = CurrentLootSpec == 0 and CurrentCharSpecName or select(2, GetSpecializationInfoByID(CurrentLootSpec))
 
-	CurrentCharSpecName = CurrentSpec and select(2, GetSpecializationInfo(CurrentSpec))
-
-	if (CurrentLootSpec ~=0 and CurrentLootSpecName == nil) or CurrentCharSpecName == nil then
+		if CurrentCharSpecName and CurrentLootSpecName then
+			self.Text:SetText("S " .. CurrentCharSpecName .. " - L " .. CurrentLootSpecName)
+		else
+			self.Text:SetText("+--+")
+		end
+	else
 		self.Text:SetText("+--+")
-
-		return
 	end
-
-	if CurrentLootSpec == 0 then
-		CurrentLootSpecName = CurrentCharSpecName
-	end
-
-	self.Text:SetText(CurrentCharSpecName)
 end
 
 local OnLeave = function()
 	GameTooltip:Hide()
 end
-
 
 local OnEnter = function(self)
 	self:Update()
@@ -45,21 +42,19 @@ local OnEnter = function(self)
 	GameTooltip:Show()
 end
 
-local OnMouseDown = function()
+local OnMouseDown = function(self, button)
 	if InCombatLockdown() then
 		T.Print(ERR_NOT_IN_COMBAT)
 
 		return
 	end
 
-	if not PlayerTalentFrame then
-		LoadAddOn("Blizzard_TalentUI")
-	end
-
-	if not PlayerTalentFrame:IsShown() then
-		ShowUIPanel(PlayerTalentFrame)
+	if button == "LeftButton" then
+		-- Opens Specialization pane
+		PlayerSpellsUtil.TogglePlayerSpellsFrame(1)
 	else
-		HideUIPanel(PlayerTalentFrame)
+		-- Opens Talents pane
+		PlayerSpellsUtil.TogglePlayerSpellsFrame(2)
 	end
 end
 
