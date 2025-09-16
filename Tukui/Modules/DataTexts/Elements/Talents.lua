@@ -9,18 +9,25 @@ local CurrentLootSpecName
 local CurrentCharSpecName
 
 local Update = function(self)
-	local CurrentSpec = GetSpecialization()
 	local CurrentLootSpec = GetLootSpecialization()
+	local CurrentSpec = GetSpecialization()
 
-	if CurrentSpec then
-		CurrentCharSpecName = select(2, GetSpecializationInfo(CurrentSpec))
-		CurrentLootSpecName = CurrentLootSpec == 0 and CurrentCharSpecName or select(2, GetSpecializationInfoByID(CurrentLootSpec))
+	CurrentLootSpecName = CurrentLootSpec and select(2, GetSpecializationInfoByID(CurrentLootSpec))
+	CurrentCharSpecName = CurrentSpec and select(2, GetSpecializationInfo(CurrentSpec))
 
-		if CurrentCharSpecName and CurrentLootSpecName then
-			self.Text:SetText("S " .. CurrentCharSpecName .. " - L " .. CurrentLootSpecName)
-		else
-			self.Text:SetText("+--+")
-		end
+	local lastSelected = PlayerUtil.GetCurrentSpecID() and C_ClassTalents.GetLastSelectedSavedConfigID(PlayerUtil.GetCurrentSpecID())
+	local selectionID = PlayerSpellsFrame and PlayerSpellsFrame.TalentsFrame and PlayerSpellsFrame.TalentsFrame.LoadoutDropDown and
+		PlayerSpellsFrame.TalentsFrame.LoadoutDropDown.GetSelectionID and
+		PlayerSpellsFrame.TalentsFrame.LoadoutDropDown:GetSelectionID()
+
+	-- https://warcraft.wiki.gg/wiki/Dragonflight_Talent_System
+	-- the priority in authoritativeness is [default UI's dropdown] > [API] > ['ActiveConfigID'] > nil
+	-- nil happens when you don't have any spec selected, e.g. on a freshly created character
+	local activeConfigID = selectionID or lastSelected or C_ClassTalents.GetActiveConfigID() or nil
+
+	if activeConfigID then
+		local configInfo = C_Traits.GetConfigInfo(activeConfigID)
+		self.Text:SetText(configInfo["name"])
 	else
 		self.Text:SetText("+--+")
 	end
