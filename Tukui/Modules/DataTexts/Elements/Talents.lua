@@ -16,9 +16,9 @@ local Update = function(self)
 	CurrentCharSpecName = CurrentSpec and select(2, GetSpecializationInfo(CurrentSpec))
 
 	local lastSelected = PlayerUtil.GetCurrentSpecID() and C_ClassTalents.GetLastSelectedSavedConfigID(PlayerUtil.GetCurrentSpecID())
-	local selectionID = PlayerSpellsFrame and PlayerSpellsFrame.TalentsFrame and PlayerSpellsFrame.TalentsFrame.LoadoutDropDown and
-		PlayerSpellsFrame.TalentsFrame.LoadoutDropDown.GetSelectionID and
-		PlayerSpellsFrame.TalentsFrame.LoadoutDropDown:GetSelectionID()
+	local selectionID = PlayerSpellsFrame and PlayerSpellsFrame.TalentsFrame and PlayerSpellsFrame.TalentsFrame.LoadSystem and
+		PlayerSpellsFrame.TalentsFrame.LoadSystem.GetSelectionID and
+		PlayerSpellsFrame.TalentsFrame.LoadSystem:GetSelectionID()
 
 	-- https://warcraft.wiki.gg/wiki/Dragonflight_Talent_System
 	-- the priority in authoritativeness is [default UI's dropdown] > [API] > ['ActiveConfigID'] > nil
@@ -73,6 +73,7 @@ local Enable = function(self)
 	self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("CONFIRM_TALENT_WIPE")
+	self:RegisterEvent("TRAIT_CONFIG_UPDATED")
 
 	self:SetScript("OnEvent", Update)
 	self:SetScript("OnEnter", OnEnter)
