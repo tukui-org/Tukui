@@ -1,7 +1,6 @@
 local T, C, L = unpack((select(2, ...)))
 
 local DataText = T["DataTexts"]
-local format = format
 local ClassColor = T.RGBToHex(unpack(T.Colors.class[T.MyClass]))
 
 local Update = function(self)
@@ -21,8 +20,10 @@ local Update = function(self)
 	end
 
 	table.sort(L.DataText.Slots, function(a, b) return a[3] < b[3] end)
+	local durability = floor(L.DataText.Slots[1][3] * 100)
+	local r, g, b = T.ColorGradient(durability, 100, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
 
-	self.Text:SetText(ClassColor..T.MyName.."|r".." ("..floor(L.DataText.Slots[1][3] * 100).."%)")
+	self.Text:SetFormattedText("Durability |cff%02x%02x%02x%s%%|r", r * 255, g * 255, b * 255, durability)
 end
 
 local OnEnter = function(self)
@@ -49,7 +50,7 @@ local OnEnter = function(self)
 	if T.Classic then
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
 		GameTooltip:AddLine(" ")
-		
+
 		if CharacterStatFrame then
 			for _, Frame in pairs(CharacterStatFrame) do
 				local Name = _G[Frame.."Label"]
