@@ -4,6 +4,10 @@ local Miscellaneous = T["Miscellaneous"]
 local UIWidgets = CreateFrame("Frame")
 
 function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
+	if self:IsForbidden() then
+		return
+	end
+
 	local Bar = self.Bar
 	local Torghast = IsInJailersTower and IsInJailersTower() or false
 
@@ -14,9 +18,9 @@ function UIWidgets:SkinUIWidgetStatusBar(widgetInfo, widgetContainer)
 		if Bar.BorderLeft and Bar.BorderLeft.SetAlpha then Bar.BorderLeft:SetAlpha(0) end
 		if Bar.BorderRight and Bar.BorderRight.SetAlpha then Bar.BorderRight:SetAlpha(0) end
 		if Bar.BorderCenter and Bar.BorderCenter.SetAlpha then Bar.BorderCenter:SetAlpha(0) end
-		
+
 		Bar:CreateBackdrop(Torghast and "Transparent" or "")
-		
+
 		Bar.Backdrop:CreateShadow()
 		Bar.Backdrop:SetFrameLevel(Bar:GetFrameLevel())
 		Bar.Backdrop:SetOutside(Bar)
@@ -62,7 +66,7 @@ function UIWidgets:Enable()
 	MinimapWidget:SetParent(self.Holder)
 	MinimapWidget:ClearAllPoints()
 	MinimapWidget:SetPoint("CENTER")
-	
+
 	if UIWidgetPowerBarContainerFrame then
 		if C.Misc.DisplayWidgetPowerBar then
 			-- This is power bar
