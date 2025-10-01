@@ -23,7 +23,7 @@ local Update = function(self)
 	local durability = floor(L.DataText.Slots[1][3] * 100)
 	local r, g, b = T.ColorGradient(durability, 100, 0.8, 0, 0, 0.8, 0.8, 0, 0, 0.8, 0)
 
-	self.Text:SetFormattedText("Durability |cff%02x%02x%02x%s%%|r", r * 255, g * 255, b * 255, durability)
+	self.Text:SetFormattedText("%s |cff%02x%02x%02x%s%%|r", DURABILITY, r * 255, g * 255, b * 255, durability)
 end
 
 local OnEnter = function(self)
