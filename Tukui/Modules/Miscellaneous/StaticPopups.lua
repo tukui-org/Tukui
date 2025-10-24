@@ -36,16 +36,6 @@ function StaticPopups:Skin()
 	_G[Name.."MoneyInputFrameCopper"].Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
 	_G[Name.."EditBox"].Backdrop:SetPoint("TOPLEFT", -2, -4)
 	_G[Name.."EditBox"].Backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
-	if T.Classic then
-		_G[Name.."ItemFrameNameFrame"]:Kill()
-		_G[Name.."ItemFrame"]:GetNormalTexture():Kill()
-		_G[Name.."ItemFrame"]:CreateBackdrop("Default")
-		_G[Name.."ItemFrame"]:StyleButton()
-		_G[Name.."ItemFrameIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		_G[Name.."ItemFrameIconTexture"]:ClearAllPoints()
-		_G[Name.."ItemFrameIconTexture"]:SetPoint("TOPLEFT", 2, -2)
-		_G[Name.."ItemFrameIconTexture"]:SetPoint("BOTTOMRIGHT", -2, 2)
-	end
 	_G[Name.."CloseButton"]:SkinCloseButton()
 	_G[Name.."CloseButton"].SetNormalTexture = function() end
 	_G[Name.."CloseButton"].SetPushedTexture = function() end
