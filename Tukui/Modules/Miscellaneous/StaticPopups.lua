@@ -16,6 +16,7 @@ function StaticPopups:Skin()
 	_G[Name]:StripTextures()
 	_G[Name]:CreateBackdrop("Transparent")
 	_G[Name]:CreateShadow()
+	_G[Name].BG:DisableDrawLayer("BACKGROUND") -- remove default background texture
 	_G[Name.."Button1"]:StripTextures()
 	_G[Name.."Button2"]:StripTextures()
 	_G[Name.."Button3"]:StripTextures()
