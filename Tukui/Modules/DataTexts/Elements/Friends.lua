@@ -330,7 +330,11 @@ local InviteFriend = function(self, name)
 	Menu:Hide()
 
 	if type(name) ~= ("number") then
-		C_PartyInfo.InviteUnit(name)
+		if C_PartyInfo and C_PartyInfo.InviteUnit then
+			C_PartyInfo.InviteUnit(name)
+		else
+			InviteUnit(name)
+		end
 	else
 		BNInviteFriend(name)
 	end

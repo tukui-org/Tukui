@@ -359,11 +359,13 @@ else
 		end
 
 
-		hooksecurefunc("LoadAddOn", function(addon)
-			if addon=="Blizzard_MacroUI" then
-				--registermacro()
-			end
-		end)
+		if LoadAddOn then
+			hooksecurefunc("LoadAddOn", function(addon)
+				if addon=="Blizzard_MacroUI" then
+					--registermacro()
+				end
+			end)
+		end
 	end
 
 	function Bind:Toggle()

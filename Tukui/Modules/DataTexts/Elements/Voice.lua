@@ -1,5 +1,10 @@
 local T, C, L = unpack((select(2, ...)))
 
+-- Voice Chat API doesn't exist in Classic/BCC
+if not C_VoiceChat then
+	return
+end
+
 local DataText = T["DataTexts"]
 
 local menuFrame = CreateFrame("Frame", "TukuiVoiceClickMenu", UIParent, "UIDropDownMenuTemplate")

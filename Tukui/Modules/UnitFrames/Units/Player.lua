@@ -431,7 +431,7 @@ function UnitFrames:Player()
 		T.Movers:RegisterFrame(ScrollingCombatText, "Scrolling Combat Text")
 	end
 
-	if T.Classic and C.UnitFrames.PowerTick then
+	if (T.Classic or T.BCC) and C.UnitFrames.PowerTick then
 		local EnergyManaRegen = CreateFrame("StatusBar", nil, Power)
 
 		EnergyManaRegen:SetFrameLevel(Power:GetFrameLevel() + 3)
@@ -577,7 +577,7 @@ function UnitFrames:Player()
 			end
 		end
 
-		if not T.Classic then
+		if not (T.Classic or T.BCC) then
 			-- To allow right-click destroy totem.
 			TotemFrame:SetParent(UIParent)
 		end

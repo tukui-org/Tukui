@@ -32,7 +32,7 @@ local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeft
 local GetContainerItemCooldown = C_Container and C_Container.GetContainerItemCooldown or GetContainerItemCooldown
 
 local BANK_INITIAL_CONTAINER_INDEX = T.Retail and 6 or 5
-local BANK_FINAL_CONTAINER_INDEX = T.Classic and 10 or T.Retail and 12 or 11
+local BANK_FINAL_CONTAINER_INDEX = (T.Classic or T.BCC) and 10 or T.Retail and 12 or 11
 
 BACKPACK_HEIGHT = 256
 
@@ -476,30 +476,34 @@ function Bags:CreateContainer(storagetype, ...)
 		SearchBox:SetScript("OnEditFocusLost", function(self) self.Backdrop:SetBorderColor(.3, .3, .3, 1) end)
 		SearchBox:SetScript("OnEditFocusGained", function(self) self.Title:Hide() self.Backdrop:SetBorderColor(1, 1, 1, 1) end)
 
+		-- ToggleBags arrow hidden on BCC - keep as anchor point
 		ToggleBags:SetSize(16, 16)
 		ToggleBags:SetPoint("RIGHT", ToggleBagsContainer, "LEFT", -1, 1)
-		ToggleBags.Texture = ToggleBags:CreateTexture(nil, "OVERLAY")
-		ToggleBags.Texture:SetSize(14, 14)
-		ToggleBags.Texture:SetPoint("CENTER")
-		ToggleBags.Texture:SetTexture(C.Medias.ArrowUp)
-		ToggleBags:SetScript("OnEnter", GameTooltip_Hide)
-		ToggleBags:SetScript("OnClick", function(self)
-			local BanksContainer = Bags.Bank.BagsContainer
+		if T.BCC or T.Classic then
+			ToggleBags:Hide()
+			ToggleBags:SetSize(1, 1) -- Make it tiny so it doesn't take space
+		else
+			ToggleBags.Texture = ToggleBags:CreateTexture(nil, "OVERLAY")
+			ToggleBags.Texture:SetSize(14, 14)
+			ToggleBags.Texture:SetPoint("CENTER")
+			ToggleBags.Texture:SetTexture(C.Medias.ArrowUp)
+			ToggleBags:SetScript("OnEnter", GameTooltip_Hide)
+			ToggleBags:SetScript("OnClick", function(self)
+				local BanksContainer = Bags.Bank and Bags.Bank.BagsContainer
 
-			if (ReplaceBags == 0) then
-				ReplaceBags = 1
-				BagsContainer:Show()
-				BanksContainer:Show()
-
-				self.Texture:SetTexture(C.Medias.ArrowDown)
-			else
-				ReplaceBags = 0
-				BagsContainer:Hide()
-				BanksContainer:Hide()
-
-				self.Texture:SetTexture(C.Medias.ArrowUp)
-			end
-		end)
+				if (ReplaceBags == 0) then
+					ReplaceBags = 1
+					if BagsContainer then BagsContainer:Show() end
+					if BanksContainer then BanksContainer:Show() end
+					self.Texture:SetTexture(C.Medias.ArrowDown)
+				else
+					ReplaceBags = 0
+					if BagsContainer then BagsContainer:Hide() end
+					if BanksContainer then BanksContainer:Hide() end
+					self.Texture:SetTexture(C.Medias.ArrowUp)
+				end
+			end)
+		end
 
 		SortButton:SetSize(16, 16)
 		SortButton:SetPoint("RIGHT", ToggleBags, "LEFT", -2, 0)
@@ -517,10 +521,14 @@ function Bags:CreateContainer(storagetype, ...)
 
 			local Sort = C_Container and C_Container.SortBags or SortBags
 
-			Sort()
+			if Sort then
+				Sort()
+			else
+				T.Print("Bag sorting is not available")
+			end
 		end)
 
-		if T.Classic then
+		if T.Classic or T.BCC then
 			Keys:SetSize(16, 16)
 			Keys:SetPoint("RIGHT", SortButton, "LEFT", -5, 0)
 			Keys:CreateShadow()
@@ -1061,7 +1069,7 @@ function Bags:UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local BankFrameMoneyFrame = BankFrameMoneyFrame
 
-	for Bank = 1, T.Classic and 24 or 28 do
+	for Bank = 1, (T.Classic or T.BCC) and 24 or 28 do
 		local Button = _G["BankFrameItem"..Bank]
 		local Money = ContainerFrame2MoneyFrame
 
@@ -1240,7 +1248,7 @@ function Bags:OpenAllBankBags()
 			self.Bank.MoverApplied = true
 		end
 
-		for i = BankStartingBag, T.Classic and 10 or 11 do
+		for i = BankStartingBag, (T.Classic or T.BCC) and 10 or 11 do
 			if (not IsBagOpen(i)) then
 
 				self:OpenBag(i, 1)
@@ -1546,7 +1554,7 @@ function Bags:Enable()
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	end
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		ToggleAllBags()
 		ToggleAllBags()
 	end

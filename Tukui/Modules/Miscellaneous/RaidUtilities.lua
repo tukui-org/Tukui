@@ -66,7 +66,9 @@ function RaidUtilities:SetRaidTarget()
 end
 
 function RaidUtilities:SetCountdown()
-	C_PartyInfo.DoCountdown(10)
+	if C_PartyInfo and C_PartyInfo.DoCountdown then
+		C_PartyInfo.DoCountdown(10)
+	end
 end
 
 function RaidUtilities:Disband()

@@ -169,7 +169,7 @@ function ActionBars:CreateBar1()
 		Button:ClearAllPoints()
 		Button:SetAttribute("showgrid", 1)
 
-		if not T.Retail then
+		if not T.Retail and ActionButton_ShowGrid then
 			ActionButton_ShowGrid(Button)
 		end
 

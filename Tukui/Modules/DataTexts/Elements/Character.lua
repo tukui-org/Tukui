@@ -47,7 +47,7 @@ local OnEnter = function(self)
 		GameTooltip:AddLine(" ")
 	end
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		GameTooltip:AddDoubleLine(ClassColor..T.MyName.."|r "..UnitLevel("player"), T.MyRealm)
 		GameTooltip:AddLine(" ")
 

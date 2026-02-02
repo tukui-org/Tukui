@@ -184,29 +184,37 @@ Toolkit.API.CreateBackdrop = function(self, BackgroundTemplate, BackgroundTextur
 	self.Backdrop.BorderTop:SetSize(BorderSize, BorderSize)
 	self.Backdrop.BorderTop:SetPoint("TOPLEFT", self.Backdrop, "TOPLEFT", 0, 0)
 	self.Backdrop.BorderTop:SetPoint("TOPRIGHT", self.Backdrop, "TOPRIGHT", 0, 0)
-	self.Backdrop.BorderTop:SetSnapToPixelGrid(false)
-	self.Backdrop.BorderTop:SetTexelSnappingBias(0)
+	if self.Backdrop.BorderTop.SetSnapToPixelGrid then
+		self.Backdrop.BorderTop:SetSnapToPixelGrid(false)
+		self.Backdrop.BorderTop:SetTexelSnappingBias(0)
+	end
 
 	self.Backdrop.BorderBottom = self.Backdrop:CreateTexture(nil, "BORDER", nil, 1)
 	self.Backdrop.BorderBottom:SetSize(BorderSize, BorderSize)
 	self.Backdrop.BorderBottom:SetPoint("BOTTOMLEFT", self.Backdrop, "BOTTOMLEFT", 0, 0)
 	self.Backdrop.BorderBottom:SetPoint("BOTTOMRIGHT", self.Backdrop, "BOTTOMRIGHT", 0, 0)
-	self.Backdrop.BorderBottom:SetSnapToPixelGrid(false)
-	self.Backdrop.BorderBottom:SetTexelSnappingBias(0)
+	if self.Backdrop.BorderBottom.SetSnapToPixelGrid then
+		self.Backdrop.BorderBottom:SetSnapToPixelGrid(false)
+		self.Backdrop.BorderBottom:SetTexelSnappingBias(0)
+	end
 
 	self.Backdrop.BorderLeft = self.Backdrop:CreateTexture(nil, "BORDER", nil, 1)
 	self.Backdrop.BorderLeft:SetSize(BorderSize, BorderSize)
 	self.Backdrop.BorderLeft:SetPoint("TOPLEFT", self.Backdrop, "TOPLEFT", 0, 0)
 	self.Backdrop.BorderLeft:SetPoint("BOTTOMLEFT", self.Backdrop, "BOTTOMLEFT", 0, 0)
-	self.Backdrop.BorderLeft:SetSnapToPixelGrid(false)
-	self.Backdrop.BorderLeft:SetTexelSnappingBias(0)
+	if self.Backdrop.BorderLeft.SetSnapToPixelGrid then
+		self.Backdrop.BorderLeft:SetSnapToPixelGrid(false)
+		self.Backdrop.BorderLeft:SetTexelSnappingBias(0)
+	end
 
 	self.Backdrop.BorderRight = self.Backdrop:CreateTexture(nil, "BORDER", nil, 1)
 	self.Backdrop.BorderRight:SetSize(BorderSize, BorderSize)
 	self.Backdrop.BorderRight:SetPoint("TOPRIGHT", self.Backdrop, "TOPRIGHT", 0, 0)
 	self.Backdrop.BorderRight:SetPoint("BOTTOMRIGHT", self.Backdrop, "BOTTOMRIGHT", 0, 0)
-	self.Backdrop.BorderRight:SetSnapToPixelGrid(false)
-	self.Backdrop.BorderRight:SetTexelSnappingBias(0)
+	if self.Backdrop.BorderRight.SetSnapToPixelGrid then
+		self.Backdrop.BorderRight:SetSnapToPixelGrid(false)
+		self.Backdrop.BorderRight:SetTexelSnappingBias(0)
+	end
 
 	self.Backdrop:SetBorderColor(BorderR, BorderG, BorderB)
 end
@@ -273,7 +281,7 @@ Toolkit.API.StyleButton = function(self)
 	end
 
 	if (self.SetCheckedTexture and not self.Checked) then
-		local Checked = self:CreateTexture()
+		local Checked = self:CreateTexture(nil, "OVERLAY")
 
 		Checked:SetColorTexture(0, 1, 0, 0.3)
 		Checked:SetInside()

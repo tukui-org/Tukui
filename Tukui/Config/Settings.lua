@@ -28,8 +28,17 @@ C["General"] = {
 
 	["GlobalFont"] = {
 		["Options"] = {
+			-- Tukui bundled fonts
 			["Express Way"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",
 			["PT Sans Narrow"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\PtSansNarrow.ttf",
+			["Big Noodle Titling"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\BigNoodleTitling.ttf",
+			["DieDieDie"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\DieDieDie.ttf",
+			["Visitor"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Visitor.ttf",
+			-- WoW built-in fonts
+			["Arial Narrow"] = "Fonts\\ARIALN.TTF",
+			["Friz Quadrata"] = "Fonts\\FRIZQT__.TTF",
+			["Skurri"] = "Fonts\\SKURRI.TTF",
+			["Morpheus"] = "Fonts\\MORPHEUS.TTF",
 		},
 
 		["Value"] = "Interface\\AddOns\\Tukui\\Medias\\Fonts\\Expressway.ttf",

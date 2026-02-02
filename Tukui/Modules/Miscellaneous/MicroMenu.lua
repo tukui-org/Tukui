@@ -82,7 +82,7 @@ function MicroMenu:Minimalist()
 		[2] = T.Retail and "P" or "SA",
 		[3] = "T&S",
 		[4] = T.Retail and "A" or T.MoP and "A" or "Q",
-		[5] = T.Retail and "QL" or T.MoP and "QL" or T.Classic and "GC" or "S",
+		[5] = T.Retail and "QL" or T.MoP and "QL" or (T.Classic or T.BCC) and "GC" or "S",
 		[6] = T.Retail and "T" or T.MoP and "S" or "G",
 		[7] = T.Retail and "G&C" or T.MoP and "GC" or "MM",
 		[8] = T.Retail and "LFG" or T.MoP and "DJ" or "HR",
@@ -102,48 +102,53 @@ function MicroMenu:Minimalist()
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, Y)
 
-	if UpdateMicroButtonsParent then
-		UpdateMicroButtonsParent(MicroMenu)
-	end
+	-- UpdateMicroButtonsParent is disabled:
+	-- - On BCC/Classic: causes taint with GameMenuFrame
+	-- - On Retail: breaks EditMode MicroMenuContainer positioning
 
 	for i = 1, NumButtons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
 
-		Button:StripTextures()
-		Button:SetAlpha(0)
-		Button:SetWidth(math.floor(Width / NumButtons))
-		Button:SetHeight(Height - 2)
-		Button:SetHitRectInsets(0, 0, 0, 0)
-		Button:CreateBackdrop()
-		Button.Backdrop:SetParent(MicroMenu)
-		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
-		Button:ClearAllPoints()
-
-		Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
-		Button.Backdrop.Texture:SetInside()
-		Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
-		Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
-
-		Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
-		Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
-		Button.Backdrop.Text:SetText(Texts[i])
-		Button.Backdrop.Text:SetPoint("TOP", 0, 7)
-		Button.Backdrop.Text:SetTextColor(1, 1, 1)
-
-		-- Reposition them
-		if i == 1 then
-			Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
+		-- Skip MainMenuMicroButton on BCC/Classic to prevent taint to GameMenuFrame
+		if (T.BCC or T.Classic) and Buttons[i] == "MainMenuMicroButton" then
+			-- Don't modify the main menu button at all, just skip it
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
+			Button:StripTextures()
+			Button:SetAlpha(0)
+			Button:SetWidth(math.floor(Width / NumButtons))
+			Button:SetHeight(Height - 2)
+			Button:SetHitRectInsets(0, 0, 0, 0)
+			Button:CreateBackdrop()
+			Button.Backdrop:SetParent(MicroMenu)
+			Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 2)
+			Button:ClearAllPoints()
 
-			if i == NumButtons then
-				Button:SetPoint("RIGHT", MicroMenu)
+			Button.Backdrop.Texture = Button.Backdrop:CreateTexture(nil, "ARTWORK")
+			Button.Backdrop.Texture:SetInside()
+			Button.Backdrop.Texture:SetTexture(C.Medias.Normal)
+			Button.Backdrop.Texture:SetVertexColor(unpack(Colors[i]))
+
+			Button.Backdrop.Text = Button.Backdrop:CreateFontString(nil, "OVERLAY")
+			Button.Backdrop.Text:SetFontTemplate(C.Medias.Font, 12)
+			Button.Backdrop.Text:SetText(Texts[i])
+			Button.Backdrop.Text:SetPoint("TOP", 0, 7)
+			Button.Backdrop.Text:SetTextColor(1, 1, 1)
+
+			-- Reposition them
+			if i == 1 then
+				Button:SetPoint("BOTTOMLEFT", MicroMenu, "BOTTOMLEFT", 0, 1)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", 0, 0)
+
+				if i == NumButtons then
+					Button:SetPoint("RIGHT", MicroMenu)
+				end
 			end
-		end
 
-		if not T.Retail then
-			Button.SetPoint = Noop
+			if not T.Retail then
+				Button.SetPoint = Noop
+			end
 		end
 	end
 end
@@ -151,7 +156,7 @@ end
 function MicroMenu:GameMenu()
 	local Buttons = MicroMenu:ShownMicroButtons()
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		WorldMapMicroButton:SetParent(T.Hider)
 		WorldMapMicroButton:ClearAllPoints()
 		WorldMapMicroButton:SetPoint("BOTTOM", T.Hider, "BOTTOM, 0, -200")
@@ -159,7 +164,7 @@ function MicroMenu:GameMenu()
 
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, T.Classic and 298 or T.MoP and 438 or 408)
+	MicroMenu:SetSize(250, (T.Classic or T.BCC) and 298 or T.MoP and 438 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -225,25 +230,30 @@ function MicroMenu:Blizzard()
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 
-	if UpdateMicroButtonsParent then
-		UpdateMicroButtonsParent(MicroMenu)
-	end
+	-- UpdateMicroButtonsParent is disabled:
+	-- - On BCC/Classic: causes taint with GameMenuFrame
+	-- - On Retail: breaks EditMode MicroMenuContainer positioning
 
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
 
-		Button:ClearAllPoints()
-
-		-- Reposition them
-		if i == 1 then
-			Button:SetPoint("LEFT", MicroMenu, "LEFT", 0, 10)
+		-- Skip MainMenuMicroButton on BCC/Classic to prevent taint to GameMenuFrame
+		if (T.BCC or T.Classic) and Buttons[i] == "MainMenuMicroButton" then
+			-- Don't modify the main menu button at all
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", T.Retail and 0 or -3, 0)
-		end
+			Button:ClearAllPoints()
 
-		if not T.Retail then
-			Button.SetPoint = Noop
+			-- Reposition them
+			if i == 1 then
+				Button:SetPoint("LEFT", MicroMenu, "LEFT", 0, 10)
+			else
+				Button:SetPoint("LEFT", PreviousButton, "RIGHT", T.Retail and 0 or -3, 0)
+			end
+
+			if not T.Retail then
+				Button.SetPoint = Noop
+			end
 		end
 	end
 end
@@ -251,11 +261,6 @@ end
 function MicroMenu:Toggle()
 	if self ~= MicroMenu then
 		self = MicroMenu
-	end
-
-	-- Hide Game Menu if visible
-	if GameMenuFrame:IsShown() then
-		HideUIPanel(GameMenuFrame)
 	end
 
 	if self:GetAlpha() == 1 then
@@ -270,15 +275,45 @@ function MicroMenu:Toggle()
 		self:SetPoint(A1, A2, A3, A4, A5)
 	end
 
-	if T.Classic and WorldMapMicroButton then
-		WorldMapMicroButton:Hide()
-	end
 end
 
 function MicroMenu:Enable()
 	if C.Misc.MicroStyle.Value == "None" then
 		return
-	elseif C.Misc.MicroStyle.Value == "Blizzard" then
+	end
+
+	-- Disable MicroMenu entirely on BCC/Classic to prevent taint
+	-- Any modification to secure micro buttons causes taint with GameMenuFrame
+	if T.BCC or T.Classic then
+		-- Hide default Blizzard micro menu elements
+		local elementsToHide = {
+			MainMenuBarBackpackButton,
+			KeyRingButton,
+			CharacterBag0Slot,
+			CharacterBag1Slot,
+			CharacterBag2Slot,
+			CharacterBag3Slot,
+			MicroButtonAndBagsBar,
+			MicroButtonAndBagsBarMovable,
+		}
+		for _, element in pairs(elementsToHide) do
+			if element then
+				element:SetParent(T.Hider)
+			end
+		end
+		return
+	end
+
+	-- Hide WorldMapMicroButton early to avoid Blizzard MicroMenu layout issues
+	if (T.Classic or T.BCC) and WorldMapMicroButton then
+		pcall(function()
+			WorldMapMicroButton:SetParent(T.Hider)
+			WorldMapMicroButton:ClearAllPoints()
+			WorldMapMicroButton:SetPoint("BOTTOM", T.Hider, "BOTTOM", 0, -200)
+		end)
+	end
+
+	if C.Misc.MicroStyle.Value == "Blizzard" then
 		self:Blizzard()
 	else
 		self:Minimalist()
@@ -291,7 +326,7 @@ function MicroMenu:Enable()
 
 	-- Toggle micro menu keybind
 	if C.Misc.MicroToggle.Value ~= "" then
-		self.Captor = CreateFrame("Button", "TukuiMicroMenuCaptor", UIParent, "SecureActionButtonTemplate")
+		self.Captor = CreateFrame("Button", "TukuiMicroMenuCaptor", UIParent)
 		self.Captor:SetScript("OnClick", MicroMenu.Toggle)
 
 		SetOverrideBindingClick(self.Captor, true, C.Misc.MicroToggle.Value, "TukuiMicroMenuCaptor")
