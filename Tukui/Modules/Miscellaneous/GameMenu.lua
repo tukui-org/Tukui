@@ -3,12 +3,10 @@ local T, C, L = unpack((select(2, ...)))
 local Miscellaneous = T["Miscellaneous"]
 local GUI = T["GUI"]
 local GameMenu = CreateFrame("Frame")
-local Menu = GameMenuFrame
-local Header = Menu.Header
-local Logout = GameMenuButtonLogout
-local Addons = GameMenuButtonAddons
 
 function GameMenu:CreateTukuiMenuButton()
+	local Menu = GameMenuFrame
+	local Addons = GameMenuButtonAddons
 	local Tukui = CreateFrame("Button", nil, Menu, "GameMenuButtonTemplate")
 	Tukui:SetSize(144, 21)
 	Tukui:SetPoint("TOPLEFT", Addons, "BOTTOMLEFT", 0, -1)
@@ -33,6 +31,9 @@ function GameMenu:Enable()
 	if T.BCC then
 		return
 	end
+
+	local Menu = GameMenuFrame
+	local Header = Menu.Header
 
 	self:CreateTukuiMenuButton()
 

@@ -476,30 +476,34 @@ function Bags:CreateContainer(storagetype, ...)
 		SearchBox:SetScript("OnEditFocusLost", function(self) self.Backdrop:SetBorderColor(.3, .3, .3, 1) end)
 		SearchBox:SetScript("OnEditFocusGained", function(self) self.Title:Hide() self.Backdrop:SetBorderColor(1, 1, 1, 1) end)
 
+		-- ToggleBags arrow hidden on BCC - keep as anchor point
 		ToggleBags:SetSize(16, 16)
 		ToggleBags:SetPoint("RIGHT", ToggleBagsContainer, "LEFT", -1, 1)
-		ToggleBags.Texture = ToggleBags:CreateTexture(nil, "OVERLAY")
-		ToggleBags.Texture:SetSize(14, 14)
-		ToggleBags.Texture:SetPoint("CENTER")
-		ToggleBags.Texture:SetTexture(C.Medias.ArrowUp)
-		ToggleBags:SetScript("OnEnter", GameTooltip_Hide)
-		ToggleBags:SetScript("OnClick", function(self)
-			local BanksContainer = Bags.Bank.BagsContainer
+		if T.BCC or T.Classic then
+			ToggleBags:Hide()
+			ToggleBags:SetSize(1, 1) -- Make it tiny so it doesn't take space
+		else
+			ToggleBags.Texture = ToggleBags:CreateTexture(nil, "OVERLAY")
+			ToggleBags.Texture:SetSize(14, 14)
+			ToggleBags.Texture:SetPoint("CENTER")
+			ToggleBags.Texture:SetTexture(C.Medias.ArrowUp)
+			ToggleBags:SetScript("OnEnter", GameTooltip_Hide)
+			ToggleBags:SetScript("OnClick", function(self)
+				local BanksContainer = Bags.Bank and Bags.Bank.BagsContainer
 
-			if (ReplaceBags == 0) then
-				ReplaceBags = 1
-				BagsContainer:Show()
-				BanksContainer:Show()
-
-				self.Texture:SetTexture(C.Medias.ArrowDown)
-			else
-				ReplaceBags = 0
-				BagsContainer:Hide()
-				BanksContainer:Hide()
-
-				self.Texture:SetTexture(C.Medias.ArrowUp)
-			end
-		end)
+				if (ReplaceBags == 0) then
+					ReplaceBags = 1
+					if BagsContainer then BagsContainer:Show() end
+					if BanksContainer then BanksContainer:Show() end
+					self.Texture:SetTexture(C.Medias.ArrowDown)
+				else
+					ReplaceBags = 0
+					if BagsContainer then BagsContainer:Hide() end
+					if BanksContainer then BanksContainer:Hide() end
+					self.Texture:SetTexture(C.Medias.ArrowUp)
+				end
+			end)
+		end
 
 		SortButton:SetSize(16, 16)
 		SortButton:SetPoint("RIGHT", ToggleBags, "LEFT", -2, 0)
@@ -517,7 +521,11 @@ function Bags:CreateContainer(storagetype, ...)
 
 			local Sort = C_Container and C_Container.SortBags or SortBags
 
-			Sort()
+			if Sort then
+				Sort()
+			else
+				T.Print("Bag sorting is not available")
+			end
 		end)
 
 		if T.Classic or T.BCC then
