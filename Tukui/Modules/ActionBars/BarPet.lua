@@ -24,12 +24,14 @@ function ActionBars:CreatePetBar()
 	local PetActionBar_UpdateCooldowns = PetActionBar_UpdateCooldowns
 	local ButtonsPerRow = C.ActionBars.BarPetButtonsPerRow
 	local NumRow = ceil(10 / ButtonsPerRow)
-	
-	PetActionBarFrame.ignoreFramePositionManager = true
-	PetActionBarFrame:EnableMouse(false)
-	PetActionBarFrame:ClearAllPoints()
-	PetActionBarFrame:SetParent(T.Hider)
-	PetActionBarFrame:UnregisterAllEvents()
+
+	if PetActionBarFrame then
+		PetActionBarFrame.ignoreFramePositionManager = true
+		PetActionBarFrame:EnableMouse(false)
+		PetActionBarFrame:ClearAllPoints()
+		PetActionBarFrame:SetParent(T.Hider)
+		PetActionBarFrame:UnregisterAllEvents()
+	end
 
 	local Bar = CreateFrame("Frame", "TukuiPetActionBar", T.PetHider, "SecureHandlerStateTemplate")
 	Bar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 233)

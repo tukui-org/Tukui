@@ -1975,11 +1975,15 @@ GUI.Enable = function(self)
 	Scrollable:ClearAllPoints()
 	Scrollable:SetPoint("TOP", ScrollFrame, "BOTTOM", 0, 0)
 
-	GameMenuFrame:HookScript("OnShow", function()
-		if GUI:IsShown() then
-			GUI:Toggle()
-		end
-	end)
+	if not T.BCC then
+		GameMenuFrame:HookScript("OnShow", function()
+			if GUI:IsShown() then
+				C_Timer.After(0, function()
+					GUI:Toggle()
+				end)
+			end
+		end)
+	end
 
 	self.Created = true
 end

@@ -44,9 +44,11 @@ function ActionBars:CreateStanceBar()
 	
 	self.Bars.Stance = Bar
 
-	StanceBarFrame.ignoreFramePositionManager = true
-	StanceBarFrame:StripTextures()
-	StanceBarFrame:EnableMouse(false)
+	if StanceBarFrame then
+		StanceBarFrame.ignoreFramePositionManager = true
+		StanceBarFrame:StripTextures()
+		StanceBarFrame:EnableMouse(false)
+	end
 
 	for i = 1, 10 do
 		local Button = _G["StanceButton"..i]

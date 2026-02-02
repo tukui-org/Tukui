@@ -32,7 +32,7 @@ local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeft
 local GetContainerItemCooldown = C_Container and C_Container.GetContainerItemCooldown or GetContainerItemCooldown
 
 local BANK_INITIAL_CONTAINER_INDEX = T.Retail and 6 or 5
-local BANK_FINAL_CONTAINER_INDEX = T.Classic and 10 or T.Retail and 12 or 11
+local BANK_FINAL_CONTAINER_INDEX = (T.Classic or T.BCC) and 10 or T.Retail and 12 or 11
 
 BACKPACK_HEIGHT = 256
 
@@ -520,7 +520,7 @@ function Bags:CreateContainer(storagetype, ...)
 			Sort()
 		end)
 
-		if T.Classic then
+		if T.Classic or T.BCC then
 			Keys:SetSize(16, 16)
 			Keys:SetPoint("RIGHT", SortButton, "LEFT", -5, 0)
 			Keys:CreateShadow()
@@ -1061,7 +1061,7 @@ function Bags:UpdateAllBankBags()
 	local NumRows, LastRowButton, NumButtons, LastButton = 0, ContainerFrame1Item1, 1, ContainerFrame1Item1
 	local BankFrameMoneyFrame = BankFrameMoneyFrame
 
-	for Bank = 1, T.Classic and 24 or 28 do
+	for Bank = 1, (T.Classic or T.BCC) and 24 or 28 do
 		local Button = _G["BankFrameItem"..Bank]
 		local Money = ContainerFrame2MoneyFrame
 
@@ -1240,7 +1240,7 @@ function Bags:OpenAllBankBags()
 			self.Bank.MoverApplied = true
 		end
 
-		for i = BankStartingBag, T.Classic and 10 or 11 do
+		for i = BankStartingBag, (T.Classic or T.BCC) and 10 or 11 do
 			if (not IsBagOpen(i)) then
 
 				self:OpenBag(i, 1)
@@ -1546,7 +1546,7 @@ function Bags:Enable()
 		self:RegisterEvent("SOULBIND_FORGE_INTERACTION_ENDED")
 	end
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		ToggleAllBags()
 		ToggleAllBags()
 	end

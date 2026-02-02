@@ -82,7 +82,7 @@ function MicroMenu:Minimalist()
 		[2] = T.Retail and "P" or "SA",
 		[3] = "T&S",
 		[4] = T.Retail and "A" or T.MoP and "A" or "Q",
-		[5] = T.Retail and "QL" or T.MoP and "QL" or T.Classic and "GC" or "S",
+		[5] = T.Retail and "QL" or T.MoP and "QL" or (T.Classic or T.BCC) and "GC" or "S",
 		[6] = T.Retail and "T" or T.MoP and "S" or "G",
 		[7] = T.Retail and "G&C" or T.MoP and "GC" or "MM",
 		[8] = T.Retail and "LFG" or T.MoP and "DJ" or "HR",
@@ -151,7 +151,7 @@ end
 function MicroMenu:GameMenu()
 	local Buttons = MicroMenu:ShownMicroButtons()
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		WorldMapMicroButton:SetParent(T.Hider)
 		WorldMapMicroButton:ClearAllPoints()
 		WorldMapMicroButton:SetPoint("BOTTOM", T.Hider, "BOTTOM, 0, -200")
@@ -159,7 +159,7 @@ function MicroMenu:GameMenu()
 
 	MicroMenu:SetFrameStrata("HIGH")
 	MicroMenu:SetFrameLevel(600)
-	MicroMenu:SetSize(250, T.Classic and 298 or T.MoP and 438 or 408)
+	MicroMenu:SetSize(250, (T.Classic or T.BCC) and 298 or T.MoP and 438 or 408)
 	MicroMenu:CreateBackdrop("Transparent")
 	MicroMenu:CreateShadow()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -270,15 +270,23 @@ function MicroMenu:Toggle()
 		self:SetPoint(A1, A2, A3, A4, A5)
 	end
 
-	if T.Classic and WorldMapMicroButton then
-		WorldMapMicroButton:Hide()
-	end
 end
 
 function MicroMenu:Enable()
 	if C.Misc.MicroStyle.Value == "None" then
 		return
-	elseif C.Misc.MicroStyle.Value == "Blizzard" then
+	end
+
+	-- Hide WorldMapMicroButton early to avoid Blizzard MicroMenu layout issues
+	if (T.Classic or T.BCC) and WorldMapMicroButton then
+		pcall(function()
+			WorldMapMicroButton:SetParent(T.Hider)
+			WorldMapMicroButton:ClearAllPoints()
+			WorldMapMicroButton:SetPoint("BOTTOM", T.Hider, "BOTTOM", 0, -200)
+		end)
+	end
+
+	if C.Misc.MicroStyle.Value == "Blizzard" then
 		self:Blizzard()
 	else
 		self:Minimalist()

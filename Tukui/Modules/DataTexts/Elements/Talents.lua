@@ -1,5 +1,10 @@
 local T, C, L = unpack((select(2, ...)))
 
+-- Specializations don't exist in Classic/BCC
+if not C_SpecializationInfo then
+	return
+end
+
 --[[ This datatext is from: SanUI, by Pyrates ]] --
 local GameTooltip = _G.GameTooltip
 local C_SpecializationInfo = _G.C_SpecializationInfo

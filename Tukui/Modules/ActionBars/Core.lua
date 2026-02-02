@@ -141,6 +141,8 @@ function ActionBars:UpdatePetBar()
 			end)
 		end
 
+		local CheckedTexture = Button:GetCheckedTexture() or Button.Checked
+
 		if IsActive then
 			if IsPetAttackAction(i) then
 				if PetActionButton_StartFlash then
@@ -149,7 +151,9 @@ function ActionBars:UpdatePetBar()
 					Button:StartFlash()
 				end
 
-				Button:GetCheckedTexture():SetAlpha(0.5)
+				if CheckedTexture then
+					CheckedTexture:SetAlpha(0.5)
+				end
 			else
 				if PetActionButton_StopFlash then
 					PetActionButton_StopFlash(Button)
@@ -157,7 +161,9 @@ function ActionBars:UpdatePetBar()
 					Button:StopFlash()
 				end
 
-				Button:GetCheckedTexture():SetAlpha(1.0)
+				if CheckedTexture then
+					CheckedTexture:SetAlpha(1.0)
+				end
 			end
 
 			Button:SetChecked(true)
@@ -210,11 +216,13 @@ function ActionBars:UpdatePetBar()
 
 	if PetActionBar_UpdateCooldowns then
 		PetActionBar_UpdateCooldowns()
-	else
+	elseif PetActionBarFrame and PetActionBarFrame.UpdateCooldowns then
 		PetActionBarFrame:UpdateCooldowns()
 	end
 
-	PetActionBarFrame.rangeTimer = -1
+	if PetActionBarFrame then
+		PetActionBarFrame.rangeTimer = -1
+	end
 end
 
 function ActionBars:OnUpdatePetBarCooldownText(elapsed)
@@ -308,7 +316,9 @@ function ActionBars:UpdateStanceBar()
 				CooldownFrame_Set(Cooldown, Start, Duration, Enable)
 
 				if IsActive then
-					StanceBarFrame.lastSelected = Button:GetID()
+					if StanceBarFrame then
+						StanceBarFrame.lastSelected = Button:GetID()
+					end
 					Button:SetChecked(true)
 
 					if Button.Backdrop then
@@ -487,22 +497,32 @@ function ActionBars:AddHooks()
 		-- FIX ME
 		-- hooksecurefunc("ActionButton_UpdateFlyout", self.StyleFlyout)
 		-- hooksecurefunc("SpellButton_OnClick", self.StyleFlyout)
-	else
+	elseif ActionButton_Update then
 		hooksecurefunc("ActionButton_Update", self.UpdateButton)
 	end
 
-	hooksecurefunc("ActionButton_UpdateRangeIndicator", self.RangeUpdate)
+	if ActionButton_UpdateRangeIndicator then
+		hooksecurefunc("ActionButton_UpdateRangeIndicator", self.RangeUpdate)
+	end
 
 	if C.ActionBars.HotKey then
 		if not T.Retail then
-			hooksecurefunc("ActionButton_UpdateHotkeys", self.SetHotKeyText)
-			hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
+			if ActionButton_UpdateHotkeys then
+				hooksecurefunc("ActionButton_UpdateHotkeys", self.SetHotKeyText)
+			end
+			if PetActionButton_SetHotkeys then
+				hooksecurefunc("PetActionButton_SetHotkeys", self.SetHotKeyText)
+			end
 		end
 	end
 
 	if C.ActionBars.ProcAnim then
-		hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
-		hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
+		if ActionButton_ShowOverlayGlow then
+			hooksecurefunc("ActionButton_ShowOverlayGlow", self.StartHighlight)
+		end
+		if ActionButton_HideOverlayGlow then
+			hooksecurefunc("ActionButton_HideOverlayGlow", self.StopHightlight)
+		end
 	end
 
 	if T.MoP and C.ActionBars.MultiCastBar then

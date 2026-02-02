@@ -87,8 +87,10 @@ function GroupLoot:SkinGroupLoot(Frame)
 
 	Frame.IconFrame.Icon:SetTexCoord(unpack(T.IconCoord))
 	Frame.IconFrame.Icon:SetInside()
-	Frame.IconFrame.Icon:SetSnapToPixelGrid(false)
-	Frame.IconFrame.Icon:SetTexelSnappingBias(0)
+	if Frame.IconFrame.Icon.SetSnapToPixelGrid then
+		Frame.IconFrame.Icon:SetSnapToPixelGrid(false)
+		Frame.IconFrame.Icon:SetTexelSnappingBias(0)
+	end
 
 	Frame.PassButton:SetSize(24, 24)
 	Frame.PassButton:ClearAllPoints()
@@ -146,7 +148,7 @@ end
 
 function GroupLoot:AddHooks()
 	-- So we can move the Group Loot Container.
-	if not T.Retail then
+	if not T.Retail and UIPARENT_MANAGED_FRAME_POSITIONS then
 		UIPARENT_MANAGED_FRAME_POSITIONS.GroupLootContainer = nil
 	end
 

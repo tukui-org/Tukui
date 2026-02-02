@@ -8,7 +8,7 @@ if (Class ~= "PALADIN") then
 end
 
 UnitFrames.AddClassFeatures["PALADIN"] = function(self)
-	if T.Classic or not C.UnitFrames.ClassBar then
+	if T.Classic or T.BCC or not C.UnitFrames.ClassBar then
 		return
 	end
 

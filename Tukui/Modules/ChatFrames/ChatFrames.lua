@@ -181,7 +181,7 @@ function Chat:StyleFrame(frame)
 		_G[format("ChatFrame%sTabSelectedMiddle", ID)]:Kill()
 		_G[format("ChatFrame%sTabSelectedRight", ID)]:Kill()
 
-		if T.MoP or T.Classic then
+		if T.MoP or T.Classic or T.BCC then
 			_G[format("ChatFrame%sMinimizeButton", ID)]:Kill()
 		else
 			_G[format("ChatFrame%sButtonFrameMinimizeButton", ID)]:Kill()
@@ -331,7 +331,7 @@ function Chat:Reset()
 	FCF_DockFrame(ChatFrame2)
 	FCF_SetLocked(ChatFrame2, 1)
 
-	if T.Classic then
+	if T.Classic or T.BCC then
 		FCF_OpenNewWindow(COMMUNITIES_DEFAULT_CHANNEL_NAME)
 	end
 
@@ -370,7 +370,7 @@ function Chat:Reset()
 
 	-- Remove everything in first 4 chat windows
 	for i = 1, 6 do
-		if (T.Retail and i ~= 2 and i ~= 3) or (T.Classic and i ~= 2 and i ~= 6) or (T.MoP and i ~= 2 and i ~= 3) then
+		if (T.Retail and i ~= 2 and i ~= 3) or ((T.Classic or T.BCC) and i ~= 2 and i ~= 6) or (T.MoP and i ~= 2 and i ~= 3) then
 			local ChatFrame = _G["ChatFrame"..i]
 
 			ChatFrame_RemoveAllMessageGroups(ChatFrame)
@@ -403,19 +403,23 @@ function Chat:Reset()
 	-- ChatFrame 3 Setup --
 	-----------------------
 
-	if T.Classic then
-		for i = 1, #Channels do
-			ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
-			ChatFrame_AddChannel(ChatFrame3, Channels[i])
+	if T.Classic or T.BCC then
+		if ChatFrame_RemoveChannel and ChatFrame_AddChannel then
+			for i = 1, #Channels do
+				ChatFrame_RemoveChannel(ChatFrame1, Channels[i])
+				ChatFrame_AddChannel(ChatFrame3, Channels[i])
+			end
 		end
 
 		-- Adjust Chat Colors
-		ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
-		ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
-		ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
-		ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
-		ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
-		ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
+		if ChangeChatColor then
+			ChangeChatColor("CHANNEL1", 195/255, 230/255, 232/255)
+			ChangeChatColor("CHANNEL2", 232/255, 158/255, 121/255)
+			ChangeChatColor("CHANNEL3", 232/255, 228/255, 121/255)
+			ChangeChatColor("CHANNEL4", 232/255, 228/255, 121/255)
+			ChangeChatColor("CHANNEL5", 0/255, 228/255, 121/255)
+			ChangeChatColor("CHANNEL6", 0/255, 228/255, 0/255)
+		end
 	end
 
 	-----------------------

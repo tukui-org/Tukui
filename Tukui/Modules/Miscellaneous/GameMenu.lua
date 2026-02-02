@@ -8,20 +8,6 @@ local Header = Menu.Header
 local Logout = GameMenuButtonLogout
 local Addons = GameMenuButtonAddons
 
-function GameMenu:AddHooks()
-	Menu:SetHeight(Menu:GetHeight() + Logout:GetHeight() - 4)
-
-	local _, RelativeTo, _, _, OffY = Logout:GetPoint()
-
-	if RelativeTo ~= GameMenu.Tukui then
-		GameMenu.Tukui:ClearAllPoints()
-		GameMenu.Tukui:SetPoint("TOPLEFT", RelativeTo, "BOTTOMLEFT", 0, -1)
-
-		Logout:ClearAllPoints()
-		Logout:SetPoint("TOPLEFT", GameMenu.Tukui, "BOTTOMLEFT", 0, OffY)
-	end
-end
-
 function GameMenu:CreateTukuiMenuButton()
 	local Tukui = CreateFrame("Button", nil, Menu, "GameMenuButtonTemplate")
 	Tukui:SetSize(144, 21)
@@ -40,14 +26,14 @@ function GameMenu:CreateTukuiMenuButton()
 		HideUIPanel(Menu)
 	end)
 
-	if not T.Retail then
-		hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", self.AddHooks)
-	end
-
 	self.Tukui = Tukui
 end
 
 function GameMenu:Enable()
+	if T.BCC then
+		return
+	end
+
 	self:CreateTukuiMenuButton()
 
 	if not AddOnSkins then

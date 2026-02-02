@@ -46,7 +46,7 @@ function UnitFrames:Pet()
 	Health.colorClass = true
 	Health.colorReaction = true
 
-	if T.Classic and T.MyClass == "HUNTER" then
+	if (T.Classic or T.BCC) and T.MyClass == "HUNTER" then
 		Health.colorHappiness = true
 	end
 

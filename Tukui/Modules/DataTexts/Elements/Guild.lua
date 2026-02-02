@@ -28,7 +28,11 @@ end
 local function InviteFriend(self, name)
 	Menu:Hide()
 
-	C_PartyInfo.InviteUnit(name)
+	if C_PartyInfo and C_PartyInfo.InviteUnit then
+		C_PartyInfo.InviteUnit(name)
+	else
+		InviteUnit(name)
+	end
 end
 
 local function WhisperFriend(self, name)
